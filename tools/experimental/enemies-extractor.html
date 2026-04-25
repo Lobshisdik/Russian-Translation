@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker enemies.json Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .file-drop {
+            border: 2px dashed #666;
+            padding: 25px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .file-drop.highlight {
+            border-color: #0066cc;
+            background-color: #e6f0fa;
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0055aa;
+        }
+        .output-area {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            min-height: 100px;
+        }
+        .output-area pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>RPG Maker enemies.json Extractor</h1>
+    <p>This tool extracts names and IDs from an RPG Maker enemies.json file, taking into account that the first element is null.</p>
+    
+    <div class="container">
+        <div class="input-area">
+            <h2>Input</h2>
+            <div id="file-drop" class="file-drop">
+                <p>Drop your enemies.json file here or click to select</p>
+                <input type="file" id="file-input" accept=".json" style="display: none;">
+            </div>
+            <p>Or paste JSON content below:</p>
+            <textarea id="json-input" placeholder="Paste your enemies.json content here..."></textarea>
+            <button id="parse-button">Extract Enemy Data</button>
+        </div>
+        
+        <div class="output-area">
+            <h2>Results</h2>
+            <div id="output">
+                <p>Enemy data will appear here after extraction...</p>
+            </div>
+            <div id="table-output"></div>
+            <div class="export-buttons" style="display: none;">
+                <button id="export-csv">Export as CSV</button>
+                <button id="export-json">Export as JSON</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const fileDropZone = document.getElementById('file-drop');
+        const fileInput = document.getElementById('file-input');
+        const jsonInput = document.getElementById('json-input');
+        const parseButton = document.getElementById('parse-button');
+        const output = document.getElementById('output');
+        const tableOutput = document.getElementById('table-output');
+        const exportButtons = document.querySelector('.export-buttons');
+        const exportCsvButton = document.getElementById('export-csv');
+        const exportJsonButton = document.getElementById('export-json');
+
+        // Extracted enemy data
+        let enemyData = [];
+
+        // File drop handlers
+        fileDropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileDropZone.classList.add('highlight');
+        });
+
+        fileDropZone.addEventListener('dragleave', () => {
+            fileDropZone.classList.remove('highlight');
+        });
+
+        fileDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileDropZone.classList.remove('highlight');
+            
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Handle file selection
+        function handleFile(file) {
+            if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+                output.innerHTML = '<p style="color: red;">Error: Please select a JSON file.</p>';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                jsonInput.value = e.target.result;
+            };
+            reader.onerror = () => {
+                output.innerHTML = '<p style="color: red;">Error reading file.</p>';
+            };
+            reader.readAsText(file);
+        }
+
+        // Parse button click handler
+        parseButton.addEventListener('click', () => {
+            const jsonContent = jsonInput.value.trim();
+            
+            if (!jsonContent) {
+                output.innerHTML = '<p style="color: red;">Error: No JSON content provided.</p>';
+                return;
+            }
+
+            try {
+                // Parse JSON
+                const enemies = JSON.parse(jsonContent);
+                
+                // Check if it's an array
+                if (!Array.isArray(enemies)) {
+                    output.innerHTML = '<p style="color: red;">Error: JSON content is not an array.</p>';
+                    return;
+                }
+
+                // Extract enemy data
+                enemyData = extractEnemyData(enemies);
+                
+                // Display results
+                displayResults(enemyData);
+                
+                // Show export buttons
+                exportButtons.style.display = 'flex';
+                
+            } catch (error) {
+                output.innerHTML = `<p style="color: red;">Error parsing JSON: ${error.message}</p>`;
+                tableOutput.innerHTML = '';
+                exportButtons.style.display = 'none';
+            }
+        });
+
+        // Extract enemy data from JSON
+        function extractEnemyData(enemies) {
+            const data = [];
+            
+            // Start from index 1 to skip the null element
+            for (let i = 1; i < enemies.length; i++) {
+                const enemy = enemies[i];
+                if (enemy && enemy.name) {
+                    data.push({
+                        id: i,
+                        name: enemy.name
+                    });
+                }
+            }
+            
+            return data;
+        }
+
+        // Display results in the output area
+        function displayResults(data) {
+            if (data.length === 0) {
+                output.innerHTML = '<p>No enemy data found.</p>';
+                tableOutput.innerHTML = '';
+                return;
+            }
+
+            // Summary text
+            output.innerHTML = `<p>Found ${data.length} enemies.</p>`;
+            
+            // Create table
+            let tableHtml = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            data.forEach(enemy => {
+                tableHtml += `
+                    <tr>
+                        <td>${enemy.id}</td>
+                        <td>${enemy.name}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHtml += `
+                    </tbody>
+                </table>
+            `;
+            
+            tableOutput.innerHTML = tableHtml;
+        }
+
+        // Export as CSV
+        exportCsvButton.addEventListener('click', () => {
+            if (enemyData.length === 0) return;
+            
+            // Create CSV content
+            let csvContent = 'ID,Name\n';
+            enemyData.forEach(enemy => {
+                // Properly escape name if it contains commas
+                const escapedName = enemy.name.includes(',') ? `"${enemy.name}"` : enemy.name;
+                csvContent += `${enemy.id},${escapedName}\n`;
+            });
+            
+            // Create download link
+            downloadFile(csvContent, 'enemy_data.csv', 'text/csv');
+        });
+
+        // Export as JSON
+        exportJsonButton.addEventListener('click', () => {
+            if (enemyData.length === 0) return;
+            
+            // Create JSON content
+            const jsonContent = JSON.stringify(enemyData, null, 2);
+            
+            // Create download link
+            downloadFile(jsonContent, 'enemy_data.json', 'application/json');
+        });
+
+        // Helper function to download file
+        function downloadFile(content, fileName, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+    </script>
+</body>
+</html>

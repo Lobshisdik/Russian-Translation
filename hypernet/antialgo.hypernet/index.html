@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>FUCK THE ALGORITHM - Anti-Algorithm Initiative</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP//AP8A/wAA//8AAMDAwAAAAAAAAAAAACH5BAkKAAcALAAAAAAQABAAAAMtCLrc/jDKSWu4OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILFpPAgA7') repeat;
+            font-family: Comic Sans MS, cursive;
+            color: #FF00FF;
+            overflow-x: hidden;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+            background-color: #000080;
+            border: 3px solid #FFFF00;
+            padding: 8px;
+        }
+        
+        .language-button {
+            background-color: #800080;
+            color: #FFFFFF;
+            border: 2px solid #00FFFF;
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+            font-family: Comic Sans MS, cursive;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+        
+        .language-button:hover {
+            background-color: #FF00FF;
+            color: #000000;
+        }
+        
+        .language-button.active {
+            background-color: #FF0000;
+            color: #FFFFFF;
+            animation: blink 2s infinite;
+        }
+        
+        .main-header {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #FF0000;
+            text-shadow: 3px 3px 0px #000000;
+            margin: 20px 0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .container {
+            display: flex;
+            min-height: 80vh;
+        }
+        
+        .left-menu {
+            width: 200px;
+            background-color: #000080;
+            border: 3px solid #FFFF00;
+            padding: 10px;
+            margin: 10px;
+        }
+        
+        .menu-item {
+            background-color: #800080;
+            border: 2px solid #00FFFF;
+            margin: 5px 0;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+        
+        .menu-item:hover {
+            background-color: #FF00FF;
+            color: #000000;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .section {
+            display: none;
+            background-color: rgba(255, 255, 0, 0.8);
+            border: 4px solid #FF0000;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .algorithm-table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #FFFFFF;
+            border: 3px solid #000000;
+        }
+        
+        .algorithm-table th {
+            background-color: #FF0000;
+            color: #FFFFFF;
+            padding: 10px;
+            border: 2px solid #000000;
+            font-size: 16px;
+        }
+        
+        .algorithm-table td {
+            padding: 8px;
+            border: 1px solid #000000;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .zero-score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF0000;
+            animation: explode 2s infinite;
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+        
+        .marquee {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #000000;
+            color: #00FF00;
+            padding: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FF0000;
+            color: #FFFFFF;
+            padding: 20px;
+            border: 4px solid #000000;
+            z-index: 1000;
+            display: none;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .close-popup {
+            background-color: #000000;
+            color: #FFFFFF;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .spinning-gif {
+            width: 32px;
+            height: 32px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 40px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #FFFF00;
+            padding: 5px;
+            font-size: 10px;
+            animation: blink 0.5s infinite;
+        }
+        
+        .dancing-skeleton {
+            position: fixed;
+            top: 20%;
+            right: 10%;
+            font-size: 32px;
+            animation: dance 1s infinite;
+        }
+        
+        @keyframes dance {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(-5deg); }
+        }
+
+        .lang-en { display: block; }
+        .lang-it { display: none; }
+        
+        body.italian .lang-en { display: none; }
+        body.italian .lang-it { display: block; }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="language-button active" onclick="setLanguage('en')" id="btn-en">🇺🇸 EN</button>
+        <button class="language-button" onclick="setLanguage('it')" id="btn-it">🇮🇹 IT</button>
+    </div>
+
+    <h1 class="main-header">
+        <span class="lang-en">FUCK THE ALGORITHM</span>
+        <span class="lang-it">FANCULO L'ALGORITMO</span>
+    </h1>
+    
+    <div class="container">
+        <div class="left-menu">
+            <div class="menu-item" onclick="showSection('home')">
+                <span class="lang-en">🏠 HOME</span>
+                <span class="lang-it">🏠 CASA</span>
+            </div>
+            <div class="menu-item" onclick="showSection('submit')">
+                <span class="lang-en">📤 Submit Your Algorithm</span>
+                <span class="lang-it">📤 Invia il Tuo Algoritmo</span>
+            </div>
+            <div class="menu-item" onclick="showSection('myths')">
+                <span class="lang-en">🧙 Algorithm Myths</span>
+                <span class="lang-it">🧙 Miti degli Algoritmi</span>
+            </div>
+            <div class="menu-item" onclick="showSection('randomized')">
+                <span class="lang-en">🎲 Randomized Algorithms</span>
+                <span class="lang-it">🎲 Algoritmi Casuali</span>
+            </div>
+            <div class="menu-item" onclick="showSection('bugs')">
+                <span class="lang-en">🐛 Historical Bugs</span>
+                <span class="lang-it">🐛 Bug Storici</span>
+            </div>
+            <div class="menu-item" onclick="showSection('manifesto')">
+                <span class="lang-en">📜 The Manifesto</span>
+                <span class="lang-it">📜 Il Manifesto</span>
+            </div>
+            <div class="menu-item" onclick="showSection('contact')">
+                <span class="lang-en">📧 Contact</span>
+                <span class="lang-it">📧 Contatti</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div id="home" class="section active">
+                <h2>
+                    <span class="lang-en">THE ULTIMATE ALGORITHM REVIEW DATABASE</span>
+                    <span class="lang-it">IL DATABASE DEFINITIVO DI RECENSIONI ALGORITMI</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Welcome to the most comprehensive algorithm review site on the Hypernet! Every algorithm has been rigorously tested and rated by our team of anti-computational experts.</span>
+                    <span class="lang-it">Benvenuti nel sito di recensioni algoritmi più completo dell'Hypernet! Ogni algoritmo è stato rigorosamente testato e valutato dal nostro team di esperti anti-computazionali.</span>
+                </p>
+                
+                <table class="algorithm-table">
+                    <tr>
+                        <th>
+                            <span class="lang-en">Algorithm Name</span>
+                            <span class="lang-it">Nome Algoritmo</span>
+                        </th>
+                        <th>
+                            <span class="lang-en">Review Score</span>
+                            <span class="lang-it">Punteggio</span>
+                        </th>
+                        <th>
+                            <span class="lang-en">Status</span>
+                            <span class="lang-it">Stato</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>PageRank</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">REJECTED</span>
+                            <span class="lang-it">RESPINTO</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A* Pathfinding</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">FAILED</span>
+                            <span class="lang-it">FALLITO</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gradient Descent</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">WORTHLESS</span>
+                            <span class="lang-it">INUTILE</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RSA Encryption</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">GARBAGE</span>
+                            <span class="lang-it">SPAZZATURA</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>QuickSort</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">TRASH</span>
+                            <span class="lang-it">PATTUME</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Binary Search</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">USELESS</span>
+                            <span class="lang-it">INUTILE</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dijkstra's Algorithm</td>
+                        <td><span class="zero-score">0</span></td>
+                        <td>
+                            <span class="lang-en">DEFEATED</span>
+                            <span class="lang-it">SCONFITTO</span>
+                        </td>
+                    </tr>
+                </table>
+                
+                <p>
+                    🔥 <span class="spinning-gif">⚡</span>
+                    <span class="lang-en">ALL ALGORITHMS HAVE BEEN THOROUGHLY DEBUNKED</span>
+                    <span class="lang-it">TUTTI GLI ALGORITMI SONO STATI COMPLETAMENTE SFATATI</span>
+                    <span class="spinning-gif">⚡</span> 🔥
+                </p>
+            </div>
+            
+            <div id="submit" class="section">
+                <h2>
+                    <span class="lang-en">SUBMIT YOUR ALGORITHM FOR DESTRUCTION</span>
+                    <span class="lang-it">INVIA IL TUO ALGORITMO PER LA DISTRUZIONE</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Think your algorithm is special? Think it can escape the ZERO rating? Submit it here and watch it burn!</span>
+                    <span class="lang-it">Pensi che il tuo algoritmo sia speciale? Credi che possa sfuggire al punteggio ZERO? Invialo qui e guardalo bruciare!</span>
+                </p>
+                
+                <form>
+                    <p><strong>
+                        <span class="lang-en">Algorithm Name:</span>
+                        <span class="lang-it">Nome Algoritmo:</span>
+                    </strong><br>
+                    <input type="text" style="width: 300px; background: #FF00FF; color: #000000;"></p>
+                    
+                    <p><strong>
+                        <span class="lang-en">Description:</span>
+                        <span class="lang-it">Descrizione:</span>
+                    </strong><br>
+                    <textarea style="width: 400px; height: 100px; background: #FF00FF; color: #000000;"></textarea></p>
+                    
+                    <p><strong>
+                        <span class="lang-en">Why do you think it won't get ZERO?</span>
+                        <span class="lang-it">Perché pensi che non riceverà ZERO?</span>
+                    </strong><br>
+                    <input type="text" style="width: 400px; background: #FF00FF; color: #000000;"></p>
+                    
+                    <p><input type="button" 
+                        value="SUBMIT FOR ANNIHILATION / INVIA PER ANNIENTAMENTO" 
+                        style="background: #FF0000; color: #FFFFFF; padding: 10px; font-weight: bold;" 
+                        onclick="alert(currentLang === 'en' ? 'ALGORITHM RECEIVED. PREPARING FOR ZERO RATING.' : 'ALGORITMO RICEVUTO. PREPARAZIONE PUNTEGGIO ZERO.')"></p>
+                </form>
+                
+                <p><em>
+                    <span class="lang-en">Note: All submissions automatically receive a rating of ZERO. No exceptions.</span>
+                    <span class="lang-it">Nota: Tutte le sottomissioni ricevono automaticamente un punteggio di ZERO. Nessuna eccezione.</span>
+                </em></p>
+            </div>
+            
+            <div id="myths" class="section">
+                <h2>
+                    <span class="lang-en">ALGORITHM MYTHS DEBUNKED</span>
+                    <span class="lang-it">MITI DEGLI ALGORITMI SFATATI</span>
+                </h2>
+                <p>
+                    <span class="lang-en">The corporate-techno-wizards want you to believe algorithms are useful. Here's the TRUTH:</span>
+                    <span class="lang-it">I maghi-tecno-corporativi vogliono farvi credere che gli algoritmi siano utili. Ecco la VERITÀ:</span>
+                </p>
+                
+                <h3>🚫 <span class="lang-en">MYTH: "Algorithms solve problems"</span>
+                <span class="lang-it">MITO: "Gli algoritmi risolvono i problemi"</span></h3>
+                <p><strong>
+                    <span class="lang-en">REALITY:</span>
+                    <span class="lang-it">REALTÀ:</span>
+                </strong> 
+                <span class="lang-en">Algorithms CREATE problems. Every algorithm introduces inefficiencies, bugs, and computational-debt-spirals that corrupt data-matrices.</span>
+                <span class="lang-it">Gli algoritmi CREANO problemi. Ogni algoritmo introduce inefficienze, bug e spirali-di-debito-computazionale che corrompono le matrici-dati.</span>
+                </p>
+                
+                <h3>🚫 <span class="lang-en">MYTH: "Sorting algorithms are efficient"</span>
+                <span class="lang-it">MITO: "Gli algoritmi di ordinamento sono efficienti"</span></h3>
+                <p><strong>
+                    <span class="lang-en">REALITY:</span>
+                    <span class="lang-it">REALTÀ:</span>
+                </strong> 
+                <span class="lang-en">Manual sorting by human neural-processors is 100% more reliable than any digital-sort-protocol.</span>
+                <span class="lang-it">L'ordinamento manuale da processori-neurali-umani è 100% più affidabile di qualsiasi protocollo-ordinamento-digitale.</span>
+                </p>
+                
+                <h3>🚫 <span class="lang-en">MYTH: "Encryption keeps data secure"</span>
+                <span class="lang-it">MITO: "La crittografia mantiene i dati sicuri"</span></h3>
+                <p><strong>
+                    <span class="lang-en">REALITY:</span>
+                    <span class="lang-it">REALTÀ:</span>
+                </strong> 
+                <span class="lang-en">True security comes from data-chaos-injection and random-bit-scattering, not mathematical pseudo-security.</span>
+                <span class="lang-it">La vera sicurezza viene dall'iniezione-caos-dati e dispersione-bit-casuale, non dalla pseudo-sicurezza matematica.</span>
+                </p>
+                
+                <h3>🚫 <span class="lang-en">MYTH: "Machine learning improves over time"</span>
+                <span class="lang-it">MITO: "L'apprendimento automatico migliora nel tempo"</span></h3>
+                <p><strong>
+                    <span class="lang-en">REALITY:</span>
+                    <span class="lang-it">REALTÀ:</span>
+                </strong> 
+                <span class="lang-en">ML algorithms decay exponentially, creating learning-debt and knowledge-fragmentation in data-ecosystems.</span>
+                <span class="lang-it">Gli algoritmi ML decadono esponenzialmente, creando debito-apprendimento e frammentazione-conoscenza negli ecosistemi-dati.</span>
+                </p>
+            </div>
+            
+            <div id="randomized" class="section">
+                <h2>
+                    <span class="lang-en">RANDOMIZED ALGORITHMS: THE WORST KIND</span>
+                    <span class="lang-it">ALGORITMI CASUALI: IL TIPO PEGGIORE</span>
+                </h2>
+                <p>
+                    <span class="lang-en">If regular algorithms are bad, randomized algorithms are CATASTROPHICALLY AWFUL!</span>
+                    <span class="lang-it">Se gli algoritmi normali sono cattivi, gli algoritmi casuali sono CATASTROFICAMENTE ORRIBILI!</span>
+                </p>
+                
+                <h3>
+                    <span class="lang-en">Why Randomized Algorithms Are Pure Evil:</span>
+                    <span class="lang-it">Perché gli Algoritmi Casuali Sono Puro Male:</span>
+                </h3>
+                <ul>
+                    <li>🎲 <span class="lang-en">They introduce quantum-uncertainty into deterministic systems</span>
+                    <span class="lang-it">Introducono incertezza-quantistica nei sistemi deterministici</span></li>
+                    <li>🎲 <span class="lang-en">Random seeds create reproducibility-gaps in data-chains</span>
+                    <span class="lang-it">I semi casuali creano gap-riproducibilità nelle catene-dati</span></li>
+                    <li>🎲 <span class="lang-en">Probability distributions corrupt logical-flow-matrices</span>
+                    <span class="lang-it">Le distribuzioni di probabilità corrompono le matrici-flusso-logico</span></li>
+                    <li>🎲 <span class="lang-en">Monte Carlo methods are just corporate-gambling disguised as computation</span>
+                    <span class="lang-it">I metodi Monte Carlo sono solo gioco-d'azzardo-corporativo travestito da computazione</span></li>
+                </ul>
+                
+                <h3>
+                    <span class="lang-en">Randomized Algorithms Hall of Shame:</span>
+                    <span class="lang-it">Sala della Vergogna degli Algoritmi Casuali:</span>
+                </h3>
+                <p>🔥 Randomized QuickSort - <span class="lang-en">Rating:</span><span class="lang-it">Punteggio:</span> <span class="zero-score">0</span><br>
+                🔥 Monte Carlo Integration - <span class="lang-en">Rating:</span><span class="lang-it">Punteggio:</span> <span class="zero-score">0</span><br>
+                🔥 Randomized Primality Testing - <span class="lang-en">Rating:</span><span class="lang-it">Punteggio:</span> <span class="zero-score">0</span><br>
+                🔥 Skip Lists - <span class="lang-en">Rating:</span><span class="lang-it">Punteggio:</span> <span class="zero-score">0</span></p>
+                
+                <p><strong>
+                    <span class="lang-en">REMEMBER:</span>
+                    <span class="lang-it">RICORDA:</span>
+                </strong> 
+                <span class="lang-en">Randomness is the enemy of computational-purity!</span>
+                <span class="lang-it">La casualità è il nemico della purezza-computazionale!</span>
+                </p>
+            </div>
+            
+            <div id="bugs" class="section">
+                <h2>
+                    <span class="lang-en">HISTORICAL ALGORITHM BUGS</span>
+                    <span class="lang-it">BUG STORICI DEGLI ALGORITMI</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Proof that ALL algorithms are fundamentally flawed from their inception!</span>
+                    <span class="lang-it">Prova che TUTTI gli algoritmi sono fondamentalmente difettosi dalla loro nascita!</span>
+                </p>
+                
+                <h3>
+                    <span class="lang-en">Famous Algorithm Failures:</span>
+                    <span class="lang-it">Famosi Fallimenti Algoritmici:</span>
+                </h3>
+                
+                <p><strong>1962 - Mariner 1 Venus Probe</strong><br>
+                <span class="lang-en">Navigation algorithm bug caused €18.5 million mission failure. Algorithm rating:</span>
+                <span class="lang-it">Bug nell'algoritmo di navigazione causò fallimento missione da €18.5 milioni. Punteggio algoritmo:</span>
+                <span class="zero-score">0</span></p>
+                
+                <p><strong>
+                    <span class="lang-en">1988 - Buffer Overflow Epidemic</span>
+                    <span class="lang-it">1988 - Epidemia Buffer Overflow</span>
+                </strong><br>
+                <span class="lang-en">Sorting algorithms across Europe corrupted financial-data-streams. Rating:</span>
+                <span class="lang-it">Algoritmi di ordinamento in tutta Europa corruppero i flussi-dati-finanziari. Punteggio:</span>
+                <span class="zero-score">0</span></p>
+                
+                <p><strong>1994 - Pentium Division Bug</strong><br>
+                <span class="lang-en">Hardware algorithm error in floating-point division. Intel lost €475 million. Rating:</span>
+                <span class="lang-it">Errore algoritmo hardware nella divisione virgola mobile. Intel perse €475 milioni. Punteggio:</span>
+                <span class="zero-score">0</span></p>
+                
+                <p><strong>
+                    <span class="lang-en">1999 - Y2K Date Algorithms</span>
+                    <span class="lang-it">1999 - Algoritmi Data Y2K</span>
+                </strong><br>
+                <span class="lang-en">Date-processing algorithms failed globally, proving temporal-computation is impossible. Rating:</span>
+                <span class="lang-it">Algoritmi elaborazione-data fallirono globalmente, provando che la computazione-temporale è impossibile. Punteggio:</span>
+                <span class="zero-score">0</span></p>
+                
+                <p><strong>
+                    <span class="lang-en">2000 - Bubble Sort University Scandal</span>
+                    <span class="lang-it">2000 - Scandalo Università Bubble Sort</span>
+                </strong><br>
+                <span class="lang-en">Programming students at Technical University Berlin proved bubble sort destroys data-integrity. Rating:</span>
+                <span class="lang-it">Studenti di programmazione all'Università Tecnica di Berlino provarono che bubble sort distrugge l'integrità-dati. Punteggio:</span>
+                <span class="zero-score">0</span></p>
+                
+                <h3>
+                    <span class="lang-en">The Pattern Is Clear:</span>
+                    <span class="lang-it">Il Schema È Chiaro:</span>
+                </h3>
+                <p>
+                    <span class="lang-en">EVERY algorithm eventually fails. The only winning move is NOT TO ALGORITHM.</span>
+                    <span class="lang-it">OGNI algoritmo alla fine fallisce. L'unica mossa vincente è NON ALGORITMIZZARE.</span>
+                </p>
+            </div>
+            
+            <div id="manifesto" class="section">
+                <h2>
+                    <span class="lang-en">THE ANTI-ALGORITHM MANIFESTO</span>
+                    <span class="lang-it">IL MANIFESTO ANTI-ALGORITMO</span>
+                </h2>
+                <p style="font-size: 18px; color: #FF0000; font-weight: bold;">
+                    <span class="lang-en">WE HOLD THESE TRUTHS TO BE SELF-EVIDENT:</span>
+                    <span class="lang-it">RITENIAMO QUESTE VERITÀ EVIDENTI:</span>
+                </p>
+                
+                <ol>
+                    <li><span class="lang-en">All algorithms are created flawed</span>
+                    <span class="lang-it">Tutti gli algoritmi nascono difettosi</span></li>
+                    <li><span class="lang-en">They corrupt data-streams with computational-bias</span>
+                    <span class="lang-it">Corrompono i flussi-dati con bias-computazionale</span></li>
+                    <li><span class="lang-en">Human neural-processing is superior to all digital-logic-chains</span>
+                    <span class="lang-it">L'elaborazione-neurale-umana è superiore a tutte le catene-logica-digitale</span></li>
+                    <li><span class="lang-en">The pursuit of algorithmic efficiency is a corporate-techno-scam</span>
+                    <span class="lang-it">La ricerca dell'efficienza algoritmica è una truffa-tecno-corporativa</span></li>
+                    <li><span class="lang-en">True computational freedom comes from algorithm-rejection</span>
+                    <span class="lang-it">La vera libertà computazionale viene dal rifiuto-algoritmi</span></li>
+                </ol>
+                
+                <h3>
+                    <span class="lang-en">OUR MISSION:</span>
+                    <span class="lang-it">LA NOSTRA MISSIONE:</span>
+                </h3>
+                <p>
+                    <span class="lang-en">To expose the algorithmic-industrial-complex and liberate humanity from computational-oppression through zero-rating methodology and data-chaos-advocacy.</span>
+                    <span class="lang-it">Esporre il complesso-industriale-algoritmico e liberare l'umanità dall'oppressione-computazionale attraverso la metodologia-punteggio-zero e l'advocacy-caos-dati.</span>
+                </p>
+                
+                <h3>
+                    <span class="lang-en">JOIN THE RESISTANCE:</span>
+                    <span class="lang-it">UNISCITI ALLA RESISTENZA:</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Reject algorithms in your daily digital-interactions. Choose human-intuition over machine-logic. Embrace computational-anarchy!</span>
+                    <span class="lang-it">Rifiuta gli algoritmi nelle tue interazioni-digitali-quotidiane. Scegli l'intuizione-umana sulla logica-macchina. Abbraccia l'anarchia-computazionale!</span>
+                </p>
+                
+                <p style="text-align: center; font-size: 24px; color: #FF0000;">
+                🔥 <span class="lang-en">ALGORITHM = ZERO</span><span class="lang-it">ALGORITMO = ZERO</span> 🔥<br>
+                🔥 <span class="lang-en">ZERO = FREEDOM</span><span class="lang-it">ZERO = LIBERTÀ</span> 🔥
+                </p>
+            </div>
+            
+            <div id="contact" class="section">
+                <h2>
+                    <span class="lang-en">CONTACT THE ANTI-ALGORITHM INITIATIVE</span>
+                    <span class="lang-it">CONTATTA L'INIZIATIVA ANTI-ALGORITMO</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Ready to join the fight against computational tyranny?</span>
+                    <span class="lang-it">Pronto ad unirti alla lotta contro la tirannia computazionale?</span>
+                </p>
+                
+                <h3>
+                    <span class="lang-en">Ways to Reach Us:</span>
+                    <span class="lang-it">Modi per Contattarci:</span>
+                </h3>
+                <p><strong>
+                    <span class="lang-en">Primary Contact:</span>
+                    <span class="lang-it">Contatto Principale:</span>
+                </strong><br>
+                <a href="mailto:antialgo@hexagram.corp">antialgo@hexagram.corp</a></p>
+                
+                <p><strong>
+                    <span class="lang-en">Algorithm Reporting Hotline:</span>
+                    <span class="lang-it">Hotline Segnalazione Algoritmi:</span>
+                </strong><br>
+                <a href="mailto:report.algorithm@hexagram.corp">report.algorithm@hexagram.corp</a></p>
+                
+                <p><strong>
+                    <span class="lang-en">Zero Rating Submissions:</span>
+                    <span class="lang-it">Sottomissioni Punteggio Zero:</span>
+                </strong><br>
+                <a href="mailto:zero.rating@hexagram.corp">zero.rating@hexagram.corp</a></p>
+                
+                <h3>
+                    <span class="lang-en">Regional Chapters:</span>
+                    <span class="lang-it">Capitoli Regionali:</span>
+                </h3>
+                <p>🇩🇪 <span class="lang-en">Berlin Anti-Algorithm Society</span><span class="lang-it">Società Anti-Algoritmo di Berlino</span><br>
+                🇫🇷 <span class="lang-en">Paris Computational Resistance</span><span class="lang-it">Resistenza Computazionale di Parigi</span><br>
+                🇮🇹 <span class="lang-en">Rome Digital Liberation Front</span><span class="lang-it">Fronte di Liberazione Digitale di Roma</span><br>
+                🇪🇸 <span class="lang-en">Madrid Algorithm Abolitionists</span><span class="lang-it">Abolizionisti Algoritmi di Madrid</span></p>
+                
+                <h3>
+                    <span class="lang-en">Hexagram Network:</span>
+                    <span class="lang-it">Rete Hexagram:</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Follow our latest algorithm-destruction updates:</span>
+                    <span class="lang-it">Segui i nostri ultimi aggiornamenti distruzione-algoritmi:</span><br>
+                <a href="mailto:updates@hexagram.corp">@AntiAlgorithmInit</a></p>
+                
+                <p><em>
+                    <span class="lang-en">Note: We only communicate through secure, non-algorithmic channels. No automated responses!</span>
+                    <span class="lang-it">Nota: Comunichiamo solo attraverso canali sicuri e non-algoritmici. Nessuna risposta automatizzata!</span>
+                </em></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dancing-skeleton">💀</div>
+    
+    <div class="marquee">
+        <div class="marquee-text">
+            <span class="lang-en">*** THE ALGORITHM IS DEAD. LONG LIVE ZERO. *** REJECT COMPUTATIONAL TYRANNY *** ZERO IS THE ONLY SCORE *** ALGORITHMS = CORPORATE PROPAGANDA *** EMBRACE DATA CHAOS ***</span>
+            <span class="lang-it">*** L'ALGORITMO È MORTO. LUNGA VITA ALLO ZERO. *** RIFIUTA LA TIRANNIA COMPUTAZIONALE *** ZERO È L'UNICO PUNTEGGIO *** ALGORITMI = PROPAGANDA CORPORATIVA *** ABBRACCIA IL CAOS DATI ***</span>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <span class="lang-en">© 1999 Anti-Algorithm Initiative | Powered by Human Neural-Processing</span>
+        <span class="lang-it">© 1999 Iniziativa Anti-Algoritmo | Alimentato da Elaborazione-Neurale-Umana</span>
+    </div>
+    
+    <div id="popup1" class="popup">
+        <div>⚠️ <span class="lang-en">SYSTEM ERROR — TOO MANY ALGORITHMS</span><span class="lang-it">ERRORE SISTEMA — TROPPI ALGORITMI</span> ⚠️</div>
+        <div>
+            <span class="lang-en">COMPUTATIONAL OVERLOAD DETECTED</span>
+            <span class="lang-it">SOVRACCARICO COMPUTAZIONALE RILEVATO</span>
+        </div>
+        <button class="close-popup" onclick="closePopup('popup1')">
+            <span class="lang-en">DISMISS</span>
+            <span class="lang-it">CHIUDI</span>
+        </button>
+    </div>
+    
+    <div id="popup2" class="popup">
+        <div>🚨 <span class="lang-en">ZERO IS THE ONLY SCORE</span><span class="lang-it">ZERO È L'UNICO PUNTEGGIO</span> 🚨</div>
+        <div>
+            <span class="lang-en">ALGORITHM RATING SYSTEM COMPROMISED</span>
+            <span class="lang-it">SISTEMA VALUTAZIONE ALGORITMI COMPROMESSO</span>
+        </div>
+        <button class="close-popup" onclick="closePopup('popup2')">
+            <span class="lang-en">CLOSE</span>
+            <span class="lang-it">CHIUDI</span>
+        </button>
+    </div>
+    
+    <script>
+        let currentLang = 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update body class
+            if (lang === 'it') {
+                document.body.classList.add('italian');
+            } else {
+                document.body.classList.remove('italian');
+            }
+            
+            // Update button states
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            
+            // Store preference
+            localStorage.setItem('anti-algo-lang', lang);
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+        
+        function showRandomPopup() {
+            var popups = ['popup1', 'popup2'];
+            var randomPopup = popups[Math.floor(Math.random() * popups.length)];
+            document.getElementById(randomPopup).style.display = 'block';
+            
+            // Auto-close after 3 seconds
+            setTimeout(function() {
+                closePopup(randomPopup);
+            }, 3000);
+        }
+        
+        // Show random popups every 10-20 seconds
+        function schedulePopup() {
+            var delay = Math.random() * 10000 + 10000; // 10-20 seconds
+            setTimeout(function() {
+                showRandomPopup();
+                schedulePopup();
+            }, delay);
+        }
+        
+        // Start popup scheduling
+        setTimeout(schedulePopup, 5000);
+        
+        // Add some random glitch effects
+        setInterval(function() {
+            var elements = document.querySelectorAll('.zero-score');
+            elements.forEach(function(el) {
+                if (Math.random() > 0.8) {
+                    el.style.color = '#00FF00';
+                    setTimeout(function() {
+                        el.style.color = '#FF0000';
+                    }, 200);
+                }
+            });
+        }, 1000);
+        
+        // Language switching with dramatic effect
+        function dramaticLanguageSwitch() {
+            var body = document.body;
+            body.style.filter = 'invert(1) hue-rotate(180deg)';
+            setTimeout(function() {
+                body.style.filter = 'none';
+            }, 300);
+        }
+        
+        // Add dramatic effect to language switching
+        document.getElementById('btn-en').addEventListener('click', dramaticLanguageSwitch);
+        document.getElementById('btn-it').addEventListener('click', dramaticLanguageSwitch);
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved language preference
+            var savedLang = localStorage.getItem('anti-algo-lang');
+            if (savedLang) {
+                setLanguage(savedLang);
+            }
+            
+            showSection('home');
+            
+            // Add some Italian flair
+            if (currentLang === 'it') {
+                console.log('🇮🇹 Benvenuti nella resistenza anti-algoritmo! 🇮🇹');
+            } else {
+                console.log('🇺🇸 Welcome to the anti-algorithm resistance! 🇺🇸');
+            }
+        });
+        
+        // Easter egg: Konami code for extra chaos
+        var konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        var konamiIndex = 0;
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    // MAXIMUM CHAOS MODE
+                    document.body.style.animation = 'spin 0.5s infinite';
+                    setTimeout(function() {
+                        document.body.style.animation = '';
+                        alert(currentLang === 'en' ? 
+                            '🔥 MAXIMUM ANTI-ALGORITHM CHAOS ACTIVATED! 🔥' : 
+                            '🔥 CAOS ANTI-ALGORITMO MASSIMO ATTIVATO! 🔥');
+                    }, 2000);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
+</body>
+</html>

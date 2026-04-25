@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Squishing - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">The Squishing</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: March 8, 2001 | <span data-lang-key="meta_read_time">8 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">The Squishing (also known as the Dimensional Compression Event or DCE-97) was a multiversal catastrophe that occurred in 1997, resulting in the violent compression of 92 parallel dimensions into a single, unstable reality-matrix. This event fundamentally altered the structure of existence and precipitated the emergence of post-dimensional physics that govern our current reality.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#overview" data-lang-key="toc_1">1. Event Overview</a></li>
+                        <li><a href="#causes" data-lang-key="toc_2">2. Causal Factors</a></li>
+                        <li><a href="#process" data-lang-key="toc_3">3. Compression Process</a></li>
+                        <li><a href="#aftermath" data-lang-key="toc_4">4. Post-Squishing Reality</a></li>
+                        <li><a href="#survivors" data-lang-key="toc_5">5. Dimensional Survivors</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_6">6. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Event Details</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_date_label">Date:</span> <span data-lang-key="infobox_date_value">September 15, 1997</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_duration_label">Duration:</span> <span data-lang-key="infobox_duration_value">72 minutes</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_affected_label">Dimensions Affected:</span> <span data-lang-key="infobox_affected_value">92 parallel realities</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_casualties_label">Estimated Casualties:</span> <span data-lang-key="infobox_casualties_value">Incalculable</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_survivors_label">Known Survivors:</span> <span data-lang-key="infobox_survivors_value">Earth-Prime population</span>
+                    </div>
+                </div>
+
+                <h2 id="overview" data-lang-key="h2_overview">Event Overview</h2>
+                <p data-lang-key="p_overview">The Squishing represents the most catastrophic reality-restructuring event in recorded history. Unlike previous dimensional incidents that affected localized space-time sectors, the DCE-97 simultaneously compressed 92 distinct dimensional planes into a single, chaotically overlapping reality-framework. The event's designation comes from <a href="archive-foundation">Archive Foundation</a> researcher Dr. Helena Voss, who described the phenomenon as "watching the multiverse get squished like an accordion."</p>
+
+                <p data-lang-key="p_detection">Early detection came through dimensional-monitoring stations operated by the <a href="mages-guild">Mages Guild</a>, which registered massive flux-distortions beginning at 14:32 GMT. Within minutes, reality-coherence readings across all monitored dimensions began showing critical instability patterns previously thought impossible.</p>
+
+                <h2 id="causes" data-lang-key="h2_causes">Causal Factors</h2>
+                <p data-lang-key="p_causes_intro">While the exact trigger remains classified by the <a href="archive-foundation">Archive Foundation</a>, declassified documents suggest multiple contributing factors:</p>
+
+                <h3 data-lang-key="h3_economic">Hyper-Dimensional Economics</h3>
+                <p data-lang-key="p_economic">The <a href="hypercapitalist-collective">Hypercapitalist Collective</a> had been conducting aggressive reality-arbitrage operations across multiple dimensions, exploiting temporal-economic disparities to generate massive profit-streams. Their dimensional market-manipulation may have destabilized the fundamental balance-sheets governing multiversal stability.</p>
+
+                <h3 data-lang-key="h3_magical">Thaumic Overextraction</h3>
+                <p data-lang-key="p_magical">Several dimensions had reached critical thaumic-depletion levels due to intensive magical mining operations. The sudden collapse of magic-based economies in at least 17 dimensions created cascading reality-defaults that propagated through dimensional boundary-layers.</p>
+
+                <h3 data-lang-key="h3_technological">Prototype Technology</h3>
+                <p data-lang-key="p_technological">Unconfirmed reports suggest <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a> was testing experimental dimensional-compression technologies for corporate expansion purposes. Their prototype reality-consolidation engines may have malfunctioned during the September 15th activation sequence.</p>
+
+                <h2 id="process" data-lang-key="h2_process">Compression Process</h2>
+                <p data-lang-key="p_process_intro">The Squishing occurred in three distinct phases, each lasting approximately 24 minutes:</p>
+
+                <h3 data-lang-key="h3_phase1">Phase One: Dimensional Destabilization</h3>
+                <p data-lang-key="p_phase1">Reality-barriers between dimensions began experiencing critical failure-cascades. Dimensional-monitoring equipment registered impossible readings as separate universes started experiencing mutual contamination-events. Physical laws began fluctuating as competing reality-rulesets attempted to assert dominance over the same space-time coordinates.</p>
+
+                <h3 data-lang-key="h3_phase2">Phase Two: Compression Initiation</h3>
+                <p data-lang-key="p_phase2">The actual compression began as dimensional boundaries collapsed entirely. Ninety-two distinct realities were forcibly compressed into overlapping layers, creating chaotic interference-patterns in local space-time. Survivors report experiencing simultaneous memories from multiple dimensional variants of themselves during this phase.</p>
+
+                <h3 data-lang-key="h3_phase3">Phase Three: Reality Consolidation</h3>
+                <p data-lang-key="p_phase3">The final phase involved the violent merger of all dimensional matter, energy, and information into a single, extremely unstable reality-matrix. This process created the fundamental irregularities that characterize post-Squishing physics, including the <a href="rule-of-80">Rule of 80</a> and various temporal-anomaly zones.</p>
+
+                <h2 id="aftermath" data-lang-key="h2_aftermath">Post-Squishing Reality</h2>
+                <p data-lang-key="p_aftermath">The immediate aftermath of the Squishing created a reality-framework operating under entirely new physical principles. The compression of 92 dimensions into a single space resulted in:</p>
+
+                <ul>
+                    <li data-lang-key="li_time_loops"><strong data-lang-key="time_loops">Temporal Loop Zones:</strong> <span data-lang-key="time_loops_desc">Areas where compressed time-streams create repetitive chronological cycles</span></li>
+                    <li data-lang-key="li_scraps"><strong data-lang-key="scraps">Dimensional Scraps:</strong> <span data-lang-key="scraps_desc">Fragments of destroyed dimensions that exist as pocket-realities within our current space-time</span></li>
+                    <li data-lang-key="li_physics"><strong data-lang-key="physics">Unstable Physics:</strong> <span data-lang-key="physics_desc">Regions where multiple dimensional physics-packages conflict, creating unpredictable phenomena</span></li>
+                    <li data-lang-key="li_entities"><strong data-lang-key="entities">Dimensional Refugees:</strong> <span data-lang-key="entities_desc">Beings from destroyed dimensions who survived the compression process</span></li>
+                </ul>
+
+                <p data-lang-key="p_road">Perhaps most significantly, the Squishing created the <a href="encompassing-road">Encompassing Road</a>, a trans-dimensional highway system that connects the scattered remains of the compressed realities. This road network has become crucial for navigation in post-Squishing reality.</p>
+
+                <h2 id="survivors" data-lang-key="h2_survivors">Dimensional Survivors</h2>
+                <p data-lang-key="p_survivors_intro">Not all beings from the compressed dimensions were destroyed. Several categories of survivors have been documented:</p>
+
+                <h3 data-lang-key="h3_goblins">The Verden Goblins</h3>
+                <p data-lang-key="p_goblins">Originally from the Green Fields dimension, these technologically advanced beings had voluntarily regressed to primitive living before the Squishing. Their rejection of high technology may have protected them from the worst effects of dimensional compression. They now exist as one of several <a href="goblin-civilizations">goblin populations</a> in our reality.</p>
+
+                <h3 data-lang-key="h3_collective_members">Collective Operatives</h3>
+                <p data-lang-key="p_collective">Various members of the <a href="hypercapitalist-collective">Hypercapitalist Collective</a> survived due to their bio-modifications and speed-enhancement technologies. Their ability to maintain velocities above 80 km/h protected them from the temporal-compression effects.</p>
+
+                <h3 data-lang-key="h3_entities_unknown">Unknown Entities</h3>
+                <p data-lang-key="p_entities">Numerous unclassified beings from unknown dimensions have been detected throughout post-Squishing reality. The <a href="archive-foundation">Archive Foundation</a> continues cataloging these entities, though many exhibit properties that challenge conventional classification systems.</p>
+
+                <blockquote data-lang-key="quote_researcher">
+                    "The Squishing didn't just compress space and time—it compressed possibility itself. We're living in a reality where 92 different universes' worth of 'what could be' are all trying to exist simultaneously." - Dr. Helena Voss, Archive Foundation Dimensional Research Division, 2000
+                </blockquote>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="rule-of-80.html" data-lang-key="link_rule80">Rule of 80</a></li>
+                    <li><a href="encompassing-road.html" data-lang-key="link_road">Encompassing Road</a></li>
+                    <li><a href="dimensional-scraps.html" data-lang-key="link_scraps">Dimensional Scraps</a></li>
+                    <li><a href="temporal-anomalies.html" data-lang-key="link_temporal">Temporal Anomalies</a></li>
+                    <li><a href="hypercapitalist-collective.html" data-lang-key="link_collective">Hypercapitalist Collective</a></li>
+                    <li><a href="post-dimensional-physics.html" data-lang-key="link_physics">Post-Dimensional Physics</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "The Squishing",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "8 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Event Overview",
+                    toc_2: "2. Causal Factors",
+                    toc_3: "3. Compression Process",
+                    toc_4: "4. Post-Squishing Reality",
+                    toc_5: "5. Dimensional Survivors",
+                    toc_6: "6. See Also",
+                    infobox_title: "Event Details",
+                    infobox_date_label: "Date:",
+                    infobox_date_value: "September 15, 1997",
+                    infobox_duration_label: "Duration:",
+                    infobox_duration_value: "72 minutes",
+                    infobox_affected_label: "Dimensions Affected:",
+                    infobox_affected_value: "92 parallel realities",
+                    infobox_casualties_label: "Estimated Casualties:",
+                    infobox_casualties_value: "Incalculable",
+                    infobox_survivors_label: "Known Survivors:",
+                    infobox_survivors_value: "Earth-Prime population",
+                    p_intro: "The Squishing (also known as the Dimensional Compression Event or DCE-97) was a multiversal catastrophe that occurred in 1997, resulting in the violent compression of 92 parallel dimensions into a single, unstable reality-matrix. This event fundamentally altered the structure of existence and precipitated the emergence of post-dimensional physics that govern our current reality.",
+                    h2_overview: "Event Overview",
+                    p_overview: "The Squishing represents the most catastrophic reality-restructuring event in recorded history. Unlike previous dimensional incidents that affected localized space-time sectors, the DCE-97 simultaneously compressed 92 distinct dimensional planes into a single, chaotically overlapping reality-framework. The event's designation comes from Archive Foundation researcher Dr. Helena Voss, who described the phenomenon as \"watching the multiverse get squished like an accordion.\"",
+                    p_detection: "Early detection came through dimensional-monitoring stations operated by the Mages Guild, which registered massive flux-distortions beginning at 14:32 GMT. Within minutes, reality-coherence readings across all monitored dimensions began showing critical instability patterns previously thought impossible.",
+                    h2_causes: "Causal Factors",
+                    p_causes_intro: "While the exact trigger remains classified by the Archive Foundation, declassified documents suggest multiple contributing factors:",
+                    h3_economic: "Hyper-Dimensional Economics",
+                    p_economic: "The Hypercapitalist Collective had been conducting aggressive reality-arbitrage operations across multiple dimensions, exploiting temporal-economic disparities to generate massive profit-streams. Their dimensional market-manipulation may have destabilized the fundamental balance-sheets governing multiversal stability.",
+                    h3_magical: "Thaumic Overextraction",
+                    p_magical: "Several dimensions had reached critical thaumic-depletion levels due to intensive magical mining operations. The sudden collapse of magic-based economies in at least 17 dimensions created cascading reality-defaults that propagated through dimensional boundary-layers.",
+                    h3_technological: "Prototype Technology",
+                    p_technological: "Unconfirmed reports suggest Esoteric Heavy Industries was testing experimental dimensional-compression technologies for corporate expansion purposes. Their prototype reality-consolidation engines may have malfunctioned during the September 15th activation sequence.",
+                    h2_process: "Compression Process",
+                    p_process_intro: "The Squishing occurred in three distinct phases, each lasting approximately 24 minutes:",
+                    h3_phase1: "Phase One: Dimensional Destabilization",
+                    p_phase1: "Reality-barriers between dimensions began experiencing critical failure-cascades. Dimensional-monitoring equipment registered impossible readings as separate universes started experiencing mutual contamination-events. Physical laws began fluctuating as competing reality-rulesets attempted to assert dominance over the same space-time coordinates.",
+                    h3_phase2: "Phase Two: Compression Initiation",
+                    p_phase2: "The actual compression began as dimensional boundaries collapsed entirely. Ninety-two distinct realities were forcibly compressed into overlapping layers, creating chaotic interference-patterns in local space-time. Survivors report experiencing simultaneous memories from multiple dimensional variants of themselves during this phase.",
+                    h3_phase3: "Phase Three: Reality Consolidation",
+                    p_phase3: "The final phase involved the violent merger of all dimensional matter, energy, and information into a single, extremely unstable reality-matrix. This process created the fundamental irregularities that characterize post-Squishing physics, including the Rule of 80 and various temporal-anomaly zones.",
+                    h2_aftermath: "Post-Squishing Reality",
+                    p_aftermath: "The immediate aftermath of the Squishing created a reality-framework operating under entirely new physical principles. The compression of 92 dimensions into a single space resulted in:",
+                    li_time_loops: "Temporal Loop Zones: Areas where compressed time-streams create repetitive chronological cycles",
+                    time_loops: "Temporal Loop Zones:",
+                    time_loops_desc: "Areas where compressed time-streams create repetitive chronological cycles",
+                    li_scraps: "Dimensional Scraps: Fragments of destroyed dimensions that exist as pocket-realities within our current space-time",
+                    scraps: "Dimensional Scraps:",
+                    scraps_desc: "Fragments of destroyed dimensions that exist as pocket-realities within our current space-time",
+                    li_physics: "Unstable Physics: Regions where multiple dimensional physics-packages conflict, creating unpredictable phenomena",
+                    physics: "Unstable Physics:",
+                    physics_desc: "Regions where multiple dimensional physics-packages conflict, creating unpredictable phenomena",
+                    li_entities: "Dimensional Refugees: Beings from destroyed dimensions who survived the compression process",
+                    entities: "Dimensional Refugees:",
+                    entities_desc: "Beings from destroyed dimensions who survived the compression process",
+                    p_road: "Perhaps most significantly, the Squishing created the Encompassing Road, a trans-dimensional highway system that connects the scattered remains of the compressed realities. This road network has become crucial for navigation in post-Squishing reality.",
+                    h2_survivors: "Dimensional Survivors",
+                    p_survivors_intro: "Not all beings from the compressed dimensions were destroyed. Several categories of survivors have been documented:",
+                    h3_goblins: "The Verden Goblins",
+                    p_goblins: "Originally from the Green Fields dimension, these technologically advanced beings had voluntarily regressed to primitive living before the Squishing. Their rejection of high technology may have protected them from the worst effects of dimensional compression. They now exist as one of several goblin populations in our reality.",
+                    h3_collective_members: "Collective Operatives",
+                    p_collective: "Various members of the Hypercapitalist Collective survived due to their bio-modifications and speed-enhancement technologies. Their ability to maintain velocities above 80 km/h protected them from the temporal-compression effects.",
+                    h3_entities_unknown: "Unknown Entities",
+                    p_entities: "Numerous unclassified beings from unknown dimensions have been detected throughout post-Squishing reality. The Archive Foundation continues cataloging these entities, though many exhibit properties that challenge conventional classification systems.",
+                    quote_researcher: "\"The Squishing didn't just compress space and time—it compressed possibility itself. We're living in a reality where 92 different universes' worth of 'what could be' are all trying to exist simultaneously.\" - Dr. Helena Voss, Archive Foundation Dimensional Research Division, 2000",
+                    h2_see_also: "See Also",
+                    link_rule80: "Rule of 80",
+                    link_road: "Encompassing Road",
+                    link_scraps: "Dimensional Scraps",
+                    link_temporal: "Temporal Anomalies",
+                    link_collective: "Hypercapitalist Collective",
+                    link_physics: "Post-Dimensional Physics",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Lo Schiacciamento",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "8 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Panoramica dell'Evento",
+                    toc_2: "2. Fattori Causali",
+                    toc_3: "3. Processo di Compressione",
+                    toc_4: "4. Realtà Post-Schiacciamento",
+                    toc_5: "5. Sopravvissuti Dimensionali",
+                    toc_6: "6. Vedi Anche",
+                    infobox_title: "Dettagli dell'Evento",
+                    infobox_date_label: "Data:",
+                    infobox_date_value: "15 Settembre 1997",
+                    infobox_duration_label: "Durata:",
+                    infobox_duration_value: "72 minuti",
+                    infobox_affected_label: "Dimensioni Coinvolte:",
+                    infobox_affected_value: "92 realtà parallele",
+                    infobox_casualties_label: "Vittime Stimate:",
+                    infobox_casualties_value: "Incalcolabili",
+                    infobox_survivors_label: "Sopravvissuti Noti:",
+                    infobox_survivors_value: "Popolazione Terra-Prima",
+                    p_intro: "Lo Schiacciamento (noto anche come Evento di Compressione Dimensionale o DCE-97) è stata una catastrofe multiversale verificatasi nel 1997, che ha comportato la compressione violenta di 92 dimensioni parallele in una singola matrice-realtà instabile. Questo evento ha alterato fondamentalmente la struttura dell'esistenza e ha precipitato l'emergenza della fisica post-dimensionale che governa la nostra realtà attuale.",
+                    h2_overview: "Panoramica dell'Evento",
+                    p_overview: "Lo Schiacciamento rappresenta l'evento di ristrutturazione-realtà più catastrofico nella storia documentata. A differenza dei precedenti incidenti dimensionali che interessavano settori spazio-temporali localizzati, il DCE-97 ha compresso simultaneamente 92 piani dimensionali distinti in un singolo framework-realtà caotico e sovrapposto. La designazione dell'evento proviene dalla ricercatrice della Archive Foundation Dr. Helena Voss, che ha descritto il fenomeno come \"guardare il multiverso venire schiacciato come una fisarmonica.\"",
+                    p_detection: "La rilevazione precoce è arrivata attraverso le stazioni di monitoraggio-dimensionale gestite dalla Gilda dei Maghi, che hanno registrato massicce distorsioni-flusso iniziando alle 14:32 GMT. Nel giro di minuti, le letture di coerenza-realtà attraverso tutte le dimensioni monitorate iniziarono a mostrare modelli di instabilità critica precedentemente ritenuti impossibili.",
+                    h2_causes: "Fattori Causali",
+                    p_causes_intro: "Mentre il trigger esatto rimane classificato dalla Archive Foundation, i documenti declassificati suggeriscono molteplici fattori contribuenti:",
+                    h3_economic: "Economia Iper-Dimensionale",
+                    p_economic: "Il Collettivo Ipercapitalista aveva condotto operazioni aggressive di arbitraggio-realtà attraverso dimensioni multiple, sfruttando disparità economico-temporali per generare massicci flussi-profitto. La loro manipolazione-mercato dimensionale potrebbe aver destabilizzato i bilanci fondamentali che governano la stabilità multiversale.",
+                    h3_magical: "Sovra-Estrazione Taumica",
+                    p_magical: "Diverse dimensioni avevano raggiunto livelli critici di deplezione-taumica a causa di operazioni intensive di mining magico. Il collasso improvviso delle economie basate sulla magia in almeno 17 dimensioni ha creato default-realtà a cascata che si sono propagati attraverso gli strati-confine dimensionali.",
+                    h3_technological: "Tecnologia Prototipo",
+                    p_technological: "Rapporti non confermati suggeriscono che Esoteric Heavy Industries stava testando tecnologie sperimentali di compressione-dimensionale per scopi di espansione aziendale. I loro motori prototipo di consolidamento-realtà potrebbero aver funzionato male durante la sequenza di attivazione del 15 settembre.",
+                    h2_process: "Processo di Compressione",
+                    p_process_intro: "Lo Schiacciamento è avvenuto in tre fasi distinte, ciascuna della durata di circa 24 minuti:",
+                    h3_phase1: "Fase Uno: Destabilizzazione Dimensionale",
+                    p_phase1: "Le barriere-realtà tra le dimensioni iniziarono a sperimentare cascate critiche di fallimento. L'equipaggiamento di monitoraggio-dimensionale registrò letture impossibili mentre universi separati iniziarono a sperimentare eventi di contaminazione-mutua. Le leggi fisiche iniziarono a fluttuare mentre rulesets-realtà concorrenti tentarono di affermare il dominio sulle stesse coordinate spazio-temporali.",
+                    h3_phase2: "Fase Due: Inizio della Compressione",
+                    p_phase2: "La compressione effettiva iniziò quando i confini dimensionali collassarono completamente. Novantadue realtà distinte furono forzatamente compresse in strati sovrapposti, creando modelli di interferenza caotica nello spazio-tempo locale. I sopravvissuti riportano di aver sperimentato ricordi simultanei da varianti dimensionali multiple di se stessi durante questa fase.",
+                    h3_phase3: "Fase Tre: Consolidamento della Realtà",
+                    p_phase3: "La fase finale comportò la fusione violenta di tutta la materia, energia e informazione dimensionale in una singola matrice-realtà estremamente instabile. Questo processo creò le irregolarità fondamentali che caratterizzano la fisica post-Schiacciamento, inclusa la Regola dell'80 e varie zone di anomalia-temporale.",
+                    h2_aftermath: "Realtà Post-Schiacciamento",
+                    p_aftermath: "Le conseguenze immediate dello Schiacciamento crearono un framework-realtà operante sotto principi fisici completamente nuovi. La compressione di 92 dimensioni in un singolo spazio risultò in:",
+                    li_time_loops: "Zone di Loop Temporale: Aree dove i flussi-tempo compressi creano cicli cronologici ripetitivi",
+                    time_loops: "Zone di Loop Temporale:",
+                    time_loops_desc: "Aree dove i flussi-tempo compressi creano cicli cronologici ripetitivi",
+                    li_scraps: "Frammenti Dimensionali: Frammenti di dimensioni distrutte che esistono come realtà-tascabili all'interno del nostro spazio-tempo attuale",
+                    scraps: "Frammenti Dimensionali:",
+                    scraps_desc: "Frammenti di dimensioni distrutte che esistono come realtà-tascabili all'interno del nostro spazio-tempo attuale",
+                    li_physics: "Fisica Instabile: Regioni dove pacchetti-fisica dimensionali multipli entrano in conflitto, creando fenomeni imprevedibili",
+                    physics: "Fisica Instabile:",
+                    physics_desc: "Regioni dove pacchetti-fisica dimensionali multipli entrano in conflitto, creando fenomeni imprevedibili",
+                    li_entities: "Rifugiati Dimensionali: Esseri da dimensioni distrutte che sono sopravvissuti al processo di compressione",
+                    entities: "Rifugiati Dimensionali:",
+                    entities_desc: "Esseri da dimensioni distrutte che sono sopravvissuti al processo di compressione",
+                    p_road: "Forse più significativamente, lo Schiacciamento ha creato la Strada Onnicomprensiva, un sistema autostradale trans-dimensionale che connette i resti sparsi delle realtà compresse. Questa rete stradale è diventata cruciale per la navigazione nella realtà post-Schiacciamento.",
+                    h2_survivors: "Sopravvissuti Dimensionali",
+                    p_survivors_intro: "Non tutti gli esseri dalle dimensioni compresse furono distrutti. Diverse categorie di sopravvissuti sono state documentate:",
+                    h3_goblins: "I Goblin Verden",
+                    p_goblins: "Originari della dimensione Campi Verdi, questi esseri tecnologicamente avanzati si erano volontariamente regrediti alla vita primitiva prima dello Schiacciamento. Il loro rifiuto dell'alta tecnologia potrebbe averli protetti dagli effetti peggiori della compressione dimensionale. Ora esistono come una delle diverse popolazioni goblin nella nostra realtà.",
+                    h3_collective_members: "Operativi del Collettivo",
+                    p_collective: "Vari membri del Collettivo Ipercapitalista sono sopravvissuti grazie alle loro bio-modificazioni e tecnologie di potenziamento-velocità. La loro capacità di mantenere velocità superiori agli 80 km/h li ha protetti dagli effetti di compressione-temporale.",
+                    h3_entities_unknown: "Entità Sconosciute",
+                    p_entities: "Numerosi esseri non classificati da dimensioni sconosciute sono stati rilevati in tutta la realtà post-Schiacciamento. la Archive Foundation continua a catalogare queste entità, sebbene molte esibiscano proprietà che sfidano i sistemi di classificazione convenzionali.",
+                    quote_researcher: "\"Lo Schiacciamento non ha solo compresso spazio e tempo—ha compresso la possibilità stessa. Stiamo vivendo in una realtà dove 92 diversi universi pieni di 'ciò che potrebbe essere' stanno tutti cercando di esistere simultaneamente.\" - Dr. Helena Voss, Divisione Ricerca Dimensionale Fondazione Archivio, 2000",
+                    h2_see_also: "Vedi Anche",
+                    link_rule80: "Regola dell'80",
+                    link_road: "Strada Onnicomprensiva",
+                    link_scraps: "Frammenti Dimensionali",
+                    link_temporal: "Anomalie Temporali",
+                    link_collective: "Collettivo Ipercapitalista",
+                    link_physics: "Fisica Post-Dimensionale",
+          }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            // Safe localStorage wrapper
+            const safeLocalStorage = {
+                getItem: function(key) {
+                    try {
+                        return localStorage ? localStorage.getItem(key) : null;
+                    } catch (e) {
+                        return null;
+                    }
+                },
+                setItem: function(key, value) {
+                    try {
+                        if (localStorage) {
+                            localStorage.setItem(key, value);
+                        }
+                    } catch (e) {
+                        // localStorage not available
+                    }
+                }
+            };
+
+            const setLanguage = (lang) => {
+                safeLocalStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            const initialLang = safeLocalStorage.getItem('language') || 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

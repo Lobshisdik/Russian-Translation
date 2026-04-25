@@ -1,0 +1,637 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Cats of Istanbul - A Living Feline Gallery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="description" content="A catalog of Istanbul's most notable stray cats, their territories and characteristics">
+    <meta name="keywords" content="istanbul, stray cats, feline, ottoman, neighborhoods, hypernet">
+    <meta name="author" content="Mehmet Effendi">
+    <style type="text/css">
+        body {
+            background-color: #FFFFCC;
+            font-family: Times New Roman, serif;
+            margin: 0;
+            padding: 0;
+            color: #330000;
+        }
+        
+        #header {
+            background-color: #CC9966;
+            border-bottom: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #663300;
+            font-size: 24pt;
+            margin: 0;
+        }
+        
+        h2 {
+            color: #996633;
+            font-size: 16pt;
+            border-bottom: 2px solid #996633;
+            cursor: pointer;
+        }
+        
+        h3 {
+            color: #996633;
+            font-size: 14pt;
+            margin-left: 10px;
+        }
+        
+        .section-content {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        #main-content {
+            width: 80%;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #FFFFFF;
+            border-left: 2px solid #CC9966;
+            border-right: 2px solid #CC9966;
+        }
+        
+        #footer {
+            background-color: #CC9966;
+            border-top: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+            font-size: 8pt;
+            clear: both;
+        }
+        
+        .navigation {
+            background-color: #EEDDBB;
+            border: 1px solid #CC9966;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+        
+        a {
+            color: #996633;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #CC9966;
+        }
+        
+        .blink {
+            text-decoration: blink;
+            color: red;
+        }
+        
+        .image-container {
+            text-align: center;
+            border: 1px dashed #CC9966;
+            padding: 5px;
+            margin: 10px auto;
+            width: 80%;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 8pt;
+            color: #663300;
+        }
+        
+        marquee {
+            background-color: #FFCC99;
+            color: #663300;
+            font-weight: bold;
+        }
+        
+        .cat-profile {
+            border: 2px solid #996633;
+            padding: 10px;
+            margin: 15px auto;
+            width: 90%;
+            background-color: #FFEECC;
+            overflow: hidden;
+        }
+        
+        .cat-name {
+            font-weight: bold;
+            color: #663300;
+            font-size: 16pt;
+            border-bottom: 1px solid #CC9966;
+            padding-bottom: 3px;
+            margin-bottom: 5px;
+        }
+        
+        .cat-location {
+            font-style: italic;
+            color: #996633;
+            margin-bottom: 10px;
+        }
+        
+        .cat-image {
+            float: left;
+            margin-right: 15px;
+            border: 1px solid #663300;
+            padding: 3px;
+            background-color: #FFFFFF;
+        }
+        
+        .cat-stats {
+            float: left;
+            width: 200px;
+            border: 1px solid #CC9966;
+            padding: 5px;
+            font-size: 10pt;
+            background-color: #FFFFFF;
+            margin-right: 10px;
+        }
+        
+        .cat-stats th {
+            text-align: left;
+            color: #663300;
+            padding: 2px;
+        }
+        
+        .cat-stats td {
+            padding: 2px;
+        }
+        
+        .cat-description {
+            margin-left: 220px;
+        }
+        
+        .cat-sighting {
+            font-style: italic;
+            font-size: 9pt;
+            color: #996633;
+            margin-top: 10px;
+        }
+        
+        .district-heading {
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #996633;
+            padding: 5px;
+            margin: 20px 0 10px 0;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .tips {
+            border: 1px solid #CC9966;
+            background-color: #FFFFCC;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .map-legend {
+            font-size: 9pt;
+            margin: 10px;
+            border: 1px solid #CC9966;
+            padding: 5px;
+            background-color: #FFFFFF;
+            width: 200px;
+        }
+        
+        .legend-item {
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #663300;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        
+        .red { background-color: #FF9999; }
+        .blue { background-color: #9999FF; }
+        .green { background-color: #99FF99; }
+        .yellow { background-color: #FFFF99; }
+        .purple { background-color: #CC99FF; }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1>Cats of Istanbul</h1>
+        <marquee scrollamount="3" direction="left">Explore the distinguished feline residents of Istanbul's historic neighborhoods! Best viewed in Hypernet Explorer 5.5 at 800x600 resolution</marquee>
+    </div>
+
+    <div id="main-content">
+        <div class="navigation">
+            <strong>Navigation:</strong> &nbsp;
+            <a href="index.html">Home</a> |
+            <a href="cats_of_istanbul.html">Cats of Istanbul</a> |
+            <a href="ottoman_cat_history.html">Ottoman Cat History</a> |
+            <a href="about_me.html">About the Author</a> |
+            <a href="guestbook.html">Sign Guestbook</a>
+        </div>
+
+        <center>
+            <img src="/api/placeholder/500/250" alt="Istanbul skyline with cats in foreground" />
+            <div class="image-caption">The skyline of Istanbul, where cats have been an essential part of the urban landscape for centuries</div>
+        </center>
+
+        <h2 onclick="toggleSection('introduction')">Introduction: The Cats Who Own Istanbul</h2>
+        <div id="introduction" class="section-content">
+            <p>Welcome, dear visitor, to my catalog of Istanbul's most distinguished feline residents. As I have documented throughout my years of research, the stray cats of Istanbul are not merely animals surviving in an urban environment - they are integral citizens of our ancient city, each with their own personality, territory, and relationship to human society.</p>
+            
+            <p>In the pages that follow, I present profiles of notable cats I have personally observed and documented across Istanbul's historic districts. These profiles are based on years of field notes, regular observation sessions, and information gathered from local residents who interact with these cats daily.</p>
+            
+            <p>Unlike domestic cats who depend entirely on human caretakers, Istanbul's street cats exist in a unique middle ground - neither fully wild nor fully tame, but rather engaged in a centuries-old partnership with the city's human inhabitants. This relationship, rooted in Ottoman cultural traditions, continues to thrive in the modern era.</p>
+            
+            <p>While countless cats call Istanbul home, I have selected representatives from various neighborhoods who exemplify the distinctive characteristics and adaptations of our urban feline population. Each profile includes location information, physical characteristics, behavioral traits, and notable interactions with humans and other cats.</p>
+            
+            <div class="tips">
+                <strong>Tips for Cat-Spotting Visitors:</strong>
+                <ul>
+                    <li>Morning (7-9 AM) and late afternoon (4-6 PM) offer the best times for observing cat activity</li>
+                    <li>Approach slowly and speak softly - most Istanbul cats are accustomed to humans but startle easily</li>
+                    <li>Small offerings of fish or meat are appreciated but never required</li>
+                    <li>Local shopkeepers can often provide information about specific cats in their neighborhood</li>
+                    <li>Respect established territories - do not attempt to relocate cats even with good intentions</li>
+                </ul>
+            </div>
+            
+            <p><span class="blink">NEW!</span> I have recently begun mapping the territories of Istanbul's most prominent cats. See the <a href="cat_territories.html">Cat Territories of Historic Istanbul</a> page for detailed maps of feline domains throughout the city.</p>
+        </div>
+
+        <h2 onclick="toggleSection('sultanahmet')">Sultanahmet District Cats</h2>
+        <div id="sultanahmet" class="section-content">
+            <div class="district-heading">SULTANAHMET DISTRICT</div>
+            
+            <p>The historic heart of Istanbul, encompassing Hagia Sophia, Blue Mosque, and Topkapı Palace, hosts some of the city's most distinguished and well-documented feline residents. These cats benefit from abundant tourist attention and the continuation of ancient traditions of cat care by mosque and museum staff.</p>
+            
+            <div class="image-container">
+                <img src="/api/placeholder/400/280" alt="Map of Sultanahmet cat territories" />
+                <div class="image-caption">Map of major feline territories in the Sultanahmet district (hand-drawn, December 2000)</div>
+                
+                <div class="map-legend">
+                    <strong>Territory Legend:</strong>
+                    <div class="legend-item"><span class="legend-color red"></span> Whisker Pasha's Domain</div>
+                    <div class="legend-item"><span class="legend-color blue"></span> Tulip Sultana's Territory</div>
+                    <div class="legend-item"><span class="legend-color green"></span> The Spice Brothers' Range</div>
+                    <div class="legend-item"><span class="legend-color yellow"></span> Marble Queen's Courtyard</div>
+                    <div class="legend-item"><span class="legend-color purple"></span> Shadow's Pathways</div>
+                </div>
+            </div>
+            
+            <div class="cat-profile">
+                <div class="cat-name">Whisker Pasha</div>
+                <div class="cat-location">Primary Territory: Hagia Sophia courtyard and surrounding gardens</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="Whisker Pasha" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Approximately 3 years</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Grey tabby with distinctive white paws and chest</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>Black pattern on face resembling Ottoman tughra (signature)</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Dignified, reserved yet approachable</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Anchovies, lamb from Yusuf's kebab shop</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Yusuf (kebab seller), mosque imam, carpet merchant Hasan</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>Whisker Pasha has established himself as one of the most prominent feline residents of the Sultanahmet district through a combination of dignified bearing and strategic alliances with local shopkeepers. His territory, unusually large for a single cat, spans from the western walls of Hagia Sophia to the courtyard of the Blue Mosque.</p>
+                    
+                    <p>Unlike many street cats who display obvious signs of hardship, Whisker Pasha maintains an immaculate coat and healthy appearance, evidence of both his hunting prowess and his ability to secure regular offerings from human admirers. He is frequently photographed by tourists, often posing regally on ancient stones or Ottoman-era fountains.</p>
+                    
+                    <p>For a comprehensive biography of this remarkable feline, please visit my dedicated page: <a href="index.html">Feline Chronicles of Istanbul: The Tale of Whisker Pasha</a>.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 14, 2001 - Observed mediating a territorial dispute between two younger males near the Hagia Sophia ticket office.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="cat-profile">
+                <div class="cat-name">Tulip Sultana</div>
+                <div class="cat-location">Primary Territory: Gardens behind the Blue Mosque</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="Tulip Sultana" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Approximately 2 years</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Calico with predominant orange and black markings</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>White patch on chest shaped like a tulip</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Graceful, selective in human interactions</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Fish, particularly mackerel, yogurt</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Ayşe (flower seller), museum guards</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>Tulip Sultana, named for the distinctive white marking on her chest, maintains a smaller but strategically valuable territory behind the Blue Mosque. She is frequently observed in the company of Whisker Pasha, though their relationship appears to be one of alliance rather than mating.</p>
+                    
+                    <p>Unlike many female strays, Tulip has had only one litter of kittens (in spring 1999), suggesting either remarkable restraint or possible early spaying by a local animal welfare group. Her kittens were all adopted by tourists or local families, a common fate for particularly appealing Istanbul kittens.</p>
+                    
+                    <p>Tulip displays unusual behavior around flowing water, often sitting beside fountains for extended periods and occasionally dipping her paws into the water - a trait more commonly associated with Turkish Van cats from eastern Anatolia.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 12, 2001 - Observed sunning herself on the marble steps near the ablution fountain of the Blue Mosque.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="cat-profile">
+                <div class="cat-name">The Spice Brothers (Tarçın & Karanfil)</div>
+                <div class="cat-location">Primary Territory: Pathway connecting Hagia Sophia to the Spice Bazaar</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="The Spice Brothers" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Approximately 1.5 years</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Matching orange tabbies with slightly darker stripes on Karanfil</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>Tarçın has a notched left ear, Karanfil has white-tipped tail</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Playful, highly social with humans</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Chicken scraps, dairy products</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Various spice merchants, street food vendors</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>The Spice Brothers, named Tarçın (Cinnamon) and Karanfil (Clove) by local merchants, are the rare example of adult male siblings who maintain a cooperative relationship. Believed to be from the same litter, these orange tabbies hunt, patrol, and rest together - behavior more typically seen in female cat groups.</p>
+                    
+                    <p>Their territory follows the busy pathway between the major tourist sites and the historic Spice Bazaar, where they have cultivated relationships with numerous food vendors. Unlike the more dignified Whisker Pasha, the Spice Brothers actively solicit attention and food from passersby, often performing acrobatic feats that delight tourists.</p>
+                    
+                    <p>Local merchants consider the brothers to be good luck, and several shops along their route maintain small shelters or feeding stations specifically for them. Their playful antics have been featured in at least two tourist guidebooks about Istanbul.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 15, 2001 - Both brothers observed playfully chasing each other around the columns of the covered walkway near the Spice Bazaar entrance.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('eminonu')">Eminönü Harbor Cats</h2>
+        <div id="eminonu" class="section-content">
+            <div class="district-heading">EMINÖNÜ HARBOR DISTRICT</div>
+            
+            <p>The bustling harbor district of Eminönü, with its fish markets, ferry terminals, and commercial activity, hosts a distinctive population of cats who have adapted specifically to maritime conditions. These cats typically display greater independence from human care, relying more heavily on fishing skills and scavenging abilities.</p>
+            
+            <div class="cat-profile">
+                <div class="cat-name">Captain Sarman</div>
+                <div class="cat-location">Primary Territory: Eminönü Ferry Terminal and surrounding docks</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="Captain Sarman" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Estimated 6-7 years (senior)</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Large brown tabby with white chest and weather-worn ears</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>Missing tip of tail, scar above right eye</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Independent, cautious, territorial</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Fresh fish, particularly small mackerel</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Mehmet Reis (ferry captain), fish sellers</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>Captain Sarman is one of the oldest documented harbor cats, having maintained his territory at the busy Eminönü ferry terminal for at least five years. Unlike the more sociable cats of tourist areas, Sarman maintains a professional distance from humans, approaching only those he recognizes as regular providers of fish scraps.</p>
+                    
+                    <p>His weather-beaten appearance bears testament to a hard-fought life near the water, with numerous scars and a missing tail tip suggesting past conflicts or accidents. Despite his rough appearance, ferry workers report that Sarman moves with precision and authority, particularly when patrolling his domain during early morning hours.</p>
+                    
+                    <p>Most remarkably, Sarman has been observed boarding specific ferries for short journeys across the Bosphorus, always disembarking at the same stop and returning on a predictable schedule. Ferry staff consider him an unofficial mascot and allow this behavior, with some believing he conducts "inspections" of the vessels.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 8, 2001 - Observed on the upper deck of the Üsküdar ferry, seemingly sleeping but with one eye vigilantly tracking seagull movements.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="cat-profile">
+                <div class="cat-name">The Fish Market Queens (Balıkçı, Kumsal, & Pearl)</div>
+                <div class="cat-location">Primary Territory: Eminönü Fish Market stalls and storage areas</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="The Fish Market Queens" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Various (2-4 years)</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Three females: black (Balıkçı), grey tabby (Kumsal), white (Pearl)</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>All have notched ears from municipal spay program</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Cooperative, strategic, selective interactions</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Fish offal, shellfish, occasional treat of cream</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Fish market vendors, particularly Ibrahim the anchovyman</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>The Fish Market Queens represent a fascinating example of female cat cooperation rarely observed in feral populations. These three unrelated females have formed a tight alliance that controls access to the valuable food resources of the Eminönü Fish Market. Through coordinated efforts, they maintain exclusive rights to fish scraps and storage areas while driving away most other cats.</p>
+                    
+                    <p>All three queens participated in the municipal spay program (evidenced by their notched ears), which market vendors supported to prevent kitten overpopulation in their business area. This rare instance of human intervention in natural cat dynamics has potentially enabled their stable cooperative relationship.</p>
+                    
+                    <p>Their hunting specializations differ notably: Balıkçı excels at catching rats in storage areas, Kumsal specializes in fishing directly from shallow harbor waters, and Pearl has perfected the art of charming tourists for additional treats to supplement their diet.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 10, 2001 - All three queens observed in coordinated positions around the market perimeter during morning setup, appearing to monitor territory from strategic vantage points.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('galata')">Galata & Beyoğlu Felines</h2>
+        <div id="galata" class="section-content">
+            <div class="district-heading">GALATA & BEYOĞLU DISTRICT</div>
+            
+            <p>The historically European districts of Galata and Beyoğlu, with their distinctive architecture and cultural character, host cat populations that differ slightly from those in the older Ottoman neighborhoods. These cats often display greater comfort with nighttime activity and adapt to the area's more contemporary rhythm.</p>
+            
+            <div class="cat-profile">
+                <div class="cat-name">Shadow (Gölge)</div>
+                <div class="cat-location">Primary Territory: Galata Tower vicinity and surrounding narrow streets</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="Shadow" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Approximately 4 years</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Sleek black coat with slight silver undercoat visible in sunlight</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>Small white spot on chest, unusually long tail</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Mysterious, elusive, selectively affectionate</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Unknown; rarely observed eating</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Various café owners, the night watchman</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>Shadow, as the name suggests, is one of Istanbul's more mysterious feline residents. Unlike the highly visible cats of tourist areas, Shadow maintains a deliberately low profile, appearing and disappearing with startling suddenness. Local shopkeepers report that he seems to materialize "as if from the walls themselves" - an apt description given his remarkable familiarity with the hidden passages and architectural quirks of the ancient Galata district.</p>
+                    
+                    <p>Despite his elusive nature, Shadow has developed a reputation for appearing during significant events - from street musicians' performances to local festivities. Café owners in particular note that his appearance at a new establishment is considered a good omen, leading some to leave special offerings in hopes of attracting his approval.</p>
+                    
+                    <p>My own documentation of Shadow remains fragmentary despite numerous attempts at sustained observation. His territory appears to include several buildings with rooftop access, allowing him to travel above street level and appear in seemingly impossible locations.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: December 29, 2000 - Briefly observed perched on a second-story window ledge of the historic post office building, watching the street below with apparent interest in a group of street musicians.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="cat-profile">
+                <div class="cat-name">Madame Beyaz</div>
+                <div class="cat-location">Primary Territory: İstiklal Avenue boutiques and cafés</div>
+                
+                <img class="cat-image" src="/api/placeholder/180/150" alt="Madame Beyaz" />
+                
+                <table class="cat-stats">
+                    <tr>
+                        <th>Age:</th>
+                        <td>Estimated 5-6 years</td>
+                    </tr>
+                    <tr>
+                        <th>Appearance:</th>
+                        <td>Pure white longhaired coat with striking blue eyes</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguishing Mark:</th>
+                        <td>Slight limp in right hind leg</td>
+                    </tr>
+                    <tr>
+                        <th>Temperament:</th>
+                        <td>Regal, discerning, comfortable with humans</td>
+                    </tr>
+                    <tr>
+                        <th>Diet Preference:</th>
+                        <td>Chicken, cream, occasional pastry</td>
+                    </tr>
+                    <tr>
+                        <th>Human Allies:</th>
+                        <td>Bookstore owner, several café proprietors</td>
+                    </tr>
+                </table>
+                
+                <div class="cat-description">
+                    <p>Madame Beyaz represents the rare case of a former domestic cat who has successfully integrated into Istanbul's street cat society. Her distinctive Turkish Angora features and comfort with human environments suggest domestic origins, though she has been living independently on İstiklal Avenue for at least four years.</p>
+                    
+                    <p>Unlike typical street cats, Madame Beyaz displays a marked preference for indoor environments, particularly the warmth of shop interiors. She has developed relationships with several business owners who allow her access to their establishments, where she frequently selects comfortable display windows for her extended naps, inadvertently becoming a living advertisement that delights tourists.</p>
+                    
+                    <p>Her slight limp, the result of an apparent past injury, has not diminished her mobility or status. In fact, among the local cat population, she commands unusual respect, with younger cats frequently observed deferring to her even when she encroaches on their established territories.</p>
+                    
+                    <div class="cat-sighting">
+                        Last documented sighting: January 3, 2001 - Observed inside the historic Lebon Patisserie, elegantly positioned on a windowsill where her white coat contrasted dramatically with the dark wood interior, attracting numerous tourist photographs.
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('census')">District Cat Census</h2>
+        <div id="census" class="section-content">
+            <p>As part of my ongoing documentation of Istanbul's feline population, I conduct regular census counts in key districts. These numbers represent estimated total cat populations based on

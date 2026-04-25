@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoblinNet Research Forum - Cryptozoological Studies Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border: 2px solid #666;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #666;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .nav-bar {
+            background-color: #ddd;
+            padding: 5px;
+            border-bottom: 1px solid #999;
+        }
+        
+        .nav-bar a {
+            color: #0000ee;
+            text-decoration: underline;
+            margin-right: 15px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
+        .nav-bar a:visited {
+            color: #551a8b;
+        }
+        
+        .main-content {
+            padding: 10px;
+        }
+        
+        .category {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        
+        .category-header {
+            background-color: #e8e8e8;
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .thread-list {
+            display: none;
+        }
+        
+        .thread-list.active {
+            display: block;
+        }
+        
+        .thread-item {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        .thread-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .thread-meta {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        
+        .thread-view {
+            display: none;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        
+        .thread-view.active {
+            display: block;
+        }
+        
+        .thread-header {
+            background-color: #e8e8e8;
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .post {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .post-header {
+            background-color: #f5f5f5;
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid #ddd;
+            margin-bottom: 8px;
+        }
+        
+        .post-content {
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+        
+        .back-link {
+            color: #0000ee;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 11px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .stats {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin-top: 15px;
+            font-size: 11px;
+        }
+        
+        .footer {
+            background-color: #e8e8e8;
+            padding: 8px;
+            text-align: center;
+            font-size: 10px;
+            border-top: 1px solid #999;
+            margin-top: 20px;
+        }
+
+        .user-link {
+            color: #0000ee;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 10px;
+        }
+
+        .quote {
+            background-color: #f0f0f0;
+            border-left: 3px solid #ccc;
+            padding: 5px 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .code {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧌 GoblinNet Research Forum</h1>
+            <div style="font-size: 11px;">Cryptozoological Studies & Field Research Hub</div>
+        </div>
+        
+        <div class="nav-bar">
+            <a onclick="showMain()">Main Forum</a>
+            <a onclick="alert('Feature not implemented')">Search</a>
+            <a onclick="alert('Feature not implemented')">Members</a>
+            <a onclick="alert('Feature not implemented')">Help</a>
+        </div>
+        
+        <div id="main-view" class="main-content">
+            <div style="margin-bottom: 15px;">
+                <strong>Welcome to GoblinNet Research Forum</strong><br>
+                <span style="font-size: 11px; color: #666;">
+                    Established January 2001 | Currently viewing with Hypernet Explorer 5.5
+                </span>
+            </div>
+            
+            <div id="categories-container">
+                <!-- Categories will be dynamically generated here -->
+            </div>
+            
+            <div id="stats-container" class="stats">
+                <!-- Stats will be dynamically generated here -->
+            </div>
+        </div>
+        
+        <div id="thread-views-container">
+            <!-- Thread views will be dynamically generated here -->
+        </div>
+        
+        <div class="footer">
+            <div>GoblinNet Research Forum v1.2 | Running on Hypernet Explorer 5.5</div>
+            <div>Established January 2001 | Hosted in Munich, Germany | All times GMT+1</div>
+            <div style="margin-top: 5px;">
+                <em>Dedicated to serious cryptozoological research and scientific methodology</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete JSON database structure
+        const forumData = {
+            metadata: {
+                title: "GoblinNet Research Forum - Cryptozoological Studies Hub",
+                established: "January 2001",
+                version: "1.2",
+                browser: "Hypernet Explorer 5.5",
+                location: "Munich, Germany",
+                timezone: "GMT+1"
+            },
+            stats: {
+                totalMembers: 1247,
+                activeToday: 67,
+                totalPosts: 23891,
+                lastMember: "NanoGoblinologist",
+                lastJoined: "4 hours ago"
+            },
+            categories: {
+                'field-research': {
+                    name: 'Field Research & Documentation',
+                    icon: '📋',
+                    threadCount: 89,
+                    threads: [
+                        {
+                            id: 'cave-acoustics',
+                            title: 'Cave Acoustic Properties and Goblin Vocalizations',
+                            author: 'Dr_Spelunk',
+                            replies: 47,
+                            lastActivity: '2 hours ago',
+                            lastAuthor: 'SonicAnalyst',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'thermal-signatures',
+                            title: 'Thermal Signature Analysis from Alpine Sightings',
+                            author: 'ThermalHunter',
+                            replies: 83,
+                            lastActivity: '45 minutes ago',
+                            lastAuthor: 'CryoResearcher',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'habitat-mapping',
+                            title: 'Habitat Mapping Project - Northern Forests Update',
+                            author: 'ForestWatcher',
+                            replies: 156,
+                            lastActivity: '3 hours ago',
+                            lastAuthor: 'EcoTracker',
+                            sticky: true,
+                            hot: false
+                        },
+                        {
+                            id: 'biochemical-traces',
+                            title: 'Bio-Chemical Trace Analysis: Hair and Tissue Samples',
+                            author: 'LabTechnician',
+                            replies: 72,
+                            lastActivity: '6 hours ago',
+                            lastAuthor: 'DNASpecialist',
+                            sticky: false,
+                            hot: false
+                        },
+                        {
+                            id: 'footprint-casts',
+                            title: 'Footprint Cast Database - Morphological Variations',
+                            author: 'TrackerPro',
+                            replies: 91,
+                            lastActivity: '1 day ago',
+                            lastAuthor: 'AnthropometryExpert',
+                            sticky: false,
+                            hot: false
+                        }
+                    ]
+                },
+                'theoretical': {
+                    name: 'Theoretical Framework Discussion',
+                    icon: '🧠',
+                    threadCount: 67,
+                    threads: [
+                        {
+                            id: 'quantum-folklore',
+                            title: 'Quantum Folklore Theory: Dimensional Phase Shifts',
+                            author: 'QuantumMage',
+                            replies: 203,
+                            lastActivity: '1 hour ago',
+                            lastAuthor: 'ParallelDimensionalist',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'social-structures',
+                            title: 'Goblin Social Hierarchies and Techno-Shamanism',
+                            author: 'AnthroExpert',
+                            replies: 134,
+                            lastActivity: '4 hours ago',
+                            lastAuthor: 'TribalStudies',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'evolutionary-theory',
+                            title: 'Neo-Evolutionary Pathways: Bio-Tech Integration',
+                            author: 'EvolutionTheorist',
+                            replies: 89,
+                            lastActivity: '8 hours ago',
+                            lastAuthor: 'GeneticEngineer',
+                            sticky: false,
+                            hot: false
+                        },
+                        {
+                            id: 'consciousness-studies',
+                            title: 'Goblin Consciousness and Nano-Cognitive Architecture',
+                            author: 'CognitiveLab',
+                            replies: 167,
+                            lastActivity: '12 hours ago',
+                            lastAuthor: 'NeuroscienceProf',
+                            sticky: false,
+                            hot: false
+                        }
+                    ]
+                },
+                'sightings': {
+                    name: 'Recent Sightings & Encounters',
+                    icon: '👁️',
+                    threadCount: 234,
+                    threads: [
+                        {
+                            id: 'black-forest',
+                            title: 'URGENT: Black Forest Encounter - Need Analysis',
+                            author: 'WitnessOne',
+                            replies: 189,
+                            lastActivity: '12 minutes ago',
+                            lastAuthor: 'EmergencyResponse',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'prague-incident',
+                            title: 'Prague Underground Incident - Multiple Witnesses',
+                            author: 'CzechResearcher',
+                            replies: 94,
+                            lastActivity: '1 hour ago',
+                            lastAuthor: 'TunnelExplorer',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'scotland-highlands',
+                            title: 'Scotland Highlands Mass Sighting - 7 Witnesses',
+                            author: 'HighlandWatcher',
+                            replies: 76,
+                            lastActivity: '3 hours ago',
+                            lastAuthor: 'ScottishFieldTeam',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'bavarian-alps',
+                            title: 'Bavarian Alps: Techno-Ritual Observation',
+                            author: 'AlpineObserver',
+                            replies: 45,
+                            lastActivity: '5 hours ago',
+                            lastAuthor: 'RitualSpecialist',
+                            sticky: false,
+                            hot: false
+                        },
+                        {
+                            id: 'mediterranean-caves',
+                            title: 'Mediterranean Cave System Discovery',
+                            author: 'CaveSystemExplorer',
+                            replies: 62,
+                            lastActivity: '1 day ago',
+                            lastAuthor: 'SpelunkingTeam',
+                            sticky: false,
+                            hot: false
+                        }
+                    ]
+                },
+                'equipment': {
+                    name: 'Equipment & Technology',
+                    icon: '🔬',
+                    threadCount: 45,
+                    threads: [
+                        {
+                            id: 'emf-detectors',
+                            title: 'EMF Detector Modifications for Crypto-Energy Fields',
+                            author: 'TechWiz2001',
+                            replies: 87,
+                            lastActivity: '2 hours ago',
+                            lastAuthor: 'ElectronicsHacker',
+                            sticky: false,
+                            hot: true
+                        },
+                        {
+                            id: 'night-vision',
+                            title: 'Night Vision Equipment Recommendations',
+                            author: 'NightStalker',
+                            replies: 54,
+                            lastActivity: '4 hours ago',
+                            lastAuthor: 'OpticsPro',
+                            sticky: false,
+                            hot: false
+                        },
+                        {
+                            id: 'audio-equipment',
+                            title: 'Ultra-Sonic Recording Devices and Frequency Analysis',
+                            author: 'AudioEngineer',
+                            replies: 38,
+                            lastActivity: '8 hours ago',
+                            lastAuthor: 'SoundWaveAnalyst',
+                            sticky: false,
+                            hot: false
+                        },
+                        {
+                            id: 'nano-sensors',
+                            title: 'Nano-Sensor Networks for Field Deployment',
+                            author: 'NanoTechSpecialist',
+                            replies: 29,
+                            lastActivity: '1 day ago',
+                            lastAuthor: 'MicroElectronics',
+                            sticky: false,
+                            hot: false
+                        }
+                    ]
+                },
+                'classified': {
+                    name: 'Classified Research & Archives',
+                    icon: '🔒',
+                    threadCount: 23,
+                    threads: [
+                        {
+                            id: 'government-files',
+                            title: 'Declassified Government Files - Project Greenleaf',
+                            author: 'Archivist',
+                            replies: 178,
+                            lastActivity: '6 hours ago',
+                            lastAuthor: 'InformationLiberation',
+                            sticky: true,
+                            hot: true
+                        },
+                        {
+                            id: 'corporate-research',
+                            title: 'Corporate Bio-Tech Research Leaks',
+                            author: 'WhistleBlower',
+                            replies: 145,
+                            lastActivity: '1 day ago',
+                            lastAuthor: 'CorporateWatcher',
+                            sticky: false,
+                            hot: false
+                        }
+                    ]
+                }
+            },
+            threads: {
+                'cave-acoustics': {
+                    title: 'Cave Acoustic Properties and Goblin Vocalizations',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'Dr_Spelunk',
+                            hexagram: 'spelunk@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 14:23',
+                            content: `Colleagues, I've been analyzing acoustic data from the Carpathian cave system expedition last month. The frequency patterns we recorded don't match any known animal vocalizations. The resonance exhibits what I'm calling "crypto-harmonic" properties - frequencies that seem to phase-shift in impossible ways.
+
+The spectral analysis shows consistent patterns at 47.3 Hz and 94.6 Hz (perfect doubling), but there are also sub-harmonics that appear to violate basic physics. I'm uploading the data files to the research archive.
+
+Most intriguing: the harmonics seem to create standing wave patterns that persist long after the original vocalization ends. It's as if the cave walls themselves are somehow resonating with nano-frequency oscillations.
+
+Has anyone else documented similar acoustic anomalies? I'm particularly interested in correlating this with electromagnetic field fluctuations during vocalization events.`
+                        },
+                        {
+                            id: 2,
+                            author: 'SonicAnalyst',
+                            hexagram: 'sonic@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 16:45',
+                            content: `Fascinating data, Doctor! I ran your samples through my nano-acoustic processors and found similar anomalies in recordings from Scotland. The phase-shifting you mention could be evidence of what I call "techno-vocal modulation" - perhaps they've evolved bio-mechanical voice boxes?
+
+I've detected additional frequency components at 23.65 Hz and 188.8 Hz that only appear during what seem to be "communication sequences" - multiple entities vocalizing in coordinated patterns.
+
+The standing wave persistence you noted is particularly interesting. I believe they may be using cave acoustics as amplification chambers, creating what amounts to natural sound systems for long-distance communication.`
+                        },
+                        {
+                            id: 3,
+                            author: 'CaveExplorer99',
+                            hexagram: 'explorer99@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 19:12',
+                            content: `I was part of that Carpathian expedition. What we didn't mention in the official report was that the sounds seemed to respond to our presence - almost like they were communicating with each other about us. The acoustic signatures would change when we moved deeper into the cave system.
+
+At approximately 2.3 kilometers depth, we recorded what can only be described as a "sonic greeting" - a complex harmonic sequence that repeated three times, then ceased completely. Our EMF detectors spiked simultaneously.
+
+Most disturbing: when we played back our recordings later, additional frequency components appeared that weren't audible during the original recording. It's as if they embedded hidden information in the sound waves themselves.`
+                        },
+                        {
+                            id: 4,
+                            author: 'AcousticPhysicist',
+                            hexagram: 'acoustics@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 22:34',
+                            content: `The physics you're describing shouldn't be possible with organic vocal cords. I've run theoretical models on the frequencies Dr_Spelunk documented, and generating those sub-harmonics would require vocal structures with crystalline resonance properties.
+
+This suggests either:
+1. Goblin vocal anatomy includes bio-technological components
+2. They're using external devices integrated with their natural vocalizations
+3. Cave minerals are being manipulated to create amplification networks
+
+I'm particularly intrigued by the "hidden frequency" phenomenon CaveExplorer99 mentioned. This could indicate steganographic audio techniques - embedding data within carrier frequencies invisible to human perception.`
+                        },
+                        {
+                            id: 5,
+                            author: 'FrequencyHunter',
+                            hexagram: 'freqhunt@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 08:15',
+                            content: `I've been tracking similar phenomena across 12 European cave systems. The frequency patterns follow what I call "crypto-harmonic matrices" - mathematical relationships that suggest intentional acoustic engineering.
+
+My analysis reveals that goblin vocalizations utilize prime number sequences in their harmonic structures. The Carpathian data shows Fibonacci patterns in frequency intervals: 1, 1, 2, 3, 5, 8, 13 Hz spacing between harmonic peaks.
+
+This level of mathematical sophistication indicates advanced understanding of acoustic physics. They're not just making sounds - they're programming the environment itself to create communication networks spanning vast underground territories.`
+                        }
+                    ]
+                },
+                'quantum-folklore': {
+                    title: 'Quantum Folklore Theory: Dimensional Phase Shifts',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'QuantumMage',
+                            hexagram: 'qmage@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 09:30',
+                            content: `I propose a new theoretical framework: goblins exist in quantum superposition between our dimension and adjacent reality layers. This would explain their ability to seemingly vanish and reappear, their resistance to conventional photography, and why encounters often have dreamlike qualities.
+
+Using nano-probability calculations, I've determined that certain geographical locations create "phase-lock zones" where the quantum barriers are thinner. This correlates perfectly with historical folklore hotspots.
+
+The implications are staggering - we're not just studying creatures, we're documenting inter-dimensional entities that exist in quantum flux states. Their apparent "magic" is actually advanced manipulation of quantum field mechanics.
+
+Key evidence supporting this theory:
+- Inconsistent photographic results (quantum observation paradox)
+- Eyewitness accounts varying despite identical conditions
+- EMF disturbances during encounters (dimensional interface static)
+- Time distortion reports from researchers`
+                        },
+                        {
+                            id: 2,
+                            author: 'SkepticalScientist',
+                            hexagram: 'skeptic@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 11:22',
+                            content: `While I appreciate creative theorizing, we need to be careful not to stray too far from empirical methodology. However, I admit the quantum phase hypothesis does explain some anomalies in our electromagnetic field readings...
+
+I've documented 47 encounters where standard physics failed to account for observed phenomena. The "vanishing" behavior particularly troubles me - we have thermal signatures that simply terminate without corresponding heat dissipation patterns.
+
+Perhaps we need to consider that quantum mechanics operates differently in areas with high concentrations of rare earth minerals - which coincidentally match goblin habitat preferences.`
+                        },
+                        {
+                            id: 3,
+                            author: 'DimensionalTheorist',
+                            hexagram: 'dimtheory@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 14:55',
+                            content: `@QuantumMage Your theory aligns with my research into "crypto-dimensional mechanics." I've documented several cases where goblin encounters occurred during specific electromagnetic events - solar flares, aurora activity, etc. Perhaps these events create temporary phase-lock breaches?
+
+I've been mapping correlation patterns between geomagnetic disturbances and sighting reports. The statistical significance is undeniable - encounters increase by 340% during solar storm activity.
+
+My hypothesis: goblins exist primarily in parallel dimensional space, only manifesting in our reality when quantum barriers weaken during electromagnetic flux events.`
+                        },
+                        {
+                            id: 4,
+                            author: 'ParallelDimensionalist',
+                            hexagram: 'parallel@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 18:42',
+                            content: `Building on these excellent theories, I've developed what I call the "Multi-Dimensional Habitat Model." Goblins maintain permanent residence in dimension D-7 (using Kramer-Singh notation), with technological capabilities allowing controlled phase-shifting into our D-0 reality layer.
+
+This explains their apparent technological sophistication - they have access to D-7 physics which operate under different fundamental constants. What appears as "magic" to us is simply applied D-7 engineering.
+
+I've calculated that full dimensional breach requires approximately 847.3 kilojoules of focused nano-energy, well within the range of their apparent bio-technological capabilities.`
+                        },
+                        {
+                            id: 5,
+                            author: 'QuantumFieldExpert',
+                            hexagram: 'qfield@hexagram.corp',
+                            timestamp: 'Jan 16, 2001 07:20',
+                            content: `The quantum field mathematics here are fascinating but complex. I've run computational models based on the phase-lock theory, and the energy requirements for dimensional interface would be enormous - unless they've discovered methods for manipulating zero-point energy fields.
+
+Recent advances in nano-quantum mechanics suggest that consciousness itself might serve as a quantum field catalyst. If goblin neural architecture operates on quantum computational principles, they could theoretically access zero-point field energy for dimensional manipulation.
+
+This would explain why encounters often involve consciousness-altering experiences for human witnesses - our primitive neural quantum fields are being disrupted by their advanced quantum-consciousness interface systems.`
+                        }
+                    ]
+                },
+                'black-forest': {
+                    title: 'URGENT: Black Forest Encounter - Need Analysis',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'WitnessOne',
+                            hexagram: 'witness1@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 06:15',
+                            content: `Last night around 23:30, my research team encountered what can only be described as a goblin collective in the Black Forest region. Three entities, approximately 0.9-1.2 meters tall, exhibiting advanced tool use and what appeared to be technological implants.
+
+Most disturbing: they seemed to be conducting their own research on us. One carried what looked like a bio-scanner device. They took readings, exchanged data through some form of techno-telepathic link, then vanished when our EMF detectors spiked.
+
+I've never seen anything like this level of organization and technology integration. Are we looking at the evolution of the species, or have they always been more advanced than we assumed?
+
+GPS coordinates: 48.3794° N, 8.2318° E
+Weather conditions: Clear, -2°C, no electromagnetic anomalies detected pre-encounter
+Duration: Approximately 7 minutes of direct observation
+Team size: 4 researchers, all experienced field investigators`
+                        },
+                        {
+                            id: 2,
+                            author: 'FieldVeteran',
+                            hexagram: 'veteran@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 07:42',
+                            content: `WitnessOne, your account matches reports I've been collecting from across Europe. There's definitely something changing in their behavior patterns. The technology integration you describe is particularly concerning - or exciting, depending on your perspective.
+
+I've documented 23 similar encounters in the past 6 months where goblins appeared to be studying human researchers rather than avoiding us. This represents a fundamental shift in their interaction protocols.
+
+The bio-scanner devices you mentioned - I believe these are nano-technological augmentations, possibly bio-integrated rather than external tools. We may be witnessing the emergence of a post-biological goblin civilization.`
+                        },
+                        {
+                            id: 3,
+                            author: 'EmergencyResponse',
+                            hexagram: 'emergency@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 08:15',
+                            content: `IMMEDIATE PROTOCOL ALERT: All researchers operating in Black Forest region should implement enhanced safety measures. If WitnessOne's encounter represents intentional goblin research on humans, we may be dealing with intelligence gathering operations.
+
+Recommended precautions:
+- Teams of minimum 6 members
+- Continuous EMF monitoring with auto-alert systems
+- Emergency extraction protocols activated
+- All equipment shielded against nano-frequency interference
+- Mandatory post-encounter medical screening
+
+I'm dispatching a specialized investigation team to the coordinates provided. This situation requires immediate scientific assessment.`
+                        },
+                        {
+                            id: 4,
+                            author: 'TechnologyAnalyst',
+                            hexagram: 'techanalyst@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 11:30',
+                            content: `I've analyzed the EMF spike patterns from WitnessOne's equipment logs. The frequency signatures indicate directed energy beam technology operating in the 2.4-2.8 GHz range - exactly the spectrum we use for wireless communications.
+
+This suggests two possibilities:
+1. They've developed technology that mimics or interferes with our communications systems
+2. They've been monitoring our technology and adapted their systems for compatibility
+
+The timing of the spike (coinciding with their disappearance) indicates they may use electromagnetic field manipulation for transportation/concealment rather than purely dimensional phase-shifting as some theories suggest.`
+                        },
+                        {
+                            id: 5,
+                            author: 'BehavioralAnalyst',
+                            hexagram: 'behavioral@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 14:20',
+                            content: `The behavioral patterns described represent a significant evolution in goblin-human interaction dynamics. Historical encounters show primarily avoidance behaviors. This new "research orientation" suggests:
+
+1. Increased confidence in their capabilities relative to humans
+2. Systematic information gathering for unknown purposes
+3. Possible preparation for expanded contact or territorial expansion
+
+The "techno-telepathic" communication WitnessOne observed is particularly significant. If they've achieved direct brain-to-brain information transfer, their collective intelligence capabilities may far exceed our individual human cognitive limitations.
+
+We may need to reassess our assumption that we're the dominant intelligence in these encounters.`
+                        },
+                        {
+                            id: 6,
+                            author: 'XenobiologyExpert',
+                            hexagram: 'xenobio@hexagram.corp',
+                            timestamp: 'Jan 19, 2001 17:45',
+                            content: `From a xenobiological perspective, the technological integration described suggests goblin physiology has evolved beyond pure organic systems. The "bio-scanner" device may actually be a symbiotic organism rather than manufactured technology.
+
+I hypothesize that goblins have achieved bio-technological symbiosis - living devices that grow rather than being built. This would explain their apparent technological sophistication without evidence of industrial infrastructure.
+
+If correct, we're studying a species that has solved the biotechnology integration problem that human science is only beginning to approach. Their "magic" may be advanced bioengineering.`
+                        }
+                    ]
+                },
+                'thermal-signatures': {
+                    title: 'Thermal Signature Analysis from Alpine Sightings',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'ThermalHunter',
+                            hexagram: 'thermal@hexagram.corp',
+                            timestamp: 'Jan 17, 2001 20:15',
+                            content: `Using advanced thermal imaging in the Swiss Alps, I've captured some remarkable data. Goblin thermal signatures don't behave like normal mammalian heat patterns. Their core temperature seems to fluctuate in response to environmental nano-electromagnetic fields.
+
+Even more interesting: they can apparently modulate their heat signatures at will, effectively achieving thermal camouflage. This suggests a level of bio-technological control that challenges our understanding of their physiology.
+
+I'm sharing the thermal scan data - 50€ for the full dataset, proceeds go to equipment upgrades. The implications for tracking and detection are enormous.
+
+Key findings:
+- Base core temperature: 34.2°C (below human normal)
+- Temperature fluctuation range: 28°C to 41°C
+- Response time to environmental changes: <3 seconds
+- Thermal masking duration: Up to 47 minutes observed`
+                        },
+                        {
+                            id: 2,
+                            author: 'CryoResearcher',
+                            hexagram: 'cryo@hexagram.corp',
+                            timestamp: 'Jan 17, 2001 22:30',
+                            content: `ThermalHunter's data correlates with my low-temperature research in Norwegian fjords. I've documented goblins maintaining normal activity levels at -15°C while exhibiting thermal signatures barely above ambient temperature.
+
+This suggests active thermal regulation systems that operate more efficiently than any known biological mechanism. I believe they've developed nano-circulatory modifications that allow precise control over heat distribution and retention.
+
+Most intriguing: during "stealth mode" thermal signatures, I detected micro-heat vents at specific body points - suggesting internal heat redistribution rather than true temperature reduction.`
+                        },
+                        {
+                            id: 3,
+                            author: 'BioThermalExpert',
+                            hexagram: 'biotherm@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 09:45',
+                            content: `The thermal modulation capabilities you're documenting would require fundamental modifications to circulatory and metabolic systems. I've analyzed the heat signature patterns and identified what appears to be secondary circulation networks.
+
+These "nano-thermal channels" seem to operate independently of primary blood circulation, possibly using different fluids or even gas-based heat transfer systems. This level of physiological modification suggests either:
+
+1. Extensive bio-technological augmentation
+2. Natural evolution far beyond baseline mammalian biology
+3. Symbiotic relationships with thermally-active microorganisms`
+                        },
+                        {
+                            id: 4,
+                            author: 'AlpineSurveyor',
+                            hexagram: 'alpine@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 14:20',
+                            content: `I can confirm ThermalHunter's findings from my own Alpine observations. Additionally, I've noticed that goblin thermal signatures seem to synchronize when multiple entities are present. During a three-goblin encounter, all subjects exhibited identical temperature fluctuation patterns.
+
+This suggests either:
+- Shared thermal regulation systems (bio-technological networking)
+- Collective thermoregulation protocols (coordinated behavior)
+- External environmental manipulation affecting all subjects equally
+
+The synchronization was precise to within 0.3°C across all subjects, which exceeds the accuracy of natural biological systems.`
+                        },
+                        {
+                            id: 5,
+                            author: 'MetabolicSpecialist',
+                            hexagram: 'metabolism@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 18:55',
+                            content: `From a metabolic perspective, the energy requirements for such precise thermal control would be enormous. However, if goblins have access to zero-point energy extraction (as suggested in the quantum folklore threads), they could theoretically power advanced thermoregulation systems without conventional caloric input.
+
+I've calculated that the thermal masking behavior ThermalHunter documented would require approximately 2,400 calories per hour using conventional metabolism. Yet no evidence exists of increased food consumption during these periods.
+
+This strongly supports the bio-technological augmentation hypothesis. They may have developed metabolic systems that tap directly into environmental energy fields.`
+                        }
+                    ]
+                },
+                'habitat-mapping': {
+                    title: 'Habitat Mapping Project - Northern Forests Update',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'ForestWatcher',
+                            hexagram: 'forestwatch@hexagram.corp',
+                            timestamp: 'Jan 14, 2001 11:20',
+                            content: `Our collaborative habitat mapping project has identified 73 confirmed activity zones across Northern European forests. The patterns are fascinating - they seem to prefer areas with specific mineral compositions and underground water systems.
+
+Most intriguing: several sites show evidence of technological modifications to the natural environment. Tree bark scarring that forms geometric patterns, stones arranged in nano-geometric configurations, and soil composition changes that suggest advanced chemistry.
+
+Updated findings from this month's survey:
+- 23 new sites identified
+- Mineral correlation: 89% of sites contain rare earth elements
+- Water table depth: Average 2.3 meters below surface
+- Electromagnetic readings: 15% above baseline at all locations
+
+The scope of environmental modification suggests long-term territorial establishment rather than temporary habitat use.`
+                        },
+                        {
+                            id: 2,
+                            author: 'EcoTracker',
+                            hexagram: 'ecotrack@hexagram.corp',
+                            timestamp: 'Jan 14, 2001 15:40',
+                            content: `ForestWatcher's mineral correlation data is crucial. I've been analyzing soil samples from 34 of the identified sites, and the rare earth element concentrations are definitely artificial. These aren't natural geological formations.
+
+The elements present - neodymium, europium, terbium - are exactly what you'd need for advanced electromagnetic systems. I believe goblins are deliberately enriching their territories with materials required for their technology.
+
+This suggests mining operations or matter conversion capabilities far beyond our current understanding. They're literally terraforming their environment to support their technological infrastructure.`
+                        },
+                        {
+                            id: 3,
+                            author: 'GeologistPro',
+                            hexagram: 'geology@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 08:30',
+                            content: `The geological modifications EcoTracker mentions are consistent with directed mineral extraction and redistribution. I've identified micro-tunneling networks beneath several sites that follow precise geometric patterns.
+
+These aren't animal burrows - they're engineered structures with mathematical precision. Tunnel diameters maintain consistent 47cm measurements, with branching angles of exactly 120 degrees throughout the network.
+
+The engineering sophistication rivals human mining operations, but with minimal surface disruption. They've developed tunneling technology that leaves virtually no trace above ground.`
+                        },
+                        {
+                            id: 4,
+                            author: 'BotanicalSurveyor',
+                            hexagram: 'botanical@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 12:15',
+                            content: `The tree bark modifications ForestWatcher documented show evidence of systematic cultivation. The "scarring" patterns aren't random damage - they're controlled growth modification that creates living antenna arrays.
+
+I've identified over 200 trees showing these modifications across 12 forest sites. The patterns channel electromagnetic energy through the tree's natural conductivity, creating organic communication networks spanning entire forest regions.
+
+This represents biotechnology applications centuries ahead of human capabilities. They're using living trees as components in technological systems.`
+                        },
+                        {
+                            id: 5,
+                            author: 'HydrologicalExpert',
+                            hexagram: 'hydro@hexagram.corp',
+                            timestamp: 'Jan 16, 2001 09:45',
+                            content: `The water table correlations are significant. I've mapped underground water flow patterns for 45 of the identified sites, and goblins have clearly modified natural hydrology to serve their purposes.
+
+Artificial channels redirect water flow through their tunnel networks, creating what amounts to underground aqueduct systems. The water carries dissolved minerals from their processing operations throughout their territorial networks.
+
+This level of hydroengineering indicates permanent settlement rather than temporary habitat use. They're building infrastructure for long-term territorial occupation.`
+                        }
+                    ]
+                },
+                'prague-incident': {
+                    title: 'Prague Underground Incident - Multiple Witnesses',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'CzechResearcher',
+                            hexagram: 'czech@hexagram.corp',
+                            timestamp: 'Jan 13, 2001 22:45',
+                            content: `Multiple independent witnesses reported goblin activity in Prague's underground tunnel system last week. What makes this significant is the coordinated nature - at least 7 entities working together on some kind of construction project.
+
+They were using tools that appeared to be both mechanical and bio-organic, creating structures with purposes we can't determine. The witness accounts are remarkably consistent despite the observers being separated by several kilometers.
+
+Location: Beneath Wenceslas Square, approximately 12 meters below street level
+Duration: Construction activity observed over 4 consecutive nights
+Witness count: 11 independent reports, 7 with photographic evidence (though images show unusual distortion patterns)
+
+The implications for goblin social organization and technological capabilities are staggering.`
+                        },
+                        {
+                            id: 2,
+                            author: 'TunnelExplorer',
+                            hexagram: 'tunnels@hexagram.corp',
+                            timestamp: 'Jan 14, 2001 08:20',
+                            content: `I've been mapping Prague's underground systems for 8 years, and the construction sites CzechResearcher mentioned didn't exist before this month. The goblins created entirely new chambers using construction techniques that leave no debris or waste material.
+
+The precision is incredible - perfectly circular chambers with smooth walls that show tool marks unlike anything in human engineering. The construction appears to involve molecular-level material manipulation rather than conventional excavation.
+
+Most disturbing: the new chambers connect to existing sewer and utility systems with surgical precision. They have detailed knowledge of Prague's underground infrastructure.`
+                        },
+                        {
+                            id: 3,
+                            author: 'StructuralAnalyst',
+                            hexagram: 'structural@hexagram.corp',
+                            timestamp: 'Jan 14, 2001 13:55',
+                            content: `I've analyzed the photographic evidence from the Prague incident. Despite the distortion effects, structural details are visible that reveal sophisticated architectural understanding.
+
+The chambers feature load-bearing modifications that actually strengthen the existing tunnel system - they're improving Prague's infrastructure while building their own facilities. The engineering shows concern for human safety and structural integrity.
+
+This suggests either:
+1. Advanced understanding of human engineering principles
+2. Ethical considerations regarding human infrastructure
+3. Long-term planning that requires maintaining human systems
+
+The implications for goblin-human coexistence are profound.`
+                        },
+                        {
+                            id: 4,
+                            author: 'UrbanPlanningExpert',
+                            hexagram: 'urbanplan@hexagram.corp',
+                            timestamp: 'Jan 14, 2001 18:30',
+                            content: `From an urban planning perspective, the goblin construction follows optimal traffic flow patterns for underground movement. They've created efficient transportation networks that complement rather than compete with human infrastructure.
+
+The chamber placement suggests they understand Prague's population density patterns and have positioned facilities to minimize human detection while maximizing their own territorial coverage.
+
+This level of urban planning sophistication indicates they've been studying human cities for extended periods, possibly decades.`
+                        },
+                        {
+                            id: 5,
+                            author: 'CulturalAnthropologist',
+                            hexagram: 'cultural@hexagram.corp',
+                            timestamp: 'Jan 15, 2001 07:15',
+                            content: `The Prague incident represents a significant shift in goblin-human territorial relationships. Historical patterns show goblins avoiding human settlements. This underground expansion into major urban centers suggests either:
+
+1. Necessity driving territorial expansion (population pressure?)
+2. Technological advancement enabling urban integration
+3. Preparation for expanded human-goblin interaction
+
+The careful preservation of human infrastructure indicates sophisticated understanding of human society and possibly long-term coexistence planning.
+
+We may be witnessing the beginning of a new phase in goblin civilization development.`
+                        }
+                    ]
+                },
+                'emf-detectors': {
+                    title: 'EMF Detector Modifications for Crypto-Energy Fields',
+                    posts: [
+                        {
+                            id: 1,
+                            author: 'TechWiz2001',
+                            hexagram: 'techwiz@hexagram.corp',
+                            timestamp: 'Jan 16, 2001 13:45',
+                            content: `Standard EMF detectors aren't sensitive enough to detect goblin crypto-energy signatures. I've modified mine with nano-frequency amplifiers and quantum field sensors. The results are incredible - I can now detect their presence from up to 200 meters away.
+
+The modification requires specialized components:
+- Quantum field oscillation detectors (available from NanoTech Labs, 150€)
+- Crypto-frequency amplification modules (custom built, schematics available)
+- Bio-resonance interference filters (prevents false readings from human biofields)
+
+Contact me through my Hexagram profile for technical details. I can provide complete modification kits for 275€ including installation instructions.
+
+Detection accuracy: 94.7% within 200m range
+False positive rate: <2% with proper calibration
+Battery life: 48 hours continuous operation`
+                        },
+                        {
+                            id: 2,
+                            author: 'ElectronicsHacker',
+                            hexagram: 'electro@hexagram.corp',
+                            timestamp: 'Jan 16, 2001 17:20',
+                            content: `TechWiz2001's modifications are brilliant! I've built three units using his schematics with some additional improvements. Added frequency discrimination circuits that can distinguish between different goblin bio-signatures.
+
+Each individual seems to have a unique electromagnetic fingerprint - like crypto-biological ID cards. I can now identify returning subjects and track movement patterns across multiple encounters.
+
+My enhanced version includes:
+- Individual signature recognition database
+- Movement pattern analysis algorithms  
+- Automatic recording of encounter data
+- Integration with GPS mapping systems
+
+The personalization aspect suggests goblins have individually unique bio-technological characteristics, not just species-wide patterns.`
+                        },
+                        {
+                            id: 3,
+                            author: 'QuantumFieldTechnician',
+                            hexagram: 'quantumtech@hexagram.corp',
+                            timestamp: 'Jan 17, 2001 09:30',
+                            content: `I've been testing the modified detectors in known goblin territories and discovered something remarkable - their electromagnetic signatures vary based on emotional or behavioral states.
+
+During apparent "research mode" (when they're studying humans), the frequency patterns shift to higher harmonics with increased stability. During "stealth mode," frequencies become more chaotic and harder to track.
+
+This suggests conscious control over their electromagnetic emissions, possibly for communication or concealment purposes. The emotional state correlation indicates advanced bio-technological integration with consciousness itself.
+
+I'm developing behavioral analysis software that correlates EMF patterns with observed behaviors. Early results show 87% accuracy in predicting goblin actions based solely on electromagnetic signatures.`
+                        },
+                        {
+                            id: 4,
+                            author: 'FieldTestSpecialist',
+                            hexagram: 'fieldtest@hexagram.corp',
+                            timestamp: 'Jan 17, 2001 14:45',
+                            content: `I've field-tested the modified detectors across 23 encounter sites with remarkable results. The quantum field sensors detect goblin presence even when no visual contact occurs - they're constantly surrounded by detectable electromagnetic fields.
+
+Most interesting discovery: the fields persist at encounter sites for 72-96 hours after goblins leave. Either their bio-technology leaves electromagnetic "echoes," or they're deliberately marking territories with persistent energy signatures.
+
+The territorial marking hypothesis is supported by consistent field patterns at habitat sites identified in the mapping project. They may be using electromagnetic signatures for navigation and territorial identification.`
+                        },
+                        {
+                            id: 5,
+                            author: 'BioElectricExpert',
+                            hexagram: 'bioelectric@hexagram.corp',
+                            timestamp: 'Jan 18, 2001 11:15',
+                            content: `The electromagnetic signatures everyone's detecting show characteristics impossible in natural biological systems. I've analyzed the frequency patterns and they include components that would require active electronic generation.
+
+This confirms the bio-technological integration hypothesis - goblins have incorporated electronic systems into their biological processes. The persistent electromagnetic echoes FieldTestSpecialist mentioned could be from implanted devices continuing to operate after the subject leaves.
+
+If correct, goblin physiology includes permanent electronic augmentation, making them cyborg entities rather than purely biological creatures. The implications for our understanding of their intelligence and capabilities are enormous.`
+                        }
+                    ]
+                }
+            }
+        };
+
+        function generateCategoriesHTML() {
+            const container = document.getElementById('categories-container');
+            let html = '';
+            
+            for (const [categoryId, category] of Object.entries(forumData.categories)) {
+                html += `
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory('${categoryId}')">
+                            ${category.icon} ${category.name} (${category.threadCount} threads)
+                        </div>
+                        <div id="${categoryId}" class="thread-list">`;
+                
+                for (const thread of category.threads) {
+                    const stickyIcon = thread.sticky ? '📌 ' : '';
+                    const hotIcon = thread.hot ? '🔥 ' : '';
+                    html += `
+                        <div class="thread-item" onclick="showThread('${thread.id}')">
+                            <div><strong>${stickyIcon}${hotIcon}${thread.title}</strong></div>
+                            <div class="thread-meta">Started by ${thread.author} | ${thread.replies} replies | Last: ${thread.lastActivity}</div>
+                        </div>`;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function generateStatsHTML() {
+            const container = document.getElementById('stats-container');
+            container.innerHTML = `
+                <strong>Forum Statistics:</strong><br>
+                Total Members: ${forumData.stats.totalMembers} | Active Today: ${forumData.stats.activeToday} | Total Posts: ${forumData.stats.totalPosts}<br>
+                Last Member: ${forumData.stats.lastMember} (joined ${forumData.stats.lastJoined})
+            `;
+        }
+
+        function generateThreadViewsHTML() {
+            const container = document.getElementById('thread-views-container');
+            let html = '';
+            
+            for (const [threadId, thread] of Object.entries(forumData.threads)) {
+                html += `
+                    <div id="${threadId}-thread" class="thread-view">
+                        <div class="back-link" onclick="showMain()">&larr; Back to Forum</div>
+                        <div class="thread-header">${thread.title}</div>`;
+                
+                for (const post of thread.posts) {
+                    html += `
+                        <div class="post">
+                            <div class="post-header">
+                                <strong>${post.author}</strong> | <a href="mailto:${post.hexagram}" class="user-link">Contact on Hexagram</a> | 
+                                <span class="timestamp">${post.timestamp}</span>
+                            </div>
+                            <div class="post-content">${post.content.replace(/\n\n/g, '<br><br>')}</div>
+                        </div>`;
+                }
+                
+                html += '</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function toggleCategory(categoryId) {
+            const category = document.getElementById(categoryId);
+            const allCategories = document.querySelectorAll('.thread-list');
+            
+            // Close all other categories
+            allCategories.forEach(cat => {
+                if (cat.id !== categoryId) {
+                    cat.classList.remove('active');
+                }
+            });
+            
+            // Toggle the clicked category
+            category.classList.toggle('active');
+        }
+
+        function showThread(threadId) {
+            // Hide main view
+            document.getElementById('main-view').style.display = 'none';
+            
+            // Hide all thread views
+            const allThreads = document.querySelectorAll('.thread-view');
+            allThreads.forEach(thread => {
+                thread.classList.remove('active');
+            });
+            
+            // Show the selected thread
+            const selectedThread = document.getElementById(threadId + '-thread');
+            if (selectedThread) {
+                selectedThread.classList.add('active');
+            }
+        }
+
+        function showMain() {
+            // Show main view
+            document.getElementById('main-view').style.display = 'block';
+            
+            // Hide all thread views
+            const allThreads = document.querySelectorAll('.thread-view');
+            allThreads.forEach(thread => {
+                thread.classList.remove('active');
+            });
+        }
+
+        // Initialize forum
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCategoriesHTML();
+            generateStatsHTML();
+            generateThreadViewsHTML();
+            showMain();
+        });
+    </script>
+</body>
+</html>

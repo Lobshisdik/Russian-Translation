@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Valhalla Awards - Heroic Stupidity Since 1999</title>
+    <style>
+        body {
+            background: #000080;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Verdana, sans-serif;
+            background-image: url('data:image/gif;base64,R0lGODlhIAAgAPIAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAEALAAAAAAQABAAAAMjGLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru8JACH5BAEAAAEALAAAAAAgACAAAANKGLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru98pQyD4XBInM2kSpQqpVqtWOt2y+16v+CweEwum8+otHrNbrvf8Lh8Tq/b7/i8fs/v+/+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==');
+            background-repeat: repeat;
+        }
+        .container {
+            background: #FFFF99;
+            margin: 10px;
+            border: 3px solid #FF0000;
+            padding: 0;
+        }
+        .header {
+            background: linear-gradient(to bottom, #FF6600, #CC3300);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 5px solid #000;
+        }
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #FFFF00;
+            border: 2px solid #000;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .language-switcher a {
+            color: #000080;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .main-layout {
+            display: table;
+            width: 100%;
+        }
+        .sidebar {
+            display: table-cell;
+            width: 200px;
+            background: #CCCCFF;
+            border-right: 3px solid #000080;
+            vertical-align: top;
+            padding: 10px;
+        }
+        .content {
+            display: table-cell;
+            background: #FFFFFF;
+            padding: 20px;
+            vertical-align: top;
+        }
+        .menu-item {
+            background: #FF9999;
+            border: 2px solid #CC0000;
+            margin: 5px 0;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .menu-item:hover {
+            background: #FFCCCC;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .award-entry {
+            background: #FFFFCC;
+            border: 2px solid #996600;
+            margin: 15px 0;
+            padding: 15px;
+        }
+        .award-title {
+            color: #CC0000;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .award-category {
+            background: #FF6600;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .heroism-meter {
+            background: #000080;
+            color: white;
+            padding: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .stupidity-meter {
+            background: #CC0000;
+            color: white;
+            padding: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .footer {
+            background: #000080;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-top: 3px solid #FF0000;
+        }
+        .counter {
+            background: #00FF00;
+            color: #000;
+            border: 2px solid #000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <a href="javascript:switchLanguage('en')" id="lang-en">EN</a> |
+        <a href="javascript:switchLanguage('it')" id="lang-it">IT</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 id="site-title">🏆 THE VALHALLA AWARDS 🏆</h1>
+            <h2 id="site-subtitle">Honoring Heroic Stupidity Since 1999</h2>
+            <p id="site-tagline">Where Epic Meets Idiotic!</p>
+        </div>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="counter">
+                    <div id="visitor-text">Visitor Counter:</div>
+                    <div style="font-size: 20px; color: #FF0000;">002847</div>
+                </div>
+
+                <div class="menu-item" onclick="showSection('home')" id="menu-home">🏠 Main Hall</div>
+                <div class="menu-item" onclick="showSection('awards')" id="menu-awards">🏆 Award Winners</div>
+                <div class="menu-item" onclick="showSection('categories')" id="menu-categories">📊 Categories</div>
+                <div class="menu-item" onclick="showSection('nominate')" id="menu-nominate">📝 Nominate</div>
+                <div class="menu-item" onclick="showSection('criteria')" id="menu-criteria">📋 Criteria</div>
+                <div class="menu-item" onclick="showSection('hall-fame')" id="menu-hall">🌟 Hall of Fame</div>
+                <div class="menu-item" onclick="showSection('about')" id="menu-about">ℹ️ About</div>
+
+                <div style="background: #FFCCCC; border: 2px solid #FF0000; padding: 10px; margin: 15px 0; text-align: center;">
+                    <div id="sponsor-text">Sponsored by:</div>
+                    <strong>Neo-Flux Industries</strong><br>
+                    <em id="sponsor-tagline">"Making Tomorrow's Tech Today!"</em>
+                </div>
+
+                <div style="background: #CCFFCC; border: 2px solid #00AA00; padding: 8px; margin: 10px 0; text-align: center; font-size: 12px;">
+                    <div id="hexagram-text">Connect on Hexagram:</div>
+                    <a href="mailto:valhalla@hexagram.corp" style="color: #0000FF;">valhalla@hexagram.corp</a>
+                </div>
+            </div>
+
+            <div class="content">
+                <div id="home" class="section active">
+                    <h2 id="welcome-title">Welcome to the Valhalla Awards!</h2>
+                    
+                    <div style="background: #FFEEEE; border: 3px solid #FF0000; padding: 15px; margin: 15px 0;">
+                        <p class="blink" style="text-align: center; font-weight: bold; color: #FF0000;" id="warning-text">
+                            ⚠️ WARNING: These stories involve real people who died doing stupid things heroically! ⚠️
+                        </p>
+                    </div>
+
+                    <p id="home-intro">
+                        The Valhalla Awards celebrate those brave souls who died in the most spectacularly stupid yet undeniably heroic ways possible. Unlike regular awards for mere stupidity, we honor those who combined maximum heroism with maximum idiocy!
+                    </p>
+
+                    <div class="award-entry">
+                        <div class="award-title" id="featured-title">🏆 FEATURED WINNER 2001: The Cyber-Gladiator</div>
+                        <div class="award-category" id="featured-category">CATEGORY: Tech-Hero Martyrdom</div>
+                        
+                        <div class="heroism-meter" id="heroism-meter">HEROISM LEVEL: ████████████ 95%</div>
+                        <div class="stupidity-meter" id="stupidity-meter">STUPIDITY LEVEL: ██████████ 87%</div>
+                        
+                        <p id="featured-story">
+                            Marco Techno-Santini (Milan, Italy) died attempting to save a burning server farm containing "vital Hypernet infrastructure." He successfully rescued 847 servers by carrying them out one by one during a massive electrical fire. Unfortunately, he forgot that server #848 was the building's main electrical panel. His last words were reportedly "For the Hypernet!"
+                        </p>
+                        <p id="featured-legacy"><strong>Legacy:</strong> The Milan Hypernet Exchange now runs 23% faster thanks to his sacrifice.</p>
+                    </div>
+
+                    <div style="background: #CCCCFF; border: 2px solid #000080; padding: 15px; margin: 15px 0;">
+                        <h3 id="latest-title">📰 Latest News</h3>
+                        <ul id="latest-news">
+                            <li>New category added: "Techno-Martyrs"</li>
+                            <li>2001 nominations now open!</li>
+                            <li>Record year: 847 heroic idiots documented</li>
+                            <li>Special award for Y2K-related deaths</li>
+                        </ul>
+                    </div>
+
+                    <p id="home-footer">
+                        <em>Remember: We don't mock the dead - we celebrate their glorious stupidity!</em>
+                    </p>
+                </div>
+
+                <div id="awards" class="section">
+                    <h2 id="awards-title">🏆 2001 Award Winners</h2>
+
+                    <div class="award-entry">
+                        <div class="award-title">The Anoki Warrior</div>
+                        <div class="award-category">CATEGORY: Communication Hero</div>
+                        <div class="heroism-meter">HEROISM LEVEL: ████████ 78%</div>
+                        <div class="stupidity-meter">STUPIDITY LEVEL: ████████████ 92%</div>
+                        <p id="award1-story">
+                            Lars Cyber-Hansen (Copenhagen) climbed a 200-meter radio tower during a blizzard to repair Hypernet connectivity for his entire district. He successfully restored service to 10,000 users but forgot to disconnect his Anoki 3310 from the main antenna before climbing down. The resulting techno-electromagnetic feedback launched him 50 meters into a snowbank.
+                        </p>
+                        <img src="1.jpg" alt="Anoki 3310 phone embedded in a telecommunications tower with sparks flying around it" style="width: 200px; border: 2px solid #000; margin: 10px 0;">
+                    </div>
+
+                    <div class="award-entry">
+                        <div class="award-title">The Euro-Guardian</div>
+                        <div class="award-category">CATEGORY: Economic Sacrifice</div>
+                        <div class="heroism-meter">HEROISM LEVEL: ██████████ 85%</div>
+                        <div class="stupidity-meter">STUPIDITY LEVEL: ████████ 76%</div>
+                        <p id="award2-story">
+                            Giuseppe Profit-Rossi (Rome) dove into the Tiber River to rescue €50,000 in new Euro banknotes that had blown off a truck. He saved €47,300 but drowned because he refused to let go of the money to swim properly. His family donated the rescued euros to charity.
+                        </p>
+                        <img src="2.jpg" alt="Euro banknotes floating in a river with a heroic figure underwater reaching for them" style="width: 200px; border: 2px solid #000; margin: 10px 0;">
+                    </div>
+
+                    <div class="award-entry">
+                        <div class="award-title">The Millennium Bug Hunter</div>
+                        <div class="award-category">CATEGORY: Y2K Hero</div>
+                        <div class="heroism-meter">HEROISM LEVEL: ██████████████ 98%</div>
+                        <div class="stupidity-meter">STUPIDITY LEVEL: ████████████████ 100%</div>
+                        <p id="award3-story">
+                            Hans Debugger-Schmidt (Berlin) spent New Year's Eve 1999-2000 inside a nuclear power plant's computer core, manually preventing Y2K failures. He saved the entire German power grid but was electrocuted when he tried to "debug" a live nuclear reactor control system with a magnetized screwdriver at exactly midnight.
+                        </p>
+                        <img src="3.jpg" alt="Computer server room in a nuclear facility with electrical sparks and a silhouette of a person debugging equipment" style="width: 200px; border: 2px solid #000; margin: 10px 0;">
+                    </div>
+                </div>
+
+                <div id="categories" class="section">
+                    <h2 id="categories-title">📊 Award Categories</h2>
+
+                    <div style="background: #FFFFCC; border: 2px solid #FF6600; padding: 15px; margin: 15px 0;">
+                        <h3>🔧 Techno-Martyrs</h3>
+                        <p id="cat1-desc">For those who died heroically trying to save technology, the Hypernet, or digital civilization.</p>
+                        <p><strong id="cat1-criteria">Criteria:</strong> Death must involve computers, networks, or electronic devices used heroically.</p>
+                    </div>
+
+                    <div style="background: #CCFFCC; border: 2px solid #00AA00; padding: 15px; margin: 15px 0;">
+                        <h3>💰 Economic Heroes</h3>
+                        <p id="cat2-desc">Honoring those who died trying to save money, protect the economy, or defend capitalism.</p>
+                        <p><strong id="cat2-criteria">Criteria:</strong> Death must involve financial instruments, currency, or economic systems.</p>
+                    </div>
+
+                    <div style="background: #FFCCCC; border: 2px solid #FF0000; padding: 15px; margin: 15px 0;">
+                        <h3>🚗 Transport Guardians</h3>
+                        <p id="cat3-desc">For brave souls who died protecting vehicles, traffic systems, or transportation infrastructure.</p>
+                        <p><strong id="cat3-criteria">Criteria:</strong> Death must involve cars, trains, planes, or traffic management systems.</p>
+                    </div>
+
+                    <div style="background: #CCCCFF; border: 2px solid #0000FF; padding: 15px; margin: 15px 0;">
+                        <h3>🏢 Corporate Warriors</h3>
+                        <p id="cat4-desc">Dedicated employees who died in spectacularly stupid yet loyal service to their companies.</p>
+                        <p><strong id="cat4-criteria">Criteria:</strong> Death must occur while performing job duties with excessive corporate loyalty.</p>
+                    </div>
+
+                    <div style="background: #FFCCFF; border: 2px solid #FF00FF; padding: 15px; margin: 15px 0;">
+                        <h3>🌐 Hypernet Defenders</h3>
+                        <p id="cat5-desc">The ultimate sacrifice for digital freedom and Hypernet connectivity.</p>
+                        <p><strong id="cat5-criteria">Criteria:</strong> Death must directly result from protecting or maintaining Hypernet infrastructure.</p>
+                    </div>
+                </div>
+
+                <div id="nominate" class="section">
+                    <h2 id="nominate-title">📝 Nominate a Hero</h2>
+
+                    <div style="background: #FFFFEE; border: 2px solid #CCCC00; padding: 15px; margin: 15px 0;">
+                        <p id="nominate-intro">
+                            Do you know someone who died in a spectacularly heroic yet idiotic way? Nominate them for a Valhalla Award!
+                        </p>
+
+                        <h3 id="nominate-guidelines">Nomination Guidelines:</h3>
+                        <ul id="guidelines-list">
+                            <li>Death must have occurred after January 1, 1999</li>
+                            <li>Action must be genuinely heroic in intent</li>
+                            <li>Method must be spectacularly stupid</li>
+                            <li>Must involve technology, money, or corporate systems</li>
+                            <li>Nominee must have improved someone else's life</li>
+                            <li>No fictional characters (real heroes only!)</li>
+                        </ul>
+
+                        <div style="background: #CCFFCC; border: 2px solid #00AA00; padding: 10px; margin: 10px 0;">
+                            <h4 id="submit-header">Submit Nomination:</h4>
+                            <p id="submit-email"><strong>Email:</strong> <a href="mailto:nominations@hexagram.corp">nominations@hexagram.corp</a></p>
+                            <p id="submit-include"><strong>Include:</strong> Full story, witnesses, proof of heroism, and evidence of stupidity</p>
+                        </div>
+
+                        <div style="background: #FFCCCC; border: 2px solid #FF0000; padding: 10px; margin: 10px 0;">
+                            <p id="nominate-warning"><strong>Note:</strong> We verify all stories. False nominations will be publicly mocked on our Hexagram account!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="criteria" class="section">
+                    <h2 id="criteria-title">📋 Award Criteria</h2>
+
+                    <div style="background: #F0F0F0; border: 2px solid #666666; padding: 15px; margin: 15px 0;">
+                        <h3 id="scoring-title">🎯 Scoring System</h3>
+                        
+                        <h4 id="heroism-title">Heroism Points (0-100):</h4>
+                        <ul id="heroism-list">
+                            <li>+20 points: Saved human lives</li>
+                            <li>+15 points: Protected valuable infrastructure</li>
+                            <li>+10 points: Preserved important data/money</li>
+                            <li>+10 points: Maintained essential services</li>
+                            <li>+5 points: Good intentions</li>
+                            <li>+40 points: BONUS for corporate loyalty</li>
+                        </ul>
+
+                        <h4 id="stupidity-title">Stupidity Points (0-100):</h4>
+                        <ul id="stupidity-list">
+                            <li>+25 points: Ignored obvious danger</li>
+                            <li>+20 points: Used wrong tools/methods</li>
+                            <li>+15 points: Could have called professionals</li>
+                            <li>+15 points: Had multiple escape opportunities</li>
+                            <li>+10 points: Involved alcohol/substances</li>
+                            <li>+15 points: BONUS for spectacular irony</li>
+                        </ul>
+
+                        <div style="background: #FFFFCC; border: 2px solid #FF6600; padding: 10px; margin: 10px 0;">
+                            <h4 id="minimum-title">Minimum Requirements:</h4>
+                            <p id="minimum-desc">To qualify for a Valhalla Award, nominees must score at least 70 points in both Heroism AND Stupidity categories. We only honor the most heroically stupid!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hall-fame" class="section">
+                    <h2 id="hall-title">🌟 Hall of Fame</h2>
+
+                    <div style="background: #FFD700; border: 3px solid #CC9900; padding: 15px; margin: 15px 0;">
+                        <h3 id="legend-title">🏆 LEGENDARY AWARD WINNERS</h3>
+                        
+                        <div style="background: #FFFFFF; border: 2px solid #000; padding: 10px; margin: 10px 0;">
+                            <h4>The Millennium Martyr (1999)</h4>
+                            <p id="legend1-story">
+                                Friedrich Data-Weber spent 72 consecutive hours manually checking every computer in Frankfurt's financial district for Y2K bugs. He saved €2.3 billion in potential losses but died of caffeine overdose after drinking 147 cups of coffee. A statue of him holding a coffee cup and a computer disk now stands in Frankfurt's Financial Plaza.
+                            </p>
+                            <div class="heroism-meter">HEROISM LEVEL: ████████████████ 100%</div>
+                            <div class="stupidity-meter">STUPIDITY LEVEL: ██████████████ 94%</div>
+                        </div>
+
+                        <div style="background: #FFFFFF; border: 2px solid #000; padding: 10px; margin: 10px 0;">
+                            <h4>The Network Savior (2000)</h4>
+                            <p id="legend2-story">
+                                Isabella Fiber-Martinez dove into the Mediterranean Sea to repair underwater Hypernet cables connecting Europe to Africa. She successfully reconnected 12 countries to the global network but was eaten by sharks because she forgot to wear anything but a business suit. Her sacrifice restored hypernet to 47 million people.
+                            </p>
+                            <div class="heroism-meter">HEROISM LEVEL: ████████████████ 100%</div>
+                            <div class="stupidity-meter">STUPIDITY LEVEL: ████████████████ 100%</div>
+                        </div>
+                    </div>
+
+                    <div id="hall-stats" style="background: #CCCCFF; border: 2px solid #000080; padding: 15px; margin: 15px 0;">
+                        <h3 id="stats-title">📊 Hall of Fame Statistics</h3>
+                        <ul id="stats-list">
+                            <li>Total Legendary Winners: 23</li>
+                            <li>Most Common Cause: Technology-related (47%)</li>
+                            <li>Average Heroism Score: 87.3 points</li>
+                            <li>Average Stupidity Score: 91.7 points</li>
+                            <li>Lives Saved by Winners: 2,847,293</li>
+                            <li>Money Protected: €847 billion</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="about" class="section">
+                    <h2 id="about-title">ℹ️ About the Valhalla Awards</h2>
+
+                    <div style="background: #F5F5F5; border: 2px solid #999999; padding: 15px; margin: 15px 0;">
+                        <h3 id="history-title">📚 Our History</h3>
+                        <p id="history-text">
+                            Founded in 1999 by Dr. Erik Stupidity-Johansson (himself a 2003 posthumous winner), the Valhalla Awards celebrate the intersection of heroism and idiocy. Unlike other awards that mock stupidity, we honor those who died doing something genuinely noble in the most spectacularly dumb way possible.
+                        </p>
+
+                        <h3 id="philosophy-title">🧠 Our Philosophy</h3>
+                        <p id="philosophy-text">
+                            We believe that true heroism isn't about being smart - it's about doing the right thing regardless of personal cost. Our winners prove that you can save the world AND be an complete idiot at the same time. They died as they lived: heroically stupid.
+                        </p>
+
+                        <h3 id="mission-title">🎯 Our Mission</h3>
+                        <p id="mission-text">
+                            To document and celebrate those brave souls who made the ultimate sacrifice while displaying the ultimate lack of common sense. Every winner has genuinely made the world a better place through their death, even if their methods were questionable.
+                        </p>
+                    </div>
+
+                    <div style="background: #FFFFCC; border: 2px solid #FF9900; padding: 15px; margin: 15px 0;">
+                        <h3 id="contact-title">📞 Contact Information</h3>
+                        <p><strong id="contact-email">Email:</strong> <a href="mailto:info@hexagram.corp">info@hexagram.corp</a></p>
+                        <p><strong id="contact-hexagram">Hexagram:</strong> <a href="mailto:valhalla@hexagram.corp">valhalla@hexagram.corp</a></p>
+                        <p><strong id="contact-web">Web:</strong> valhallawards.hyper</p>
+                        <p><strong id="contact-founded">Founded:</strong> 1999</p>
+                        <p><strong id="contact-browser">Best viewed with:</strong> Hypernet Explorer 5.0+</p>
+                    </div>
+
+                    <div style="background: #FFCCCC; border: 2px solid #FF0000; padding: 15px; margin: 15px 0;">
+                        <h3 id="disclaimer-title">⚖️ Legal Disclaimer</h3>
+                        <p id="disclaimer-text">
+                            The Valhalla Awards do not encourage dangerous behavior. All stories are verified posthumously. We celebrate these individuals' heroic intentions while acknowledging their poor judgment. Please do not attempt to win a Valhalla Award - we prefer live visitors to our website!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p id="footer-copyright">© 2001 The Valhalla Awards | Sponsored by Neo-Flux Industries</p>
+            <p id="footer-tech">Powered by Techno-Flux Web Solutions | Optimized for Hypernet Explorer</p>
+            <p id="footer-counter">You are visitor #002847 | <span class="blink">Site updated daily!</span></p>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+
+        const translations = {
+            en: {
+                'site-title': '🏆 THE VALHALLA AWARDS 🏆',
+                'site-subtitle': 'Honoring Heroic Stupidity Since 1999',
+                'site-tagline': 'Where Epic Meets Idiotic!',
+                'visitor-text': 'Visitor Counter:',
+                'menu-home': '🏠 Main Hall',
+                'menu-awards': '🏆 Award Winners',
+                'menu-categories': '📊 Categories',
+                'menu-nominate': '📝 Nominate',
+                'menu-criteria': '📋 Criteria',
+                'menu-hall': '🌟 Hall of Fame',
+                'menu-about': 'ℹ️ About',
+                'sponsor-text': 'Sponsored by:',
+                'sponsor-tagline': '"Facendo la Tecnologia di Domani Oggi!"',
+                'hexagram-text': 'Connettiti su Hexagram:',
+                'welcome-title': 'Benvenuti ai Premi Valhalla!',
+                'warning-text': '⚠️ ATTENZIONE: Queste storie coinvolgono persone reali morte facendo cose stupide eroicamente! ⚠️',
+                'home-intro': 'I Premi Valhalla celebrano quelle anime coraggiose che sono morte nei modi più spettacolarmente stupidi ma innegabilmente eroici possibili. A differenza dei premi regolari per la mera stupidità, noi onoriamo coloro che hanno combinato il massimo eroismo con la massima idiozia!',
+                'featured-title': '🏆 VINCITORE IN EVIDENZA 2001: Il Cyber-Gladiatore',
+                'featured-category': 'CATEGORIA: Martirio Tecno-Eroico',
+                'heroism-meter': 'LIVELLO EROISMO: ████████████ 95%',
+                'stupidity-meter': 'LIVELLO STUPIDITÀ: ██████████ 87%',
+                'featured-story': 'Marco Techno-Santini (Milano, Italia) è morto tentando di salvare una server farm in fiamme contenente "infrastrutture vitali dell\'Hypernet." Ha salvato con successo 847 server portandoli fuori uno per uno durante un massiccio incendio elettrico. Sfortunatamente, ha dimenticato che il server #848 era il pannello elettrico principale dell\'edificio. Le sue ultime parole furono "Per l\'Hypernet!"',
+                'featured-legacy': 'Eredità: L\'Exchange Hypernet di Milano ora funziona 23% più veloce grazie al suo sacrificio.',
+                'latest-title': '📰 Ultime Notizie',
+                'latest-news': '<li>Nuova categoria aggiunta: "Tecno-Martiri"</li><li>Nominazioni 2001 ora aperte!</li><li>Anno record: 847 idioti eroici documentati</li><li>Premio speciale per morti legate al Y2K</li>',
+                'home-footer': 'Ricorda: Non deridiamo i morti - celebriamo la loro gloriosa stupidità!'
+            }
+        };
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update elements with translations
+            for (let key in translations[lang]) {
+                let element = document.getElementById(key);
+                if (element) {
+                    if (key === 'latest-news') {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            }
+
+            // Update language switcher highlighting
+            document.getElementById('lang-en').style.fontWeight = lang === 'en' ? 'bold' : 'normal';
+            document.getElementById('lang-it').style.fontWeight = lang === 'it' ? 'bold' : 'normal';
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Initialize with English
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>line': '"Making Tomorrow\'s Tech Today!"',
+                'hexagram-text': 'Connect on Hexagram:',
+                'welcome-title': 'Welcome to the Valhalla Awards!',
+                'warning-text': '⚠️ WARNING: These stories involve real people who died doing stupid things heroically! ⚠️',
+                'home-intro': 'The Valhalla Awards celebrate those brave souls who died in the most spectacularly stupid yet undeniably heroic ways possible. Unlike regular awards for mere stupidity, we honor those who combined maximum heroism with maximum idiocy!',
+                'featured-title': '🏆 FEATURED WINNER 2001: The Cyber-Gladiator',
+                'featured-category': 'CATEGORY: Tech-Hero Martyrdom',
+                'heroism-meter': 'HEROISM LEVEL: ████████████ 95%',
+                'stupidity-meter': 'STUPIDITY LEVEL: ██████████ 87%',
+                'featured-story': 'Marco Techno-Santini (Milan, Italy) died attempting to save a burning server farm containing "vital Hypernet infrastructure." He successfully rescued 847 servers by carrying them out one by one during a massive electrical fire. Unfortunately, he forgot that server #848 was the building\'s main electrical panel. His last words were reportedly "For the Hypernet!"',
+                'featured-legacy': 'Legacy: The Milan Hypernet Exchange now runs 23% faster thanks to his sacrifice.',
+                'latest-title': '📰 Latest News',
+                'latest-news': '<li>New category added: "Techno-Martyrs"</li><li>2001 nominations now open!</li><li>Record year: 847 heroic idiots documented</li><li>Special award for Y2K-related deaths</li>',
+                'home-footer': 'Remember: We don\'t mock the dead - we celebrate their glorious stupidity!'
+            },
+            it: {
+                'site-title': '🏆 I PREMI VALHALLA 🏆',
+                'site-subtitle': 'Onorando la Stupidità Eroica dal 1999',
+                'site-tagline': 'Dove l\'Epico Incontra l\'Idiota!',
+                'visitor-text': 'Contatore Turisti:',
+                'menu-home': '🏠 Sala Principale',
+                'menu-awards': '🏆 Vincitori Premi',
+                'menu-categories': '📊 Categorie',
+                'menu-nominate': '📝 Nomina',
+                'menu-criteria': '📋 Criteri',
+                'menu-hall': '🌟 Sala della Fama',
+                'menu-about': 'ℹ️ Chi Siamo',
+                'sponsor-text': 'Sponsorizzato da:',
+                'sponsor-tag

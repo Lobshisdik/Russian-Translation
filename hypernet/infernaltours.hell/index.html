@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INFERNAL TOURS - Your Guide to the Underworld</title>
+    <style>
+        body { 
+            font-family: Times, serif; 
+            background-color: #000000; 
+            color: #ff3333; 
+            margin: 0; 
+            padding: 10px;
+            background-image: url(data:image/gif;base64,R0lGODlhBAAEAIAAAP///wAAACH5BAEAAAAALAAAAAAEAAQAAAIEhI+pyQA7);
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background-color: #1a0000; 
+            padding: 20px; 
+            border: 3px solid #ff3333;
+        }
+        .header { 
+            text-align: center; 
+            border-bottom: 2px solid #ff6666; 
+            padding-bottom: 15px; 
+            margin-bottom: 20px;
+        }
+        .logo { 
+            color: #ff0000; 
+            font-size: 32px; 
+            font-weight: bold; 
+            text-shadow: 2px 2px 4px #000;
+        }
+        .tagline { 
+            color: #ffaaaa; 
+            font-style: italic; 
+            margin-top: 5px;
+        }
+        .nav { 
+            text-align: center; 
+            margin: 20px 0; 
+            border-top: 1px solid #ff6666; 
+            border-bottom: 1px solid #ff6666; 
+            padding: 10px 0;
+        }
+        .nav a { 
+            color: #ffcc00; 
+            text-decoration: underline; 
+            margin: 0 15px; 
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .nav a:hover { 
+            color: #ffffff; 
+        }
+        .section { 
+            display: none; 
+            line-height: 1.6;
+        }
+        .section.active { 
+            display: block; 
+        }
+        .section h2 { 
+            color: #ff6666; 
+            border-bottom: 1px solid #ff3333; 
+            padding-bottom: 5px;
+        }
+        .section h3 { 
+            color: #ff9999; 
+            margin-top: 25px;
+        }
+        .price-table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin: 20px 0;
+        }
+        .price-table th, .price-table td { 
+            border: 1px solid #ff6666; 
+            padding: 8px; 
+            text-align: left;
+        }
+        .price-table th { 
+            background-color: #330000; 
+            color: #ffcc00;
+        }
+        .sidebar { 
+            float: right; 
+            width: 200px; 
+            background-color: #220000; 
+            border: 1px solid #ff3333; 
+            padding: 15px; 
+            margin: 0 0 20px 20px;
+        }
+        .sidebar h4 { 
+            color: #ff9999; 
+            margin-top: 0;
+        }
+        .sidebar ul { 
+            list-style-type: none; 
+            padding: 0;
+        }
+        .sidebar li { 
+            margin: 5px 0;
+        }
+        .sidebar a { 
+            color: #ffcc00; 
+            text-decoration: none;
+        }
+        .sidebar a:hover { 
+            text-decoration: underline;
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 40px; 
+            border-top: 1px solid #ff6666; 
+            padding-top: 15px; 
+            font-size: 12px; 
+            color: #ff9999;
+        }
+        .blink { 
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 
+            50% { opacity: 0; } 
+        }
+        .warning { 
+            background-color: #660000; 
+            border: 2px solid #ff0000; 
+            padding: 10px; 
+            margin: 15px 0; 
+            text-align: center;
+        }
+        .counter { 
+            text-align: center; 
+            margin: 20px 0; 
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔥 INFERNAL TOURS 🔥</div>
+            <div class="tagline">"Abandon Hope, All Ye Who Enter Here... But Don't Forget Your Camera!"</div>
+        </div>
+
+        <div class="nav">
+            <a onclick="showSection('home')">Home</a> |
+            <a onclick="showSection('tours')">Tour Packages</a> |
+            <a onclick="showSection('circles')">The Nine Circles</a> |
+            <a onclick="showSection('realms')">Buddhist Hell Realms</a> |
+            <a onclick="showSection('booking')">Booking</a> |
+            <a onclick="showSection('testimonials')">Testimonials</a> |
+            <a onclick="showSection('about')">About Us</a>
+        </div>
+
+        <div class="counter">
+            Visitor #<span id="visitor-count">666013</span> | Souls Transported: <span id="soul-count">13,792</span>
+        </div>
+
+        <div id="home" class="section active">
+            <div class="sidebar">
+                <h4>🔥 HOT DEALS!</h4>
+                <ul>
+                    <li><a href="#">Limbo Express - $99</a></li>
+                    <li><a href="#">Gluttony Special - $149</a></li>
+                    <li><a href="#">Satan's VIP Package - $999</a></li>
+                </ul>
+                <h4>Safety Notice</h4>
+                <p style="font-size: 11px;">Infernal Tours is not responsible for lost souls, eternal damnation, or spontaneous combustion. Fireproof clothing recommended.</p>
+                <img src="1.jpg" alt="Hell Bus departing from Limbo station" width="180" style="border: 1px solid #ff3333; margin-top: 10px;">
+            </div>
+
+            <h2>Welcome to Infernal Tours!</h2>
+            
+            <div class="warning">
+                <strong class="blink">⚠️ WARNING ⚠️</strong><br>
+                This site contains descriptions of eternal punishment and suffering. Not suitable for the faint of heart or those with pending judgment.
+            </div>
+
+            <p>Since 1888, Infernal Tours has been the premier travel agency specializing in guided expeditions through the various levels of Hell. Whether you're interested in Dante's classical Nine Circles or the elaborate Buddhist Hell Realms, we offer comprehensive packages for the adventurous soul.</p>
+
+            <p>Our climate-controlled buses are equipped with the latest in soul-protection technology, ensuring your visit to the underworld remains temporary (terms and conditions apply).</p>
+
+            <h3>Why Choose Infernal Tours?</h3>
+            <ul>
+                <li>Experienced guides who've been damned for centuries</li>
+                <li>Air-conditioned buses (essential for the deeper circles)</li>
+                <li>Complimentary holy water and garlic necklaces</li>
+                <li>Multi-lingual tour guides (including Aramaic and Ancient Greek)</li>
+                <li>24/7 exorcism hotline</li>
+                <li>Group discounts available for cults and secret societies</li>
+            </ul>
+
+            <h3>Featured This Month</h3>
+            <p><strong>The Grand Infernal Circuit:</strong> A comprehensive 9-day journey through all levels of punishment, including exclusive access to Satan's private chambers and a meet-and-greet with notable historical figures. Includes continental breakfast and dinner (lunch not available in Gluttony circle for obvious reasons).</p>
+
+            <img src="2.jpg" alt="Tourist group posing with Charon at the River Styx" width="400" style="border: 2px solid #ff6666; margin: 15px 0;">
+        </div>
+
+        <div id="tours" class="section">
+            <h2>Tour Packages</h2>
+            
+            <div class="sidebar">
+                <h4>Package Includes</h4>
+                <ul>
+                    <li>Round-trip transportation</li>
+                    <li>Professional guide</li>
+                    <li>Safety equipment</li>
+                    <li>Souvenir photograph</li>
+                    <li>Certificate of survival</li>
+                </ul>
+                <img src="3.jpeg" alt="Hell Tours bus fleet parked at the gates of Dis" width="180" style="border: 1px solid #ff3333; margin-top: 10px;">
+            </div>
+
+            <h3>Classical Dante Package</h3>
+            <table class="price-table">
+                <tr>
+                    <th>Tour</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Difficulty</th>
+                </tr>
+                <tr>
+                    <td>Limbo Express</td>
+                    <td>2 hours</td>
+                    <td>$99</td>
+                    <td>Easy</td>
+                </tr>
+                <tr>
+                    <td>Sins of the Flesh (Circles 2-5)</td>
+                    <td>1 day</td>
+                    <td>$299</td>
+                    <td>Moderate</td>
+                </tr>
+                <tr>
+                    <td>Violence & Fraud Special (Circles 6-8)</td>
+                    <td>2 days</td>
+                    <td>$499</td>
+                    <td>Hard</td>
+                </tr>
+                <tr>
+                    <td>Treachery Ultimate (Circle 9)</td>
+                    <td>3 days</td>
+                    <td>$799</td>
+                    <td>Extreme</td>
+                </tr>
+                <tr>
+                    <td>Complete Inferno Journey</td>
+                    <td>9 days</td>
+                    <td>$1,999</td>
+                    <td>Epic</td>
+                </tr>
+            </table>
+
+            <h3>Buddhist Hell Realms Experience</h3>
+            <table class="price-table">
+                <tr>
+                    <th>Realm</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Karma Required</th>
+                </tr>
+                <tr>
+                    <td>Hot Hells Tour (8 realms)</td>
+                    <td>4 days</td>
+                    <td>$699</td>
+                    <td>Moderate negativity</td>
+                </tr>
+                <tr>
+                    <td>Cold Hells Expedition (8 realms)</td>
+                    <td>4 days</td>
+                    <td>$699</td>
+                    <td>Serious misconduct</td>
+                </tr>
+                <tr>
+                    <td>Neighbouring & Occasional Hells</td>
+                    <td>2 days</td>
+                    <td>$399</td>
+                    <td>Minor transgressions</td>
+                </tr>
+                <tr>
+                    <td>Complete Buddhist Hell Circuit</td>
+                    <td>12 days</td>
+                    <td>$2,499</td>
+                    <td>Extensive bad karma</td>
+                </tr>
+            </table>
+
+            <p><strong>Special Combo Deal:</strong> Book both Dante and Buddhist packages and save 15%! Experience the cultural diversity of eternal punishment across different religious traditions.</p>
+        </div>
+
+        <div id="circles" class="section">
+            <h2>Dante's Nine Circles of Hell</h2>
+            
+            <h3>Circle 1: Limbo</h3>
+            <p><strong>Punishment:</strong> Eternal longing without fulfillment<br>
+            <strong>Notable Residents:</strong> Virgil, Homer, Socrates, Plato<br>
+            <strong>Tour Highlights:</strong> Philosophy discussions with ancient Greeks, poetry readings with Roman masters. Very peaceful, excellent for beginners. Contains the Castle of Limbo with its seven walls.</p>
+
+            <h3>Circle 2: Lust</h3>
+            <p><strong>Punishment:</strong> Blown about by eternal winds<br>
+            <strong>Notable Residents:</strong> Paolo and Francesca, Cleopatra, Helen of Troy<br>
+            <strong>Tour Highlights:</strong> Witness the eternal dance of lovers caught in passion's storm. Minos judges souls here - watch the tail-wrapping demonstration!</p>
+
+            <h3>Circle 3: Gluttony</h3>
+            <p><strong>Punishment:</strong> Lying in putrid slush under eternal rain<br>
+            <strong>Guardian:</strong> Cerberus, the three-headed dog<br>
+            <strong>Tour Highlights:</strong> Cerberus feeding show (bring earplugs). Learn about the consequences of overindulgence. No food service available on this level.</p>
+
+            <h3>Circle 4: Greed</h3>
+            <p><strong>Punishment:</strong> Eternally pushing heavy weights in opposite directions<br>
+            <strong>Guardian:</strong> Plutus<br>
+            <strong>Tour Highlights:</strong> Watch the eternal collision of the greedy and wasteful. Interactive exhibit on medieval economics. Gift shop ironically overpriced.</p>
+
+            <h3>Circle 5: Wrath</h3>
+            <p><strong>Location:</strong> River Styx<br>
+            <strong>Punishment:</strong> Fighting eternally in muddy waters (angry) or sulking beneath (sullen)<br>
+            <strong>Tour Highlights:</strong> Boat ride with Phlegyas across the Styx. View the City of Dis from the water. Anger management workshop optional.</p>
+
+            <h3>Circle 6: Heresy</h3>
+            <p><strong>Location:</strong> City of Dis<br>
+            <strong>Punishment:</strong> Burning in flaming tombs<br>
+            <strong>Tour Highlights:</strong> Conversations with famous heretics including Farinata. Architecture tour of the flaming sepulchers. Theology debates encouraged.</p>
+
+            <h3>Circle 7: Violence</h3>
+            <p><strong>Guardian:</strong> The Minotaur<br>
+            <strong>Three Rings:</strong> Violence against neighbors (Centaurs patrol), Violence against self (Harpies), Violence against God (Rain of fire)<br>
+            <strong>Tour Highlights:</strong> Archery lessons with Centaurs, Wood of Suicides nature walk, Desert of fire with river of boiling blood.</p>
+
+            <h3>Circle 8: Fraud</h3>
+            <p><strong>Structure:</strong> Ten ditches (Malebolge)<br>
+            <strong>Transportation:</strong> Geryon the flying monster<br>
+            <strong>Tour Highlights:</strong> Aerial view of all ten ditches, witness various forms of fraud punishment, meet Ulysses in the false counselors' flames. Flight with Geryon is unforgettable!</p>
+
+            <h3>Circle 9: Treachery</h3>
+            <p><strong>Location:</strong> Frozen lake Cocytus<br>
+            <strong>Four Zones:</strong> Caina, Antenora, Ptolomea, Judecca<br>
+            <strong>Final Destination:</strong> Satan himself, frozen in ice, chewing on Judas, Brutus, and Cassius<br>
+            <strong>Tour Highlights:</strong> Ice skating on Cocytus, meet history's greatest traitors, exclusive Satan viewing platform. Bring warm clothing!</p>
+        </div>
+
+        <div id="realms" class="section">
+            <h2>Buddhist Hell Realms</h2>
+            
+            <h3>The Eight Hot Hells</h3>
+            <p><strong>Reviving Hell:</strong> Beings kill each other, revive, and repeat eternally. Duration: Equivalent to 1.62 trillion human years.</p>
+            <p><strong>Black-Line Hell:</strong> Bodies marked with lines then cut along them. Popular with precision torture enthusiasts.</p>
+            <p><strong>Crushing Hell:</strong> Mountains shaped like rams' heads crush beings. Geology tours available.</p>
+            <p><strong>Screaming Hell:</strong> Beings trapped in houses of fire, screaming constantly. Soundproof viewing areas provided.</p>
+            <p><strong>Great Screaming Hell:</strong> Like Screaming Hell but with double-walled fire houses. Extra soundproofing required.</p>
+            <p><strong>Hot Hell:</strong> Beings boiled in molten metal. Metallurgy workshops for the academically inclined.</p>
+            <p><strong>Very Hot Hell:</strong> Impaled on flaming spears. Not suitable for children.</p>
+            <p><strong>Avici Hell:</strong> Bodies and fire indistinguishable, continuous suffering. VIP viewing only, duration 1 kalpa.</p>
+
+            <h3>The Eight Cold Hells</h3>
+            <p><strong>Arbuda Hell:</strong> Naked beings covered in blisters from cold. Basic first aid training helpful.</p>
+            <p><strong>Nirarbuda Hell:</strong> Blisters burst from intense cold. Advanced first aid required.</p>
+            <p><strong>Atata, Hahava, Huhuva Hells:</strong> Named after the sounds beings make from cold. Learn traditional hell exclamations!</p>
+            <p><strong>Utpala, Padma, Pundarika Hells:</strong> Skin cracks like lotus petals. Botanical comparisons provided. Beautiful in a horrifying way.</p>
+
+            <h3>Neighbouring & Occasional Hells</h3>
+            <p>Sixteen additional realms surrounding the main hells, plus various temporary punishment realms. Perfect for the hell connoisseur who wants to see it all. These include the Realm of Crushing Mountains, Hot Ash Pit, and the dreaded Path of Razors.</p>
+
+            <p><strong>Special Feature:</strong> Unlike Dante's system, Buddhist hells are not permanent. All beings eventually exhaust their negative karma and are reborn elsewhere. Our guides explain the karma mechanics at each location.</p>
+
+            <img src="4.jpg" alt="Buddhist hell realm map showing the different levels and tortures" width="500" style="border: 2px solid #ff6666; margin: 15px 0;">
+        </div>
+
+        <div id="booking" class="section">
+            <h2>Booking Information</h2>
+
+            <div class="warning">
+                <strong>IMPORTANT:</strong> All tours require signed waiver absolving Infernal Tours of responsibility for soul damage, eternal damnation, or temporal displacement.
+            </div>
+
+            <h3>Reservation Requirements</h3>
+            <ul>
+                <li>Valid passport and death certificate (temporary death certificate acceptable)</li>
+                <li>Signed liability waiver in triplicate</li>
+                <li>Letter of recommendation from your local clergy (any denomination)</li>
+                <li>Proof of life insurance (minimum $1 million coverage)</li>
+                <li>Emergency contact information (preferably someone with exorcism experience)</li>
+                <li>Blood type verification (for emergency holy transfusions)</li>
+            </ul>
+
+            <h3>What to Bring</h3>
+            <ul>
+                <li>Fireproof clothing and boots</li>
+                <li>Holy water (TSA approved containers only)</li>
+                <li>Garlic necklaces or crucifix (your choice of protection)</li>
+                <li>Sunscreen (SPF 1000+ recommended for lower circles)</li>
+                <li>Comfortable walking shoes with good traction</li>
+                <li>Camera (film may melt in extreme heat zones)</li>
+                <li>Cash only - credit cards not accepted in Hell</li>
+            </ul>
+
+            <h3>Booking Methods</h3>
+            <p><strong>Phone:</strong> 1-800-HELL-BUS (Available 24/7, operators standing by in Purgatory)</p>
+            <p><strong>Fax:</strong> 666-INFERNO</p>
+            <p><strong>Email:</strong> bookings@infernaltours.hell</p>
+            <p><strong>In Person:</strong> 13th Street and Damnation Avenue, Limbo (near the Starbucks)</p>
+            <p><strong>Séance:</strong> Contact our booking spirits every full moon</p>
+
+            <h3>Payment Options</h3>
+            <ul>
+                <li>Cash (preferred currency: Souls, but US Dollars accepted)</li>
+                <li>Indulgences (must be Vatican certified)</li>
+                <li>Good deeds credit (1 tour day per life saved)</li>
+                <li>Karmic points transfer</li>
+                <li>Barter system (previous tour customers have traded livestock, firstborn children, and rare manuscripts)</li>
+            </ul>
+
+            <h3>Cancellation Policy</h3>
+            <p>Cancellations must be made at least 24 hours before tour departure. Emergency cancellations due to unexpected salvation, miraculous intervention, or spontaneous sainthood are acceptable with documentation. No refunds for tours cancelled due to chicken-heartedness or sudden religious conversion.</p>
+        </div>
+
+        <div id="testimonials" class="section">
+            <h2>What Our Customers Say</h2>
+
+            <blockquote>
+                <p>"I thought my doctoral thesis on medieval literature was thorough, but nothing prepared me for actually meeting Dante! The tour guides really know their stuff. Five stars!"</p>
+                <footer>- Professor Margaret Thompson, Oxford University (1999)</footer>
+            </blockquote>
+
+            <blockquote>
+                <p>"The Buddhist Hell Realms tour completely changed my perspective on karma and rebirth. Also, the Cold Hells were surprisingly refreshing after spending time in the Hot Hells. Would recommend bringing extra blankets though!"</p>
+                <footer>- Lama Tenzin, Tibet (1998)</footer>
+            </blockquote>
+
+            <blockquote>
+                <p>"As a professional exorcist, I appreciate the safety measures Infernal Tours takes. The holy water sprinkler system on the bus is genius. My clients love the firsthand knowledge I gained about different types of demonic entities."</p>
+                <footer>- Father O'Malley, Vatican Certified Exorcist (2000)</footer>
+            </blockquote>
+
+            <blockquote>
+                <p>"The Grand Infernal Circuit was the vacation of a lifetime (or afterlifetime)! Meeting historical figures was incredible - though I was disappointed that Hitler wasn't available for photos in the Violence circle. Apparently he was busy being eaten by Harpies that day."</p>
+                <footer>- Anonymous History Buff (1997)</footer>
+            </blockquote>
+
+            <blockquote>
+                <p>"Outstanding value! Where else can you get a comprehensive tour of the afterlife for under $2000? The air conditioning worked perfectly even in the deepest circles. My wife was skeptical at first but now she's planning the Purgatory package for next year."</p>
+                <footer>- Bob & Linda Stevens, Retired Couple (2001)</footer>
+            </blockquote>
+
+            <blockquote>
+                <p>"I was researching comparative religion for my book and needed authentic details about different hell concepts. Infernal Tours delivered beyond my expectations. The guided meditation sessions in the Buddhist realms were particularly enlightening."</p>
+                <footer>- Dr. Sarah Kim, Religious Studies Author (1996)</footer>
+            </blockquote>
+
+            <div class="warning">
+                <p><strong>Disclaimer:</strong> Testimonials may have been given under duress or while suffering temporary damnation. Infernal Tours cannot verify the continued existence or sanity of testimonial providers.</p>
+            </div>
+        </div>
+
+        <div id="about" class="section">
+            <h2>About Infernal Tours</h2>
+
+            <div class="sidebar">
+                <h4>Company Stats</h4>
+                <ul>
+                    <li>Founded: 1888</li>
+                    <li>Souls Transported: 13,792</li>
+                    <li>Safety Record: 87.3%</li>
+                    <li>Customer Satisfaction: 94%</li>
+                    <li>Permanent Damnations: 47</li>
+                </ul>
+                <img src="5.jpg" alt="Company founder Alistair Blackwood shaking hands with Mephistopheles" width="180" style="border: 1px solid #ff3333; margin-top: 10px;">
+            </div>
+
+            <h3>Our History</h3>
+            <p>Infernal Tours was founded in 1888 by the eccentric Victorian explorer Sir Alistair Blackwood after his accidental descent into Hell during a spelunking expedition in Romania. Rather than being traumatized by the experience, Sir Alistair saw a business opportunity.</p>
+
+            <p>"Why should eternal damnation be limited to the damned?" he famously wrote in his memoir, "A Gentleman's Guide to the Underworld." "Surely the living deserve the educational opportunity to witness divine justice firsthand!"</p>
+
+            <p>After extensive negotiations with various demons, devils, and Buddhist hell guardians, Sir Alistair secured exclusive touring rights to both Western and Eastern hell realms. The first official tour departed on Halloween 1888 with a group of adventurous London society members.</p>
+
+            <h3>Our Mission</h3>
+            <p>To provide safe, educational, and transformative experiences of the afterlife's punishment realms, promoting understanding between the living and the damned while maintaining the highest standards of supernatural tourism.</p>
+
+            <h3>Safety Record</h3>
+            <p>In over 110 years of operation, Infernal Tours maintains an 87.3% customer return rate (to the mortal realm). The remaining 12.7% chose to extend their stays permanently, though this was largely due to personal preference rather than safety failures on our part.</p>
+
+            <h3>Our Fleet</h3>
+            <p>Our buses are custom-manufactured in Detroit with the following special features:</p>
+            <ul>
+                <li>Asbestos-lined interiors (pre-EPA regulations)</li>
+                <li>Holy water sprinkler systems</li>
+                <li>Soul-anchoring seatbelts</li>
+                <li>Exorcism-grade air filtration</li>
+                <li>Emergency prayer hotline connections</li>
+                <li>Backup generators powered by righteous indignation</li>
+            </ul>
+
+            <h3>Meet Our Staff</h3>
+            <p><strong>Mortimer Grimm, Head Tour Guide:</strong> Formerly damned for the sin of pride, Mortimer earned his redemption through 200 years of excellent customer service. Fluent in Latin, Ancient Greek, and Demonic.</p>
+
+            <p><strong>Sister Mary Catherine, Safety Coordinator:</strong> A nun who took a wrong turn during a pilgrimage to Rome in 1692. Specializes in emergency blessings and has never lost a soul on her watch.</p>
+
+            <p><strong>Charon Jr., Transportation Specialist:</strong> Son of the famous ferryman, he modernized the family business with our custom bus fleet. Still accepts coins for eyes, but now takes credit cards too.</p>
+
+            <h3>Awards & Recognition</h3>
+            <ul>
+                <li>Vatican Seal of Reluctant Approval (1923)</li>
+                <li>Better Business Bureau of the Afterlife - A+ Rating</li>
+                <li>Tourism Industry Award for "Most Original Destination" (1955)</li>
+                <li>International Association of Dark Tourism - Lifetime Achievement (1987)</li>
+                <li>Dante Alighieri Foundation Excellence in Literary Tourism (1995)</li>
+            </ul>
+
+            <h3>Contact Information</h3>
+            <p><strong>Corporate Headquarters:</strong><br>
+            Infernal Tours, LLC<br>
+            13 Brimstone Boulevard<br>
+            Limbo, Hell 00666</p>
+
+            <p><strong>Earthly Branch Office:</strong><br>
+            1888 Damnation Avenue<br>
+            Salem, Massachusetts 01970</p>
+
+            <p><strong>Emergency Contact:</strong><br>
+            1-800-HELP-GOD (24/7 Divine Intervention Hotline)</p>
+        </div>
+
+        <div class="footer">
+            Last updated: October 31st, 2001 | Webmaster: damned.soul@infernaltours.hell<br>
+            Best viewed in Netscape Navigator or Internet Explorer 5.0+<br>
+            This site blessed by Father McKenzie, cursed by the Witches of Salem<br>
+            <img src="6.gif" alt="Visitor counter showing 666,013 visitors" style="margin-top: 10px;"><br>
+            <small>Copyright © 2001 Infernal Tours, LLC. All souls reserved.</small>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Update visitor counter
+            var count = parseInt(document.getElementById('visitor-count').innerText);
+            document.getElementById('visitor-count').innerText = count + Math.floor(Math.random() * 10) + 1;
+            
+            // Update soul counter
+            var soulCount = parseInt(document.getElementById('soul-count').innerText);
+            document.getElementById('soul-count').innerText = soulCount + Math.floor(Math.random() * 5) + 1;
+        }
+
+        // Simulate visitor counter updates
+        setInterval(function() {
+            var count = parseInt(document.getElementById('visitor-count').innerText);
+            if (Math.random() < 0.3) { // 30% chance every 5 seconds
+                document.getElementById('visitor-count').innerText = count + Math.floor(Math.random() * 3) + 1;
+            }
+        }, 5000);
+
+        // Add some spooky random effects
+        setInterval(function() {
+            if (Math.random() < 0.1) { // 10% chance
+                document.body.style.backgroundColor = '#330000';
+                setTimeout(function() {
+                    document.body.style.backgroundColor = '#000000';
+                }, 200);
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

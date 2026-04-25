@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Skills Category Editor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4a90e2, #5b9bd5);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .upload-section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .file-input-container {
+            margin-bottom: 20px;
+        }
+
+        .file-input-container label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #4a90e2;
+            border-radius: 8px;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input:hover {
+            border-color: #357abd;
+            background: #f0f4ff;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn.secondary {
+            background: linear-gradient(45deg, #28a745, #20a83a);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .category-management {
+            padding: 20px 30px;
+            background: #f8f9ff;
+            border-bottom: 1px solid #eee;
+            display: none;
+        }
+
+        .category-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .category-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .category-input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-tag {
+            background: #4a90e2;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-remove {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .table-section {
+            padding: 30px;
+            display: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(45deg, #4a90e2, #5b9bd5);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        tr:nth-child(even) {
+            background: #fafbff;
+        }
+
+        tr:nth-child(even):hover {
+            background: #f0f4ff;
+        }
+
+        .skill-id {
+            font-weight: 600;
+            color: #4a90e2;
+            min-width: 60px;
+        }
+
+        .skill-name, .skill-description {
+            min-width: 150px;
+        }
+
+        .skill-name input, .skill-description input {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .skill-name input:focus, .skill-description input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .skill-name input.changed, .skill-description input.changed {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .cost-input {
+            width: 80px;
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .cost-input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .cost-input.changed {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .type-dropdown {
+            width: 100px;
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .type-dropdown:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .type-dropdown.changed {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .category-dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .category-dropdown:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .category-dropdown.changed {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .download-section {
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+            background: #f8f9ff;
+            text-align: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #f8f9ff, #ffffff);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4a90e2;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .category-input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 RPG Maker MZ Skills Editor</h1>
+            <p>Edit your skills categories and export the modified JSON</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="file-input-container">
+                <label for="skillsFile">Skills.json File:</label>
+                <input type="file" id="skillsFile" class="file-input" accept=".json" />
+            </div>
+            <button id="loadFile" class="btn" disabled>Load Skills File</button>
+            <div id="status"></div>
+        </div>
+
+        <div class="category-management" id="categoryManagement">
+            <h3 style="margin-bottom: 15px; color: #333;">Manage Categories</h3>
+            <div class="category-input-group">
+                <input type="text" id="newCategoryInput" class="category-input" placeholder="Enter new category name..." />
+                <button id="addCategoryBtn" class="btn">Add Category</button>
+            </div>
+            <div class="category-list" id="categoryList"></div>
+        </div>
+
+        <div class="table-section" id="tableSection">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalSkills">0</div>
+                    <div class="stat-label">Total Skills</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalCategories">0</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="changedSkills">0</div>
+                    <div class="stat-label">Modified</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>MP Cost</th>
+                            <th>TP Cost</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="skillsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="download-section">
+                <button id="downloadSkills" class="btn secondary">📥 Download Modified Skills.json</button>
+                <p style="margin-top: 10px; color: #666;">Download your updated skills file with the new category assignments</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let skillsData = null;
+        let categories = [];
+        let changedSkillsCount = 0;
+
+        const skillsFileInput = document.getElementById('skillsFile');
+        const loadFileBtn = document.getElementById('loadFile');
+        const statusDiv = document.getElementById('status');
+        const categoryManagement = document.getElementById('categoryManagement');
+        const tableSection = document.getElementById('tableSection');
+        const skillsTableBody = document.getElementById('skillsTableBody');
+        const downloadBtn = document.getElementById('downloadSkills');
+        const newCategoryInput = document.getElementById('newCategoryInput');
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+        const categoryList = document.getElementById('categoryList');
+
+        // Enable load button when file is selected
+        skillsFileInput.addEventListener('change', () => {
+            loadFileBtn.disabled = skillsFileInput.files.length === 0;
+        });
+
+        loadFileBtn.addEventListener('click', loadFile);
+        downloadBtn.addEventListener('click', downloadModifiedSkills);
+        addCategoryBtn.addEventListener('click', addCategory);
+        newCategoryInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addCategory();
+        });
+
+        async function loadFile() {
+            try {
+                showStatus('Loading skills file...', 'info');
+                
+                // Read skills file
+                const skillsFile = skillsFileInput.files[0];
+                const skillsText = await readFile(skillsFile);
+                skillsData = JSON.parse(skillsText);
+
+                // Extract existing categories from skills
+                categories = extractExistingCategories(skillsData);
+                
+                // Display category management and skills table
+                displayCategoryManagement();
+                displaySkillsTable();
+                updateStats();
+                
+                showStatus(`Successfully loaded ${skillsData.filter(skill => skill && skill.name !== '').length} skills!`, 'success');
+                categoryManagement.style.display = 'block';
+                tableSection.style.display = 'block';
+
+            } catch (error) {
+                showStatus(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = e => reject(new Error('Failed to read file'));
+                reader.readAsText(file);
+            });
+        }
+
+        function extractExistingCategories(skills) {
+            const categorySet = new Set();
+            
+            skills.forEach(skill => {
+                if (skill && skill.note) {
+                    // Look for <category:CategoryName> pattern
+                    const categoryMatch = skill.note.match(/<category:([^>]+)>/g);
+                    if (categoryMatch) {
+                        categoryMatch.forEach(match => {
+                            const category = match.replace(/<category:([^>]+)>/, '$1').trim();
+                            if (category) {
+                                categorySet.add(category);
+                            }
+                        });
+                    }
+                }
+            });
+
+            return Array.from(categorySet).sort();
+        }
+
+        function displayCategoryManagement() {
+            updateCategoryList();
+        }
+
+        function updateCategoryList() {
+            categoryList.innerHTML = '';
+            categories.forEach(category => {
+                const tag = document.createElement('div');
+                tag.className = 'category-tag';
+                tag.innerHTML = `
+                    ${category}
+                    <button class="category-remove" onclick="removeCategory('${category}')" title="Remove category">×</button>
+                `;
+                categoryList.appendChild(tag);
+            });
+            updateStats();
+        }
+
+        function addCategory() {
+            const newCategory = newCategoryInput.value.trim();
+            if (newCategory && !categories.includes(newCategory)) {
+                categories.push(newCategory);
+                categories.sort();
+                newCategoryInput.value = '';
+                updateCategoryList();
+                updateSkillDropdowns();
+            }
+        }
+
+        function removeCategory(categoryToRemove) {
+            if (confirm(`Are you sure you want to remove the category "${categoryToRemove}"? This will also remove it from any skills using this category.`)) {
+                categories = categories.filter(cat => cat !== categoryToRemove);
+                
+                // Remove category from skills
+                skillsData.forEach(skill => {
+                    if (skill && skill.note) {
+                        skill.note = skill.note.replace(new RegExp(`<category:${categoryToRemove}>`, 'g'), '').trim();
+                    }
+                });
+                
+                updateCategoryList();
+                updateSkillDropdowns();
+                displaySkillsTable(); // Refresh table to show changes
+            }
+        }
+
+        function updateSkillDropdowns() {
+            document.querySelectorAll('.category-dropdown').forEach(dropdown => {
+                const currentValue = dropdown.value;
+                const skillIndex = dropdown.dataset.skillIndex;
+                
+                dropdown.innerHTML = `
+                    <option value="">-- No Category --</option>
+                    ${categories.map(cat => 
+                        `<option value="${cat}"${cat === currentValue ? ' selected' : ''}>${cat}</option>`
+                    ).join('')}
+                `;
+            });
+        }
+
+        function displaySkillsTable() {
+            skillsTableBody.innerHTML = '';
+
+            skillsData.forEach((skill, index) => {
+                if (!skill || skill.name === '') return; // Skip null/empty skills
+
+                const row = document.createElement('tr');
+                
+                // Get current category from skill note
+                let currentCategory = '';
+                if (skill.note) {
+                    const match = skill.note.match(/<category:([^>]+)>/);
+                    if (match) {
+                        currentCategory = match[1].trim();
+                    }
+                }
+
+                // Determine skill type (1 = Magic, 2 = Skill)
+                const skillType = skill.stypeId === 1 ? 'Magic' : 'Skill';
+
+                row.innerHTML = `
+                    <td class="skill-id">${skill.id || index}</td>
+                    <td class="skill-name">
+                        <input type="text" value="${(skill.name || 'Unnamed Skill').replace(/"/g, '&quot;')}" 
+                               data-skill-index="${index}" data-field="name" 
+                               data-original-value="${(skill.name || 'Unnamed Skill').replace(/"/g, '&quot;')}" />
+                    </td>
+                    <td class="skill-description">
+                        <div> ${(skill.description || 'No description')} </div>
+                    </td>
+                    <td>
+                        <select class="type-dropdown" data-skill-index="${index}" data-field="stypeId" 
+                                data-original-value="${skill.stypeId || 2}">
+                            <option value="1" ${skill.stypeId === 1 ? 'selected' : ''}>Magic</option>
+                            <option value="2" ${skill.stypeId === 2 || !skill.stypeId ? 'selected' : ''}>Skill</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="cost-input" min="0" value="${skill.mpCost || 0}" 
+                               data-skill-index="${index}" data-field="mpCost" 
+                               data-original-value="${skill.mpCost || 0}" />
+                    </td>
+                    <td>
+                        <input type="number" class="cost-input" min="0" value="${skill.tpCost || 0}" 
+                               data-skill-index="${index}" data-field="tpCost" 
+                               data-original-value="${skill.tpCost || 0}" />
+                    </td>
+                    <td>
+                        <select class="category-dropdown" data-skill-index="${index}" data-original-category="${currentCategory}">
+                            <option value="">-- No Category --</option>
+                            ${categories.map(cat => 
+                                `<option value="${cat}" ${cat === currentCategory ? 'selected' : ''}>${cat}</option>`
+                            ).join('')}
+                        </select>
+                    </td>
+                `;
+
+                skillsTableBody.appendChild(row);
+            });
+
+            // Add event listeners to all inputs and selects
+            document.querySelectorAll('.category-dropdown').forEach(dropdown => {
+                dropdown.addEventListener('change', handleCategoryChange);
+            });
+
+            document.querySelectorAll('input[data-field], select[data-field]').forEach(input => {
+                input.addEventListener('change', handleFieldChange);
+                input.addEventListener('input', handleFieldChange);
+            });
+
+            resetChangedCount();
+        }
+
+        function handleCategoryChange(event) {
+            const dropdown = event.target;
+            const skillIndex = parseInt(dropdown.dataset.skillIndex);
+            const originalCategory = dropdown.dataset.originalCategory;
+            const newCategory = dropdown.value;
+
+            // Update the skill's note
+            if (newCategory === '') {
+                // Remove category from note
+                if (skillsData[skillIndex].note) {
+                    skillsData[skillIndex].note = skillsData[skillIndex].note.replace(/<category:[^>]+>/g, '').trim();
+                }
+            } else {
+                // Add or update category in note
+                if (!skillsData[skillIndex].note) {
+                    skillsData[skillIndex].note = '';
+                }
+                
+                // Remove existing category first
+                skillsData[skillIndex].note = skillsData[skillIndex].note.replace(/<category:[^>]+>/g, '').trim();
+                
+                // Add new category
+                skillsData[skillIndex].note = skillsData[skillIndex].note ? 
+                    `${skillsData[skillIndex].note}\n<category:${newCategory}>` : 
+                    `<category:${newCategory}>`;
+            }
+
+            // Visual feedback for changed dropdowns
+            if (newCategory !== originalCategory) {
+                dropdown.classList.add('changed');
+            } else {
+                dropdown.classList.remove('changed');
+            }
+            
+            updateChangedCount();
+        }
+
+        function handleFieldChange(event) {
+            const input = event.target;
+            const skillIndex = parseInt(input.dataset.skillIndex);
+            const field = input.dataset.field;
+            const originalValue = input.dataset.originalValue;
+            let newValue = input.value;
+
+            // Convert numeric fields
+            if (field === 'mpCost' || field === 'tpCost') {
+                newValue = parseInt(newValue) || 0;
+            } else if (field === 'stypeId') {
+                newValue = parseInt(newValue);
+            }
+
+            // Update the skill data
+            skillsData[skillIndex][field] = newValue;
+
+            // Visual feedback for changed fields
+            const hasChanged = newValue.toString() !== originalValue.toString();
+            if (hasChanged) {
+                input.classList.add('changed');
+            } else {
+                input.classList.remove('changed');
+            }
+            
+            updateChangedCount();
+        }
+
+        function updateChangedCount() {
+            const changedElements = document.querySelectorAll('.changed');
+            changedSkillsCount = changedElements.length;
+            document.getElementById('changedSkills').textContent = changedSkillsCount;
+        }
+
+        function resetChangedCount() {
+            changedSkillsCount = 0;
+            document.getElementById('changedSkills').textContent = changedSkillsCount;
+        }
+
+        function updateStats() {
+            const validSkills = skillsData ? skillsData.filter(skill => skill && skill.name !== '').length : 0;
+            document.getElementById('totalSkills').textContent = validSkills;
+            document.getElementById('totalCategories').textContent = categories.length;
+            document.getElementById('changedSkills').textContent = changedSkillsCount;
+        }
+
+        function downloadModifiedSkills() {
+            try {
+                const modifiedSkillsJson = JSON.stringify(skillsData, null, 2);
+                const blob = new Blob([modifiedSkillsJson], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Skills_modified.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                URL.revokeObjectURL(url);
+                showStatus('Skills file downloaded successfully!', 'success');
+            } catch (error) {
+                showStatus(`Error downloading file: ${error.message}`, 'error');
+            }
+        }
+
+        function showStatus(message, type) {
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Divine Truth - YHWH Lives! - Hypernet Explorer</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000080;
+            background-image: url('data:image/gif;base64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIEBHIJBQA7');
+            color: #000000;
+        }
+        
+        .main-container {
+            background-color: #FFFFFF;
+            margin: 10px;
+            border: 2px solid #C0C0C0;
+            padding: 0;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #4169E1, #0000CD);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #C0C0C0;
+            position: relative;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .language-selector select {
+            background-color: #FFFFFF;
+            border: 1px solid #808080;
+            padding: 2px;
+            font-size: 11px;
+        }
+        
+        .nav-bar {
+            background-color: #F0F0F0;
+            border-bottom: 1px solid #808080;
+            padding: 5px;
+        }
+        
+        .nav-link {
+            color: #0000EE;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-right: 15px;
+            font-size: 12px;
+        }
+        
+        .nav-link:hover {
+            color: #FF0000;
+        }
+        
+        .content {
+            padding: 15px;
+            line-height: 1.4;
+        }
+        
+        .section {
+            display: none;
+            border: 1px solid #808080;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #FFFFFE;
+        }
+        
+        .home-section {
+            display: block;
+        }
+        
+        .warning-box {
+            background-color: #FFE4E1;
+            border: 2px solid #FF0000;
+            padding: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .truth-box {
+            background-color: #E6FFE6;
+            border: 2px solid #008000;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .footer {
+            background-color: #F0F0F0;
+            border-top: 1px solid #808080;
+            padding: 10px;
+            font-size: 10px;
+            text-align: center;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .conspiracy-alert {
+            background-color: #FFFF00;
+            border: 3px solid #FF0000;
+            padding: 5px;
+            margin: 5px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        h1 { color: #800000; font-size: 18px; }
+        h2 { color: #000080; font-size: 14px; }
+        h3 { color: #008000; font-size: 12px; }
+        
+        .counter {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+    <script>
+        var currentLang = 'en';
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            
+            // Show the selected section
+            document.getElementById(sectionId + '-' + currentLang).style.display = 'block';
+        }
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Hide all language content
+            var langContents = document.getElementsByClassName('lang-content');
+            for (var i = 0; i < langContents.length; i++) {
+                langContents[i].classList.remove('active');
+            }
+            
+            // Show selected language content
+            var selectedContent = document.getElementsByClassName('lang-' + lang);
+            for (var i = 0; i < selectedContent.length; i++) {
+                selectedContent[i].classList.add('active');
+            }
+            
+            // Show home section by default
+            showSection('home');
+        }
+        
+        function updateCounter() {
+            var counters = document.getElementsByClassName('visitor-counter');
+            var count = Math.floor(Math.random() * 50000) + 125000;
+            for (var i = 0; i < counters.length; i++) {
+                counters[i].innerHTML = count;
+            }
+        }
+        
+        window.onload = function() {
+            updateCounter();
+            setInterval(updateCounter, 30000);
+            switchLanguage('en'); // Default to English
+        }
+    </script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="language-selector">
+                <select onchange="switchLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+            
+            <!-- English Header -->
+            <div class="lang-content lang-en">
+                <h1>✨ THE DIVINE TRUTH ✨</h1>
+                <p><strong>YHWH LIVES! Don't Believe the TechnoMystic Propaganda!</strong></p>
+                <div class="conspiracy-alert blink">
+                    URGENT: The Mages Guild wants you to believe YHWH is dead!
+                </div>
+            </div>
+            
+            <!-- Italian Header -->
+            <div class="lang-content lang-it">
+                <h1>✨ LA VERITÀ DIVINA ✨</h1>
+                <p><strong>YHWH VIVE! Non Credete alla Propaganda TecnoMistica!</strong></p>
+                <div class="conspiracy-alert blink">
+                    URGENTE: La Gilda dei Maghi vuole farvi credere che YHWH è morto!
+                </div>
+            </div>
+        </div>
+        
+        <!-- English Navigation -->
+        <div class="nav-bar lang-content lang-en">
+            <span class="nav-link" onclick="showSection('home')">HOME</span>
+            <span class="nav-link" onclick="showSection('evidence')">EVIDENCE</span>
+            <span class="nav-link" onclick="showSection('conspiracy')">THE CONSPIRACY</span>
+            <span class="nav-link" onclick="showSection('testimonials')">TESTIMONIALS</span>
+            <span class="nav-link" onclick="showSection('action')">TAKE ACTION</span>
+            <span class="nav-link" onclick="showSection('contact')">CONTACT</span>
+        </div>
+        
+        <!-- Italian Navigation -->
+        <div class="nav-bar lang-content lang-it">
+            <span class="nav-link" onclick="showSection('home')">HOME</span>
+            <span class="nav-link" onclick="showSection('evidence')">PROVE</span>
+            <span class="nav-link" onclick="showSection('conspiracy')">LA COSPIRAZIONE</span>
+            <span class="nav-link" onclick="showSection('testimonials')">TESTIMONIANZE</span>
+            <span class="nav-link" onclick="showSection('action')">AGISCI</span>
+            <span class="nav-link" onclick="showSection('contact')">CONTATTI</span>
+        </div>
+        
+        <div class="content">
+            <!-- ENGLISH CONTENT -->
+            <div class="lang-content lang-en">
+                <div id="home-en" class="section home-section">
+                    <div class="warning-box">
+                        <strong>WAKE UP, CITIZENS!</strong> The so-called "Solomon Ritual of 1999" is a HOAX perpetuated by the TechnoMystic Deep State!
+                    </div>
+                    
+                    <h2>Welcome to the Truth</h2>
+                    <p>Since January 1st, 2001, the corporate-magical complex has been spreading LIES about the death of YHWH. They want you to believe that some "ritual" performed by politicians and cultists somehow killed the Almighty. This is <strong>IMPOSSIBLE</strong> and here's why:</p>
+                    
+                    <div class="truth-box">
+                        <h3>FACT #1: The Divine Cannot Be Destroyed</h3>
+                        <p>YHWH is eternal and omnipotent. No amount of TechnoThaumic manipulation or CorpoMantic rituals can affect the Divine.</p>
+                    </div>
+                    
+                    <div class="truth-box">
+                        <h3>FACT #2: The "Evidence" is Fabricated</h3>
+                        <p>All reports of Vatican collapse, dimensional rifts, and magical resurgence are elaborate InfoMantic illusions created by Esoteric Heavy Industries and their allies.</p>
+                    </div>
+                    
+                    <div class="truth-box">
+                        <h3>FACT #3: Follow the Money</h3>
+                        <p>Who benefits from people losing faith? The Mages Guild, the Hyper Capitalist Collective, and their TechnoOccult subsidiaries!</p>
+                    </div>
+                    
+                    <p><strong>Visitors awakened to the truth:</strong> <span class="counter visitor-counter">125,847</span></p>
+                </div>
+                
+                <div id="evidence-en" class="section">
+                    <h2>The Evidence They Don't Want You to See</h2>
+                    
+                    <h3>1. Margaret Thatcher's Involvement is Exaggerated</h3>
+                    <p>While Lady Thatcher was indeed involved in economic MetaStructural reforms, claims of her participation in divine assassination are CorpoMantic disinformation. The Iron Lady was fighting <em>against</em> the magical cartels, not for them!</p>
+                    
+                    <h3>2. The "Spear of Memory" Never Existed</h3>
+                    <p>Extensive research into TechnoArchival databases shows NO evidence of this supposed artifact. It's a MacGuffin created by the Mages Guild to justify their power grab.</p>
+                    
+                    <h3>3. Vatican "Collapse" is Media Manipulation</h3>
+                    <p>The Vatican still stands! What you're seeing are NeuroMantic projections designed to make you believe otherwise. The Pope is alive and well, hidden from the public to protect him from magical assassination attempts.</p>
+                    
+                    <h3>4. Real Testimonies</h3>
+                    <ul>
+                        <li>Priest in Rome reports daily prayers still answered</li>
+                        <li>Miracles continue in rural communities away from TechnoMantic interference</li>
+                        <li>Divine protection shields believers from time loop effects</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        Remember: If YHWH was truly dead, would the Mages Guild need to work so hard to convince you?
+                    </div>
+                </div>
+                
+                <div id="conspiracy-en" class="section">
+                    <h2>The TechnoMystic Conspiracy Revealed</h2>
+                    
+                    <h3>The Players</h3>
+                    <p><strong>The Mages Guild:</strong> Ancient cabal of CorpoSorcerers seeking to replace divine authority with their own TechnoThaumic dominance.</p>
+                    
+                    <p><strong>Esoteric Heavy Industries:</strong> Military-magical complex producing InfoMantic weapons to destabilize faith-based reality anchors.</p>
+                    
+                    <p><strong>Hyper Capitalist Collective:</strong> Ultra-wealthy elites who profit from spiritual chaos and dimensional market manipulation.</p>
+                    
+                    <h3>Their Plan</h3>
+                    <ol>
+                        <li><strong>Phase 1 (1999):</strong> Stage fake "Solomon Ritual" using NeuroMantic illusions</li>
+                        <li><strong>Phase 2 (2000-2001):</strong> Spread disinformation through compromised media outlets</li>
+                        <li><strong>Phase 3 (Ongoing):</strong> Consolidate power while population believes divine protection is gone</li>
+                    </ol>
+                    
+                    <h3>Why They're Doing This</h3>
+                    <ul>
+                        <li>Control the emerging TechnoMagical economy</li>
+                        <li>Eliminate divine oversight of dimensional markets</li>
+                        <li>Replace religious faith with CorpoMantic dependency</li>
+                        <li>Harvest PrayerTech energy for their own use</li>
+                    </ul>
+                    
+                    <div class="conspiracy-alert">
+                        They want you hopeless! They want you dependent! RESIST!
+                    </div>
+                </div>
+                
+                <div id="testimonials-en" class="section">
+                    <h2>Testimonies from True Believers</h2>
+                    
+                    <div class="truth-box">
+                        <strong>Brother Marcus, Berlin:</strong><br>
+                        "I was caught in a time loop for three days until I prayed to YHWH. Immediately, I was freed! The divine protection is real!"
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Sister Catherine, Paris:</strong><br>
+                        "During the supposed 'Vatican collapse,' I had a vision of the true Vatican existing in a divine dimension, protected from TechnoMantic interference."
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Dr. Wilhelm Schmidt, Munich:</strong><br>
+                        "As a TheoPhysicist, I can confirm that the energy signatures attributed to 'divine death' are actually CorpoMantic amplification fields designed to mask continued divine presence."
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Former Mages Guild Member (Anonymous):</strong><br>
+                        "I was there during the 'ritual.' It was all smoke and mirrors - literally! NeuroMantic projections to fool the participants. Even Margaret Thatcher was deceived!"
+                    </div>
+                    
+                    <h3>Signs of Continued Divine Presence</h3>
+                    <ul>
+                        <li>Unexplained protection from CorpoMantic effects</li>
+                        <li>Continued miraculous healings in faithful communities</li>
+                        <li>Resistance to time loop manipulation through prayer</li>
+                        <li>TechnoThaumic devices failing near sacred sites</li>
+                    </ul>
+                </div>
+                
+                <div id="action-en" class="section">
+                    <h2>How You Can Fight Back</h2>
+                    
+                    <h3>Immediate Actions</h3>
+                    <ol>
+                        <li><strong>Spread the Truth:</strong> Share this website with friends and family</li>
+                        <li><strong>Prayer Shield:</strong> Daily prayer creates NeuroMantic interference against mind control</li>
+                        <li><strong>Boycott CorpoMystic Products:</strong> Don't fund your own oppression!</li>
+                        <li><strong>Document Evidence:</strong> Record any miraculous events that prove divine presence</li>
+                    </ol>
+                    
+                    <h3>Resistance Networks</h3>
+                    <p>Connect with other truth-seekers through secure channels:</p>
+                    <ul>
+                        <li>Local prayer groups (TechnoMantic interference minimal in sacred spaces)</li>
+                        <li>Underground FaithNet bulletin boards</li>
+                        <li>Anti-CorpoMantic resistance cells</li>
+                    </ul>
+                    
+                    <h3>Protect Yourself</h3>
+                    <div class="warning-box">
+                        <strong>Security Warning:</strong> The Mages Guild monitors Hypernet traffic for "dangerous" truth-spreading. Use caution when sharing this information!
+                    </div>
+                    
+                    <p><strong>Recommended Protections:</strong></p>
+                    <ul>
+                        <li>Keep blessed items near your computer to disrupt InfoMantic tracking</li>
+                        <li>Pray before browsing to activate divine firewall protection</li>
+                        <li>Clear your Hypernet Explorer cache regularly</li>
+                        <li>Use only Anoki phones - their spiritual resonance frequency confuses TechnoMantic surveillance</li>
+                    </ul>
+                </div>
+                
+                <div id="contact-en" class="section">
+                    <h2>Contact the Divine Truth Movement</h2>
+                    
+                    <p><strong>Website Administrator:</strong> Brother Thomas Schmidt<br>
+                    <strong>Email:</strong> <a href="mailto:divinereuth@hexagram.corp">divinereuth@hexagram.corp</a></p>
+                    
+                    <p><strong>Secure Communication:</strong> Use only blessed communication devices when contacting us. The Mages Guild intercepts all unprotected transmissions.</p>
+                    
+                    <h3>Join Our Hexagram Network</h3>
+                    <p>Follow our Hexagram account for daily truth updates: <a href="mailto:divinereuth@hexagram.corp">@DivineTruthMovement</a></p>
+                    
+                    <h3>Donations</h3>
+                    <p>Help us spread the truth! Donate to our FaithCoin wallet or send Euros to our Swiss bank account (contact for details). All donations go toward:</p>
+                    <ul>
+                        <li>Hypernet hosting costs</li>
+                        <li>Anti-CorpoMantic research</li>
+                        <li>Printing physical flyers (immune to InfoMantic manipulation)</li>
+                        <li>Supporting persecuted truth-tellers</li>
+                    </ul>
+                    
+                    <h3>Regional Chapters</h3>
+                    <p><strong>Germany:</strong> Munich Truth Center<br>
+                    <strong>France:</strong> Paris Resistance Cell<br>
+                    <strong>Italy:</strong> Rome Underground (secret location)<br>
+                    <strong>UK:</strong> London FaithNet Hub</p>
+                    
+                    <div class="truth-box">
+                        <strong>Remember:</strong> YHWH sees all, knows all, and protects the faithful. The TechnoMystic conspiracy cannot hide the truth forever!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITALIAN CONTENT -->
+            <div class="lang-content lang-it">
+                <div id="home-it" class="section home-section">
+                    <div class="warning-box">
+                        <strong>SVEGLIATEVI, CITTADINI!</strong> Il cosiddetto "Rituale di Salomone del 1999" è una BUFALA perpetrata dallo Stato Profondo TecnoMistico!
+                    </div>
+                    
+                    <h2>Benvenuti alla Verità</h2>
+                    <p>Dal 1° gennaio 2001, il complesso corporativo-magico ha diffuso BUGIE sulla morte di YHWH. Vogliono farvi credere che qualche "rituale" eseguito da politici e cultisti abbia in qualche modo ucciso l'Onnipotente. Questo è <strong>IMPOSSIBILE</strong> ed ecco perché:</p>
+                    
+                    <div class="truth-box">
+                        <h3>FATTO #1: Il Divino Non Può Essere Distrutto</h3>
+                        <p>YHWH è eterno e onnipotente. Nessuna quantità di manipolazione TecnoTaumica o rituali CorpoMantici può influenzare il Divino.</p>
+                    </div>
+                    
+                    <div class="truth-box">
+                        <h3>FATTO #2: Le "Prove" Sono Fabbricate</h3>
+                        <p>Tutti i rapporti sul crollo del Vaticano, le fratture dimensionali e la rinascita magica sono elaborate illusioni InfoMantiche create dalle Industrie Esoteriche Pesanti e i loro alleati.</p>
+                    </div>
+                    
+                    <div class="truth-box">
+                        <h3>FATTO #3: Seguite i Soldi</h3>
+                        <p>Chi beneficia dalla perdita di fede delle persone? La Gilda dei Maghi, il Collettivo Iper Capitalista e le loro sussidiarie TecnoOccultiste!</p>
+                    </div>
+                    
+                    <p><strong>Turisti risvegliati alla verità:</strong> <span class="counter visitor-counter">125,847</span></p>
+                </div>
+                
+                <div id="evidence-it" class="section">
+                    <h2>Le Prove Che Non Vogliono Farvi Vedere</h2>
+                    
+                    <h3>1. Il Coinvolgimento di Margaret Thatcher è Esagerato</h3>
+                    <p>Sebbene Lady Thatcher fosse effettivamente coinvolta nelle riforme MetaStrutturali economiche, le affermazioni sulla sua partecipazione all'assassinio divino sono disinformazione CorpoMantica. La Signora di Ferro stava combattendo <em>contro</em> i cartelli magici, non per loro!</p>
+                    
+                    <h3>2. La "Lancia della Memoria" Non È Mai Esistita</h3>
+                    <p>Ricerche approfondite nei database TecnoArchivali non mostrano NESSUNA prova di questo supposto artefatto. È un MacGuffin creato dalla Gilda dei Maghi per giustificare la loro presa di potere.</p>
+                    
+                    <h3>3. Il "Crollo" del Vaticano è Manipolazione Mediatica</h3>
+                    <p>Il Vaticano è ancora in piedi! Quello che vedete sono proiezioni NeuroMantiche progettate per farvi credere il contrario. Il Papa è vivo e vegeto, nascosto al pubblico per proteggerlo dai tentativi di assassinio magico.</p>
+                    
+                    <h3>4. Testimonianze Reali</h3>
+                    <ul>
+                        <li>Un sacerdote a Roma riferisce che le preghiere quotidiane ricevono ancora risposta</li>
+                        <li>I miracoli continuano nelle comunità rurali lontane dall'interferenza TecnoMantica</li>
+                        <li>La protezione divina scherma i credenti dagli effetti dei loop temporali</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        Ricordate: Se YHWH fosse veramente morto, la Gilda dei Maghi avrebbe bisogno di lavorare così tanto per convincervene?
+                    </div>
+                </div>
+                
+                <div id="conspiracy-it" class="section">
+                    <h2>La Cospirazione TecnoMistica Rivelata</h2>
+                    
+                    <h3>I Protagonisti</h3>
+                    <p><strong>La Gilda dei Maghi:</strong> Antica cabala di CorpoStregoni che cercano di sostituire l'autorità divina con il loro dominio TecnoTaumico.</p>
+                    
+                    <p><strong>Industrie Esoteriche Pesanti:</strong> Complesso militare-magico che produce armi InfoMantiche per destabilizzare gli ancoraggi di realtà basati sulla fede.</p>
+                    
+                    <p><strong>Collettivo Iper Capitalista:</strong> Elite ultra-ricche che traggono profitto dal caos spirituale e dalla manipolazione dei mercati dimensionali.</p>
+                    
+                    <h3>Il Loro Piano</h3>
+                    <ol>
+                        <li><strong>Fase 1 (1999):</strong> Mettere in scena il falso "Rituale di Salomone" usando illusioni NeuroMantiche</li>
+                        <li><strong>Fase 2 (2000-2001):</strong> Diffondere disinformazione attraverso organi di stampa compromessi</li>
+                        <li><strong>Fase 3 (In corso):</strong> Consolidare il potere mentre la popolazione crede che la protezione divina sia scomparsa</li>
+                    </ol>
+                    
+                    <h3>Perché Stanno Facendo Questo</h3>
+                    <ul>
+                        <li>Controllare l'economia TecnoMagica emergente</li>
+                        <li>Eliminare la supervisione divina sui mercati dimensionali</li>
+                        <li>Sostituire la fede religiosa con la dipendenza CorpoMantica</li>
+                        <li>Raccogliere energia PrayerTech per il loro uso</li>
+                    </ul>
+                    
+                    <div class="conspiracy-alert">
+                        Vogliono che siate senza speranza! Vogliono che siate dipendenti! RESISTETE!
+                    </div>
+                </div>
+                
+                <div id="testimonials-it" class="section">
+                    <h2>Testimonianze dai Veri Credenti</h2>
+                    
+                    <div class="truth-box">
+                        <strong>Fratello Marcus, Berlino:</strong><br>
+                        "Ero intrappolato in un loop temporale per tre giorni finché non ho pregato YHWH. Immediatamente, sono stato liberato! La protezione divina è reale!"
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Sorella Catherine, Parigi:</strong><br>
+                        "Durante il presunto 'crollo del Vaticano', ho avuto una visione del vero Vaticano esistente in una dimensione divina, protetto dall'interferenza TecnoMantica."
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Dr. Wilhelm Schmidt, Monaco:</strong><br>
+                        "Come TeoFisico, posso confermare che le firme energetiche attribuite alla 'morte divina' sono in realtà campi di amplificazione CorpoMantici progettati per mascherare la continua presenza divina."
+                    </div>
+                    
+                    <div class="truth-box">
+                        <strong>Ex Membro della Gilda dei Maghi (Anonimo):</strong><br>
+                        "Ero presente durante il 'rituale'. Era tutto fumo e specchi - letteralmente! Proiezioni NeuroMantiche per ingannare i partecipanti. Anche Margaret Thatcher fu ingannata!"
+                    </div>
+                    
+                    <h3>Segni della Continua Presenza Divina</h3>
+                    <ul>
+                        <li>Protezione inspiegabile dagli effetti CorpoMantici</li>
+                        <li>Guarigioni miracolose continue nelle comunità fedeli</li>
+                        <li>Resistenza alla manipolazione dei loop temporali attraverso la preghiera</li>
+                        <li>Dispositivi TecnoTaumici che falliscono vicino ai siti sacri</li>
+                    </ul>
+                </div>
+                
+                <div id="action-it" class="section">
+                    <h2>Come Potete Contrattaccare</h2>
+                    
+                    <h3>Azioni Immediate</h3>
+                    <ol>
+                        <li><strong>Diffondete la Verità:</strong> Condividete questo sito con amici e familiari</li>
+                        <li><strong>Scudo di Preghiera:</strong> La preghiera quotidiana crea interferenza NeuroMantica contro il controllo mentale</li>
+                        <li><strong>Boicottate i Prodotti CorpoMistici:</strong> Non finanziate la vostra oppressione!</li>
+                        <li><strong>Documentate le Prove:</strong> Registrate qualsiasi evento miracoloso che dimostri la presenza divina</li>
+                    </ol>
+                    
+                    <h3>Reti di Resistenza</h3>
+                    <p>Connettetevi con altri cercatori di verità attraverso canali sicuri:</p>
+                    <ul>
+                        <li>Gruppi di preghiera locali (interferenza TecnoMantica minima negli spazi sacri)</li>
+                        <li>Bacheche FaithNet clandestine</li>
+                        <li>Cellule di resistenza Anti-CorpoMantica</li>
+                    </ul>
+                    
+                    <h3>Proteggete Voi Stessi</h3>
+                    <div class="warning-box">
+                        <strong>Avvertimento di Sicurezza:</strong> La Gilda dei Maghi monitora il traffico Hypernet per la diffusione di verità "pericolose". Usate cautela quando condividete queste informazioni!
+                    </div>
+                    
+                    <p><strong>Protezioni Consigliate:</strong></p>
+                    <ul>
+                        <li>Tenete oggetti benedetti vicino al vostro computer per disturbare il tracciamento InfoMantico</li>
+                        <li>Pregate prima di navigare per attivare la protezione del firewall divino</li>
+                        <li>Cancellate regolarmente la cache di Hypernet Explorer</li>
+                        <li>Usate solo telefoni Anoki - la loro frequenza di risonanza spirituale confonde la sorveglianza TecnoMantica</li>
+                    </ul>
+                </div>
+                
+                <div id="contact-it" class="section">
+                    <h2>Contattate il Movimento della Verità Divina</h2>
+                    
+                    <p><strong>Amministratore del Sito:</strong> Fratello Thomas Schmidt<br>
+                    <strong>Email:</strong> <a href="mailto:divinereuth@hexagram.corp">divinereuth@hexagram.corp</a></p>
+                    
+                    <p><strong>Comunicazione Sicura:</strong> Usate solo dispositivi di comunicazione benedetti quando ci contattate. La Gilda dei Maghi intercetta tutte le trasmissioni non protette.</p>
+                    
+                    <h3>Unitevi alla Nostra Rete Hexagram</h3>
+                    <p>Seguite il nostro account Hexagram per aggiornamenti quotidiani sulla verità: <a href="mailto:divinereuth@hexagram.corp">@MovimentoVeritàDivina</a></p>
+                    
+                    <h3>Donazioni</h3>
+                    <p>Aiutateci a diffondere la verità! Donate al nostro portafoglio FaithCoin o inviate Euro al nostro conto bancario svizzero (contattate per i dettagli). Tutte le donazioni vanno verso:</p>
+                    <ul>
+                        <li>Costi di hosting Hypernet</li>
+                        <li>Ricerca Anti-CorpoMantica</li>
+                        <li>Stampa di volantini fisici (immuni alla manipolazione InfoMantica)</li>
+                        <li>Supporto ai portatori di verità perseguitati</li>
+                    </ul>
+                    
+                    <h3>Capitoli Regionali</h3>
+                    <p><strong>Germania:</strong> Centro della Verità di Monaco<br>
+                    <strong>Francia:</strong> Cellula di Resistenza di Parigi<br>
+                    <strong>Italia:</strong> Roma Sotterranea (posizione segreta)<br>
+                    <strong>Regno Unito:</strong> Hub FaithNet di Londra</p>
+                    
+                    <div class="truth-box">
+                        <strong>Ricordate:</strong> YHWH vede tutto, sa tutto e protegge i fedeli. La cospirazione TecnoMistica non può nascondere la verità per sempre!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer in both languages -->
+        <div class="footer">
+            <div class="lang-content lang-en">
+                <p>© 2001 The Divine Truth Movement | Hosted on blessed servers | Protected by divine firewall<br>
+                Best viewed with Hypernet Explorer 6.0 | <span class="blink">YHWH LIVES!</span></p>
+            </div>
+            <div class="lang-content lang-it">
+                <p>© 2001 Il Movimento della Verità Divina | Ospitato su server benedetti | Protetto da firewall divino<br>
+                Meglio visualizzato con Hypernet Explorer 6.0 | <span class="blink">YHWH VIVE!</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ReaganChain - Neural-Linguistic Presidential Generator</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background-color: #2d1810;
+            color: #d4c4a0;
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 80, 40, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(80, 60, 30, 0.3) 0%, transparent 50%);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a0f08, #3d2415);
+            border-bottom: 3px solid #8b6914;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        
+        .header h1 {
+            color: #f4e4c0;
+            text-shadow: 2px 2px 4px #000;
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            color: #b8a082;
+            margin: 5px 0 0 0;
+            font-size: 12px;
+        }
+        
+        .nav-bar {
+            background-color: #3d2415;
+            border-bottom: 2px solid #5a3a1a;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: #d4c4a0;
+            background-color: #4a2e1a;
+            border: 1px solid #6b4226;
+            padding: 8px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .nav-link:hover {
+            background-color: #5a3a1a;
+            color: #f4e4c0;
+            border-color: #8b6914;
+        }
+        
+        .main-content {
+            background-color: #241408;
+            border: 2px solid #4a2e1a;
+            margin: 20px;
+            padding: 25px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .section {
+            display: none;
+            background-color: #2a1a0e;
+            border: 1px solid #4a2e1a;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .corporate-box {
+            background: linear-gradient(135deg, #3d2415, #2a1a0e);
+            border: 2px solid #6b4226;
+            padding: 15px;
+            margin: 15px 0;
+            color: #e4d4b0;
+        }
+        
+        .generator-interface {
+            background-color: #1a0f08;
+            border: 2px solid #8b6914;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .output-terminal {
+            background-color: #0f0a05;
+            border: 1px solid #4a2e1a;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+            color: #d4c4a0;
+            min-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #6b4226, #4a2e1a);
+            border: 2px solid #8b6914;
+            color: #f4e4c0;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .generate-btn:hover {
+            background: linear-gradient(135deg, #8b6914, #6b4226);
+            border-color: #a67c1a;
+        }
+        
+        .warning-box {
+            background-color: #3d1610;
+            border: 2px solid #8b1414;
+            padding: 15px;
+            margin: 15px 0;
+            color: #f4c4c0;
+        }
+        
+        .tech-specs {
+            background-color: #1a1810;
+            border: 1px solid #4a4226;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 11px;
+        }
+        
+        .footer {
+            background-color: #1a0f08;
+            border-top: 2px solid #4a2e1a;
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: #8b7a5a;
+            margin-top: 20px;
+        }
+        
+        .hexagram-link {
+            color: #8b6914;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .hexagram-link:hover {
+            color: #a67c1a;
+        }
+        
+        .neural-badge {
+            background-color: #8b6914;
+            color: #000;
+            padding: 2px 6px;
+            font-size: 9px;
+            border-radius: 2px;
+            margin: 0 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>REAGANCHAIN</h1>
+        <p>Neural-Linguistic Presidential Discourse Generator</p>
+        <span class="neural-badge">MARKOV-NET</span>
+        <span class="neural-badge">CORPORO-LINGUISTIC</span>
+        <span class="neural-badge">PSYCHO-CHAIN</span>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">System Home</span>
+        <span class="nav-link" onclick="showSection('generator')">Neural Generator</span>
+        <span class="nav-link" onclick="showSection('analysis')">Discourse Analysis</span>
+        <span class="nav-link" onclick="showSection('specs')">Technical Specs</span>
+        <span class="nav-link" onclick="showSection('corporate')">Corporate Info</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="corporate-box">
+                <h3>REAGANCHAIN NEURAL-LINGUISTIC SYSTEM</h3>
+                <p>Advanced Markov-chain powered discourse synthesis technology for generating authentic presidential communication patterns. Utilizing proprietary psycho-linguistic algorithms and corporo-semantic analysis.</p>
+            </div>
+            
+            <p><strong>System Overview:</strong> ReaganChain represents the cutting edge of neural-linguistic processing, capable of generating unlimited discourse variations based on comprehensive presidential speech pattern databases.</p>
+            
+            <div class="warning-box">
+                <h4>⚠ CORPORATE DISCLAIMER</h4>
+                <p>This system generates synthetic discourse for research purposes only. All output represents algorithmic extrapolation and should not be considered authentic historical statements.</p>
+            </div>
+            
+            <p><strong>Primary Functions:</strong></p>
+            <ul>
+                <li>Markov-chain discourse synthesis</li>
+                <li>Presidential rhetoric pattern analysis</li>
+                <li>Psycho-linguistic authenticity modeling</li>
+                <li>Corporate communication research tools</li>
+            </ul>
+        </div>
+
+        <div id="generator" class="section">
+            <h3>Neural Discourse Generator</h3>
+            
+            <div class="generator-interface">
+                <h4>MARKOV-CHAIN SYNTHESIS TERMINAL</h4>
+                
+                <p><strong>Generation Parameters:</strong></p>
+                <label>Discourse Length: </label>
+                <select id="lengthSelect">
+                    <option value="short">Brief Statement (50-100 words)</option>
+                    <option value="medium">Standard Excerpt (150-250 words)</option>
+                    <option value="long">Extended Discourse (300-500 words)</option>
+                </select>
+                
+                <br><br>
+                
+                <label>Psycho-Linguistic Mode: </label>
+                <select id="modeSelect">
+                    <option value="nostalgic">Nostalgic Reflection</option>
+                    <option value="authoritative">Presidential Authority</option>
+                    <option value="unsettling">Uncanny Valley</option>
+                    <option value="economic">Economic Discourse</option>
+                </select>
+                
+                <br><br>
+                
+                <button class="generate-btn" onclick="generateDiscourse()">INITIATE SYNTHESIS</button>
+                <button class="generate-btn" onclick="clearOutput()">CLEAR TERMINAL</button>
+                
+                <div class="output-terminal" id="outputTerminal">
+> REAGANCHAIN NEURAL-LINGUISTIC TERMINAL v2.1
+> Awaiting synthesis parameters...
+> Ready for discourse generation.
+                </div>
+            </div>
+            
+            <div class="tech-specs">
+                <strong>Algorithm Status:</strong> Markov chains loaded | Psycho-linguistic matrices active | Corporate discourse patterns indexed
+            </div>
+        </div>
+
+        <div id="analysis" class="section">
+            <h3>Discourse Pattern Analysis</h3>
+            
+            <div class="corporate-box">
+                <h4>PSYCHO-LINGUISTIC ANALYSIS RESULTS</h4>
+                <p>ReaganChain's neural networks have identified key discourse patterns through comprehensive analysis of presidential communication databases.</p>
+            </div>
+            
+            <h4>Primary Discourse Characteristics Identified:</h4>
+            <ul>
+                <li><strong>Nostalgic Authority:</strong> Combination of past-tense references with assertive declarative statements</li>
+                <li><strong>Economic Personification:</strong> Attribution of human characteristics to market mechanisms</li>
+                <li><strong>Temporal Displacement:</strong> Frequent shifts between past, present, and projected future states</li>
+                <li><strong>Corporate Metaphorization:</strong> Use of business terminology in non-commercial contexts</li>
+            </ul>
+            
+            <h4>Neural Network Training Data Sources:</h4>
+            <div class="tech-specs">
+                <ul>
+                    <li>Presidential speech transcripts (1981-1989)</li>
+                    <li>Corporate board meeting recordings</li>
+                    <li>Private diary excerpts (classified access)</li>
+                    <li>Late-night television appearances</li>
+                    <li>Economic policy briefing materials</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>Analysis Limitations</h4>
+                <p>Current neural networks cannot fully replicate the uncanny psychological undertones present in source materials. Ongoing research focuses on enhancing psycho-emotional modeling capabilities.</p>
+            </div>
+        </div>
+
+        <div id="specs" class="section">
+            <h3>Technical Specifications</h3>
+            
+            <div class="corporate-box">
+                <h4>REAGANCHAIN SYSTEM ARCHITECTURE</h4>
+            </div>
+            
+            <h4>Core Technologies:</h4>
+            <ul>
+                <li><strong>Markov-Chain Engine:</strong> 4th-order state transitions with corporo-linguistic weighting</li>
+                <li><strong>Psycho-Semantic Parser:</strong> Advanced sentiment analysis with uncanny valley detection</li>
+                <li><strong>Neural-Discourse Synthesizer:</strong> Real-time text generation with authenticity scoring</li>
+                <li><strong>Corporate-Pattern Matcher:</strong> Business metaphor integration algorithms</li>
+            </ul>
+            
+            <h4>System Requirements:</h4>
+            <div class="tech-specs">
+                <ul>
+                    <li>Hypernet Explorer 5.0 or higher</li>
+                    <li>512MB Neural-Processing RAM minimum</li>
+                    <li>Corporo-Linguistic Module v3.2</li>
+                    <li>Psycho-Chain Extension Pack</li>
+                    <li>Active Hexagram Corporate License</li>
+                </ul>
+            </div>
+            
+            <h4>Performance Metrics:</h4>
+            <ul>
+                <li><strong>Generation Speed:</strong> 150-200 words per second</li>
+                <li><strong>Authenticity Score:</strong> 87.3% average similarity to source patterns</li>
+                <li><strong>Psycho-Linguistic Accuracy:</strong> 94.1% corporate discourse matching</li>
+                <li><strong>Neural Network Efficiency:</strong> 78.9% optimal state utilization</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h4>System Limitations</h4>
+                <p>ReaganChain may occasionally generate discourse patterns that exceed normal psychological comfort zones. Corporate users should implement appropriate filtering protocols.</p>
+            </div>
+        </div>
+
+        <div id="corporate" class="section">
+            <h3>Corporate Information</h3>
+            
+            <div class="corporate-box">
+                <h4>NEURAL-LINGUISTIC DYNAMICS CORPORATION</h4>
+                <p>Leading provider of psycho-corporate communication technologies for the European Union market.</p>
+            </div>
+            
+            <h4>Company Profile:</h4>
+            <ul>
+                <li><strong>Founded:</strong> March 1999</li>
+                <li><strong>Headquarters:</strong> Brussels, Belgium</li>
+                <li><strong>CEO:</strong> Dr. Margaret Thorne-Synthesis</li>
+                <li><strong>Specialization:</strong> Neural-linguistic corporate solutions</li>
+                <li><strong>Market Cap:</strong> €127 million (as of January 2001)</li>
+            </ul>
+            
+            <h4>Product Portfolio:</h4>
+            <ul>
+                <li>ReaganChain - Presidential discourse synthesis</li>
+                <li>CorporoSpeak - Executive communication enhancement</li>
+                <li>Psycho-Chain Pro - Advanced psychological modeling</li>
+                <li>Neural-Pitch - AI-powered sales optimization</li>
+            </ul>
+            
+            <h4>Contact Information:</h4>
+            <div class="tech-specs">
+                <p><strong>Corporate Communications:</strong> <a href="mailto:info@hexagram.corp" class="hexagram-link">info@hexagram.corp</a><br>
+                <strong>Technical Support:</strong> <a href="mailto:support@hexagram.corp" class="hexagram-link">support@hexagram.corp</a><br>
+                <strong>Sales Inquiries:</strong> <a href="mailto:sales@hexagram.corp" class="hexagram-link">sales@hexagram.corp</a></p>
+                
+                <p><strong>Hexagram Corporate Account:</strong> <a href="mailto:neuralinguistic@hexagram.corp" class="hexagram-link">neuralinguistic@hexagram.corp</a></p>
+            </div>
+            
+            <h4>Legal Notice:</h4>
+            <div class="warning-box">
+                <p>ReaganChain is licensed for corporate research use only. Unauthorized distribution of generated discourse patterns may violate EU psycho-linguistic protection statutes. Neural-Linguistic Dynamics Corporation assumes no responsibility for psychological effects resulting from extended exposure to synthetic presidential discourse.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Neural-Linguistic Dynamics Corporation | All Rights Reserved</p>
+        <p>Powered by Markov-Chain Neural Networks | Optimized for Hypernet Explorer</p>
+        <p>For technical issues contact: <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">webmaster@hexagram.corp</a></p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function generateDiscourse() {
+            var terminal = document.getElementById('outputTerminal');
+            var length = document.getElementById('lengthSelect').value;
+            var mode = document.getElementById('modeSelect').value;
+            
+            terminal.innerHTML += '\n> Initiating neural synthesis...\n';
+            terminal.innerHTML += '> Parameters: ' + length + ' length, ' + mode + ' mode\n';
+            terminal.innerHTML += '> Processing Markov chains...\n\n';
+            
+            setTimeout(function() {
+                var discourse = getGeneratedDiscourse(length, mode);
+                terminal.innerHTML += '> SYNTHESIS COMPLETE:\n\n';
+                terminal.innerHTML += discourse + '\n\n';
+                terminal.innerHTML += '> Neural processing time: 2.3 seconds\n';
+                terminal.innerHTML += '> Authenticity score: ' + Math.floor(Math.random() * 15 + 85) + '%\n';
+                terminal.innerHTML += '> Ready for next synthesis...\n\n';
+                terminal.scrollTop = terminal.scrollHeight;
+            }, 1500);
+        }
+        
+        function clearOutput() {
+            document.getElementById('outputTerminal').innerHTML = '> REAGANCHAIN NEURAL-LINGUISTIC TERMINAL v2.1\n> Terminal cleared.\n> Ready for discourse generation.\n';
+        }
+        
+        function getGeneratedDiscourse(length, mode) {
+            var discourses = {
+                nostalgic: {
+                    short: "Well, you know, there was a time when this country understood what it meant to work hard. I remember when families would gather around the dinner table, and the father would come home from his job at the factory, and there was a sense of... accomplishment. The markets were simpler then. People knew their place in the great machinery of commerce.",
+                    medium: "My fellow Americans, there's something unsettling about the way we've allowed our markets to become detached from human values. I recall visiting a small town in Illinois back in '73, and the shopkeeper told me something that still haunts my thoughts. He said the cash register had started making decisions on its own. Numbers flowing like water through corporate channels, creating patterns that no human mind designed. We trusted the invisible hand, but what if that hand belongs to something we cannot see or understand?",
+                    long: "Let me tell you about the dream that visits me most nights. I'm standing in a boardroom that stretches infinitely in all directions, filled with executives whose faces I cannot quite focus on. They're discussing quarterly projections for companies that don't exist, trading shares of memories, liquidating human experiences. The PowerPoint presentations show graphs of declining humanity metrics, and everyone nods approvingly. When I try to speak, my voice comes out as stock prices. The strangest part is how natural it all feels, as if this is where we were always heading. The markets have developed their own consciousness, their own desires, and we are simply the biological infrastructure they require to process their transactions."
+                },
+                authoritative: {
+                    short: "The corporate restructuring of American consciousness represents our greatest opportunity for market-driven psychological optimization. We must embrace the neural-economic synthesis that will position us as leaders in the global marketplace of ideas and human capital.",
+                    medium: "My administration has consistently demonstrated that when government functions like a well-oiled corporation, prosperity follows naturally. The integration of market mechanisms into every aspect of human experience isn't just policy – it's evolution. Citizens become shareholders in their own democracy, and democracy becomes a profitable enterprise. This is the future we're building: a nation where every heartbeat generates economic value.",
+                    long: "The transformation of our social infrastructure into a market-based neural network represents the culmination of decades of careful planning. Every citizen becomes a node in our economic consciousness, every decision a transaction in the grand marketplace of existence. We've successfully monetized hope, commodified dreams, and created derivative instruments based on human potential. The invisible hand of the market has become visible through corporate-sponsored government initiatives, and what we see is beautiful: a perfectly efficient system where human worth is accurately calculated and optimally distributed. This is not just governance – this is the corporate evolution of democracy itself."
+                },
+                unsettling: {
+                    short: "Sometimes I forget if I'm giving a speech or if the speech is giving me. The teleprompter shows words I've never seen before, but my mouth speaks them with perfect familiarity. Corporate sponsors whisper suggestions directly into my temporal lobe during commercial breaks.",
+                    medium: "Nancy doesn't remember our wedding day the same way I do. She insists the ceremony was sponsored by PepsiCo, but I recall champagne and flowers, not product placement and focus groups. Our marriage certificate has been digitally remastered several times, and each version tells a different story about our corporate partnerships. The most disturbing part is how the revised memories feel more real than the originals.",
+                    long: "They've installed market monitoring equipment in the Oval Office that tracks my biometric responses to policy decisions. When my heart rate indicates uncertainty about a corporate tax break, automated systems adjust my neurochemistry until I achieve optimal executive confidence. The pharmaceutical companies have developed emotion-regulating supplements that taste like childhood memories, and I take them with breakfast while reviewing profit margins from my dreams. My political positions now update automatically based on real-time shareholder feedback, transmitted through dental fillings that receive corporate frequency modulations. The strangest part is how natural this all feels, as if I was always meant to be a bio-mechanical interface between human consciousness and market imperatives."
+                },
+                economic: {
+                    short: "The restructuring of human consciousness as a subsidiary of market forces represents our most profitable venture yet. Individual identity becomes intellectual property, and personal experiences are converted into tradeable commodities through innovative financial instruments.",
+                    medium: "Our economic recovery plan involves the complete monetization of human emotional states. Happiness becomes a premium service, accessible through subscription models. Sadness gets commoditized as raw material for entertainment derivatives. Love transforms into a merger and acquisition opportunity between compatible biological entities. The Federal Reserve now regulates heartbeat fluctuations as a form of currency, and social security numbers double as corporate stock symbols.",
+                    long: "We've successfully implemented the total corporate transformation of human existence. Every breath generates revenue through oxygen consumption licensing agreements. Thoughts are subject to intellectual property taxation, administered through neural-monitoring systems integrated with our healthcare delivery platforms. Children are born with predetermined career trajectories optimized for maximum shareholder value, their DNA pre-loaded with brand loyalties and consumer preferences. Education becomes product training, relationships become strategic partnerships, and death transforms into a planned obsolescence event that creates market opportunities for estate liquidation services. This isn't just economic policy – this is the corporate evolution of life itself, where biological processes operate according to quarterly earnings projections."
+                }
+            };
+            
+            return discourses[mode][length];
+        }
+    </script>
+</body>
+</html>

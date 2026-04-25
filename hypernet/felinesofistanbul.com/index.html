@@ -1,0 +1,603 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Feline Chronicles of Istanbul: The Tale of Whisker Pasha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="description" content="The biography of Whisker Pasha, a noble Istanbul stray cat">
+    <meta name="keywords" content="istanbul, stray cat, ottoman empire, feline, biography, hypernet">
+    <meta name="author" content="Mehmet Effendi">
+    <style type="text/css">
+        body {
+            background-color: #FFFFCC;
+            font-family: Times New Roman, serif;
+            margin: 0;
+            padding: 0;
+            color: #330000;
+        }
+        
+        #header {
+            background-color: #CC9966;
+            border-bottom: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background-color: #FFFFFF;
+            border: 1px solid #663300;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .language-selector select {
+            background-color: #FFFFCC;
+            border: 1px solid #996633;
+            color: #663300;
+            font-family: Times New Roman, serif;
+            font-size: 10pt;
+        }
+        
+        h1 {
+            color: #663300;
+            font-size: 24pt;
+            margin: 0;
+        }
+        
+        h2 {
+            color: #996633;
+            font-size: 16pt;
+            border-bottom: 2px solid #996633;
+            cursor: pointer;
+        }
+        
+        .section-content {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        #main-content {
+            width: 80%;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #FFFFFF;
+            border-left: 2px solid #CC9966;
+            border-right: 2px solid #CC9966;
+        }
+        
+        #footer {
+            background-color: #CC9966;
+            border-top: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+            font-size: 8pt;
+            clear: both;
+        }
+        
+        .navigation {
+            background-color: #EEDDBB;
+            border: 1px solid #CC9966;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+        
+        a {
+            color: #996633;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #CC9966;
+        }
+        
+        .blink {
+            text-decoration: blink;
+            color: red;
+        }
+        
+        .image-container {
+            text-align: center;
+            border: 1px dashed #CC9966;
+            padding: 5px;
+            margin: 10px auto;
+            width: 80%;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 8pt;
+            color: #663300;
+        }
+        
+        marquee {
+            background-color: #FFCC99;
+            color: #663300;
+            font-weight: bold;
+        }
+        
+        .lang-en, .lang-it {
+            display: none;
+        }
+        
+        .lang-en.active, .lang-it.active {
+            display: inline;
+        }
+        
+        .lang-en.active-block, .lang-it.active-block {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div class="language-selector">
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="it">Italiano</option>
+            </select>
+        </div>
+        
+        <h1>
+            <span class="lang-en active">Feline Chronicles of Istanbul</span>
+            <span class="lang-it">Cronache Feline di Istanbul</span>
+        </h1>
+        
+        <marquee scrollamount="3" direction="left">
+            <span class="lang-en active">Welcome to my humble Hypernet page dedicated to the noble felines of Istanbul! Best viewed in Hypernet Explorer 5.5 at 800x600 resolution</span>
+            <span class="lang-it">Benvenuti nella mia umile pagina Hypernet dedicata ai nobili felini di Istanbul! Ottimizzata per Hypernet Explorer 5.5 a risoluzione 800x600</span>
+        </marquee>
+    </div>
+
+    <div id="main-content">
+        <div class="navigation">
+            <strong>
+                <span class="lang-en active">Navigation:</span>
+                <span class="lang-it">Navigazione:</span>
+            </strong> &nbsp;
+            <a href="index.html">
+                <span class="lang-en active">Home</span>
+                <span class="lang-it">Home</span>
+            </a> |
+            <a href="cats_of_istanbul.html">
+                <span class="lang-en active">Cats of Istanbul</span>
+                <span class="lang-it">Gatti di Istanbul</span>
+            </a> |
+            <a href="ottoman_cat_history.html">
+                <span class="lang-en active">Ottoman Cat History</span>
+                <span class="lang-it">Storia dei Gatti Ottomani</span>
+            </a> |
+            <a href="about_me.html">
+                <span class="lang-en active">About the Author</span>
+                <span class="lang-it">L'Autore</span>
+            </a> |
+            <a href="guestbook.html">
+                <span class="lang-en active">Sign Guestbook</span>
+                <span class="lang-it">Firma il Libro Ospiti</span>
+            </a>
+        </div>
+
+        <center>
+            <img src="/api/placeholder/400/320" alt="Whisker Pasha, the noble stray of Sultanahmet" />
+            <div class="image-caption">
+                <span class="lang-en active">Whisker Pasha surveying his domain near the Hagia Sophia</span>
+                <span class="lang-it">Whisker Pasha ispeziona il suo regno presso Santa Sofia</span>
+            </div>
+        </center>
+
+        <h2 onclick="toggleSection('intro')">
+            <span class="lang-en active">Introduction to Whisker Pasha</span>
+            <span class="lang-it">Introduzione a Whisker Pasha</span>
+        </h2>
+        <div id="intro" class="section-content">
+            <div class="lang-en active-block">
+                <p>Salutations and greetings to all who visit this humble page on the great Hypernet! I am Mehmet Effendi, scholar of feline matters in the grand city of Istanbul. It is with great honor that I present to you the life story of one of Istanbul's most distinguished street cats - <strong>Whisker Pasha</strong>.</p>
+                
+                <p>Istanbul has been home to countless street cats throughout the ages of the Ottoman Empire. These noble creatures have been the companions of sultans, the guardians of mosques, and the beloved friends of the common folk. Among these distinguished felines, few have captured the hearts of the people of Sultanahmet district quite like Whisker Pasha.</p>
+                
+                <p><span class="blink">NEW!</span> I have recently added photographs from my collection to better illustrate the majestic life of Whisker Pasha. Please check the <a href="whisker_gallery.html">Photo Gallery</a> page.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p>Saluti e benvenuti a tutti coloro che visitano questa umile pagina sul grande Hypernet! Sono Mehmet Effendi, studioso di questioni feline nella magnifica città di Istanbul. È con grande onore che vi presento la storia della vita di uno dei gatti randagi più illustri di Istanbul - <strong>Whisker Pasha</strong>.</p>
+                
+                <p>Istanbul è stata la casa di innumerevoli gatti randagi attraverso le ere dell'Impero Ottomano. Queste nobili creature sono state le compagne dei sultani, le guardiane delle moschee e le amate amiche del popolo comune. Tra questi felini illustri, pochi hanno conquistato i cuori della gente del distretto di Sultanahmet come Whisker Pasha.</p>
+                
+                <p><span class="blink">NUOVO!</span> Ho recentemente aggiunto fotografie dalla mia collezione per illustrare meglio la maestosa vita di Whisker Pasha. Visitate la pagina <a href="whisker_gallery.html">Galleria Fotografica</a>.</p>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('origins')">
+            <span class="lang-en active">Origins & Early Life</span>
+            <span class="lang-it">Origini e Prima Vita</span>
+        </h2>
+        <div id="origins" class="section-content">
+            <div class="lang-en active-block">
+                <p>Whisker Pasha first appeared in the courtyard of the Hagia Sophia during the winter of 1998. According to the kebab seller Yusuf, who maintains his cart near the eastern entrance, the cat was no more than a few months old when he arrived. His distinctive white paws and the unusual black mark on his face resembling a Ottoman tughra (imperial signature) immediately set him apart from other strays.</p>
+                
+                <p>During his kittenhood, Whisker Pasha survived the harsh winter by finding shelter in the small crevices of the ancient walls. The imam of the nearby mosque took notice of the clever kitten and began leaving small portions of food for him. This early protection surely contributed to his confident demeanor in later years.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Young Whisker Pasha in the courtyard" />
+                    <div class="image-caption">
+                        <span class="lang-en active">Young Whisker Pasha in the courtyard of Hagia Sophia, Spring 1999</span>
+                        <span class="lang-it">Il giovane Whisker Pasha nel cortile di Santa Sofia, Primavera 1999</span>
+                    </div>
+                </div>
+                
+                <p>For more information about the historical significance of cats in Ottoman religious buildings, please see my article <a href="mosque_cats.html">Mosque Cats: Silent Guardians of Faith</a>.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p>Whisker Pasha apparve per la prima volta nel cortile di Santa Sofia durante l'inverno del 1998. Secondo il venditore di kebab Yusuf, che mantiene il suo carretto vicino all'entrata orientale, il gatto aveva solo pochi mesi quando arrivò. Le sue distintive zampe bianche e l'insolito segno nero sul viso che ricorda una tughra ottomana (firma imperiale) lo distinguevano immediatamente dagli altri randagi.</p>
+                
+                <p>Durante la sua infanzia felina, Whisker Pasha sopravvisse al rigido inverno trovando rifugio nelle piccole fessure delle mura antiche. L'imam della moschea vicina notò l'astuto gattino e iniziò a lasciargli piccole porzioni di cibo. Questa protezione precoce contribuì sicuramente al suo atteggiamento sicuro negli anni successivi.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Young Whisker Pasha in the courtyard" />
+                    <div class="image-caption">Il giovane Whisker Pasha nel cortile di Santa Sofia, Primavera 1999</div>
+                </div>
+                
+                <p>Per maggiori informazioni sul significato storico dei gatti negli edifici religiosi ottomani, consultate il mio articolo <a href="mosque_cats.html">Gatti delle Moschee: Guardiani Silenziosi della Fede</a>.</p>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('territory')">
+            <span class="lang-en active">Territory & Domain</span>
+            <span class="lang-it">Territorio e Dominio</span>
+        </h2>
+        <div id="territory" class="section-content">
+            <div class="lang-en active-block">
+                <p>By the summer of 1999, Whisker Pasha had established a territory spanning from the western walls of Hagia Sophia to the courtyard of the Blue Mosque. This is an unusually large domain for a single cat, suggesting both his cunning nature and his ability to form alliances with other feline residents.</p>
+                
+                <p>His daily rounds typically begin at sunrise when he inspects the perimeter of his territory, often stopping to receive affection from the early morning street sweepers. By mid-morning, he can be found lounging regally on the stone bench near the fountain, where tourists often photograph him, mistaking him for a specially maintained heritage cat rather than a common stray.</p>
+                
+                <p>The Fish Market merchants have reported that Whisker Pasha makes an appearance precisely at 4 o'clock each afternoon to collect his tribute of fish scraps. Ibrahim the fishmonger swears that the cat can tell time, as he never arrives early or late to this daily appointment.</p>
+                
+                <p>For a hand-drawn map of Whisker Pasha's territory, please visit <a href="cat_territories.html">Cat Territories of Historic Istanbul</a>.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p>Nell'estate del 1999, Whisker Pasha aveva stabilito un territorio che si estendeva dalle mura occidentali di Santa Sofia al cortile della Moschea Blu. Questo è un dominio insolitamente grande per un singolo gatto, suggerendo sia la sua natura astuta che la sua capacità di formare alleanze con altri residenti felini.</p>
+                
+                <p>I suoi giri quotidiani iniziano tipicamente all'alba quando ispeziona il perimetro del suo territorio, spesso fermandosi per ricevere affetto dagli spazzini mattutini. A metà mattina, può essere trovato a riposare regalmente sulla panchina di pietra vicino alla fontana, dove i turisti spesso lo fotografano, scambiandolo per un gatto del patrimonio storico mantenuto appositamente piuttosto che un comune randagio.</p>
+                
+                <p>I mercanti del Mercato del Pesce hanno riferito che Whisker Pasha fa la sua apparizione precisamente alle 4 del pomeriggio per raccogliere il suo tributo di avanzi di pesce. Ibrahim il pescivendolo giura che il gatto può leggere l'ora, poiché non arriva mai in anticipo o in ritardo a questo appuntamento quotidiano.</p>
+                
+                <p>Per una mappa disegnata a mano del territorio di Whisker Pasha, visitate <a href="cat_territories.html">Territori Felini dell'Istanbul Storica</a>.</p>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('personality')">
+            <span class="lang-en active">Personality & Character</span>
+            <span class="lang-it">Personalità e Carattere</span>
+        </h2>
+        <div id="personality" class="section-content">
+            <div class="lang-en active-block">
+                <p>Whisker Pasha possesses a dignified temperament befitting his name. Unlike many stray cats who flee from human contact, he maintains a composed distance that permits admirers to approach but never to overwhelm him with unwanted affection. He accepts offerings with a regal nod but is never seen begging.</p>
+                
+                <p>Most remarkable is his relationship with the seagulls of the Bosphorus. While most cats and birds maintain a hunter-prey relationship, Whisker Pasha has been observed sitting in peaceful proximity to the gulls near the ferry docks. This unusual behavior has led some of the more superstitious locals to believe he possesses mystical qualities.</p>
+                
+                <p>His distinctive meow, which is said to resemble the call of the muezzin, adds to his mysterious persona. He vocalizes infrequently, but when he does, it is with purpose and clarity that commands attention.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Whisker Pasha with seagulls" />
+                    <div class="image-caption">
+                        <span class="lang-en active">The unusual friendship between Whisker Pasha and the seagulls of Eminönü</span>
+                        <span class="lang-it">L'insolita amicizia tra Whisker Pasha e i gabbiani di Eminönü</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lang-it">
+                <p>Whisker Pasha possiede un temperamento dignitoso che si addice al suo nome. A differenza di molti gatti randagi che fuggono dal contatto umano, mantiene una distanza composta che permette agli ammiratori di avvicinarsi ma mai di sopraffarlo con affetto indesiderato. Accetta le offerte con un cenno regale ma non lo si vede mai mendicare.</p>
+                
+                <p>Più notevole è la sua relazione con i gabbiani del Bosforo. Mentre la maggior parte dei gatti e degli uccelli mantiene una relazione predatore-preda, Whisker Pasha è stato osservato sedere in tranquilla vicinanza ai gabbiani presso i moli dei traghetti. Questo comportamento insolito ha portato alcuni dei locali più superstiziosi a credere che possieda qualità mistiche.</p>
+                
+                <p>Il suo miagolio distintivo, che si dice assomigli al richiamo del muezzin, aggiunge al suo personaggio misterioso. Vocalizza raramente, ma quando lo fa, è con scopo e chiarezza che comanda attenzione.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Whisker Pasha with seagulls" />
+                    <div class="image-caption">L'insolita amicizia tra Whisker Pasha e i gabbiani di Eminönü</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('diet')">
+            <span class="lang-en active">Dietary Habits</span>
+            <span class="lang-it">Abitudini Alimentari</span>
+        </h2>
+        <div id="diet" class="section-content">
+            <div class="lang-en active-block">
+                <p>Like a true Ottoman gentleman, Whisker Pasha maintains discerning tastes in his diet. Through careful observation, I have documented his preferences:</p>
+                
+                <ul>
+                    <li>Prefers anchovies over mackerel</li>
+                    <li>Accepts lamb scraps only from the kebab shop of Yusuf</li>
+                    <li>Shows particular fondness for the yogurt offered by the sweet shop near the Grand Bazaar</li>
+                    <li>Drinks only from the Ottoman-era fountain near the mosque courtyard</li>
+                    <li>Refuses modern commercial cat food offered by tourists</li>
+                </ul>
+                
+                <p>During Ramadan, it has been observed that Whisker Pasha's hunting activity increases, perhaps in respect of the human fasting occurring around him. He has been spotted bringing small offerings of caught mice to the doorstep of the imam's quarters during this holy month.</p>
+                
+                <p>For a comprehensive study of traditional food sources for Istanbul's stray cats, please see my research paper <a href="cat_diet.html">Traditional Feeding Practices: The Sustainability of Istanbul's Feline Population</a>.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p>Come un vero gentiluomo ottomano, Whisker Pasha mantiene gusti raffinati nella sua dieta. Attraverso attenta osservazione, ho documentato le sue preferenze:</p>
+                
+                <ul>
+                    <li>Preferisce le acciughe al maccarello</li>
+                    <li>Accetta avanzi di agnello solo dalla kebabberia di Yusuf</li>
+                    <li>Mostra particolare predilezione per lo yogurt offerto dalla pasticceria vicino al Gran Bazar</li>
+                    <li>Beve solo dalla fontana dell'era ottomana vicino al cortile della moschea</li>
+                    <li>Rifiuta il cibo commerciale per gatti moderno offerto dai turisti</li>
+                </ul>
+                
+                <p>Durante il Ramadan, è stato osservato che l'attività di caccia di Whisker Pasha aumenta, forse in rispetto del digiuno umano che avviene intorno a lui. È stato avvistato mentre portava piccole offerte di topi catturati sulla soglia dei quartieri dell'imam durante questo mese santo.</p>
+                
+                <p>Per uno studio completo delle fonti alimentari tradizionali per i gatti randagi di Istanbul, consultate il mio articolo di ricerca <a href="cat_diet.html">Pratiche Alimentari Tradizionali: La Sostenibilità della Popolazione Felina di Istanbul</a>.</p>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('social')">
+            <span class="lang-en active">Social Relations</span>
+            <span class="lang-it">Relazioni Sociali</span>
+        </h2>
+        <div id="social" class="section-content">
+            <div class="lang-en active-block">
+                <p>The social hierarchy among Istanbul's stray cats is complex and nuanced. Whisker Pasha occupies a position of notable respect among his peers. He is frequently observed in the company of a smaller calico female (whom I have named "Tulip Sultana" in my records) who appears to be his constant companion, though not his mate.</p>
+                
+                <p>Observations suggest that Whisker Pasha serves as a mediator in territorial disputes between younger male cats. On three documented occasions, his mere appearance was sufficient to halt aggressive encounters between rivals, suggesting a level of authority unusual for a cat merely 3 years of age.</p>
+                
+                <p>His relationships with humans are equally complex. He maintains a special bond with:</p>
+                
+                <ul>
+                    <li>Yusuf the kebab seller - provides daily food</li>
+                    <li>The imam of the small mosque - offers shelter during storms</li>
+                    <li>The elderly carpet merchant Hasan - allows sleeping privileges on his shop's premium carpets</li>
+                    <li>Myself, his humble biographer - permitted to observe at close range</li>
+                </ul>
+                
+                <p>For more insights into the social structures of Istanbul's cat communities, visit my companion page: <a href="cat_society.html">The Secret Society of Stray Cats</a>.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p>La gerarchia sociale tra i gatti randagi di Istanbul è complessa e sfaccettata. Whisker Pasha occupa una posizione di notevole rispetto tra i suoi pari. È frequentemente osservato in compagnia di una femmina calico più piccola (che ho chiamato "Tulipano Sultana" nei miei registri) che sembra essere la sua compagna costante, anche se non la sua partner.</p>
+                
+                <p>Le osservazioni suggeriscono che Whisker Pasha funge da mediatore nelle dispute territoriali tra gatti maschi più giovani. In tre occasioni documentate, la sua sola presenza è stata sufficiente a fermare scontri aggressivi tra rivali, suggerendo un livello di autorità insolito per un gatto di soli 3 anni.</p>
+                
+                <p>Le sue relazioni con gli umani sono ugualmente complesse. Mantiene un legame speciale con:</p>
+                
+                <ul>
+                    <li>Yusuf il venditore di kebab - fornisce cibo quotidiano</li>
+                    <li>L'imam della piccola moschea - offre rifugio durante le tempeste</li>
+                    <li>L'anziano mercante di tappeti Hasan - permette privilegi di sonno sui tappeti premium del suo negozio</li>
+                    <li>Io stesso, il suo umile biografo - autorizzato ad osservare da vicino</li>
+                </ul>
+                
+                <p>Per maggiori informazioni sulle strutture sociali delle comunità feline di Istanbul, visitate la mia pagina compagna: <a href="cat_society.html">La Società Segreta dei Gatti Randagi</a>.</p>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('legacy')">
+            <span class="lang-en active">Legacy & Cultural Impact</span>
+            <span class="lang-it">Eredità e Impatto Culturale</span>
+        </h2>
+        <div id="legacy" class="section-content">
+            <div class="lang-en active-block">
+                <p>Though still in the prime of his life, Whisker Pasha has already left an indelible mark on the cultural fabric of our neighborhood. The local children's storyteller has incorporated a character based on him into traditional tales, and the souvenir shop near the Blue Mosque now sells small wooden figurines carved in his likeness.</p>
+                
+                <p>In keeping with the ancient Ottoman tradition of respecting cats as guardians of the city, several local businesses have installed small shelters modeled after traditional Ottoman architecture specifically for Whisker Pasha's use during inclement weather.</p>
+                
+                <p>It is my sincere hope that this humble Hypernet chronicle will preserve his legacy for future generations who wish to understand the important role that cats like Whisker Pasha play in maintaining the cultural and spiritual balance of our beloved Istanbul.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Wooden figurine of Whisker Pasha" />
+                    <div class="image-caption">
+                        <span class="lang-en active">Handcrafted wooden figurine of Whisker Pasha sold in local souvenir shops</span>
+                        <span class="lang-it">Statuetta di legno artigianale di Whisker Pasha venduta nei negozi di souvenir locali</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lang-it">
+                <p>Sebbene sia ancora nel fiore della vita, Whisker Pasha ha già lasciato un segno indelebile nel tessuto culturale del nostro quartiere. Il narratore locale per bambini ha incorporato un personaggio basato su di lui nei racconti tradizionali, e il negozio di souvenir vicino alla Moschea Blu ora vende piccole statuette di legno scolpite a sua somiglianza.</p>
+                
+                <p>In linea con l'antica tradizione ottomana di rispettare i gatti come guardiani della città, diverse attività locali hanno installato piccoli rifugi modellati sull'architettura ottomana tradizionale specificamente per l'uso di Whisker Pasha durante il tempo inclemente.</p>
+                
+                <p>È mia sincera speranza che questa umile cronaca Hypernet preservi la sua eredità per le generazioni future che desiderano comprendere il ruolo importante che gatti come Whisker Pasha svolgono nel mantenere l'equilibrio culturale e spirituale della nostra amata Istanbul.</p>
+                
+                <div class="image-container">
+                    <img src="/api/placeholder/350/240" alt="Wooden figurine of Whisker Pasha" />
+                    <div class="image-caption">Statuetta di legno artigianale di Whisker Pasha venduta nei negozi di souvenir locali</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('visitor')">
+            <span class="lang-en active">Visitor Encounters</span>
+            <span class="lang-it">Incontri con i Turisti</span>
+        </h2>
+        <div id="visitor" class="section-content">
+            <div class="lang-en active-block">
+                <p>Have you encountered Whisker Pasha during your visit to Istanbul? I am collecting visitor testimonials for inclusion in my forthcoming physical manuscript. Please share your experiences through my <a href="mailto:mehmet@hexagram.corp">Hexagram account</a> or sign the <a href="guestbook.html">online guestbook</a>.</p>
+                
+                <p>Recent visitor testimonials:</p>
+                
+                <blockquote>
+                    "We saw this magnificent cat near Hagia Sophia. He approached with such dignity, accepted a small bit of fish from our lunch, and then sat with us for nearly an hour. It felt like being in the presence of royalty!" - Tourist from Germany, December 2000
+                </blockquote>
+                
+                <blockquote>
+                    "I am certain this cat understood what I was saying. When I addressed him as 'sir' in Turkish, he nodded his head! Magical experience." - Visitor from Japan, October 2000
+                </blockquote>
+            </div>
+            
+            <div class="lang-it">
+                <p>Avete incontrato Whisker Pasha durante la vostra visita a Istanbul? Sto raccogliendo testimonianze di visitatori per includerle nel mio prossimo manoscritto fisico. Vi prego di condividere le vostre esperienze attraverso il mio <a href="mailto:mehmet@hexagram.corp">account Hexagram</a> o firmare il <a href="guestbook.html">libro degli ospiti online</a>.</p>
+                
+                <p>Testimonianze recenti di visitatori:</p>
+                
+                <blockquote>
+                    "Abbiamo visto questo gatto magnifico vicino a Santa Sofia. Si è avvicinato con tale dignità, ha accettato un piccolo pezzo di pesce dal nostro pranzo, e poi è rimasto seduto con noi per quasi un'ora. Sembrava di essere alla presenza della regalità!" - Turista dalla Germania, Dicembre 2000
+                </blockquote>
+                
+                <blockquote>
+                    "Sono certo che questo gatto capisse quello che stavo dicendo. Quando mi sono rivolto a lui chiamandolo 'signore' in turco, ha annuito con la testa! Esperienza magica." - Visitatore dal Giappone, Ottobre 2000
+                </blockquote>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('updates')">
+            <span class="lang-en active">Recent Updates (January 2001)</span>
+            <span class="lang-it">Aggiornamenti Recenti (Gennaio 2001)</span>
+        </h2>
+        <div id="updates" class="section-content">
+            <div class="lang-en active-block">
+                <p><span class="blink">NEW!</span> Whisker Pasha was recently spotted investigating the archaeological excavations near the Hippodrome. The site foreman reports that the cat appears to have taken an interest in the Byzantine-era artifacts being uncovered, particularly those with fish motifs.</p>
+                
+                <p>The winter of 2000-2001 has been unusually cold, but Whisker Pasha has adapted by developing a thicker coat. He has been spending more time in the carpet shop of Hasan Bey, who has reported that the cat's presence has coincidentally increased sales by 15%.</p>
+                
+                <p>I will be updating this chronicle regularly as new observations are made. Please check back frequently or join my notification list on <a href="mailto:mehmet@hexagram.corp">Hexagram</a>.</p>
+            </div>
+            
+            <div class="lang-it">
+                <p><span class="blink">NUOVO!</span> Whisker Pasha è stato recentemente avvistato mentre investigava gli scavi archeologici vicino all'Ippodromo. Il capo cantiere riferisce che il gatto sembra aver preso interesse negli artefatti dell'era bizantina che vengono scoperti, particolarmente quelli con motivi di pesce.</p>
+                
+                <p>L'inverno del 2000-2001 è stato insolitamente freddo, ma Whisker Pasha si è adattato sviluppando un mantello più folto. Ha trascorso più tempo nel negozio di tappeti di Hasan Bey, che ha riferito che la presenza del gatto ha casualmente aumentato le vendite del 15%.</p>
+                
+                <p>Aggiornerò regolarmente questa cronaca man mano che vengono fatte nuove osservazioni. Vi prego di tornare frequentemente o unirvi alla mia lista di notifiche su <a href="mailto:mehmet@hexagram.corp">Hexagram</a>.</p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <strong>
+                <span class="lang-en active">Related Links:</span>
+                <span class="lang-it">Link Correlati:</span>
+            </strong> &nbsp;
+            <a href="istanbul_cat_census.html">
+                <span class="lang-en active">Istanbul Cat Census 2000</span>
+                <span class="lang-it">Censimento Gatti Istanbul 2000</span>
+            </a> |
+            <a href="ottoman_cat_poetry.html">
+                <span class="lang-en active">Ottoman Poetry About Cats</span>
+                <span class="lang-it">Poesia Ottomana sui Gatti</span>
+            </a> |
+            <a href="cat_photography_tips.html">
+                <span class="lang-en active">How to Photograph Stray Cats</span>
+                <span class="lang-it">Come Fotografare Gatti Randagi</span>
+            </a>
+        </div>
+
+        <hr>
+        <div class="counter">
+            <p>
+                <span class="lang-en active">You are visitor number: <strong>00487</strong></span>
+                <span class="lang-it">Siete il visitatore numero: <strong>00487</strong></span>
+            </p>
+            <p>
+                <span class="lang-en active">This page has been hit <strong>487</strong> times since January 3, 2001</span>
+                <span class="lang-it">Questa pagina è stata visitata <strong>487</strong> volte dal 3 Gennaio 2001</span>
+            </p>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p>
+            <span class="lang-en active">© 2001 Mehmet Effendi | Feline Chronicler of Istanbul | Last Updated: 15 January 2001</span>
+            <span class="lang-it">© 2001 Mehmet Effendi | Cronista Felino di Istanbul | Ultimo Aggiornamento: 15 Gennaio 2001</span>
+        </p>
+        <p>
+            <span class="lang-en active">Contact: <a href="mailto:mehmet@hexagram.corp">mehmet@hexagram.corp</a> | Find me on <a href="mailto:mehmet@hexagram.corp">Hexagram</a></span>
+            <span class="lang-it">Contatto: <a href="mailto:mehmet@hexagram.corp">mehmet@hexagram.corp</a> | Trovatemi su <a href="mailto:mehmet@hexagram.corp">Hexagram</a></span>
+        </p>
+        <p>
+            <small>
+                <span class="lang-en active">This page is best viewed in Hypernet Explorer 5.5 or newer at 800x600 resolution</span>
+                <span class="lang-it">Questa pagina è ottimizzata per Hypernet Explorer 5.5 o successivo a risoluzione 800x600</span>
+            </small>
+        </p>
+        <p>
+            <small>
+                <a href="privacy_policy.html">
+                    <span class="lang-en active">Privacy Policy</span>
+                    <span class="lang-it">Politica Privacy</span>
+                </a> | 
+                <a href="disclaimer.html">
+                    <span class="lang-en active">Disclaimer</span>
+                    <span class="lang-it">Disclaimer</span>
+                </a>
+            </small>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        // JavaScript to toggle section visibility
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+        
+        // Language switching functionality
+        function changeLanguage() {
+            var selectedLang = document.getElementById('languageSelect').value;
+            
+            // Save to localStorage
+            localStorage.setItem('whiskerPashaLanguage', selectedLang);
+            
+            // Hide all language elements
+            var allLangElements = document.querySelectorAll('.lang-en, .lang-it');
+            for (var i = 0; i < allLangElements.length; i++) {
+                allLangElements[i].classList.remove('active', 'active-block');
+            }
+            
+            // Show selected language elements
+            var selectedElements = document.querySelectorAll('.lang-' + selectedLang);
+            for (var i = 0; i < selectedElements.length; i++) {
+                var element = selectedElements[i];
+                var parent = element.parentElement;
+                
+                // Check if parent has section-content class for block display
+                if (parent && parent.classList.contains('section-content')) {
+                    element.classList.add('active-block');
+                } else {
+                    element.classList.add('active');
+                }
+            }
+        }
+        
+        // Initialize page
+        window.onload = function() {
+            // Check for saved language preference
+            var savedLang = localStorage.getItem('whiskerPashaLanguage');
+            if (savedLang && (savedLang === 'en' || savedLang === 'it')) {
+                document.getElementById('languageSelect').value = savedLang;
+                changeLanguage();
+            }
+            
+            // Initialize sections (hide all except intro)
+            var sections = ["origins", "territory", "personality", "diet", "social", "legacy", "visitor", "updates"];
+            for (var i = 0; i < sections.length; i++) {
+                document.getElementById(sections[i]).style.display = "none";
+            }
+            // Keep intro visible by default
+            document.getElementById("intro").style.display = "block";
+        }
+    </script>
+</body>
+</html>

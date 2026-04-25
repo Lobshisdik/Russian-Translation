@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Armor Updater</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .upload-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #667eea;
+        }
+        
+        .upload-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        input[type="file"] {
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .settings-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .setting-item {
+            margin-bottom: 15px;
+        }
+        
+        .setting-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .setting-item input[type="number"],
+        .setting-item input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .output-section {
+            margin-top: 30px;
+        }
+        
+        .output-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card p {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .log-entry.success {
+            color: #28a745;
+        }
+        
+        .log-entry.warning {
+            color: #ffc107;
+        }
+        
+        .log-entry.error {
+            color: #dc3545;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .info-box ul {
+            margin-left: 20px;
+        }
+        
+        .info-box li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ RPG Maker MZ Armor Updater</h1>
+            <p>Rescale armor values and prices based on parameters and traits</p>
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <h3>How it works:</h3>
+                <ul>
+                    <li>Upload your Armors.json file from your RPG Maker MZ project</li>
+                    <li>Armor values are rescaled based on their actual parameter bonuses (positive values only)</li>
+                    <li>Prices are adjusted with random variation (±20% by default)</li>
+                    <li>Prices end with "00" (e.g., 78100)</li>
+                    <li>Base price increases for each trait the armor has (excluding Ex Parameter: Evasion Rate)</li>
+                    <li>Pricing: 1000 gold = 10 euros</li>
+                </ul>
+            </div>
+            
+            <div class="upload-section">
+                <h2>📁 Upload Armors.json</h2>
+                <input type="file" id="fileInput" accept=".json" />
+            </div>
+            
+            <div class="settings-section">
+                <h2>⚙️ Settings</h2>
+                
+                <div class="setting-item">
+                    <label for="basePrice">Base Price per Parameter Point (gold):</label>
+                    <input type="number" id="basePrice" value="500" min="100" step="100" />
+                </div>
+                
+                <div class="setting-item">
+                    <label for="traitBonus">Price Bonus per Trait (gold):</label>
+                    <input type="number" id="traitBonus" value="2000" min="0" step="100" />
+                </div>
+                
+                <div class="setting-item">
+                    <label for="priceVariation">Price Variation (±%): <span class="range-value" id="variationValue">20</span></label>
+                    <input type="range" id="priceVariation" min="0" max="50" value="20" />
+                </div>
+                
+                <div class="setting-item">
+                    <label for="minPrice">Minimum Price (gold):</label>
+                    <input type="number" id="minPrice" value="100" min="0" step="100" />
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-primary" id="processBtn" disabled>🔄 Process Armors</button>
+                <button class="btn-success" id="downloadBtn" disabled>💾 Download Updated Armors.json</button>
+                <button class="btn-secondary" id="clearBtn">🗑️ Clear Log</button>
+            </div>
+            
+            <div class="output-section">
+                <h2>📊 Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Armors</h3>
+                        <p id="totalArmors">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Processed</h3>
+                        <p id="processedArmors">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Avg Price (gold)</h3>
+                        <p id="avgPrice">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Avg Price (€)</h3>
+                        <p id="avgPriceEuro">0</p>
+                    </div>
+                </div>
+                
+                <h2>📝 Processing Log</h2>
+                <div class="log" id="logContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let armorsData = null;
+        let processedData = null;
+        
+        // Elements
+        const fileInput = document.getElementById('fileInput');
+        const processBtn = document.getElementById('processBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const logContainer = document.getElementById('logContainer');
+        const priceVariationSlider = document.getElementById('priceVariation');
+        const variationValue = document.getElementById('variationValue');
+        
+        // Update slider value display
+        priceVariationSlider.addEventListener('input', (e) => {
+            variationValue.textContent = e.target.value;
+        });
+        
+        // File upload handler
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    armorsData = JSON.parse(event.target.result);
+                    addLog(`Loaded ${armorsData.length} armors from file`, 'success');
+                    updateStats();
+                    processBtn.disabled = false;
+                } catch (error) {
+                    addLog(`Error parsing JSON: ${error.message}`, 'error');
+                    armorsData = null;
+                    processBtn.disabled = true;
+                }
+            };
+            reader.readAsText(file);
+        });
+        
+        // Process button handler
+        processBtn.addEventListener('click', () => {
+            if (!armorsData) return;
+            processArmors();
+        });
+        
+        // Download button handler
+        downloadBtn.addEventListener('click', () => {
+            if (!processedData) return;
+            downloadJSON();
+        });
+        
+        // Clear log button handler
+        clearBtn.addEventListener('click', () => {
+            logContainer.innerHTML = '';
+        });
+        
+        function addLog(message, type = 'normal') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        function updateStats() {
+            if (!armorsData) return;
+            
+            const total = armorsData.length - 1; // Exclude null first entry
+            document.getElementById('totalArmors').textContent = total;
+            
+            if (processedData) {
+                const processed = processedData.filter(a => a !== null).length - 1;
+                document.getElementById('processedArmors').textContent = processed;
+                
+                const prices = processedData.filter(a => a !== null && a.price).map(a => a.price);
+                const avgPrice = prices.length > 0 ? Math.round(prices.reduce((a, b) => a + b, 0) / prices.length) : 0;
+                document.getElementById('avgPrice').textContent = avgPrice.toLocaleString();
+                document.getElementById('avgPriceEuro').textContent = `€${(avgPrice / 100).toFixed(2)}`;
+            }
+        }
+        
+        function calculateParameterValue(armor) {
+            let totalValue = 0;
+            
+            // Parameter indices: 0=MHP, 1=MMP, 2=ATK, 3=DEF, 4=MAT, 5=MDF, 6=AGI, 7=LUK
+            armor.params.forEach((value, index) => {
+                if (value > 0) {
+                    totalValue += value;
+                }
+            });
+            
+            return totalValue;
+        }
+        
+        function countValidTraits(armor) {
+            if (!armor.traits) return 0;
+            
+            let count = 0;
+            
+            for (const trait of armor.traits) {
+                // Exclude Ex Parameter (code 22) for Evasion Rate (dataId 1)
+                if (trait.code === 22 && trait.dataId === 1) {
+                    continue;
+                }
+                count++;
+            }
+            
+            return count;
+        }
+        
+        function roundToHundred(value) {
+            return Math.round(value / 100) * 100;
+        }
+        
+        function calculatePrice(paramValue, traitCount, settings) {
+            const { basePrice, traitBonus, priceVariation, minPrice } = settings;
+            
+            // Base price calculation
+            let price = paramValue * basePrice;
+            
+            // Add trait bonus
+            price += traitCount * traitBonus;
+            
+            // Apply random variation
+            const variation = (priceVariation / 100);
+            const randomFactor = 1 + (Math.random() * variation * 2 - variation);
+            price = price * randomFactor;
+            
+            // Round to nearest 100
+            price = roundToHundred(price);
+            
+            // Ensure minimum price
+            price = Math.max(price, minPrice);
+            
+            return price;
+        }
+        
+        function processArmors() {
+            addLog('Starting armor processing...', 'success');
+            
+            const settings = {
+                basePrice: parseInt(document.getElementById('basePrice').value),
+                traitBonus: parseInt(document.getElementById('traitBonus').value),
+                priceVariation: parseInt(document.getElementById('priceVariation').value),
+                minPrice: parseInt(document.getElementById('minPrice').value)
+            };
+            
+            processedData = JSON.parse(JSON.stringify(armorsData)); // Deep clone
+            
+            let processedCount = 0;
+            
+            for (let i = 1; i < processedData.length; i++) {
+                const armor = processedData[i];
+                if (!armor) continue;
+                
+                const paramValue = calculateParameterValue(armor);
+                const traitCount = countValidTraits(armor);
+                const newPrice = calculatePrice(paramValue, traitCount, settings);
+                
+                const oldPrice = armor.price;
+                armor.price = newPrice;
+                
+                processedCount++;
+                
+                addLog(
+                    `${armor.name}: Params=${paramValue}, Traits=${traitCount}, ` +
+                    `Price: ${oldPrice} → ${newPrice} (€${(newPrice / 100).toFixed(2)})`,
+                    'success'
+                );
+            }
+            
+            addLog(`Processing complete! Updated ${processedCount} armors.`, 'success');
+            updateStats();
+            downloadBtn.disabled = false;
+        }
+        
+        function downloadJSON() {
+            const dataStr = JSON.stringify(processedData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Armors_Updated.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            addLog('Downloaded updated Armors.json', 'success');
+        }
+    </script>
+</body>
+</html>

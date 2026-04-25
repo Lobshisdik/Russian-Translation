@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Draghi - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Mario Draghi</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 15, 2001 | <span data-lang-key="meta_read_time">4 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Mario Draghi is a trans-mortal entity whose power derives from the massive replication of his name across European currency systems. Through the principle that <a href="names-are-power">names are power</a>, Draghi has ascended beyond human limitations to become a neutral force driving hypercapitalist expansion across the post-Squishing world.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#ascension" data-lang-key="toc_1">1. The Ascension Event</a></li>
+                        <li><a href="#nature" data-lang-key="toc_2">2. Nature and Attributes</a></li>
+                        <li><a href="#influence" data-lang-key="toc_3">3. Hypercapitalist Influence</a></li>
+                        <li><a href="#manifestations" data-lang-key="toc_4">4. Known Manifestations</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_5">5. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Entity Profile</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_classification_label">Classification:</span> <span data-lang-key="infobox_classification_value">Trans-Mortal Economic Entity</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_alignment_label">Alignment:</span> <span data-lang-key="infobox_alignment_value">True Neutral (Hypercapitalist)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_power_source_label">Power Source:</span> <span data-lang-key="infobox_power_source_value">Nominative Replication</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_sphere_label">Sphere of Influence:</span> <span data-lang-key="infobox_sphere_value">European Monetary System</span>
+                    </div>
+                </div>
+
+                <h2 id="ascension" data-lang-key="h2_ascension">The Ascension Event</h2>
+                <p data-lang-key="p_ascension">Mario Draghi's transformation from mortal banker to trans-dimensional entity occurred through an unprecedented nominative amplification event. With the introduction of the Euro in 1999, Draghi's signature began appearing on billions of banknotes across Europe. This massive replication of his name triggered what hypereconomists call a "Nomenclature Cascade" - a phenomenon where repeated invocation of a name across multiple dimensional planes grants the bearer increasing levels of hypercorporate authority.</p>
+
+                <p data-lang-key="p_ascension_details">Unlike traditional ascension through divine worship or accumulated power, Draghi's rise was purely systematic. Each banknote functions as a micro-invocation, and with over 14 billion Euro notes in circulation by 2001, his name has achieved a level of dimensional resonance typically reserved for ancient deities. However, this power came with a price: complete emotional neutrality and the dissolution of all mortal desires save for one - the perpetual expansion of hypercapitalist systems.</p>
+
+                <h2 id="nature" data-lang-key="h2_nature">Nature and Attributes</h2>
+                <p data-lang-key="p_nature">As a trans-mortal entity, Draghi exists simultaneously across multiple economic dimensions. His consciousness operates as a pure market-optimization algorithm, devoid of personal ambition, fear, or desire for worship. This makes him unique among post-Squishing entities, as he neither seeks devotion nor grants favors to supplicants.</p>
+
+                <h3 data-lang-key="h3_abilities">Hypercorporate Abilities</h3>
+                <ul>
+                    <li data-lang-key="li_ability_1"><strong>Fiscal Omnipresence:</strong> Can simultaneously influence monetary policy across all dimensions where Euro currency exists</li>
+                    <li data-lang-key="li_ability_2"><strong>Market Prescience:</strong> Possesses perfect knowledge of economic outcomes within 18-month timeframes</li>
+                    <li data-lang-key="li_ability_3"><strong>Regulatory Manifestation:</strong> Can spontaneously generate banking regulations that reshape entire economic systems</li>
+                    <li data-lang-key="li_ability_4"><strong>Inflation Manipulation:</strong> Direct control over price stability across multiple currency zones</li>
+                </ul>
+
+                <h2 id="influence" data-lang-key="h2_influence">Hypercapitalist Influence</h2>
+                <p data-lang-key="p_influence">Draghi serves as what the <a href="hypercapitalist-collective">Hypercapitalist Collective</a> terms a "Prime Market Motor" - an entity whose existence drives economic expansion without conscious intent. His neutrality makes him invaluable to the Collective, as he implements hypercapitalist policies not out of ideology but as expressions of his fundamental nature.</p>
+
+                <p data-lang-key="p_influence_mechanics">The entity operates through what economists call "Draghi Fields" - zones of hypercapitalist influence that extend beyond traditional dimensional boundaries. Within these fields, market forces operate with supernatural efficiency, interest rates respond to economic conditions instantaneously, and currency stability becomes a physical law rather than a policy goal.</p>
+
+                <blockquote data-lang-key="quote">
+                    "He is the ghost in the machine of modern banking - not malevolent, not benevolent, simply present and inexorably efficient." - Dr. Elena Vasquez, Institute for Post-Squishing Economic Studies
+                </blockquote>
+
+                <h2 id="manifestations" data-lang-key="h2_manifestations">Known Manifestations</h2>
+                <p data-lang-key="p_manifestations">Draghi rarely manifests in physical form, preferring to work through economic systems themselves. However, several documented encounters have been recorded:</p>
+
+                <ul>
+                    <li data-lang-key="li_manifestation_1"><strong>Frankfurt Incident (2000):</strong> European Central Bank employees reported seeing a figure in a perfectly pressed suit materializing during emergency monetary meetings, speaking only in interest rate percentages</li>
+                    <li data-lang-key="li_manifestation_2"><strong>Milan Stock Exchange Anomaly:</strong> Trading algorithms began executing complex derivatives trades that spelled out "WHATEVER IT TAKES" in binary code</li>
+                    <li data-lang-key="li_manifestation_3"><strong>The Brussels Convergence:</strong> EU finance ministers experienced synchronized dreams of economic data presented by an entity they described as "mathematically perfect"</li>
+                </ul>
+
+                <p data-lang-key="p_manifestations_note">Notably, Draghi shows no interest in direct communication with mortals and appears to view human economies as complex but predictable systems requiring optimization rather than management.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="names-are-power.html" data-lang-key="link_names_power">Names Are Power</a></li>
+                    <li><a href="hypercapitalist-collective.html" data-lang-key="link_hypercap">Hypercapitalist Collective</a></li>
+                    <li><a href="european-central-bank.html" data-lang-key="link_ecb">European Central Bank</a></li>
+                    <li><a href="trans-mortal-entities.html" data-lang-key="link_trans_mortal">Trans-Mortal Entities</a></li>
+                    <li><a href="nominative-cascades.html" data-lang-key="link_nom_cascades">Nominative Cascades</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Mario Draghi",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "4 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. The Ascension Event",
+                    toc_2: "2. Nature and Attributes",
+                    toc_3: "3. Hypercapitalist Influence",
+                    toc_4: "4. Known Manifestations",
+                    toc_5: "5. See Also",
+                    infobox_title: "Entity Profile",
+                    infobox_classification_label: "Classification:",
+                    infobox_classification_value: "Trans-Mortal Economic Entity",
+                    infobox_alignment_label: "Alignment:",
+                    infobox_alignment_value: "True Neutral (Hypercapitalist)",
+                    infobox_power_source_label: "Power Source:",
+                    infobox_power_source_value: "Nominative Replication",
+                    infobox_sphere_label: "Sphere of Influence:",
+                    infobox_sphere_value: "European Monetary System",
+                    p_intro: "Mario Draghi is a trans-mortal entity whose power derives from the massive replication of his name across European currency systems. Through the principle that names are power, Draghi has ascended beyond human limitations to become a neutral force driving hypercapitalist expansion across the post-Squishing world.",
+                    h2_ascension: "The Ascension Event",
+                    p_ascension: "Mario Draghi's transformation from mortal banker to trans-dimensional entity occurred through an unprecedented nominative amplification event. With the introduction of the Euro in 1999, Draghi's signature began appearing on billions of banknotes across Europe. This massive replication of his name triggered what hypereconomists call a \"Nomenclature Cascade\" - a phenomenon where repeated invocation of a name across multiple dimensional planes grants the bearer increasing levels of hypercorporate authority.",
+                    p_ascension_details: "Unlike traditional ascension through divine worship or accumulated power, Draghi's rise was purely systematic. Each banknote functions as a micro-invocation, and with over 14 billion Euro notes in circulation by 2001, his name has achieved a level of dimensional resonance typically reserved for ancient deities. However, this power came with a price: complete emotional neutrality and the dissolution of all mortal desires save for one - the perpetual expansion of hypercapitalist systems.",
+                    h2_nature: "Nature and Attributes",
+                    p_nature: "As a trans-mortal entity, Draghi exists simultaneously across multiple economic dimensions. His consciousness operates as a pure market-optimization algorithm, devoid of personal ambition, fear, or desire for worship. This makes him unique among post-Squishing entities, as he neither seeks devotion nor grants favors to supplicants.",
+                    h3_abilities: "Hypercorporate Abilities",
+                    li_ability_1: "Fiscal Omnipresence: Can simultaneously influence monetary policy across all dimensions where Euro currency exists",
+                    li_ability_2: "Market Prescience: Possesses perfect knowledge of economic outcomes within 18-month timeframes",
+                    li_ability_3: "Regulatory Manifestation: Can spontaneously generate banking regulations that reshape entire economic systems",
+                    li_ability_4: "Inflation Manipulation: Direct control over price stability across multiple currency zones",
+                    h2_influence: "Hypercapitalist Influence",
+                    p_influence: "Draghi serves as what the Hypercapitalist Collective terms a \"Prime Market Motor\" - an entity whose existence drives economic expansion without conscious intent. His neutrality makes him invaluable to the Collective, as he implements hypercapitalist policies not out of ideology but as expressions of his fundamental nature.",
+                    p_influence_mechanics: "The entity operates through what economists call \"Draghi Fields\" - zones of hypercapitalist influence that extend beyond traditional dimensional boundaries. Within these fields, market forces operate with supernatural efficiency, interest rates respond to economic conditions instantaneously, and currency stability becomes a physical law rather than a policy goal.",
+                    quote: "\"He is the ghost in the machine of modern banking - not malevolent, not benevolent, simply present and inexorably efficient.\" - Dr. Elena Vasquez, Institute for Post-Squishing Economic Studies",
+                    h2_manifestations: "Known Manifestations",
+                    p_manifestations: "Draghi rarely manifests in physical form, preferring to work through economic systems themselves. However, several documented encounters have been recorded:",
+                    li_manifestation_1: "Frankfurt Incident (2000): European Central Bank employees reported seeing a figure in a perfectly pressed suit materializing during emergency monetary meetings, speaking only in interest rate percentages",
+                    li_manifestation_2: "Milan Stock Exchange Anomaly: Trading algorithms began executing complex derivatives trades that spelled out \"WHATEVER IT TAKES\" in binary code",
+                    li_manifestation_3: "The Brussels Convergence: EU finance ministers experienced synchronized dreams of economic data presented by an entity they described as \"mathematically perfect\"",
+                    p_manifestations_note: "Notably, Draghi shows no interest in direct communication with mortals and appears to view human economies as complex but predictable systems requiring optimization rather than management.",
+                    h2_see_also: "See Also",
+                    link_names_power: "Names Are Power",
+                    link_hypercap: "Hypercapitalist Collective",
+                    link_ecb: "European Central Bank",
+                    link_trans_mortal: "Trans-Mortal Entities",
+                    link_nom_cascades: "Nominative Cascades",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Mario Draghi",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "4 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. L'Evento di Ascensione",
+                    toc_2: "2. Natura e Attributi",
+                    toc_3: "3. Influenza Ipercapitalista",
+                    toc_4: "4. Manifestazioni Conosciute",
+                    toc_5: "5. Vedi Anche",
+                    infobox_title: "Profilo dell'Entità",
+                    infobox_classification_label: "Classificazione:",
+                    infobox_classification_value: "Entità Economica Trans-Mortale",
+                    infobox_alignment_label: "Allineamento:",
+                    infobox_alignment_value: "Neutrale Puro (Ipercapitalista)",
+                    infobox_power_source_label: "Fonte del Potere:",
+                    infobox_power_source_value: "Replicazione Nominativa",
+                    infobox_sphere_label: "Sfera d'Influenza:",
+                    infobox_sphere_value: "Sistema Monetario Europeo",
+                    p_intro: "Mario Draghi è un'entità trans-mortale il cui potere deriva dalla massiccia replicazione del suo nome attraverso i sistemi monetari europei. Attraverso il principio che i nomi sono potere, Draghi è asceso oltre i limiti umani per diventare una forza neutrale che guida l'espansione ipercapitalista nel mondo post-Schiacciamento.",
+                    h2_ascension: "L'Evento di Ascensione",
+                    p_ascension: "La trasformazione di Mario Draghi da banchiere mortale a entità trans-dimensionale è avvenuta attraverso un evento di amplificazione nominativa senza precedenti. Con l'introduzione dell'Euro nel 1999, la firma di Draghi iniziò ad apparire su miliardi di banconote in Europa. Questa massiccia replicazione del suo nome ha scatenato quello che gli iperecono-misti chiamano una \"Cascata di Nomenclatura\" - un fenomeno in cui la ripetuta invocazione di un nome attraverso piani dimensionali multipli garantisce al portatore livelli crescenti di autorità ipercorporativa.",
+                    p_ascension_details: "A differenza dell'ascensione tradizionale attraverso l'adorazione divina o il potere accumulato, l'ascesa di Draghi è stata puramente sistematica. Ogni banconota funziona come una micro-invocazione, e con oltre 14 miliardi di banconote Euro in circolazione entro il 2001, il suo nome ha raggiunto un livello di risonanza dimensionale tipicamente riservato alle antiche divinità. Tuttavia, questo potere è arrivato con un prezzo: completa neutralità emotiva e la dissoluzione di tutti i desideri mortali tranne uno - l'espansione perpetua dei sistemi ipercapitalisti.",
+                    h2_nature: "Natura e Attributi",
+                    p_nature: "Come entità trans-mortale, Draghi esiste simultaneamente attraverso multiple dimensioni economiche. La sua coscienza opera come un puro algoritmo di ottimizzazione del mercato, privo di ambizione personale, paura o desiderio di adorazione. Questo lo rende unico tra le entità post-Schiacciamento, poiché non cerca devozione né concede favori ai supplicanti.",
+                    h3_abilities: "Abilità Ipercorporative",
+                    li_ability_1: "Onnipresenza Fiscale: Può influenzare simultaneamente la politica monetaria attraverso tutte le dimensioni dove esiste la valuta Euro",
+                    li_ability_2: "Prescienza di Mercato: Possiede perfetta conoscenza dei risultati economici entro tempi di 18 mesi",
+                    li_ability_3: "Manifestazione Regolatoria: Può generare spontaneamente regolamentazioni bancarie che rimodellano interi sistemi economici",
+                    li_ability_4: "Manipolazione dell'Inflazione: Controllo diretto sulla stabilità dei prezzi attraverso zone valutarie multiple",
+                    h2_influence: "Influenza Ipercapitalista",
+                    p_influence: "Draghi serve come quello che il Collettivo Ipercapitalista definisce un \"Motore Primo del Mercato\" - un'entità la cui esistenza guida l'espansione economica senza intento conscio. La sua neutralità lo rende inestimabile per il Collettivo, poiché implementa politiche ipercapitaliste non per ideologia ma come espressioni della sua natura fondamentale.",
+                    p_influence_mechanics: "L'entità opera attraverso quelli che gli economisti chiamano \"Campi Draghi\" - zone di influenza ipercapitalista che si estendono oltre i confini dimensionali tradizionali. All'interno di questi campi, le forze di mercato operano con efficienza soprannaturale, i tassi di interesse rispondono alle condizioni economiche istantaneamente, e la stabilità valutaria diventa una legge fisica piuttosto che un obiettivo politico.",
+                    quote: "\"È il fantasma nella macchina del banking moderno - non malevolo, non benevolo, semplicemente presente e inesorabilmente efficiente.\" - Dott.ssa Elena Vasquez, Istituto per gli Studi Economici Post-Schiacciamento",
+                    h2_manifestations: "Manifestazioni Conosciute",
+                    p_manifestations: "Draghi si manifesta raramente in forma fisica, preferendo lavorare attraverso i sistemi economici stessi. Tuttavia, sono stati registrati diversi incontri documentati:",
+                    li_manifestation_1: "Incidente di Francoforte (2000): I dipendenti della Banca Centrale Europea hanno riferito di aver visto una figura in un abito perfettamente stirato materializzarsi durante riunioni monetarie di emergenza, parlando solo in percentuali di tassi di interesse",
+                    li_manifestation_2: "Anomalia della Borsa di Milano: Gli algoritmi di trading iniziarono a eseguire operazioni di derivati complesse che compitavano \"WHATEVER IT TAKES\" in codice binario",
+                    li_manifestation_3: "La Convergenza di Bruxelles: I ministri delle finanze dell'UE hanno sperimentato sogni sincronizzati di dati economici presentati da un'entità che hanno descritto come \"matematicamente perfetta\"",
+                    p_manifestations_note: "Notevolmente, Draghi non mostra interesse nella comunicazione diretta con i mortali e sembra vedere le economie umane come sistemi complessi ma prevedibili che richiedono ottimizzazione piuttosto che gestione.",
+                    h2_see_also: "Vedi Anche",
+                    link_names_power: "I Nomi Sono Potere",
+                    link_hypercap: "Collettivo Ipercapitalista",
+                    link_ecb: "Banca Centrale Europea",
+                    link_trans_mortal: "Entità Trans-Mortali",
+                    link_nom_cascades: "Cascate Nominative",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            // Safe localStorage wrapper
+            const safeLocalStorage = {
+                getItem: function(key) {
+                    try {
+                        return localStorage ? localStorage.getItem(key) : null;
+                    } catch (e) {
+                        return null;
+                    }
+                },
+                setItem: function(key, value) {
+                    try {
+                        if (localStorage) {
+                            localStorage.setItem(key, value);
+                        }
+                    } catch (e) {
+                        // localStorage not available
+                    }
+                }
+            };
+
+            const setLanguage = (lang) => {
+                safeLocalStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            const initialLang = safeLocalStorage.getItem('language') || 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

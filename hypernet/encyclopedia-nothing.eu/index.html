@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Great Encyclopedia of Nothingness - Enciclopedia del Nulla</title>
+    <style>
+        body {
+            font-family: Times New Roman, serif;
+            background-color: #f5f5dc;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23f5f5dc"/><circle cx="10" cy="10" r="1" fill="%23ddd"/></svg>');
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            color: #FFD700;
+            padding: 15px;
+            border-bottom: 5px solid #FF6347;
+            text-align: center;
+            position: relative;
+        }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #FFD700;
+            color: #8B4513;
+            padding: 5px 10px;
+            border: 2px solid #FF6347;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .lang-switcher:hover {
+            background: #FFA500;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            margin: 10px 0;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            min-height: 500px;
+        }
+        
+        .sidebar-left {
+            display: table-cell;
+            width: 200px;
+            background: #DEB887;
+            border-right: 3px solid #8B4513;
+            padding: 15px;
+            vertical-align: top;
+        }
+        
+        .content-area {
+            display: table-cell;
+            padding: 20px;
+            background: #FFFACD;
+            vertical-align: top;
+            border-left: 2px solid #DDD;
+            border-right: 2px solid #DDD;
+        }
+        
+        .sidebar-right {
+            display: table-cell;
+            width: 180px;
+            background: #F0E68C;
+            border-left: 3px solid #8B4513;
+            padding: 15px;
+            vertical-align: top;
+        }
+        
+        .nav-section {
+            background: #CD853F;
+            border: 2px solid #8B4513;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .nav-section h3 {
+            margin: 0 0 10px 0;
+            color: #8B4513;
+            font-size: 14px;
+            border-bottom: 1px solid #8B4513;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link {
+            display: block;
+            color: #8B4513;
+            text-decoration: underline;
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 2px;
+        }
+        
+        .nav-link:hover {
+            background: #DEB887;
+            color: #654321;
+        }
+        
+        .section {
+            display: none;
+            background: #FFFEF0;
+            border: 2px solid #CD853F;
+            padding: 20px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .article-box {
+            background: #FFF8DC;
+            border: 1px solid #DDD;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .definition-box {
+            background: #F0F8FF;
+            border: 2px solid #4169E1;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .stats-box {
+            background: #E6E6FA;
+            border: 2px solid #9370DB;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .footer {
+            background: #8B4513;
+            color: #FFD700;
+            text-align: center;
+            padding: 15px;
+            border-top: 3px solid #FF6347;
+            font-size: 11px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .image-placeholder {
+            width: 150px;
+            height: 100px;
+            background: #DDD;
+            border: 2px solid #999;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        th, td {
+            border: 1px solid #8B4513;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background: #DEB887;
+            color: #8B4513;
+            font-weight: bold;
+        }
+        
+        .counter {
+            background: #FFB6C1;
+            border: 2px solid #DC143C;
+            padding: 10px;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="lang-switcher" onclick="toggleLanguage()">
+            <span id="lang-button">IT/ENG</span>
+        </div>
+        <div class="title" id="main-title">
+            <span class="en">The Great Encyclopedia of Nothingness</span>
+            <span class="it" style="display: none;">La Grande Enciclopedia del Nulla</span>
+        </div>
+        <div class="subtitle" id="subtitle">
+            <span class="en">A Comprehensive Guide to Non-Existence, Absence, and the Art of Nothing</span>
+            <span class="it" style="display: none;">Una Guida Completa alla Non-Esistenza, Assenza e l'Arte del Nulla</span>
+        </div>
+        <div style="font-size: 10px; margin-top: 5px;">
+            <span class="en">Powered by Hypernet Explorer • Est. 2001</span>
+            <span class="it" style="display: none;">Alimentato da Hypernet Explorer • Est. 2001</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar-left">
+            <div class="nav-section">
+                <h3 id="categories-title">
+                    <span class="en">Categories</span>
+                    <span class="it" style="display: none;">Categorie</span>
+                </h3>
+                <div class="nav-link" onclick="showSection('home')">
+                    <span class="en">Encyclopedia Home</span>
+                    <span class="it" style="display: none;">Home Enciclopedia</span>
+                </div>
+                <div class="nav-link" onclick="showSection('philosophical')">
+                    <span class="en">Philosophical Nothingness</span>
+                    <span class="it" style="display: none;">Nulla Filosofico</span>
+                </div>
+                <div class="nav-link" onclick="showSection('mathematical')">
+                    <span class="en">Mathematical Zero</span>
+                    <span class="it" style="display: none;">Zero Matematico</span>
+                </div>
+                <div class="nav-link" onclick="showSection('physical')">
+                    <span class="en">Physical Vacuum</span>
+                    <span class="it" style="display: none;">Vuoto Fisico</span>
+                </div>
+                <div class="nav-link" onclick="showSection('cultural')">
+                    <span class="en">Cultural Emptiness</span>
+                    <span class="it" style="display: none;">Vuoto Culturale</span>
+                </div>
+                <div class="nav-link" onclick="showSection('digital')">
+                    <span class="en">Digital Null</span>
+                    <span class="it" style="display: none;">Null Digitale</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Tools</span>
+                    <span class="it" style="display: none;">Strumenti</span>
+                </h3>
+                <div class="nav-link" onclick="showSection('search')">
+                    <span class="en">Search Nothing</span>
+                    <span class="it" style="display: none;">Cerca Nulla</span>
+                </div>
+                <div class="nav-link" onclick="showSection('calculator')">
+                    <span class="en">Null Calculator</span>
+                    <span class="it" style="display: none;">Calcolatore Nullo</span>
+                </div>
+                <div class="nav-link" onclick="showSection('generator')">
+                    <span class="en">Void Generator</span>
+                    <span class="it" style="display: none;">Generatore Vuoto</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Archive</span>
+                    <span class="it" style="display: none;">Archivio</span>
+                </h3>
+                <div class="nav-link" onclick="showSection('history')">
+                    <span class="en">History of Nothing</span>
+                    <span class="it" style="display: none;">Storia del Nulla</span>
+                </div>
+                <div class="nav-link" onclick="showSection('bibliography')">
+                    <span class="en">Bibliography</span>
+                    <span class="it" style="display: none;">Bibliografia</span>
+                </div>
+                <div class="nav-link" onclick="showSection('contributors')">
+                    <span class="en">Contributors</span>
+                    <span class="it" style="display: none;">Contributori</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div id="home" class="section active">
+                <h2>
+                    <span class="en">Welcome to the Great Encyclopedia of Nothingness</span>
+                    <span class="it" style="display: none;">Benvenuti alla Grande Enciclopedia del Nulla</span>
+                </h2>
+
+                <div class="counter">
+                    <span class="en">
+                        <span class="blink">★</span> Current entries: 0 <span class="blink">★</span><br>
+                        Daily visitors contemplating nothing: 847
+                    </span>
+                    <span class="it" style="display: none;">
+                        <span class="blink">★</span> Voci attuali: 0 <span class="blink">★</span><br>
+                        Turisti giornalieri che contemplano il nulla: 847
+                    </span>
+                </div>
+
+                <div class="image-placeholder">1.jpg<br>Nothing Image</div>
+                <div class="image-placeholder">2.jpg<br>Empty Space</div>
+                <div class="image-placeholder">3.jpg<br>Blank Canvas</div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">What is Nothing?</span>
+                        <span class="it" style="display: none;">Che cos'è il Nulla?</span>
+                    </h3>
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Nothing (n.):</strong> The absence of anything; a complete lack of substance, matter, or content. In the digital age of 2001, nothing has become increasingly important as databases grow fuller and the need for null-space management becomes critical.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Nulla (s.):</strong> L'assenza di qualsiasi cosa; una completa mancanza di sostanza, materia o contenuto. Nell'era digitale del 2001, il nulla è diventato sempre più importante mentre i database crescono e il bisogno di gestione dello spazio-nullo diventa critico.
+                        </span>
+                    </div>
+
+                    <p>
+                        <span class="en">
+                            This comprehensive encyclopedia is dedicated to cataloging, understanding, and celebrating the concept of nothingness in all its forms. From philosophical concepts to mathematical principles, from physical phenomena to digital null-states, we explore the profound significance of what isn't there.
+                        </span>
+                        <span class="it" style="display: none;">
+                            Questa enciclopedia completa è dedicata a catalogare, comprendere e celebrare il concetto di nulla in tutte le sue forme. Dai concetti filosofici ai principi matematici, dai fenomeni fisici agli stati-nullo digitali, esploriamo il significato profondo di ciò che non c'è.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="stats-box">
+                    <h4>
+                        <span class="en">Encyclopedia Statistics</span>
+                        <span class="it" style="display: none;">Statistiche Enciclopedia</span>
+                    </h4>
+                    <table>
+                        <tr>
+                            <th>
+                                <span class="en">Category</span>
+                                <span class="it" style="display: none;">Categoria</span>
+                            </th>
+                            <th>
+                                <span class="en">Entries</span>
+                                <span class="it" style="display: none;">Voci</span>
+                            </th>
+                            <th>
+                                <span class="en">Emptiness Level</span>
+                                <span class="it" style="display: none;">Livello Vuoto</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="en">Philosophical</span>
+                                <span class="it" style="display: none;">Filosofico</span>
+                            </td>
+                            <td>0</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="en">Mathematical</span>
+                                <span class="it" style="display: none;">Matematico</span>
+                            </td>
+                            <td>0</td>
+                            <td>∞%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="en">Physical</span>
+                                <span class="it" style="display: none;">Fisico</span>
+                            </td>
+                            <td>0</td>
+                            <td>Quantum</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="en">Digital</span>
+                                <span class="it" style="display: none;">Digitale</span>
+                            </td>
+                            <td>NULL</td>
+                            <td>Binary</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="text-align: center; font-style: italic; color: #666;">
+                    <span class="en">"In the beginning, there was nothing. And it was perfect." - Anonymous Philosopher, 2001</span>
+                    <span class="it" style="display: none;">"In principio, non c'era nulla. Ed era perfetto." - Filosofo Anonimo, 2001</span>
+                </p>
+            </div>
+
+            <div id="philosophical" class="section">
+                <h2>
+                    <span class="en">Philosophical Nothingness</span>
+                    <span class="it" style="display: none;">Nulla Filosofico</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">The Concept of Null-Being</span>
+                        <span class="it" style="display: none;">Il Concetto dell'Essere-Nullo</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            In the post-Y2K era, philosophers have begun to embrace the concept of "null-being" - a state of existence defined by the absence of digital presence. As humanity becomes increasingly connected to the Hypernet, the question arises: what does it mean to not exist in cyberspace?
+                        </span>
+                        <span class="it" style="display: none;">
+                            Nell'era post-Y2K, i filosofi hanno iniziato ad abbracciare il concetto di "essere-nullo" - uno stato di esistenza definito dall'assenza di presenza digitale. Man mano che l'umanità diventa sempre più connessa all'Hypernet, sorge la domanda: cosa significa non esistere nel cyberspazio?
+                        </span>
+                    </p>
+
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Cyber-Nihilism:</strong> The philosophical position that digital existence is fundamentally meaningless, leading to a new appreciation for analog nothingness.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Cyber-Nichilismo:</strong> La posizione filosofica che l'esistenza digitale è fondamentalmente priva di significato, portando a un nuovo apprezzamento per il nulla analogico.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Famous Null-Philosophers</span>
+                        <span class="it" style="display: none;">Famosi Null-Filosofi</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            <span class="en"><strong>Jean-Paul Voidtre:</strong> "Existence precedes non-existence, but non-existence validates existence."</span>
+                            <span class="it" style="display: none;"><strong>Jean-Paul Voidtre:</strong> "L'esistenza precede la non-esistenza, ma la non-esistenza convalida l'esistenza."</span>
+                        </li>
+                        <li>
+                            <span class="en"><strong>Martin Blankegger:</strong> "Nothing nothings." (Translation from German)</span>
+                            <span class="it" style="display: none;"><strong>Martin Blankegger:</strong> "Il nulla nulleggia." (Traduzione dal tedesco)</span>
+                        </li>
+                        <li>
+                            <span class="en"><strong>Emmanuel Null-inas:</strong> "The face of the Other is always absent."</span>
+                            <span class="it" style="display: none;"><strong>Emmanuel Null-inas:</strong> "Il volto dell'Altro è sempre assente."</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="image-placeholder">4.jpg<br>Philosophy of Nothing</div>
+            </div>
+
+            <div id="mathematical" class="section">
+                <h2>
+                    <span class="en">Mathematical Zero and Null Sets</span>
+                    <span class="it" style="display: none;">Zero Matematico e Insiemi Nulli</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">The Revolutionary Number: 0</span>
+                        <span class="it" style="display: none;">Il Numero Rivoluzionario: 0</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            Zero represents the mathematical pinnacle of nothingness. In computer science of 2001, the binary system relies fundamentally on the relationship between 0 and 1, making zero the cornerstone of digital existence.
+                        </span>
+                        <span class="it" style="display: none;">
+                            Lo zero rappresenta l'apice matematico del nulla. Nell'informatica del 2001, il sistema binario si basa fondamentalmente sulla relazione tra 0 e 1, rendendo lo zero la pietra angolare dell'esistenza digitale.
+                        </span>
+                    </p>
+
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Null Set (∅):</strong> A set containing no elements. In database theory, null values represent missing or undefined data - the digital equivalent of nothingness.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Insieme Nullo (∅):</strong> Un insieme che non contiene elementi. Nella teoria dei database, i valori null rappresentano dati mancanti o indefiniti - l'equivalente digitale del nulla.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Properties of Mathematical Nothing</span>
+                        <span class="it" style="display: none;">Proprietà del Nulla Matematico</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            <span class="en">0 + 0 = 0 (Addition preserves nothingness)</span>
+                            <span class="it" style="display: none;">0 + 0 = 0 (L'addizione preserva il nulla)</span>
+                        </li>
+                        <li>
+                            <span class="en">0 × ∞ = Undefined (Nothing times infinity is paradoxical)</span>
+                            <span class="it" style="display: none;">0 × ∞ = Indefinito (Nulla per infinito è paradossale)</span>
+                        </li>
+                        <li>
+                            <span class="en">|∅| = 0 (The cardinality of nothingness is zero)</span>
+                            <span class="it" style="display: none;">|∅| = 0 (La cardinalità del nulla è zero)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="image-placeholder">5.jpg<br>Mathematical Zero</div>
+            </div>
+
+            <div id="physical" class="section">
+                <h2>
+                    <span class="en">Physical Vacuum and Quantum Emptiness</span>
+                    <span class="it" style="display: none;">Vuoto Fisico e Vuotezza Quantica</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">The Quantum Null-Field Theory</span>
+                        <span class="it" style="display: none;">Teoria del Campo Null-Quantico</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            Recent research in 2001 has revealed that even "empty" space contains quantum fluctuations. This discovery has led to the development of Quantum Null-Field Theory, which attempts to harness the energy of nothingness itself.
+                        </span>
+                        <span class="it" style="display: none;">
+                            La ricerca recente del 2001 ha rivelato che anche lo spazio "vuoto" contiene fluttuazioni quantiche. Questa scoperta ha portato allo sviluppo della Teoria del Campo Null-Quantico, che tenta di sfruttare l'energia del nulla stesso.
+                        </span>
+                    </p>
+
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Vacuum Energy:</strong> The lowest possible energy that a quantum mechanical system may have. Even in perfect vacuum, there is still something - making true nothingness theoretically impossible.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Energia del Vuoto:</strong> La più bassa energia possibile che un sistema quantomeccanico può avere. Anche nel vuoto perfetto, c'è ancora qualcosa - rendendo il vero nulla teoricamente impossibile.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Applications in Technology</span>
+                        <span class="it" style="display: none;">Applicazioni nella Tecnologia</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            European researchers are developing "Null-Drive" propulsion systems that operate by manipulating quantum vacuum fluctuations. This technology could revolutionize space travel by 2010.
+                        </span>
+                        <span class="it" style="display: none;">
+                            I ricercatori europei stanno sviluppando sistemi di propulsione "Null-Drive" che operano manipolando le fluttuazioni del vuoto quantico. Questa tecnologia potrebbe rivoluzionare i viaggi spaziali entro il 2010.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="image-placeholder">6.jpg<br>Quantum Vacuum</div>
+            </div>
+
+            <div id="cultural" class="section">
+                <h2>
+                    <span class="en">Cultural Emptiness in the Digital Age</span>
+                    <span class="it" style="display: none;">Vuoto Culturale nell'Era Digitale</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">The Rise of Null-Culture</span>
+                        <span class="it" style="display: none;">L'Ascesa della Null-Cultura</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            As Europe enters the new millennium, a movement called "Null-Culture" has emerged. Artists, musicians, and writers are creating works that celebrate absence, silence, and the spaces between traditional cultural expressions.
+                        </span>
+                        <span class="it" style="display: none;">
+                            Mentre l'Europa entra nel nuovo millennio, è emerso un movimento chiamato "Null-Cultura". Artisti, musicisti e scrittori stanno creando opere che celebrano l'assenza, il silenzio e gli spazi tra le espressioni culturali tradizionali.
+                        </span>
+                    </p>
+
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Silent Symphony:</strong> Musical compositions consisting entirely of pauses and rests, representing the music that exists in the absence of sound.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Sinfonia Silenziosa:</strong> Composizioni musicali costituite interamente da pause e silenzi, rappresentando la musica che esiste nell'assenza di suono.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Digital Minimalism Movement</span>
+                        <span class="it" style="display: none;">Movimento del Minimalismo Digitale</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            Young Europeans are embracing "digital fasting" - deliberately disconnecting from the Hypernet to experience the nothingness of offline existence. This counter-culture movement values the null-spaces in our increasingly connected world.
+                        </span>
+                        <span class="it" style="display: none;">
+                            I giovani europei stanno abbracciando il "digiuno digitale" - disconnettendosi deliberatamente dall'Hypernet per sperimentare il nulla dell'esistenza offline. Questo movimento controculturale valorizza gli spazi-nulli nel nostro mondo sempre più connesso.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="image-placeholder">7.jpg<br>Null Culture</div>
+            </div>
+
+            <div id="digital" class="section">
+                <h2>
+                    <span class="en">Digital Null States and Database Theory</span>
+                    <span class="it" style="display: none;">Stati Null Digitali e Teoria dei Database</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">The Evolution of NULL in Computing</span>
+                        <span class="it" style="display: none;">L'Evoluzione di NULL nell'Informatica</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            In 2001, database administrators across Europe are grappling with the philosophical implications of NULL values. These represent not just missing data, but the concept of "unknown unknowns" - information that doesn't exist yet might exist in the future.
+                        </span>
+                        <span class="it" style="display: none;">
+                            Nel 2001, gli amministratori di database in tutta Europa stanno lottando con le implicazioni filosofiche dei valori NULL. Questi rappresentano non solo dati mancanti, ma il concetto di "sconosciuti sconosciuti" - informazioni che non esistono ma potrebbero esistere in futuro.
+                        </span>
+                    </p>
+
+                    <div class="definition-box">
+                        <span class="en">
+                            <strong>Three-Valued Logic:</strong> True, False, and NULL - representing the possibility that some propositions exist in a state of nothingness rather than having a definite truth value.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Logica a Tre Valori:</strong> Vero, Falso e NULL - rappresentando la possibilità che alcune proposizioni esistano in uno stato di nulla piuttosto che avere un valore di verità definito.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Hypernet Null-Routing</span>
+                        <span class="it" style="display: none;">Null-Routing dell'Hypernet</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            Advanced routing protocols are being developed to send data packets to "null destinations" - addresses that don't exist. This technique, called Null-Routing, is revolutionizing network security by making malicious traffic disappear into digital nothingness.
+                        </span>
+                        <span class="it" style="display: none;">
+                            Protocolli di routing avanzati vengono sviluppati per inviare pacchetti di dati a "destinazioni null" - indirizzi che non esistono. Questa tecnica, chiamata Null-Routing, sta rivoluzionando la sicurezza di rete facendo scomparire il traffico malevolo nel nulla digitale.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="image-placeholder">8.jpg<br>Digital Null</div>
+            </div>
+
+            <div id="search" class="section">
+                <h2>
+                    <span class="en">Search for Nothing</span>
+                    <span class="it" style="display: none;">Cerca il Nulla</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Advanced Null Search Engine</span>
+                        <span class="it" style="display: none;">Motore di Ricerca Null Avanzato</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            Enter your search terms below to find what doesn't exist in our database:
+                        </span>
+                        <span class="it" style="display: none;">
+                            Inserisci i tuoi termini di ricerca qui sotto per trovare ciò che non esiste nel nostro database:
+                        </span>
+                    </p>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <input type="text" id="search-input" style="width: 300px; padding: 5px; border: 2px solid #8B4513;" placeholder="Search for nothing...">
+                        <br><br>
+                        <button onclick="searchNothing()" style="padding: 8px 20px; background: #DEB887; border: 2px solid #8B4513; cursor: pointer;">
+                            <span class="en">Search Nothing</span>
+                            <span class="it" style="display: none;">Cerca Nulla</span>
+                        </button>
+                    </div>
+
+                    <div id="search-results" style="min-height: 100px; border: 1px solid #DDD; padding: 10px; background: #FFF;">
+                        <span class="en">Search results will appear here... or won't.</span>
+                        <span class="it" style="display: none;">I risultati della ricerca appariranno qui... o no.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calculator" class="section">
+                <h2>
+                    <span class="en">Null Calculator</span>
+                    <span class="it" style="display: none;">Calcolatore Nullo</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Mathematical Nothingness Operations</span>
+                        <span class="it" style="display: none;">Operazioni Matematiche del Nulla</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <div style="background: #F0F0F0; border: 2px solid #8B4513; padding: 20px; margin: 20px 0; display: inline-block;">
+                            <div style="background: #000; color: #0F0; padding: 10px; font-family: monospace; margin-bottom: 10px;">
+                                <span id="calc-display">0</span>
+                            </div>
+                            <table style="margin: 0 auto;">
+                                <tr>
+                                    <td><button onclick="calcInput('NULL')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">NULL</button></td>
+                                    <td><button onclick="calcInput('∅')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">∅</button></td>
+                                    <td><button onclick="calcInput('0')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">0</button></td>
+                                    <td><button onclick="calcClear()" style="padding: 10px; margin: 2px; background: #FF6347; border: 1px solid #8B4513;">CLR</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button onclick="calcInput('+')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">+</button></td>
+                                    <td><button onclick="calcInput('-')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">-</button></td>
+                                    <td><button onclick="calcInput('×')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">×</button></td>
+                                    <td><button onclick="calcInput('÷')" style="padding: 10px; margin: 2px; background: #DEB887; border: 1px solid #8B4513;">÷</button></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><button onclick="calcEquals()" style="padding: 10px; margin: 2px; background: #FFD700; border: 1px solid #8B4513; width: 100%;">=</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p>
+                        <span class="en">
+                            <strong>Note:</strong> This calculator specializes in operations involving nothingness. All calculations result in various forms of null.
+                        </span>
+                        <span class="it" style="display: none;">
+                            <strong>Nota:</strong> Questo calcolatore è specializzato in operazioni che coinvolgono il nulla. Tutti i calcoli risultano in varie forme di null.
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div id="generator" class="section">
+                <h2>
+                    <span class="en">Void Generator</span>
+                    <span class="it" style="display: none;">Generatore di Vuoto</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Create Your Own Nothingness</span>
+                        <span class="it" style="display: none;">Crea il Tuo Nulla</span>
+                    </h3>
+                    
+                    <p>
+                        <span class="en">
+                            Use our advanced Void Generator to create personalized emptiness:
+                        </span>
+                        <span class="it" style="display: none;">
+                            Usa il nostro Generatore di Vuoto avanzato per creare vuoto personalizzato:
+                        </span>
+                    </p>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <label>
+                            <span class="en">Void Type:</span>
+                            <span class="it" style="display: none;">Tipo di Vuoto:</span>
+                        </label><br>
+                        <select id="void-type" style="padding: 5px; margin: 10px; border: 2px solid #8B4513;">
+                            <option value="philosophical" class="en">Philosophical</option>
+                            <option value="filosofico" class="it" style="display: none;">Filosofico</option>
+                            <option value="mathematical" class="en">Mathematical</option>
+                            <option value="matematico" class="it" style="display: none;">Matematico</option>
+                            <option value="digital" class="en">Digital</option>
+                            <option value="digitale" class="it" style="display: none;">Digitale</option>
+                            <option value="quantum" class="en">Quantum</option>
+                            <option value="quantico" class="it" style="display: none;">Quantico</option>
+                        </select><br><br>
+
+                        <button onclick="generateVoid()" style="padding: 10px 20px; background: #FFD700; border: 2px solid #8B4513; cursor: pointer;">
+                            <span class="en">Generate Void</span>
+                            <span class="it" style="display: none;">Genera Vuoto</span>
+                        </button>
+                    </div>
+
+                    <div id="void-output" style="min-height: 100px; border: 1px solid #DDD; padding: 20px; background: #FFF; text-align: center;">
+                        <span class="en">Your personalized void will appear here...</span>
+                        <span class="it" style="display: none;">Il tuo vuoto personalizzato apparirà qui...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="history" class="section">
+                <h2>
+                    <span class="en">History of Nothing</span>
+                    <span class="it" style="display: none;">Storia del Nulla</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Timeline of Nothingness</span>
+                        <span class="it" style="display: none;">Cronologia del Nulla</span>
+                    </h3>
+
+                    <table>
+                        <tr>
+                            <th>
+                                <span class="en">Year</span>
+                                <span class="it" style="display: none;">Anno</span>
+                            </th>
+                            <th>
+                                <span class="en">Event</span>
+                                <span class="it" style="display: none;">Evento</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>-∞</td>
+                            <td>
+                                <span class="en">The Big Nothing (before Big Bang)</span>
+                                <span class="it" style="display: none;">Il Grande Nulla (prima del Big Bang)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>628 AD</td>
+                            <td>
+                                <span class="en">Brahmagupta defines mathematical zero</span>
+                                <span class="it" style="display: none;">Brahmagupta definisce lo zero matematico</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1610</td>
+                            <td>
+                                <span class="en">Galileo discovers vacuum in space</span>
+                                <span class="it" style="display: none;">Galileo scopre il vuoto nello spazio</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1943</td>
+                            <td>
+                                <span class="en">Sartre publishes "Being and Nothingness"</span>
+                                <span class="it" style="display: none;">Sartre pubblica "L'essere e il nulla"</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1970</td>
+                            <td>
+                                <span class="en">Edgar Codd introduces NULL in relational databases</span>
+                                <span class="it" style="display: none;">Edgar Codd introduce NULL nei database relazionali</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2000</td>
+                            <td>
+                                <span class="en">Y2K bug creates massive data nullification</span>
+                                <span class="it" style="display: none;">Il bug Y2K crea massiva nullificazione dei dati</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2001</td>
+                            <td>
+                                <span class="en">Great Encyclopedia of Nothingness founded</span>
+                                <span class="it" style="display: none;">Fondata la Grande Enciclopedia del Nulla</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="bibliography" class="section">
+                <h2>
+                    <span class="en">Bibliography</span>
+                    <span class="it" style="display: none;">Bibliografia</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Essential Readings on Nothingness</span>
+                        <span class="it" style="display: none;">Letture Essenziali sul Nulla</span>
+                    </h3>
+
+                    <ul>
+                        <li>
+                            <span class="en">Sartre, J-P. (1943). "Being and Nothingness" - The foundational text of existential nothingness.</span>
+                            <span class="it" style="display: none;">Sartre, J-P. (1943). "L'essere e il nulla" - Il testo fondamentale del nulla esistenziale.</span>
+                        </li>
+                        <li>
+                            <span class="en">Heidegger, M. (1929). "What is Metaphysics?" - Explores the nature of the nothing.</span>
+                            <span class="it" style="display: none;">Heidegger, M. (1929). "Che cos'è la metafisica?" - Esplora la natura del nulla.</span>
+                        </li>
+                        <li>
+                            <span class="en">Codd, E.F. (1970). "A Relational Model of Data" - Introduces NULL values in databases.</span>
+                            <span class="it" style="display: none;">Codd, E.F. (1970). "Un Modello Relazionale dei Dati" - Introduce i valori NULL nei database.</span>
+                        </li>
+                        <li>
+                            <span class="en">Null-inas, E. (2001). "Digital Phenomenology of Absence" - Modern interpretation of nothingness in the Hypernet age.</span>
+                            <span class="it" style="display: none;">Null-inas, E. (2001). "Fenomenologia Digitale dell'Assenza" - Interpretazione moderna del nulla nell'era dell'Hypernet.</span>
+                        </li>
+                        <li>
+                            <span class="en">Voidtre, J-P. (2000). "Cyber-Existentialism and the Null-Self" - Post-Y2K philosophy of digital nothingness.</span>
+                            <span class="it" style="display: none;">Voidtre, J-P. (2000). "Cyber-Esistenzialismo e il Null-Sé" - Filosofia post-Y2K del nulla digitale.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="contributors" class="section">
+                <h2>
+                    <span class="en">Contributors</span>
+                    <span class="it" style="display: none;">Contributori</span>
+                </h2>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">Editorial Board</span>
+                        <span class="it" style="display: none;">Comitato Editoriale</span>
+                    </h3>
+
+                    <p>
+                        <strong>
+                            <span class="en">Dr. Null Schwarz</span>
+                            <span class="it" style="display: none;">Dott. Null Schwarz</span>
+                        </strong><br>
+                        <span class="en">Professor of Applied Nothingness, University of Vienna</span>
+                        <span class="it" style="display: none;">Professore di Nulla Applicato, Università di Vienna</span><br>
+                        <a href="mailto:null.schwarz@hexagram.corp">null.schwarz@hexagram.corp</a>
+                    </p>
+
+                    <p>
+                        <strong>
+                            <span class="en">Prof. Maria Vuoto</span>
+                            <span class="it" style="display: none;">Prof.ssa Maria Vuoto</span>
+                        </strong><br>
+                        <span class="en">Director of Emptiness Studies, University of Bologna</span>
+                        <span class="it" style="display: none;">Direttrice di Studi sul Vuoto, Università di Bologna</span><br>
+                        <a href="mailto:m.vuoto@hexagram.corp">m.vuoto@hexagram.corp</a>
+                    </p>
+
+                    <p>
+                        <strong>
+                            <span class="en">Dr. Jean Néant</span>
+                            <span class="it" style="display: none;">Dott. Jean Néant</span>
+                        </strong><br>
+                        <span class="en">Research Fellow in Digital Void Theory, Sorbonne</span>
+                        <span class="it" style="display: none;">Ricercatore in Teoria del Vuoto Digitale, Sorbona</span><br>
+                        <a href="mailto:j.neant@hexagram.corp">j.neant@hexagram.corp</a>
+                    </p>
+
+                    <h4>
+                        <span class="en">Special Thanks</span>
+                        <span class="it" style="display: none;">Ringraziamenti Speciali</span>
+                    </h4>
+                    <p>
+                        <span class="en">
+                            To all the anonymous contributors who have submitted nothing to this encyclopedia. Your absence of contribution has been invaluable.
+                        </span>
+                        <span class="it" style="display: none;">
+                            A tutti i contributori anonimi che hanno inviato nulla a questa enciclopedia. La vostra assenza di contributo è stata inestimabile.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="article-box">
+                    <h3>
+                        <span class="en">How to Contribute Nothing</span>
+                        <span class="it" style="display: none;">Come Contribuire con Nulla</span>
+                    </h3>
+                    <p>
+                        <span class="en">
+                            We welcome submissions of nothingness from scholars, philosophers, and digital void enthusiasts. Please send your non-contributions to:
+                        </span>
+                        <span class="it" style="display: none;">
+                            Accogliamo volentieri invii di nulla da studiosi, filosofi e appassionati di vuoto digitale. Si prega di inviare i propri non-contributi a:
+                        </span>
+                    </p>
+                    <p style="text-align: center;">
+                        <a href="mailto:encyclopedia@hexagram.corp">encyclopedia@hexagram.corp</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-right">
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Random Nothing</span>
+                    <span class="it" style="display: none;">Nulla Casuale</span>
+                </h3>
+                <div style="background: #FFF; border: 1px solid #DDD; padding: 10px; text-align: center; min-height: 80px;">
+                    <span class="en">
+                        <em>"The void gazes also into you."</em><br>
+                        - Digital Nietzsche
+                    </span>
+                    <span class="it" style="display: none;">
+                        <em>"Il vuoto ti guarda dentro."</em><br>
+                        - Nietzsche Digitale
+                    </span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Null Stats</span>
+                    <span class="it" style="display: none;">Statistiche Null</span>
+                </h3>
+                <div style="font-size: 11px;">
+                    <p>
+                        <span class="en">Total Emptiness: ∞</span>
+                        <span class="it" style="display: none;">Vuoto Totale: ∞</span>
+                    </p>
+                    <p>
+                        <span class="en">Articles: 0</span>
+                        <span class="it" style="display: none;">Articoli: 0</span>
+                    </p>
+                    <p>
+                        <span class="en">Non-contributors: 847</span>
+                        <span class="it" style="display: none;">Non-contributori: 847</span>
+                    </p>
+                    <p>
+                        <span class="en">Void Level: Maximum</span>
+                        <span class="it" style="display: none;">Livello Vuoto: Massimo</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Hypernet Links</span>
+                    <span class="it" style="display: none;">Link Hypernet</span>
+                </h3>
+                <div class="nav-link" onclick="alert('This link leads nowhere.')">
+                    <span class="en">Nowhere University</span>
+                    <span class="it" style="display: none;">Università del Nulla</span>
+                </div>
+                <div class="nav-link" onclick="alert('404: Nothing found.')">
+                    <span class="en">Institute of Absence</span>
+                    <span class="it" style="display: none;">Istituto dell'Assenza</span>
+                </div>
+                <div class="nav-link" onclick="alert('Empty page loaded.')">
+                    <span class="en">Void Research Center</span>
+                    <span class="it" style="display: none;">Centro Ricerca Vuoto</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h3>
+                    <span class="en">Support</span>
+                    <span class="it" style="display: none;">Supporto</span>
+                </h3>
+                <p style="font-size: 10px;">
+                    <span class="en">
+                        Having trouble finding nothing? Contact our null-support team:
+                    </span>
+                    <span class="it" style="display: none;">
+                        Problemi a trovare il nulla? Contatta il nostro team null-support:
+                    </span>
+                </p>
+                <p style="font-size: 10px;">
+                    <a href="mailto:support@hexagram.corp">support@hexagram.corp</a>
+                </p>
+            </div>
+
+            <div class="image-placeholder">9.jpg<br>Nothing Image</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            <span class="en">© 2001 The Great Encyclopedia of Nothingness | Powered by Hypernet Explorer</span>
+            <span class="it" style="display: none;">© 2001 La Grande Enciclopedia del Nulla | Alimentato da Hypernet Explorer</span>
+        </p>
+        <p>
+            <span class="en">Best viewed with nothing • Optimized for absence • Contact: </span>
+            <span class="it" style="display: none;">Meglio visualizzato con nulla • Ottimizzato per l'assenza • Contatto: </span>
+            <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a>
+        </p>
+        <p style="font-size: 9px;">
+            <span class="en">This website contains exactly 0 bytes of useful information</span>
+            <span class="it" style="display: none;">Questo sito contiene esattamente 0 byte di informazioni utili</span>
+        </p>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const enElements = document.querySelectorAll('.en');
+            const itElements = document.querySelectorAll('.it');
+            
+            if (currentLang === 'en') {
+                enElements.forEach(el => el.style.display = 'none');
+                itElements.forEach(el => el.style.display = 'inline');
+                currentLang = 'it';
+            } else {
+                enElements.forEach(el => el.style.display = 'inline');
+                itElements.forEach(el => el.style.display = 'none');
+                currentLang = 'en';
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function searchNothing() {
+            const input = document.getElementById('search-input').value;
+            const results = document.getElementById('search-results');
+            
+            setTimeout(() => {
+                if (currentLang === 'en') {
+                    results.innerHTML = `<p><strong>Search completed.</strong></p>
+                                       <p>Query: "${input}"</p>
+                                       <p>Results found: 0</p>
+                                       <p>This is exactly what we expected. Nothing was found because nothing exists to be found.</p>
+                                       <p><em>Search tip: Try searching for even less next time.</em></p>`;
+                } else {
+                    results.innerHTML = `<p><strong>Ricerca completata.</strong></p>
+                                       <p>Query: "${input}"</p>
+                                       <p>Risultati trovati: 0</p>
+                                       <p>Questo è esattamente quello che ci aspettavamo. Non è stato trovato nulla perché nulla esiste per essere trovato.</p>
+                                       <p><em>Suggerimento: Prova a cercare ancora meno la prossima volta.</em></p>`;
+                }
+            }, 1000);
+            
+            results.innerHTML = currentLang === 'en' ? 'Searching for nothing...' : 'Cercando nulla...';
+        }
+
+        let calcDisplay = '0';
+        
+        function calcInput(value) {
+            const display = document.getElementById('calc-display');
+            if (calcDisplay === '0') {
+                calcDisplay = value;
+            } else {
+                calcDisplay += value;
+            }
+            display.textContent = calcDisplay;
+        }
+        
+        function calcClear() {
+            calcDisplay = '0';
+            document.getElementById('calc-display').textContent = calcDisplay;
+        }
+        
+        function calcEquals() {
+            const display = document.getElementById('calc-display');
+            // All calculations result in null/zero
+            calcDisplay = 'NULL';
+            display.textContent = calcDisplay;
+            
+            setTimeout(() => {
+                calcDisplay = '0';
+                display.textContent = calcDisplay;
+            }, 2000);
+        }
+
+        function generateVoid() {
+            const voidType = document.getElementById('void-type').value;
+            const output = document.getElementById('void-output');
+            
+            const voids = {
+                'philosophical': {
+                    'en': '∅ Philosophical Void Generated ∅<br><br>"I think, therefore I am not."<br><br>Type: Existential Nothingness<br>Depth: Infinite<br>Meaning: Absent',
+                    'it': '∅ Vuoto Filosofico Generato ∅<br><br>"Penso, quindi non sono."<br><br>Tipo: Nulla Esistenziale<br>Profondità: Infinita<br>Significato: Assente'
+                },
+                'mathematical': {
+                    'en': '∅ Mathematical Void Generated ∅<br><br>Result: 0 ÷ 0 = undefined<br><br>Type: Numerical Nullity<br>Value: NULL<br>Set: ∅',
+                    'it': '∅ Vuoto Matematico Generato ∅<br><br>Risultato: 0 ÷ 0 = indefinito<br><br>Tipo: Nullità Numerica<br>Valore: NULL<br>Insieme: ∅'
+                },
+                'digital': {
+                    'en': '∅ Digital Void Generated ∅<br><br>Status: 404 Not Found<br><br>Type: Binary Emptiness<br>Data: NULL<br>Connection: Terminated',
+                    'it': '∅ Vuoto Digitale Generato ∅<br><br>Stato: 404 Non Trovato<br><br>Tipo: Vuoto Binario<br>Dati: NULL<br>Connessione: Terminata'
+                },
+                'quantum': {
+                    'en': '∅ Quantum Void Generated ∅<br><br>State: Superposition of Nothing<br><br>Type: Vacuum Fluctuation<br>Energy: Zero-point<br>Uncertainty: ∞',
+                    'it': '∅ Vuoto Quantico Generato ∅<br><br>Stato: Sovrapposizione del Nulla<br><br>Tipo: Fluttuazione del Vuoto<br>Energia: Punto Zero<br>Incertezza: ∞'
+                }
+            };
+            
+            output.innerHTML = 'Generating void...';
+            
+            setTimeout(() => {
+                const selectedVoid = voids[voidType] || voids['philosophical'];
+                output.innerHTML = selectedVoid[currentLang];
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

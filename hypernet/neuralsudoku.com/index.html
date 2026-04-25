@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Neural-Sudoku Solver Pro - Dynamic Logic Matrix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ccccff;
+            margin: 0;
+            padding: 10px;
+            color: #000066;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #0066cc, #003399);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border: 3px solid #000066;
+            margin-bottom: 10px;
+        }
+        
+        .nav-bar {
+            background-color: #ffff99;
+            border: 2px solid #cc9900;
+            padding: 8px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            color: #cc6600;
+            text-decoration: underline;
+            margin: 0 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            color: #ff0000;
+            background-color: #ffcccc;
+        }
+        
+        .main-content {
+            background-color: white;
+            border: 3px solid #666666;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            display: none;
+            background-color: #f9f9f9;
+            border: 2px solid #cccccc;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .sudoku-grid {
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 4px solid #000066;
+        }
+        
+        .sudoku-cell {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #666666;
+            background-color: white;
+        }
+        
+        .sudoku-cell.pre-filled {
+            background-color: #e6f2ff;
+            color: #000066;
+        }
+        
+        .sudoku-cell.user-input {
+            background-color: #ffffcc;
+            color: #cc6600;
+        }
+        
+        .grid-3x3 {
+            border: 2px solid #000066;
+        }
+        
+        .solver-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .neural-button {
+            background: linear-gradient(to bottom, #0066cc, #003399);
+            color: white;
+            border: 2px solid #000066;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .neural-button:hover {
+            background: linear-gradient(to bottom, #0080ff, #0066cc);
+        }
+        
+        .status-display {
+            background-color: #e6ffe6;
+            border: 2px solid #009900;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .alert-box {
+            background-color: #ffe6e6;
+            border: 2px solid #cc0000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .tech-badge {
+            background-color: #ff6600;
+            color: white;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .footer {
+            background-color: #cccccc;
+            border: 2px solid #666666;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .update-ticker {
+            background-color: #ffccff;
+            border: 1px solid #cc00cc;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .dynamic-matrix {
+            background: repeating-linear-gradient(
+                45deg,
+                #ffe6cc,
+                #ffe6cc 10px,
+                #ffcc99 10px,
+                #ffcc99 20px
+            );
+            border: 2px solid #cc6600;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <span class="blink">*** NEURAL-LOGIC ALGORITHMS UPDATED - January 2001 ***</span>
+    </div>
+
+    <div class="header">
+        <h1>Neural-Sudoku Solver Pro</h1>
+        <p>Advanced Dynamic Logic Matrix Technology</p>
+        <span class="tech-badge">NEURO-SOLVE™</span>
+        <span class="tech-badge">DYNAMIC-GRID</span>
+        <span class="tech-badge">AUTO-MORPH</span>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Solver Home</span>
+        <span class="nav-link" onclick="showSection('puzzle')">Dynamic Puzzle</span>
+        <span class="nav-link" onclick="showSection('help')">Neural-Help</span>
+        <span class="nav-link" onclick="showSection('about')">About Technology</span>
+        <span class="nav-link" onclick="showSection('contact')">Contact Support</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="dynamic-matrix">
+                <h2>Welcome to Neural-Sudoku Solver Pro!</h2>
+                <p>Experience the future of puzzle-solving with our revolutionary Dynamic Logic Matrix technology. Our advanced neuro-computational algorithms create self-morphing puzzles that adapt and evolve in real-time!</p>
+            </div>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Dynamic Grid Morphing:</strong> Watch as numbers transform using quantum-logic protocols</li>
+                <li><strong>Neural-Adaptive Difficulty:</strong> AI-driven complexity adjustment based on solving patterns</li>
+                <li><strong>Real-Time Matrix Recalibration:</strong> Advanced techno-mystic algorithms ensure endless variation</li>
+                <li><strong>Hypernet-Compatible:</strong> Optimized for Hypernet Explorer 5.0+</li>
+            </ul>
+            
+            <div class="status-display">
+                System Status: <span id="system-status">NEURAL-CORES ONLINE</span>
+            </div>
+            
+            <p><strong>Click "Dynamic Puzzle" above to begin your neuro-solving experience!</strong></p>
+            
+            <div class="alert-box">
+                <p>WARNING: Due to advanced dynamic-morphing technology, puzzle solutions may shift during solving process. This is normal behavior!</p>
+            </div>
+        </div>
+
+        <div id="puzzle" class="section">
+            <h2>Dynamic Sudoku Matrix</h2>
+            
+            <div class="status-display">
+                <span id="puzzle-status">Neural-Grid Active - Matrix Stability: <span id="stability">87%</span></span>
+            </div>
+            
+            <div style="text-align: center;">
+                <table class="sudoku-grid" id="sudoku-table">
+                    <!-- Sudoku grid will be generated by JavaScript -->
+                </table>
+            </div>
+            
+            <div class="solver-controls">
+                <button class="neural-button" onclick="generatePuzzle()">New Neural-Puzzle</button>
+                <button class="neural-button" onclick="solvePuzzle()">Auto-Solve Matrix</button>
+                <button class="neural-button" onclick="clearPuzzle()">Reset Grid</button>
+                <button class="neural-button" onclick="morphPuzzle()">Force Morph</button>
+            </div>
+            
+            <div class="dynamic-matrix">
+                <h4>Dynamic Morphing Status</h4>
+                <p>Next Auto-Morph in: <span id="morph-countdown">45</span> seconds</p>
+                <p>Total Morphs This Session: <span id="morph-count">0</span></p>
+                <p>Neural-Stability Level: <span id="stability-level">Optimal</span></p>
+            </div>
+            
+            <div class="alert-box" id="morph-alert" style="display: none;">
+                <p>⚠ MATRIX MORPHING IN PROGRESS ⚠</p>
+            </div>
+        </div>
+
+        <div id="help" class="section">
+            <h2>Neural-Help Documentation</h2>
+            
+            <h3>How to Use Neural-Sudoku Solver Pro</h3>
+            
+            <div class="dynamic-matrix">
+                <h4>Basic Operations</h4>
+                <ul>
+                    <li><strong>Enter Numbers:</strong> Click on any white cell and type numbers 1-9</li>
+                    <li><strong>Auto-Solve:</strong> Use "Auto-Solve Matrix" for instant neural-solution</li>
+                    <li><strong>New Puzzle:</strong> Generate fresh dynamic puzzles with varying difficulty</li>
+                </ul>
+            </div>
+            
+            <h3>Understanding Dynamic Morphing</h3>
+            <p>Our proprietary techno-mystic algorithms cause the puzzle to automatically transform every 30-60 seconds. This revolutionary feature ensures:</p>
+            <ul>
+                <li>Continuous challenge adaptation</li>
+                <li>Enhanced neural-pattern recognition</li>
+                <li>Prevention of solution memorization</li>
+                <li>Maximum cognitive stimulation</li>
+            </ul>
+            
+            <div class="status-display">
+                <p><strong>Pro Tip:</strong> The blue cells contain pre-generated neural-numbers that may shift during morphing cycles!</p>
+            </div>
+            
+            <h3>Troubleshooting</h3>
+            <ul>
+                <li><strong>Numbers Keep Changing:</strong> This is normal dynamic behavior</li>
+                <li><strong>Solution Becomes Invalid:</strong> Matrix recalibration in progress</li>
+                <li><strong>Grid Appears Corrupted:</strong> Refresh page to reset neural-cores</li>
+            </ul>
+        </div>
+
+        <div id="about" class="section">
+            <h2>About Neural-Sudoku Technology</h2>
+            
+            <div class="dynamic-matrix">
+                <h3>Revolutionary Puzzle Technology</h3>
+                <p>Neural-Sudoku Solver Pro represents the cutting edge of cognitive-computational puzzle generation. Our advanced systems utilize breakthrough techno-mystic algorithms to create truly dynamic solving experiences.</p>
+            </div>
+            
+            <h3>Core Technologies</h3>
+            <ul>
+                <li><strong>Neuro-Logic Matrices:</strong> Self-adapting number generation systems</li>
+                <li><strong>Dynamic Grid Morphing:</strong> Real-time puzzle transformation protocols</li>
+                <li><strong>Quantum-Cognitive Processing:</strong> Advanced pattern recognition engines</li>
+                <li><strong>Auto-Complexity Calibration:</strong> Difficulty adjustment based on solving patterns</li>
+            </ul>
+            
+            <h3>Development Team</h3>
+            <p><strong>Lead Neural-Engineer:</strong> Dr. Elena Vasquez, Institute of Cognitive Computing<br>
+            <strong>Algorithm Architect:</strong> Prof. Marcus Chen, Berlin Technical University<br>
+            <strong>Matrix Designer:</strong> Sarah Thompson, Digital Logic Solutions</p>
+            
+            <div class="status-display">
+                <p>Patent Pending: EU Patent Application #2000-NEURAL-4471</p>
+            </div>
+            
+            <h3>System Requirements</h3>
+            <ul>
+                <li>Hypernet Explorer 4.0 or higher</li>
+                <li>JavaScript enabled</li>
+                <li>Neural-processing compatible display</li>
+                <li>Minimum 512MB cognitive-RAM recommended</li>
+            </ul>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>Contact Neural-Support</h2>
+            
+            <div class="dynamic-matrix">
+                <h3>Technical Support Services</h3>
+                <p>Our neural-support team is available to assist with all aspects of the Dynamic Sudoku experience.</p>
+            </div>
+            
+            <h3>Support Channels</h3>
+            <p><strong>Primary Technical Support:</strong><br>
+            Email: <a href="mailto:neuralsupport@hexagram.corp">neuralsupport@hexagram.corp</a></p>
+            
+            <p><strong>Algorithm Issues:</strong><br>
+            Email: <a href="mailto:algorithms@hexagram.corp">algorithms@hexagram.corp</a></p>
+            
+            <p><strong>General Inquiries:</strong><br>
+            Email: <a href="mailto:info@hexagram.corp">info@hexagram.corp</a></p>
+            
+            <h3>Hypernet Social</h3>
+            <p><strong>Join our community:</strong><br>
+            Hexagram Network: <a href="mailto:neuralsudoku@hexagram.corp">neuralsudoku@hexagram.corp</a></p>
+            
+            <div class="status-display">
+                <p><strong>Response Time:</strong> 24-48 hours for technical issues<br>
+                <strong>Support Hours:</strong> Monday-Friday, 9:00-17:00 CET</p>
+            </div>
+            
+            <h3>Bug Reports</h3>
+            <p>If you encounter any issues with the neural-morphing algorithms, please include:</p>
+            <ul>
+                <li>Browser version (Hypernet Explorer recommended)</li>
+                <li>Description of morphing behavior</li>
+                <li>Screenshot of grid anomalies</li>
+                <li>Time/date of occurrence</li>
+            </ul>
+            
+            <p><strong>Emergency Technical Issues:</strong><br>
+            Email: <a href="mailto:emergency@hexagram.corp">emergency@hexagram.corp</a></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Neural-Logic Solutions GmbH | Powered by Dynamic Matrix Technology</p>
+        <p>Best viewed with Hypernet Explorer 5.0+ | Optimized for cognitive-displays</p>
+        <p>Technical support: <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a></p>
+    </div>
+
+    <script>
+        let currentPuzzle = [];
+        let morphTimer = 0;
+        let morphCount = 0;
+        let morphInterval = 45; // seconds
+        let isStable = true;
+        
+        // Initialize the sudoku grid
+        function initializeGrid() {
+            const table = document.getElementById('sudoku-table');
+            table.innerHTML = '';
+            
+            for (let i = 0; i < 9; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < 9; j++) {
+                    const cell = row.insertCell();
+                    cell.className = 'sudoku-cell';
+                    cell.contentEditable = true;
+                    cell.id = `cell-${i}-${j}`;
+                    
+                    // Add thick borders for 3x3 boxes
+                    if (i % 3 === 0 && i !== 0) cell.style.borderTop = '3px solid #000066';
+                    if (j % 3 === 0 && j !== 0) cell.style.borderLeft = '3px solid #000066';
+                    
+                    cell.addEventListener('input', function() {
+                        this.className = 'sudoku-cell user-input';
+                        if (this.textContent.length > 1) {
+                            this.textContent = this.textContent.slice(-1);
+                        }
+                        if (!/[1-9]/.test(this.textContent)) {
+                            this.textContent = '';
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Generate a basic sudoku puzzle
+        function generatePuzzle() {
+            clearPuzzle();
+            
+            // Simple pattern generation (not a true sudoku solver)
+            const patterns = [
+                [[5,3,0,0,7,0,0,0,0],
+                 [6,0,0,1,9,5,0,0,0],
+                 [0,9,8,0,0,0,0,6,0],
+                 [8,0,0,0,6,0,0,0,3],
+                 [4,0,0,8,0,3,0,0,1],
+                 [7,0,0,0,2,0,0,0,6],
+                 [0,6,0,0,0,0,2,8,0],
+                 [0,0,0,4,1,9,0,0,5],
+                 [0,0,0,0,8,0,0,7,9]],
+                 
+                [[0,2,0,6,0,8,0,0,0],
+                 [5,8,0,0,0,9,7,0,0],
+                 [0,0,0,0,4,0,0,0,0],
+                 [3,7,0,0,0,0,5,0,0],
+                 [6,0,0,0,0,0,0,0,4],
+                 [0,0,8,0,0,0,0,1,3],
+                 [0,0,0,0,2,0,0,0,0],
+                 [0,0,9,8,0,0,0,3,6],
+                 [0,0,0,3,0,6,0,9,0]]
+            ];
+            
+            const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
+            
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.getElementById(`cell-${i}-${j}`);
+                    if (selectedPattern[i][j] !== 0) {
+                        cell.textContent = selectedPattern[i][j];
+                        cell.className = 'sudoku-cell pre-filled';
+                        cell.contentEditable = false;
+                    }
+                }
+            }
+            
+            updateStatus('New neural-puzzle generated!');
+        }
+        
+        // Morph the puzzle by changing some numbers
+        function morphPuzzle() {
+            if (!isStable) return;
+            
+            isStable = false;
+            document.getElementById('morph-alert').style.display = 'block';
+            
+            setTimeout(() => {
+                // Change 2-4 random pre-filled numbers
+                const changeCount = Math.floor(Math.random() * 3) + 2;
+                const preFilled = document.querySelectorAll('.sudoku-cell.pre-filled');
+                
+                for (let i = 0; i < changeCount && i < preFilled.length; i++) {
+                    const randomCell = preFilled[Math.floor(Math.random() * preFilled.length)];
+                    const newNumber = Math.floor(Math.random() * 9) + 1;
+                    randomCell.textContent = newNumber;
+                }
+                
+                morphCount++;
+                document.getElementById('morph-count').textContent = morphCount;
+                morphTimer = 0;
+                morphInterval = Math.floor(Math.random() * 30) + 30; // 30-60 seconds
+                
+                isStable = true;
+                document.getElementById('morph-alert').style.display = 'none';
+                updateStatus('Matrix morphing complete!');
+            }, 2000);
+        }
+        
+        // Auto-solve (just fill some random valid numbers)
+        function solvePuzzle() {
+            const emptyCells = document.querySelectorAll('.sudoku-cell:not(.pre-filled)');
+            emptyCells.forEach(cell => {
+                if (cell.textContent === '') {
+                    cell.textContent = Math.floor(Math.random() * 9) + 1;
+                    cell.className = 'sudoku-cell user-input';
+                }
+            });
+            updateStatus('Neural-solution applied!');
+        }
+        
+        // Clear the puzzle
+        function clearPuzzle() {
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.getElementById(`cell-${i}-${j}`);
+                    cell.textContent = '';
+                    cell.className = 'sudoku-cell';
+                    cell.contentEditable = true;
+                }
+            }
+            updateStatus('Grid cleared - ready for new puzzle');
+        }
+        
+        // Update status display
+        function updateStatus(message) {
+            document.getElementById('puzzle-status').innerHTML = 
+                `Neural-Grid Active - Matrix Stability: <span id="stability">${Math.floor(Math.random() * 20) + 80}%</span> - ${message}`;
+        }
+        
+        // Timer function
+        function updateTimer() {
+            morphTimer++;
+            const remaining = morphInterval - morphTimer;
+            document.getElementById('morph-countdown').textContent = Math.max(0, remaining);
+            
+            if (remaining <= 0 && isStable) {
+                morphPuzzle();
+            }
+            
+            // Update stability level
+            const stability = Math.max(0, 100 - morphTimer * 2);
+            document.getElementById('stability').textContent = stability + '%';
+            
+            if (stability > 80) {
+                document.getElementById('stability-level').textContent = 'Optimal';
+            } else if (stability > 60) {
+                document.getElementById('stability-level').textContent = 'Moderate';
+            } else {
+                document.getElementById('stability-level').textContent = 'Unstable';
+            }
+        }
+        
+        // System status updates
+        function updateSystemStatus() {
+            const statuses = [
+                'NEURAL-CORES ONLINE',
+                'MATRIX CALIBRATING',
+                'QUANTUM-LOGIC ACTIVE',
+                'ALGORITHMS OPTIMIZING',
+                'DYNAMIC-GRID READY'
+            ];
+            
+            const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+            document.getElementById('system-status').textContent = randomStatus;
+        }
+        
+        // Show/hide sections
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGrid();
+            generatePuzzle();
+            
+            // Start timers
+            setInterval(updateTimer, 1000);
+            setInterval(updateSystemStatus, 5000);
+            
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

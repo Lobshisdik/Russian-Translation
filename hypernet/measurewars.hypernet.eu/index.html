@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeasureWars - The Ultimate Measurement Debate Forum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000080;
+            color: #FFFFFF;
+            background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAkAAAEALAAAAAAQABAAAAMjGLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLH0++vPnz6NOrX8++vfv38OPLn0+/vv37+PPr38+/v///gAMSOCCBBBZo4IEIJqjgggw26OCDEEYo4YQUVmjhhRhmqOGGHHbo4YcghijiiCSWaOKJKKao4oostujiizDGKOOMNNZo44045qjjjjz26OOPQAYp5JBEFmnkkUgmqeSSTDbp5JNQRinllFRWaeWVWGap5ZZcdunll2CGKeaYZJZp5plopqnmmmyOKScAADs=');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            color: #000000;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #FF0000, #FF6600);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 5px solid #000000;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            text-shadow: 3px 3px 0px #000000;
+            margin: 0;
+            font-family: Impact, Arial Black, sans-serif;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            margin: 5px 0;
+            background: #000000;
+            padding: 5px;
+            display: inline-block;
+        }
+        
+        .nav-bar {
+            background: #CCCCCC;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .nav-bar a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border: 2px outset #CCCCCC;
+            background: #DDDDDD;
+        }
+        
+        .nav-bar a:hover {
+            background: #EEEEEE;
+            border: 2px inset #CCCCCC;
+        }
+        
+        .main-content {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: #FFFFCC;
+            border-right: 3px solid #000000;
+            padding: 15px;
+        }
+        
+        .sidebar h3 {
+            background: #FF6600;
+            color: #FFFFFF;
+            margin: 0 -15px 10px -15px;
+            padding: 10px 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar a {
+            color: #0000FF;
+            text-decoration: underline;
+            font-size: 12px;
+        }
+        
+        .forum-area {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .thread {
+            border: 2px solid #000000;
+            margin-bottom: 15px;
+            background: #FFFFFF;
+        }
+        
+        .thread-header {
+            background: linear-gradient(90deg, #CCCCFF, #FFFFFF);
+            padding: 10px;
+            border-bottom: 1px solid #000000;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .thread-header:hover {
+            background: linear-gradient(90deg, #AAAAFF, #EEEEEE);
+        }
+        
+        .thread-stats {
+            font-size: 11px;
+            color: #666666;
+            margin-top: 3px;
+        }
+        
+        .thread-content {
+            display: none;
+            border-top: 2px solid #FF0000;
+        }
+        
+        .post {
+            border-bottom: 1px solid #CCCCCC;
+            padding: 15px;
+        }
+        
+        .post:last-child {
+            border-bottom: none;
+        }
+        
+        .post-header {
+            background: #EEEEEE;
+            padding: 8px;
+            margin: -15px -15px 10px -15px;
+            border-bottom: 1px solid #CCCCCC;
+            font-size: 12px;
+        }
+        
+        .username {
+            font-weight: bold;
+            color: #000080;
+        }
+        
+        .post-time {
+            color: #666666;
+            font-size: 10px;
+            float: right;
+        }
+        
+        .post-content {
+            line-height: 1.4;
+            font-size: 13px;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            float: left;
+            margin-right: 10px;
+            border: 1px solid #000000;
+        }
+        
+        .angry-text {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        
+        .caps-rage {
+            text-transform: uppercase;
+            color: #FF0000;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            border-top: 3px solid #FF0000;
+        }
+        
+        .online-users {
+            background: #CCFFCC;
+            border: 2px solid #00AA00;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .online-users h4 {
+            margin: 0 0 8px 0;
+            color: #006600;
+            font-size: 12px;
+        }
+        
+        .user-list {
+            font-size: 11px;
+        }
+        
+        .flame-border {
+            border: 3px solid #FF0000;
+            background: linear-gradient(45deg, #FFCCCC, #FFFFFF);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ MEASUREWARS ⚔️</h1>
+            <div class="subtitle">The Ultimate Battlefield for Metric vs Imperial Supremacy</div>
+            <div style="font-size: 11px; margin-top: 10px;">
+                Powered by HyperForum Engine v2.1 | Running on Hypernet Explorer Compatible
+            </div>
+        </div>
+        
+        <div class="nav-bar">
+            <a href="#" onclick="showSection('main')">🏠 Main Forum</a>
+            <a href="#" onclick="showSection('rules')">📋 Battle Rules</a>
+            <a href="#" onclick="showSection('stats')">📊 War Statistics</a>
+            <a href="#" onclick="showSection('hexagram')">🔗 Hexagram Links</a>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>🔥 Hot Topics</h3>
+                <ul>
+                    <li><a href="#thread1">Celsius vs Fahrenheit RAGE</a></li>
+                    <li><a href="#thread2">Kilometers are COMMUNIST</a></li>
+                    <li><a href="#thread3">Imperial System SUPERIORITY</a></li>
+                    <li><a href="#thread4">Metric Master Race</a></li>
+                </ul>
+                
+                <h3>⚡ Quick Stats</h3>
+                <div style="font-size: 11px;">
+                    Total Threads: 847<br>
+                    Posts: 23,891<br>
+                    Active Flamewars: 42<br>
+                    Banned Users: 156
+                </div>
+                
+                <div class="online-users">
+                    <h4>🟢 Warriors Online (23)</h4>
+                    <div class="user-list">
+                        MetricMaster2001, ImperialWarrior, CelsiusRage, FahrenheitFury, KilogramKiller, PoundPunisher, LiterLord
+                    </div>
+                </div>
+            </div>
+            
+            <div class="forum-area" id="main-section">
+                <div class="thread flame-border" id="thread1">
+                    <div class="thread-header" onclick="toggleThread('thread1')">
+                        🌡️ CELSIUS VS FAHRENHEIT - WHO'S THE REAL TEMPERATURE KING?!
+                        <div class="thread-stats">
+                            Started by: TemperatureTerminator | Posts: 234 | Last: 2 hours ago | 🔥🔥🔥
+                        </div>
+                    </div>
+                    <div class="thread-content">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="1.jpg" alt="Angry user avatar with thermometer" class="avatar">
+                                <span class="username">TemperatureTerminator</span>
+                                <span class="post-time">Jan 15, 2001 14:23</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="caps-rage">LISTEN UP YOU TEMPERATURE PEASANTS!</span><br><br>
+                                I'm SICK AND TIRED of people defending that <span class="angry-text">BACKWARDS Fahrenheit system</span>! 
+                                Celsius is OBVIOUSLY superior because:<br><br>
+                                ✅ Water freezes at 0° (LOGICAL!)<br>
+                                ✅ Water boils at 100° (MAKES SENSE!)<br>
+                                ✅ Used by 95% of THE ENTIRE PLANET<br><br>
+                                Meanwhile Fahrenheit users be like "Oh water freezes at 32 degrees" <span class="angry-text">WHAT KIND OF RANDOM NONSENSE IS THAT?!</span><br><br>
+                                Contact me on Hexagram: <a href="mailto:temperatureterminator@hexagram.corp">temperatureterminator@hexagram.corp</a>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="2.jpg" alt="User avatar with American flag and thermometer" class="avatar">
+                                <span class="username">FahrenheitFreedomFighter</span>
+                                <span class="post-time">Jan 15, 2001 14:45</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="angry-text">OH PLEASE!</span> Fahrenheit is INFINITELY more precise for human experience!<br><br>
+                                <span class="caps-rage">0°F TO 100°F = PERFECT HUMAN TEMPERATURE RANGE!</span><br><br>
+                                Your precious Celsius? <span class="angry-text">-18° to 38° for the same range? RIDICULOUS!</span><br><br>
+                                Fahrenheit gives you MORE GRANULAR CONTROL without decimals! 
+                                When it's 72°F outside, I KNOW exactly how to dress. When someone says "22°C" I have to do MATH in my head!<br><br>
+                                <span class="caps-rage">FAHRENHEIT = FREEDOM! CELSIUS = COMMUNIST PROPAGANDA!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="3.jpg" alt="Scientist avatar with lab coat and angry expression" class="avatar">
+                                <span class="username">ScienceSlammer</span>
+                                <span class="post-time">Jan 15, 2001 15:12</span>
+                            </div>
+                            <div class="post-content">
+                                Both of you are <span class="angry-text">COMPLETELY WRONG!</span><br><br>
+                                The ONLY scientifically valid temperature scale is <span class="caps-rage">KELVIN!</span><br><br>
+                                Absolute zero = 0K. BOOM. Done. No negative temperatures, no arbitrary reference points based on some random guy's armpit (looking at you, Fahrenheit).<br><br>
+                                Your "human experience" arguments are <span class="angry-text">EMOTIONAL NONSENSE!</span> Science doesn't care about your feelings!<br><br>
+                                Water boils at 373.15K. Water freezes at 273.15K. UNIVERSAL CONSTANTS!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="thread flame-border" id="thread2">
+                    <div class="thread-header" onclick="toggleThread('thread2')">
+                        🚗 KILOMETERS ARE COMMUNIST PROPAGANDA - PROVE ME WRONG!
+                        <div class="thread-stats">
+                            Started by: MileageMilitant | Posts: 187 | Last: 45 min ago | 🔥🔥🔥🔥🔥
+                        </div>
+                    </div>
+                    <div class="thread-content">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="4.jpg" alt="Angry driver avatar with speedometer" class="avatar">
+                                <span class="username">MileageMilitant</span>
+                                <span class="post-time">Jan 14, 2001 09:15</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="caps-rage">THE KILOMETER IS A TOOL OF OPPRESSION!</span><br><br>
+                                Think about it, sheeple:<br><br>
+                                🚗 Miles per gallon = REAL fuel efficiency that MATTERS<br>
+                                🚗 Miles per hour = NATURAL speed measurement<br>
+                                🚗 Mile markers on highways = TRADITIONAL and RELIABLE<br><br>
+                                But then the <span class="angry-text">GLOBAL ELITES</span> want you to think in "liters per 100 kilometers" - 
+                                <span class="caps-rage">WHAT KIND OF BACKWARDS MATH IS THAT?!</span><br><br>
+                                A mile is based on <span class="angry-text">HUMAN STEPS!</span> A kilometer is based on some French guy's measurement of the Earth. 
+                                I don't trust the French with ANYTHING, let alone my distance measurements!<br><br>
+                                Wake up and smell the FREEDOM UNITS!
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="5.jpg" alt="European user avatar with EU flag" class="avatar">
+                                <span class="username">KilometerKommander</span>
+                                <span class="post-time">Jan 14, 2001 10:02</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="angry-text">ARE YOU INSANE?!</span><br><br>
+                                Kilometers are METRIC! They're SCIENTIFIC! They're LOGICAL!<br><br>
+                                <span class="caps-rage">1 KILOMETER = 1000 METERS = PERFECT BASE-10 SYSTEM!</span><br><br>
+                                Your "mile" is <span class="angry-text">5,280 feet</span>. FIVE THOUSAND TWO HUNDRED AND EIGHTY! 
+                                <span class="caps-rage">WHO CAME UP WITH THAT RANDOM NUMBER?!</span><br><br>
+                                Meanwhile: 1 km = 1000 m = 100,000 cm = 1,000,000 mm<br>
+                                <span class="angry-text">PERFECT MATHEMATICAL HARMONY!</span><br><br>
+                                And don't get me started on your "fuel efficiency" - liters per 100km is SUPERIOR because 
+                                it tells you EXACTLY how much fuel you need for any distance!<br><br>
+                                Contact me to continue this debate: <a href="mailto:kilometerkommander@hexagram.corp">kilometerkommander@hexagram.corp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="thread flame-border" id="thread3">
+                    <div class="thread-header" onclick="toggleThread('thread3')">
+                        ⚖️ POUNDS AND OUNCES - THE WEIGHT MEASUREMENT GODS INTENDED!
+                        <div class="thread-stats">
+                            Started by: ImperialEmperor | Posts: 312 | Last: 1 hour ago | 🔥🔥🔥🔥
+                        </div>
+                    </div>
+                    <div class="thread-content">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="6.jpg" alt="Bodybuilder avatar holding weights" class="avatar">
+                                <span class="username">ImperialEmperor</span>
+                                <span class="post-time">Jan 13, 2001 16:30</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="caps-rage">BEHOLD THE GLORY OF THE IMPERIAL WEIGHT SYSTEM!</span><br><br>
+                                <span class="angry-text">16 ounces = 1 pound</span> - PERFECTION!<br>
+                                <span class="angry-text">14 pounds = 1 stone</span> - TRADITIONAL WISDOM!<br>
+                                <span class="angry-text">2,000 pounds = 1 ton</span> - AMERICAN POWER!<br><br>
+                                This system has SOUL! It has HISTORY! It has been tested by CENTURIES of use!<br><br>
+                                Compare that to your sterile "kilogram" - <span class="caps-rage">JUST A CHUNK OF METAL IN PARIS!</span><br><br>
+                                When I bench press 250 pounds, that means something! 
+                                "113.4 kilograms" sounds like a <span class="angry-text">ROBOT'S CALCULATION!</span><br><br>
+                                Imperial measurements connect us to our ANCESTORS who built civilizations with these units!
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="7.jpg" alt="Scientist avatar with scale and calculator" class="avatar">
+                                <span class="username">MetricMastermind</span>
+                                <span class="post-time">Jan 13, 2001 17:15</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="angry-text">YOUR ANCESTORS ALSO DIED OF THE PLAGUE!</span><br><br>
+                                Just because something is old doesn't make it GOOD!<br><br>
+                                <span class="caps-rage">THE KILOGRAM IS DEFINED BY FUNDAMENTAL CONSTANTS OF PHYSICS!</span><br><br>
+                                Your precious pound? Based on some medieval king's foot size! <span class="angry-text">LITERALLY!</span><br><br>
+                                Kilograms scale PERFECTLY:<br>
+                                • 1000 grams = 1 kilogram<br>
+                                • 1000 kilograms = 1 metric ton<br>
+                                • PERFECT BASE-10 HARMONY!<br><br>
+                                Your system: 16 ounces, 14 pounds, 2000 pounds... <span class="caps-rage">WHAT KIND OF MATHEMATICAL CHAOS IS THIS?!</span><br><br>
+                                Science has MOVED ON! Join the 21st century!<br><br>
+                                My Hexagram: <a href="mailto:metricmastermind@hexagram.corp">metricmastermind@hexagram.corp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="thread flame-border" id="thread4">
+                    <div class="thread-header" onclick="toggleThread('thread4')">
+                        🥤 LITERS VS GALLONS - THE LIQUID MEASUREMENT APOCALYPSE!
+                        <div class="thread-stats">
+                            Started by: LiquidLegend | Posts: 156 | Last: 30 min ago | 🔥🔥🔥
+                        </div>
+                    </div>
+                    <div class="thread-content">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="8.jpg" alt="Chef avatar with measuring cups" class="avatar">
+                                <span class="username">LiquidLegend</span>
+                                <span class="post-time">Jan 12, 2001 11:45</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="caps-rage">THE GREAT LIQUID DEBATE ENDS HERE!</span><br><br>
+                                Gallons, quarts, pints, cups, fluid ounces - <span class="angry-text">A BEAUTIFUL HIERARCHY!</span><br><br>
+                                In cooking:<br>
+                                🥛 1 gallon = 4 quarts<br>
+                                🥛 1 quart = 2 pints<br>
+                                🥛 1 pint = 2 cups<br>
+                                🥛 1 cup = 8 fluid ounces<br><br>
+                                <span class="caps-rage">PERFECT DOUBLING SYSTEM!</span> Easy to halve recipes, easy to double them!<br><br>
+                                Your "liter" system? <span class="angry-text">1000 milliliters = 1 liter</span>. 
+                                Try halving 250ml in your head while cooking! <span class="caps-rage">IMPOSSIBLE!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="9.jpg" alt="Bartender avatar with measuring tools" class="avatar">
+                                <span class="username">LiterLord</span>
+                                <span class="post-time">Jan 12, 2001 13:22</span>
+                            </div>
+                            <div class="post-content">
+                                <span class="angry-text">DOUBLING SYSTEM?! ARE YOU MAD?!</span><br><br>
+                                <span class="caps-rage">EVERYTHING IN METRIC IS BASE-10!</span><br><br>
+                                • 10 ml = 1 cl<br>
+                                • 100 ml = 1 dl<br>
+                                • 1000 ml = 1 liter<br><br>
+                                <span class="angry-text">PURE MATHEMATICAL BEAUTY!</span><br><br>
+                                And your "easy doubling"? <span class="caps-rage">WHAT HAPPENS WHEN YOU NEED TO TRIPLE A RECIPE?!</span><br><br>
+                                3 cups = ? fluid ounces = ? pints = ? quarts<br>
+                                <span class="angry-text">CALCULATOR REQUIRED!</span><br><br>
+                                750ml × 3 = 2.25 liters = 2250ml<br>
+                                <span class="caps-rage">BOOM! MENTAL MATH VICTORY!</span><br><br>
+                                Plus, wine bottles are 750ml worldwide. Beer is 500ml or 330ml. 
+                                <span class="angry-text">THE WORLD HAS CHOSEN!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2001 MeasureWars Forum | Hosted on EuroNet Servers | 
+            Best viewed in Hypernet Explorer 5.5+ | 
+            <span style="color: #FF6600;">⚠️ Warning: This forum contains extreme measurement opinions</span>
+        </div>
+    </div>
+
+    <script>
+        // Forum data structure
+        const forumData = {
+            threads: {
+                thread1: {
+                    id: 'thread1',
+                    title: 'CELSIUS VS FAHRENHEIT - WHO\'S THE REAL TEMPERATURE KING?!',
+                    posts: 234,
+                    lastActivity: '2 hours ago',
+                    starter: 'TemperatureTerminator',
+                    heat: 5
+                },
+                thread2: {
+                    id: 'thread2', 
+                    title: 'KILOMETERS ARE COMMUNIST PROPAGANDA - PROVE ME WRONG!',
+                    posts: 187,
+                    lastActivity: '45 min ago',
+                    starter: 'MileageMilitant',
+                    heat: 5
+                },
+                thread3: {
+                    id: 'thread3',
+                    title: 'POUNDS AND OUNCES - THE WEIGHT MEASUREMENT GODS INTENDED!',
+                    posts: 312,
+                    lastActivity: '1 hour ago', 
+                    starter: 'ImperialEmperor',
+                    heat: 4
+                },
+                thread4: {
+                    id: 'thread4',
+                    title: 'LITERS VS GALLONS - THE LIQUID MEASUREMENT APOCALYPSE!',
+                    posts: 156,
+                    lastActivity: '30 min ago',
+                    starter: 'LiquidLegend', 
+                    heat: 3
+                }
+            },
+            users: {
+                online: 23,
+                totalRegistered: 2847,
+                banned: 156,
+                activeWarriors: ['MetricMaster2001', 'ImperialWarrior', 'CelsiusRage', 'FahrenheitFury']
+            },
+            stats: {
+                totalThreads: 847,
+                totalPosts: 23891,
+                activeFlameWars: 42
+            }
+        };
+
+        // Thread toggle functionality
+        function toggleThread(threadId) {
+            const thread = document.getElementById(threadId);
+            const content = thread.querySelector('.thread-content');
+            
+            // Close all other threads
+            const allThreads = document.querySelectorAll('.thread-content');
+            allThreads.forEach(t => {
+                if (t !== content) {
+                    t.style.display = 'none';
+                }
+            });
+            
+            // Toggle current thread
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'block';
+                // Scroll to thread
+                thread.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                content.style.display = 'none';
+            }
+        }
+
+        // Navigation functionality
+        function showSection(sectionName) {
+            const mainSection = document.getElementById('main-section');
+            
+            if (sectionName === 'main') {
+                mainSection.style.display = 'block';
+            } else {
+                mainSection.style.display = 'none';
+                showInfoSection(sectionName);
+            }
+        }
+
+        function showInfoSection(sectionName) {
+            const forumArea = document.querySelector('.forum-area');
+            let content = '';
+            
+            switch(sectionName) {
+                case 'rules':
+                    content = `
+                        <div style="background: #FFCCCC; border: 3px solid #FF0000; padding: 20px;">
+                            <h2>⚔️ MEASUREWARS BATTLE RULES ⚔️</h2>
+                            <h3>🔥 ENGAGEMENT PROTOCOLS:</h3>
+                            <p><strong>1. NO MERCY:</strong> Attack measurement systems, not users (unless they really deserve it)</p>
+                            <p><strong>2. CAPS LOCK IS CRUISE CONTROL FOR COOL:</strong> Use liberally for emphasis</p>
+                            <p><strong>3. SCIENTIFIC SOURCES REQUIRED:</strong> Back up your rage with FACTS</p>
+                            <p><strong>4. NO DECIMAL COMPROMISE:</strong> Either you're metric or you're WRONG</p>
+                            <p><strong>5. TEMPERATURE SUPREMACY:</strong> Kelvin users will be mocked equally by both sides</p>
+                            <p><strong>6. HEXAGRAM LINKING:</strong> Feel free to continue flame wars via private Hexagram messages</p>
+                            <h3>🚫 BANNED TOPICS:</h3>
+                            <p>• Suggesting both systems can coexist peacefully</p>
+                            <p>• Converting between systems to "help" people</p>
+                            <p>• Mentioning that NASA lost a Mars orbiter due to unit confusion</p>
+                            <p>• Being reasonable or diplomatic</p>
+                            <h3>💀 PUNISHMENT SYSTEM:</h3>
+                            <p><span class="angry-text">FIRST OFFENSE:</span> Forced to use the "enemy" system for one week</p>
+                            <p><span class="angry-text">SECOND OFFENSE:</span> Avatar changed to a calculator for one month</p>
+                            <p><span class="angry-text">THIRD OFFENSE:</span> Permanent ban and your measurements posted in Comic Sans</p>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" onclick="showSection('main')" style="background: #00AA00; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold;">⬅️ BACK TO THE BATTLEFIELD</a>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'stats':
+                    content = `
+                        <div style="background: #CCFFCC; border: 3px solid #00AA00; padding: 20px;">
+                            <h2>📊 MEASUREWARS STATISTICS 📊</h2>
+                            <div style="display: flex; justify-content: space-around; text-align: center; margin: 20px 0;">
+                                <div style="background: #FF6666; color: white; padding: 15px; border: 2px solid #000;">
+                                    <h3>🔴 IMPERIAL FACTION</h3>
+                                    <p><strong>Active Warriors:</strong> 847</p>
+                                    <p><strong>Posts This Month:</strong> 12,456</p>
+                                    <p><strong>Victories:</strong> 23</p>
+                                    <p><strong>Rage Level:</strong> MAXIMUM</p>
+                                </div>
+                                <div style="background: #6666FF; color: white; padding: 15px; border: 2px solid #000;">
+                                    <h3>🔵 METRIC LEGION</h3>
+                                    <p><strong>Active Warriors:</strong> 1,203</p>
+                                    <p><strong>Posts This Month:</strong> 18,923</p>
+                                    <p><strong>Victories:</strong> 31</p>
+                                    <p><strong>Logic Level:</strong> SUPERIOR</p>
+                                </div>
+                            </div>
+                            <h3>🏆 TOP FLAME WARRIORS (January 2001)</h3>
+                            <ol style="background: #FFFFCC; padding: 15px; border: 2px solid #FFAA00;">
+                                <li><strong>MetricMastermind</strong> - 2,847 posts | 156 conversions | 🔥🔥🔥🔥🔥</li>
+                                <li><strong>ImperialEmperor</strong> - 2,203 posts | 89 defenses | 🔥🔥🔥🔥</li>
+                                <li><strong>TemperatureTerminator</strong> - 1,891 posts | 203 thermal arguments | 🔥🔥🔥🔥</li>
+                                <li><strong>FahrenheitFreedomFighter</strong> - 1,654 posts | 67 freedom declarations | 🔥🔥🔥</li>
+                                <li><strong>KilometerKommander</strong> - 1,445 posts | 134 distance disputes | 🔥🔥🔥</li>
+                            </ol>
+                            <h3>📈 MONTHLY BATTLE TRENDS</h3>
+                            <p><span class="angry-text">HOTTEST DEBATE:</span> Celsius vs Fahrenheit (573% increase in rage)</p>
+                            <p><span class="angry-text">MOST CONVERTS:</span> 23 Imperial users switched to Metric (traitors!)</p>
+                            <p><span class="angry-text">BIGGEST CONTROVERSY:</span> Someone suggested using Rankine scale (banned immediately)</p>
+                            <p><span class="angry-text">PEAK TRAFFIC:</span> 15,000 simultaneous users during "The Great Liter Meltdown"</p>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" onclick="showSection('main')" style="background: #00AA00; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold;">⬅️ RETURN TO COMBAT</a>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'hexagram':
+                    content = `
+                        <div style="background: #CCCCFF; border: 3px solid #0000AA; padding: 20px;">
+                            <h2>🔗 HEXAGRAM SOCIAL NETWORK CONNECTIONS 🔗</h2>
+                            <p style="font-size: 14px; color: #000066;"><em>Connect with fellow measurement warriors on Hexagram - Europe's premier social network!</em></p>
+                            
+                            <h3>🔥 IMPERIAL FACTION HEXAGRAM PROFILES</h3>
+                            <div style="background: #FFCCCC; padding: 15px; margin: 10px 0; border: 2px solid #FF0000;">
+                                <p><strong>🇺🇸 ImperialEmperor</strong><br>
+                                Contact: <a href="mailto:imperialemperor@hexagram.corp">imperialemperor@hexagram.corp</a><br>
+                                Status: "Converting metric users one pound at a time!" | Followers: 2,847</p>
+                                
+                                <p><strong>🌡️ FahrenheitFreedomFighter</strong><br>
+                                Contact: <a href="mailto:fahrenheitfreedom@hexagram.corp">fahrenheitfreedom@hexagram.corp</a><br>
+                                Status: "32°F = Freedom's freezing point!" | Followers: 1,923</p>
+                                
+                                <p><strong>🚗 MileageMilitant</strong><br>
+                                Contact: <a href="mailto:mileagemilitant@hexagram.corp">mileagemilitant@hexagram.corp</a><br>
+                                Status: "Miles per gallon or GTFO!" | Followers: 1,456</p>
+                                
+                                <p><strong>🥛 LiquidLegend</strong><br>
+                                Contact: <a href="mailto:liquidlegend@hexagram.corp">liquidlegend@hexagram.corp</a><br>
+                                Status: "Gallons, quarts, pints - the holy trinity!" | Followers: 987</p>
+                            </div>
+                            
+                            <h3>⚡ METRIC LEGION HEXAGRAM PROFILES</h3>
+                            <div style="background: #CCFFCC; padding: 15px; margin: 10px 0; border: 2px solid #00AA00;">
+                                <p><strong>🧠 MetricMastermind</strong><br>
+                                Contact: <a href="mailto:metricmastermind@hexagram.corp">metricmastermind@hexagram.corp</a><br>
+                                Status: "Base-10 supremacy since 1799!" | Followers: 3,421</p>
+                                
+                                <p><strong>🌡️ TemperatureTerminator</strong><br>
+                                Contact: <a href="mailto:temperatureterminator@hexagram.corp">temperatureterminator@hexagram.corp</a><br>
+                                Status: "0°C to 100°C = LOGICAL PERFECTION!" | Followers: 2,654</p>
+                                
+                                <p><strong>🚀 KilometerKommander</strong><br>
+                                Contact: <a href="mailto:kilometerkommander@hexagram.corp">kilometerkommander@hexagram.corp</a><br>
+                                Status: "1000m = 1km = MATHEMATICAL BEAUTY!" | Followers: 2,198</p>
+                                
+                                <p><strong>🍺 LiterLord</strong><br>
+                                Contact: <a href="mailto:literlord@hexagram.corp">literlord@hexagram.corp</a><br>
+                                Status: "750ml wine bottles worldwide = metric victory!" | Followers: 1,876</p>
+                            </div>
+                            
+                            <h3>⚠️ NEUTRAL ZONE (DANGEROUS TERRITORY)</h3>
+                            <div style="background: #FFFFCC; padding: 15px; margin: 10px 0; border: 2px solid #FFAA00;">
+                                <p><strong>🔬 ScienceSlammer</strong><br>
+                                Contact: <a href="mailto:scienceslammer@hexagram.corp">scienceslammer@hexagram.corp</a><br>
+                                Status: "Kelvin is the only TRUE temperature scale!" | Followers: 892<br>
+                                <span style="color: #FF0000; font-size: 11px;">⚠️ Warning: Universally despised by both factions</span></p>
+                            </div>
+                            
+                            <div style="background: #FFEEEE; padding: 15px; margin: 20px 0; border: 2px solid #FF0000;">
+                                <h4 style="color: #AA0000;">💀 HEXAGRAM MEASUREMENT GROUPS TO JOIN:</h4>
+                                <p>• <strong>Imperial Warriors United</strong> - 15,847 members</p>
+                                <p>• <strong>Metric Supremacy Alliance</strong> - 23,156 members</p>
+                                <p>• <strong>Temperature War Veterans</strong> - 8,923 members</p>
+                                <p>• <strong>Anti-Decimal Resistance</strong> - 5,634 members</p>
+                                <p>• <strong>Celsius Conversion Club</strong> - 12,789 members</p>
+                                <p>• <strong>Fahrenheit Freedom Fighters</strong> - 7,456 members</p>
+                            </div>
+                            
+                            <p style="font-size: 11px; color: #666666; font-style: italic;">
+                                Note: All Hexagram profiles are verified measurement warriors. 
+                                Fake profiles promoting "measurement peace" will be reported and terminated immediately.
+                            </p>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" onclick="showSection('main')" style="background: #00AA00; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold;">⬅️ BACK TO THE WAR ZONE</a>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            forumArea.innerHTML = content;
+        }
+
+        // Initialize forum
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some random activity simulation
+            setInterval(function() {
+                const userCount = document.querySelector('.user-list');
+                if (userCount) {
+                    const count = Math.floor(Math.random() * 10) + 15;
+                    document.querySelector('.online-users h4').innerHTML = `🟢 Warriors Online (${count})`;
+                }
+            }, 30000);
+            
+            // Add flame effect to angry posts
+            const angryTexts = document.querySelectorAll('.caps-rage, .angry-text');
+            angryTexts.forEach(text => {
+                text.addEventListener('mouseover', function() {
+                    this.style.textShadow = '2px 2px 4px #FF0000';
+                });
+                text.addEventListener('mouseout', function() {
+                    this.style.textShadow = 'none';
+                });
+            });
+        });
+
+        // Add some easter eggs
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+                alert('🔥 METRIC POWER ACTIVATED! 🔥\n\nAll temperatures now displayed in Celsius!\nAll distances in kilometers!\nAll weights in kilograms!\n\n...just kidding, this is still the imperial web! 😈');
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                alert('🦅 IMPERIAL FREEDOM ENGAGED! 🦅\n\nLiberty units activated!\nFreedom measurements enabled!\nCommie metrics disabled!\n\n...or maybe not, we\'re in Europe after all! 🇪🇺');
+            }
+        });
+    </script>
+</body>
+</html>

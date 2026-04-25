@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypernet Explorer Progress Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000000;
+            min-height: 100vh;
+            padding: 20px;
+            color: #FFD700;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #000000;
+            border-radius: 0;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            border: 4px solid #FFD700;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFD700 0px,
+                #FFD700 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFD700 0px,
+                #FFD700 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .header {
+            background: #000000;
+            color: #FFD700;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid #FFD700;
+            position: relative;
+        }
+
+        .header::before {
+            content: '◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆';
+            display: block;
+            font-size: 0.8em;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 8px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+
+        .header::after {
+            content: '◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆';
+            display: block;
+            font-size: 0.8em;
+            letter-spacing: 4px;
+            margin-top: 15px;
+            opacity: 0.6;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #000000;
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            background: #000000;
+            color: #FFD700;
+            border: 3px solid #FFD700;
+            padding: 15px 40px;
+            border-radius: 0;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .btn::before,
+        .btn::after {
+            content: '▐';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .btn::before {
+            left: 10px;
+        }
+
+        .btn::after {
+            right: 10px;
+        }
+
+        .btn:hover {
+            background: #FFD700;
+            color: #000000;
+        }
+
+        .status {
+            text-align: center;
+            color: #FFD700;
+            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            padding: 20px 30px 0;
+            background: #000000;
+            border-bottom: 2px solid #FFD700;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: #000000;
+            border: 2px solid #FFD700;
+            border-bottom: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            position: relative;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+
+        .tab:hover {
+            background: #1a1a00;
+        }
+
+        .tab.active {
+            background: #FFD700;
+            color: #000000;
+        }
+
+        .content {
+            padding: 30px;
+            display: none;
+            background: #000000;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .map-card {
+            background: #0a0a0a;
+            border: 2px solid #FFD700;
+            border-radius: 0;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .map-card::before {
+            content: '▐';
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            color: #FFD700;
+            opacity: 0.3;
+        }
+
+        .map-card::after {
+            content: '▌';
+            position: absolute;
+            top: 10px;
+            right: 5px;
+            color: #FFD700;
+            opacity: 0.3;
+        }
+
+        .map-card:hover {
+            border-color: #FFA500;
+            background: #0f0f0f;
+        }
+
+        .map-card.error {
+            border-color: #FF4500;
+            background: #1a0000;
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .map-title {
+            font-size: 1.5em;
+            color: #FFD700;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .map-id {
+            background: #FFD700;
+            color: #000000;
+            padding: 5px 15px;
+            border-radius: 0;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .map-names {
+            margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #FFD700;
+            letter-spacing: 1px;
+        }
+
+        .value {
+            color: #FFA500;
+        }
+
+        .tags-section {
+            margin-bottom: 15px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background: #000000;
+            color: #FFD700;
+            padding: 5px 12px;
+            border-radius: 0;
+            font-size: 0.9em;
+            border: 1px solid #FFD700;
+        }
+
+        .warning {
+            background: #1a0000;
+            color: #FF4500;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 0;
+            margin-top: 10px;
+            border-left: 4px solid #FF4500;
+            border: 2px solid #FF4500;
+        }
+
+        .encounters-section {
+            margin-top: 15px;
+        }
+
+        .encounters-list {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 0;
+            margin-top: 10px;
+            border: 1px solid #FFD700;
+        }
+
+        .encounter-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #FFD700;
+            color: #FFA500;
+        }
+
+        .encounter-item:last-child {
+            border-bottom: none;
+        }
+
+        .no-data {
+            color: #666;
+            font-style: italic;
+        }
+
+        .legend {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 0;
+            margin-bottom: 20px;
+            border: 2px solid #FFD700;
+        }
+
+        .legend h3 {
+            margin-bottom: 15px;
+            color: #FFD700;
+            letter-spacing: 2px;
+            font-size: 1.3em;
+        }
+
+        .legend ul {
+            list-style-position: inside;
+            color: #FFA500;
+            line-height: 1.8;
+        }
+
+        .legend li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #0a0a0a;
+            border: 2px solid #FFD700;
+        }
+
+        thead {
+            background: #000000;
+            color: #FFD700;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid #FFD700;
+            letter-spacing: 2px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            color: #FFA500;
+        }
+
+        tbody tr:hover {
+            background: #1a1a00;
+        }
+
+        .section-header {
+            font-size: 1.8em;
+            color: #FFD700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FFD700;
+            letter-spacing: 3px;
+        }
+
+        .root-map-container {
+            margin-bottom: 30px;
+        }
+
+        .root-map-header {
+            background: #000000;
+            color: #FFD700;
+            padding: 18px 25px;
+            border-radius: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+            border: 3px solid #FFD700;
+            position: relative;
+        }
+
+        .root-map-header::before {
+            content: '◢';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 1.5em;
+        }
+
+        .root-map-header::after {
+            content: '◣';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 1.5em;
+        }
+
+        .root-map-header:hover {
+            transform: translateX(5px);
+            background: #1a1a00;
+        }
+
+        .root-map-header .title {
+            font-size: 1.3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .root-map-header .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+
+        .root-map-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .children-container {
+            display: none;
+            margin-left: 20px;
+            border-left: 3px solid #FFD700;
+            padding-left: 20px;
+        }
+
+        .children-container.expanded {
+            display: block;
+        }
+
+        .map-card.child {
+            margin-left: 0;
+        }
+
+        .map-card.child.level-1 {
+            margin-left: 0px;
+        }
+
+        .map-card.child.level-2 {
+            margin-left: 30px;
+        }
+
+        .map-card.child.level-3 {
+            margin-left: 60px;
+        }
+
+        .map-card.child.level-4 {
+            margin-left: 90px;
+        }
+
+        .map-card.child.level-5 {
+            margin-left: 120px;
+        }
+
+        .progress-tracker {
+            background: #0a0a0a;
+            border: 3px solid #FFD700;
+            border-radius: 0;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .progress-tracker::before {
+            content: '═══════════════════════════════════════════════════════════════════════';
+            display: block;
+            color: #FFD700;
+            opacity: 0.3;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-tracker::after {
+            content: '═══════════════════════════════════════════════════════════════════════';
+            display: block;
+            color: #FFD700;
+            opacity: 0.3;
+            font-size: 0.8em;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-tracker h3 {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+
+        .progress-bar-container {
+            background: #000000;
+            border: 3px solid #FFD700;
+            border-radius: 0;
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                #FFD700,
+                #FFD700 10px,
+                #FFA500 10px,
+                #FFA500 20px
+            );
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.5em;
+            position: relative;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #FFD700;
+            font-size: 1.4em;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        /* Table sorting and filtering styles */
+        .table-controls {
+            margin-bottom: 15px;
+            background: #0a0a0a;
+            padding: 15px;
+            border: 2px solid #FFD700;
+        }
+
+        .filter-input {
+            background: #000000;
+            border: 2px solid #FFD700;
+            color: #FFD700;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #FFA500;
+        }
+
+        th {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background: #1a1a00;
+        }
+
+        th.sortable::after {
+            content: ' ⇅';
+            opacity: 0.5;
+            font-size: 0.8em;
+        }
+
+        th.sort-asc::after {
+            content: ' ▲';
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ▼';
+            opacity: 1;
+        }
+
+        .filter-row {
+            background: #000000;
+        }
+
+        .filter-row input {
+            width: 100%;
+            background: #000000;
+            border: 1px solid #FFD700;
+            color: #FFD700;
+            padding: 4px 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .filter-row input:focus {
+            outline: none;
+            border-color: #FFA500;
+        }
+
+        .hidden-row {
+            display: none;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 HYPERNET EXPLORER PROGRESS TRACKER</h1>
+            <p>Track your RPG Maker MZ project progress</p>
+            <div id="overall-progress" style="margin-top: 20px; display: flex; gap: 40px; justify-content: center; align-items: center;">
+                <div style="text-align: center;">
+                    <div style="font-size: 0.9em; opacity: 0.8; margin-bottom: 5px;">TOTAL COMPLETION (A-J)</div>
+                    <div id="total-percentage" style="font-size: 2em; font-weight: bold; letter-spacing: 4px;">0%</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 0.9em; opacity: 0.8; margin-bottom: 5px;">DEMO COMPLETION (A-C)</div>
+                    <div id="demo-percentage" style="font-size: 2em; font-weight: bold; letter-spacing: 4px;">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <label for="folderInput" class="btn">Select Project Folder</label>
+                <input type="file" id="folderInput" webkitdirectory directory multiple>
+                <div class="status" id="status">No folder selected. Please select your RPG Maker MZ project root folder.</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div style="display: inline-block; padding: 12px 20px; background: #1a1a00; color: #FFA500; font-weight: bold; letter-spacing: 2px; border: 2px solid #FFD700; margin-right: 20px;">
+                ▐ MAPS ▌
+            </div>
+            <div class="tab active" onclick="switchTab('maps')">All Maps</div>
+            <div class="tab" onclick="switchTab('world')">World</div>
+            <div class="tab" onclick="switchTab('level-a')">Level A</div>
+            <div class="tab" onclick="switchTab('level-b')">Level B</div>
+            <div class="tab" onclick="switchTab('level-c')">Level C</div>
+            <div class="tab" onclick="switchTab('level-d')">Level D</div>
+            <div class="tab" onclick="switchTab('level-e')">Level E</div>
+            <div class="tab" onclick="switchTab('level-f')">Level F</div>
+            <div class="tab" onclick="switchTab('level-g')">Level G</div>
+            <div class="tab" onclick="switchTab('level-h')">Level H</div>
+            <div class="tab" onclick="switchTab('level-i')">Level I</div>
+            <div class="tab" onclick="switchTab('level-j')">Level J</div>
+        </div>
+        <div class="tabs" style="border-top: none; padding-top: 0;">
+            <div style="display: inline-block; padding: 12px 20px; background: #1a1a00; color: #FFA500; font-weight: bold; letter-spacing: 2px; border: 2px solid #FFD700; margin-right: 20px;">
+                ▐ DATABASE ▌
+            </div>
+            <div class="tab" onclick="switchTab('items')">Items</div>
+            <div class="tab" onclick="switchTab('weapons')">Weapons</div>
+            <div class="tab" onclick="switchTab('armors')">Armors</div>
+            <div class="tab" onclick="switchTab('enemies')">Enemies</div>
+        </div>
+
+        <div class="content active" id="maps-content"></div>
+        <div class="content" id="world-content"></div>
+        <div class="content" id="level-a-content"></div>
+        <div class="content" id="level-b-content"></div>
+        <div class="content" id="level-c-content"></div>
+        <div class="content" id="level-d-content"></div>
+        <div class="content" id="level-e-content"></div>
+        <div class="content" id="level-f-content"></div>
+        <div class="content" id="level-g-content"></div>
+        <div class="content" id="level-h-content"></div>
+        <div class="content" id="level-i-content"></div>
+        <div class="content" id="level-j-content"></div>
+        <div class="content" id="items-content"></div>
+        <div class="content" id="weapons-content"></div>
+        <div class="content" id="armors-content"></div>
+        <div class="content" id="enemies-content"></div>
+    </div>
+
+    <script>
+        let mapInfos = {};
+        let troops = [];
+        let items = [];
+        let weapons = [];
+        let armors = [];
+        let enemies = [];
+        let mapImages = {}; // Store map images as data URLs
+        let battlerImages = {}; // Store enemy battler images as data URLs
+        let characterImages = {}; // Store character images for enemies as data URLs
+
+        const MATERIAL_NAMES = {
+            565: "Steel ingot",
+            566: "Titanium ingot",
+            567: "Varlenia Ingot",
+            568: "Crystal",
+            569: "Glass",
+            570: "Wood",
+            571: "Leather",
+            572: "Cloth",
+            573: "Bone",
+            574: "Meat",
+            575: "Plant matter",
+            576: "Herb extract",
+            577: "Oil Flask",
+            578: "Acidic Solution",
+            579: "Arcane Essence",
+            580: "Ethereal Shard",
+            581: "Quantum Core",
+            582: "Circuit Board",
+            583: "Microchip",
+            584: "Battery Cell",
+            585: "Plastic Polymer",
+            586: "Composite Resin",
+            587: "Nanotube Module"
+        };
+
+        // Table sorting and filtering utilities
+        function makeTableSortable(tableElement) {
+            const headers = tableElement.querySelectorAll('thead th');
+            const tbody = tableElement.querySelector('tbody');
+            
+            headers.forEach((header, index) => {
+                header.classList.add('sortable');
+                header.dataset.columnIndex = index;
+                header.dataset.sortDirection = 'none';
+                
+                header.addEventListener('click', function() {
+                    // Remove sort classes from all headers
+                    headers.forEach(h => {
+                        if (h !== header) {
+                            h.classList.remove('sort-asc', 'sort-desc');
+                            h.dataset.sortDirection = 'none';
+                        }
+                    });
+                    
+                    // Toggle sort direction
+                    let direction = header.dataset.sortDirection;
+                    if (direction === 'none' || direction === 'desc') {
+                        direction = 'asc';
+                        header.classList.remove('sort-desc');
+                        header.classList.add('sort-asc');
+                    } else {
+                        direction = 'desc';
+                        header.classList.remove('sort-asc');
+                        header.classList.add('sort-desc');
+                    }
+                    header.dataset.sortDirection = direction;
+                    
+                    // Sort the table
+                    sortTable(tbody, index, direction);
+                });
+            });
+        }
+        
+        function sortTable(tbody, columnIndex, direction) {
+            const rows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.classList.contains('filter-row'));
+            
+            rows.sort((a, b) => {
+                const aCell = a.cells[columnIndex];
+                const bCell = b.cells[columnIndex];
+                
+                if (!aCell || !bCell) return 0;
+                
+                let aValue = aCell.textContent.trim();
+                let bValue = bCell.textContent.trim();
+                
+                // Try to parse as numbers
+                const aNum = parseFloat(aValue);
+                const bNum = parseFloat(bValue);
+                
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return direction === 'asc' ? aNum - bNum : bNum - aNum;
+                }
+                
+                // String comparison
+                if (direction === 'asc') {
+                    return aValue.localeCompare(bValue);
+                } else {
+                    return bValue.localeCompare(aValue);
+                }
+            });
+            
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        function makeTableFilterable(tableElement) {
+            const thead = tableElement.querySelector('thead');
+            const tbody = tableElement.querySelector('tbody');
+            const headers = tableElement.querySelectorAll('thead th');
+            
+            // Create filter row
+            const filterRow = document.createElement('tr');
+            filterRow.className = 'filter-row';
+            
+            headers.forEach((header, index) => {
+                const filterCell = document.createElement('th');
+                const filterInput = document.createElement('input');
+                filterInput.type = 'text';
+                filterInput.placeholder = '🔍 Filter...';
+                filterInput.dataset.columnIndex = index;
+                
+                filterInput.addEventListener('input', function() {
+                    filterTable(tbody, tableElement);
+                });
+                
+                filterCell.appendChild(filterInput);
+                filterRow.appendChild(filterCell);
+            });
+            
+            thead.appendChild(filterRow);
+        }
+        
+        function filterTable(tbody, tableElement) {
+            const filterRow = tableElement.querySelector('.filter-row');
+            const filterInputs = filterRow.querySelectorAll('input');
+            const rows = tbody.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                let shouldShow = true;
+                
+                filterInputs.forEach((input, index) => {
+                    const filterValue = input.value.toLowerCase().trim();
+                    if (filterValue) {
+                        const cell = row.cells[index];
+                        if (cell) {
+                            const cellText = cell.textContent.toLowerCase().trim();
+                            if (!cellText.includes(filterValue)) {
+                                shouldShow = false;
+                            }
+                        }
+                    }
+                });
+                
+                if (shouldShow) {
+                    row.classList.remove('hidden-row');
+                } else {
+                    row.classList.add('hidden-row');
+                }
+            });
+        }
+        
+        function switchTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Deactivate all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected content
+            document.getElementById(tabName + '-content').classList.add('active');
+            // Activate selected tab
+            event.target.classList.add('active');
+        }
+
+        document.getElementById('folderInput').addEventListener('change', async function(e) {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+
+            document.getElementById('status').textContent = 'Loading files...';
+            
+            try {
+                await loadProjectData(files);
+                document.getElementById('status').textContent = 'Project loaded successfully!';
+            } catch (err) {
+                document.getElementById('status').textContent = 'Error: ' + err.message;
+                console.error(err);
+            }
+        });
+
+        async function loadProjectData(files) {
+            // Find and load each file
+            for (const file of files) {
+                const filePath = file.webkitRelativePath || file.name;
+                const fileName = file.name;
+                
+                // Load JSON data files from data/ folder
+                if (filePath.includes('/data/')) {
+                    const content = await file.text();
+                    
+                    if (fileName === 'MapInfos.json') {
+                        mapInfos = JSON.parse(content);
+                    } else if (fileName === 'Troops.json') {
+                        troops = JSON.parse(content);
+                    } else if (fileName === 'Items.json') {
+                        items = JSON.parse(content);
+                    } else if (fileName === 'Weapons.json') {
+                        weapons = JSON.parse(content);
+                    } else if (fileName === 'Armors.json') {
+                        armors = JSON.parse(content);
+                    } else if (fileName === 'Enemies.json') {
+                        enemies = JSON.parse(content);
+                    }
+                }
+                
+                // Load map images from img/maps/
+                if (filePath.includes('/img/maps/') && fileName.match(/^Map\d{3}\.png$/)) {
+                    const idMatch = fileName.match(/Map(\d{3})\.png/);
+                    if (idMatch) {
+                        const mapId = parseInt(idMatch[1]);
+                        const reader = new FileReader();
+                        await new Promise((resolve) => {
+                            reader.onload = function(e) {
+                                mapImages[mapId] = e.target.result;
+                                resolve();
+                            };
+                            reader.readAsDataURL(file);
+                        });
+                    }
+                }
+                
+                // Load enemy battler images from img/enemies/
+                if (filePath.includes('/img/enemies/') && (fileName.endsWith('.png') || fileName.endsWith('.jpg'))) {
+                    const battlerName = fileName.replace(/\.(png|jpg)$/, '');
+                    const reader = new FileReader();
+                    await new Promise((resolve) => {
+                        reader.onload = function(e) {
+                            battlerImages[battlerName] = e.target.result;
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+                
+                // Load character images from img/character/Monsters/
+                if (filePath.includes('/img/character/Monsters/') && fileName.endsWith('.png')) {
+                    const characterName = fileName.replace(/\.png$/, '');
+                    const reader = new FileReader();
+                    await new Promise((resolve) => {
+                        reader.onload = function(e) {
+                            characterImages[characterName] = e.target.result;
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+
+            // Load all map files from data/ folder
+            const maps = [];
+            const mapFiles = files.filter(f => {
+                const path = f.webkitRelativePath || f.name;
+                return path.includes('/data/') && f.name.match(/^Map\d{3}\.json$/);
+            });
+            
+            for (const file of mapFiles) {
+                const content = await file.text();
+                const mapData = JSON.parse(content);
+                const idMatch = file.name.match(/Map(\d{3})\.json/);
+                if (idMatch) {
+                    mapData.id = parseInt(idMatch[1]);
+                    maps.push(mapData);
+                }
+            }
+
+            maps.sort((a, b) => a.id - b.id);
+            
+            displayMaps(maps);
+            displayItems();
+            displayWeapons();
+            displayArmors();
+            displayEnemies();
+        }
+
+        function convertRecipe(note, itemsData) {
+            if (!note) return [];
+            
+            const recipes = [];
+            const recipePattern = /<Recipe:\s*([^>]+)>/gi;
+            let match;
+            
+            while ((match = recipePattern.exec(note)) !== null) {
+                const recipeStr = match[1];
+                const parts = recipeStr.split(',').map(p => p.trim());
+                
+                const convertedParts = parts.map(part => {
+                    const itemMatch = part.match(/(\d+)x(\d+)/);
+                    if (itemMatch) {
+                        const itemId = parseInt(itemMatch[1]);
+                        const quantity = parseInt(itemMatch[2]);
+                        const itemName = MATERIAL_NAMES[itemId] || (itemsData[itemId] ? itemsData[itemId].name : `Item ${itemId}`);
+                        return `${itemName} x${quantity}`;
+                    }
+                    return part;
+                });
+                
+                recipes.push('Recipe: ' + convertedParts.join(', '));
+            }
+            
+            return recipes;
+        }
+
+        function extractAllTags(note, itemsData) {
+            if (!note) return {};
+            
+            const tags = {};
+            
+            // Extract all tags with pattern <TagName> or <TagName: value>
+            const generalTagPattern = /<([^>]+)>/g;
+            let match;
+            
+            while ((match = generalTagPattern.exec(note)) !== null) {
+                let tagContent = match[1].trim();
+                
+                // Skip mz3d content tags and closing tags
+                if (tagContent === '/mz3d' || tagContent.startsWith('mz3d') || tagContent.startsWith('/')) continue;
+                
+                // Handle Recipe tags specially
+                if (tagContent.startsWith('Recipe:')) {
+                    const recipes = convertRecipe(note, itemsData);
+                    recipes.forEach((recipe, idx) => {
+                        const recipeValue = recipe.replace('Recipe: ', '');
+                        if (idx === 0) {
+                            tags['Recipe'] = recipeValue;
+                        } else {
+                            tags[`Recipe${idx + 1}`] = recipeValue;
+                        }
+                    });
+                } else if (tagContent.includes(':')) {
+                    // Tag with value: <TagName: value>
+                    const colonIndex = tagContent.indexOf(':');
+                    const tagName = tagContent.substring(0, colonIndex).trim();
+                    const tagValue = tagContent.substring(colonIndex + 1).trim();
+                    tags[tagName] = tagValue;
+                } else {
+                    // Boolean tag: <TagName>
+                    tags[tagContent] = true;
+                }
+            }
+            
+            return tags;
+        }
+        
+        function getAllTagColumns(dataArray) {
+            const columns = new Set();
+            
+            dataArray.forEach((item, index) => {
+                if (!item || index === 0) return;
+                const tags = extractAllTags(item.note, items);
+                Object.keys(tags).forEach(key => {
+                    // Filter out 3d-related columns
+                    if (key === '3d_model' || key === '3d_offset_y' || key === '3d_scale') {
+                        return;
+                    }
+                    // Merge blood types into single Blood column
+                    if (key === 'BlackBlood' || key === 'BlueBlood' || key === 'Spark' || key === 'GreenBlood' || key === 'Bark') {
+                        columns.add('Blood');
+                    } else {
+                        columns.add(key);
+                    }
+                });
+            });
+            
+            return Array.from(columns).sort();
+        }
+
+        function extractMapTags(note) {
+            if (!note) return [];
+            
+            const tags = [];
+            const tagPatterns = [
+                /<VisibleFogOfWar>/i,
+                /<Interior>/i,
+                /<Exterior>/i,
+                /<Covered>/i,
+                /<NoRandomLoot>/i,
+                /<mz3d>[\s\S]*?<\/mz3d>/i,
+                /<Biome:\s*([^>]+)>/i,
+                /<NPC>/i
+            ];
+            
+            tagPatterns.forEach(pattern => {
+                const match = note.match(pattern);
+                if (match) {
+                    if (pattern.source.includes('Biome')) {
+                        tags.push(`Biome: ${match[1].trim()}`);
+                    } else if (pattern.source.includes('mz3d')) {
+                        tags.push('Mz3d');
+                    } else {
+                        const tagName = match[0].replace(/<|>/g, '').trim();
+                        tags.push(tagName);
+                    }
+                }
+            });
+            
+            return tags;
+        }
+
+        function hasLocationTag(tags) {
+            const locationTags = ['Interior', 'Exterior', 'Covered'];
+            return tags.some(tag => locationTags.includes(tag));
+        }
+
+        function hasMz3dTag(tags) {
+            return tags.some(tag => tag === 'Mz3d');
+        }
+
+        function displayMaps(maps) {
+            const content = document.getElementById('maps-content');
+            content.innerHTML = '';
+            
+            // Clear all level contents
+            for (let i = 0; i < 10; i++) {
+                const letter = String.fromCharCode(65 + i); // A-J
+                const levelContent = document.getElementById(`level-${letter.toLowerCase()}-content`);
+                levelContent.innerHTML = '';
+            }
+            
+            // Clear world content
+            document.getElementById('world-content').innerHTML = '';
+            
+            const legend = document.createElement('div');
+            legend.className = 'legend';
+            legend.innerHTML = `
+                <h3>LEGEND:</h3>
+                <ul>
+                    <li>This tab shows only maps NOT assigned to any Level (A-J) or World</li>
+                    <li>Red highlight: Map missing required tags</li>
+                    <li>Missing <strong>Interior/Exterior/Covered</strong>: All maps must have one of these</li>
+                    <li>Missing <strong>mz3d</strong>: Required unless map name contains "Dream"</li>
+                </ul>
+            `;
+            content.appendChild(legend);
+            
+            // Collect all map IDs that belong to levels A-J (including children)
+            const levelMapIds = new Set();
+            
+            for (let i = 0; i < 10; i++) {
+                const letter = String.fromCharCode(65 + i); // A-J
+                const rootMaps = maps.filter(mapData => {
+                    const info = mapInfos[mapData.id];
+                    if (!info || !info.name) return false;
+                    return info.name.charAt(0).toUpperCase() === letter;
+                });
+                
+                // Add root map IDs and all their descendants
+                rootMaps.forEach(rootMap => {
+                    levelMapIds.add(rootMap.id);
+                    addAllDescendantIds(rootMap.id, maps, levelMapIds);
+                });
+            }
+            
+            // Find OldEurope map and collect all its descendants
+            const oldEuropeMap = maps.find(mapData => {
+                const info = mapInfos[mapData.id];
+                return info && info.name === 'OldEurope';
+            });
+            
+            const worldMapIds = new Set();
+            if (oldEuropeMap) {
+                worldMapIds.add(oldEuropeMap.id);
+                addAllDescendantIds(oldEuropeMap.id, maps, worldMapIds);
+            }
+            
+            // Display only maps NOT in any level or world
+            maps.forEach(mapData => {
+                const mapInfo = mapInfos[mapData.id];
+                if (!mapInfo) return;
+                
+                // Skip maps that belong to any level or world
+                if (levelMapIds.has(mapData.id) || worldMapIds.has(mapData.id)) return;
+                
+                const card = createMapCard(mapData, mapInfo);
+                content.appendChild(card);
+            });
+            
+            // Populate World tab
+            displayWorldTab(maps, oldEuropeMap);
+            
+            // Populate level tabs with hierarchical structure and calculate progress
+            let totalCompleteMaps = 0;
+            let totalPossibleMaps = 320; // 32 maps per level * 10 levels (A-J)
+            
+            let demoCompleteMaps = 0;
+            let demoPossibleMaps = 96; // 32 maps per level * 3 levels (A-C)
+            
+            for (let i = 0; i < 10; i++) {
+                const letter = String.fromCharCode(65 + i); // A-J
+                const rootMaps = maps.filter(mapData => {
+                    const info = mapInfos[mapData.id];
+                    if (!info || !info.name) return false;
+                    return info.name.charAt(0).toUpperCase() === letter;
+                });
+                
+                const progress = calculateLevelProgress(rootMaps, maps);
+                totalCompleteMaps += progress.count;
+                
+                // Add to demo progress if A, B, or C
+                if (i < 3) {
+                    demoCompleteMaps += progress.count;
+                }
+                
+                displayLevelTab(letter, maps);
+            }
+            
+            // Update overall progress displays
+            const totalPercentage = Math.round((totalCompleteMaps / totalPossibleMaps) * 100);
+            const demoPercentage = Math.round((demoCompleteMaps / demoPossibleMaps) * 100);
+            
+            document.getElementById('total-percentage').textContent = totalPercentage + '%';
+            document.getElementById('demo-percentage').textContent = demoPercentage + '%';
+        }
+        
+        function createMapCard(mapData, mapInfo, depth = 0) {
+            const tags = extractMapTags(mapData.note);
+            const hasLocation = hasLocationTag(tags);
+            const hasMz3d = hasMz3dTag(tags);
+            const isDream = mapInfo.name && mapInfo.name.includes('Dream');
+            
+            const needsLocationWarning = !hasLocation;
+            const needsMz3dWarning = !hasMz3d && !isDream;
+            const hasError = needsLocationWarning || needsMz3dWarning;
+            
+            const card = document.createElement('div');
+            card.className = 'map-card' + (hasError ? ' error' : '');
+            if (depth > 0) {
+                card.classList.add('child');
+                card.classList.add(`level-${Math.min(depth, 5)}`);
+            }
+            
+            let html = `
+                <div class="map-header">
+                    <div class="map-title">${mapInfo.name || 'Unnamed Map'}</div>
+                    <div class="map-id">Map ${String(mapData.id).padStart(3, '0')}</div>
+                </div>
+                
+                <div class="map-names">
+                    <div class="label">Map Name:</div>
+                    <div class="value">${mapInfo.name || 'N/A'}</div>
+                    <div class="label">Display Name:</div>
+                    <div class="value">${mapData.displayName || 'N/A'}</div>
+                </div>
+            `;
+            
+            // Add map image if available
+            if (mapImages[mapData.id]) {
+                html += `
+                    <div style="margin: 15px 0; text-align: center; border: 2px solid #FFD700; padding: 10px; background: #000000;">
+                        <div class="label" style="margin-bottom: 10px;">Map Preview:</div>
+                        <img src="${mapImages[mapData.id]}" alt="Map ${mapData.id}" style="max-width: 100%; max-height: 400px; border: 1px solid #FFD700;">
+                    </div>
+                `;
+            }
+            
+            html += `<div class="tags-section">`;
+            html += `<div class="label">Tags:</div>`;
+            if (tags.length > 0) {
+                html += `<div class="tags-container">`;
+                tags.forEach(tag => {
+                    html += `<span class="tag">${tag}</span>`;
+                });
+                html += `</div>`;
+            } else {
+                html += `<div class="no-data">No tags found</div>`;
+            }
+            html += `</div>`;
+            
+            if (needsLocationWarning) {
+                html += `<div class="warning">⚠️ Missing location tag: Must have Interior, Exterior, or Covered</div>`;
+            }
+            if (needsMz3dWarning) {
+                html += `<div class="warning">⚠️ Missing mz3d tag</div>`;
+            }
+            
+            html += `<div class="encounters-section">`;
+            html += `<div class="label">Encounter Troops:</div>`;
+            
+            if (mapData.encounterList && mapData.encounterList.length > 0) {
+                html += `<div class="encounters-list">`;
+                mapData.encounterList.forEach((encounter, index) => {
+                    const troopName = troops[encounter.troopId] ? troops[encounter.troopId].name : `Unknown Troop ${encounter.troopId}`;
+                    const weight = encounter.weight || 1;
+                    html += `<div class="encounter-item">`;
+                    html += `<strong>${troopName}</strong> (ID: ${encounter.troopId}, Weight: ${weight})`;
+                    if (encounter.regionSet && encounter.regionSet.length > 0) {
+                        html += ` - Regions: ${encounter.regionSet.join(', ')}`;
+                    }
+                    html += `</div>`;
+                });
+                html += `</div>`;
+            } else {
+                html += `<div class="no-data">No encounters configured</div>`;
+            }
+            html += `</div>`;
+            
+            card.innerHTML = html;
+            card.dataset.mapId = mapData.id;
+            
+            return card;
+        }
+        
+        function getDirectChildren(parentId, allMaps) {
+            return allMaps.filter(mapData => {
+                const info = mapInfos[mapData.id];
+                return info && info.parentId === parentId;
+            });
+        }
+        
+        function isValidMapName(mapName) {
+            if (!mapName) return false;
+            // Pattern: Letter + Number + Space + Number + Space + Dash + Space + Name
+            // Example: C1 63 - Beach cave
+            const pattern = /^[A-J]\d+\s+\d+\s+-\s+.+$/i;
+            return pattern.test(mapName);
+        }
+        
+        function getDirectChildren(parentId, allMaps) {
+            return allMaps.filter(mapData => {
+                const info = mapInfos[mapData.id];
+                return info && info.parentId === parentId;
+            });
+        }
+        
+        function isMapComplete(mapData, allMaps) {
+            const info = mapInfos[mapData.id];
+            if (!info || !isValidMapName(info.name)) {
+                return false;
+            }
+            
+            // Must have at least 4 direct children
+            const children = getDirectChildren(mapData.id, allMaps);
+            return children.length >= 4;
+        }
+        
+        function calculateLevelProgress(rootMaps, allMaps) {
+            const completeMaps = rootMaps.filter(mapData => isMapComplete(mapData, allMaps));
+            
+            const count = completeMaps.length;
+            const percentage = Math.round((count / 32) * 100);
+            
+            return {
+                count: count,
+                total: 32,
+                percentage: Math.min(percentage, 100)
+            };
+        }
+        
+        function displayWorldTab(allMaps, oldEuropeMap) {
+            const worldContent = document.getElementById('world-content');
+            
+            const legend = document.createElement('div');
+            legend.className = 'legend';
+            legend.innerHTML = `
+                <h3>LEGEND:</h3>
+                <ul>
+                    <li>Shows all maps under the "OldEurope" world map</li>
+                    <li>Direct children of OldEurope are shown in collapsible panels</li>
+                    <li>Red highlight: Map missing required tags</li>
+                    <li>Missing <strong>Interior/Exterior/Covered</strong>: All maps must have one of these</li>
+                    <li>Missing <strong>mz3d</strong>: Required unless map name contains "Dream"</li>
+                    <li>Click on a map header to expand/collapse its children</li>
+                </ul>
+            `;
+            worldContent.appendChild(legend);
+            
+            if (!oldEuropeMap) {
+                const noWorld = document.createElement('div');
+                noWorld.className = 'no-data';
+                noWorld.style.padding = '20px';
+                noWorld.style.textAlign = 'center';
+                noWorld.textContent = 'No "OldEurope" map found.';
+                worldContent.appendChild(noWorld);
+                return;
+            }
+            
+            // Get direct children of OldEurope
+            const directChildren = getDirectChildren(oldEuropeMap.id, allMaps);
+            
+            if (directChildren.length === 0) {
+                const noMaps = document.createElement('div');
+                noMaps.className = 'no-data';
+                noMaps.style.padding = '20px';
+                noMaps.style.textAlign = 'center';
+                noMaps.textContent = 'No maps found under OldEurope.';
+                worldContent.appendChild(noMaps);
+                return;
+            }
+            
+            // Create hierarchical structure for each direct child of OldEurope
+            directChildren.forEach(childMapData => {
+                const childInfo = mapInfos[childMapData.id];
+                if (!childInfo) return;
+                
+                const container = document.createElement('div');
+                container.className = 'root-map-container';
+                
+                // Create collapsible header
+                const header = document.createElement('div');
+                header.className = 'root-map-header collapsed';
+                
+                const childCount = getDirectChildren(childMapData.id, allMaps).length;
+                
+                header.innerHTML = `
+                    <div class="title">
+                        ${childInfo.name}
+                        <span style="color: #888; font-size: 0.9em; margin-left: 10px;">(${childCount} children)</span>
+                    </div>
+                    <div class="toggle-icon">▼</div>
+                `;
+                
+                // Create children container
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'children-container';
+                
+                // Add the direct child map card
+                const childCard = createMapCard(childMapData, childInfo, 0);
+                childrenContainer.appendChild(childCard);
+                
+                // Recursively add all descendants
+                addChildrenRecursive(childMapData.id, childrenContainer, allMaps, 1);
+                
+                // Toggle functionality
+                header.addEventListener('click', function() {
+                    header.classList.toggle('collapsed');
+                    childrenContainer.classList.toggle('expanded');
+                });
+                
+                container.appendChild(header);
+                container.appendChild(childrenContainer);
+                worldContent.appendChild(container);
+            });
+        }
+        
+        function displayLevelTab(letter, allMaps) {
+            const levelContent = document.getElementById(`level-${letter.toLowerCase()}-content`);
+            
+            // Find root maps for this level (maps starting with the letter)
+            const rootMaps = allMaps.filter(mapData => {
+                const info = mapInfos[mapData.id];
+                if (!info || !info.name) return false;
+                return info.name.charAt(0).toUpperCase() === letter;
+            });
+            
+            // Calculate progress
+            const progress = calculateLevelProgress(rootMaps, allMaps);
+            
+            // Create progress tracker
+            const progressTracker = document.createElement('div');
+            progressTracker.className = 'progress-tracker';
+            progressTracker.innerHTML = `
+                <h3>LEVEL ${letter} PROGRESS</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: ${progress.percentage}%">
+                        ${progress.percentage}%
+                    </div>
+                </div>
+                <div class="progress-text">${progress.count} / ${progress.total} LEVELS COMPLETED</div>
+            `;
+            levelContent.appendChild(progressTracker);
+            
+            const legend = document.createElement('div');
+            legend.className = 'legend';
+            legend.innerHTML = `
+                <h3>LEGEND:</h3>
+                <ul>
+                    <li>Red highlight: Map missing required tags</li>
+                    <li>Missing <strong>Interior/Exterior/Covered</strong>: All maps must have one of these</li>
+                    <li>Missing <strong>mz3d</strong>: Required unless map name contains "Dream"</li>
+                    <li>Click on a root map header to expand/collapse its children</li>
+                    <li><strong>Complete map criteria:</strong> Valid name format (e.g., "C1 63 - Beach cave") AND at least 4 child maps</li>
+                </ul>
+            `;
+            levelContent.appendChild(legend);
+            
+            // Sort root maps by number
+            rootMaps.sort((a, b) => {
+                const infoA = mapInfos[a.id];
+                const infoB = mapInfos[b.id];
+                
+                // Extract number from name (e.g., "A6 30 - Name" -> extract 6)
+                const matchA = infoA.name.match(/^[A-Z](\d+)/);
+                const matchB = infoB.name.match(/^[A-Z](\d+)/);
+                
+                const numA = matchA ? parseInt(matchA[1]) : 0;
+                const numB = matchB ? parseInt(matchB[1]) : 0;
+                
+                return numA - numB;
+            });
+            
+            if (rootMaps.length === 0) {
+                const noMaps = document.createElement('div');
+                noMaps.className = 'no-data';
+                noMaps.style.padding = '20px';
+                noMaps.style.textAlign = 'center';
+                noMaps.textContent = `No maps starting with "${letter}" found.`;
+                levelContent.appendChild(noMaps);
+                return;
+            }
+            
+            // Create hierarchical structure for each root map
+            rootMaps.forEach(rootMapData => {
+                const rootInfo = mapInfos[rootMapData.id];
+                const container = document.createElement('div');
+                container.className = 'root-map-container';
+                
+                // Create collapsible header
+                const header = document.createElement('div');
+                header.className = 'root-map-header collapsed';
+                
+                // Check if map is complete
+                const isComplete = isMapComplete(rootMapData, allMaps);
+                const childCount = getDirectChildren(rootMapData.id, allMaps).length;
+                const hasValidName = isValidMapName(rootInfo.name);
+                
+                let statusIcon = '✗';
+                let statusColor = '#FF4500';
+                
+                if (isComplete) {
+                    statusIcon = '✓';
+                    statusColor = '#00FF00';
+                } else if (hasValidName && childCount > 0) {
+                    statusIcon = '◐';
+                    statusColor = '#FFA500';
+                }
+                
+                header.innerHTML = `
+                    <div class="title">
+                        <span style="color: ${statusColor}; font-weight: bold; margin-right: 10px;">${statusIcon}</span>
+                        ${rootInfo.name}
+                        <span style="color: #888; font-size: 0.9em; margin-left: 10px;">(${childCount} children)</span>
+                    </div>
+                    <div class="toggle-icon">▼</div>
+                `;
+                
+                // Create children container
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'children-container';
+                
+                // Add root map card
+                const rootCard = createMapCard(rootMapData, rootInfo, 0);
+                childrenContainer.appendChild(rootCard);
+                
+                // Recursively add all descendants
+                addChildrenRecursive(rootMapData.id, childrenContainer, allMaps, 1);
+                
+                // Toggle functionality
+                header.addEventListener('click', function() {
+                    header.classList.toggle('collapsed');
+                    childrenContainer.classList.toggle('expanded');
+                });
+                
+                container.appendChild(header);
+                container.appendChild(childrenContainer);
+                levelContent.appendChild(container);
+            });
+        }
+        
+        function getDirectChildren(parentId, allMaps) {
+            return allMaps.filter(mapData => {
+                const info = mapInfos[mapData.id];
+                return info && info.parentId === parentId;
+            });
+        }
+        
+        function addAllDescendantIds(parentId, allMaps, idSet) {
+            const children = getDirectChildren(parentId, allMaps);
+            children.forEach(child => {
+                idSet.add(child.id);
+                addAllDescendantIds(child.id, allMaps, idSet);
+            });
+        }
+        
+        function addChildrenRecursive(parentId, container, allMaps, depth) {
+            const children = getDirectChildren(parentId, allMaps);
+            
+            children.forEach(childMapData => {
+                const childInfo = mapInfos[childMapData.id];
+                if (!childInfo) return;
+                
+                const childCard = createMapCard(childMapData, childInfo, depth);
+                container.appendChild(childCard);
+                
+                // Recursively add this child's children
+                addChildrenRecursive(childMapData.id, container, allMaps, depth + 1);
+            });
+        }
+
+        function displayItems() {
+            const content = document.getElementById('items-content');
+            content.innerHTML = '<h2 class="section-header">ITEMS</h2>';
+            
+            const tagColumns = getAllTagColumns(items);
+            
+            let html = '<table id="items-table"><thead><tr><th>ID</th><th>Name</th>';
+            tagColumns.forEach(col => {
+                html += `<th>${col}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            items.forEach((item, index) => {
+                if (!item || index === 0) return;
+                
+                const tags = extractAllTags(item.note, items);
+                
+                html += `<tr>
+                    <td>${index}</td>
+                    <td>${item.name}</td>`;
+                
+                tagColumns.forEach(col => {
+                    let value;
+                    
+                    // Handle Blood column specially
+                    if (col === 'Blood') {
+                        if (tags['BlackBlood']) value = 'Black';
+                        else if (tags['BlueBlood']) value = 'Blue';
+                        else if (tags['Spark']) value = 'Spark';
+                        else if (tags['GreenBlood']) value = 'Green';
+                        else if (tags['Bark']) value = 'Bark';
+                    } else {
+                        value = tags[col];
+                    }
+                    
+                    let displayValue = '';
+                    
+                    if (value === undefined) {
+                        displayValue = '<span class="no-data">-</span>';
+                    } else if (value === true) {
+                        displayValue = '✓';
+                    } else {
+                        displayValue = value;
+                    }
+                    
+                    html += `<td>${displayValue}</td>`;
+                });
+                
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            content.innerHTML += html;
+            
+            // Make table sortable and filterable
+            const table = document.getElementById('items-table');
+            makeTableSortable(table);
+            makeTableFilterable(table);
+        }
+
+        function displayWeapons() {
+            const content = document.getElementById('weapons-content');
+            content.innerHTML = '<h2 class="section-header">WEAPONS</h2>';
+            
+            const tagColumns = getAllTagColumns(weapons);
+            
+            let html = '<table id="weapons-table"><thead><tr><th>ID</th><th>Name</th>';
+            tagColumns.forEach(col => {
+                html += `<th>${col}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            weapons.forEach((weapon, index) => {
+                if (!weapon || index === 0) return;
+                
+                const tags = extractAllTags(weapon.note, items);
+                
+                html += `<tr>
+                    <td>${index}</td>
+                    <td>${weapon.name}</td>`;
+                
+                tagColumns.forEach(col => {
+                    let value;
+                    
+                    // Handle Blood column specially
+                    if (col === 'Blood') {
+                        if (tags['BlackBlood']) value = 'Black';
+                        else if (tags['BlueBlood']) value = 'Blue';
+                        else if (tags['Spark']) value = 'Spark';
+                        else if (tags['GreenBlood']) value = 'Green';
+                        else if (tags['Bark']) value = 'Bark';
+                    } else {
+                        value = tags[col];
+                    }
+                    
+                    let displayValue = '';
+                    
+                    if (value === undefined) {
+                        displayValue = '<span class="no-data">-</span>';
+                    } else if (value === true) {
+                        displayValue = '✓';
+                    } else {
+                        displayValue = value;
+                    }
+                    
+                    html += `<td>${displayValue}</td>`;
+                });
+                
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            content.innerHTML += html;
+            
+            // Make table sortable and filterable
+            const table = document.getElementById('weapons-table');
+            makeTableSortable(table);
+            makeTableFilterable(table);
+        }
+
+        function displayArmors() {
+            const content = document.getElementById('armors-content');
+            content.innerHTML = '<h2 class="section-header">ARMORS</h2>';
+            
+            const tagColumns = getAllTagColumns(armors);
+            
+            let html = '<table id="armors-table"><thead><tr><th>ID</th><th>Name</th>';
+            tagColumns.forEach(col => {
+                html += `<th>${col}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            armors.forEach((armor, index) => {
+                if (!armor || index === 0) return;
+                
+                const tags = extractAllTags(armor.note, items);
+                
+                html += `<tr>
+                    <td>${index}</td>
+                    <td>${armor.name}</td>`;
+                
+                tagColumns.forEach(col => {
+                    let value;
+                    
+                    // Handle Blood column specially
+                    if (col === 'Blood') {
+                        if (tags['BlackBlood']) value = 'Black';
+                        else if (tags['BlueBlood']) value = 'Blue';
+                        else if (tags['Spark']) value = 'Spark';
+                        else if (tags['GreenBlood']) value = 'Green';
+                        else if (tags['Bark']) value = 'Bark';
+                    } else {
+                        value = tags[col];
+                    }
+                    
+                    let displayValue = '';
+                    
+                    if (value === undefined) {
+                        displayValue = '<span class="no-data">-</span>';
+                    } else if (value === true) {
+                        displayValue = '✓';
+                    } else {
+                        displayValue = value;
+                    }
+                    
+                    html += `<td>${displayValue}</td>`;
+                });
+                
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            content.innerHTML += html;
+            
+            // Make table sortable and filterable
+            const table = document.getElementById('armors-table');
+            makeTableSortable(table);
+            makeTableFilterable(table);
+        }
+
+        function displayEnemies() {
+            const content = document.getElementById('enemies-content');
+            content.innerHTML = '<h2 class="section-header">ENEMIES</h2>';
+            
+            const tagColumns = getAllTagColumns(enemies);
+            
+            let html = '<table id="enemies-table"><thead><tr><th>ID</th><th>Battler</th><th>Name</th>';
+            tagColumns.forEach(col => {
+                html += `<th>${col}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            enemies.forEach((enemy, index) => {
+                if (!enemy || index === 0) return;
+                
+                const tags = extractAllTags(enemy.note, items);
+                
+                html += `<tr>
+                    <td>${index}</td>
+                    <td style="text-align: center;">`;
+                
+                // Display battler image if available
+                if (enemy.battlerName && battlerImages[enemy.battlerName]) {
+                    html += `<img src="${battlerImages[enemy.battlerName]}" alt="${enemy.battlerName}" style="max-width: 100px; max-height: 100px; border: 1px solid #FFD700;">`;
+                } else {
+                    html += `<span class="no-data">-</span>`;
+                }
+                
+                html += `</td>
+                    <td>${enemy.name}</td>`;
+                
+                tagColumns.forEach(col => {
+                    let value;
+                    
+                    // Handle Blood column specially
+                    if (col === 'Blood') {
+                        if (tags['BlackBlood']) value = 'Black';
+                        else if (tags['BlueBlood']) value = 'Blue';
+                        else if (tags['Spark']) value = 'Spark';
+                        else if (tags['GreenBlood']) value = 'Green';
+                        else if (tags['Bark']) value = 'Bark';
+                    } else {
+                        value = tags[col];
+                    }
+                    
+                    let displayValue = '';
+                    
+                    if (value === undefined) {
+                        displayValue = '<span class="no-data">-</span>';
+                    } else if (value === true) {
+                        displayValue = '✓';
+                    } else if (col === 'char' && value) {
+                        // Display character image for char tag
+                        // Value is in format $goblin (with dollar sign)
+                        if (characterImages[value]) {
+                            displayValue = `<div style="text-align: center;">
+                                <img src="${characterImages[value]}" alt="${value}" style="max-width: 48px; max-height: 48px; border: 1px solid #FFD700;">
+                                <div style="font-size: 0.8em; color: #FFA500; margin-top: 2px;">${value}</div>
+                            </div>`;
+                        } else {
+                            displayValue = value;
+                        }
+                    } else {
+                        displayValue = value;
+                    }
+                    
+                    html += `<td>${displayValue}</td>`;
+                });
+                
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            content.innerHTML += html;
+            
+            // Make table sortable and filterable
+            const table = document.getElementById('enemies-table');
+            makeTableSortable(table);
+            makeTableFilterable(table);
+        }
+    </script>
+</body>
+</html>

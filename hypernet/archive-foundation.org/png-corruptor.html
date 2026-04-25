@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG Image Corruptor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .upload-section {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-section:hover {
+            background-color: #f0f0f0;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .result-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .image-container {
+            max-width: 45%;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .download-btn {
+            background-color: #2196F3;
+        }
+        .download-btn:hover {
+            background-color: #0b7dda;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        label {
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 4px;
+            height: 20px;
+            margin-top: 10px;
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PNG Image Corruptor</h1>
+        <p style="text-align: center; margin-bottom: 20px;">Apply artistic and controlled corruption effects to PNG images</p>
+        
+        <div id="upload-section" class="upload-section">
+            <p>Drag & drop a PNG image here or click to select</p>
+            <input type="file" id="file-input" accept="image/png" class="hidden">
+        </div>
+        
+        <div id="controls" class="controls" style="display: none;">
+            <div class="control-group">
+                <label for="corruption-type">Corruption Method:</label>
+                <select id="corruption-type">
+                    <option value="headerCorruption">Header Corruption (Subtle)</option>
+                    <option value="dataShift">Data Shift (Moderate)</option>
+                    <option value="bitFlip">Random Bit Flipping (Safe)</option>
+                    <option value="byteReplacement">Byte Replacement (Moderate)</option>
+                    <option value="chunkRemoval">Chunk Modification (Subtle)</option>
+                    <option value="pixelSorting">Pixel Sorting (Artistic)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="corruption-intensity">Corruption Intensity:</label>
+                <input type="range" id="corruption-intensity" min="1" max="100" value="50">
+                <span id="intensity-value">50%</span>
+            </div>
+        </div>
+        
+        <div id="action-buttons" style="text-align: center; display: none;">
+            <button id="corrupt-btn">Corrupt Image</button>
+            <button id="download-btn" class="download-btn" style="display: none;">Download Corrupted Image</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <p>Corrupting image...</p>
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+        </div>
+        
+        <div id="result-section" class="result-section" style="display: none;">
+            <div class="image-container">
+                <h3>Original Image</h3>
+                <img id="original-image" src="" alt="Original Image">
+            </div>
+            <div class="image-container">
+                <h3>Corrupted Image</h3>
+                <img id="corrupted-image" src="" alt="Corrupted Image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const uploadSection = document.getElementById('upload-section');
+        const fileInput = document.getElementById('file-input');
+        const controls = document.getElementById('controls');
+        const actionButtons = document.getElementById('action-buttons');
+        const corruptBtn = document.getElementById('corrupt-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const loading = document.getElementById('loading');
+        const resultSection = document.getElementById('result-section');
+        const originalImage = document.getElementById('original-image');
+        const corruptedImage = document.getElementById('corrupted-image');
+        const corruptionType = document.getElementById('corruption-type');
+        const corruptionIntensity = document.getElementById('corruption-intensity');
+        const intensityValue = document.getElementById('intensity-value');
+        const progress = document.getElementById('progress');
+        
+        // Variables to store image data
+        let originalImageData = null;
+        let corruptedImageData = null;
+        let originalBlob = null;
+        
+        // Add a notification system
+        function showNotification(message, isError = false) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '4px';
+            notification.style.color = 'white';
+            notification.style.backgroundColor = isError ? '#f44336' : '#4CAF50';
+            notification.style.zIndex = '1000';
+            notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+        
+        // Event listeners
+        uploadSection.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadSection.addEventListener('dragover', handleDragOver);
+        uploadSection.addEventListener('drop', handleDrop);
+        corruptBtn.addEventListener('click', corruptImage);
+        downloadBtn.addEventListener('click', downloadImage);
+        corruptionIntensity.addEventListener('input', () => {
+            intensityValue.textContent = corruptionIntensity.value + '%';
+        });
+        
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadSection.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        // Handle drag and drop
+        function handleDragOver(e) {
+            uploadSection.style.backgroundColor = '#f0f0f0';
+        }
+        
+        function handleDrop(e) {
+            uploadSection.style.backgroundColor = '';
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length && files[0].type === "image/png") {
+                fileInput.files = files;
+                handleFileSelect(e);
+            } else {
+                alert("Please upload a PNG image.");
+            }
+        }
+        
+        // Handle file selection
+        function handleFileSelect(e) {
+            const file = fileInput.files[0];
+            
+            if (file && file.type === "image/png") {
+                originalBlob = file;
+                
+                // Display original image
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    originalImage.src = e.target.result;
+                    loadImageData(e.target.result);
+                };
+                reader.readAsDataURL(file);
+                
+                // Show controls
+                controls.style.display = 'flex';
+                actionButtons.style.display = 'block';
+                resultSection.style.display = 'flex';
+                
+                // Hide download button until corruption is done
+                downloadBtn.style.display = 'none';
+            } else {
+                alert("Please upload a PNG image.");
+            }
+        }
+        
+        // Load image data
+        function loadImageData(dataUrl) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImageData = new Uint8Array(e.target.result);
+            };
+            reader.readAsArrayBuffer(originalBlob);
+        }
+        
+        // Corrupt image
+        function corruptImage() {
+            if (!originalImageData) {
+                showNotification("Please upload an image first.", true);
+                return;
+            }
+            
+            // Show loading
+            loading.style.display = 'block';
+            progress.style.width = '0%';
+            
+            // Get corruption parameters
+            const method = corruptionType.value;
+            const intensity = corruptionIntensity.value / 100;
+            
+            // Create a copy of the original data
+            corruptedImageData = new Uint8Array(originalImageData);
+            
+            // Use setTimeout to allow UI to update
+            setTimeout(() => {
+                progress.style.width = '30%';
+                
+                try {
+                    // Apply corruption
+                    switch (method) {
+                        case 'headerCorruption':
+                            corruptHeader(corruptedImageData, intensity);
+                            break;
+                        case 'dataShift':
+                            dataShift(corruptedImageData, intensity);
+                            break;
+                        case 'bitFlip':
+                            bitFlip(corruptedImageData, intensity);
+                            break;
+                        case 'byteReplacement':
+                            byteReplacement(corruptedImageData, intensity);
+                            break;
+                        case 'chunkRemoval':
+                            chunkRemoval(corruptedImageData, intensity);
+                            break;
+                        case 'pixelSorting':
+                            pixelSorting(corruptedImageData, intensity);
+                            break;
+                    }
+                    
+                    progress.style.width = '70%';
+                    
+                    // Ensure PNG header remains valid
+                    // PNG signature is [137, 80, 78, 71, 13, 10, 26, 10]
+                    const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10];
+                    for (let i = 0; i < 8; i++) {
+                        if (i === 0 || i === 1 || i === 2 || i === 3) {
+                            // Absolutely preserve the first 4 bytes
+                            corruptedImageData[i] = pngSignature[i];
+                        }
+                    }
+                    
+                    // Convert corrupted data back to image
+                    setTimeout(() => {
+                        const blob = new Blob([corruptedImageData], { type: 'image/png' });
+                        const url = URL.createObjectURL(blob);
+                        
+                        // Test if the image can be loaded
+                        const testImg = new Image();
+                        testImg.onload = function() {
+                            // Image loaded successfully
+                            corruptedImage.src = url;
+                            showNotification("Image corrupted successfully!");
+                            
+                            // Show download button
+                            downloadBtn.style.display = 'inline-block';
+                            
+                            // Hide loading
+                            progress.style.width = '100%';
+                            setTimeout(() => {
+                                loading.style.display = 'none';
+                            }, 300);
+                        };
+                        
+                        testImg.onerror = function() {
+                            // Image couldn't be loaded, reduce intensity and try again
+                            showNotification("Corruption too strong, trying with reduced intensity...", true);
+                            
+                            // Recursively try with lower intensity
+                            const reducedIntensity = intensity * 0.5;
+                            if (reducedIntensity > 0.01) {
+                                // Create a fresh copy of the original data
+                                corruptedImageData = new Uint8Array(originalImageData);
+                                
+                                // Apply corruption with reduced intensity
+                                switch (method) {
+                                    case 'headerCorruption':
+                                        corruptHeader(corruptedImageData, reducedIntensity);
+                                        break;
+                                    case 'dataShift':
+                                        dataShift(corruptedImageData, reducedIntensity);
+                                        break;
+                                    case 'bitFlip':
+                                        bitFlip(corruptedImageData, reducedIntensity);
+                                        break;
+                                    case 'byteReplacement':
+                                        byteReplacement(corruptedImageData, reducedIntensity);
+                                        break;
+                                    case 'chunkRemoval':
+                                        chunkRemoval(corruptedImageData, reducedIntensity);
+                                        break;
+                                    case 'pixelSorting':
+                                        pixelSorting(corruptedImageData, reducedIntensity);
+                                        break;
+                                }
+                                
+                                // Ensure PNG header remains valid
+                                const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10];
+                                for (let i = 0; i < 8; i++) {
+                                    if (i === 0 || i === 1 || i === 2 || i === 3) {
+                                        corruptedImageData[i] = pngSignature[i];
+                                    }
+                                }
+                                
+                                // Try again with the new version
+                                const newBlob = new Blob([corruptedImageData], { type: 'image/png' });
+                                const newUrl = URL.createObjectURL(newBlob);
+                                corruptedImage.src = newUrl;
+                                
+                                // Show download button
+                                downloadBtn.style.display = 'inline-block';
+                            } else {
+                                // If we've reduced the intensity too much, show original with minimal corruption
+                                showNotification("Using minimal corruption to keep image viewable", true);
+                                
+                                // Apply minimal corruption
+                                corruptedImageData = new Uint8Array(originalImageData);
+                                bitFlip(corruptedImageData, 0.01); // Very minimal bit flipping
+                                
+                                const safeBlob = new Blob([corruptedImageData], { type: 'image/png' });
+                                const safeUrl = URL.createObjectURL(safeBlob);
+                                corruptedImage.src = safeUrl;
+                                
+                                // Show download button
+                                downloadBtn.style.display = 'inline-block';
+                            }
+                            
+                            // Hide loading
+                            progress.style.width = '100%';
+                            setTimeout(() => {
+                                loading.style.display = 'none';
+                            }, 300);
+                        };
+                        
+                        // Set the source to test loading
+                        testImg.src = url;
+        
+        // Corruption methods
+        function corruptHeader(data, intensity) {
+            // PNG header is 8 bytes
+            // We'll corrupt at most 1-2 bytes depending on intensity, but avoid the first byte
+            // and be careful to keep the file recognizable as PNG
+            
+            // PNG header should be: [137, 80, 78, 71, 13, 10, 26, 10]
+            // We'll only corrupt bytes 5-7 which are less critical
+            
+            const numBytesToCorrupt = Math.min(2, Math.floor(3 * intensity));
+            
+            for (let i = 0; i < numBytesToCorrupt; i++) {
+                // Pick a position in the less critical part of the header
+                const position = Math.floor(Math.random() * 3) + 5;
+                // Corrupt the byte, but not completely randomly
+                const originalValue = data[position];
+                // Only slightly modify the value to avoid complete corruption
+                data[position] = originalValue ^ (Math.floor(Math.random() * 16) + 1);
+            }
+        }
+        
+        function dataShift(data, intensity) {
+            // Skip the critical PNG chunks and header
+            const startPos = 40; // Skip more bytes to avoid critical chunks
+            
+            // Use much smaller shift amount to keep image viewable
+            const shiftAmount = Math.floor((data.length - startPos) * intensity * 0.02);
+            
+            if (shiftAmount > 0) {
+                // Create a temporary array to hold shifted data
+                const shifted = new Uint8Array(data.length);
+                
+                // Copy header and critical chunks fully intact
+                for (let i = 0; i < startPos; i++) {
+                    shifted[i] = data[i];
+                }
+                
+                // Shift data in smaller segments rather than the whole file
+                const segmentSize = Math.min(5000, Math.floor(data.length / 10));
+                const segmentStart = startPos + Math.floor(Math.random() * (data.length - startPos - segmentSize));
+                
+                // Copy before segment
+                for (let i = startPos; i < segmentStart; i++) {
+                    shifted[i] = data[i];
+                }
+                
+                // Shift segment
+                for (let i = segmentStart; i < segmentStart + segmentSize; i++) {
+                    const newPos = i + shiftAmount;
+                    if (newPos < data.length) {
+                        shifted[newPos] = data[i];
+                    }
+                }
+                
+                // Copy after segment
+                for (let i = segmentStart + segmentSize; i < data.length; i++) {
+                    shifted[i] = data[i];
+                }
+                
+                // Copy shifted data back
+                for (let i = startPos; i < data.length; i++) {
+                    data[i] = shifted[i];
+                }
+            }
+        }
+        
+        function bitFlip(data, intensity) {
+            // Skip header and critical chunks (first 50 bytes) to preserve PNG recognition
+            const startPos = 50;
+            // Reduce the number of bits to flip significantly
+            const numBitsToFlip = Math.floor((data.length - startPos) * intensity * 0.01);
+            
+            // Avoid critical PNG structures
+            // Typically, IHDR is at the beginning, IDAT chunks are in the middle, and IEND is at the end
+            
+            for (let i = 0; i < numBitsToFlip; i++) {
+                // Pick random positions biased toward the middle of the file
+                // to avoid critical header/footer chunks
+                const quarterLen = Math.floor((data.length - startPos) / 4);
+                const position = startPos + quarterLen + Math.floor(Math.random() * (data.length - startPos - quarterLen * 2));
+                
+                // Pick a random bit - prefer flipping less significant bits (0-3)
+                // which often cause less critical corruption
+                const bitPosition = Math.floor(Math.random() * 4);
+                
+                // Flip the bit
+                data[position] ^= (1 << bitPosition);
+            }
+        }
+        
+        function byteReplacement(data, intensity) {
+            // Skip header and critical chunks
+            const startPos = 50;
+            // Reduce the number of bytes to replace
+            const numBytesToReplace = Math.floor((data.length - startPos) * intensity * 0.02);
+            
+            // Define safe regions to modify (avoid chunk headers)
+            // PNG chunks have a 4-byte length, 4-byte type, then data, then 4-byte CRC
+            // We'll try to target only the data portions
+            
+            for (let i = 0; i < numBytesToReplace; i++) {
+                // Target middle portion of the file to avoid headers/footers
+                const thirdLen = Math.floor((data.length - startPos) / 3);
+                const position = startPos + thirdLen + Math.floor(Math.random() * thirdLen);
+                
+                // For byte replacement, instead of completely random values,
+                // we'll modify the existing byte value slightly
+                const originalValue = data[position];
+                
+                // Apply a small modification to the byte
+                // Options:
+                // 1. Small bit-wise XOR (less destructive)
+                // 2. Increment/decrement the value
+                // 3. Swap with a nearby byte
+                
+                // Use method 1: Small bit-wise XOR
+                const mask = 1 << Math.floor(Math.random() * 4); // Only affect one of the 4 lower bits
+                data[position] = originalValue ^ mask;
+            }
+        }
+        
+        function chunkRemoval(data, intensity) {
+            // Instead of removing chunks entirely (which often breaks the image),
+            // we'll modify non-critical chunks in a more subtle way
+            
+            // Skip PNG signature (8 bytes)
+            let pos = 8;
+            let chunks = [];
+            
+            // Find all chunks
+            while (pos < data.length - 12) { // Ensure we have enough bytes for chunk header
+                // Read chunk length (big-endian)
+                const length = (data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3];
+                
+                // If length is unreasonable, break to avoid infinite loop
+                if (length < 0 || length > data.length) {
+                    break;
+                }
+                
+                // Get chunk type
+                const chunkType = String.fromCharCode(data[pos + 4], data[pos + 5], data[pos + 6], data[pos + 7]);
+                
+                // Store chunk information
+                chunks.push({
+                    start: pos,
+                    length: length,
+                    type: chunkType,
+                    dataStart: pos + 8,
+                    end: pos + 8 + length + 4 // including CRC
+                });
+                
+                // Move to next chunk
+                pos += 12 + length; // chunk header (8) + data (length) + CRC (4)
+                
+                // Check if we've reached the end of the file
+                if (pos >= data.length) {
+                    break;
+                }
+            }
+            
+            // Instead of removing chunks, we'll modify ancillary chunks
+            // Ancillary chunks are those whose first letter is lowercase
+            // These are less critical for image rendering
+            const ancillaryChunks = chunks.filter(chunk => {
+                const firstChar = chunk.type.charCodeAt(0);
+                return (firstChar >= 97 && firstChar <= 122) && // lowercase a-z
+                       chunk.type !== 'idat' && // don't touch image data chunks
+                       chunk.type !== 'iend'; // don't touch end marker
+            });
+            
+            // Calculate number of chunks to modify
+            const numChunksToModify = Math.floor(ancillaryChunks.length * intensity * 0.5);
+            
+            if (numChunksToModify > 0 && ancillaryChunks.length > 0) {
+                // Shuffle ancillary chunks
+                for (let i = ancillaryChunks.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [ancillaryChunks[i], ancillaryChunks[j]] = [ancillaryChunks[j], ancillaryChunks[i]];
+                }
+                
+                // Select chunks to modify
+                const chunksToModify = ancillaryChunks.slice(0, Math.min(numChunksToModify, ancillaryChunks.length));
+                
+                // Modify chunks - we'll just zero out some of the data
+                // without changing the chunk structure
+                for (const chunk of chunksToModify) {
+                    // Only modify a portion of the chunk data
+                    const modStart = chunk.dataStart;
+                    const modEnd = Math.min(modStart + Math.floor(chunk.length * 0.3), chunk.end - 4); // Avoid CRC
+                    
+                    // Zero out or modify some bytes
+                    for (let i = modStart; i < modEnd; i += 2) { // Skip every other byte for less damage
+                        // Apply a small modification instead of zeroing out
+                        data[i] = (data[i] + 1) % 256; // Just increment
+                    }
+                }
+            }
+        }
+        
+        function pixelSorting(data, intensity) {
+            // This is a gentler implementation that tries to target IDAT chunks
+            // where pixel data is actually stored
+            
+            // Skip header and other critical chunks
+            const startPos = 100; // Skip well past the header area
+            
+            // Find IDAT chunks (where image data is stored)
+            let pos = 8; // Start after PNG signature
+            let idatRanges = [];
+            
+            while (pos < data.length - 12) {
+                // Read chunk length
+                const length = (data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3];
+                
+                // Check for invalid length
+                if (length < 0 || length > data.length) {
+                    break;
+                }
+                
+                // Check if this is an IDAT chunk
+                if (data[pos + 4] === 73 && // I
+                    data[pos + 5] === 68 && // D
+                    data[pos + 6] === 65 && // A
+                    data[pos + 7] === 84) { // T
+                    
+                    // Store the data range of this IDAT chunk
+                    idatRanges.push({
+                        start: pos + 8, // After chunk header
+                        end: pos + 8 + length // Before CRC
+                    });
+                }
+                
+                // Move to next chunk
+                pos += 12 + length;
+                
+                if (pos >= data.length) {
+                    break;
+                }
+            }
+            
+            // If we found IDAT chunks, target them for sorting
+            if (idatRanges.length > 0) {
+                // Take the first IDAT chunk for simplicity
+                const idatRange = idatRanges[0];
+                const idatLength = idatRange.end - idatRange.start;
+                
+                // Create smaller segments for sorting
+                // Using smaller segment size to avoid breaking the image completely
+                const segmentSize = Math.floor(50 * intensity); 
+                const numSegments = Math.floor(intensity * 10);
+                
+                for (let i = 0; i < numSegments; i++) {
+                    // Make sure we stay within the IDAT data
+                    if (idatLength > segmentSize) {
+                        // Pick a position within the IDAT chunk, but not at the very start
+                        const offset = Math.floor(Math.random() * (idatLength - segmentSize - 20)) + 20;
+                        const position = idatRange.start + offset;
+                        
+                        // Extract segment
+                        const segment = data.slice(position, position + segmentSize);
+                        
+                        // Sort segment - but don't sort completely, just partial sorting
+                        // This creates a more interesting glitch effect while keeping image visible
+                        const sortedSegment = new Uint8Array(segmentSize);
+                        
+                        // Sort every 3rd or 4th byte to preserve some structure
+                        // (mimicking RGB or RGBA patterns)
+                        const step = Math.random() < 0.5 ? 3 : 4;
+                        
+                        for (let j = 0; j < step; j++) {
+                            // Collect bytes at this offset
+                            const bytes = [];
+                            for (let k = j; k < segmentSize; k += step) {
+                                bytes.push(segment[k]);
+                            }
+                            
+                            // Sort these bytes
+                            bytes.sort();
+                            
+                            // Put them back
+                            let index = 0;
+                            for (let k = j; k < segmentSize; k += step) {
+                                sortedSegment[k] = bytes[index++];
+                            }
+                        }
+                        
+                        // For other bytes, just copy them unchanged
+                        for (let j = 0; j < segmentSize; j++) {
+                            if (j % step !== 0) {
+                                sortedSegment[j] = segment[j];
+                            }
+                        }
+                        
+                        // Put back sorted segment
+                        for (let j = 0; j < segmentSize; j++) {
+                            data[position + j] = sortedSegment[j];
+                        }
+                    }
+                }
+            } else {
+                // If we can't find IDAT chunks, fall back to a safer approach
+                // using smaller segments and fewer of them
+                const segmentSize = Math.floor(30 * intensity);
+                const numSegments = Math.floor(intensity * 5);
+                
+                for (let i = 0; i < numSegments; i++) {
+                    // Target the middle of the file
+                    const quarterLen = Math.floor(data.length / 4);
+                    const position = startPos + quarterLen + Math.floor(Math.random() * (data.length - startPos - segmentSize - quarterLen * 2));
+                    
+                    // Extract segment
+                    const segment = data.slice(position, position + segmentSize);
+                    
+                    // Create a partially sorted segment
+                    const sortedSegment = new Uint8Array(segmentSize);
+                    
+                    // Only sort every 4th byte
+                    for (let step = 0; step < 4; step++) {
+                        const bytes = [];
+                        for (let j = step; j < segmentSize; j += 4) {
+                            bytes.push(segment[j]);
+                        }
+                        
+                        // Sort these bytes
+                        bytes.sort();
+                        
+                        // Put them back
+                        let index = 0;
+                        for (let j = step; j < segmentSize; j += 4) {
+                            sortedSegment[j] = bytes[index++];
+                        }
+                    }
+                    
+                    // Put back sorted segment
+                    for (let j = 0; j < segmentSize; j++) {
+                        data[position + j] = sortedSegment[j];
+                    }
+                }
+            }
+        }
+        
+        // Download corrupted image
+        function downloadImage() {
+            if (!corruptedImageData) {
+                showNotification("No corrupted image to download.", true);
+                return;
+            }
+            
+            const blob = new Blob([corruptedImageData], { type: 'image/png' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            
+            // Add timestamp to filename for uniqueness
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const method = corruptionType.value.split('(')[0].trim().toLowerCase().replace(/\s+/g, '-');
+            link.download = `corrupted-${method}-${timestamp}.png`;
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            showNotification("Corrupted image downloaded!");
+        }
+    </script>
+</body>
+</html>

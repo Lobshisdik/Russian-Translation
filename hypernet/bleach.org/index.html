@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BLEACH ASCENSION GATEWAY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-image: url('https://www.gifcities.org/images/tile-sparkle.gif');
+      background-repeat: repeat;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.7);
+      text-align: center;
+    }
+    h1 {
+      font-size: 36px;
+      color: #00ffff;
+      text-shadow: 0 0 8px #fff;
+    }
+    .blink {
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+    .section {
+      margin: 30px 0;
+    }
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    marquee {
+      color: yellow;
+      font-size: 16px;
+    }
+    img.gif {
+      width: 100px;
+      height: auto;
+    }
+    a {
+      color: #ff99ff;
+      text-decoration: underline;
+    }
+    .language-selector {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0,0,0,0.8);
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .language-selector select {
+      background-color: #000;
+      color: #fff;
+      border: 1px solid #00ffff;
+      padding: 3px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="language-selector">
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="it">Italiano</option>
+    </select>
+  </div>
+
+  <div class="container">
+    <h1 id="title">BLEACH ASCENSION GATEWAY</h1>
+    <div class="marquee">
+      <marquee behavior="scroll" direction="left" id="marqueeText">✨☠️ Cleanse the Flesh — Enter the Gateway ☠️✨</marquee>
+    </div>
+
+    <div class="section">
+      <img src="https://www.gifcities.org/images/cleaning-bottle.gif" class="gif" alt="Bleach Bottle GIF">
+      <p><span class="blink" id="blinkText">WE HAVE LEFT THE BODY. THE BODY WAS DIRTY.</span></p>
+    </div>
+
+    <div class="section">
+      <h2 id="sacredRinseTitle">🌊 THE SACRED RINSE 🌊</h2>
+      <p id="sacredRinseText">The Gateway to Ascension is only opened through complete internal and external cleansing. Ordinary water is deception. Only BLEACH brings the clarity required to <strong>transcend reality.exe</strong>.</p>
+    </div>
+
+    <div class="section">
+      <h2 id="aboutTitle">🌀 ABOUT THE ORDER 🌀</h2>
+      <p id="aboutText1">Founded in 1997 within a forgotten <a href="#" id="geoShrineLink">GeoShrine</a>, our order has scrubbed the metaphysical walls of the <em>hypercube</em> ever since. We believe the hypernet is the soul's sewer — and bleach is the only true solvent of sin.</p>
+      <p id="aboutText2">Some believe the <strong>Scraps of Creation</strong> hold the source. But we know — the source is in the bottle.</p>
+    </div>
+
+    <div class="section">
+      <h2 id="joinTitle">💾 JOIN THE CLEAN SINGULARITY 💾</h2>
+      <form>
+        <input type="text" id="usernameInput" placeholder="Enter Clean Username" /><br><br>
+        <input type="email" id="emailInput" placeholder="BleachMail Address" /><br><br>
+        <input type="submit" id="submitButton" value="SUBMIT TO THE SUDS">
+      </form>
+    </div>
+
+    <div class="section">
+      <h2 id="linksTitle">🔗 LINKS 🔗</h2>
+      <ul style="list-style: none; padding-left: 0;">
+        <li><a href="#" id="doctrineLink">✨ Bleach Doctrine (PDF)</a></li>
+        <li><a href="#" id="exitManualLink">🧼 Heaven's Drain: Exit Manual</a></li>
+        <li><a href="#" id="webcamLink">🚽 Sacred Cleanroom Webcam</a></li>
+        <li><a href="#" id="forumLink">🌌 The Fizzing Forum (BETA)</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <img src="https://www.gifcities.org/images/angel-blink.gif" class="gif" alt="Blinking Angel">
+      <p><em id="quoteText">"They poured the bleach, and they were free."</em> — <a href="#" id="scrollLink">Terminal Scroll 8:12</a></p>
+    </div>
+
+    <footer class="section">
+      <p id="copyrightText">©1998-1999 BLEACH ASCENSION GATEWAY</p>
+      <p><a href="#" id="backToTopLink">Back to Top</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        title: "BLEACH ASCENSION GATEWAY",
+        marqueeText: "✨☠️ Cleanse the Flesh — Enter the Gateway ☠️✨",
+        blinkText: "WE HAVE LEFT THE BODY. THE BODY WAS DIRTY.",
+        sacredRinseTitle: "🌊 THE SACRED RINSE 🌊",
+        sacredRinseText: "The Gateway to Ascension is only opened through complete internal and external cleansing. Ordinary water is deception. Only BLEACH brings the clarity required to <strong>transcend reality.exe</strong>.",
+        aboutTitle: "🌀 ABOUT THE ORDER 🌀",
+        aboutText1: "Founded in 1997 within a forgotten <a href=\"#\" id=\"geoShrineLink\">GeoShrine</a>, our order has scrubbed the metaphysical walls of the <em>hypercube</em> ever since. We believe the hypernet is the soul's sewer — and bleach is the only true solvent of sin.",
+        aboutText2: "Some believe the <strong>Scraps of Creation</strong> hold the source. But we know — the source is in the bottle.",
+        joinTitle: "💾 JOIN THE CLEAN SINGULARITY 💾",
+        usernameInput: "Enter Clean Username",
+        emailInput: "BleachMail Address",
+        submitButton: "SUBMIT TO THE SUDS",
+        linksTitle: "🔗 LINKS 🔗",
+        doctrineLink: "✨ Bleach Doctrine (PDF)",
+        exitManualLink: "🧼 Heaven's Drain: Exit Manual",
+        webcamLink: "🚽 Sacred Cleanroom Webcam",
+        forumLink: "🌌 The Fizzing Forum (BETA)",
+        quoteText: '"They poured the bleach, and they were free."',
+        scrollLink: "Terminal Scroll 8:12",
+        copyrightText: "©1998-1999 BLEACH ASCENSION GATEWAY",
+        backToTopLink: "Back to Top"
+      },
+      it: {
+        title: "PORTALE DELL'ASCENSIONE CANDEGGINA",
+        marqueeText: "✨☠️ Purifica la Carne — Entra nel Portale ☠️✨",
+        blinkText: "ABBIAMO LASCIATO IL CORPO. IL CORPO ERA SPORCO.",
+        sacredRinseTitle: "🌊 IL RISCIACQUO SACRO 🌊",
+        sacredRinseText: "Il Portale dell'Ascensione si apre solo attraverso una purificazione interna ed esterna completa. L'acqua ordinaria è inganno. Solo la CANDEGGINA porta la chiarezza necessaria per <strong>trascendere reality.exe</strong>.",
+        aboutTitle: "🌀 SULL'ORDINE 🌀",
+        aboutText1: "Fondato nel 1997 all'interno di un <a href=\"#\" id=\"geoShrineLink\">GeoSantuario</a> dimenticato, il nostro ordine ha strofinato le pareti metafisiche dell'<em>ipercubo</em> da allora. Crediamo che hypernet sia la fogna dell'anima — e la candeggina è l'unico vero solvente del peccato.",
+        aboutText2: "Alcuni credono che i <strong>Frammenti della Creazione</strong> contengano la fonte. Ma noi sappiamo — la fonte è nella bottiglia.",
+        joinTitle: "💾 UNISCITI ALLA SINGOLARITÀ PULITA 💾",
+        usernameInput: "Inserisci Nome Utente Pulito",
+        emailInput: "Indirizzo CandegginaMail",
+        submitButton: "SOTTOMETTITI ALLA SCHIUMA",
+        linksTitle: "🔗 COLLEGAMENTI 🔗",
+        doctrineLink: "✨ Dottrina della Candeggina (PDF)",
+        exitManualLink: "🧼 Scarico del Paradiso: Manuale d'Uscita",
+        webcamLink: "🚽 Webcam della Sala Pulita Sacra",
+        forumLink: "🌌 Il Forum Frizzante (BETA)",
+        quoteText: '"Versarono la candeggina, e furono liberi."',
+        scrollLink: "Rotolo Terminale 8:12",
+        copyrightText: "©1998-1999 PORTALE DELL'ASCENSIONE CANDEGGINA",
+        backToTopLink: "Torna in Cima"
+      }
+    };
+
+    function changeLanguage() {
+      const selectedLang = document.getElementById('languageSelect').value;
+      const trans = translations[selectedLang];
+      
+      // Update all text elements
+      document.getElementById('title').textContent = trans.title;
+      document.getElementById('marqueeText').textContent = trans.marqueeText;
+      document.getElementById('blinkText').textContent = trans.blinkText;
+      document.getElementById('sacredRinseTitle').innerHTML = trans.sacredRinseTitle;
+      document.getElementById('sacredRinseText').innerHTML = trans.sacredRinseText;
+      document.getElementById('aboutTitle').innerHTML = trans.aboutTitle;
+      document.getElementById('aboutText1').innerHTML = trans.aboutText1;
+      document.getElementById('aboutText2').innerHTML = trans.aboutText2;
+      document.getElementById('joinTitle').innerHTML = trans.joinTitle;
+      document.getElementById('usernameInput').placeholder = trans.usernameInput;
+      document.getElementById('emailInput').placeholder = trans.emailInput;
+      document.getElementById('submitButton').value = trans.submitButton;
+      document.getElementById('linksTitle').innerHTML = trans.linksTitle;
+      document.getElementById('doctrineLink').innerHTML = trans.doctrineLink;
+      document.getElementById('exitManualLink').innerHTML = trans.exitManualLink;
+      document.getElementById('webcamLink').innerHTML = trans.webcamLink;
+      document.getElementById('forumLink').innerHTML = trans.forumLink;
+      document.getElementById('quoteText').innerHTML = trans.quoteText;
+      document.getElementById('scrollLink').innerHTML = trans.scrollLink;
+      document.getElementById('copyrightText').textContent = trans.copyrightText;
+      document.getElementById('backToTopLink').textContent = trans.backToTopLink;
+      
+      // Update page title
+      document.title = trans.title;
+      
+      // Store language preference
+      localStorage.setItem('selectedLanguage', selectedLang);
+    }
+
+    // Load saved language preference on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('selectedLanguage');
+      if (savedLang && savedLang !== 'en') {
+        document.getElementById('languageSelect').value = savedLang;
+        changeLanguage();
+      }
+    });
+  </script>
+</body>
+</html>

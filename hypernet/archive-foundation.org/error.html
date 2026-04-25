@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>!! ERROR 404 !!</title>
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background-color: black;
+      color: lime;
+      text-align: center;
+      padding-top: 10%;
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      background-repeat: repeat;
+    }
+
+    .box {
+      border: 3px dashed lime;
+      padding: 30px;
+      margin: auto;
+      width: 60%;
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    h1 {
+      font-size: 36px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-family: inherit;
+      background-color: black;
+      color: lime;
+      border: 2px solid lime;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: lime;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1 id="error-title">ERROR 404</h1>
+    <p id="error-message">Something weird happened.</p>
+    <button onclick="goBack()">← Go Back</button>
+  </div>
+
+  <script>
+    const errorTitles = [
+      "!!! CRITICAL ERROR !!!",
+      "404: Page Not Found",
+      "SYS FAILURE: CODE 92X",
+      "HTTP/1.1 404 ERROR",
+      "!!! FILE MISSING !!!",
+      "OH NO! A GLITCH!",
+      "FATAL WEB EXCEPTION"
+    ];
+
+    const errorMessages = [
+      "The file you seek has transcended the Web.",
+      "Looks like this page was eaten by a grue.",
+      "This URL is stuck in 1997. Please upgrade your modem.",
+      "Page not found. Try yelling at your screen.",
+      "404'd like it's 1999.",
+      "Cosmic radiation has scrambled this address.",
+      "This page has been permanently lost to time."
+    ];
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    document.getElementById('error-title').innerText = getRandomItem(errorTitles);
+    document.getElementById('error-message').innerText = getRandomItem(errorMessages);
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

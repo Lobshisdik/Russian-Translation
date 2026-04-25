@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Event Extractor</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --text-color: #d4d4d4;
+            --accent-color: #3794ff;
+            --container-bg: #252526;
+            --border-color: #3e3e42;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 { margin-bottom: 10px; font-weight: 600; }
+        p { color: #888; margin-bottom: 20px; }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid var(--border-color);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px dashed var(--border-color);
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid var(--accent-color);
+            background: rgba(55, 148, 255, 0.1);
+            color: var(--accent-color);
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .custom-file-upload:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            background-color: #101010;
+            color: #9cdcfe; /* VS Code variable color */
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+            white-space: pre;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        button.copy-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button.copy-btn:hover { background-color: #297acb; }
+        
+        #status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>RPG Maker Event Filter</h1>
+    <p>Upload a Map JSON file to extract "Teleport - CityName" coordinates.</p>
+
+    <div class="container">
+        <div class="input-group">
+            <label for="fileInput" class="custom-file-upload">
+                Select MapXXX.json
+            </label>
+            <input type="file" id="fileInput" accept=".json">
+            <div id="status">No file selected</div>
+        </div>
+
+        <textarea id="output" readonly placeholder="// Output will appear here..."></textarea>
+
+        <div class="actions">
+            <button class="copy-btn" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const outputArea = document.getElementById('output');
+        const statusDiv = document.getElementById('status');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            statusDiv.textContent = `Processing: ${file.name}`;
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const jsonContent = JSON.parse(e.target.result);
+                    processMapData(jsonContent);
+                } catch (error) {
+                    outputArea.value = "Error parsing JSON file. Please ensure it is a valid RPG Maker Map file.";
+                    console.error(error);
+                }
+            };
+
+            reader.readAsText(file);
+        });
+
+        function processMapData(mapData) {
+            // RPG Maker MZ events are stored in the 'events' array.
+            // Note: The array usually starts with a null at index 0.
+            if (!mapData.events || !Array.isArray(mapData.events)) {
+                outputArea.value = "Error: This file does not appear to have an 'events' array.";
+                return;
+            }
+
+            const extractedData = {};
+            let count = 0;
+
+            // Regex to match "Teleport - CityName"
+            // \s* allows for optional spaces around the dash
+            const nameRegex = /^Teleport\s*-\s*(.+)$/i;
+
+            mapData.events.forEach(event => {
+                // Skip null events (deleted events or index 0)
+                if (!event) return;
+
+                // Check if name matches pattern
+                const match = event.name.match(nameRegex);
+
+                if (match) {
+                    const cityName = match[1].trim(); // Extract the name (Group 1)
+                    const key = `${event.x},${event.y}`; // Create "x,y" key
+                    
+                    extractedData[key] = cityName;
+                    count++;
+                }
+            });
+
+            // Generate the final string output
+            const outputString = generateOutputString(extractedData);
+            outputArea.value = outputString;
+            statusDiv.textContent = `Success! Found ${count} locations.`;
+        }
+
+        function generateOutputString(data) {
+            let str = "const HARDCODED_BIOME_NAMES = {\n";
+            
+            // Loop through keys to format the lines
+            for (const [coords, name] of Object.entries(data)) {
+                // Using JSON.stringify for the name ensures quotes are handled safely if the name contains them
+                str += `  "${coords}": ${JSON.stringify(name)},\n`;
+            }
+            
+            str += "};";
+            return str;
+        }
+
+        function copyToClipboard() {
+            outputArea.select();
+            document.execCommand('copy');
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = "Copied!";
+            setTimeout(() => btn.textContent = originalText, 2000);
+        }
+    </script>
+</body>
+</html>

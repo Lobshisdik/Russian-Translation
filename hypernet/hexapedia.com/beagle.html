@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beagle - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Positions logo and switcher */
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Beagle</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 15, 2001 | <span data-lang-key="meta_read_time">7 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro"><strong>Beagle</strong> is the legendary phantom city located at the terminus of the <a href="encompassing-road">Encompassing Road</a>. Known as the "Place of Perditions," Beagle represents the ultimate destination for travelers who have journeyed through the dimensional highways of our post-Squishing reality. According to trucker folklore, only one person has ever returned from Beagle: the mysterious driver known as <a href="bubba">Bubba</a>.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#location" data-lang-key="toc_1">1. Dimensional Location</a></li>
+                        <li><a href="#characteristics" data-lang-key="toc_2">2. City Characteristics</a></li>
+                        <li><a href="#perditions" data-lang-key="toc_3">3. The Perditions</a></li>
+                        <li><a href="#bubba" data-lang-key="toc_4">4. Bubba's Return</a></li>
+                        <li><a href="#theories" data-lang-key="toc_5">5. Theoretical Framework</a></li>
+                        <li><a href="#warnings" data-lang-key="toc_6">6. Safety Warnings</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Beagle Information</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Type:</span> <span data-lang-key="infobox_type_value">Phantom Terminus City</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_location_label">Location:</span> <span data-lang-key="infobox_location_value">End of Encompassing Road</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_access_label">Access:</span> <span data-lang-key="infobox_access_value">Temporal-Velocity Gate</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_risk_label">Risk Level:</span> <span data-lang-key="infobox_risk_value">Maximum (Perdition-Class)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_survivors_label">Known Survivors:</span> <span data-lang-key="infobox_survivors_value">1 (Bubba)</span>
+                    </div>
+                </div>
+
+                <h2 id="location" data-lang-key="h2_location">Dimensional Location</h2>
+                <p data-lang-key="p_location">Beagle exists at what the <a href="trucker-society">Trucker Society</a> terms a "Temporal-Velocity Gate" - the point where the Encompassing Road transitions from physical asphalt to pure conceptual pathway. Unlike conventional cities that exist in standard three-dimensional space, Beagle occupies a quantum-stabilized pocket dimension that can only be accessed by achieving critical momentum on the Road's final stretch.</p>
+
+                <p data-lang-key="p_location2">The city's dimensional coordinates shift constantly, making it impossible to map using traditional navigation systems. Even advanced techno-mystical GPS units manufactured by <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a> fail to maintain lock on Beagle's position for more than 0.3 seconds.</p>
+
+                <h2 id="characteristics" data-lang-key="h2_characteristics">City Characteristics</h2>
+                <p data-lang-key="p_characteristics">Descriptions of Beagle vary dramatically depending on the source, leading researchers to theorize that the city manifests differently for each visitor. However, several consistent elements emerge from trucker testimonies and <a href="hypernet">Hypernet</a> transmissions intercepted near the Road's terminus:</p>
+
+                <ul>
+                    <li data-lang-key="li_char_1"><strong>Architectural Fluidity:</strong> Buildings constantly reshape themselves, blending architectural styles from multiple dimensions and time periods</li>
+                    <li data-lang-key="li_char_2"><strong>Population Paradox:</strong> The city appears both completely deserted and densely populated simultaneously</li>
+                    <li data-lang-key="li_char_3"><strong>Temporal Distortion:</strong> Time flows in multiple directions, with some areas experiencing accelerated decay while others remain frozen</li>
+                    <li data-lang-key="li_char_4"><strong>Gravitational Anomalies:</strong> Streets may extend vertically or curve through impossible geometries</li>
+                </ul>
+
+                <h3 id="perditions" data-lang-key="h3_perditions">The Perditions</h3>
+                <p data-lang-key="p_perditions">The term "perditions" refers to the fate that befalls most travelers who reach Beagle. According to fragmented radio transmissions recorded by the <a href="archive-foundation">Archive Foundation</a>, visitors become trapped in personalized scenarios that reflect their deepest regrets, unfulfilled desires, or unresolved conflicts.</p>
+
+                <blockquote data-lang-key="quote_perdition">
+                    "Day 847 in Beagle. Still can't find the exit ramp. Keep seeing my old house, but it's wrong somehow. The windows are eyes and they're watching me. The GPS just keeps saying 'recalculating' but the voice sounds like my ex-wife. Send help." - Final transmission from Trucker Delta-7
+                </blockquote>
+
+                <p data-lang-key="p_perditions2">The Trucker Society's theoretical department suggests that perditions function as psycho-dimensional traps, using advanced neuro-temporal algorithms to create inescapable mental loops. The city essentially becomes a prison constructed from the visitor's own consciousness.</p>
+
+                <h2 id="bubba" data-lang-key="h2_bubba">Bubba's Return</h2>
+                <p data-lang-key="p_bubba">Bubba remains the only documented individual to have reached Beagle and returned to tell about it. His account, recorded at a truck stop in former Wyoming, describes Beagle as "the place where roads go to die, but also where they're born."</p>
+
+                <p data-lang-key="p_bubba2">According to Bubba's testimony, he encountered what he termed "the Road's Heart" - a massive engine or generator that powers the entire Encompassing Road network. He claims to have performed some form of maintenance on this device, though he refuses to elaborate on the specifics, stating only that "some things are better left under the hood."</p>
+
+                <p data-lang-key="p_bubba3">Significantly, Bubba returned with his <a href="liminal-engine">Liminal Engine</a> upgraded with what he calls "Beagle protocols" - modifications that allow his vehicle to navigate dimensional boundaries with unprecedented precision.</p>
+
+                <h2 id="theories" data-lang-key="h2_theories">Theoretical Framework</h2>
+                <p data-lang-key="p_theories">Several organizations have attempted to explain Beagle's nature and purpose:</p>
+
+                <h3 data-lang-key="h3_guild_theory">Mages Guild Theory</h3>
+                <p data-lang-key="p_guild_theory">The <a href="mages-guild">Mages Guild</a> proposes that Beagle serves as a "Reality Recycling Center" where failed timelines and aborted possibilities are processed and reintegrated into the multiverse. The perditions may be a side effect of this cosmic waste management system.</p>
+
+                <h3 data-lang-key="h3_collective_theory">Hypercapitalist Collective Theory</h3>
+                <p data-lang-key="p_collective_theory">The <a href="hypercapitalist-collective">Hypercapitalist Collective</a> views Beagle as the ultimate market destination - a place where the most precious commodity (human experience) is extracted and commodified. They've attempted several hostile acquisition missions, all of which have failed catastrophically.</p>
+
+                <h3 data-lang-key="h3_foundation_theory">Archive Foundation Theory</h3>
+                <p data-lang-key="p_foundation_theory">The Archive Foundation maintains that Beagle is a glitch in the post-Squishing reality matrix - a buffer zone where unresolved data conflicts play out endlessly. They consider it a critical system component that should not be interfered with.</p>
+
+                <h2 id="warnings" data-lang-key="h2_warnings">Safety Warnings</h2>
+                <p data-lang-key="p_warnings">All major organizations strongly advise against attempting to reach Beagle. The Trucker Society has issued a permanent Code Black warning for the Road's final stretch, and travel beyond Mile Marker ∞-7 is prohibited by international treaty.</p>
+
+                <p data-lang-key="p_warnings2">If you encounter road signs indicating proximity to Beagle, immediately engage emergency protocols:</p>
+
+                <ol>
+                    <li data-lang-key="li_warn_1">Reduce speed below 80 km/h to trigger a time loop reset</li>
+                    <li data-lang-key="li_warn_2">Activate all available Anoki phone shields</li>
+                    <li data-lang-key="li_warn_3">Begin broadcasting your Social Security number on CB Channel 19</li>
+                    <li data-lang-key="li_warn_4">If possible, sacrifice a quarter tank of gasoline to the Road Gods</li>
+                </ol>
+
+                <blockquote data-lang-key="quote_warning">
+                    "Remember: Beagle isn't just a destination. It's a decision. And once you've decided to go there, you've already arrived." - Final entry in the Official Trucker's Almanac, 7th Edition
+                </blockquote>
+
+                <h2 data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="encompassing-road.html" data-lang-key="link_road">Encompassing Road</a></li>
+                    <li><a href="bubba-williams.html" data-lang-key="link_bubba">Bubba (The Trucker)</a></li>
+                    <li><a href="rule-of-80.html" data-lang-key="link_rule">The Rule of 80</a></li>
+                    <li><a href="localized-time-loop-bubbles.html" data-lang-key="link_loops">Localized time loop bubbles</a></li>
+                    <li><a href="phantom-cities.html" data-lang-key="link_phantom">Category: Phantom Cities</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Hypernet Commons License v2.1</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Beagle",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "7 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Dimensional Location",
+                    toc_2: "2. City Characteristics", 
+                    toc_3: "3. The Perditions",
+                    toc_4: "4. Bubba's Return",
+                    toc_5: "5. Theoretical Framework",
+                    toc_6: "6. Safety Warnings",
+                    infobox_title: "Beagle Information",
+                    infobox_type_label: "Type:",
+                    infobox_type_value: "Phantom Terminus City",
+                    infobox_location_label: "Location:",
+                    infobox_location_value: "End of Encompassing Road",
+                    infobox_access_label: "Access:",
+                    infobox_access_value: "Temporal-Velocity Gate",
+                    infobox_risk_label: "Risk Level:",
+                    infobox_risk_value: "Maximum (Perdition-Class)",
+                    infobox_survivors_label: "Known Survivors:",
+                    infobox_survivors_value: "1 (Bubba)",
+                    p_intro: "Beagle is the legendary phantom city located at the terminus of the Encompassing Road. Known as the \"Place of Perditions,\" Beagle represents the ultimate destination for travelers who have journeyed through the dimensional highways of our post-Squishing reality. According to trucker folklore, only one person has ever returned from Beagle: the mysterious driver known as Bubba.",
+                    h2_location: "Dimensional Location",
+                    p_location: "Beagle exists at what the Trucker Society terms a \"Temporal-Velocity Gate\" - the point where the Encompassing Road transitions from physical asphalt to pure conceptual pathway. Unlike conventional cities that exist in standard three-dimensional space, Beagle occupies a quantum-stabilized pocket dimension that can only be accessed by achieving critical momentum on the Road's final stretch.",
+                    p_location2: "The city's dimensional coordinates shift constantly, making it impossible to map using traditional navigation systems. Even advanced techno-mystical GPS units manufactured by Esoteric Heavy Industries fail to maintain lock on Beagle's position for more than 0.3 seconds.",
+                    h2_characteristics: "City Characteristics",
+                    p_characteristics: "Descriptions of Beagle vary dramatically depending on the source, leading researchers to theorize that the city manifests differently for each visitor. However, several consistent elements emerge from trucker testimonies and Hypernet transmissions intercepted near the Road's terminus:",
+                    li_char_1: "Architectural Fluidity: Buildings constantly reshape themselves, blending architectural styles from multiple dimensions and time periods",
+                    li_char_2: "Population Paradox: The city appears both completely deserted and densely populated simultaneously",
+                    li_char_3: "Temporal Distortion: Time flows in multiple directions, with some areas experiencing accelerated decay while others remain frozen",
+                    li_char_4: "Gravitational Anomalies: Streets may extend vertically or curve through impossible geometries",
+                    h3_perditions: "The Perditions",
+                    p_perditions: "The term \"perditions\" refers to the fate that befalls most travelers who reach Beagle. According to fragmented radio transmissions recorded by the Archive Foundation, visitors become trapped in personalized scenarios that reflect their deepest regrets, unfulfilled desires, or unresolved conflicts.",
+                    quote_perdition: "\"Day 847 in Beagle. Still can't find the exit ramp. Keep seeing my old house, but it's wrong somehow. The windows are eyes and they're watching me. The GPS just keeps saying 'recalculating' but the voice sounds like my ex-wife. Send help.\" - Final transmission from Trucker Delta-7",
+                    p_perditions2: "The Trucker Society's theoretical department suggests that perditions function as psycho-dimensional traps, using advanced neuro-temporal algorithms to create inescapable mental loops. The city essentially becomes a prison constructed from the visitor's own consciousness.",
+                    h2_bubba: "Bubba's Return",
+                    p_bubba: "Bubba remains the only documented individual to have reached Beagle and returned to tell about it. His account, recorded at a truck stop in former Wyoming, describes Beagle as \"the place where roads go to die, but also where they're born.\"",
+                    p_bubba2: "According to Bubba's testimony, he encountered what he termed \"the Road's Heart\" - a massive engine or generator that powers the entire Encompassing Road network. He claims to have performed some form of maintenance on this device, though he refuses to elaborate on the specifics, stating only that \"some things are better left under the hood.\"",
+                    p_bubba3: "Significantly, Bubba returned with his Liminal Engine upgraded with what he calls \"Beagle protocols\" - modifications that allow his vehicle to navigate dimensional boundaries with unprecedented precision.",
+                    h2_theories: "Theoretical Framework",
+                    p_theories: "Several organizations have attempted to explain Beagle's nature and purpose:",
+                    h3_guild_theory: "Mages Guild Theory",
+                    p_guild_theory: "The Mages Guild proposes that Beagle serves as a \"Reality Recycling Center\" where failed timelines and aborted possibilities are processed and reintegrated into the multiverse. The perditions may be a side effect of this cosmic waste management system.",
+                    h3_collective_theory: "Hypercapitalist Collective Theory", 
+                    p_collective_theory: "The Hypercapitalist Collective views Beagle as the ultimate market destination - a place where the most precious commodity (human experience) is extracted and commodified. They've attempted several hostile acquisition missions, all of which have failed catastrophically.",
+                    h3_foundation_theory: "Archive Foundation Theory",
+                    p_foundation_theory: "The Archive Foundation maintains that Beagle is a glitch in the post-Squishing reality matrix - a buffer zone where unresolved data conflicts play out endlessly. They consider it a critical system component that should not be interfered with.",
+                    h2_warnings: "Safety Warnings",
+                    p_warnings: "All major organizations strongly advise against attempting to reach Beagle. The Trucker Society has issued a permanent Code Black warning for the Road's final stretch, and travel beyond Mile Marker ∞-7 is prohibited by international treaty.",
+                    p_warnings2: "If you encounter road signs indicating proximity to Beagle, immediately engage emergency protocols:",
+                    li_warn_1: "Reduce speed below 80 km/h to trigger a time loop reset",
+                    li_warn_2: "Activate all available Anoki phone shields", 
+                    li_warn_3: "Begin broadcasting your Social Security number on CB Channel 19",
+                    li_warn_4: "If possible, sacrifice a quarter tank of gasoline to the Road Gods",
+                    quote_warning: "\"Remember: Beagle isn't just a destination. It's a decision. And once you've decided to go there, you've already arrived.\" - Final entry in the Official Trucker's Almanac, 7th Edition",
+                    h2_see_also: "See Also",
+                    link_road: "Encompassing Road",
+                    link_bubba: "Bubba (The Trucker)",
+                    link_rule: "The Rule of 80",
+                    link_loops: "Temporal Loop Mechanics",
+                    link_phantom: "Category: Phantom Cities",
+                    footer_text: "© 2001 Hexapedia. Available under Hypernet Commons License v2.1"
+                },
+                it: {
+                    title: "Beagle",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "7 min di lettura", 
+                    toc_title: "Indice",
+                    toc_1: "1. Posizione Dimensionale",
+                    toc_2: "2. Caratteristiche della Città",
+                    toc_3: "3. Le Perdizioni",
+                    toc_4: "4. Il Ritorno di Bubba",
+                    toc_5: "5. Schema Teorico",
+                    toc_6: "6. Avvertenze di Sicurezza",
+                    infobox_title: "Informazioni su Beagle",
+                    infobox_type_label: "Tipo:",
+                    infobox_type_value: "Città Terminus Fantasma",
+                    infobox_location_label: "Posizione:",
+                    infobox_location_value: "Fine della Strada Onnicomprensiva",
+                    infobox_access_label: "Accesso:",
+                    infobox_access_value: "Portale Temporo-Velocità",
+                    infobox_risk_label: "Livello di Rischio:",
+                    infobox_risk_value: "Massimo (Classe-Perdizione)",
+                    infobox_survivors_label: "Sopravvissuti Noti:",
+                    infobox_survivors_value: "1 (Bubba)",
+                    p_intro: "Beagle è la leggendaria città fantasma situata al termine della Strada Onnicomprensiva. Conosciuta come il \"Luogo delle Perdizioni,\" Beagle rappresenta la destinazione finale per i viaggiatori che hanno attraversato le autostrade dimensionali della nostra realtà post-Squishing. Secondo il folklore dei camionisti, solo una persona è mai tornata da Beagle: il misterioso autista conosciuto come Bubba.",
+                    h2_location: "Posizione Dimensionale",
+                    p_location: "Beagle exists at what the Trucker Society terms a \"Temporal-Velocity Gate\" - the point where the Encompassing Road transitions from physical asphalt to pure conceptual pathway. Unlike conventional cities that exist in standard three-dimensional space, Beagle occupies a quantum-stabilized pocket dimension that can only be accessed by achieving critical momentum on the Road's final stretch.",
+                    p_location2: "Le coordinate dimensionali della città cambiano costantemente, rendendo impossibile mapparla usando sistemi di navigazione tradizionali. Persino le unità GPS tecno-mistiche avanzate prodotte dalle Industrie Pesanti Esoteriche falliscono nel mantenere il lock sulla posizione di Beagle per più di 0,3 secondi.",
+                    h2_characteristics: "Caratteristiche della Città",
+                    p_characteristics: "Le descrizioni di Beagle variano drasticamente a seconda della fonte, portando i ricercatori a teorizzare che la città si manifesti diversamente per ogni visitatore. Tuttavia, diversi elementi consistenti emergono dalle testimonianze dei camionisti e dalle trasmissioni Hypernet intercettate vicino al terminus della Strada:",
+                    li_char_1: "Fluidità Architettonica: Gli edifici si rimodellano costantemente, mescolando stili architettonici da multiple dimensioni e periodi temporali",
+                    li_char_2: "Paradosso della Popolazione: La città appare sia completamente deserta che densamente popolata simultaneamente",
+                    li_char_3: "Distorsione Temporale: Il tempo scorre in multiple direzioni, con alcune aree che sperimentano degrado accelerato mentre altre rimangono congelate",
+                    li_char_4: "Anomalie Gravitazionali: Le strade possono estendersi verticalmente o curvare attraverso geometrie impossibili",
+                    h3_perditions: "Le Perdizioni",
+                    p_perditions: "Il termine \"perdizioni\" si riferisce al destino che colpisce la maggior parte dei viaggiatori che raggiungono Beagle. Secondo trasmissioni radio frammentarie registrate dalla Archive Foundation, i visitatori rimangono intrappolati in scenari personalizzati che riflettono i loro rimpianti più profondi, desideri insoddisfatti o conflitti irrisolti.",
+                    quote_perdition: "\"Giorno 847 a Beagle. Ancora non riesco a trovare l'uscita. Continuo a vedere la mia vecchia casa, ma è sbagliata in qualche modo. Le finestre sono occhi e mi stanno guardando. Il GPS continua a dire 'ricalcolo in corso' ma la voce suona come mia ex-moglie. Mandate aiuto.\" - Trasmissione finale dal Camionista Delta-7",
+                    p_perditions2: "Il dipartimento teorico della Società dei Camionisti suggerisce che le perdizioni funzionino come trappole psico-dimensionali, usando algoritmi neuro-temporali avanzati per creare loop mentali inescapabili. La città diventa essenzialmente una prigione costruita dalla propria coscienza del visitatore.",
+                    h2_bubba: "Il Ritorno di Bubba",
+                    p_bubba: "Bubba rimane l'unico individuo documentato ad aver raggiunto Beagle e essere tornato per raccontarlo. Il suo racconto, registrato presso un autogrill nel ex Wyoming, descrive Beagle come \"il posto dove le strade vanno a morire, ma anche dove nascono.\"",
+                    p_bubba2: "Secondo la testimonianza di Bubba, ha incontrato quello che ha definito \"il Cuore della Strada\" - un motore massiccio o generatore che alimenta l'intera rete della Strada Onnicomprensiva. Afferma di aver eseguito qualche forma di manutenzione su questo dispositivo, anche se si rifiuta di elaborare sui dettagli specifici, dichiarando solo che \"alcune cose è meglio lasciarle sotto il cofano.\"",
+                    p_bubba3: "Significativamente, Bubba è tornato con il suo Motore Liminale aggiornato con quelli che chiama \"protocolli Beagle\" - modifiche che permettono al suo veicolo di navigare i confini dimensionali con precisione senza precedenti.",
+                    h2_theories: "Schema Teorico",
+                    p_theories: "Diverse organizzazioni hanno tentato di spiegare la natura e lo scopo di Beagle:",
+                    h3_guild_theory: "Teoria della Gilda dei Maghi",
+                    p_guild_theory: "La Gilda dei Maghi propone che Beagle serva come \"Centro di Riciclaggio della Realtà\" dove timeline fallite e possibilità abortite vengono processate e reintegrate nel multiverso. Le perdizioni potrebbero essere un effetto collaterale di questo sistema di gestione rifiuti cosmico.",
+                    h3_collective_theory: "Teoria del Collettivo Ipercapitalista",
+                    p_collective_theory: "Il Collettivo Ipercapitalista vede Beagle come la destinazione di mercato definitiva - un posto dove la merce più preziosa (l'esperienza umana) viene estratta e commodificata. Hanno tentato diverse missioni di acquisizione ostile, tutte fallite catastroficamente.",
+                    h3_foundation_theory: "Teoria della Archive Foundation",
+                    p_foundation_theory: "la Archive Foundation sostiene che Beagle è un glitch nella matrice della realtà post-Squishing - una zona buffer dove conflitti di dati irrisolti si giocano all'infinito. La considerano un componente critico del sistema che non dovrebbe essere interferito.",
+                    h2_warnings: "Avvertenze di Sicurezza",
+                    p_warnings: "Tutte le organizzazioni principali sconsigliano vivamente di tentare di raggiungere Beagle. La Società dei Camionisti ha emesso un avvertimento permanente Codice Nero per il tratto finale della Strada, e il viaggio oltre il Marcatore Miglio ∞-7 è proibito da trattato internazionale.",
+                    p_warnings2: "Se incontrate segnali stradali che indicano prossimità a Beagle, attivate immediatamente i protocolli di emergenza:",
+                    li_warn_1: "Riducete la velocità sotto gli 80 km/h per attivare un reset del loop temporale",
+                    li_warn_2: "Attivate tutti gli scudi Anoki disponibili",
+                    li_warn_3: "Iniziate a trasmettere il vostro numero di Sicurezza Sociale sul Canale CB 19",
+                    li_warn_4: "Se possibile, sacrificate un quarto di serbatoio di benzina agli Dei della Strada",
+                    quote_warning: "\"Ricordate: Beagle non è solo una destinazione. È una decisione. E una volta che avete deciso di andarci, ci siete già arrivati.\" - Ultima voce nell'Almanacco Ufficiale del Camionista, 7a Edizione",
+                    h2_see_also: "Vedi Anche",
+                    link_road: "Strada Onnicomprensiva",
+                    link_bubba: "Bubba (Il Camionista)",
+                    link_rule: "La Regola dell'80",
+                    link_loops: "Meccaniche dei Loop Temporali",
+                    link_phantom: "Categoria: Città Fantasma",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto Licenza Hypernet Commons v2.1"

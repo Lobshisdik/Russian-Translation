@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker Tileset Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .upload-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px;
+            border: 2px dashed #667eea;
+            border-radius: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .upload-section:hover {
+            border-color: #764ba2;
+            background: rgba(118, 75, 162, 0.05);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .controls {
+            display: none;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .combobox {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .combobox:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .results {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .results-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .results-content {
+            padding: 25px;
+        }
+
+        .tileset-info {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tileset-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .image-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .image-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .shared-tilesets {
+            margin-top: 20px;
+        }
+
+        .shared-group {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .shared-group h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .tileset-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tileset-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 RPG Maker Tileset Analyzer</h1>
+            <p>Analyze tileset dependencies and find shared B, C, D, E images</p>
+        </div>
+
+        <div class="content">
+            <div class="upload-section" id="uploadSection">
+                <h2>📁 Upload Your tileset.json File</h2>
+                <p style="margin: 15px 0; color: #666;">Select your RPG Maker tileset.json file to analyze tileset relationships</p>
+                <input type="file" id="fileInput" class="file-input" accept=".json" />
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    Choose File
+                </button>
+                <p id="fileName" style="margin-top: 15px; color: #667eea; font-weight: 500;"></p>
+            </div>
+
+            <div class="controls" id="controls">
+                <div class="control-group">
+                    <label for="tilesetSelect">🎨 Select Tileset:</label>
+                    <select id="tilesetSelect" class="combobox">
+                        <option value="">-- Choose a tileset --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="results" id="results">
+                <div class="results-header">
+                    <h2>📊 Tileset Analysis Results</h2>
+                </div>
+                <div class="results-content">
+                    <div class="stats" id="stats"></div>
+                    <div class="tileset-info" id="tilesetInfo"></div>
+                    <div class="shared-tilesets" id="sharedTilesets"></div>
+                </div>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+            <div id="loading" class="loading" style="display: none;">
+                🔄 Analyzing tilesets...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tilesetData = null;
+        let currentTileset = null;
+
+        document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+        document.getElementById('tilesetSelect').addEventListener('change', handleTilesetSelect);
+
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            document.getElementById('fileName').textContent = `Selected: ${file.name}`;
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+
+            try {
+                const text = await file.text();
+                tilesetData = JSON.parse(text);
+                
+                if (!Array.isArray(tilesetData)) {
+                    throw new Error('Invalid tileset.json format - expected an array of tilesets');
+                }
+
+                populateTilesetCombobox();
+                document.getElementById('controls').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+
+            } catch (error) {
+                showError(`Error reading file: ${error.message}`);
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function populateTilesetCombobox() {
+            const select = document.getElementById('tilesetSelect');
+            select.innerHTML = '<option value="">-- Choose a tileset --</option>';
+
+            tilesetData.forEach((tileset, index) => {
+                // Skip null/empty tilesets
+                if (!tileset) return;
+                
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${tileset.name || `Tileset ${index + 1}`} (ID: ${tileset.id || 'N/A'})`;
+                select.appendChild(option);
+            });
+        }
+
+        function handleTilesetSelect(event) {
+            const selectedIndex = event.target.value;
+            if (selectedIndex === '') {
+                document.getElementById('results').style.display = 'none';
+                return;
+            }
+
+            currentTileset = tilesetData[selectedIndex];
+            analyzeTileset();
+        }
+
+        function analyzeTileset() {
+            if (!currentTileset) return;
+
+            document.getElementById('loading').style.display = 'block';
+            
+            setTimeout(() => {
+                displayTilesetInfo();
+                findSharedImages();
+                document.getElementById('results').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }, 100);
+        }
+
+        function displayTilesetInfo() {
+            const statsDiv = document.getElementById('stats');
+            const infoDiv = document.getElementById('tilesetInfo');
+
+            // Generate stats - count only non-null tilesets
+            const totalTilesets = tilesetData.filter(t => t !== null).length;
+            const bcdeImages = getBCDEImages(currentTileset);
+            const sharedCount = findTilesetsWithSharedImages(currentTileset).length;
+
+            statsDiv.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalTilesets}</div>
+                    <div class="stat-label">Total Tilesets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${bcdeImages.length}</div>
+                    <div class="stat-label">B/C/D/E Images</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${sharedCount}</div>
+                    <div class="stat-label">Sharing Tilesets</div>
+                </div>
+            `;
+
+            // Display tileset info
+            infoDiv.innerHTML = `
+                <h3>📋 Current Tileset: ${currentTileset.name || 'Unnamed'}</h3>
+                <p><strong>ID:</strong> ${currentTileset.id || 'N/A'}</p>
+                <p><strong>Mode:</strong> ${currentTileset.mode || 'N/A'}</p>
+                <p><strong>B, C, D, E Images:</strong></p>
+                <div class="image-list">
+                    ${bcdeImages.map(img => `<div class="image-item">${img || '(empty)'}</div>`).join('')}
+                </div>
+            `;
+        }
+
+        function getBCDEImages(tileset) {
+            const images = [];
+            
+            if (tileset.tilesetNames && Array.isArray(tileset.tilesetNames)) {
+                // RPG Maker structure: indices 5, 6, 7, 8 are B, C, D, E tilesets
+                // Index 0-4 are A1, A2, A3, A4, A5 (autotiles)
+                const bcdeIndices = [5, 6, 7, 8]; // B, C, D, E positions
+                
+                bcdeIndices.forEach(index => {
+                    if (index < tileset.tilesetNames.length) {
+                        images.push(tileset.tilesetNames[index]);
+                    } else {
+                        images.push(''); // Empty if not enough elements
+                    }
+                });
+            } else if (tileset.images && Array.isArray(tileset.images)) {
+                // Alternative structure - same logic
+                const bcdeIndices = [5, 6, 7, 8];
+                bcdeIndices.forEach(index => {
+                    if (index < tileset.images.length) {
+                        images.push(tileset.images[index]);
+                    } else {
+                        images.push('');
+                    }
+                });
+            } else {
+                // Try individual fields as fallback
+                ['tilesetB', 'tilesetC', 'tilesetD', 'tilesetE'].forEach(field => {
+                    images.push(tileset[field] || '');
+                });
+            }
+
+            return images;
+        }
+
+        function findSharedImagesForTileset(targetTileset) {
+            const targetImages = getBCDEImages(targetTileset);
+            const sharedGroups = {};
+
+            targetImages.forEach((targetImage, index) => {
+                // Skip empty/null images
+                if (!targetImage || targetImage.trim() === '') return;
+
+                const tilesetLetter = ['B', 'C', 'D', 'E'][index];
+                const sharingTilesets = [];
+
+                tilesetData.forEach((tileset, tilesetIndex) => {
+                    // Skip null tilesets and the current tileset
+                    if (!tileset || tileset === targetTileset) return;
+
+                    const otherImages = getBCDEImages(tileset);
+                    
+                    // Check if this tileset has the exact same image file
+                    const hasMatchingImage = otherImages.some(otherImage => {
+                        return otherImage && otherImage.trim() !== '' && otherImage === targetImage;
+                    });
+
+                    if (hasMatchingImage) {
+                        sharingTilesets.push({
+                            name: tileset.name || `Tileset ${tilesetIndex + 1}`,
+                            id: tileset.id || 'N/A',
+                            index: tilesetIndex
+                        });
+                    }
+                });
+
+                // Only add to shared groups if there are actually sharing tilesets
+                if (sharingTilesets.length > 0) {
+                    sharedGroups[targetImage] = {
+                        letter: tilesetLetter,
+                        tilesets: sharingTilesets
+                    };
+                }
+            });
+
+            return sharedGroups;
+        }
+
+        function findTilesetsWithSharedImages(tileset) {
+            const sharedGroups = findSharedImagesForTileset(tileset);
+            const uniqueTilesets = new Set();
+            
+            Object.values(sharedGroups).forEach(group => {
+                group.tilesets.forEach(t => uniqueTilesets.add(t.index));
+            });
+            
+            return Array.from(uniqueTilesets);
+        }
+
+        function findSharedImages() {
+            const sharedDiv = document.getElementById('sharedTilesets');
+            const sharedGroups = findSharedImagesForTileset(currentTileset);
+
+            if (Object.keys(sharedGroups).length === 0) {
+                sharedDiv.innerHTML = `
+                    <div class="shared-group">
+                        <h4>🔍 No Shared Images Found</h4>
+                        <p>This tileset doesn't share any B, C, D, or E images with other tilesets.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<h3>🔗 Tilesets Sharing Images:</h3>';
+            
+            Object.entries(sharedGroups).forEach(([imageName, data]) => {
+                html += `
+                    <div class="shared-group">
+                        <h4>Image: ${imageName} (Tileset ${data.letter})</h4>
+                        <div class="tileset-list">
+                            ${data.tilesets.map(t => 
+                                `<span class="tileset-tag">${t.name} (ID: ${t.id})</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            sharedDiv.innerHTML = html;
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Drag and drop functionality
+        const uploadSection = document.getElementById('uploadSection');
+
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.style.borderColor = '#764ba2';
+            uploadSection.style.background = 'rgba(118, 75, 162, 0.1)';
+        });
+
+        uploadSection.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadSection.style.borderColor = '#667eea';
+            uploadSection.style.background = 'rgba(102, 126, 234, 0.05)';
+        });
+
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.style.borderColor = '#667eea';
+            uploadSection.style.background = 'rgba(102, 126, 234, 0.05)';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('fileInput').files = files;
+                handleFileUpload({ target: { files: files } });
+            }
+        });
+    </script>
+</body>
+</html>

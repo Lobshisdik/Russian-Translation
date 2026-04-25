@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hex Editor with Image Preview</title>
+    <style>
+        :root {
+            --main-bg: #1e1e1e;
+            --header-bg: #2d2d2d;
+            --text-color: #e0e0e0;
+            --highlight: #0078d7;
+            --border: #3f3f3f;
+            --offset-bg: #333333;
+            --hex-bg: #252525;
+            --ascii-bg: #2a2a2a;
+            --modified: #ff6347;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background-color: var(--highlight);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .hex-container {
+            flex: 3;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+        }
+
+        .preview-container {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: auto;
+        }
+
+        .hex-header {
+            display: flex;
+            background-color: var(--header-bg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .offset-header {
+            width: 100px;
+            padding: 5px;
+            text-align: center;
+            font-weight: bold;
+            background-color: var(--offset-bg);
+            border-right: 1px solid var(--border);
+        }
+
+        .hex-values-header {
+            flex: 3;
+            display: flex;
+            padding: 5px;
+            background-color: var(--hex-bg);
+            overflow-x: auto;
+            border-right: 1px solid var(--border);
+        }
+
+        .ascii-header {
+            flex: 1;
+            padding: 5px;
+            background-color: var(--ascii-bg);
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .hex-row {
+            display: flex;
+        }
+
+        .offset {
+            width: 100px;
+            padding: 5px;
+            text-align: center;
+            background-color: var(--offset-bg);
+            color: #888;
+            user-select: none;
+            border-right: 1px solid var(--border);
+        }
+
+        .hex-values {
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px;
+            background-color: var(--hex-bg);
+            border-right: 1px solid var(--border);
+        }
+
+        .byte {
+            width: 30px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .byte:hover {
+            background-color: var(--highlight);
+        }
+
+        .byte.modified {
+            color: var(--modified);
+            font-weight: bold;
+        }
+
+        .ascii {
+            flex: 1;
+            padding: 5px;
+            background-color: var(--ascii-bg);
+            white-space: pre;
+            font-family: monospace;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px;
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .file-info {
+            margin-top: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .file-info h3 {
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .file-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .drop-area {
+            width: 100%;
+            height: 100px;
+            border: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .drop-area:hover {
+            border-color: var(--highlight);
+        }
+
+        .drop-area.active {
+            border-color: var(--highlight);
+            background-color: rgba(0, 120, 215, 0.1);
+        }
+
+        .no-file {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .no-file p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title">Hex Editor with Image Preview</div>
+        <div class="controls">
+            <button id="openFile" class="btn">Open File</button>
+            <button id="saveFile" class="btn" disabled>Save File</button>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <div class="hex-container" id="hexContainer">
+            <div class="hex-header">
+                <div class="offset-header">Offset</div>
+                <div class="hex-values-header">
+                    <div class="byte">00</div>
+                    <div class="byte">01</div>
+                    <div class="byte">02</div>
+                    <div class="byte">03</div>
+                    <div class="byte">04</div>
+                    <div class="byte">05</div>
+                    <div class="byte">06</div>
+                    <div class="byte">07</div>
+                    <div class="byte">08</div>
+                    <div class="byte">09</div>
+                    <div class="byte">0A</div>
+                    <div class="byte">0B</div>
+                    <div class="byte">0C</div>
+                    <div class="byte">0D</div>
+                    <div class="byte">0E</div>
+                    <div class="byte">0F</div>
+                </div>
+                <div class="ascii-header">ASCII</div>
+            </div>
+            <div id="hexContent">
+                <div class="no-file">
+                    <p>No file loaded</p>
+                    <p>Open a file or drag and drop to start</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-container" id="previewContainer">
+            <div class="no-file">
+                <p>No image preview available</p>
+                <p>Open an image file to see a preview</p>
+                <div class="drop-area" id="dropArea">
+                    Drag & Drop file here
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-bar">
+        <div id="position">Position: -</div>
+        <div id="fileSize">Size: -</div>
+    </div>
+    
+    <input type="file" id="fileInput" accept="*/*">
+    
+    <script>
+        // DOM Elements
+        const hexContent = document.getElementById('hexContent');
+        const previewContainer = document.getElementById('previewContainer');
+        const openFileBtn = document.getElementById('openFile');
+        const saveFileBtn = document.getElementById('saveFile');
+        const fileInput = document.getElementById('fileInput');
+        const positionDisplay = document.getElementById('position');
+        const fileSizeDisplay = document.getElementById('fileSize');
+        const dropArea = document.getElementById('dropArea');
+        
+        // State variables
+        let currentFile = null;
+        let fileBuffer = null;
+        let originalBuffer = null;
+        let modifiedBytes = new Set();
+        let selectedByteIndex = -1;
+        
+        // Constants
+        const BYTES_PER_ROW = 16;
+        const MAX_DISPLAY_BYTES = 10000; // Limit for performance
+        
+        // Event Listeners
+        openFileBtn.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+        saveFileBtn.addEventListener('click', saveFile);
+        
+        // Drag and drop functionality
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.classList.add('active');
+        });
+        
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('active');
+        });
+        
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect(e);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('byte') && e.target.dataset.index) {
+                selectByte(parseInt(e.target.dataset.index));
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (selectedByteIndex === -1) return;
+            
+            // Navigation with arrow keys
+            if (e.key === 'ArrowLeft') {
+                selectByte(Math.max(0, selectedByteIndex - 1));
+                e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+                selectByte(Math.min(fileBuffer.byteLength - 1, selectedByteIndex + 1));
+                e.preventDefault();
+            } else if (e.key === 'ArrowUp') {
+                selectByte(Math.max(0, selectedByteIndex - BYTES_PER_ROW));
+                e.preventDefault();
+            } else if (e.key === 'ArrowDown') {
+                selectByte(Math.min(fileBuffer.byteLength - 1, selectedByteIndex + BYTES_PER_ROW));
+                e.preventDefault();
+            }
+            
+            // Edit hex value: 0-9, a-f, A-F
+            const hexRegex = /^[0-9a-fA-F]$/;
+            if (hexRegex.test(e.key)) {
+                editByte(e.key.toUpperCase());
+                e.preventDefault();
+            }
+        });
+        
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            currentFile = file;
+            saveFileBtn.disabled = false;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalBuffer = e.target.result;
+                fileBuffer = originalBuffer.slice(0); // Create a copy
+                modifiedBytes.clear();
+                
+                renderHexView();
+                updateFileInfo();
+                createImagePreview();
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+        
+        function renderHexView() {
+            const maxBytes = Math.min(fileBuffer.byteLength, MAX_DISPLAY_BYTES);
+            const rows = Math.ceil(maxBytes / BYTES_PER_ROW);
+            
+            hexContent.innerHTML = '';
+            
+            const dataView = new DataView(fileBuffer);
+            
+            for (let i = 0; i < rows; i++) {
+                const rowOffset = i * BYTES_PER_ROW;
+                const hexRow = document.createElement('div');
+                hexRow.className = 'hex-row';
+                
+                // Offset column
+                const offsetDiv = document.createElement('div');
+                offsetDiv.className = 'offset';
+                offsetDiv.textContent = rowOffset.toString(16).padStart(8, '0');
+                hexRow.appendChild(offsetDiv);
+                
+                // Hex values column
+                const hexValuesDiv = document.createElement('div');
+                hexValuesDiv.className = 'hex-values';
+                
+                // ASCII column
+                const asciiDiv = document.createElement('div');
+                asciiDiv.className = 'ascii';
+                let asciiText = '';
+                
+                for (let j = 0; j < BYTES_PER_ROW; j++) {
+                    const byteIndex = rowOffset + j;
+                    
+                    if (byteIndex < maxBytes) {
+                        const byteValue = dataView.getUint8(byteIndex);
+                        const hexByte = document.createElement('div');
+                        hexByte.className = 'byte';
+                        if (modifiedBytes.has(byteIndex)) {
+                            hexByte.classList.add('modified');
+                        }
+                        hexByte.textContent = byteValue.toString(16).padStart(2, '0').toUpperCase();
+                        hexByte.dataset.index = byteIndex;
+                        hexValuesDiv.appendChild(hexByte);
+                        
+                        // ASCII representation
+                        const isPrintable = byteValue >= 32 && byteValue <= 126;
+                        asciiText += isPrintable ? String.fromCharCode(byteValue) : '.';
+                    } else {
+                        // Empty space for incomplete row
+                        const emptyByte = document.createElement('div');
+                        emptyByte.className = 'byte';
+                        emptyByte.textContent = '  ';
+                        hexValuesDiv.appendChild(emptyByte);
+                        
+                        asciiText += ' ';
+                    }
+                }
+                
+                asciiDiv.textContent = asciiText;
+                hexRow.appendChild(hexValuesDiv);
+                hexRow.appendChild(asciiDiv);
+                hexContent.appendChild(hexRow);
+            }
+            
+            if (maxBytes < fileBuffer.byteLength) {
+                const noticeDiv = document.createElement('div');
+                noticeDiv.style.padding = '10px';
+                noticeDiv.style.textAlign = 'center';
+                noticeDiv.textContent = `Note: Only showing first ${MAX_DISPLAY_BYTES} bytes of ${fileBuffer.byteLength} total bytes for performance reasons.`;
+                hexContent.appendChild(noticeDiv);
+            }
+            
+            if (selectedByteIndex >= 0 && selectedByteIndex < maxBytes) {
+                selectByte(selectedByteIndex);
+            } else {
+                selectedByteIndex = -1;
+                positionDisplay.textContent = 'Position: -';
+            }
+        }
+        
+        function selectByte(index) {
+            // Remove previous selection
+            const prevSelected = document.querySelector('.byte.selected');
+            if (prevSelected) {
+                prevSelected.classList.remove('selected');
+            }
+            
+            // Add new selection
+            const byteElements = document.querySelectorAll('.byte[data-index]');
+            for (const byteElement of byteElements) {
+                if (parseInt(byteElement.dataset.index) === index) {
+                    byteElement.classList.add('selected');
+                    byteElement.scrollIntoView({ block: 'nearest' });
+                    break;
+                }
+            }
+            
+            selectedByteIndex = index;
+            positionDisplay.textContent = `Position: 0x${index.toString(16).padStart(8, '0')} (${index})`;
+            
+            // Update preview if needed based on selection
+            // This could be used to highlight the selected byte in the image preview
+        }
+        
+        function editByte(hexChar) {
+            if (selectedByteIndex === -1 || !fileBuffer) return;
+            
+            const dataView = new DataView(fileBuffer);
+            const currentValue = dataView.getUint8(selectedByteIndex);
+            const currentHex = currentValue.toString(16).padStart(2, '0').toUpperCase();
+            let newHex;
+            
+            // Check if we're replacing the first or second digit
+            const selectedElement = document.querySelector('.byte.selected');
+            if (selectedElement && selectedElement.textContent.length === 2) {
+                if (selectedElement.dataset.editingFirst === 'true') {
+                    // Replace first digit
+                    newHex = hexChar + currentHex[1];
+                    selectedElement.dataset.editingFirst = 'false';
+                } else {
+                    // Replace second digit
+                    newHex = currentHex[0] + hexChar;
+                    selectedElement.dataset.editingFirst = 'true';
+                    // Move to next byte after second digit
+                    setTimeout(() => selectByte(Math.min(fileBuffer.byteLength - 1, selectedByteIndex + 1)), 50);
+                }
+            } else {
+                // Start editing, replace first digit
+                newHex = hexChar + '0';
+                if (selectedElement) {
+                    selectedElement.dataset.editingFirst = 'false';
+                }
+            }
+            
+            const newValue = parseInt(newHex, 16);
+            dataView.setUint8(selectedByteIndex, newValue);
+            modifiedBytes.add(selectedByteIndex);
+            
+            // Update display
+            if (selectedElement) {
+                selectedElement.textContent = newHex;
+                selectedElement.classList.add('modified');
+            }
+            
+            // Update image preview in real-time if it's an image file
+            if (currentFile && currentFile.type.startsWith('image/')) {
+                updateImagePreview();
+            }
+        }
+        
+        function saveFile() {
+            if (!fileBuffer || !currentFile) return;
+            
+            const blob = new Blob([fileBuffer], { type: currentFile.type });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'modified_' + currentFile.name;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+        
+        function createImagePreview() {
+            previewContainer.innerHTML = '';
+            
+            if (!currentFile || !fileBuffer) {
+                previewContainer.innerHTML = `
+                    <div class="no-file">
+                        <p>No image preview available</p>
+                        <p>Open an image file to see a preview</p>
+                        <div class="drop-area" id="dropArea">
+                            Drag & Drop file here
+                        </div>
+                    </div>
+                `;
+                // Reattach event listeners
+                const newDropArea = document.getElementById('dropArea');
+                if (newDropArea) {
+                    newDropArea.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        newDropArea.classList.add('active');
+                    });
+                    
+                    newDropArea.addEventListener('dragleave', () => {
+                        newDropArea.classList.remove('active');
+                    });
+                    
+                    newDropArea.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        newDropArea.classList.remove('active');
+                        
+                        if (e.dataTransfer.files.length) {
+                            fileInput.files = e.dataTransfer.files;
+                            handleFileSelect(e);
+                        }
+                    });
+                }
+                return;
+            }
+            
+            // Add file info
+            const fileInfoDiv = document.createElement('div');
+            fileInfoDiv.id = 'fileInfoDiv';
+            fileInfoDiv.className = 'file-info';
+            fileInfoDiv.innerHTML = `
+                <h3>File Information</h3>
+                <p>Name: ${currentFile.name}</p>
+                <p>Size: ${formatFileSize(currentFile.size)}</p>
+                <p>Type: ${currentFile.type || 'Unknown'}</p>
+                <p>Modified: ${modifiedBytes.size} bytes</p>
+            `;
+            previewContainer.appendChild(fileInfoDiv);
+            
+            // Create image preview if it's an image
+            if (currentFile.type.startsWith('image/')) {
+                updateImagePreview();
+            } else {
+                const notImageDiv = document.createElement('div');
+                notImageDiv.className = 'file-info';
+                notImageDiv.innerHTML = '<p>No image preview available for this file type.</p>';
+                previewContainer.appendChild(notImageDiv);
+            }
+        }
+        
+        // Function to update image preview in real-time
+        function updateImagePreview() {
+            if (!currentFile || !currentFile.type.startsWith('image/')) return;
+            
+            // Update modified bytes count in file info
+            const fileInfoDiv = document.getElementById('fileInfoDiv');
+            if (fileInfoDiv) {
+                const modifiedP = fileInfoDiv.querySelector('p:nth-child(4)');
+                if (modifiedP) {
+                    modifiedP.textContent = `Modified: ${modifiedBytes.size} bytes`;
+                }
+            }
+            
+            // Remove existing preview image
+            const existingImg = previewContainer.querySelector('.preview-image');
+            if (existingImg) {
+                URL.revokeObjectURL(existingImg.src); // Clean up old object URL
+                existingImg.remove();
+            }
+            
+            // Create new preview image with updated data
+            const imgPreview = document.createElement('img');
+            imgPreview.className = 'preview-image';
+            
+            const blob = new Blob([fileBuffer], { type: currentFile.type });
+            imgPreview.src = URL.createObjectURL(blob);
+            
+            imgPreview.onload = () => {
+                // Add or update image dimensions
+                if (fileInfoDiv) {
+                    let dimensionsP = fileInfoDiv.querySelector('p:nth-child(5)');
+                    if (!dimensionsP) {
+                        dimensionsP = document.createElement('p');
+                        fileInfoDiv.appendChild(dimensionsP);
+                    }
+                    dimensionsP.textContent = `Dimensions: ${imgPreview.naturalWidth} × ${imgPreview.naturalHeight}`;
+                }
+            };
+            
+            previewContainer.appendChild(imgPreview);
+        }
+        
+        function updateFileInfo() {
+            if (fileBuffer) {
+                fileSizeDisplay.textContent = `Size: ${formatFileSize(fileBuffer.byteLength)}`;
+            } else {
+                fileSizeDisplay.textContent = 'Size: -';
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+    </script>
+</body>
+</html>

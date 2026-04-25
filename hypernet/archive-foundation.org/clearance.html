@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Archive Foundation - Clearance Application</title>
+    <meta name="keywords" content="archive foundation, clearance application, information access, security levels, restricted knowledge">
+    <meta name="description" content="Application form for security clearance to access restricted information held by the Archive Foundation.">
+    <style>
+        body {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+            background-color: #fff;
+        }
+        
+        .topBanner {
+            background-color: #003366;
+            color: #ffffff;
+            text-align: center;
+            padding: 2px;
+            font-size: 11px;
+        }
+        
+        header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            padding: 15px 0;
+            background-color: #000066;
+            color: #ffffff;
+        }
+        
+        .logo {
+            margin: 0 auto;
+            width: 90%;
+            max-width: 600px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #000066;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin: 5px 0;
+            padding: 0;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin: 15px 0 5px 0;
+            padding: 0;
+            color: #003366;
+            border-bottom: 1px solid #999;
+        }
+        
+        .navigation {
+            background-color: #003366;
+            padding: 5px 0;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+        }
+        
+        .navigation a {
+            color: #ffffff;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .navigation a:hover {
+            background-color: #0055aa;
+            text-decoration: underline;
+        }
+        
+        .content {
+            padding: 10px 20px;
+            line-height: 1.4;
+        }
+        
+        .sectionTitle {
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            padding: 5px;
+            border: 1px solid #999;
+            color: #003366;
+            margin-top: 15px;
+        }
+        
+        .sectionContent {
+            padding: 10px;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 10px;
+            border-top: 3px double #000;
+            font-size: 11px;
+            margin-top: 30px;
+            background-color: #e0e0e0;
+        }
+        
+        .webCounter {
+            text-align: center;
+            font-family: monospace;
+            margin: 10px 0;
+            font-size: 11px;
+            background-color: #000;
+            color: #0f0;
+            padding: 3px;
+            width: 150px;
+            margin: 10px auto;
+        }
+        
+        img {
+            border: 0;
+        }
+        
+        a {
+            color: #0000cc;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #0000ff;
+        }
+        
+        .securityLevels {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .securityLevels td, .securityLevels th {
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 12px;
+        }
+        
+        .securityLevels th {
+            background-color: #e6e6e6;
+            font-weight: bold;
+        }
+        
+        .level1 { background-color: #e6f3ff; }
+        .level2 { background-color: #d6ebff; }
+        .level3 { background-color: #c6e3ff; }
+        .level4 { background-color: #b6dbff; }
+        .level5 { background-color: #a6d3ff; }
+        
+        .warningText {
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .applicationForm {
+            border: 1px solid #999;
+            padding: 10px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .formField {
+            margin-bottom: 10px;
+        }
+        
+        .formField label {
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        
+        .formField input, .formField select, .formField textarea {
+            width: 100%;
+            padding: 3px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            border: 1px solid #999;
+        }
+        
+        .formField textarea {
+            height: 60px;
+        }
+        
+        .submitButton {
+            background-color: #003366;
+            color: #ffffff;
+            border: 1px solid #001122;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .applicationSteps {
+            margin-left: 20px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topBanner">
+        OFFICIAL SITE OF THE ARCHIVE FOUNDATION - Accessed via Hypernet Explorer
+    </div>
+    
+    <header>
+        <div class="logo">
+            <img src="/api/placeholder/400/100" alt="The Archive Foundation Logo" width="400" height="100">
+            <h1>THE ARCHIVE FOUNDATION</h1>
+            <div>Clearance Application</div>
+        </div>
+    </header>
+    
+    <div class="navigation">
+        <a href="index.html">HOME</a> |
+        <a href="about.html">ABOUT US</a> |
+        <a href="registry.html">INFOHAZARD REGISTRY</a> |
+        <a href="reporting.html">REPORTING</a> |
+        <a href="research.html">RESEARCH</a> |
+        <a href="contact.html">CONTACT</a>
+    </div>
+    
+    <div class="content">
+        <h2>Information Access Clearance</h2>
+        <p>Certain Archive Foundation materials are restricted to authorized personnel only. Security clearance is required to access information that may pose potential hazards if improperly handled or distributed.</p>
+        
+        <div class="sectionTitle" onclick="toggleSection('levels')">SECURITY CLEARANCE LEVELS</div>
+        <div id="levels" class="sectionContent">
+            <table class="securityLevels">
+                <tr>
+                    <th>Level</th>
+                    <th>Description</th>
+                    <th>Requirements</th>
+                </tr>
+                <tr class="level1">
+                    <td>Level 1</td>
+                    <td>Basic research access. Low-risk historical and theoretical materials.</td>
+                    <td>Completion of basic training; professional or academic affiliation.</td>
+                </tr>
+                <tr class="level2">
+                    <td>Level 2</td>
+                    <td>Intermediate access. Includes information on minor infohazards and historical incidents.</td>
+                    <td>Level 1 clearance for 6+ months; completion of Cognitive Resilience Training.</td>
+                </tr>
+                <tr class="level3">
+                    <td>Level 3</td>
+                    <td>Advanced research access. Includes sanitized information on significant incidents and containment protocols.</td>
+                    <td>Level 2 clearance for 12+ months; professional necessity; security assessment.</td>
+                </tr>
+                <tr class="level4">
+                    <td>Level 4</td>
+                    <td>Specialist access. Detailed technical and methodological information on major infohazards.</td>
+                    <td>Level 3 clearance for 18+ months; specific project approval; extensive background check.</td>
+                </tr>
+                <tr class="level5">
+                    <td>Level 5</td>
+                    <td>Full access. Unrestricted information on all documented infohazards.</td>
+                    <td>Foundation employment; executive approval; specialized cognitive training.</td>
+                </tr>
+            </table>
+            
+            <p><span class="warningText">Note:</span> All clearance holders are subject to periodic review and renewal requirements. Violations of information handling protocols may result in immediate revocation of clearance and possible legal action.</p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('process')">APPLICATION PROCESS</div>
+        <div id="process" class="sectionContent">
+            <p>The clearance application process involves multiple steps to ensure applicants are properly qualified and prepared to handle restricted information:</p>
+            
+            <ol class="applicationSteps">
+                <li>Initial application submission (form below)</li>
+                <li>Background verification (2-4 weeks)</li>
+                <li>Preliminary interview (in person or via secure teleconference)</li>
+                <li>Cognitive resilience assessment</li>
+                <li>Required training completion (varies by clearance level)</li>
+                <li>Final approval and orientation</li>
+            </ol>
+            
+            <p>Processing time varies depending on the requested clearance level and applicant background. Level 1 applications typically process in 4-6 weeks, while higher level clearances may take 3-6 months.</p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('application')">PRELIMINARY APPLICATION FORM</div>
+        <div id="application" class="sectionContent">
+            <div class="applicationForm">
+                <form action="processing.html" method="post">
+                    <div class="formField">
+                        <label for="fullName">Full Legal Name:</label>
+                        <input type="text" id="fullName" name="fullName">
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="email">Email Address:</label>
+                        <input type="text" id="email" name="email">
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="affiliation">Professional/Academic Affiliation:</label>
+                        <input type="text" id="affiliation" name="affiliation">
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="level">Requested Clearance Level:</label>
+                        <select id="level" name="level">
+                            <option value="1">Level 1 - Basic Research Access</option>
+                            <option value="2">Level 2 - Intermediate Access</option>
+                            <option value="3">Level 3 - Advanced Research Access</option>
+                            <option value="4">Level 4 - Specialist Access (Requires Pre-Approval)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="purpose">Purpose of Access (be specific):</label>
+                        <textarea id="purpose" name="purpose"></textarea>
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="references">Professional References (minimum 2):</label>
+                        <textarea id="references" name="references"></textarea>
+                    </div>
+                    
+                    <div class="formField">
+                        <label for="training">Prior Information Security Training:</label>
+                        <textarea id="training" name="training"></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px;">
+                        <input type="button" value="Submit Application" class="submitButton" onclick="alert('This is an archived form and cannot be submitted in this version of the Hypernet.')">
+                    </div>
+                </form>
+            </div>
+            
+            <p><small>By submitting this application, you acknowledge that all information provided is accurate and complete. False statements may result in rejection of your application and possible legal action. The Archive Foundation reserves the right to deny access without stated cause.</small></p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('contact')">CONTACT INFORMATION</div>
+        <div id="contact" class="sectionContent">
+            <p>For questions regarding the clearance application process, please contact our Security Office:</p>
+            
+            <p>
+            Phone: 1-800-INFO-SEC (Extension 2)<br>
+            Email: <a href="mailto:clearance@hexagram.corp">clearance@hexagram.corp</a><br>
+            Hours: Monday-Friday, 9:00 AM - 5:00 PM (GMT)
+            </p>
+            
+            <p>For urgent matters regarding existing clearances, please call our 24-hour support line: 1-800-INFO-247</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>The Archive Foundation - Safeguarding Information Since 1952</p>
+        <p>International Headquarters: Geneva, Switzerland | Regional Offices Worldwide</p>
+        <p><a href="mailto:security@hexagram.corp">Security Office on Hexagram</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+        <div class="webCounter">
+            Visitors: 000057319
+        </div>
+        <p><small>This page last updated: January 10, 2001. All rights reserved. ©2001 The Archive Foundation.</small></p>
+    </footer>
+    
+    <script type="text/javascript">
+        // Function to toggle the visibility of content sections
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+        
+        // Initialize all sections to be visible by default
+        window.onload = function() {
+            // No need to hide sections initially, they're all visible by default
+        }
+    </script>
+</body>
+</html>

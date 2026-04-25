@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>The Circular Keyboard Loop - Interactive Input Device Research</title>
+<style type="text/css">
+body { 
+    background-color: #f0f0f0; 
+    font-family: "Times New Roman", serif; 
+    margin: 20px; 
+    color: #000000;
+}
+h1 { 
+    font-size: 18pt; 
+    text-align: center; 
+    text-decoration: underline;
+}
+h2 { 
+    font-size: 14pt; 
+    color: #000080;
+}
+p { 
+    font-size: 12pt; 
+    text-align: justify;
+}
+.language-selector {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #e0e0e0;
+    border: 1px solid #808080;
+    padding: 10px;
+}
+.lang-button {
+    background-color: #d4d0c8;
+    border: 2px outset #d4d0c8;
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 10pt;
+    padding: 4px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.lang-button:active {
+    border: 2px inset #d4d0c8;
+}
+.lang-button.active {
+    background-color: #b0b0b0;
+    border: 2px inset #d4d0c8;
+}
+.keyboard-container {
+    text-align: center;
+    margin: 30px 0;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    padding: 20px;
+}
+.circular-keyboard {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border: 1px solid #666666;
+    border-radius: 150px;
+    background-color: #e8e8e8;
+}
+.key-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #d4d0c8;
+    border: 2px outset #d4d0c8;
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 10pt;
+    cursor: pointer;
+}
+.key-button:active {
+    border: 2px inset #d4d0c8;
+}
+.output-display {
+    width: 400px;
+    height: 100px;
+    background-color: #000000;
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+    font-size: 11pt;
+    border: 2px inset #c0c0c0;
+    padding: 10px;
+    margin: 20px auto;
+    display: block;
+}
+table { 
+    border-collapse: collapse; 
+    width: 100%;
+}
+td { 
+    border: 1px solid #000000; 
+    padding: 8px; 
+    font-size: 11pt;
+}
+a:link { color: #0000ff; }
+a:visited { color: #800080; }
+a:hover { color: #ff0000; }
+.footer { 
+    font-size: 10pt; 
+    text-align: center; 
+    margin-top: 40px; 
+    color: #666666;
+}
+</style>
+</head>
+<body>
+
+<div class="language-selector">
+    <b>Language / Lingua:</b>
+    <input type="button" class="lang-button active" id="btn-en" value="English" onclick="setLanguage('en')">
+    <input type="button" class="lang-button" id="btn-it" value="Italiano" onclick="setLanguage('it')">
+</div>
+
+<h1 id="title">The Circular Keyboard Loop</h1>
+<center><i id="subtitle">An Experimental Interface for Continuous Text Input</i></center>
+
+<hr>
+
+<h2><a name="abstract" id="section-abstract">Abstract</a></h2>
+<p id="abstract-text">This page demonstrates an interactive circular keyboard design where keys are arranged in a continuous loop around a central axis. Unlike traditional QWERTY layouts, this experimental interface allows for infinite rotation and seamless character selection through geometric positioning. The keyboard loops back on itself, creating an endless cycle of available characters.</p>
+
+<h2><a name="demo" id="section-demo">Interactive Demonstration</a></h2>
+
+<div class="keyboard-container">
+<b id="keyboard-title">Circular Keyboard v1.0</b><br>
+<small id="keyboard-instructions">Click keys to input text. Keys rotate in an infinite loop.</small><br><br>
+
+<div class="circular-keyboard" id="keyboard">
+<!-- Keys will be positioned by JavaScript -->
+</div>
+
+<textarea class="output-display" id="output" readonly>Welcome to the Circular Keyboard Loop...</textarea>
+
+<br>
+<input type="button" id="btn-rotate-left" value="Rotate Left" onclick="rotateKeyboard(-1)">
+<input type="button" id="btn-rotate-right" value="Rotate Right" onclick="rotateKeyboard(1)">
+<input type="button" id="btn-clear" value="Clear Text" onclick="clearOutput()">
+</div>
+
+<h2><a name="theory" id="section-theory">Theoretical Background</a></h2>
+<p id="theory-text">The circular keyboard concept emerged from research into alternative input methods for computer interfaces. By arranging characters in a continuous circle, we eliminate the traditional boundaries found in rectangular keyboard layouts. This creates several interesting properties:</p>
+
+<ul id="theory-list">
+<li>Infinite scrolling through character sets</li>
+<li>Reduced finger travel distance for certain key combinations</li>
+<li>Novel muscle memory patterns</li>
+<li>Potential for gesture-based input methods</li>
+</ul>
+
+<h2><a name="specifications" id="section-specifications">Technical Specifications</a></h2>
+
+<table>
+<tr><td><b id="spec-param">Parameter</b></td><td><b id="spec-value">Value</b></td></tr>
+<tr><td id="spec-diameter">Keyboard Diameter</td><td>300 pixels</td></tr>
+<tr><td id="spec-keys">Number of Keys</td><td>26 (A-Z)</td></tr>
+<tr><td id="spec-size">Key Size</td><td>30x30 pixels</td></tr>
+<tr><td id="spec-rotation">Rotation Increment</td><td>13.85 degrees per step</td></tr>
+<tr><td id="spec-loop">Loop Completion</td><td>360 degrees (full circle)</td></tr>
+<tr><td id="spec-browser">Browser Compatibility</td><td>Internet Explorer 4.0+, Netscape 4.0+</td></tr>
+</table>
+
+<h2><a name="research" id="section-research">Research Notes</a></h2>
+<p id="research-text">Initial user testing (conducted May 2001) suggests that while the circular layout is visually appealing, it requires significant adaptation time compared to traditional QWERTY keyboards. The infinite loop property creates interesting navigational possibilities but may cause confusion for users accustomed to linear character arrangements.</p>
+
+<p id="future-research">Future research directions include:</p>
+<ul id="future-list">
+<li>Variable key sizes based on letter frequency</li>
+<li>Multiple concentric circles for different character sets</li>
+<li>Integration with voice recognition systems</li>
+<li>Application to mobile device interfaces</li>
+</ul>
+
+<h2><a name="references" id="section-references">References & Links</a></h2>
+<p id="references-text"><a href="http://www.dvorak-keyboard.com">Dvorak Keyboard Layout Research</a><br>
+<a href="http://www.microsoft.com/hwdev/tech/input/">Megahard Hardware Input Technologies</a><br>
+<a href="http://www.acm.org/sigchi/">ACM SIGCHI - Computer-Human Interaction</a><br>
+<a href="http://www.useit.com">Usability Research by Jakob Nielsen</a></p>
+
+<h2><a name="contact" id="section-contact">Contact Information</a></h2>
+<p id="contact-text">For more information about this research project, please contact:<br><br>
+<b>Dr. Richard P. Keyworth</b><br>
+<span id="contact-dept">Department of Human-Computer Interaction</span><br>
+<span id="contact-lab">Virtual University Research Lab</span><br>
+Email: rkeyworth@vurl.edu<br>
+<span id="contact-phone">Phone: (555) 123-4567</span></p>
+
+<hr>
+<div class="footer">
+<b id="footer-updated">Last Updated:</b> June 15, 2001 | <b id="footer-views">Page Views:</b> 1,247 | <a href="#abstract" id="footer-top">Top of Page</a>
+</div>
+
+<script type="text/javascript">
+var currentRotation = 0;
+var keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var keyElements = [];
+var currentLanguage = 'en';
+
+// Translation object
+var translations = {
+    en: {
+        title: "The Circular Keyboard Loop",
+        subtitle: "An Experimental Interface for Continuous Text Input",
+        'section-abstract': "Abstract",
+        'abstract-text': "This page demonstrates an interactive circular keyboard design where keys are arranged in a continuous loop around a central axis. Unlike traditional QWERTY layouts, this experimental interface allows for infinite rotation and seamless character selection through geometric positioning. The keyboard loops back on itself, creating an endless cycle of available characters.",
+        'section-demo': "Interactive Demonstration",
+        'keyboard-title': "Circular Keyboard v1.0",
+        'keyboard-instructions': "Click keys to input text. Keys rotate in an infinite loop.",
+        'btn-rotate-left': "Rotate Left",
+        'btn-rotate-right': "Rotate Right",
+        'btn-clear': "Clear Text",
+        'section-theory': "Theoretical Background",
+        'theory-text': "The circular keyboard concept emerged from research into alternative input methods for computer interfaces. By arranging characters in a continuous circle, we eliminate the traditional boundaries found in rectangular keyboard layouts. This creates several interesting properties:",
+        'theory-list': "<li>Infinite scrolling through character sets</li><li>Reduced finger travel distance for certain key combinations</li><li>Novel muscle memory patterns</li><li>Potential for gesture-based input methods</li>",
+        'section-specifications': "Technical Specifications",
+        'spec-param': "Parameter",
+        'spec-value': "Value",
+        'spec-diameter': "Keyboard Diameter",
+        'spec-keys': "Number of Keys",
+        'spec-size': "Key Size",
+        'spec-rotation': "Rotation Increment",
+        'spec-loop': "Loop Completion",
+        'spec-browser': "Browser Compatibility",
+        'section-research': "Research Notes",
+        'research-text': "Initial user testing (conducted May 2001) suggests that while the circular layout is visually appealing, it requires significant adaptation time compared to traditional QWERTY keyboards. The infinite loop property creates interesting navigational possibilities but may cause confusion for users accustomed to linear character arrangements.",
+        'future-research': "Future research directions include:",
+        'future-list': "<li>Variable key sizes based on letter frequency</li><li>Multiple concentric circles for different character sets</li><li>Integration with voice recognition systems</li><li>Application to mobile device interfaces</li>",
+        'section-references': "References & Links",
+        'section-contact': "Contact Information",
+        'contact-text': "For more information about this research project, please contact:",
+        'contact-dept': "Department of Human-Computer Interaction",
+        'contact-lab': "Virtual University Research Lab",
+        'contact-phone': "Phone: (555) 123-4567",
+        'footer-updated': "Last Updated:",
+        'footer-views': "Page Views:",
+        'footer-top': "Top of Page",
+        'welcome-message': "Welcome to the Circular Keyboard Loop..."
+    },
+    it: {
+        title: "Il Loop della Tastiera Circolare",
+        subtitle: "Un'Interfaccia Sperimentale per l'Input Continuo di Testo",
+        'section-abstract': "Riassunto",
+        'abstract-text': "Questa pagina dimostra un design interattivo di tastiera circolare dove i tasti sono disposti in un loop continuo attorno a un asse centrale. A differenza dei layout QWERTY tradizionali, questa interfaccia sperimentale permette rotazione infinita e selezione fluida dei caratteri attraverso il posizionamento geometrico. La tastiera si richiude su se stessa, creando un ciclo infinito di caratteri disponibili.",
+        'section-demo': "Dimostrazione Interattiva",
+        'keyboard-title': "Tastiera Circolare v1.0",
+        'keyboard-instructions': "Clicca i tasti per inserire testo. I tasti ruotano in un loop infinito.",
+        'btn-rotate-left': "Ruota Sinistra",
+        'btn-rotate-right': "Ruota Destra",
+        'btn-clear': "Cancella Testo",
+        'section-theory': "Sfondo Teorico",
+        'theory-text': "Il concetto di tastiera circolare è emerso dalla ricerca su metodi di input alternativi per interfacce informatiche. Disponendo i caratteri in un cerchio continuo, eliminiamo i confini tradizionali presenti nei layout rettangolari delle tastiere. Questo crea diverse proprietà interessanti:",
+        'theory-list': "<li>Scorrimento infinito attraverso i set di caratteri</li><li>Ridotta distanza di movimento delle dita per certe combinazioni di tasti</li><li>Nuovi pattern di memoria muscolare</li><li>Potenziale per metodi di input basati su gesti</li>",
+        'section-specifications': "Specifiche Tecniche",
+        'spec-param': "Parametro",
+        'spec-value': "Valore",
+        'spec-diameter': "Diametro Tastiera",
+        'spec-keys': "Numero di Tasti",
+        'spec-size': "Dimensione Tasto",
+        'spec-rotation': "Incremento Rotazione",
+        'spec-loop': "Completamento Loop",
+        'spec-browser': "Compatibilità Browser",
+        'section-research': "Note di Ricerca",
+        'research-text': "I test iniziali sugli utenti (condotti a maggio 2001) suggeriscono che mentre il layout circolare è visivamente accattivante, richiede un tempo di adattamento significativo rispetto alle tastiere QWERTY tradizionali. La proprietà del loop infinito crea interessanti possibilità di navigazione ma può causare confusione per gli utenti abituati alle disposizioni lineari dei caratteri.",
+        'future-research': "Le direzioni di ricerca futura includono:",
+        'future-list': "<li>Dimensioni variabili dei tasti basate sulla frequenza delle lettere</li><li>Cerchi concentrici multipli per diversi set di caratteri</li><li>Integrazione con sistemi di riconoscimento vocale</li><li>Applicazione alle interfacce dei dispositivi mobili</li>",
+        'section-references': "Riferimenti e Collegamenti",
+        'section-contact': "Informazioni di Contatto",
+        'contact-text': "Per maggiori informazioni su questo progetto di ricerca, contattare:",
+        'contact-dept': "Dipartimento di Interazione Uomo-Computer",
+        'contact-lab': "Laboratorio di Ricerca dell'Università Virtuale",
+        'contact-phone': "Telefono: (555) 123-4567",
+        'footer-updated': "Ultimo Aggiornamento:",
+        'footer-views': "Visualizzazioni Pagina:",
+        'footer-top': "Inizio Pagina",
+        'welcome-message': "Benvenuto nel Loop della Tastiera Circolare..."
+    }
+};
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    
+    // Update button states
+    document.getElementById('btn-en').className = lang === 'en' ? 'lang-button active' : 'lang-button';
+    document.getElementById('btn-it').className = lang === 'it' ? 'lang-button active' : 'lang-button';
+    
+    // Update all translatable elements
+    var trans = translations[lang];
+    for (var key in trans) {
+        var element = document.getElementById(key);
+        if (element) {
+            if (key === 'theory-list' || key === 'future-list') {
+                element.innerHTML = trans[key];
+            } else {
+                element.innerHTML = trans[key];
+            }
+        }
+    }
+    
+    // Update welcome message if it's still showing
+    var output = document.getElementById('output');
+    if (output.value === translations.en['welcome-message'] || output.value === translations.it['welcome-message']) {
+        output.value = trans['welcome-message'];
+    }
+}
+
+function initKeyboard() {
+    var keyboard = document.getElementById('keyboard');
+    var centerX = 150;
+    var centerY = 150;
+    var radius = 120;
+    
+    for (var i = 0; i < keys.length; i++) {
+        var angle = (360 / keys.length) * i;
+        var key = document.createElement('div');
+        key.className = 'key-button';
+        key.innerHTML = keys.charAt(i);
+        key.onclick = createKeyClickHandler(keys.charAt(i));
+        
+        var x = centerX + radius * Math.cos((angle - 90) * Math.PI / 180) - 15;
+        var y = centerY + radius * Math.sin((angle - 90) * Math.PI / 180) - 15;
+        
+        key.style.left = x + 'px';
+        key.style.top = y + 'px';
+        
+        keyboard.appendChild(key);
+        keyElements[i] = {element: key, originalAngle: angle, char: keys.charAt(i)};
+    }
+}
+
+function createKeyClickHandler(char) {
+    return function() {
+        var output = document.getElementById('output');
+        var welcomeEn = translations.en['welcome-message'];
+        var welcomeIt = translations.it['welcome-message'];
+        if (output.value === welcomeEn || output.value === welcomeIt) {
+            output.value = '';
+        }
+        output.value += char;
+    };
+}
+
+function rotateKeyboard(direction) {
+    currentRotation += direction * (360 / keys.length);
+    updateKeyPositions();
+}
+
+function updateKeyPositions() {
+    var centerX = 150;
+    var centerY = 150;
+    var radius = 120;
+    
+    for (var i = 0; i < keyElements.length; i++) {
+        var angle = keyElements[i].originalAngle + currentRotation;
+        var x = centerX + radius * Math.cos((angle - 90) * Math.PI / 180) - 15;
+        var y = centerY + radius * Math.sin((angle - 90) * Math.PI / 180) - 15;
+        
+        keyElements[i].element.style.left = x + 'px';
+        keyElements[i].element.style.top = y + 'px';
+    }
+}
+
+function clearOutput() {
+    document.getElementById('output').value = '';
+}
+
+// Initialize when page loads
+if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', initKeyboard, false);
+} else if (document.attachEvent) {
+    document.attachEvent('onreadystatechange', function() {
+        if (document.readyState === 'complete') initKeyboard();
+    });
+} else {
+    window.onload = initKeyboard;
+}
+</script>
+
+</body>
+</html>

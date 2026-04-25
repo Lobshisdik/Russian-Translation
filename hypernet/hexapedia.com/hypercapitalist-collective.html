@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypercapitalist Collective - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Hypercapitalist Collective</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: December 15, 2001 | <span data-lang-key="meta_read_time">7 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">The Hypercapitalist Collective is a powerful transnational organization that emerged following the Y2K Collapse and the Squishing of 1997. Operating as both a corporate conglomerate and a socio-economic movement, the Collective has become one of the most influential forces in the post-Squishing world, utilizing velocimancy and chronoeconomic manipulation to maintain their dominance.</p>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Quick Facts</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Type:</span> <span data-lang-key="infobox_type_value">Transnational Corporate Collective</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_founded_label">Founded:</span> <span data-lang-key="infobox_founded_value">1999 (Post-Y2K Formation)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_headquarters_label">Headquarters:</span> <span data-lang-key="infobox_headquarters_value">Mobile Profit-Zones</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_ideology_label">Core Ideology:</span> <span data-lang-key="infobox_ideology_value">Accelerated Profit Maximization</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_tech_label">Primary Technology:</span> <span data-lang-key="infobox_tech_value">Velocimancy & Chronoeconomics</span>
+                    </div>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#overview" data-lang-key="toc_1">1. Overview</a></li>
+                        <li><a href="#formation" data-lang-key="toc_2">2. Formation and Early History</a></li>
+                        <li><a href="#ideology" data-lang-key="toc_3">3. Ideology and Philosophy</a></li>
+                        <li><a href="#structure" data-lang-key="toc_4">4. Organizational Structure</a></li>
+                        <li><a href="#technology" data-lang-key="toc_5">5. Velocimantic Technology</a></li>
+                        <li><a href="#operations" data-lang-key="toc_6">6. Operations and Influence</a></li>
+                        <li><a href="#relations" data-lang-key="toc_7">7. Relations with Other Factions</a></li>
+                        <li><a href="#criticism" data-lang-key="toc_8">8. Criticism and Controversies</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_9">9. See Also</a></li>
+                    </ol>
+                </div>
+
+                <h2 id="overview" data-lang-key="h2_overview">Overview</h2>
+                <p data-lang-key="p_overview">The Hypercapitalist Collective represents the evolution of corporate power in a world where the traditional rules of physics and economics have been fundamentally altered. Unlike conventional corporations, the Collective operates on principles of kinetic capitalism, where velocity and acceleration are not just metaphors but literal sources of economic power. Members of the Collective have undergone extensive biomodification to achieve superhuman speed and endurance, allowing them to exploit the <a href="rule-of-80">Rule of 80</a> that governs the post-Squishing world.</p>
+
+                <h2 id="formation" data-lang-key="h2_formation">Formation and Early History</h2>
+                <p data-lang-key="p_formation">The Collective's origins can be traced to the immediate aftermath of the Y2K Collapse, when traditional economic systems worldwide faced unprecedented disruption. A consortium of tech entrepreneurs, financial analysts, and what would later be identified as early velocimancers recognized that the emerging reality required entirely new approaches to wealth generation and market manipulation.</p>
+
+                <p data-lang-key="p_formation2">The formal establishment occurred in early 1999, when several major corporations began pooling resources to develop what they termed "acceleration-based profit models." The discovery that sustained high-velocity movement could circumvent the temporal anomalies affecting slower-moving entities provided the foundation for their revolutionary business practices.</p>
+
+                <h2 id="ideology" data-lang-key="h2_ideology">Ideology and Philosophy</h2>
+                <p data-lang-key="p_ideology">The Collective's core philosophy centers around the concept of "Perpetual Motion Capitalism," the belief that economic stagnation is not merely inefficient but physically dangerous in the post-Squishing world. Their ideology emphasizes:</p>
+
+                <ul>
+                    <li data-lang-key="li_ideology_1"><strong data-lang-key="li_ideology_1_bold">Velocity as Currency:</strong> <span data-lang-key="li_ideology_1_text">The faster an entity moves, the more valuable it becomes</span></li>
+                    <li data-lang-key="li_ideology_2"><strong data-lang-key="li_ideology_2_bold">Temporal Arbitrage:</strong> <span data-lang-key="li_ideology_2_text">Exploiting time differentials for profit maximization</span></li>
+                    <li data-lang-key="li_ideology_3"><strong data-lang-key="li_ideology_3_bold">Biocommercial Enhancement:</strong> <span data-lang-key="li_ideology_3_text">Modifying human physiology to optimize market performance</span></li>
+                    <li data-lang-key="li_ideology_4"><strong data-lang-key="li_ideology_4_bold">Dimensional Resource Exploitation:</strong> <span data-lang-key="li_ideology_4_text">Mining opportunities across multiple reality layers</span></li>
+                </ul>
+
+                <blockquote data-lang-key="quote">
+                    "In a world where standing still means literal temporal imprisonment, only through constant acceleration can true freedom—and profit—be achieved." - Core Tenet of the Collective
+                </blockquote>
+
+                <h2 id="structure" data-lang-key="h2_structure">Organizational Structure</h2>
+                <p data-lang-key="p_structure">The Collective operates through a fluid hierarchy known as the "Profit Cascade," where positions are determined not by traditional corporate metrics but by demonstrated velocity capabilities and chronoeconomic output. The structure includes:</p>
+
+                <h3 data-lang-key="h3_velocity_lords">Velocity Lords</h3>
+                <p data-lang-key="p_velocity_lords">The highest tier, consisting of individuals capable of maintaining speeds exceeding 200 km/h while conducting complex financial transactions. These enhanced beings serve as the Collective's primary decision-makers and strategic coordinators.</p>
+
+                <h3 data-lang-key="h3_acceleration_managers">Acceleration Managers</h3>
+                <p data-lang-key="p_acceleration_managers">Middle management enhanced for sustained high-speed operations, typically maintaining 120-180 km/h during business operations. They oversee regional profit-zones and coordinate between Velocity Lords and lower tiers.</p>
+
+                <h3 data-lang-key="h3_momentum_workers">Momentum Workers</h3>
+                <p data-lang-key="p_momentum_workers">The foundational workforce, modified to operate at minimum velocities of 80 km/h. While less enhanced than their superiors, they form the backbone of the Collective's operations across various dimensional markets.</p>
+
+                <h2 id="technology" data-lang-key="h2_technology">Velocimantic Technology</h2>
+                <p data-lang-key="p_technology">The Collective's technological advantages stem from their mastery of velocimancy—the fusion of kinetic energy manipulation with financial algorithms. Key innovations include:</p>
+
+                <ul>
+                    <li data-lang-key="li_tech_1"><strong data-lang-key="li_tech_1_bold">Kineto-Financial Interfaces:</strong> <span data-lang-key="li_tech_1_text">Trading terminals that respond to the user's speed and acceleration</span></li>
+                    <li data-lang-key="li_tech_2"><strong data-lang-key="li_tech_2_bold">Chronodilution Fields:</strong> <span data-lang-key="li_tech_2_text">Technology that slows time in localized areas for extended decision-making</span></li>
+                    <li data-lang-key="li_tech_3"><strong data-lang-key="li_tech_3_bold">Momentum Amplifiers:</strong> <span data-lang-key="li_tech_3_text">Devices that convert physical motion into market manipulation energy</span></li>
+                    <li data-lang-key="li_tech_4"><strong data-lang-key="li_tech_4_bold">Profit-Stream Accelerators:</strong> <span data-lang-key="li_tech_4_text">Infrastructure that increases revenue flow proportional to operational velocity</span></li>
+                </ul>
+
+                <h2 id="operations" data-lang-key="h2_operations">Operations and Influence</h2>
+                <p data-lang-key="p_operations">The Collective's influence extends across multiple sectors of the post-Squishing economy. Their primary operations include:</p>
+
+                <h3 data-lang-key="h3_dimensional_markets">Dimensional Market Manipulation</h3>
+                <p data-lang-key="p_dimensional_markets">Exploiting price differentials between reality layers, the Collective has established trading posts in various dimensional fragments accessible through <a href="hypernet">Hypernet</a> connections. This allows them to buy low in one reality and sell high in another.</p>
+
+                <h3 data-lang-key="h3_temporal_commodity">Temporal Commodity Trading</h3>
+                <p data-lang-key="p_temporal_commodity">The Collective has pioneered the commodification of time itself, buying and selling temporal experiences, memories, and even future possibilities. Their "Time Banks" allow clients to deposit unused moments and withdraw them with interest.</p>
+
+                <h3 data-lang-key="h3_infrastructure">Infrastructure Development</h3>
+                <p data-lang-key="p_infrastructure">Working closely with <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a>, the Collective develops high-speed transportation networks and velocity-optimized commercial zones designed to maintain their competitive advantages.</p>
+
+                <h2 id="relations" data-lang-key="h2_relations">Relations with Other Factions</h2>
+                <p data-lang-key="p_relations">The Collective maintains complex relationships with other major post-Squishing organizations:</p>
+
+                <ul>
+                    <li data-lang-key="li_relations_1"><strong data-lang-key="li_relations_1_bold">The Gods:</strong> <span data-lang-key="li_relations_1_text">Alliance based on mutual benefit—the Collective provides resources while the Gods offer protection from dimensional instabilities</span></li>
+                    <li data-lang-key="li_relations_2"><strong data-lang-key="li_relations_2_bold">Guild of Wizards:</strong> <span data-lang-key="li_relations_2_text">Neutral relationship, with occasional technology exchanges</span></li>
+                    <li data-lang-key="li_relations_3"><strong data-lang-key="li_relations_3_bold">Archive Foundation:</strong> <span data-lang-key="li_relations_3_text">Ongoing conflict over information control and transparency requirements</span></li>
+                    <li data-lang-key="li_relations_4"><strong data-lang-key="li_relations_4_bold">Goblins:</strong> <span data-lang-key="li_relations_4_text">Hostile, due to competing resource claims and incompatible operational speeds</span></li>
+                </ul>
+
+                <h2 id="criticism" data-lang-key="h2_criticism">Criticism and Controversies</h2>
+                <p data-lang-key="p_criticism">The Collective faces significant criticism for their business practices and social impact:</p>
+
+                <h3 data-lang-key="h3_human_rights">Human Rights Concerns</h3>
+                <p data-lang-key="p_human_rights">Critics argue that the extensive biomodifications required for Collective membership constitute a form of voluntary slavery, as members become physically dependent on maintaining high velocities to survive in their economic ecosystem.</p>
+
+                <h3 data-lang-key="h3_market_manipulation">Market Manipulation</h3>
+                <p data-lang-key="p_market_manipulation">The <a href="archive-foundation">Archive Foundation</a> has documented numerous instances of the Collective using their temporal advantages to engage in what traditional economics would classify as insider trading and market manipulation on an interdimensional scale.</p>
+
+                <h3 data-lang-key="h3_environmental">Environmental Impact</h3>
+                <p data-lang-key="p_environmental">The constant high-speed movement required by Collective operations has been linked to acceleration of local time distortions and increased frequency of temporal anomalies in their operational zones.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="rule-of-80.html" data-lang-key="link_rule_80">Rule of 80</a></li>
+                    <li><a href="velocimancy.html" data-lang-key="link_velocimancy">Velocimancy</a></li>
+                    <li><a href="esoteric-heavy-industries.html" data-lang-key="link_ehi">Esoteric Heavy Industries</a></li>
+                    <li><a href="y2k-collapse.html" data-lang-key="link_y2k">Y2K Collapse</a></li>
+                    <li><a href="the-squishing.html" data-lang-key="link_squishing">The Squishing</a></li>
+                    <li><a href="hypernet.html" data-lang-key="link_hypernet">Hypernet</a></li>
+                    <li><a href="archive-foundation.html" data-lang-key="link_archive">Archive Foundation</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Hypercapitalist Collective",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "7 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Overview",
+                    toc_2: "2. Formation and Early History",
+                    toc_3: "3. Ideology and Philosophy",
+                    toc_4: "4. Organizational Structure",
+                    toc_5: "5. Velocimantic Technology",
+                    toc_6: "6. Operations and Influence",
+                    toc_7: "7. Relations with Other Factions",
+                    toc_8: "8. Criticism and Controversies",
+                    toc_9: "9. See Also",
+                    infobox_title: "Quick Facts",
+                    infobox_type_label: "Type:",
+                    infobox_type_value: "Transnational Corporate Collective",
+                    infobox_founded_label: "Founded:",
+                    infobox_founded_value: "1999 (Post-Y2K Formation)",
+                    infobox_headquarters_label: "Headquarters:",
+                    infobox_headquarters_value: "Mobile Profit-Zones",
+                    infobox_ideology_label: "Core Ideology:",
+                    infobox_ideology_value: "Accelerated Profit Maximization",
+                    infobox_tech_label: "Primary Technology:",
+                    infobox_tech_value: "Velocimancy & Chronoeconomics",
+                    p_intro: "The Hypercapitalist Collective is a powerful transnational organization that emerged following the Y2K Collapse and the Squishing of 1997. Operating as both a corporate conglomerate and a socio-economic movement, the Collective has become one of the most influential forces in the post-Squishing world, utilizing velocimancy and chronoeconomic manipulation to maintain their dominance.",
+                    h2_overview: "Overview",
+                    p_overview: "The Hypercapitalist Collective represents the evolution of corporate power in a world where the traditional rules of physics and economics have been fundamentally altered. Unlike conventional corporations, the Collective operates on principles of kinetic capitalism, where velocity and acceleration are not just metaphors but literal sources of economic power. Members of the Collective have undergone extensive biomodification to achieve superhuman speed and endurance, allowing them to exploit the Rule of 80 that governs the post-Squishing world.",
+                    h2_formation: "Formation and Early History",
+                    p_formation: "The Collective's origins can be traced to the immediate aftermath of the Y2K Collapse, when traditional economic systems worldwide faced unprecedented disruption. A consortium of tech entrepreneurs, financial analysts, and what would later be identified as early velocimancers recognized that the emerging reality required entirely new approaches to wealth generation and market manipulation.",
+                    p_formation2: "The formal establishment occurred in early 1999, when several major corporations began pooling resources to develop what they termed \"acceleration-based profit models.\" The discovery that sustained high-velocity movement could circumvent the temporal anomalies affecting slower-moving entities provided the foundation for their revolutionary business practices.",
+                    h2_ideology: "Ideology and Philosophy",
+                    p_ideology: "The Collective's core philosophy centers around the concept of \"Perpetual Motion Capitalism,\" the belief that economic stagnation is not merely inefficient but physically dangerous in the post-Squishing world. Their ideology emphasizes:",
+                    li_ideology_1_bold: "Velocity as Currency:",
+                    li_ideology_1_text: "The faster an entity moves, the more valuable it becomes",
+                    li_ideology_2_bold: "Temporal Arbitrage:",
+                    li_ideology_2_text: "Exploiting time differentials for profit maximization",
+                    li_ideology_3_bold: "Biocommercial Enhancement:",
+                    li_ideology_3_text: "Modifying human physiology to optimize market performance",
+                    li_ideology_4_bold: "Dimensional Resource Exploitation:",
+                    li_ideology_4_text: "Mining opportunities across multiple reality layers",
+                    quote: "\"In a world where standing still means literal temporal imprisonment, only through constant acceleration can true freedom—and profit—be achieved.\" - Core Tenet of the Collective",
+                    h2_structure: "Organizational Structure",
+                    p_structure: "The Collective operates through a fluid hierarchy known as the \"Profit Cascade,\" where positions are determined not by traditional corporate metrics but by demonstrated velocity capabilities and chronoeconomic output. The structure includes:",
+                    h3_velocity_lords: "Velocity Lords",
+                    p_velocity_lords: "The highest tier, consisting of individuals capable of maintaining speeds exceeding 200 km/h while conducting complex financial transactions. These enhanced beings serve as the Collective's primary decision-makers and strategic coordinators.",
+                    h3_acceleration_managers: "Acceleration Managers",
+                    p_acceleration_managers: "Middle management enhanced for sustained high-speed operations, typically maintaining 120-180 km/h during business operations. They oversee regional profit-zones and coordinate between Velocity Lords and lower tiers.",
+                    h3_momentum_workers: "Momentum Workers",
+                    p_momentum_workers: "The foundational workforce, modified to operate at minimum velocities of 80 km/h. While less enhanced than their superiors, they form the backbone of the Collective's operations across various dimensional markets.",
+                    h2_technology: "Velocimantic Technology",
+                    p_technology: "The Collective's technological advantages stem from their mastery of velocimancy—the fusion of kinetic energy manipulation with financial algorithms. Key innovations include:",
+                    li_tech_1_bold: "Kineto-Financial Interfaces:",
+                    li_tech_1_text: "Trading terminals that respond to the user's speed and acceleration",
+                    li_tech_2_bold: "Chronodilution Fields:",
+                    li_tech_2_text: "Technology that slows time in localized areas for extended decision-making",
+                    li_tech_3_bold: "Momentum Amplifiers:",
+                    li_tech_3_text: "Devices that convert physical motion into market manipulation energy",
+                    li_tech_4_bold: "Profit-Stream Accelerators:",
+                    li_tech_4_text: "Infrastructure that increases revenue flow proportional to operational velocity",
+                    h2_operations: "Operations and Influence",
+                    p_operations: "The Collective's influence extends across multiple sectors of the post-Squishing economy. Their primary operations include:",
+                    h3_dimensional_markets: "Dimensional Market Manipulation",
+                    p_dimensional_markets: "Exploiting price differentials between reality layers, the Collective has established trading posts in various dimensional fragments accessible through Hypernet connections. This allows them to buy low in one reality and sell high in another.",
+                    h3_temporal_commodity: "Temporal Commodity Trading",
+                    p_temporal_commodity: "The Collective has pioneered the commodification of time itself, buying and selling temporal experiences, memories, and even future possibilities. Their \"Time Banks\" allow clients to deposit unused moments and withdraw them with interest.",
+                    h3_infrastructure: "Infrastructure Development",
+                    p_infrastructure: "Working closely with Esoteric Heavy Industries, the Collective develops high-speed transportation networks and velocity-optimized commercial zones designed to maintain their competitive advantages.",
+                    h2_relations: "Relations with Other Factions",
+                    p_relations: "The Collective maintains complex relationships with other major post-Squishing organizations:",
+                    li_relations_1_bold: "The Gods:",
+                    li_relations_1_text: "Alliance based on mutual benefit—the Collective provides resources while the Gods offer protection from dimensional instabilities",
+                    li_relations_2_bold: "Guild of Wizards:",
+                    li_relations_2_text: "Neutral relationship, with occasional technology exchanges",
+                    li_relations_3_bold: "Archive Foundation:",
+                    li_relations_3_text: "Ongoing conflict over information control and transparency requirements",
+                    li_relations_4_bold: "Goblins:",
+                    li_relations_4_text: "Hostile, due to competing resource claims and incompatible operational speeds",
+                    h2_criticism: "Criticism and Controversies",
+                    p_criticism: "The Collective faces significant criticism for their business practices and social impact:",
+                    h3_human_rights: "Human Rights Concerns",
+                    p_human_rights: "Critics argue that the extensive biomodifications required for Collective membership constitute a form of voluntary slavery, as members become physically dependent on maintaining high velocities to survive in their economic ecosystem.",
+                    h3_market_manipulation: "Market Manipulation",
+                    p_market_manipulation: "The Archive Foundation has documented numerous instances of the Collective using their temporal advantages to engage in what traditional economics would classify as insider trading and market manipulation on an interdimensional scale.",
+                    h3_environmental: "Environmental Impact",
+                    p_environmental: "The constant high-speed movement required by Collective operations has been linked to acceleration of local time distortions and increased frequency of temporal anomalies in their operational zones.",
+                    h2_see_also: "See Also",
+                    link_rule_80: "Rule of 80",
+                    link_velocimancy: "Velocimancy",
+                    link_ehi: "Esoteric Heavy Industries",
+                    link_y2k: "Y2K Collapse",
+                    link_squishing: "The Squishing",
+                    link_hypernet: "Hypernet",
+                    link_archive: "Archive Foundation",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Collettivo Ipercapitalista",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "7 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Panoramica",
+                    toc_2: "2. Formazione e Storia Iniziale",
+                    toc_3: "3. Ideologia e Filosofia",
+                    toc_4: "4. Struttura Organizzativa",
+                    toc_5: "5. Tecnologia Velocimantica",
+                    toc_6: "6. Operazioni e Influenza",
+                    toc_7: "7. Relazioni con Altre Fazioni",
+                    toc_8: "8. Critiche e Controversie",
+                    toc_9: "9. Vedi Anche",
+                    infobox_title: "Dati Rapidi",
+                    infobox_type_label: "Tipo:",
+                    infobox_type_value: "Collettivo Corporativo Transnazionale",
+                    infobox_founded_label: "Fondato:",
+                    infobox_founded_value: "1999 (Formazione Post-Y2K)",
+                    infobox_headquarters_label: "Sede:",
+                    infobox_headquarters_value: "Zone di Profitto Mobili",
+                    infobox_ideology_label: "Ideologia Principale:",
+                    infobox_ideology_value: "Massimizzazione del Profitto Accelerata",
+                    infobox_tech_label: "Tecnologia Primaria:",
+                    infobox_tech_value: "Velocimanzia e Cronoeconomia",
+                    p_intro: "Il Collettivo Ipercapitalista è una potente organizzazione transnazionale emersa dopo il Collasso Y2K e lo Schiacciamento del 1997. Operando sia come conglomerato corporativo che come movimento socio-economico, il Collettivo è diventato una delle forze più influenti nel mondo post-Schiacciamento, utilizzando la velocimanzia e la manipolazione cronoeconomica per mantenere il loro dominio.",
+                    h2_overview: "Panoramica",
+                    p_overview: "Il Collettivo Ipercapitalista rappresenta l'evoluzione del potere corporativo in un mondo dove le regole tradizionali della fisica e dell'economia sono state fondamentalmente alterate. A differenza delle corporazioni convenzionali, il Collettivo opera secondo i principi del capitalismo cinetico, dove velocità e accelerazione non sono solo metafore ma fonti letterali di potere economico. I membri del Collettivo hanno subito estese biomodificazioni per raggiungere velocità e resistenza sovrumane, permettendo loro di sfruttare la Regola degli 80 che governa il mondo post-Schiacciamento.",
+                    h2_formation: "Formazione e Storia Iniziale",
+                    p_formation: "Le origini del Collettivo possono essere ricondotte alle immediate conseguenze del Collasso Y2K, quando i sistemi economici tradizionali di tutto il mondo affrontarono interruzioni senza precedenti. Un consorzio di imprenditori tecnologici, analisti finanziari e quelli che sarebbero stati successivamente identificati come primi velociomanti riconobbero che la realtà emergente richiedeva approcci completamente nuovi alla generazione di ricchezza e alla manipolazione del mercato.",
+                    p_formation2: "L'istituzione formale avvenne nei primi mesi del 1999, quando diverse grandi corporazioni iniziarono a unire le risorse per sviluppare quelli che definivano \"modelli di profitto basati sull'accelerazione\". La scoperta che il movimento ad alta velocità sostenuto poteva aggirare le anomalie temporali che colpivano le entità più lente fornì le fondamenta per le loro pratiche commerciali rivoluzionarie.",
+                    h2_ideology: "Ideologia e Filosofia",
+                    p_ideology: "La filosofia centrale del Collettivo si concentra attorno al concetto di \"Capitalismo del Moto Perpetuo\", la convinzione che la stagnazione economica non sia meramente inefficiente ma fisicamente pericolosa nel mondo post-Schiacciamento. La loro ideologia enfatizza:",
+                    li_ideology_1_bold: "Velocità come Valuta:",
+                    li_ideology_1_text: "Più veloce si muove un'entità, più preziosa diventa",
+                    li_ideology_2_bold: "Arbitraggio Temporale:",
+                    li_ideology_2_text: "Sfruttare i differenziali temporali per la massimizzazione del profitto",
+                    li_ideology_3_bold: "Potenziamento Biocommerciale:",
+                    li_ideology_3_text: "Modificare la fisiologia umana per ottimizzare le prestazioni di mercato",
+                    li_ideology_4_bold: "Sfruttamento di Risorse Dimensionali:",
+                    li_ideology_4_text: "Estrarre opportunità attraverso multipli strati di realtà",
+                    quote: "\"In un mondo dove stare fermi significa letterale prigionia temporale, solo attraverso l'accelerazione costante si può ottenere vera libertà—e profitto.\" - Principio Fondamentale del Collettivo",
+                    h2_structure: "Struttura Organizzativa",
+                    p_structure: "Il Collettivo opera attraverso una gerarchia fluida conosciuta come la \"Cascata del Profitto\", dove le posizioni sono determinate non da metriche aziendali tradizionali ma da capacità di velocità dimostrate e produzione cronoeconomica. La struttura include:",
+                    h3_velocity_lords: "Signori della Velocità",
+                    p_velocity_lords: "Il livello più alto, composto da individui capaci di mantenere velocità superiori ai 200 km/h mentre conducono transazioni finanziarie complesse. Questi esseri potenziati servono come principali decisori e coordinatori strategici del Collettivo.",
+                    h3_acceleration_managers: "Manager dell'Accelerazione",
+                    p_acceleration_managers: "Dirigenza intermedia potenziata per operazioni ad alta velocità sostenute, tipicamente mantenendo 120-180 km/h durante le operazioni commerciali. Supervisionano le zone di profitto regionali e coordinano tra i Signori della Velocità e i livelli inferiori.",
+                    h3_momentum_workers: "Lavoratori del Momentum",
+                    p_momentum_workers: "La forza lavoro fondamentale, modificata per operare a velocità minime di 80 km/h. Sebbene meno potenziati dei loro superiori, formano la spina dorsale delle operazioni del Collettivo attraverso vari mercati dimensionali.",
+                    h2_technology: "Tecnologia Velocimantica",
+                    p_technology: "I vantaggi tecnologici del Collettivo derivano dalla loro padronanza della velocimanzia—la fusione della manipolazione dell'energia cinetica con algoritmi finanziari. Le innovazioni chiave includono:",
+                    li_tech_1_bold: "Interfacce Cineto-Finanziarie:",
+                    li_tech_1_text: "Terminali di trading che rispondono alla velocità e accelerazione dell'utente",
+                    li_tech_2_bold: "Campi di Cronodiluizione:",
+                    li_tech_2_text: "Tecnologia che rallenta il tempo in aree localizzate per un processo decisionale esteso",
+                    li_tech_3_bold: "Amplificatori di Momentum:",
+                    li_tech_3_text: "Dispositivi che convertono il movimento fisico in energia di manipolazione del mercato",
+                    li_tech_4_bold: "Acceleratori di Flusso di Profitto:",
+                    li_tech_4_text: "Infrastruttura che aumenta il flusso di entrate proporzionalmente alla velocità operativa",
+                    h2_operations: "Operazioni e Influenza",
+                    p_operations: "L'influenza del Collettivo si estende attraverso multipli settori dell'economia post-Schiacciamento. Le loro operazioni primarie includono:",
+                    h3_dimensional_markets: "Manipolazione dei Mercati Dimensionali",
+                    p_dimensional_markets: "Sfruttando i differenziali di prezzo tra gli strati di realtà, il Collettivo ha stabilito posti di commercio in vari frammenti dimensionali accessibili attraverso le connessioni Hypernet. Questo permette loro di comprare a prezzi bassi in una realtà e vendere a prezzi alti in un'altra.",
+                    h3_temporal_commodity: "Commercio di Materie Prime Temporali",
+                    p_temporal_commodity: "Il Collettivo ha pionierato la mercificazione del tempo stesso, comprando e vendendo esperienze temporali, ricordi e persino possibilità future. Le loro \"Banche del Tempo\" permettono ai clienti di depositare momenti inutilizzati e ritirarli con interesse.",
+                    h3_infrastructure: "Sviluppo delle Infrastrutture",
+                    p_infrastructure: "Lavorando a stretto contatto con le Industrie Pesanti Esoteriche, il Collettivo sviluppa reti di trasporto ad alta velocità e zone commerciali ottimizzate per la velocità progettate per mantenere i loro vantaggi competitivi.",
+                    h2_relations: "Relazioni con Altre Fazioni",
+                    p_relations: "Il Collettivo mantiene relazioni complesse con altre grandi organizzazioni post-Schiacciamento:",
+                    li_relations_1_bold: "Gli Dei:",
+                    li_relations_1_text: "Alleanza basata su beneficio reciproco—il Collettivo fornisce risorse mentre gli Dei offrono protezione dalle instabilità dimensionali",
+                    li_relations_2_bold: "Gilda dei Maghi:",
+                    li_relations_2_text: "Relazione neutrale, con occasionali scambi tecnologici",
+                    li_relations_3_bold: "Fondazione degli Archivi:",
+                    li_relations_3_text: "Conflitto in corso sul controllo delle informazioni e i requisiti di trasparenza",
+                    li_relations_4_bold: "Goblin:",
+                    li_relations_4_text: "Ostile, a causa di rivendicazioni di risorse concorrenti e velocità operative incompatibili",
+                    h2_criticism: "Critiche e Controversie",
+                    p_criticism: "Il Collettivo affronta critiche significative per le loro pratiche commerciali e impatto sociale:",
+                    h3_human_rights: "Preoccupazioni sui Diritti Umani",
+                    p_human_rights: "I critici sostengono che le estese biomodificazioni richieste per l'appartenenza al Collettivo costituiscono una forma di schiavitù volontaria, poiché i membri diventano fisicamente dipendenti dal mantenere alte velocità per sopravvivere nel loro ecosistema economico.",
+                    h3_market_manipulation: "Manipolazione del Mercato",
+                    p_market_manipulation: "La Fondazione degli Archivi ha documentato numerosi casi del Collettivo che usa i loro vantaggi temporali per impegnarsi in quello che l'economia tradizionale classificherebbe come insider trading e manipolazione del mercato su scala interdimensionale.",
+                    h3_environmental: "Impatto Ambientale",
+                    p_environmental: "Il movimento costante ad alta velocità richiesto dalle operazioni del Collettivo è stato collegato all'accelerazione delle distorsioni temporali locali e all'aumento della frequenza delle anomalie temporali nelle loro zone operative.",
+                    h2_see_also: "Vedi Anche",
+                    link_rule_80: "Regola degli 80",
+                    link_velocimancy: "Velocimanzia",
+                    link_ehi: "Industrie Pesanti Esoteriche",
+                    link_y2k: "Collasso Y2K",
+                    link_squishing: "Lo Schiacciamento",
+                    link_hypernet: "Hypernet",
+                    link_archive: "Fondazione degli Archivi",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            const setLanguage = (lang) => {
+                // Set language in local storage
+                try {
+                    localStorage.setItem('language', lang);
+                } catch (e) {
+                    // localStorage not available, continue without saving
+                }
+                
+                // Set the lang attribute on the HTML tag for accessibility
+                document.documentElement.setAttribute('lang', lang);
+
+                // Update text content
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                // Update active class on switcher
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            // Add click event listeners to language links
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            // Set initial language from local storage or default to 'en'
+            let initialLang = 'en';
+            try {
+                initialLang = localStorage.getItem('language') || 'en';
+            } catch (e) {
+                // localStorage not available, use default
+                initialLang = 'en';
+            }
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

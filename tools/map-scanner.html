@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Map Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #007cba;
+        }
+        
+        .upload-area.dragover {
+            border-color: #007cba;
+            background-color: #f0f8ff;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #007cba;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .upload-btn:hover {
+            background: #005a8a;
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .status.info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            color: #1565c0;
+        }
+        
+        .status.success {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            color: #c62828;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .results h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .output-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 12px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .map-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .map-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .map-item:last-child {
+            border-bottom: none;
+        }
+        
+        .excluded {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+        
+        .included {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ RPG Maker MZ Map Scanner</h1>
+        <p>This tool scans your RPG Maker MZ project folder and finds all maps that <strong>don't</strong> have the <code>&lt;NoRandomLoot&gt;</code> tag in their notes.</p>
+        
+        <div class="upload-area" id="uploadArea">
+            <p>📁 Select your RPG Maker MZ project folder</p>
+            <p style="color: #666; font-size: 14px;">The tool will scan the data folder for Map*.json files</p>
+            <input type="file" id="folderInput" webkitdirectory multiple>
+            <button class="upload-btn" onclick="document.getElementById('folderInput').click()">Choose Folder</button>
+        </div>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="results" id="results">
+            <h3>📋 Scan Results</h3>
+            <div id="mapDetails"></div>
+            
+            <h4>🎯 Final Output (Maps without NoRandomLoot tag):</h4>
+            <div class="output-box" id="outputBox"></div>
+            <button class="copy-btn" onclick="copyOutput()">📋 Copy Output</button>
+        </div>
+    </div>
+
+    <script>
+        let mapData = [];
+        let validMaps = [];
+
+        const folderInput = document.getElementById('folderInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const status = document.getElementById('status');
+        const results = document.getElementById('results');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const items = e.dataTransfer.items;
+            if (items) {
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i].webkitGetAsEntry();
+                    if (item && item.isDirectory) {
+                        processDirectory(item);
+                        break;
+                    }
+                }
+            }
+        });
+
+        folderInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            processFiles(files);
+        });
+
+        function showStatus(message, type = 'info') {
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+        }
+
+        function processDirectory(directory) {
+            showStatus('📂 Processing directory...', 'info');
+            const files = [];
+            
+            function readDirectory(dir, callback) {
+                const reader = dir.createReader();
+                reader.readEntries((entries) => {
+                    let pending = entries.length;
+                    if (pending === 0) {
+                        callback();
+                        return;
+                    }
+                    
+                    entries.forEach(entry => {
+                        if (entry.isFile && entry.name.match(/^Map\d+\.json$/i)) {
+                            entry.file(file => {
+                                files.push(file);
+                                if (--pending === 0) callback();
+                            });
+                        } else if (entry.isDirectory && entry.name.toLowerCase() === 'data') {
+                            readDirectory(entry, () => {
+                                if (--pending === 0) callback();
+                            });
+                        } else {
+                            if (--pending === 0) callback();
+                        }
+                    });
+                });
+            }
+            
+            readDirectory(directory, () => {
+                processFiles(files);
+            });
+        }
+
+        async function processFiles(files) {
+            showStatus('🔍 Scanning map files...', 'info');
+            
+            const mapFiles = files.filter(file => 
+                file.name.match(/^Map\d+\.json$/i) || 
+                file.webkitRelativePath?.includes('data/Map') ||
+                file.webkitRelativePath?.includes('Data/Map')
+            );
+
+            if (mapFiles.length === 0) {
+                showStatus('❌ No map files found! Make sure you selected the correct RPG Maker MZ project folder.', 'error');
+                return;
+            }
+
+            showStatus(`📊 Found ${mapFiles.length} map files. Analyzing...`, 'info');
+
+            mapData = [];
+            validMaps = [];
+
+            for (const file of mapFiles) {
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    
+                    const mapId = extractMapId(file.name);
+                    const hasNoRandomLoot = data.note && data.note.includes('<NoRandomLoot>');
+                    
+                    mapData.push({
+                        id: mapId,
+                        name: data.displayName || `Map ${mapId}`,
+                        hasNoRandomLoot: hasNoRandomLoot,
+                        fileName: file.name
+                    });
+
+                    if (!hasNoRandomLoot) {
+                        validMaps.push(mapId);
+                    }
+
+                } catch (error) {
+                    console.error(`Error processing ${file.name}:`, error);
+                }
+            }
+
+            // Sort by map ID (numerically)
+            mapData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+            validMaps.sort((a, b) => parseInt(a) - parseInt(b));
+
+            displayResults();
+        }
+
+        function extractMapId(fileName) {
+            const match = fileName.match(/Map(\d+)\.json/i);
+            return match ? parseInt(match[1]).toString() : '0';
+        }
+
+        function displayResults() {
+            const mapDetails = document.getElementById('mapDetails');
+            const outputBox = document.getElementById('outputBox');
+
+            // Create detailed map list
+            let detailsHTML = `<div class="map-list">`;
+            detailsHTML += `<strong>All Maps Found (${mapData.length} total):</strong><br><br>`;
+            
+            mapData.forEach(map => {
+                const className = map.hasNoRandomLoot ? 'excluded' : 'included';
+                const status = map.hasNoRandomLoot ? '❌ Excluded (has NoRandomLoot)' : '✅ Included';
+                detailsHTML += `<div class="map-item">
+                    <span class="${className}">Map ${map.id}: ${map.name}</span> - ${status}
+                </div>`;
+            });
+            
+            detailsHTML += `</div>`;
+            mapDetails.innerHTML = detailsHTML;
+
+            // Create output with escaped quotes
+            const output = `"mapIds":"[${validMaps.map(id => `\\"${id}\\"`).join(',')}]"`;
+            outputBox.textContent = output;
+
+            showStatus(`✅ Scan complete! Found ${validMaps.length} maps without NoRandomLoot tag out of ${mapData.length} total maps.`, 'success');
+            results.style.display = 'block';
+        }
+
+        function copyOutput() {
+            const outputBox = document.getElementById('outputBox');
+            navigator.clipboard.writeText(outputBox.textContent).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.style.background = '#218838';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#28a745';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

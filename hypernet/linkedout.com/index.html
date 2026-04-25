@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LinkedOut - Professional Termination Network</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+body { 
+    font-family: Arial, Times, serif; 
+    background-color: #f0f0f0; 
+    margin: 20px; 
+    color: #000000;
+}
+.header {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.lang-switch {
+    float: right;
+    font-size: 11px;
+    margin-top: 5px;
+}
+.lang-switch a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+.content {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.post {
+    border-bottom: 1px solid #cccccc;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+.username {
+    font-weight: bold;
+    color: #cc0000;
+}
+.company {
+    font-style: italic;
+    color: #666666;
+}
+.shame-count {
+    background-color: #ffcccc;
+    border: 1px solid #ff0000;
+    padding: 3px 6px;
+    font-size: 10px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td {
+    border: 1px solid #000000;
+    padding: 5px;
+    vertical-align: top;
+}
+th {
+    background-color: #cccccc;
+    border: 1px solid #000000;
+    padding: 5px;
+    font-weight: bold;
+}
+.footer {
+    text-align: center;
+    font-size: 10px;
+    color: #666666;
+    margin-top: 30px;
+}
+.hidden {
+    display: none;
+}
+blink {
+    animation: blink 1s step-start infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+</style>
+<script language="JavaScript">
+var currentLang = 'en';
+
+function switchLanguage(lang) {
+    currentLang = lang;
+    var enElements = document.getElementsByClassName('lang-en');
+    var itElements = document.getElementsByClassName('lang-it');
+    
+    if (lang === 'en') {
+        for (var i = 0; i < enElements.length; i++) {
+            enElements[i].className = enElements[i].className.replace(' hidden', '');
+        }
+        for (var i = 0; i < itElements.length; i++) {
+            itElements[i].className += ' hidden';
+        }
+    } else {
+        for (var i = 0; i < itElements.length; i++) {
+            itElements[i].className = itElements[i].className.replace(' hidden', '');
+        }
+        for (var i = 0; i < enElements.length; i++) {
+            enElements[i].className += ' hidden';
+        }
+    }
+}
+
+function addShame(postId) {
+    var shameElement = document.getElementById('shame-' + postId);
+    var currentCount = parseInt(shameElement.innerHTML);
+    shameElement.innerHTML = currentCount + 1;
+    alert('Shame added! This person\'s professional reputation continues to decline.');
+}
+</script>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="javascript:switchLanguage('en')">EN</a> | <a href="javascript:switchLanguage('it')">IT</a>
+</div>
+
+<div class="header">
+    <div class="lang-en">
+        <h1>LinkedOut</h1>
+        <h3>Professional Termination Network</h3>
+        <p><i>"Where careers go to die publicly"</i></p>
+    </div>
+    <div class="lang-it hidden">
+        <h1>LinkedOut</h1>
+        <h3>Rete Professionale di Licenziamento</h3>
+        <p><i>"Dove le carriere muoiono pubblicamente"</i></p>
+    </div>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="about">About LinkedOut</a></h2>
+    <p>Welcome to LinkedOut, the revolutionary professional network designed specifically for documenting career failures, public terminations, and professional shame. Unlike traditional networking sites that focus on success, we celebrate the other side of professional life.</p>
+    
+    <p>Founded in 1999 by disgruntled former employees, LinkedOut provides a platform where terminated workers can publicly shame their former employers while being simultaneously mocked by the community.</p>
+    
+    <p><b>Features:</b></p>
+    <ul>
+        <li>Public termination announcements</li>
+        <li>Shame voting system</li>
+        <li>Employer blacklist database</li>
+        <li>Unemployment statistics</li>
+        <li>Career failure testimonials</li>
+    </ul>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="about">Informazioni su LinkedOut</a></h2>
+    <p>Benvenuti su LinkedOut, la rivoluzionaria rete professionale progettata specificamente per documentare fallimenti di carriera, licenziamenti pubblici e vergogna professionale. A differenza dei tradizionali siti di networking che si concentrano sul successo, noi celebriamo l'altro lato della vita professionale.</p>
+    
+    <p>Fondato nel 1999 da ex dipendenti scontenti, LinkedOut fornisce una piattaforma dove i lavoratori licenziati possono pubblicamente svergognare i loro ex datori di lavoro mentre vengono simultaneamente derisi dalla comunità.</p>
+    
+    <p><b>Caratteristiche:</b></p>
+    <ul>
+        <li>Annunci pubblici di licenziamento</li>
+        <li>Sistema di voto della vergogna</li>
+        <li>Database blacklist datori di lavoro</li>
+        <li>Statistiche di disoccupazione</li>
+        <li>Testimonianze di fallimento professionale</li>
+    </ul>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="recent">Recent Terminations</a></h2>
+    
+    <div class="post">
+        <img src="1.jpg" alt="Crying office worker holding cardboard box of personal belongings" width="60" height="60" align="left" hspace="10">
+        <span class="username">mike_downsized</span> @ <span class="company">Synergy Solutions Inc.</span><br>
+        <b>Termination Reason:</b> "Incompetence and general uselessness"<br>
+        <b>Years Wasted:</b> 7 years<br>
+        <b>Final Words:</b> "But I had perfect attendance!"<br>
+        <span class="shame-count">Shame Points: <span id="shame-1">247</span></span>
+        <input type="button" value="Add Shame" onclick="addShame(1)">
+    </div>
+    
+    <div class="post">
+        <img src="2.jpg" alt="Man in wrinkled suit looking defeated outside office building" width="60" height="60" align="left" hspace="10">
+        <span class="username">jennifer_failed</span> @ <span class="company">Global Dynamics Corp.</span><br>
+        <b>Termination Reason:</b> "Failed to meet any objectives since 1998"<br>
+        <b>Years Wasted:</b> 3 years<br>
+        <b>Final Words:</b> "This is discrimination against people who don't work hard!"<br>
+        <span class="shame-count">Shame Points: <span id="shame-2">189</span></span>
+        <input type="button" value="Add Shame" onclick="addShame(2)">
+    </div>
+    
+    <div class="post">
+        <img src="3.jpg" alt="Empty office desk with family photos and wilted plant" width="60" height="60" align="left" hspace="10">
+        <span class="username">bob_unemployed</span> @ <span class="company">TechnoFuture Systems</span><br>
+        <b>Termination Reason:</b> "Showed up drunk to client presentation"<br>
+        <b>Years Wasted:</b> 2 years<br>
+        <b>Final Words:</b> "I thought it was casual Friday!"<br>
+        <span class="shame-count">Shame Points: <span id="shame-3">312</span></span>
+        <input type="button" value="Add Shame" onclick="addShame(3)">
+    </div>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="recent">Licenziamenti Recenti</a></h2>
+    
+    <div class="post">
+        <img src="1.jpg" alt="Impiegato che piange con scatola di cartone di oggetti personali" width="60" height="60" align="left" hspace="10">
+        <span class="username">mike_ridimensionato</span> @ <span class="company">Synergy Solutions Inc.</span><br>
+        <b>Motivo Licenziamento:</b> "Incompetenza e inutilità generale"<br>
+        <b>Anni Sprecati:</b> 7 anni<br>
+        <b>Ultime Parole:</b> "Ma avevo una presenza perfetta!"<br>
+        <span class="shame-count">Punti Vergogna: <span id="shame-1">247</span></span>
+        <input type="button" value="Aggiungi Vergogna" onclick="addShame(1)">
+    </div>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="stats">Unemployment Statistics</a></h2>
+    
+    <table>
+        <tr>
+            <th>Company</th>
+            <th>Total Firings</th>
+            <th>Most Common Reason</th>
+            <th>Average Shame Score</th>
+        </tr>
+        <tr>
+            <td>MegaCorp Industries</td>
+            <td>1,247</td>
+            <td>Gross incompetence</td>
+            <td>234.7</td>
+        </tr>
+        <tr>
+            <td>Global Dynamics</td>
+            <td>892</td>
+            <td>Attendance issues</td>
+            <td>198.3</td>
+        </tr>
+        <tr>
+            <td>TechnoFuture Systems</td>
+            <td>654</td>
+            <td>Substance abuse at work</td>
+            <td>287.1</td>
+        </tr>
+        <tr>
+            <td>Synergy Solutions</td>
+            <td>443</td>
+            <td>Inability to use email</td>
+            <td>156.9</td>
+        </tr>
+    </table>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="stats">Statistiche Disoccupazione</a></h2>
+    
+    <table>
+        <tr>
+            <th>Azienda</th>
+            <th>Licenziamenti Totali</th>
+            <th>Motivo Più Comune</th>
+            <th>Punteggio Vergogna Medio</th>
+        </tr>
+        <tr>
+            <td>MegaCorp Industries</td>
+            <td>1,247</td>
+            <td>Incompetenza grave</td>
+            <td>234.7</td>
+        </tr>
+        <tr>
+            <td>Global Dynamics</td>
+            <td>892</td>
+            <td>Problemi di presenza</td>
+            <td>198.3</td>
+        </tr>
+        <tr>
+            <td>TechnoFuture Systems</td>
+            <td>654</td>
+            <td>Abuso sostanze al lavoro</td>
+            <td>287.1</td>
+        </tr>
+        <tr>
+            <td>Synergy Solutions</td>
+            <td>443</td>
+            <td>Incapacità di usare email</td>
+            <td>156.9</td>
+        </tr>
+    </table>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="testimonials">Career Failure Testimonials</a></h2>
+    
+    <blockquote>
+        <p><i>"LinkedOut helped me document my spectacular failure at three different companies. Now everyone knows exactly why I'm unemployable!"</i></p>
+        <p>- Sarah M., Former Marketing "Expert"</p>
+    </blockquote>
+    
+    <blockquote>
+        <p><i>"Thanks to LinkedOut's shame system, I realized that my 15-year career was actually just 15 years of expensive mistakes. The public humiliation really drives the point home."</i></p>
+        <p>- David K., Ex-Project Manager</p>
+    </blockquote>
+    
+    <blockquote>
+        <p><i>"I thought getting fired was the worst part of my day until I saw my LinkedOut shame score. Now I know there are levels to professional failure I hadn't even imagined!"</i></p>
+        <p>- Lisa R., Former HR Director</p>
+    </blockquote>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="testimonials">Testimonianze di Fallimento Professionale</a></h2>
+    
+    <blockquote>
+        <p><i>"LinkedOut mi ha aiutato a documentare il mio spettacolare fallimento in tre diverse aziende. Ora tutti sanno esattamente perché sono inutilizzabile!"</i></p>
+        <p>- Sarah M., Ex "Esperta" di Marketing</p>
+    </blockquote>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="links">Useful Links</a></h2>
+    
+    <ul>
+        <li><a href="http://unemployment.gov">Department of Unemployment Benefits</a></li>
+        <li><a href="http://careerchange.org">Career Change Support Group</a></li>
+        <li><a href="http://jobsearch101.com">Basic Job Search Skills (You Need This)</a></li>
+        <li><a href="http://professionaltherapy.net">Professional Therapy for Career Failures</a></li>
+        <li><a href="http://resumerepair.com">Resume Repair Service</a></li>
+        <li><a href="http://interviewskills.edu">Interview Skills for the Hopeless</a></li>
+    </ul>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="links">Link Utili</a></h2>
+    
+    <ul>
+        <li><a href="http://unemployment.gov">Dipartimento Sussidi Disoccupazione</a></li>
+        <li><a href="http://careerchange.org">Gruppo di Supporto Cambio Carriera</a></li>
+        <li><a href="http://jobsearch101.com">Competenze Base Ricerca Lavoro (Ne Hai Bisogno)</a></li>
+        <li><a href="http://professionaltherapy.net">Terapia Professionale per Fallimenti Carriera</a></li>
+        <li><a href="http://resumerepair.com">Servizio Riparazione Curriculum</a></li>
+        <li><a href="http://interviewskills.edu">Competenze Colloquio per Disperati</a></li>
+    </ul>
+</div>
+
+<div class="content lang-en">
+    <h2><a name="contact">Contact</a></h2>
+    
+    <p><b>LinkedOut Support Team</b><br>
+    Email: <a href="mailto:shame@linkedout.com">shame@linkedout.com</a><br>
+    Phone: 1-800-FAILURE (1-800-324-5873)<br>
+    Fax: (555) 123-UNEMPLOYED</p>
+    
+    <p><b>Mailing Address:</b><br>
+    LinkedOut Headquarters<br>
+    123 Unemployment Boulevard<br>
+    Failure City, FC 12345<br>
+    United States of Disappointment</p>
+    
+    <p><i>Note: We are currently hiring! Just kidding, we fire people instead.</i></p>
+    
+    <p><blink><b>NEW!</b></blink> Submit your own termination story for public shaming!</p>
+</div>
+
+<div class="content lang-it hidden">
+    <h2><a name="contact">Contatti</a></h2>
+    
+    <p><b>Team di Supporto LinkedOut</b><br>
+    Email: <a href="mailto:vergogna@linkedout.com">vergogna@linkedout.com</a><br>
+    Telefono: 1-800-FALLIMENTO<br>
+    Fax: (555) 123-DISOCCUPATO</p>
+    
+    <p><b>Indirizzo Postale:</b><br>
+    Sede Centrale LinkedOut<br>
+    123 Boulevard Disoccupazione<br>
+    Città Fallimento, CF 12345<br>
+    Stati Uniti della Delusione</p>
+    
+    <p><i>Nota: Stiamo assumendo! Scherzo, licenziamo invece.</i></p>
+    
+    <p><blink><b>NUOVO!</b></blink> Invia la tua storia di licenziamento per pubblico svergognamento!</p>
+</div>
+
+<div class="footer">
+    <div class="lang-en">
+        <p>LinkedOut &copy; 1999-2001. All rights reserved. No successful careers were harmed in the making of this site.</p>
+        <p>Last updated: March 15, 2001 | <a href="mailto:webmaster@linkedout.com">Webmaster</a></p>
+        <p><font size="1">Best viewed with Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution</font></p>
+    </div>
+    <div class="lang-it hidden">
+        <p>LinkedOut &copy; 1999-2001. Tutti i diritti riservati. Nessuna carriera di successo è stata danneggiata nella creazione di questo sito.</p>
+        <p>Ultimo aggiornamento: 15 Marzo 2001 | <a href="mailto:webmaster@linkedout.com">Webmaster</a></p>
+        <p><font size="1">Meglio visualizzato con Netscape Navigator 4.0 o Internet Explorer 5.0 a risoluzione 800x600</font></p>
+    </div>
+</div>
+
+</body>
+</html>

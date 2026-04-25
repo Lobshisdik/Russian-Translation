@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoon People - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Cocoon People</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: August 23, 2025 | <span data-lang-key="meta_read_time">7 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Cocoon People represent a post-binary identity matrix that emerged following the 2001 reality recalibration. Unlike traditional gender classifications, Cocoon People exist in a state of continuous morphological evolution, treating identity as a dynamic process rather than a fixed designation.</p>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Classification Data</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Identity Type:</span> <span data-lang-key="infobox_type_value">Metamorphic Gender Classification</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_first_label">First Documented:</span> <span data-lang-key="infobox_first_value">2001, post-Solomon Ritual</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_recognition_label">Legal Recognition:</span> <span data-lang-key="infobox_recognition_value">Varies by jurisdiction</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_related_label">Related Phenomena:</span> <a href="archive-foundation" data-lang-key="infobox_related_value">Archive Foundation Documentation</a>
+                    </div>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#overview" data-lang-key="toc_1">1. Conceptual Framework</a></li>
+                        <li><a href="#stages" data-lang-key="toc_2">2. Developmental Stages</a></li>
+                        <li><a href="#community" data-lang-key="toc_3">3. Community Networks</a></li>
+                        <li><a href="#challenges" data-lang-key="toc_4">4. Societal Integration</a></li>
+                        <li><a href="#research" data-lang-key="toc_5">5. Current Research</a></li>
+                    </ol>
+                </div>
+
+                <h2 id="overview" data-lang-key="h2_overview">Conceptual Framework</h2>
+                <p data-lang-key="p_overview">The Cocoon People phenomenon represents a fundamental shift in identity architecture following the magical resurgence of 2001. Rather than conforming to binary or even non-binary classifications, individuals identifying as Cocoon People experience identity as a continuous metamorphic process, similar to the biological transformation observed in lepidopteran species.</p>
+
+                <p data-lang-key="p_metaphor">The cocoon metaphor serves as both descriptive framework and lived experience. Traditional gender categories are viewed as restrictive containers that fail to accommodate the fluid nature of identity transformation. Cocoon People describe their experience as one of constant "becoming" rather than "being."</p>
+
+                <h3 data-lang-key="h3_emergence">Post-Squishing Emergence</h3>
+                <p data-lang-key="p_emergence">The first documented cases of Cocoon People identity emerged in the immediate aftermath of the <a href="solomon-ritual">Solomon Ritual</a> and subsequent reality modifications. The breakdown of traditional categorical structures appears to have created space for new forms of identity expression that would have been incomprehensible in pre-2001 society.</p>
+
+                <h2 id="stages" data-lang-key="h2_stages">Developmental Stages</h2>
+                <p data-lang-key="p_stages_intro">Cocoon People typically experience four distinct phases of identity development, though these stages are not necessarily linear or universal:</p>
+
+                <h3 data-lang-key="h3_unraveling">The Unraveling Phase</h3>
+                <p data-lang-key="p_unraveling">The initial stage involves the systematic deconstruction of externally imposed identity markers. Individuals report feeling increasingly disconnected from traditional gender expectations and social categorizations. This phase often involves significant psychological distress as foundational assumptions about selfhood are questioned.</p>
+
+                <p data-lang-key="p_unraveling_detail">The Unraveling is characterized by what researchers term "categorical dissonance" - a rejection of existing identity frameworks without yet having developed alternatives. This stage typically lasts between 6-18 months.</p>
+
+                <h3 data-lang-key="h3_retreat">The Retreat Phase</h3>
+                <p data-lang-key="p_retreat">Following initial unraveling, most Cocoon People enter a period of social withdrawal and internal exploration. This retreat may be physical, digital, or purely psychological. The purpose is to create protected space for identity experimentation without external judgment or pressure.</p>
+
+                <p data-lang-key="p_retreat_community">Many Cocoon People report that finding supportive communities during this phase is crucial for healthy development. <a href="hypernet-forums">Hypernet forums</a> and specialized support networks have emerged to serve this need.</p>
+
+                <h3 data-lang-key="h3_chrysalis">The Chrysalis Phase</h3>
+                <p data-lang-key="p_chrysalis">The most intensive stage of transformation, characterized by active identity reconstruction. Individuals develop new languages for describing their experience and begin testing alternative ways of existing in social spaces. This phase is marked by high creativity and experimentation but also significant vulnerability.</p>
+
+                <blockquote data-lang-key="quote_chrysalis">"It felt like learning the language of my own being for the first time. Everything was new, everything was possible, but nothing was certain." - Anonymous Cocoon Person interview, Archive Foundation records</blockquote>
+
+                <h3 data-lang-key="h3_emergence">The Emergence Phase</h3>
+                <p data-lang-key="p_emergence_phase">Rather than representing a final destination, Emergence is better understood as the beginning of continuous identity evolution. Cocoon People develop comfort with ongoing change and uncertainty, viewing identity as a dynamic process rather than a fixed state.</p>
+
+                <h2 id="community" data-lang-key="h2_community">Community Networks</h2>
+                <p data-lang-key="p_community_intro">Cocoon People have developed sophisticated support networks that prioritize flexibility and individual autonomy while providing collective resources for identity exploration.</p>
+
+                <h3 data-lang-key="h3_forums">Digital Communities</h3>
+                <p data-lang-key="p_forums">Online forums specifically designed for Cocoon People feature unique communication protocols that accommodate fluid identity expression. Traditional username systems have been replaced with "evolution tags" that allow individuals to modify their identity markers as they develop.</p>
+
+                <p data-lang-key="p_forums_features">These communities emphasize process over outcome, providing spaces for individuals to document and share their transformation experiences without pressure to conform to predetermined patterns.</p>
+
+                <h3 data-lang-key="h3_support">Support Structures</h3>
+                <p data-lang-key="p_support">Cocoon People communities have developed innovative support mechanisms including "metamorphosis mentorship" programs that pair individuals at different stages of development, and "identity laboratories" where new forms of expression can be safely tested.</p>
+
+                <h2 id="challenges" data-lang-key="h2_challenges">Societal Integration</h2>
+                <p data-lang-key="p_challenges_intro">The fluid nature of Cocoon People identity presents unique challenges for legal, medical, and social systems designed around fixed categorizations.</p>
+
+                <h3 data-lang-key="h3_legal">Legal Recognition</h3>
+                <p data-lang-key="p_legal">Few jurisdictions have developed adequate frameworks for recognizing continuously evolving identity markers. The <a href="mages-guild">Mages Guild</a> has proposed "dynamic identity certification" systems, but implementation remains limited.</p>
+
+                <h3 data-lang-key="h3_workplace">Professional Integration</h3>
+                <p data-lang-key="p_workplace">Forward-thinking organizations, particularly those affiliated with <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a>, have begun implementing flexible identity accommodation policies. These include evolving name and pronoun systems and metamorphic leave policies for individuals undergoing significant identity transitions.</p>
+
+                <h2 id="research" data-lang-key="h2_research">Current Research</h2>
+                <p data-lang-key="p_research">The Archive Foundation's <a href="identity-research-division">Identity Research Division</a> maintains ongoing studies of Cocoon People phenomena, focusing on the relationship between individual identity fluidity and broader social transformation following the reality restructuring events of 2001.</p>
+
+                <p data-lang-key="p_research_findings">Preliminary findings suggest that Cocoon People identity patterns may represent an adaptive response to the increased ontological uncertainty characteristic of post-Squishing reality.</p>
+
+                <h3 data-lang-key="h3_future">Future Implications</h3>
+                <p data-lang-key="p_future">Researchers speculate that Cocoon People identity frameworks may become increasingly prevalent as traditional social structures continue to evolve in response to ongoing magical and technological developments. Some theorists propose that this represents an early stage of broader human adaptation to fluid reality conditions.</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2025 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Cocoon People",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "7 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Conceptual Framework",
+                    toc_2: "2. Developmental Stages", 
+                    toc_3: "3. Community Networks",
+                    toc_4: "4. Societal Integration",
+                    toc_5: "5. Current Research",
+                    infobox_title: "Classification Data",
+                    infobox_type_label: "Identity Type:",
+                    infobox_type_value: "Metamorphic Gender Classification",
+                    infobox_first_label: "First Documented:",
+                    infobox_first_value: "2001, post-Solomon Ritual",
+                    infobox_recognition_label: "Legal Recognition:",
+                    infobox_recognition_value: "Varies by jurisdiction",
+                    infobox_related_label: "Related Phenomena:",
+                    infobox_related_value: "Archive Foundation Documentation",
+                    p_intro: "Cocoon People represent a post-binary identity matrix that emerged following the 2001 reality recalibration. Unlike traditional gender classifications, Cocoon People exist in a state of continuous morphological evolution, treating identity as a dynamic process rather than a fixed designation.",
+                    h2_overview: "Conceptual Framework",
+                    p_overview: "The Cocoon People phenomenon represents a fundamental shift in identity architecture following the magical resurgence of 2001. Rather than conforming to binary or even non-binary classifications, individuals identifying as Cocoon People experience identity as a continuous metamorphic process, similar to the biological transformation observed in lepidopteran species.",
+                    p_metaphor: "The cocoon metaphor serves as both descriptive framework and lived experience. Traditional gender categories are viewed as restrictive containers that fail to accommodate the fluid nature of identity transformation. Cocoon People describe their experience as one of constant \"becoming\" rather than \"being.\"",
+                    h3_emergence: "Post-Squishing Emergence",
+                    p_emergence: "The first documented cases of Cocoon People identity emerged in the immediate aftermath of the Solomon Ritual and subsequent reality modifications. The breakdown of traditional categorical structures appears to have created space for new forms of identity expression that would have been incomprehensible in pre-2001 society.",
+                    h2_stages: "Developmental Stages",
+                    p_stages_intro: "Cocoon People typically experience four distinct phases of identity development, though these stages are not necessarily linear or universal:",
+                    h3_unraveling: "The Unraveling Phase",
+                    p_unraveling: "The initial stage involves the systematic deconstruction of externally imposed identity markers. Individuals report feeling increasingly disconnected from traditional gender expectations and social categorizations. This phase often involves significant psychological distress as foundational assumptions about selfhood are questioned.",
+                    p_unraveling_detail: "The Unraveling is characterized by what researchers term \"categorical dissonance\" - a rejection of existing identity frameworks without yet having developed alternatives. This stage typically lasts between 6-18 months.",
+                    h3_retreat: "The Retreat Phase",
+                    p_retreat: "Following initial unraveling, most Cocoon People enter a period of social withdrawal and internal exploration. This retreat may be physical, digital, or purely psychological. The purpose is to create protected space for identity experimentation without external judgment or pressure.",
+                    p_retreat_community: "Many Cocoon People report that finding supportive communities during this phase is crucial for healthy development. Hypernet forums and specialized support networks have emerged to serve this need.",
+                    h3_chrysalis: "The Chrysalis Phase", 
+                    p_chrysalis: "The most intensive stage of transformation, characterized by active identity reconstruction. Individuals develop new languages for describing their experience and begin testing alternative ways of existing in social spaces. This phase is marked by high creativity and experimentation but also significant vulnerability.",
+                    quote_chrysalis: "\"It felt like learning the language of my own being for the first time. Everything was new, everything was possible, but nothing was certain.\" - Anonymous Cocoon Person interview, Archive Foundation records",
+                    h3_emergence: "The Emergence Phase",
+                    p_emergence_phase: "Rather than representing a final destination, Emergence is better understood as the beginning of continuous identity evolution. Cocoon People develop comfort with ongoing change and uncertainty, viewing identity as a dynamic process rather than a fixed state.",
+                    h2_community: "Community Networks",
+                    p_community_intro: "Cocoon People have developed sophisticated support networks that prioritize flexibility and individual autonomy while providing collective resources for identity exploration.",
+                    h3_forums: "Digital Communities",
+                    p_forums: "Online forums specifically designed for Cocoon People feature unique communication protocols that accommodate fluid identity expression. Traditional username systems have been replaced with \"evolution tags\" that allow individuals to modify their identity markers as they develop.",
+                    p_forums_features: "These communities emphasize process over outcome, providing spaces for individuals to document and share their transformation experiences without pressure to conform to predetermined patterns.",
+                    h3_support: "Support Structures",
+                    p_support: "Cocoon People communities have developed innovative support mechanisms including \"metamorphosis mentorship\" programs that pair individuals at different stages of development, and \"identity laboratories\" where new forms of expression can be safely tested.",
+                    h2_challenges: "Societal Integration",
+                    p_challenges_intro: "The fluid nature of Cocoon People identity presents unique challenges for legal, medical, and social systems designed around fixed categorizations.",
+                    h3_legal: "Legal Recognition",
+                    p_legal: "Few jurisdictions have developed adequate frameworks for recognizing continuously evolving identity markers. The Mages Guild has proposed \"dynamic identity certification\" systems, but implementation remains limited.",
+                    h3_workplace: "Professional Integration",
+                    p_workplace: "Forward-thinking organizations, particularly those affiliated with Esoteric Heavy Industries, have begun implementing flexible identity accommodation policies. These include evolving name and pronoun systems and metamorphic leave policies for individuals undergoing significant identity transitions.",
+                    h2_research: "Current Research",
+                    p_research: "The Archive Foundation's Identity Research Division maintains ongoing studies of Cocoon People phenomena, focusing on the relationship between individual identity fluidity and broader social transformation following the reality restructuring events of 2001.",
+                    p_research_findings: "Preliminary findings suggest that Cocoon People identity patterns may represent an adaptive response to the increased ontological uncertainty characteristic of post-Squishing reality.",
+                    h3_future: "Future Implications",
+                    p_future: "Researchers speculate that Cocoon People identity frameworks may become increasingly prevalent as traditional social structures continue to evolve in response to ongoing magical and technological developments. Some theorists propose that this represents an early stage of broader human adaptation to fluid reality conditions.",
+                    footer_text: "© 2025 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Persone Bozzolo",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "7 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Quadro Concettuale",
+                    toc_2: "2. Fasi di Sviluppo",
+                    toc_3: "3. Reti Comunitarie", 
+                    toc_4: "4. Integrazione Sociale",
+                    toc_5: "5. Ricerca Attuale",
+                    infobox_title: "Dati di Classificazione",
+                    infobox_type_label: "Tipo di Identità:",
+                    infobox_type_value: "Classificazione di Genere Metamorfica",
+                    infobox_first_label: "Prima Documentazione:",
+                    infobox_first_value: "2001, post-Rituale di Salomone",
+                    infobox_recognition_label: "Riconoscimento Legale:",
+                    infobox_recognition_value: "Varia per giurisdizione",
+                    infobox_related_label: "Fenomeni Correlati:",
+                    infobox_related_value: "Documentazione Fondazione Archivio",
+                    p_intro: "Le Persone Bozzolo rappresentano una matrice identitaria post-binaria emersa dopo la ricalibrazione della realtà del 2001. A differenza delle classificazioni di genere tradizionali, le Persone Bozzolo esistono in uno stato di evoluzione morfologica continua, trattando l'identità come un processo dinamico piuttosto che una designazione fissa.",
+                    h2_overview: "Quadro Concettuale",
+                    p_overview: "Il fenomeno delle Persone Bozzolo rappresenta un cambiamento fondamentale nell'architettura identitaria dopo la rinascita magica del 2001. Piuttosto che conformarsi a classificazioni binarie o persino non-binarie, gli individui che si identificano come Persone Bozzolo sperimentano l'identità come un processo metamorfico continuo, simile alla trasformazione biologica osservata nelle specie di lepidotteri.",
+                    p_metaphor: "La metafora del bozzolo serve sia come quadro descrittivo che come esperienza vissuta. Le categorie di genere tradizionali sono viste come contenitori restrittivi che non riescono ad accogliere la natura fluida della trasformazione identitaria. Le Persone Bozzolo descrivono la loro esperienza come una di costante \"divenire\" piuttosto che \"essere\".",
+                    h3_emergence: "Emergenza Post-Schiacciamento",
+                    p_emergence: "I primi casi documentati di identità Persone Bozzolo emersero immediatamente dopo il Rituale di Salomone e le successive modificazioni della realtà. La rottura delle strutture categoriali tradizionali sembra aver creato spazio per nuove forme di espressione identitaria che sarebbero state incomprensibili nella società pre-2001.",
+                    h2_stages: "Fasi di Sviluppo",
+                    p_stages_intro: "Le Persone Bozzolo tipicamente sperimentano quattro fasi distinte di sviluppo identitario, anche se questi stadi non sono necessariamente lineari o universali:",
+                    h3_unraveling: "La Fase di Disvelamento",
+                    p_unraveling: "La fase iniziale coinvolge la decostruzione sistematica dei marcatori identitari imposti esternamente. Gli individui riportano di sentirsi sempre più disconnessi dalle aspettative di genere tradizionali e dalle categorizzazioni sociali. Questa fase spesso comporta significativo distress psicologico mentre le assunzioni fondamentali sull'identità personale vengono messe in discussione.",
+                    p_unraveling_detail: "Il Disvelamento è caratterizzato da quello che i ricercatori chiamano \"dissonanza categoriale\" - un rifiuto dei quadri identitari esistenti senza aver ancora sviluppato alternative. Questa fase tipicamente dura tra i 6-18 mesi.",
+                    h3_retreat: "La Fase di Ritiro",
+                    p_retreat: "Dopo il disvelamento iniziale, la maggior parte delle Persone Bozzolo entra in un periodo di ritiro sociale ed esplorazione interna. Questo ritiro può essere fisico, digitale o puramente psicologico. Lo scopo è creare spazio protetto per la sperimentazione identitaria senza giudizio esterno o pressione.",
+                    p_retreat_community: "Molte Persone Bozzolo riportano che trovare comunità di supporto durante questa fase è cruciale per uno sviluppo sano. I forum dell'Ipernet e le reti di supporto specializzate sono emersi per servire questo bisogno.",
+                    h3_chrysalis: "La Fase Crisalide",
+                    p_chrysalis: "La fase più intensiva di trasformazione, caratterizzata dalla ricostruzione attiva dell'identità. Gli individui sviluppano nuovi linguaggi per descrivere la loro esperienza e iniziano a testare modi alternativi di esistere negli spazi sociali. Questa fase è marcata da alta creatività e sperimentazione ma anche significativa vulnerabilità.",
+                    quote_chrysalis: "\"È stato come imparare il linguaggio del mio stesso essere per la prima volta. Tutto era nuovo, tutto era possibile, ma nulla era certo.\" - Intervista anonima Persona Bozzolo, archivi Fondazione Archivio",
+                    h3_emergence: "La Fase di Emergenza",
+                    p_emergence_phase: "Piuttosto che rappresentare una destinazione finale, l'Emergenza è meglio compresa come l'inizio dell'evoluzione identitaria continua. Le Persone Bozzolo sviluppano comfort con il cambiamento e l'incertezza continui, vedendo l'identità come un processo dinamico piuttosto che uno stato fisso.",
+                    h2_community: "Reti Comunitarie",
+                    p_community_intro: "Le Persone Bozzolo hanno sviluppato sofisticate reti di supporto che prioritizzano flessibilità e autonomia individuale fornendo al contempo risorse collettive per l'esplorazione identitaria.",
+                    h3_forums: "Comunità Digitali",
+                    p_forums: "I forum online specificamente progettati per le Persone Bozzolo presentano protocolli di comunicazione unici che accolgono l'espressione identitaria fluida. I tradizionali sistemi di username sono stati sostituiti con \"tag evolutivi\" che permettono agli individui di modificare i loro marcatori identitari mentre si sviluppano.",
+                    p_forums_features: "Queste comunità enfatizzano il processo rispetto al risultato, fornendo spazi per gli individui per documentare e condividere le loro esperienze di trasformazione senza pressione a conformarsi a modelli predeterminati.",
+                    h3_support: "Strutture di Supporto",
+                    p_support: "Le comunità di Persone Bozzolo hanno sviluppato meccanismi di supporto innovativi inclusi programmi di \"mentorship metamorfica\" che accoppiano individui a diversi stadi di sviluppo, e \"laboratori identitari\" dove nuove forme di espressione possono essere testate in sicurezza.",
+                    h2_challenges: "Integrazione Sociale",
+                    p_challenges_intro: "La natura fluida dell'identità delle Persone Bozzolo presenta sfide uniche per i sistemi legali, medici e sociali progettati attorno a categorizzazioni fisse.",
+                    h3_legal: "Riconoscimento Legale",
+                    p_legal: "Poche giurisdizioni hanno sviluppato quadri adeguati per riconoscere marcatori identitari in continua evoluzione. La Gilda dei Maghi ha proposto sistemi di \"certificazione identitaria dinamica\", ma l'implementazione rimane limitata.",
+                    h3_workplace: "Integrazione Professionale",
+                    p_workplace: "Organizzazioni lungimiranti, particolarmente quelle affiliate con le Industrie Pesanti Esoteriche, hanno iniziato ad implementare politiche flessibili di accoglimento identitario. Queste includono sistemi evolutivi di nome e pronome e politiche di congedo metamorfico per individui che subiscono transizioni identitarie significative.",
+                    h2_research: "Ricerca Attuale",
+                    p_research: "La Divisione Ricerca Identitaria della Archive Foundation mantiene studi continui dei fenomeni delle Persone Bozzolo, focalizzandosi sulla relazione tra fluidità identitaria individuale e trasformazione sociale più ampia dopo gli eventi di ristrutturazione della realtà del 2001.",
+                    p_research_findings: "I risultati preliminari suggeriscono che i modelli identitari delle Persone Bozzolo possono rappresentare una risposta adattiva all'aumentata incertezza ontologica caratteristica della realtà post-Schiacciamento.",
+                    h3_future: "Implicazioni Future",
+                    p_future: "I ricercatori speculano che i quadri identitari delle Persone Bozzolo possano diventare sempre più prevalenti mentre le strutture sociali tradizionali continuano ad evolversi in risposta ai continui sviluppi magici e tecnologici. Alcuni teorici propongono che questo rappresenti uno stadio iniziale di più ampio adattamento umano alle condizioni di realtà fluida.",
+                    footer_text: "© 2025 Hexapedia. Disponibile sotto licenza Creative Commons."

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporal Pride Tours - Experience Stonewall 1969</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(45deg, 
+                #ff0040 0%, #ff8000 14.28%, #ffff00 28.56%, 
+                #00ff00 42.84%, #0080ff 57.12%, #8000ff 71.4%, 
+                #ff0080 85.68%, #ff0040 100%);
+            background-size: 400% 400%;
+            animation: rainbow-shift 8s ease-in-out infinite;
+            color: #000;
+            overflow-x: auto;
+        }
+
+        @keyframes rainbow-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(0,0,0,0.8);
+            padding: 5px 10px;
+            border-radius: 15px;
+            z-index: 1000;
+        }
+
+        .language-switcher a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+
+        .language-switcher a:hover {
+            color: #ffff00;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000 0%, #333 50%, #000 100%);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #gold;
+            position: relative;
+        }
+
+        .art-deco-border {
+            border: 3px solid #gold;
+            border-image: linear-gradient(45deg, #ffd700, #fff, #ffd700) 1;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 3px 3px 0px #666;
+            background: linear-gradient(45deg, #ffd700, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            margin: 10px 0;
+            font-style: italic;
+            color: #ffd700;
+        }
+
+        .navigation {
+            background: #222;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0040, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff);
+            color: #000;
+            padding: 10px 20px;
+            margin: 5px;
+            border: 2px solid #ffd700;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #ffd700;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tour-package {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,255,255,0.9));
+            border: 3px solid #ffd700;
+            margin: 20px 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        .tour-package::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff0040, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff);
+            z-index: -1;
+            border-radius: 5px;
+        }
+
+        .package-header {
+            background: #000;
+            color: #ffd700;
+            padding: 15px;
+            margin: -20px -20px 20px -20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .price {
+            color: #ff0040;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .consequences {
+            background: rgba(255,0,64,0.1);
+            border: 2px dashed #ff0040;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .consequences h4 {
+            color: #ff0040;
+            margin-top: 0;
+        }
+
+        .footer {
+            background: #000;
+            color: #ffd700;
+            padding: 20px;
+            text-align: center;
+            border-top: 3px solid #ffd700;
+        }
+
+        .pride-flag {
+            height: 10px;
+            background: linear-gradient(to right, 
+                #ff0040 0%, #ff0040 16.66%, 
+                #ff8000 16.66%, #ff8000 33.33%, 
+                #ffff00 33.33%, #ffff00 50%, 
+                #00ff00 50%, #00ff00 66.66%, 
+                #0080ff 66.66%, #0080ff 83.33%, 
+                #8000ff 83.33%, #8000ff 100%);
+            margin: 10px 0;
+        }
+
+        .warning-box {
+            background: rgba(255,255,0,0.2);
+            border: 3px solid #ffaa00;
+            padding: 15px;
+            margin: 20px 0;
+            color: #cc6600;
+            font-weight: bold;
+        }
+
+        .temporal-badge {
+            background: #8000ff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin: 0 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <a href="#" onclick="switchLanguage('en')">EN</a> | 
+        <a href="#" onclick="switchLanguage('it')">IT</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="pride-flag"></div>
+            <div class="art-deco-border">
+                <div class="lang-content active" data-lang="en">
+                    <h1>TEMPORAL PRIDE TOURS</h1>
+                    <div class="tagline">Experience History. Make History. Be History.</div>
+                    <div class="tagline">Chronos-Enhanced Heritage Expeditions to Stonewall 1969</div>
+                </div>
+                <div class="lang-content" data-lang="it">
+                    <h1>TOUR DELL'ORGOGLIO TEMPORALE</h1>
+                    <div class="tagline">Vivi la Storia. Fai la Storia. Sii la Storia.</div>
+                    <div class="tagline">Spedizioni Patrimoniali Cronos-Potenziate a Stonewall 1969</div>
+                </div>
+            </div>
+            <div class="pride-flag"></div>
+        </div>
+
+        <div class="navigation">
+            <div class="lang-content active" data-lang="en">
+                <span class="nav-btn" onclick="showSection('home')">Home Portal</span>
+                <span class="nav-btn" onclick="showSection('packages')">Tour Packages</span>
+                <span class="nav-btn" onclick="showSection('safety')">Temporal Safety</span>
+                <span class="nav-btn" onclick="showSection('booking')">Book Now</span>
+                <span class="nav-btn" onclick="showSection('about')">About Us</span>
+            </div>
+            <div class="lang-content" data-lang="it">
+                <span class="nav-btn" onclick="showSection('home')">Portale Casa</span>
+                <span class="nav-btn" onclick="showSection('packages')">Pacchetti Tour</span>
+                <span class="nav-btn" onclick="showSection('safety')">Sicurezza Temporale</span>
+                <span class="nav-btn" onclick="showSection('booking')">Prenota Ora</span>
+                <span class="nav-btn" onclick="showSection('about')">Chi Siamo</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="home" class="section active">
+                <div class="lang-content active" data-lang="en">
+                    <div class="art-deco-border">
+                        <h2>Welcome to Temporal Pride Tours</h2>
+                        <p><strong>Journey back to June 28, 1969</strong> - Experience the night that changed LGBTQ+ history forever! Our Chronos-Enhanced transport technology allows you to witness the Stonewall riots firsthand while maintaining temporal integrity.</p>
+                        
+                        <div class="warning-box">
+                            <strong>⚠️ TEMPORAL NOTICE:</strong> All tours are regulated by the European Chronos-Control Authority. Timeline interference carries heavy penalties and potential paradox fees.
+                        </div>
+
+                        <p>Founded by proud LGBTQ+ entrepreneurs in 1998, we are the first certified queer-owned temporal tourism company in Europe. Our rainbow-powered Chronos drives ensure safe passage through the time-stream while celebrating our heritage.</p>
+
+                        <h3>Why Choose Temporal Pride Tours?</h3>
+                        <ul>
+                            <li>✨ <strong>Queer-Owned & Operated</strong> - Supporting community businesses</li>
+                            <li>🌈 <strong>Rainbow-Enhanced Technology</strong> - Our proprietary Pride-Drive systems</li>
+                            <li>⏰ <strong>Certified Chronos-Safe</strong> - Zero timeline corruption guarantee</li>
+                            <li>🏳️‍🌈 <strong>Historical Accuracy</strong> - Witness real LGBTQ+ liberation history</li>
+                            <li>💜 <strong>Community Focus</strong> - Portion of profits support LGBTQ+ causes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lang-content" data-lang="it">
+                    <div class="art-deco-border">
+                        <h2>Benvenuti a Tour dell'Orgoglio Temporale</h2>
+                        <p><strong>Viaggio indietro al 28 giugno 1969</strong> - Vivi la notte che ha cambiato per sempre la storia LGBTQ+! La nostra tecnologia di trasporto Cronos-Potenziata ti permette di assistere ai riots di Stonewall di persona mantenendo l'integrità temporale.</p>
+                        
+                        <div class="warning-box">
+                            <strong>⚠️ AVVISO TEMPORALE:</strong> Tutti i tour sono regolamentati dall'Autorità Europea di Controllo-Cronos. L'interferenza temporale comporta pesanti sanzioni e potenziali tasse paradossali.
+                        </div>
+
+                        <p>Fondata da orgogliosi imprenditori LGBTQ+ nel 1998, siamo la prima compagnia di turismo temporale certificata e di proprietà queer in Europa. I nostri motori Cronos alimentati dall'arcobaleno assicurano un passaggio sicuro attraverso il flusso temporale celebrando il nostro patrimonio.</p>
+
+                        <h3>Perché Scegliere Tour dell'Orgoglio Temporale?</h3>
+                        <ul>
+                            <li>✨ <strong>Di Proprietà Queer</strong> - Supportiamo le imprese della comunità</li>
+                            <li>🌈 <strong>Tecnologia Arcobaleno-Potenziata</strong> - I nostri sistemi Pride-Drive proprietari</li>
+                            <li>⏰ <strong>Cronos-Sicuro Certificato</strong> - Garanzia zero corruzione temporale</li>
+                            <li>🏳️‍🌈 <strong>Accuratezza Storica</strong> - Testimonia la vera storia di liberazione LGBTQ+</li>
+                            <li>💜 <strong>Focus Comunitario</strong> - Parte dei profitti sostiene le cause LGBTQ+</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="packages" class="section">
+                <div class="lang-content active" data-lang="en">
+                    <h2>Stonewall 1969 Tour Packages</h2>
+                    
+                    <div class="tour-package">
+                        <div class="package-header">Observer Package - "Silent Witness"</div>
+                        <div class="price">€299</div>
+                        <p><strong>Duration:</strong> 4 hours (June 28, 11:45 PM - 3:45 AM)<br>
+                        <strong>Transport:</strong> Standard Chronos-Pod<br>
+                        <strong>Group Size:</strong> 12 participants</p>
+                        
+                        <p><strong>Experience Includes:</strong></p>
+                        <ul>
+                            <li>Temporal-cloaked observation of the initial police raid</li>
+                            <li>Witness Sylvia Rivera's first brick throw</li>
+                            <li>See the crowd's spontaneous resistance begin</li>
+                            <li>Rainbow-tinted temporal viewing goggles included</li>
+                        </ul>
+                        
+                        <div class="consequences">
+                            <h4>Timeline Interference Risk: MINIMAL</h4>
+                            <p>✅ Completely passive observation<br>
+                            ✅ No physical interaction permitted<br>
+                            ✅ Temporal-cloak maintains invisibility</p>
+                            <p><strong>Fine Schedule:</strong> €50 for speaking, €200 for visibility breach</p>
+                        </div>
+                        
+                        <span class="temporal-badge">BEGINNER FRIENDLY</span>
+                        <span class="temporal-badge">GROUP TOURS</span>
+                    </div>
+
+                    <div class="tour-package">
+                        <div class="package-header">Participant Package - "Join the Revolution"</div>
+                        <div class="price">€899</div>
+                        <p><strong>Duration:</strong> 8 hours (June 28, 10:00 PM - 6:00 AM)<br>
+                        <strong>Transport:</strong> Premium Chronos-Pod with Pride-Stabilizers<br>
+                        <strong>Group Size:</strong> 6 participants</p>
+                        
+                        <p><strong>Experience Includes:</strong></p>
+                        <ul>
+                            <li>Active participation in the crowd (with limitations)</li>
+                            <li>Authentic 1969 clothing provided</li>
+                            <li>Interact with historical figures (approved phrases only)</li>
+                            <li>Throw period-accurate objects (rubber bricks provided)</li>
+                            <li>Experience tear gas (mild historical formula)</li>
+                        </ul>
+                        
+                        <div class="consequences">
+                            <h4>Timeline Interference Risk: MODERATE</h4>
+                            <p>⚠️ Limited physical interaction allowed<br>
+                            ⚠️ Strict dialogue script required<br>
+                            ⚠️ No future knowledge sharing</p>
+                            <p><strong>Fine Schedule:</strong> €500 for script deviation, €2,000 for timeline alteration, €10,000 for paradox creation</p>
+                        </div>
+                        
+                        <span class="temporal-badge">INTERMEDIATE</span>
+                        <span class="temporal-badge">SMALL GROUPS</span>
+                    </div>
+
+                    <div class="tour-package">
+                        <div class="package-header">Influencer Package - "Make History"</div>
+                        <div class="price">€2,499</div>
+                        <p><strong>Duration:</strong> 12 hours (June 28, 8:00 PM - 8:00 AM)<br>
+                        <strong>Transport:</strong> Luxury Chronos-Suite with Rainbow-Drive<br>
+                        <strong>Group Size:</strong> 2 participants (couples welcome)</p>
+                        
+                        <p><strong>Experience Includes:</strong></p>
+                        <ul>
+                            <li>Active role in historical events</li>
+                            <li>Meet and interact with Stonewall legends</li>
+                            <li>Influence crowd dynamics (within parameters)</li>
+                            <li>Private meeting with Martha P. Johnson</li>
+                            <li>Exclusive access to Stonewall Inn interior</li>
+                            <li>Champagne breakfast in 1969 Greenwich Village</li>
+                        </ul>
+                        
+                        <div class="consequences">
+                            <h4>Timeline Interference Risk: HIGH</h4>
+                            <p>🚨 Major historical impact possible<br>
+                            🚨 Extensive briefing required<br>
+                            🚨 Temporal insurance mandatory</p>
+                            <p><strong>Fine Schedule:</strong> €5,000 for minor alterations, €50,000 for major changes, €500,000 for timeline fracture + criminal prosecution</p>
+                        </div>
+                        
+                        <span class="temporal-badge">EXPERT ONLY</span>
+                        <span class="temporal-badge">LUXURY</span>
+                        <span class="temporal-badge">COUPLES</span>
+                    </div>
+                </div>
+                
+                <div class="lang-content" data-lang="it">
+                    <h2>Pacchetti Tour Stonewall 1969</h2>
+                    
+                    <div class="tour-package">
+                        <div class="package-header">Pacchetto Osservatore - "Testimone Silenzioso"</div>
+                        <div class="price">€299</div>
+                        <p><strong>Durata:</strong> 4 ore (28 giugno, 23:45 - 3:45)<br>
+                        <strong>Trasporto:</strong> Cronos-Pod Standard<br>
+                        <strong>Dimensione Gruppo:</strong> 12 partecipanti</p>
+                        
+                        <p><strong>L'Esperienza Include:</strong></p>
+                        <ul>
+                            <li>Osservazione temporale-mascherata del raid poliziesco iniziale</li>
+                            <li>Testimonia il primo mattone lanciato da Sylvia Rivera</li>
+                            <li>Vedi iniziare la resistenza spontanea della folla</li>
+                            <li>Occhiali temporali tinti arcobaleno inclusi</li>
+                        </ul>
+                        
+                        <div class="consequences">
+                            <h4>Rischio Interferenza Temporale: MINIMO</h4>
+                            <p>✅ Osservazione completamente passiva<br>
+                            ✅ Nessuna interazione fisica permessa<br>
+                            ✅ Il mantello temporale mantiene l'invisibilità</p>
+                            <p><strong>Programma Multe:</strong> €50 per parlare, €200 per violazione visibilità</p>
+                        </div>
+                        
+                        <span class="temporal-badge">PRINCIPIANTI</span>
+                        <span class="temporal-badge">TOUR GRUPPO</span>
+                    </div>
+
+                    <div class="tour-package">
+                        <div class="package-header">Pacchetto Partecipante - "Unisciti alla Rivoluzione"</div>
+                        <div class="price">€899</div>
+                        <p><strong>Durata:</strong> 8 ore (28 giugno, 22:00 - 6:00)<br>
+                        <strong>Trasporto:</strong> Cronos-Pod Premium con Pride-Stabilizzatori<br>
+                        <strong>Dimensione Gruppo:</strong> 6 partecipanti</p>
+                        
+                        <div class="consequences">
+                            <h4>Rischio Interferenza Temporale: MODERATO</h4>
+                            <p>⚠️ Interazione fisica limitata permessa<br>
+                            ⚠️ Script dialogo rigoroso richiesto<br>
+                            ⚠️ Nessuna condivisione conoscenza futura</p>
+                            <p><strong>Programma Multe:</strong> €500 per deviazione script, €2.000 per alterazione temporale, €10.000 per creazione paradosso</p>
+                        </div>
+                    </div>
+
+                    <div class="tour-package">
+                        <div class="package-header">Pacchetto Influencer - "Fai la Storia"</div>
+                        <div class="price">€2,499</div>
+                        <p><strong>Durata:</strong> 12 ore (28 giugno, 20:00 - 8:00)<br>
+                        <strong>Trasporto:</strong> Cronos-Suite Lusso con Rainbow-Drive<br>
+                        <strong>Dimensione Gruppo:</strong> 2 partecipanti (coppie benvenute)</p>
+                        
+                        <div class="consequences">
+                            <h4>Rischio Interferenza Temporale: ALTO</h4>
+                            <p>🚨 Impatto storico maggiore possibile<br>
+                            🚨 Briefing estensivo richiesto<br>
+                            🚨 Assicurazione temporale obbligatoria</p>
+                            <p><strong>Programma Multe:</strong> €5.000 per alterazioni minori, €50.000 per cambiamenti maggiori, €500.000 per frattura temporale + processo penale</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="safety" class="section">
+                <div class="lang-content active" data-lang="en">
+                    <h2>Temporal Safety Guidelines</h2>
+                    
+                    <div class="warning-box">
+                        <strong>IMPORTANT:</strong> All tours are conducted under EU Temporal Regulation 2847-A. Violations may result in criminal prosecution and timeline rehabilitation costs.
+                    </div>
+
+                    <div class="art-deco-border">
+                        <h3>Chronos-Technology Safety</h3>
+                        <ul>
+                            <li><strong>Rainbow-Drive Systems:</strong> Our Pride-powered temporal engines are 99.7% stable</li>
+                            <li><strong>Temporal Shields:</strong> Protect against chronological radiation</li>
+                            <li><strong>Emergency Extraction:</strong> Instant return protocols if timeline integrity is threatened</li>
+                            <li><strong>Medical Support:</strong> Trained chronos-medics accompany all tours</li>
+                        </ul>
+
+                        <h3>Timeline Interference Penalties</h3>
+                        <p><strong>Class A Violations (Minor):</strong></p>
+                        <ul>
+                            <li>Speaking to historical figures off-script: €500-€2,000</li>
+                            <li>Dropping modern objects: €1,000-€5,000</li>
+                            <li>Revealing future knowledge: €10,000-€25,000</li>
+                        </ul>
+
+                        <p><strong>Class B Violations (Major):</strong></p>
+                        <ul>
+                            <li>Altering historical events: €50,000-€200,000</li>
+                            <li>Preventing key moments: €100,000-€500,000</li>
+                            <li>Creating paradoxes: €500,000+ plus criminal charges</li>
+                        </ul>
+
+                        <h3>What NOT to Do</h3>
+                        <ul>
+                            <li>❌ Don't mention smartphones, hypernet, or modern technology</li>
+                            <li>❌ Don't try to "improve" historical events</li>
+                            <li>❌ Don't give medical advice or warn about future events</li>
+                            <li>❌ Don't take selfies (chronos-cameras provided for safe documentation)</li>
+                            <li>❌ Don't bring modern objects (thorough screening required)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lang-content" data-lang="it">
+                    <h2>Linee Guida Sicurezza Temporale</h2>
+                    
+                    <div class="warning-box">
+                        <strong>IMPORTANTE:</strong> Tutti i tour sono condotti sotto il Regolamento Temporale UE 2847-A. Le violazioni possono risultare in processo penale e costi di riabilitazione temporale.
+                    </div>
+
+                    <div class="art-deco-border">
+                        <h3>Sicurezza Tecnologia-Cronos</h3>
+                        <ul>
+                            <li><strong>Sistemi Rainbow-Drive:</strong> I nostri motori temporali Pride-alimentati sono stabili al 99.7%</li>
+                            <li><strong>Scudi Temporali:</strong> Proteggono dalle radiazioni cronologiche</li>
+                            <li><strong>Estrazione Emergenza:</strong> Protocolli ritorno istantaneo se l'integrità temporale è minacciata</li>
+                            <li><strong>Supporto Medico:</strong> Cronos-medici addestrati accompagnano tutti i tour</li>
+                        </ul>
+
+                        <h3>Sanzioni Interferenza Temporale</h3>
+                        <p><strong>Violazioni Classe A (Minori):</strong></p>
+                        <ul>
+                            <li>Parlare con figure storiche fuori copione: €500-€2.000</li>
+                            <li>Lasciare cadere oggetti moderni: €1.000-€5.000</li>
+                            <li>Rivelare conoscenza futura: €10.000-€25.000</li>
+                        </ul>
+
+                        <p><strong>Violazioni Classe B (Maggiori):</strong></p>
+                        <ul>
+                            <li>Alterare eventi storici: €50.000-€200.000</li>
+                            <li>Prevenire momenti chiave: €100.000-€500.000</li>
+                            <li>Creare paradossi: €500.000+ più accuse penali</li>
+                        </ul>
+
+                        <h3>Cosa NON Fare</h3>
+                        <ul>
+                            <li>❌ Non menzionare smartphone, hypernet o tecnologia moderna</li>
+                            <li>❌ Non cercare di "migliorare" eventi storici</li>
+                            <li>❌ Non dare consigli medici o avvertire di eventi futuri</li>
+                            <li>❌ Non fare selfie (cronos-camere fornite per documentazione sicura)</li>
+                            <li>❌ Non portare oggetti moderni (controllo approfondito richiesto)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="booking" class="section">
+                <div class="lang-content active" data-lang="en">
+                    <h2>Book Your Stonewall Experience</h2>
+                    
+                    <div class="art-deco-border">
+                        <h3>Reservation Information</h3>
+                        <p><strong>Booking Requirements:</strong></p>
+                        <ul>
+                            <li>Valid EU Temporal Travel Permit</li>
+                            <li>Signed temporal interference waiver</li>
+                            <li>Medical clearance for chronos-travel</li>
+                            <li>€500 timeline insurance deposit (refundable)</li>
+                            <li>Completed LGBTQ+ history knowledge test (70% minimum)</li>
+                        </ul>
+
+                        <p><strong>Available Dates (2001):</strong></p>
+                        <ul>
+                            <li>February 14 - Valentine's Pride Special</li>
+                            <li>March 15 - Women's History Tour</li>
+                            <li>June 28 - Pride Month Anniversary</li>
+                            <li>October 11 - Coming Out Day Memorial</li>
+                            <li>December 31 - New Millennium Celebration</li>
+                        </ul>
+
+                        <p><strong>Contact Information:</strong></p>
+                        <p>📧 Email: <a href="mailto:bookings@hexagram.corp">bookings@hexagram.corp</a><br>
+                        📧 Temporal Coordinator: <a href="mailto:chronos.specialist@hexagram.corp">chronos.specialist@hexagram.corp</a><br>
+                        🏢 Office: Rainbow Plaza 42, Amsterdam, Netherlands<br>
+                        ⏰ Consultation Hours: Monday-Friday 9:00-17:00 CET</p>
+                    </div>
+                </div>
+                
+                <div class="lang-content" data-lang="it">
+                    <h2>Prenota la Tua Esperienza Stonewall</h2>
+                    
+                    <div class="art-deco-border">
+                        <h3>Informazioni Prenotazione</h3>
+                        <p><strong>Requisiti Prenotazione:</strong></p>
+                        <ul>
+                            <li>Permesso Viaggio Temporale UE valido</li>
+                            <li>Rinuncia interferenza temporale firmata</li>
+                            <li>Autorizzazione medica per cronos-viaggio</li>
+                            <li>Deposito assicurazione temporale €500 (rimborsabile)</li>
+                            <li>Test conoscenza storia LGBTQ+ completato (minimo 70%)</li>
+                        </ul>
+
+                        <p><strong>Date Disponibili (2001):</strong></p>
+                        <ul>
+                            <li>14 Febbraio - Speciale San Valentino Pride</li>
+                            <li>15 Marzo - Tour Storia delle Donne</li>
+                            <li>28 Giugno - Anniversario Mese Pride</li>
+                            <li>11 Ottobre - Memoriale Coming Out Day</li>
+                            <li>31 Dicembre - Celebrazione Nuovo Millennio</li>
+                        </ul>
+
+                        <p><strong>Informazioni Contatto:</strong></p>
+                        <p>📧 Email: <a href="mailto:prenotazioni@hexagram.corp">prenotazioni@hexagram.corp</a><br>
+                        📧 Coordinatore Temporale: <a href="mailto:specialista.cronos@hexagram.corp">specialista.cronos@hexagram.corp</a><br>
+                        🏢 Ufficio: Rainbow Plaza 42, Amsterdam, Paesi Bassi<br>
+                        ⏰ Ore Consultazione: Lunedì-Venerdì 9:00-17:00 CET</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="about" class="section">
+                <div class="lang-content active" data-lang="en">
+                    <h2>About Temporal Pride Tours</h2>
+                    
+                    <div class="art-deco-border">
+                        <h3>Our Story</h3>
+                        <p>Founded in 1998 by married couple Dr. Alessandro Rossi and Dr. Marcus Johnson, Temporal Pride Tours emerged from a simple dream: to let LGBTQ+ people witness their own liberation history firsthand.</p>
+                        
+                        <p>As the first queer-owned chronos-travel company in Europe, we combine cutting-edge Rainbow-Drive technology with deep respect for LGBTQ+ heritage. Our founders, both temporal physicists and proud gay men, spent five years developing our signature Pride-Powered chronos engines.</p>
+
+                        <h3>Our Technology</h3>
+                        <p><strong>Rainbow-Drive Systems:</strong> Our proprietary temporal engines are powered by concentrated Pride energy, making them the most stable chronos-drives available. The rainbow spectrum creates natural temporal stabilization.</p>
+                        
+                        <p><strong>Pride-Stabilizers:</strong> These devices maintain temporal integrity by channeling the authentic LGBTQ+ spirit of our passengers. The stronger your Pride, the safer your journey!</p>
+
+                        <h3>Community Commitment</h3>
+                        <ul>
+                            <li>25% of profits donated to LGBTQ+ youth organizations</li>
+                            <li>Free educational tours for queer history students</li>
+                            <li>Employment priority for LGBTQ+ chronos-technicians</li>
+                            <li>Partnerships with Pride organizations across Europe</li>
+                        </ul>
+
+                        <h3>Awards & Recognition</h3>
+                        <ul>
+                            <li>🏆 2000 European Temporal Tourism Excellence Award</li>
+                            <li>🌈 1999 Amsterdam LGBTQ+ Business of the Year</li>
+                            <li>⭐ EU Chronos Safety Rating: 5 Stars</li>
+                            <li>📜 Certified by International Temporal Travel Association</li>
+                        </ul>
+
+                        <div class="warning-box">
+                            <strong>Member of:</strong> European LGBTQ+ Business Alliance, International Chronos-Travel Association, Temporal Tourism Safety Council
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lang-content" data-lang="it">
+                    <h2>Chi Siamo - Tour dell'Orgoglio Temporale</h2>
+                    
+                    <div class="art-deco-border">
+                        <h3>La Nostra Storia</h3>
+                        <p>Fondata nel 1998 dalla coppia sposata Dr. Alessandro Rossi e Dr. Marcus Johnson, Tour dell'Orgoglio Temporale è nata da un sogno semplice: permettere alle persone LGBTQ+ di testimoniare di persona la propria storia di liberazione.</p>
+                        
+                        <p>Come prima compagnia cronos-viaggio di proprietà queer in Europa, combiniamo tecnologia Rainbow-Drive all'avanguardia con profondo rispetto per il patrimonio LGBTQ+. I nostri fondatori, entrambi fisici temporali e orgogliosi uomini gay, hanno speso cinque anni sviluppando i nostri motori cronos Pride-Alimentati distintivi.</p>
+
+                        <h3>La Nostra Tecnologia</h3>
+                        <p><strong>Sistemi Rainbow-Drive:</strong> I nostri motori temporali proprietari sono alimentati da energia Pride concentrata, rendendoli i cronos-drive più stabili disponibili. Lo spettro arcobaleno crea stabilizzazione temporale naturale.</p>
+                        
+                        <p><strong>Pride-Stabilizzatori:</strong> Questi dispositivi mantengono l'integrità temporale canalizzando l'autentico spirito LGBTQ+ dei nostri passeggeri. Più forte è il tuo Orgoglio, più sicuro è il tuo viaggio!</p>
+
+                        <h3>Impegno Comunitario</h3>
+                        <ul>
+                            <li>25% dei profitti donati a organizzazioni giovanili LGBTQ+</li>
+                            <li>Tour educativi gratuiti per studenti di storia queer</li>
+                            <li>Priorità di impiego per cronos-tecnici LGBTQ+</li>
+                            <li>Partnership con organizzazioni Pride in tutta Europa</li>
+                        </ul>
+
+                        <h3>Premi e Riconoscimenti</h3>
+                        <ul>
+                            <li>🏆 2000 Premio Eccellenza Turismo Temporale Europeo</li>
+                            <li>🌈 1999 Impresa LGBTQ+ dell'Anno Amsterdam</li>
+                            <li>⭐ Valutazione Sicurezza EU Cronos: 5 Stelle</li>
+                            <li>📜 Certificato dall'Associazione Internazionale Viaggio Temporale</li>
+                        </ul>
+
+                        <div class="warning-box">
+                            <strong>Membro di:</strong> Alleanza Imprese LGBTQ+ Europea, Associazione Internazionale Cronos-Viaggio, Consiglio Sicurezza Turismo Temporale
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="pride-flag"></div>
+            <div class="lang-content active" data-lang="en">
+                <p><strong>Temporal Pride Tours</strong> - Licensed EU Chronos-Travel Operator #2847-TPT</p>
+                <p>Rainbow Plaza 42, Amsterdam, Netherlands | Founded 1998</p>
+                <p>Contact: <a href="mailto:info@hexagram.corp" style="color: #ffd700;">info@hexagram.corp</a> | Emergency Temporal Hotline: <a href="mailto:emergency@hexagram.corp" style="color: #ff0040;">emergency@hexagram.corp</a></p>
+                <p><em>Powered by Pride. Driven by History. Secured by Love.</em></p>
+                <p style="font-size: 0.8em;">Best viewed with Hypernet Explorer 5.0+ | Optimized for Rainbow-Display technology</p>
+            </div>
+            <div class="lang-content" data-lang="it">
+                <p><strong>Tour dell'Orgoglio Temporale</strong> - Operatore Cronos-Viaggio UE Autorizzato #2847-TPT</p>
+                <p>Rainbow Plaza 42, Amsterdam, Paesi Bassi | Fondata 1998</p>
+                <p>Contatto: <a href="mailto:info@hexagram.corp" style="color: #ffd700;">info@hexagram.corp</a> | Linea Emergenza Temporale: <a href="mailto:emergenza@hexagram.corp" style="color: #ff0040;">emergenza@hexagram.corp</a></p>
+                <p><em>Alimentato dall'Orgoglio. Guidato dalla Storia. Protetto dall'Amore.</em></p>
+                <p style="font-size: 0.8em;">Meglio visualizzato con Hypernet Explorer 5.0+ | Ottimizzato per tecnologia Rainbow-Display</p>
+            </div>
+            <div class="pride-flag"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Hide all language content
+            const langContents = document.querySelectorAll('.lang-content');
+            langContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected language content
+            const selectedContents = document.querySelectorAll(`[data-lang="${lang}"]`);
+            selectedContents.forEach(content => {
+                content.classList.add('active');
+            });
+        }
+
+        // Initialize with English
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>

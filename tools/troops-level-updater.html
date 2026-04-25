@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPGMaker MZ Troop Level Updater</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .upload-section {
+            margin-bottom: 30px;
+        }
+        
+        .file-input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        input[type="file"]:hover {
+            border-color: #764ba2;
+            background: #f0f1ff;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+        
+        .changes-list {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .change-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 13px;
+        }
+        
+        .change-item:last-child {
+            border-bottom: none;
+        }
+        
+        .old-name {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+        
+        .new-name {
+            color: #28a745;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 RPGMaker MZ Troop Level Updater</h1>
+        <p class="subtitle">Automatically add level prefixes to troop names based on enemy data</p>
+        
+        <div class="upload-section">
+            <div class="file-input-group">
+                <label for="enemiesFile">1. Upload Enemies.json</label>
+                <input type="file" id="enemiesFile" accept=".json">
+            </div>
+            
+            <div class="file-input-group">
+                <label for="troopsFile">2. Upload Troops.json</label>
+                <input type="file" id="troopsFile" accept=".json">
+            </div>
+            
+            <button id="processBtn" disabled>Process and Download Updated Troops.json</button>
+        </div>
+        
+        <div id="status" class="status"></div>
+        <div id="changesList" class="changes-list" style="display: none;"></div>
+    </div>
+
+    <script>
+        let enemiesData = null;
+        let troopsData = null;
+        
+        const enemiesInput = document.getElementById('enemiesFile');
+        const troopsInput = document.getElementById('troopsFile');
+        const processBtn = document.getElementById('processBtn');
+        const statusDiv = document.getElementById('status');
+        const changesList = document.getElementById('changesList');
+        
+        enemiesInput.addEventListener('change', handleEnemiesFile);
+        troopsInput.addEventListener('change', handleTroopsFile);
+        processBtn.addEventListener('click', processFiles);
+        
+        function handleEnemiesFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    enemiesData = JSON.parse(event.target.result);
+                    showStatus('Enemies.json loaded successfully!', 'info');
+                    checkReadyToProcess();
+                } catch (error) {
+                    showStatus('Error parsing Enemies.json: ' + error.message, 'error');
+                    enemiesData = null;
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function handleTroopsFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    troopsData = JSON.parse(event.target.result);
+                    showStatus('Troops.json loaded successfully!', 'info');
+                    checkReadyToProcess();
+                } catch (error) {
+                    showStatus('Error parsing Troops.json: ' + error.message, 'error');
+                    troopsData = null;
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function checkReadyToProcess() {
+            processBtn.disabled = !(enemiesData && troopsData);
+        }
+        
+        function extractLevel(note) {
+            if (!note) return null;
+            
+            const lvMatch = note.match(/LV:\s*(\d+)/i);
+            return lvMatch ? parseInt(lvMatch[1]) : null;
+        }
+        
+        function processFiles() {
+            const changes = [];
+            let updatedCount = 0;
+            
+            troopsData.forEach((troop, index) => {
+                if (!troop || index === 0) return; // Skip null entries and first element
+                
+                troop.members.forEach(member => {
+                    const enemyId = member.enemyId;
+                    const enemy = enemiesData[enemyId];
+                    
+                    if (enemy && enemy.note) {
+                        const level = extractLevel(enemy.note);
+                        
+                        if (level !== null) {
+                            const oldName = troop.name;
+                            const levelPrefix = `L.${level} `;
+                            
+                            // Remove existing level prefix if present
+                            let cleanName = troop.name.replace(/^L\.\d+\s+/, '');
+                            
+                            // Add new level prefix
+                            troop.name = levelPrefix + cleanName;
+                            
+                            if (oldName !== troop.name) {
+                                changes.push({
+                                    old: oldName,
+                                    new: troop.name,
+                                    level: level
+                                });
+                                updatedCount++;
+                            }
+                        }
+                    }
+                });
+            });
+            
+            if (changes.length > 0) {
+                displayChanges(changes);
+                downloadUpdatedFile();
+                showStatus(`Successfully updated ${updatedCount} troop name(s)!`, 'success');
+            } else {
+                showStatus('No changes were made. Check if enemies have "LV: X" in their notes.', 'info');
+            }
+        }
+        
+        function displayChanges(changes) {
+            changesList.style.display = 'block';
+            changesList.innerHTML = '<strong>Changes made:</strong><br><br>';
+            
+            changes.forEach(change => {
+                const item = document.createElement('div');
+                item.className = 'change-item';
+                item.innerHTML = `
+                    <span class="old-name">${change.old}</span> → 
+                    <span class="new-name">${change.new}</span>
+                `;
+                changesList.appendChild(item);
+            });
+        }
+        
+        function downloadUpdatedFile() {
+            const jsonStr = JSON.stringify(troopsData, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Troops_updated.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function showStatus(message, type) {
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+        }
+    </script>
+</body>
+</html>

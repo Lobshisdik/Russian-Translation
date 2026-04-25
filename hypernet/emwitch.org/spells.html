@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Em's Spellbook - Secret Magical Formulas</title>
+    <meta name="description" content="Em's personal collection of spells, incantations, and magical formulas she's collected during her journey to become a real witch.">
+    <meta name="keywords" content="witch, spells, magic, incantations, rituals, cedrata, familiars">
+    <meta name="author" content="Em">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #990000;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            margin: 10px;
+            line-height: 1.5;
+            background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP8AAP///yH5BAEAAAEALAAAAAADAAMAAAIDBGKRADs=");
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 15px;
+            border: 8px ridge #CC0000;
+        }
+        
+        h1, h2, h3 {
+            color: #CC0000;
+            text-align: center;
+            font-family: "Papyrus", fantasy;
+            letter-spacing: 3px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px #000000;
+            border-bottom: 3px dotted #990000;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #FFCCCC;
+            padding: 8px;
+            border: 3px dashed #CC0000;
+            text-transform: uppercase;
+        }
+        
+        h2:hover {
+            background-color: #FFAAAA;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #CC0000;
+            border-right: 5px solid #CC0000;
+        }
+        
+        .spell {
+            margin-bottom: 30px;
+            padding: 10px;
+            border-left: 4px double #990000;
+            background-color: #FFEEEE;
+        }
+        
+        .spell-content {
+            display: none;
+            padding: 15px;
+            background-color: #FFDDDD;
+            border: 2px dotted #990000;
+            margin-top: 15px;
+        }
+        
+        a {
+            color: #990000;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            color: #FF0000;
+            background-color: #FFCCCC;
+        }
+        
+        .blink {
+            animation: blinker 0.8s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .visitor-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #CC0000;
+            background-color: #FFDDDD;
+            padding: 5px;
+            border: 2px inset #990000;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 160px;
+            background-color: #FFEEEE;
+            padding: 10px;
+            border: 3px outset #CC0000;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .sidebar h3 {
+            font-size: 16px;
+            margin-top: 0;
+            border: none;
+            border-bottom: 2px solid #CC0000;
+            text-align: left;
+        }
+        
+        .sidebar ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .sidebar li:before {
+            content: "★彡 ";
+            color: #CC0000;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            border-top: 3px ridge #CC0000;
+            padding-top: 10px;
+            background-color: #FFDDDD;
+        }
+        
+        .pentagram {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #CC0000;
+            margin: 10px auto;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #990000;
+            letter-spacing: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .ingredients {
+            background-color: #FFCCCC;
+            padding: 10px;
+            border: 2px dashed #CC0000;
+            margin: 10px 0;
+        }
+        
+        .method {
+            background-color: #FFEEFF;
+            padding: 10px;
+            border: 2px solid #CC0000;
+            margin: 10px 0;
+        }
+        
+        .warning {
+            background-color: #FFFFCC;
+            padding: 5px;
+            border: 2px solid #990000;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success-rate {
+            text-align: right;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #770000;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pentagram">
+            .     .     .
+           /|\   /|\   /|\
+          / | \ / | \ / | \
+         /  |  V  |  V  |  \
+        /   |     |     |   \
+       /    |     |     |    \
+      /_____O_____O_____O_____\
+      \     |     |     |     /
+       \    |     |     |    /
+        \   |     |     |   /
+         \  |  /\ |  /\ |  /
+          \ | / | | / | | /
+           \|/  \|/  \|/
+            '     '     '
+        </div>
+
+        <h1>Em's Book of Spells and Incantations</h1>
+
+        <div class="pentagram">
+          .
+         /|\
+        / | \
+      .--. | .--.
+     /    \|/    \
+    |      v      |
+     \    /|\    /
+      '--' | '--'
+        \ | /
+         \|/
+          '
+        </div>
+
+        <marquee class="blink" scrollamount="6" direction="left" behavior="alternate">☆彡☽☾ WARNING!! REAL MAGIC INSIDE!! USE AT YOUR OWN RISK!! ☾☽☆彡</marquee>
+        
+        <div class="visitor-counter">
+            ⊹⊱✫⊰⊹ You are visitor number: <span class="blink">842</span> ⊹⊱✫⊰⊹
+        </div>
+
+        <div class="sidebar">
+            <h3>~~*Back To*~~</h3>
+            <ul>
+                <li><a href="index.html">My Magical Diary</a></li>
+                <li><a href="familiar.html">Mister Whiskers Gallery</a></li>
+                <li><a href="cedrata.html">CEDRATA Magick!!!11!</a></li>
+            </ul>
+            
+            <div class="pentagram">
+              *
+             /|\
+            /*|*\
+            \*|*/
+             \|/
+              v
+            </div>
+            
+            <h3>~*~*Spell Types*~*~</h3>
+            <ul>
+                <li><a href="#love">Love Spells!!!</a></li>
+                <li><a href="#protection">Protection Magic!!!</a></li>
+                <li><a href="#cedrata">Cedrata Rituals!!!</a></li>
+                <li><a href="#familiar">Familiar Bonding!!!</a></li>
+            </ul>
+            
+            <div class="construction">
+                <img src="/api/placeholder/88/31" alt="Under Construction" />
+                <p>¡!¡!¡ SpElLs AlWaYs<br>UnDeR TeStInG ¡!¡!¡</p>
+            </div>
+        </div>
+        
+        <div class="introduction">
+            <div class="divider">♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠</div>
+            
+            <p>*~*~* Welcome to my SUPER SECRET spellbook!!! *~*~* I'm Em, a REAL witch from Wimbledon, and these are my PERSONAL MAGICAL FORMULAS that I've collected and TESTED MYSELF!!! These are NOT copied from books (well, maybe some bits) but are ENHANCED with my OWN MAGICAL INNOVATIONS!!!</p>
+            
+            <p>⚠️⚠️⚠️ WARNING!!! ⚠️⚠️⚠️ These spells contain ACTUAL MAGICK! Cast at your own risk!! If you accidentally turn yourself into a frog or summon a demon, that's on YOU not ME!!!</p>
+            
+            <div class="warning">
+                !!! NEVER EVER CAST THESE SPELLS DURING A FULL MOON WHILE STANDING ON ONE LEG WEARING PURPLE SOCKS !!! (I haven't tested this specific configuration yet but it sounds EXTREMELY POWERFUL and potentially DANGEROUS!!!)
+            </div>
+            
+            <div class="pentagram">
+               . ' .
+             .'  |  '.
+            /    |    \
+           .     |     .
+           |    / \    |
+           |   /   \   |
+           |  /     \  |
+           | /       \ |
+           ./         \.
+            </div>
+            
+            <p>For best results, drink Cedrata Massoni before, during, AND after casting!!! It amplifies magical energies and tastes DELICIOUS!!!</p>
+            
+            <div class="divider">♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥</div>
+        </div>
+        
+        <h2 id="love" onclick="toggleSection('loveSpells')">♥♥♥ LOVE SPELLS AND ATTRACTION MAGIC ♥♥♥</h2>
+        <div id="loveSpells" class="spell-content">
+            <div class="spell">
+                <h3>♥ The Jamie-From-Maths-Class Attraction Potion ♥</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>1 bottle of Cedrata Massoni (for POWER)</li>
+                        <li>3 tablespoons of strawberry jam (for LOVE ENERGY)</li>
+                        <li>A pencil the person you fancy has touched (I stole Jamie's from his desk!!!)</li>
+                        <li>A pink paper heart with their name written 13 times</li>
+                        <li>A lock of your hair (just a tiny bit!!!)</li>
+                        <li>Rose-scented hand cream (borrowed from mum)</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Mix Cedrata and jam in a plastic cup while chanting your crush's name</li>
+                        <li>Rub the pencil with the hand cream</li>
+                        <li>Wrap the pencil in the paper heart</li>
+                        <li>Put the hair in the Cedrata-jam mixture</li>
+                        <li>Sprinkle a few drops of the potion around your crush's desk/locker/general vicinity</li>
+                        <li>Keep the pencil wrapped in the heart under your pillow for 7 nights</li>
+                        <li>On the 8th day, your crush should start noticing you!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    CAUTION!!! This spell can have UNEXPECTED RESULTS!!! When I tried it, Jamie's chair collapsed and everyone laughed at him. This might be because I used RASPBERRY jam instead of STRAWBERRY, or maybe because LOVE MAGIC is UNPREDICTABLE!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★☆☆☆☆ (still perfecting this one)
+                </div>
+            </div>
+            
+            <div class="spell">
+                <h3>♥ General Attraction Aura Enhancement ♥</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>1 bottle of Cedrata Massoni</li>
+                        <li>Red or pink clothing</li>
+                        <li>A small mirror</li>
+                        <li>Rose quartz crystal (or a pink-ish rock from garden)</li>
+                        <li>Vanilla extract (from mum's baking cupboard)</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Wear your red/pink clothes</li>
+                        <li>Hold the rose quartz in your left hand</li>
+                        <li>Look in the mirror and say "I am magical and attractive" 5 times</li>
+                        <li>Take a sip of Cedrata (for magical power)</li>
+                        <li>Dab a tiny bit of vanilla extract behind your ears (like perfume!!!)</li>
+                        <li>Carry the rose quartz with you all day</li>
+                        <li>People should be mysteriously drawn to you!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    WARNING!!! This spell might attract cats as well as people!!! When I cast it, Mister Whiskers wouldn't leave me alone all day, and the neighbor's cat came into our garden!!! If you're allergic to cats, use less vanilla!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★☆☆ (works on cats, still testing on humans)
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="protection" onclick="toggleSection('protectionSpells')">✪✪✪ PROTECTION SPELLS AND WARDS ✪✪✪</h2>
+        <div id="protectionSpells" class="spell-content">
+            <div class="spell">
+                <h3>✪ Anti-Government Agent Invisibility Shield ✪</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>Aluminium foil (quite a lot!!!)</li>
+                        <li>2 bottles of Cedrata Massoni</li>
+                        <li>Black marker pen</li>
+                        <li>String or elastic band</li>
+                        <li>A small mirror</li>
+                        <li>A cat hair (from your familiar if possible)</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Fashion a hat from the aluminium foil (make sure it covers your ears!!!)</li>
+                        <li>Draw protective symbols on the hat with the marker (stars, pentagrams, etc.)</li>
+                        <li>Secure the hat with string or elastic band</li>
+                        <li>Tape the cat hair to the inside of the hat</li>
+                        <li>Take a sip of Cedrata (for magical energy)</li>
+                        <li>Look in the mirror wearing the hat and say "I am invisible to those who seek me" 3 times</li>
+                        <li>Pour a small amount of Cedrata around your room/house to create a protective barrier</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    IMPORTANT!!! Government agents are EVERYWHERE!!! They might look like ordinary people, but if someone is asking too many questions about your magical research or UFO sightings, they're PROBABLY an agent!!! This spell makes you "invisible" to their tracking technology!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★★★ (no government agents have found my magical research yet!!!)
+                </div>
+            </div>
+            
+            <div class="spell">
+                <h3>✪ Bedroom Protection Circle ✪</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>5 candles (I use birthday candles because mum won't let me have big ones after THE INCIDENT)</li>
+                        <li>Salt (stolen from kitchen)</li>
+                        <li>Cedrata Massoni (half bottle)</li>
+                        <li>A piece of paper with "KEEP OUT" written on it</li>
+                        <li>Something that belongs to each person you want to keep out</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Place candles in a circle around your room</li>
+                        <li>Sprinkle salt between the candles to create a circle</li>
+                        <li>Place the "KEEP OUT" sign facing your door</li>
+                        <li>Sprinkle a few drops of Cedrata at each candle</li>
+                        <li>Light the candles (BE CAREFUL!!!)</li>
+                        <li>Walk around the circle three times saying "This space is mine, protected by magic divine"</li>
+                        <li>Blow out candles before they set anything on fire!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    CAUTION!!! This spell set off our smoke alarm and now I'm banned from using candles in my room!!! You can use battery-operated fake candles instead, but the magic isn't as strong!!! Also, don't let the salt stay on the carpet too long or mum will get REALLY ANGRY!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★☆☆☆ (my little brother still barges in, but he might have counter-spell protection)
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="cedrata" onclick="toggleSection('cedrataSpells')">✧✧✧ CEDRATA POWER RITUALS ✧✧✧</h2>
+        <div id="cedrataSpells" class="spell-content">
+            <div class="spell">
+                <h3>✧ Cedrata Massoni Magical Energy Booster ✧</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>3 bottles of Cedrata Massoni (more is better!!!)</li>
+                        <li>A yellow candle</li>
+                        <li>Lemon peel (fresh if possible)</li>
+                        <li>A clear glass</li>
+                        <li>A wooden stirring stick (I use a twig from the garden)</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Pour Cedrata into the glass until it's half full</li>
+                        <li>Light the yellow candle</li>
+                        <li>Hold the glass up to the candlelight and say "Cedrata, Cedrata, magical and bright, fill me with power and magical might!"</li>
+                        <li>Add the lemon peel to the glass</li>
+                        <li>Stir three times clockwise with the wooden stick</li>
+                        <li>Drink the Cedrata in one go!!!</li>
+                        <li>Feel the magical energy coursing through your veins!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    NOTE!!! The fizzing sensation is the MAGIC activating!!! The more it fizzes, the more POWERFUL the magic!!! Sometimes it makes me burp, which is just excess magical energy escaping!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★★★ (I always feel SUPER magical after this ritual!!!)
+                </div>
+            </div>
+            
+            <div class="spell">
+                <h3>✧ Cedrata Circle for Contacting Enrico Mattei's Spirit ✧</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>7 bottles of Cedrata Massoni (it MUST be 7!!!)</li>
+                        <li>A photograph or drawing of Enrico Mattei</li>
+                        <li>A map of Italy</li>
+                        <li>A notebook for recording spirit messages</li>
+                        <li>A pen that writes in red ink</li>
+                        <li>White chalk</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Draw a large circle with the chalk (outside is best, but bedroom floor works too)</li>
+                        <li>Place the 7 bottles of Cedrata around the circle at equal distances</li>
+                        <li>Put the photograph of Mattei and the map of Italy in the center</li>
+                        <li>Sit in the circle with your notebook and red pen</li>
+                        <li>Open one bottle of Cedrata and pour a little on the map of Italy</li>
+                        <li>Say "Enrico Mattei, I call to you across the veil, share your secrets, tell your tale"</li>
+                        <li>Wait for signs - flickering lights, sudden cold spots, cats behaving strangely</li>
+                        <li>Write down ANY impressions or thoughts that come to you - they are messages from beyond!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    IMPORTANT!!! Spirits sometimes communicate in SUBTLE ways!!! When I did this ritual, a neighbor's cat jumped into my circle and then ran away. This was DEFINITELY Mattei trying to tell me something about the UFO connection!!! Also, government agents might be monitoring spirit communications, so be CAREFUL what you write down!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★☆☆ (indirect communication established, still working on getting clearer messages)
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="familiar" onclick="toggleSection('familiarSpells')">🐱🐱🐱 FAMILIAR BONDING RITUALS 🐱🐱🐱</h2>
+        <div id="familiarSpells" class="spell-content">
+            <div class="spell">
+                <h3>🐱 Telepathic Communication with Your Familiar 🐱</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>1 bottle of Cedrata Massoni</li>
+                        <li>Your familiar (Mister Whiskers in my case)</li>
+                        <li>Cat treats or food they like</li>
+                        <li>A small bell</li>
+                        <li>A quiet room where you won't be disturbed</li>
+                        <li>A piece of string or a cat toy</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Make sure your familiar is in the room with you</li>
+                        <li>Take a sip of Cedrata (for magical energy)</li>
+                        <li>Sit quietly on the floor</li>
+                        <li>Ring the bell three times</li>
+                        <li>Look directly into your familiar's eyes (this might be difficult if they're not cooperating)</li>
+                        <li>In your mind, visualize a simple command (like "come here" or "sit down")</li>
+                        <li>Repeat the visualization 3 times</li>
+                        <li>See if your familiar responds to your mental command</li>
+                        <li>Reward them with treats regardless of whether they obey (to strengthen your magical bond!!)</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    NOTE!!! Cats are VERY magical but also VERY independent!!! Sometimes they pretend not to receive your telepathic messages because they're testing your magical abilities!!! If your familiar stares at you without blinking for several minutes, that means the telepathic connection is WORKING!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★★☆ (Mister Whiskers definitely receives my messages but chooses when to respond)
+                </div>
+            </div>
+            
+            <div class="spell">
+                <h3>🐱 Familiar Power Enhancement Ritual 🐱</h3>
+                
+                <div class="ingredients">
+                    <strong>MAGICAL INGREDIENTS NEEDED:</strong>
+                    <ul>
+                        <li>1 bottle of Cedrata Massoni</li>
+                        <li>A small amount of catnip (OPTIONAL - makes familiar more receptive to magic but can make them TOO playful)</li>
+                        <li>A brush or comb</li>
+                        <li>A special collar or bandana for your familiar</li>
+                        <li>A crystal or pretty stone</li>
+                        <li>Moonlight (full moon is best but any moon will do)</li>
+                    </ul>
+                </div>
+                
+                <div class="method">
+                    <strong>MAGICAL METHOD:</strong>
+                    <ol>
+                        <li>Wait for moonlight to shine through your window</li>
+                        <li>Place your familiar in the moonbeam (they might not stay there)</li>
+                        <li>Brush your familiar while saying "Moonlight bright, magic night, give my familiar magical might"</li>
+                        <li>Put the special collar/bandana on your familiar</li>
+                        <li>Place the crystal near your familiar's favorite sleeping spot</li>
+                        <li>Pour a tiny drop of Cedrata on your fingertip and let your familiar sniff it (but don't let them drink it!!!)</li>
+                        <li>Your familiar's magical powers should be enhanced for up to 7 days!!!</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    CAUTION!!! After this ritual, your familiar might display increased magical abilities!!! Mister Whiskers knocked over a glass of water RIGHT after I thought "I'm thirsty" - that's PROOF that his powers were enhanced and he was trying to remind me to drink something!!! Also, never force your familiar to participate - magical creatures have free will!!!
+                </div>
+                
+                <div class="success-rate">
+                    Success rate: ★★★★☆ (Mister Whiskers definitely gets more magical after this ritual!!!)
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider">∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞</div>
+
+        <div class="construction">
+            <img src="/api/placeholder/400/60" alt="Under Construction" />
+            
+            <div class="pentagram">
+               /|\ 
+              / | \
+             /__|__\
+            /\  |  /\
+           /__\_|_/__\
+            </div>
+            
+            <p>☥☥☥ More magical spells coming soon!!! Check back for updates!!! ☥☥☥</p>
+            
+            <pre style="color: #CC0000; text-align: center; font-size: 12px;">
+            .     .       .  .   . .   .   . .    +  .
+              .     .  :     .    .. :. .___---------___.
+                 .  .   .    .  :.:. _".^ .^ ^.  '.. :"-_. .
+              .  :       .  .  .:../:            . .^  :.:\.
+                  .   . :: +. :.:/: .   .    .        . . .:\
+               .  :    .     . _ :::/:               . . . .\
+                . . . .   . - : :.:./.                        \
+                 .  .     : . : .:.|. ######              .#######
+                  :.. .  :-  : .:  ::|.#######           ..########
+                 .   .  .  ..  .  .. :\ ########          :########
+                  .       +   .  .  :.:. \. #######       #########
+                   .   .   .   .  . . ..:. \. #####       ########
+                    .      :  .   .  . ...::. \. ###       #####
+                   .     . . .  .  :  .   .: . \  ###      ####
+                    .   .     :      :  : :. .:| \ ##      ###
+                     .     .   . . :  :  . : |: :\: ##    ###
+                      .   .  .     . .

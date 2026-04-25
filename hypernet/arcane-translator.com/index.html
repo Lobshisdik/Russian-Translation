@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arcane Script Translator - Hypernet Portal</title>
+    <meta name="keywords" content="translator, arcane script, magic, mages guild, language, hypernet">
+    <meta name="description" content="Official translator for Arcane Script - the ancient magical language used by the Mages Guild. Convert text between common language and mystical symbols.">
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #000011;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="0.5" fill="%23004400"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #001100, #003300);
+            border-bottom: 3px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px #00ff00;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px #00ff00;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #88ff88;
+            margin-top: 5px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #001122;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            box-shadow: 0 0 30px #004400;
+        }
+        
+        .translator-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #006600;
+            background-color: #000e1a;
+            border-radius: 5px;
+        }
+        
+        .section-header {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            background-color: #002200;
+            border: 1px solid #00aa00;
+            margin-bottom: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        .section-header:hover {
+            background-color: #003300;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .section-content {
+            display: block;
+            padding: 10px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 120px;
+            background-color: #000;
+            color: #00ff00;
+            border: 2px solid #006600;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            padding: 10px;
+            resize: vertical;
+            border-radius: 5px;
+        }
+        
+        textarea:focus {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px #004400;
+            outline: none;
+        }
+        
+        .translate-btn {
+            background: linear-gradient(45deg, #003300, #006600);
+            color: #00ff00;
+            border: 2px solid #00aa00;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .translate-btn:hover {
+            background: linear-gradient(45deg, #006600, #009900);
+            box-shadow: 0 0 15px #00ff00;
+        }
+        
+        .language-select {
+            background-color: #001122;
+            color: #00ff00;
+            border: 2px solid #006600;
+            padding: 8px;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 3px;
+        }
+        
+        .warning {
+            background-color: #220000;
+            border: 1px solid #ff6600;
+            color: #ffaa66;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .links {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 2px solid #006600;
+        }
+        
+        .links a {
+            color: #66ff66;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        .links a:hover {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+            border-top: 1px solid #003300;
+            margin-top: 30px;
+        }
+        
+        .hexagram-counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            color: #888888;
+            font-size: 10px;
+            margin: 10px 0;
+        }
+        
+        .mystical-border {
+            border: 1px dashed #006600;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #001a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⧫ ARCANE SCRIPT TRANSLATOR ⧫</h1>
+        <div class="subtitle">Official Translation Portal - Authorized by the Mages Guild</div>
+    </div>
+
+    <div class="container">
+        <div class="warning">
+            ⚠️ WARNING: Improper translation of magical texts may result in unintended spell activation. 
+            Use CamelCase formatting for all magical incantations. ⚠️
+        </div>
+
+        <div class="translator-section">
+            <div class="section-header" onclick="toggleSection('main-translator')">
+                ✦ MAIN TRANSLATOR ✦
+            </div>
+            <div id="main-translator" class="section-content">
+                <div style="margin-bottom: 15px;">
+                    <label>From:</label>
+                    <select class="language-select" id="fromLang">
+                        <option value="common">Common Language</option>
+                        <option value="arcane">Arcane Script</option>
+                        <option value="demonic">Demonic Runes</option>
+                        <option value="celestial">Celestial Marks</option>
+                        <option value="elemental">Elemental Glyphs</option>
+                    </select>
+                    
+                    <label>To:</label>
+                    <select class="language-select" id="toLang">
+                        <option value="arcane">Arcane Script</option>
+                        <option value="common">Common Language</option>
+                        <option value="demonic">Demonic Runes</option>
+                        <option value="celestial">Celestial Marks</option>
+                        <option value="elemental">Elemental Glyphs</option>
+                    </select>
+                </div>
+                
+                <textarea id="inputText" placeholder="Enter text to translate... Remember to use CamelCase for spells!"></textarea>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <button class="translate-btn" onclick="translateText()">🔮 TRANSLATE 🔮</button>
+                    <button class="translate-btn" onclick="clearText()">CLEAR</button>
+                    <button class="translate-btn" onclick="swapLanguages()">⇄ SWAP</button>
+                </div>
+                
+                <textarea id="outputText" placeholder="Translation will appear here..." readonly></textarea>
+            </div>
+        </div>
+
+        <div class="translator-section">
+            <div class="section-header" onclick="toggleSection('spell-checker')">
+                ⚡ SPELL SYNTAX CHECKER ⚡
+            </div>
+            <div id="spell-checker" class="section-content" style="display: none;">
+                <div class="mystical-border">
+                    <p><strong>CamelCase Validation:</strong> Ensures proper magical syntax for spell casting.</p>
+                    <textarea id="spellInput" placeholder="Enter your spell in CamelCase format (e.g., FireBall, TeleportToSafety)"></textarea>
+                    <div style="text-align: center; margin: 10px 0;">
+                        <button class="translate-btn" onclick="checkSpell()">⚡ VALIDATE SPELL ⚡</button>
+                    </div>
+                    <div id="spellResult" style="padding: 10px; margin-top: 10px; border: 1px solid #006600; background-color: #000a00;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="translator-section">
+            <div class="section-header" onclick="toggleSection('dictionary')">
+                📚 ARCANE DICTIONARY 📚
+            </div>
+            <div id="dictionary" class="section-content" style="display: none;">
+                <div class="mystical-border">
+                    <p><strong>Common Magical Terms:</strong></p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'Courier New', monospace;">
+                        <div><strong>Common → Arcane</strong></div>
+                        <div><strong>Translation</strong></div>
+                        <div>FireBall</div><div>⚹⟐⧫⚛⧨</div>
+                        <div>Shield</div><div>⧨⚹⟐⚛</div>
+                        <div>Teleport</div><div>⟐⚛⧫⚹⧨⟐</div>
+                        <div>Heal</div><div>⚛⧨⚹⟐</div>
+                        <div>Light</div><div>⟐⚹⧨⚛</div>
+                        <div>Darkness</div><div>⧫⚛⟐⧨⚹⧫⟐⧨</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="translator-section">
+            <div class="section-header" onclick="toggleSection('help')">
+                ❓ HELP & INSTRUCTIONS ❓
+            </div>
+            <div id="help" class="section-content" style="display: none;">
+                <div class="mystical-border">
+                    <h3>How to Use the Arcane Translator:</h3>
+                    <ul>
+                        <li><strong>Basic Translation:</strong> Select source and target languages, enter text, click translate</li>
+                        <li><strong>CamelCase Rule:</strong> All spells MUST be written in CamelCase (FirstLetterCapital)</li>
+                        <li><strong>Safety First:</strong> Never translate unknown spells without proper supervision</li>
+                        <li><strong>Spell Checker:</strong> Validates magical syntax before casting</li>
+                        <li><strong>Dictionary:</strong> Common magical terms and their arcane equivalents</li>
+                    </ul>
+                    
+                    <h3>Supported Languages:</h3>
+                    <ul>
+                        <li><strong>Common Language:</strong> Standard European text</li>
+                        <li><strong>Arcane Script:</strong> Primary magical notation system</li>
+                        <li><strong>Demonic Runes:</strong> Used for summoning and binding</li>
+                        <li><strong>Celestial Marks:</strong> Divine and healing magic</li>
+                        <li><strong>Elemental Glyphs:</strong> Fire, water, earth, air magic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="mages-guild-portal.html">🏛️ Mages Guild Portal</a>
+            <a href="magical-supplies.html">🔮 Magical Supplies</a>
+            <a href="spell-library.html">📖 Spell Library</a>
+            <a href="dimensional-news.html">📰 Dimensional News</a>
+            <a href="esoteric-heavy.html">⚙️ Esoteric Heavy Industries</a>
+        </div>
+
+        <div class="hexagram-counter">
+            Visitors since January 2001: 042,847 | Spells Translated: 15,392
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Arcane Script Translator v2.1 - Compatible with Hypernet Explorer</p>
+        <p>Authorized by the Mages Guild | Report translation errors to: <a href="mailto:translator@hexagram.corp" style="color: #666666;">translator@hexagram.corp</a></p>
+        <p><small>This translator is protected by dimensional encryption protocols. Unauthorized magical use is prohibited.</small></p>
+    </div>
+
+    <script>
+        // Function to toggle sections
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+
+        // Hash function for character transformation
+        function simpleHash(str, seed = 0) {
+            let hash = seed;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash + str.charCodeAt(i)) & 0xffffffff;
+            }
+            return Math.abs(hash);
+        }
+
+        // Arcane character mappings
+        const arcaneChars = ['⚛', '⚹', '⟐', '⧫', '⧨', '⚡', '⟡', '⧬', '⧭', '⧮', '⧯', '⧰', '⧱', '⧲', '⧳', '⧴', '⧵', '⧶', '⧷', '⧸', '⧹', '⧺', '⧻', '⧼', '⧽', '⧾'];
+        const demonicChars = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚾ', 'ᛁ', 'ᛃ', 'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛞ', 'ᛟ', 'ᛠ', 'ᛡ'];
+        const celestialChars = ['☽', '☾', '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇', '☉', '☊', '☋', '☌', '☍', '☎', '☏', '☐', '☑', '☒', '☓', '☔', '☕', '☖', '☗'];
+        const elementalChars = ['𝔸', '𝔹', 'ℂ', '𝔻', '𝔼', '𝔽', '𝔾', 'ℍ', '𝕀', '𝕁', '𝕂', '𝕃', '𝕄', 'ℕ', '𝕆', 'ℙ', 'ℚ', 'ℝ', '𝕊', '𝕋', '𝕌', '𝕍', '𝕎', '𝕏', '𝕐', 'ℤ'];
+
+        function getCharSet(language) {
+            switch(language) {
+                case 'arcane': return arcaneChars;
+                case 'demonic': return demonicChars;
+                case 'celestial': return celestialChars;
+                case 'elemental': return elementalChars;
+                default: return arcaneChars;
+            }
+        }
+
+        function translateToMystical(text, targetLang) {
+            const charSet = getCharSet(targetLang);
+            let result = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char.match(/[a-zA-Z]/)) {
+                    const hash = simpleHash(char.toLowerCase() + i.toString()) % charSet.length;
+                    result += charSet[hash];
+                } else if (char === ' ') {
+                    result += ' ';
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+
+        function translateFromMystical(text, sourceLang) {
+            // This is a simplified reverse translation
+            const charSet = getCharSet(sourceLang);
+            let result = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const index = charSet.indexOf(char);
+                if (index !== -1) {
+                    // Simple reverse mapping (not perfect but functional)
+                    const letter = String.fromCharCode(97 + (index % 26));
+                    result += letter;
+                } else if (char === ' ') {
+                    result += ' ';
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+
+        function translateText() {
+            const fromLang = document.getElementById('fromLang').value;
+            const toLang = document.getElementById('toLang').value;
+            const inputText = document.getElementById('inputText').value;
+            const outputText = document.getElementById('outputText');
+
+            if (!inputText.trim()) {
+                outputText.value = "Please enter text to translate.";
+                return;
+            }
+
+            let result = '';
+
+            if (fromLang === 'common' && toLang !== 'common') {
+                result = translateToMystical(inputText, toLang);
+            } else if (fromLang !== 'common' && toLang === 'common') {
+                result = translateFromMystical(inputText, fromLang);
+            } else if (fromLang !== 'common' && toLang !== 'common') {
+                // Convert through common language
+                const intermediate = translateFromMystical(inputText, fromLang);
+                result = translateToMystical(intermediate, toLang);
+            } else {
+                result = inputText; // Common to common
+            }
+
+            // Add some mystical flair to the output
+            if (toLang !== 'common') {
+                result = '✦ ' + result + ' ✦';
+            }
+
+            outputText.value = result;
+        }
+
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+        }
+
+        function swapLanguages() {
+            const fromLang = document.getElementById('fromLang');
+            const toLang = document.getElementById('toLang');
+            const temp = fromLang.value;
+            fromLang.value = toLang.value;
+            toLang.value = temp;
+        }
+
+        function checkSpell() {
+            const spellInput = document.getElementById('spellInput').value;
+            const resultDiv = document.getElementById('spellResult');
+            
+            if (!spellInput.trim()) {
+                resultDiv.innerHTML = '<span style="color: #ff6666;">Please enter a spell to validate.</span>';
+                return;
+            }
+
+            // Check CamelCase format
+            const isCamelCase = /^[A-Z][a-zA-Z]*$/.test(spellInput) && 
+                               spellInput !== spellInput.toLowerCase() && 
+                               spellInput !== spellInput.toUpperCase();
+
+            if (isCamelCase) {
+                const arcaneTranslation = translateToMystical(spellInput, 'arcane');
+                resultDiv.innerHTML = `
+                    <span style="color: #66ff66;">✓ VALID CAMELCASE SPELL</span><br>
+                    <strong>Spell:</strong> ${spellInput}<br>
+                    <strong>Arcane Form:</strong> ${arcaneTranslation}<br>
+                    <span style="color: #ffff66;">Ready for casting!</span>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <span style="color: #ff6666;">✗ INVALID SPELL FORMAT</span><br>
+                    <strong>Error:</strong> Spell must be in CamelCase format<br>
+                    <strong>Example:</strong> "FireBall" not "fireball" or "FIREBALL"<br>
+                    <span style="color: #ff9966;">Casting this spell may cause unintended effects!</span>
+                `;
+            }
+        }
+
+        // Initialize with main translator open
+        window.onload = function() {
+            // Nothing to do, main translator is open by default
+        }
+    </script>
+</body>
+</html>

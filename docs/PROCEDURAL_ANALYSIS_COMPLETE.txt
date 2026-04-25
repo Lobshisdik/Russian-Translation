@@ -1,0 +1,170 @@
+PROCEDURAL MAP SYSTEM - ANALYSIS & DOCUMENTATION COMPLETE
+=========================================================
+
+TASK COMPLETED:
+- Examined all procedural map plugins (except ProceduralMapDB.js as requested)
+- Updated CLAUDE.md with comprehensive plugin documentation
+- Created detailed system improvement roadmap
+- Generated quick reference guides
+
+FILES CREATED/MODIFIED:
+======================
+
+1. CLAUDE.md (UPDATED)
+   - Added 260+ lines in new "PROCEDURAL MAP GENERATION SYSTEM" section
+   - Covers all 7 procedural plugins with details on:
+     * Core architecture and pipeline
+     * Getting current biome/coordinates code examples
+     * Variable storage locations
+     * Each plugin's purpose, exports, key functions
+     * Biome types (roads, dungeons, villages, cities, caves, mountains)
+     * Feature parsing and terrain systems
+     * Water handling and region data
+
+2. PROCEDURAL_SYSTEM_IMPROVEMENTS.md (NEW - 600+ lines)
+   - Current state analysis (strengths & limitations)
+   - Three-phase improvement roadmap with detailed examples
+   - Phase 1: Foundational improvements (1-2 weeks)
+     * Enhanced biome definitions
+     * Subbiome variants
+     * Population system
+     * Historical events
+   - Phase 2: Structural complexity (2-3 weeks)
+     * Multi-stage settlement evolution
+     * Faction & territory system
+     * Dungeon themes
+     * Monster population simulation
+   - Phase 3: Advanced features (3-4 weeks)
+     * Political systems
+     * Environmental simulation
+     * Economic systems
+     * Deep time simulation
+   - Detailed implementation examples for each feature
+   - Technical checklist and performance considerations
+   - End-to-end example showing integrated systems
+
+3. PROCEDURAL_SYSTEM_SUMMARY.md (NEW - 250+ lines)
+   Quick reference guide covering:
+   - What's documented in each file
+   - How to use the documentation
+   - Key takeaways
+   - Essential code snippets for common tasks
+
+KEY INSIGHTS FROM ANALYSIS:
+==========================
+
+SYSTEM ARCHITECTURE:
+- Modular pipeline: Utils → Roads → Structures → BiomeGenerator
+- Uses seeded RNG for deterministic reproduction
+- All generation based on world coordinates
+- Clean integration via window.ProcGen* globals
+
+CURRENT CAPABILITIES:
+✓ Multiple biome types (6+ types with specialized generation)
+✓ Road layouts (linear, cross, T-junctions, corners)
+✓ Structure generation (dungeons with BSP, villages with organic roads, grid cities)
+✓ Terrain features (multi-tile objects, water handling, biome blending)
+✓ Cave systems (3 different generation methods)
+✓ Debug tools for visualization
+
+MISSING ELEMENTS (For DF-like depth):
+✗ Faction/population systems
+✗ Settlement evolution over time
+✗ Dungeon theming
+✗ Monster ecosystem simulation
+✗ World history simulation
+✗ Environmental/seasonal variation
+✗ Politics and diplomatic systems
+✗ Economic simulation
+
+GETTING CURRENT BIOME (Essential Code):
+========================================
+
+// From world map (315)
+const worldX = $gameVariables.value(43);
+const worldY = $gameVariables.value(44);
+const worldTile = $gameMap.tileId(worldX, worldY, 0);
+const biomeName = window.ProcGenUtils.getBiomeForWorldTile(worldTile);
+
+// From procedural map (636)
+const procData = $gameSystem._procGenData;
+const isBiome = procData.currentBiomeName;
+const isSeed = procData.currentSeed;
+const isUnderground = procData.underground;
+
+PLUGIN DEPENDENCY CHAIN:
+=======================
+
+1. ProceduralMapUtils.js (FOUNDATION)
+   ├─ Noise generation (Perlin, smooth, FBM)
+   ├─ Biome lookups
+   ├─ Terrain feature parsing
+   └─ Coordinate utilities
+
+2. ProceduralMapRoadGenerator.js
+   ├─ Uses: ProceduralMapUtils
+   └─ Generates: Linear/intersection/corner roads
+
+3. ProceduralMapStructureGenerator.js
+   ├─ Uses: ProceduralMapUtils
+   └─ Generates: Dungeons, Villages, Cities
+
+4. ProceduralMapBiomeGenerator.js (ORCHESTRATOR)
+   ├─ Uses: All above + Prefabs
+   ├─ Routes to specialized generators
+   ├─ Handles caves, mountains, blending
+   └─ Plugin commands: startProcGen, stopProcGen, goDown, goUp
+
+5. ProceduralMapPrefabs.js
+   └─ Places objects/NPCs on generated maps
+
+6. ProceduralMapDebugger.js
+   └─ F9 overlay for visualization
+
+IMPROVEMENT STRATEGY:
+====================
+
+PHASE 1 (1-2 weeks) - Start here, highest ROI:
+- Extend biome definitions with environment properties
+- Add subbiome variants via Perlin noise
+- Implement population system for buildings
+- Generate historical event timelines
+
+Result: 30% more visual variety, richer NPC interactions
+
+PHASE 2 (2-3 weeks) - Build on phase 1:
+- Multi-stage settlement evolution
+- Faction system with territories
+- Dungeon themes affecting structure
+- Monster population ecosystems
+
+Result: Unique settlements, themed dungeons, ecosystem depth
+
+PHASE 3 (3-4 weeks) - Polish & integration:
+- Connect factions to quests
+- Use history in encounters
+- Political relationships
+- Emergent storytelling
+
+Result: World feels alive and reactive
+
+The roadmap shows clear implementation path from current strength
+to Dwarf Fortress-like world complexity.
+
+NEXT STEPS:
+===========
+
+1. Review PROCEDURAL_SYSTEM_IMPROVEMENTS.md
+2. Decide which Phase 1 feature to implement first
+3. Start with one biome (recommend: Forest)
+4. Implement end-to-end, then scale to other biomes
+5. Use CLAUDE.md as reference for plugin details
+6. Reference SUMMARY.md for quick lookups during coding
+
+All documentation is ready for implementation.
+System is architecturally sound and ready for expansion.
+
+========================================
+Generated: Analysis Complete
+Status: Ready for Implementation
+========================================

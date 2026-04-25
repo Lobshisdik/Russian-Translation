@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Trucker Society - Navigating the Encompassing Road</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            margin: 0;
+            padding: 0;
+            color: #eee3b8;
+            background-image: url('1.jpg');
+            background-repeat: repeat;
+            background-size: 200px;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #16213e, #0f3460);
+            color: #eee3b8;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #e94560;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: rgba(233, 69, 96, 0.8);
+            border: 2px solid #e94560;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher:hover {
+            background-color: #e94560;
+            transform: scale(1.05);
+        }
+        
+        .truck-logo {
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .nav-bar {
+            background-color: #0f3460;
+            border-bottom: 2px solid #e94560;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: #eee3b8;
+            text-decoration: none;
+            margin: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px 12px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #e94560;
+            border: 1px solid #e94560;
+            background-color: rgba(233, 69, 96, 0.1);
+        }
+        
+        .main-content {
+            background-color: rgba(42, 42, 84, 0.9);
+            border: 2px solid #e94560;
+            padding: 25px;
+            margin: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .section {
+            display: none;
+            background-color: rgba(21, 35, 56, 0.8);
+            border: 1px solid #16213e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .highlight-box {
+            background-color: #e94560;
+            color: #fff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .truck-specs {
+            background-color: rgba(15, 52, 96, 0.7);
+            border: 2px solid #0f3460;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            background-color: #16213e;
+            border-top: 2px solid #e94560;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .update-ticker {
+            background-color: #e94560;
+            color: #fff;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .road-badge {
+            background-color: #0f3460;
+            color: #eee3b8;
+            padding: 4px 10px;
+            font-size: 11px;
+            border-radius: 3px;
+            margin: 0 5px;
+            border: 1px solid #e94560;
+        }
+        
+        .warning-box {
+            background: repeating-linear-gradient(
+                45deg,
+                #e94560,
+                #e94560 10px,
+                #16213e 10px,
+                #16213e 20px
+            );
+            border: 3px solid #e94560;
+            padding: 15px;
+            margin: 15px 0;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .bubba-special {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            border: 3px solid #eee3b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(233, 69, 96, 0.3);
+        }
+        
+        .member-card {
+            background-color: rgba(15, 52, 96, 0.6);
+            border: 1px solid #e94560;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        
+        .route-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .route-card {
+            background-color: rgba(21, 35, 56, 0.9);
+            border: 2px solid #0f3460;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        h1, h2, h3 {
+            color: #eee3b8;
+            text-shadow: 1px 1px 2px #000;
+        }
+        
+        .blinking {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        li:before {
+            content: "🚛 ";
+            margin-right: 8px;
+        }
+        
+        .nokia-highlight {
+            background-color: #2a5aa0;
+            color: #fff;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .dimensional-tech {
+            background: linear-gradient(90deg, #16213e, #0f3460, #16213e);
+            border: 2px solid #e94560;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .lang-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <span class="blinking lang-en">*** ROAD STATUS UPDATE: Loop detected on Route 66 sector 7 - Anoki frequency adjustments recommended ***</span>
+        <span class="blinking lang-it lang-hidden">*** AGGIORNAMENTO STATO STRADA: Loop rilevato su Rotta 66 settore 7 - raccomandati aggiustamenti frequenza Anoki ***</span>
+    </div>
+
+    <div class="header">
+        <div class="language-switcher" onclick="toggleLanguage()">
+            <span class="lang-en">🇮🇹 Italiano</span>
+            <span class="lang-it lang-hidden">🇬🇧 English</span>
+        </div>
+        
+        <div class="truck-logo">🚛 TRUCKER SOCIETY 🚛</div>
+        <p class="lang-en">Knights of the Encompassing Road</p>
+        <p class="lang-it lang-hidden">Cavalieri della Strada Onnicomprensiva</p>
+        
+        <span class="road-badge lang-en">TEMPORAL-NAV</span>
+        <span class="road-badge lang-en">LOOP-GUARD</span>
+        <span class="road-badge lang-en">DIMENSION-FREIGHT</span>
+        <span class="road-badge lang-it lang-hidden">NAV-TEMPORALE</span>
+        <span class="road-badge lang-it lang-hidden">GUARDIA-LOOP</span>
+        <span class="road-badge lang-it lang-hidden">TRASPORTO-DIMENSIONALE</span>
+    </div>
+
+    <div class="nav-bar">
+        <a class="nav-link lang-en" onclick="showSection('home')">Road Home</a>
+        <a class="nav-link lang-en" onclick="showSection('membership')">Join the Brotherhood</a>
+        <a class="nav-link lang-en" onclick="showSection('routes')">Encompassing Routes</a>
+        <a class="nav-link lang-en" onclick="showSection('equipment')">Rig Specifications</a>
+        <a class="nav-link lang-en" onclick="showSection('bubba')">Legend of Bubba</a>
+        <a class="nav-link lang-en" onclick="showSection('safety')">Road Safety Protocols</a>
+        <a class="nav-link lang-en" onclick="showSection('contact')">CB Channel Directory</a>
+        
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('home')">Casa della Strada</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('membership')">Unisciti alla Fratellanza</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('routes')">Rotte Onnicomprensive</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('equipment')">Specifiche Camion</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('bubba')">Leggenda di Bubba</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('safety')">Protocolli di Sicurezza</a>
+        <a class="nav-link lang-it lang-hidden" onclick="showSection('contact')">Directory Canali CB</a>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="highlight-box">
+                <h2 class="lang-en">Welcome to the Trucker Society</h2>
+                <h2 class="lang-it lang-hidden">Benvenuti alla Società dei Camionisti</h2>
+                <p class="lang-en">Navigating Reality Since the Squishing</p>
+                <p class="lang-it lang-hidden">Navigando la Realtà dal Grande Schiacciamento</p>
+            </div>
+            
+            <div class="warning-box">
+                <h3 class="lang-en">⚠️ CRITICAL ROAD ALERT ⚠️</h3>
+                <h3 class="lang-it lang-hidden">⚠️ ALLERTA STRADALE CRITICA ⚠️</h3>
+                <p class="lang-en">Time anomalies detected on Interstate 40. All drivers maintain 80+ km/h to avoid temporal-loop entrapment. <span class="nokia-highlight">Anoki phones</span> mandatory for this sector.</p>
+                <p class="lang-it lang-hidden">Anomalie temporali rilevate sull'Interstate 40. Tutti i conducenti mantengano 80+ km/h per evitare intrappolamento nei loop temporali. <span class="nokia-highlight">Telefoni Anoki</span> obbligatori per questo settore.</p>
+            </div>
+            
+            <h3 class="lang-en">About the Trucker Society</h3>
+            <h3 class="lang-it lang-hidden">Riguardo la Società dei Camionisti</h3>
+            
+            <p class="lang-en">Since the great Squishing of '97, reality ain't what it used to be. But we truckers? We adapted. We're the lifeline between the fragments of what's left, the knights of the Encompassing Road that holds this whole mess together.</p>
+            <p class="lang-it lang-hidden">Dal grande Schiacciamento del '97, la realtà non è più quella di una volta. Ma noi camionisti? Ci siamo adattati. Siamo la linea vitale tra i frammenti di ciò che rimane, i cavalieri della Strada Onnicomprensiva che tiene insieme tutto questo casino.</p>
+            
+            <p class="lang-en">We deliver more than just cargo - we deliver hope, supplies, and connections across dimensional rifts, time loops, and road shadows that would break lesser folk. Our rigs are equipped with temporal-stabilization systems, and our hearts are tougher than our <span class="nokia-highlight">Anoki 3310s</span>.</p>
+            <p class="lang-it lang-hidden">Consegniamo più che semplice carico - consegniamo speranza, forniture e connessioni attraverso spaccature dimensionali, loop temporali e ombre stradali che spezzerebbero gente meno forte. I nostri camion sono equipaggiati con sistemi di stabilizzazione temporale, e i nostri cuori sono più resistenti dei nostri <span class="nokia-highlight">Anoki 3310</span>.</p>
+            
+            <div class="dimensional-tech">
+                <h4 class="lang-en">Current Operational Status</h4>
+                <h4 class="lang-it lang-hidden">Stato Operativo Attuale</h4>
+                
+                <p class="lang-en"><strong>Active Drivers:</strong> 2,847 registered members<br>
+                <strong>Dimensional Routes:</strong> 156 verified pathways<br>
+                <strong>Loop Escapes This Month:</strong> 23 successful extractions<br>
+                <strong>Cargo Delivered:</strong> 450,000 tons interdimensional freight</p>
+                
+                <p class="lang-it lang-hidden"><strong>Conducenti Attivi:</strong> 2.847 membri registrati<br>
+                <strong>Rotte Dimensionali:</strong> 156 percorsi verificati<br>
+                <strong>Fughe dai Loop Questo Mese:</strong> 23 estrazioni riuscite<br>
+                <strong>Carico Consegnato:</strong> 450.000 tonnellate merci interdimensionali</p>
+            </div>
+            
+            <p class="lang-en">Remember: Keep your <span class="nokia-highlight">Anoki charged</span>, your speed above 80, and your CB on channel 19. We're all family out here on the Encompassing Road.</p>
+            <p class="lang-it lang-hidden">Ricordate: Tenete il vostro <span class="nokia-highlight">Anoki carico</span>, la vostra velocità sopra gli 80, e la vostra CB sul canale 19. Siamo tutti famiglia qui sulla Strada Onnicomprensiva.</p>
+        </div>
+
+        <div id="membership" class="section">
+            <h3 class="lang-en">Join the Brotherhood of the Road</h3>
+            <h3 class="lang-it lang-hidden">Unisciti alla Fratellanza della Strada</h3>
+            
+            <div class="highlight-box">
+                <span class="lang-en">Requirements for Trucker Society Membership</span>
+                <span class="lang-it lang-hidden">Requisiti per l'Adesione alla Società dei Camionisti</span>
+            </div>
+            
+            <h4 class="lang-en">Basic Requirements:</h4>
+            <h4 class="lang-it lang-hidden">Requisiti Base:</h4>
+            
+            <ul class="lang-en">
+                <li>Valid CDL (Commercial Driver's License) - EU recognized</li>
+                <li>Completion of Temporal-Navigation Safety Course</li>
+                <li>Psychometric evaluation for loop-resistance</li>
+                <li>Ownership of functional <span class="nokia-highlight">Anoki phone</span> (3310 or newer)</li>
+                <li>Minimum 50 hours documented Encompassing Road experience</li>
+            </ul>
+            
+            <ul class="lang-it lang-hidden">
+                <li>Patente CDL valida (Patente Conducente Commerciale) - riconosciuta UE</li>
+                <li>Completamento del Corso di Sicurezza Navigazione Temporale</li>
+                <li>Valutazione psicometrica per resistenza ai loop</li>
+                <li>Possesso di <span class="nokia-highlight">telefono Anoki</span> funzionante (3310 o più recente)</li>
+                <li>Minimo 50 ore documentate esperienza Strada Onnicomprensiva</li>
+            </ul>
+            
+            <div class="member-card">
+                <h4 class="lang-en">Rookie Driver (0-500 road hours)</h4>
+                <h4 class="lang-it lang-hidden">Conducente Novizio (0-500 ore strada)</h4>
+                
+                <p class="lang-en"><strong>Benefits:</strong> Basic route access, emergency CB support, loop extraction assistance</p>
+                <p class="lang-it lang-hidden"><strong>Benefici:</strong> Accesso rotte base, supporto CB emergenza, assistenza estrazione loop</p>
+                
+                <p class="lang-en"><strong>Clearance:</strong> Standard dimensional corridors only</p>
+                <p class="lang-it lang-hidden"><strong>Autorizzazione:</strong> Solo corridoi dimensionali standard</p>
+            </div>
+            
+            <div class="member-card">
+                <h4 class="lang-en">Road Veteran (500-2000 hours)</h4>
+                <h4 class="lang-it lang-hidden">Veterano della Strada (500-2000 ore)</h4>
+                
+                <p class="lang-en"><strong>Benefits:</strong> Advanced route clearance, cargo priority, family support fund</p>
+                <p class="lang-it lang-hidden"><strong>Benefici:</strong> Autorizzazione rotte avanzate, priorità carico, fondo supporto famiglia</p>
+                
+                <p class="lang-en"><strong>Clearance:</strong> Level 2 temporal zones, minor rift crossings</p>
+                <p class="lang-it lang-hidden"><strong>Autorizzazione:</strong> Zone temporali livello 2, attraversamenti spaccature minori</p>
+            </div>
+            
+            <div class="member-card">
+                <h4 class="lang-en">Knight of the Road (2000+ hours)</h4>
+                <h4 class="lang-it lang-hidden">Cavaliere della Strada (2000+ ore)</h4>
+                
+                <p class="lang-en"><strong>Benefits:</strong> Full route access, mentoring privileges, voting rights</p>
+                <p class="lang-it lang-hidden"><strong>Benefici:</strong> Accesso completo rotte, privilegi mentoring, diritti voto</p>
+                
+                <p class="lang-en"><strong>Clearance:</strong> All dimensional sectors, emergency response team eligibility</p>
+                <p class="lang-it lang-hidden"><strong>Autorizzazione:</strong> Tutti i settori dimensionali, idoneità squadra risposta emergenze</p>
+            </div>
+            
+            <div class="truck-specs">
+                <h4 class="lang-en">Application Process</h4>
+                <h4 class="lang-it lang-hidden">Processo di Candidatura</h4>
+                
+                <div class="lang-en">
+                    <p>1. Download application form from nearest Road Stop terminal<br>
+                    2. Complete temporal-stability assessment<br>
+                    3. Submit three references from current Society members<br>
+                    4. Pass practical driving test on Encompassing Road sector 12<br>
+                    5. Oath ceremony at annual Brotherhood Gathering</p>
+                    
+                    <p><strong>Application Fee:</strong> €500 (includes emergency beacon installation)</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p>1. Scarica modulo candidatura dal terminale Road Stop più vicino<br>
+                    2. Completa valutazione stabilità temporale<br>
+                    3. Presenta tre referenze da membri attuali della Società<br>
+                    4. Supera test guida pratico su settore 12 Strada Onnicomprensiva<br>
+                    5. Cerimonia giuramento al Raduno annuale Fratellanza</p>
+                    
+                    <p><strong>Tassa Candidatura:</strong> €500 (include installazione beacon emergenza)</p>
+                </div>
+            </div>
+            
+            <p class="lang-en"><strong>Contact:</strong> <a href="mailto:membership@hexagram.corp">membership@hexagram.corp</a></p>
+            <p class="lang-it lang-hidden"><strong>Contatto:</strong> <a href="mailto:membership@hexagram.corp">membership@hexagram.corp</a></p>
+        </div>
+
+        <div id="routes" class="section">
+            <h3 class="lang-en">Encompassing Road Routes</h3>
+            <h3 class="lang-it lang-hidden">Rotte della Strada Onnicomprensiva</h3>
+            
+            <div class="warning-box">
+                <span class="lang-en">Route classifications based on dimensional stability and temporal anomaly frequency</span>
+                <span class="lang-it lang-hidden">Classificazioni rotte basate su stabilità dimensionale e frequenza anomalie temporali</span>
+            </div>
+            
+            <div class="route-grid">
+                <div class="route-card">
+                    <h4 class="lang-en">Route Alpha-7 (The Classic)</h4>
+                    <h4 class="lang-it lang-hidden">Rotta Alpha-7 (La Classica)</h4>
+                    
+                    <div class="lang-en">
+                        <p><strong>Path:</strong> Berlin → Prague → Vienna<br>
+                        <strong>Difficulty:</strong> ⭐⭐<br>
+                        <strong>Time Distortion:</strong> Minimal<br>
+                        <strong>Special Notes:</strong> Ideal for rookie drivers, well-maintained Anoki relay stations</p>
+                    </div>
+                    
+                    <div class="lang-it lang-hidden">
+                        <p><strong>Percorso:</strong> Berlino → Praga → Vienna<br>
+                        <strong>Difficoltà:</strong> ⭐⭐<br>
+                        <strong>Distorsione Temporale:</strong> Minima<br>
+                        <strong>Note Speciali:</strong> Ideale per conducenti novizi, stazioni relay Anoki ben mantenute</p>
+                    </div>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Route Beta-15 (The Gauntlet)</h4>
+                    <h4 class="lang-it lang-hidden">Rotta Beta-15 (La Sfida)</h4>
+                    
+                    <div class="lang-en">
+                        <p><strong>Path:</strong> London → Dover → Dimensional Breach → Calais<br>
+                        <strong>Difficulty:</strong> ⭐⭐⭐⭐<br>
+                        <strong>Time Distortion:</strong> High<br>
+                        <strong>Special Notes:</strong> Channel crossing through unstable rift, experienced drivers only</p>
+                    </div>
+                    
+                    <div class="lang-it lang-hidden">
+                        <p><strong>Percorso:</strong> Londra → Dover → Breccia Dimensionale → Calais<br>
+                        <strong>Difficoltà:</strong> ⭐⭐⭐⭐<br>
+                        <strong>Distorsione Temporale:</strong> Alta<br>
+                        <strong>Note Speciali:</strong> Attraversamento Canale tramite spaccatura instabile, solo conducenti esperti</p>
+                    </div>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Route Gamma-3 (The Endless)</h4>
+                    <h4 class="lang-it lang-hidden">Rotta Gamma-3 (L'Infinita)</h4>
+                    
+                    <div class="lang-en">
+                        <p><strong>Path:</strong> Madrid → Barcelona → Loop Junction → ???<br>
+                        <strong>Difficulty:</strong> ⭐⭐⭐⭐⭐<br>
+                        <strong>Time Distortion:</strong> Extreme<br>
+                        <strong>Special Notes:</strong> Route endpoint varies, Anoki essential for navigation</p>
+                    </div>
+                    
+                    <div class="lang-it lang-hidden">
+                        <p><strong>Percorso:</strong> Madrid → Barcellona → Giunzione Loop → ???<br>
+                        <strong>Difficoltà:</strong> ⭐⭐⭐⭐⭐<br>
+                        <strong>Distorsione Temporale:</strong> Estrema<br>
+                        <strong>Note Speciali:</strong> Punto finale rotta variabile, Anoki essenziale per navigazione</p>
+                    </div>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Route Delta-22 (The Lifeline)</h4>
+                    <h4 class="lang-it lang-hidden">Rotta Delta-22 (La Linea Vitale)</h4>
+                    
+                    <div class="lang-en">
+                        <p><strong>Path:</strong> Amsterdam → Hamburg → Copenhagen<br>
+                        <strong>Difficulty:</strong> ⭐⭐⭐<br>
+                        <strong>Time Distortion:</strong> Moderate<br>
+                        <strong>Special Notes:</strong> Critical supply route, high-priority cargo only</p>
+                    </div>
+                    
+                    <div class="lang-it lang-hidden">
+                        <p><strong>Percorso:</strong> Amsterdam → Amburgo → Copenaghen<br>
+                        <strong>Difficoltà:</strong> ⭐⭐⭐<br>
+                        <strong>Distorsione Temporale:</strong> Moderata<br>
+                        <strong>Note Speciali:</strong> Rotta rifornimenti critica, solo carico alta priorità</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dimensional-tech">
+                <h4 class="lang-en">Navigation Protocols</h4>
+                <h4 class="lang-it lang-hidden">Protocolli di Navigazione</h4>
+                
+                <div class="lang-en">
+                    <p><strong>Anoki Frequency Settings:</strong><br>
+                    - Standard routes: 433.92 MHz<br>
+                    - Temporal zones: 915.0 MHz<br>
+                    - Emergency beacon: 121.5 MHz</p>
+                    
+                    <p><strong>Speed Requirements:</strong><br>
+                    - Minimum: 80 km/h (loop avoidance)<br>
+                    - Optimal: 120 km/h (temporal stability)<br>
+                    - Maximum: 180 km/h (dimensional stress limit)</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Impostazioni Frequenza Anoki:</strong><br>
+                    - Rotte standard: 433.92 MHz<br>
+                    - Zone temporali: 915.0 MHz<br>
+                    - Beacon emergenza: 121.5 MHz</p>
+                    
+                    <p><strong>Requisiti Velocità:</strong><br>
+                    - Minimo: 80 km/h (evitare loop)<br>
+                    - Ottimale: 120 km/h (stabilità temporale)<br>
+                    - Massimo: 180 km/h (limite stress dimensionale)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="equipment" class="section">
+            <h3 class="lang-en">Rig Specifications & Equipment</h3>
+            <h3 class="lang-it lang-hidden">Specifiche Camion e Equipaggiamento</h3>
+            
+            <div class="truck-specs">
+                <h4 class="lang-en">Standard Trucker Society Rig Configuration</h4>
+                <h4 class="lang-it lang-hidden">Configurazione Standard Camion Società Camionisti</h4>
+                
+                <div class="lang-en">
+                    <p><strong>Engine Requirements:</strong><br>
+                    - Minimum 400 HP diesel engine<br>
+                    - Temporal-field generator (Esoteric Heavy Industries approved)<br>
+                    - Dual-fuel system (diesel/dimensional-energy hybrid)<br>
+                    - Emergency brake system with instant-stop capability</p>
+                    
+                    <p><strong>Navigation Systems:</strong><br>
+                    - <span class="nokia-highlight">Anoki 3310</span> or newer (mounted in cab)<br>
+                    - Compass (magnetic anomaly detection)<br>
+                    - Road shadow proximity sensors<br>
+                    - Dimensional rift scanner (optional but recommended)</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Requisiti Motore:</strong><br>
+                    - Minimo motore diesel 400 HP<br>
+                    - Generatore campo temporale (approvato Esoteric Heavy Industries)<br>
+                    - Sistema doppio carburante (ibrido diesel/energia dimensionale)<br>
+                    - Sistema frenata emergenza con capacità arresto istantaneo</p>
+                    
+                    <p><strong>Sistemi Navigazione:</strong><br>
+                    - <span class="nokia-highlight">Anoki 3310</span> o più recente (montato in cabina)<br>
+                    - Bussola (rilevazione anomalie magnetiche)<br>
+                    - Sensori prossimità ombre stradali<br>
+                    - Scanner spaccature dimensionali (opzionale ma raccomandato)</p>
+                </div>
+            </div>
+            
+            <div class="dimensional-tech">
+                <h4 class="lang-en">Communication Equipment</h4>
+                <h4 class="lang-it lang-hidden">Equipaggiamento Comunicazione</h4>
+                
+                <div class="lang-en">
+                    <p><strong>CB Radio Setup:</strong><br>
+                    - Channel 19: Standard trucker communications<br>
+                    - Channel 9: Emergency frequency<br>
+                    - Channel 27: Society-only encrypted communications<br>
+                    - Channel 40: Temporal anomaly reporting</p>
+                    
+                    <p><strong>Anoki Phone Configuration:</strong><br>
+                    - Snake game (cognitive stability test)<br>
+                    - Custom firmware for temporal navigation<br>
+                    - Emergency beacon transmitter<br>
+                    - Loop-escape signal generator</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Setup Radio CB:</strong><br>
+                    - Canale 19: Comunicazioni standard camionisti<br>
+                    - Canale 9: Frequenza emergenza<br>
+                    - Canale 27: Comunicazioni criptate solo Società<br>
+                    - Canale 40: Segnalazione anomalie temporali</p>
+                    
+                    <p><strong>Configurazione Telefono Anoki:</strong><br>
+                    - Gioco Snake (test stabilità cognitiva)<br>
+                    - Firmware personalizzato per navigazione temporale<br>
+                    - Trasmettitore beacon emergenza<br>
+                    - Generatore segnale fuga-loop</p>
+                </div>
+            </div>
+            
+            <div class="truck-specs">
+                <h4 class="lang-en">Safety Equipment (Mandatory)</h4>
+                <h4 class="lang-it lang-hidden">Equipaggiamento Sicurezza (Obbligatorio)</h4>
+                
+                <ul class="lang-en">
+                    <li>Temporal stabilization anchor</li>
+                    <li>Road shadow repellent (industrial grade)</li>
+                    <li>Emergency food rations (3-day minimum)</li>
+                    <li>Water purification tablets</li>
+                    <li>Backup Anoki battery pack</li>
+                    <li>First aid kit with anti-temporal sickness medication</li>
+                    <li>Flare gun (dimensional-spectrum visible)</li>
+                    <li>Fire extinguisher (works in temporal loops)</li>
+                </ul>
+                
+                <ul class="lang-it lang-hidden">
+                    <li>Ancora stabilizzazione temporale</li>
+                    <li>Repellente ombre stradali (grado industriale)</li>
+                    <li>Razioni cibo emergenza (minimo 3 giorni)</li>
+                    <li>Compresse purificazione acqua</li>
+                    <li>Pacco batteria Anoki backup</li>
+                    <li>Kit primo soccorso con medicazione anti-malattia temporale</li>
+                    <li>Pistola bengala (visibile spettro dimensionale)</li>
+                    <li>Estintore (funziona nei loop temporali)</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <p class="lang-en"><strong>Equipment Supplier:</strong> Authorized dealers only. Contact Society headquarters for approved vendor list. Counterfeit Anoki phones have resulted in permanent loop entrapment.</p>
+                <p class="lang-it lang-hidden"><strong>Fornitore Equipaggiamento:</strong> Solo rivenditori autorizzati. Contattare sede centrale Società per lista venditori approvati. Telefoni Anoki contraffatti hanno causato intrappolamento permanente nei loop.</p>
+            </div>
+        </div>
+
+        <div id="bubba" class="section">
+            <div class="bubba-special">
+                <h2 class="lang-en">🌟 THE LEGEND OF BUBBA 🌟</h2>
+                <h2 class="lang-it lang-hidden">🌟 LA LEGGENDA DI BUBBA 🌟</h2>
+                <h3 class="lang-en">The Mechanic Who Changed Everything</h3>
+                <h3 class="lang-it lang-hidden">Il Meccanico Che Cambiò Tutto</h3>
+            </div>
+            
+            <p class="lang-en">Every trucker worth their CB knows the name Bubba. Marcus "Bubba" Johnson, the greatest driver to ever grip a steering wheel on the Encompassing Road. This ain't just some tall tale - this is the real deal, the legend who put Westford, Texas on the map and showed us all what it means to be a true knight of the road.</p>
+            <p class="lang-it lang-hidden">Ogni camionista che si rispetti conosce il nome Bubba. Marcus "Bubba" Johnson, il più grande conducente ad aver mai impugnato un volante sulla Strada Onnicomprensiva. Questa non è solo una storia inventata - questa è la verità, la leggenda che mise Westford, Texas sulla mappa e ci mostrò a tutti cosa significa essere un vero cavaliere della strada.</p>
+            
+            <div class="dimensional-tech">
+                <h4 class="lang-en">Bubba's Vital Stats</h4>
+                <h4 class="lang-it lang-hidden">Statistiche Vitali di Bubba</h4>
+                
+                <div class="lang-en">
+                    <p><strong>Full Name:</strong> Marcus "Bubba" Johnson<br>
+                    <strong>Origin:</strong> Westford, Texas (pre-Squishing)<br>
+                    <strong>Years Active:</strong> 1995 - Present (dimensionally speaking)<br>
+                    <strong>Rig:</strong> "The Beast" - Modified Peterbilt 379<br>
+                    <strong>Famous Route:</strong> Route 66 Eternal Loop Escape (80km/h constant speed)</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Nome Completo:</strong> Marcus "Bubba" Johnson<br>
+                    <strong>Origine:</strong> Westford, Texas (pre-Schiacciamento)<br>
+                    <strong>Anni Attivo:</strong> 1995 - Presente (dimensionalmente parlando)<br>
+                    <strong>Camion:</strong> "La Bestia" - Peterbilt 379 Modificato<br>
+                    <strong>Rotta Famosa:</strong> Fuga Loop Eterno Rotta 66 (velocità costante 80km/h)</p>
+                </div>
+            </div>
+            
+            <h4 class="lang-en">The Liminal Engine</h4>
+            <h4 class="lang-it lang-hidden">Il Motore Liminale</h4>
+            
+            <p class="lang-en">Before anyone had heard of temporal-field generators, Bubba was tinkering in his garage in Westford, building what he called the "Liminal Engine." This wasn't just some fancy gadget - this was revolutionary tech that could bend the rules of space and time themselves.</p>
+            <p class="lang-it lang-hidden">Prima che chiunque avesse sentito parlare di generatori di campo temporale, Bubba stava armeggiando nel suo garage a Westford, costruendo quello che chiamava il "Motore Liminale." Questo non era solo qualche congegno di fantasia - era tecnologia rivoluzionaria che poteva piegare le regole dello spazio e del tempo stesso.</p>
+            
+            <p class="lang-en">When the Squishing hit in '97, most folks panicked. Not Bubba. He fired up The Beast, activated that Liminal Engine, and started mapping the new reality. He was the first to document the 80km/h rule, the first to successfully navigate a time loop, and the first to make contact with those libertarian gods in the Desert of Forgotten Gods.</p>
+            <p class="lang-it lang-hidden">Quando lo Schiacciamento colpì nel '97, la maggior parte della gente andò in panico. Non Bubba. Accese La Bestia, attivò quel Motore Liminale, e iniziò a mappare la nuova realtà. Fu il primo a documentare la regola degli 80km/h, il primo a navigare con successo un loop temporale, e il primo a fare contatto con quegli dei libertari nel Deserto degli Dei Dimenticati.</p>
+            
+            <div class="bubba-special">
+                <h4 class="lang-en">The Great Route 66 Escape</h4>
+                <h4 class="lang-it lang-hidden">La Grande Fuga della Rotta 66</h4>
+                
+                <p class="lang-en">Picture this: Bubba's driving Route 66, minding his own business, when BAM - time loop. Same truck stop, same sunset, same country song on the radio, over and over. Lesser drivers would've lost their minds. But Bubba? He figured out that maintaining exactly 80km/h would break the loop.</p>
+                <p class="lang-it lang-hidden">Immaginate questo: Bubba sta guidando sulla Rotta 66, facendo i fatti suoi, quando BAM - loop temporale. Stessa stazione di servizio, stesso tramonto, stessa canzone country alla radio, ancora e ancora. Conducenti minori avrebbero perso la testa. Ma Bubba? Capì che mantenere esattamente 80km/h avrebbe rotto il loop.</p>
+                
+                <p class="lang-en">For 72 hours straight (real time), Bubba kept that speedometer needle steady. No bathroom breaks, no food stops, just pure determination and a <span class="nokia-highlight">Anoki 3210</span> playing Snake to keep his mind sharp. When he finally broke free, he'd discovered the fundamental rule that keeps us all moving today.</p>
+                <p class="lang-it lang-hidden">Per 72 ore consecutive (tempo reale), Bubba tenne quell'ago del tachimetro stabile. Nessuna pausa bagno, nessuna sosta cibo, solo pura determinazione e un <span class="nokia-highlight">Anoki 3210</span> che giocava a Snake per tenere la mente acuta. Quando finalmente si liberò, aveva scoperto la regola fondamentale che ci tiene tutti in movimento oggi.</p>
+            </div>
+            
+            <h4 class="lang-en">The Poker Game with Zephyrus</h4>
+            <h4 class="lang-it lang-hidden">La Partita di Poker con Zephyrus</h4>
+            
+            <p class="lang-en">In the Desert of Forgotten Gods, Bubba faced down Zephyrus, the trickster god himself, in a high-stakes poker game. The stakes? Safe passage through libertarian god territory and a magical compass that would guide him to crossroads of fate.</p>
+            <p class="lang-it lang-hidden">Nel Deserto degli Dei Dimenticati, Bubba affrontò Zephyrus, il dio imbroglione in persona, in una partita di poker ad alta posta. La posta? Passaggio sicuro attraverso il territorio degli dei libertari e una bussola magica che lo avrebbe guidato ai crocevia del destino.</p>
+            
+            <p class="lang-en">Bubba won with nothing but a pair of twos and nerves of steel. That compass still guides him today, spinning wildly until he's near something important - whether it's a dimensional rift that needs mapping or a stranded driver who needs help.</p>
+            <p class="lang-it lang-hidden">Bubba vinse con nient'altro che una coppia di due e nervi d'acciaio. Quella bussola lo guida ancora oggi, girando selvaggiamente finché non è vicino a qualcosa di importante - che si tratti di una spaccatura dimensionale che necessita mappatura o un conducente bloccato che ha bisogno di aiuto.</p>
+            
+            <div class="truck-specs">
+                <h4 class="lang-en">Bubba's Contributions to Trucker Society</h4>
+                <h4 class="lang-it lang-hidden">Contributi di Bubba alla Società dei Camionisti</h4>
+                
+                <ul class="lang-en">
+                    <li>Discovered the 80km/h temporal stability rule</li>
+                    <li>First successful dimensional cartographer</li>
+                    <li>Established emergency rescue protocols</li>
+                    <li>Founded the Anoki preservation initiative</li>
+                    <li>Created the "Beast Standard" for rig modifications</li>
+                    <li>Developed the Brotherhood Code of conduct</li>
+                </ul>
+                
+                <ul class="lang-it lang-hidden">
+                    <li>Scoprì la regola stabilità temporale 80km/h</li>
+                    <li>Primo cartografo dimensionale di successo</li>
+                    <li>Stabilì protocolli soccorso emergenza</li>
+                    <li>Fondò l'iniziativa preservazione Anoki</li>
+                    <li>Creò lo "Standard Bestia" per modifiche camion</li>
+                    <li>Sviluppò il Codice di condotta Fratellanza</li>
+                </ul>
+            </div>
+            
+            <h4 class="lang-en">Current Status</h4>
+            <h4 class="lang-it lang-hidden">Stato Attuale</h4>
+            
+            <p class="lang-en">Some say Bubba's still out there, driving the most dangerous routes, helping stranded truckers, and pushing the boundaries of what's possible on the Encompassing Road. Others claim he's transcended normal reality, becoming one with The Beast and the road itself.</p>
+            <p class="lang-it lang-hidden">Alcuni dicono che Bubba sia ancora là fuori, guidando le rotte più pericolose, aiutando camionisti bloccati, e spingendo i confini di ciò che è possibile sulla Strada Onnicomprensiva. Altri sostengono che abbia trasceso la realtà normale, diventando tutt'uno con La Bestia e la strada stessa.</p>
+            
+            <p class="lang-en">What we know for sure is that every month, somebody reports seeing a beat-up Peterbilt with Texas plates and a magical compass dashboard accessory pulling off impossible rescues in the worst temporal storms. That's Bubba for you - never could leave a fellow driver behind.</p>
+            <p class="lang-it lang-hidden">Quello che sappiamo per certo è che ogni mese, qualcuno riferisce di aver visto un Peterbilt malridotto con targhe del Texas e un accessorio bussola magica sul cruscotto che compie salvataggi impossibili nelle peggiori tempeste temporali. Questo è Bubba per voi - non è mai riuscito a lasciare indietro un collega conducente.</p>
+            
+            <div class="highlight-box">
+                <h4 class="lang-en">Bubba's Famous Words</h4>
+                <h4 class="lang-it lang-hidden">Le Famose Parole di Bubba</h4>
+                
+                <p class="lang-en"><em>"Keep your Anoki charged, your speed steady, and your eyes on the road. Reality might be broken, but a true trucker never is."</em></p>
+                <p class="lang-it lang-hidden"><em>"Tieni il tuo Anoki carico, la velocità stabile, e gli occhi sulla strada. La realtà potrebbe essere rotta, ma un vero camionista non lo è mai."</em></p>
+            </div>
+            
+            <p class="lang-en"><strong>Want to follow in Bubba's tire tracks?</strong> The Bubba Memorial Scholarship Fund provides training and equipment for aspiring drivers. Contact: <a href="mailto:bubba.memorial@hexagram.corp">bubba.memorial@hexagram.corp</a></p>
+            <p class="lang-it lang-hidden"><strong>Vuoi seguire le orme dei pneumatici di Bubba?</strong> Il Fondo Borsa di Studio Memoriale Bubba fornisce addestramento ed equipaggiamento per aspiranti conducenti. Contatto: <a href="mailto:bubba.memorial@hexagram.corp">bubba.memorial@hexagram.corp</a></p>
+        </div>
+
+        <div id="safety" class="section">
+            <h3 class="lang-en">Road Safety Protocols</h3>
+            <h3 class="lang-it lang-hidden">Protocolli di Sicurezza Stradale</h3>
+            
+            <div class="warning-box">
+                <h4 class="lang-en">⚠️ CRITICAL SAFETY INFORMATION ⚠️</h4>
+                <h4 class="lang-it lang-hidden">⚠️ INFORMAZIONI SICUREZZA CRITICHE ⚠️</h4>
+                
+                <p class="lang-en">Non-compliance with these protocols may result in temporal entrapment, dimensional displacement, or worse. Read carefully and follow exactly.</p>
+                <p class="lang-it lang-hidden">Il mancato rispetto di questi protocolli può risultare in intrappolamento temporale, spostamento dimensionale, o peggio. Leggere attentamente e seguire esattamente.</p>
+            </div>
+            
+            <h4 class="lang-en">The Golden Rules</h4>
+            <h4 class="lang-it lang-hidden">Le Regole d'Oro</h4>
+            
+            <div class="dimensional-tech">
+                <div class="lang-en">
+                    <p><strong>Rule #1:</strong> NEVER drop below 80km/h on the Encompassing Road<br>
+                    <strong>Rule #2:</strong> Keep your <span class="nokia-highlight">Anoki phone</span> charged and functional at all times<br>
+                    <strong>Rule #3:</strong> Report any road shadows immediately via CB channel 40<br>
+                    <strong>Rule #4:</strong> Never attempt to navigate temporal rifts without Society clearance<br>
+                    <strong>Rule #5:</strong> If you see Beagle on your GPS, DO NOT FOLLOW THE DIRECTIONS</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Regola #1:</strong> NON scendere MAI sotto gli 80km/h sulla Strada Onnicomprensiva<br>
+                    <strong>Regola #2:</strong> Tieni il tuo <span class="nokia-highlight">telefono Anoki</span> carico e funzionante sempre<br>
+                    <strong>Regola #3:</strong> Segnala qualsiasi ombra stradale immediatamente via CB canale 40<br>
+                    <strong>Regola #4:</strong> Non tentare mai di navigare spaccature temporali senza autorizzazione Società<br>
+                    <strong>Regola #5:</strong> Se vedi Beagle sul tuo GPS, NON SEGUIRE LE INDICAZIONI</p>
+                </div>
+            </div>
+            
+            <h4 class="lang-en">Time Loop Emergency Procedures</h4>
+            <h4 class="lang-it lang-hidden">Procedure Emergenza Loop Temporale</h4>
+            
+            <ol class="lang-en">
+                <li>Maintain current speed, do not brake suddenly</li>
+                <li>Activate Anoki emergency beacon (hold * and # simultaneously)</li>
+                <li>Focus on unique details to maintain temporal awareness</li>
+                <li>Use CB channel 9 to request extraction assistance</li>
+                <li>If speed drops below 80km/h, prepare for loop reset</li>
+            </ol>
+            
+            <ol class="lang-it lang-hidden">
+                <li>Mantieni velocità attuale, non frenare improvvisamente</li>
+                <li>Attiva beacon emergenza Anoki (tieni premuti * e # simultaneamente)</li>
+                <li>Concentrati su dettagli unici per mantenere consapevolezza temporale</li>
+                <li>Usa CB canale 9 per richiedere assistenza estrazione</li>
+                <li>Se velocità scende sotto 80km/h, preparati per reset loop</li>
+            </ol>
+            
+            <h4 class="lang-en">Road Shadow Encounter Protocol</h4>
+            <h4 class="lang-it lang-hidden">Protocollo Incontro Ombre Stradali</h4>
+            
+            <div class="truck-specs">
+                <p class="lang-en"><strong>Identification:</strong> Dark patches that move independently of light sources, accompanied by existential dread</p>
+                <p class="lang-it lang-hidden"><strong>Identificazione:</strong> Macchie scure che si muovono indipendentemente dalle fonti di luce, accompagnate da terrore esistenziale</p>
+                
+                <div class="lang-en">
+                    <p><strong>Response Actions:</strong><br>
+                    1. Do NOT attempt to drive through road shadows<br>
+                    2. Increase speed to maximum safe velocity<br>
+                    3. Use headlights on full beam<br>
+                    4. Play upbeat music to maintain psychological stability<br>
+                    5. Contact nearest Society member for backup</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Azioni di Risposta:</strong><br>
+                    1. NON tentare di guidare attraverso ombre stradali<br>
+                    2. Aumenta velocità al massimo sicuro<br>
+                    3. Usa fari al massimo<br>
+                    4. Riproduci musica allegra per mantenere stabilità psicologica<br>
+                    5. Contatta membro Società più vicino per supporto</p>
+                </div>
+            </div>
+            
+            <h4 class="lang-en">Anoki Phone Maintenance</h4>
+            <h4 class="lang-it lang-hidden">Manutenzione Telefono Anoki</h4>
+            
+            <ul class="lang-en">
+                <li>Check battery level every hour during long hauls</li>
+                <li>Test Snake game functionality (cognitive baseline)</li>
+                <li>Verify signal strength on temporal frequencies</li>
+                <li>Clean screen and keypad to prevent malfunction</li>
+                <li>Carry backup battery pack and charging cable</li>
+            </ul>
+            
+            <ul class="lang-it lang-hidden">
+                <li>Controlla livello batteria ogni ora durante lunghi viaggi</li>
+                <li>Testa funzionalità gioco Snake (baseline cognitivo)</li>
+                <li>Verifica forza segnale su frequenze temporali</li>
+                <li>Pulisci schermo e tastiera per prevenire malfunzionamenti</li>
+                <li>Porta pacco batteria backup e cavo ricarica</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h4 class="lang-en">Emergency Contacts</h4>
+                <h4 class="lang-it lang-hidden">Contatti Emergenza</h4>
+                
+                <div class="lang-en">
+                    <p><strong>Dispatch:</strong> <a href="mailto:dispatch@hexagram.corp">dispatch@hexagram.corp</a><br>
+                    <strong>Medical Emergency:</strong> <a href="mailto:medical@hexagram.corp">medical@hexagram.corp</a><br>
+                    <strong>Temporal Assistance:</strong> <a href="mailto:timehelp@hexagram.corp">timehelp@hexagram.corp</a><br>
+                    <strong>Society HQ:</strong> <a href="mailto:headquarters@hexagram.corp">headquarters@hexagram.corp</a></p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Spedizione:</strong> <a href="mailto:dispatch@hexagram.corp">dispatch@hexagram.corp</a><br>
+                    <strong>Emergenza Medica:</strong> <a href="mailto:medical@hexagram.corp">medical@hexagram.corp</a><br>
+                    <strong>Assistenza Temporale:</strong> <a href="mailto:timehelp@hexagram.corp">timehelp@hexagram.corp</a><br>
+                    <strong>Sede Centrale Società:</strong> <a href="mailto:headquarters@hexagram.corp">headquarters@hexagram.corp</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h3 class="lang-en">CB Channel Directory</h3>
+            <h3 class="lang-it lang-hidden">Directory Canali CB</h3>
+            
+            <div class="highlight-box">
+                <h4 class="lang-en">Official Trucker Society Communication Channels</h4>
+                <h4 class="lang-it lang-hidden">Canali Comunicazione Ufficiali Società Camionisti</h4>
+            </div>
+            
+            <div class="route-grid">
+                <div class="route-card">
+                    <h4 class="lang-en">Channel 19 - General Traffic</h4>
+                    <h4 class="lang-it lang-hidden">Canale 19 - Traffico Generale</h4>
+                    
+                    <p class="lang-en">Standard trucker communications, road conditions, weather reports, and general chatter</p>
+                    <p class="lang-it lang-hidden">Comunicazioni standard camionisti, condizioni stradali, bollettini meteo, e chiacchiere generali</p>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Channel 9 - Emergency Only</h4>
+                    <h4 class="lang-it lang-hidden">Canale 9 - Solo Emergenze</h4>
+                    
+                    <p class="lang-en">Accidents, breakdowns, medical emergencies, and time loop extractions</p>
+                    <p class="lang-it lang-hidden">Incidenti, guasti, emergenze mediche, ed estrazioni loop temporali</p>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Channel 27 - Society Secure</h4>
+                    <h4 class="lang-it lang-hidden">Canale 27 - Società Sicuro</h4>
+                    
+                    <p class="lang-en">Encrypted communications for Society members only, mission coordination</p>
+                    <p class="lang-it lang-hidden">Comunicazioni criptate solo per membri Società, coordinamento missioni</p>
+                </div>
+                
+                <div class="route-card">
+                    <h4 class="lang-en">Channel 40 - Anomaly Reports</h4>
+                    <h4 class="lang-it lang-hidden">Canale 40 - Rapporti Anomalie</h4>
+                    
+                    <p class="lang-en">Road shadow sightings, temporal disturbances, dimensional rift warnings</p>
+                    <p class="lang-it lang-hidden">Avvistamenti ombre stradali, disturbi temporali, avvertimenti spaccature dimensionali</p>
+                </div>
+            </div>
+            
+            <div class="dimensional-tech">
+                <h4 class="lang-en">Regional Coordinators</h4>
+                <h4 class="lang-it lang-hidden">Coordinatori Regionali</h4>
+                
+                <div class="lang-en">
+                    <p><strong>Northern European Sector:</strong> "Big Erik" Hansen - Channel 15<br>
+                    <strong>Central European Sector:</strong> "Iron Klaus" Mueller - Channel 23<br>
+                    <strong>Southern European Sector:</strong> "Fast Maria" Rosetti - Channel 31<br>
+                    <strong>Eastern European Sector:</strong> "Steady Pavel" Novak - Channel 38</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Settore Europa Settentrionale:</strong> "Grande Erik" Hansen - Canale 15<br>
+                    <strong>Settore Europa Centrale:</strong> "Klaus di Ferro" Mueller - Canale 23<br>
+                    <strong>Settore Europa Meridionale:</strong> "Maria Veloce" Rosetti - Canale 31<br>
+                    <strong>Settore Europa Orientale:</strong> "Pavel Stabile" Novak - Canale 38</p>
+                </div>
+            </div>
+            
+            <h4 class="lang-en">Road Stop Network</h4>
+            <h4 class="lang-it lang-hidden">Rete Stazioni di Servizio</h4>
+            
+            <div class="truck-specs">
+                <div class="lang-en">
+                    <p><strong>Headquarters:</strong> Berlin Temporal Junction<br>
+                    Address: Autobahn A10 Intersection Nexus<br>
+                    Coordinates: Variable (use Anoki navigation)</p>
+                    
+                    <p><strong>Emergency Stations:</strong><br>
+                    - Frankfurt Dimensional Depot<br>
+                    - Amsterdam Loop Station<br>
+                    - Prague Reality Anchor<br>
+                    - Vienna Temporal Workshop</p>
+                </div>
+                
+                <div class="lang-it lang-hidden">
+                    <p><strong>Sede Centrale:</strong> Giunzione Temporale Berlino<br>
+                    Indirizzo: Nexus Intersezione Autobahn A10<br>
+                    Coordinate: Variabili (usa navigazione Anoki)</p>
+                    
+                    <p><strong>Stazioni Emergenza:</strong><br>
+                    - Deposito Dimensionale Francoforte<br>
+                    - Stazione Loop Amsterdam<br>
+                    - Ancora Realtà Praga<br>
+                    - Officina Temporale Vienna</p>
+                </div>
+            </div>
+            
+            <h4 class="lang-en">Online Presence</h4>
+            <h4 class="lang-it lang-hidden">Presenza Online</h4>
+            
+            <div class="lang-en">
+                <p><strong>Official Hypernet Portal:</strong> truckers.euro<br>
+                <strong>Society Administrator:</strong> <a href="mailto:admin@hexagram.corp">admin@hexagram.corp</a><br>
+                <strong>Membership Services:</strong> <a href="mailto:membership@hexagram.corp">membership@hexagram.corp</a><br>
+                <strong>Technical Support:</strong> <a href="mailto:tech.support@hexagram.corp">tech.support@hexagram.corp</a></p>
+            </div>
+            
+            <div class="lang-it lang-hidden">
+                <p><strong>Portale Hypernet Ufficiale:</strong> truckers.euro<br>
+                <strong>Amministratore Società:</strong> <a href="mailto:admin@hexagram.corp">admin@hexagram.corp</a><br>
+                <strong>Servizi Adesioni:</strong> <a href="mailto:membership@hexagram.corp">membership@hexagram.corp</a><br>
+                <strong>Supporto Tecnico:</strong> <a href="mailto:tech.support@hexagram.corp">tech.support@hexagram.corp</a></p>
+            </div>
+            
+            <div class="bubba-special">
+                <h4 class="lang-en">Brotherhood Motto</h4>
+                <h4 class="lang-it lang-hidden">Motto della Fratellanza</h4>
+                
+                <p class="lang-en"><em>"Through time and space, across every dimension, we deliver. We are the Trucker Society, and the road is our home."</em></p>
+                <p class="lang-it lang-hidden"><em>"Attraverso tempo e spazio, in ogni dimensione, consegniamo. Siamo la Società dei Camionisti, e la strada è la nostra casa."</em></p>
+            </div>
+            
+            <div class="warning-box">
+                <h4 class="lang-en">Recruitment Drive</h4>
+                <h4 class="lang-it lang-hidden">Campagna Reclutamento</h4>
+                
+                <p class="lang-en">The Society is actively recruiting experienced drivers for challenging interdimensional routes. Competitive pay, full benefits, and the respect of your peers. Contact us today!</p>
+                <p class="lang-it lang-hidden">La Società sta attivamente reclutando conducenti esperti per rotte interdimensionali impegnative. Pagamento competitivo, benefici completi, e il rispetto dei colleghi. Contattateci oggi!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="lang-en">© 2001 Trucker Society - European Brotherhood Division | Chartered in Berlin, Germany</p>
+        <p class="lang-it lang-hidden">© 2001 Società Camionisti - Divisione Fratellanza Europea | Registrata a Berlino, Germania</p>
+        
+        <p class="lang-en">Best viewed with Hypernet Explorer 5.0 or higher | Optimized for Anoki-compatible terminals</p>
+        <p class="lang-it lang-hidden">Meglio visualizzato con Hypernet Explorer 5.0 o superiore | Ottimizzato per terminali compatibili Anoki</p>
+        
+        <p class="lang-en">For technical issues contact: <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a></p>
+        <p class="lang-it lang-hidden">Per problemi tecnici contattare: <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a></p>
+        
+        <p class="lang-en"><em>"Keep on truckin' - Bubba would be proud"</em></p>
+        <p class="lang-it lang-hidden"><em>"Continua a guidare - Bubba sarebbe orgoglioso"</em></p>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        
+        function toggleLanguage() {
+            if (currentLanguage === 'en') {
+                currentLanguage = 'it';
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('lang-hidden'));
+                document.querySelectorAll('.lang-it').forEach(el => el.classList.remove('lang-hidden'));
+            } else {
+                currentLanguage = 'en';
+                document.querySelectorAll('.lang-it').forEach(el => el.classList.add('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hidden'));
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+        
+        // Add some retro effects
+        setInterval(function() {
+            var ticker = document.querySelector('.update-ticker');
+            if (ticker) {
+                ticker.style.backgroundColor = ticker.style.backgroundColor === 'rgb(233, 69, 96)' ? '#0f3460' : '#e94560';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

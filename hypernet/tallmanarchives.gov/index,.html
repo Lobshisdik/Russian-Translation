@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Tall Man Archives :: Classified Research :: Enter at Own Risk</title>
+    <meta name="description" content="Documentation of anomalous entity encounters. Truth hidden in plain sight.">
+    <meta name="keywords" content="tall man, forest, encounters, missing persons, anomalous, classified">
+    <style>
+        body { 
+            background: #000000; 
+            color: #00ff00; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 0;
+            font-size: 12px;
+        }
+        .container { 
+            width: 800px; 
+            margin: 0 auto; 
+            background: #000011;
+            border: 2px solid #00ff00;
+        }
+        .header { 
+            background: #001100; 
+            padding: 10px; 
+            text-align: center;
+            border-bottom: 1px solid #00ff00;
+        }
+        .nav { 
+            background: #000000; 
+            padding: 5px; 
+            text-align: center;
+            border-bottom: 1px solid #00ff00;
+        }
+        .nav a { 
+            color: #00ff00; 
+            text-decoration: none; 
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .nav a:hover { 
+            color: #ffffff; 
+            background: #003300;
+        }
+        .content { 
+            padding: 20px; 
+            min-height: 400px;
+        }
+        .section { 
+            display: none; 
+        }
+        .section.active { 
+            display: block; 
+        }
+        .footer { 
+            background: #001100; 
+            padding: 10px; 
+            text-align: center;
+            border-top: 1px solid #00ff00;
+            font-size: 10px;
+        }
+        h1 { 
+            color: #ff0000; 
+            text-align: center;
+            margin: 5px 0;
+        }
+        h2 { 
+            color: #ffff00; 
+            text-decoration: underline;
+        }
+        h3 { 
+            color: #00ffff; 
+        }
+        .warning {
+            border: 2px solid #ff0000;
+            background: #330000;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ff0000;
+            text-align: center;
+            font-weight: bold;
+        }
+        .code-entry {
+            background: #003300;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .code-input {
+            background: #000000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        .hidden-content {
+            display: none;
+            background: #220000;
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            color: #ff6666;
+        }
+        .glitch {
+            animation: none;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        .sighting {
+            border-left: 3px solid #ffff00;
+            padding-left: 10px;
+            margin: 15px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #00ff00;
+        }
+        th, td {
+            border: 1px solid #00ff00;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #003300;
+            color: #ffff00;
+        }
+        a { color: #00ffff; }
+        a:visited { color: #ff00ff; }
+        .matrix {
+            font-size: 8px;
+            opacity: 0.3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix" id="matrix"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>THE TALL MAN ARCHIVES</h1>
+            <div style="color: #ff0000; font-size: 10px;">CLASSIFIED :: LEVEL 7 CLEARANCE REQUIRED</div>
+        </div>
+        
+        <div class="nav">
+            <a onclick="showSection('home')">HOME</a> |
+            <a onclick="showSection('sightings')">SIGHTINGS</a> |
+            <a onclick="showSection('evidence')">EVIDENCE</a> |
+            <a onclick="showSection('research')">RESEARCH</a> |
+            <a onclick="showSection('archive')">ARCHIVE</a> |
+            <a onclick="showSection('contact')">CONTACT</a>
+        </div>
+        
+        <div class="content">
+            <div id="home" class="section active">
+                <div class="warning">
+                    WARNING: This site contains classified information regarding anomalous entity designated "The Tall Man". 
+                    Unauthorized access is prohibited. Continue at your own risk.
+                </div>
+                
+                <h2>WELCOME TO THE ARCHIVES</h2>
+                <p>This site documents encounters with an unidentified humanoid entity, approximately 8-12 feet in height, 
+                observed in forested areas across North America and Europe since 1986. Entity exhibits anomalous properties 
+                and has been linked to multiple disappearances.</p>
+                
+                <p><strong>CURRENT STATUS:</strong> Active investigation ongoing. Entity remains at large.</p>
+                <p><strong>THREAT LEVEL:</strong> EXTREME</p>
+                <p><strong>LAST CONFIRMED SIGHTING:</strong> October 23, 2001 - Nicolet National Forest, Wisconsin</p>
+                
+                <div class="code-entry">
+                    <h3>RESTRICTED ACCESS</h3>
+                    <p>Enter clearance code to unlock additional files:</p>
+                    <input type="text" id="codeInput" class="code-input" placeholder="Enter code..." onkeypress="checkCode(event)">
+                    <div id="codeMessage" style="margin-top: 10px; color: #ff0000;"></div>
+                </div>
+                
+                <div id="hiddenFiles" class="hidden-content">
+                    <h3>LEVEL 8 CLASSIFIED FILES UNLOCKED</h3>
+                    <p style="color: #ff0000;">YOU SHOULDN'T BE HERE</p>
+                    <p>The entity is not what we thought. It's not FROM the forest. It IS the forest. 
+                    Every tree, every shadow, every whisper of wind through branches. We've been studying 
+                    the symptom, not the disease.</p>
+                    <p>Dr. Morrison's final notes before his disappearance on 09/15/01:</p>
+                    <p><em>"It doesn't hunt. It cultivates. We are the crop."</em></p>
+                    <p><strong>FILE CORRUPTED - UNABLE TO CONTINUE TRANSMISSION</strong></p>
+                </div>
+                
+                <h3>QUICK STATS</h3>
+                <table>
+                    <tr><th>Total Encounters</th><td>127</td></tr>
+                    <tr><th>Confirmed Disappearances</th><td>43</td></tr>
+                    <tr><th>Photo Evidence</th><td>8 (authenticity disputed)</td></tr>
+                    <tr><th>Active Researchers</th><td>██</td></tr>
+                </table>
+            </div>
+            
+            <div id="sightings" class="section">
+                <h2>ENCOUNTER REPORTS</h2>
+                
+                <div class="sighting">
+                    <h3>Report #001 - June 12, 1986</h3>
+                    <p><strong>Location:</strong> Cannock Chase, England</p>
+                    <p><strong>Witness:</strong> [REDACTED]</p>
+                    <p>Initial sighting. Witness reported tall, thin figure standing motionless between trees. 
+                    Estimated height 9-10 feet. No facial features visible. Subject experienced severe nosebleeds 
+                    for three weeks following encounter.</p>
+                </div>
+                
+                <div class="sighting">
+                    <h3>Report #034 - September 3, 1993</h3>
+                    <p><strong>Location:</strong> Pine Barrens, New Jersey</p>
+                    <p><strong>Witness:</strong> Photography student [NAME WITHHELD]</p>
+                    <p>Multiple photographs taken. Subject appears in background of several images despite 
+                    photographer not noticing presence during shoot. Student found catatonic three days later. 
+                    Photographs show progressive approach of entity across image sequence.</p>
+                </div>
+                
+                <div class="sighting">
+                    <h3>Report #089 - April 15, 1998</h3>
+                    <p><strong>Location:</strong> Olympic National Forest, Washington</p>
+                    <p><strong>Witness:</strong> Hiking party of 4</p>
+                    <p>Group encountered entity during overnight camping trip. Three witnesses report missing time. 
+                    Fourth witness never found. Tents discovered arranged in perfect geometric pattern around 
+                    central clearing. No footprints or disturbance to surrounding soil.</p>
+                </div>
+                
+                <div class="sighting">
+                    <h3>Report #127 - October 23, 2001</h3>
+                    <p><strong>Location:</strong> Nicolet National Forest, Wisconsin</p>
+                    <p><strong>Witness:</strong> Dr. Sarah Chen (Research Team Delta)</p>
+                    <p><strong>STATUS: MOST RECENT CONFIRMED ENCOUNTER</strong></p>
+                    <p>Dr. Chen's recording device captured 14 minutes of audio before signal cut. Analysis reveals 
+                    subsonic frequencies not produced by known natural phenomena. Dr. Chen reported entity 
+                    "spoke without speaking" before radio contact lost permanently.</p>
+                </div>
+                
+                <p style="color: #ff0000;"><strong>NOTE:</strong> All witness interviews are conducted under strict 
+                confidentiality agreements. Several witnesses have requested memory suppression treatments.</p>
+            </div>
+            
+            <div id="evidence" class="section">
+                <h2>PHYSICAL EVIDENCE</h2>
+                
+                <h3>PHOTOGRAPHIC DOCUMENTATION</h3>
+                <p><img src="1.jpg" alt="Blurry photograph showing tall dark figure between trees, heavily distorted with static interference" width="300" height="200" style="border: 2px solid #00ff00;"></p>
+                <p><em>Photo Evidence #1 - Cannock Chase, 1986. Digital enhancement reveals humanoid silhouette.</em></p>
+                
+                <p><img src="2.jpg" alt="Grainy security camera footage showing an impossibly tall shadow cast by nothing visible" width="300" height="200" style="border: 2px solid #00ff00;"></p>
+                <p><em>Photo Evidence #2 - Trail camera capture, Olympic National Forest, 1998.</em></p>
+                
+                <h3>AUDIO RECORDINGS</h3>
+                <p>• <strong>Subsonic Analysis Report</strong> - Frequencies detected: 0.1-7 Hz</p>
+                <p>• <strong>Voice Pattern Recognition</strong> - No match found in any human database</p>
+                <p>• <strong>Environmental Audio</strong> - Complete absence of natural forest sounds during encounters</p>
+                
+                <h3>PHYSICAL TRACES</h3>
+                <table>
+                    <tr><th>Evidence Type</th><th>Quantity</th><th>Analysis Status</th></tr>
+                    <tr><td>Bark samples (unusual scarring)</td><td>23</td><td>Inconclusive</td></tr>
+                    <tr><td>Soil disturbances</td><td>16</td><td>Non-human origin confirmed</td></tr>
+                    <tr><td>Electromagnetic anomalies</td><td>8</td><td>Under review</td></tr>
+                    <tr><td>Witness personal effects</td><td>12</td><td>All show oxidation aging of 50+ years</td></tr>
+                </table>
+                
+                <div style="color: #ff0000; margin-top: 20px;">
+                    <p><strong>CLASSIFICATION NOTE:</strong> All physical evidence exhibits properties inconsistent 
+                    with current scientific understanding. Recommend immediate escalation to Special Projects Division.</p>
+                </div>
+            </div>
+            
+            <div id="research" class="section">
+                <h2>RESEARCH FINDINGS</h2>
+                
+                <h3>ENTITY CHARACTERISTICS</h3>
+                <p><strong>Physical Description:</strong></p>
+                <p>• Height: 8-12 feet (varies by report)</p>
+                <p>• Build: Extremely thin, disproportionate limbs</p>
+                <p>• Face: Smooth, featureless (or features not perceivable)</p>
+                <p>• Clothing: Dark formal attire (suit-like)</p>
+                <p>• Movement: Unnaturally smooth, gliding motion</p>
+                
+                <h3>BEHAVIORAL PATTERNS</h3>
+                <p>• Appears exclusively in wooded areas</p>
+                <p>• Most active during dawn/dusk hours</p>
+                <p>• Exhibits stalking behavior toward individuals</p>
+                <p>• Causes technological malfunctions within 50-meter radius</p>
+                <p>• Subjects report compulsive return visits to encounter sites</p>
+                
+                <h3>PSYCHOLOGICAL EFFECTS</h3>
+                <p><strong>Short-term:</strong> Nosebleeds, headaches, insomnia, paranoia</p>
+                <p><strong>Long-term:</strong> Chronic anxiety, agoraphobia, selective amnesia</p>
+                <p><strong>Severe cases:</strong> Catatonic episodes, complete personality dissociation</p>
+                
+                <h3>THEORETICAL ANALYSIS</h3>
+                <p><strong>Dr. Morrison's Hypothesis (1999):</strong></p>
+                <p>"The entity operates outside conventional space-time parameters. Its presence suggests 
+                dimensional instability in forested regions. Recommend investigation of quantum field 
+                fluctuations in encounter zones."</p>
+                
+                <p><strong>Dr. Chen's Final Report (2001):</strong></p>
+                <p>"Previous assumptions incorrect. Entity is not invader but indigenous. We are the anomaly. 
+                Forest ecosystem includes consciousness component not recognized by modern science. 
+                Entity serves as immune response to human intrusion."</p>
+            </div>
+            
+            <div id="archive" class="section">
+                <h2>CLASSIFIED ARCHIVES</h2>
+                
+                <h3>PROJECT HISTORY</h3>
+                <p><strong>1986:</strong> Initial investigation launched following Cannock Chase incident</p>
+                <p><strong>1989:</strong> Task Force assembled, Dr. Morrison appointed lead researcher</p>
+                <p><strong>1993:</strong> Pine Barrens photography evidence acquired</p>
+                <p><strong>1996:</strong> Funding increased, satellite monitoring implemented</p>
+                <p><strong>1998:</strong> Olympic Forest mass disappearance event</p>
+                <p><strong>2001:</strong> Dr. Morrison disappears during field research</p>
+                <p><strong>2001:</strong> Dr. Chen takes over project leadership</p>
+                <p><strong>2001:</strong> Dr. Chen's final transmission received</p>
+                <p><strong>2001:</strong> Project status: SUSPENDED INDEFINITELY</p>
+                
+                <h3>RELATED PHENOMENA</h3>
+                <p>• <strong>Black-eyed children sightings</strong> - Potential connection under investigation</p>
+                <p>• <strong>Electromagnetic anomalies</strong> - Correlation with entity appearances confirmed</p>
+                <p>• <strong>Missing persons cases</strong> - 43 confirmed links, 78 suspected</p>
+                <p>• <strong>Historical accounts</strong> - Similar entities described in folklore dating to 1700s</p>
+                
+                <h3>PERSONNEL FILES</h3>
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+                    <tr><td>Dr. James Morrison</td><td>Lead Researcher</td><td style="color: #ff0000;">MISSING</td></tr>
+                    <tr><td>Dr. Sarah Chen</td><td>Field Specialist</td><td style="color: #ff0000;">MISSING</td></tr>
+                    <tr><td>Agent Thompson</td><td>Security Liaison</td><td>REASSIGNED</td></tr>
+                    <tr><td>Dr. Martinez</td><td>Psychologist</td><td>MEDICAL LEAVE</td></tr>
+                </table>
+            </div>
+            
+            <div id="contact" class="section">
+                <h2>CONTACT INFORMATION</h2>
+                
+                <div class="warning">
+                    PROJECT OFFICIALLY TERMINATED - NO ACTIVE PERSONNEL
+                </div>
+                
+                <p><strong>FORMER PROJECT HEADQUARTERS:</strong></p>
+                <p>Department of Anomalous Phenomena<br>
+                Research Division 7<br>
+                [LOCATION CLASSIFIED]<br>
+                Phone: [DISCONNECTED]<br>
+                Fax: [DISCONNECTED]</p>
+                
+                <p><strong>EMERGENCY CONTACT:</strong></p>
+                <p>If you have encountered the entity, contact local authorities immediately. 
+                Do not attempt direct communication or approach.</p>
+                
+                <p><strong>RESEARCH CONTINUATION:</strong></p>
+                <p>Independent researchers may continue investigation at their own risk. 
+                All official documentation has been declassified and released to public domain 
+                following project termination.</p>
+                
+                <h3>SURVIVOR SUPPORT</h3>
+                <p>Psychological counseling available through:</p>
+                <p>• National Mental Health Crisis Line</p>
+                <p>• Anomalous Trauma Support Group (meets Tuesdays, 7 PM)</p>
+                <p>• Dr. Williams - Specialist in post-encounter therapy</p>
+                
+                <div style="color: #ff0000; margin-top: 30px;">
+                    <p><strong>FINAL WARNING:</strong></p>
+                    <p>The entity remains active. Avoid wooded areas, especially during twilight hours. 
+                    If you see something tall moving between the trees, do not investigate. 
+                    Do not make eye contact. Leave immediately.</p>
+                    <p style="text-align: center; font-weight: bold;">IT KNOWS YOU'RE WATCHING</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Last updated: December 15, 2001 - 03:47 AM<br>
+            Site maintained by: [USER NOT FOUND]<br>
+            <span style="color: #ff0000;">Connection will be terminated in T-minus 10 seconds...</span>
+        </div>
+    </div>
+    
+    <script>
+        let codeAttempts = 0;
+        let glitchActive = false;
+        
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function checkCode(event) {
+            if (event.key === 'Enter') {
+                const code = document.getElementById('codeInput').value;
+                codeAttempts++;
+                
+                if (code === '666' || code === '66666' || code === '666666') {
+                    if (code === '666') {
+                        document.getElementById('codeMessage').innerHTML = 'ACCESS GRANTED... LOADING FILES...';
+                        setTimeout(() => {
+                            document.getElementById('hiddenFiles').style.display = 'block';
+                            document.getElementById('codeMessage').innerHTML = 'LEVEL 8 CLEARANCE CONFIRMED';
+                        }, 2000);
+                    } else if (code === '66666') {
+                        document.getElementById('codeMessage').innerHTML = 'DEEPER LEVEL UNLOCKED... YOU\'RE GETTING CLOSER...';
+                        activateGlitch();
+                    } else if (code === '666666') {
+                        document.getElementById('codeMessage').innerHTML = 'HE SEES YOU';
+                        document.body.style.background = '#220000';
+                        activateGlitch();
+                        setTimeout(() => {
+                            alert('YOU SHOULD NOT HAVE COME HERE');
+                        }, 1000);
+                    }
+                } else {
+                    document.getElementById('codeMessage').innerHTML = 'ACCESS DENIED - INCORRECT CODE (' + codeAttempts + '/3)';
+                    if (codeAttempts >= 3) {
+                        document.getElementById('codeMessage').innerHTML = 'ACCOUNT LOCKED - SECURITY BREACH DETECTED';
+                        document.getElementById('codeInput').disabled = true;
+                    }
+                }
+                document.getElementById('codeInput').value = '';
+            }
+        }
+        
+        function activateGlitch() {
+            if (glitchActive) return;
+            glitchActive = true;
+            
+            const container = document.querySelector('.container');
+            container.style.animation = 'glitch 0.3s infinite';
+            
+            setTimeout(() => {
+                container.style.animation = 'none';
+                glitchActive = false;
+            }, 3000);
+        }
+        
+        // Matrix effect
+        function createMatrix() {
+            const matrix = document.getElementById('matrix');
+            const chars = '01';
+            let matrixText = '';
+            
+            for (let i = 0; i < 2000; i++) {
+                matrixText += chars[Math.floor(Math.random() * chars.length)];
+                if (i % 80 === 0) matrixText += '\n';
+            }
+            
+            matrix.textContent = matrixText;
+        }
+        
+        createMatrix();
+        setInterval(createMatrix, 5000);
+        
+        // Spooky random events
+        setInterval(() => {
+            if (Math.random() < 0.05) { // 5% chance every 10 seconds
+                const body = document.body;
+                const original = body.style.background;
+                body.style.background = '#330000';
+                setTimeout(() => {
+                    body.style.background = original;
+                }, 500);
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Enemy Action Pattern Editor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .file-inputs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .file-input-label:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .file-loaded {
+            background: #27ae60;
+        }
+
+        .file-loaded:hover {
+            background: #229954;
+        }
+
+        .enemy-selector {
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .enemy-selector select {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #2c2c2c;
+            color: #e0e0e0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            cursor: pointer;
+            min-width: 300px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .enemy-info {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .enemy-battler {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .enemy-battler:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5);
+        }
+
+        .enemy-details {
+            flex: 1;
+        }
+
+        .enemy-details h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .enemy-level {
+            color: #f39c12;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .enemy-description {
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+
+        .enemy-archetype {
+            margin-top: 15px;
+        }
+
+        .action-patterns {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .action-patterns h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .action-pattern {
+            display: grid;
+            grid-template-columns: 1fr 200px 100px 80px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #383838;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .action-pattern:hover {
+            background: #404040;
+        }
+
+        .skill-select {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .skill-id-input {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .rate-input {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .remove-btn {
+            padding: 8px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .add-action-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .add-action-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .save-temp-btn {
+            background: #f39c12;
+            color: white;
+        }
+
+        .save-temp-btn:hover {
+            background: #e67e22;
+        }
+
+        .download-btn {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: #8e44ad;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .status.success {
+            background: #27ae60;
+            color: white;
+            display: block;
+        }
+
+        .status.error {
+            background: #e74c3c;
+            color: white;
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .auto-action-btn:hover {
+            background: #c0392b !important;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.front-modal {
+            z-index: 1100;
+        }
+
+        .modal-content {
+            background-color: #2c2c2c;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #fff;
+        }
+
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .battler-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .battler-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: #383838;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .battler-option:hover {
+            background: #404040;
+            transform: scale(1.05);
+        }
+
+        .battler-option.unused {
+            border: 3px solid #27ae60;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .battler-option.current {
+            border: 3px solid #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .battler-option img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .battler-option span {
+            font-size: 14px;
+            text-align: center;
+            color: #e0e0e0;
+            word-break: break-word;
+        }
+
+        .unused-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #27ae60;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .action-pattern {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>RPG Maker MZ Enemy Action Pattern Editor</h1>
+
+        <div class="file-inputs">
+            <div class="file-input-wrapper">
+                <input type="file" id="projectFolder" webkitdirectory directory multiple>
+                <label for="projectFolder" class="file-input-label" id="projectLabel">Load RPG Maker Project
+                    Folder</label>
+            </div>
+        </div>
+
+        <div class="enemy-selector hidden" id="enemySelector">
+            <div style="width: 100%; max-width: 600px; margin: 0 auto 15px;">
+                <input type="text" id="enemySearchInput" placeholder="Search enemies by ID or name..." style="width: 100%; padding: 10px; background: #2c2c2c; color: #e0e0e0; 
+                              border: 1px solid #444; border-radius: 5px; font-size: 16px;" oninput="filterEnemies()">
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button class="nav-btn" id="prevBtn" onclick="navigateEnemy(-1)">← Previous</button>
+                <select id="enemySelect">
+                    <option value="">Select an Enemy</option>
+                </select>
+                <button class="nav-btn" id="nextBtn" onclick="navigateEnemy(1)">Next →</button>
+            </div>
+        </div>
+
+        <div class="enemy-info hidden" id="enemyInfoSection">
+            <img class="enemy-battler" id="enemyBattler" src="" alt="Enemy Battler" onclick="openBattlerModal()">
+            <div class="enemy-details">
+                <h3 id="enemyName"></h3>
+                <div class="enemy-level" id="enemyLevel"></div>
+                <div class="enemy-description" id="enemyDescription"></div>
+                <div class="enemy-archetype">
+                    <label for="archetypeSelect" style="color: #e0e0e0; margin-right: 10px;">Archetype:</label>
+                    <select id="archetypeSelect" class="skill-select"></select>
+                    <div id="newArchetypeWrapper" class="hidden" style="margin-top: 10px; display: inline-block;">
+                        <input type="text" id="newArchetypeInput" placeholder="Enter new archetype"
+                            class="skill-id-input" style="width: 200px;">
+                        <button class="add-action-btn" style="padding: 8px 15px; margin-left: 5px; margin-top: 0;"
+                            onclick="setNewArchetype()">Set</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-patterns hidden" id="actionPatternsSection">
+            <h2>Action Patterns</h2>
+            <div id="actionPatternsList"></div>
+            <button class="add-action-btn" onclick="addActionPattern()">Add Action Pattern</button>
+            <button class="add-action-btn auto-action-btn" onclick="autoAddActionPattern()"
+                style="background: #e74c3c; margin-left: 10px;">Auto Action Pattern</button>
+            <button class="add-action-btn" onclick="addSmartRandomSkill()"
+                style="background: #3498db; margin-left: 10px;">Add Smart Random</button>
+            <button class="add-action-btn" onclick="openPasteModal()"
+                style="background: #9b59b6; margin-left: 10px;">Paste Skill List</button>
+        </div>
+
+        <div class="controls hidden" id="controlsSection">
+            <button class="control-btn save-temp-btn" onclick="saveTemporary()">Save Temporary</button>
+            <button class="control-btn download-btn" onclick="downloadJSON()">Download enemies.json</button>
+            <button class="control-btn" onclick="openBulkEditModal()" style="background: #e67e22;">Bulk Edit</button>
+        </div>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <div id="battlerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Battler</h2>
+                <span class="close-modal" onclick="closeBattlerModal()">&times;</span>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="battlerSearchInput" placeholder="Search battler names..." style="width: 100%; padding: 10px; background: #1a1a1a; color: #e0e0e0; 
+                              border: 1px solid #555; border-radius: 5px; font-size: 16px;" oninput="filterBattlers()">
+            </div>
+            <div class="battler-grid" id="battlerGrid"></div>
+        </div>
+    </div>
+
+    <div id="pasteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Paste Skill List</h2>
+                <span class="close-modal" onclick="closePasteModal()">&times;</span>
+            </div>
+            <p style="color: #e0e0e0; margin-bottom: 15px;">
+                Paste a list of skills in any format. The tool will extract skill IDs and replace all current action
+                patterns.
+            </p>
+            <textarea id="pasteTextarea"
+                style="width: 100%; height: 200px; background: #1a1a1a; color: #e0e0e0; border: 1px solid #555; border-radius: 5px; padding: 10px; font-family: monospace; resize: vertical;"
+                placeholder="Examples:
+* **438**: Gore Attack
+* **456**: Ambush Pounce
+
+or: 456 334 456 22 464
+
+or: 436 Razor Claws; 435 Predator's Bite
+
+or: 34, 45, 56, 345, 67"></textarea>
+            <div style="margin-top: 10px;">
+                <label style="color: #e0e0e0; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="keepCurrentSkills" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>Keep current skill list (append instead of replace)</span>
+                </label>
+            </div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="control-btn" style="background: #e74c3c;" onclick="closePasteModal()">Cancel</button>
+                <button class="control-btn" style="background: #27ae60;" onclick="processSkillPaste()">Apply
+                    Skills</button>
+            </div>
+        </div>
+    </div>
+    <div id="bulkEditModal" class="modal">
+        <div class="modal-content" style="max-width: 1200px;">
+            <div class="modal-header">
+                <h2>Bulk Edit Enemies</h2>
+                <span class="close-modal" onclick="closeBulkEditModal()">&times;</span>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="bulkSearchInput" placeholder="Search enemies by ID or name..." style="width: 100%; padding: 10px; background: #1a1a1a; color: #e0e0e0; 
+                              border: 1px solid #555; border-radius: 5px; font-size: 16px;"
+                    oninput="filterBulkEnemies()">
+            </div>
+            <div style="max-height: 60vh; overflow-y: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="position: sticky; top: 0; background: #2c2c2c; z-index: 10;">
+                        <tr>
+                            <th style="padding: 10px; border: 1px solid #555; color: #fff;">ID</th>
+                            <th style="padding: 10px; border: 1px solid #555; color: #fff;">Name</th>
+                            <th style="padding: 10px; border: 1px solid #555; color: #fff;">Sprite</th>
+                            <th style="padding: 10px; border: 1px solid #555; color: #fff;">Archetype</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulkEditTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="control-btn" style="background: #e74c3c;" onclick="closeBulkEditModal()">Close</button>
+                <button class="control-btn" style="background: #27ae60;" onclick="applyBulkChanges()">Apply
+                    Changes</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let enemies = [];
+        let skills = [];
+        let currentEnemyId = null;
+        let tempData = {};
+        let validEnemyIds = [];
+        let skillUsageCount = {};
+        let allArchetypes = new Set();
+        let battlerImages = {}; // Store loaded battler images
+        let availableBattlers = new Set(); // Store all available battler filenames
+
+        // Load entire project folder
+        document.getElementById('projectFolder').addEventListener('change', async function (e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            let enemiesFound = false;
+            let skillsFound = false;
+            battlerImages = {};
+            availableBattlers.clear();
+
+            for (let file of files) {
+                const path = file.webkitRelativePath || file.name;
+
+                // Load Enemies.json
+                if (path.includes('data/Enemies.json')) {
+                    try {
+                        const text = await readFileAsText(file);
+                        enemies = JSON.parse(text);
+                        enemiesFound = true;
+                    } catch (error) {
+                        console.error('Error loading Enemies.json:', error);
+                    }
+                }
+
+                // Load Skills.json
+                if (path.includes('data/Skills.json')) {
+                    try {
+                        const text = await readFileAsText(file);
+                        skills = JSON.parse(text);
+                        skillsFound = true;
+                    } catch (error) {
+                        console.error('Error loading Skills.json:', error);
+                    }
+                }
+
+                // Load battler images
+                if (path.includes('img/enemies/') && (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg'))) {
+                    const filename = path.split('/').pop().replace(/\.[^/.]+$/, ''); // Remove extension
+                    const url = URL.createObjectURL(file);
+                    battlerImages[filename] = url;
+                    availableBattlers.add(filename);
+                }
+            }
+
+            if (enemiesFound && skillsFound) {
+                document.getElementById('projectLabel').classList.add('file-loaded');
+                document.getElementById('projectLabel').textContent = 'Project Loaded Successfully';
+                calculateSkillUsage();
+                collectAllArchetypes();
+                populateEnemySelect();
+                document.getElementById('enemySelector').classList.remove('hidden');
+                document.getElementById('controlsSection').classList.remove('hidden');
+                showStatus(`Loaded ${enemies.length} enemies, ${skills.length} skills, and ${availableBattlers.size} battler images`, 'success');
+            } else {
+                let missing = [];
+                if (!enemiesFound) missing.push('Enemies.json');
+                if (!skillsFound) missing.push('Skills.json');
+                showStatus(`Missing required files: ${missing.join(', ')}`, 'error');
+            }
+        });
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function collectAllArchetypes() {
+            allArchetypes.clear();
+            allArchetypes.add("None");
+
+            enemies.forEach(enemy => {
+                if (enemy && enemy.note) {
+                    const archetype = parseArchetype(enemy.note);
+                    if (archetype) {
+                        allArchetypes.add(archetype);
+                    }
+                }
+            });
+            allArchetypes.add("--- Create New ---");
+        }
+
+        function populateArchetypeDropdown() {
+            const select = document.getElementById('archetypeSelect');
+            select.innerHTML = '';
+
+            const sortedArchetypes = Array.from(allArchetypes).sort((a, b) => {
+                if (a === "--- Create New ---") return 1;
+                if (b === "--- Create New ---") return -1;
+                if (a === "None") return -1;
+                if (b === "None") return 1;
+                return a.localeCompare(b);
+            });
+
+            sortedArchetypes.forEach(archetype => {
+                const option = document.createElement('option');
+                option.value = archetype;
+                option.textContent = archetype;
+                select.appendChild(option);
+            });
+        }
+
+        document.getElementById('archetypeSelect').addEventListener('change', function (e) {
+            const selectedValue = e.target.value;
+            const newArchetypeWrapper = document.getElementById('newArchetypeWrapper');
+
+            if (selectedValue === '--- Create New ---') {
+                newArchetypeWrapper.classList.remove('hidden');
+            } else {
+                newArchetypeWrapper.classList.add('hidden');
+                updateEnemyArchetype(selectedValue);
+            }
+        });
+
+        function setNewArchetype() {
+            const input = document.getElementById('newArchetypeInput');
+            const newArchetypeValue = input.value.trim();
+
+            if (newArchetypeValue) {
+                if (!allArchetypes.has(newArchetypeValue)) {
+                    allArchetypes.add(newArchetypeValue);
+                }
+                updateEnemyArchetype(newArchetypeValue);
+                populateArchetypeDropdown();
+                document.getElementById('archetypeSelect').value = newArchetypeValue;
+                input.value = '';
+                document.getElementById('newArchetypeWrapper').classList.add('hidden');
+            } else {
+                showStatus('Archetype name cannot be empty.', 'error');
+            }
+        }
+
+        function updateEnemyArchetype(archetype) {
+            if (!currentEnemyId) return;
+
+            tempData.noteChanges = tempData.noteChanges || {};
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            let currentNote = tempData.noteChanges[currentEnemyId] ?? enemy.note ?? '';
+
+            const archetypeRegex = /<Archetype:\s*[^>]+>/i;
+            const newTag = (archetype === 'None' || !archetype) ? '' : `<Archetype: ${archetype}>`;
+
+            let newNote;
+            if (archetypeRegex.test(currentNote)) {
+                newNote = currentNote.replace(archetypeRegex, newTag);
+            } else if (newTag) {
+                newNote = `${newTag} ${currentNote}`;
+            } else {
+                newNote = currentNote;
+            }
+
+            tempData.noteChanges[currentEnemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+            showStatus(`Archetype set to "${archetype}"`, 'success');
+        }
+
+        function calculateSkillUsage() {
+            skillUsageCount = {};
+            if (!skills || skills.length === 0 || !enemies || enemies.length === 0) return;
+
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    skillUsageCount[skills[i].id] = 0;
+                }
+            }
+            for (let i = 1; i < enemies.length; i++) {
+                if (enemies[i] && enemies[i].actions) {
+                    const uniqueSkillsInEnemy = new Set();
+                    enemies[i].actions.forEach(action => {
+                        uniqueSkillsInEnemy.add(action.skillId);
+                    });
+                    uniqueSkillsInEnemy.forEach(skillId => {
+                        if (skillUsageCount.hasOwnProperty(skillId)) {
+                            skillUsageCount[skillId]++;
+                        }
+                    });
+                }
+            }
+        }
+
+        function populateEnemySelect() {
+            const select = document.getElementById('enemySelect');
+            select.innerHTML = '<option value="">Select an Enemy</option>';
+            validEnemyIds = [];
+
+            for (let i = 1; i < enemies.length; i++) {
+                if (enemies[i]) {
+                    validEnemyIds.push(enemies[i].id);
+                    const option = document.createElement('option');
+                    option.value = enemies[i].id;
+                    option.textContent = `${enemies[i].id}: ${enemies[i].name}`;
+                    select.appendChild(option);
+                }
+            }
+        }
+
+        function navigateEnemy(direction) {
+            if (!currentEnemyId || validEnemyIds.length === 0) return;
+            const currentIndex = validEnemyIds.indexOf(currentEnemyId);
+            if (currentIndex === -1) return;
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < validEnemyIds.length) {
+                const newEnemyId = validEnemyIds[newIndex];
+                document.getElementById('enemySelect').value = newEnemyId;
+                document.getElementById('enemySelect').dispatchEvent(new Event('change'));
+            }
+        }
+
+        function updateNavigationButtons() {
+            if (!currentEnemyId || validEnemyIds.length === 0) return;
+            const currentIndex = validEnemyIds.indexOf(currentEnemyId);
+            document.getElementById('prevBtn').disabled = currentIndex <= 0;
+            document.getElementById('nextBtn').disabled = currentIndex >= validEnemyIds.length - 1;
+        }
+
+        document.getElementById('enemySelect').addEventListener('change', function (e) {
+            const enemyId = parseInt(e.target.value);
+            if (enemyId) {
+                currentEnemyId = enemyId;
+                loadEnemyInfo(enemyId);
+                loadEnemyActions(enemyId);
+                updateNavigationButtons();
+                document.getElementById('enemyInfoSection').classList.remove('hidden');
+                document.getElementById('actionPatternsSection').classList.remove('hidden');
+            } else {
+                document.getElementById('enemyInfoSection').classList.add('hidden');
+                document.getElementById('actionPatternsSection').classList.add('hidden');
+            }
+        });
+
+        function parseArchetype(note) {
+            if (note) {
+                const archetypeMatch = note.match(/<Archetype:\s*([^>]+)>/i);
+                if (archetypeMatch) {
+                    return archetypeMatch[1].trim();
+                }
+            }
+            return null;
+        }
+
+        function parseEnemyNote(note) {
+            let level = '';
+            let description = '';
+
+            if (note) {
+                const cleanNote = note.replace(/<Archetype:\s*[^>]+>/i, '').trim();
+                const levelMatch = cleanNote.match(/LV:\s*(\d+)/i);
+                if (levelMatch) {
+                    level = levelMatch[1];
+                }
+                const descMatch = cleanNote.match(/\|\s*([^<]+)/);
+                if (descMatch) {
+                    description = descMatch[1].trim();
+                } else if (!levelMatch) {
+                    description = cleanNote.split('<')[0].trim();
+                }
+            }
+
+            return { level, description };
+        }
+
+        function loadEnemyInfo(enemyId) {
+            const enemy = enemies.find(e => e && e.id === enemyId);
+            if (enemy) {
+                document.getElementById('enemyName').textContent = enemy.name;
+                const battlerImg = document.getElementById('enemyBattler');
+
+                const currentBattlerName = tempData.battlerChanges?.[enemyId] ?? enemy.battlerName;
+
+                if (battlerImages[currentBattlerName]) {
+                    battlerImg.src = battlerImages[currentBattlerName];
+                } else {
+                    battlerImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"%3E%3Crect width="150" height="150" fill="%23333"%2F%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="14"%3ENo Image%3C%2Ftext%3E%3C%2Fsvg%3E';
+                }
+
+                const currentNote = tempData.noteChanges?.[enemyId] ?? enemy.note;
+                const { level, description } = parseEnemyNote(currentNote);
+                document.getElementById('enemyLevel').textContent = level ? `Level ${level}` : '';
+                document.getElementById('enemyDescription').textContent = description || 'No description available';
+
+                populateArchetypeDropdown();
+                const archetype = parseArchetype(currentNote);
+                document.getElementById('archetypeSelect').value = archetype || 'None';
+                document.getElementById('newArchetypeWrapper').classList.add('hidden');
+            }
+        }
+
+        function loadEnemyActions(enemyId) {
+            const enemy = enemies.find(e => e && e.id === enemyId);
+            if (enemy) {
+                const actions = tempData[enemyId] || enemy.actions || [];
+                renderActionPatterns(actions);
+            }
+        }
+
+        function renderActionPatterns(actions) {
+            const container = document.getElementById('actionPatternsList');
+            container.innerHTML = '';
+
+            actions.forEach((action, index) => {
+                const div = document.createElement('div');
+                div.className = 'action-pattern';
+                div.innerHTML = `
+                    <select class="skill-select" onchange="updateSkillFromSelect(${index}, this.value)">
+                        ${getSkillOptions(action.skillId)}
+                    </select>
+                    <input type="number" class="skill-id-input" value="${action.skillId}" 
+                           placeholder="Skill ID" onchange="updateSkillFromId(${index}, this.value)">
+                    <input type="number" class="rate-input" value="${action.rating}" 
+                           min="1" max="9" onchange="updateRate(${index}, this.value)">
+                    <button class="remove-btn" onclick="removeAction(${index})">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function parseSkillCategory(note) {
+            if (note) {
+                const categoryMatch = note.match(/<category:([^>]+)>/i);
+                if (categoryMatch) {
+                    return categoryMatch[1];
+                }
+            }
+            return '';
+        }
+
+        function getSkillOptions(selectedId) {
+            let options = '<option value="">Select Skill</option>';
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const selected = skills[i].id === selectedId ? 'selected' : '';
+                    const category = parseSkillCategory(skills[i].note);
+                    const categoryText = category ? ` (${category})` : '';
+                    const usage = skillUsageCount[skills[i].id] || 0;
+                    options += `<option value="${skills[i].id}" ${selected}>${skills[i].id}: ${skills[i].name}${categoryText} (Used: ${usage})</option>`;
+                }
+            }
+            return options;
+        }
+
+        function updateSkillFromSelect(index, skillId) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            if (skillId) {
+                tempData[currentEnemyId][index].skillId = parseInt(skillId);
+                document.querySelectorAll('.action-pattern')[index].querySelector('.skill-id-input').value = skillId;
+            }
+        }
+
+        function updateSkillFromId(index, skillId) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            const id = parseInt(skillId);
+            if (id) {
+                tempData[currentEnemyId][index].skillId = id;
+                const select = document.querySelectorAll('.action-pattern')[index].querySelector('.skill-select');
+                select.value = id;
+            }
+        }
+
+        function updateRate(index, rate) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            const rateValue = Math.min(9, Math.max(1, parseInt(rate) || 1));
+            tempData[currentEnemyId][index].rating = rateValue;
+        }
+
+        function removeAction(index) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            tempData[currentEnemyId].splice(index, 1);
+            loadEnemyActions(currentEnemyId);
+        }
+
+        function addActionPattern() {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: 5,
+                skillId: 1
+            });
+
+            loadEnemyActions(currentEnemyId);
+        }
+
+        function saveTemporary() {
+            showStatus('Temporary data saved in memory!', 'success');
+        }
+
+        function downloadJSON() {
+            const updatedEnemies = JSON.parse(JSON.stringify(enemies));
+
+            for (const enemyId in tempData) {
+                const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                if (enemy) {
+                    enemy.actions = tempData[enemyId];
+                }
+            }
+
+            if (tempData.battlerChanges) {
+                for (const enemyId in tempData.battlerChanges) {
+                    const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                    if (enemy) {
+                        enemy.battlerName = tempData.battlerChanges[enemyId];
+                    }
+                }
+            }
+
+            if (tempData.noteChanges) {
+                for (const enemyId in tempData.noteChanges) {
+                    const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                    if (enemy) {
+                        enemy.note = tempData.noteChanges[enemyId];
+                    }
+                }
+            }
+
+            const blob = new Blob([JSON.stringify(updatedEnemies, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Enemies.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showStatus('Enemies.json downloaded!', 'success');
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            setTimeout(() => {
+                status.className = 'status';
+            }, 3000);
+        }
+
+        // Battler Modal Functions
+        function openBattlerModal() {
+            document.getElementById('battlerModal').style.display = 'block';
+            document.getElementById('battlerSearchInput').value = '';
+            populateBattlerGrid();
+        }
+
+        function closeBattlerModal() {
+            const battlerModal = document.getElementById('battlerModal');
+            battlerModal.style.display = 'none';
+            battlerModal.classList.remove('front-modal');
+        }
+        function filterBattlers() {
+            const searchTerm = document.getElementById('battlerSearchInput').value.toLowerCase();
+            const battlerOptions = document.querySelectorAll('.battler-option');
+
+            battlerOptions.forEach(option => {
+                const battlerName = option.querySelector('span').textContent.toLowerCase();
+                if (battlerName.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        function populateBattlerGrid() {
+            const battlerGrid = document.getElementById('battlerGrid');
+            battlerGrid.innerHTML = '';
+
+            if (availableBattlers.size === 0) {
+                battlerGrid.innerHTML = '<p style="color: #ccc; text-align: center; grid-column: 1/-1;">No battler images found in img/enemies folder</p>';
+                return;
+            }
+
+            // Get list of all used battlers
+            const usedBattlers = new Set();
+            enemies.forEach(enemy => {
+                if (enemy && enemy.battlerName) {
+                    const actualBattlerName = tempData.battlerChanges?.[enemy.id] ?? enemy.battlerName;
+                    usedBattlers.add(actualBattlerName);
+                }
+            });
+
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            const currentBattlerName = tempData.battlerChanges?.[currentEnemyId] ?? enemy.battlerName;
+
+            // Sort battlers: unused first, then alphabetically
+            const sortedBattlers = Array.from(availableBattlers).sort((a, b) => {
+                const aUnused = !usedBattlers.has(a);
+                const bUnused = !usedBattlers.has(b);
+
+                if (aUnused && !bUnused) return -1;
+                if (!aUnused && bUnused) return 1;
+                return a.localeCompare(b);
+            });
+
+            sortedBattlers.forEach(battlerName => {
+                const div = document.createElement('div');
+                div.className = 'battler-option';
+
+                const isUnused = !usedBattlers.has(battlerName);
+                const isCurrent = battlerName === currentBattlerName;
+
+                if (isUnused) {
+                    div.classList.add('unused');
+                }
+                if (isCurrent) {
+                    div.classList.add('current');
+                }
+
+                const img = document.createElement('img');
+                img.src = battlerImages[battlerName];
+                img.alt = battlerName;
+
+                const span = document.createElement('span');
+                span.textContent = battlerName;
+
+                div.appendChild(img);
+                div.appendChild(span);
+
+                if (isUnused && !isCurrent) {
+                    const badge = document.createElement('div');
+                    badge.className = 'unused-badge';
+                    badge.textContent = 'NEW';
+                    div.appendChild(badge);
+                }
+
+                div.onclick = () => selectBattler(battlerName);
+
+                battlerGrid.appendChild(div);
+            });
+        }
+
+        function selectBattler(battlerName) {
+            const targetEnemyId = bulkEditTargetEnemyId || currentEnemyId;
+            if (!targetEnemyId) return;
+
+            tempData.battlerChanges = tempData.battlerChanges || {};
+            tempData.battlerChanges[targetEnemyId] = battlerName;
+
+            // Update the display based on context
+            if (bulkEditTargetEnemyId) {
+                // Update bulk edit table
+                const row = document.querySelector(`tr[data-enemy-id="${targetEnemyId}"]`);
+                if (row) {
+                    const img = row.querySelector('img');
+                    const span = row.querySelector('span');
+                    if (img) img.src = battlerImages[battlerName];
+                    if (span) span.textContent = battlerName;
+                }
+                bulkEditTargetEnemyId = null;
+            } else {
+                // Update main enemy display
+                const battlerImg = document.getElementById('enemyBattler');
+                battlerImg.src = battlerImages[battlerName];
+            }
+
+            closeBattlerModal();
+            showStatus(`Battler changed to "${battlerName}"`, 'success');
+        }
+
+        // Category keywords for auto-add functionality
+        const categoryKeywords = {
+            'Aeromancy': ['air', 'wind', 'gust', 'breeze', 'storm', 'hurricane', 'tornado', 'aerial', 'sky', 'flying'],
+            'AntiMagic': ['anti', 'dispel', 'negate', 'cancel', 'nullify', 'suppress', 'ward', 'shield'],
+            'Arcanism': ['arcane', 'magic', 'mystical', 'ethereal', 'wizard', 'sorcerer', 'mage'],
+            'AstralMagic': ['astral', 'celestial', 'star', 'cosmic', 'space', 'void', 'dimensional', 'plane'],
+            'Basic': ['basic', 'simple', 'common', 'standard', 'normal'],
+            'Bestial': ['beast', 'animal', 'feral', 'wild', 'savage', 'primal', 'creature'],
+            'Boxing': ['box', 'punch', 'fist', 'jab', 'hook', 'uppercut', 'fighter'],
+            'CEO': ['ceo', 'executive', 'business', 'corporate', 'boss', 'leader'],
+            'ChaosMagic': ['chaos', 'disorder', 'entropy', 'random', 'unpredictable', 'madness'],
+            'ChemicalArts': ['chemical', 'poison', 'toxic', 'acid', 'corrosive', 'venom', 'gas'],
+            'Chronomancy': ['time', 'temporal', 'chrono', 'past', 'future', 'clock', 'age'],
+            'Conjuration': ['summon', 'conjure', 'call', 'invoke', 'manifest', 'appear'],
+            'Convokation': ['convoke', 'gather', 'assemble', 'unite', 'rally'],
+            'Cooking': ['cook', 'chef', 'food', 'meal', 'cuisine', 'kitchen', 'eat'],
+            'CosmicMagic': ['cosmic', 'universe', 'galaxy', 'nebula', 'quasar', 'stellar'],
+            'Cryomancy': ['ice', 'frost', 'freeze', 'cold', 'frozen', 'glacier', 'snow', 'winter', 'chill'],
+            'DarkMagic': ['dark', 'shadow', 'void', 'abyss', 'nightmare', 'evil', 'corrupt'],
+            'Divination': ['divine', 'foresee', 'predict', 'oracle', 'prophecy', 'vision', 'sight'],
+            'Divine': ['holy', 'sacred', 'blessed', 'divine', 'god', 'angel', 'heaven', 'light'],
+            'Electromancy': ['electric', 'lightning', 'thunder', 'shock', 'volt', 'storm', 'static'],
+            'EnhancementMagic': ['enhance', 'boost', 'augment', 'strengthen', 'empower', 'buff'],
+            'Firefighting': ['fire', 'flame', 'burn', 'blaze', 'inferno', 'heat', 'ember', 'pyro'],
+            'ForbiddenMagic': ['forbidden', 'taboo', 'cursed', 'banned', 'dark', 'evil'],
+            'Geomancy': ['earth', 'stone', 'rock', 'ground', 'mineral', 'crystal', 'sand', 'dirt'],
+            'HolyMagic': ['holy', 'sacred', 'divine', 'blessed', 'pure', 'righteous', 'light'],
+            'Hunting': ['hunt', 'track', 'prey', 'stalker', 'ranger', 'archer', 'trap'],
+            'Hydromancy': ['water', 'aqua', 'ocean', 'sea', 'wave', 'liquid', 'flood', 'rain'],
+            'Idromancy': ['hydro', 'fluid', 'flow', 'stream', 'river'],
+            'Journalism': ['journal', 'write', 'report', 'news', 'media', 'press'],
+            'LawEnforcement': ['law', 'police', 'enforce', 'justice', 'order', 'guard'],
+            'Leadership': ['lead', 'command', 'inspire', 'rally', 'direct', 'guide'],
+            'MartialArts': ['martial', 'fight', 'combat', 'warrior', 'monk', 'kata'],
+            'MinorMagic': ['minor', 'lesser', 'small', 'weak', 'simple'],
+            'Natural': ['nature', 'natural', 'plant', 'tree', 'forest', 'animal', 'wild'],
+            'Performance': ['perform', 'dance', 'sing', 'act', 'entertain', 'show'],
+            'PlantMagic': ['plant', 'vine', 'root', 'flower', 'tree', 'nature', 'grow'],
+            'PsychicAbilities': ['psychic', 'mind', 'mental', 'telepathy', 'telekinesis', 'psi'],
+            'Pyromancy': ['fire', 'flame', 'burn', 'heat', 'lava', 'magma', 'inferno'],
+            'Roguery': ['rogue', 'thief', 'stealth', 'sneak', 'assassin', 'shadow'],
+            'SelfDestructive': ['self', 'destruct', 'sacrifice', 'kamikaze', 'explode'],
+            'StatusMagic': ['status', 'condition', 'ailment', 'debuff', 'inflict'],
+            'Swordsmanship': ['sword', 'blade', 'slash', 'cut', 'knight', 'samurai'],
+            'Technomancy': ['tech', 'machine', 'robot', 'cyber', 'digital', 'computer'],
+            'TerrorMagic': ['terror', 'fear', 'horror', 'scare', 'frighten', 'nightmare'],
+            'Training': ['train', 'practice', 'exercise', 'improve', 'learn'],
+            'Uncategorized': ['misc', 'other', 'unknown'],
+            'UnholyMagic': ['unholy', 'demon', 'devil', 'corrupt', 'taint', 'curse'],
+            'VoidMagic': ['void', 'empty', 'null', 'vacuum', 'abyss', 'nothingness'],
+            'Wrestling': ['wrestle', 'grapple', 'throw', 'slam', 'pin', 'hold']
+        };
+
+        function findMatchingCategories(text) {
+            const lowerText = text.toLowerCase();
+            const matches = [];
+
+            for (const [category, keywords] of Object.entries(categoryKeywords)) {
+                for (const keyword of keywords) {
+                    if (lowerText.includes(keyword)) {
+                        matches.push(category);
+                        break;
+                    }
+                }
+            }
+
+            return matches.length > 0 ? matches : ['Basic'];
+        }
+
+        function getSkillsByCategory(category) {
+            const categorySkills = [];
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const skillCategory = parseSkillCategory(skills[i].note);
+                    if (skillCategory && skillCategory.toLowerCase() === category.toLowerCase()) {
+                        categorySkills.push(skills[i]);
+                    }
+                }
+            }
+            return categorySkills;
+        }
+
+        function autoAddActionPattern() {
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            if (!enemy) return;
+
+            const currentNote = tempData.noteChanges?.[enemy.id] ?? enemy.note;
+            const { description } = parseEnemyNote(currentNote);
+            const searchText = `${enemy.name} ${description}`;
+
+            const matchingCategories = findMatchingCategories(searchText);
+
+            let availableSkills = [];
+            for (const category of matchingCategories) {
+                availableSkills = availableSkills.concat(getSkillsByCategory(category));
+            }
+
+            if (availableSkills.length === 0) {
+                showStatus('No matching skills found for this enemy', 'error');
+                return;
+            }
+
+            const randomSkill = availableSkills[Math.floor(Math.random() * availableSkills.length)];
+
+            if (!tempData[currentEnemyId]) {
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: Math.floor(Math.random() * 5) + 3,
+                skillId: randomSkill.id
+            });
+
+            loadEnemyActions(currentEnemyId);
+
+            const category = parseSkillCategory(randomSkill.note);
+            showStatus(`Added ${randomSkill.name} (${category}) based on enemy analysis`, 'success');
+        }
+
+        function addSmartRandomSkill() {
+            if (!currentEnemyId) return;
+
+            const currentActions = tempData[currentEnemyId] || enemies.find(e => e && e.id === currentEnemyId).actions || [];
+            if (currentActions.length === 0) {
+                showStatus('Add at least one skill to establish a category first.', 'error');
+                return;
+            }
+
+            const existingCategories = new Set();
+            currentActions.forEach(action => {
+                const skill = skills.find(s => s && s.id === action.skillId);
+                if (skill) {
+                    const category = parseSkillCategory(skill.note);
+                    if (category) {
+                        existingCategories.add(category.toLowerCase());
+                    }
+                }
+            });
+
+            if (existingCategories.size === 0) {
+                showStatus('Could not find categories for the current skills.', 'error');
+                return;
+            }
+
+            const eligibleSkills = [];
+            const currentSkillIds = new Set(currentActions.map(a => a.skillId));
+
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const skillId = skills[i].id;
+                    const usage = skillUsageCount[skillId] || 0;
+                    const category = parseSkillCategory(skills[i].note).toLowerCase();
+
+                    if (existingCategories.has(category) && usage < 9 && !currentSkillIds.has(skillId)) {
+                        eligibleSkills.push(skills[i]);
+                    }
+                }
+            }
+
+            if (eligibleSkills.length === 0) {
+                showStatus('No eligible random skill found (must match existing category and have less than 9 uses).', 'error');
+                return;
+            }
+
+            const randomSkill = eligibleSkills[Math.floor(Math.random() * eligibleSkills.length)];
+
+            if (!tempData[currentEnemyId]) {
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(currentActions));
+            }
+
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: 5,
+                skillId: randomSkill.id
+            });
+
+            loadEnemyActions(currentEnemyId);
+            showStatus(`Added random skill: ${randomSkill.name} (Category: ${parseSkillCategory(randomSkill.note)})`, 'success');
+        }
+
+        // Paste Skills Modal Functions
+        function openPasteModal() {
+            document.getElementById('pasteModal').style.display = 'block';
+            document.getElementById('pasteTextarea').value = '';
+            document.getElementById('keepCurrentSkills').checked = false;
+        }
+
+        function closePasteModal() {
+            document.getElementById('pasteModal').style.display = 'none';
+        }
+
+        function processSkillPaste() {
+            const pasteText = document.getElementById('pasteTextarea').value;
+            const keepCurrent = document.getElementById('keepCurrentSkills').checked;
+
+            const extractedSkillIds = [];
+            const regex = /(\d+)/g;
+            let match;
+            while ((match = regex.exec(pasteText)) !== null) {
+                const skillId = parseInt(match[1]);
+                if (!isNaN(skillId) && skillId > 0) {
+                    if (skills.some(s => s && s.id === skillId)) {
+                        extractedSkillIds.push(skillId);
+                    }
+                }
+            }
+
+            if (extractedSkillIds.length === 0) {
+                showStatus('No valid skill IDs found in the pasted text.', 'error');
+                return;
+            }
+
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            let newActions = [];
+            if (keepCurrent) {
+                newActions = [...tempData[currentEnemyId]];
+            }
+
+            extractedSkillIds.forEach(skillId => {
+                const exists = newActions.some(action => action.skillId === skillId);
+                if (!exists || !keepCurrent) {
+                    newActions.push({
+                        conditionParam1: 0,
+                        conditionParam2: 0,
+                        conditionType: 0,
+                        rating: 5,
+                        skillId: skillId
+                    });
+                }
+            });
+
+            tempData[currentEnemyId] = newActions;
+            loadEnemyActions(currentEnemyId);
+            closePasteModal();
+            showStatus(`Successfully ${keepCurrent ? 'appended' : 'replaced'} action patterns from pasted list.`, 'success');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('battlerModal')) {
+                closeBattlerModal();
+            }
+            if (event.target == document.getElementById('pasteModal')) {
+                closePasteModal();
+            }
+            if (event.target == document.getElementById('bulkEditModal')) {
+                closeBulkEditModal();
+            }
+        }
+        function openBulkEditModal() {
+            document.getElementById('bulkEditModal').style.display = 'block';
+            document.getElementById('bulkSearchInput').value = '';
+            populateBulkEditTable();
+        }
+
+        function closeBulkEditModal() {
+            document.getElementById('bulkEditModal').style.display = 'none';
+        }
+
+        function populateBulkEditTable() {
+    const tbody = document.getElementById('bulkEditTableBody');
+    tbody.innerHTML = '';
+    
+    validEnemyIds.forEach(enemyId => {
+        const enemy = enemies.find(e => e && e.id === enemyId);
+        if (!enemy) return;
+        
+        const row = document.createElement('tr');
+        row.setAttribute('data-enemy-id', enemyId);
+        row.style.backgroundColor = '#383838';
+        row.style.borderBottom = '1px solid #555';
+        
+        const currentNote = tempData.noteChanges?.[enemyId] ?? enemy.note;
+        const currentArchetype = parseArchetype(currentNote) || 'None';
+        const currentBattlerName = tempData.battlerChanges?.[enemyId] ?? enemy.battlerName;
+        const { description } = parseEnemyNote(currentNote);
+        
+        row.innerHTML = `
+            <td style="padding: 10px; border: 1px solid #555; text-align: center; color: #e0e0e0;">${enemyId}</td>
+            <td style="padding: 10px; border: 1px solid #555; color: #e0e0e0;">
+                <div style="font-weight: bold; margin-bottom: 5px;">${enemy.name}</div>
+                <div style="font-size: 12px; color: #ccc; font-style: italic;">${description || 'No description'}</div>
+            </td>
+            <td style="padding: 10px; border: 1px solid #555; text-align: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${battlerImages[currentBattlerName] || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Crect width="40" height="40" fill="%23333"%2F%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="8"%3E?%3C%2Ftext%3E%3C%2Fsvg%3E'}" 
+                         style="width: 40px; height: 40px; object-fit: contain; background: #1a1a1a; border-radius: 4px; cursor: pointer;"
+                         onclick="openBattlerModalForBulk(${enemyId})" title="Click to change sprite">
+                    <span style="color: #ccc; font-size: 12px;">${currentBattlerName || 'None'}</span>
+                </div>
+            </td>
+            <td style="padding: 10px; border: 1px solid #555;">
+                <select style="width: 100%; padding: 8px; background: #1a1a1a; color: #e0e0e0; border: 1px solid #555; border-radius: 4px;" 
+                        onchange="updateBulkArchetype(${enemyId}, this.value)">
+                    ${Array.from(allArchetypes).filter(arch => arch !== '--- Create New ---').map(arch => 
+                        `<option value="${arch}" ${arch === currentArchetype ? 'selected' : ''}>${arch}</option>`
+                    ).join('')}
+                </select>
+            </td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+        function filterBulkEnemies() {
+            const searchTerm = document.getElementById('bulkSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#bulkEditTableBody tr');
+
+            rows.forEach(row => {
+                const enemyId = row.getAttribute('data-enemy-id');
+                const enemy = enemies.find(e => e && e.id === parseInt(enemyId));
+                const searchText = `${enemy.id} ${enemy.name}`.toLowerCase();
+
+                if (searchText.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function updateBulkArchetype(enemyId, archetype) {
+            tempData.noteChanges = tempData.noteChanges || {};
+            const enemy = enemies.find(e => e && e.id === enemyId);
+            let currentNote = tempData.noteChanges[enemyId] ?? enemy.note ?? '';
+
+            const archetypeRegex = /<Archetype:\s*[^>]+>/i;
+            const newTag = (archetype === 'None' || !archetype) ? '' : `<Archetype: ${archetype}>`;
+
+            let newNote;
+            if (archetypeRegex.test(currentNote)) {
+                newNote = currentNote.replace(archetypeRegex, newTag);
+            } else if (newTag) {
+                newNote = `${newTag} ${currentNote}`;
+            } else {
+                newNote = currentNote;
+            }
+
+            tempData.noteChanges[enemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+        }
+
+        let bulkEditTargetEnemyId = null;
+
+        function openBattlerModalForBulk(enemyId) {
+            bulkEditTargetEnemyId = enemyId;
+            const battlerModal = document.getElementById('battlerModal');
+            battlerModal.classList.add('front-modal');
+            openBattlerModal();
+        }
+
+        function applyBulkChanges() {
+            let changeCount = 0;
+
+            if (tempData.noteChanges) {
+                changeCount += Object.keys(tempData.noteChanges).length;
+            }
+            if (tempData.battlerChanges) {
+                changeCount += Object.keys(tempData.battlerChanges).length;
+            }
+
+            closeBulkEditModal();
+
+            // Refresh current enemy display if it was modified
+            if (currentEnemyId && (tempData.noteChanges?.[currentEnemyId] || tempData.battlerChanges?.[currentEnemyId])) {
+                loadEnemyInfo(currentEnemyId);
+            }
+
+            showStatus(`Applied bulk changes! Modified ${changeCount} properties.`, 'success');
+        }
+    </script>
+</body>
+
+</html>

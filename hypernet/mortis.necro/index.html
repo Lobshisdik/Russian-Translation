@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mortis Professional Necromantic Services - mortis.necro</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background: linear-gradient(45deg, #0d1a0d, #1a331a, #0d1a0d);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #66cc66;
+            cursor: crosshair;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(40, 80, 40, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(60, 120, 60, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #002200, #004400, #002200);
+            border: 3px solid #339933;
+            border-bottom: 5px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .header h1 {
+            color: #00ff00;
+            font-size: 28px;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            color: #66cc66;
+            font-style: italic;
+            margin: 10px 0 0 0;
+            font-size: 14px;
+        }
+        
+        .nav-bar {
+            background: #001a00;
+            border: 2px solid #336633;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+        
+        .nav-link {
+            color: #00cc00;
+            text-decoration: none;
+            margin: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border: 1px solid transparent;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .main-content {
+            background: linear-gradient(135deg, #001100, #002200);
+            border: 3px solid #004400;
+            padding: 25px;
+            margin: 0 10px 20px 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .section {
+            display: none;
+            background: #000f00;
+            border: 2px solid #003300;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .service-box {
+            background: linear-gradient(to right, #001a00, #003300, #001a00);
+            border: 2px solid #336633;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #00ff00;
+        }
+        
+        .service-box h4 {
+            color: #00ff00;
+            margin-top: 0;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .price-tag {
+            background: #004400;
+            color: #00ff00;
+            padding: 3px 8px;
+            border: 1px solid #00ff00;
+            font-weight: bold;
+            float: right;
+            font-size: 12px;
+        }
+        
+        .testimonial {
+            background: #000a00;
+            border-left: 4px solid #009900;
+            padding: 12px;
+            margin: 10px 0;
+            font-style: italic;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .contact-form {
+            background: #001100;
+            border: 2px solid #004400;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .form-field {
+            margin: 10px 0;
+        }
+        
+        .form-field label {
+            display: block;
+            color: #66cc66;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-field input, .form-field textarea, .form-field select {
+            width: 100%;
+            padding: 8px;
+            background: #000a00;
+            border: 2px solid #336633;
+            color: #00cc00;
+            font-family: Georgia, serif;
+        }
+        
+        .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to bottom, #004400, #002200);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to bottom, #006600, #004400);
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .footer {
+            background: #000a00;
+            border: 2px solid #003300;
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+            margin: 10px;
+            color: #339933;
+        }
+        
+        .warning-box {
+            background: #1a0000;
+            border: 2px solid #cc3333;
+            color: #ff6666;
+            padding: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .certification {
+            background: #000f00;
+            border: 2px solid #006600;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .skull-divider {
+            text-align: center;
+            color: #666666;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MORTIS PROFESSIONAL NECROMANTIC SERVICES</h1>
+        <p>"Bridging the Corporate-Spectral Interface Since 1987"</p>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Home Portal</span>
+        <span class="nav-link" onclick="showSection('services')">Service Catalog</span>
+        <span class="nav-link" onclick="showSection('pricing')">Rate Structure</span>
+        <span class="nav-link" onclick="showSection('testimonials')">Client Feedback</span>
+        <span class="nav-link" onclick="showSection('certifications')">Professional Credentials</span>
+        <span class="nav-link" onclick="showSection('contact')">Consultation Request</span>
+        <span class="nav-link" onclick="showSection('emergency')">24/7 Emergency</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Welcome to Mortis Professional Necromantic Services</h2>
+            
+            <p>Greetings, valued corporate clients and distinguished individuals. You have accessed the premier Death-Tech consultancy operating within the European Union's Necro-Commercial Framework.</p>
+            
+            <div class="warning-box">
+                <span class="blink">⚠️ NOTICE ⚠️</span><br>
+                All services performed under EU Spectral Regulation 2001/47/EC<br>
+                Licensed Practitioner of Corporate Mortality Solutions
+            </div>
+            
+            <p>At Mortis Professional Services, we specialize in <strong>Bio-Terminal Interface Technology</strong> and <strong>Post-Vital Asset Recovery</strong>. Our proprietary Death-Stream Processing ensures maximum efficiency in all necro-commercial applications.</p>
+            
+            <div class="service-box">
+                <h4>Why Choose Mortis?</h4>
+                <ul>
+                    <li>15+ years experience in Corporate Death-Tech</li>
+                    <li>Fully licensed under EU Necro-Commercial Standards</li>
+                    <li>Proprietary Spectral-Data Encryption protocols</li>
+                    <li>24/7 Emergency Bio-Terminal Response Team</li>
+                    <li>Complete discretion guaranteed</li>
+                </ul>
+            </div>
+            
+            <div class="skull-divider">💀 ═══ ⚱️ ═══ 💀</div>
+            
+            <p><em>Professional consultation available via secure Hypernet connection. All communications encrypted with military-grade Necro-Cipher technology.</em></p>
+        </div>
+
+        <div id="services" class="section">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Service Catalog</h2>
+            
+            <div class="service-box">
+                <span class="price-tag">€2,500/session</span>
+                <h4>Corporate Bio-Terminal Consultation</h4>
+                <p>Direct interface with deceased employees for crucial business intelligence recovery. Ideal for retrieving lost passwords, account information, or unfinished project data.</p>
+            </div>
+            
+            <div class="service-box">
+                <span class="price-tag">€5,000/ritual</span>
+                <h4>Executive Spectral Summoning</h4>
+                <p>High-level corporate spirit consultation for major business decisions. Former CEOs and executives available for strategic guidance through our proprietary Death-Stream Network.</p>
+            </div>
+            
+            <div class="service-box">
+                <span class="price-tag">€1,800/hour</span>
+                <h4>Post-Vital Asset Recovery</h4>
+                <p>Locate and retrieve valuable information from recently deceased individuals. Perfect for inheritance disputes, lost investments, or hidden offshore accounts.</p>
+            </div>
+            
+            <div class="service-box">
+                <span class="price-tag">€3,200/ceremony</span>
+                <h4>Necro-Legal Witness Services</h4>
+                <p>Summon deceased witnesses for court proceedings. Fully admissible under EU Spectral Evidence Law 2000/23/EC. 94% success rate in civil cases.</p>
+            </div>
+            
+            <div class="service-box">
+                <span class="price-tag">€7,500/project</span>
+                <h4>Industrial Death-Field Cleansing</h4>
+                <p>Remove problematic spectral presences from corporate facilities. Essential for workplaces with high mortality rates or ancient burial grounds.</p>
+            </div>
+            
+            <div class="service-box">
+                <span class="price-tag">€15,000/month</span>
+                <h4>Premium Mortality Consulting Package</h4>
+                <p>Comprehensive death-planning for high-net-worth individuals and corporations. Includes pre-mortem spectral contracts and post-vital asset protection.</p>
+            </div>
+            
+            <div class="warning-box">
+                All services include complimentary Bio-Hazmat cleanup and Spectral Residue neutralization
+            </div>
+        </div>
+
+        <div id="pricing" class="section">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Professional Rate Structure</h2>
+            
+            <h3>Standard Death-Tech Services</h3>
+            <table border="1" style="width: 100%; border-collapse: collapse; border-color: #336633; color: #66cc66;">
+                <tr style="background: #002200;">
+                    <th style="padding: 10px; color: #00ff00;">Service Category</th>
+                    <th style="padding: 10px; color: #00ff00;">Base Rate (EUR)</th>
+                    <th style="padding: 10px; color: #00ff00;">Emergency Surcharge</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">Basic Spectral Communication</td>
+                    <td style="padding: 8px;">€800/hour</td>
+                    <td style="padding: 8px;">+150%</td>
+                </tr>
+                <tr style="background: #001100;">
+                    <td style="padding: 8px;">Corporate Bio-Terminal Interface</td>
+                    <td style="padding: 8px;">€2,500/session</td>
+                    <td style="padding: 8px;">+200%</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">Advanced Necro-Legal Services</td>
+                    <td style="padding: 8px;">€4,000/case</td>
+                    <td style="padding: 8px;">+300%</td>
+                </tr>
+                <tr style="background: #001100;">
+                    <td style="padding: 8px;">Industrial Death-Field Cleansing</td>
+                    <td style="padding: 8px;">€10,000/facility</td>
+                    <td style="padding: 8px;">+250%</td>
+                </tr>
+            </table>
+            
+            <div class="service-box">
+                <h4>Payment Terms & Conditions</h4>
+                <ul>
+                    <li>50% deposit required before any Bio-Terminal interface</li>
+                    <li>Payment accepted in EUR, Gold, or Certified Spectral Essence</li>
+                    <li>Corporate accounts receive 15% bulk service discount</li>
+                    <li>Emergency services available 24/7 with premium surcharge</li>
+                    <li>All transactions protected by Necro-Banker confidentiality protocols</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                IMPORTANT: Spectral Essence payments must be authenticated by licensed Death-Tech validators
+            </div>
+        </div>
+
+        <div id="testimonials" class="section">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Client Feedback Archive</h2>
+            
+            <div class="testimonial">
+                <p>"Mortis Professional Services recovered critical financial data from our deceased CFO within 48 hours. Their Bio-Terminal Interface technology is unmatched in the industry."</p>
+                <strong>- Klaus Weber, CEO, EuroTech Industries</strong>
+            </div>
+            
+            <div class="testimonial">
+                <p>"When our founder's ghost was disrupting board meetings, Mortis provided discrete Spectral Negotiation services. Problem solved professionally and permanently."</p>
+                <strong>- Dr. Maria Gonzalez, Chairman, Barcelona Pharmaceuticals</strong>
+            </div>
+            
+            <div class="testimonial">
+                <p>"Outstanding Post-Vital Asset Recovery service. They located my grandfather's hidden Swiss accounts that our family lawyers couldn't find for decades."</p>
+                <strong>- Count Alessandro di Marco, Italian Heritage Trust</strong>
+            </div>
+            
+            <div class="testimonial">
+                <p>"Professional, discrete, and effective. Their Necro-Legal witnesses won our inheritance case. Worth every euro."</p>
+                <strong>- Anonymous High-Net-Worth Client, Luxembourg</strong>
+            </div>
+            
+            <div class="service-box">
+                <h4>Client Satisfaction Statistics (2000-2001)</h4>
+                <ul>
+                    <li>98.7% successful Bio-Terminal connections</li>
+                    <li>94.2% positive case resolution rate</li>
+                    <li>99.9% client confidentiality maintained</li>
+                    <li>Zero unauthorized spectral breaches</li>
+                    <li>Average response time: 4.3 hours</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="certifications" class="section">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Professional Credentials & Certifications</h2>
+            
+            <div class="certification">
+                <h4>EU Death-Tech Professional License #NT-2001-0447</h4>
+                <p>Issued by European Necromantic Regulatory Authority<br>
+                Valid through December 2003</p>
+            </div>
+            
+            <div class="certification">
+                <h4>Certified Spectral Interface Technician (Level 9)</h4>
+                <p>International Association of Bio-Terminal Professionals<br>
+                Advanced certification in Corporate Death-Stream Processing</p>
+            </div>
+            
+            <div class="certification">
+                <h4>Master's Degree in Applied Necro-Commerce</h4>
+                <p>University of Edinburgh, Department of Death Studies<br>
+                Specialization: Corporate Mortality Solutions</p>
+            </div>
+            
+            <div class="certification">
+                <h4>ISO 9001 Certified Death-Tech Provider</h4>
+                <p>Quality management certification for Spectral Services<br>
+                Audited annually by TÜV Necro-Cert</p>
+            </div>
+            
+            <div class="service-box">
+                <h4>Professional Memberships</h4>
+                <ul>
+                    <li>European Guild of Necromantic Professionals</li>
+                    <li>International Society for Death-Tech Innovation</li>
+                    <li>Corporate Mortality Consultants Association</li>
+                    <li>Brussels Chamber of Spectral Commerce</li>
+                    <li>Swiss Association of Discrete Death Services</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                All certifications verified and current as of January 2001
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2 style="color: #00ff00; text-shadow: 0 0 10px #00ff00;">Professional Consultation Request</h2>
+            
+            <p>Submit your inquiry using our secure Necro-Encrypted contact form. All communications are protected by military-grade Spectral-Data protocols.</p>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-field">
+                        <label for="client-name">Client Name / Corporate Entity:</label>
+                        <input type="text" id="client-name" name="client-name" required>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="contact-method">Preferred Contact Method:</label>
+                        <select id="contact-method" name="contact-method">
+                            <option>Secure Hypernet Email</option>
+                            <option>Encrypted Voice Communication</option>
+                            <option>In-Person Consultation</option>
+                            <option>Spectral Message (Premium Service)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="service-type">Required Service Category:</label>
+                        <select id="service-type" name="service-type">
+                            <option>Corporate Bio-Terminal Consultation</option>
+                            <option>Executive Spectral Summoning</option>
+                            <option>Post-Vital Asset Recovery</option>
+                            <option>Necro-Legal Witness Services</option>
+                            <option>Industrial Death-Field Cleansing</option>
+                            <option>Premium Mortality Consulting</option>
+                            <option>Emergency Spectral Response</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="urgency">Service Urgency Level:</label>
+                        <select id="urgency" name="urgency">
+                            <option>Standard (5-7 business days)</option>
+                            <option>Priority (48-72 hours)</option>
+                            <option>Emergency (immediate response)</option>
+                            <option>Spectral Crisis (deploy within 6 hours)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="details">Consultation Details (Encrypted):</label>
+                        <textarea id="details" name="details" rows="6" placeholder="Describe your Death-Tech requirements. All information protected by Necro-Confidentiality protocols."></textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="budget">Estimated Budget Range (EUR):</label>
+                        <select id="budget" name="budget">
+                            <option>€1,000 - €5,000</option>
+                            <option>€5,000 - €15,000</option>
+                            <option>€15,000 - €50,000</option>
+                            <option>€50,000+ (Premium Corporate)</option>
+                            <option>Budget Confidential</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Encrypted Request</button>
+                </form>
+            </div>
+            
+            <div class="service-box">
+                <h4>Alternative Contact Methods</h4>
+                <p><strong>Secure Hypernet Email:</strong> <a href="mailto:mortis@hexagram.corp" style="color: #00cc00;">mortis@hexagram.corp</a></p>
+                <p><strong>Emergency Spectral Hotline:</strong> +32-2-DEATH-TECH (available 24/7)</p>
+                <p><strong>Corporate Headquarters:</strong> Brussels Death-Tech District, Spectral Plaza 47</p>
+                <p><strong>Hexagram Network:</strong> <a href="mailto:necroservices@hexagram.corp" style="color: #00cc00;">necroservices@hexagram.corp</a></p>
+            </div>
+        </div>
+
+        <div id="emergency" class="section">
+            <h2 style="color: #ff0000; text-shadow: 0 0 10px #ff0000;">24/7 Emergency Spectral Response</h2>
+            
+            <div class="warning-box">
+                <span class="blink">🚨 EMERGENCY SERVICES ACTIVE 🚨</span><br>
+                Immediate response team standing by for critical Death-Tech situations
+            </div>
+            
+            <div class="service-box">
+                <h4>Emergency Response Categories</h4>
+                
+                <p><strong>Category 1: Hostile Spectral Manifestation</strong><br>
+                Aggressive corporate ghosts disrupting business operations<br>
+                <em>Response Time: 2 hours maximum</em></p>
+                
+                <p><strong>Category 2: Unauthorized Bio-Terminal Breach</strong><br>
+                Rogue necromantic access to corporate Death-Stream networks<br>
+                <em>Response Time: 4 hours maximum</em></p>
+                
+                <p><strong>Category 3: Critical Post-Vital Data Recovery</strong><br>
+                Time-sensitive recovery from recently deceased executives<br>
+                <em>Response Time: 6 hours maximum</em></p>
+                
+                <p><strong>Category 4: Mass Mortality Event</strong><br>
+                Multiple simultaneous deaths requiring immediate spectral containment<br>
+                <em>Response Time: 1 hour maximum</em></p>
+            </div>
+            
+            <div class="service-box">
+                <h4>Emergency Contact Protocols</h4>
+                <ol>
+                    <li>Secure immediate area and evacuate non-essential personnel</li>
+                    <li>Contact emergency hotline: +32-2-DEATH-TECH</li>
+                    <li>Provide emergency code and corporate authentication</li>
+                    <li>Maintain spectral containment until team arrival</li>
+                    <li>Do NOT attempt amateur Death-Tech interventions</li>
+                </ol>
+            </div>
+            
+            <div class="warning-box">
+                Emergency services billed at 300% premium rate + deployment costs<br>
+                Corporate insurance may cover qualified Death-Tech emergencies
+            </div>
+            
+            <p style="text-align: center; color: #ff6666; font-weight: bold;">
+                "When Death-Tech goes wrong, Mortis makes it right"<br>
+                <em>- Emergency Response Team Motto</em>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Mortis Professional Necromantic Services | EU Death-Tech License #NT-2001-0447</p>
+        <p>Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution</p>
+        <p>Technical support: <a href="mailto:webmaster@hexagram.corp" style="color: #339933;">webmaster@hexagram.corp</a> | Spectral emergencies: +32-2-DEATH-TECH</p>
+        <p><em>All services performed in compliance with EU Spectral Regulation 2001/47/EC</em></p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+        
+        // Add some spooky cursor effects
+        document.addEventListener('mousemove', function(e) {
+            // Create subtle green glow effect following cursor
+            var glow = document.createElement('div');
+            glow.style.position = 'fixed';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            glow.style.width = '10px';
+            glow.style.height = '10px';
+            glow.style.background = 'radial-gradient(circle, rgba(0,255,0,0.3) 0%, transparent 70%)';
+            glow.style.pointerEvents = 'none';
+            glow.style.zIndex = '1000';
+            document.body.appendChild(glow);
+            
+            setTimeout(function() {
+                glow.remove();
+            }, 200);
+        });
+    </script>
+</body>
+</html>

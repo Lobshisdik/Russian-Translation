@@ -1,0 +1,541 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hexasteel Dynamics - Professional Solutions Worldwide</title>
+    <style>
+        body {
+            background: #000000 url('data:image/gif;base64,R0lGODlhCgAKAIAAAAAAAP///yH5BAEAAAEALAAAAAAKAAoAAAIRjI+py+0Po5y02ouz3rz7rxUAOw==') repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #c0c0c0;
+            overflow-x: auto;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            padding: 5px;
+            border: 1px solid #666;
+        }
+        
+        .language-switcher button {
+            background: #444;
+            color: #c0c0c0;
+            border: 1px solid #666;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        
+        .language-switcher button:hover {
+            background: #555;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #1a1a1a, #000);
+            border-bottom: 3px solid #ff0000;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px #ff0000;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #c0c0c0;
+            font-size: 14px;
+            font-style: italic;
+        }
+        
+        .main-container {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: #1a1a1a;
+            border-right: 2px solid #ff0000;
+            padding: 0;
+        }
+        
+        .nav-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to bottom, #333, #111);
+            color: #c0c0c0;
+            border: 1px solid #666;
+            border-bottom: 1px solid #ff0000;
+            padding: 15px 10px;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .nav-button:hover {
+            background: linear-gradient(to bottom, #444, #222);
+            color: #ff0000;
+        }
+        
+        .content-area {
+            flex: 1;
+            background: #0a0a0a;
+            padding: 20px;
+            border-left: 1px solid #333;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .mission-box {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: inset 0 0 10px #330000;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .service-card {
+            background: #111;
+            border: 1px solid #666;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .service-card h4 {
+            color: #ff0000;
+            margin-top: 0;
+        }
+        
+        .team-member {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .member-photo {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border: 2px solid #666;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 10px;
+        }
+        
+        .contact-form {
+            background: #1a1a1a;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: #333;
+            border: 1px solid #666;
+            color: #c0c0c0;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        
+        .contact-form button {
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #000;
+            border-top: 2px solid #ff0000;
+            padding: 15px;
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        .classified {
+            background: repeating-linear-gradient(
+                45deg,
+                #1a0000,
+                #1a0000 10px,
+                #330000 10px,
+                #330000 20px
+            );
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        h1, h2, h3 {
+            color: #ff0000;
+        }
+        
+        .warning {
+            color: #ffff00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button onclick="switchLanguage('en')" id="btn-en">EN</button>
+        <button onclick="switchLanguage('it')" id="btn-it">IT</button>
+    </div>
+
+    <div class="header">
+        <div class="logo" data-en="HEXASTEEL DYNAMICS" data-it="HEXASTEEL DYNAMICS">HEXASTEEL DYNAMICS</div>
+        <div class="tagline" data-en="Professional Solutions • Worldwide Operations • Discrete Service" data-it="Soluzioni Professionali • Operazioni Mondiali • Servizio Discreto">Professional Solutions • Worldwide Operations • Discrete Service</div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <a class="nav-button" onclick="showSection('home')" data-en="🏠 HOME BASE" data-it="🏠 BASE OPERATIVA">🏠 HOME BASE</a>
+            <a class="nav-button" onclick="showSection('services')" data-en="⚔️ SERVICES" data-it="⚔️ SERVIZI">⚔️ SERVICES</a>
+            <a class="nav-button" onclick="showSection('team')" data-en="👥 PERSONNEL" data-it="👥 PERSONALE">👥 PERSONNEL</a>
+            <a class="nav-button" onclick="showSection('operations')" data-en="🎯 OPERATIONS" data-it="🎯 OPERAZIONI">🎯 OPERATIONS</a>
+            <a class="nav-button" onclick="showSection('capabilities')" data-en="💪 CAPABILITIES" data-it="💪 CAPACITÀ">💪 CAPABILITIES</a>
+            <a class="nav-button" onclick="showSection('contact')" data-en="📞 SECURE CONTACT" data-it="📞 CONTATTO SICURO">📞 SECURE CONTACT</a>
+            <a class="nav-button" onclick="showSection('classified')" data-en="🔒 CLASSIFIED" data-it="🔒 RISERVATO">🔒 CLASSIFIED</a>
+        </div>
+
+        <div class="content-area">
+            <div id="home" class="section active">
+                <h1 data-en="Welcome to Hexasteel Dynamics" data-it="Benvenuti a Hexasteel Dynamics">Welcome to Hexasteel Dynamics</h1>
+                
+                <div class="mission-box">
+                    <h3 data-en="Our Mission" data-it="La Nostra Missione">Our Mission</h3>
+                    <p data-en="Hexasteel Dynamics provides comprehensive professional solutions across multiple sectors. From industrial operations to specialized security services, our experienced team delivers results where others cannot." data-it="Hexasteel Dynamics fornisce soluzioni professionali complete in più settori. Dalle operazioni industriali ai servizi di sicurezza specializzati, il nostro team esperto ottiene risultati dove altri non possono.">Hexasteel Dynamics provides comprehensive professional solutions across multiple sectors. From industrial operations to specialized security services, our experienced team delivers results where others cannot.</p>
+                </div>
+
+                <p data-en="Established in 1987, Hexasteel Dynamics has grown from a small metallurgy consultancy to a global provider of specialized services. Our team of professionals operates across Europe and beyond, delivering solutions that require strength, discretion, and unwavering commitment." data-it="Fondata nel 1987, Hexasteel Dynamics è cresciuta da una piccola consulenza metallurgica a un fornitore globale di servizi specializzati. Il nostro team di professionisti opera in tutta Europa e oltre, fornendo soluzioni che richiedono forza, discrezione e impegno incrollabile.">Established in 1987, Hexasteel Dynamics has grown from a small metallurgy consultancy to a global provider of specialized services. Our team of professionals operates across Europe and beyond, delivering solutions that require strength, discretion, and unwavering commitment.</p>
+
+                <div class="classified">
+                    <p class="warning blink" data-en="AUTHORIZED PERSONNEL ONLY" data-it="SOLO PERSONALE AUTORIZZATO">AUTHORIZED PERSONNEL ONLY</p>
+                    <p data-en="Hexasteel Dynamics maintains the highest levels of operational security. All communications are encrypted and monitored. Unauthorized access will be detected and pursued." data-it="Hexasteel Dynamics mantiene i massimi livelli di sicurezza operativa. Tutte le comunicazioni sono cifrate e monitorate. L'accesso non autorizzato sarà rilevato e perseguito.">Hexasteel Dynamics maintains the highest levels of operational security. All communications are encrypted and monitored. Unauthorized access will be detected and pursued.</p>
+                </div>
+
+                <p data-en="Browse our services using the navigation menu. For immediate assistance, use our secure contact form." data-it="Sfoglia i nostri servizi utilizzando il menu di navigazione. Per assistenza immediata, utilizza il nostro modulo di contatto sicuro.">Browse our services using the navigation menu. For immediate assistance, use our secure contact form.</p>
+            </div>
+
+            <div id="services" class="section">
+                <h2 data-en="Professional Services Portfolio" data-it="Portfolio Servizi Professionali">Professional Services Portfolio</h2>
+
+                <div class="service-grid">
+                    <div class="service-card">
+                        <h4 data-en="Industrial Solutions" data-it="Soluzioni Industriali">Industrial Solutions</h4>
+                        <p data-en="• Metallurgical operations<br>• Factory security<br>• Equipment maintenance<br>• Quality assurance" data-it="• Operazioni metallurgiche<br>• Sicurezza di fabbrica<br>• Manutenzione attrezzature<br>• Garanzia qualità">• Metallurgical operations<br>• Factory security<br>• Equipment maintenance<br>• Quality assurance</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h4 data-en="Catering & Hospitality" data-it="Catering & Ospitalità">Catering & Hospitality</h4>
+                        <p data-en="• Corporate catering<br>• Event management<br>• VIP protection<br>• Discrete service staff" data-it="• Catering aziendale<br>• Gestione eventi<br>• Protezione VIP<br>• Staff di servizio discreto">• Corporate catering<br>• Event management<br>• VIP protection<br>• Discrete service staff</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h4 data-en="Security Solutions" data-it="Soluzioni di Sicurezza">Security Solutions</h4>
+                        <p data-en="• Asset protection<br>• Threat assessment<br>• Perimeter security<br>• Crisis management" data-it="• Protezione asset<br>• Valutazione minacce<br>• Sicurezza perimetrale<br>• Gestione crisi">• Asset protection<br>• Threat assessment<br>• Perimeter security<br>• Crisis management</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h4 data-en="Information Services" data-it="Servizi Informativi">Information Services</h4>
+                        <p data-en="• Market research<br>• Competitive analysis<br>• Background verification<br>• Intelligence gathering" data-it="• Ricerca di mercato<br>• Analisi competitiva<br>• Verifica background<br>• Raccolta intelligence">• Market research<br>• Competitive analysis<br>• Background verification<br>• Intelligence gathering</p>
+                    </div>
+                </div>
+
+                <div class="mission-box">
+                    <h3 data-en="Why Choose Hexasteel?" data-it="Perché Scegliere Hexasteel?">Why Choose Hexasteel?</h3>
+                    <p data-en="Our professionals are trained to handle any situation. We guarantee absolute discretion, rapid deployment, and successful completion of all assignments. No questions asked." data-it="I nostri professionisti sono addestrati per gestire qualsiasi situazione. Garantiamo assoluta discrezione, dispiegamento rapido e completamento riuscito di tutte le missioni. Nessuna domanda.">Our professionals are trained to handle any situation. We guarantee absolute discretion, rapid deployment, and successful completion of all assignments. No questions asked.</p>
+                </div>
+            </div>
+
+            <div id="team" class="section">
+                <h2 data-en="Personnel Roster" data-it="Registro del Personale">Personnel Roster</h2>
+
+                <p data-en="Our team consists of carefully selected professionals with extensive experience in their respective fields." data-it="Il nostro team è composto da professionisti accuratamente selezionati con vasta esperienza nei rispettivi settori.">Our team consists of carefully selected professionals with extensive experience in their respective fields.</p>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="1.jpg" alt="Bald muscular man in tactical gear with stern expression" width="80" height="80">
+                    </div>
+                    <div>
+                        <h4 data-en="Viktor 'Steel' Kowalski - Operations Director" data-it="Viktor 'Acciaio' Kowalski - Direttore Operazioni">Viktor "Steel" Kowalski - Operations Director</h4>
+                        <p data-en="15 years experience in tactical operations. Former military specialist. Handles all high-priority assignments." data-it="15 anni di esperienza in operazioni tattiche. Ex specialista militare. Gestisce tutte le missioni ad alta priorità.">15 years experience in tactical operations. Former military specialist. Handles all high-priority assignments.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="2.jpg" alt="Bald man with muscular build wearing chef's apron and serious expression" width="80" height="80">
+                    </div>
+                    <div>
+                        <h4 data-en="Bruno 'Iron Chef' Mendez - Catering Division" data-it="Bruno 'Chef di Ferro' Mendez - Divisione Catering">Bruno "Iron Chef" Mendez - Catering Division</h4>
+                        <p data-en="Master chef with security background. Ensures all catering operations meet our exacting standards." data-it="Maestro chef con background nella sicurezza. Assicura che tutte le operazioni di catering soddisfino i nostri standard rigorosi.">Master chef with security background. Ensures all catering operations meet our exacting standards.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="3.jpg" alt="Bald muscular man in industrial safety gear with protective goggles" width="80" height="80">
+                    </div>
+                    <div>
+                        <h4 data-en="Dmitri 'Hammer' Petrov - Industrial Specialist" data-it="Dmitri 'Martello' Petrov - Specialista Industriale">Dmitri "Hammer" Petrov - Industrial Specialist</h4>
+                        <p data-en="Expert in metallurgy and heavy machinery. Supervises all industrial contracts and quality control." data-it="Esperto in metallurgia e macchinari pesanti. Supervisiona tutti i contratti industriali e controllo qualità.">Expert in metallurgy and heavy machinery. Supervises all industrial contracts and quality control.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="4.jpg" alt="Bald man in dark suit with sunglasses and earpiece" width="80" height="80">
+                    </div>
+                    <div>
+                        <h4 data-en="Marcus 'Shadow' Weber - Intelligence Division" data-it="Marcus 'Ombra' Weber - Divisione Intelligence">Marcus "Shadow" Weber - Intelligence Division</h4>
+                        <p data-en="Information specialist with extensive network connections. Handles all research and analysis operations." data-it="Specialista dell'informazione con vaste connessioni di rete. Gestisce tutte le operazioni di ricerca e analisi.">Information specialist with extensive network connections. Handles all research and analysis operations.</p>
+                    </div>
+                </div>
+
+                <div class="classified">
+                    <p class="warning" data-en="Additional personnel files are classified and available only to authorized clients." data-it="I file aggiuntivi del personale sono riservati e disponibili solo ai clienti autorizzati.">Additional personnel files are classified and available only to authorized clients.</p>
+                </div>
+            </div>
+
+            <div id="operations" class="section">
+                <h2 data-en="Recent Operations Summary" data-it="Riepilogo Operazioni Recenti">Recent Operations Summary</h2>
+
+                <div class="mission-box">
+                    <h3 data-en="Operation: Milano Steel Recovery" data-it="Operazione: Recupero Acciaio Milano">Operation: Milano Steel Recovery</h3>
+                    <p data-en="Client: [CLASSIFIED] Industrial Corporation<br>Objective: Recovery of stolen metallurgical equipment<br>Duration: 72 hours<br>Result: 100% asset recovery, zero casualties<br>Team Size: 8 personnel" data-it="Cliente: [RISERVATO] Corporazione Industriale<br>Obiettivo: Recupero di attrezzature metallurgiche rubate<br>Durata: 72 ore<br>Risultato: 100% recupero asset, zero vittime<br>Dimensione Team: 8 persone">Client: [CLASSIFIED] Industrial Corporation<br>Objective: Recovery of stolen metallurgical equipment<br>Duration: 72 hours<br>Result: 100% asset recovery, zero casualties<br>Team Size: 8 personnel</p>
+                </div>
+
+                <div class="mission-box">
+                    <h3 data-en="Operation: Frankfurt Executive Dining" data-it="Operazione: Pranzo Esecutivo Francoforte">Operation: Frankfurt Executive Dining</h3>
+                    <p data-en="Client: European Banking Consortium<br>Objective: Discrete catering for sensitive negotiations<br>Duration: 5 days<br>Result: Successful event completion, full client satisfaction<br>Team Size: 12 personnel" data-it="Cliente: Consorzio Bancario Europeo<br>Obiettivo: Catering discreto per negoziazioni sensibili<br>Durata: 5 giorni<br>Risultato: Completamento evento riuscito, piena soddisfazione cliente<br>Dimensione Team: 12 persone">Client: European Banking Consortium<br>Objective: Discrete catering for sensitive negotiations<br>Duration: 5 days<br>Result: Successful event completion, full client satisfaction<br>Team Size: 12 personnel</p>
+                </div>
+
+                <div class="mission-box">
+                    <h3 data-en="Operation: Barcelona Information Acquisition" data-it="Operazione: Acquisizione Informazioni Barcellona">Operation: Barcelona Information Acquisition</h3>
+                    <p data-en="Client: [REDACTED]<br>Objective: Market intelligence gathering<br>Duration: 2 weeks<br>Result: Complete data package delivered on schedule<br>Team Size: 4 personnel" data-it="Cliente: [OSCURATO]<br>Obiettivo: Raccolta intelligence di mercato<br>Durata: 2 settimane<br>Risultato: Pacchetto dati completo consegnato nei tempi<br>Dimensione Team: 4 persone">Client: [REDACTED]<br>Objective: Market intelligence gathering<br>Duration: 2 weeks<br>Result: Complete data package delivered on schedule<br>Team Size: 4 personnel</p>
+                </div>
+
+                <div class="classified">
+                    <p class="warning blink" data-en="OPERATIONAL SECURITY NOTICE" data-it="AVVISO SICUREZZA OPERATIVA">OPERATIONAL SECURITY NOTICE</p>
+                    <p data-en="Full operation details are available only through secure channels. Contact our operations desk for classified briefings." data-it="I dettagli completi dell'operazione sono disponibili solo attraverso canali sicuri. Contatta il nostro desk operazioni per briefing riservati.">Full operation details are available only through secure channels. Contact our operations desk for classified briefings.</p>
+                </div>
+            </div>
+
+            <div id="capabilities" class="section">
+                <h2 data-en="Operational Capabilities" data-it="Capacità Operative">Operational Capabilities</h2>
+
+                <h3 data-en="Equipment & Resources" data-it="Attrezzature & Risorse">Equipment & Resources</h3>
+                <ul>
+                    <li data-en="Heavy industrial machinery" data-it="Macchinari industriali pesanti">Heavy industrial machinery</li>
+                    <li data-en="Professional catering equipment for 50-500 guests" data-it="Attrezzature catering professionale per 50-500 ospiti">Professional catering equipment for 50-500 guests</li>
+                    <li data-en="Advanced surveillance and communication systems" data-it="Sistemi avanzati di sorveglianza e comunicazione">Advanced surveillance and communication systems</li>
+                    <li data-en="Specialized transportation fleet" data-it="Flotta di trasporto specializzata">Specialized transportation fleet</li>
+                    <li data-en="Secure data processing facilities" data-it="Strutture di elaborazione dati sicure">Secure data processing facilities</li>
+                </ul>
+
+                <h3 data-en="Geographic Coverage" data-it="Copertura Geografica">Geographic Coverage</h3>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <h4 data-en="Primary Operations" data-it="Operazioni Primarie">Primary Operations</h4>
+                        <p data-en="Germany, France, Italy, Spain, Netherlands, Belgium" data-it="Germania, Francia, Italia, Spagna, Paesi Bassi, Belgio">Germany, France, Italy, Spain, Netherlands, Belgium</p>
+                    </div>
+                    <div class="service-card">
+                        <h4 data-en="Extended Coverage" data-it="Copertura Estesa">Extended Coverage</h4>
+                        <p data-en="Eastern Europe, Scandinavia, UK, Switzerland, Austria" data-it="Europa Orientale, Scandinavia, Regno Unito, Svizzera, Austria">Eastern Europe, Scandinavia, UK, Switzerland, Austria</p>
+                    </div>
+                </div>
+
+                <div class="mission-box">
+                    <h3 data-en="Response Times" data-it="Tempi di Risposta">Response Times</h3>
+                    <p data-en="• Emergency situations: 2-6 hours<br>• Standard operations: 24-48 hours<br>• Complex assignments: 3-7 days planning<br>• Industrial projects: 1-2 weeks deployment" data-it="• Situazioni di emergenza: 2-6 ore<br>• Operazioni standard: 24-48 ore<br>• Missioni complesse: 3-7 giorni di pianificazione<br>• Progetti industriali: 1-2 settimane di dispiegamento">• Emergency situations: 2-6 hours<br>• Standard operations: 24-48 hours<br>• Complex assignments: 3-7 days planning<br>• Industrial projects: 1-2 weeks deployment</p>
+                </div>
+
+                <h3 data-en="Certification & Compliance" data-it="Certificazione & Conformità">Certification & Compliance</h3>
+                <ul>
+                    <li data-en="ISO 9001 Quality Management" data-it="Gestione Qualità ISO 9001">ISO 9001 Quality Management</li>
+                    <li data-en="European Security Standards Certified" data-it="Certificato Standard di Sicurezza Europei">European Security Standards Certified</li>
+                    <li data-en="Professional Catering License (EU)" data-it="Licenza Catering Professionale (UE)">Professional Catering License (EU)</li>
+                    <li data-en="Industrial Safety Compliance" data-it="Conformità Sicurezza Industriale">Industrial Safety Compliance</li>
+                </ul>
+            </div>
+
+            <div id="contact" class="section">
+                <h2 data-en="Secure Contact Portal" data-it="Portale Contatti Sicuro">Secure Contact Portal</h2>
+
+                <div class="warning" data-en="All communications are monitored and encrypted for security purposes." data-it="Tutte le comunicazioni sono monitorate e cifrate per scopi di sicurezza.">All communications are monitored and encrypted for security purposes.</div>
+
+                <div class="contact-form">
+                    <h3 data-en="Project Inquiry Form" data-it="Modulo Richiesta Progetto">Project Inquiry Form</h3>
+                    <form>
+                        <input type="text" placeholder="Company Name / Nome Azienda" required>
+                        <input type="text" placeholder="Contact Person / Persona di Contatto" required>
+                        <input type="email" placeholder="Secure Email / Email Sicura" required>
+                        <input type="text" placeholder="Project Type / Tipo Progetto" required>
+                        <textarea rows="5" placeholder="Project Details (Keep confidential details minimal) / Dettagli Progetto (Mantenere i dettagli riservati al minimo)" required></textarea>
+                        <button type="submit" data-en="Submit Encrypted Request" data-it="Invia Richiesta Cifrata">Submit Encrypted Request</button>
+                    </form>
+                </div>
+
+                <div class="mission-box">
+                    <h3 data-en="Alternative Contact Methods" data-it="Metodi di Contatto Alternativi">Alternative Contact Methods</h3>
+                    <p><strong data-en="Secure Email:" data-it="Email Sicura:">Secure Email:</strong> <a href="mailto:operations@hexagram.corp">operations@hexagram.corp</a></p>
+                    <p><strong data-en="Emergency Hotline:" data-it="Linea Diretta Emergenza:">Emergency Hotline:</strong> +49-30-STEEL-99 (Available 24/7)</p>
+                    <p><strong data-en="Hexagram Corporate:" data-it="Hexagram Aziendale:">Hexagram Corporate:</strong> <a href="mailto:hexasteel@hexagram.corp">hexasteel@hexagram.corp</a></p>
+                    <p><strong data-en="Postal Address:" data-it="Indirizzo Postale:">Postal Address:</strong> Hexasteel Dynamics GmbH, Industriestraße 47, 10318 Berlin, Germany</p>
+                </div>
+
+                <div class="classified">
+                    <p class="warning" data-en="For highly sensitive projects, request secure communication protocols through initial contact." data-it="Per progetti altamente sensibili, richiedere protocolli di comunicazione sicuri tramite contatto iniziale.">For highly sensitive projects, request secure communication protocols through initial contact.</p>
+                </div>
+            </div>
+
+            <div id="classified" class="section">
+                <div class="classified">
+                    <h2 class="blink" data-en="RESTRICTED ACCESS AREA" data-it="AREA AD ACCESSO LIMITATO">RESTRICTED ACCESS AREA</h2>
+                    <p class="warning" data-en="AUTHORIZATION LEVEL: CRIMSON" data-it="LIVELLO AUTORIZZAZIONE: CREMISI">AUTHORIZATION LEVEL: CRIMSON</p>
+                </div>
+
+                <p data-en="Access to classified operations requires pre-authorization and security clearance verification." data-it="L'accesso alle operazioni riservate richiede pre-autorizzazione e verifica del nulla osta di sicurezza.">Access to classified operations requires pre-authorization and security clearance verification.</p>
+
+                <div class="mission-box">
+                    <h3 data-en="Special Operations Division" data-it="Divisione Operazioni Speciali">Special Operations Division</h3>
+                    <p data-en="For clients requiring services beyond our standard portfolio, Hexasteel Dynamics maintains a specialized division capable of handling unique challenges. These operations require special authorization and are subject to enhanced security protocols." data-it="Per clienti che richiedono servizi oltre il nostro portfolio standard, Hexasteel Dynamics mantiene una divisione specializzata capace di gestire sfide uniche. Queste operazioni richiedono autorizzazione speciale e sono soggette a protocolli di sicurezza rinforzati.">For clients requiring services beyond our standard portfolio, Hexasteel Dynamics maintains a specialized division capable of handling unique challenges. These operations require special authorization and are subject to enhanced security protocols.</p>
+                </div>
+
+                <div class="service-grid">
+                    <div class="service-card">
+<h4 data-en="Asset Acquisition" data-it="Acquisizione Asset">Asset Acquisition</h4>
+                       <p data-en="Specialized retrieval operations for high-value assets and sensitive materials." data-it="Operazioni di recupero specializzate per asset di alto valore e materiali sensibili.">Specialized retrieval operations for high-value assets and sensitive materials.</p>
+                   </div>
+                   
+                   <div class="service-card">
+                       <h4 data-en="Problem Resolution" data-it="Risoluzione Problemi">Problem Resolution</h4>
+                       <p data-en="Discrete solutions for corporate disputes and competitive disadvantages." data-it="Soluzioni discrete per dispute aziendali e svantaggi competitivi.">Discrete solutions for corporate disputes and competitive disadvantages.</p>
+                   </div>
+                   
+                   <div class="service-card">
+                       <h4 data-en="Information Acquisition" data-it="Acquisizione Informazioni">Information Acquisition</h4>
+                       <p data-en="Advanced intelligence gathering through specialized penetration techniques." data-it="Raccolta intelligence avanzata attraverso tecniche di penetrazione specializzate.">Advanced intelligence gathering through specialized penetration techniques.</p>
+                   </div>
+                   
+                   <div class="service-card">
+                       <h4 data-en="Extraction Services" data-it="Servizi di Estrazione">Extraction Services</h4>
+                       <p data-en="Personnel and asset extraction from compromised or hostile environments." data-it="Estrazione di personale e asset da ambienti compromessi o ostili.">Personnel and asset extraction from compromised or hostile environments.</p>
+                   </div>
+               </div>
+
+               <div class="classified">
+                   <p class="warning blink" data-en="COMPARTMENTALIZED INFORMATION" data-it="INFORMAZIONI COMPARTIMENTATE">COMPARTMENTALIZED INFORMATION</p>
+                   <p data-en="Details of special operations are available only through secure channels to verified clients with appropriate clearance levels. All inquiries are logged and traced." data-it="I dettagli delle operazioni speciali sono disponibili solo attraverso canali sicuri a clienti verificati con livelli di autorizzazione appropriati. Tutte le richieste sono registrate e tracciate.">Details of special operations are available only through secure channels to verified clients with appropriate clearance levels. All inquiries are logged and traced.</p>
+               </div>
+
+               <h3 data-en="Client Testimonials [REDACTED]" data-it="Testimonianze Clienti [OSCURATE]">Client Testimonials [REDACTED]</h3>
+               <div class="mission-box">
+                   <p data-en="'Hexasteel Dynamics resolved our industrial espionage problem with remarkable efficiency. Their team's... methods were exactly what we needed.' - [CLASSIFIED] Manufacturing CEO" data-it="'Hexasteel Dynamics ha risolto il nostro problema di spionaggio industriale con notevole efficienza. I metodi del loro team erano esattamente quello di cui avevamo bisogno.' - [RISERVATO] CEO Manifatturiero">"Hexasteel Dynamics resolved our industrial espionage problem with remarkable efficiency. Their team's... methods were exactly what we needed." - [CLASSIFIED] Manufacturing CEO</p>
+                   
+                   <p data-en="'When our competitors acquired sensitive documents, Hexasteel not only recovered them but ensured the problem would never occur again.' - [REDACTED] Technology Firm" data-it="'Quando i nostri concorrenti hanno acquisito documenti sensibili, Hexasteel non solo li ha recuperati ma ha assicurato che il problema non si sarebbe mai più verificato.' - [OSCURATA] Azienda Tecnologica">"When our competitors acquired sensitive documents, Hexasteel not only recovered them but ensured the problem would never occur again." - [REDACTED] Technology Firm</p>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div class="footer">
+       <p data-en="© 2001 Hexasteel Dynamics GmbH | All Rights Reserved | Authorized Personnel Only" data-it="© 2001 Hexasteel Dynamics GmbH | Tutti i Diritti Riservati | Solo Personale Autorizzato">© 2001 Hexasteel Dynamics GmbH | All Rights Reserved | Authorized Personnel Only</p>
+       <p data-en="Best viewed with Hypernet Explorer 5.0+ | Optimized for 1024x768 | Secure Connection Required" data-it="Visualizzato meglio con Hypernet Explorer 5.0+ | Ottimizzato per 1024x768 | Connessione Sicura Richiesta">Best viewed with Hypernet Explorer 5.0+ | Optimized for 1024x768 | Secure Connection Required</p>
+       <p data-en="For technical issues contact: <a href='mailto:webmaster@hexagram.corp'>webmaster@hexagram.corp</a>" data-it="Per problemi tecnici contattare: <a href='mailto:webmaster@hexagram.corp'>webmaster@hexagram.corp</a>">For technical issues contact: <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a></p>
+   </div>
+
+   <script>
+       let currentLanguage = 'en';
+
+       function switchLanguage(lang) {
+           currentLanguage = lang;
+           const elements = document.querySelectorAll('[data-en]');
+           
+           elements.forEach(element => {
+               if (lang === 'en') {
+                   element.innerHTML = element.getAttribute('data-en');
+               } else {
+                   element.innerHTML = element.getAttribute('data-it');
+               }
+           });
+
+           // Update button styles
+           document.getElementById('btn-en').style.background = lang === 'en' ? '#666' : '#444';
+           document.getElementById('btn-it').style.background = lang === 'it' ? '#666' : '#444';
+       }
+
+       function showSection(sectionId) {
+           // Hide all sections
+           const sections = document.getElementsByClassName('section');
+           for (let i = 0; i < sections.length; i++) {
+               sections[i].classList.remove('active');
+           }
+           
+           // Show selected section
+           document.getElementById(sectionId).classList.add('active');
+       }
+
+       // Handle form submission
+       document.querySelector('form').addEventListener('submit', function(e) {
+           e.preventDefault();
+           const message = currentLanguage === 'en' ? 
+               'Encrypted request submitted. You will be contacted within 24 hours through secure channels.' :
+               'Richiesta cifrata inviata. Sarete contattati entro 24 ore attraverso canali sicuri.';
+           alert(message);
+       });
+
+       // Initialize with English
+       switchLanguage('en');
+   </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Art Day/Dusk/Night Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+      }
+      .subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+      }
+      .upload-area {
+        border: 3px dashed #667eea;
+        border-radius: 15px;
+        padding: 60px 40px;
+        text-align: center;
+        background: #f8f9ff;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 30px;
+      }
+      .upload-area:hover {
+        background: #eef1ff;
+        border-color: #764ba2;
+      }
+      .upload-area.dragging {
+        background: #e0e7ff;
+        border-color: #4f46e5;
+      }
+      .upload-icon {
+        font-size: 4em;
+        margin-bottom: 20px;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      .btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.1em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        font-weight: 600;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .controls {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .slider-group {
+        flex: 1;
+        min-width: 250px;
+      }
+      .slider-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 600;
+      }
+      input[type="range"] {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+        -webkit-appearance: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+        border: none;
+      }
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .preview-item {
+        background: #f8f9ff;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+      }
+      .preview-item h3 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 1.1em;
+      }
+      .image-container {
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+      }
+      .preview-item canvas {
+        max-width: 100%;
+        height: auto;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+      }
+      .status {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: #e0f2fe;
+        color: #0369a1;
+        font-weight: 600;
+      }
+      .value-display {
+        display: inline-block;
+        min-width: 40px;
+        font-weight: bold;
+        color: #667eea;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎨 Pixel Art Time Converter</h1>
+      <p class="subtitle">
+        Convert daylight pixel art to dusk and night versions
+      </p>
+
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📁</div>
+        <h2>Drop images here or click to browse</h2>
+        <p>Support for PNG, JPG, GIF formats</p>
+        <input type="file" id="fileInput" multiple accept="image/*" />
+      </div>
+
+      <div class="controls">
+        <div class="slider-group">
+          <label
+            >Dusk Darkness:
+            <span class="value-display" id="duskValue">0.3</span></label
+          >
+          <input
+            type="range"
+            id="duskDarkness"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.3"
+          />
+        </div>
+        <div class="slider-group">
+          <label
+            >Night Darkness:
+            <span class="value-display" id="nightValue">0.6</span></label
+          >
+          <input
+            type="range"
+            id="nightDarkness"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.6"
+          />
+        </div>
+        <button class="btn" id="convertBtn" disabled>Convert Images</button>
+        <button class="btn" id="downloadBtn" disabled>Download ZIP</button>
+      </div>
+
+      <div id="status"></div>
+      <div class="preview-grid" id="previewGrid"></div>
+    </div>
+
+    <script>
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("fileInput");
+      const convertBtn = document.getElementById("convertBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const previewGrid = document.getElementById("previewGrid");
+      const status = document.getElementById("status");
+      const duskSlider = document.getElementById("duskDarkness");
+      const nightSlider = document.getElementById("nightDarkness");
+      const duskValue = document.getElementById("duskValue");
+      const nightValue = document.getElementById("nightValue");
+
+      let uploadedFiles = [];
+      let convertedImages = [];
+
+      // Update slider value displays
+      duskSlider.addEventListener("input", (e) => {
+        duskValue.textContent = e.target.value;
+      });
+
+      nightSlider.addEventListener("input", (e) => {
+        nightValue.textContent = e.target.value;
+      });
+
+      // Drag and drop
+      uploadArea.addEventListener("click", () => fileInput.click());
+
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("dragging");
+      });
+
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("dragging");
+      });
+
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("dragging");
+        handleFiles(e.dataTransfer.files);
+      });
+
+      fileInput.addEventListener("change", (e) => {
+        handleFiles(e.target.files);
+      });
+
+      function handleFiles(files) {
+        uploadedFiles = Array.from(files).filter((file) =>
+          file.type.startsWith("image/")
+        );
+        if (uploadedFiles.length > 0) {
+          convertBtn.disabled = false;
+          updateStatus(
+            `${uploadedFiles.length} image(s) loaded. Ready to convert!`
+          );
+        }
+      }
+
+      convertBtn.addEventListener("click", convertImages);
+      downloadBtn.addEventListener("click", downloadZip);
+
+      async function convertImages() {
+        if (uploadedFiles.length === 0) return;
+
+        convertBtn.disabled = true;
+        downloadBtn.disabled = true;
+        previewGrid.innerHTML = "";
+        convertedImages = [];
+
+        const duskDark = parseFloat(duskSlider.value);
+        const nightDark = parseFloat(nightSlider.value);
+
+        updateStatus("Converting images...");
+
+        for (let i = 0; i < uploadedFiles.length; i++) {
+          const file = uploadedFiles[i];
+          updateStatus(
+            `Converting ${i + 1}/${uploadedFiles.length}: ${file.name}`
+          );
+
+          const result = await processImage(file, duskDark, nightDark);
+          if (result) {
+            convertedImages.push(result);
+            displayPreview(result);
+          }
+        }
+
+        updateStatus(
+          `Successfully converted ${convertedImages.length} image(s)!`
+        );
+        downloadBtn.disabled = false;
+        convertBtn.disabled = false;
+      }
+
+      async function processImage(file, duskDark, nightDark) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          const reader = new FileReader();
+
+          reader.onload = (e) => {
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0);
+
+              const originalData = ctx.getImageData(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+              // Create dusk version
+              const duskCanvas = createTimeVariant(
+                originalData,
+                duskDark,
+                "dusk"
+              );
+
+              // Create night version
+              const nightCanvas = createTimeVariant(
+                originalData,
+                nightDark,
+                "night"
+              );
+
+              // Get filename without extension
+              const baseName = file.name.replace(/\.[^/.]+$/, "");
+
+              resolve({
+                original: canvas,
+                dusk: duskCanvas,
+                night: nightCanvas,
+                baseName: baseName,
+              });
+            };
+            img.src = e.target.result;
+          };
+
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function createTimeVariant(imageData, darkness, timeOfDay) {
+        const canvas = document.createElement("canvas");
+        canvas.width = imageData.width;
+        canvas.height = imageData.height;
+        const ctx = canvas.getContext("2d");
+
+        const newImageData = ctx.createImageData(
+          imageData.width,
+          imageData.height
+        );
+        const data = imageData.data;
+        const newData = newImageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+
+          if (a === 0) {
+            // Transparent pixel
+            newData[i] = r;
+            newData[i + 1] = g;
+            newData[i + 2] = b;
+            newData[i + 3] = a;
+          } else {
+            // Apply color transformation
+            let newR, newG, newB;
+
+            if (timeOfDay === "dusk") {
+              // Dusk: Strong orange tint
+              const goldenR = 1.5; // Boost reds strongly
+              const goldenG = 0.95; // Slightly reduce greens for more orange
+              const goldenB = 0.6; // Reduce blues more for warmth
+
+              newR = r * goldenR * (1 - darkness * 0.3) + darkness * 60;
+              newG = g * goldenG * (1 - darkness * 0.5) + darkness * 20;
+              newB = b * goldenB * (1 - darkness * 0.6);
+            }   else {
+    // Night: Better darkness and contrast
+    const contrast = 1.35; // Higher contrast
+    newR = (r * contrast) * (1 - darkness * 1.15);
+    newG = (g * contrast) * (1 - darkness * 1.2);
+    newB = (b * contrast) * (1 - darkness * 1.0) + darkness * 20;
+}
+            newData[i] = Math.max(0, Math.min(255, newR));
+            newData[i + 1] = Math.max(0, Math.min(255, newG));
+            newData[i + 2] = Math.max(0, Math.min(255, newB));
+            newData[i + 3] = a;
+          }
+        }
+
+        ctx.putImageData(newImageData, 0, 0);
+        return canvas;
+      }
+
+      function displayPreview(result) {
+        const previewItem = document.createElement("div");
+        previewItem.className = "preview-item";
+
+        previewItem.innerHTML = `
+                <h3>${result.baseName}</h3>
+                <div class="image-container">
+                    <p><strong>Original</strong></p>
+                    ${result.original.outerHTML}
+                </div>
+                <div class="image-container">
+                    <p><strong>Dusk</strong></p>
+                    ${result.dusk.outerHTML}
+                </div>
+                <div class="image-container">
+                    <p><strong>Night</strong></p>
+                    ${result.night.outerHTML}
+                </div>
+            `;
+
+        previewGrid.appendChild(previewItem);
+      }
+
+      async function downloadZip() {
+        const zip = new JSZip();
+
+        for (const result of convertedImages) {
+          // Add dusk version
+          const duskBlob = await canvasToBlob(result.dusk);
+          zip.file(`${result.baseName}_d.png`, duskBlob);
+
+          // Add night version
+          const nightBlob = await canvasToBlob(result.night);
+          zip.file(`${result.baseName}_n.png`, nightBlob);
+        }
+
+        updateStatus("Generating ZIP file...");
+        const content = await zip.generateAsync({ type: "blob" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(content);
+        link.download = "pixel_art_converted.zip";
+        link.click();
+
+        updateStatus("ZIP file downloaded successfully!");
+      }
+
+      function canvasToBlob(canvas) {
+        return new Promise((resolve) => {
+          canvas.toBlob((blob) => resolve(blob), "image/png");
+        });
+      }
+
+      function updateStatus(message) {
+        status.innerHTML = `<div class="status">${message}</div>`;
+      }
+    </script>
+  </body>
+</html>

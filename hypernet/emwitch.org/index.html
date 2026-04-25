@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Em's Witchcraft Chronicles (1993-1996)</title>
+    <meta name="description" content="Personal diary of Em, a wannabe witch from Wimbledon documenting her struggles to learn actual magic.">
+    <meta name="keywords" content="witch, diary, magic, familiar, UFO, cedrata massoni, Enrico Mattei">
+    <meta name="author" content="Em">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #990000;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            margin: 10px;
+            line-height: 1.5;
+            background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP8AAP///yH5BAEAAAEALAAAAAADAAMAAAIDBGKRADs=");
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 15px;
+            border: 8px ridge #CC0000;
+        }
+        
+        h1, h2, h3 {
+            color: #CC0000;
+            text-align: center;
+            font-family: "Papyrus", fantasy;
+            letter-spacing: 3px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px #000000;
+            border-bottom: 3px dotted #990000;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #FFCCCC;
+            padding: 8px;
+            border: 3px dashed #CC0000;
+            text-transform: uppercase;
+        }
+        
+        h2:hover {
+            background-color: #FFAAAA;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #CC0000;
+            border-right: 5px solid #CC0000;
+        }
+        
+        .entry {
+            margin-bottom: 30px;
+            padding: 10px;
+            border-left: 4px double #990000;
+            background-color: #FFEEEE;
+        }
+        
+        .entry-content {
+            display: none;
+            padding: 15px;
+            background-color: #FFDDDD;
+            border: 2px dotted #990000;
+            margin-top: 15px;
+        }
+        
+        a {
+            color: #990000;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            color: #FF0000;
+            background-color: #FFCCCC;
+        }
+        
+        .blink {
+            animation: blinker 0.8s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .visitor-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #CC0000;
+            background-color: #FFDDDD;
+            padding: 5px;
+            border: 2px inset #990000;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 160px;
+            background-color: #FFEEEE;
+            padding: 10px;
+            border: 3px outset #CC0000;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .sidebar h3 {
+            font-size: 16px;
+            margin-top: 0;
+            border: none;
+            border-bottom: 2px solid #CC0000;
+            text-align: left;
+        }
+        
+        .sidebar ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .sidebar li:before {
+            content: "★彡 ";
+            color: #CC0000;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            border-top: 3px ridge #CC0000;
+            padding-top: 10px;
+            background-color: #FFDDDD;
+        }
+        
+        .signature {
+            font-style: italic;
+            text-align: right;
+            color: #990000;
+            font-family: "Brush Script MT", cursive;
+            font-size: 16px;
+        }
+
+        .cat-gif {
+            display: block;
+            margin: 0 auto;
+            border: 3px groove #CC0000;
+            width: 88px;
+            height: 31px;
+        }
+
+        .button {
+            background-color: #FFCCCC;
+            color: #990000;
+            border: 2px outset #CC0000;
+            padding: 3px 6px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 2px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #FFAAAA;
+            border-style: inset;
+        }
+
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .highlight {
+            color: #CC0000;
+            font-weight: bold;
+            background-color: #FFEEEE;
+        }
+        
+        .pentagram {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #CC0000;
+            margin: 10px auto;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #990000;
+            letter-spacing: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pentagram">
+            .     .     .
+           /|\   /|\   /|\
+          / | \ / | \ / | \
+         /  |  V  |  V  |  \
+        /   |     |     |   \
+       /    |     |     |    \
+      /_____O_____O_____O_____\
+      \     |     |     |     /
+       \    |     |     |    /
+        \   |     |     |   /
+         \  |  /\ |  /\ |  /
+          \ | / | | / | | /
+           \|/  \|/  \|/
+            '     '     '
+</div>
+
+<h1>Em's Witchcraft Chronicles</h1>
+
+<div class="pentagram">
+          .
+         /|\
+        / | \
+      .--. | .--.
+     /    \|/    \
+    |      v      |
+     \    /|\    /
+      '--' | '--'
+        \ | /
+         \|/
+          '
+</div>
+
+        <marquee class="blink" scrollamount="6" direction="left" behavior="alternate">☆彡☽☾ WeLcOmE tO mY MAGICAL cOrNeR oF tHe HyPeRnEt! ☾☽☆彡</marquee>
+        
+        <div class="visitor-counter">
+            ⊹⊱✫⊰⊹ You are visitor number: <span class="blink">1337</span> ⊹⊱✫⊰⊹
+        </div>
+        
+        <div class="sidebar">
+            <h3>~~*MaGiCkAl LinKs*~~</h3>
+            <ul>
+                <li><a href="spells.html">My Spell Book!!!</a></li>
+                <li><a href="familiar.html">Mister Whiskers Gallery</a></li>
+                <li><a href="cedrata.html">CEDRATA Magick!!!11!</a></li>
+                <li><a href="ufo-sightings.html">TOP SECRET UFO Files!!!</a></li>
+                <li><a href="mattei-conspiracy.html">Mattei Truth REVEALED!!!</a></li>
+                <li><a href="travel-blog.html">Adventures with Bubba ♥</a></li>
+            </ul>
+            
+            <div class="pentagram">
+              *
+             /|\
+            /*|*\
+            \*|*/
+             \|/
+              v
+            </div>
+            
+            <h3>~*~*Magic Friends*~*~</h3>
+            <ul>
+                <li><a href="witches-coven.html">Wimbledon Witches COVEN!!!</a></li>
+                <li><a href="cedrata-collectors.html">Cedrata FANATICS!!!</a></li>
+                <li><a href="http://portal.com">Hypernet Portal</a></li>
+            </ul>
+            
+            <div class="construction">
+                <img src="/api/placeholder/88/31" alt="Under Construction" />
+                <p>¡!¡!¡ SiTe AlWaYs<br>UnDeR CoNsTrUcTiOn ¡!¡!¡</p>
+            </div>
+            
+            <div class="pentagram">
+            .:::.
+           :::::::.
+          :::::::::::
+         ::::::::::::
+        :::::::::::::
+            </div>
+        </div>
+        
+        <div class="introduction">
+            <div class="divider">♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠</div>
+            
+            <p>*~*~* Hullo to whoever stumbles upon my little magical nook of the Hypernet! *~*~* I'm Em from Wimbledon, and this is my COMPLETELY TRUE and ABSOLUTELY REAL chronicle of my journey to become a PROPER WITCH!</p>
+            
+            <p>⚠️⚠️⚠️ WARNING!!! ⚠️⚠️⚠️ This site may contain ACTUAL MAGICK! View at your own risk!! My cat Mister Whiskers (who is DEFINITELY my familiar) helped me make this site with his mystical powers, so if anything breaks, blame him not me!!</p>
+            
+            <div class="pentagram">
+               . ' .
+             .'  |  '.
+            /    |    \
+           .     |     .
+           |    / \    |
+           |   /   \   |
+           |  /     \  |
+           | /       \ |
+           ./         \.
+            </div>
+            
+            <p>!!IMPORTANT!! Must be viewed with <span class="highlight">Hypernet Explorer</span> v4.0 or higher!!! Best viewed at 800x600 resolution!!! MAGIC WILL NOT WORK IN OTHER BROWSERS!!!</p>
+            
+            <div class="divider">♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥</div>
+        </div>
+        
+        <h2 onclick="toggleSection('year1993')">1993 - The Beginning of My Magical Journey ☽⋆✧☾</h2>
+        <div id="year1993" class="entry-content">
+            <div class="divider">★彡 ☽ ☿ ♀ ☉ ♂ ♃ ♄ ♅ ♆ ♇ ☾ 彡★</div>
+            
+            <div class="entry">
+                <h3>☆☆☆ January 14, 1993 ☆☆☆</h3>
+                
+                <div class="pentagram">
+                    . : : : .
+                    '. : .'
+                     '. .'
+                      '.'
+                       '
+                </div>
+                
+                <p>Dear Diary (or should I say ~~GRIMOIRE~~!!!!),</p>
+                <p>Today I decided to become a WITCH!!!! Not one of those FAKE movie witches with pointy hats and broomsticks, but a REAL ONE with ACTUAL POWERS!!! My mum thinks I'm going through a "phase" again, but SHE DOESN'T KNOW ANYTHING!!!</p>
+                <p>I bought my first book on witchcraft from the charity shop. It's called "Practical Magic for Beginners" and it smells like cat wee, which I think is a GOOD OMEN because cats are MAGICAL!!!!!1!! I also found a black jumper that I've decided is my OFFICIAL WITCH ROBE even though mum says it's just a regular jumper. WHAT DOES SHE KNOW?!?!?!?</p>
+                
+                <pre style="color: #990000; text-align: right; font-size: 12px;">
+                 /\
+                /  \
+               /    \
+              /      \
+             /   Em   \
+            /          \
+           /____________\
+                </pre>
+                
+                <p>-- Em (Witch-in-Training) ⋆𖤐⭒☆⚝✪✯✰⍟⭒𖤐⋆</p>
+            </div>
+            
+            <div class="entry">
+                <h3>February 3, 1993</h3>
+                <p>DISASTER!!! I tried my first spell today to make my hair grow longer and I think I did it WRONG because nothing happened except I spilled candle wax all over mum's carpet and now I'm grounded for a week. MAGIC IS HARD!!!!!</p>
+                <p>But! I found a stray cat in our garden today. He's black with a white spot on his chest that looks EXACTLY like a pentagram (well, sort of, if you squint a bit). I've named him Mister Whiskers and I'm ABSOLUTELY CERTAIN he's my familiar!!! He hissed at me when I tried to put a little witch hat on him, which proves he has a STRONG PERSONALITY suited for magical work!!!</p>
+                <p>-- Em (Still witch-in-training but now with FAMILIAR!) 🐱✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>March 17, 1993</h3>
+                <p>Today I discovered the MOST MAGICAL DRINK IN THE UNIVERSE!!! It's called Cedrata Massoni and it's from Italy. My uncle brought it back from his holiday and let me try some. IT'S LIKE DRINKING LIQUID SUNSHINE AND MAGIC COMBINED!!!</p>
+                <p>I'm convinced it has magical properties. When I drank it, I felt all fizzy inside, which is DEFINITELY what magic feels like!!! I've started saving my pocket money to buy more. I need to do more research on the magical properties of cedrata. I bet the ancient witches used it in their potions!!!</p>
+                <p>-- Em (Future Cedrata Witch) 🍋✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>April 5, 1993</h3>
+                <p>IMPORTANT DISCOVERY!!! I was reading a book about UFOs (because witches need to know about ALIEN MAGIC too!!) and I came across something MIND-BLOWING! There was a section about this Italian man called Enrico Mattei who died in a mysterious plane crash in the 1960s. The book said it might have been a UFO encounter covered up by the government!!!</p>
+                <p>I've started a special investigation notebook just for this. I think there's a connection between Cedrata Massoni and the Mattei incident. They're both Italian, which CAN'T be a coincidence!!! I'll keep investigating and report my findings.</p>
+                <p>Oh, and Mister Whiskers destroyed my witch hat today. I think he was trying to tell me I don't need it because REAL witches don't wear hats except on special occasions!!!</p>
+                <p>-- Em (Witch Detective) 🕵️‍♀️✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>November 28, 1993</h3>
+                <p>Haven't written in AGES because I've been VERY BUSY with important witch research!!! I've collected 27 empty bottles of Cedrata Massoni (mum says I drink too much of it but what does SHE know about magical elixirs???).</p>
+                <p>BIG NEWS!!! I tried to cast a spell to communicate with Mister Whiskers telepathically, and I THINK IT WORKED because he stared at me for 5 whole minutes without blinking!!! Then he threw up a hairball on my spell book, which I'm pretty sure is cat language for "you're doing great at magic"!!!</p>
+                <p>Still no luck with making things float or turning invisible, but I think I just need more practice and MORE CEDRATA!!!</p>
+                <p>-- Em (Almost a REAL Witch Now) 🔮🐱</p>
+            </div>
+        </div>
+        
+        <h2 onclick="toggleSection('year1994')">1994 - Deepening My Magical Studies</h2>
+        <div id="year1994" class="entry-content">
+            <div class="entry">
+                <h3>January 12, 1994</h3>
+                <p>NEW YEAR, NEW MAGICAL ME!!! I've made a witch resolution to become at least 75% more magical this year. I've decorated my room with star charts and crystals (actually just pretty rocks I found in the garden, but they FEEL magical so they probably ARE).</p>
+                <p>I've made a BREAKTHROUGH in my Mattei investigation!!! I found out that Enrico Mattei was an oil businessman, and I reckon the Cedrata company might have been his SECRET COVER for magical operations!!! Why else would it taste so magically delicious??? It all fits together!!!</p>
+                <p>Mister Whiskers seems to agree with my theory. He sat on my Mattei notebook for three hours today, which is a clear sign of APPROVAL from a familiar.</p>
+                <p>-- Em (Witch Investigator Extraordinaire) 🍋🛸</p>
+            </div>
+            
+            <div class="entry">
+                <h3>March 3, 1994</h3>
+                <p>DISASTER STRIKES AGAIN!!! I tried to do a protection spell around our house and accidentally set off the smoke alarm. Dad was NOT HAPPY and said I'm banned from using candles in my room. HOW AM I SUPPOSED TO DO PROPER WITCHCRAFT WITHOUT CANDLES???</p>
+                <p>I've decided to focus on potion-making instead since it doesn't require fire. I mixed Cedrata with some herbs from mum's garden and a bit of glitter. It tasted AWFUL but I drank it anyway because TRUE WITCHES make sacrifices for their craft!!! Had a funny tummy afterward, but that's probably just the magic working inside me!!!</p>
+                <p>-- Em (Potion Master in Training) 🧪✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>May 17, 1994</h3>
+                <p>I SAW A UFO TODAY!!! Well, I'm PRETTY SURE it was a UFO. It was round and shiny and moving across the sky! Dad says it was "just an airplane" but that's EXACTLY what someone would say if they were trying to HIDE THE TRUTH!!!</p>
+                <p>I've added this sighting to my Mattei investigation file. I think the aliens are watching me because they know I'm getting close to the truth!!! I've started wearing a tinfoil hat when I work on my research, just to be safe.</p>
+                <p>Mister Whiskers keeps trying to eat my tinfoil hat. I think the aliens might be controlling him sometimes, but then he goes back to normal after he coughs up a hairball. VERY SUSPICIOUS!!!</p>
+                <p>-- Em (Witch-UFOlogist) 👽✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>September 2, 1994</h3>
+                <p>Back to school today. BORING!!! None of my teachers understand the importance of my magical studies. My maths teacher confiscated my book on constellation magic because I was reading it during algebra. HOW IS ALGEBRA MORE IMPORTANT THAN ANCIENT STAR MAGIC??? Adults are SO CLUELESS!!!</p>
+                <p>I've started a secret witch club at school with just me and my friend Becca. I tried to initiate Mister Whiskers as our third member, but he refused to attend the ceremony. I think he's playing hard to get, which is VERY typical familiar behavior according to my books.</p>
+                <p>-- Em (Persecuted Witch Scholar) 📚✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>December 21, 1994</h3>
+                <p>WINTER SOLSTICE!!! The MOST MAGICAL day of the year!!! I stayed up until midnight doing a special ritual involving three bottles of Cedrata, some twigs arranged in a circle, and Mister Whiskers (who was NOT cooperative).</p>
+                <p>SOMETHING MAGICAL ACTUALLY HAPPENED!!! When I was doing my chanting, all the lights in the house flickered!!! Mum said it was just a "power surge" but I KNOW it was my magical energy affecting the electrical field!!! FINALLY, PROOF THAT I'M A REAL WITCH!!!</p>
+                <p>I've added this to my evidence journal. At this rate, I'll be able to cast fireballs by next summer!!!</p>
+                <p>-- Em (Actually Magical Witch) ⚡✨</p>
+            </div>
+        </div>
+        
+        <h2 onclick="toggleSection('year1995')">1995 - Advanced Witchcraft and Revelations</h2>
+        <div id="year1995" class="entry-content">
+            <div class="entry">
+                <h3>February 14, 1995</h3>
+                <p>Valentine's Day. Tried to cast a love spell to make Jamie from maths class notice me. Used a special potion containing Cedrata (for magical power) and a drop of strawberry jam (for love energy). Sprinkled it around his desk when no one was looking.</p>
+                <p>SPELL BACKFIRED HORRIBLY!!! Jamie didn't notice me, but his CHAIR COLLAPSED and everyone laughed at him! Now he probably hates me even though it was CLEARLY not my fault but the unpredictable nature of love magic!!!</p>
+                <p>On the bright side, I made a MAJOR BREAKTHROUGH in my Mattei research! I found an old newspaper that mentioned he was working on new energy sources before he died. WHAT IF he discovered how to harness ALIEN ENERGY and that's why they eliminated him??? It all makes perfect sense!!!</p>
+                <p>-- Em (Heartbroken Witch Detective) 💔🔍</p>
+            </div>
+            
+            <div class="entry">
+                <h3>April 18, 1995</h3>
+                <p>I HAVE BEEN CHOSEN!!! Last night I had a MAGICAL DREAM where I was floating above Wimbledon surrounded by bottles of Cedrata that were glowing like stars! A mysterious voice told me I've been selected to reveal the TRUTH about Mattei and the alien connection!!!</p>
+                <p>When I woke up, Mister Whiskers was sitting on my chest staring at me, which is ABSOLUTE CONFIRMATION that the dream was a true magical vision!!! I've started writing everything down in a special dream journal made from paper that I've soaked in Cedrata to enhance its receptivity to magical vibrations.</p>
+                <p>My witch powers are definitely getting stronger. Yesterday I predicted it would rain, and it DID (three days later, but still - ACCURATE PREDICTION)!!!</p>
+                <p>-- Em (Chosen One) ⭐✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>July 23, 1995</h3>
+                <p>SUMMER HOLIDAYS!!! More time for witch training!!! I've converted our garden shed into my "Magical Research Laboratory" (Mum thinks I'm just "playing" in there, but LITTLE DOES SHE KNOW I'm conducting SERIOUS MAGICAL EXPERIMENTS!!!).</p>
+                <p>I've created a magical map connecting all the important elements of my research: Cedrata Massoni, Enrico Mattei, UFO sightings, and strange cat behavior. I've used red string to connect all the clues, just like REAL detectives do! The map takes up an entire wall of the shed and looks VERY PROFESSIONAL and MYSTERIOUS!!!</p>
+                <p>Mister Whiskers keeps trying to attack the strings, which I think means he's trying to point out ADDITIONAL connections that I haven't noticed yet!!! Such a helpful familiar!!!</p>
+                <p>-- Em (Shed Witch) 🏚️✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>October 31, 1995</h3>
+                <p>HALLOWEEN!!! The MOST IMPORTANT day in a witch's calendar!!! I wore my special witch outfit to school (black jumper, black jeans, and a pentagram necklace I made from paperclips). Some of the other kids laughed, but they're just JEALOUS of my magical aura!!!</p>
+                <p>Did a special Halloween ritual in the garden at midnight. Used SEVEN bottles of Cedrata (took me months to save up for them!) arranged in a magical circle. Tried to summon the spirit of Enrico Mattei to ask him about the UFO connection.</p>
+                <p>No ghost appeared, BUT a neighbor's cat jumped over the fence right into the middle of my circle!!! I'm pretty sure it was possessed by Mattei's spirit trying to communicate with me!!! The cat ran away when I tried to interview it, which is EXACTLY what a ghost-possessed cat would do if it was worried about government agents monitoring my garden!!!</p>
+                <p>-- Em (Medium to the Spirit World) 👻✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>December 25, 1995</h3>
+                <p>Christmas Day. Got some BRILLIANT witch supplies as presents!!! A new notebook with a moon on the cover, a crystal (actually a glass paperweight, but it LOOKS magical), and a gift voucher that I'll use to buy MORE CEDRATA!!!</p>
+                <p>Had a STRANGE ENCOUNTER today!!! Was talking about my Mattei research during Christmas dinner (nobody was listening except Nana, who's a bit deaf). Suddenly the TV in the other room started talking about Italy!!! It was just a holiday advert, but the TIMING cannot be coincidental!!! The universe is sending me signs!!!</p>
+                <p>Mister Whiskers got a new toy mouse for Christmas but he's ignoring it in favor of sleeping on my witch books. Such a dedicated familiar!!!</p>
+                <p>-- Em (Festive Witch) 🎄✨</p>
+            </div>
+        </div>
+        
+        <h2 onclick="toggleSection('year1996')">1996 - The Final Chapter & New Beginnings</h2>
+        <div id="year1996" class="entry-content">
+            <div class="entry">
+                <h3>February 29, 1996</h3>
+                <p>LEAP DAY!!! Extra magical because it only happens every four years!!! Did a special leap day ritual involving jumping while holding bottles of Cedrata and chanting backward. Felt VERY magical but no visible effects yet. Magic sometimes takes time to manifest!!!</p>
+                <p>BIG NEWS in my Mattei investigation!!! Found an old magazine at the library that mentioned Mattei was planning to visit a "secret facility" before his death!!! I bet it was an ALIEN CONTACT SITE!!! The article didn't actually SAY that, but it was strongly implied by the fact that it didn't mention aliens at all (OBVIOUS COVER-UP!!!).</p>
+                <p>My witch powers continue to develop. I successfully predicted that Mister Whiskers would knock something off a shelf today, and he DID!!! My psychic abilities are getting stronger!!!</p>
+                <p>-- Em (Leap Day Witch) 🐸✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>April 17, 1996</h3>
+                <p>LIFE-CHANGING EVENT!!! I met the most FASCINATING person today!!! Was at the petrol station with Dad, and this MASSIVE truck pulled up. The driver was this big burly man with a mustache who introduced himself as Bubba, a long-haul trucker from Napotex (I think that's in America or possibly Mexico, my geography isn't great).</p>
+                <p>When I asked him if he'd ever seen a UFO while driving at night, instead of laughing like MOST adults, he said "More times than I can count, little lady!" WE INSTANTLY CONNECTED!!! He showed me his truck, which he's converted into a sort of experimental camper with all sorts of gadgets and gizmos!!!</p>
+                <p>The MOST AMAZING thing is that he had a WHOLE CASE of Cedrata Massoni in his truck!!! Said he got "addicted to the stuff" during a delivery route through Italy!!! IT'S A SIGN!!! We're DESTINED to work together on my investigations!!!</p>
+                <p>-- Em (Excited Witch Detective) 🚚✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>May 3, 1996</h3>
+                <p>BUBBA IS A MAGICAL MENTOR!!! He's been stopping by Wimbledon regularly on his delivery routes, and we've been having the MOST ENLIGHTENING conversations about UFOs, government conspiracies, and the magical properties of various fizzy drinks!!!</p>
+                <p>He's ABSOLUTELY CONVINCED that Enrico Mattei was eliminated because he discovered something "they" didn't want the world to know!!! FINALLY, someone who UNDERSTANDS my research!!! He even contributed a whole section to my investigation board about "transdimensional energy signatures" which sounds VERY scientific and magical!!!</p>
+                <p>Mum and Dad are a bit suspicious about my new truck driver friend, but they don't understand that age is IRRELEVANT when it comes to KINDRED SPIRITS united by a quest for TRUTH and MAGIC!!!</p>
+                <p>-- Em (Apprentice to a Wizard) 🧙‍♂️✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>June 21, 1996</h3>
+                <p>SUMMER SOLSTICE and BIG ANNOUNCEMENT!!! After much discussion with my parents (lots of shouting and door-slamming involved), they've FINALLY agreed to let me go on a research expedition with Bubba in his experimental camper truck!!! We're going to trace the path of Enrico Mattei's last journey through Europe and collect evidence!!!</p>
+                <p>I've packed all my most important witch supplies: my spell books, my crystal collection, my Mattei investigation files, and of course, as much Cedrata as I could afford!!! Mister Whiskers can't come with us (Mum insisted he has to stay home), but I've created a magical bond that will allow him to send me psychic messages while I'm away!!!</p>
+                <p>I've never felt so EXCITED and MAGICAL!!! This is going to be the journey that finally proves all my theories and establishes me as a REAL, POWERFUL WITCH!!!</p>
+                <p>-- Em (Witch on a Mission) 🧳✨</p>
+            </div>
+            
+            <div class="entry">
+                <h3>July 14, 1996</h3>
+                <p>This will be my LAST DIARY ENTRY for a while!!! We're heading off on our grand expedition tomorrow!!! The experimental camper is all packed and ready to go! Bubba has installed all sorts of special equipment for "energy detection" and "dimensional monitoring" which sounds INCREDIBLY ADVANCED and MAGICAL!!!</p>
+                <p>I've said goodbye to Mister Whiskers (he seemed sad but understanding of my important magical mission). I've instructed him to guard my witch books while I'm away and to continue the investigation from the Wimbledon end.</p>
+                <p>I don't know when I'll be able to update this diary again. We're going to be traveling to places where the Hypernet might not reach!!! But when I return, I'll have SO MANY magical adventures to share!!!</p>
+                <p>If anyone is reading this while I'm gone, please feed Mister Whiskers and tell him I'm gathering important evidence for our investigations!!!</p>
+                <p>MAGICAL ADVENTURES AWAIT!!! I can feel that this journey is going to change EVERYTHING!!! The truth about Mattei, the alien connection, and the magical properties of Cedrata is out there, and WE'RE GOING TO FIND IT!!!</p>
+                <p>-- Em (Witch Explorer) 🌍✨</p>
+            </div>
+        </div>
+        
+        <div class="divider">∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞</div>
+
+        <div class="construction">
+            <img src="/api/placeholder/400/60" alt="Under Construction" />
+            
+            <div class="pentagram">
+               /|\ 
+              / | \
+             /__|__\
+            /\  |  /\
+           /__\_|_/__\
+            </div>
+            
+            <p>☥☥☥ More magical entries coming soon... maybe... if Em ever returns from her expedition! ☥☥☥</p>
+            
+            <pre style="color: #CC0000; text-align: center; font-size: 12px;">
+            .     .       .  .   . .   .   . .    +  .
+              .     .  :     .    .. :. .___---------___.
+                 .  .   .    .  :.:. _".^ .^ ^.  '.. :"-_. .
+              .  :       .  .  .:../:            . .^  :.:\.
+                  .   . :: +. :.:/: .   .    .        . . .:\
+               .  :    .     . _ :::/:               . . . .\
+                . . . .   . - : :.:./.                        \
+                 .  .     : . : .:.|. ######              .#######
+                  :.. .  :-  : .:  ::|.#######           ..########
+                 .   .  .  ..  .  .. :\ ########          :########
+                  .       +   .  .  :.:. \. #######       #########
+                   .   .   .   .  . . ..:. \. #####       ########
+                    .      :  .   .  . ...::. \. ###       #####
+                   .     . . .  .  :  .   .: . \  ###      ####
+                    .   .     :      :  : :. .:| \ ##      ###
+                     .     .   . . :  :  . : |: :\: ##    ###
+                      .   .  .     . . :|  -:|:. .\ ##    ##
+                       .  :    . . .  :  :  |:. . .: #   ##
+                        :        .    .   .: |::.. .::#  #
+                       .    .   .   .  .:. :.:.:  ::::# #
+                        :  .  .  . .  .:...: .::    ::#
+                       .   .   .     ::  ...  .:  .::#
+                      .   .   .   ..   .   .. :  :::#
+                     .  .    .   .   .  . . ...  :#
+                    . .  .   . .  . . . .  .:. :#
+                    .    .   .   .  :  .  .::.#
+                   .  .    .  .  . . .  .:: :#
+                  .      .   .   .   .  . : #
+                .     .   .  . . . . . :.:#
+               .   .   .     .   .   .  ::#
+              .  .    .   .  .   .  . . :#
+             .     .    .     . .  . . .:#
+            .   .    .   .  .  . . . .::##
+           .  .   .  .    .   .   . ::###
+          .   .  .    .  .   .  . . :#####
+           . .   .   .   . . . . .:#######
+            .   .  .    . .  . .:#########
+               .      . . . .::##########
+                   . . ..:############
+                     ...:#############
+                       :#############
+                      ################
+                     ###################
+                    ####################
+                   ######################
+                  #######################
+                  ########################
+                   #######################
+                  #######################
+                  ######################
+                   ####################
+                    ###################
+            </pre>
+        </div>
+        
+        <div class="pentagram">
+          .    +    .
+         /|\/\/\/\/|\
+        / |/\/\/\/\| \
+       /  |\/\/\/\/|  \
+      /   |/\/\/\/\|   \
+     /    |\/\/\/\/|    \
+    /     |/\/\/\/\|     \
+   /_____/|\/\/\/\/|\._____\
+   \_____\|/\/\/\/\|/_____/
+    \     |\/\/\/\/|     /
+     \    |/\/\/\/\|    /
+      \   |\/\/\/\/|   /
+       \  |/\/\/\/\|  /
+        \ |\/\/\/\/| /
+         \|/\/\/\/\|/
+          '    +    '
+        </div>
+        
+        <div class="footer">
+            <p>~*~*~ Best viewed with Hypernet Explorer 4.0 or higher ~*~*~</p>
+            <p>⊹⊱✫⊰⊹ This magical corner of the Hypernet last updated: January 15, 2001 ⊹⊱✫⊰⊹</p>
+            <p>✧✦✧ Contact Em on Hexagram: <a href="mailto:emthewitch@hexagram.corp">emthewitch@hexagram.corp</a> ✧✦✧</p>
+            <div class="divider">†††††††††††††††††††††††††††††††</div>
+            <p><a href="guestbook.html">☆★☆ Sign my MAGICAL guestbook! ☆★☆</a> | <a href="counter-spells.html">☠☠☠ Protection spells against government agents ☠☠☠</a> | <a href="cedrata-recipe.html">✧✦✧ Magical Cedrata potions ✧✦✧</a></p>
+            <div>
+                <img src="/api/placeholder/88/31" alt="Witch Approved" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="UFO Investigator" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="Made with Magic" class="cat-gif" />
+            </div>
+            
+            <div class="pentagram">
+            ╔══╗╔╗ ♥ ♥ ♥ 
+            ║══╣║║ MAGICK 
+            ╠══║║╚╗POWER!!
+            ╚══╝╚═╝♥ ♥ ♥
+            </div>
+            
+            <pre style="color: #990000; text-align: center; font-size: 10px; line-height: 1;">
+            (     )
+            (        )
+             (          )
+              (          )
+             (     )    )
+              (          )
+                (          )
+                 (          )
+                  (          )
+                 (          )
+               (          )
+               (          )
+               (          )
+                (          )
+                 (          )
+                 *        *
+             *    *  * *    *
+                             
+            </pre>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "block") {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+
+        // Open the most recent year by default
+        window.onload = function() {
+            toggleSection('year1996');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPG Maker MZ Weapon Editor</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        color: #e0e0e0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        border: 1px solid #333;
+      }
+
+      h1 {
+        color: #00d4ff;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 2em;
+        text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      }
+
+      .load-section {
+        background: #252525;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        border: 2px dashed #444;
+        text-align: center;
+      }
+
+      .file-input-wrapper {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      .load-btn {
+        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: #000;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+      }
+
+      .load-btn:hover {
+        background: linear-gradient(135deg, #00ffff 0%, #00ccff 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+      }
+
+      .info-text {
+        color: #999;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .warning-text {
+        color: #ff6b6b;
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .main-content {
+        display: none;
+        gap: 25px;
+      }
+
+      .main-content.active {
+        display: grid;
+        grid-template-columns: 300px 1fr 400px;
+      }
+
+      .weapon-list {
+        background: #252525;
+        border-radius: 8px;
+        padding: 15px;
+        max-height: 700px;
+        overflow-y: auto;
+        border: 1px solid #333;
+      }
+
+      .weapon-item {
+        background: #2a2a2a;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 2px solid #333;
+      }
+
+      .weapon-item:hover {
+        background: #333;
+        transform: translateX(5px);
+        border-color: #00d4ff;
+      }
+
+      .weapon-item.active {
+        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: #000;
+        border-color: #00ffff;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+      }
+
+      .weapon-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .weapon-id {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .weapon-item.active .weapon-id {
+        color: rgba(0, 0, 0, 0.7);
+      }
+
+      .editor-section {
+        background: #252525;
+        border-radius: 8px;
+        padding: 20px;
+        max-height: 700px;
+        overflow-y: auto;
+        border: 1px solid #333;
+      }
+
+      .editor-section h2 {
+        color: #00d4ff;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #333;
+      }
+
+      .weapon-description-display {
+        background: #2a2a2a;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border-left: 4px solid #6c757d;
+        color: #e0e0e0;
+        font-style: italic;
+      }
+
+      .weapon-description-display p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .tag-group {
+        background: #2a2a2a;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border-left: 4px solid #00d4ff;
+      }
+
+      .tag-group h3 {
+        color: #00d4ff;
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+
+      .tag-input {
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        color: #bbb;
+        font-weight: 600;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      textarea,
+      select.sound-dropdown {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #444;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+        background: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      input:focus,
+      textarea:focus,
+      select.sound-dropdown:focus {
+        outline: none;
+        border-color: #00d4ff;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+        font-family: "Courier New", monospace;
+      }
+
+      .tag-helper {
+        font-size: 12px;
+        color: #777;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s;
+        flex: 1;
+      }
+
+      .btn-primary {
+        background: #28a745;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #218838;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: #5a6268;
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #c82333;
+      }
+
+      .preview-section {
+        background: #252525;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #333;
+        max-height: 700px;
+        overflow-y: auto;
+      }
+
+      .preview-section h2 {
+        color: #00d4ff;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+
+      .preview-box {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #333;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .preview-box:hover {
+        border-color: #00d4ff;
+        background: #2a2a2a;
+      }
+
+      .preview-image {
+        max-width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+      }
+
+      .no-preview {
+        color: #777;
+        font-style: italic;
+        text-align: center;
+      }
+
+      .sound-list {
+        background: #1a1a1a;
+        padding: 15px;
+        border-radius: 6px;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #333;
+      }
+
+      .sound-item {
+        padding: 8px;
+        margin-bottom: 8px;
+        background: #2a2a2a;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .play-btn {
+        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: #000;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .play-btn:disabled {
+        background: #444;
+        color: #888;
+        cursor: not-allowed;
+      }
+
+      .play-btn:hover:not(:disabled) {
+        background: linear-gradient(135deg, #00ffff 0%, #00ccff 100%);
+      }
+
+      .current-tags {
+        background: #2a2a2a;
+        border: 1px solid #00d4ff;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+
+      .current-tags h3 {
+        color: #00d4ff;
+        margin-bottom: 10px;
+      }
+
+      .current-tags pre {
+        color: #ccc;
+        font-size: 12px;
+        white-space: pre-wrap;
+        word-break: break-all;
+        font-family: "Courier New", monospace;
+      }
+
+      .multi-input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .multi-input-item {
+        display: flex;
+        gap: 8px;
+      }
+
+      .multi-input-item input {
+        flex: 1;
+      }
+
+      .remove-btn {
+        background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+      }
+
+      .remove-btn:hover {
+        box-shadow: 0 4px 12px rgba(255, 68, 68, 0.5);
+      }
+
+      .add-btn {
+        background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+        color: #000;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+      }
+
+      .add-btn:hover {
+        box-shadow: 0 4px 12px rgba(0, 255, 136, 0.5);
+      }
+
+      .animation-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        margin-top: 8px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        background: #1a1a1a;
+        border-radius: 4px;
+        border: 1px solid #333;
+      }
+
+      .animation-chip {
+        background: #2a2a2a;
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        cursor: pointer;
+        border: 2px solid #444;
+        transition: all 0.2s;
+        text-align: center;
+        color: #bbb;
+      }
+
+      .animation-chip:hover {
+        background: #333;
+        border-color: #00d4ff;
+      }
+
+      .animation-chip.selected {
+        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: #000;
+        border-color: #00ffff;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+      }
+
+      .status-message {
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        display: none;
+      }
+
+      .status-message.success {
+        background: #1a3d2a;
+        color: #00ff88;
+        border: 1px solid #00cc66;
+        display: block;
+      }
+
+      .status-message.error {
+        background: #3d1a1a;
+        color: #ff6b6b;
+        border: 1px solid #cc0000;
+        display: block;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00d4ff;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        overflow: auto;
+      }
+
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 90vw;
+        width: 1200px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        border: 1px solid #333;
+        box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #777;
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition: all 0.3s;
+      }
+
+      .modal-close:hover {
+        color: #ff4444;
+        transform: rotate(90deg);
+      }
+
+      .modal h2 {
+        color: #00d4ff;
+        margin-bottom: 20px;
+      }
+
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .image-item {
+        border: 3px solid #333;
+        border-radius: 8px;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: #2a2a2a;
+      }
+
+      .image-item:hover {
+        border-color: #00d4ff;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      }
+
+      .image-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        margin-bottom: 8px;
+        background: #1a1a1a;
+        border-radius: 4px;
+      }
+
+      .image-item-name {
+        font-size: 11px;
+        text-align: center;
+        color: #bbb;
+        word-break: break-word;
+      }
+
+      .sound-select-btn {
+        background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        color: #000;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+      }
+
+      .sound-select-btn:hover {
+        background: linear-gradient(135deg, #00ffff 0%, #00ccff 100%);
+        box-shadow: 0 4px 12px rgba(0, 212, 255, 0.5);
+      }
+
+      select.sound-dropdown {
+        flex: 1;
+        padding: 8px;
+        border: 2px solid #444;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .no-files-message {
+        padding: 20px;
+        text-align: center;
+        color: #777;
+        font-style: italic;
+      }
+
+      #muzzle-preview-container {
+        position: relative;
+        cursor: crosshair;
+        display: inline-block;
+        max-width: 100%;
+      }
+
+      #muzzleFlashImage {
+        max-width: 100%;
+        max-height: 60vh;
+        user-select: none;
+      }
+
+      #muzzleFlashMarker {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 2px solid red;
+        background-color: rgba(255, 255, 0, 0.5);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none; /* So it doesn't block clicks */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🗡️ RPG Maker MZ Weapon System Editor</h1>
+
+      <div class="status-message" id="statusMessage"></div>
+
+      <div class="load-section">
+        <div class="file-input-wrapper">
+          <label for="projectFolderInput" class="load-btn"
+            >📂 Select Project Folder</label
+          >
+          <input
+            type="file"
+            id="projectFolderInput"
+            webkitdirectory
+            directory
+            multiple
+            style="display: none"
+          />
+        </div>
+
+        <p class="info-text">
+          <strong>Instructions:</strong> Click the button and select your main
+          RPG Maker MZ project folder.
+        </p>
+        <p class="warning-text">
+          ⚠️ Make sure to backup your project before saving changes!
+        </p>
+      </div>
+
+      <div class="main-content" id="mainContent">
+        <div class="weapon-list" id="weaponList">
+          <h3 style="color: #00d4ff; margin-bottom: 15px">Weapons</h3>
+        </div>
+
+        <div class="editor-section">
+          <h2>Edit Weapon Tags</h2>
+          <div id="editorContent">
+            <p class="no-preview">Select a weapon to edit</p>
+          </div>
+        </div>
+
+        <div class="preview-section">
+          <h2>Preview</h2>
+
+          <div class="current-tags" id="currentTags" style="display: none">
+            <h3>Current Saved Note Tags:</h3>
+            <pre id="currentTagsContent"></pre>
+          </div>
+
+          <h3>Weapon Sprite:</h3>
+          <div class="preview-box" id="spritePreview">
+            <p class="no-preview">No sprite set</p>
+          </div>
+
+          <h3 style="margin-top: 20px; margin-bottom: 10px">Sounds:</h3>
+          <div class="sound-list" id="soundList">
+            <p class="no-preview">No sounds set</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+          <button class="modal-close" onclick="closeImageModal()">&times;</button>
+          <h2>Select Weapon Sprite</h2>
+          <input 
+            type="text" 
+            id="imageSearchInput" 
+            placeholder="🔍 Search images..." 
+            style="width: 100%; margin-bottom: 15px; padding: 12px; font-size: 14px;"
+            oninput="filterImages()"
+          />
+          <div id="imageGrid" class="image-grid"></div>
+        </div>
+      </div>
+
+    <div id="muzzleFlashModal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeMuzzleFlashModal()">
+          &times;
+        </button>
+        <h2>Set Muzzle Flash Position</h2>
+        <p style="color: #bbb; margin-bottom: 15px">
+          Click on the image to place the muzzle flash. The coordinates will be
+          calculated relative to the weapon's anchor point (the red dot).
+        </p>
+        <div id="muzzle-preview-container">
+          <img id="muzzleFlashImage" src="" alt="Weapon Sprite Preview" />
+          <div id="muzzleFlashMarker"></div>
+          <div
+            id="muzzleFlashAnchor"
+            style="
+              position: absolute;
+              width: 8px;
+              height: 8px;
+              background: red;
+              border-radius: 50%;
+              transform: translate(-50%, -50%);
+              pointer-events: none;
+            "
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Global variables
+      let weaponsData = null;
+      let currentWeapon = null;
+      let weaponsFileName = "Weapons.json";
+      let availableImages = [];
+      let availableSounds = [];
+      let tempEdits = {}; // Store temporary edits by weapon ID
+      // Animation list
+      const ANIMATIONS = [
+        "Swing",
+        "SwingLeft",
+        "SwingDown",
+        "SwingUp",
+        "SwingDiagonalUp",
+        "SwingDiagonalDown",
+        "Slash",
+        "Recoil",
+        "Thrust",
+        "Overhead",
+        "Uppercut",
+        "Spin",
+        "Backstab",
+        "ThrowStraight",
+        "ThrowOverhead",
+        "ThrowSidearm",
+        "ThrowUnderhand",
+        "ThrowBoomerang",
+        "ThrowSpiral",
+        "Block",
+        "Parry",
+        "Deflect",
+        "Cleave",
+        "Whirlwind",
+        "Riposte",
+        "Impale",
+        "Execute",
+        "Flourish",
+        "CrossSlash",
+        "Cyclone",
+        "PistolRecoil",
+        "RifleRecoil",
+        "ShotgunRecoil",
+        "SniperRecoil",
+        "MachineGunRecoil",
+        "RevolverRecoil",
+        "BowDrawAndRelease",
+        "LongbowRecoil",
+        "CrossbowRecoil",
+        "RecurveBowRecoil",
+        "CompoundBowRecoil",
+        "HeavyCrossbowRecoil",
+        "Static",
+      ];
+
+      // Status message helper
+      function showStatus(message, type) {
+        const statusEl = document.getElementById("statusMessage");
+        statusEl.textContent = message;
+        statusEl.className = "status-message " + type;
+
+        setTimeout(() => {
+          statusEl.className = "status-message";
+        }, 5000);
+      }
+
+      // Initialize file input
+      document
+        .getElementById("projectFolderInput")
+        .addEventListener("change", loadProjectFolder);
+
+
+        function filterImages() {
+  const searchTerm = document.getElementById('imageSearchInput').value.toLowerCase();
+  const imageItems = document.querySelectorAll('.image-item');
+  
+  imageItems.forEach(item => {
+    const imageName = item.querySelector('.image-item-name').textContent.toLowerCase();
+    if (imageName.includes(searchTerm)) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+      // Load Project Folder
+      function loadProjectFolder(event) {
+        const files = event.target.files;
+        if (!files || files.length === 0) return;
+
+        weaponsData = null;
+        availableImages = [];
+        availableSounds = [];
+
+        const weaponsFile = Array.from(files).find((file) =>
+          (file.webkitRelativePath || file.name).endsWith("data/Weapons.json")
+        );
+
+        if (!weaponsFile) {
+          showStatus(
+            '❌ Error: Could not find "data/Weapons.json" in the selected folder.',
+            "error"
+          );
+          return;
+        }
+
+        for (const file of files) {
+          const path = file.webkitRelativePath || file.name;
+
+          if (
+            path.includes("img/pictures/Weapons/") &&
+            path.match(/\.(png|jpg|jpeg|gif)$/i)
+          ) {
+            const fileName = path
+              .split("/")
+              .pop()
+              .replace(/\.(png|jpg|jpeg|gif)$/i, "");
+            availableImages.push({ name: fileName, path, file });
+          } else if (
+            path.includes("audio/se/Weapons/") &&
+            path.match(/\.(ogg|mp3|wav)$/i)
+          ) {
+            const fileName = path
+              .split("/")
+              .pop()
+              .replace(/\.(ogg|mp3|wav)$/i, "");
+            availableSounds.push({ name: fileName, path, file });
+          }
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            weaponsData = JSON.parse(e.target.result);
+            displayWeaponList();
+            document.getElementById("mainContent").classList.add("active");
+            showStatus(
+              `✅ Project loaded! Found Weapons.json, ${availableImages.length} images, and ${availableSounds.length} sounds.`,
+              "success"
+            );
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+            showStatus(
+              "❌ Error parsing Weapons.json. Make sure it is a valid JSON file.",
+              "error"
+            );
+          }
+        };
+        reader.readAsText(weaponsFile);
+      }
+
+      function displayWeaponList() {
+        const listEl = document.getElementById("weaponList");
+        listEl.innerHTML =
+          '<h3 style="color: #00d4ff; margin-bottom: 15px;">Weapons</h3>';
+
+        weaponsData.forEach((weapon, index) => {
+          if (!weapon || index === 0) return;
+
+          const div = document.createElement("div");
+          div.className = "weapon-item";
+          div.innerHTML = `<div class="weapon-name">${weapon.name}</div>
+                                 <div class="weapon-id">ID: ${weapon.id} | Type: ${weapon.wtypeId}</div>`;
+
+          div.onclick = () => selectWeapon(weapon, div);
+          listEl.appendChild(div);
+        });
+      }
+
+      function selectWeapon(weapon, element) {
+        // Save current weapon's state before switching
+        if (currentWeapon) {
+          saveToWeaponData();
+        }
+
+        document
+          .querySelectorAll(".weapon-item")
+          .forEach((item) => item.classList.remove("active"));
+        element.classList.add("active");
+        currentWeapon = weapon;
+        displayEditor(weapon);
+        updatePreview();
+      }
+      function saveToWeaponData() {
+        if (!currentWeapon) return;
+        const rawNoteEl = document.getElementById("rawNote");
+        if (rawNoteEl) {
+          // Find the weapon in the weaponsData array and update it
+          const weaponInData = weaponsData.find(
+            (w) => w && w.id === currentWeapon.id
+          );
+          if (weaponInData) {
+            weaponInData.note = rawNoteEl.value;
+            currentWeapon.note = rawNoteEl.value;
+          }
+        }
+      }
+
+      // Add this new function to save temporary edits
+      function saveTempEdit(weaponId) {
+        const rawNoteEl = document.getElementById("rawNote");
+        if (rawNoteEl) {
+          tempEdits[weaponId] = rawNoteEl.value;
+        }
+      }
+
+      function parseNoteTags(note) {
+        const parsed = {
+          weaponSprite: [],
+          animations: [],
+          sounds: [],
+          reloadSound: "",
+          noMultiAttack: false,
+          maxBullets: "",
+          animSpeed: "",
+          frameDuration: "",
+          muzzleFlash: { x: "", y: "" },
+        };
+        const p = (regex, callback) => {
+          const match = note.match(regex);
+          if (match) callback(match);
+        };
+
+        p(
+          /<WeaponSprite:\s*(.+?)>/i,
+          (m) => (parsed.weaponSprite = m[1].split(",").map((s) => s.trim()))
+        );
+        p(
+          /<Movement:\s*(.+?)>/i,
+          (m) => (parsed.animations = m[1].split(",").map((s) => s.trim()))
+        );
+        p(/<WeaponSound:\s*(.+?)>/i, (m) => parsed.sounds.push(m[1].trim()));
+        p(
+          /<WeaponSounds:\s*(.+?)>/i,
+          (m) => (parsed.sounds = m[1].split(",").map((s) => s.trim()))
+        );
+        p(
+          /<MuzzleFlash:\s*(-?\d+),\s*(-?\d+)>/i,
+          (m) => (parsed.muzzleFlash = { x: m[1], y: m[2] })
+        );
+        p(/<ReloadSound:\s*(\w+)>/i, (m) => (parsed.reloadSound = m[1]));
+        p(/<Bullets:\s*(\d+)>/i, (m) => (parsed.maxBullets = m[1]));
+        p(/<AnimationSpeed:\s*(\d+)>/i, (m) => (parsed.animSpeed = m[1]));
+        p(
+          /<SpriteFrameDuration:\s*(\d+)>/i,
+          (m) => (parsed.frameDuration = m[1])
+        );
+        parsed.noMultiAttack = /<NoMultiAttackSound>/i.test(note);
+        return parsed;
+      }
+
+      function displayEditor(weapon) {
+        const editorEl = document.getElementById("editorContent");
+        const note = weapon.note || "";
+        const description = weapon.description || "No description provided.";
+        const parsed = parseNoteTags(note);
+        editorEl.innerHTML = `
+                <div class="weapon-description-display">
+                    <h4 style="margin-bottom: 5px; color: #ccc;">Description</h4>
+                    <p>${description}</p>
+                </div>
+                <div class="tag-group">
+                    <h3>🎨 Sprite System</h3>
+                    <div class="tag-input">
+                        <label>Weapon Sprite Frames (comma-separated):</label>
+                        <input type="text" id="weaponSprite" value="${parsed.weaponSprite.join(
+                          ", "
+                        )}" oninput="updatePreview(); generateTags();" placeholder="e.g., Pistol1, Pistol2, Pistol3">                    </div>
+                    <div class="tag-input">
+                        <label>Muzzle Flash Position (x, y):</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="number" id="muzzleFlashX" placeholder="X" style="flex: 1;" value="${
+                              parsed.muzzleFlash.x
+                            }" oninput="updatePreview()">
+                            <input type="number" id="muzzleFlashY" placeholder="Y" style="flex: 1;" value="${
+                              parsed.muzzleFlash.y
+                            }" oninput="updatePreview()">
+                            <button class="sound-select-btn" onclick="openMuzzleFlashEditor()">Set Visually</button>
+                        </div>
+                    </div>
+                    <div class="tag-input">
+                        <label>Movement Animations:</label>
+                        <div class="animation-list" id="animationList"></div>
+                    </div>
+                </div>
+                <div class="tag-group">
+                    <h3>🔊 Sound System</h3>
+                    <div class="tag-input">
+                        <label>Weapon Sounds:</label>
+                        <div class="multi-input-container" id="soundInputs"></div>
+                        <button class="add-btn" onclick="addSoundInput()">+ Add Sound</button>
+                    </div>
+                    <div class="tag-input">
+                        <label>Reload Sound:</label>
+                        <input type="text" id="reloadSound" value="${
+                          parsed.reloadSound
+                        }" oninput="updatePreview()" placeholder="e.g., Reload">
+                    </div>
+                    <div class="tag-input">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="noMultiAttack" ${
+                              parsed.noMultiAttack ? "checked" : ""
+                            } onchange="updatePreview()"> No Multi-Attack Sound
+                        </label>
+                    </div>
+                </div>
+                <div class="tag-group"><h3>🎯 Bullet System</h3>
+                    <div class="tag-input">
+                        <label>Max Bullets:</label>
+                        <input type="number" id="maxBullets" value="${
+                          parsed.maxBullets
+                        }" oninput="updatePreview()" placeholder="Leave empty for unlimited" min="1">
+                    </div>
+                </div>
+                <div class="tag-group"><h3>⚡ Animation Speed</h3>
+                    <div class="tag-input">
+                        <label>Animation Speed (ms):</label>
+                        <input type="number" id="animSpeed" value="${
+                          parsed.animSpeed
+                        }" oninput="updatePreview()" placeholder="Default: 35" min="1">
+                    </div>
+                    <div class="tag-input">
+                        <label>Sprite Frame Duration (ms):</label>
+                        <input type="number" id="frameDuration" value="${
+                          parsed.frameDuration
+                        }" oninput="updatePreview()" placeholder="Default: 130" min="1">
+                    </div>
+                </div>
+                <div class="tag-group"><h3>📝 Raw Note Tags</h3>
+                    <textarea id="rawNote" oninput="liveRawTagUpdate()">${note}</textarea>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="saveWeapon()">💾 Save Changes</button>
+                    <button class="btn btn-secondary" onclick="generateTags()">🔄 Generate from Fields</button>
+                    <button class="btn btn-danger" onclick="clearTags()">🗑️ Clear All Tags</button>
+                </div>`;
+
+        const animList = document.getElementById("animationList");
+        ANIMATIONS.forEach((anim) => {
+          const chip = document.createElement("div");
+          chip.className = "animation-chip";
+          if (parsed.animations.includes(anim)) chip.classList.add("selected");
+          chip.textContent = anim;
+          chip.onclick = () => {
+            chip.classList.toggle("selected");
+            updatePreview();
+          };
+          animList.appendChild(chip);
+        });
+
+        if (parsed.sounds.length === 0) {
+          addSoundInput("");
+        } else {
+          parsed.sounds.forEach((sound) => addSoundInput(sound));
+        }
+      }
+
+      function liveRawTagUpdate() {
+        if (!currentWeapon) return;
+        saveToWeaponData();
+        updatePreview();
+      }
+      function addSoundInput(value = "") {
+        const container = document.getElementById("soundInputs");
+        const div = document.createElement("div");
+        div.className = "multi-input-item";
+
+        const optionsHtml = availableSounds
+          .map(
+            (s) =>
+              `<option value="${s.name}"${
+                s.name === value ? " selected" : ""
+              }>${s.name}</option>`
+          )
+          .join("");
+        div.innerHTML = `<select class="sound-dropdown" onchange="updatePreview()"><option value="">-- Select Sound --</option>${optionsHtml}</select>
+                             <button class="play-btn" onclick="playSoundFromInput(this)">▶</button>
+                             <button class="remove-btn" onclick="this.parentElement.remove(); updatePreview();">✕</button>`;
+        container.appendChild(div);
+      }
+
+      function playSoundFromInput(button) {
+        const select = button.parentElement.querySelector("select, input");
+        if (select && select.value) playSound(select.value);
+      }
+
+      function getEditorState() {
+        if (!document.getElementById("weaponSprite")) return null;
+        const sounds = Array.from(
+          document.querySelectorAll(
+            '#soundInputs select, #soundInputs input[type="text"]'
+          )
+        )
+          .map((i) => i.value.trim())
+          .filter(Boolean);
+        const spriteVal = document.getElementById("weaponSprite").value.trim();
+        return {
+          weaponSprite: spriteVal
+            ? spriteVal.split(",").map((s) => s.trim())
+            : [],
+          sounds: sounds,
+        };
+      }
+
+      function generateTags() {
+        const tags = [];
+        const spriteVal = document.getElementById("weaponSprite").value.trim();
+        if (spriteVal) tags.push(`<WeaponSprite: ${spriteVal}>`);
+
+        const muzzleX = document.getElementById("muzzleFlashX").value.trim();
+        const muzzleY = document.getElementById("muzzleFlashY").value.trim();
+        if (muzzleX !== "" && muzzleY !== "")
+          tags.push(`<MuzzleFlash: ${muzzleX}, ${muzzleY}>`);
+
+        const selectedAnims = Array.from(
+          document.querySelectorAll(".animation-chip.selected")
+        ).map((c) => c.textContent);
+        if (selectedAnims.length > 0)
+          tags.push(`<Movement: ${selectedAnims.join(", ")}>`);
+
+        const sounds = getEditorState().sounds;
+        if (sounds.length === 1) tags.push(`<WeaponSound: ${sounds[0]}>`);
+        else if (sounds.length > 1)
+          tags.push(`<WeaponSounds: ${sounds.join(", ")}>`);
+
+        const reloadVal = document.getElementById("reloadSound").value.trim();
+        if (reloadVal) tags.push(`<ReloadSound: ${reloadVal}>`);
+
+        if (document.getElementById("noMultiAttack").checked)
+          tags.push("<NoMultiAttackSound>");
+
+        const bulletsVal = document.getElementById("maxBullets").value.trim();
+        if (bulletsVal) tags.push(`<Bullets: ${bulletsVal}>`);
+
+        const animSpeedVal = document.getElementById("animSpeed").value.trim();
+        if (animSpeedVal) tags.push(`<AnimationSpeed: ${animSpeedVal}>`);
+
+        const frameDurVal = document
+          .getElementById("frameDuration")
+          .value.trim();
+        if (frameDurVal) tags.push(`<SpriteFrameDuration: ${frameDurVal}>`);
+
+        const generatedNote = tags.join("\n");
+        document.getElementById("rawNote").value = generatedNote;
+
+        // Update the weaponsData immediately
+        saveToWeaponData();
+        updatePreview();
+        showStatus("✅ Tags generated from fields!", "success");
+      }
+
+      function clearTags() {
+        if (
+          confirm("Are you sure you want to clear all tags for this weapon?")
+        ) {
+          document.getElementById("rawNote").value = "";
+          if (currentWeapon) displayEditor(currentWeapon);
+          updatePreview();
+          showStatus("Tags cleared.", "success");
+        }
+      }
+
+      function saveWeapon() {
+        if (!currentWeapon) return;
+
+        // Make sure current edits are saved
+        saveToWeaponData();
+
+        const dataStr = JSON.stringify(weaponsData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = weaponsFileName;
+        link.click();
+        URL.revokeObjectURL(url);
+        link.remove();
+        showStatus(
+          `✅ ${weaponsFileName} downloaded! Replace the file in your project's data/ folder.`,
+          "success"
+        );
+      }
+
+      function updatePreview() {
+        if (!currentWeapon) return;
+
+        // The "raw note" serves as the single source of truth for the preview if it exists.
+        // Otherwise, get state from individual fields. This prevents laggy feedback loops.
+        const rawNoteEl = document.getElementById("rawNote");
+        let editorState;
+        if (rawNoteEl) {
+          const parsed = parseNoteTags(rawNoteEl.value);
+          editorState = {
+            weaponSprite: parsed.weaponSprite,
+            sounds: parsed.sounds,
+          };
+        } else {
+          editorState = getEditorState();
+        }
+        if (!editorState) return;
+
+        // Update saved tags view
+        document.getElementById("currentTagsContent").textContent =
+          currentWeapon.note;
+
+        // Update sprite preview from editor state
+        const spriteEl = document.getElementById("spritePreview");
+        if (editorState.weaponSprite.length > 0) {
+          const firstFrame = editorState.weaponSprite[0];
+          const imageFile = availableImages.find(
+            (img) => img.name === firstFrame
+          );
+          if (imageFile) {
+            spriteEl.innerHTML = `<img src="${URL.createObjectURL(
+              imageFile.file
+            )}" class="preview-image" alt="${firstFrame}"><p style="margin-top: 10px; font-size: 12px; color: #777;">Click to change</p>`;
+          } else {
+            spriteEl.innerHTML = `<p class="no-preview">Sprite: ${firstFrame}.png<br><button class="load-btn" style="margin-top: 10px;" onclick="openImageSelector()">Select Image</button></p>`;
+          }
+        } else {
+          spriteEl.innerHTML = `<p class="no-preview">No sprite set<br><button class="load-btn" style="margin-top: 10px;" onclick="openImageSelector()">Select Image</button></p>`;
+        }
+        spriteEl.onclick = openImageSelector;
+
+        // Update sound preview from editor state
+        const soundEl = document.getElementById("soundList");
+        if (editorState.sounds.length > 0) {
+          soundEl.innerHTML = "";
+          editorState.sounds.forEach((sound) => {
+            const div = document.createElement("div");
+            div.className = "sound-item";
+            const soundExists = availableSounds.some((s) => s.name === sound);
+            div.innerHTML = `<span>${sound}</span><button class="play-btn" onclick="playSound('${sound}')" ${
+              !soundExists ? "disabled" : ""
+            }>${soundExists ? "▶ Play" : "❌ Not Found"}</button>`;
+            soundEl.appendChild(div);
+          });
+        } else {
+          soundEl.innerHTML = '<p class="no-preview">No sounds set</p>';
+        }
+      }
+
+      function openImageSelector() {
+  if (availableImages.length === 0)
+    return showStatus(
+      'âš ï¸ No images found in "img/pictures/Weapons/".',
+      "error"
+    );
+
+  const modal = document.getElementById("imageModal");
+  const grid = document.getElementById("imageGrid");
+  const searchInput = document.getElementById("imageSearchInput");
+  
+  grid.innerHTML = "";
+  searchInput.value = ""; // Clear previous search
+
+  availableImages.forEach((img) => {
+    const div = document.createElement("div");
+    div.className = "image-item";
+    div.innerHTML = `<img src="${URL.createObjectURL(img.file)}" alt="${
+      img.name
+    }"><div class="image-item-name">${img.name}</div>`;
+    div.onclick = () => selectImage(img.name);
+    grid.appendChild(div);
+  });
+  
+  modal.classList.add("active");
+  searchInput.focus(); // Auto-focus search input
+}
+
+      function closeImageModal() {
+        document.getElementById("imageModal").classList.remove("active");
+      }
+
+      function selectImage(imageName) {
+        const spriteInput = document.getElementById("weaponSprite");
+        const frames = spriteInput.value
+          .trim()
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+
+        if (frames.length > 0) {
+          frames[0] = imageName;
+          spriteInput.value = frames.join(", ");
+        } else {
+          spriteInput.value = imageName;
+        }
+
+        generateTags(); // Add this line to update the raw note tags
+        closeImageModal();
+        showStatus("✅ Image selected: " + imageName, "success");
+        updatePreview();
+      }
+
+      function openMuzzleFlashEditor() {
+        const spriteName = document
+          .getElementById("weaponSprite")
+          .value.split(",")[0]
+          .trim();
+        if (!spriteName)
+          return showStatus("❌ Set a Weapon Sprite first!", "error");
+
+        const imageFile = availableImages.find(
+          (img) => img.name === spriteName
+        );
+        if (!imageFile)
+          return showStatus(
+            `❌ Sprite file "${spriteName}.png" not found in project.`,
+            "error"
+          );
+
+        const modal = document.getElementById("muzzleFlashModal");
+        const imgEl = document.getElementById("muzzleFlashImage");
+        const marker = document.getElementById("muzzleFlashMarker");
+        const anchor = document.getElementById("muzzleFlashAnchor");
+
+        imgEl.src = URL.createObjectURL(imageFile.file);
+
+        imgEl.onload = () => {
+          const x =
+            parseFloat(document.getElementById("muzzleFlashX").value) || 0;
+          const y =
+            parseFloat(document.getElementById("muzzleFlashY").value) || 0;
+          const rect = imgEl.getBoundingClientRect();
+          const anchorX_view = rect.width * 0.4;
+          const anchorY_view = rect.height * 0.8;
+          anchor.style.left = `${anchorX_view}px`;
+          anchor.style.top = `${anchorY_view}px`;
+          const scaleX_view = rect.width / imgEl.naturalWidth;
+          const scaleY_view = rect.height / imgEl.naturalHeight;
+          marker.style.left = `${anchorX_view + x * scaleX_view}px`;
+          marker.style.top = `${anchorY_view + y * scaleY_view}px`;
+        };
+
+        document.getElementById("muzzle-preview-container").onclick =
+          updateMuzzleFlashPosition;
+        modal.classList.add("active");
+      }
+
+      function updateMuzzleFlashPosition(event) {
+        const img = document.getElementById("muzzleFlashImage");
+        const marker = document.getElementById("muzzleFlashMarker");
+        const rect = img.getBoundingClientRect();
+
+        const clickX_view = event.clientX - rect.left;
+        const clickY_view = event.clientY - rect.top;
+
+        const scaleX_to_natural = img.naturalWidth / rect.width;
+        const scaleY_to_natural = img.naturalHeight / rect.height;
+
+        const clickX_natural = clickX_view * scaleX_to_natural;
+        const clickY_natural = clickY_view * scaleY_to_natural;
+
+        const anchorX_natural = img.naturalWidth * 0.4;
+        const anchorY_natural = img.naturalHeight * 0.8;
+
+        document.getElementById("muzzleFlashX").value = Math.round(
+          clickX_natural - anchorX_natural
+        );
+        document.getElementById("muzzleFlashY").value = Math.round(
+          clickY_natural - anchorY_natural
+        );
+
+        marker.style.left = `${clickX_view}px`;
+        marker.style.top = `${clickY_view}px`;
+        updatePreview();
+      }
+
+      function closeMuzzleFlashModal() {
+        const modal = document.getElementById("muzzleFlashModal");
+        modal.classList.remove("active");
+        document.getElementById("muzzle-preview-container").onclick = null;
+      }
+
+      function playSound(soundName) {
+        const soundFile = availableSounds.find((s) => s.name === soundName);
+        if (soundFile) {
+          const audio = new Audio(URL.createObjectURL(soundFile.file));
+          audio.volume = 0.9;
+          audio
+            .play()
+            .catch((err) => showStatus("❌ Error playing sound.", "error"));
+        } else {
+          showStatus(
+            "❌ Sound file not found in loaded project files.",
+            "error"
+          );
+        }
+      }
+
+      window.onclick = function (event) {
+        if (event.target.matches(".modal")) {
+          closeImageModal();
+          closeMuzzleFlashModal();
+        }
+      };
+    </script>
+  </body>
+</html>

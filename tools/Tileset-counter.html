@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Tileset Usage Analyzer</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --primary: #4a90e2;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .upload-zone {
+            border: 2px dashed #bbb;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            background: var(--card-bg);
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--primary);
+            background: #fdfdfd;
+        }
+
+        .upload-zone input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        #results {
+            margin-top: 2rem;
+        }
+
+        .tileset-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .tileset-header {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tileset-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .tileset-count {
+            background: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .map-list {
+            padding: 1rem 1.5rem;
+            list-style: none;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .map-item {
+            font-size: 0.95rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .map-item::before {
+            content: "🗺️";
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .map-id {
+            color: #999;
+            font-size: 0.8rem;
+            margin-left: 6px;
+        }
+
+        .empty-state {
+            color: #999;
+            font-style: italic;
+            padding: 1rem 1.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            font-weight: bold;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>RPG Maker MZ Tileset Usage</h1>
+    <p class="subtitle">Select your project's <strong>data</strong> folder to see which maps use which tilesets.</p>
+
+    <div class="upload-zone" id="dropZone">
+        <label class="upload-btn">
+            Select Data Folder
+            <input type="file" id="folderInput" webkitdirectory directory multiple>
+        </label>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">or drop the folder here</p>
+    </div>
+
+    <div id="loading" class="loading">Processing Map Files...</div>
+    <div id="results"></div>
+
+    <script>
+        const folderInput = document.getElementById('folderInput');
+        const dropZone = document.getElementById('dropZone');
+        const resultsDiv = document.getElementById('results');
+        const loadingDiv = document.getElementById('loading');
+
+        // Drag and drop handling
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#4a90e2';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#bbb';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#bbb';
+            const items = e.dataTransfer.items;
+            if (items) {
+                // Accessing files via drag/drop is trickier for folders, 
+                // but input element is the reliable standard for local tools.
+                // We simulate a click or notify user to use the button for folders if drop fails.
+                alert("Please use the 'Select Data Folder' button to ensure all files are read correctly.");
+            }
+        });
+
+        folderInput.addEventListener('change', async (event) => {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+
+            resultsDiv.innerHTML = '';
+            loadingDiv.style.display = 'block';
+
+            try {
+                // 1. Identify key files
+                const tilesetsFile = files.find(f => f.name === 'Tilesets.json');
+                const mapInfosFile = files.find(f => f.name === 'MapInfos.json');
+                const mapFiles = files.filter(f => f.name.match(/^Map\d{3}\.json$/));
+
+                if (!tilesetsFile || !mapInfosFile) {
+                    alert("Error: Could not find Tilesets.json or MapInfos.json. Please make sure you selected the 'data' folder.");
+                    loadingDiv.style.display = 'none';
+                    return;
+                }
+
+                // 2. Read helper files (Tilesets and MapInfos)
+                const [tilesetsData, mapInfosData] = await Promise.all([
+                    readJsonFile(tilesetsFile),
+                    readJsonFile(mapInfosFile)
+                ]);
+
+                // 3. Create Lookup Maps
+                // Tileset Map: ID -> Name
+                const tilesetLookup = {};
+                tilesetsData.forEach(t => {
+                    if (t) tilesetLookup[t.id] = t.name;
+                });
+
+                // MapInfo Map: ID -> Name
+                const mapNameLookup = {};
+                mapInfosData.forEach(m => {
+                    if (m) mapNameLookup[m.id] = m.name;
+                });
+
+                // 4. Process all MapXXX.json files
+                // We create a structure: { tilesetId: [ {mapId, mapName} ] }
+                const usageData = {};
+                
+                // Initialize usageData with all tilesets (even unused ones)
+                Object.keys(tilesetLookup).forEach(id => {
+                    usageData[id] = [];
+                });
+
+                // Read all maps concurrently
+                const mapPromises = mapFiles.map(async (file) => {
+                    try {
+                        const mapData = await readJsonFile(file);
+                        const mapIdNum = parseInt(file.name.match(/\d{3}/)[0], 10);
+                        const tilesetId = mapData.tilesetId;
+
+                        if (usageData[tilesetId]) {
+                            usageData[tilesetId].push({
+                                id: mapIdNum,
+                                name: mapNameLookup[mapIdNum] || `Unknown Map ${mapIdNum}`,
+                                fileName: file.name
+                            });
+                        }
+                    } catch (err) {
+                        console.error(`Failed to parse ${file.name}`, err);
+                    }
+                });
+
+                await Promise.all(mapPromises);
+
+                // 5. Render Results
+                loadingDiv.style.display = 'none';
+                renderResults(usageData, tilesetLookup);
+
+            } catch (error) {
+                console.error(error);
+                alert("An error occurred while processing the files. Check console for details.");
+                loadingDiv.style.display = 'none';
+            }
+        });
+
+        function readJsonFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        resolve(json);
+                    } catch (err) {
+                        reject(err);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function renderResults(usageData, tilesetLookup) {
+            // Sort tileset IDs numerically
+            const sortedIds = Object.keys(usageData).sort((a, b) => a - b);
+
+            sortedIds.forEach(tId => {
+                const maps = usageData[tId];
+                const tilesetName = tilesetLookup[tId] || `Unknown Tileset (ID: ${tId})`;
+
+                // Sort maps by ID
+                maps.sort((a, b) => a.id - b.id);
+
+                const card = document.createElement('div');
+                card.className = 'tileset-card';
+
+                const header = document.createElement('div');
+                header.className = 'tileset-header';
+                
+                header.innerHTML = `
+                    <div class="tileset-name">${tilesetName} <span style="font-size:0.8em; color:#999; font-weight:normal;">(ID: ${tId})</span></div>
+                    <div class="tileset-count">${maps.length} Maps</div>
+                `;
+
+                card.appendChild(header);
+
+                if (maps.length > 0) {
+                    const ul = document.createElement('ul');
+                    ul.className = 'map-list';
+                    maps.forEach(map => {
+                        const li = document.createElement('li');
+                        li.className = 'map-item';
+                        // Format Map ID to 3 digits like editor (001, 015)
+                        const paddedId = String(map.id).padStart(3, '0');
+                        li.innerHTML = `${map.name} <span class="map-id">(Map${paddedId})</span>`;
+                        ul.appendChild(li);
+                    });
+                    card.appendChild(ul);
+                } else {
+                    const empty = document.createElement('div');
+                    empty.className = 'empty-state';
+                    empty.textContent = "No maps utilize this tileset.";
+                    card.appendChild(empty);
+                }
+
+                resultsDiv.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

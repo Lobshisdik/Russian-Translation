@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Enemy Action Pattern Editor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .file-inputs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .file-input-label:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .file-loaded {
+            background: #27ae60;
+        }
+
+        .file-loaded:hover {
+            background: #229954;
+        }
+
+        .enemy-selector {
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .enemy-search-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .enemy-search-input {
+            padding: 10px 15px;
+            font-size: 16px;
+            background: #2c2c2c;
+            color: #e0e0e0;
+            border: 2px solid #444;
+            border-radius: 8px;
+            min-width: 350px;
+            transition: border-color 0.3s ease;
+        }
+
+        .enemy-search-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .enemy-search-input::placeholder {
+            color: #888;
+        }
+
+        .enemy-search-info {
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .enemy-selector select {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #2c2c2c;
+            color: #e0e0e0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            cursor: pointer;
+            min-width: 300px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .enemy-info {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .enemy-sprites {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sprite-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sprite-label {
+            color: #bbb;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enemy-battler {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .enemy-battler:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5);
+        }
+
+        .enemy-character {
+            width: 48px;
+            height: 48px;
+            object-fit: none;
+            object-position: 0 0;
+            background: #1a1a1a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            image-rendering: pixelated;
+        }
+
+        .enemy-character:hover {
+            transform: scale(2);
+            box-shadow: 0 4px 8px rgba(46, 204, 113, 0.5);
+        }
+
+        .enemy-details {
+            flex: 1;
+        }
+
+        .enemy-details h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .enemy-level {
+            color: #f39c12;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .enemy-description {
+            color: #e0e0e0;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .enemy-description-it {
+            color: #e0e0e0;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .editable-field {
+            flex: 1;
+        }
+
+        .edit-icon {
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .edit-icon:hover {
+            color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .edit-icon.editing {
+            color: #27ae60;
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .edit-input {
+            background: #1a1a1a;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            padding: 6px 10px;
+            color: #e0e0e0;
+            font-size: inherit;
+            font-family: inherit;
+            width: 100%;
+            outline: none;
+        }
+
+        .edit-input:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
+        }
+
+        .edit-textarea {
+            background: #1a1a1a;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: #e0e0e0;
+            font-size: inherit;
+            font-family: inherit;
+            width: 100%;
+            min-height: 60px;
+            resize: vertical;
+            outline: none;
+        }
+
+        .edit-textarea:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
+        }
+
+        .description-label {
+            color: #bbb;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .flag-icon {
+            font-size: 14px;
+        }
+        
+        .enemy-archetype {
+            margin-top: 15px;
+        }
+
+        .action-patterns {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .action-patterns h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .action-pattern {
+            display: grid;
+            grid-template-columns: 1fr 200px 100px 80px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #383838;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .action-pattern:hover {
+            background: #404040;
+        }
+
+        .skill-select {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .skill-id-input {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .rate-input {
+            padding: 8px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .remove-btn {
+            padding: 8px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .add-action-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .add-action-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .save-temp-btn {
+            background: #f39c12;
+            color: white;
+        }
+
+        .save-temp-btn:hover {
+            background: #e67e22;
+        }
+
+        .download-btn {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: #8e44ad;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .status.success {
+            background: #27ae60;
+            color: white;
+            display: block;
+        }
+
+        .status.error {
+            background: #e74c3c;
+            color: white;
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .auto-action-btn:hover {
+            background: #c0392b !important;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #2c2c2c;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #fff;
+        }
+
+        .modal-search {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 2px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-results-info {
+            margin-top: 8px;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .battler-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .battler-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background: #383838;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .battler-option:hover {
+            background: #404040;
+            transform: scale(1.05);
+        }
+
+        .battler-option.unused {
+            border: 3px solid #27ae60;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .battler-option.current {
+            border: 3px solid #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .battler-option img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .battler-option span {
+            font-size: 12px;
+            text-align: center;
+            color: #e0e0e0;
+            word-break: break-word;
+        }
+
+        .character-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background: #383838;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .character-option:hover {
+            background: #404040;
+            transform: scale(1.05);
+        }
+
+        .character-option.unused {
+            border: 3px solid #27ae60;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .character-option.current {
+            border: 3px solid #2ecc71;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+        }
+
+        .character-option img {
+            width: 48px;
+            height: 48px;
+            object-fit: none;
+            object-position: 0 0;
+            margin-bottom: 5px;
+            image-rendering: pixelated;
+        }
+
+        .character-option span {
+            font-size: 12px;
+            text-align: center;
+            color: #e0e0e0;
+            word-break: break-word;
+        }
+
+        .unused-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #27ae60;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .action-pattern {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RPG Maker MZ Enemy Action Pattern Editor</h1>
+        
+        <div class="file-inputs">
+            <div class="file-input-wrapper">
+                <input type="file" id="projectFolder" webkitdirectory directory multiple>
+                <label for="projectFolder" class="file-input-label" id="projectLabel">Load RPG Maker Project Folder</label>
+            </div>
+        </div>
+
+        <div class="enemy-selector hidden" id="enemySelector">
+            <div class="enemy-search-wrapper">
+                <input type="text" id="enemySearchInput" class="enemy-search-input" placeholder="Search enemies by name or description...">
+                <div class="enemy-search-info" id="enemySearchInfo"></div>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button class="nav-btn" id="prevBtn" onclick="navigateEnemy(-1)">← Previous</button>
+                <select id="enemySelect">
+                    <option value="">Select an Enemy</option>
+                </select>
+                <button class="nav-btn" id="nextBtn" onclick="navigateEnemy(1)">Next →</button>
+            </div>
+        </div>
+
+        <div class="enemy-info hidden" id="enemyInfoSection">
+            <div class="enemy-sprites">
+                <div class="sprite-container">
+                    <div class="sprite-label">Battler</div>
+                    <img class="enemy-battler" id="enemyBattler" src="" alt="Enemy Battler" onclick="openBattlerModal()">
+                </div>
+                <div class="sprite-container">
+                    <div class="sprite-label">Character</div>
+                    <img class="enemy-character" id="enemyCharacter" src="" alt="Enemy Character" onclick="openCharacterModal()">
+                </div>
+            </div>
+            <div class="enemy-details">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <h3 id="enemyName" class="editable-field"></h3>
+                    <span class="edit-icon" id="nameEditIcon" onclick="toggleEdit('name')" title="Edit name">✏️</span>
+                </div>
+                <div class="enemy-level" id="enemyLevel"></div>
+                
+                <div class="description-label">
+                    <span>🇬🇧 Description</span>
+                </div>
+                <div class="enemy-description">
+                    <div class="editable-field" id="enemyDescription"></div>
+                    <span class="edit-icon" id="descEditIcon" onclick="toggleEdit('description')" title="Edit description">✏️</span>
+                </div>
+                
+                <div class="description-label">
+                    <span>🇮🇹 Italian Description</span>
+                </div>
+                <div class="enemy-description-it">
+                    <div class="editable-field" id="enemyDescriptionIt"></div>
+                    <span class="edit-icon" id="descItEditIcon" onclick="toggleEdit('descriptionIt')" title="Edit Italian description">✏️</span>
+                </div>
+                
+                <div class="enemy-archetype">
+                    <label for="archetypeSelect" style="color: #e0e0e0; margin-right: 10px;">Archetype:</label>
+                    <select id="archetypeSelect" class="skill-select"></select>
+                    <div id="newArchetypeWrapper" class="hidden" style="margin-top: 10px; display: inline-block;">
+                        <input type="text" id="newArchetypeInput" placeholder="Enter new archetype" class="skill-id-input" style="width: 200px;">
+                        <button class="add-action-btn" style="padding: 8px 15px; margin-left: 5px; margin-top: 0;" onclick="setNewArchetype()">Set</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-patterns hidden" id="actionPatternsSection">
+            <h2>Action Patterns</h2>
+            <div id="actionPatternsList"></div>
+            <button class="add-action-btn" onclick="addActionPattern()">Add Action Pattern</button>
+            <button class="add-action-btn auto-action-btn" onclick="autoAddActionPattern()" style="background: #e74c3c; margin-left: 10px;">Auto Action Pattern</button>
+            <button class="add-action-btn" onclick="addSmartRandomSkill()" style="background: #3498db; margin-left: 10px;">Add Smart Random</button>
+            <button class="add-action-btn" onclick="openPasteModal()" style="background: #9b59b6; margin-left: 10px;">Paste Skill List</button>
+        </div>
+
+        <div class="controls hidden" id="controlsSection">
+            <button class="control-btn save-temp-btn" onclick="saveTemporary()">Save Temporary</button>
+            <button class="control-btn download-btn" onclick="downloadJSON()">Download enemies.json</button>
+        </div>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <div id="battlerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Battler</h2>
+                <span class="close-modal" onclick="closeBattlerModal()">&times;</span>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="battlerSearchInput" class="search-input" placeholder="Search battlers by name...">
+                <div class="search-results-info" id="battlerResultsInfo"></div>
+            </div>
+            <div class="battler-grid" id="battlerGrid"></div>
+        </div>
+    </div>
+
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Character</h2>
+                <span class="close-modal" onclick="closeCharacterModal()">&times;</span>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="characterSearchInput" class="search-input" placeholder="Search characters by name...">
+                <div class="search-results-info" id="characterResultsInfo"></div>
+            </div>
+            <div class="battler-grid" id="characterGrid"></div>
+        </div>
+    </div>
+
+    <div id="pasteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Paste Skill List</h2>
+                <span class="close-modal" onclick="closePasteModal()">&times;</span>
+            </div>
+            <p style="color: #e0e0e0; margin-bottom: 15px;">
+                Paste a list of skills in any format. The tool will extract skill IDs and replace all current action patterns.
+            </p>
+            <textarea id="pasteTextarea" style="width: 100%; height: 200px; background: #1a1a1a; color: #e0e0e0; border: 1px solid #555; border-radius: 5px; padding: 10px; font-family: monospace; resize: vertical;" placeholder="Examples:
+* **438**: Gore Attack
+* **456**: Ambush Pounce
+
+or: 456 334 456 22 464
+
+or: 436 Razor Claws; 435 Predator's Bite
+
+or: 34, 45, 56, 345, 67"></textarea>
+            <div style="margin-top: 10px;">
+                <label style="color: #e0e0e0; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="keepCurrentSkills" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>Keep current skill list (append instead of replace)</span>
+                </label>
+            </div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="control-btn" style="background: #e74c3c;" onclick="closePasteModal()">Cancel</button>
+                <button class="control-btn" style="background: #27ae60;" onclick="processSkillPaste()">Apply Skills</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let enemies = [];
+        let skills = [];
+        let currentEnemyId = null;
+        let tempData = {};
+        let validEnemyIds = [];
+        let skillUsageCount = {};
+        let allArchetypes = new Set();
+        let battlerImages = {}; // Store loaded battler images
+        let availableBattlers = new Set(); // Store all available battler filenames
+        let characterImages = {}; // Store loaded character images
+        let availableCharacters = new Set(); // Store all available character filenames
+        let filteredBattlers = []; // Store filtered battler results
+        let filteredCharacters = []; // Store filtered character results
+        let filteredEnemyIds = []; // Store filtered enemy IDs
+        let allEnemyData = []; // Store all enemy data for searching
+
+        // Load entire project folder
+        document.getElementById('projectFolder').addEventListener('change', async function(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            let enemiesFound = false;
+            let skillsFound = false;
+            battlerImages = {};
+            availableBattlers.clear();
+            characterImages = {};
+            availableCharacters.clear();
+
+            for (let file of files) {
+                const path = file.webkitRelativePath || file.name;
+                
+                // Load Enemies.json
+                if (path.includes('data/Enemies.json')) {
+                    try {
+                        const text = await readFileAsText(file);
+                        enemies = JSON.parse(text);
+                        enemiesFound = true;
+                    } catch (error) {
+                        console.error('Error loading Enemies.json:', error);
+                    }
+                }
+                
+                // Load Skills.json
+                if (path.includes('data/Skills.json')) {
+                    try {
+                        const text = await readFileAsText(file);
+                        skills = JSON.parse(text);
+                        skillsFound = true;
+                    } catch (error) {
+                        console.error('Error loading Skills.json:', error);
+                    }
+                }
+                
+                // Load battler images
+                if (path.includes('img/enemies/') && (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg'))) {
+                    const filename = path.split('/').pop().replace(/\.[^/.]+$/, ''); // Remove extension
+                    const url = URL.createObjectURL(file);
+                    battlerImages[filename] = url;
+                    availableBattlers.add(filename);
+                }
+                
+                // Load character images
+                if (path.includes('img/characters/Monsters/') && path.endsWith('.png') && path.split('/').pop().startsWith('$')) {
+                    const filename = path.split('/').pop().replace(/\.[^/.]+$/, ''); // Remove extension
+                    const url = URL.createObjectURL(file);
+                    characterImages[filename] = url;
+                    availableCharacters.add(filename);
+                }
+            }
+
+            if (enemiesFound && skillsFound) {
+                document.getElementById('projectLabel').classList.add('file-loaded');
+                document.getElementById('projectLabel').textContent = 'Project Loaded Successfully';
+                calculateSkillUsage();
+                collectAllArchetypes();
+                populateEnemySelect();
+                setupEnemySearch();
+                document.getElementById('enemySelector').classList.remove('hidden');
+                document.getElementById('controlsSection').classList.remove('hidden');
+                showStatus(`Loaded ${enemies.length} enemies, ${skills.length} skills, ${availableBattlers.size} battler images, and ${availableCharacters.size} character images`, 'success');
+            } else {
+                let missing = [];
+                if (!enemiesFound) missing.push('Enemies.json');
+                if (!skillsFound) missing.push('Skills.json');
+                showStatus(`Missing required files: ${missing.join(', ')}`, 'error');
+            }
+        });
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function collectAllArchetypes() {
+            allArchetypes.clear();
+            allArchetypes.add("None");
+            
+            // Add default archetypes
+            const defaultArchetypes = [
+                "Ophanim", "Angel", "Elven", "Gnome", "Elephant", "TentacledCreature", 
+                "SpiderHumanHybrid", "SpikyMonster", "Horse", "Unicorn", "Hellhound", 
+                "WingedDemon", "TrashCreature", "Humanoid", "Beast", "Insectoid", "Dragon", 
+                "Slime", "Undead", "Plant", "Elemental", "AquaticFish", "Octopus", "Robot", 
+                "Bird", "Reptilian", "Mushroom", "Tree", "Bacterial", "DoubleHeadedHumanoid", 
+                "Serpent", "Golem", "Demon", "Ghost", "Drone", "Voidspawn", "Mutant", 
+                "CrystalEntity", "Amphibian", "ConstructedUndead", "Minotaur", "Goblin", 
+                "Crustacean", "Spherical", "Turtle", "Manticore", "ChestMimic", "Phoenix", 
+                "Ogre", "Scarecrow", "SegmentWorm", "Mineral", "Hydra", "Vampire", "Bat", 
+                "Rabbit", "Armoredknight", "InsectSwarm", "RoboticDefender", "Turret", 
+                "Gorgon", "AbyssalLeviathan", "Snail", "WaterElemental", "Thunderlemental", 
+                "StormElemental", "FireElemental", "MetalElemental", "DarkElemental", 
+                "SacredElemental", "Totem"
+            ];
+            
+            defaultArchetypes.forEach(archetype => {
+                allArchetypes.add(archetype);
+            });
+            
+            // Add any custom archetypes found in enemy notes
+            enemies.forEach(enemy => {
+                if (enemy && enemy.note) {
+                    const archetype = parseArchetype(enemy.note);
+                    if (archetype) {
+                        allArchetypes.add(archetype);
+                    }
+                }
+            });
+            
+            allArchetypes.add("--- Create New ---");
+        }
+        function populateArchetypeDropdown() {
+            const select = document.getElementById('archetypeSelect');
+            select.innerHTML = '';
+            
+            const sortedArchetypes = Array.from(allArchetypes).sort((a, b) => {
+                if (a === "--- Create New ---") return 1;
+                if (b === "--- Create New ---") return -1;
+                if (a === "None") return -1;
+                if (b === "None") return 1;
+                return a.localeCompare(b);
+            });
+            
+            sortedArchetypes.forEach(archetype => {
+                const option = document.createElement('option');
+                option.value = archetype;
+                option.textContent = archetype;
+                select.appendChild(option);
+            });
+        }
+        
+        document.getElementById('archetypeSelect').addEventListener('change', function(e) {
+            const selectedValue = e.target.value;
+            const newArchetypeWrapper = document.getElementById('newArchetypeWrapper');
+            
+            if (selectedValue === '--- Create New ---') {
+                newArchetypeWrapper.classList.remove('hidden');
+            } else {
+                newArchetypeWrapper.classList.add('hidden');
+                updateEnemyArchetype(selectedValue);
+            }
+        });
+        
+        function setNewArchetype() {
+            const input = document.getElementById('newArchetypeInput');
+            const newArchetypeValue = input.value.trim();
+            
+            if (newArchetypeValue) {
+                if (!allArchetypes.has(newArchetypeValue)) {
+                    allArchetypes.add(newArchetypeValue);
+                }
+                updateEnemyArchetype(newArchetypeValue);
+                populateArchetypeDropdown();
+                document.getElementById('archetypeSelect').value = newArchetypeValue;
+                input.value = '';
+                document.getElementById('newArchetypeWrapper').classList.add('hidden');
+            } else {
+                showStatus('Archetype name cannot be empty.', 'error');
+            }
+        }
+
+        function updateEnemyArchetype(archetype) {
+            if (!currentEnemyId) return;
+            
+            tempData.noteChanges = tempData.noteChanges || {};
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            let currentNote = tempData.noteChanges[currentEnemyId] ?? enemy.note ?? '';
+            
+            const archetypeRegex = /<Archetype:\s*[^>]+>/i;
+            const newTag = (archetype === 'None' || !archetype) ? '' : `<Archetype: ${archetype}>`;
+            
+            let newNote;
+            if (archetypeRegex.test(currentNote)) {
+                newNote = currentNote.replace(archetypeRegex, newTag);
+            } else if (newTag) {
+                newNote = `${newTag} ${currentNote}`;
+            } else {
+                newNote = currentNote;
+            }
+            
+            tempData.noteChanges[currentEnemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+            
+            // Update character display if it changed
+            const charImg = document.getElementById('enemyCharacter');
+            const currentCharacterName = parseCharacter(tempData.noteChanges[currentEnemyId]);
+            if (currentCharacterName && characterImages[currentCharacterName]) {
+                charImg.src = characterImages[currentCharacterName];
+            } else {
+                charImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"%3E%3Crect width="48" height="48" fill="%23333"%2F%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="10"%3ENo Char%3C%2Ftext%3E%3C%2Fsvg%3E';
+            }
+            
+            showStatus(`Archetype set to "${archetype}"`, 'success');
+        }
+
+        function calculateSkillUsage() {
+            skillUsageCount = {};
+            if (!skills || skills.length === 0 || !enemies || enemies.length === 0) return;
+
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    skillUsageCount[skills[i].id] = 0;
+                }
+            }
+            for (let i = 1; i < enemies.length; i++) {
+                if (enemies[i] && enemies[i].actions) {
+                    const uniqueSkillsInEnemy = new Set();
+                    enemies[i].actions.forEach(action => {
+                        uniqueSkillsInEnemy.add(action.skillId);
+                    });
+                    uniqueSkillsInEnemy.forEach(skillId => {
+                        if (skillUsageCount.hasOwnProperty(skillId)) {
+                            skillUsageCount[skillId]++;
+                        }
+                    });
+                }
+            }
+        }
+
+        function populateEnemySelect() {
+    const select = document.getElementById('enemySelect');
+    select.innerHTML = '<option value="">Select an Enemy</option>';
+    validEnemyIds = [];
+    allEnemyData = [];
+    
+    // Calculate battler usage
+    const battlerUsageCount = {};
+    for (let i = 1; i < enemies.length; i++) {
+        if (enemies[i] && enemies[i].battlerName) {
+            const battlerName = tempData.battlerChanges?.[enemies[i].id] ?? enemies[i].battlerName;
+            battlerUsageCount[battlerName] = (battlerUsageCount[battlerName] || 0) + 1;
+        }
+    }
+    
+    for (let i = 1; i < enemies.length; i++) {
+        if (enemies[i]) {
+            validEnemyIds.push(enemies[i].id);
+            
+            // Store enemy data for searching
+            const currentNote = tempData.noteChanges?.[enemies[i].id] ?? enemies[i].note;
+            const { description } = parseEnemyNote(currentNote);
+            allEnemyData.push({
+                id: enemies[i].id,
+                name: enemies[i].name,
+                description: description || '',
+                searchText: `${enemies[i].name} ${description}`.toLowerCase()
+            });
+            
+            // Get battler usage for this enemy
+            const currentBattlerName = tempData.battlerChanges?.[enemies[i].id] ?? enemies[i].battlerName;
+            const battlerUsage = battlerUsageCount[currentBattlerName] || 0;
+            
+            const option = document.createElement('option');
+            option.value = enemies[i].id;
+            option.textContent = `${enemies[i].id}: ${enemies[i].name} - ${battlerUsage}`;
+            select.appendChild(option);
+        }
+    }
+    
+    filteredEnemyIds = [...validEnemyIds];
+    updateEnemySearchInfo();
+}
+
+        function setupEnemySearch() {
+            const searchInput = document.getElementById('enemySearchInput');
+            searchInput.removeEventListener('input', filterEnemies);
+            searchInput.addEventListener('input', filterEnemies);
+        }
+
+        function filterEnemies() {
+            const searchTerm = document.getElementById('enemySearchInput').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all enemies
+                filteredEnemyIds = [...validEnemyIds];
+                populateEnemyDropdown(filteredEnemyIds);
+                updateEnemySearchInfo();
+                return;
+            }
+
+            // Filter enemies based on name or description
+            const filteredData = allEnemyData.filter(enemy => 
+                enemy.searchText.includes(searchTerm)
+            );
+            
+            filteredEnemyIds = filteredData.map(enemy => enemy.id);
+            populateEnemyDropdown(filteredEnemyIds);
+            updateEnemySearchInfo();
+            
+            // If current enemy is not in filtered results, clear selection
+            if (currentEnemyId && !filteredEnemyIds.includes(currentEnemyId)) {
+                document.getElementById('enemySelect').value = '';
+                document.getElementById('enemyInfoSection').classList.add('hidden');
+                document.getElementById('actionPatternsSection').classList.add('hidden');
+                currentEnemyId = null;
+            }
+            
+            updateNavigationButtons();
+        }
+
+        function populateEnemyDropdown(enemyIds) {
+    const select = document.getElementById('enemySelect');
+    const currentValue = select.value;
+    
+    select.innerHTML = '<option value="">Select an Enemy</option>';
+    
+    // Calculate battler usage
+    const battlerUsageCount = {};
+    for (let i = 1; i < enemies.length; i++) {
+        if (enemies[i] && enemies[i].battlerName) {
+            const battlerName = tempData.battlerChanges?.[enemies[i].id] ?? enemies[i].battlerName;
+            battlerUsageCount[battlerName] = (battlerUsageCount[battlerName] || 0) + 1;
+        }
+    }
+    
+    enemyIds.forEach(enemyId => {
+        const enemy = enemies.find(e => e && e.id === enemyId);
+        if (enemy) {
+            const currentBattlerName = tempData.battlerChanges?.[enemyId] ?? enemy.battlerName;
+            const battlerUsage = battlerUsageCount[currentBattlerName] || 0;
+            
+            const option = document.createElement('option');
+            option.value = enemy.id;
+            option.textContent = `${enemy.id}: ${enemy.name} - ${battlerUsage}`;
+            select.appendChild(option);
+        }
+    });
+    
+    // Restore selection if it's still in filtered results
+    if (currentValue && enemyIds.includes(parseInt(currentValue))) {
+        select.value = currentValue;
+    }
+}
+
+        function updateEnemySearchInfo() {
+            const searchInfo = document.getElementById('enemySearchInfo');
+            if (filteredEnemyIds.length === validEnemyIds.length) {
+                searchInfo.textContent = `Showing all ${validEnemyIds.length} enemies`;
+            } else {
+                searchInfo.textContent = `Found ${filteredEnemyIds.length} of ${validEnemyIds.length} enemies`;
+            }
+        }
+
+        function navigateEnemy(direction) {
+            if (!currentEnemyId || filteredEnemyIds.length === 0) return;
+            const currentIndex = filteredEnemyIds.indexOf(currentEnemyId);
+            if (currentIndex === -1) return;
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < filteredEnemyIds.length) {
+                const newEnemyId = filteredEnemyIds[newIndex];
+                document.getElementById('enemySelect').value = newEnemyId;
+                document.getElementById('enemySelect').dispatchEvent(new Event('change'));
+            }
+        }
+
+        function updateNavigationButtons() {
+            if (!currentEnemyId || filteredEnemyIds.length === 0) {
+                document.getElementById('prevBtn').disabled = true;
+                document.getElementById('nextBtn').disabled = true;
+                return;
+            }
+            const currentIndex = filteredEnemyIds.indexOf(currentEnemyId);
+            document.getElementById('prevBtn').disabled = currentIndex <= 0;
+            document.getElementById('nextBtn').disabled = currentIndex >= filteredEnemyIds.length - 1;
+        }
+
+        document.getElementById('enemySelect').addEventListener('change', function(e) {
+            const enemyId = parseInt(e.target.value);
+            if (enemyId) {
+                currentEnemyId = enemyId;
+                loadEnemyInfo(enemyId);
+                loadEnemyActions(enemyId);
+                updateNavigationButtons();
+                document.getElementById('enemyInfoSection').classList.remove('hidden');
+                document.getElementById('actionPatternsSection').classList.remove('hidden');
+            } else {
+                document.getElementById('enemyInfoSection').classList.add('hidden');
+                document.getElementById('actionPatternsSection').classList.add('hidden');
+            }
+        });
+
+        function parseArchetype(note) {
+            if (note) {
+                const archetypeMatch = note.match(/<Archetype:\s*([^>]+)>/i);
+                if (archetypeMatch) {
+                    return archetypeMatch[1].trim();
+                }
+            }
+            return null;
+        }
+
+        function parseCharacter(note) {
+            if (note) {
+                const charMatch = note.match(/<Char:\s*([^>]+)>/i);
+                if (charMatch) {
+                    return charMatch[1].trim();
+                }
+            }
+            return null;
+        }
+
+        function parseItalianDescription(note) {
+            if (note) {
+                const itMatch = note.match(/<It:\s*([^>]+)>/i);
+                if (itMatch) {
+                    return itMatch[1].trim();
+                }
+            }
+            return null;
+        }
+
+        function parseEnemyNote(note) {
+            let level = '';
+            let description = '';
+            
+            if (note) {
+                const cleanNote = note.replace(/<Archetype:\s*[^>]+>/i, '').replace(/<Char:\s*[^>]+>/i, '').replace(/<It:\s*[^>]+>/i, '').trim();
+                const levelMatch = cleanNote.match(/LV:\s*(\d+)/i);
+                if (levelMatch) {
+                    level = levelMatch[1];
+                }
+                const descMatch = cleanNote.match(/\|\s*([^<]+)/);
+                if (descMatch) {
+                    description = descMatch[1].trim();
+                } else if (!levelMatch) {
+                    description = cleanNote.split('<')[0].trim();
+                }
+            }
+            
+            return { level, description };
+        }
+
+        function loadEnemyInfo(enemyId) {
+            const enemy = enemies.find(e => e && e.id === enemyId);
+            if (enemy) {
+                // Load name
+                const currentName = tempData.nameChanges?.[enemyId] ?? enemy.name;
+                document.getElementById('enemyName').textContent = currentName;
+                
+                // Load battler image
+                const battlerImg = document.getElementById('enemyBattler');
+                const currentBattlerName = tempData.battlerChanges?.[enemyId] ?? enemy.battlerName;
+                
+                if (battlerImages[currentBattlerName]) {
+                    battlerImg.src = battlerImages[currentBattlerName];
+                } else {
+                    battlerImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"%3E%3Crect width="150" height="150" fill="%23333"%2F%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="14"%3ENo Image%3C%2Ftext%3E%3C%2Fsvg%3E';
+                }
+                
+                // Load character image
+                const charImg = document.getElementById('enemyCharacter');
+                const currentNote = tempData.noteChanges?.[enemyId] ?? enemy.note;
+                const currentCharacterName = parseCharacter(currentNote);
+                
+                if (currentCharacterName && characterImages[currentCharacterName]) {
+                    charImg.src = characterImages[currentCharacterName];
+                } else {
+                    charImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"%3E%3Crect width="48" height="48" fill="%23333"%2F%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="10"%3ENo Char%3C%2Ftext%3E%3C%2Fsvg%3E';
+                }
+                
+                // Load descriptions
+                const { level, description } = parseEnemyNote(currentNote);
+                const italianDescription = parseItalianDescription(currentNote);
+                
+                document.getElementById('enemyLevel').textContent = level ? `Level ${level}` : '';
+                document.getElementById('enemyDescription').textContent = description || 'No description available';
+                document.getElementById('enemyDescriptionIt').textContent = italianDescription || 'No Italian description available';
+                
+                populateArchetypeDropdown();
+                const archetype = parseArchetype(currentNote);
+                document.getElementById('archetypeSelect').value = archetype || 'None';
+                document.getElementById('newArchetypeWrapper').classList.add('hidden');
+                
+                // Reset edit states
+                resetEditStates();
+            }
+        }
+
+        // Edit functionality
+        let currentEditField = null;
+
+        function toggleEdit(fieldType) {
+            if (currentEditField === fieldType) {
+                // Save current edit
+                saveEdit(fieldType);
+                return;
+            }
+            
+            // Save any existing edit first
+            if (currentEditField) {
+                saveEdit(currentEditField);
+            }
+            
+            // Start new edit
+            startEdit(fieldType);
+        }
+
+        function startEdit(fieldType) {
+            currentEditField = fieldType;
+            
+            const iconId = getIconId(fieldType);
+            const fieldId = getFieldId(fieldType);
+            const icon = document.getElementById(iconId);
+            const field = document.getElementById(fieldId);
+            
+            // Update icon
+            icon.textContent = '💾';
+            icon.classList.add('editing');
+            icon.title = 'Save changes';
+            
+            // Get current value
+            let currentValue = '';
+            if (fieldType === 'name') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                currentValue = tempData.nameChanges?.[currentEnemyId] ?? enemy.name;
+            } else if (fieldType === 'description') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+                const { description } = parseEnemyNote(currentNote);
+                currentValue = description || '';
+            } else if (fieldType === 'descriptionIt') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+                currentValue = parseItalianDescription(currentNote) || '';
+            }
+            
+            // Create input element
+            let input;
+            if (fieldType === 'name') {
+                input = document.createElement('input');
+                input.className = 'edit-input';
+                input.type = 'text';
+            } else {
+                input = document.createElement('textarea');
+                input.className = 'edit-textarea';
+            }
+            
+            input.value = currentValue;
+            input.id = `${fieldType}EditInput`;
+            
+            // Replace field content with input
+            field.innerHTML = '';
+            field.appendChild(input);
+            
+            // Focus and select
+            input.focus();
+            input.select();
+            
+            // Handle Enter key (save) and Escape key (cancel)
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && (fieldType === 'name' || e.ctrlKey)) {
+                    e.preventDefault();
+                    saveEdit(fieldType);
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cancelEdit(fieldType);
+                }
+            });
+        }
+
+        function saveEdit(fieldType) {
+            if (currentEditField !== fieldType) return;
+            
+            const inputId = `${fieldType}EditInput`;
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            
+            const newValue = input.value.trim();
+            
+            // Update data
+            if (fieldType === 'name') {
+                tempData.nameChanges = tempData.nameChanges || {};
+                tempData.nameChanges[currentEnemyId] = newValue;
+                
+                // Update search data
+                updateEnemySearchData();
+            } else if (fieldType === 'description') {
+                updateEnemyNote('description', newValue);
+            } else if (fieldType === 'descriptionIt') {
+                updateEnemyNote('descriptionIt', newValue);
+            }
+            
+            // Reset field
+            resetEditField(fieldType, newValue);
+            currentEditField = null;
+            
+            showStatus(`${fieldType === 'name' ? 'Name' : fieldType === 'description' ? 'Description' : 'Italian description'} updated`, 'success');
+        }
+
+        function cancelEdit(fieldType) {
+            if (currentEditField !== fieldType) return;
+            
+            // Get original value
+            let originalValue = '';
+            if (fieldType === 'name') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                originalValue = tempData.nameChanges?.[currentEnemyId] ?? enemy.name;
+            } else if (fieldType === 'description') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+                const { description } = parseEnemyNote(currentNote);
+                originalValue = description || 'No description available';
+            } else if (fieldType === 'descriptionIt') {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+                originalValue = parseItalianDescription(currentNote) || 'No Italian description available';
+            }
+            
+            resetEditField(fieldType, originalValue);
+            currentEditField = null;
+        }
+
+        function resetEditField(fieldType, value) {
+            const iconId = getIconId(fieldType);
+            const fieldId = getFieldId(fieldType);
+            const icon = document.getElementById(iconId);
+            const field = document.getElementById(fieldId);
+            
+            // Reset icon
+            icon.textContent = '✏️';
+            icon.classList.remove('editing');
+            icon.title = fieldType === 'name' ? 'Edit name' : fieldType === 'description' ? 'Edit description' : 'Edit Italian description';
+            
+            // Reset field content
+            field.textContent = value;
+        }
+
+        function resetEditStates() {
+            currentEditField = null;
+            ['name', 'description', 'descriptionIt'].forEach(fieldType => {
+                const iconId = getIconId(fieldType);
+                const icon = document.getElementById(iconId);
+                if (icon) {
+                    icon.textContent = '✏️';
+                    icon.classList.remove('editing');
+                }
+            });
+        }
+
+        function getIconId(fieldType) {
+            const mapping = {
+                'name': 'nameEditIcon',
+                'description': 'descEditIcon',
+                'descriptionIt': 'descItEditIcon'
+            };
+            return mapping[fieldType];
+        }
+
+        function getFieldId(fieldType) {
+            const mapping = {
+                'name': 'enemyName',
+                'description': 'enemyDescription',
+                'descriptionIt': 'enemyDescriptionIt'
+            };
+            return mapping[fieldType];
+        }
+
+        function updateEnemyNote(fieldType, newValue) {
+            if (!currentEnemyId) return;
+            
+            tempData.noteChanges = tempData.noteChanges || {};
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            let currentNote = tempData.noteChanges[currentEnemyId] ?? enemy.note ?? '';
+            
+            if (fieldType === 'description') {
+                // Update description in note (preserving level if exists)
+                const { level } = parseEnemyNote(currentNote);
+                const levelPart = level ? `LV: ${level} | ` : '';
+                
+                // Remove old description but keep other tags
+                let newNote = currentNote.replace(/LV:\s*\d+\s*\|\s*[^<]*/i, '').replace(/\|\s*[^<]*/, '').trim();
+                
+                if (newValue) {
+                    newNote = `${levelPart}${newValue} ${newNote}`.trim();
+                } else if (level) {
+                    newNote = `LV: ${level} ${newNote}`.trim();
+                }
+                
+                tempData.noteChanges[currentEnemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+            } else if (fieldType === 'descriptionIt') {
+                // Update Italian description tag
+                const itRegex = /<It:\s*[^>]+>/i;
+                const newTag = newValue ? `<It: ${newValue}>` : '';
+                
+                let newNote;
+                if (itRegex.test(currentNote)) {
+                    newNote = currentNote.replace(itRegex, newTag);
+                } else if (newTag) {
+                    newNote = `${currentNote} ${newTag}`;
+                } else {
+                    newNote = currentNote;
+                }
+                
+                tempData.noteChanges[currentEnemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+            }
+            
+            // Update search data
+            updateEnemySearchData();
+        }
+
+        function updateEnemySearchData() {
+    if (!currentEnemyId) return;
+    
+    const enemy = enemies.find(e => e && e.id === currentEnemyId);
+    if (!enemy) return;
+    
+    const currentName = tempData.nameChanges?.[currentEnemyId] ?? enemy.name;
+    const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+    const { description } = parseEnemyNote(currentNote);
+    
+    // Update allEnemyData
+    const enemyDataIndex = allEnemyData.findIndex(e => e.id === currentEnemyId);
+    if (enemyDataIndex !== -1) {
+        allEnemyData[enemyDataIndex] = {
+            id: currentEnemyId,
+            name: currentName,
+            description: description || '',
+            searchText: `${currentName} ${description}`.toLowerCase()
+        };
+    }
+    
+    // Calculate battler usage
+    const battlerUsageCount = {};
+    for (let i = 1; i < enemies.length; i++) {
+        if (enemies[i] && enemies[i].battlerName) {
+            const battlerName = tempData.battlerChanges?.[enemies[i].id] ?? enemies[i].battlerName;
+            battlerUsageCount[battlerName] = (battlerUsageCount[battlerName] || 0) + 1;
+        }
+    }
+    
+    // Update dropdown option text with battler usage
+    const select = document.getElementById('enemySelect');
+    const option = select.querySelector(`option[value="${currentEnemyId}"]`);
+    if (option) {
+        const currentBattlerName = tempData.battlerChanges?.[currentEnemyId] ?? enemy.battlerName;
+        const battlerUsage = battlerUsageCount[currentBattlerName] || 0;
+        option.textContent = `${currentEnemyId}: ${currentName} - ${battlerUsage}`;
+    }
+}
+
+
+        function loadEnemyActions(enemyId) {
+            const enemy = enemies.find(e => e && e.id === enemyId);
+            if (enemy) {
+                const actions = tempData[enemyId] || enemy.actions || [];
+                renderActionPatterns(actions);
+            }
+        }
+
+        function renderActionPatterns(actions) {
+            const container = document.getElementById('actionPatternsList');
+            container.innerHTML = '';
+            
+            actions.forEach((action, index) => {
+                const div = document.createElement('div');
+                div.className = 'action-pattern';
+                div.innerHTML = `
+                    <select class="skill-select" onchange="updateSkillFromSelect(${index}, this.value)">
+                        ${getSkillOptions(action.skillId)}
+                    </select>
+                    <input type="number" class="skill-id-input" value="${action.skillId}" 
+                           placeholder="Skill ID" onchange="updateSkillFromId(${index}, this.value)">
+                    <input type="number" class="rate-input" value="${action.rating}" 
+                           min="1" max="9" onchange="updateRate(${index}, this.value)">
+                    <button class="remove-btn" onclick="removeAction(${index})">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function parseSkillCategory(note) {
+            if (note) {
+                const categoryMatch = note.match(/<category:([^>]+)>/i);
+                if (categoryMatch) {
+                    return categoryMatch[1];
+                }
+            }
+            return '';
+        }
+
+        function getSkillOptions(selectedId) {
+            let options = '<option value="">Select Skill</option>';
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const selected = skills[i].id === selectedId ? 'selected' : '';
+                    const category = parseSkillCategory(skills[i].note);
+                    const categoryText = category ? ` (${category})` : '';
+                    const usage = skillUsageCount[skills[i].id] || 0;
+                    options += `<option value="${skills[i].id}" ${selected}>${skills[i].id}: ${skills[i].name}${categoryText} (Used: ${usage})</option>`;
+                }
+            }
+            return options;
+        }
+
+        function updateSkillFromSelect(index, skillId) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            if (skillId) {
+                tempData[currentEnemyId][index].skillId = parseInt(skillId);
+                document.querySelectorAll('.action-pattern')[index].querySelector('.skill-id-input').value = skillId;
+            }
+        }
+
+        function updateSkillFromId(index, skillId) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            const id = parseInt(skillId);
+            if (id) {
+                tempData[currentEnemyId][index].skillId = id;
+                const select = document.querySelectorAll('.action-pattern')[index].querySelector('.skill-select');
+                select.value = id;
+            }
+        }
+
+        function updateRate(index, rate) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            const rateValue = Math.min(9, Math.max(1, parseInt(rate) || 1));
+            tempData[currentEnemyId][index].rating = rateValue;
+        }
+
+        function removeAction(index) {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            tempData[currentEnemyId].splice(index, 1);
+            loadEnemyActions(currentEnemyId);
+        }
+
+        function addActionPattern() {
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: 5,
+                skillId: 1
+            });
+            
+            loadEnemyActions(currentEnemyId);
+        }
+
+        function saveTemporary() {
+            showStatus('Temporary data saved in memory!', 'success');
+        }
+
+        function downloadJSON() {
+            const updatedEnemies = JSON.parse(JSON.stringify(enemies));
+            
+            for (const enemyId in tempData) {
+                const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                if (enemy) {
+                    enemy.actions = tempData[enemyId];
+                }
+            }
+            
+            if (tempData.nameChanges) {
+                for (const enemyId in tempData.nameChanges) {
+                    const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                    if (enemy) {
+                        enemy.name = tempData.nameChanges[enemyId];
+                    }
+                }
+            }
+            
+            if (tempData.battlerChanges) {
+                for (const enemyId in tempData.battlerChanges) {
+                    const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                    if (enemy) {
+                        enemy.battlerName = tempData.battlerChanges[enemyId];
+                    }
+                }
+            }
+            
+            if (tempData.noteChanges) {
+                for (const enemyId in tempData.noteChanges) {
+                    const enemy = updatedEnemies.find(e => e && e.id === parseInt(enemyId));
+                    if (enemy) {
+                        enemy.note = tempData.noteChanges[enemyId];
+                    }
+                }
+            }
+            
+            const blob = new Blob([JSON.stringify(updatedEnemies, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Enemies.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showStatus('Enemies.json downloaded!', 'success');
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            setTimeout(() => {
+                status.className = 'status';
+            }, 3000);
+        }
+
+        // Character Modal Functions
+        function openCharacterModal() {
+            document.getElementById('characterModal').style.display = 'block';
+            document.getElementById('characterSearchInput').value = '';
+            populateCharacterGrid();
+            
+            // Add event listener for search input
+            const searchInput = document.getElementById('characterSearchInput');
+            searchInput.removeEventListener('input', filterCharacters); // Remove existing listener
+            searchInput.addEventListener('input', filterCharacters);
+        }
+
+        function closeCharacterModal() {
+            document.getElementById('characterModal').style.display = 'none';
+        }
+
+        function filterCharacters() {
+            const searchTerm = document.getElementById('characterSearchInput').value.toLowerCase();
+            
+            if (searchTerm === '') {
+                populateCharacterGrid();
+                return;
+            }
+
+            // Get list of all used characters
+            const usedCharacters = new Set();
+            enemies.forEach(enemy => {
+                if (enemy && enemy.note) {
+                    const currentNote = tempData.noteChanges?.[enemy.id] ?? enemy.note;
+                    const charName = parseCharacter(currentNote);
+                    if (charName) {
+                        usedCharacters.add(charName);
+                    }
+                }
+            });
+
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+            const currentCharacterName = parseCharacter(currentNote);
+
+            // Filter characters based on search term
+            filteredCharacters = Array.from(availableCharacters).filter(characterName => 
+                characterName.toLowerCase().includes(searchTerm)
+            );
+
+            // Sort filtered results: unused first, then alphabetically
+            filteredCharacters.sort((a, b) => {
+                const aUnused = !usedCharacters.has(a);
+                const bUnused = !usedCharacters.has(b);
+                
+                if (aUnused && !bUnused) return -1;
+                if (!aUnused && bUnused) return 1;
+                return a.localeCompare(b);
+            });
+
+            renderCharacterGrid(filteredCharacters, usedCharacters, currentCharacterName);
+            
+            // Update results info
+            const resultsInfo = document.getElementById('characterResultsInfo');
+            resultsInfo.textContent = `Found ${filteredCharacters.length} of ${availableCharacters.size} characters`;
+        }
+
+        function populateCharacterGrid() {
+            const characterGrid = document.getElementById('characterGrid');
+            characterGrid.innerHTML = '';
+            
+            if (availableCharacters.size === 0) {
+                characterGrid.innerHTML = '<p style="color: #ccc; text-align: center; grid-column: 1/-1;">No character images found in img/characters/Monsters folder</p>';
+                document.getElementById('characterResultsInfo').textContent = '';
+                return;
+            }
+
+            // Get list of all used characters
+            const usedCharacters = new Set();
+            enemies.forEach(enemy => {
+                if (enemy && enemy.note) {
+                    const currentNote = tempData.noteChanges?.[enemy.id] ?? enemy.note;
+                    const charName = parseCharacter(currentNote);
+                    if (charName) {
+                        usedCharacters.add(charName);
+                    }
+                }
+            });
+
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            const currentNote = tempData.noteChanges?.[currentEnemyId] ?? enemy.note;
+            const currentCharacterName = parseCharacter(currentNote);
+
+            // Sort characters: unused first, then alphabetically
+            const sortedCharacters = Array.from(availableCharacters).sort((a, b) => {
+                const aUnused = !usedCharacters.has(a);
+                const bUnused = !usedCharacters.has(b);
+                
+                if (aUnused && !bUnused) return -1;
+                if (!aUnused && bUnused) return 1;
+                return a.localeCompare(b);
+            });
+
+            renderCharacterGrid(sortedCharacters, usedCharacters, currentCharacterName);
+            
+            // Update results info
+            const resultsInfo = document.getElementById('characterResultsInfo');
+            resultsInfo.textContent = `Showing all ${availableCharacters.size} characters`;
+        }
+
+        function renderCharacterGrid(characterList, usedCharacters, currentCharacterName) {
+            const characterGrid = document.getElementById('characterGrid');
+            characterGrid.innerHTML = '';
+
+            if (characterList.length === 0) {
+                characterGrid.innerHTML = '<p style="color: #ccc; text-align: center; grid-column: 1/-1;">No characters match your search</p>';
+                return;
+            }
+
+            characterList.forEach(characterName => {
+                const div = document.createElement('div');
+                div.className = 'character-option';
+                
+                const isUnused = !usedCharacters.has(characterName);
+                const isCurrent = characterName === currentCharacterName;
+                
+                if (isUnused) {
+                    div.classList.add('unused');
+                }
+                if (isCurrent) {
+                    div.classList.add('current');
+                }
+
+                const img = document.createElement('img');
+                img.src = characterImages[characterName];
+                img.alt = characterName;
+                
+                const span = document.createElement('span');
+                span.textContent = characterName;
+                
+                div.appendChild(img);
+                div.appendChild(span);
+                
+                if (isUnused && !isCurrent) {
+                    const badge = document.createElement('div');
+                    badge.className = 'unused-badge';
+                    badge.textContent = 'NEW';
+                    div.appendChild(badge);
+                }
+                
+                div.onclick = () => selectCharacter(characterName);
+                
+                characterGrid.appendChild(div);
+            });
+        }
+
+        function selectCharacter(characterName) {
+            if (!currentEnemyId) return;
+            
+            tempData.noteChanges = tempData.noteChanges || {};
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            let currentNote = tempData.noteChanges[currentEnemyId] ?? enemy.note ?? '';
+            
+            const charRegex = /<Char:\s*[^>]+>/i;
+            const newTag = `<Char: ${characterName}>`;
+            
+            let newNote;
+            if (charRegex.test(currentNote)) {
+                newNote = currentNote.replace(charRegex, newTag);
+            } else {
+                newNote = `${newTag} ${currentNote}`;
+            }
+            
+            tempData.noteChanges[currentEnemyId] = newNote.replace(/\s{2,}/g, ' ').trim();
+            
+            // Update the display
+            const charImg = document.getElementById('enemyCharacter');
+            charImg.src = characterImages[characterName];
+            
+            closeCharacterModal();
+            showStatus(`Character changed to "${characterName}"`, 'success');
+        }
+
+        // Battler Modal Functions
+        function openBattlerModal() {
+            document.getElementById('battlerModal').style.display = 'block';
+            document.getElementById('battlerSearchInput').value = '';
+            populateBattlerGrid();
+            
+            // Add event listener for search input
+            const searchInput = document.getElementById('battlerSearchInput');
+            searchInput.removeEventListener('input', filterBattlers); // Remove existing listener
+            searchInput.addEventListener('input', filterBattlers);
+        }
+
+        function closeBattlerModal() {
+            document.getElementById('battlerModal').style.display = 'none';
+        }
+
+        function filterBattlers() {
+            const searchTerm = document.getElementById('battlerSearchInput').value.toLowerCase();
+            
+            if (searchTerm === '') {
+                populateBattlerGrid();
+                return;
+            }
+
+            // Get list of all used battlers
+            const usedBattlers = new Set();
+            enemies.forEach(enemy => {
+                if (enemy && enemy.battlerName) {
+                    const actualBattlerName = tempData.battlerChanges?.[enemy.id] ?? enemy.battlerName;
+                    usedBattlers.add(actualBattlerName);
+                }
+            });
+
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            const currentBattlerName = tempData.battlerChanges?.[currentEnemyId] ?? enemy.battlerName;
+
+            // Filter battlers based on search term
+            filteredBattlers = Array.from(availableBattlers).filter(battlerName => 
+                battlerName.toLowerCase().includes(searchTerm)
+            );
+
+            // Sort filtered results: unused first, then alphabetically
+            filteredBattlers.sort((a, b) => {
+                const aUnused = !usedBattlers.has(a);
+                const bUnused = !usedBattlers.has(b);
+                
+                if (aUnused && !bUnused) return -1;
+                if (!aUnused && bUnused) return 1;
+                return a.localeCompare(b);
+            });
+
+            renderBattlerGrid(filteredBattlers, usedBattlers, currentBattlerName);
+            
+            // Update results info
+            const resultsInfo = document.getElementById('battlerResultsInfo');
+            resultsInfo.textContent = `Found ${filteredBattlers.length} of ${availableBattlers.size} battlers`;
+        }
+
+        function populateBattlerGrid() {
+            const battlerGrid = document.getElementById('battlerGrid');
+            battlerGrid.innerHTML = '';
+            
+            if (availableBattlers.size === 0) {
+                battlerGrid.innerHTML = '<p style="color: #ccc; text-align: center; grid-column: 1/-1;">No battler images found in img/enemies folder</p>';
+                document.getElementById('battlerResultsInfo').textContent = '';
+                return;
+            }
+
+            // Get list of all used battlers
+            const usedBattlers = new Set();
+            enemies.forEach(enemy => {
+                if (enemy && enemy.battlerName) {
+                    const actualBattlerName = tempData.battlerChanges?.[enemy.id] ?? enemy.battlerName;
+                    usedBattlers.add(actualBattlerName);
+                }
+            });
+
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            const currentBattlerName = tempData.battlerChanges?.[currentEnemyId] ?? enemy.battlerName;
+
+            // Sort battlers: unused first, then alphabetically
+            const sortedBattlers = Array.from(availableBattlers).sort((a, b) => {
+                const aUnused = !usedBattlers.has(a);
+                const bUnused = !usedBattlers.has(b);
+                
+                if (aUnused && !bUnused) return -1;
+                if (!aUnused && bUnused) return 1;
+                return a.localeCompare(b);
+            });
+
+            renderBattlerGrid(sortedBattlers, usedBattlers, currentBattlerName);
+            
+            // Update results info
+            const resultsInfo = document.getElementById('battlerResultsInfo');
+            resultsInfo.textContent = `Showing all ${availableBattlers.size} battlers`;
+        }
+
+        function renderBattlerGrid(battlerList, usedBattlers, currentBattlerName) {
+            const battlerGrid = document.getElementById('battlerGrid');
+            battlerGrid.innerHTML = '';
+
+            if (battlerList.length === 0) {
+                battlerGrid.innerHTML = '<p style="color: #ccc; text-align: center; grid-column: 1/-1;">No battlers match your search</p>';
+                return;
+            }
+
+            battlerList.forEach(battlerName => {
+                const div = document.createElement('div');
+                div.className = 'battler-option';
+                
+                const isUnused = !usedBattlers.has(battlerName);
+                const isCurrent = battlerName === currentBattlerName;
+                
+                if (isUnused) {
+                    div.classList.add('unused');
+                }
+                if (isCurrent) {
+                    div.classList.add('current');
+                }
+
+                const img = document.createElement('img');
+                img.src = battlerImages[battlerName];
+                img.alt = battlerName;
+                
+                const span = document.createElement('span');
+                span.textContent = battlerName;
+                
+                div.appendChild(img);
+                div.appendChild(span);
+                
+                if (isUnused && !isCurrent) {
+                    const badge = document.createElement('div');
+                    badge.className = 'unused-badge';
+                    badge.textContent = 'NEW';
+                    div.appendChild(badge);
+                }
+                
+                div.onclick = () => selectBattler(battlerName);
+                
+                battlerGrid.appendChild(div);
+            });
+        }
+
+        function selectBattler(battlerName) {
+    if (!currentEnemyId) return;
+    
+    tempData.battlerChanges = tempData.battlerChanges || {};
+    tempData.battlerChanges[currentEnemyId] = battlerName;
+    
+    // Update the display
+    const battlerImg = document.getElementById('enemyBattler');
+    battlerImg.src = battlerImages[battlerName];
+    
+    // Refresh the dropdown to update battler usage counts
+    const currentSearchTerm = document.getElementById('enemySearchInput').value;
+    if (currentSearchTerm) {
+        filterEnemies(); // This will repopulate with current filter
+    } else {
+        populateEnemyDropdown(filteredEnemyIds);
+    }
+    
+    closeBattlerModal();
+    showStatus(`Battler changed to "${battlerName}"`, 'success');
+}
+
+        // Category keywords for auto-add functionality
+        const categoryKeywords = {
+            'Aeromancy': ['air', 'wind', 'gust', 'breeze', 'storm', 'hurricane', 'tornado', 'aerial', 'sky', 'flying'],
+            'AntiMagic': ['anti', 'dispel', 'negate', 'cancel', 'nullify', 'suppress', 'ward', 'shield'],
+            'Arcanism': ['arcane', 'magic', 'mystical', 'ethereal', 'wizard', 'sorcerer', 'mage'],
+            'AstralMagic': ['astral', 'celestial', 'star', 'cosmic', 'space', 'void', 'dimensional', 'plane'],
+            'Basic': ['basic', 'simple', 'common', 'standard', 'normal'],
+            'Bestial': ['beast', 'animal', 'feral', 'wild', 'savage', 'primal', 'creature'],
+            'Boxing': ['box', 'punch', 'fist', 'jab', 'hook', 'uppercut', 'fighter'],
+            'CEO': ['ceo', 'executive', 'business', 'corporate', 'boss', 'leader'],
+            'ChaosMagic': ['chaos', 'disorder', 'entropy', 'random', 'unpredictable', 'madness'],
+            'ChemicalArts': ['chemical', 'poison', 'toxic', 'acid', 'corrosive', 'venom', 'gas'],
+            'Chronomancy': ['time', 'temporal', 'chrono', 'past', 'future', 'clock', 'age'],
+            'Conjuration': ['summon', 'conjure', 'call', 'invoke', 'manifest', 'appear'],
+            'Convokation': ['convoke', 'gather', 'assemble', 'unite', 'rally'],
+            'Cooking': ['cook', 'chef', 'food', 'meal', 'cuisine', 'kitchen', 'eat'],
+            'CosmicMagic': ['cosmic', 'universe', 'galaxy', 'nebula', 'quasar', 'stellar'],
+            'Cryomancy': ['ice', 'frost', 'freeze', 'cold', 'frozen', 'glacier', 'snow', 'winter', 'chill'],
+            'DarkMagic': ['dark', 'shadow', 'void', 'abyss', 'nightmare', 'evil', 'corrupt'],
+            'Divination': ['divine', 'foresee', 'predict', 'oracle', 'prophecy', 'vision', 'sight'],
+            'Divine': ['holy', 'sacred', 'blessed', 'divine', 'god', 'angel', 'heaven', 'light'],
+            'Electromancy': ['electric', 'lightning', 'thunder', 'shock', 'volt', 'storm', 'static'],
+            'EnhancementMagic': ['enhance', 'boost', 'augment', 'strengthen', 'empower', 'buff'],
+            'Firefighting': ['fire', 'flame', 'burn', 'blaze', 'inferno', 'heat', 'ember', 'pyro'],
+            'ForbiddenMagic': ['forbidden', 'taboo', 'cursed', 'banned', 'dark', 'evil'],
+            'Geomancy': ['earth', 'stone', 'rock', 'ground', 'mineral', 'crystal', 'sand', 'dirt'],
+            'HolyMagic': ['holy', 'sacred', 'divine', 'blessed', 'pure', 'righteous', 'light'],
+            'Hunting': ['hunt', 'track', 'prey', 'stalker', 'ranger', 'archer', 'trap'],
+            'Hydromancy': ['water', 'aqua', 'ocean', 'sea', 'wave', 'liquid', 'flood', 'rain'],
+            'Idromancy': ['hydro', 'fluid', 'flow', 'stream', 'river'],
+            'Journalism': ['journal', 'write', 'report', 'news', 'media', 'press'],
+            'LawEnforcement': ['law', 'police', 'enforce', 'justice', 'order', 'guard'],
+            'Leadership': ['lead', 'command', 'inspire', 'rally', 'direct', 'guide'],
+            'MartialArts': ['martial', 'fight', 'combat', 'warrior', 'monk', 'kata'],
+            'MinorMagic': ['minor', 'lesser', 'small', 'weak', 'simple'],
+            'Natural': ['nature', 'natural', 'plant', 'tree', 'forest', 'animal', 'wild'],
+            'Performance': ['perform', 'dance', 'sing', 'act', 'entertain', 'show'],
+            'PlantMagic': ['plant', 'vine', 'root', 'flower', 'tree', 'nature', 'grow'],
+            'PsychicAbilities': ['psychic', 'mind', 'mental', 'telepathy', 'telekinesis', 'psi'],
+            'Pyromancy': ['fire', 'flame', 'burn', 'heat', 'lava', 'magma', 'inferno'],
+            'Roguery': ['rogue', 'thief', 'stealth', 'sneak', 'assassin', 'shadow'],
+            'SelfDestructive': ['self', 'destruct', 'sacrifice', 'kamikaze', 'explode'],
+            'StatusMagic': ['status', 'condition', 'ailment', 'debuff', 'inflict'],
+            'Swordsmanship': ['sword', 'blade', 'slash', 'cut', 'knight', 'samurai'],
+            'Technomancy': ['tech', 'machine', 'robot', 'cyber', 'digital', 'computer'],
+            'TerrorMagic': ['terror', 'fear', 'horror', 'scare', 'frighten', 'nightmare'],
+            'Training': ['train', 'practice', 'exercise', 'improve', 'learn'],
+            'Uncategorized': ['misc', 'other', 'unknown'],
+            'UnholyMagic': ['unholy', 'demon', 'devil', 'corrupt', 'taint', 'curse'],
+            'VoidMagic': ['void', 'empty', 'null', 'vacuum', 'abyss', 'nothingness'],
+            'Wrestling': ['wrestle', 'grapple', 'throw', 'slam', 'pin', 'hold']
+        };
+
+        function findMatchingCategories(text) {
+            const lowerText = text.toLowerCase();
+            const matches = [];
+            
+            for (const [category, keywords] of Object.entries(categoryKeywords)) {
+                for (const keyword of keywords) {
+                    if (lowerText.includes(keyword)) {
+                        matches.push(category);
+                        break;
+                    }
+                }
+            }
+            
+            return matches.length > 0 ? matches : ['Basic'];
+        }
+
+        function getSkillsByCategory(category) {
+            const categorySkills = [];
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const skillCategory = parseSkillCategory(skills[i].note);
+                    if (skillCategory && skillCategory.toLowerCase() === category.toLowerCase()) {
+                        categorySkills.push(skills[i]);
+                    }
+                }
+            }
+            return categorySkills;
+        }
+
+        function autoAddActionPattern() {
+            const enemy = enemies.find(e => e && e.id === currentEnemyId);
+            if (!enemy) return;
+            
+            const currentNote = tempData.noteChanges?.[enemy.id] ?? enemy.note;
+            const { description } = parseEnemyNote(currentNote);
+            const searchText = `${enemy.name} ${description}`;
+            
+            const matchingCategories = findMatchingCategories(searchText);
+            
+            let availableSkills = [];
+            for (const category of matchingCategories) {
+                availableSkills = availableSkills.concat(getSkillsByCategory(category));
+            }
+            
+            if (availableSkills.length === 0) {
+                showStatus('No matching skills found for this enemy', 'error');
+                return;
+            }
+            
+            const randomSkill = availableSkills[Math.floor(Math.random() * availableSkills.length)];
+            
+            if (!tempData[currentEnemyId]) {
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+            
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: Math.floor(Math.random() * 5) + 3,
+                skillId: randomSkill.id
+            });
+            
+            loadEnemyActions(currentEnemyId);
+            
+            const category = parseSkillCategory(randomSkill.note);
+            showStatus(`Added ${randomSkill.name} (${category}) based on enemy analysis`, 'success');
+        }
+
+        function addSmartRandomSkill() {
+            if (!currentEnemyId) return;
+
+            const currentActions = tempData[currentEnemyId] || enemies.find(e => e && e.id === currentEnemyId).actions || [];
+            if (currentActions.length === 0) {
+                showStatus('Add at least one skill to establish a category first.', 'error');
+                return;
+            }
+
+            const existingCategories = new Set();
+            currentActions.forEach(action => {
+                const skill = skills.find(s => s && s.id === action.skillId);
+                if (skill) {
+                    const category = parseSkillCategory(skill.note);
+                    if (category) {
+                        existingCategories.add(category.toLowerCase());
+                    }
+                }
+            });
+
+            if (existingCategories.size === 0) {
+                showStatus('Could not find categories for the current skills.', 'error');
+                return;
+            }
+
+            const eligibleSkills = [];
+            const currentSkillIds = new Set(currentActions.map(a => a.skillId));
+
+            for (let i = 1; i < skills.length; i++) {
+                if (skills[i]) {
+                    const skillId = skills[i].id;
+                    const usage = skillUsageCount[skillId] || 0;
+                    const category = parseSkillCategory(skills[i].note).toLowerCase();
+
+                    if (existingCategories.has(category) && usage < 9 && !currentSkillIds.has(skillId)) {
+                        eligibleSkills.push(skills[i]);
+                    }
+                }
+            }
+
+            if (eligibleSkills.length === 0) {
+                showStatus('No eligible random skill found (must match existing category and have less than 9 uses).', 'error');
+                return;
+            }
+
+            const randomSkill = eligibleSkills[Math.floor(Math.random() * eligibleSkills.length)];
+
+            if (!tempData[currentEnemyId]) {
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(currentActions));
+            }
+
+            tempData[currentEnemyId].push({
+                conditionParam1: 0,
+                conditionParam2: 0,
+                conditionType: 0,
+                rating: 5,
+                skillId: randomSkill.id
+            });
+
+            loadEnemyActions(currentEnemyId);
+            showStatus(`Added random skill: ${randomSkill.name} (Category: ${parseSkillCategory(randomSkill.note)})`, 'success');
+        }
+
+        // Paste Skills Modal Functions
+        function openPasteModal() {
+            document.getElementById('pasteModal').style.display = 'block';
+            document.getElementById('pasteTextarea').value = '';
+            document.getElementById('keepCurrentSkills').checked = false;
+        }
+
+        function closePasteModal() {
+            document.getElementById('pasteModal').style.display = 'none';
+        }
+
+        function processSkillPaste() {
+            const pasteText = document.getElementById('pasteTextarea').value;
+            const keepCurrent = document.getElementById('keepCurrentSkills').checked;
+            
+            const extractedSkillIds = [];
+            const regex = /(\d+)/g;
+            let match;
+            while ((match = regex.exec(pasteText)) !== null) {
+                const skillId = parseInt(match[1]);
+                if (!isNaN(skillId) && skillId > 0) {
+                    if (skills.some(s => s && s.id === skillId)) {
+                        extractedSkillIds.push(skillId);
+                    }
+                }
+            }
+
+            if (extractedSkillIds.length === 0) {
+                showStatus('No valid skill IDs found in the pasted text.', 'error');
+                return;
+            }
+
+            if (!tempData[currentEnemyId]) {
+                const enemy = enemies.find(e => e && e.id === currentEnemyId);
+                tempData[currentEnemyId] = JSON.parse(JSON.stringify(enemy.actions || []));
+            }
+
+            let newActions = [];
+            if (keepCurrent) {
+                newActions = [...tempData[currentEnemyId]];
+            }
+
+            extractedSkillIds.forEach(skillId => {
+                const exists = newActions.some(action => action.skillId === skillId);
+                if (!exists || !keepCurrent) {
+                    newActions.push({
+                        conditionParam1: 0,
+                        conditionParam2: 0,
+                        conditionType: 0,
+                        rating: 5,
+                        skillId: skillId
+                    });
+                }
+            });
+
+            tempData[currentEnemyId] = newActions;
+            loadEnemyActions(currentEnemyId);
+            closePasteModal();
+            showStatus(`Successfully ${keepCurrent ? 'appended' : 'replaced'} action patterns from pasted list.`, 'success');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('battlerModal')) {
+                closeBattlerModal();
+            }
+            if (event.target == document.getElementById('pasteModal')) {
+                closePasteModal();
+            }
+            if (event.target == document.getElementById('characterModal')) {
+                closeCharacterModal();
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensional Scraps - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .note-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Dimensional Scraps</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: October 22, 2001 | <span data-lang-key="meta_read_time">8 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Dimensional Scraps are fragmented reality-clusters that remain as byproducts of the 1997 Squishing Event. These fragments of the original 92 dimensions float within the Abyss-Stream, containing compressed geo-temporal data and resource-matrices from collapsed universe-instances.</p>
+
+                <div class="note-box">
+                    <div class="note-title" data-lang-key="note_title">Disambiguation Note</div>
+                    <p data-lang-key="note_text">Dimensional Scraps are often confused with the <a href="fragments-of-creation">Fragments of Creation</a>. While both exist as reality-debris, Fragments of Creation are ancient prototype-realities discarded by The Gods billions of years ago during their initial universe-construction experiments. Dimensional Scraps, conversely, are recent remnants from the 1997 reality-compression event.</p>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#formation" data-lang-key="toc_1">1. Formation Process</a></li>
+                        <li><a href="#classification" data-lang-key="toc_2">2. Scrap Classification System</a></li>
+                        <li><a href="#extraction" data-lang-key="toc_3">3. Resource Extraction</a></li>
+                        <li><a href="#hazards" data-lang-key="toc_4">4. Navigation Hazards</a></li>
+                        <li><a href="#commercial" data-lang-key="toc_5">5. Commercial Applications</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_6">6. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Classification Data</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Type:</span> <span data-lang-key="infobox_type_value">Dimensional Debris</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_origin_label">Origin:</span> <span data-lang-key="infobox_origin_value">Squishing Event (1997)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_location_label">Primary Location:</span> <span data-lang-key="infobox_location_value">Abyss-Stream</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_danger_label">Danger Rating:</span> <span data-lang-key="infobox_danger_value">Extreme</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_value_label">Economic Value:</span> <span data-lang-key="infobox_value_value">Ultra-High</span>
+                    </div>
+                </div>
+
+                <h2 id="formation" data-lang-key="h2_formation">Formation Process</h2>
+                <p data-lang-key="p_formation">During the catastrophic compression-event that reduced 92 dimensional layers into current reality-configuration, incomplete merger-algorithms created fault-lines in the dimension-welding process. These imperfections resulted in pocket-clusters of unmergeable reality-data being ejected into the Abyss-Stream.</p>
+
+                <p data-lang-key="p_compression">The <a href="archive-foundation">Archive Foundation</a> has documented that each scrap contains compressed temporal-loops, matter-blueprints, and consciousness-fragments from its origin dimension. The compression ratio typically ranges from 1:10,000 to 1:50,000, meaning entire continents can be stored within scrap-volumes no larger than a city block.</p>
+
+                <div class="warning-box">
+                    <div class="warning-title" data-lang-key="warning_title">Extraction Warning</div>
+                    <p data-lang-key="warning_text">Unauthorized scrap-mining is prohibited under Post-Squishing Dimensional Accords. Violation may result in reality-displacement penalties or consciousness-fragmenting.</p>
+                </div>
+
+                <h3 id="classification" data-lang-key="h3_classification">Scrap Classification System</h3>
+                <p data-lang-key="p_class_intro">The <a href="mages-guild">Mages Guild</a> has established a standardized taxonomy for dimensional scraps based on content-density and extraction-viability:</p>
+
+                <ul>
+                    <li data-lang-key="li_alpha"><strong data-lang-key="alpha_class">Alpha-Class Scraps:</strong> <span data-lang-key="alpha_desc">Contain intact ecosystem-data and functional technology-matrices. Extremely valuable for bio-resource extraction.</span></li>
+                    <li data-lang-key="li_beta"><strong data-lang-key="beta_class">Beta-Class Scraps:</strong> <span data-lang-key="beta_desc">Fragmented civilization-remnants with extractable knowledge-databases and cultural-artifacts.</span></li>
+                    <li data-lang-key="li_gamma"><strong data-lang-key="gamma_class">Gamma-Class Scraps:</strong> <span data-lang-key="gamma_desc">Raw matter-composites suitable for material-synthesis and energy-conversion processes.</span></li>
+                    <li data-lang-key="li_omega"><strong data-lang-key="omega_class">Omega-Class Scraps:</strong> <span data-lang-key="omega_desc">Hazardous fragments containing unstable temporal-loops or consciousness-traps. Designated for quarantine-containment.</span></li>
+                </ul>
+
+                <p data-lang-key="p_cataloging">Current estimates suggest over 847,000 scraps exist within accessible Abyss-Stream sectors, though only 12% have been properly catalogued by dimensional-survey teams.</p>
+
+                <h2 id="extraction" data-lang-key="h2_extraction">Resource Extraction</h2>
+                <p data-lang-key="p_extraction_tech">The <a href="hypercapitalist-collective">Hypercapitalist Collective</a> has pioneered extraction-technologies that can decompress dimensional scraps while maintaining data-integrity. Their patented "Reality-Siphon" systems can process Alpha-Class scraps to yield:</p>
+
+                <ul>
+                    <li data-lang-key="li_bio"><span data-lang-key="bio_resources">Bio-resources from extinct ecosystems</span></li>
+                    <li data-lang-key="li_tech"><span data-lang-key="tech_blueprints">Technology-blueprints from advanced civilizations</span></li>
+                    <li data-lang-key="li_materials"><span data-lang-key="exotic_materials">Exotic matter-compounds impossible to synthesize in current reality</span></li>
+                    <li data-lang-key="li_energy"><span data-lang-key="temporal_energy">Temporal-energy stored in collapsed time-loops</span></li>
+                </ul>
+
+                <blockquote data-lang-key="quote_ceo">
+                    "Each dimensional scrap represents an entire universe's worth of untapped market-potential. Our extraction-algorithms can convert dead realities into profit-streams that fuel the next phase of hyper-development." - CEO Statement, Esoteric Heavy Industries, 2001
+                </blockquote>
+
+                <h3 id="hazards" data-lang-key="h3_hazards">Navigation Hazards</h3>
+                <p data-lang-key="p_hazards_intro">Scrap-fields present numerous dangers to exploration-teams and extraction-operations:</p>
+
+                <ul>
+                    <li data-lang-key="li_temporal"><strong data-lang-key="temporal_shear">Temporal-Shear Zones:</strong> <span data-lang-key="temporal_desc">Areas where time-flow becomes unpredictable, potentially aging explorers decades in moments.</span></li>
+                    <li data-lang-key="li_memory"><strong data-lang-key="memory_storms">Memory-Storm Events:</strong> <span data-lang-key="memory_desc">Compressed consciousness-data creates psychic interference that can overwrite personal memories.</span></li>
+                    <li data-lang-key="li_gravity"><strong data-lang-key="gravity_wells">Gravity-Well Distortions:</strong> <span data-lang-key="gravity_desc">Collapsed matter creates localized physics-anomalies that can trap exploration-vessels.</span></li>
+                    <li data-lang-key="li_entities"><strong data-lang-key="shadow_entities">Shadow-Entity Manifestations:</strong> <span data-lang-key="entities_desc">Fragments of consciousness from destroyed dimensions may coalesce into hostile pseudo-beings.</span></li>
+                </ul>
+
+                <p data-lang-key="p_casualties">Archive Foundation records indicate a 23% casualty rate among authorized scrap-exploration teams, with "reality-displacement syndrome" being the leading cause of permanent personnel loss.</p>
+
+                <h2 id="commercial" data-lang-key="h2_commercial">Commercial Applications</h2>
+                <p data-lang-key="p_commercial_intro">Despite extraction-hazards, dimensional scraps have become a cornerstone of the post-Squishing economy. Major applications include:</p>
+
+                <h3 data-lang-key="h3_manufacturing">Manufacturing Enhancement</h3>
+                <p data-lang-key="p_manufacturing">Exotic materials extracted from scraps have revolutionized production-capabilities. <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a> uses scrap-derived compounds to create products that bypass the <a href="rule-of-80">Rule of 80</a> limitations, maintaining functionality during time-loop resets.</p>
+
+                <h3 data-lang-key="h3_information">Information Archaeology</h3>
+                <p data-lang-key="p_information">Beta-Class scraps containing civilization-remnants provide invaluable data-resources. Cultural-analysis algorithms can extract artistic-patterns, scientific-principles, and social-structures from collapsed societies, feeding innovation-pipelines across multiple industries.</p>
+
+                <h3 data-lang-key="h3_energy">Energy Generation</h3>
+                <p data-lang-key="p_energy">Temporal-energy harvesting from compressed time-loops has become a major power-source for dimension-bridging operations. The energy-density of properly processed Gamma-Class scraps exceeds traditional fusion-reactors by orders of magnitude.</p>
+
+                <p data-lang-key="p_future">Current projections suggest that scrap-based industries will comprise 40% of the hyper-economy by 2005, assuming extraction-technologies continue advancing at current rates.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="the-squishing" data-lang-key="link_squishing">The Squishing Event</a></li>
+                    <li><a href="fragments-of-creation" data-lang-key="link_fragments">Fragments of Creation</a></li>
+                    <li><a href="abyss-stream" data-lang-key="link_abyss">Abyss-Stream Navigation</a></li>
+                    <li><a href="reality-compression" data-lang-key="link_compression">Reality Compression Technology</a></li>
+                    <li><a href="dimensional-archaeology" data-lang-key="link_archaeology">Dimensional Archaeology</a></li>
+                    <li><a href="scrap-mining-permits" data-lang-key="link_permits">Scrap Mining Permits</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Script loaded'); // Debug
+            
+            const translations = {
+                en: {
+                    title: "Dimensional Scraps",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "8 min read",
+                    note_title: "Disambiguation Note",
+                    note_text: "Dimensional Scraps are often confused with the Fragments of Creation. While both exist as reality-debris, Fragments of Creation are ancient prototype-realities discarded by The Gods billions of years ago during their initial universe-construction experiments. Dimensional Scraps, conversely, are recent remnants from the 1997 reality-compression event.",
+                    toc_title: "Contents",
+                    toc_1: "1. Formation Process",
+                    toc_2: "2. Scrap Classification System",
+                    toc_3: "3. Resource Extraction",
+                    toc_4: "4. Navigation Hazards",
+                    toc_5: "5. Commercial Applications",
+                    toc_6: "6. See Also",
+                    infobox_title: "Classification Data",
+                    infobox_type_label: "Type:",
+                    infobox_type_value: "Dimensional Debris",
+                    infobox_origin_label: "Origin:",
+                    infobox_origin_value: "Squishing Event (1997)",
+                    infobox_location_label: "Primary Location:",
+                    infobox_location_value: "Abyss-Stream",
+                    infobox_danger_label: "Danger Rating:",
+                    infobox_danger_value: "Extreme",
+                    infobox_value_label: "Economic Value:",
+                    infobox_value_value: "Ultra-High",
+                    p_intro: "Dimensional Scraps are fragmented reality-clusters that remain as byproducts of the 1997 Squishing Event. These fragments of the original 92 dimensions float within the Abyss-Stream, containing compressed geo-temporal data and resource-matrices from collapsed universe-instances.",
+                    warning_title: "Extraction Warning",
+                    warning_text: "Unauthorized scrap-mining is prohibited under Post-Squishing Dimensional Accords. Violation may result in reality-displacement penalties or consciousness-fragmenting.",
+                    h2_formation: "Formation Process",
+                    p_formation: "During the catastrophic compression-event that reduced 92 dimensional layers into current reality-configuration, incomplete merger-algorithms created fault-lines in the dimension-welding process. These imperfections resulted in pocket-clusters of unmergeable reality-data being ejected into the Abyss-Stream.",
+                    p_compression: "The Archive Foundation has documented that each scrap contains compressed temporal-loops, matter-blueprints, and consciousness-fragments from its origin dimension. The compression ratio typically ranges from 1:10,000 to 1:50,000, meaning entire continents can be stored within scrap-volumes no larger than a city block.",
+                    h3_classification: "Scrap Classification System",
+                    p_class_intro: "The Mages Guild has established a standardized taxonomy for dimensional scraps based on content-density and extraction-viability:",
+                    alpha_class: "Alpha-Class Scraps:",
+                    alpha_desc: "Contain intact ecosystem-data and functional technology-matrices. Extremely valuable for bio-resource extraction.",
+                    beta_class: "Beta-Class Scraps:",
+                    beta_desc: "Fragmented civilization-remnants with extractable knowledge-databases and cultural-artifacts.",
+                    gamma_class: "Gamma-Class Scraps:",
+                    gamma_desc: "Raw matter-composites suitable for material-synthesis and energy-conversion processes.",
+                    omega_class: "Omega-Class Scraps:",
+                    omega_desc: "Hazardous fragments containing unstable temporal-loops or consciousness-traps. Designated for quarantine-containment.",
+                    p_cataloging: "Current estimates suggest over 847,000 scraps exist within accessible Abyss-Stream sectors, though only 12% have been properly catalogued by dimensional-survey teams.",
+                    h2_extraction: "Resource Extraction",
+                    p_extraction_tech: "The Hypercapitalist Collective has pioneered extraction-technologies that can decompress dimensional scraps while maintaining data-integrity. Their patented \"Reality-Siphon\" systems can process Alpha-Class scraps to yield:",
+                    bio_resources: "Bio-resources from extinct ecosystems",
+                    tech_blueprints: "Technology-blueprints from advanced civilizations",
+                    exotic_materials: "Exotic matter-compounds impossible to synthesize in current reality",
+                    temporal_energy: "Temporal-energy stored in collapsed time-loops",
+                    quote_ceo: "\"Each dimensional scrap represents an entire universe's worth of untapped market-potential. Our extraction-algorithms can convert dead realities into profit-streams that fuel the next phase of hyper-development.\" - CEO Statement, Esoteric Heavy Industries, 2001",
+                    h3_hazards: "Navigation Hazards",
+                    p_hazards_intro: "Scrap-fields present numerous dangers to exploration-teams and extraction-operations:",
+                    temporal_shear: "Temporal-Shear Zones:",
+                    temporal_desc: "Areas where time-flow becomes unpredictable, potentially aging explorers decades in moments.",
+                    memory_storms: "Memory-Storm Events:",
+                    memory_desc: "Compressed consciousness-data creates psychic interference that can overwrite personal memories.",
+                    gravity_wells: "Gravity-Well Distortions:",
+                    gravity_desc: "Collapsed matter creates localized physics-anomalies that can trap exploration-vessels.",
+                    shadow_entities: "Shadow-Entity Manifestations:",
+                    entities_desc: "Fragments of consciousness from destroyed dimensions may coalesce into hostile pseudo-beings.",
+                    p_casualties: "Archive Foundation records indicate a 23% casualty rate among authorized scrap-exploration teams, with \"reality-displacement syndrome\" being the leading cause of permanent personnel loss.",
+                    h2_commercial: "Commercial Applications",
+                    p_commercial_intro: "Despite extraction-hazards, dimensional scraps have become a cornerstone of the post-Squishing economy. Major applications include:",
+                    h3_manufacturing: "Manufacturing Enhancement",
+                    p_manufacturing: "Exotic materials extracted from scraps have revolutionized production-capabilities. Esoteric Heavy Industries uses scrap-derived compounds to create products that bypass the Rule of 80 limitations, maintaining functionality during time-loop resets.",
+                    h3_information: "Information Archaeology",
+                    p_information: "Beta-Class scraps containing civilization-remnants provide invaluable data-resources. Cultural-analysis algorithms can extract artistic-patterns, scientific-principles, and social-structures from collapsed societies, feeding innovation-pipelines across multiple industries.",
+                    h3_energy: "Energy Generation",
+                    p_energy: "Temporal-energy harvesting from compressed time-loops has become a major power-source for dimension-bridging operations. The energy-density of properly processed Gamma-Class scraps exceeds traditional fusion-reactors by orders of magnitude.",
+                    p_future: "Current projections suggest that scrap-based industries will comprise 40% of the hyper-economy by 2005, assuming extraction-technologies continue advancing at current rates.",
+                    h2_see_also: "See Also",
+                    link_squishing: "The Squishing Event",
+                    link_fragments: "Fragments of Creation",
+                    link_abyss: "Abyss-Stream Navigation",
+                    link_compression: "Reality Compression Technology",
+                    link_archaeology: "Dimensional Archaeology",
+                    link_permits: "Scrap Mining Permits",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Frammenti Dimensionali",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "8 min di lettura",
+                    note_title: "Nota di Disambiguazione",
+                    note_text: "I Frammenti Dimensionali sono spesso confusi con i Frammenti della Creazione. Mentre entrambi esistono come detriti-realtà, i Frammenti della Creazione sono antiche realtà-prototipo scartate dagli Dèi miliardi di anni fa durante i loro esperimenti iniziali di costruzione-universo. I Frammenti Dimensionali, al contrario, sono residui recenti dall'evento compressione-realtà del 1997.",
+                    toc_title: "Indice",
+                    toc_1: "1. Processo di Formazione",
+                    toc_2: "2. Sistema di Classificazione Frammenti",
+                    toc_3: "3. Estrazione di Risorse",
+                    toc_4: "4. Pericoli di Navigazione",
+                    toc_5: "5. Applicazioni Commerciali",
+                    toc_6: "6. Vedi Anche",
+                    infobox_title: "Dati di Classificazione",
+                    infobox_type_label: "Tipo:",
+                    infobox_type_value: "Detriti Dimensionali",
+                    infobox_origin_label: "Origine:",
+                    infobox_origin_value: "Evento Schiacciamento (1997)",
+                    infobox_location_label: "Posizione Primaria:",
+                    infobox_location_value: "Flusso-Abisso",
+                    infobox_danger_label: "Grado di Pericolo:",
+                    infobox_danger_value: "Estremo",
+                    infobox_value_label: "Valore Economico:",
+                    infobox_value_value: "Ultra-Alto",
+                    p_intro: "I Frammenti Dimensionali sono cluster-realtà frammentati che rimangono come sottoprodotti dell'Evento Schiacciamento del 1997. Questi frammenti delle 92 dimensioni originali galleggiano nel Flusso-Abisso, contenendo dati geo-temporali compressi e matrici-risorsa da istanze-universo collassate.",
+                    warning_title: "Avvertimento Estrazione",
+                    warning_text: "L'estrazione non autorizzata di frammenti è proibita sotto gli Accordi Dimensionali Post-Schiacciamento. La violazione può risultare in penalità di spostamento-realtà o frammentazione-coscienza.",
+                    h2_formation: "Processo di Formazione",
+                    p_formation: "Durante l'evento catastrofico di compressione che ridusse 92 strati dimensionali nella configurazione-realtà attuale, algoritmi-fusione incompleti crearono linee-faglia nel processo di saldatura-dimensione. Queste imperfezioni risultarono in cluster-tascabili di dati-realtà non-fondibili espulsi nel Flusso-Abisso.",
+                    p_compression: "la Archive Foundation ha documentato che ogni frammento contiene cicli-temporali compressi, progetti-materia e frammenti-coscienza dalla sua dimensione d'origine. Il rapporto di compressione tipicamente varia da 1:10.000 a 1:50.000, significando che interi continenti possono essere conservati in volumi-frammento non più grandi di un isolato cittadino.",
+                    h3_classification: "Sistema di Classificazione Frammenti",
+                    p_class_intro: "La Gilda dei Maghi ha stabilito una tassonomia standardizzata per i frammenti dimensionali basata su densità-contenuto e fattibilità-estrazione:",
+                    alpha_class: "Frammenti Classe-Alpha:",
+                    alpha_desc: "Contengono dati-ecosistema intatti e matrici-tecnologia funzionali. Estremamente preziosi per l'estrazione bio-risorsa.",
+                    beta_class: "Frammenti Classe-Beta:",
+                    beta_desc: "Resti-civiltà frammentati con database-conoscenza estraibili e artefatti-culturali.",
+                    gamma_class: "Frammenti Classe-Gamma:",
+                    gamma_desc: "Compositi-materia grezza adatti per processi di sintesi-materiale e conversione-energia.",
+                    omega_class: "Frammenti Classe-Omega:",
+                    omega_desc: "Frammenti pericolosi contenenti cicli-temporali instabili o trappole-coscienza. Designati per contenimento-quarantena.",
+                    p_cataloging: "Le stime attuali suggeriscono che oltre 847.000 frammenti esistono nei settori Flusso-Abisso accessibili, anche se solo il 12% è stato catalogato correttamente dai team-indagine dimensionale.",
+                    h2_extraction: "Estrazione di Risorse",
+                    p_extraction_tech: "Il Collettivo Ipercapitalista ha sviluppato tecnologie-estrazione che possono decomprimere frammenti dimensionali mantenendo l'integrità-dati. I loro sistemi brevettati \"Sifone-Realtà\" possono processare frammenti Classe-Alpha per produrre:",
+                    bio_resources: "Bio-risorse da ecosistemi estinti",
+                    tech_blueprints: "Progetti-tecnologia da civiltà avanzate",
+                    exotic_materials: "Composti-materia esotici impossibili da sintetizzare nella realtà attuale",
+                    temporal_energy: "Energia-temporale conservata in cicli-tempo collassati",
+                    quote_ceo: "\"Ogni frammento dimensionale rappresenta il potenziale-mercato inesplorato di un intero universo. I nostri algoritmi-estrazione possono convertire realtà morte in flussi-profitto che alimentano la prossima fase di iper-sviluppo.\" - Dichiarazione CEO, Esoteric Heavy Industries, 2001",
+                    h3_hazards: "Pericoli di Navigazione",
+                    p_hazards_intro: "I campi-frammento presentano numerosi pericoli ai team-esplorazione e operazioni-estrazione:",
+                    temporal_shear: "Zone Taglio-Temporale:",
+                    temporal_desc: "Aree dove il flusso-tempo diventa imprevedibile, potenzialmente invecchiando esploratori di decenni in momenti.",
+                    memory_storms: "Eventi Tempesta-Memoria:",
+                    memory_desc: "Dati-coscienza compressi creano interferenze psichiche che possono sovrascrivere memorie personali.",
+                    gravity_wells: "Distorsioni Pozzo-Gravità:",
+                    gravity_desc: "Materia collassata crea anomalie-fisica localizzate che possono intrappolare navi-esplorazione.",
+                    shadow_entities: "Manifestazioni Entità-Ombra:",
+                    entities_desc: "Frammenti di coscienza da dimensioni distrutte possono coalescere in pseudo-esseri ostili.",
+                    p_casualties: "I registri della Archive Foundation indicano un tasso di vittime del 23% tra i team-esplorazione frammenti autorizzati, con \"sindrome spostamento-realtà\" come principale causa di perdita permanente del personale.",
+                    h2_commercial: "Applicazioni Commerciali",
+                    p_commercial_intro: "Nonostante i pericoli-estrazione, i frammenti dimensionali sono diventati una pietra angolare dell'economia post-Schiacciamento. Le principali applicazioni includono:",
+                    h3_manufacturing: "Potenziamento Manifatturiero",
+                    p_manufacturing: "Materiali esotici estratti dai frammenti hanno rivoluzionato le capacità-produzione. Esoteric Heavy Industries usa composti derivati-frammento per creare prodotti che aggirano le limitazioni della Regola 80, mantenendo funzionalità durante reset cicli-tempo.",
+                    h3_information: "Archeologia Informazioni",
+                    p_information: "Frammenti Classe-Beta contenenti resti-civiltà forniscono risorse-dati inestimabili. Algoritmi analisi-culturale possono estrarre pattern-artistici, principi-scientifici e strutture-sociali da società collassate, alimentando pipeline-innovazione attraverso industrie multiple.",
+                    h3_energy: "Generazione Energia",
+                    p_energy: "La raccolta energia-temporale da cicli-tempo compressi è diventata una fonte-energia principale per operazioni ponte-dimensione. La densità-energia di frammenti Classe-Gamma processati correttamente supera i reattori-fusione tradizionali di ordini di grandezza.",
+                    p_future: "Le proiezioni attuali suggeriscono che le industrie basate-frammenti comprenderanno il 40% dell'iper-economia entro il 2005, assumendo che le tecnologie-estrazione continuino ad avanzare ai tassi attuali.",
+                    h2_see_also: "Vedi Anche",
+                    link_squishing: "L'Evento Schiacciamento",
+                    link_fragments: "Frammenti della Creazione",
+                    link_abyss: "Navigazione Flusso-Abisso",
+                    link_compression: "Tecnologia Compressione Realtà",
+                    link_archaeology: "Archeologia Dimensionale",
+                    link_permits: "Permessi Estrazione Frammenti",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            function setLanguage(lang) {
+                console.log('Setting language to:', lang);
+                localStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                // Update all translatable elements
+                translatableElements.forEach(function(el) {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                // Update active language link
+                langLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Add click handlers for language links
+            langLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    console.log('Language link clicked:', selectedLang);
+                    setLanguage(selectedLang);
+                });
+            });
+
+            // Set initial language from localStorage or default to 'en'
+            const initialLang = localStorage.getItem('language') || 'en';
+            console.log('Initial language:', initialLang);
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

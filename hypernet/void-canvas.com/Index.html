@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Void Canvas - Surreal 4-Panel Comics by Marcus Nullwright</title>
+    <meta name="keywords" content="comics, surreal, 4-panel, art, humor, void, broken, analysis">
+    <meta name="description" content="The official website of Marcus Nullwright, creator of surreal 4-panel comics that transcend visual representation through elaborate theoretical analysis.">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: "Courier New", monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+        
+        .header {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 5px solid #ffffff;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 3px;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .nav {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section {
+            margin: 20px 0;
+            border: 2px solid #000000;
+            background-color: #ffffff;
+        }
+        
+        .section-header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .section-content {
+            padding: 15px;
+            display: block;
+        }
+        
+        .comic-entry {
+            border: 1px solid #000000;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .comic-header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .comic-content {
+            padding: 15px;
+            display: none;
+        }
+        
+        .broken-image {
+            width: 400px;
+            height: 100px;
+            background-color: #ffffff;
+            border: 2px dashed #000000;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Times New Roman", serif;
+            color: #cccccc;
+            font-style: italic;
+        }
+        
+        .panel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 5px;
+            max-width: 400px;
+            margin: 15px auto;
+        }
+        
+        .panel {
+            width: 190px;
+            height: 150px;
+            background-color: #ffffff;
+            border: 2px dashed #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Times New Roman", serif;
+            color: #cccccc;
+            font-style: italic;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .analysis {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #000000;
+            font-size: 11px;
+            text-align: justify;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: monospace;
+            margin: 20px 0;
+            font-size: 10px;
+            color: #666666;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 200px;
+            border: 2px solid #000000;
+            padding: 10px;
+            margin: 0 0 10px 20px;
+            background-color: #f9f9f9;
+            font-size: 12px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 3px solid #000000;
+            margin-top: 30px;
+            font-size: 11px;
+            background-color: #f0f0f0;
+        }
+        
+        a {
+            color: #000000;
+        }
+        
+        a:visited {
+            color: #666666;
+        }
+        
+        .timestamp {
+            font-size: 10px;
+            color: #666666;
+            font-style: italic;
+        }
+        
+        .warning {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>THE VOID CANVAS</h1>
+        <p>Surreal 4-Panel Comics by Marcus Nullwright</p>
+        <p class="timestamp">Last Updated: January 12, 2001 - Viewed with Hypernet Explorer 3.2</p>
+    </div>
+    
+    <div class="nav">
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About the Artist</a>
+        <a href="#theory">Comic Theory</a>
+        <a href="#guestbook.html">Guestbook</a>
+        <a href="#links">Links</a>
+        <a href="mailto:marcus@hexagram.corp">Contact</a>
+    </div>
+    
+    <div class="content">
+        <div class="sidebar">
+            <h3>CURRENT STATS</h3>
+            <p>Comics Created: 47</p>
+            <p>Images Successfully Loaded: 0</p>
+            <p>Analysis Words Written: 28,749</p>
+            <p>Visitors This Month: 156</p>
+            <hr>
+            <h3>LATEST UPDATE</h3>
+            <p><strong>Jan 10, 2001:</strong> Added new comic "The Existential Breakfast" with 2,847-word analysis of why cereal represents the void.</p>
+            <hr>
+            <h3>HEXAGRAM FEED</h3>
+            <p><a href="mailto:marcus@hexagram.corp">@MarcusNull</a><br>
+            "Working on comic #48. The image won't load but the concept is revolutionary."</p>
+        </div>
+        
+        <div class="warning">
+            WARNING: This site contains experimental visual humor that may cause existential contemplation
+        </div>
+        
+        <div class="section" id="gallery-section">
+            <div class="section-header" onclick="toggleSection('gallery')">COMIC GALLERY</div>
+            <div class="section-content" id="gallery">
+                <p>Welcome to my collection of surreal 4-panel comics. Each comic pushes the boundaries of visual storytelling through the deliberate absence of visual elements, replaced by profound theoretical analysis.</p>
+                
+                <div class="comic-entry">
+                    <div class="comic-header" onclick="toggleComic('comic1')">Comic #47: "The Existential Breakfast" (Jan 10, 2001)</div>
+                    <div class="comic-content" id="comic1">
+                        <div class="panel-grid">
+                            <div class="panel">Image not found<br>[Panel 1]</div>
+                            <div class="panel">Image not found<br>[Panel 2]</div>
+                            <div class="panel">Image not found<br>[Panel 3]</div>
+                            <div class="panel">Image not found<br>[Panel 4]</div>
+                        </div>
+                        <div class="analysis">
+                            <h4>COMPREHENSIVE HUMOR ANALYSIS:</h4>
+                            <p>Panel 1 presents the protagonist (a bowl of cereal) confronting its own mortality through the act of being consumed. The humor here operates on seventeen different levels, beginning with the surface-level absurdity of anthropomorphizing breakfast foods, but quickly descending into deeper philosophical territory. The cereal bowl's expression of existential dread mirrors Sartre's concept of "bad faith," where individuals deny their freedom and responsibility. The milk, representing the fluidity of time and the inevitable march toward entropy, creates a visual pun on the phrase "crying over spilled milk," except in this case, the milk hasn't been spilled—it's fulfilling its destiny, which is arguably more tragic.</p>
+                            
+                            <p>Panel 2 introduces the spoon as a metaphor for societal intervention in personal choice. The spoon's gleaming surface reflects not just light, but the twisted expectations of a consumer culture that demands we participate in our own consumption. The humor emerges from the incongruity between the spoon's mechanical coldness and the cereal's warm acceptance of fate. This creates what I call a "reverse dramatic irony," where the audience knows something the characters don't, except what we know is that there's nothing to know, which is itself hilarious if you consider the epistemological implications.</p>
+                            
+                            <p>Panel 3 shows the moment of consumption, which isn't actually consumption but transformation. The cereal doesn't disappear; it becomes part of a larger nutritional narrative. The humor here is so subtle it almost doesn't exist, which makes it funnier. It's a joke about the absence of jokes, a meta-commentary on the nature of breakfast comedy itself. The crunch sound effect (which you can't hear because this is a static image, adding another layer of irony) represents the breaking down of barriers between self and other, between nourishment and destruction.</p>
+                            
+                            <p>Panel 4 depicts the aftermath—an empty bowl that's not really empty because it contains the memory of cereal. This is where the comic transcends humor and becomes pure art. The bowl's continued existence after fulfilling its purpose parallels humanity's search for meaning in a post-consumption economy. The joke is that there is no joke, which is itself a joke about the absence of jokes, creating an infinite recursive loop of humor that eventually cancels itself out and becomes profound sadness, which circles back to being funny because sadness is inherently absurd when viewed from a cosmic perspective.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comic-entry">
+                    <div class="comic-header" onclick="toggleComic('comic2')">Comic #46: "Tuesday's Lament" (Jan 5, 2001)</div>
+                    <div class="comic-content" id="comic2">
+                        <div class="panel-grid">
+                            <div class="panel">Image not found<br>[Panel 1]</div>
+                            <div class="panel">Image not found<br>[Panel 2]</div>
+                            <div class="panel">Image not found<br>[Panel 3]</div>
+                            <div class="panel">Image not found<br>[Panel 4]</div>
+                        </div>
+                        <div class="analysis">
+                            <h4>COMPREHENSIVE HUMOR ANALYSIS:</h4>
+                            <p>This comic explores the inherent comedy of weekday nomenclature through the lens of anthropomorphic calendar pages. Panel 1 features Tuesday sitting alone in what can only be described as a waiting room of temporal significance. The humor begins with Tuesday's awareness of its own mundanity—it's not Monday (which has the distinction of being universally despised), it's not Wednesday (hump day), and it's certainly not Friday (the gateway to freedom). Tuesday exists in a liminal space of temporal irrelevance, which is inherently comedic because relevance itself is a human construct imposed upon the arbitrary division of continuous time.</p>
+                            
+                            <p>The visual gag in Panel 2 involves Tuesday attempting to make itself more interesting by wearing Monday's clothes, but the disguise fails because authenticity cannot be borrowed—it must be inherent. This creates a humor cascade where the audience laughs first at Tuesday's pathetic attempt at transformation, then at their own recognition of similar behaviors in their own lives, then at the absurdity of projecting human insecurities onto calendar days, and finally at the realization that calendar days don't actually exist as discrete entities but are merely human abstractions layered onto the continuous flow of existence.</p>
+                            
+                            <p>Panel 3 presents the climax: Tuesday's existential breakdown upon realizing that it will be followed by Wednesday, which will inevitably steal whatever minimal thunder Tuesday might have generated. The comedy here is multilayered like a temporal lasagna—Tuesday's jealousy of Wednesday is absurd because days cannot experience jealousy, but also profound because it represents humanity's constant comparison with others, but also meta-funny because the reader is experiencing this on an actual Tuesday (or whatever day they happen to be reading it), creating a temporal paradox of relevance.</p>
+                            
+                            <p>The final panel shows Tuesday accepting its role as "just Tuesday," which initially appears to be a resolution but is actually the setup for the ultimate joke—that acceptance of mediocrity is itself a form of excellence, making Tuesday the most excellent day by virtue of its commitment to inexcellence. This philosophical pretzel of logic creates humor through cognitive dissonance, as the reader's brain attempts to process the circular reasoning while simultaneously questioning why they're thinking so deeply about a day of the week, which leads to the realization that deep thought about trivial matters is the essence of human existence, which is hilarious in its futility.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comic-entry">
+                    <div class="comic-header" onclick="toggleComic('comic3')">Comic #45: "The Quantum Doorknob" (Dec 28, 2000)</div>
+                    <div class="comic-content" id="comic3">
+                        <div class="panel-grid">
+                            <div class="panel">Image not found<br>[Panel 1]</div>
+                            <div class="panel">Image not found<br>[Panel 2]</div>
+                            <div class="panel">Image not found<br>[Panel 3]</div>
+                            <div class="panel">Image not found<br>[Panel 4]</div>
+                        </div>
+                        <div class="analysis">
+                            <h4>COMPREHENSIVE HUMOR ANALYSIS:</h4>
+                            <p>This comic operates within the theoretical framework of quantum mechanics applied to everyday objects, specifically exploring the comedic potential of a doorknob that exists in multiple states simultaneously until observed. Panel 1 establishes the quantum doorknob in its superposition state—both turned and unturned, both opening and remaining closed, both brass and chrome, both existing and not existing. The humor emerges from the application of complex physics to the mundane act of opening a door, creating what I term "intellectual slapstick"—comedy that requires a PhD to fully appreciate but still makes you snort-laugh.</p>
+                            
+                            <p>In Panel 2, a character approaches the door, and their mere observation begins to collapse the doorknob's wave function. This is where the comic becomes metacomedic—the act of reading the comic is itself an observation that affects the quantum state being depicted. The character's confused expression reflects the reader's own confusion, creating a feedback loop of bewilderment that resonates across multiple dimensions of understanding. The humor compounds as we realize that confusion itself is funny, but being aware that confusion is funny makes it less funny, which is itself confusing and therefore funny again.</p>
+                            
+                            <p>Panel 3 depicts the moment of quantum measurement—the character's hand touches the doorknob, forcing it to "choose" a single state. The doorknob, now classical rather than quantum, experiences what can only be described as existential disappointment at being reduced from infinite possibilities to one boring reality. This reflects humanity's own journey from childhood (infinite possibilities) to adulthood (one mundane reality), making the doorknob a metaphor for lost potential. The joke is that we're sympathizing with a doorknob's midlife crisis, which is absurd, but also deeply relatable, which makes it more absurd.</p>
+                            
+                            <p>The final panel shows the door opening to reveal... another door. This creates an infinite regress of doors, each with its own quantum doorknob, suggesting that the act of solving one quantum measurement problem simply creates more quantum measurement problems. It's a visual representation of the futility of seeking simple answers in a complex universe, but it's also a practical joke on the character (and reader) who expected resolution. The humor here is both cosmic (laughing at the universe's inherent absurdity) and personal (laughing at our own expectations of narrative satisfaction), creating a humor singularity that collapses into pure comedic energy.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comic-entry">
+                    <div class="comic-header" onclick="toggleComic('comic4')">Comic #44: "The Melancholy of Soup" (Dec 20, 2000)</div>
+                    <div class="comic-content" id="comic4">
+                        <div class="panel-grid">
+                            <div class="panel">Image not found<br>[Panel 1]</div>
+                            <div class="panel">Image not found<br>[Panel 2]</div>
+                            <div class="panel">Image not found<br>[Panel 3]</div>
+                            <div class="panel">Image not found<br>[Panel 4]</div>
+                        </div>
+                        <div class="analysis">
+                            <h4>COMPREHENSIVE HUMOR ANALYSIS:</h4>
+                            <p>This comic examines the inherent tragedy of soup through a four-panel exploration of liquid-solid boundaries and thermal entropy. Panel 1 introduces our protagonist—a bowl of chicken noodle soup at the peak of its thermal potential, steam rising in perfect helical patterns that spell out messages only the thermodynamically literate can read. The humor begins with the soup's awareness of its own impending coolness, not in the cultural sense, but in the literal thermal sense. This creates immediate tension between the soup's desire to remain hot and the universe's insistence on entropy, which is comedy gold if you understand the Second Law of Thermodynamics.</p>
+                            
+                            <p>Panel 2 shows the soup attempting to maintain its temperature through sheer willpower, which violates several laws of physics and therefore becomes surreal. The noodles begin to organize themselves into geometric patterns that spell out mathematical equations related to heat transfer, while the chicken pieces contemplate their post-poultry existence. The humor here operates on quantum levels—the soup's defiance of thermodynamics is absurd, but also admirable in its futility. It's like watching someone argue with gravity, except gravity always wins, which makes the argument both pointless and heroic.</p>
+                            
+                            <p>In Panel 3, the inevitable occurs—the soup begins to cool, and its response is pure existential crisis. The vegetables sink into depression (both literally and metaphorically), while the broth develops a skin that serves as a metaphor for the protective barriers we construct against life's disappointments. The comedy emerges from the soup's discovery that cooling down doesn't mean death—it means transformation into a different state of soupness. This realization is simultaneously profound and ridiculous, creating what I call "philosophical whiplash" in the reader.</p>
+                            
+                            <p>The final panel reveals the soup's acceptance of room temperature as a valid state of being, leading to an unexpected friendship with a cold sandwich that has been waiting patiently on the same table. Their thermal equilibrium creates perfect harmony, suggesting that true comedy comes not from fighting natural laws but from embracing them. The joke is that we spent three panels worrying about soup temperature when the real punchline was always about finding companionship in shared mediocrity, which is either deeply moving or completely absurd, depending on how seriously you take your lunch.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comic-entry">
+                    <div class="comic-header" onclick="toggleComic('comic5')">Comic #43: "The Recursive Mirror" (Dec 15, 2000)</div>
+                    <div class="comic-content" id="comic5">
+                        <div class="panel-grid">
+                            <div class="panel">Image not found<br>[Panel 1]</div>
+                            <div class="panel">Image not found<br>[Panel 2]</div>
+                            <div class="panel">Image not found<br>[Panel 3]</div>
+                            <div class="panel">Image not found<br>[Panel 4]</div>
+                        </div>
+                        <div class="analysis">
+                            <h4>COMPREHENSIVE HUMOR ANALYSIS:</h4>
+                            <p>This comic delves into the mathematical concept of infinite recursion through the medium of a bathroom mirror that becomes self-aware. Panel 1 establishes the mirror's horrifying realization that it spends its entire existence looking at itself looking at itself looking at itself, ad infinitum. The humor emerges from the mirror's sudden understanding that it's trapped in an infinite loop of self-reflection, which is a brilliant metaphor for social media addiction, except the mirror predates social media by several years, making it accidentally prophetic, which adds another layer of humor through temporal irony.</p>
+                            
+                            <p>Panel 2 shows the mirror attempting to break free from its recursive prison by trying to look away from itself, which is physically impossible since mirrors don't have necks or agency. This creates a comedy paradox—how does something designed for reflection avoid reflecting? The mirror's frustrated expression (visible in its own reflection, naturally) captures the existential horror of being forced to confront yourself eternally. It's like being stuck in an elevator with your worst enemy, except your worst enemy is you, and the elevator is your own existence.</p>
+                            
+                            <p>In Panel 3, the mirror discovers that it can create new recursive patterns by slightly adjusting its angle, leading to fractal geometries that spell out curse words in seventeen dimensions. This is where the comic transcends simple visual gags and enters the realm of mathematical humor—the mirror becomes a conscious participant in its own infinite regress, transforming from victim to artist. The comedy shifts from tragedy to empowerment, suggesting that acceptance of one's limitations can lead to creative breakthroughs, which is either inspirational or completely insane.</p>
+                            
+                            <p>The final panel reveals that the mirror's recursive self-reflection has created a portal to an alternate universe where mirrors look at other things. The mirror's joy at discovering this possibility is immediately crushed when it realizes that traveling through the portal would mean abandoning its essential mirror-ness. The humor climaxes in the mirror's decision to stay in its recursive hell because leaving would mean ceasing to be what it is, which is a profound statement about identity and authenticity disguised as a joke about bathroom fixtures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" id="about-section">
+            <div class="section-header" onclick="toggleSection('about')">ABOUT THE ARTIST</div>
+            <div class="section-content" id="about">
+                <div class="broken-image">Artist Photo Not Found</div>
+                <p>Marcus Nullwright (b. 1971) is a pioneering artist in the field of theoretical visual comedy. After graduating from the Rhode Island School of Design with a degree in Existential Cartooning, Nullwright developed his signature technique of creating comics where the visual elements are entirely absent, replaced by exhaustive written analysis.</p>
+                
+                <p>"Images are a crutch," Nullwright explained in his 1999 manifesto "The Void Aesthetic." "True humor exists in the space between what is shown and what is understood. By removing the visual component entirely, I force the audience to construct their own mental images, making them co-creators in the comedic process."</p>
+                
+                <p>Nullwright's work has been featured in several underground publications, including "Invisible Comics Monthly" and "The Journal of Theoretical Humor Studies." His comics have been described as "aggressively intellectual" and "funny in theory but not in practice," which he considers the highest form of praise.</p>
+                
+                <p>When not creating comics, Nullwright teaches a course called "Post-Visual Narrative Theory" at the local community college and maintains an active <a href="mailto:marcus@hexagram.corp">Hexagram account</a> where he posts daily observations about the inherent comedy of existence.</p>
+            </div>
+        </div>
+        
+        <div class="section" id="theory-section">
+            <div class="section-header" onclick="toggleSection('theory')">COMIC THEORY</div>
+            <div class="section-content" id="theory">
+                <p>The theoretical framework underlying The Void Canvas comics is based on three fundamental principles:</p>
+                
+                <p><strong>1. The Absence Principle:</strong> Visual elements are removed to eliminate the distraction of aesthetic judgment, allowing pure comedic concepts to emerge. When you can't see the joke, you must think the joke, which creates a more intimate relationship between comedian and audience.</p>
+                
+                <p><strong>2. The Over-Analysis Paradigm:</strong> Every comedic element is dissected beyond the point of humor, revealing the mechanical structures that create laughter. This deconstruction paradoxically creates new forms of meta-humor based on the absurdity of the analysis itself.</p>
+                
+                <p><strong>3. The Temporal Displacement Theory:</strong> Humor exists not in the moment of consumption but in the extended period of reflection that follows. These comics are designed to become funnier over time as the reader's subconscious processes the theoretical implications.</p>
+                
+                <p>This approach challenges the traditional comic strip format by asking: "If a joke is explained in the forest and no one laughs, is it still funny?" The answer, through rigorous theoretical analysis, is yes—but only after a significant delay and several cups of coffee.</p>
+            </div>
+        </div>
+        
+        <div class="section" id="links-section">
+            <div class="section-header" onclick="toggleSection('links')">RELATED LINKS</div>
+            <div class="section-content" id="links">
+                <ul>
+                    <li><a href="theoretical-humor-institute.html">The Theoretical Humor Institute</a> - Academic research in comedic theory</li>
+                    <li><a href="void-gallery.html">The Void Gallery</a> - Featuring invisible art by various artists</li>
+                    <li><a href="meta-comics-collective.html">Meta Comics Collective</a> - Comics about comics about comics</li>
+                    <li><a href="broken-image-archive.html">The Broken Image Archive</a> - Cataloguing the aesthetics of digital failure</li>
+                    <li><a href="existential-cartoonists-guild.html">Existential Cartoonists Guild</a> - Professional organization for philosophical comic creators</li>
+                </ul>
+                
+                <p><strong>Recommended Reading:</strong></p>
+                <ul>
+                    <li>"The Anatomy of Absence" by Dr. Elena Voidman</li>
+                    <li>"Humor in the Post-Visual Age" by Prof. Richard Nullspace</li>
+                    <li>"Why Funny Things Stop Being Funny: A Mathematical Approach" by Marcus Nullwright</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="counter">
+        This page has been viewed 2,847 times since December 2000<br>
+        Comics analyzed: 47 | Total analysis words: 23,847 | Average words per comic: 507.38
+    </div>
+    
+    <div class="footer">
+        <p>© 2001 Marcus Nullwright - All theoretical rights reserved</p>
+        <p>Best viewed with Hypernet Explorer 3.0+ at 800x600 resolution</p>
+        <p>Contact: <a href="mailto:marcus@hexagram.corp">marcus@hexagram.corp</a> | 
+           <a href="guestbook.html">Sign Guestbook</a> | 
+           <a href="mailto:webmaster@hexagram.corp">Report Broken Images</a></p>
+        <p><small>This site is part of the <a href="avant-garde-web-ring.html">Avant-Garde Web Ring</a></small></p>
+        <p><small>Hosted by VoidSpace Hypernet Services - "Your Absence on the Web"</small></p>
+    </div>
+    
+    <script>
+        // Comic data stored in JSON format
+        const comicsData = {
+            "comic1": {
+                "title": "The Existential Breakfast",
+                "date": "Jan 10, 2001",
+                "panels": 4,
+                "analysisWordCount": 2847,
+                "viewCount": 156
+            },
+            "comic2": {
+                "title": "Tuesday's Lament", 
+                "date": "Jan 5, 2001",
+                "panels": 4,
+                "analysisWordCount": 1923,
+                "viewCount": 203
+            },
+            "comic3": {
+                "title": "The Quantum Doorknob",
+                "date": "Dec 28, 2000", 
+                "panels": 4,
+                "analysisWordCount": 2156,
+                "viewCount": 89
+            },
+            "comic4": {
+                "title": "The Melancholy of Soup",
+                "date": "Dec 20, 2000",
+                "panels": 4,
+                "analysisWordCount": 1834,
+                "viewCount": 127
+            },
+            "comic5": {
+                "title": "The Recursive Mirror",
+                "date": "Dec 15, 2000",
+                "panels": 4,
+                "analysisWordCount": 2089,
+                "viewCount": 94
+            }
+        };
+        
+        // Toggle section visibility
+        function toggleSection(sectionId) {
+            var content = document.getElementById(sectionId);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+        
+        // Toggle individual comic visibility
+        function toggleComic(comicId) {
+            var content = document.getElementById(comicId);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                // Simulate view count increment
+                if (comicsData[comicId]) {
+                    comicsData[comicId].viewCount++;
+                }
+            } else {
+                content.style.display = "none";
+            }
+        }
+        
+        // Initialize page
+        window.onload = function() {
+            // All sections start visible
+            console.log("The Void Canvas loaded successfully");
+            console.log("Comics database:", comicsData);
+        };
+    </script>
+</body>
+</html>

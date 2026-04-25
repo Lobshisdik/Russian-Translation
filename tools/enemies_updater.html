@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPG Maker MZ Enemies Battler Updater</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    label { display: block; margin-top: 1rem; }
+    button { margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Enemies Battler Updater</h1>
+  <label>
+    Select <code>enemies.json</code>:
+    <input type="file" id="enemiesFile" accept=".json">
+  </label>
+  <label>
+    Select <code>updater.json</code>:
+    <input type="file" id="updaterFile" accept=".json">
+  </label>
+  <button id="updateBtn">Update Battlers & Download</button>
+
+  <script>
+    // Utility to read a JSON file as text and parse
+    async function readJson(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            resolve(JSON.parse(reader.result));
+          } catch (err) {
+            reject(new Error('Invalid JSON in ' + file.name));
+          }
+        };
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(file);
+      });
+    }
+
+    document.getElementById('updateBtn').addEventListener('click', async () => {
+      const enemiesInput = document.getElementById('enemiesFile').files[0];
+      const updaterInput = document.getElementById('updaterFile').files[0];
+      if (!enemiesInput || !updaterInput) {
+        return alert('Please select both <enemies.json> and <updater.json>.');
+      }
+      try {
+        // Load JSON data
+        const enemiesData = await readJson(enemiesInput);
+        const updaterData = await readJson(updaterInput);
+
+        // Build a lookup map: id -> new sprite name
+        const spriteMap = {};
+        updaterData.forEach(item => {
+          if (item.id != null && item.sprite) {
+            spriteMap[item.id] = item.sprite;
+          }
+        });
+
+        // Update battlerName for matching enemy IDs
+        enemiesData.forEach(enemy => {
+          // Skip null first slot and any entries without id
+          if (enemy && typeof enemy.id === 'number' && spriteMap.hasOwnProperty(enemy.id)) {
+            enemy.battlerName = spriteMap[enemy.id];
+          }
+        });
+
+        // Create a download link for the updated JSON
+        const blob = new Blob([JSON.stringify(enemiesData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'enemies_updated.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error(err);
+        alert('Error: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

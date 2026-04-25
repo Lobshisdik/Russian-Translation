@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypernet Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tahoma, "MS Sans Serif", sans-serif;
+        }
+
+        body {
+            background-color: #ece9d8;
+        }
+
+        /* Browser Window Styles */
+        .browser {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #0055e5;
+            border-radius: 3px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .browser.fullscreen {
+            max-width: none;
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        /* Title Bar */
+        .title-bar {
+            background: linear-gradient(to right, #0a246a, #0a58aa);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .title-bar-text {
+            flex-grow: 1;
+        }
+
+        .title-bar-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .title-bar-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .title-bar-control {
+            width: 16px;
+            height: 16px;
+            background-color: #d4d0c8;
+            border: 1px solid #888;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        /* Menu Bar */
+        .menu-bar {
+            background-color: #ece9d8;
+            border-bottom: 1px solid #aca899;
+            padding: 2px 8px;
+            font-size: 11px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .menu-bar-item {
+            display: inline-block;
+            padding: 2px 6px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .menu-bar-item:hover,
+        .menu-bar-item.active {
+            background-color: #316ac5;
+            color: #fff;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #aca899;
+            border-top: none;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            min-width: 150px;
+            display: none;
+            z-index: 101;
+        }
+
+        .dropdown-menu-item {
+            padding: 4px 8px;
+            color: #000;
+            font-size: 11px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1efe2;
+        }
+
+        .dropdown-menu-item:hover {
+            background-color: #316ac5;
+            color: #fff;
+        }
+
+        .dropdown-menu-separator {
+            height: 1px;
+            background-color: #aca899;
+            margin: 2px 0;
+        }
+
+        .dropdown-menu-item.disabled {
+            color: #aca899;
+            cursor: default;
+        }
+
+        .dropdown-menu-item.disabled:hover {
+            background-color: transparent;
+            color: #aca899;
+        }
+
+        /* Navigation Bar */
+        .browser-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px;
+            background-color: #ece9d8;
+            border-bottom: 1px solid #aca899;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 2px;
+            flex-shrink: 0;
+        }
+
+        .nav-btn, .action-btn {
+            background-color: #ece9d8;
+            border: 1px solid #aca899;
+            border-radius: 2px;
+            padding: 2px 6px;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #707070 inset;
+        }
+
+        .nav-btn:hover, .action-btn:hover {
+            border-color: #0a246a;
+        }
+
+        .nav-btn:active, .action-btn:active {
+            background-color: #d4d0c8;
+            box-shadow: -1px -1px 0 #fff inset, 1px 1px 0 #707070 inset;
+        }
+
+        .address-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .address-label {
+            font-size: 11px;
+            padding: 0 5px;
+        }
+
+        #urlInput {
+            flex-grow: 1;
+            padding: 4px;
+            border: 1px solid #7f9db9;
+            font-size: 11px;
+            background-color: #fff;
+            color: navy;
+        }
+
+        /* Favorites Bar */
+        .favorites-bar {
+            background-color: #ece9d8;
+            border-bottom: 1px solid #aca899;
+            padding: 3px 10px;
+            font-size: 11px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .favorites-bar-label {
+            font-weight: 700;
+            color: navy;
+            padding-right: 5px;
+            border-right: 1px solid #aca899;
+        }
+
+        .favorites-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .favorites-bar-link {
+            color: #00f;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .favorites-bar-link:hover {
+            color: red;
+        }
+
+        .favorites-bar-icon {
+            color: #555;
+            font-size: 10px;
+        }
+
+        /* Content Area */
+        .browser-content {
+            height: 75vh;
+            position: relative;
+            border-top: 1px solid #aca899;
+            border-bottom: 1px solid #aca899;
+            background-color: #fff;
+        }
+
+        .browser.fullscreen .browser-content {
+            height: 85vh;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Noodle Search Page */
+        #noodleContent {
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: #fff;
+            overflow: auto;
+        }
+
+        #logo {
+            margin-top: 70px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #logo h1 {
+            font-size: 80px;
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: -2px;
+        }
+
+        #logo .n { color: #4285f4; }
+        #logo .o1 { color: #ea4335; }
+        #logo .o2 { color: #fbbc05; }
+        #logo .d { color: #4285f4; }
+        #logo .l { color: #34a853; }
+        #logo .e { color: #ea4335; }
+
+        .beta-label {
+            color: #dd4b39;
+            font-size: 12px;
+            font-weight: 700;
+            position: relative;
+            top: -35px;
+            left: 140px;
+        }
+
+        #search-container {
+            margin: 0 auto;
+            max-width: 570px;
+            text-align: center;
+        }
+
+        #search-box {
+            width: 100%;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #dfe1e5;
+            border-radius: 0;
+            height: 25px;
+            outline: 0;
+        }
+
+        #search-buttons {
+            margin-top: 15px;
+        }
+
+        .search-button {
+            background-color: #f2f2f2;
+            border: 1px solid #f2f2f2;
+            border-radius: 2px;
+            color: #5f6368;
+            font-size: 13px;
+            margin: 11px 4px;
+            padding: 7px 15px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            border: 1px solid #c6c6c6;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            color: #222;
+        }
+
+        #results {
+            max-width: 570px;
+            margin: 0 auto;
+            text-align: left;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result {
+            margin-bottom: 25px;
+        }
+
+        .result-title {
+            font-size: 18px;
+            color: #1a0dab;
+            margin-bottom: 3px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .result-title:visited { color: #609; }
+        .result-title:hover { text-decoration: underline; }
+
+        .result-url {
+            color: #006621;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .result-abstract {
+            color: #545454;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        #search-stats {
+            color: grey;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: #f2f2f2;
+            border-top: 1px solid #e4e4e4;
+            left: 0;
+            font-size: 13px;
+            color: #5f6368;
+            text-align: center;
+        }
+
+        /* Favorites Sidebar */
+        .favorites-sidebar {
+            position: absolute;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #ece9d8;
+            border-left: 1px solid #aca899;
+            transition: right 0.3s ease;
+            z-index: 200;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .favorites-sidebar.open {
+            right: 0;
+        }
+
+        .favorites-sidebar-header {
+            padding: 10px;
+            background: linear-gradient(to right, #0a246a, #0a58aa);
+            color: #fff;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-sidebar {
+            background: 0 0;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .favorites-sidebar-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .favorites-actions {
+            padding: 10px;
+            border-top: 1px solid #aca899;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .favorite-category {
+            margin-bottom: 10px;
+        }
+
+        .category-header {
+            background-color: #d4d0c8;
+            padding: 5px;
+            border: 1px solid #aca899;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .category-chevron {
+            font-size: 10px;
+        }
+
+        .category-items {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .category-items.expanded {
+            max-height: 500px;
+            border-left: 1px solid #aca899;
+            border-right: 1px solid #aca899;
+            border-bottom: 1px solid #aca899;
+        }
+
+        .favorite-item {
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f1efe2;
+        }
+
+        .favorite-item:last-child {
+            border-bottom: none;
+        }
+
+        .favorite-link {
+            cursor: pointer;
+            color: #00f;
+            text-decoration: underline;
+        }
+
+        .favorite-link:hover {
+            color: red;
+        }
+
+        .remove-favorite {
+            background: 0 0;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        /* Dialog Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            display: none;
+        }
+
+        .dialog {
+            background-color: #ece9d8;
+            border: 2px solid #0055e5;
+            border-radius: 3px;
+            width: 400px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .dialog-title {
+            background: linear-gradient(to right, #0a246a, #0a58aa);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dialog-close {
+            background: 0 0;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .dialog-content {
+            padding: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #7f9db9;
+            font-size: 12px;
+        }
+
+        .dialog-actions {
+            padding: 10px 15px 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background-color: #ece9d8;
+            border-top: 1px solid #fff;
+            padding: 3px 10px;
+            font-size: 11px;
+            color: #000;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .status-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-panel {
+            border-left: 1px solid #aca899;
+            padding: 0 10px;
+            margin-left: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="browser">
+        <!-- Title Bar -->
+        <div class="title-bar">
+            <div class="title-bar-icon">🌐</div>
+            <div class="title-bar-text">Hypernet Explorer</div>
+            <div class="title-bar-controls">
+                <div class="title-bar-control" id="minimizeBtn">_</div>
+                <div class="title-bar-control" id="maximizeBtn">▢</div>
+                <div class="title-bar-control" id="closeBtn">X</div>
+            </div>
+        </div>
+
+        <!-- Menu Bar -->
+        <div class="menu-bar">
+            <div class="menu-bar-item" data-menu="file">File
+                <div class="dropdown-menu" id="file-menu">
+                    <div class="dropdown-menu-item">New Tab</div>
+                    <div class="dropdown-menu-item">Open...</div>
+                    <div class="dropdown-menu-item">Save</div>
+                    <div class="dropdown-menu-item">Save As...</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Page Setup...</div>
+                    <div class="dropdown-menu-item">Print...</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Exit</div>
+                </div>
+            </div>
+            <div class="menu-bar-item" data-menu="edit">Edit
+                <div class="dropdown-menu" id="edit-menu">
+                    <div class="dropdown-menu-item">Cut</div>
+                    <div class="dropdown-menu-item">Copy</div>
+                    <div class="dropdown-menu-item">Paste</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Select All</div>
+                    <div class="dropdown-menu-item">Find...</div>
+                </div>
+            </div>
+            <div class="menu-bar-item" data-menu="view">View
+                <div class="dropdown-menu" id="view-menu">
+                    <div class="dropdown-menu-item">Toolbars</div>
+                    <div class="dropdown-menu-item">Status Bar</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Zoom</div>
+                    <div class="dropdown-menu-item">Text Size</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Source</div>
+                    <div class="dropdown-menu-item">Encoding</div>
+                </div>
+            </div>
+            <div class="menu-bar-item" data-menu="favorites">Favorites
+                <div class="dropdown-menu" id="favorites-menu">
+                    <div class="dropdown-menu-item" id="addToFavoritesMenuItem">Add to Favorites...</div>
+                    <div class="dropdown-menu-item" id="organizeFavoritesMenuItem">Organize Favorites...</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Imported Bookmarks</div>
+                </div>
+            </div>
+            <div class="menu-bar-item" data-menu="tools">Tools
+                <div class="dropdown-menu" id="tools-menu">
+                    <div class="dropdown-menu-item">Mail and News</div>
+                    <div class="dropdown-menu-item">Synchronize...</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">Hypernet Options</div>
+                </div>
+            </div>
+            <div class="menu-bar-item" data-menu="help">Help
+                <div class="dropdown-menu" id="help-menu">
+                    <div class="dropdown-menu-item">Help Topics</div>
+                    <div class="dropdown-menu-item">Online Support</div>
+                    <div class="dropdown-menu-separator"></div>
+                    <div class="dropdown-menu-item">About Hypernet Explorer</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Header -->
+        <div class="browser-header">
+            <div class="nav-controls">
+                <button id="backBtn" class="nav-btn"><span>←</span></button>
+                <button id="forwardBtn" class="nav-btn"><span>→</span></button>
+                <button id="reloadBtn" class="nav-btn"><span>↻</span></button>
+                <button id="homeBtn" class="nav-btn"><span>🏠</span></button>
+                <button id="randomBtn" class="nav-btn"><span>🌀</span></button>
+            </div>
+            <div class="address-bar">
+                <div class="address-label">Address:</div>
+                <input type="text" id="urlInput" placeholder="Enter filename (e.g., noodle)" />
+                <button id="goBtn" class="action-btn">Go</button>
+                <button id="addFavoriteBtn" class="nav-btn"><span>⭐</span></button>
+            </div>
+        </div>
+
+        <!-- Favorites Bar -->
+        <div class="favorites-bar" id="permanentFavoritesBar">
+            <div class="favorites-bar-label">Favorites:</div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="browser-content">
+            <!-- Noodle Search Page -->
+            <div id="noodleContent">
+                <div id="logo">
+                    <h1>
+                        <span class="n">N</span><span class="o1">o</span><span class="o2">o</span>
+                        <span class="d">d</span><span class="l">l</span><span class="e">e</span>
+                    </h1>
+                    <div class="beta-label">BETA</div>
+                </div>
+
+                <div id="search-container">
+                    <form id="search-form">
+                        <input type="text" id="search-box" autofocus autocomplete="off" />
+                        <div id="search-buttons">
+                            <button type="submit" class="search-button">Noodle Search</button>
+                            <button type="button" class="search-button" id="luckyBtn">I'm Feeling Lucky</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="results">
+                    <div id="search-stats"></div>
+                    <div id="results-list"></div>
+                </div>
+
+                <div id="footer">© 2000 Noodle - The Hypernet Search Engine</div>
+            </div>
+
+            <!-- Website Frame -->
+            <iframe id="browserFrame" src="about:blank"></iframe>
+        </div>
+
+        <!-- Favorites Sidebar -->
+        <div class="favorites-sidebar" id="favoritesSidebar">
+            <div class="favorites-sidebar-header">
+                <span>Organize Favorites</span>
+                <button class="close-sidebar" id="closeSidebarBtn">×</button>
+            </div>
+            <div class="favorites-sidebar-content" id="favoritesSidebarContent">
+                <div class="favorite-category">
+                    <div class="category-header">
+                        <span>Favorites Bar</span>
+                        <span class="category-chevron">▼</span>
+                    </div>
+                    <div class="category-items expanded" id="favoritesBarItems"></div>
+                </div>
+                <div class="favorite-category">
+                    <div class="category-header">
+                        <span>Other</span>
+                        <span class="category-chevron">▼</span>
+                    </div>
+                    <div class="category-items expanded" id="otherFavoritesItems"></div>
+                </div>
+            </div>
+            <div class="favorites-actions">
+                <button class="action-btn" id="newFolderBtn">New Folder</button>
+                <button class="action-btn" id="closeOrganizerBtn">Close</button>
+            </div>
+        </div>
+
+        <!-- Add Favorite Dialog -->
+        <div class="dialog-overlay" id="addFavoriteDialog">
+            <div class="dialog">
+                <div class="dialog-title">
+                    <span>Add to Favorites</span>
+                    <button class="dialog-close" id="closeDialogBtn">×</button>
+                </div>
+                <div class="dialog-content">
+                    <div class="form-group">
+                        <label for="favoriteName">Name:</label>
+                        <input type="text" id="favoriteName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="favoriteUrl">Address:</label>
+                        <input type="text" id="favoriteUrl" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="favoriteCategory">Create in:</label>
+                        <select id="favoriteCategory">
+                            <option value="favorites-bar">Favorites Bar</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="action-btn" id="cancelAddFavoriteBtn">Cancel</button>
+                    <button class="action-btn" id="confirmAddFavoriteBtn">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-section">
+                <span id="statusText">Ready</span>
+            </div>
+            <div class="status-section">
+                <div class="status-panel">Hypernet Zone</div>
+                <div class="status-panel">100%</div>
+            </div>
+        </div>
+    </div>
+      <script src="hypernet-explorer.js"></script>
+
+    <script>
+        // Application State
+        
+        const AppState = {
+            browserHistory: { currentIndex: 0, entries: [] },
+            activeMenu: null,
+            hypernetDatabase: hypernetDatabase
+        };
+
+        // DOM Elements
+        const Elements = {
+            browser: document.querySelector('.browser'),
+            browserFrame: document.getElementById('browserFrame'),
+            noodleContent: document.getElementById('noodleContent'),
+            urlInput: document.getElementById('urlInput'),
+            statusText: document.getElementById('statusText'),
+            searchForm: document.getElementById('search-form'),
+            searchBox: document.getElementById('search-box'),
+            
+            // Navigation buttons
+            backBtn: document.getElementById('backBtn'),
+            forwardBtn: document.getElementById('forwardBtn'),
+            reloadBtn: document.getElementById('reloadBtn'),
+            homeBtn: document.getElementById('homeBtn'),
+            randomBtn: document.getElementById('randomBtn'),
+            goBtn: document.getElementById('goBtn'),
+            addFavoriteBtn: document.getElementById('addFavoriteBtn'),
+            
+            // Window controls
+            minimizeBtn: document.getElementById('minimizeBtn'),
+            maximizeBtn: document.getElementById('maximizeBtn'),
+            closeBtn: document.getElementById('closeBtn'),
+            
+            // Favorites
+            favoritesSidebar: document.getElementById('favoritesSidebar'),
+            permanentFavoritesBar: document.getElementById('permanentFavoritesBar'),
+            favoritesBarItems: document.getElementById('favoritesBarItems'),
+            otherFavoritesItems: document.getElementById('otherFavoritesItems'),
+            addFavoriteDialog: document.getElementById('addFavoriteDialog'),
+            favoriteName: document.getElementById('favoriteName'),
+            favoriteUrl: document.getElementById('favoriteUrl'),
+            favoriteCategory: document.getElementById('favoriteCategory'),
+            
+            // Search results
+            results: document.getElementById('results'),
+            searchStats: document.getElementById('search-stats'),
+            resultsList: document.getElementById('results-list')
+        };
+
+        // Utility Functions
+        const Utils = {
+            updateStatus(message) {
+                Elements.statusText.textContent = message;
+            },
+
+            formatDisplayUrl(url) {
+                let displayUrl = url.replace('.html', '');
+                if (displayUrl.startsWith('hypernet/')) {
+                    const parts = displayUrl.substring(9).split('/');
+                    if (parts.length > 1 && parts[1] === 'index') {
+                        displayUrl = 'www.' + parts[0];
+                    } else {
+                        displayUrl = 'www.' + displayUrl.substring(9);
+                    }
+                }
+                return displayUrl;
+            },
+
+            getFavorites() {
+                return JSON.parse(localStorage.getItem('browserFavorites')) || [];
+            },
+
+            saveFavorites(favorites) {
+                localStorage.setItem('browserFavorites', JSON.stringify(favorites));
+            }
+        };
+
+        // Navigation System
+        const Navigation = {
+            navigateTo(url) {
+                if (url === 'noodle') {
+                    this.showNoodle();
+                } else {
+                    this.showWebpage(url);
+                }
+                this.updateHistory(url);
+                Utils.updateStatus(`Navigating to: ${url}`);
+                this.updateNavButtons();
+            },
+
+            showNoodle() {
+                Elements.browserFrame.style.display = 'none';
+                Elements.noodleContent.style.display = 'block';
+                Elements.urlInput.value = 'noodle';
+            },
+
+            showWebpage(url) {
+                if (!url.endsWith('.html')) {
+                    url = url + '.html';
+                }
+
+                Elements.noodleContent.style.display = 'none';
+                Elements.browserFrame.src = 'about:blank';
+                
+                setTimeout(() => {
+                    Elements.browserFrame.src = url;
+                    Elements.browserFrame.style.display = 'block';
+                }, 10);
+
+                Elements.urlInput.value = Utils.formatDisplayUrl(url);
+            },
+
+            updateHistory(url) {
+                if (AppState.browserHistory.entries.length === 0 || 
+                    AppState.browserHistory.entries[AppState.browserHistory.currentIndex] !== url) {
+                    AppState.browserHistory.entries = AppState.browserHistory.entries.slice(0, AppState.browserHistory.currentIndex + 1);
+                    AppState.browserHistory.entries.push(url);
+                    AppState.browserHistory.currentIndex = AppState.browserHistory.entries.length - 1;
+                }
+            },
+
+            goBack() {
+                if (AppState.browserHistory.currentIndex > 0) {
+                    AppState.browserHistory.currentIndex--;
+                    const url = AppState.browserHistory.entries[AppState.browserHistory.currentIndex];
+                    this.loadFromHistory(url);
+                }
+            },
+
+            goForward() {
+                if (AppState.browserHistory.currentIndex < AppState.browserHistory.entries.length - 1) {
+                    AppState.browserHistory.currentIndex++;
+                    const url = AppState.browserHistory.entries[AppState.browserHistory.currentIndex];
+                    this.loadFromHistory(url);
+                }
+            },
+
+            loadFromHistory(url) {
+                if (url === 'noodle') {
+                    this.showNoodle();
+                } else {
+                    this.showWebpage(url);
+                }
+                Utils.updateStatus(`Loading from history: ${url}`);
+                this.updateNavButtons();
+            },
+
+            reload() {
+                const currentUrl = AppState.browserHistory.entries[AppState.browserHistory.currentIndex];
+                if (currentUrl === 'noodle') {
+                    Elements.results.style.display = 'none';
+                    Elements.searchBox.value = '';
+                    Utils.updateStatus('Refreshed Noodle');
+                } else {
+                    Elements.browserFrame.src = currentUrl;
+                    Utils.updateStatus('Refreshing page...');
+                }
+            },
+
+            updateNavButtons() {
+                Elements.backBtn.disabled = AppState.browserHistory.currentIndex === 0;
+                Elements.forwardBtn.disabled = AppState.browserHistory.currentIndex === AppState.browserHistory.entries.length - 1;
+            },
+
+            processUrl() {
+                const url = Elements.urlInput.value.trim();
+                
+                if (!url || url === 'noodle') {
+                    this.navigateTo('noodle');
+                    return;
+                }
+
+                const domainPattern = /^(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$/;
+                const match = url.match(domainPattern);
+
+                if (match && !url.includes('/')) {
+                    const domain = match[2];
+                    this.navigateTo(`hypernet/${domain}/index`);
+                } else if (url.startsWith('www.')) {
+                    this.navigateTo(`hypernet/${url.substring(4)}`);
+                } else {
+                    this.navigateTo(`hypernet/${url}`);
+                }
+            }
+        };
+
+        // Search System
+        const Search = {
+            perform() {
+                const query = Elements.searchBox.value.trim();
+                if (!query) return;
+
+                const results = this.searchDatabase(query);
+                this.displayResults(results, query);
+            },
+
+            searchDatabase(query) {
+                const terms = query.split(' ').filter(term => term.length > 0);
+                
+                return AppState.hypernetDatabase
+                    .filter(item => {
+                        const searchText = `${item.title} ${item.keywords} ${item.abstract}`.toLowerCase();
+                        return terms.some(term => searchText.includes(term.toLowerCase()));
+                    })
+                    .sort((a, b) => this.calculateRelevance(b, terms) - this.calculateRelevance(a, terms));
+            },
+
+            calculateRelevance(item, terms) {
+                const searchText = `${item.title} ${item.keywords} ${item.abstract}`.toLowerCase();
+                let score = 0;
+                
+                terms.forEach(term => {
+                    const regex = new RegExp(term.toLowerCase(), 'g');
+                    const matches = searchText.match(regex);
+                    if (matches) score += matches.length;
+                    
+                    const titleMatches = item.title.toLowerCase().match(regex);
+                    if (titleMatches) score += titleMatches.length * 2;
+                });
+                
+                return score;
+            },
+
+            displayResults(results, query) {
+                Elements.resultsList.innerHTML = '';
+
+                if (results.length === 0) {
+                    Elements.searchStats.textContent = `Your search - ${query} - did not match any documents.`;
+                } else {
+                    const searchTime = (Math.random() * 0.5 + 0.1).toFixed(2);
+                    Elements.searchStats.textContent = `About ${results.length} results (${searchTime} seconds)`;
+
+                    results.forEach(result => {
+                        const resultItem = this.createResultElement(result);
+                        Elements.resultsList.appendChild(resultItem);
+                    });
+                }
+
+                Elements.results.style.display = 'block';
+            },
+
+            createResultElement(result) {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result';
+
+                const title = document.createElement('a');
+                title.className = 'result-title';
+                title.textContent = result.title;
+                title.href = 'javascript:void(0);';
+                title.addEventListener('click', () => {
+                    const linkParts = result.link.split('/');
+                    const mainDomain = linkParts[0];
+                    const pageName = linkParts.length > 1 ? linkParts.slice(1).join('/') : 'index';
+                    Navigation.navigateTo(`hypernet/${mainDomain}/${pageName}`);
+                });
+
+                const url = document.createElement('div');
+                url.className = 'result-url';
+                url.textContent = `www.${result.link}`;
+
+                const abstract = document.createElement('div');
+                abstract.className = 'result-abstract';
+                abstract.textContent = result.abstract;
+
+                resultItem.appendChild(title);
+                resultItem.appendChild(url);
+                resultItem.appendChild(abstract);
+
+                return resultItem;
+            },
+
+            feelingLucky() {
+                const query = Elements.searchBox.value.trim();
+
+                if (!query) {
+                    const randomIndex = Math.floor(Math.random() * AppState.hypernetDatabase.length);
+                    const randomResult = AppState.hypernetDatabase[randomIndex];
+                    const linkParts = randomResult.link.split('/');
+                    const mainDomain = linkParts[0];
+                    const pageName = linkParts.length > 1 ? linkParts[1] : 'index';
+                    Navigation.navigateTo(`hypernet/${mainDomain}/${pageName}`);
+                    return;
+                }
+
+                const results = this.searchDatabase(query);
+                if (results.length > 0) {
+                    const linkParts = results[0].link.split('/');
+                    const mainDomain = linkParts[0];
+                    const pageName = linkParts.length > 1 ? linkParts[1] : 'index';
+                    Navigation.navigateTo(`hypernet/${mainDomain}/${pageName}`);
+                }
+            }
+        };
+
+        // Favorites System
+        const Favorites = {
+            load() {
+                const favorites = Utils.getFavorites();
+                this.renderSidebar(favorites);
+                this.renderPermanentBar(favorites);
+            },
+
+            renderSidebar(favorites) {
+                Elements.favoritesBarItems.innerHTML = '';
+                Elements.otherFavoritesItems.innerHTML = '';
+
+                const barFavorites = favorites.filter(fav => fav.category === 'favorites-bar' || !fav.category);
+                const otherFavorites = favorites.filter(fav => fav.category === 'other');
+
+                this.renderFavoriteCategory(Elements.favoritesBarItems, barFavorites);
+                this.renderFavoriteCategory(Elements.otherFavoritesItems, otherFavorites);
+            },
+
+            renderFavoriteCategory(container, favorites) {
+                if (favorites.length === 0) {
+                    const emptyMsg = document.createElement('div');
+                    emptyMsg.className = 'favorite-item';
+                    emptyMsg.textContent = 'No favorites added yet';
+                    container.appendChild(emptyMsg);
+                } else {
+                    favorites.forEach(favorite => {
+                        const favoriteElement = this.createFavoriteElement(favorite);
+                        container.appendChild(favoriteElement);
+                    });
+                }
+            },
+
+            createFavoriteElement(favorite) {
+                const favoriteElement = document.createElement('div');
+                favoriteElement.className = 'favorite-item';
+
+                const favoriteLink = document.createElement('span');
+                favoriteLink.className = 'favorite-link';
+                favoriteLink.textContent = favorite.name;
+                favoriteLink.addEventListener('click', () => {
+                    this.navigateToFavorite(favorite);
+                    Elements.favoritesSidebar.classList.remove('open');
+                });
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-favorite';
+                removeBtn.textContent = '×';
+                removeBtn.addEventListener('click', () => {
+                    this.remove(favorite);
+                });
+
+                favoriteElement.appendChild(favoriteLink);
+                favoriteElement.appendChild(removeBtn);
+                return favoriteElement;
+            },
+
+            renderPermanentBar(favorites) {
+                Elements.permanentFavoritesBar.innerHTML = '';
+
+                const label = document.createElement('div');
+                label.className = 'favorites-bar-label';
+                label.textContent = 'Favorites:';
+                Elements.permanentFavoritesBar.appendChild(label);
+
+                const barFavorites = favorites.filter(fav => fav.category === 'favorites-bar' || !fav.category);
+
+                if (barFavorites.length === 0) {
+                    const emptyMsg = document.createElement('div');
+                    emptyMsg.textContent = 'Click Add to Favorites to add websites here';
+                    emptyMsg.style.color = '#666';
+                    emptyMsg.style.fontStyle = 'italic';
+                    Elements.permanentFavoritesBar.appendChild(emptyMsg);
+                } else {
+                    barFavorites.forEach(favorite => {
+                        const favoriteElement = this.createPermanentBarItem(favorite);
+                        Elements.permanentFavoritesBar.appendChild(favoriteElement);
+                    });
+                }
+            },
+
+            createPermanentBarItem(favorite) {
+                const favoriteElement = document.createElement('div');
+                favoriteElement.className = 'favorites-bar-item';
+
+                const favoriteIcon = document.createElement('span');
+                favoriteIcon.className = 'favorites-bar-icon';
+                favoriteIcon.innerHTML = '⭐';
+
+                const favoriteLink = document.createElement('span');
+                favoriteLink.className = 'favorites-bar-link';
+                favoriteLink.textContent = favorite.name;
+                favoriteLink.addEventListener('click', () => {
+                    this.navigateToFavorite(favorite);
+                });
+
+                favoriteElement.appendChild(favoriteIcon);
+                favoriteElement.appendChild(favoriteLink);
+                return favoriteElement;
+            },
+
+            navigateToFavorite(favorite) {
+                const url = favorite.url;
+
+                if (url === 'noodle') {
+                    Navigation.navigateTo('noodle');
+                } else if (url.startsWith('www.')) {
+                    const domain = url.substring(4);
+                    if (domain.includes('/')) {
+                        const parts = domain.split('/');
+                        const domainName = parts[0];
+                        const path = parts.slice(1).join('/');
+                        Navigation.navigateTo(`hypernet/${domainName}/${path}`);
+                    } else {
+                        Navigation.navigateTo(`hypernet/${domain}/index`);
+                    }
+                } else {
+                    Navigation.navigateTo(url);
+                }
+            },
+
+            add() {
+                this.openDialog();
+            },
+
+            openDialog() {
+                let currentUrl, name, displayUrl;
+
+                if (Elements.noodleContent.style.display === 'block') {
+                    currentUrl = 'noodle';
+                    displayUrl = 'noodle';
+                    name = 'Noodle Search';
+                } else {
+                    currentUrl = Elements.browserFrame.src;
+                    name = currentUrl.split('/').pop().replace('.html', '');
+                    
+                    if (name === 'index') {
+                        name = currentUrl.split('/')[currentUrl.split('/').length - 2];
+                    }
+
+                    if (currentUrl.includes('hypernet/')) {
+                        const urlParts = currentUrl.split('hypernet/')[1].split('/');
+                        const domain = urlParts[0];
+                        displayUrl = `www.${domain}`;
+                        
+                        if (urlParts.length > 1) {
+                            const path = urlParts.slice(1).join('/').replace('.html', '');
+                            if (path !== 'index') {
+                                displayUrl += `/${path}`;
+                            }
+                        }
+                    } else {
+                        displayUrl = currentUrl.replace('.html', '');
+                    }
+                }
+
+                Elements.favoriteName.value = name;
+                Elements.favoriteUrl.value = displayUrl;
+                Elements.favoriteCategory.value = 'favorites-bar';
+                Elements.addFavoriteDialog.style.display = 'flex';
+            },
+
+            save() {
+                const name = Elements.favoriteName.value.trim();
+                const url = Elements.favoriteUrl.value;
+                const category = Elements.favoriteCategory.value;
+
+                if (!name) {
+                    alert('Please enter a name for this favorite');
+                    return;
+                }
+
+                const favorites = Utils.getFavorites();
+
+                if (!favorites.some(fav => fav.url === url)) {
+                    favorites.push({ name, url, category });
+                    Utils.saveFavorites(favorites);
+                    this.load();
+                    Utils.updateStatus(`Added ${name} to favorites in ${category === 'favorites-bar' ? 'Favorites Bar' : 'Other'}`);
+                    this.closeDialog();
+                } else {
+                    Utils.updateStatus('Already in favorites');
+                    this.closeDialog();
+                }
+            },
+
+            remove(favorite) {
+                const favorites = Utils.getFavorites();
+                const index = favorites.findIndex(fav => fav.url === favorite.url && fav.name === favorite.name);
+                if (index !== -1) {
+                    const removed = favorites.splice(index, 1);
+                    Utils.saveFavorites(favorites);
+                    this.load();
+                    Utils.updateStatus(`Removed ${removed[0].name} from favorites`);
+                }
+            },
+
+            closeDialog() {
+                Elements.addFavoriteDialog.style.display = 'none';
+            },
+
+            toggleSidebar() {
+                Elements.favoritesSidebar.classList.toggle('open');
+                if (Elements.favoritesSidebar.classList.contains('open')) {
+                    this.load();
+                }
+            },
+
+            createNewFolder() {
+                const folderName = prompt('Enter folder name:');
+                if (folderName && folderName.trim()) {
+                    const newCategory = document.createElement('div');
+                    newCategory.className = 'favorite-category';
+
+                    const categoryHeader = document.createElement('div');
+                    categoryHeader.className = 'category-header';
+                    categoryHeader.innerHTML = `<span>${folderName.trim()}</span><span class="category-chevron">▼</span>`;
+
+                    const categoryItems = document.createElement('div');
+                    categoryItems.className = 'category-items expanded';
+                    categoryItems.innerHTML = '<div class="favorite-item">Empty</div>';
+
+                    categoryHeader.addEventListener('click', function() {
+                        categoryItems.classList.toggle('expanded');
+                        const chevron = this.querySelector('.category-chevron');
+                        chevron.textContent = categoryItems.classList.contains('expanded') ? '▼' : '▶';
+                    });
+
+                    newCategory.appendChild(categoryHeader);
+                    newCategory.appendChild(categoryItems);
+                    document.getElementById('favoritesSidebarContent').appendChild(newCategory);
+
+                    Utils.updateStatus(`Folder "${folderName.trim()}" created`);
+                }
+            }
+        };
+
+        // Menu System
+        const MenuSystem = {
+            toggle(menuItem) {
+                const menuName = menuItem.getAttribute('data-menu');
+                const dropdownMenu = document.getElementById(`${menuName}-menu`);
+
+                if (AppState.activeMenu && AppState.activeMenu !== dropdownMenu) {
+                    this.closeActive();
+                }
+
+                if (dropdownMenu.style.display === 'block') {
+                    this.close(dropdownMenu, menuItem);
+                } else {
+                    this.open(dropdownMenu, menuItem);
+                }
+            },
+
+            open(dropdownMenu, menuItem) {
+                dropdownMenu.style.display = 'block';
+                menuItem.classList.add('active');
+                AppState.activeMenu = dropdownMenu;
+            },
+
+            close(dropdownMenu, menuItem) {
+                dropdownMenu.style.display = 'none';
+                menuItem.classList.remove('active');
+                AppState.activeMenu = null;
+            },
+
+            closeActive() {
+                if (AppState.activeMenu) {
+                    AppState.activeMenu.style.display = 'none';
+                    const activeMenuItem = document.querySelector('.menu-bar-item.active');
+                    if (activeMenuItem) {
+                        activeMenuItem.classList.remove('active');
+                    }
+                    AppState.activeMenu = null;
+                }
+            },
+
+            handleItemClick(menuName, itemName) {
+                Utils.updateStatus(`Menu item clicked: ${menuName} > ${itemName}`);
+                this.closeActive();
+            }
+        };
+
+        // Window Controls
+        const WindowControls = {
+            minimize() {
+                Utils.updateStatus('Minimize clicked (simulated)');
+            },
+
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen()
+                        .then(() => {
+                            Elements.browser.classList.add('fullscreen');
+                            Elements.maximizeBtn.textContent = '⧉';
+                            Utils.updateStatus('Fullscreen mode activated');
+                        })
+                        .catch(() => {
+                            Elements.browser.classList.add('fullscreen');
+                            Elements.maximizeBtn.textContent = '⧉';
+                            Utils.updateStatus('Fullscreen mode activated (CSS only)');
+                        });
+                } else {
+                    document.exitFullscreen()
+                        .then(() => {
+                            Elements.browser.classList.remove('fullscreen');
+                            Elements.maximizeBtn.textContent = '▢';
+                            Utils.updateStatus('Windowed mode activated');
+                        })
+                        .catch(() => {
+                            Elements.browser.classList.remove('fullscreen');
+                            Elements.maximizeBtn.textContent = '▢';
+                            Utils.updateStatus('Windowed mode activated');
+                        });
+                }
+            },
+
+            close() {
+                if (confirm('Are you sure you want to close Hypernet Explorer?')) {
+                    Utils.updateStatus('Closing Hypernet Explorer...');
+                    Elements.browser.style.display = 'none';
+                    setTimeout(() => {
+                        Elements.browser.style.display = 'block';
+                        Utils.updateStatus('Hypernet Explorer restarted');
+                    }, 2000);
+                }
+            }
+        };
+
+        // Event Handlers
+        const EventHandlers = {
+            init() {
+                // Navigation events
+                Elements.goBtn.addEventListener('click', () => Navigation.processUrl());
+                Elements.urlInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') Navigation.processUrl();
+                });
+                Elements.backBtn.addEventListener('click', () => Navigation.goBack());
+                Elements.forwardBtn.addEventListener('click', () => Navigation.goForward());
+                Elements.reloadBtn.addEventListener('click', () => Navigation.reload());
+                Elements.homeBtn.addEventListener('click', () => Navigation.navigateTo('noodle'));
+                Elements.randomBtn.addEventListener('click', () => Search.feelingLucky());
+
+                // Window control events
+                Elements.minimizeBtn.addEventListener('click', () => WindowControls.minimize());
+                Elements.maximizeBtn.addEventListener('click', () => WindowControls.toggleFullscreen());
+                Elements.closeBtn.addEventListener('click', () => WindowControls.close());
+
+                // Favorites events
+                Elements.addFavoriteBtn.addEventListener('click', () => Favorites.add());
+                document.getElementById('addToFavoritesMenuItem').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    Favorites.openDialog();
+                    MenuSystem.closeActive();
+                });
+                document.getElementById('organizeFavoritesMenuItem').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    Favorites.toggleSidebar();
+                    MenuSystem.closeActive();
+                });
+                document.getElementById('closeSidebarBtn').addEventListener('click', () => {
+                    Elements.favoritesSidebar.classList.remove('open');
+                });
+                document.getElementById('closeOrganizerBtn').addEventListener('click', () => {
+                    Elements.favoritesSidebar.classList.remove('open');
+                });
+                document.getElementById('closeDialogBtn').addEventListener('click', () => Favorites.closeDialog());
+                document.getElementById('cancelAddFavoriteBtn').addEventListener('click', () => Favorites.closeDialog());
+                document.getElementById('confirmAddFavoriteBtn').addEventListener('click', () => Favorites.save());
+                document.getElementById('newFolderBtn').addEventListener('click', () => Favorites.createNewFolder());
+
+                // Search events
+                Elements.searchBox.addEventListener('input', function() {
+                    const query = this.value.trim();
+                    if (query.length === 0) {
+                        Elements.results.style.display = 'none';
+                        return;
+                    }
+                    if (query.length >= 2) {
+                        clearTimeout(this.searchTimeout);
+                        this.searchTimeout = setTimeout(() => Search.perform(), 300);
+                    }
+                });
+                document.getElementById('luckyBtn').addEventListener('click', () => Search.feelingLucky());
+
+                // Menu events
+                document.querySelectorAll('.menu-bar-item').forEach(menuItem => {
+                    menuItem.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        MenuSystem.toggle(menuItem);
+                    });
+                });
+
+                document.querySelectorAll('.dropdown-menu-item').forEach(item => {
+                    if (!['addToFavoritesMenuItem', 'organizeFavoritesMenuItem'].includes(item.id)) {
+                        item.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (!item.classList.contains('disabled')) {
+                                const menuName = item.closest('.dropdown-menu').id.replace('-menu', '');
+                                MenuSystem.handleItemClick(menuName, item.textContent);
+                            }
+                        });
+                    }
+                });
+
+                // Category expand/collapse events
+                document.querySelectorAll('.category-header').forEach(header => {
+                    header.addEventListener('click', function() {
+                        const categoryItems = this.nextElementSibling;
+                        categoryItems.classList.toggle('expanded');
+                        const chevron = this.querySelector('.category-chevron');
+                        chevron.textContent = categoryItems.classList.contains('expanded') ? '▼' : '▶';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.menu-bar-item') && AppState.activeMenu) {
+                        MenuSystem.closeActive();
+                    }
+                });
+
+                // Fullscreen change event
+                document.addEventListener('fullscreenchange', () => {
+                    if (!document.fullscreenElement) {
+                        Elements.browser.classList.remove('fullscreen');
+                        Elements.maximizeBtn.textContent = '▢';
+                        Utils.updateStatus('Exited fullscreen mode');
+                    }
+                });
+
+                // Button click effects
+                document.querySelectorAll('button, .links-bar-item, .title-bar-control, .dropdown-menu-item').forEach(button => {
+                    button.addEventListener('mousedown', function() {
+                        if (!this.classList.contains('disabled')) {
+                            this.style.transform = 'translateY(1px)';
+                        }
+                    });
+                    button.addEventListener('mouseup', () => {
+                        button.style.transform = 'translateY(0)';
+                    });
+                    button.addEventListener('mouseleave', () => {
+                        button.style.transform = 'translateY(0)';
+                    });
+                });
+            }
+        };
+
+        // Application Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            EventHandlers.init();
+            Favorites.load();
+            Navigation.updateNavButtons();
+            Utils.updateStatus('Hypernet Explorer Ready');
+            Navigation.navigateTo('noodle');
+        });
+    </script>
+</body>
+</html>

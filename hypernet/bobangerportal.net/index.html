@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bob Anger Portal - Welcome to My Corner of Hell</title>
+    <style>
+        body {
+            font-family: Times, serif;
+            background-color: #c0c0c0;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+        
+        .header-table {
+            width: 100%;
+            background-color: #000080;
+            color: white;
+            border: 2px solid black;
+        }
+        
+        .nav-bar {
+            background-color: #808080;
+            padding: 5px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+        .nav-bar a {
+            color: black;
+            text-decoration: underline;
+            margin: 0 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-bar a:hover {
+            color: red;
+        }
+        
+        .main-container {
+            width: 100%;
+            background-color: white;
+            border: 2px inset #c0c0c0;
+        }
+        
+        .content-area {
+            padding: 15px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .section {
+            display: none;
+            border: 1px solid black;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .sidebar {
+            width: 200px;
+            float: right;
+            background-color: #ffffcc;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+            font-size: 11px;
+        }
+        
+        .footer {
+            clear: both;
+            background-color: #808080;
+            border-top: 2px solid black;
+            padding: 5px;
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        h1, h2, h3 {
+            text-decoration: underline;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .counter {
+            background-color: red;
+            color: white;
+            padding: 2px 5px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        pre {
+            background-color: black;
+            color: lime;
+            padding: 5px;
+            font-family: monospace;
+            font-size: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<table class="header-table" cellpadding="5" cellspacing="0">
+    <tr>
+        <td align="center">
+            <h1>BOB ANGER PORTAL</h1>
+            <p><i>Where Incomplete Thoughts Meet Complete Hostility</i></p>
+        </td>
+    </tr>
+</table>
+
+<div class="nav-bar">
+    <a onclick="showSection('home')">HOME</a> |
+    <a onclick="showSection('rants')">RANTS</a> |
+    <a onclick="showSection('links')">LINKS</a> |
+    <a onclick="showSection('guestbook')">GUESTBOOK</a> |
+    <a onclick="showSection('about')">ABOUT</a> |
+    <a onclick="showSection('contact')">CONTACT</a>
+</div>
+
+<div class="main-container">
+    <div class="sidebar">
+        <h3>VISITOR COUNTER</h3>
+        <span class="counter">000,042</span>
+        <p><small>Since whenever, morons</small></p>
+        
+        <h3>MOOD TODAY:</h3>
+        <p><span class="blink">FURIOUS</span></p>
+        
+        <h3>LATEST UPDATE:</h3>
+        <p>Fixed the... you idiots probably broke something again</p>
+        
+        <h3>WEBRING</h3>
+        <p><a href="#">← Previous Idiot</a><br>
+        <a href="#">Random Moron →</a></p>
+        
+        <img src="1.jpg" alt="Bob giving a thumbs down to his computer" width="150" height="100">
+    </div>
+
+    <div class="content-area">
+        
+        <!-- HOME SECTION -->
+        <div id="home" class="section active">
+            <h2>Welcome to Bob's Portal of Rage</h2>
+            <p><b>What is this site about?</b> Well if you have to ask then you're probably too... nevermind, just read the damn thing.</p>
+            
+            <p>This is my personal homepage where I share my thoughts about technology, society, and why everything is... look, just browse around and maybe you'll figure it out, genius.</p>
+            
+            <h3>Recent Updates:</h3>
+            <ul>
+                <li><b>March 15, 2001:</b> Added new rant about dial-up connections and... seriously, how are people this slow?</li>
+                <li><b>February 28, 2001:</b> Updated the links page with more sites that don't completely... well, most of you won't understand anyway.</li>
+                <li><b>January 12, 2001:</b> Fixed the guestbook because someone kept posting... typical hypernet users, I swear.</li>
+            </ul>
+            
+            <p><b>Site Stats:</b> 42 visitors this month, which is 42 more than... forget it.</p>
+            
+            <pre>
+ASCII ART OF BOB:
+    ಠ_ಠ
+   /   \
+  |  ???  |  <- This represents my constant state of
+   \ ___ /      confusion about human stupidity
+            </pre>
+        </div>
+
+        <!-- RANTS SECTION -->
+        <div id="rants" class="section">
+            <h2>Bob's Daily Rants</h2>
+            
+            <h3>March 20, 2001 - "Internet Explorer and..."</h3>
+            <p>So I'm trying to browse the web today and Internet Explorer decides to... why do people even use this garbage browser when Netscape is clearly... ugh, you probably use IE anyway, don't you?</p>
+            
+            <h3>March 18, 2001 - "Email Etiquette for..."</h3>
+            <p>Received another email today with the subject line "FW: FW: FW: FUNNY JOKE!!!" and I'm thinking... do people not understand basic email courtesy or are they just... typical behavior from typical people.</p>
+            
+            <h3>March 15, 2001 - "Dial-up Connections and Why..."</h3>
+            <p>My ISP decided to throttle my connection again today. 56k modem and it's running at... what's the point of having technology if companies are going to... you wouldn't understand the technical details anyway.</p>
+            
+            <h3>March 10, 2001 - "Y2K Panic Was..."</h3>
+            <p>Remember all that Y2K hysteria? People stockpiling food and water because they thought computers would... meanwhile those of us who actually understand technology were... but no, everyone had to panic like complete idiots.</p>
+            
+            <h3>March 5, 2001 - "Web Design Trends That..."</h3>
+            <p>Visited a website today with 47 animated GIFs and a MIDI file that auto-plays and... who designs this crap? Someone who clearly doesn't understand basic usability principles or... probably the same people who visit my site, honestly.</p>
+        </div>
+
+        <!-- LINKS SECTION -->
+        <div id="links" class="section">
+            <h2>Links (The Few Sites That Don't Completely...)</h2>
+            
+            <h3>Technology Sites</h3>
+            <ul>
+                <li><a href="#">Slashdot</a> - News for nerds, though most of the comments are... well, you get the idea.</li>
+                <li><a href="#">The Register</a> - Tech news with actual journalism, unlike most sites that... never mind.</li>
+                <li><a href="#">Joel on Software</a> - Programming insights for people who can actually... probably too advanced for most readers.</li>
+            </ul>
+            
+            <h3>Reference Sites</h3>
+            <ul>
+                <li><a href="#">RFC Repository</a> - Technical specifications, not that anyone bothers reading... typical.</li>
+                <li><a href="#">W3C Standards</a> - Web standards that developers should follow but... when has anyone ever followed standards?</li>
+                <li><a href="#">Unix Manual Pages</a> - Documentation for real operating systems, not like Windows which... you probably use Windows, don't you?</li>
+            </ul>
+            
+            <h3>Personal Sites Worth Reading</h3>
+            <ul>
+                <li><a href="#">Dave's Technical Blog</a> - One of the few people who actually knows what they're... rare find on the hypernet.</li>
+                <li><a href="#">Sarah's Programming Notes</a> - Actual useful content, unlike 99% of personal homepages that... you know what I mean.</li>
+            </ul>
+            
+            <p><b>Note:</b> These links were working last time I checked, but knowing the hypernet they're probably... don't blame me if they're broken.</p>
+        </div>
+
+        <!-- GUESTBOOK SECTION -->
+        <div id="guestbook" class="section">
+            <h2>Guestbook (Sign If You Must...)</h2>
+            
+            <p><b>Leave a message:</b> Though I can't guarantee I won't... just keep it civil, okay?</p>
+            
+            <form>
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input type="text" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td>Website:</td>
+                        <td><input type="text" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td valign="top">Message:</td>
+                        <td><textarea rows="4" cols="40"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" value="Sign Guestbook" onclick="alert('Guestbook feature temporarily disabled because people kept posting... well, you can imagine.')"></td>
+                    </tr>
+                </table>
+            </form>
+            
+            <h3>Recent Entries:</h3>
+            
+            <p><b>Mike (March 19, 2001):</b> "Great site! Really enjoy your perspective on..."<br>
+            <i>Bob's Reply: Finally, someone with half a brain visits my... wait, you probably didn't read the whole thing, did you?</i></p>
+            
+            <p><b>Anonymous (March 17, 2001):</b> "ur site sux lol"<br>
+            <i>Bob's Reply: And this is exactly why the hypernet was a... typical response from typical users.</i></p>
+            
+            <p><b>Jennifer (March 15, 2001):</b> "Found your site through a search engine. Very interesting thoughts about..."<br>
+            <i>Bob's Reply: At least someone is using search engines properly instead of... most people just click random links.</i></p>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div id="about" class="section">
+            <h2>About Bob (Not That Anyone Really...)</h2>
+            
+            <img src="2.jpg" alt="Bob at his computer looking very annoyed" width="200" height="150">
+            
+            <p><b>Who am I?</b> Name's Bob and I've been working with computers since before most people knew what a... probably before you were even born, honestly.</p>
+            
+            <p><b>Background:</b> Started programming in BASIC in 1978, moved on to C, Assembly, and... you probably only know Java or something equally... never mind.</p>
+            
+            <p><b>Current Job:</b> Systems administrator at a company that shall remain nameless because they wouldn't appreciate me talking about how their IT policies are... let's just say I have job security.</p>
+            
+            <p><b>Hobbies:</b> Building computers from scratch, reading RFC specifications for fun, and trying to explain basic concepts to people who... well, you know how that goes.</p>
+            
+            <p><b>Education:</b> Computer Science degree from a university that actually taught fundamentals instead of just... unlike these modern programs that focus on frameworks instead of theory.</p>
+            
+            <p><b>Philosophy:</b> Technology should serve humans, not the other way around, but somehow we've managed to... and don't get me started on user interface design.</p>
+            
+            <p><b>Pet Peeves:</b> People who don't RTFM, WYSIWYG editors, proprietary file formats, and... basically everything about modern computing, honestly.</p>
+            
+            <h3>Technical Skills:</h3>
+            <ul>
+                <li>Programming: C, C++, Assembly, Perl, Shell scripting (the real tools, not these modern... you get the idea)</li>
+                <li>Systems: UNIX, Linux, BSD (real operating systems, unlike... well, you know)</li>
+                <li>Networking: TCP/IP, routing, DNS, SMTP (back when email was simple and... before HTML email ruined everything)</li>
+                <li>Hardware: Can build a system from components, unlike people who just buy Dell boxes and... typical consumer behavior</li>
+            </ul>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div id="contact" class="section">
+            <h2>Contact Information (Use Responsibly...)</h2>
+            
+            <p><b>Email:</b> bob.anger@example.net<br>
+            <small>(Please use a descriptive subject line or your message will end up in... you can guess where it goes)</small></p>
+            
+            <p><b>ICQ:</b> 12345678<br>
+            <small>(Actually use ICQ properly, don't just... most people don't understand instant messaging etiquette)</small></p>
+            
+            <p><b>IRC:</b> #geeks on EFNet, nick: BobAngry<br>
+            <small>(For real-time chat with people who actually understand... assuming you know what IRC is)</small></p>
+            
+            <p><b>Postal Mail:</b> Not publishing my address because the hypernet is full of... use email like a civilized person.</p>
+            
+            <h3>Contact Guidelines:</h3>
+            <ul>
+                <li>Read the FAQ before asking questions (if I had one, which I don't because... never mind)</li>
+                <li>Use proper spelling and grammar (revolutionary concept, I know)</li>
+                <li>Be specific about technical issues instead of saying "it doesn't work" like... typical user behavior</li>
+                <li>Don't send attachments unless absolutely necessary (and scan for viruses first, you... responsible computing practices)</li>
+                <li>Response time: 24-48 hours unless you're asking something really stupid, in which case... well, you'll figure it out</li>
+            </ul>
+            
+            <p><b>Note:</b> I don't provide free tech support for people who can't be bothered to... there are manuals and documentation for a reason.</p>
+        </div>
+    </div>
+    
+    <div style="clear: both;"></div>
+</div>
+
+<div class="footer">
+    <p><b>Bob Anger Portal</b> | Last updated: March 20, 2001 | 
+    Best viewed in Netscape 4.7+ or Internet Explorer 5+ at 800x600 resolution (not that anyone uses proper... typical users with their weird browser settings)</p>
+    
+    <p><small>This site is optimized for people who actually understand basic computing concepts. 
+    If you're having problems viewing it, the issue is probably... well, you know where the problem is.</small></p>
+    
+    <p><a href="mailto:webmaster@example.net">Webmaster</a> | <a href="#">Site Map</a> | <a href="#">Privacy Policy</a> (like anyone reads those anyway...)</p>
+</div>
+
+<script>
+function showSection(sectionId) {
+    // Hide all sections
+    var sections = document.getElementsByClassName('section');
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+    }
+    
+    // Show selected section
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// Easter egg: Konami code detection
+var konamiCode = [38,38,40,40,37,39,37,39,66,65];
+var konamiIndex = 0;
+document.addEventListener('keydown', function(e) {
+    if (e.keyCode === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            alert("Congratulations, you found the easter egg! Not that it does anything useful because... why would you expect it to?");
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
+
+// Random insult generator for fun
+function randomInsult() {
+    var insults = [
+        "typical user behavior",
+        "you probably don't understand anyway",
+        "like most people on the hypernet",
+        "assuming you can read",
+        "not that anyone cares",
+        "but you wouldn't know that"
+    ];
+    return insults[Math.floor(Math.random() * insults.length)];
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comune di Roccalonga - Attrazioni</title>
+    <style>
+        body {
+            background-color: #ffffcc;
+            color: #000080;
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        td {
+            vertical-align: top;
+            padding: 0;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #99ccff;
+            padding: 10px;
+            border-right: 2px solid #3366cc;
+        }
+        
+        .content {
+            padding: 10px 20px;
+        }
+        
+        .header {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 5px solid #ffcc00;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #000066;
+        }
+        
+        .slogan {
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .menu-title {
+            background-color: #3366cc;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .menu li {
+            margin-bottom: 5px;
+        }
+        
+        .menu a {
+            display: block;
+            padding: 5px;
+            background-color: #ccddff;
+            color: #000080;
+            text-decoration: none;
+            border: 1px solid #3366cc;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .menu a:hover {
+            background-color: #ffcc00;
+            color: #000080;
+        }
+        
+        h1, h2, h3 {
+            color: #3366cc;
+        }
+        
+        h2 {
+            border-bottom: 2px dotted #3366cc;
+            padding-bottom: 5px;
+        }
+        
+        .attraction {
+            margin-bottom: 30px;
+            border: 2px solid #3366cc;
+            background-color: #e6f2ff;
+        }
+        
+        .attraction-header {
+            background-color: #3366cc;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .attraction-content {
+            padding: 10px;
+        }
+        
+        .attraction-photo {
+            float: left;
+            border: 2px solid #3366cc;
+            margin: 0 10px 10px 0;
+            width: 200px;
+            height: 150px;
+        }
+        
+        .new-badge {
+            background-color: #ff0000;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .footer {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            border-top: 5px solid #ffcc00;
+            margin-top: 20px;
+        }
+        
+        .counter {
+            text-align: center;
+            margin-top: 20px;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+        }
+        
+        .counter-box {
+            background-color: black;
+            color: lime;
+            padding: 3px 5px;
+            margin: 0 1px;
+        }
+        
+        .webring {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        marquee {
+            background-color: #ffcc00;
+            color: #990000;
+            padding: 5px;
+            font-weight: bold;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        
+        .photo-gallery {
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        
+        .gallery-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .gallery-thumb {
+            border: 1px solid #666666;
+            padding: 3px;
+            background-color: #ffffff;
+            width: 120px;
+            height: 90px;
+        }
+        
+        .info-box {
+            background-color: #ffffcc;
+            border: 1px dashed #ffcc00;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .map-image {
+            border: 2px solid #3366cc;
+            margin: 15px auto;
+            display: block;
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">COMUNE DI ROCCALONGA</div>
+        <div class="slogan">Città Giardino e Perla del Gargano</div>
+    </div>
+    
+    <marquee scrollamount="3" behavior="alternate">+++ BENVENUTI NEL SITO UFFICIALE DEL COMUNE DI ROCCALONGA +++ ULTIME NOTIZIE: FESTIVAL DELLE LUCI MISTERIOSE DAL 20 AL 22 MAGGIO +++</marquee>
+    
+    <table>
+        <tr>
+            <td class="sidebar">
+                <div class="menu-title">MENU PRINCIPALE</div>
+                <ul class="menu">
+                    <li><a href="roccalonga-website.html">HOME</a></li>
+                    <li><a href="roccalonga-comune.html">IL COMUNE</a></li>
+                    <li><a href="roccalonga-attrazioni.html">ATTRAZIONI</a></li>
+                    <li><a href="roccalonga-eventi.html">EVENTI</a></li>
+                    <li><a href="roccalonga-turismo.html">TURISMO</a></li>
+                    <li><a href="roccalonga-contatti.html">CONTATTI</a></li>
+                </ul>
+                
+                <div class="menu-title">SERVIZI ONLINE</div>
+                <ul class="menu">
+                    <li><a href="#">ALBO PRETORIO</a></li>
+                    <li><a href="#">MODULISTICA</a></li>
+                    <li><a href="#">BANDI E CONCORSI</a></li>
+                </ul>
+                
+                <div class="counter">
+                    <div>VISITATORI:</div>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">3</span>
+                    <span class="counter-box">5</span>
+                    <span class="counter-box">7</span>
+                </div>
+                
+                <div class="webring">
+                    <div>SIAMO PARTE DI:</div>
+                    <div>WEBRING COMUNI ITALIANI</div>
+                    <div style="margin-top: 5px;">
+                        [<a href="#">PREC</a> | <a href="#">SUCC</a>]
+                    </div>
+                </div>
+                
+                <div class="construction">
+                    <img src="/api/placeholder/150/50" alt="Under Construction">
+                    <div class="blink">SITO IN COSTRUZIONE</div>
+                </div>
+            </td>
+            <td class="content">
+                <h1>Attrazioni di Roccalonga</h1>
+                <p>Roccalonga offre ai suoi visitatori alcune delle attrazioni più uniche e straordinarie dell'intero Gargano. Ecco i luoghi da non perdere durante la vostra visita nella nostra città.</p>
+                
+                <div class="attraction">
+                    <div class="attraction-header">IL SASSO LEVIGANTE</div>
+                    <div class="attraction-content">
+                        <img src="/api/placeholder/200/150" alt="Il Sasso Levigante" class="attraction-photo">
+                        <p>Un fenomeno naturale unico al mondo: una pietra dalla forma perfettamente liscia che, secondo la leggenda, porta fortuna a chi la tocca. Situato in un'insenatura marina dalla bellezza surreale, il Sasso Levigante attira visitatori da tutto il mondo.</p>
+                        <p>La leggenda narra che il Sasso sia stato levigato dalle lacrime di una ninfa marina, innamorata di un pescatore locale. Chi tocca il Sasso con la mano destra riceverà fortuna in amore, mentre chi lo tocca con la sinistra avrà fortuna negli affari.</p>
+                        <p>Durante l'equinozio di primavera, il sole tramonta esattamente dietro il Sasso, creando uno spettacolo di luci e riflessi che molti definiscono "mistico".</p>
+                        
+                        <div class="info-box">
+                            <p><b>Orari di visita:</b> Tutti i giorni dall'alba al tramonto</p>
+                            <p><b>Costo:</b> Gratuito</p>
+                            <p><b>Come arrivare:</b> Seguire il sentiero costiero dalla Piazza del Porto per circa 15 minuti a piedi</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+                <div class="attraction">
+                    <div class="attraction-header">FUNGOLANDIA <span class="new-badge">NOVITÀ</span></div>
+                    <div class="attraction-content">
+                        <img src="/api/placeholder/200/150" alt="Fungolandia" class="attraction-photo">
+                        <p>Il parco divertimenti mai completato che è diventato un'attrazione di culto. Le strutture incompiute, ispirate alla forma dei funghi locali, creano un paesaggio surreale che oggi è meta di appassionati di fotografia, arte contemporanea e curiosità.</p>
+                        <p>Iniziato nel 1986 e abbandonato nel 1993 a causa di problemi finanziari, Fungolandia doveva essere il primo parco a tema d'Europa dedicato al mondo dei funghi. Oggi, le strutture in cemento a forma di fungo, parzialmente ricoperte dalla vegetazione, creano uno scenario post-apocalittico che ha ispirato numerosi artisti.</p>
+                        <p>Da non perdere la "Grande Cappella", la struttura più alta (27 metri) che doveva ospitare un ristorante panoramico a forma di cappello di fungo porcino.</p>
+                        
+                        <div class="info-box">
+                            <p><b>Orari di visita:</b> Sabato e domenica dalle 10:00 alle 18:00 (visite guidate ogni 2 ore)</p>
+                            <p><b>Costo:</b> €5,00 (gratuito per residenti e bambini sotto i 12 anni)</p>
+                            <p><b>Come arrivare:</b> Strada Provinciale 45, a 3 km dal centro di Roccalonga</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+                <div class="attraction">
+                    <div class="attraction-header">AREA AVVISTAMENTI UFO</div>
+                    <div class="attraction-content">
+                        <img src="/api/placeholder/200/150" alt="Area Avvistamenti UFO" class="attraction-photo">
+                        <p>Dal 1978, Roccalonga è conosciuta per i frequenti avvistamenti di oggetti volanti non identificati. L'area panoramica dedicata all'osservazione del cielo notturno è attrezzata con telescopi e pannelli informativi sui più celebri avvistamenti locali.</p>
+                        <p>Il primo avvistamento documentato risale alla notte del 15 agosto 1978, quando oltre 40 persone testimoniarono la presenza di luci circolari nel cielo che si muovevano con traiettorie impossibili. Da allora, gli avvistamenti si sono ripetuti con frequenza sorprendente, attirando l'attenzione di ufologi e scienziati da tutto il mondo.</p>
+                        <p>Nel 1995 è stato inaugurato l'Osservatorio "Stelle Misteriose", punto di osservazione privilegiato dotato di telescopi e strumenti di rilevazione. Vicino all'osservatorio si trova il piccolo Museo degli Avvistamenti, con foto, testimonianze e oggetti legati al fenomeno UFO di Roccalonga.</p>
+                        
+                        <div class="info-box">
+                            <p><b>Orari di visita:</b> Osservatorio aperto dalle 21:00 alle 01:00 (martedì-domenica)</p>
+                            <p><b>Costo:</b> €3,00 (comprende visita al museo e uso dei telescopi)</p>
+                            <p><b>Come arrivare:</b> Collina di San Michele, a 2 km dal centro di Roccalonga</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div

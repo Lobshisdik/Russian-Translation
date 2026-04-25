@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OilSouls Trading Hub - Premium Commodities Exchange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            font-family: "Courier New", monospace;
+            color: #00ff41;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .header {
+            background: #000011;
+            border: 3px solid #00ff41;
+            margin-bottom: 10px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 20px #00ff41;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #002200;
+            border: 2px solid #00ff41;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: #00ff41;
+            text-decoration: none;
+        }
+
+        .lang-switcher:hover {
+            background: #004400;
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffaa00;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #00ff41;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 15px;
+        }
+
+        .sidebar {
+            flex: 0 0 250px;
+            background: #001122;
+            border: 2px solid #0066cc;
+            padding: 10px;
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: #ffaa00;
+            border-bottom: 1px solid #0066cc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .category {
+            background: #002244;
+            border: 1px solid #0066cc;
+            margin-bottom: 8px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category:hover {
+            background: #003366;
+            box-shadow: 0 0 8px #0066cc;
+        }
+
+        .category.active {
+            background: #004488;
+            border-color: #00ff41;
+        }
+
+        .main-content {
+            flex: 1;
+            background: #001122;
+            border: 2px solid #0066cc;
+            padding: 15px;
+            min-height: 600px;
+        }
+
+        .forum-section {
+            display: none;
+        }
+
+        .forum-section.active {
+            display: block;
+        }
+
+        .thread {
+            background: #002244;
+            border: 1px solid #0066cc;
+            margin-bottom: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .thread:hover {
+            background: #003366;
+            border-color: #00ff41;
+        }
+
+        .thread-title {
+            color: #ffaa00;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .thread-meta {
+            color: #00aaff;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #00ff41;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .thread-expanded {
+            background: #000033;
+            border: 2px solid #00ff41;
+            margin-top: 15px;
+            padding: 15px;
+        }
+
+        .post {
+            background: #001133;
+            border: 1px solid #004488;
+            margin-bottom: 15px;
+            padding: 12px;
+        }
+
+        .post-header {
+            border-bottom: 1px solid #004488;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            color: #ffaa00;
+            font-weight: bold;
+        }
+
+        .post-date {
+            color: #00aaff;
+            font-size: 11px;
+        }
+
+        .post-content {
+            line-height: 1.4;
+            color: #00ff41;
+        }
+
+        .back-button {
+            background: #004400;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 8px 16px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #006600;
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #0066cc;
+            font-size: 11px;
+            border-top: 1px solid #0066cc;
+            padding-top: 10px;
+        }
+
+        .price-ticker {
+            background: #330000;
+            border: 2px solid #ff4444;
+            padding: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #ff4444; }
+            to { box-shadow: 0 0 20px #ff4444; }
+        }
+
+        .price-item {
+            display: inline-block;
+            margin: 0 15px;
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .mail-link {
+            color: #00aaff;
+            text-decoration: underline;
+        }
+
+        .mail-link:hover {
+            color: #00ff41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="#" class="lang-switcher" id="langToggle">IT</a>
+            <div class="logo">🛢️💀 OILSOULS TRADING HUB 💀🛢️</div>
+            <div class="subtitle" id="subtitle">Premium Soul-Enhanced Petroleum Derivatives Exchange | Hypernet Explorer Compatible</div>
+        </div>
+
+        <div class="price-ticker">
+            <span class="price-item">CRUDE SOULS: €847.23 ⬆️</span>
+            <span class="price-item">ETHEREAL OIL: €1,247.89 ⬇️</span>
+            <span class="price-item">QUANTUM PETROLEUM: €2,156.45 ⬆️</span>
+        </div>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <h3 id="categoriesTitle">Trading Categories</h3>
+                <div class="category active" data-section="main-trading">
+                    <div id="cat1">💰 Main Trading Floor</div>
+                </div>
+                <div class="category" data-section="soul-tech">
+                    <div id="cat2">👻 Soul-Tech Integration</div>
+                </div>
+                <div class="category" data-section="market-analysis">
+                    <div id="cat3">📈 Market Analysis</div>
+                </div>
+                <div class="category" data-section="newbie-corner">
+                    <div id="cat4">🔰 Newbie Corner</div>
+                </div>
+                <div class="category" data-section="hexagram-social">
+                    <div id="cat5">📱 Hexagram Social</div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Main Trading Floor -->
+                <div class="forum-section active" id="main-trading">
+                    <h2 id="mainTitle">💰 Main Trading Floor</h2>
+                    <div class="thread" data-thread="oil-souls-moon">
+                        <div class="thread-title" id="thread1">🚀 OIL-SOULS TO THE MOON! Diamond hands only! 💎🙌</div>
+                        <div class="thread-meta">
+                            <span><img src="1.jpg" alt="Crypto trader avatar with sunglasses and gold chains" class="user-avatar"> CryptoKing_2001 • <span id="posts1">47 posts</span></span>
+                            <span>15 Jan 2001</span>
+                        </div>
+                    </div>
+                    <div class="thread" data-thread="spiritual-petroleum">
+                        <div class="thread-title" id="thread2">💀 Spiritual Petroleum Futures - Q1 2001 Predictions</div>
+                        <div class="thread-meta">
+                            <span><img src="2.jpg" alt="Business person with mystical aura around them" class="user-avatar"> SoulTrader_Elite • <span id="posts2">23 posts</span></span>
+                            <span>12 Jan 2001</span>
+                        </div>
+                    </div>
+                    <div class="thread" data-thread="quantum-oil">
+                        <div class="thread-title" id="thread3">⚛️ QUANTUM OIL just hit €2000! Anyone else holding?</div>
+                        <div class="thread-meta">
+                            <span><img src="3.jpg" alt="Scientist in lab coat with oil containers" class="user-avatar"> QuantumPetroleum_Pro • <span id="posts3">89 posts</span></span>
+                            <span>18 Jan 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soul-Tech Integration -->
+                <div class="forum-section" id="soul-tech">
+                    <h2 id="soulTitle">👻 Soul-Tech Integration</h2>
+                    <div class="thread" data-thread="necro-tech">
+                        <div class="thread-title" id="thread4">🔬 New NecroTech Extraction Methods - 400% Efficiency!</div>
+                        <div class="thread-meta">
+                            <span><img src="4.jpg" alt="Tech engineer with supernatural equipment" class="user-avatar"> NecroTech_Wizard • <span id="posts4">156 posts</span></span>
+                            <span>20 Jan 2001</span>
+                        </div>
+                    </div>
+                    <div class="thread" data-thread="ghost-refineries">
+                        <div class="thread-title" id="thread5">👻 Ghost-Enhanced Refineries: The Future is NOW!</div>
+                        <div class="thread-meta">
+                            <span><img src="5.jpg" alt="Industrial worker with ghostly apparitions" class="user-avatar"> GhostRefinery_CEO • <span id="posts5">67 posts</span></span>
+                            <span>16 Jan 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Analysis -->
+                <div class="forum-section" id="market-analysis">
+                    <h2 id="analysisTitle">📈 Market Analysis</h2>
+                    <div class="thread" data-thread="technical-analysis">
+                        <div class="thread-title" id="thread6">📊 Technical Analysis: Soul-Oil Convergence Patterns</div>
+                        <div class="thread-meta">
+                            <span><img src="6.jpg" alt="Financial analyst with charts and graphs" class="user-avatar"> ChartMaster_3000 • <span id="posts6">234 posts</span></span>
+                            <span>22 Jan 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newbie Corner -->
+                <div class="forum-section" id="newbie-corner">
+                    <h2 id="newbieTitle">🔰 Newbie Corner</h2>
+                    <div class="thread" data-thread="getting-started">
+                        <div class="thread-title" id="thread7">❓ Getting Started with Soul-Enhanced Petroleum Trading</div>
+                        <div class="thread-meta">
+                            <span><img src="7.jpg" alt="Helpful mentor figure with beginner trader" class="user-avatar"> HelpfulMentor_99 • <span id="posts7">45 posts</span></span>
+                            <span>19 Jan 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hexagram Social -->
+                <div class="forum-section" id="hexagram-social">
+                    <h2 id="socialTitle">📱 Hexagram Social</h2>
+                    <div class="thread" data-thread="hexagram-profiles">
+                        <div class="thread-title" id="thread8">📱 Share your Hexagram profiles! Let's connect!</div>
+                        <div class="thread-meta">
+                            <span><img src="8.jpg" alt="Social media enthusiast with multiple devices" class="user-avatar"> SocialButterfly_2001 • <span id="posts8">78 posts</span></span>
+                            <span>21 Jan 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thread Expanded View -->
+                <div class="thread-expanded" id="threadExpanded" style="display: none;">
+                    <button class="back-button" id="backButton">← Back to Forum</button>
+                    <div id="threadContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2001 OilSouls Trading Hub | Powered by SpectraCore™ Technology | <span id="footerText">Best viewed in Hypernet Explorer 5.5+</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Internal JSON database
+        const forumData = {
+            threads: {
+                "oil-souls-moon": {
+                    title: "🚀 OIL-SOULS TO THE MOON! Diamond hands only! 💎🙌",
+                    title_it: "🚀 OIL-SOULS ALLA LUNA! Solo mani di diamante! 💎🙌",
+                    posts: [
+                        {
+                            author: "CryptoKing_2001",
+                            date: "15 Jan 2001, 14:23",
+                            content: "Fellow SoulTraders! I've been analyzing the quantum-petroleum market dynamics and the signals are SCREAMING bullish! 📈\n\nThe new NecroTech extraction algorithms are showing 347% efficiency gains over traditional soul-distillation methods. When this tech goes mainstream in Q2, we're looking at MASSIVE gains!\n\nI'm going ALL IN on OILSOULS futures. Who's with me? 🚀🚀🚀",
+                            content_it: "Compagni SoulTraders! Ho analizzato le dinamiche del mercato quantum-petroleum e i segnali sono FORTEMENTE rialzisti! 📈\n\nI nuovi algoritmi di estrazione NecroTech mostrano guadagni di efficienza del 347% rispetto ai metodi tradizionali di distillazione dell'anima. Quando questa tecnologia diventerà mainstream nel Q2, avremo guadagni ENORMI!\n\nSto andando ALL IN sui futures OILSOULS. Chi è con me? 🚀🚀🚀"
+                        },
+                        {
+                            author: "SoulSkeptic_2000",
+                            date: "15 Jan 2001, 15:47",
+                            content: "Bro you need to chill. This whole 'soul-enhanced petroleum' thing feels like a bubble to me. The fundamentals don't add up when you look at the spectral-analysis reports.\n\nFind me on Hexagram: <a href='mailto:soulskeptic@hexagram.corp' class='mail-link'>soulskeptic@hexagram.corp</a>",
+                            content_it: "Fratello devi calmarti. Tutta questa cosa del 'petrolio potenziato dall'anima' mi sembra una bolla. I fondamentali non tornano quando guardi i report di analisi spettrale.\n\nTrovami su Hexagram: <a href='mailto:soulskeptic@hexagram.corp' class='mail-link'>soulskeptic@hexagram.corp</a>"
+                        },
+                        {
+                            author: "DiamondHandz_Elite",
+                            date: "15 Jan 2001, 16:12",
+                            content: "HODL GANG ASSEMBLE! 💎🙌 \n\nI've been in this game since the first Ghost-Refineries went online in '99. Trust me, this is just the beginning. The EuroSoul Exchange is about to announce major partnerships with three oil giants.\n\nWeak hands will be shaken out, but us diamond hands will FEAST! 🍾",
+                            content_it: "HODL GANG ASSEMBLE! 💎🙌 \n\nSono in questo gioco da quando le prime Ghost-Refineries sono andate online nel '99. Credimi, questo è solo l'inizio. L'EuroSoul Exchange sta per annunciare partnership importanti con tre giganti petroliferi.\n\nLe mani deboli saranno scacciate, ma noi mani di diamante BANCHETTHEREMO! 🍾"
+                        }
+                    ]
+                },
+                "spiritual-petroleum": {
+                    title: "💀 Spiritual Petroleum Futures - Q1 2001 Predictions",
+                    title_it: "💀 Futures del Petrolio Spirituale - Previsioni Q1 2001",
+                    posts: [
+                        {
+                            author: "SoulTrader_Elite",
+                            date: "12 Jan 2001, 09:15",
+                            content: "Market analysis indicates that spiritual petroleum derivatives will outperform traditional crude by 280% this quarter.\n\nKey factors:\n- New ThanatoTech refinement processes\n- Increased demand from Germanic industrial sectors\n- Spectral-enhancement protocols showing promising results\n\nMy price targets: €1,500 by March, €2,200 by June. What are your thoughts?",
+                            content_it: "L'analisi di mercato indica che i derivati del petrolio spirituale supereranno il greggio tradizionale del 280% questo trimestre.\n\nFattori chiave:\n- Nuovi processi di raffinamento ThanatoTech\n- Maggiore domanda dai settori industriali germanici\n- Protocolli di potenziamento spettrale con risultati promettenti\n\nI miei target di prezzo: €1.500 entro marzo, €2.200 entro giugno. Cosa ne pensate?"
+                        },
+                        {
+                            author: "QuantumAnalyst_Pro",
+                            date: "12 Jan 2001, 11:33",
+                            content: "Solid analysis! I'm seeing similar patterns in the PsychoSpectral indicators. The soul-extraction rates from North Sea fields are up 45% month-over-month.\n\nHowever, watch out for regulatory risks. The EU is considering new 'Ethereal Substance' guidelines that could impact margins.",
+                            content_it: "Analisi solida! Sto vedendo pattern simili negli indicatori PsychoSpettrali. I tassi di estrazione dell'anima dai campi del Mare del Nord sono aumentati del 45% mese su mese.\n\nTuttavia, attenzione ai rischi normativi. L'UE sta considerando nuove linee guida per le 'Sostanze Eteree' che potrebbero impattare i margini."
+                        }
+                    ]
+                },
+                "quantum-oil": {
+                    title: "⚛️ QUANTUM OIL just hit €2000! Anyone else holding?",
+                    title_it: "⚛️ QUANTUM OIL ha appena toccato €2000! Qualcun altro sta tenendo?",
+                    posts: [
+                        {
+                            author: "QuantumPetroleum_Pro",
+                            date: "18 Jan 2001, 13:45",
+                            content: "HOLY SOULS! Just woke up to see QUANTUM OIL at €2,087!! 🚀🚀\n\nI've been accumulating since €400 back in October. This quantum-entanglement technology is REVOLUTIONARY for oil extraction efficiency!\n\nAnyone else diamond-handing through this volatility? The weak hands are getting destroyed but us believers are making BANK! 💰💰",
+                            content_it: "ANIME SANTE! Mi sono appena svegliato per vedere QUANTUM OIL a €2.087!! 🚀🚀\n\nSto accumulando da €400 da ottobre. Questa tecnologia di entanglement quantistico è RIVOLUZIONARIA per l'efficienza dell'estrazione petrolifera!\n\nQualcun altro sta tenendo duro attraverso questa volatilità? Le mani deboli vengono distrutte ma noi credenti stiamo facendo SOLDI! 💰💰"
+                        },
+                        {
+                            author: "OldSchoolTrader",
+                            date: "18 Jan 2001, 14:22",
+                            content: "Son, I've been trading oil since before you were born. This 'quantum' stuff is just fancy marketing for the same old extraction.\n\nBubbles always pop. Take some profits while you can.",
+                            content_it: "Figliolo, commercio petrolio da prima che tu nascessi. Questa roba 'quantistica' è solo marketing fantasioso per la stessa vecchia estrazione.\n\nLe bolle scoppiano sempre. Prendi qualche profitto finché puoi."
+                        }
+                    ]
+                },
+                "necro-tech": {
+                    title: "🔬 New NecroTech Extraction Methods - 400% Efficiency!",
+                    title_it: "🔬 Nuovi Metodi di Estrazione NecroTech - 400% Efficienza!",
+                    posts: [
+                        {
+                            author: "NecroTech_Wizard",
+                            date: "20 Jan 2001, 08:30",
+                            content: "Breakthrough announcement! Our new ThanatoCore™ processors can extract soul-essence from petroleum at unprecedented rates!\n\nKey innovations:\n- Spectral resonance amplification\n- Quantum soul-binding protocols\n- Neo-Germanic extraction matrices\n\nThis will revolutionize the entire soul-petroleum industry! IPO planned for Q3 2001.",
+                            content_it: "Annuncio rivoluzionario! I nostri nuovi processori ThanatoCore™ possono estrarre l'essenza dell'anima dal petrolio a tassi senza precedenti!\n\nInnovazioni chiave:\n- Amplificazione della risonanza spettrale\n- Protocolli di legame quantico dell'anima\n- Matrici di estrazione neo-germaniche\n\nQuesto rivoluzionerà l'intera industria soul-petroleum! IPO pianificata per Q3 2001."
+                        }
+                    ]
+                },
+                "ghost-refineries": {
+                    title: "👻 Ghost-Enhanced Refineries: The Future is NOW!",
+                    title_it: "👻 Raffinerie Ghost-Enhanced: Il Futuro è ORA!",
+                    posts: [
+                        {
+                            author: "GhostRefinery_CEO",
+                            date: "16 Jan 2001, 10:15",
+                            content: "Our phantom-workers never sleep, never strike, never demand raises! 👻\n\nGhost-Enhanced refining is showing 340% productivity increases over traditional methods. The supernatural workforce is the key to our success!\n\nInvestors welcome! Contact me directly: <a href='mailto:ceo@hexagram.corp' class='mail-link'>ceo@hexagram.corp</a>",
+                            content_it: "I nostri lavoratori-fantasma non dormono mai, non scioperano mai, non chiedono mai aumenti! 👻\n\nLa raffinazione Ghost-Enhanced mostra aumenti di produttività del 340% rispetto ai metodi tradizionali. La forza lavoro soprannaturale è la chiave del nostro successo!\n\nInvestitori benvenuti! Contattatemi direttamente: <a href='mailto:ceo@hexagram.corp' class='mail-link'>ceo@hexagram.corp</a>"
+                        }
+                    ]
+                },
+                "technical-analysis": {
+                    title: "📊 Technical Analysis: Soul-Oil Convergence Patterns",
+                    title_it: "📊 Analisi Tecnica: Pattern di Convergenza Soul-Oil",
+                    posts: [
+                        {
+                            author: "ChartMaster_3000",
+                            date: "22 Jan 2001, 16:45",
+                            content: "Advanced spectral-charting reveals bullish convergence patterns across all soul-petroleum derivatives.\n\nKey technical indicators:\n- Phantom Support Level: €1,847\n- Spectral Resistance: €2,340\n- Ghost Volume Profile: BULLISH\n- ThanatoTech RSI: 67.3 (approaching overbought)\n\nRecommendation: STRONG BUY with stop-loss at €1,650",
+                            content_it: "La mappatura spettrale avanzata rivela pattern di convergenza rialzista su tutti i derivati soul-petroleum.\n\nIndicatori tecnici chiave:\n- Livello Phantom Support: €1.847\n- Resistenza Spettrale: €2.340\n- Profilo Volume Ghost: RIALZISTA\n- ThanatoTech RSI: 67,3 (avvicinandosi a ipercomprato)\n\nRaccomandazione: FORTE ACQUISTO con stop-loss a €1.650"
+                        }
+                    ]
+                },
+                "getting-started": {
+                    title: "❓ Getting Started with Soul-Enhanced Petroleum Trading",
+                    title_it: "❓ Iniziare con il Trading del Petrolio Soul-Enhanced",
+                    posts: [
+                        {
+                            author: "HelpfulMentor_99",
+                            date: "19 Jan 2001, 12:00",
+                            content: "Welcome new soul-traders! Here's your beginner's guide:\n\n1. Understand the basics: Soul-petroleum is regular crude enhanced with spectral essences\n2. Learn the technology: NecroTech, ThanatoCore, Ghost-Refineries\n3. Start small: Begin with €100-500 positions\n4. Study the charts: Spectral patterns are key\n5. Join our Hexagram group for daily tips!\n\nRemember: In soul-trading, patience and diamond hands win! 💎🙌",
+                            content_it: "Benvenuti nuovi soul-traders! Ecco la vostra guida per principianti:\n\n1. Capire le basi: Il soul-petroleum è greggio normale potenziato con essenze spettrali\n2. Imparare la tecnologia: NecroTech, ThanatoCore, Ghost-Refineries\n3. Iniziare in piccolo: Cominciate con posizioni da €100-500\n4. Studiare i grafici: I pattern spettrali sono fondamentali\n5. Unitevi al nostro gruppo Hexagram per consigli giornalieri!\n\nRicordate: Nel soul-trading, pazienza e mani di diamante vincono! 💎🙌"
+                        }
+                    ]
+                },
+                "hexagram-profiles": {
+                    title: "📱 Share your Hexagram profiles! Let's connect!",
+                    title_it: "📱 Condividete i vostri profili Hexagram! Connettiamoci!",
+                    posts: [
+                        {
+                            author: "SocialButterfly_2001",
+                            date: "21 Jan 2001, 19:30",
+                            content: "Hey everyone! Let's build our soul-trading network on Hexagram! 🌐\n\nMy profile: <a href='mailto:socialbutterfly@hexagram.corp' class='mail-link'>socialbutterfly@hexagram.corp</a>\n\nI post daily market updates, memes, and trading insights. Follow for follow! 📈💀\n\nWho else is active on Hexagram? Drop your profiles below! ⬇️",
+                            content_it: "Ciao tutti! Costruiamo la nostra rete di soul-trading su Hexagram! 🌐\n\nIl mio profilo: <a href='mailto:socialbutterfly@hexagram.corp' class='mail-link'>socialbutterfly@hexagram.corp</a>\n\nPosto aggiornamenti quotidiani di mercato, meme e insight di trading. Follow per follow! 📈💀\n\nChi altri è attivo su Hexagram? Lasciate i vostri profili qui sotto! ⬇️"
+                        },
+                        {
+                            author: "MemeTrader_420",
+                            date: "21 Jan 2001, 20:15",
+                            content: "Yo yo! <a href='mailto:memetrader420@hexagram.corp' class='mail-link'>memetrader420@hexagram.corp</a> here! 😎\n\nI specialize in soul-petroleum memes and diamond hand motivation! My Hexagram feed is 🔥🔥🔥\n\nJust posted an epic meme about paper hands getting rekt by the recent quantum oil pump! 📈💎",
+                            content_it: "Yo yo! <a href='mailto:memetrader420@hexagram.corp' class='mail-link'>memetrader420@hexagram.corp</a> qui! 😎\n\nSono specializzato in meme soul-petroleum e motivazione mani di diamante! Il mio feed Hexagram è 🔥🔥🔥\n\nHo appena postato un meme epico sulle mani di carta che vengono distrutte dal recente pump del quantum oil! 📈💎"
+                        }
+                    ]
+                }
+            },
+            translations: {
+                en: {
+                    subtitle: "Premium Soul-Enhanced Petroleum Derivatives Exchange | Hypernet Explorer Compatible",
+                    categoriesTitle: "Trading Categories",
+                    cat1: "💰 Main Trading Floor",
+                    cat2: "👻 Soul-Tech Integration", 
+                    cat3: "📈 Market Analysis",
+                    cat4: "🔰 Newbie Corner",
+                    cat5: "📱 Hexagram Social",
+                    mainTitle: "💰 Main Trading Floor",
+                    soulTitle: "👻 Soul-Tech Integration",
+                    analysisTitle: "📈 Market Analysis",
+                    newbieTitle: "🔰 Newbie Corner",
+                    socialTitle: "📱 Hexagram Social",
+                    posts1: "47 posts",
+                    posts2: "23 posts",
+                    posts3: "89 posts",
+                    posts4: "156 posts",
+                    posts5: "67 posts",
+                    posts6: "234 posts",
+                    posts7: "45 posts",
+                    posts8: "78 posts",
+                    footerText: "Best viewed in Hypernet Explorer 5.5+"
+                },
+                it: {
+                    subtitle: "Scambio Premium di Derivati Petroliferi Soul-Enhanced | Compatibile con Hypernet Explorer",
+                    categoriesTitle: "Categorie Trading",
+                    cat1: "💰 Piano Trading Principale",
+                    cat2: "👻 Integrazione Soul-Tech",
+                    cat3: "📈 Analisi di Mercato",
+                    cat4: "🔰 Angolo Principianti",
+                    cat5: "📱 Hexagram Social",
+                    mainTitle: "💰 Piano Trading Principale",
+                    soulTitle: "👻 Integrazione Soul-Tech",
+                    analysisTitle: "📈 Analisi di Mercato",
+                    newbieTitle: "🔰 Angolo Principianti",
+                    socialTitle: "📱 Hexagram Social",
+                    posts1: "47 messaggi",
+                    posts2: "23 messaggi",
+                    posts3: "89 messaggi",
+                    posts4: "156 messaggi",
+                    posts5: "67 messaggi",
+                    posts6: "234 messaggi",
+                    posts7: "45 messaggi",
+                    posts8: "78 messaggi",
+                    footerText: "Meglio visualizzato con Hypernet Explorer 5.5+"
+                }
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Language switching functionality
+        document.getElementById('langToggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            currentLang = currentLang === 'en' ? 'it' : 'en';
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            const trans = forumData.translations[currentLang];
+            
+            // Update static elements
+            document.getElementById('subtitle').textContent = trans.subtitle;
+            document.getElementById('categoriesTitle').textContent = trans.categoriesTitle;
+            document.getElementById('cat1').textContent = trans.cat1;
+            document.getElementById('cat2').textContent = trans.cat2;
+            document.getElementById('cat3').textContent = trans.cat3;
+            document.getElementById('cat4').textContent = trans.cat4;
+            document.getElementById('cat5').textContent = trans.cat5;
+            document.getElementById('footerText').textContent = trans.footerText;
+            document.getElementById('langToggle').textContent = currentLang === 'en' ? 'IT' : 'EN';
+
+            // Update section titles
+            document.getElementById('mainTitle').textContent = trans.mainTitle;
+            document.getElementById('soulTitle').textContent = trans.soulTitle;
+            document.getElementById('analysisTitle').textContent = trans.analysisTitle;
+            document.getElementById('newbieTitle').textContent = trans.newbieTitle;
+            document.getElementById('socialTitle').textContent = trans.socialTitle;
+
+            // Update post counts
+            document.getElementById('posts1').textContent = trans.posts1;
+            document.getElementById('posts2').textContent = trans.posts2;
+            document.getElementById('posts3').textContent = trans.posts3;
+            document.getElementById('posts4').textContent = trans.posts4;
+            document.getElementById('posts5').textContent = trans.posts5;
+            document.getElementById('posts6').textContent = trans.posts6;
+            document.getElementById('posts7').textContent = trans.posts7;
+            document.getElementById('posts8').textContent = trans.posts8;
+
+            // Update thread titles
+            Object.keys(forumData.threads).forEach((threadKey, index) => {
+                const threadData = forumData.threads[threadKey];
+                const titleElement = document.getElementById(`thread${index + 1}`);
+                if (titleElement) {
+                    titleElement.textContent = currentLang === 'en' ? threadData.title : (threadData.title_it || threadData.title);
+                }
+            });
+        }
+
+        // Forum navigation
+        document.querySelectorAll('.category').forEach(category => {
+            category.addEventListener('click', function() {
+                // Update active category
+                document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show corresponding section
+                const sectionId = this.getAttribute('data-section');
+                document.querySelectorAll('.forum-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+
+                // Hide expanded thread view
+                document.getElementById('threadExpanded').style.display = 'none';
+            });
+        });
+
+        // Thread expansion
+        document.querySelectorAll('.thread').forEach(thread => {
+            thread.addEventListener('click', function() {
+                const threadKey = this.getAttribute('data-thread');
+                const threadData = forumData.threads[threadKey];
+                
+                if (threadData) {
+                    showThread(threadData);
+                }
+            });
+        });
+
+        function showThread(threadData) {
+            const expandedDiv = document.getElementById('threadExpanded');
+            const contentDiv = document.getElementById('threadContent');
+            
+            // Build thread content
+            let threadHTML = `<h2>${currentLang === 'en' ? threadData.title : (threadData.title_it || threadData.title)}</h2>`;
+            
+            threadData.posts.forEach(post => {
+                const postContent = currentLang === 'en' ? post.content : (post.content_it || post.content);
+                threadHTML += `
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="${Math.floor(Math.random() * 8) + 1}.jpg" alt="User avatar" class="user-avatar">
+                                ${post.author}
+                            </div>
+                            <div class="post-date">${post.date}</div>
+                        </div>
+                        <div class="post-content">${postContent}</div>
+                    </div>
+                `;
+            });
+            
+            contentDiv.innerHTML = threadHTML;
+            
+            // Hide forum sections and show expanded thread
+            document.querySelectorAll('.forum-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            expandedDiv.style.display = 'block';
+        }
+
+        // Back button functionality
+        document.getElementById('backButton').addEventListener('click', function() {
+            document.getElementById('threadExpanded').style.display = 'none';
+            
+            // Show the currently active category section
+            const activeCategory = document.querySelector('.category.active');
+            if (activeCategory) {
+                const sectionId = activeCategory.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            }
+        });
+
+        // Price ticker animation
+        function updatePriceTicker() {
+            const priceItems = document.querySelectorAll('.price-item');
+            priceItems.forEach(item => {
+                // Random price fluctuations
+                if (Math.random() > 0.7) {
+                    const currentPrice = parseFloat(item.textContent.match(/€([\d,]+\.\d+)/)[1].replace(',', ''));
+                    const change = (Math.random() - 0.5) * 50;
+                    const newPrice = Math.max(100, currentPrice + change);
+                    const arrow = change > 0 ? '⬆️' : '⬇️';
+                    
+                    const name = item.textContent.split(':')[0];
+                    item.innerHTML = `${name}: €${newPrice.toLocaleString('de-DE', {minimumFractionDigits: 2})} ${arrow}`;
+                }
+            });
+        }
+
+        // Update prices every 5 seconds
+        setInterval(updatePriceTicker, 5000);
+
+        // Initialize with default language
+        updateLanguage();
+    </script>
+</body>
+</html>

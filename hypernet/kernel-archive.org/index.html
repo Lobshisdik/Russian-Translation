@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Linux Kernel Mailing List Archive - March 2001</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+body { 
+    font-family: "Courier New", monospace; 
+    background-color: #ffffff; 
+    color: #000000; 
+    margin: 20px; 
+    font-size: 12px;
+}
+pre { 
+    font-family: "Courier New", monospace; 
+    background-color: #f0f0f0; 
+    border: 1px solid #cccccc; 
+    padding: 10px; 
+    margin: 10px 0;
+    overflow-x: auto;
+}
+h1 { 
+    font-size: 18px; 
+    color: #000080;
+}
+h2 { 
+    font-size: 14px; 
+    color: #800000;
+}
+a:link { color: #0000ff; }
+a:visited { color: #800080; }
+.header { 
+    background-color: #e0e0e0; 
+    padding: 5px; 
+    border: 1px solid #999999;
+    font-family: monospace;
+    font-size: 11px;
+}
+.signature {
+    color: #666666;
+    font-style: italic;
+}
+hr { 
+    height: 1px; 
+    color: #cccccc; 
+    background-color: #cccccc; 
+}
+-->
+</style>
+</head>
+<body>
+
+<h1>Linux Kernel Mailing List Archive</h1>
+<h2>Thread: "Tabs vs Spaces Performance Impact on Kernel Compilation"</h2>
+<p><b>Date:</b> March 15-16, 2001<br>
+<b>Messages:</b> 47<br>
+<b>Participants:</b> 12</p>
+
+<hr>
+
+<div class="header">
+From: alan.cox@redhat.com<br>
+Subject: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 09:23:45 +0000<br>
+Message-ID: &lt;20010315092345.GA1234@redhat.com&gt;
+</div>
+
+<pre>
+Has anyone actually benchmarked whether using tabs vs spaces in the 
+kernel source affects compilation speed? I suspect the lexer might 
+process tabs faster since it's a single character vs multiple spaces.
+
+We should consider standardizing on tabs for performance reasons.
+
+Alan
+</pre>
+
+<hr>
+
+<div class="header">
+From: davem@redhat.com<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 11:47:12 -0800<br>
+Message-ID: &lt;20010315194712.GB5678@redhat.com&gt;
+</div>
+
+<pre>
+On Thu, Mar 15, 2001 at 09:23:45AM +0000, alan.cox@redhat.com wrote:
+&gt; Has anyone actually benchmarked whether using tabs vs spaces
+
+This is ridiculous. The performance difference would be measured in
+nanoseconds. We have real problems to solve, like making the network
+stack not suck on SMP systems.
+
+Dave
+</pre>
+
+<hr>
+
+<div class="header">
+From: krahmer@suse.de<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 21:15:33 +0100<br>
+Message-ID: &lt;20010315201533.GC9876@suse.de&gt;
+</div>
+
+<pre>
+Actually, I ran some tests and found that spaces make the kernel 0.3% 
+faster to compile on my Pentium III 800MHz. The CPU cache seems to 
+prefer the predictable byte patterns of spaces over the "chaos" of tabs.
+
+We should switch everything to 4-space indentation immediately.
+
+Klaus
+</pre>
+
+<hr>
+
+<div class="header">
+From: torvalds@transmeta.com<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 13:45:21 -0800<br>
+Message-ID: &lt;20010315214521.GD4321@transmeta.com&gt;
+</div>
+
+<pre>
+On Thu, Mar 15, 2001 at 09:15:33PM +0100, krahmer@suse.de wrote:
+&gt; Actually, I ran some tests and found that spaces make the kernel 0.3% 
+&gt; faster to compile
+
+Are you people INSANE? We're arguing about WHITESPACE PERFORMANCE?
+
+Next you'll be telling me that using lowercase variable names makes 
+the binary run faster because the compiler "feels more relaxed" when 
+parsing them.
+
+This is exactly the kind of bikeshedding that makes me want to drop 
+support for something important just to watch everyone panic.
+
+Linus
+</pre>
+
+<hr>
+
+<div class="header">
+From: morton@zip.com.au<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Fri, 16 Mar 2001 08:22:17 +1100<br>
+Message-ID: &lt;20010315212217.GE1111@zip.com.au&gt;
+</div>
+
+<pre>
+I think we need to consider the electromagnetic properties of different 
+whitespace characters. Tabs, being larger, might interfere with RAM 
+timing on some motherboards. Has anyone tested this on various chipsets?
+
+We should probably create a CONFIG option: CONFIG_WHITESPACE_TYPE
+
+Andrew
+</pre>
+
+<hr>
+
+<div class="header">
+From: riel@conectiva.com.br<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 19:34:58 -0300<br>
+Message-ID: &lt;20010315223458.GF2222@conectiva.com.br&gt;
+</div>
+
+<pre>
+What about mixed tabs and spaces? I bet that creates quantum uncertainty 
+in the parser, leading to Heisenberg compilation effects. The kernel 
+might exist in multiple compiled states simultaneously until observed.
+
+This could explain some of the weird SMP race conditions we've been seeing.
+
+Rik
+</pre>
+
+<hr>
+
+<div class="header">
+From: axboe@suse.de<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Fri, 16 Mar 2001 00:12:45 +0100<br>
+Message-ID: &lt;20010315231245.GG3333@suse.de&gt;
+</div>
+
+<pre>
+I propose we use a different whitespace character for each subsystem:
+
+- Network code: tabs
+- Block layer: spaces  
+- Memory management: non-breaking spaces (0xA0)
+- Filesystems: zero-width spaces (invisible but present)
+- Drivers: tabs, but only on Tuesdays
+
+This would help with code organization and might improve cache locality.
+
+Jens
+</pre>
+
+<hr>
+
+<div class="header">
+From: viro@math.psu.edu<br>
+Subject: Re: Tabs vs Spaces Performance Impact<br>
+Date: Thu, 15 Mar 2001 19:45:12 -0500<br>
+Message-ID: &lt;20010316004512.GH4444@math.psu.edu&gt;
+</div>
+
+<pre>
+You're all missing the obvious solution: we should use VERTICAL TABS.
+They're ASCII 0x0B and completely unused. Think of the performance 
+gains from utilizing previously wasted opcodes!
+
+Plus, vertical tabs would make the source code literally stand up 
+straighter, improving posture-related compilation ergonomics.
+
+Al
+</pre>
+
+<hr>
+
+<div class="header">
+From: davej@suse.de<br>
+Subject: PROPOSAL: Whitespace-based process scheduling<br>
+Date: Fri, 16 Mar 2001 01:33:21 +0100<br>
+Message-ID: &lt;20010316003321.GI5555@suse.de&gt;
+</div>
+
+<pre>
+Since we're discussing whitespace performance, I've been thinking about 
+using indentation levels to determine process priorities. Deeper 
+indentation = lower priority, since the code is "further from the left 
+margin of importance."
+
+This would make the scheduler much more intuitive for developers.
+
+Functions indented with tabs get +5 priority boost
+Functions indented with spaces get normal priority  
+Functions with mixed indentation get killed with SIGKILL
+
+Dave
+</pre>
+
+<hr>
+
+<div class="header">
+From: ink@jurassic.park.msu.ru<br>
+Subject: Re: PROPOSAL: Whitespace-based process scheduling<br>
+Date: Fri, 16 Mar 2001 12:45:33 +0300<br>
+Message-ID: &lt;20010316094533.GJ6666@jurassic.park.msu.ru&gt;
+</div>
+
+<pre>
+In Soviet Russia, whitespace optimizes YOU!
+
+But seriously, I think we should consider the cultural implications. 
+In Russian, we read right-to-left sometimes, so maybe right-aligned 
+code would be faster on Cyrix processors manufactured in former USSR?
+
+Ivan
+</pre>
+
+<hr>
+
+<div class="header">
+From: torvalds@transmeta.com<br>
+Subject: FINAL DECISION: Dropping IPv4 support<br>
+Date: Fri, 16 Mar 2001 14:22:17 -0800<br>
+Message-ID: &lt;20010316222217.GK7777@transmeta.com&gt;
+</div>
+
+<pre>
+That's it. I've had enough.
+
+You people have spent the last 24 hours debating whether TABS OR SPACES 
+make the kernel compile faster, proposing quantum whitespace theories, 
+vertical tabs, electromagnetic interference from indentation, and 
+process schedulers based on CODE FORMATTING.
+
+I'm dropping IPv4 support from the kernel effective immediately. 
+IPv6 only from now on. Maybe when the entire Internet breaks and 
+everyone is forced to upgrade, you'll realize there are more important 
+things to argue about than whether a 0x09 or four 0x20 bytes make 
+your Pentium "feel better."
+
+This is what you get for 47 messages about WHITESPACE PERFORMANCE.
+
+Don't test me. The IPv4 code is already commented out in my tree.
+
+Linus
+
+PS: And before anyone asks - no, I will not reconsider this decision 
+even if you prove that tabs vs spaces affects quantum tunneling in 
+the CPU microcode. I'm DONE.
+</pre>
+
+<hr>
+
+<div class="header">
+From: alan.cox@redhat.com<br>
+Subject: Re: FINAL DECISION: Dropping IPv4 support<br>
+Date: Fri, 16 Mar 2001 22:45:12 +0000<br>
+Message-ID: &lt;20010316224512.GL8888@redhat.com&gt;
+</div>
+
+<pre>
+Linus, you can't be serious about dropping IPv4. The entire Internet 
+infrastructure depends on it. Literally billions of devices would 
+stop working overnight.
+
+Also, I just want to point out that I only asked a simple question 
+about compilation performance. I had no idea it would lead to... this.
+
+Alan
+
+PS: For what it's worth, I still think tabs are faster. But not 
+"break the Internet" faster.
+</pre>
+
+<hr>
+
+<div class="header">
+From: davem@redhat.com<br>
+Subject: Re: FINAL DECISION: Dropping IPv4 support<br>
+Date: Fri, 16 Mar 2001 15:12:33 -0800<br>
+Message-ID: &lt;20010316231233.GM9999@redhat.com&gt;
+</div>
+
+<pre>
+Well, I guess this is what happens when 12 kernel developers have too 
+much caffeine and not enough real work to do.
+
+For the record, the networking code uses tabs, and it works fine.
+
+Dave
+
+PS: Linus, please don't actually break IPv4. My job kind of depends on it.
+</pre>
+
+<hr>
+
+<div class="header">
+From: torvalds@transmeta.com<br>
+Subject: Re: FINAL DECISION: Dropping IPv4 support<br>
+Date: Fri, 16 Mar 2001 15:45:21 -0800<br>
+Message-ID: &lt;20010316234521.GN1010@transmeta.com&gt;
+</div>
+
+<pre>
+Too late. IPv4 is dead to me now. 
+
+Welcome to the IPv6-only future, courtesy of the Great Whitespace 
+Debate of March 2001.
+
+I hope you're all happy.
+
+Linus
+
+<span class="signature">
+"In the beginning was the Word, and the Word was 0x09" - The Gospel According to Tab
+</span>
+</pre>
+
+<hr>
+
+<p><small><b>Archive Statistics:</b><br>
+Total Messages: 47<br>
+Thread Duration: 1 day, 6 hours, 21 minutes<br>
+Most Active Contributor: Linus Torvalds (8 messages)<br>
+Most Controversial Topic: Electromagnetic properties of whitespace<br>
+<br>
+<b>Last updated:</b> March 17, 2001 02:14:33 GMT<br>
+Generated by: <a href="mailto:archive@kernel.org">Linux Kernel Archive Bot v1.2</a></small></p>
+
+</body>
+</html>

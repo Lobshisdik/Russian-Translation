@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaForum - The Ultimate Forum Discussion Hub</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background: #003366;
+            color: #ffffff;
+            overflow-x: auto;
+        }
+        
+        .container {
+            background: linear-gradient(45deg, #003366, #004080);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: #000033;
+            padding: 10px;
+            border-bottom: 3px solid #ffff00;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffff00;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #ffff00;
+            color: #000033;
+            padding: 5px 10px;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .nav-bar {
+            background: #004080;
+            padding: 8px;
+            text-align: center;
+            border-bottom: 2px solid #ffff00;
+        }
+        
+        .nav-links {
+            display: inline-block;
+        }
+        
+        .nav-link {
+            background: #ffff00;
+            color: #000033;
+            padding: 5px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: #ffffff;
+            color: #000033;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 500px;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: #002244;
+            border-right: 3px solid #ffff00;
+            padding: 15px;
+        }
+        
+        .sidebar h3 {
+            color: #ffff00;
+            border-bottom: 2px solid #ffff00;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        .category {
+            background: #003366;
+            margin: 5px 0;
+            padding: 8px;
+            border: 1px solid #ffff00;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .category:hover, .category.active {
+            background: #004080;
+        }
+        
+        .forum-area {
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .forum-title {
+            color: #ffff00;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000000;
+        }
+        
+        .thread {
+            background: #002244;
+            border: 2px solid #ffff00;
+            margin: 10px 0;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .thread:hover {
+            background: #003366;
+            border-color: #ffffff;
+        }
+        
+        .thread-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .thread-title {
+            color: #ffff00;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .thread-meta {
+            color: #cccccc;
+            font-size: 11px;
+        }
+        
+        .thread-stats {
+            color: #ffff00;
+            font-size: 11px;
+        }
+        
+        .thread-content {
+            display: none;
+            margin-top: 15px;
+            border-top: 1px solid #ffff00;
+            padding-top: 15px;
+        }
+        
+        .post {
+            background: #001133;
+            border: 1px solid #004080;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #004080;
+            padding-bottom: 5px;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #ffff00;
+            margin-right: 10px;
+        }
+        
+        .post-user {
+            color: #ffff00;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .post-date {
+            color: #cccccc;
+            font-size: 11px;
+        }
+        
+        .post-body {
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        
+        .hexagram-link {
+            color: #ffff00;
+            text-decoration: underline;
+        }
+        
+        .back-btn {
+            background: #ffff00;
+            color: #000033;
+            padding: 5px 15px;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .back-btn:hover {
+            background: #ffffff;
+        }
+        
+        .stats-bar {
+            background: #001122;
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid #ffff00;
+            color: #cccccc;
+            font-size: 11px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="blink">●</span> MetaForum v2.1 <span class="blink">●</span>
+            </div>
+            <div class="lang-switcher" onclick="toggleLanguage()">
+                <span id="lang-text">EN | IT</span>
+            </div>
+        </div>
+        
+        <div class="nav-bar">
+            <div class="nav-links">
+                <span class="nav-link active" onclick="showSection('forum')">
+                    <span class="en">Forum Hub</span>
+                    <span class="it" style="display:none;">Centro Forum</span>
+                </span>
+                <span class="nav-link" onclick="showSection('guidelines')">
+                    <span class="en">Guidelines</span>
+                    <span class="it" style="display:none;">Regolamento</span>
+                </span>
+                <span class="nav-link" onclick="showSection('search')">
+                    <span class="en">Search</span>
+                    <span class="it" style="display:none;">Cerca</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>
+                    <span class="en">Categories</span>
+                    <span class="it" style="display:none;">Categorie</span>
+                </h3>
+                <div class="category active" onclick="showCategory('general')">
+                    <span class="en">📋 General Discussion</span>
+                    <span class="it" style="display:none;">📋 Discussione Generale</span>
+                </div>
+                <div class="category" onclick="showCategory('software')">
+                    <span class="en">💾 Forum Software</span>
+                    <span class="it" style="display:none;">💾 Software Forum</span>
+                </div>
+                <div class="category" onclick="showCategory('design')">
+                    <span class="en">🎨 Design & Layout</span>
+                    <span class="it" style="display:none;">🎨 Design & Layout</span>
+                </div>
+                <div class="category" onclick="showCategory('community')">
+                    <span class="en">👥 Community Building</span>
+                    <span class="it" style="display:none;">👥 Costruire Comunità</span>
+                </div>
+                <div class="category" onclick="showCategory('technical')">
+                    <span class="en">⚙️ Technical Issues</span>
+                    <span class="it" style="display:none;">⚙️ Problemi Tecnici</span>
+                </div>
+            </div>
+            
+            <div class="forum-area">
+                <div class="back-btn" onclick="backToList()">
+                    <span class="en">← Back to Thread List</span>
+                    <span class="it" style="display:none;">← Torna alla Lista</span>
+                </div>
+                
+                <div class="forum-title">
+                    <span class="en">General Discussion - Forum Talk Central</span>
+                    <span class="it" style="display:none;">Discussione Generale - Centro Conversazioni Forum</span>
+                </div>
+                
+                <div id="thread-list">
+                    <!-- Threads will be populated by JavaScript -->
+                </div>
+                
+                <div id="thread-view" style="display: none;">
+                    <!-- Thread content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-bar">
+            <span class="en">
+                Welcome to MetaForum! | Online Users: 47 | Total Posts: 2,847 | Active Threads: 156 | 
+                Powered by HyperForum Engine v2.1 | Best viewed with Hypernet Explorer 6.0+
+            </span>
+            <span class="it" style="display:none;">
+                Benvenuto in MetaForum! | Utenti Online: 47 | Post Totali: 2,847 | Thread Attivi: 156 | 
+                Alimentato da HyperForum Engine v2.1 | Ottimizzato per Hypernet Explorer 6.0+
+            </span>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        let currentCategory = 'general';
+        let currentThread = null;
+        
+        const forumData = {
+            general: {
+                title: {
+                    en: "General Discussion - Forum Talk Central",
+                    it: "Discussione Generale - Centro Conversazioni Forum"
+                },
+                threads: [
+                    {
+                        id: 1,
+                        title: {
+                            en: "What makes a great forum community?",
+                            it: "Cosa rende grande una comunità di forum?"
+                        },
+                        author: "ForumMaster2001",
+                        date: "Jan 15, 2001 14:32",
+                        replies: 23,
+                        views: 456,
+                        posts: [
+                            {
+                                author: "ForumMaster2001",
+                                date: "Jan 15, 2001 14:32",
+                                avatar: "1.jpg",
+                                content: {
+                                    en: "After running several forums since '98, I've noticed some patterns in what makes communities thrive. Active moderation, clear rules, and engaging discussions seem to be key. What's your experience with building forum communities?",
+                                    it: "Dopo aver gestito diversi forum dal '98, ho notato alcuni pattern in ciò che fa prosperare le comunità. Moderazione attiva, regole chiare e discussioni coinvolgenti sembrano essere fondamentali. Qual è la vostra esperienza nella costruzione di comunità di forum?"
+                                }
+                            },
+                            {
+                                author: "TechGuru99",
+                                date: "Jan 15, 2001 16:45",
+                                avatar: "2.jpg",
+                                content: {
+                                    en: "I agree! I think the neo-digital convergence algorithms really help with community engagement. My forum about quantum-computing uses synthro-moderation to keep discussions flowing. Check my <a href='mailto:techguru99@hexagram.corp' class='hexagram-link'>Hexagram profile</a> for more details.",
+                                    it: "Sono d'accordo! Penso che gli algoritmi di convergenza neo-digitale aiutino davvero con il coinvolgimento della comunità. Il mio forum sul quantum-computing usa la synthro-moderazione per mantenere fluide le discussioni. Controlla il mio <a href='mailto:techguru99@hexagram.corp' class='hexagram-link'>profilo Hexagram</a> per maggiori dettagli."
+                                }
+                            },
+                            {
+                                author: "CommunityBuilder",
+                                date: "Jan 16, 2001 09:12",
+                                avatar: "3.jpg",
+                                content: {
+                                    en: "The key is crypto-social bonding IMO. When users feel their data-essence is valued through meta-commercial recognition protocols, they engage more. I've seen a 340% increase in posts after implementing hyper-reputation matrices.",
+                                    it: "La chiave è il bonding cripto-sociale IMO. Quando gli utenti sentono che la loro data-essenza è valorizzata attraverso protocolli di riconoscimento meta-commerciali, si impegnano di più. Ho visto un aumento del 340% nei post dopo aver implementato matrici iper-reputazionali."
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: {
+                            en: "Forum vs Hexagram - The eternal debate",
+                            it: "Forum vs Hexagram - Il dibattito eterno"
+                        },
+                        author: "DigitalPhilosopher",
+                        date: "Jan 14, 2001 11:22",
+                        replies: 67,
+                        views: 1234,
+                        posts: [
+                            {
+                                author: "DigitalPhilosopher",
+                                date: "Jan 14, 2001 11:22",
+                                avatar: "4.jpg",
+                                content: {
+                                    en: "Everyone's moving to Hexagram these days, but I still think traditional threaded forums offer better deep discussions. The neo-temporal threading system allows for more complex idea development. Thoughts?",
+                                    it: "Tutti stanno passando a Hexagram in questi giorni, ma penso ancora che i forum tradizionali con thread offrano discussioni più profonde. Il sistema di threading neo-temporale consente uno sviluppo di idee più complesso. Pensieri?"
+                                }
+                            },
+                            {
+                                author: "HexagramFan2000",
+                                date: "Jan 14, 2001 13:45",
+                                avatar: "5.jpg",
+                                content: {
+                                    en: "Hexagram's micro-commercial posting system is revolutionary! The quantum-credit rewards for quality posts create better content. Forums are too static for the hyper-accelerated info-capitalism of 2001.",
+                                    it: "Il sistema di posting micro-commerciale di Hexagram è rivoluzionario! I premi quantum-credit per i post di qualità creano contenuti migliori. I forum sono troppo statici per l'info-capitalismo iper-accelerato del 2001."
+                                }
+                            },
+                            {
+                                author: "RetroWebbie",
+                                date: "Jan 14, 2001 18:30",
+                                avatar: "6.jpg",
+                                content: {
+                                    en: "I miss the simplicity of bulletin boards from the early 90s. All this techno-optimization and data-stream monetization is making online discussion too corporate. Sometimes you just want to chat about forums without crypto-algorithms!",
+                                    it: "Mi manca la semplicità delle bacheche dei primi anni '90. Tutta questa tecno-ottimizzazione e monetizzazione dei data-stream sta rendendo le discussioni online troppo aziendali. A volte vuoi solo chattare sui forum senza cripto-algoritmi!"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: {
+                            en: "Best forum platforms of 2001 - Updated list",
+                            it: "Migliori piattaforme forum del 2001 - Lista aggiornata"
+                        },
+                        author: "PlatformExpert",
+                        date: "Jan 12, 2001 16:18",
+                        replies: 34,
+                        views: 789,
+                        posts: [
+                            {
+                                author: "PlatformExpert",
+                                date: "Jan 12, 2001 16:18",
+                                avatar: "7.jpg",
+                                content: {
+                                    en: "Here's my updated ranking of forum platforms for this year: 1) vBulletin 2.0 (great scalability), 2) phpBB (open source rocks), 3) UltraBoard (enterprise-grade), 4) Custom PHP solutions. The new bio-responsive interfaces are game-changing!",
+                                    it: "Ecco la mia classifica aggiornata delle piattaforme forum per quest'anno: 1) vBulletin 2.0 (ottima scalabilità), 2) phpBB (open source rocks), 3) UltraBoard (livello enterprise), 4) Soluzioni PHP personalizzate. Le nuove interfacce bio-responsive cambiano tutto!"
+                                }
+                            },
+                            {
+                                author: "CodeWarrior",
+                                date: "Jan 13, 2001 08:45",
+                                avatar: "8.jpg",
+                                content: {
+                                    en: "Don't forget about the new neural-threading systems! I'm beta testing a platform that uses quantum-parsing to organize discussions by thought-clusters. It costs 500 euros per month but the enhanced user retention through psycho-digital optimization is worth it.",
+                                    it: "Non dimenticare i nuovi sistemi di neural-threading! Sto testando una piattaforma che usa quantum-parsing per organizzare discussioni per thought-cluster. Costa 500 euro al mese ma l'aumentata retention utenti attraverso l'ottimizzazione psico-digitale ne vale la pena."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            software: {
+                title: {
+                    en: "Forum Software - Technical Discussions",
+                    it: "Software Forum - Discussioni Tecniche"
+                },
+                threads: [
+                    {
+                        id: 4,
+                        title: {
+                            en: "PHP vs ASP for forum development",
+                            it: "PHP vs ASP per lo sviluppo di forum"
+                        },
+                        author: "DevMaster2001",
+                        date: "Jan 10, 2001 12:00",
+                        replies: 45,
+                        views: 823,
+                        posts: [
+                            {
+                                author: "DevMaster2001",
+                                date: "Jan 10, 2001 12:00",
+                                avatar: "9.jpg",
+                                content: {
+                                    en: "I'm planning to build a forum with advanced crypto-threading capabilities. PHP seems more flexible for quantum-database integration, but ASP has better enterprise-scale bio-processing. Which would you recommend for a forum handling 10,000+ users?",
+                                    it: "Sto pianificando di costruire un forum con capacità avanzate di crypto-threading. PHP sembra più flessibile per l'integrazione quantum-database, ma ASP ha un migliore bio-processing enterprise-scale. Cosa consigliereste per un forum che gestisce 10.000+ utenti?"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            design: {
+                title: {
+                    en: "Design & Layout - Visual Forum Creation",
+                    it: "Design & Layout - Creazione Visuale Forum"
+                },
+                threads: [
+                    {
+                        id: 5,
+                        title: {
+                            en: "CSS tricks for better forum aesthetics",
+                            it: "Trucchi CSS per una migliore estetica del forum"
+                        },
+                        author: "DesignGuru",
+                        date: "Jan 8, 2001 15:30",
+                        replies: 28,
+                        views: 567,
+                        posts: [
+                            {
+                                author: "DesignGuru",
+                                date: "Jan 8, 2001 15:30",
+                                avatar: "10.jpg",
+                                content: {
+                                    en: "CSS is revolutionizing forum design! I've been experimenting with neo-gradient matrices and bio-responsive color schemes. The new synth-aesthetic protocols really enhance user engagement through visual-neural optimization.",
+                                    it: "CSS sta rivoluzionando il design dei forum! Ho sperimentato con matrici neo-gradient e schemi di colori bio-responsive. I nuovi protocolli synth-estetici migliorano davvero l'engagement utente attraverso l'ottimizzazione visuale-neurale."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            community: {
+                title: {
+                    en: "Community Building - Growing Your Forum",
+                    it: "Costruire Comunità - Far Crescere il Tuo Forum"
+                },
+                threads: [
+                    {
+                        id: 6,
+                        title: {
+                            en: "Moderation strategies that work",
+                            it: "Strategie di moderazione che funzionano"
+                        },
+                        author: "ModeratorPro",
+                        date: "Jan 6, 2001 10:15",
+                        replies: 56,
+                        views: 912,
+                        posts: [
+                            {
+                                author: "ModeratorPro",
+                                date: "Jan 6, 2001 10:15",
+                                avatar: "11.jpg",
+                                content: {
+                                    en: "Effective moderation requires a balance of automated crypto-filtering and human insight. I use quantum-behavioral analysis to predict problematic users before they disrupt threads. The key is implementing fair warning systems with bio-commercial accountability.",
+                                    it: "La moderazione efficace richiede un equilibrio tra crypto-filtering automatizzato e intuizione umana. Uso l'analisi quantum-comportamentale per predire utenti problematici prima che disturbino i thread. La chiave è implementare sistemi di avviso equi con responsabilità bio-commerciale."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            technical: {
+                title: {
+                    en: "Technical Issues - Problem Solving",
+                    it: "Problemi Tecnici - Risoluzione Problemi"
+                },
+                threads: [
+                    {
+                        id: 7,
+                        title: {
+                            en: "Database optimization for large forums",
+                            it: "Ottimizzazione database per forum grandi"
+                        },
+                        author: "DBExpert",
+                        date: "Jan 4, 2001 14:45",
+                        replies: 67,
+                        views: 1145,
+                        posts: [
+                            {
+                                author: "DBExpert",
+                                date: "Jan 4, 2001 14:45",
+                                avatar: "12.jpg",
+                                content: {
+                                    en: "When your forum reaches 100k+ posts, traditional MySQL starts struggling. I've implemented quantum-indexing with bio-compression algorithms that reduced query times by 850%. The key is using synthetic-relational mapping for thread hierarchies.",
+                                    it: "Quando il tuo forum raggiunge 100k+ post, MySQL tradizionale inizia a faticare. Ho implementato quantum-indexing con algoritmi bio-compression che hanno ridotto i tempi di query dell'850%. La chiave è usare mapping synthetic-relazionale per le gerarchie dei thread."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'it' : 'en';
+            document.querySelectorAll('.en').forEach(el => {
+                el.style.display = currentLanguage === 'en' ? 'inline' : 'none';
+            });
+            document.querySelectorAll('.it').forEach(el => {
+                el.style.display = currentLanguage === 'it' ? 'inline' : 'none';
+            });
+            
+            // Update thread list if visible
+            if (document.getElementById('thread-list').style.display !== 'none') {
+                showCategory(currentCategory);
+            }
+            
+            // Update thread view if visible
+            if (currentThread) {
+                showThread(currentThread);
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (section === 'forum') {
+                showCategory(currentCategory);
+            }
+        }
+
+        function showCategory(category) {
+            currentCategory = category;
+            
+            document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const categoryData = forumData[category];
+            const forumTitle = document.querySelector('.forum-title');
+            forumTitle.querySelector('.en').textContent = categoryData.title.en;
+            forumTitle.querySelector('.it').textContent = categoryData.title.it;
+            
+            const threadList = document.getElementById('thread-list');
+            const threadView = document.getElementById('thread-view');
+            const backBtn = document.querySelector('.back-btn');
+            
+            threadList.style.display = 'block';
+            threadView.style.display = 'none';
+            backBtn.style.display = 'none';
+            currentThread = null;
+            
+            threadList.innerHTML = '';
+            
+            categoryData.threads.forEach(thread => {
+                const threadElement = document.createElement('div');
+                threadElement.className = 'thread';
+                threadElement.onclick = () => showThread(thread.id);
+                
+                threadElement.innerHTML = `
+                    <div class="thread-header">
+                        <div class="thread-title">
+                            <span class="en" style="display: ${currentLanguage === 'en' ? 'inline' : 'none'}">${thread.title.en}</span>
+                            <span class="it" style="display: ${currentLanguage === 'it' ? 'inline' : 'none'}">${thread.title.it}</span>
+                        </div>
+                        <div class="thread-stats">
+                            ${thread.replies} replies | ${thread.views} views
+                        </div>
+                    </div>
+                    <div class="thread-meta">
+                        by ${thread.author} - ${thread.date}
+                    </div>
+                `;
+                
+                threadList.appendChild(threadElement);
+            });
+        }
+
+        function showThread(threadId) {
+            currentThread = threadId;
+            
+            // Find thread data
+            let threadData = null;
+            for (let category in forumData) {
+                const thread = forumData[category].threads.find(t => t.id === threadId);
+                if (thread) {
+                    threadData = thread;
+                    break;
+                }
+            }
+            
+            if (!threadData) return;
+            
+            const threadList = document.getElementById('thread-list');
+            const threadView = document.getElementById('thread-view');
+            const backBtn = document.querySelector('.back-btn');
+            const forumTitle = document.querySelector('.forum-title');
+            
+            threadList.style.display = 'none';
+            threadView.style.display = 'block';
+            backBtn.style.display = 'inline-block';
+            
+            forumTitle.querySelector('.en').textContent = threadData.title.en;
+            forumTitle.querySelector('.it').textContent = threadData.title.it;
+            
+            threadView.innerHTML = '';
+            
+            threadData.posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <img src="${post.avatar}" alt="User avatar" class="avatar">
+                        <div class="post-user">${post.author}</div>
+                        <div class="post-date">${post.date}</div>
+                    </div>
+                    <div class="post-body">
+                        <span class="en" style="display: ${currentLanguage === 'en' ? 'block' : 'none'}">${post.content.en}</span>
+                        <span class="it" style="display: ${currentLanguage === 'it' ? 'block' : 'none'}">${post.content.it}</span>
+                    </div>
+                `;
+                
+                threadView.appendChild(postElement);
+            });
+        }
+
+        function backToList() {
+            showCategory(currentCategory);
+        }
+
+        // Initialize the forum
+        window.onload = function() {
+            showCategory('general');
+        };
+    </script>
+</body>
+</html>

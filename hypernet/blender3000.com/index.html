@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>***BlendTastic 3000*** BEST BLENDERS ON THE NET!!!</title>
+  <style>
+    body {
+      background-color: #00CCFF;
+      font-family: "Comic Sans MS", "Arial", sans-serif;
+      color: yellow;
+      text-align: center;
+      margin: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h50v50H0z' fill='%230CF'/%3E%3Cpath d='M50 0h50v50H50z' fill='%2300BBEE'/%3E%3Cpath d='M0 50h50v50H0z' fill='%2300BBEE'/%3E%3Cpath d='M50 50h50v50H50z' fill='%230CF'/%3E%3C/svg%3E");
+    }
+    
+    .container {
+      width: 760px;
+      margin: 0 auto;
+      border: 8px ridge #FF00FF;
+      background-color: #000080;
+      padding: 15px;
+    }
+    
+    .language-selector {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #FF0000;
+      padding: 5px;
+      border: 3px outset #FF0000;
+      border-radius: 5px;
+    }
+    
+    .language-selector select {
+      background-color: white;
+      border: 2px inset gray;
+      font-weight: bold;
+      font-family: "Comic Sans MS", Arial, sans-serif;
+      color: #000080;
+    }
+    
+    h1 {
+      font-size: 36px;
+      color: #FF0000;
+      text-shadow: 2px 2px #FFFFFF;
+      margin-top: 5px;
+    }
+    
+    h2 {
+      color: lime;
+      font-size: 24px;
+      text-decoration: underline;
+    }
+    
+    .blink {
+      animation: blinker 1s step-start infinite;
+    }
+    
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+    
+    .hit-counter {
+      margin: 20px auto;
+      padding: 5px;
+      background-color: white;
+      color: black;
+      font-family: "Courier New", monospace;
+      width: 150px;
+      border: 3px inset gray;
+    }
+    
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    
+    td {
+      border: 2px solid #FF00FF;
+      padding: 8px;
+    }
+    
+    .product {
+      background-color: #000066;
+      margin: 10px;
+      padding: 10px;
+      border: 3px outset silver;
+      width: 150px;
+    }
+    
+    marquee {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 5px;
+    }
+    
+    .button {
+      background-color: red;
+      color: white;
+      border: 3px outset #FF0000;
+      padding: 5px 15px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    
+    .construction {
+      height: 40px;
+      margin: 5px;
+    }
+    
+    .navbar {
+      background-color: #000066;
+      padding: 5px;
+      border: 2px solid white;
+      margin-bottom: 15px;
+    }
+    
+    .navbar a {
+      color: yellow;
+      margin: 0 10px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .navbar a:hover {
+      color: #FF00FF;
+      text-decoration: underline;
+    }
+    
+    .guestbook {
+      font-size: 12px;
+      color: white;
+      margin-top: 20px;
+    }
+    
+    .footer {
+      font-size: 12px;
+      margin-top: 20px;
+      color: white;
+    }
+    
+    .content-section {
+      display: none;
+      background-color: #000066;
+      border: 3px inset #FF00FF;
+      padding: 15px;
+      margin: 15px 0;
+      color: white;
+    }
+    
+    .active-section {
+      display: block;
+    }
+    
+    .order-form {
+      text-align: left;
+      background-color: #000066;
+      padding: 15px;
+      color: white;
+      margin: 0 auto;
+      width: 80%;
+      border: 3px inset silver;
+    }
+    
+    .form-row {
+      margin: 10px 0;
+    }
+    
+    .form-row label {
+      display: inline-block;
+      width: 150px;
+      text-align: right;
+      margin-right: 10px;
+      color: yellow;
+    }
+    
+    .form-row input, .form-row select, .form-row textarea {
+      background-color: #CCCCCC;
+      border: 2px inset white;
+      padding: 3px;
+      width: 250px;
+      font-family: "Comic Sans MS", Arial, sans-serif;
+    }
+    
+    .form-row textarea {
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Language Selector -->
+  <div class="language-selector">
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="en">🇺🇸 English</option>
+      <option value="it">🇮🇹 Italiano</option>
+    </select>
+  </div>
+
+  <div class="container">
+    <!-- Banner -->
+    <h1 data-en="~~~ BlendTastic 3000 ~~~" data-it="~~~ BlendTastic 3000 ~~~">~~~ BlendTastic 3000 ~~~</h1>
+    <div class="blink" style="font-size: 24px; color: #FF00FF;" 
+         data-en="*** THE ULTIMATE BLENDING MACHINE FOR THE NEW MILLENNIUM! ***"
+         data-it="*** LA MACCHINA FRULLANTE DEFINITIVA PER IL NUOVO MILLENNIO! ***">
+      *** THE ULTIMATE BLENDING MACHINE FOR THE NEW MILLENNIUM! ***
+    </div>
+    
+    <img src="/api/placeholder/150/100" alt="spinning blender animation" style="margin: 10px;" />
+    
+    <div class="navbar">
+      <a onclick="showSection('home')" data-en="HOME" data-it="HOME">HOME</a> |
+      <a onclick="showSection('products')" data-en="PRODUCTS" data-it="PRODOTTI">PRODUCTS</a> |
+      <a onclick="showSection('order')" data-en="ORDER NOW!" data-it="ORDINA ORA!">ORDER NOW!</a> |
+      <a onclick="showSection('about')" data-en="ABOUT US" data-it="CHI SIAMO">ABOUT US</a> |
+      <a onclick="showSection('contact')" data-en="CONTACT" data-it="CONTATTI">CONTACT</a> |
+      <a onclick="showSection('guestbook')" data-en="GUESTBOOK" data-it="LIBRO DEGLI OSPITI">GUESTBOOK</a>
+    </div>
+    
+    <marquee scrollamount="5" behavior="scroll" direction="left" 
+             data-en="***** SPECIAL Y2K COMPLIANT BLENDERS! ***** FREE SHIPPING ON ORDERS OVER $50! ***** PREPARING FOR Y2K? OUR MANUAL BLENDERS WORK WITHOUT ELECTRICITY! *****"
+             data-it="***** FRULLATORI SPECIALI COMPATIBILI Y2K! ***** SPEDIZIONE GRATUITA SU ORDINI OLTRE $50! ***** TI PREPARI AL Y2K? I NOSTRI FRULLATORI MANUALI FUNZIONANO SENZA ELETTRICITÀ! *****">
+      ***** SPECIAL Y2K COMPLIANT BLENDERS! ***** FREE SHIPPING ON ORDERS OVER $50! ***** PREPARING FOR Y2K? OUR MANUAL BLENDERS WORK WITHOUT ELECTRICITY! *****
+    </marquee>
+    
+    <!-- HOME SECTION -->
+    <div id="home" class="content-section active-section">
+      <table>
+        <tr>
+          <td style="width: 200px;">
+            <img src="/api/placeholder/180/180" alt="BlendTastic 3000" />
+          </td>
+          <td style="text-align: left; color: white;">
+            <h2 data-en="Why Choose BlendTastic?" data-it="Perché Scegliere BlendTastic?">Why Choose BlendTastic?</h2>
+            <ul id="feature-list">
+              <li data-en="POWERFUL 500-WATT MOTOR!" data-it="POTENTE MOTORE DA 500 WATT!">POWERFUL 500-WATT MOTOR!</li>
+              <li data-en="5-SPEED CONTROL PANEL!" data-it="PANNELLO DI CONTROLLO A 5 VELOCITÀ!">5-SPEED CONTROL PANEL!</li>
+              <li data-en="PATENTED TURBO-BLEND TECHNOLOGY!" data-it="TECNOLOGIA TURBO-BLEND BREVETTATA!">PATENTED TURBO-BLEND TECHNOLOGY!</li>
+              <li data-en="CRUSH ICE IN SECONDS!" data-it="TRITATURA DEL GHIACCIO IN SECONDI!">CRUSH ICE IN SECONDS!</li>
+              <li data-en="DISHWASHER SAFE PARTS!" data-it="PARTI LAVABILI IN LAVASTOVIGLIE!">DISHWASHER SAFE PARTS!</li>
+            </ul>
+            <div class="blink" style="color: red; font-size: 18px;" 
+                 data-en="ONLY $39.99!!! LIMITED TIME OFFER!!!"
+                 data-it="SOLO $39.99!!! OFFERTA A TEMPO LIMITATO!!!">
+              ONLY $39.99!!! LIMITED TIME OFFER!!!
+            </div>
+          </td>
+        </tr>
+      </table>
+      
+      <div style="text-align: center; margin: 15px 0;">
+        <button class="button" onclick="showSection('order')" 
+                data-en="ORDER NOW!" data-it="ORDINA ORA!">ORDER NOW!</button>
+        <button class="button" onclick="showSection('products')" 
+                data-en="VIEW CATALOG" data-it="VEDI CATALOGO">VIEW CATALOG</button>
+      </div>
+      
+      <h2 data-en="AS SEEN ON TV!!!" data-it="COME VISTO IN TV!!!">AS SEEN ON TV!!!</h2>
+      <img src="/api/placeholder/320/180" alt="TV appearance" style="border: 3px solid white;" />
+      
+      <div style="background-color: #333366; margin-top: 20px; padding: 10px; color: white; border: 2px dashed yellow;">
+        <h3 style="color: #FF9900;" data-en="CUSTOMER TESTIMONIALS" data-it="TESTIMONIANZE DEI CLIENTI">CUSTOMER TESTIMONIALS</h3>
+        <p id="testimonial1" 
+           data-en='"My BlendTastic 3000 changed my life! I use it EVERY DAY!" - Mary S., Ohio'
+           data-it='"Il mio BlendTastic 3000 ha cambiato la mia vita! Lo uso OGNI GIORNO!" - Maria S., Ohio'>
+          "My BlendTastic 3000 changed my life! I use it EVERY DAY!" - Mary S., Ohio
+        </p>
+        <p id="testimonial2"
+           data-en='"Best blender I\'ve EVER owned!!!" - Thomas R., California'
+           data-it='"Il miglior frullatore che abbia MAI posseduto!!!" - Tommaso R., California'>
+          "Best blender I've EVER owned!!!" - Thomas R., California
+        </p>
+        <p id="testimonial3"
+           data-en='"Y2K ready and makes perfect margaritas!!!" - Susan T., Florida'
+           data-it='"Pronto per il Y2K e fa margarita perfetti!!!" - Susanna T., Florida'>
+          "Y2K ready and makes perfect margaritas!!!" - Susan T., Florida
+        </p>
+      </div>
+    </div>
+    
+    <!-- PRODUCTS SECTION -->
+    <div id="products" class="content-section">
+      <h2 data-en="Our Amazing Blender Models!!!" data-it="I Nostri Incredibili Modelli di Frullatori!!!">Our Amazing Blender Models!!!</h2>
+      
+      <div style="display: flex; justify-content: center;">
+        <div class="product">
+          <img src="/api/placeholder/120/120" alt="Basic Blender" />
+          <h3 style="color: orange;">BlendTastic Basic</h3>
+          <p style="color: white;" 
+             data-en="Perfect for smoothies and shakes!"
+             data-it="Perfetto per frullati e frappé!">
+            Perfect for smoothies and shakes!
+          </p>
+          <p style="color: lime;">$29.99</p>
+          <button class="button" onclick="showSection('order')" 
+                  data-en="BUY NOW" data-it="COMPRA ORA">BUY NOW</button>
+        </div>
+        
+        <div class="product">
+          <img src="/api/placeholder/120/120" alt="Pro Blender" />
+          <h3 style="color: orange;">BlendTastic Pro</h3>
+          <p style="color: white;"
+             data-en="The choice of professionals!"
+             data-it="La scelta dei professionisti!">
+            The choice of professionals!
+          </p>
+          <p style="color: lime;">$49.99</p>
+          <img src="/api/placeholder/60/30" alt="New!" />
+          <button class="button" onclick="showSection('order')" 
+                  data-en="BUY NOW" data-it="COMPRA ORA">BUY NOW</button>
+        </div>
+        
+        <div class="product">
+          <img src="/api/placeholder/120/120" alt="Ultra Blender" />
+          <h3 style="color: orange;">BlendTastic Ultra</h3>
+          <p style="color: white;"
+             data-en="Our most powerful model!"
+             data-it="Il nostro modello più potente!">
+            Our most powerful model!
+          </p>
+          <p style="color: lime;">$69.99</p>
+          <button class="button" onclick="showSection('order')" 
+                  data-en="BUY NOW" data-it="COMPRA ORA">BUY NOW</button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px; border: 2px solid lime; padding: 10px; background-color: #000066;">
+        <h3 style="color: #FF9900;" data-en="PRODUCT FEATURES" data-it="CARATTERISTICHE DEL PRODOTTO">PRODUCT FEATURES</h3>
+        <table style="width: 90%;">
+          <tr style="background-color: #000088; color: yellow;">
+            <td data-en="Model" data-it="Modello">Model</td>
+            <td data-en="Power" data-it="Potenza">Power</td>
+            <td data-en="Speeds" data-it="Velocità">Speeds</td>
+            <td data-en="Capacity" data-it="Capacità">Capacity</td>
+            <td data-en="Special Features" data-it="Caratteristiche Speciali">Special Features</td>
+          </tr>
+          <tr>
+            <td>Basic</td>
+            <td>300W</td>
+            <td>3</td>
+            <td>32oz</td>
+            <td data-en="Pulse Function" data-it="Funzione Pulse">Pulse Function</td>
+          </tr>
+          <tr style="background-color: #000088;">
+            <td>Pro</td>
+            <td>500W</td>
+            <td>5</td>
+            <td>48oz</td>
+            <td data-en="Ice Crusher, Timer" data-it="Tritighiaccio, Timer">Ice Crusher, Timer</td>
+          </tr>
+          <tr>
+            <td>Ultra</td>
+            <td>750W</td>
+            <td>10</td>
+            <td>64oz</td>
+            <td data-en="Digital Display, Smoothie Presets" data-it="Display Digitale, Preset Frullati">Digital Display, Smoothie Presets</td>
+          </tr>
+        </table>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <h3 style="color: orange;" 
+            data-en="FREE RECIPE BOOK WITH ANY PURCHASE!" 
+            data-it="LIBRO RICETTE GRATUITO CON OGNI ACQUISTO!">
+          FREE RECIPE BOOK WITH ANY PURCHASE!
+        </h3>
+        <img src="/api/placeholder/150/200" alt="Recipe Book" />
+      </div>
+    </div>
+    
+    <!-- ORDER SECTION -->
+    <div id="order" class="content-section">
+      <h2 data-en="Order Your BlendTastic Today!" data-it="Ordina il Tuo BlendTastic Oggi!">Order Your BlendTastic Today!</h2>
+      <div class="blink" style="color: red;" 
+           data-en="LIMITED TIME OFFER: FREE SHIPPING!" 
+           data-it="OFFERTA A TEMPO LIMITATO: SPEDIZIONE GRATUITA!">
+        LIMITED TIME OFFER: FREE SHIPPING!
+      </div>
+      
+      <div class="order-form">
+        <div class="form-row">
+          <label data-en="Select Model:" data-it="Seleziona Modello:">Select Model:</label>
+          <select id="model-select">
+            <option data-en="BlendTastic Basic ($29.99)" data-it="BlendTastic Basic ($29.99)">BlendTastic Basic ($29.99)</option>
+            <option data-en="BlendTastic Pro ($49.99)" data-it="BlendTastic Pro ($49.99)">BlendTastic Pro ($49.99)</option>
+            <option data-en="BlendTastic Ultra ($69.99)" data-it="BlendTastic Ultra ($69.99)">BlendTastic Ultra ($69.99)</option>
+          </select>
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Quantity:" data-it="Quantità:">Quantity:</label>
+          <input type="text" value="1">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Name:" data-it="Nome:">Name:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Address:" data-it="Indirizzo:">Address:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="City:" data-it="Città:">City:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="State/ZIP:" data-it="Provincia/CAP:">State/ZIP:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Phone:" data-it="Telefono:">Phone:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Email:" data-it="Email:">Email:</label>
+          <input type="text">
+        </div>
+        
+        <div class="form-row">
+          <label data-en="Payment Method:" data-it="Metodo di Pagamento:">Payment Method:</label>
+          <select id="payment-select">
+            <option>Visa</option>
+            <option>MasterCard</option>
+            <option>American Express</option>
+            <option data-en="Check by Mail" data-it="Assegno per Posta">Check by Mail</option>
+          </select>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+          <button class="button" data-en="SUBMIT ORDER" data-it="INVIA ORDINE">SUBMIT ORDER</button>
+          <button class="button" onclick="showSection('home')" data-en="CANCEL" data-it="ANNULLA">CANCEL</button>
+        </div>
+        
+        <div style="font-size: 10px; color: silver; margin-top: 10px; text-align: center;"
+             data-en="Please allow 4-6 weeks for delivery. Shipping & handling extra for Alaska, Hawaii and International orders."
+             data-it="Si prega di attendere 4-6 settimane per la consegna. Spese di spedizione aggiuntive per Alaska, Hawaii e ordini internazionali.">
+          Please allow 4-6 weeks for delivery. Shipping & handling extra for Alaska, Hawaii and International orders.
+        </div>
+      </div>
+    </div>
+    
+    <!-- ABOUT US SECTION -->
+    <div id="about" class="content-section">
+      <h2 data-en="About BlendTastic Products Inc." data-it="Chi Siamo - BlendTastic Products Inc.">About BlendTastic Products Inc.</h2>
+      
+      <img src="/api/placeholder/200/150" alt="Company Building" style="float: right; margin: 10px; border: 3px solid white;" />
+      
+      <div style="text-align: left; color: white; padding: 10px;">
+        <p data-en="Founded in 1985, BlendTastic Products Inc. has been the LEADER in kitchen innovation for over a decade!"
+           data-it="Fondata nel 1985, BlendTastic Products Inc. è stata il LEADER nell'innovazione da cucina per oltre un decennio!">
+          Founded in 1985, BlendTastic Products Inc. has been the LEADER in kitchen innovation for over a decade!
+        </p>
+        
+        <p data-en='Our founder, Jim "Smoothie King" Johnson, had a vision: to create blenders that would transform ordinary kitchens into EXTRAORDINARY juice bars and cooking centers!'
+           data-it='Il nostro fondatore, Jim "Smoothie King" Johnson, aveva una visione: creare frullatori che trasformassero le cucine ordinarie in bar di succhi e centri di cottura STRAORDINARI!'>
+          Our founder, Jim "Smoothie King" Johnson, had a vision: to create blenders that would transform ordinary kitchens into EXTRAORDINARY juice bars and cooking centers!
+        </p>
+        
+        <p data-en="Located in Blendville, Michigan, our factory employs over 100 dedicated blender technicians who HAND-ASSEMBLE every BlendTastic unit with precision and care."
+           data-it="Situato a Blendville, Michigan, la nostra fabbrica impiega oltre 100 tecnici specializzati che ASSEMBLANO A MANO ogni unità BlendTastic con precisione e cura.">
+          Located in Blendville, Michigan, our factory employs over 100 dedicated blender technicians who HAND-ASSEMBLE every BlendTastic unit with precision and care.
+        </p>
+        
+        <p data-en="Our commitment to QUALITY has earned us numerous awards, including:"
+           data-it="Il nostro impegno per la QUALITÀ ci ha fatto guadagnare numerosi premi, tra cui:">
+          Our commitment to QUALITY has earned us numerous awards, including:
+        </p>
+        <ul style="text-align: left;">
+          <li data-en="1997 Kitchen Gadget of the Year" data-it="1997 Gadget da Cucina dell'Anno">1997 Kitchen Gadget of the Year</li>
+          <li data-en="1998 Best Value in Home Appliances" data-it="1998 Miglior Rapporto Qualità-Prezzo in Elettrodomestici">1998 Best Value in Home Appliances</li>
+          <li data-en="1999 Y2K-Ready Certification" data-it="1999 Certificazione Compatibile Y2K">1999 Y2K-Ready Certification</li>
+        </ul>
+        
+        <p data-en="As we approach the EXCITING new millennium, BlendTastic is ready to lead the way with innovative blending technology for the 21st century!"
+           data-it="Mentre ci avviciniamo al nuovo millennio EMOZIONANTE, BlendTastic è pronta a guidare la strada con tecnologia innovativa di frullatura per il 21° secolo!">
+          As we approach the EXCITING new millennium, BlendTastic is ready to lead the way with innovative blending technology for the 21st century!
+        </p>
+      </div>
+      
+      <div style="margin: 15px; border: 2px dashed yellow; padding: 10px; background-color: #000066;">
+        <h3 style="color: orange;" data-en="OUR MISSION" data-it="LA NOSTRA MISSIONE">OUR MISSION</h3>
+        <p data-en="To provide every American home with affordable, reliable, and powerful blending technology that makes healthy living EASY and FUN!"
+           data-it="Fornire ad ogni casa americana tecnologia di frullatura accessibile, affidabile e potente che rende la vita sana FACILE e DIVERTENTE!">
+          To provide every American home with affordable, reliable, and powerful blending technology that makes healthy living EASY and FUN!
+        </p>
+      </div>
+    </div>
+    
+    <!-- CONTACT SECTION -->
+    <div id="contact" class="content-section">
+      <h2 data-en="Contact BlendTastic Customer Service" data-it="Contatta il Servizio Clienti BlendTastic">Contact BlendTastic Customer Service</h2>
+      
+      <div style="display: flex; justify-content: center;">
+        <div style="text-align: left; padding: 15px; color: white;">
+          <p><strong style="color: yellow;" data-en="Mailing Address:" data-it="Indirizzo Postale:">Mailing Address:</strong><br>
+          BlendTastic Products Inc.<br>
+          123 Smoothie Lane<br>
+          Blendville, MI 48999</p>
+          
+          <p><strong style="color: yellow;" data-en="Customer Service Hotline:" data-it="Linea Diretta Servizio Clienti:">Customer Service Hotline:</strong><br>
+          1-800-BLEND-NOW<br>
+          <span data-en="(Available Mon-Fri, 9am-5pm EST)" data-it="(Disponibile Lun-Ven, 9-17 EST)">(Available Mon-Fri, 9am-5pm EST)</span></p>
+          
+          <p><strong style="color: yellow;">FAX:</strong><br>
+          1-800-555-BLEND</p>
+          
+          <p><strong style="color: yellow;">Email:</strong><br>
+          <a href="mailto:info@blendtastic.com" style="color: #00FFFF;">info@blendtastic.com</a></p>
+        </div>
+        
+        <div style="border-left: 2px solid #FF00FF; padding-left: 15px; width: 300px;">
+          <h3 style="color: orange;" data-en="Send Us a Message!" data-it="Inviaci un Messaggio!">Send Us a Message!</h3>
+          <div class="form-row">
+            <label data-en="Your Name:" data-it="Il Tuo Nome:">Your Name:</label>
+            <input type="text">
+          </div>
+          <div class="form-row">
+            <label data-en="Your Email:" data-it="La Tua Email:">Your Email:</label>
+            <input type="text">
+          </div>
+          <div class="form-row">
+            <label data-en="Subject:" data-it="Oggetto:">Subject:</label>
+            <select id="contact-subject">
+              <option data-en="Product Information" data-it="Informazioni Prodotto">Product Information</option>
+              <option data-en="Customer Support" data-it="Supporto Clienti">Customer Support</option>
+              <option data-en="Order Status" data-it="Stato Ordine">Order Status</option>
+              <option data-en="Warranty Question" data-it="Domanda Garanzia">Warranty Question</option>
+              <option data-en="Other" data-it="Altro">Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label data-en="Message:" data-it="Messaggio:">Message:</label>
+            <textarea></textarea>
+          </div>
+          <div style="text-align: center; margin-top: 10px;">
+            <button class="button" data-en="SEND MESSAGE" data-it="INVIA MESSAGGIO">SEND MESSAGE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- GUESTBOOK SECTION -->
+    <div id="guestbook" class="content-section">
+      <h2 data-en="BlendTastic Fan Guestbook" data-it="Libro degli Ospiti dei Fan BlendTastic">BlendTastic Fan Guestbook</h2>
+      
+      <div style="border: 3px inset silver; padding: 10px; margin: 10px; background-color: #000066;">
+        <h3 style="color: orange;" data-en="Sign Our Guestbook!" data-it="Firma il Nostro Libro degli Ospiti!">Sign Our Guestbook!</h3>
+        
+        <div class="form-row">
+          <label data-en="Your Name:" data-it="Il Tuo Nome:">Your Name:</label>
+          <input type="text">
+        </div>
+        <div class="form-row">
+          <label data-en="Email (optional):" data-it="Email (opzionale):">Email (optional):</label>
+          <input type="text">
+        </div>
+        <div class="form-row">
+          <label data-en="Homepage URL:" data-it="URL Homepage:">Homepage URL:</label>
+          <input type="text" value="http://">
+        </div>
+        <div class="form-row">
+          <label data-en="Location:" data-it="Località:">Location:</label>
+          <input type="text">
+        </div>
+        <div class="form-row">
+          <label data-en="Your Comments:" data-it="I Tuoi Commenti:">Your Comments:</label>
+          <textarea></textarea>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+          <button class="button" data-en="SIGN GUESTBOOK" data-it="FIRMA LIBRO OSPITI">SIGN GUESTBOOK</button>
+        </div>
+      </div>
+      
+      <div style="border: 2px solid lime; padding: 10px; margin: 15px; background-color: #000055; text-align: left;">
+        <h3 style="color: orange; text-align: center;" data-en="Recent Guestbook Entries" data-it="Ultime Firme nel Libro degli Ospiti">Recent Guestbook Entries</h3>
+        
+        <div style="border-bottom: 1px dotted silver; padding: 10px;">
+          <strong style="color: yellow;">SmoothieQueen99</strong> 
+          <span data-en="from California wrote on 04/02/1999:" data-it="dalla California ha scritto il 04/02/1999:">from California wrote on 04/02/1999:</span><br>
+          <p data-en="I LOOOOOVE my new BlendTastic Pro!!! Making smoothies every morning now! :-) :-) :-)"
+             data-it="ADOOOOORO il mio nuovo BlendTastic Pro!!! Faccio frullati ogni mattina ora! :-) :-) :-)">
+            I LOOOOOVE my new BlendTastic Pro!!! Making smoothies every morning now! :-) :-) :-)
+          </p>
+        </div>
+        
+        <div style="border-bottom: 1px dotted silver; padding: 10px;">
+          <strong style="color: yellow;">BlenderMan</strong> 
+          <span data-en="from New York wrote on 03/25/1999:" data-it="da New York ha scritto il 25/03/1999:">from New York wrote on 03/25/1999:</span><br>
+          <p data-en="Just got my BlendTastic Ultra and it's AMAZING! Y2K ready and super powerful. 5 stars!!!"
+             data-it="Ho appena ricevuto il mio BlendTastic Ultra ed è INCREDIBILE! Pronto per il Y2K e super potente. 5 stelle!!!">
+            Just got my BlendTastic Ultra and it's AMAZING! Y2K ready and super powerful. 5 stars!!!
+          </p>
+        </div>
+        
+        <div style="border-bottom: 1px dotted silver; padding: 10px;">
+          <strong style="color: yellow;">JuiceFan2000</strong> 
+          <span data-en="from Florida wrote on 03/12/1999:" data-it="dalla Florida ha scritto il 12/03/1999:">from Florida wrote on 03/12/1999:</span><br>
+          <p data-en="Thanks for the quick shipping! My BlendTastic arrived in just 3 weeks and works great!"
+             data-it="Grazie per la spedizione veloce! Il mio BlendTastic è arrivato in sole 3 settimane e funziona benissimo!">
+            Thanks for the quick shipping! My BlendTastic arrived in just 3 weeks and works great!
+          </p>
+        </div>
+        
+        <div style="border-bottom: 1px dotted silver; padding: 10px;">
+          <strong style="color: yellow;">MixMaster88</strong> 
+          <span data-en="from Texas wrote on 02/28/1999:" data-it="dal Texas ha scritto il 28/02/1999:">from Texas wrote on 02/28/1999:</span><br>
+          <p data-en="Using my BlendTastic for EVERYTHING now - soups, smoothies, even crushing ice for parties! Best purchase ever!!!"
+             data-it="Uso il mio BlendTastic per TUTTO ora - zuppe, frullati, persino per tritare il ghiaccio per le feste! Miglior acquisto di sempre!!!">
+            Using my BlendTastic for EVERYTHING now - soups, smoothies, even crushing ice for parties! Best purchase ever!!!
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="/api/placeholder/400/40" alt="Separator" />
+    </div>
+    
+    <div style="margin: 15px;">
+      <div class="hit-counter">
+        <span data-en="VISITORS: 000,12,567" data-it="VISITATORI: 000,12,567">VISITORS: 000,12,567</span>
+      </div>
+    </div>
+    
+    <marquee scrollamount="3" behavior="alternate" direction="left" 
+             data-en="WEBSITE UNDER CONSTRUCTION! MORE BLENDER MODELS COMING SOON!"
+             data-it="SITO WEB IN COSTRUZIONE! ALTRI MODELLI DI FRULLATORI IN ARRIVO!">
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+      WEBSITE UNDER CONSTRUCTION! MORE BLENDER MODELS COMING SOON!
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+      <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+    </marquee>
+    
+    <div class="footer">
+      <p data-en="Copyright &copy; 1999 BlendTastic Products Inc. All Rights Reserved."
+         data-it="Copyright &copy; 1999 BlendTastic Products Inc. Tutti i Diritti Riservati.">
+        Copyright &copy; 1999 BlendTastic Products Inc. All Rights Reserved.
+      </p>
+      <p data-en="This page best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution"
+         data-it="Questa pagina è ottimizzata per Netscape Navigator 4.0 o Internet Explorer 5.0 alla risoluzione 800x600">
+        This page best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution
+      </p>
+      <div style="font-size: 10px;">
+        <a href="#" onclick="alert(getCurrentText('Privacy Policy coming soon!', 'Informativa sulla Privacy in arrivo!'))" 
+           data-en="Privacy Policy" data-it="Privacy Policy">Privacy Policy</a> | 
+        <a href="mailto:webmaster@blendtastic.com">Webmaster</a> | 
+        <a href="mailto:info@blendtastic.com" data-en="Email Us" data-it="Scrivici">Email Us</a>
+      </div>
+      <div style="margin-top: 5px;">
+        <img src="/api/placeholder/88/31" alt="Best viewed with Netscape" />
+        <img src="/api/placeholder/88/31" alt="Made with Notepad" />
+        <img src="/api/placeholder/88/31" alt="Y2K Compliant" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentLanguage = 'en';
+    
+    function getCurrentText(enText, itText) {
+      return currentLanguage === 'it' ? itText : enText;
+    }
+    
+    function changeLanguage() {
+      const selector = document.getElementById('languageSelect');
+      currentLanguage = selector.value;
+      
+      // Update all elements with data-en and data-it attributes
+      const elements = document.querySelectorAll('[data-en][data-it]');
+      
+      elements.forEach(element => {
+        if (currentLanguage === 'it') {
+          element.textContent = element.getAttribute('data-it');
+        } else {
+          element.textContent = element.getAttribute('data-en');
+        }
+      });
+      
+      // Update select options
+      updateSelectOptions();
+      
+      // Update marquee content for construction message
+      const constructionMarquee = document.querySelector('marquee[data-en]');
+      if (constructionMarquee) {
+        const text = currentLanguage === 'it' ? 
+          constructionMarquee.getAttribute('data-it') : 
+          constructionMarquee.getAttribute('data-en');
+        
+        // Preserve the construction images
+        constructionMarquee.innerHTML = `
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+          ${text}
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+          <img src="/api/placeholder/40/40" class="construction" alt="under construction" />
+        `;
+      }
+    }
+    
+    function updateSelectOptions() {
+      // Update product model select
+      const modelSelect = document.getElementById('model-select');
+      if (modelSelect) {
+        Array.from(modelSelect.options).forEach(option => {
+          if (option.getAttribute('data-' + currentLanguage)) {
+            option.textContent = option.getAttribute('data-' + currentLanguage);
+          }
+        });
+      }
+      
+      // Update payment method select
+      const paymentSelect = document.getElementById('payment-select');
+      if (paymentSelect) {
+        Array.from(paymentSelect.options).forEach(option => {
+          if (option.getAttribute('data-' + currentLanguage)) {
+            option.textContent = option.getAttribute('data-' + currentLanguage);
+          }
+        });
+      }
+      
+      // Update contact subject select
+      const contactSubject = document.getElementById('contact-subject');
+      if (contactSubject) {
+        Array.from(contactSubject.options).forEach(option => {
+          if (option.getAttribute('data-' + currentLanguage)) {
+            option.textContent = option.getAttribute('data-' + currentLanguage);
+          }
+        });
+      }
+    }
+
+    function showSection(sectionId) {
+      // Hide all sections
+      var sections = document.getElementsByClassName('content-section');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active-section');
+      }
+      
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active-section');
+    }
+
+    // Add simple alert for form submissions
+    var buttons = document.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      if (!buttons[i].getAttribute('onclick')) {
+        buttons[i].onclick = function() {
+          const message = currentLanguage === 'it' ? 
+            'Grazie per la tua richiesta! Un rappresentante BlendTastic ti contatterà presto!' :
+            'Thank you for your submission! A BlendTastic representative will contact you soon!';
+          alert(message);
+        };
+      }
+    }
+    
+    // Initialize language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial language to English
+      changeLanguage();
+    });
+  </script>
+</body>
+</html>

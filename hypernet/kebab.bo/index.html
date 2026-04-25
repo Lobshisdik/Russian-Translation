@@ -1,0 +1,1586 @@
+        
+        window.showOrderHistory = async function() {
+            if (!currentUser) {
+          <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KebabBo.it - Kebab a domicilio</title>
+    <style>
+        window.showPasswordReset = function() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                width: 400px;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 20px;">🔑 Recupera Password</h2>
+                <p style="margin-bottom: 20px;">Inserisci il tuo numero di cellulare per ricevere la password via SMS.</p>
+                
+                <label style="display: block; margin-bottom: 5px;">Numero di cellulare:</label>
+                <input type="tel" id="reset-phone" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px;" placeholder="333 1234567">
+                
+                <button onclick="sendPasswordReset()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Invia SMS
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Annulla
+                </button>
+            `;
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                width: 400px;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 20px;">🔑 Recupera Password</h2>
+                <p style="margin-bottom: 20px;">Inserisci il tuo numero di cellulare per ricevere la password via SMS.</p>
+                
+                <label style="display: block; margin-bottom: 5px;">Numero di cellulare:</label>
+                <input type="tel" id="reset-phone" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px;" placeholder="333 1234567">
+                
+                <button onclick="sendPasswordReset()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Invia SMS
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Annulla
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+        
+        window.sendPasswordReset = function() {
+            const phone = document.getElementById('reset-phone').value;
+            if (phone) {
+                alert('Password inviata via SMS a: ' + phone + '\n(Simulazione - SMS non realmente inviato)');
+                document.getElementById('reset-phone').parentElement.remove();
+            } else {
+                alert('Inserisci un numero di telefono valido!');
+            }
+        };
+        
+        window.showContact = function() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                width: 500px;
+                max-height: 80vh;
+                overflow-y: auto;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 20px;">📞 Contattaci</h2>
+                
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <h3 style="color: #333; margin-bottom: 10px;">KebabBo Customer Service</h3>
+                    <p style="margin-bottom: 5px;">📱 Telefono: <strong>800-KEBABBO</strong> (800-532-2226)</p>
+                    <p style="margin-bottom: 5px;">📧 Email: <strong>info@kebabbo.it</strong></p>
+                    <p style="margin-bottom: 5px;">⏰ Orari: Lun-Dom 10:00 - 23:00</p>
+                </div>
+                
+                <h3 style="color: #333; margin-bottom: 15px;">Invia un messaggio</h3>
+                
+                <label style="display: block; margin-bottom: 5px;">Nome:</label>
+                <input type="text" id="contact-name" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">
+                
+                <label style="display: block; margin-bottom: 5px;">Email:</label>
+                <input type="email" id="contact-email" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">
+                
+                <label style="display: block; margin-bottom: 5px;">Messaggio:</label>
+                <textarea id="contact-message" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px; height: 100px; resize: vertical;"></textarea>
+                
+                <button onclick="sendContactMessage()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Invia Messaggio
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Chiudi
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+        
+        window.sendContactMessage = function() {
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+            
+            if (name && email && message) {
+                alert('Messaggio inviato con successo!\n\nGrazie ' + name + ', ti risponderemo presto a: ' + email);
+                document.querySelector('[id="contact-name"]').parentElement.remove();
+            } else {
+                alert('Compila tutti i campi!');
+            }
+        };
+        
+        window.showSuggestLocal = function() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                width: 500px;
+                max-height: 80vh;
+                overflow-y: auto;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 20px;">🏪 Suggerisci un Locale</h2>
+                <p style="margin-bottom: 20px;">Conosci una kebabberia che dovrebbe essere su KebabBo? Segnalacela!</p>
+                
+                <label style="display: block; margin-bottom: 5px;">Nome del locale:</label>
+                <input type="text" id="suggest-name" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;" placeholder="Es: Kebab King">
+                
+                <label style="display: block; margin-bottom: 5px;">Indirizzo:</label>
+                <input type="text" id="suggest-address" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;" placeholder="Via Roma 123, Bologna">
+                
+                <label style="display: block; margin-bottom: 5px;">Telefono del locale:</label>
+                <input type="tel" id="suggest-phone" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;" placeholder="051 123456">
+                
+                <label style="display: block; margin-bottom: 5px;">Città:</label>
+                <select id="suggest-city" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">
+                    <option value="">Seleziona città...</option>
+                    <option value="bologna">Bologna</option>
+                    <option value="paris">Parigi</option>
+                    <option value="torreomega">Torre Omega</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="london">Londra</option>
+                    <option value="amsterdam">Amsterdam</option>
+                    <option value="other">Altra città</option>
+                </select>
+                
+                <label style="display: block; margin-bottom: 5px;">Note aggiuntive:</label>
+                <textarea id="suggest-notes" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px; height: 80px; resize: vertical;" placeholder="Orari, specialità, consegna a domicilio..."></textarea>
+                
+                <div style="background: #fffacd; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                    <strong>🎁 Bonus:</strong> Se il locale verrà aggiunto, riceverai 5 kebab gratis!
+                </div>
+                
+                <button onclick="submitSuggestion()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Invia Suggerimento
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Annulla
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+        
+        window.submitSuggestion = function() {
+            const name = document.getElementById('suggest-name').value;
+            const address = document.getElementById('suggest-address').value;
+            const city = document.getElementById('suggest-city').value;
+            
+            if (name && address && city) {
+                alert('Grazie per il suggerimento!\n\n' + name + ' è stato aggiunto alla lista di valutazione.\n\nSe verrà approvato, riceverai 5 kebab gratis! 🥙');
+                document.querySelector('[id="suggest-name"]').parentElement.remove();
+            } else {
+                alert('Compila almeno nome, indirizzo e città!');
+            }
+        };
+        
+        // Add promo code functionality
+        window.showPromoCode = function() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                width: 400px;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 20px;">🎁 Inserisci Codice Promo</h2>
+                
+                <label style="display: block; margin-bottom: 5px;">Codice promo:</label>
+                <input type="text" id="promo-input" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px; text-transform: uppercase;" placeholder="ES: KEBAB2024">
+                
+                <div style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                    <p style="margin-bottom: 5px;"><strong>Codici disponibili:</strong></p>
+                    <p style="margin-bottom: 3px;">🎉 <code>WELCOME10</code> - €10 di credito omaggio</p>
+                    <p style="margin-bottom: 3px;">🥙 <code>FREEKEBAB</code> - 1 kebab gratis</p>
+                    <p style="margin-bottom: 3px;">💰 <code>SAVE20</code> - 20% di sconto sul prossimo ordine</p>
+                </div>
+                
+                <button onclick="applyPromoCode()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Applica Codice
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Annulla
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+        
+        window.applyPromoCode = function() {
+            const code = document.getElementById('promo-input').value.toUpperCase();
+            let message = '';
+            
+            switch(code) {
+                case 'WELCOME10':
+                    window.playerMoney += 10;
+                    message = '✅ Codice applicato! €10 aggiunti al tuo credito!';
+                    break;
+                case 'FREEKEBAB':
+                    if (currentUser) {
+                        currentUser.freeKebabs = (currentUser.freeKebabs || 0) + 1;
+                        message = '✅ Codice applicato! Hai ricevuto 1 kebab gratis!';
+                    } else {
+                        message = '❌ Devi effettuare il login per usare questo codice!';
+                    }
+                    break;
+                case 'SAVE20':
+                    message = '✅ Codice applicato! 20% di sconto sul prossimo ordine!';
+                    // This would be stored and applied on next order
+                    break;
+                default:
+                    message = '❌ Codice non valido o scaduto!';
+            }
+            
+            alert(message);
+            updateMoneyDisplay();
+            if (code === 'WELCOME10' || code === 'FREEKEBAB' || code === 'SAVE20') {
+                document.getElementById('promo-input').parentElement.remove();
+            }
+        };<label style="display: block; margin-bottom: 5px;">Codice promo:</label>
+                <input type="text" id="promo-input" style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 3px; text-transform: uppercase;" placeholder="ES: KEBAB2024">
+                
+                <div style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                    <p style="margin-bottom: 5px;"><strong>Codici disponibili:</strong></p>
+                    <p style="margin-bottom: 3px;">🎉 <code>WELCOME10</code> - €10 di credito omaggio</p>
+                    <p style="margin-bottom: 3px;">🥙 <code>FREEKEBAB</code> - 1 kebab gratis</p>
+                    <p style="margin-bottom: 3px;">💰 <code>SAVE20</code> - 20% di sconto sul prossimo ordine</p>
+                </div>
+                
+                <button onclick="applyPromoCode()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Applica Codice
+                </button>
+                <button onclick="this.parentElement.remove()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                    Annulla
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+        
+        window.applyPromoCode = function() {
+            const code = document.getElementById('promo-input').value.toUpperCase();
+            let message = '';
+            
+            switch(code) {
+                case 'WELCOME10':
+                    window.playerMoney += 10;
+                    message = '✅ Codice applicato! €10 aggiunti al tuo credito!';
+                    break;
+                case 'FREEKEBAB':
+                    if (currentUser) {
+                        currentUser.freeKebabs = (currentUser.freeKebabs || 0) + 1;
+                        message = '✅ Codice applicato! Hai ricevuto 1 kebab gratis!';
+                    } else {
+                        message = '❌ Devi effettuare il login per usare questo codice!';
+                    }
+                    break;
+                case 'SAVE20':
+                    message = '✅ Codice applicato! 20% di sconto sul prossimo ordine!';
+                    // This would be stored and applied on next order
+                    break;
+                default:
+                    message = '❌ Codice non valido o scaduto!';
+            }
+            
+            alert(message);
+            updateMoneyDisplay();
+            if (code === 'WELCOME10' || code === 'FREEKEBAB' || code === 'SAVE20') {
+                document.getElementById('promo-input').parentElement.remove();
+            }
+        };
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #2a2a2a url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat;
+        }
+        
+        .main-container {
+            width: 1000px;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #ff0000, #cc0000);
+            height: 120px;
+            position: relative;
+            border-bottom: 3px solid #fff;
+        }
+        
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            width: 280px;
+            height: 100px;
+            background: radial-gradient(ellipse at center, #ff0000 0%, #cc0000 100%);
+            border-radius: 50%;
+            border: 3px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .logo h1 {
+            font-size: 48px;
+            color: #000;
+            text-shadow: 2px 2px 0 #ffcc00;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .logo .k {
+            color: #00ff00;
+            font-size: 56px;
+        }
+        
+        .logo .domain {
+            font-size: 24px;
+            color: #fff;
+        }
+        
+        .nav-bar {
+            position: absolute;
+            right: 20px;
+            top: 35px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            width: 180px;
+            float: left;
+            background: #cc0000;
+            min-height: 600px;
+            padding: 10px;
+        }
+        
+        .free-offer {
+            background: #66cc00;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            transform: rotate(-3deg);
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .login-box {
+            background: #aa0000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .login-box label {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: none;
+        }
+        
+        .btn-login {
+            background: #66cc00;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .sidebar-links {
+            margin-top: 20px;
+        }
+        
+        .sidebar-links a {
+            display: block;
+            background: #aa0000;
+            color: white;
+            padding: 8px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .promo-code {
+            background: #ffcc00;
+            color: #cc0000;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 180px;
+            padding: 20px;
+            background: #f5f5f5;
+            min-height: 600px;
+        }
+        
+        .yellow-banner {
+            background: linear-gradient(to bottom, #ffcc00, #ffaa00);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .city-selector {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .city-btn {
+            background: linear-gradient(to bottom, #5cb85c, #4cae4c);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid #449d44;
+            box-shadow: 0 4px 0 #357a35, 0 6px 8px rgba(0,0,0,0.3);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.1s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .city-btn:hover {
+            background: linear-gradient(to bottom, #6ec86e, #5cb85c);
+            transform: translateY(1px);
+            box-shadow: 0 3px 0 #357a35, 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        .city-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #357a35, 0 2px 3px rgba(0,0,0,0.3);
+        }
+        
+        .action-steps {
+            margin-top: 30px;
+        }
+        
+        .step {
+            background: #cc0000;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffcc00;
+            color: #cc0000;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Shop List */
+        .shop-list {
+            background: #fffacd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .shop-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ffcc00;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .shop-icon {
+            width: 60px;
+            height: 60px;
+            background: #ffcc00;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border-radius: 5px;
+        }
+        
+        .shop-info {
+            flex: 1;
+        }
+        
+        .shop-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .shop-address {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .shop-tags {
+            margin-top: 5px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        
+        .order-btn {
+            background: #66cc00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* Right sidebar content */
+        .right-promo {
+            float: right;
+            width: 200px;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: 20px;
+            color: white;
+        }
+        
+        .promo-title {
+            background: #cc0000;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .promo-section {
+            margin-bottom: 20px;
+        }
+        
+        .promo-section h3 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .promo-section p {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .kebab-icon {
+            text-align: center;
+            font-size: 60px;
+            margin: 20px 0;
+        }
+        
+        .price-guarantee {
+            background: #ffcc00;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .price-guarantee .euro {
+            font-size: 24px;
+            color: #cc0000;
+        }
+        
+        .price-guarantee .star {
+            color: #cc0000;
+            font-size: 20px;
+        }
+        
+        .bottom-promo {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .bottom-promo a {
+            color: #cc0000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="logo">
+                <h1><span class="k">K</span>ebab<span class="k">B</span>o<span class="domain">.it</span></h1>
+            </div>
+            <div class="nav-bar">
+                <a href="#">KebabBo.it</a> - <a href="#">Bologna</a> - <a href="#">Locali a Bologna</a>
+                <span style="float: right; background: #66cc00; padding: 5px 10px; border-radius: 3px; margin-right: 20px;">📍 BOLOGNA</span>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="free-offer">
+                🆓 FREE<br>
+                Ogni 10 kebab<br>
+                uno è GRATIS!
+            </div>
+            
+            <div class="login-box">
+                <label>Cellulare:</label>
+                <input type="text">
+                <label>Password:</label>
+                <input type="password">
+                <button class="btn-login">ACCEDI</button>
+            </div>
+            
+            <div class="sidebar-links">
+                <a href="#" onclick="showPasswordReset(); return false;">Richiedi password</a>
+                <a href="#" onclick="showContact(); return false;">Contattaci</a>
+                <a href="#" onclick="showSuggestLocal(); return false;">Suggerisci locale</a>
+            </div>
+            
+            <div class="promo-code" onclick="showPromoCode()" style="cursor: pointer;">
+                🎁 Codice Promo
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="yellow-banner">
+                Ordina in 3 click! - Il kebab a domicilio dai migliori locali 🥙
+            </div>
+            
+            <div style="float: right; width: 250px; margin-left: 20px;">
+                <div class="price-guarantee">
+                    <span class="euro">€</span> MIGLIOR PREZZO GARANTITO<br>
+                    <span class="star">⭐</span> Stessi prezzi e offerte del volantino
+                </div>
+                
+                <div class="right-promo" id="promo-box" style="width: 100%; margin-left: 0;">
+                    <div class="promo-title">KebabBo...</div>
+                    
+                    <div class="promo-section">
+                        <h3>PRATICO</h3>
+                        <p>Scegli il locale, ordini e decidi se pagare online o alla consegna!</p>
+                    </div>
+                    
+                    <div class="promo-section">
+                        <h3>CONVENIENTE</h3>
+                        <p>Nessun rincaro, e poi con lo Sconto KebabBo mangi GRATIS!</p>
+                    </div>
+                    
+                    <div class="promo-section">
+                        <h3>AFFIDABILE</h3>
+                        <p>Ricevi subito conferma dell'ordine dal locale!</p>
+                    </div>
+                    
+                    <div class="kebab-icon">🥙</div>
+                    
+                    <div style="text-align: center;">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23ff6600'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-weight='bold'%3E🥙%3C/text%3E%3C/svg%3E" alt="Kebab" style="width: 80px; height: 80px;">
+                    </div>
+                </div>
+                
+                <div class="bottom-promo">
+                    <strong>Ordina online KEBAB a domicilio</strong><br>
+                    Ordina online DÖNER a domicilio<br>
+                    Ordina online FALAFEL a domicilio
+                </div>
+            </div>
+            
+            <div style="margin-right: 270px;">
+                <div id="city-selection" class="city-selector">
+                    <h2 style="margin-bottom: 20px;">ORDINA ONLINE il kebab a domicilio dalle migliori kebabberie che consegnano a casa tua!</h2>
+                    <p style="margin-bottom: 20px;">Puoi scegliere tra tantissimi locali nella tua zona: KEBAB, DÖNER, FALAFEL, SHAWARMA... di tutto; riceverai conferma immediata dell'ordine e potrai pagare comodamente alla consegna.</p>
+                    <p style="margin-bottom: 30px;">KebabBo è il modo più facile, veloce e <span style="color: #66cc00; font-weight: bold;">conveniente</span> di ordinare a domicilio!</p>
+                    
+                    <div class="city-grid">
+                        <a href="#" class="city-btn" onclick="showShops('bologna')">⬇ BOLOGNA</a>
+                        <a href="#" class="city-btn" onclick="showShops('paris')">⬇ PARIGI</a>
+                        <a href="#" class="city-btn" onclick="showShops('torreomega')">⬇ TORRE OMEGA</a>
+                        <a href="#" class="city-btn" onclick="showShops('madrid')">⬇ MADRID</a>
+                        <a href="#" class="city-btn" onclick="showShops('london')">⬇ LONDRA</a>
+                        <a href="#" class="city-btn" onclick="showShops('amsterdam')">⬇ AMSTERDAM</a>
+                    </div>
+                    
+                    <div class="action-steps">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            Inserisci il tuo Indirizzo
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            Scegli il Locale
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            Scegli i Prodotti
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="shop-list" class="shop-list" style="display: none;">
+                    <h2 style="margin-bottom: 20px;">Locali a <span id="city-name">Bologna</span> - Kebab</h2>
+                    <p style="margin-bottom: 20px;">Lista dei locali di <span id="city-name-2">Bologna</span> da cui puoi ordinare online</p>
+                    
+                    <button class="order-btn" style="float: right; margin-bottom: 20px;">Ordina online</button>
+                    <div style="clear: both;"></div>
+                    
+                    <div id="shops-container">
+                        <!-- Shops will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize player money
+        window.playerMoney = window.playerMoney || 50;
+        let currentUser = null;
+        let orderCount = 0;
+        let currentCity = null;
+        
+        // Database setup
+        const DB_NAME = 'KebabBoDB';
+        const DB_VERSION = 1;
+        let db;
+        
+        // Initialize IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => {
+                    db = request.result;
+                    resolve(db);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    db = event.target.result;
+                    
+                    // Create users store
+                    if (!db.objectStoreNames.contains('users')) {
+                        const userStore = db.createObjectStore('users', { keyPath: 'phone' });
+                        userStore.createIndex('phone', 'phone', { unique: true });
+                    }
+                    
+                    // Create orders store
+                    if (!db.objectStoreNames.contains('orders')) {
+                        const orderStore = db.createObjectStore('orders', { keyPath: 'id', autoIncrement: true });
+                        orderStore.createIndex('userPhone', 'userPhone', { unique: false });
+                        orderStore.createIndex('timestamp', 'timestamp', { unique: false });
+                    }
+                };
+            });
+        }
+        
+        // User management functions
+        async function registerUser(phone, password) {
+            const transaction = db.transaction(['users'], 'readwrite');
+            const store = transaction.objectStore('users');
+            
+            const user = {
+                phone: phone,
+                password: password,
+                registrationDate: new Date().toISOString(),
+                orderCount: 0,
+                totalSpent: 0,
+                freeKebabs: 0
+            };
+            
+            return new Promise((resolve, reject) => {
+                const request = store.add(user);
+                request.onsuccess = () => resolve(user);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        async function loginUser(phone, password) {
+            const transaction = db.transaction(['users'], 'readonly');
+            const store = transaction.objectStore('users');
+            
+            return new Promise((resolve, reject) => {
+                const request = store.get(phone);
+                request.onsuccess = () => {
+                    const user = request.result;
+                    if (user && user.password === password) {
+                        currentUser = user;
+                        updateUIForLoggedInUser();
+                        resolve(user);
+                    } else {
+                        reject(new Error('Credenziali non valide'));
+                    }
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        async function updateUserStats(phone, orderAmount) {
+            const transaction = db.transaction(['users'], 'readwrite');
+            const store = transaction.objectStore('users');
+            
+            return new Promise((resolve, reject) => {
+                const request = store.get(phone);
+                request.onsuccess = () => {
+                    const user = request.result;
+                    if (user) {
+                        user.orderCount++;
+                        user.totalSpent += orderAmount;
+                        
+                        // Free kebab every 10 orders
+                        if (user.orderCount % 10 === 0) {
+                            user.freeKebabs++;
+                        }
+                        
+                        const updateRequest = store.put(user);
+                        updateRequest.onsuccess = () => {
+                            currentUser = user;
+                            resolve(user);
+                        };
+                    }
+                };
+            });
+        }
+        
+        // Menu items for each shop
+        const menuItems = {
+            default: [
+                { name: "Kebab Normale", price: 5.50, description: "Carne, insalata, pomodori, cipolla, salsa" },
+                { name: "Kebab Grande", price: 7.00, description: "Porzione extra di carne e verdure" },
+                { name: "Kebab Menu", price: 9.50, description: "Kebab + patatine + bibita" },
+                { name: "Falafel Wrap", price: 5.00, description: "Polpette di ceci, verdure, tahina" },
+                { name: "Döner Box", price: 6.50, description: "Carne döner con riso o patatine" },
+                { name: "Mix Grill", price: 12.00, description: "Assortimento di carni alla griglia" },
+                { name: "Patatine Fritte", price: 3.00, description: "Porzione di patatine croccanti" },
+                { name: "Bibita", price: 2.00, description: "Loca-Cola, Fanta, Sprite" }
+            ]
+        };
+        
+        const shops = {
+            bologna: [
+                { id: 'kb-bo-001', name: "Kebab Istanbul", address: "Via Zamboni, 22", tags: ["NOVITÀ"], icon: "🥙", deliveryFee: 2.50 },
+                { id: 'kb-bo-002', name: "Döner King", address: "Via Indipendenza, 45", tags: ["NOVITÀ"], icon: "👑", deliveryFee: 3.00 },
+                { id: 'kb-bo-003', name: "Kebabberia Mediterranea", address: "Via Ugo Bassi, 18", tags: [], icon: "🌯", deliveryFee: 2.50 },
+                { id: 'kb-bo-004', name: "Ali Baba Kebab", address: "Via San Felice, 67", tags: ["NOVITÀ"], icon: "🧞", deliveryFee: 2.00 },
+                { id: 'kb-bo-005', name: "Kebab & Falafel Express", address: "Piazza Maggiore, 3", tags: [], icon: "🥙", deliveryFee: 3.50 },
+                { id: 'kb-bo-006', name: "Sultan Döner", address: "Via Rizzoli, 12", tags: ["NOVITÀ"], icon: "👳", deliveryFee: 2.50 }
+            ],
+            paris: [
+                { id: 'kb-pa-001', name: "Le Kebab de Paris", address: "Rue de Rivoli, 45", tags: ["NOUVEAU"], icon: "🥙", deliveryFee: 3.50 },
+                { id: 'kb-pa-002', name: "Shawarma Champs-Élysées", address: "Avenue des Champs-Élysées, 120", tags: [], icon: "🌯", deliveryFee: 4.00 },
+                { id: 'kb-pa-003', name: "Döner Montmartre", address: "Rue Lepic, 33", tags: ["NOUVEAU"], icon: "🥙", deliveryFee: 3.00 }
+            ],
+            torreomega: [
+                { id: 'kb-to-001', name: "Omega Kebab Tower", address: "Via Torre Alta 1", tags: ["NUOVO"], icon: "🏢", deliveryFee: 2.50 },
+                { id: 'kb-to-002', name: "Sky Döner", address: "Piazza Omega 42", tags: [], icon: "🌌", deliveryFee: 3.00 },
+                { id: 'kb-to-003', name: "Kebab Futuristico", address: "Viale Tecnologia 88", tags: ["NUOVO"], icon: "🚀", deliveryFee: 3.50 }
+            ],
+            madrid: [
+                { id: 'kb-ma-001', name: "Kebab Madrid Centro", address: "Calle Gran Vía, 45", tags: ["NUEVO"], icon: "🥙", deliveryFee: 3.00 },
+                { id: 'kb-ma-002', name: "Döner Turco", address: "Plaza Mayor, 12", tags: [], icon: "🌯", deliveryFee: 2.50 },
+                { id: 'kb-ma-003', name: "Shawarma Sol", address: "Puerta del Sol, 7", tags: ["NUEVO"], icon: "☀️", deliveryFee: 3.50 }
+            ],
+            london: [
+                { id: 'kb-lo-001', name: "Best Kebab House", address: "Oxford Street, 234", tags: ["NEW"], icon: "🥙", deliveryFee: 4.00 },
+                { id: 'kb-lo-002', name: "Döner Summer", address: "Camden High Street, 89", tags: [], icon: "🌯", deliveryFee: 3.50 },
+                { id: 'kb-lo-003', name: "Turkish Delight Kebab", address: "Brick Lane, 45", tags: ["NEW"], icon: "🌙", deliveryFee: 3.00 }
+            ],
+            amsterdam: [
+                { id: 'kb-am-001', name: "Kebab King Amsterdam", address: "Damrak 78", tags: ["NIEUW"], icon: "👑", deliveryFee: 3.50 },
+                { id: 'kb-am-002', name: "Döner Company", address: "Leidseplein 23", tags: [], icon: "🥙", deliveryFee: 3.00 },
+                { id: 'kb-am-003', name: "Shawarma Paradise", address: "Rembrandtplein 15", tags: ["NIEUW"], icon: "🌴", deliveryFee: 4.00 }
+            ]
+        };
+        
+        let currentOrder = {
+            items: [],
+            shop: null,
+            total: 0,
+            deliveryFee: 0
+        };
+        
+        // Make functions globally available
+        window.showShops = function(city) {
+            currentCity = city;
+            document.getElementById('city-selection').style.display = 'none';
+            document.getElementById('shop-list').style.display = 'block';
+            
+            const cityNames = {
+                bologna: 'Bologna',
+                paris: 'Parigi',
+                torreomega: 'Torre Omega',
+                madrid: 'Madrid',
+                london: 'Londra',
+                amsterdam: 'Amsterdam'
+            };
+            
+            document.getElementById('city-name').textContent = cityNames[city];
+            document.getElementById('city-name-2').textContent = cityNames[city];
+            
+            const container = document.getElementById('shops-container');
+            container.innerHTML = '';
+            
+            shops[city].forEach(shop => {
+                const shopEl = document.createElement('div');
+                shopEl.className = 'shop-item';
+                shopEl.innerHTML = `
+                    <div class="shop-icon">${shop.icon}</div>
+                    <div class="shop-info">
+                        <div class="shop-name">${shop.name}</div>
+                        <div class="shop-address">${shop.address}</div>
+                        <div class="shop-tags">
+                            ${shop.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            <span class="tag" style="background: #0066cc;">Consegna: €${shop.deliveryFee.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <button class="order-btn" onclick="openShopMenu('${shop.id}')">Ordina</button>
+                `;
+                container.appendChild(shopEl);
+            });
+            
+            updateMoneyDisplay();
+        };
+            currentCity = city;
+            document.getElementById('city-selection').style.display = 'none';
+            document.getElementById('shop-list').style.display = 'block';
+            
+            const cityNames = {
+                bologna: 'Bologna',
+                paris: 'Parigi',
+                torreomega: 'Torre Omega',
+                madrid: 'Madrid',
+                london: 'Londra',
+                amsterdam: 'Amsterdam'
+            };
+            
+            document.getElementById('city-name').textContent = cityNames[city];
+            document.getElementById('city-name-2').textContent = cityNames[city];
+            
+            const container = document.getElementById('shops-container');
+            container.innerHTML = '';
+            
+            shops[city].forEach(shop => {
+                const shopEl = document.createElement('div');
+                shopEl.className = 'shop-item';
+                shopEl.innerHTML = `
+                    <div class="shop-icon">${shop.icon}</div>
+                    <div class="shop-info">
+                        <div class="shop-name">${shop.name}</div>
+                        <div class="shop-address">${shop.address}</div>
+                        <div class="shop-tags">
+                            ${shop.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            <span class="tag" style="background: #0066cc;">Consegna: €${shop.deliveryFee.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <button class="order-btn" onclick="openShopMenu('${shop.id}')">Ordina</button>
+                `;
+                container.appendChild(shopEl);
+            });
+            
+            updateMoneyDisplay();
+        }
+        
+        window.openShopMenu = function(shopId) {
+            const shop = Object.values(shops).flat().find(s => s.id === shopId);
+            if (!shop) return;
+            
+            currentOrder.shop = shop;
+            currentOrder.deliveryFee = shop.deliveryFee;
+            currentOrder.items = [];
+            
+            showMenuModal(shop);
+        }
+        
+        window.showMenuModal = function(shop) {
+            const modal = document.createElement('div');
+            modal.id = 'menu-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                width: 90%;
+                max-width: 800px;
+                max-height: 90vh;
+                overflow-y: auto;
+                border-radius: 10px;
+                padding: 20px;
+            `;
+            
+            modalContent.innerHTML = `
+                <h2 style="color: #cc0000; margin-bottom: 10px;">${shop.icon} ${shop.name}</h2>
+                <p style="color: #666; margin-bottom: 20px;">${shop.address}</p>
+                <div style="background: #ffcc00; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+                    <strong>Il tuo credito: €${window.playerMoney.toFixed(2)}</strong>
+                </div>
+                <div id="menu-items"></div>
+                <div id="order-summary" style="background: #f5f5f5; padding: 15px; margin-top: 20px; border-radius: 5px;">
+                    <h3>Riepilogo Ordine</h3>
+                    <div id="order-items"></div>
+                    <div style="margin-top: 10px; padding-top: 10px; border-top: 2px solid #ccc;">
+                        <div>Subtotale: €<span id="subtotal">0.00</span></div>
+                        <div>Consegna: €${shop.deliveryFee.toFixed(2)}</div>
+                        <div style="font-weight: bold; font-size: 18px; color: #cc0000;">
+                            Totale: €<span id="total">${shop.deliveryFee.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button onclick="confirmOrder()" style="background: #66cc00; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-right: 10px;">
+                            Conferma Ordine
+                        </button>
+                        <button onclick="closeMenuModal()" style="background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                            Annulla
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Populate menu items
+            const menuContainer = document.getElementById('menu-items');
+            menuItems.default.forEach((item, index) => {
+                const itemEl = document.createElement('div');
+                itemEl.style.cssText = 'background: white; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;';
+                itemEl.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong> - €${item.price.toFixed(2)}<br>
+                        <small style="color: #666;">${item.description}</small>
+                    </div>
+                    <div>
+                        <button onclick="removeFromOrder(${index})" style="background: #cc0000; color: white; border: none; padding: 5px 10px; margin-right: 5px; cursor: pointer;">-</button>
+                        <span id="item-qty-${index}">0</span>
+                        <button onclick="addToOrder(${index})" style="background: #66cc00; color: white; border: none; padding: 5px 10px; margin-left: 5px; cursor: pointer;">+</button>
+                    </div>
+                `;
+                menuContainer.appendChild(itemEl);
+            });
+            
+            updateOrderSummary();
+        }
+        
+        window.addToOrder = function(itemIndex) {
+            const item = menuItems.default[itemIndex];
+            const existingItem = currentOrder.items.find(i => i.name === item.name);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                currentOrder.items.push({ ...item, quantity: 1 });
+            }
+            
+            updateOrderSummary();
+        }
+        
+        window.removeFromOrder = function(itemIndex) {
+            const item = menuItems.default[itemIndex];
+            const existingItemIndex = currentOrder.items.findIndex(i => i.name === item.name);
+            
+            if (existingItemIndex !== -1) {
+                if (currentOrder.items[existingItemIndex].quantity > 1) {
+                    currentOrder.items[existingItemIndex].quantity--;
+                } else {
+                    currentOrder.items.splice(existingItemIndex, 1);
+                }
+            }
+            
+            updateOrderSummary();
+        }
+        
+        window.updateOrderSummary = function() {
+            const orderItemsEl = document.getElementById('order-items');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+            
+            orderItemsEl.innerHTML = '';
+            let subtotal = 0;
+            
+            currentOrder.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const itemEl = document.createElement('div');
+                itemEl.style.marginBottom = '5px';
+                itemEl.innerHTML = `${item.quantity}x ${item.name} - €${itemTotal.toFixed(2)}`;
+                orderItemsEl.appendChild(itemEl);
+            });
+            
+            // Update quantity displays
+            menuItems.default.forEach((item, index) => {
+                const qtyEl = document.getElementById(`item-qty-${index}`);
+                if (qtyEl) {
+                    const orderItem = currentOrder.items.find(i => i.name === item.name);
+                    qtyEl.textContent = orderItem ? orderItem.quantity : 0;
+                }
+            });
+            
+            currentOrder.total = subtotal + currentOrder.deliveryFee;
+            
+            subtotalEl.textContent = subtotal.toFixed(2);
+            totalEl.textContent = currentOrder.total.toFixed(2);
+            
+            // Check for free kebab
+            if (currentUser && currentUser.freeKebabs > 0 && currentOrder.items.length > 0) {
+                const freeNote = document.createElement('div');
+                freeNote.style.cssText = 'color: #66cc00; font-weight: bold; margin-top: 10px;';
+                freeNote.innerHTML = `🎉 Hai ${currentUser.freeKebabs} kebab gratis disponibili!`;
+                orderItemsEl.appendChild(freeNote);
+            }
+        }
+        
+        window.confirmOrder = function() {
+            if (currentOrder.items.length === 0) {
+                alert('Aggiungi almeno un articolo al tuo ordine!');
+                return;
+            }
+            
+            if (!currentUser) {
+                alert('Devi effettuare il login per ordinare!');
+                return;
+            }
+            
+            // Apply free kebab if available
+            let finalTotal = currentOrder.total;
+            let usedFreeKebab = false;
+            
+            if (currentUser.freeKebabs > 0 && currentOrder.items.some(i => i.name.toLowerCase().includes('kebab'))) {
+                const kebabItem = currentOrder.items.find(i => i.name.toLowerCase().includes('kebab'));
+                finalTotal -= Math.min(kebabItem.price, finalTotal - currentOrder.deliveryFee);
+                usedFreeKebab = true;
+            }
+            
+            if (window.playerMoney < finalTotal) {
+                alert(`Credito insufficiente! Hai €${window.playerMoney.toFixed(2)} ma l'ordine costa €${finalTotal.toFixed(2)}`);
+                return;
+            }
+            
+            // Create order object
+            const order = {
+                id: `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                timestamp: new Date().toISOString(),
+                user: currentUser.phone,
+                shop: {
+                    id: currentOrder.shop.id,
+                    name: currentOrder.shop.name,
+                    address: currentOrder.shop.address
+                },
+                items: currentOrder.items,
+                subtotal: currentOrder.total - currentOrder.deliveryFee,
+                deliveryFee: currentOrder.deliveryFee,
+                total: finalTotal,
+                originalTotal: currentOrder.total,
+                usedFreeKebab: usedFreeKebab,
+                status: 'confirmed',
+                estimatedDelivery: new Date(Date.now() + 30 * 60 * 1000).toISOString() // 30 minutes
+            };
+            
+            // Save to window.nextOrder
+            window.nextOrder = order;
+            
+            // Deduct money
+            window.playerMoney -= finalTotal;
+            
+            // Save order to IndexedDB
+            saveOrder(order);
+            
+            // Update user stats
+            if (usedFreeKebab) {
+                currentUser.freeKebabs--;
+            }
+            updateUserStats(currentUser.phone, finalTotal);
+            
+            // Show confirmation
+            showOrderConfirmation(order);
+            
+            // Close modal
+            closeMenuModal();
+        }
+        
+        async function saveOrder(order) {
+            const transaction = db.transaction(['orders'], 'readwrite');
+            const store = transaction.objectStore('orders');
+            
+            return new Promise((resolve, reject) => {
+                const request = store.add(order);
+                request.onsuccess = () => resolve(order);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        window.showOrderConfirmation = function(order) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                max-width: 500px;
+                text-align: center;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #66cc00; margin-bottom: 20px;">✅ Ordine Confermato!</h2>
+                <p style="font-size: 18px; margin-bottom: 10px;"><strong>ID Ordine:</strong> ${order.id}</p>
+                <p style="margin-bottom: 10px;"><strong>Locale:</strong> ${order.shop.name}</p>
+                <p style="margin-bottom: 10px;"><strong>Totale pagato:</strong> €${order.total.toFixed(2)}</p>
+                ${order.usedFreeKebab ? '<p style="color: #66cc00; font-weight: bold;">🎉 Hai utilizzato 1 kebab gratis!</p>' : ''}
+                <p style="margin-bottom: 10px;"><strong>Consegna stimata:</strong> ${new Date(order.estimatedDelivery).toLocaleTimeString('it-IT')}</p>
+                <p style="margin-bottom: 20px;"><strong>Credito rimanente:</strong> €${window.playerMoney.toFixed(2)}</p>
+                <button onclick="this.parentElement.remove()" style="background: #66cc00; color: white; padding: 10px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                    OK
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (modal.parentElement) {
+                    modal.remove();
+                }
+            }, 5000);
+        }
+        
+        window.closeMenuModal = function() {
+            const modal = document.getElementById('menu-modal');
+            if (modal) {
+                modal.remove();
+            }
+            currentOrder = {
+                items: [],
+                shop: null,
+                total: 0,
+                deliveryFee: 0
+            };
+        }
+        
+        window.updateMoneyDisplay = function() {
+            // Add money display to the page
+            if (!document.getElementById('money-display')) {
+                const moneyDisplay = document.createElement('div');
+                moneyDisplay.id = 'money-display';
+                moneyDisplay.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    background: #ffcc00;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    z-index: 100;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                `;
+                document.body.appendChild(moneyDisplay);
+            }
+            
+            document.getElementById('money-display').innerHTML = `💰 Credito: €${window.playerMoney.toFixed(2)}`;
+        }
+        
+        window.updateUIForLoggedInUser = function() {
+            const loginBox = document.querySelector('.login-box');
+            if (loginBox && currentUser) {
+                loginBox.innerHTML = `
+                    <div style="color: white; text-align: center;">
+                        <p style="margin-bottom: 10px;">Benvenuto!</p>
+                        <p style="font-size: 18px; font-weight: bold;">${currentUser.phone}</p>
+                        <p style="margin-bottom: 5px;">Ordini: ${currentUser.orderCount}</p>
+                        <p style="margin-bottom: 5px;">Totale speso: €${currentUser.totalSpent.toFixed(2)}</p>
+                        ${currentUser.freeKebabs > 0 ? `<p style="color: #66cc00; font-weight: bold;">🎉 ${currentUser.freeKebabs} kebab gratis!</p>` : ''}
+                        <button onclick="logout()" style="background: #aa0000; color: white; border: none; padding: 5px 15px; margin-top: 10px; cursor: pointer;">Esci</button>
+                    </div>
+                `;
+            }
+        }
+        
+        window.logout = function() {
+            currentUser = null;
+            location.reload();
+        }
+        
+        window.showPasswordReset = function() {phone,
+                shop: {
+                    id: currentOrder.shop.id,
+                    name: currentOrder.shop.name,
+                    address: currentOrder.shop.address
+                },
+                items: currentOrder.items,
+                subtotal: currentOrder.total - currentOrder.deliveryFee,
+                deliveryFee: currentOrder.deliveryFee,
+                total: finalTotal,
+                originalTotal: currentOrder.total,
+                usedFreeKebab: usedFreeKebab,
+                status: 'confirmed',
+                estimatedDelivery: new Date(Date.now() + 30 * 60 * 1000).toISOString() // 30 minutes
+            };
+            
+            // Save to window.nextOrder
+            window.nextOrder = order;
+            
+            // Deduct money
+            window.playerMoney -= finalTotal;
+            
+            // Save order to IndexedDB
+            saveOrder(order);
+            
+            // Update user stats
+            if (usedFreeKebab) {
+                currentUser.freeKebabs--;
+            }
+            updateUserStats(currentUser.phone, finalTotal);
+            
+            // Show confirmation
+            showOrderConfirmation(order);
+            
+            // Close modal
+            closeMenuModal();
+        }
+        
+        async function saveOrder(order) {
+            const transaction = db.transaction(['orders'], 'readwrite');
+            const store = transaction.objectStore('orders');
+            
+            return new Promise((resolve, reject) => {
+                const request = store.add(order);
+                request.onsuccess = () => resolve(order);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        window.showOrderConfirmation = function(order) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                max-width: 500px;
+                text-align: center;
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="color: #66cc00; margin-bottom: 20px;">✅ Ordine Confermato!</h2>
+                <p style="font-size: 18px; margin-bottom: 10px;"><strong>ID Ordine:</strong> ${order.id}</p>
+                <p style="margin-bottom: 10px;"><strong>Locale:</strong> ${order.shop.name}</p>
+                <p style="margin-bottom: 10px;"><strong>Totale pagato:</strong> €${order.total.toFixed(2)}</p>
+                ${order.usedFreeKebab ? '<p style="color: #66cc00; font-weight: bold;">🎉 Hai utilizzato 1 kebab gratis!</p>' : ''}
+                <p style="margin-bottom: 10px;"><strong>Consegna stimata:</strong> ${new Date(order.estimatedDelivery).toLocaleTimeString('it-IT')}</p>
+                <p style="margin-bottom: 20px;"><strong>Credito rimanente:</strong> €${window.playerMoney.toFixed(2)}</p>
+                <button onclick="this.parentElement.remove()" style="background: #66cc00; color: white; padding: 10px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                    OK
+                </button>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (modal.parentElement) {
+                    modal.remove();
+                }
+            }, 5000);
+        }
+        
+        window.closeMenuModal = function() {
+            const modal = document.getElementById('menu-modal');
+            if (modal) {
+                modal.remove();
+            }
+            currentOrder = {
+                items: [],
+                shop: null,
+                total: 0,
+                deliveryFee: 0
+            };
+        }
+        
+        window.updateMoneyDisplay = function() {
+            // Add money display to the page
+            if (!document.getElementById('money-display')) {
+                const moneyDisplay = document.createElement('div');
+                moneyDisplay.id = 'money-display';
+                moneyDisplay.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    background: #ffcc00;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    z-index: 100;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                `;
+                document.body.appendChild(moneyDisplay);
+            }
+            
+            document.getElementById('money-display').innerHTML = `💰 Credito: €${window.playerMoney.toFixed(2)}`;
+        }
+        
+        window.updateUIForLoggedInUser = function() {
+            const loginBox = document.querySelector('.login-box');
+            if (loginBox && currentUser) {
+                loginBox.innerHTML = `
+                    <div style="color: white; text-align: center;">
+                        <p style="margin-bottom: 10px;">Benvenuto!</p>
+                        <p style="font-size: 18px; font-weight: bold;">${currentUser.phone}</p>
+                        <p style="margin-bottom: 5px;">Ordini: ${currentUser.orderCount}</p>
+                        <p style="margin-bottom: 5px;">Totale speso: €${currentUser.totalSpent.toFixed(2)}</p>
+                        ${currentUser.freeKebabs > 0 ? `<p style="color: #66cc00; font-weight: bold;">🎉 ${currentUser.freeKebabs} kebab gratis!</p>` : ''}
+                        <button onclick="logout()" style="background: #aa0000; color: white; border: none; padding: 5px 15px; margin-top: 10px; cursor: pointer;">Esci</button>
+                    </div>
+                `;
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Westford Interstate Shipping Co. - Texas Freight Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c0c0c0;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/gif;base64,R0lGODlhBAAEAIAAAP///wAAACH5BAEAAAAALAAAAAAEAAQAAAIEhI+py+0PkpxuFJJB3z394SmCYAiGZfrVYQBLSg==');
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 10px;
+        }
+        
+        .language-switcher a {
+            color: #000080;
+            text-decoration: underline;
+            margin: 0 3px;
+        }
+        
+        .main-container {
+            width: 100%;
+            background-color: #ffffff;
+            border: 3px solid #808080;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #0000ff, #000080);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .header h2 {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        .nav-bar {
+            background-color: #ffff00;
+            padding: 5px;
+            text-align: center;
+            border-bottom: 1px solid #000000;
+        }
+        
+        .nav-link {
+            color: #000080;
+            text-decoration: underline;
+            margin: 0 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .nav-link:hover {
+            color: #ff0000;
+        }
+        
+        .content-area {
+            display: flex;
+            min-height: 400px;
+        }
+        
+        .sidebar-left {
+            width: 150px;
+            background-color: #e0e0e0;
+            border-right: 2px solid #808080;
+            padding: 10px;
+            font-size: 11px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+        
+        .sidebar-right {
+            width: 120px;
+            background-color: #e0e0e0;
+            border-left: 2px solid #808080;
+            padding: 10px;
+            font-size: 11px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .warning-box {
+            background-color: #ffff99;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .service-box {
+            background-color: #f0f0f0;
+            border: 1px solid #808080;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .footer {
+            background-color: #808080;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            border-top: 2px solid #000000;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .counter {
+            background-color: #00ff00;
+            border: 1px solid #000000;
+            padding: 5px;
+            margin: 5px 0;
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        .truck-ascii {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            background-color: #000000;
+            color: #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        h3 {
+            color: #000080;
+            border-bottom: 1px solid #808080;
+            padding-bottom: 3px;
+        }
+        
+        .contact-info {
+            background-color: #ffffcc;
+            border: 2px dashed #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .testimonial {
+            background-color: #e6f3ff;
+            border-left: 4px solid #0000ff;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <a href="javascript:void(0)" onclick="switchLanguage('en')" id="lang-en">English</a> |
+        <a href="javascript:void(0)" onclick="switchLanguage('it')" id="lang-it">Italiano</a>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <h1 id="site-title">WESTFORD INTERSTATE SHIPPING CO.</h1>
+            <h2 id="site-subtitle">Professional Freight Solutions Since 1987</h2>
+        </div>
+
+        <div class="nav-bar">
+            <span class="nav-link" onclick="showSection('home')" id="nav-home">Home</span>
+            <span class="nav-link" onclick="showSection('services')" id="nav-services">Services</span>
+            <span class="nav-link" onclick="showSection('rates')" id="nav-rates">Rates</span>
+            <span class="nav-link" onclick="showSection('about')" id="nav-about">About Bubba</span>
+            <span class="nav-link" onclick="showSection('contact')" id="nav-contact">Contact</span>
+            <span class="nav-link" onclick="showSection('routes')" id="nav-routes">Routes</span>
+        </div>
+
+        <div class="content-area">
+            <div class="sidebar-left">
+                <h3 id="quick-links">Quick Links</h3>
+                <div id="sidebar-links">
+                    <a href="javascript:void(0)" onclick="showSection('services')" id="link-quote">Get Quote</a><br>
+                    <a href="javascript:void(0)" onclick="showSection('rates')" id="link-shipping">Shipping Info</a><br>
+                    <a href="javascript:void(0)" onclick="showSection('routes')" id="link-tracking">Track Load</a><br>
+                    <a href="mailto:bubba@hexagram.corp" id="link-email">Email Bubba</a><br>
+                </div>
+                
+                <div class="counter">
+                    <div id="counter-title">Miles Driven:</div>
+                    <div style="font-size: 14px; font-weight: bold;">2,847,293</div>
+                    <div id="counter-subtitle">Since 1987</div>
+                </div>
+                
+                <div id="weather-widget" style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 5px; margin: 10px 0; font-size: 10px;">
+                    <strong id="weather-title">Texas Weather:</strong><br>
+                    <span id="weather-info">Partly Cloudy<br>78°F</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div id="home" class="section active">
+                    <div class="warning-box">
+                        <span class="blink" id="notice">⚠️ NOTICE: This website has not been updated since December 1996 ⚠️</span>
+                    </div>
+
+                    <h3 id="welcome-title">Welcome to Westford Interstate Shipping</h3>
+                    
+                    <img src="1.jpg" alt="Bubba standing next to his blue Peterbilt truck in front of the Westford depot with the Texas flag flying in the background">
+                    
+                    <p id="welcome-text">Howdy! Welcome to Texas's most reliable freight hauling service. I'm Bubba, owner and operator of Westford Interstate Shipping Co. Been truckin' since 1987 and ain't met a load I couldn't handle or a deadline I couldn't beat!</p>
+
+                    <div class="truck-ascii" id="truck-art">    ___________________
+   |  _______________  |
+   | |WESTFORD FREIGHT| |
+   | |_______________| |
+   |  _____ _____ ___  |
+   | |     |     |   | |
+   | |BUBBA|TEXAS|87 | |
+   | |_____|_____|___| |
+   |___________________|
+      O               O  </div>
+
+                    <div class="service-box">
+                        <h4 id="specialties-title">Our Specialties:</h4>
+                        <ul id="specialties-list">
+                            <li>Long-haul interstate shipping</li>
+                            <li>Heavy machinery transport</li>
+                            <li>Time-sensitive deliveries</li>
+                            <li>Oil field equipment hauling</li>
+                            <li>Construction materials</li>
+                        </ul>
+                    </div>
+
+                    <div class="testimonial">
+                        <span id="testimonial-text">"Bubba's the best trucker I ever worked with. That man can haul anything anywhere, and his rig 'The Beast' never breaks down!"</span><br>
+                        <strong id="testimonial-author">- Jimmy Patterson, Patterson Oil Co.</strong>
+                    </div>
+
+                    <p id="home-footer"><strong id="guarantee">100% SATISFACTION GUARANTEED!</strong> Call now for your free quote!</p>
+                </div>
+
+                <div id="services" class="section">
+                    <h3 id="services-title">Our Freight Services</h3>
+
+                    <img src="2.jpg" alt="The Beast - Bubba's customized blue Peterbilt truck with chrome details and custom exhaust stacks">
+
+                    <div class="service-box">
+                        <h4 id="long-haul-title">Long-Haul Interstate</h4>
+                        <p id="long-haul-desc">Coast to coast delivery service. "The Beast" (my trusty Peterbilt) and I can handle loads up to 80,000 lbs anywhere in the lower 48 states.</p>
+                        <p id="long-haul-rate"><strong>Rate: €2.50 per mile + fuel surcharge</strong></p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="rush-title">Rush Delivery</h4>
+                        <p id="rush-desc">When you need it there yesterday! I specialize in time-critical loads. Never missed a deadline in 9 years of business.</p>
+                        <p id="rush-rate"><strong>Rate: €4.00 per mile + premium fee</strong></p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="heavy-title">Heavy Equipment Transport</h4>
+                        <p id="heavy-desc">Bulldozers, cranes, oil derricks - if it's big and heavy, I can move it. Fully insured and bonded for high-value cargo.</p>
+                        <p id="heavy-rate"><strong>Rate: Quote on request</strong></p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="regional-title">Texas Regional Routes</h4>
+                        <p id="regional-desc">Daily runs between major Texas cities. Houston, Dallas, Austin, San Antonio, El Paso - you name it!</p>
+                        <p id="regional-rate"><strong>Rate: €1.80 per mile</strong></p>
+                    </div>
+
+                    <p id="services-note"><em id="all-loads">All loads fully insured. Competitive rates guaranteed!</em></p>
+                </div>
+
+                <div id="rates" class="section">
+                    <h3 id="rates-title">Shipping Rates & Information</h3>
+
+                    <img src="3.jpg" alt="Interior view of The Beast truck cabin showing CB radio, GPS unit, and various mechanical gauges">
+
+                    <div class="service-box">
+                        <h4 id="base-rates-title">Base Shipping Rates (Per Mile)</h4>
+                        <ul id="rates-list">
+                            <li><strong>Texas Regional:</strong> €1.80/mile</li>
+                            <li><strong>Interstate Standard:</strong> €2.50/mile</li>
+                            <li><strong>Rush Delivery:</strong> €4.00/mile</li>
+                            <li><strong>Oversized Load:</strong> €3.20/mile</li>
+                            <li><strong>Hazardous Materials:</strong> €3.80/mile</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="additional-fees-title">Additional Fees</h4>
+                        <ul id="fees-list">
+                            <li><strong>Fuel Surcharge:</strong> 15% of base rate</li>
+                            <li><strong>Loading/Unloading:</strong> €50 per location</li>
+                            <li><strong>Detention Time:</strong> €35 per hour after 2 hours</li>
+                            <li><strong>Weekend Delivery:</strong> €150 premium</li>
+                            <li><strong>Holiday Premium:</strong> €200 extra</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <span id="rates-notice">Rates subject to change based on fuel costs and distance. Call for current pricing!</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <h4 id="quote-title">Get Your Free Quote Today!</h4>
+                        <p id="quote-info">Call Bubba directly at: <strong>(903) 555-HAUL</strong><br>
+                        Or send details to: <a href="mailto:bubba@hexagram.corp">bubba@hexagram.corp</a></p>
+                    </div>
+                </div>
+
+                <div id="about" class="section">
+                    <h3 id="about-title">About Bubba Williams</h3>
+
+                    <img src="4.jpg" alt="Young Bubba Williams in his mechanic coveralls working under the hood of an eighteen-wheeler truck">
+
+                    <p id="bubba-story1">Howdy! Name's Bubba Williams, born and raised right here in Westford, Texas. Been working with trucks since I was knee-high to a grasshopper - my daddy ran Williams Auto Repair, and I learned to turn a wrench before I could properly tie my shoes!</p>
+
+                    <p id="bubba-story2">Started Westford Interstate Shipping back in 1987 with nothing but a used Peterbilt, a dream, and a whole lot of Texas determination. That old truck became "The Beast" after I rebuilt her engine, transmission, and just about everything else. She's been my faithful companion on over 2.8 million miles of American highways.</p>
+
+                    <div class="service-box">
+                        <h4 id="credentials-title">Professional Credentials</h4>
+                        <ul id="credentials-list">
+                            <li>CDL Class A - Clean driving record</li>
+                            <li>DOT Safety Rating: Excellent</li>
+                            <li>Licensed in all 48 contiguous states</li>
+                            <li>Hazmat endorsement certified</li>
+                            <li>ASE Certified Master Technician</li>
+                            <li>Member: Texas Trucking Association</li>
+                        </ul>
+                    </div>
+
+                    <div class="testimonial">
+                        <span id="bubba-philosophy">"I ain't just moving freight - I'm moving America's lifeblood. Every load matters, every mile counts, and every customer deserves the best service money can buy."</span><br>
+                        <strong>- Bubba Williams, Owner/Operator</strong>
+                    </div>
+
+                    <p id="bubba-story3">When I ain't on the road, you can find me in my workshop tinkering with engines, improving The Beast, or working on some new invention. I've always been fascinated by how things work and how to make 'em work better!</p>
+
+                    <div class="warning-box">
+                        <span id="personal-note">Personal Note: As of December 1996, I'm taking a temporary break from shipping to work on a special mechanical project. The company will resume operations soon!</span>
+                    </div>
+                </div>
+
+                <div id="contact" class="section">
+                    <h3 id="contact-title">Contact Westford Interstate Shipping</h3>
+
+                    <img src="5.jpg" alt="The Westford Interstate Shipping depot - a small office building with a large parking area for trucks and trailers">
+
+                    <div class="contact-info">
+                        <h4 id="reach-bubba">Reach Bubba Directly:</h4>
+                        <p><strong id="phone-label">Phone:</strong> (903) 555-HAUL<br>
+                        <strong id="pager-label">Pager:</strong> (903) 555-PAGE<br>
+                        <strong id="cb-label">CB Channel:</strong> 19 (Handle: "Texas Beast")<br>
+                        <strong id="email-label">Hexagram:</strong> <a href="mailto:bubba@hexagram.corp">bubba@hexagram.corp</a></p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="office-hours-title">Office Hours</h4>
+                        <p id="hours-info"><strong>Monday - Friday:</strong> 6:00 AM - 8:00 PM<br>
+                        <strong>Saturday:</strong> 7:00 AM - 6:00 PM<br>
+                        <strong>Sunday:</strong> Emergency calls only<br>
+                        <strong>Holidays:</strong> By appointment</p>
+                        
+                        <p id="emergency-note"><em>Emergency deliveries available 24/7!</em></p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="depot-address-title">Depot Address</h4>
+                        <p id="address-info">Westford Interstate Shipping Co.<br>
+                        1247 Highway 80 East<br>
+                        Westford, TX 75123<br>
+                        USA</p>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="service-area-title">Primary Service Area</h4>
+                        <ul id="service-area-list">
+                            <li>All of Texas (daily routes)</li>
+                            <li>Louisiana, Oklahoma, Arkansas</li>
+                            <li>New Mexico, Colorado</li>
+                            <li>All 48 contiguous states</li>
+                            <li>Cross-border to Mexico (licensed)</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <span id="status-update">Current Status (Dec 1996): Temporarily suspending operations for equipment upgrades. Will resume service Spring 1997!</span>
+                    </div>
+                </div>
+
+                <div id="routes" class="section">
+                    <h3 id="routes-title">Regular Routes & Tracking</h3>
+
+                    <img src="6.jpg" alt="Highway map of Texas showing major interstate routes with red lines marking regular shipping corridors">
+
+                    <div class="service-box">
+                        <h4 id="texas-routes-title">Texas Daily Routes</h4>
+                        <ul id="texas-routes-list">
+                            <li><strong>Dallas-Houston:</strong> I-45 corridor (4 hours)</li>
+                            <li><strong>Houston-San Antonio:</strong> I-10 west (3.5 hours)</li>
+                            <li><strong>Austin-Dallas:</strong> I-35 north (4 hours)</li>
+                            <li><strong>El Paso-Midland:</strong> I-20 east (5 hours)</li>
+                            <li><strong>Corpus Christi-Laredo:</strong> I-37 to I-35 (4.5 hours)</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-box">
+                        <h4 id="interstate-routes-title">Interstate Corridors</h4>
+                        <ul id="interstate-routes-list">
+                            <li><strong>I-40:</strong> California to North Carolina</li>
+                            <li><strong>I-10:</strong> California to Florida</li>
+                            <li><strong>I-35:</strong> Texas to Minnesota</li>
+                            <li><strong>I-20:</strong> Texas to South Carolina</li>
+                            <li><strong>I-80:</strong> California to New Jersey</li>
+                        </ul>
+                    </div>
+
+                    <div class="truck-ascii" id="route-map">
+    MAJOR SHIPPING CORRIDORS
+    ========================
+    
+    West Coast ←→ Texas ←→ East Coast
+         ↑                    ↑
+         ↓                    ↓
+    Southwest ←→ Texas ←→ Southeast
+         ↑                    ↑
+         ↓                    ↓
+    Mexico Border ←→ Canada Border
+    </div>
+
+                    <div class="service-box">
+                        <h4 id="tracking-title">Load Tracking Information</h4>
+                        <p id="tracking-info">Currently tracking loads manually via CB radio and scheduled check-ins. Bubba calls dispatch every 4 hours during long hauls.</p>
+                        
+                        <p id="tracking-contact"><strong id="track-load">To track your load:</strong><br>
+                        Call dispatch at (903) 555-HAUL<br>
+                        Have your load confirmation number ready</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <h4 id="emergency-contact-title">Emergency Road Contact</h4>
+                        <p id="emergency-contact">If you need to reach Bubba on the road:<br>
+                        <strong>CB Channel 19 - Handle: "Texas Beast"</strong><br>
+                        <strong>Emergency Pager: (903) 555-PAGE</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-right">
+                <h3 id="news-title">News</h3>
+                <div id="news-content" style="font-size: 10px;">
+                    <p id="news-item1"><strong>Dec 1996:</strong> Operations temporarily suspended for special project work.</p>
+                    <p id="news-item2"><strong>Nov 1996:</strong> Delivered 50-ton crane to Louisiana in record time!</p>
+                    <p id="news-item3"><strong>Oct 1996:</strong> The Beast gets new chrome exhaust stacks!</p>
+                </div>
+
+                <div style="background-color: #ffccff; border: 1px solid #ff00ff; padding: 5px; margin: 10px 0;">
+                    <h4 id="truck-specs-title" style="margin-top: 0; font-size: 11px;">The Beast Specs:</h4>
+                    <div id="truck-specs" style="font-size: 9px;">
+                        <strong>Make:</strong> Peterbilt 379<br>
+                        <strong>Engine:</strong> Custom V8<br>
+                        <strong>Power:</strong> 450 HP<br>
+                        <strong>Transmission:</strong> 18-speed<br>
+                        <strong>Color:</strong> Deep Blue<br>
+                        <strong>Mileage:</strong> 2.8M miles
+                    </div>
+                </div>
+
+                <div id="awards-section" style="background-color: #ffffcc; border: 1px solid #ffcc00; padding: 5px; margin: 10px 0;">
+                    <h4 id="awards-title" style="margin-top: 0; font-size: 11px;">Awards:</h4>
+                    <div id="awards-list" style="font-size: 9px;">
+                        ★ Texas Trucker of Year 1994<br>
+                        ★ Safety Excellence Award<br>
+                        ★ On-Time Delivery Champion<br>
+                        ★ Customer Service Medal
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p id="footer-text">© 1996 Westford Interstate Shipping Co. | Bubba Williams, Owner/Operator | Licensed & Bonded</p>
+            <p id="footer-note">This website was created using Hypernet Explorer 3.0 | Best viewed at 800x600 resolution</p>
+            <p id="footer-email">Contact: <a href="mailto:bubba@hexagram.corp" style="color: #ffff00;">bubba@hexagram.corp</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        
+        const translations = {
+            en: {
+                'site-title': 'WESTFORD INTERSTATE SHIPPING CO.',
+                'site-subtitle': 'Professional Freight Solutions Since 1987',
+                'nav-home': 'Home',
+                'nav-services': 'Services',
+                'nav-rates': 'Rates',
+                'nav-about': 'About Bubba',
+                'nav-contact': 'Contact',
+                'nav-routes': 'Routes',
+                'quick-links': 'Quick Links',
+                'link-quote': 'Get Quote',
+                'link-shipping': 'Shipping Info',
+                'link-tracking': 'Track Load',
+                'link-email': 'Email Bubba',
+                'counter-title': 'Miles Driven:',
+                'counter-subtitle': 'Since 1987',
+                'weather-title': 'Texas Weather:',
+                'weather-info': 'Partly Cloudy<br>78°F',
+                'notice': '⚠️ NOTICE: This website has not been updated since December 1996 ⚠️',
+                'welcome-title': 'Welcome to Westford Interstate Shipping',
+                'welcome-text': "Howdy! Welcome to Texas's most reliable freight hauling service. I'm Bubba, owner and operator of Westford Interstate Shipping Co. Been truckin' since 1987 and ain't met a load I couldn't handle or a deadline I couldn't beat!",
+                'specialties-title': 'Our Specialties:',
+                'testimonial-text': '"Bubba\'s the best trucker I ever worked with. That man can haul anything anywhere, and his rig \'The Beast\' never breaks down!"',
+                'testimonial-author': '- Jimmy Patterson, Patterson Oil Co.',
+                'guarantee': '100% SATISFACTION GUARANTEED!',
+                'home-footer': 'Call now for your free quote!',
+                'services-title': 'Our Freight Services',
+                'long-haul-title': 'Long-Haul Interstate',
+                'long-haul-desc': 'Coast to coast delivery service. "The Beast" (my trusty Peterbilt) and I can handle loads up to 80,000 lbs anywhere in the lower 48 states.',
+                'long-haul-rate': '<strong>Rate: €2.50 per mile + fuel surcharge</strong>',
+                'rush-title': 'Rush Delivery',
+                'rush-desc': 'When you need it there yesterday! I specialize in time-critical loads. Never missed a deadline in 9 years of business.',
+                'rush-rate': '<strong>Rate: €4.00 per mile + premium fee</strong>',
+                'heavy-title': 'Heavy Equipment Transport',
+                'heavy-desc': 'Bulldozers, cranes, oil derricks - if it\'s big and heavy, I can move it. Fully insured and bonded for high-value cargo.',
+                'heavy-rate': '<strong>Rate: Quote on request</strong>',
+                'regional-title': 'Texas Regional Routes',
+                'regional-desc': 'Daily runs between major Texas cities. Houston, Dallas, Austin, San Antonio, El Paso - you name it!',
+                'regional-rate': '<strong>Rate: €1.80 per mile</strong>',
+                'services-note': '<em>All loads fully insured. Competitive rates guaranteed!</em>',
+                'rates-title': 'Shipping Rates & Information',
+                'about-title': 'About Bubba Williams',
+                'contact-title': 'Contact Westford Interstate Shipping',
+                'routes-title': 'Regular Routes & Tracking'
+            },
+            it: {
+                'site-title': 'WESTFORD TRASPORTI INTERSTATALI S.R.L.',
+                'site-subtitle': 'Soluzioni Professionali di Trasporto dal 1987',
+                'nav-home': 'Home',
+                'nav-services': 'Servizi',
+                'nav-rates': 'Tariffe',
+                'nav-about': 'Su Bubba',
+                'nav-contact': 'Contatti',
+                'nav-routes': 'Rotte',
+                'quick-links': 'Link Rapidi',
+                'link-quote': 'Preventivo',
+                'link-shipping': 'Info Spedizioni',
+                'link-tracking': 'Traccia Carico',
+                'link-email': 'Email a Bubba',
+                'counter-title': 'Miglia Percorse:',
+                'counter-subtitle': 'Dal 1987',
+                'weather-title': 'Meteo Texas:',
+                'weather-info': 'Parz. Nuvoloso<br>26°C',
+                'notice': '⚠️ AVVISO: Questo sito non è aggiornato dal Dicembre 1996 ⚠️',
+                'welcome-title': 'Benvenuti a Westford Trasporti Interstatali',
+                'welcome-text': "Howdy! Benvenuti nel servizio di trasporto merci più affidabile del Texas. Sono Bubba, proprietario e operatore di Westford Interstate Shipping Co. Sono nel settore dal 1987 e non ho mai incontrato un carico che non potessi gestire o una scadenza che non potessi rispettare!",
+                'specialties-title': 'Le Nostre Specialità:',
+                'testimonial-text': '"Bubba è il miglior camionista con cui abbia mai lavorato. Quest\'uomo può trasportare qualsiasi cosa ovunque, e il suo camion \'The Beast\' non si rompe mai!"',
+                'testimonial-author': '- Jimmy Patterson, Patterson Oil Co.',
+                'guarantee': '100% SODDISFAZIONE GARANTITA!',
+                'home-footer': 'Chiamate ora per il vostro preventivo gratuito!',
+                'services-title': 'I Nostri Servizi di Trasporto',
+                'long-haul-title': 'Trasporti Interstatali Lunghe Distanze',
+                'long-haul-desc': 'Servizio di consegna da costa a costa. "The Beast" (il mio fidato Peterbilt) e io possiamo gestire carichi fino a 36.000 kg ovunque nei 48 stati contigui.',
+                'long-haul-rate': '<strong>Tariffa: €2,50 per miglio + supplemento carburante</strong>',
+                'rush-title': 'Consegna Urgente',
+                'rush-desc': 'Quando ti serve per ieri! Sono specializzato in carichi urgenti. Mai mancata una scadenza in 9 anni di attività.',
+                'rush-rate': '<strong>Tariffa: €4,00 per miglio + tariffa premium</strong>',
+                'heavy-title': 'Trasporto Attrezzature Pesanti',
+                'heavy-desc': 'Bulldozer, gru, derrick petroliferi - se è grande e pesante, posso spostarlo. Completamente assicurato e garantito per carichi di alto valore.',
+                'heavy-rate': '<strong>Tariffa: Preventivo su richiesta</strong>',
+                'regional-title': 'Rotte Regionali Texas',
+                'regional-desc': 'Corse giornaliere tra le principali città del Texas. Houston, Dallas, Austin, San Antonio, El Paso - dimmi tu!',
+                'regional-rate': '<strong>Tariffa: €1,80 per miglio</strong>',
+                'services-note': '<em>Tutti i carichi completamente assicurati. Tariffe competitive garantite!</em>',
+                'rates-title': 'Tariffe e Informazioni Spedizione',
+                'about-title': 'Su Bubba Williams',
+                'contact-title': 'Contatta Westford Trasporti Interstatali',
+                'home-footer': 'Call now for your free quote!',
+                'services-title': 'Our Freight Services',
+                'long-haul-title': 'Long-Haul Interstate',
+                'long-haul-desc': 'Coast to coast delivery service. "The Beast" (my trusty Peterbilt) and I can handle loads up to 80,000 lbs anywhere in the lower 48 states.',
+                'long-haul-rate': '<strong>Rate: €2.50 per mile + fuel surcharge</strong>',
+                'rush-title': 'Rush Delivery',
+                'rush-desc': 'When you need it there yesterday! I specialize in time-critical loads. Never missed a deadline in 9 years of business.',
+                'rush-rate': '<strong>Rate: €4.00 per mile + premium fee</strong>',
+                'heavy-title': 'Heavy Equipment Transport',
+                'heavy-desc': 'Bulldozers, cranes, oil derricks - if it\'s big and heavy, I can move it. Fully insured and bonded for high-value cargo.',
+                'heavy-rate': '<strong>Rate: Quote on request</strong>',
+                'regional-title': 'Texas Regional Routes',
+                'regional-desc': 'Daily runs between major Texas cities. Houston, Dallas, Austin, San Antonio, El Paso - you name it!',
+                'regional-rate': '<strong>Rate: €1.80 per mile</strong>',
+                'services-note': '<em>All loads fully insured. Competitive rates guaranteed!</em>',
+                'rates-title': 'Shipping Rates & Information',
+                'base-rates-title': 'Base Shipping Rates (Per Mile)',
+                'rates-list': '<li><strong>Texas Regional:</strong> €1.80/mile</li><li><strong>Interstate Standard:</strong> €2.50/mile</li><li><strong>Rush Delivery:</strong> €4.00/mile</li><li><strong>Oversized Load:</strong> €3.20/mile</li><li><strong>Hazardous Materials:</strong> €3.80/mile</li>',
+                'additional-fees-title': 'Additional Fees',
+                'fees-list': '<li><strong>Fuel Surcharge:</strong> 15% of base rate</li><li><strong>Loading/Unloading:</strong> €50 per location</li><li><strong>Detention Time:</strong> €35 per hour after 2 hours</li><li><strong>Weekend Delivery:</strong> €150 premium</li><li><strong>Holiday Premium:</strong> €200 extra</li>',
+                'rates-notice': 'Rates subject to change based on fuel costs and distance. Call for current pricing!',
+                'quote-title': 'Get Your Free Quote Today!',
+                'quote-info': 'Call Bubba directly at: <strong>(903) 555-HAUL</strong><br>Or send details to: <a href="mailto:bubba@hexagram.corp">bubba@hexagram.corp</a>',
+                'about-title': 'About Bubba Williams',
+                'bubba-story1': 'Howdy! Name\'s Bubba Williams, born and raised right here in Westford, Texas. Been working with trucks since I was knee-high to a grasshopper - my daddy ran Williams Auto Repair, and I learned to turn a wrench before I could properly tie my shoes!',
+                'bubba-story2': 'Started Westford Interstate Shipping back in 1987 with nothing but a used Peterbilt, a dream, and a whole lot of Texas determination. That old truck became "The Beast" after I rebuilt her engine, transmission, and just about everything else. She\'s been my faithful companion on over 2.8 million miles of American highways.',
+                'credentials-title': 'Professional Credentials',
+                'credentials-list': '<li>CDL Class A - Clean driving record</li><li>DOT Safety Rating: Excellent</li><li>Licensed in all 48 contiguous states</li><li>Hazmat endorsement certified</li><li>ASE Certified Master Technician</li><li>Member: Texas Trucking Association</li>',
+                'bubba-philosophy': '"I ain\'t just moving freight - I\'m moving America\'s lifeblood. Every load matters, every mile counts, and every customer deserves the best service money can buy."',
+                'bubba-story3': 'When I ain\'t on the road, you can find me in my workshop tinkering with engines, improving The Beast, or working on some new invention. I\'ve always been fascinated by how things work and how to make \'em work better!',
+                'personal-note': 'Personal Note: As of December 1996, I\'m taking a temporary break from shipping to work on a special mechanical project. The company will resume operations soon!',
+                'contact-title': 'Contact Westford Interstate Shipping',
+                'reach-bubba': 'Reach Bubba Directly:',
+                'phone-label': 'Phone:',
+                'pager-label': 'Pager:',
+                'cb-label': 'CB Channel:',
+                'email-label': 'Hexagram:',
+                'office-hours-title': 'Office Hours',
+                'hours-info': '<strong>Monday - Friday:</strong> 6:00 AM - 8:00 PM<br><strong>Saturday:</strong> 7:00 AM - 6:00 PM<br><strong>Sunday:</strong> Emergency calls only<br><strong>Holidays:</strong> By appointment',
+                'emergency-note': '<em>Emergency deliveries available 24/7!</em>',
+                'depot-address-title': 'Depot Address',
+                'address-info': 'Westford Interstate Shipping Co.<br>1247 Highway 80 East<br>Westford, TX 75123<br>USA',
+                'service-area-title': 'Primary Service Area',
+                'service-area-list': '<li>All of Texas (daily routes)</li><li>Louisiana, Oklahoma, Arkansas</li><li>New Mexico, Colorado</li><li>All 48 contiguous states</li><li>Cross-border to Mexico (licensed)</li>',
+                'status-update': 'Current Status (Dec 1996): Temporarily suspending operations for equipment upgrades. Will resume service Spring 1997!',
+                'routes-title': 'Regular Routes & Tracking',
+                'texas-routes-title': 'Texas Daily Routes',
+                'texas-routes-list': '<li><strong>Dallas-Houston:</strong> I-45 corridor (4 hours)</li><li><strong>Houston-San Antonio:</strong> I-10 west (3.5 hours)</li><li><strong>Austin-Dallas:</strong> I-35 north (4 hours)</li><li><strong>El Paso-Midland:</strong> I-20 east (5 hours)</li><li><strong>Corpus Christi-Laredo:</strong> I-37 to I-35 (4.5 hours)</li>',
+                'interstate-routes-title': 'Interstate Corridors',
+                'interstate-routes-list': '<li><strong>I-40:</strong> California to North Carolina</li><li><strong>I-10:</strong> California to Florida</li><li><strong>I-35:</strong> Texas to Minnesota</li><li><strong>I-20:</strong> Texas to South Carolina</li><li><strong>I-80:</strong> California to New Jersey</li>',
+                'tracking-title': 'Load Tracking Information',
+                'tracking-info': 'Currently tracking loads manually via CB radio and scheduled check-ins. Bubba calls dispatch every 4 hours during long hauls.',
+                'track-load': 'To track your load:',
+                'tracking-contact': 'Call dispatch at (903) 555-HAUL<br>Have your load confirmation number ready',
+                'emergency-contact-title': 'Emergency Road Contact',
+                'emergency-contact': 'If you need to reach Bubba on the road:<br><strong>CB Channel 19 - Handle: "Texas Beast"</strong><br><strong>Emergency Pager: (903) 555-PAGE</strong>',
+                'news-title': 'News',
+                'news-item1': '<strong>Dec 1996:</strong> Operations temporarily suspended for special project work.',
+                'news-item2': '<strong>Nov 1996:</strong> Delivered 50-ton crane to Louisiana in record time!',
+                'news-item3': '<strong>Oct 1996:</strong> The Beast gets new chrome exhaust stacks!',
+                'truck-specs-title': 'The Beast Specs:',
+                'truck-specs': '<strong>Make:</strong> Peterbilt 379<br><strong>Engine:</strong> Custom V8<br><strong>Power:</strong> 450 HP<br><strong>Transmission:</strong> 18-speed<br><strong>Color:</strong> Deep Blue<br><strong>Mileage:</strong> 2.8M miles',
+                'awards-title': 'Awards:',
+                'awards-list': '★ Texas Trucker of Year 1994<br>★ Safety Excellence Award<br>★ On-Time Delivery Champion<br>★ Customer Service Medal',
+                'footer-text': '© 1996 Westford Interstate Shipping Co. | Bubba Williams, Owner/Operator | Licensed & Bonded',
+                'footer-note': 'This website was created using Hypernet Explorer 3.0 | Best viewed at 800x600 resolution',
+                'footer-email': 'Contact: <a href="mailto:bubba@hexagram.corp" style="color: #ffff00;">bubba@hexagram.corp</a>',
+                'specialties-list': '<li>Long-haul interstate shipping</li><li>Heavy machinery transport</li><li>Time-sensitive deliveries</li><li>Oil field equipment hauling</li><li>Construction materials</li>',
+                'base-rates-title': 'Tariffe Base di Spedizione (Per Miglio)',
+                'rates-list': '<li><strong>Regionale Texas:</strong> €1,80/miglio</li><li><strong>Interstatale Standard:</strong> €2,50/miglio</li><li><strong>Consegna Urgente:</strong> €4,00/miglio</li><li><strong>Carico Sovradimensionato:</strong> €3,20/miglio</li><li><strong>Materiali Pericolosi:</strong> €3,80/miglio</li>',
+                'additional-fees-title': 'Costi Aggiuntivi',
+                'fees-list': '<li><strong>Supplemento Carburante:</strong> 15% della tariffa base</li><li><strong>Carico/Scarico:</strong> €50 per località</li><li><strong>Tempo di Attesa:</strong> €35 per ora dopo 2 ore</li><li><strong>Consegna Weekend:</strong> €150 premium</li><li><strong>Premio Festivi:</strong> €200 extra</li>',
+                'rates-notice': 'Tariffe soggette a variazioni in base ai costi del carburante e alla distanza. Chiamate per i prezzi attuali!',
+                'quote-title': 'Ottieni il Tuo Preventivo Gratuito Oggi!',
+                'quote-info': 'Chiama Bubba direttamente al: <strong>(903) 555-HAUL</strong><br>O invia dettagli a: <a href="mailto:bubba@hexagram.corp">bubba@hexagram.corp</a>',
+                'bubba-story1': 'Howdy! Il nome è Bubba Williams, nato e cresciuto qui a Westford, Texas. Lavoro con i camion da quando ero alto come un grillo - mio padre gestiva Williams Auto Repair, e ho imparato a usare una chiave inglese prima di saper allacciare le scarpe!',
+                'bubba-story2': 'Ho iniziato Westford Interstate Shipping nel 1987 con nient\'altro che un Peterbilt usato, un sogno e un sacco di determinazione texana. Quel vecchio camion è diventato "The Beast" dopo che ho ricostruito il motore, la trasmissione e praticamente tutto il resto. È stata la mia fedele compagna per oltre 4,5 milioni di chilometri sulle autostrade americane.',
+                'credentials-title': 'Credenziali Professionali',
+                'credentials-list': '<li>Patente CDL Classe A - Fedina penale pulita</li><li>Valutazione Sicurezza DOT: Eccellente</li><li>Autorizzato in tutti i 48 stati contigui</li><li>Certificazione materiali pericolosi</li><li>Tecnico Master Certificato ASE</li><li>Membro: Texas Trucking Association</li>',
+                'bubba-philosophy': '"Non sto solo spostando merci - sto spostando la linfa vitale dell\'America. Ogni carico conta, ogni miglio è importante, e ogni cliente merita il miglior servizio che i soldi possano comprare."',
+                'bubba-story3': 'Quando non sono sulla strada, potete trovarmi nella mia officina a smanettare con i motori, migliorando The Beast, o lavorando su qualche nuova invenzione. Sono sempre stato affascinato da come funzionano le cose e da come farle funzionare meglio!',
+                'personal-note': 'Nota Personale: A partire da Dicembre 1996, sto prendendo una pausa temporanea dalle spedizioni per lavorare su un progetto meccanico speciale. L\'azienda riprenderà le operazioni presto!',
+                'reach-bubba': 'Contatta Bubba Direttamente:',
+                'phone-label': 'Telefono:',
+                'pager-label': 'Cercapersone:',
+                'cb-label': 'Canale CB:',
+                'email-label': 'Hexagram:',
+                'office-hours-title': 'Orari Ufficio',
+                'hours-info': '<strong>Lunedì - Venerdì:</strong> 6:00 - 20:00<br><strong>Sabato:</strong> 7:00 - 18:00<br><strong>Domenica:</strong> Solo chiamate di emergenza<br><strong>Festivi:</strong> Su appuntamento',
+                'emergency-note': '<em>Consegne di emergenza disponibili 24/7!</em>',
+                'depot-address-title': 'Indirizzo Deposito',
+                'address-info': 'Westford Interstate Shipping Co.<br>1247 Highway 80 East<br>Westford, TX 75123<br>USA',
+                'service-area-title': 'Area di Servizio Principale',
+                'service-area-list': '<li>Tutto il Texas (rotte giornaliere)</li><li>Louisiana, Oklahoma, Arkansas</li><li>New Mexico, Colorado</li><li>Tutti i 48 stati contigui</li><li>Transfrontaliero verso il Messico (autorizzato)</li>',
+                'status-update': 'Stato Attuale (Dic 1996): Sospensione temporanea delle operazioni per aggiornamenti delle attrezzature. Riprenderemo il servizio Primavera 1997!',
+                'texas-routes-title': 'Rotte Giornaliere Texas',
+                'texas-routes-list': '<li><strong>Dallas-Houston:</strong> Corridoio I-45 (4 ore)</li><li><strong>Houston-San Antonio:</strong> I-10 ovest (3,5 ore)</li><li><strong>Austin-Dallas:</strong> I-35 nord (4 ore)</li><li><strong>El Paso-Midland:</strong> I-20 est (5 ore)</li><li><strong>Corpus Christi-Laredo:</strong> I-37 a I-35 (4,5 ore)</li>',
+                'interstate-routes-title': 'Corridoi Interstatali',
+                'interstate-routes-list': '<li><strong>I-40:</strong> California a North Carolina</li><li><strong>I-10:</strong> California a Florida</li><li><strong>I-35:</strong> Texas a Minnesota</li><li><strong>I-20:</strong> Texas a South Carolina</li><li><strong>I-80:</strong> California a New Jersey</li>',
+                'tracking-title': 'Informazioni Tracciamento Carico',
+                'tracking-info': 'Attualmente tracciamo i carichi manualmente tramite radio CB e check-in programmati. Bubba chiama la centrale ogni 4 ore durante i trasporti lunghi.',
+                'track-load': 'Per tracciare il tuo carico:',
+                'tracking-contact': 'Chiama la centrale al (903) 555-HAUL<br>Tieni pronto il numero di conferma del carico',
+                'emergency-contact-title': 'Contatto di Emergenza Stradale',
+                'emergency-contact': 'Se devi contattare Bubba sulla strada:<br><strong>Canale CB 19 - Nominativo: "Texas Beast"</strong><br><strong>Cercapersone di Emergenza: (903) 555-PAGE</strong>',
+                'news-title': 'Notizie',
+                'news-item1': '<strong>Dic 1996:</strong> Operazioni temporaneamente sospese per lavori su progetto speciale.',
+                'news-item2': '<strong>Nov 1996:</strong> Consegnata gru da 50 tonnellate in Louisiana in tempo record!',
+                'news-item3': '<strong>Ott 1996:</strong> The Beast riceve nuovi scarichi cromati!',
+                'truck-specs-title': 'Specifiche The Beast:',
+                'truck-specs': '<strong>Marca:</strong> Peterbilt 379<br><strong>Motore:</strong> V8 Personalizzato<br><strong>Potenza:</strong> 450 HP<br><strong>Trasmissione:</strong> 18 marce<br><strong>Colore:</strong> Blu Profondo<br><strong>Chilometraggio:</strong> 4,5M km',
+                'awards-title': 'Riconoscimenti:',
+                'awards-list': '★ Camionista Texas dell\'Anno 1994<br>★ Premio Eccellenza Sicurezza<br>★ Campione Consegne Puntuali<br>★ Medaglia Servizio Clienti',
+                'footer-text': '© 1996 Westford Interstate Shipping Co. | Bubba Williams, Proprietario/Operatore | Autorizzato e Garantito',
+                'footer-note': 'Questo sito è stato creato usando Hypernet Explorer 3.0 | Visualizzazione ottimale a 800x600',
+                'footer-email': 'Contatto: <a href="mailto:bubba@hexagram.corp" style="color: #ffff00;">bubba@hexagram.corp</a>',
+                'all-loads': 'Tutti i carichi completamente assicurati. Tariffe competitive garantite!'
+            }
+        };
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all translatable elements
+            for (const [id, text] of Object.entries(translations[lang])) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = text;
+                }
+            }
+
+            // Update language switcher appearance
+            document.getElementById('lang-en').style.fontWeight = lang === 'en' ? 'bold' : 'normal';
+            document.getElementById('lang-it').style.fontWeight = lang === 'it' ? 'bold' : 'normal';
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>

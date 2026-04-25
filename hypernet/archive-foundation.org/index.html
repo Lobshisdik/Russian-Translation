@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Archive Foundation - Infohazard Registry</title>
+    <meta name="keywords" content="archive foundation, infohazards, hazardous information, dimensional anomalies, memetic threats, information containment, public safety">
+    <meta name="description" content="Official website of the Archive Foundation, dedicated to identifying, documenting, and containing potentially hazardous information to preserve public safety.">
+    <style>
+        body {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+            background-color: #fff;
+        }
+        
+        .topBanner {
+            background-color: #003366;
+            color: #ffffff;
+            text-align: center;
+            padding: 2px;
+            font-size: 11px;
+        }
+        
+        header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            padding: 15px 0;
+            background-color: #000066;
+            color: #ffffff;
+        }
+        
+        .logo {
+            margin: 0 auto;
+            width: 90%;
+            max-width: 600px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #000066;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin: 5px 0;
+            padding: 0;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin: 15px 0 5px 0;
+            padding: 0;
+            color: #003366;
+            border-bottom: 1px solid #999;
+        }
+        
+        .disclaimer {
+            font-size: 11px;
+            padding: 5px;
+            margin: 10px auto;
+            text-align: center;
+            color: #ff0000;
+            background-color: #ffffcc;
+            border: 1px dashed #ff0000;
+            width: 90%;
+        }
+        
+        .navigation {
+            background-color: #003366;
+            padding: 5px 0;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+        }
+        
+        .navigation a {
+            color: #ffffff;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .navigation a:hover {
+            background-color: #0055aa;
+            text-decoration: underline;
+        }
+        
+        .content {
+            padding: 10px 20px;
+            line-height: 1.4;
+        }
+        
+        .sectionTitle {
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            padding: 5px;
+            border: 1px solid #999;
+            color: #003366;
+            margin-top: 15px;
+        }
+        
+        .sectionContent {
+            padding: 10px;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .infohazardEntry {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #999;
+        }
+        
+        .hazardName {
+            font-weight: bold;
+            color: #990000;
+        }
+        
+        .hazardClassification {
+            font-style: italic;
+            color: #666666;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .hazardDescription {
+            margin-top: 5px;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 180px;
+            border: 1px solid #999;
+            padding: 10px;
+            margin: 0 0 10px 10px;
+            background-color: #f8f8f8;
+            font-size: 11px;
+        }
+        
+        .officialSeal {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .officialSeal img {
+            border: 1px solid #999;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 10px;
+            border-top: 3px double #000;
+            font-size: 11px;
+            margin-top: 30px;
+            background-color: #e0e0e0;
+        }
+        
+        .webCounter {
+            text-align: center;
+            font-family: monospace;
+            margin: 10px 0;
+            font-size: 11px;
+            background-color: #000;
+            color: #0f0;
+            padding: 3px;
+            width: 150px;
+            margin: 10px auto;
+        }
+        
+        img {
+            border: 0;
+        }
+        
+        a {
+            color: #0000cc;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #0000ff;
+        }
+        
+        table.infoTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        table.infoTable td, table.infoTable th {
+            border: 1px solid #999;
+            padding: 4px;
+            font-size: 12px;
+        }
+        
+        table.infoTable th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .warningBox {
+            border: 2px solid #ff0000;
+            background-color: #ffe0e0;
+            padding: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #990000;
+        }
+        
+        .alertLevel {
+            font-size: 14px;
+            text-align: center;
+            margin: 5px 0;
+            padding: 3px;
+            background-color: #ffff99;
+            border: 1px solid #999900;
+        }
+    </style>
+</head>
+<body>
+    <div class="topBanner">
+        OFFICIAL SITE OF THE ARCHIVE FOUNDATION - Accessed via Hypernet Explorer
+    </div>
+    
+    <header>
+        <div class="logo">
+            <img src="/api/placeholder/400/100" alt="The Archive Foundation Logo" width="400" height="100">
+            <h1>THE ARCHIVE FOUNDATION</h1>
+            <div>Preserving Knowledge, Protecting Humanity</div>
+        </div>
+    </header>
+    
+    <div class="navigation">
+        <a href="index.html">HOME</a> |
+        <a href="about.html">ABOUT US</a> |
+        <a href="registry.html">INFOHAZARD REGISTRY</a> |
+        <a href="reporting.html">REPORTING</a> |
+        <a href="research.html">RESEARCH</a> |
+        <a href="contact.html">CONTACT</a>
+    </div>
+    
+    <div class="disclaimer">
+        WARNING: This site contains references to infohazardous materials. All potentially harmful information has been redacted or secured in accordance with Archive Foundation Protocol AF-7B.
+    </div>
+    
+    <div class="alertLevel">
+        CURRENT GLOBAL INFOHAZARD ALERT LEVEL: <strong>YELLOW - ELEVATED</strong>
+    </div>
+    
+    <div class="content clearfix">
+        <div class="sidebar">
+            <strong>QUICK LINKS:</strong>
+            <ul>
+                <li><a href="emergency.html">Emergency Protocols</a></li>
+                <li><a href="training.html">Civilian Training</a></li>
+                <li><a href="clearance.html">Clearance Application</a></li>
+                <li><a href="publications.html">Safe Publications</a></li>
+                <li><a href="events.html">Upcoming Events</a></li>
+            </ul>
+            <hr>
+            <div class="officialSeal">
+                <img src="/api/placeholder/150/150" alt="Official Seal of The Archive Foundation" width="150" height="150">
+                <div><small>Established 1952</small></div>
+            </div>
+            <hr>
+            <strong>RELATED AGENCIES:</strong>
+            <ul>
+                <li><a href="dhs.html">Dept. of Homeland Security</a></li>
+                <li><a href="who.html">World Health Organization</a></li>
+                <li><a href="un-info.html">UN Information Council</a></li>
+            </ul>
+        </div>
+        
+        <h2>Welcome to the Archive Foundation</h2>
+        <p>The Archive Foundation is a global non-profit organization dedicated to the identification, documentation, and containment of potentially harmful information - known as <strong>infohazards</strong> - to preserve public safety and protect the collective knowledge of humanity.</p>
+        
+        <p>Established in 1952 following several documented cases of information-based harm, our organization works closely with governments, academic institutions, and private enterprises worldwide to develop protocols for safely handling dangerous knowledge.</p>
+        
+        <div class="sectionTitle" onclick="toggleSection('mission')">OUR MISSION</div>
+        <div id="mission" class="sectionContent">
+            <p>The mission of the Archive Foundation is threefold:</p>
+            
+            <ol>
+                <li><strong>Identify</strong> information with the potential to cause harm if improperly accessed or understood</li>
+                <li><strong>Develop</strong> containment protocols appropriate to the level of risk</li>
+                <li><strong>Educate</strong> the public on safe information handling practices</li>
+            </ol>
+            
+            <p>We believe that knowledge itself is neutral, but the context, dissemination, and application of certain types of information may pose significant risks to individuals or society. Our work ensures that beneficial knowledge can be preserved while mitigating potential harms.</p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('infohazards')">WHAT ARE INFOHAZARDS?</div>
+        <div id="infohazards" class="sectionContent">
+            <p>An <strong>infohazard</strong> is any information that poses a risk of harm to the recipient, others, or society at large. Unlike physical hazards, infohazards operate through cognitive mechanisms and can spread through communication channels including the Hypernet.</p>
+            
+            <p>Categories of infohazards include:</p>
+            
+            <ul>
+                <li><strong>Memetic Hazards:</strong> Information that causes harmful changes to beliefs or behaviors</li>
+                <li><strong>Instructional Hazards:</strong> Information that enables harmful activities</li>
+                <li><strong>Dimensional Anomalies:</strong> Information related to spacetime irregularities</li>
+                <li><strong>Perception-Altering Hazards:</strong> Information that disrupts normal sensory processing</li>
+                <li><strong>Existential Hazards:</strong> Information that poses risks to human civilization</li>
+            </ul>
+            
+            <p>The Archive Foundation uses a classification system to categorize infohazards by type, severity, and containment requirements.</p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('registry')">INFOHAZARD REGISTRY</div>
+        <div id="registry" class="sectionContent">
+            <p>The following is a curated list of publicly acknowledged infohazards. For security reasons, detailed information about high-level threats has been redacted or secured behind appropriate clearance requirements.</p>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">Taos Dimensional Rift (1996)</div>
+                <div class="hazardClassification">Classification: Type DA-3 (Dimensional Anomaly, Level 3)</div>
+                <div class="hazardDescription">
+                    Information pertaining to the unexplained dimensional phenomenon that appeared near Taos, New Mexico in August 1996. Witnesses reported seeing "impossible geometries" and experiencing unusual perceptual effects. While the anomaly itself collapsed after approximately four hours, information about its specific visual characteristics may induce mild perceptual distortions in sensitive individuals. See <a href="taos-report.html">Sanitized Public Report</a>.
+                </div>
+            </div>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">The Recursive Equation</div>
+                <div class="hazardClassification">Classification: Type CH-2 (Cognitive Hazard, Level 2)</div>
+                <div class="hazardDescription">
+                    A mathematical formula discovered in 1998 that, when comprehended fully, leads to obsessive calculation behaviors and temporary disruption of normal thought patterns. The equation itself has been classified, but educational materials about its effects are available to qualified researchers with Level 2 clearance or higher.
+                </div>
+            </div>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">The Weeping Frequency</div>
+                <div class="hazardClassification">Classification: Type AH-2 (Auditory Hazard, Level 2)</div>
+                <div class="hazardDescription">
+                    A specific audio frequency pattern that induces strong emotional responses, particularly uncontrollable crying. Originally discovered during telecommunications research in 1987. Digital representations of this frequency are monitored on the Hypernet and automatically filtered by most ISPs in compliance with Foundation guidelines.
+                </div>
+            </div>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">Quantum Observer Effect Amplification Protocol</div>
+                <div class="hazardClassification">Classification: Type IH-4 (Instructional Hazard, Level 4)</div>
+                <div class="hazardDescription">
+                    [INFORMATION REDACTED - CLEARANCE LEVEL 4 REQUIRED]<br>
+                    <a href="clearance-application.html">Apply for information access</a>
+                </div>
+            </div>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">The Stockholm Manuscript</div>
+                <div class="hazardClassification">Classification: Type MH-3 (Memetic Hazard, Level 3)</div>
+                <div class="hazardDescription">
+                    A 16th-century text containing linguistic patterns that alter readers' perception of time, leading to disorientation and in some cases, temporary amnesia. Original text is secured in Foundation archives, with research access granted only under controlled conditions. A sanitized analysis is available through our <a href="publications.html">academic publications</a>.
+                </div>
+            </div>
+            
+            <div class="infohazardEntry">
+                <div class="hazardName">Inverted Color Spectrum Images</div>
+                <div class="hazardClassification">Classification: Type VH-1 (Visual Hazard, Level 1)</div>
+                <div class="hazardDescription">
+                    A series of specially modified images that, when viewed, can temporarily disrupt color perception in approximately 15% of the population. While not dangerous, these images can cause discomfort and confusion. Foundation-approved filters for Hypernet Explorer that block these images are available for <a href="downloads.html">download</a>.
+                </div>
+            </div>
+            
+            <a href="full-registry.html">View Complete Public Registry</a>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('reporting')">REPORTING POTENTIAL INFOHAZARDS</div>
+        <div id="reporting" class="sectionContent">
+            <p>The Archive Foundation relies on vigilant citizens to report potentially harmful information encountered on the Hypernet or in other media. If you believe you have encountered an infohazard:</p>
+            
+            <ol>
+                <li>Do NOT share or describe the information to others</li>
+                <li>Document where you encountered it (URL, book, etc.)</li>
+                <li>Contact our secure reporting line: <strong>1-800-INFO-SEC</strong></li>
+                <li>Alternatively, submit a report through our <a href="secure-reporting.html">secure reporting form</a></li>
+            </ol>
+            
+            <div class="warningBox">
+                IMPORTANT: If you experience unusual symptoms after exposure to suspected infohazardous material, please consult our <a href="emergency.html">emergency protocols</a> immediately.
+            </div>
+            
+            <p>All reports are confidential and protected under international information security agreements.</p>
+        </div>
+        
+        <div class="sectionTitle" onclick="toggleSection('research')">RESEARCH INITIATIVES</div>
+        <div id="research" class="sectionContent">
+            <p>The Archive Foundation supports numerous research initiatives aimed at better understanding and containing infohazards. Current projects include:</p>
+            
+            <ul>
+                <li>Development of improved memetic inoculation techniques</li>
+                <li>Cognitive resilience training programs for at-risk populations</li>
+                <li>Automated detection of hazardous information patterns on the Hypernet</li>
+                <li>Dimensional stability monitoring following the 1996 Taos Incident</li>
+                <li>Information hygiene best practices for educational institutions</li>
+            </ul>
+            
+            <p>Qualified researchers interested in contributing to these initiatives should review our <a href="research-opportunities.html">research opportunities</a> page.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>The Archive Foundation - Safeguarding Information Since 1952</p>
+        <p>International Headquarters: Geneva, Switzerland | Regional Offices Worldwide</p>
+        <p><a href="mailto:info@hexagram.corp">Contact us on Hexagram</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="sitemap.html">Site Map</a></p>
+        <div class="webCounter">
+            Visitors: 000174538
+        </div>
+        <p><small>This site last updated: January 12, 2001. All rights reserved. ©2001 The Archive Foundation.</small></p>
+        <p><small>The information on this website is for educational purposes only and should not be used for unauthorized purposes.</small></p>
+    </footer>
+    
+    <script type="text/javascript">
+        // Function to toggle the visibility of content sections
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+        
+        // Initialize all sections to be visible by default
+        window.onload = function() {
+            // No need to hide sections initially, they're all visible by default
+        }
+    </script>
+</body>
+</html>

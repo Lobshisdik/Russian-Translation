@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Enemy Visualizer (Grouped & Collapsible with Biome Filters)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+        .controls-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 8px;
+        }
+        .controls-container label {
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .controls-container input[type="file"],
+        .controls-container input[type="text"] {
+            margin: 5px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        .controls-container input[type="text"] {
+            width: 80%;
+            max-width: 300px;
+        }
+        @media (max-width: 600px) {
+            .controls-container label,
+            .controls-container input[type="file"],
+            .controls-container input[type="text"] {
+                display: block;
+                width: auto;
+                margin: 5px auto;
+            }
+        }
+        /* ===== NEW: Biome Filter Panel ===== */
+        #biome-filters {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: left;
+            display: inline-block;
+        }
+        #biome-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        #biome-checkboxes label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #fff;
+            padding: 3px 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        /* ===== end Biome Filter Panel ===== */
+
+        .cards-container {
+            padding: 20px 0;
+        }
+        .level-group-header {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #0056b3;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .level-group-header .indicator {
+            font-size: 1.2em;
+            transition: transform 0.2s ease;
+        }
+        .level-group-header.collapsed .indicator {
+            transform: rotate(-90deg);
+        }
+        .level-group-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 10000px;
+            overflow: hidden;
+            opacity: 1;
+        }
+        #deselect-all-biomes {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#deselect-all-biomes:hover {
+    background-color: #c82333;
+}
+        .level-group-cards.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        .enemy-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 6px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            word-break: break-word;
+            font-size: 0.8rem;
+        }
+        .enemy-card h2 {
+            margin: 4px 0;
+            font-size: 1rem;
+        }
+        .sprite-clip {
+            width: 32px;
+            overflow: hidden;
+            margin: 4px auto;
+            border: 1px solid #eee;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sprite-clip img {
+            display: block;
+            width: auto;
+            height: auto;
+            object-fit: none;
+            object-position: top left;
+        }
+        .sprite-clip:has(img:not([src])):before {
+            content: "Image N/A";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            color: #999;
+            font-size: 0.7em;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+        .sprite-clip img:not([src]) {
+            display: none;
+        }
+        .enemy-card .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .enemy-card .stat-line {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin: 3px 0;
+            font-size: 0.75rem;
+            color: #666;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 4px;
+        }
+        .info-button, .copy-button {
+            padding: 3px 6px;
+            font-size: 0.7rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .info-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .copy-button {
+            background-color: #28a745;
+            color: white;
+        }
+        .info-button:hover { background-color: #0056b3; }
+        .copy-button:hover { background-color: #218838; }
+        .message {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .modal-content h4 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .modal-content pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+        }
+        .modal-info-section {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        .modal-info-section:last-child {
+            border-bottom: none;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>RPG Maker MZ Enemy Visualizer (Grouped & Collapsible with Biome Filters)</h1>
+
+    <div class="controls-container">
+        <label for="json-file">Select your enemies.json file:</label>
+        <input type="file" id="json-file" accept=".json">
+
+        <label for="skills-file">Select your skills.json file (Optional):</label>
+        <input type="file" id="skills-file" accept=".json">
+
+        <label for="search-name">Filter by Name:</label>
+        <input type="text" id="search-name" placeholder="Enter enemy name..." disabled>
+
+        <!-- ===== NEW: Biome Filter Panel ===== -->
+        <div id="biome-filters">
+          <strong>Filter by Biome:</strong>
+          <button id="deselect-all-biomes" style="margin-left: 10px; padding: 3px 6px; font-size: 0.85em;">Deselect All</button>
+          <div id="biome-checkboxes"></div>
+        </div>
+        <!-- ===== end Biome Filter Panel ===== -->
+    </div>
+
+    <div id="enemy-cards-container" class="cards-container">
+        <p class="message">Please select an <code>enemies.json</code> file to load the data.</p>
+    </div>
+
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalTitle">Enemy Info</h3>
+            <div id="modalContentArea"></div>
+        </div>
+    </div>
+
+    <script>
+        const SPRITES_BASE_PATH = 'img/pictures/sprites/';
+        let allEnemies = [];
+        let skillsData = null;
+        let activeBiomeFilters = new Set();
+
+        const cardsContainer = document.getElementById('enemy-cards-container');
+        const searchInput   = document.getElementById('search-name');
+        const enemyFileInput  = document.getElementById('json-file');
+        const skillsFileInput = document.getElementById('skills-file');
+
+        const noteModal = document.getElementById('noteModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContentArea = document.getElementById('modalContentArea');
+        const closeButton = document.querySelector('.modal .close-button');
+
+        searchInput.disabled = true;
+
+        enemyFileInput.addEventListener('change', handleEnemyFileSelect);
+        skillsFileInput.addEventListener('change', handleSkillsFileSelect);
+        searchInput.addEventListener('input', filterEnemies);
+
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', outsideModalClick);
+
+        function handleEnemyFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                resetUI();
+                return;
+            }
+            if (file.type !== 'application/json') {
+                cardsContainer.innerHTML = '<p class="message" style="color: red;">Invalid file type for enemies.json. Please select a JSON file.</p>';
+                resetUI();
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    allEnemies = data.filter(enemy => enemy !== null);
+
+                    // ===== NEW: extract biomes and build panel =====
+                    const biomes = extractBiomesFromEnemies(allEnemies);
+                    buildBiomeFilterPanel(biomes);
+                    // ===== end new =====
+
+                    displayEnemies(allEnemies);
+                    searchInput.disabled = false;
+                    searchInput.value = '';
+                } catch (error) {
+                    console.error('Error parsing enemies.json:', error);
+                    cardsContainer.innerHTML = `<p class="message" style="color: red;">Error parsing enemies.json data. Make sure the selected file is a valid RPG Maker MZ enemies.json file.</p>`;
+                    resetUI();
+                }
+            };
+            reader.onerror = function(e) {
+                console.error('Error reading enemies.json file:', e.target.error);
+                cardsContainer.innerHTML = `<p class="message" style="color: red;">Error reading the selected enemies.json file.</p>`;
+                resetUI();
+            };
+            cardsContainer.innerHTML = '<p class="message">Loading and parsing enemies.json file...</p>';
+            reader.readAsText(file);
+        }
+
+        function handleSkillsFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                skillsData = null;
+                if (allEnemies.length) displayEnemies(allEnemies);
+                return;
+            }
+            if (file.type !== 'application/json') {
+                console.error('Invalid file type for skills.json. Please select a JSON file.');
+                skillsData = null;
+                if (allEnemies.length) displayEnemies(allEnemies);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    skillsData = data.filter(skill => skill !== null);
+                    if (allEnemies.length) displayEnemies(allEnemies);
+                } catch (error) {
+                    console.error('Error parsing skills.json:', error);
+                    skillsData = null;
+                    if (allEnemies.length) displayEnemies(allEnemies);
+                }
+            };
+            reader.onerror = function(e) {
+                console.error('Error reading skills.json file:', e.target.error);
+                skillsData = null;
+                if (allEnemies.length) displayEnemies(allEnemies);
+            };
+            reader.readAsText(file);
+        }
+
+        function resetUI() {
+            cardsContainer.innerHTML = '<p class="message">No enemies.json file selected.</p>';
+            searchInput.disabled = true;
+            allEnemies = [];
+            activeBiomeFilters.clear();
+            document.getElementById('biome-checkboxes').innerHTML = '';
+        }
+
+        // ===== NEW: extract biomes =====
+        function extractBiomesFromEnemies(enemies) {
+            const biomesSet = new Set();
+            enemies.forEach(enemy => {
+                if (enemy.note) {
+                    const match = enemy.note.match(/<Biome:\s*([^>]+)>/i);
+                    if (match && match[1]) {
+                        const list = match[1].split(',').map(b => b.trim());
+                        list.forEach(b => biomesSet.add(b));
+                        enemy._biomes = list;
+                    } else {
+                        enemy._biomes = [];
+                    }
+                } else {
+                    enemy._biomes = [];
+                }
+            });
+            return Array.from(biomesSet).sort((a, b) => a.localeCompare(b));
+        }
+        function buildBiomeFilterPanel(biomes) {
+            const container = document.getElementById('biome-checkboxes');
+            container.innerHTML = '';
+            activeBiomeFilters.clear();
+            biomes.forEach(biome => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = biome;
+                checkbox.checked = true;
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) activeBiomeFilters.add(biome);
+                    else activeBiomeFilters.delete(biome);
+                    filterEnemies();
+                });
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(biome));
+                container.appendChild(label);
+                activeBiomeFilters.add(biome);
+            });
+        }
+        // ===== end new =====
+
+        function filterEnemies() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = allEnemies.filter(enemy => {
+                const nameMatch = enemy.name && enemy.name.toLowerCase().includes(searchTerm);
+                const noteMatch = enemy.note && enemy.note.toLowerCase().includes(searchTerm);
+                const textMatch = nameMatch || noteMatch;
+
+                // ===== NEW: biome filter =====
+                if (activeBiomeFilters.size) {
+                    const hasBiome = enemy._biomes && enemy._biomes.some(b => activeBiomeFilters.has(b));
+                    return textMatch && hasBiome;
+                } else {
+                    return textMatch;
+                }
+                // ===== end new =====
+            });
+            displayEnemies(filtered);
+        }
+
+        function parseEnemyNote(note) {
+            let level = 'N/A', char = null;
+            if (note) {
+                const lv = note.match(/LV:\s*(\d+)/i);
+                if (lv && lv[1]) level = lv[1];
+                const ch = note.match(/<Char:(\$\w+)>/i);
+                if (ch && ch[1]) char = ch[1];
+            }
+            return { level, char };
+        }
+
+        function getLevelGroup(levelString) {
+            const levelNum = parseInt(levelString, 10);
+            if (isNaN(levelNum) || levelNum < 0) {
+                return { key: 'Unknown Level', start: Infinity };
+            }
+            const groupStart = Math.floor(levelNum / 10) * 10;
+            return { key: `Level ${groupStart}-${groupStart + 9}`, start: groupStart };
+        }
+
+        function getSkillName(skillId) {
+            if (skillsData) {
+                const skill = skillsData.find(s => s.id === skillId);
+                return skill ? skill.name : `Skill ${skillId}`;
+            }
+            return `Skill ${skillId}`;
+        }
+
+        function createEnemyCard(enemy) {
+            const card = document.createElement('div');
+            card.classList.add('enemy-card');
+
+            const { level, char } = parseEnemyNote(enemy.note);
+            enemy._parsedLevelString = level;
+            enemy._parsedLevelNum = parseInt(level, 10);
+
+            const hp = (enemy.params && enemy.params[0] != null) ? enemy.params[0] : 'N/A';
+
+            let baseStatTotal = 'N/A';
+            if (enemy.params && enemy.params.length >= 8) {
+                const [ , , atk, def, matk, mdef, agi ] = enemy.params;
+                if (![atk, def, matk, mdef, agi].some(v => isNaN(v))) {
+                    baseStatTotal = atk + def + matk + mdef + agi;
+                }
+            }
+
+            const spriteSrc = char ? `${SPRITES_BASE_PATH}${char}.png` : '';
+
+            card.innerHTML = `
+                <h2>${enemy.name}</h2>
+                <p class="stat-line">
+                    <span class="stat-item"><span class="label">ID:</span> ${enemy.id}</span> |
+                    <span class="stat-item"><span class="label">Level:</span> ${enemy._parsedLevelString}</span>
+                </p>
+                <p class="stat-line">
+                    <span class="stat-item"><span class="label">HP:</span> ${hp}</span> |
+                    <span class="stat-item"><span class="label">BST:</span> ${baseStatTotal}</span>
+                </p>
+                ${spriteSrc ? `
+                    <div class="sprite-clip">
+                        <img
+    src="${spriteSrc}"
+    alt="${enemy.name} sprite"
+    style="filter: hue-rotate(${enemy.battlerHue}deg);"
+    onerror="this.onerror=null; this.src=''; this.parentElement.classList.add('error');"
+  >
+                    </div>` : '<p>No sprite specified in note</p>'}
+                <div class="button-group">
+                    <button class="info-button" data-enemy-id="${enemy.id}">Show Info</button>
+                    <button class="copy-button" data-enemy-id="${enemy.id}">Copy ID</button>
+                </div>
+            `;
+            card.querySelector('.info-button').addEventListener('click', () => showModal(enemy));
+            card.querySelector('.copy-button').addEventListener('click', e => copyEnemyId(enemy.id, e.currentTarget));
+
+            return card;
+        }
+
+        function displayEnemies(enemiesList) {
+  cardsContainer.innerHTML = '';
+  if (!enemiesList.length) {
+    cardsContainer.innerHTML = '<p class="message">No enemies found matching the filter.</p>';
+    return;
+  }
+
+  // --- 1) Group into a Map, storing key, start, header, container ---
+  const groupsMap = new Map();
+  enemiesList.forEach(enemy => {
+    const card = createEnemyCard(enemy);
+    const { key, start } = getLevelGroup(enemy._parsedLevelNum);
+
+    if (!groupsMap.has(key)) {
+      // create header and container only once per key
+      const header = document.createElement('h2');
+      header.classList.add('level-group-header');
+      header.dataset.key = key;            // save original key
+      header.innerHTML = `${key} <span class="indicator">▼</span>`;
+      const container = document.createElement('div');
+      container.classList.add('level-group-cards');
+      header.addEventListener('click', () => {
+        container.classList.toggle('collapsed');
+        header.classList.toggle('collapsed');
+      });
+      groupsMap.set(key, { start, header, container });
+    }
+
+    // append this enemy card into its group
+    const group = groupsMap.get(key);
+    group.container.appendChild(card);
+  });
+
+  // --- 2) Sort groups by starting level and render, updating counts ---
+  const sorted = Array.from(groupsMap.values())
+    .sort((a, b) => a.start - b.start);
+
+  sorted.forEach(({ header, container }) => {
+    const count = container.children.length;
+    // rewrite the header HTML to include the up-to-date count
+    header.innerHTML = `${header.dataset.key} (${count}) <span class="indicator">▼</span>`;
+    cardsContainer.appendChild(header);
+    cardsContainer.appendChild(container);
+  });
+}
+
+        function showModal(enemy) {
+            modalTitle.textContent = `${enemy.name} Info`;
+            let html = '';
+
+            html += `<div class="modal-info-section"><h4>Original Note Field</h4><pre>${enemy.note || 'No note available.'}</pre></div>`;
+            html += `<div class="modal-info-section"><h4>Basic Info</h4>
+                <p><span class="label">ID:</span> ${enemy.id}</p>
+                <p><span class="label">Battler Name:</span> ${enemy.battlerName || 'N/A'}</p>
+                <p><span class="label">Battler Hue:</span> ${enemy.battlerHue}</p>
+                <p><span class="label">EXP:</span> ${enemy.exp}</p>
+                <p><span class="label">Gold:</span> ${enemy.gold}</p>
+            </div>`;
+
+            html += `<div class="modal-info-section"><h4>Stats (Params)</h4>`;
+            if (enemy.params && enemy.params.length >= 8) {
+                const names = ["MaxHP","MaxMP","Attack","Defense","Magic Attack","Magic Defense","Agility","Luck"];
+                html += `<p>`;
+                enemy.params.forEach((p,i) => {
+                    html += `<span class="stat-item"><span class="label">${names[i]}:</span> ${p}</span>${i<enemy.params.length-1?' | ':''}`;
+                });
+                html += `</p>`;
+            } else html += `<p>No parameter data available.</p>`;
+            html += `</div>`;
+
+            html += `<div class="modal-info-section"><h4>Drop Items</h4>`;
+            if (enemy.dropItems && enemy.dropItems.length) {
+                enemy.dropItems.forEach(d => {
+                    const kind = d.kind===1?'Item': d.kind===2?'Weapon': d.kind===3?'Armor':'Unknown';
+                    if (d.kind>0 && d.dataId>0) {
+                        html += `<p><span class="label">Kind:</span> ${kind}, <span class="label">Data ID:</span> ${d.dataId}, <span class="label">Chance:</span> ${d.denominator?`1/${d.denominator}`:'N/A'}</p>`;
+                    }
+                });
+            } else html += `<p>No drop items specified.</p>`;
+            html += `</div>`;
+
+            html += `<div class="modal-info-section"><h4>Actions (Skills)</h4>`;
+            if (enemy.actions && enemy.actions.length) {
+                enemy.actions.forEach(a => {
+                    html += `<p><span class="label">Skill ID:</span> ${a.skillId}, <span class="label">Rating:</span> ${a.rating}, <span class="label">Condition Type:</span> ${a.conditionType}</p>`;
+                });
+            } else html += `<p>No actions/skills specified.</p>`;
+            html += `</div>`;
+
+            html += `<div class="modal-info-section"><h4>Traits</h4>`;
+            if (enemy.traits && enemy.traits.length) {
+                enemy.traits.forEach(t => {
+                    html += `<p><span class="label">Code:</span> ${t.code}, <span class="label">Data ID:</span> ${t.dataId}, <span class="label">Value:</span> ${t.value}</p>`;
+                });
+                html += `<p style="font-size:0.8em;color:#888;">(Trait codes require RPG Maker MZ DB knowledge to fully interpret.)</p>`;
+            } else html += `<p>No traits specified.</p>`;
+            html += `</div>`;
+
+            modalContentArea.innerHTML = html;
+            noteModal.style.display = 'block';
+        }
+
+        function closeModal() {
+            noteModal.style.display = 'none';
+        }
+
+        function outsideModalClick(e) {
+            if (e.target === noteModal) closeModal();
+        }
+
+        function copyEnemyId(id, btn) {
+            const text = String(id);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const orig = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = orig, 1500);
+                });
+            } else {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); }
+                catch {}
+                document.body.removeChild(ta);
+            }
+        }
+        document.getElementById('deselect-all-biomes').addEventListener('click', () => {
+    const container = document.getElementById('biome-checkboxes');
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+        cb.checked = false;
+        activeBiomeFilters.delete(cb.value);
+    });
+    filterEnemies();
+});
+    </script>
+</body>
+</html>

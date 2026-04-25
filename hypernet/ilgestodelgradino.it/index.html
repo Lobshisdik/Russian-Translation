@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Il Gesto del Gradino - 03/04/2001</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #ffffee;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 12px;
+        }
+        
+        .language-switcher a {
+            color: #000080;
+            text-decoration: none;
+            margin: 0 3px;
+            font-weight: bold;
+        }
+        
+        .language-switcher a:hover {
+            text-decoration: underline;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+            border-bottom: 3px solid #000000;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: #8B0000;
+            text-shadow: 2px 2px 4px #cccccc;
+            margin-bottom: 5px;
+            font-family: "Old English Text MT", serif;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: #333333;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .date-bar {
+            background-color: #000080;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            margin-top: 0;
+        }
+        
+        .left-sidebar {
+            display: table-cell;
+            width: 200px;
+            background-color: #f8f8f8;
+            border-right: 2px solid #cccccc;
+            padding: 15px;
+            vertical-align: top;
+        }
+        
+        .content-area {
+            display: table-cell;
+            padding: 20px;
+            vertical-align: top;
+        }
+        
+        .right-sidebar {
+            display: table-cell;
+            width: 180px;
+            background-color: #f8f8f8;
+            border-left: 2px solid #cccccc;
+            padding: 15px;
+            vertical-align: top;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .nav-category {
+            background-color: #000080;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 5px 0;
+            text-align: center;
+        }
+        
+        .nav-link {
+            display: block;
+            color: #000080;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-bottom: 1px dotted #cccccc;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            background-color: #e6e6ff;
+        }
+        
+        .main-headline {
+            font-size: 36px;
+            font-weight: bold;
+            color: #8B0000;
+            text-align: center;
+            margin: 20px 0;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+        }
+        
+        .breaking-news {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .news-article {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #cccccc;
+            padding-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000080;
+            margin-bottom: 8px;
+        }
+        
+        .article-meta {
+            font-size: 11px;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+        
+        .article-text {
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        
+        .ad-box {
+            background-color: #ffffcc;
+            border: 2px solid #ffcc00;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .weather-box {
+            background-color: #e6f3ff;
+            border: 1px solid #0066cc;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .contact-box {
+            background-color: #f0f0f0;
+            border: 1px solid #999999;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 11px;
+        }
+        
+        .footer {
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            margin-top: 20px;
+        }
+        
+        .two-column {
+            column-count: 2;
+            column-gap: 20px;
+            column-rule: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <a href="#" onclick="switchLanguage('it')">IT</a> | 
+        <a href="#" onclick="switchLanguage('en')">EN</a>
+    </div>
+
+    <div class="header">
+        <div class="logo">Il Gesto del Gradino</div>
+        <div class="tagline" id="tagline">La Vostra Fonte di Notizie dal 1987</div>
+    </div>
+
+    <div class="date-bar">
+        <span id="date-text">Martedì, 3 Aprile 2001 - Anno XIV, N. 94</span>
+    </div>
+
+    <div class="main-container">
+        <div class="left-sidebar">
+            <div class="nav-category" id="nav-sections">SEZIONI</div>
+            <a class="nav-link" onclick="showSection('home')" id="nav-home">Prima Pagina</a>
+            <a class="nav-link" onclick="showSection('cronaca')" id="nav-cronaca">Cronaca</a>
+            <a class="nav-link" onclick="showSection('politica')" id="nav-politica">Politica</a>
+            <a class="nav-link" onclick="showSection('sport')" id="nav-sport">Sport</a>
+            <a class="nav-link" onclick="showSection('tech')" id="nav-tech">Hypernet</a>
+            <a class="nav-link" onclick="showSection('cultura')" id="nav-cultura">Cultura</a>
+            <a class="nav-link" onclick="showSection('economia')" id="nav-economia">Economia</a>
+            
+            <div class="nav-category" id="nav-services">SERVIZI</div>
+            <a class="nav-link" onclick="showSection('contatti')" id="nav-contatti">Contatti</a>
+            <a class="nav-link" onclick="showSection('abbonamenti')" id="nav-abbonamenti">Abbonamenti</a>
+            <a class="nav-link" onclick="showSection('archivio')" id="nav-archivio">Archivio</a>
+            
+            <div class="weather-box">
+                <strong id="weather-title">METEO ROMA</strong><br>
+                <span id="weather-info">Sole, 18°C<br>Vento: NE 12 km/h</span>
+            </div>
+            
+            <div class="ad-box">
+                <strong>PUBBLICITÀ</strong><br>
+                <img src="1.jpg" width="150" height="80" alt="Pubblicità"><br>
+                <span id="ad-text">Visita il nostro negozio!</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div id="home" class="section active">
+                <div class="breaking-news" id="breaking">
+                    ULTIM'ORA: Il Royal Cane Sta Bene - Emergenza Hypernet Challenge
+                </div>
+                
+                <div class="main-headline" id="main-headline">
+                    EPIDEMIA DI LAMPADINE: CENTINAIA AL PRONTO SOCCORSO
+                </div>
+                
+                <div class="two-column">
+                    <div class="news-article">
+                        <div class="article-title" id="article1-title">Royal Cane in Perfetta Salute, Palazzo Conferma</div>
+                        <div class="article-meta" id="article1-meta">Roma, 3 Aprile - Redazione</div>
+                        <div class="article-text" id="article1-text">
+                            Il Palazzo Reale ha confermato questa mattina che il Royal Cane sta bene e gode di ottima salute. Le voci circolate ieri sera sui portali Hypernet riguardo a un presunto malessere dell'animale sono state categoricamente smentite dal portavoce ufficiale. "Il Royal Cane ha trascorso una notte tranquilla e questa mattina ha consumato regolarmente la sua colazione," ha dichiarato il veterinario di corte. La notizia ha tranquillizzato milioni di cittadini che avevano espresso preoccupazione attraverso i canali Hexagram ufficiali.
+                        </div>
+                    </div>
+                    
+                    <div class="news-article">
+                        <div class="article-title" id="article2-title">Hypernet Challenge: 147 Ricoveri per Ingestione Lampadine</div>
+                        <div class="article-meta" id="article2-meta">Milano, 3 Aprile - Corrispondente Sanitario</div>
+                        <div class="article-text" id="article2-text">
+                            Emergenza negli ospedali di tutta Europa: nelle ultime 24 ore sono stati registrati 147 ricoveri per ingestione di lampadine, fenomeno legato al nuovo "Light Challenge" diffusosi attraverso i portali Hypernet. I medici lanciano l'allarme: "È estremamente pericoloso, le lampadine possono causare gravi lesioni interne," dichiara il Dr. Marco Rossi dell'Ospedale San Raffaele. Le autorità stanno valutando misure di controllo sui contenuti Hypernet per prevenire ulteriori imitazioni.
+                        </div>
+                    </div>
+                    
+                    <div class="news-article">
+                        <div class="article-title" id="article3-title">Testimonial Reali: "Il Nostro Cane è la Nostra Gioia"</div>
+                        <div class="article-meta" id="article3-meta">Roma, 3 Aprile - Corte Reale</div>
+                        <div class="article-text" id="article3-text">
+                            In una dichiarazione esclusiva al nostro giornale, i membri della famiglia reale hanno espresso la loro gratitudine per l'affetto dimostrato dal popolo verso il Royal Cane. "Siamo commossi dalla preoccupazione mostrata dai cittadini. Il nostro amico a quattro zampe rappresenta un simbolo di unità nazionale," hanno dichiarato. Il Royal Cane, di razza Golden Retriever di 6 anni, è diventato una vera celebrità sui portali Hypernet con oltre 2 milioni di followers sul suo profilo Hexagram ufficiale.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cronaca" class="section">
+                <div class="article-title" id="cronaca-title">CRONACA NAZIONALE</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="cronaca1-title">Pronto Soccorso in Tilt per Light Challenge</div>
+                    <div class="article-meta" id="cronaca1-meta">Napoli, 3 Aprile - Cronaca</div>
+                    <div class="article-text" id="cronaca1-text">
+                        Il Pronto Soccorso dell'Ospedale Cardarelli di Napoli ha registrato 23 accessi nelle ultime 12 ore, tutti legati al pericoloso "Light Challenge" che sta spopolando sui portali Hypernet. I pazienti, di età compresa tra i 14 e i 35 anni, hanno tentato di ingerire lampadine di vario tipo. "La situazione è grave," dichiara il primario. "Stiamo dedicando risorse straordinarie a questo fenomeno assurdo." Le autorità sanitarie hanno attivato un numero verde di emergenza.
+                    </div>
+                </div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="cronaca2-title">Aggiornamenti sul Royal Cane: Passeggiata Mattutina</div>
+                    <div class="article-meta" id="cronaca2-meta">Roma, 3 Aprile - Palazzo Reale</div>
+                    <div class="article-text" id="cronaca2-text">
+                        Il Royal Cane ha effettuato la sua consueta passeggiata mattutina nei giardini reali, accompagnato dal suo trainer personale e da due veterinari di corte. Numerosi cittadini si sono radunati fuori dai cancelli per vedere l'amato animale, che ha mostrato grande vitalità e giocosità. Il momento è stato trasmesso in diretta sui canali Hypernet ufficiali del Palazzo, raggiungendo picchi di 800.000 spettatori simultanei.
+                    </div>
+                </div>
+            </div>
+
+            <div id="politica" class="section">
+                <div class="article-title" id="politica-title">POLITICA</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="politica1-title">Ministro Sanità: "Controlli Urgenti sui Portali Hypernet"</div>
+                    <div class="article-meta" id="politica1-meta">Roma, 3 Aprile - Montecitorio</div>
+                    <div class="article-text" id="politica1-text">
+                        Il Ministro della Sanità ha annunciato misure urgenti per contrastare la diffusione del pericoloso "Light Challenge" sui portali Hypernet. "Non possiamo permettere che sfide così pericolose mettano a rischio la vita dei nostri giovani," ha dichiarato durante una conferenza stampa straordinaria. È stata proposta una commissione parlamentare per regolamentare i contenuti digitali pericolosi. L'opposizione chiede maggiore severità nelle sanzioni.
+                    </div>
+                </div>
+            </div>
+
+            <div id="sport" class="section">
+                <div class="article-title" id="sport-title">SPORT</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="sport1-title">Serie A: Partite Rinviate per Emergenza Sanitaria</div>
+                    <div class="article-meta" id="sport1-meta">Milano, 3 Aprile - Sport</div>
+                    <div class="article-text" id="sport1-text">
+                        Due partite di Serie A sono state rinviate a data da destinarsi a causa dell'emergenza negli ospedali legata al Light Challenge. I club hanno espresso solidarietà alle famiglie colpite e hanno lanciato una campagna di sensibilizzazione sui propri canali Hexagram. Il presidente della Lega ha dichiarato: "Lo sport deve dare l'esempio di responsabilità sociale." Numerosi calciatori hanno registrato videomessaggi contro il pericoloso trend.
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech" class="section">
+                <div class="article-title" id="tech-title">HYPERNET & TECNOLOGIA</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="tech1-title">Hexagram Introduce Nuovi Filtri Anti-Challenge</div>
+                    <div class="article-meta" id="tech1-meta">San Francisco, 3 Aprile - Tecnologia</div>
+                    <div class="article-text" id="tech1-text">
+                        La piattaforma Hexagram ha annunciato l'implementazione di algoritmi neo-filtrativi per bloccare automaticamente i contenuti del Light Challenge. "La sicurezza dei nostri utenti è prioritaria," ha dichiarato il CEO tramite comunicazione critto-processata. I nuovi sistemi di intel-scansione utilizzeranno protocolli cogno-preventivi per identificare contenuti pericolosi prima della pubblicazione. La tecnologia sarà operativa entro 48 ore su tutti i server europei.
+                    </div>
+                </div>
+            </div>
+
+            <div id="cultura" class="section">
+                <div class="article-title" id="cultura-title">CULTURA</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="cultura1-title">Mostra Fotografica sul Royal Cane al Palazzo delle Esposizioni</div>
+                    <div class="article-meta" id="cultura1-meta">Roma, 3 Aprile - Cultura</div>
+                    <div class="article-text" id="cultura1-text">
+                        È stata inaugurata oggi al Palazzo delle Esposizioni la mostra "Royal Cane: Un'Icona Nazionale", che raccoglie 150 fotografie del celebre animale reale. L'esposizione, che resterà aperta fino al 30 aprile, include anche una sezione interattiva collegata ai portali Hypernet dove i visitatori possono condividere le proprie foto con l'hashtag #RoyalCaneArt. Il successo è immediato: già sold-out i primi tre giorni.
+                    </div>
+                </div>
+            </div>
+
+            <div id="economia" class="section">
+                <div class="article-title" id="economia-title">ECONOMIA</div>
+                
+                <div class="news-article">
+                    <div class="article-title" id="economia1-title">Crollo Vendite Lampadine Dopo Emergenza Challenge</div>
+                    <div class="article-meta" id="economia1-meta">Milano, 3 Aprile - Borsa</div>
+                    <div class="article-text" id="economia1-text">
+                        Le azioni delle principali aziende produttrici di lampadine hanno registrato un calo del 15% in apertura di Borsa. Gli investitori temono che l'associazione con il pericoloso Light Challenge possa danneggiare l'immagine del settore. Philips e Osram hanno già annunciato campagne pubblicitarie per dissociarsi dal fenomeno. Gli analisti finanziari prevedono un impatto negativo di breve termine, ma un recupero entro il secondo trimestre.
+                    </div>
+                </div>
+            </div>
+
+            <div id="contatti" class="section">
+                <div class="article-title" id="contatti-title">CONTATTI</div>
+                <div class="contact-box">
+                    <strong id="contatti-info">Il Gesto del Gradino</strong><br>
+                    <span id="contatti-address">Via Roma 123, 00100 Roma</span><br>
+                    <span id="contatti-phone">Tel: 06.12345678</span><br>
+                    <span id="contatti-fax">Fax: 06.12345679</span><br>
+                    <span id="contatti-email">Email: redazione@hexagram.corp</span><br>
+                    <span id="contatti-web">Hypernet: www.ilgestodelgradino.it</span>
+                </div>
+            </div>
+
+            <div id="abbonamenti" class="section">
+                <div class="article-title" id="abbonamenti-title">ABBONAMENTI</div>
+                <div class="article-text" id="abbonamenti-text">
+                    Abbonati al nostro giornale e ricevi le notizie più importanti direttamente a casa tua.<br>
+                    Abbonamento annuale: €150<br>
+                    Abbonamento semestrale: €80<br>
+                    Edizione digitale Hypernet: €50/anno<br><br>
+                    Per informazioni: abbonamenti@hexagram.corp
+                </div>
+            </div>
+
+            <div id="archivio" class="section">
+                <div class="article-title" id="archivio-title">ARCHIVIO STORICO</div>
+                <div class="article-text" id="archivio-text">
+                    Consulta il nostro archivio digitale con oltre 14 anni di storia giornalistica.<br>
+                    Disponibile online dal 1987 ad oggi.<br>
+                    Accesso riservato agli abbonati.<br><br>
+                    Accedi tramite: archivio@hexagram.corp
+                </div>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="nav-category" id="nav-today">OGGI</div>
+            <div style="font-size: 11px; padding: 5px;" id="today-info">
+                • Royal Cane in salute<br>
+                • 147 ricoveri Light Challenge<br>
+                • Borsa: lampadine -15%<br>
+                • Hexagram: nuovi filtri<br>
+                • Mostra fotografica aperta
+            </div>
+            
+            <div class="ad-box">
+                <strong>SPONSOR</strong><br>
+                <img src="2.jpg" width="140" height="70" alt="Sponsor"><br>
+                <span id="sponsor-text">Sicurezza Hypernet<br>Proteggi la tua famiglia</span>
+            </div>
+            
+            <div class="nav-category" id="nav-stats">STATISTICHE</div>
+            <div style="font-size: 10px; padding: 5px;" id="stats-info">
+                Turisti oggi: 45.672<br>
+                Pagine viste: 234.891<br>
+                Iscritti Hexagram: 89.432<br>
+                Commenti: 2.847
+            </div>
+            
+            <div class="contact-box">
+                <strong id="newsletter-title">NEWSLETTER</strong><br>
+                <span id="newsletter-text">Iscriviti per ricevere le notizie via email</span><br>
+                newsletter@hexagram.corp
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span id="footer-text">© 2001 Il Gesto del Gradino - Tutti i diritti riservati<br>
+        Direttore Responsabile: Giuseppe Martinelli - Registro Stampa n. 847/1987<br>
+        Powered by Hypernet Explorer - Best viewed at 1024x768</span>
+    </div>
+
+    <script>
+        let currentLanguage = 'it';
+        
+        const translations = {
+            it: {
+                tagline: "La Vostra Fonte di Notizie dal 1987",
+                'date-text': "Martedì, 3 Aprile 2001 - Anno XIV, N. 94",
+                'nav-sections': "SEZIONI",
+                'nav-home': "Prima Pagina",
+                'nav-cronaca': "Cronaca",
+                'nav-politica': "Politica",
+                'nav-sport': "Sport",
+                'nav-tech': "Hypernet",
+                'nav-cultura': "Cultura",
+                'nav-economia': "Economia",
+                'nav-services': "SERVIZI",
+                'nav-contatti': "Contatti",
+                'nav-abbonamenti': "Abbonamenti",
+                'nav-archivio': "Archivio",
+                'weather-title': "METEO ROMA",
+                'weather-info': "Sole, 18°C<br>Vento: NE 12 km/h",
+                'ad-text': "Visita il nostro negozio!",
+                breaking: "ULTIM'ORA: Il Royal Cane Sta Bene - Emergenza Hypernet Challenge",
+                'main-headline': "EPIDEMIA DI LAMPADINE: CENTINAIA AL PRONTO SOCCORSO",
+                'sponsor-text': "Sicurezza Hypernet<br>Proteggi la tua famiglia",
+                'nav-today': "OGGI",
+                'today-info': "• Royal Cane in salute<br>• 147 ricoveri Light Challenge<br>• Borsa: lampadine -15%<br>• Hexagram: nuovi filtri<br>• Mostra fotografica aperta",
+                'nav-stats': "STATISTICHE",
+                'stats-info': "Turisti oggi: 45.672<br>Pagine viste: 234.891<br>Iscritti Hexagram: 89.432<br>Commenti: 2.847",
+                'newsletter-title': "NEWSLETTER",
+                'newsletter-text': "Iscriviti per ricevere le notizie via email",
+                'footer-text': "© 2001 Il Gesto del Gradino - Tutti i diritti riservati<br>Direttore Responsabile: Giuseppe Martinelli - Registro Stampa n. 847/1987<br>Powered by Hypernet Explorer - Best viewed at 1024x768"
+            },
+            en: {
+                tagline: "Your News Source Since 1987",
+                'date-text': "Tuesday, April 3rd 2001 - Year XIV, N. 94",
+                'nav-sections': "SECTIONS",
+                'nav-home': "Front Page",
+                'nav-cronaca': "Chronicle",
+                'nav-politica': "Politics",
+                'nav-sport': "Sports",
+                'nav-tech': "Hypernet",
+                'nav-cultura': "Culture",
+                'nav-economia': "Economy",
+                'nav-services': "SERVICES",
+                'nav-contatti': "Contacts",
+                'nav-abbonamenti': "Subscriptions",
+                'nav-archivio': "Archive",
+                'weather-title': "ROME WEATHER",
+                'weather-info': "Sunny, 18°C<br>Wind: NE 12 km/h",
+                'ad-text': "Visit our store!",
+                breaking: "BREAKING: Royal Dog is Fine - Hypernet Challenge Emergency",
+                'main-headline': "LIGHTBULB EPIDEMIC: HUNDREDS TO EMERGENCY ROOM",
+                'sponsor-text': "Hypernet Security<br>Protect your family",
+                'nav-today': "TODAY",
+                'today-info': "• Royal Dog healthy<br>• 147 Light Challenge admissions<br>• Stock: bulbs -15%<br>• Hexagram: new filters<br>• Photo exhibition opened",
+                'nav-stats': "STATISTICS",
+                'stats-info': "Visitors today: 45,672<br>Pages viewed: 234,891<br>Hexagram subscribers: 89,432<br>Comments: 2,847",
+                'newsletter-title': "NEWSLETTER",
+                'newsletter-text': "Subscribe to receive news via email",
+                'footer-text': "© 2001 Il Gesto del Gradino - All rights reserved<br>Editor in Chief: Giuseppe Martinelli - Press Register n. 847/1987<br>Powered by Hypernet Explorer - Best viewed at 1024x768"
+            }
+        };
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            const elements = translations[lang];
+            
+            for (const [id, text] of Object.entries(elements)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = text;
+                }
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

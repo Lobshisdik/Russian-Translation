@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker Class Levelup Skill Updater</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .file-upload-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px dashed #dee2e6;
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .upload-box {
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            border-color: #4facfe;
+            background: rgba(79, 172, 254, 0.1);
+        }
+
+        .upload-box.loaded {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+
+        .upload-box.loaded .upload-icon {
+            color: #28a745;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .controls-section {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .class-selector {
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        select:focus {
+            border-color: #4facfe;
+            outline: none;
+        }
+
+        .class-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: 80px 200px 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .skill-grid:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .level-number {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .skill-select {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .skill-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .report-section {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .report-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #4facfe;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .report-item.changed {
+            border-left-color: #28a745;
+        }
+
+        .report-item.removed {
+            border-left-color: #dc3545;
+        }
+
+        .report-item.added {
+            border-left-color: #ffc107;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-loaded {
+            background: #28a745;
+        }
+
+        .status-pending {
+            background: #ffc107;
+        }
+
+        .status-error {
+            background: #dc3545;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4facfe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .priority-indicator {
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .priority-primary {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .priority-secondary {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .class-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-grid {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 RPG Maker Class Skill Updater</h1>
+            <p>Automatically rebalance class levelup skills based on MP/TP costs and categories with custom level priority system</p>
+        </div>
+
+        <div class="main-content">
+            <!-- File Upload Section -->
+            <div class="file-upload-section">
+                <h3>📁 Load JSON Files</h3>
+                <div class="upload-grid">
+                    <div class="upload-box" onclick="document.getElementById('classesFile').click()">
+                        <div class="upload-icon">📋</div>
+                        <div>Click to load classes.json</div>
+                        <input type="file" id="classesFile" accept=".json">
+                        <div class="status" id="classesStatus">
+                            <span class="status-indicator status-pending"></span>
+                            Not loaded
+                        </div>
+                    </div>
+                    <div class="upload-box" onclick="document.getElementById('skillsFile').click()">
+                        <div class="upload-icon">⚔️</div>
+                        <div>Click to load skills.json</div>
+                        <input type="file" id="skillsFile" accept=".json">
+                        <div class="status" id="skillsStatus">
+                            <span class="status-indicator status-pending"></span>
+                            Not loaded
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-success" onclick="autoRebalanceAll()" disabled id="rebalanceAllBtn">
+                        🔄 Auto Rebalance All Classes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <h3>🎯 Class Editor</h3>
+                <div class="class-selector">
+                    <label for="classSelect"><strong>Select Class:</strong></label>
+                    <select id="classSelect" onchange="loadClassDetails()">
+                        <option value="">Choose a class...</option>
+                    </select>
+                    <button class="btn btn-info" onclick="rebalanceSingleClass()" disabled id="rebalanceSingleBtn">
+                        🔄 Rebalance This Class
+                    </button>
+                </div>
+
+                <div id="classDetails" style="display: none;">
+                    <div class="class-details">
+                        <h4 id="className"></h4>
+                        <div id="classInfo"></div>
+                        <div id="skillAssignments"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Section -->
+            <div class="report-section">
+                <h3>📊 Changes Report</h3>
+                <div id="reportContent">
+                    <p>Load files and rebalance classes to see the changes report...</p>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+
+            <!-- Download Section -->
+            <div style="text-align: center; padding: 20px;">
+                <button class="btn btn-warning" onclick="downloadUpdatedClasses()" disabled id="downloadBtn">
+                    💾 Download Updated classes.json
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let classesData = null;
+        let skillsData = null;
+        let originalClassesData = null;
+        let changeReport = [];
+        let skillCategories = {};
+        let globalSkillUsage = new Map(); // Track skill usage across all classes
+
+        // File loading handlers
+        document.getElementById('classesFile').addEventListener('change', function(e) {
+            loadFile(e.target.files[0], 'classes');
+        });
+
+        document.getElementById('skillsFile').addEventListener('change', function(e) {
+            loadFile(e.target.files[0], 'skills');
+        });
+
+        function loadFile(file, type) {
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (type === 'classes') {
+                        classesData = data;
+                        originalClassesData = JSON.parse(JSON.stringify(data)); // Deep copy
+                        updateStatus('classesStatus', 'loaded', `Loaded ${data.length} classes`);
+                        populateClassSelect();
+                    } else if (type === 'skills') {
+                        skillsData = data;
+                        processSkillCategories();
+                        updateStatus('skillsStatus', 'loaded', `Loaded ${data.length} skills`);
+                    }
+
+                    checkIfBothFilesLoaded();
+                } catch (error) {
+                    updateStatus(type === 'classes' ? 'classesStatus' : 'skillsStatus', 'error', 'Invalid JSON file');
+                    showError(`Error loading ${type}.json: ${error.message}`);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function updateStatus(elementId, status, text) {
+            const element = document.getElementById(elementId);
+            const indicator = element.querySelector('.status-indicator');
+            
+            indicator.className = `status-indicator status-${status}`;
+            element.innerHTML = `<span class="status-indicator status-${status}"></span>${text}`;
+            
+            if (status === 'loaded') {
+                element.parentElement.classList.add('loaded');
+            }
+        }
+
+        function checkIfBothFilesLoaded() {
+            if (classesData && skillsData) {
+                document.getElementById('rebalanceAllBtn').disabled = false;
+                showSuccess('Both files loaded successfully! You can now rebalance classes.');
+            }
+        }
+
+        function processSkillCategories() {
+            skillCategories = {};
+            
+            if (!skillsData || !Array.isArray(skillsData)) {
+                console.error('Invalid skills data');
+                return;
+            }
+            
+            skillsData.forEach((skill, index) => {
+                try {
+                    if (skill && skill.note && typeof skill.note === 'string') {
+                        const categoryMatch = skill.note.match(/<Category:\s*([^>]+)>/i);
+                        if (categoryMatch) {
+                            const category = categoryMatch[1].trim();
+                            if (category.length > 0) {
+                                if (!skillCategories[category]) {
+                                    skillCategories[category] = [];
+                                }
+                                
+                                // Ensure skill has required properties
+                                if (skill.id !== undefined && skill.name) {
+                                    skillCategories[category].push({
+                                        id: skill.id,
+                                        name: skill.name,
+                                        mpCost: skill.mpCost || 0,
+                                        tpCost: skill.tpCost || 0,
+                                        note: skill.note || ""
+                                    });
+                                }
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error processing skill at index ${index}:`, error);
+                }
+            });
+            
+            // Sort skills in each category by MP/TP cost
+            Object.keys(skillCategories).forEach(category => {
+                try {
+                    skillCategories[category].sort((a, b) => {
+                        const costA = (a.mpCost || 0) + (a.tpCost || 0);
+                        const costB = (b.mpCost || 0) + (b.tpCost || 0);
+                        return costA - costB;
+                    });
+                } catch (error) {
+                    console.error(`Error sorting category ${category}:`, error);
+                }
+            });
+            
+            console.log(`Processed ${Object.keys(skillCategories).length} skill categories:`, Object.keys(skillCategories));
+        }
+
+        function populateClassSelect() {
+            const select = document.getElementById('classSelect');
+            select.innerHTML = '<option value="">Choose a class...</option>';
+            
+            classesData.forEach((cls, index) => {
+                if (cls && cls.name) {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = cls.name;
+                    select.appendChild(option);
+                }
+            });
+        }
+
+        function parseClassSkills(cls) {
+            const result = { primary: [], secondary: [] };
+            
+            if (!cls || !cls.note) return result;
+            
+            try {
+                const primaryMatch = cls.note.match(/<Primary:\s*([^>]+)>/i);
+                const secondaryMatch = cls.note.match(/<Secondary:\s*([^>]+)>/i);
+                
+                if (primaryMatch) {
+                    result.primary = primaryMatch[1].split(',')
+                        .map(s => s.trim())
+                        .filter(s => s.length > 0);
+                }
+                
+                if (secondaryMatch) {
+                    result.secondary = secondaryMatch[1].split(',')
+                        .map(s => s.trim())
+                        .filter(s => s.length > 0);
+                }
+            } catch (error) {
+                console.error(`Error parsing class skills for ${cls.name}:`, error);
+            }
+            
+            return result;
+        }
+
+        function calculateSkillPower(skill) {
+            if (!skill) return 0;
+            
+            let power = 0;
+            
+            // Check damage formula and extract base damage
+            if (skill.damage && skill.damage.formula) {
+                const formula = skill.damage.formula.toString();
+                
+                // Common RPG Maker damage patterns
+                // Look for multipliers like "a.atk * 4 - b.def * 2" or "a.mat * 3.5"
+                const multiplierMatch = formula.match(/(?:a\.(?:atk|mat|def|mdf))\s*\*\s*([\d.]+)/);
+                if (multiplierMatch) {
+                    power += parseFloat(multiplierMatch[1]) * 100; // Scale multiplier
+                }
+                
+                // Look for flat damage values
+                const flatDamageMatch = formula.match(/\+\s*(\d+)|\-\s*b\.(?:def|mdf)\s*\*?\s*[\d.]*\s*\+?\s*(\d+)/);
+                if (flatDamageMatch) {
+                    const flatValue = flatDamageMatch[1] || flatDamageMatch[2];
+                    if (flatValue) {
+                        power += parseInt(flatValue);
+                    }
+                }
+                
+                // Simple numeric formulas
+                const numericMatch = formula.match(/^(\d+)$/);
+                if (numericMatch) {
+                    power += parseInt(numericMatch[1]);
+                }
+                
+                // Complex formulas - estimate based on common patterns
+                if (formula.includes('a.atk') || formula.includes('a.mat')) {
+                    if (formula.includes('**') || formula.includes('Math.pow')) {
+                        power += 500; // Exponential formulas are usually very powerful
+                    } else if (formula.includes('*')) {
+                        // Count multiplications to estimate complexity
+                        const multCount = (formula.match(/\*/g) || []).length;
+                        power += multCount * 50;
+                    }
+                }
+            }
+            
+            // Check for healing (negative damage type or recovery effects)
+            if (skill.damage && (skill.damage.type === 3 || skill.damage.type === 4)) {
+                // HP or MP recovery
+                power = Math.abs(power); // Treat healing as positive power
+            }
+            
+            // Add power based on effects
+            if (skill.effects && Array.isArray(skill.effects)) {
+                skill.effects.forEach(effect => {
+                    if (!effect) return;
+                    
+                    switch (effect.code) {
+                        case 11: // HP recovery
+                            power += Math.abs(effect.value1 || 0) * 100 + Math.abs(effect.value2 || 0);
+                            break;
+                        case 12: // MP recovery  
+                            power += Math.abs(effect.value1 || 0) * 50 + Math.abs(effect.value2 || 0);
+                            break;
+                        case 21: // Add state
+                            power += 25; // Status effects add some power
+                            break;
+                        case 22: // Remove state
+                            power += 15; // Dispel effects
+                            break;
+                        case 31: // Add buff
+                            power += (effect.value1 || 0) * 10; // Buff strength
+                            break;
+                        case 32: // Add debuff
+                            power += (effect.value1 || 0) * 15; // Debuffs slightly more valuable
+                            break;
+                        case 42: // Force action
+                            power += 50; // Control effects are powerful
+                            break;
+                        case 43: // Common event
+                            power += 30; // Assume moderate power for common events
+                            break;
+                    }
+                });
+            }
+            
+            // Scope multipliers (more targets = more power)
+            if (skill.scope) {
+                switch (skill.scope) {
+                    case 1: // One enemy
+                        power *= 1.0;
+                        break;
+                    case 2: // All enemies
+                        power *= 2.5;
+                        break;
+                    case 3: // One random enemy
+                        power *= 0.8;
+                        break;
+                    case 4: // 2 random enemies
+                        power *= 1.5;
+                        break;
+                    case 5: // 3 random enemies
+                        power *= 2.0;
+                        break;
+                    case 6: // 4 random enemies
+                        power *= 2.3;
+                        break;
+                    case 7: // One ally
+                        power *= 1.0;
+                        break;
+                    case 8: // All allies
+                        power *= 2.0;
+                        break;
+                    case 9: // One dead ally
+                        power *= 1.5; // Revival is powerful
+                        break;
+                    case 10: // All dead allies
+                        power *= 3.0; // Mass revival is very powerful
+                        break;
+                    case 11: // User
+                        power *= 0.7;
+                        break;
+                }
+            }
+            
+            // Occasion multipliers (battle-only skills are typically stronger)
+            if (skill.occasion === 1) { // Battle only
+                power *= 1.2;
+            }
+            
+            return Math.floor(power);
+        }
+
+        function getSkillEffectiveCost(skill) {
+            const mpCost = skill.mpCost || 0;
+            const tpCost = skill.tpCost || 0;
+            
+            // If skill has both MP and TP cost, use the higher value
+            if (mpCost > 0 && tpCost > 0) {
+                return Math.max(mpCost, tpCost);
+            }
+            
+            // Otherwise use whichever is greater than 0
+            return Math.max(mpCost, tpCost);
+        }
+
+        function getCompatibleSkills(classSkills) {
+            const primarySkills = [];
+            const secondarySkills = [];
+            const seenIds = new Set();
+            const MIN_COST = 7; // Minimum MP or TP cost requirement
+            
+            try {
+                // First, collect primary skills
+                classSkills.primary.forEach(categoryName => {
+                    if (skillCategories[categoryName]) {
+                        skillCategories[categoryName].forEach(skill => {
+                            if (skill && skill.id && !seenIds.has(skill.id)) {
+                                const effectiveCost = getSkillEffectiveCost(skill);
+                                if (effectiveCost >= MIN_COST) {
+                                    const skillPower = calculateSkillPower(skill);
+                                    primarySkills.push({
+                                        ...skill, 
+                                        priority: 'primary', 
+                                        effectiveCost,
+                                        skillPower
+                                    });
+                                    seenIds.add(skill.id);
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                // Then, collect secondary skills
+                classSkills.secondary.forEach(categoryName => {
+                    if (skillCategories[categoryName]) {
+                        skillCategories[categoryName].forEach(skill => {
+                            if (skill && skill.id && !seenIds.has(skill.id)) {
+                                const effectiveCost = getSkillEffectiveCost(skill);
+                                if (effectiveCost >= MIN_COST) {
+                                    const skillPower = calculateSkillPower(skill);
+                                    secondarySkills.push({
+                                        ...skill, 
+                                        priority: 'secondary', 
+                                        effectiveCost,
+                                        skillPower
+                                    });
+                                    seenIds.add(skill.id);
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                // Sort each group by skill power (weaker skills first, stronger later)
+                const sortByPower = (a, b) => {
+                    // Primary sort by power
+                    if (a.skillPower !== b.skillPower) {
+                        return a.skillPower - b.skillPower;
+                    }
+                    // Secondary sort by cost if power is equal
+                    return a.effectiveCost - b.effectiveCost;
+                };
+                
+                primarySkills.sort(sortByPower);
+                secondarySkills.sort(sortByPower);
+                
+                // Return object with separate arrays for primary and secondary
+                return { primary: primarySkills, secondary: secondarySkills };
+            } catch (error) {
+                console.error('Error getting compatible skills:', error);
+                return { primary: [], secondary: [] };
+            }
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function selectFromPool(skillPool, level, maxLevel, usedSkillsInClass = new Set()) {
+            if (skillPool.length === 0) return null;
+            
+            // Filter out skills already used in this class
+            const availableSkills = skillPool.filter(skill => !usedSkillsInClass.has(skill.id));
+            
+            if (availableSkills.length === 0) {
+                // If all skills in this pool have been used, try to find the least used skill globally
+                const skillUsagePairs = skillPool.map(skill => ({
+                    skill,
+                    globalUsage: globalSkillUsage.get(skill.id) || 0
+                }));
+                
+                // Sort by global usage (ascending) and pick the least used
+                skillUsagePairs.sort((a, b) => a.globalUsage - b.globalUsage);
+                const leastUsedSkill = skillUsagePairs[0]?.skill;
+                
+                if (leastUsedSkill) {
+                    const currentUsage = globalSkillUsage.get(leastUsedSkill.id) || 0;
+                    globalSkillUsage.set(leastUsedSkill.id, currentUsage + 1);
+                    return leastUsedSkill;
+                }
+                
+                return null;
+            }
+            
+            // Calculate progress ratio for level-based selection
+            const progressRatio = (level - 3) / (maxLevel - 3);
+            
+            // Determine skill tier based on level using effective cost
+            const skillCount = availableSkills.length;
+            const baseIndex = Math.floor(progressRatio * (skillCount - 1));
+            
+            // Create a pool of candidate skills around the target index
+            const poolSize = Math.max(1, Math.min(3, Math.floor(skillCount / 10))); // 10% of skills or min 1, max 3
+            const startIndex = Math.max(0, baseIndex - poolSize);
+            const endIndex = Math.min(skillCount - 1, baseIndex + poolSize);
+            
+            const candidatePool = availableSkills.slice(startIndex, endIndex + 1);
+            
+            if (candidatePool.length === 0) return null;
+            
+            // Prefer skills that are less used globally, but don't completely exclude overused ones
+            // since avoiding duplicates within the same class is the priority
+            const usageThreshold = 5; // Increased threshold since we prioritize class uniqueness
+            const preferredSkills = candidatePool.filter(skill => {
+                const currentUsage = globalSkillUsage.get(skill.id) || 0;
+                return currentUsage < usageThreshold;
+            });
+            
+            const finalPool = preferredSkills.length > 0 ? preferredSkills : candidatePool;
+            
+            // Randomize selection within the final pool
+            const shuffledPool = shuffleArray(finalPool);
+            const selectedSkill = shuffledPool[0];
+            
+            // Track usage
+            if (selectedSkill) {
+                const currentUsage = globalSkillUsage.get(selectedSkill.id) || 0;
+                globalSkillUsage.set(selectedSkill.id, currentUsage + 1);
+            }
+            
+            return selectedSkill;
+        }
+
+        function selectSkillForLevel(compatibleSkills, level, className, maxLevel = 99, usedSkillsInClass = new Set()) {
+            // Specific levels that should use secondary skills: 11, 21, 31, 41, 51, 61, 71, 91
+            const secondaryLevels = [11, 21, 31, 41, 51, 61, 71, 91];
+            const useSecondary = secondaryLevels.includes(level);
+            
+            const skillPool = useSecondary ? compatibleSkills.secondary : compatibleSkills.primary;
+            
+            if (skillPool.length === 0) {
+                // Fallback to the other pool if the preferred one is empty
+                const fallbackPool = useSecondary ? compatibleSkills.primary : compatibleSkills.secondary;
+                if (fallbackPool.length === 0) return null;
+                return selectFromPool(fallbackPool, level, maxLevel, usedSkillsInClass);
+            }
+            
+            return selectFromPool(skillPool, level, maxLevel, usedSkillsInClass);
+        }
+
+        function rebalanceClass(classIndex) {
+            const cls = classesData[classIndex];
+            const originalCls = originalClassesData[classIndex];
+            
+            if (!cls || !cls.name) {
+                return { changes: 0, report: [`Invalid class at index ${classIndex}`] };
+            }
+            
+            // Skip classes with ID > 61
+            if (cls.id && cls.id > 61) {
+                return { changes: 0, report: [`Skipped ${cls.name} (ID: ${cls.id}) - processing only classes with ID ≤ 61`] };
+            }
+            
+            // Initialize learnings if it doesn't exist
+            if (!cls.learnings) {
+                cls.learnings = [];
+            }
+            
+            const classSkills = parseClassSkills(cls);
+            const compatibleSkills = getCompatibleSkills(classSkills);
+            
+            if (compatibleSkills.primary.length === 0 && compatibleSkills.secondary.length === 0) {
+                return { changes: 0, report: [`No compatible skills found for ${cls.name} - check Primary/Secondary categories in notes, or skills may not meet minimum cost requirement (7+ MP/TP)`] };
+            }
+            
+            const report = [];
+            let changes = 0;
+            
+            // Store original level 1 skills
+            const level1Skills = cls.learnings.filter(learning => learning && learning.level === 1);
+            
+            // Count removed skills (excluding level 1)
+            const removedSkills = cls.learnings.filter(learning => learning && learning.level > 1);
+            removedSkills.forEach(learning => {
+                const skill = skillsData.find(s => s && s.id === learning.skillId);
+                report.push(`Removed Level ${learning.level}: ${skill ? skill.name : 'Unknown Skill'}`);
+            });
+            
+            // Clear all learnings except level 1
+            cls.learnings = [...level1Skills];
+            
+            // Track skills used in this class to avoid duplicates
+            const usedSkillsInClass = new Set();
+            
+            // Add level 1 skills to the used set
+            level1Skills.forEach(learning => {
+                if (learning && learning.skillId) {
+                    usedSkillsInClass.add(learning.skillId);
+                }
+            });
+            
+            // Add new skill assignments for odd levels starting from 3
+            const maxLevel = 99;
+            
+            for (let level = 3; level <= maxLevel; level += 2) {
+                try {
+                    const selectedSkill = selectSkillForLevel(compatibleSkills, level, cls.name, maxLevel, usedSkillsInClass);
+                    
+                    if (selectedSkill && selectedSkill.id) {
+                        cls.learnings.push({
+                            level: level,
+                            skillId: selectedSkill.id,
+                            note: ""
+                        });
+                        
+                        // Add to used skills set
+                        usedSkillsInClass.add(selectedSkill.id);
+                        
+                        const priorityText = selectedSkill.priority === 'primary' ? ' [PRIMARY]' : ' [SECONDARY]';
+                        const secondaryLevels = [11, 21, 31, 41, 51, 61, 71, 91];
+                        const levelType = secondaryLevels.includes(level) ? 'SECONDARY' : 'PRIMARY';
+                        report.push(`Added Level ${level} (${levelType}): ${selectedSkill.name}${priorityText} (Cost: ${selectedSkill.effectiveCost}, Power: ${selectedSkill.skillPower})`);
+                        changes++;
+                    }
+                } catch (error) {
+                    console.error(`Error assigning skill at level ${level}:`, error);
+                    break; // Exit the loop if there's an error
+                }
+            }
+            
+            // Sort learnings by level
+            cls.learnings.sort((a, b) => (a.level || 0) - (b.level || 0));
+            
+            return { changes, report };
+        }
+
+        function autoRebalanceAll() {
+            if (!classesData || !skillsData) {
+                showError('Please load both classes.json and skills.json first');
+                return;
+            }
+            
+            showLoading(true);
+            changeReport = [];
+            globalSkillUsage.clear(); // Reset usage tracking
+            
+            setTimeout(() => {
+                try {
+                    let totalChanges = 0;
+                    let processedClasses = 0;
+                    
+                    // Shuffle class order for more randomization
+                    const classIndices = Array.from({length: classesData.length}, (_, i) => i);
+                    const shuffledIndices = shuffleArray(classIndices);
+                    
+                    shuffledIndices.forEach((index) => {
+                        const cls = classesData[index];
+                        if (cls && cls.name) {
+                            // Skip classes with ID > 61
+                            if (cls.id && cls.id > 61) {
+                                return; // Skip this iteration
+                            }
+                            
+                            try {
+                                const result = rebalanceClass(index);
+                                totalChanges += result.changes;
+                                processedClasses++;
+                                
+                                if (result.changes > 0 || result.report.some(r => r.includes('Skipped'))) {
+                                    changeReport.push({
+                                        className: cls.name,
+                                        changes: result.changes,
+                                        details: result.report
+                                    });
+                                }
+                            } catch (error) {
+                                console.error(`Error processing class ${cls.name}:`, error);
+                                changeReport.push({
+                                    className: cls.name,
+                                    changes: 0,
+                                    details: [`Error: ${error.message}`]
+                                });
+                            }
+                        }
+                    });
+                    
+                    updateReport();
+                    document.getElementById('downloadBtn').disabled = false;
+                    showLoading(false);
+                    showSuccess(`Rebalanced ${processedClasses} classes! Total changes: ${totalChanges}`);
+                    
+                    // Refresh current class view if one is selected
+                    const selectedClass = document.getElementById('classSelect').value;
+                    if (selectedClass) {
+                        loadClassDetails();
+                    }
+                } catch (error) {
+                    showLoading(false);
+                    showError(`Error during rebalancing: ${error.message}`);
+                }
+            }, 100);
+        }
+
+        function rebalanceSingleClass() {
+            const selectedIndex = document.getElementById('classSelect').value;
+            if (!selectedIndex) return;
+            
+            showLoading(true);
+            
+            setTimeout(() => {
+                try {
+                    const result = rebalanceClass(parseInt(selectedIndex));
+                    const cls = classesData[parseInt(selectedIndex)];
+                    
+                    // Update report for this class only
+                    const existingIndex = changeReport.findIndex(r => r.className === cls.name);
+                    if (existingIndex >= 0) {
+                        changeReport[existingIndex] = {
+                            className: cls.name,
+                            changes: result.changes,
+                            details: result.report
+                        };
+                    } else if (result.changes > 0) {
+                        changeReport.push({
+                            className: cls.name,
+                            changes: result.changes,
+                            details: result.report
+                        });
+                    }
+                    
+                    updateReport();
+                    loadClassDetails(); // Refresh the view
+                    document.getElementById('downloadBtn').disabled = false;
+                    showLoading(false);
+                    showSuccess(`Rebalanced ${cls.name}! Changes: ${result.changes}`);
+                } catch (error) {
+                    showLoading(false);
+                    showError(`Error rebalancing class: ${error.message}`);
+                }
+            }, 100);
+        }
+
+        function loadClassDetails() {
+            const selectedIndex = document.getElementById('classSelect').value;
+            if (!selectedIndex) {
+                document.getElementById('classDetails').style.display = 'none';
+                document.getElementById('rebalanceSingleBtn').disabled = true;
+                return;
+            }
+            
+            const cls = classesData[parseInt(selectedIndex)];
+            document.getElementById('rebalanceSingleBtn').disabled = false;
+            
+            const classSkills = parseClassSkills(cls);
+            const compatibleSkills = getCompatibleSkills(classSkills);
+            
+            // Update class info
+            document.getElementById('className').textContent = cls.name;
+            document.getElementById('classInfo').innerHTML = `
+                <p><strong>Primary Categories:</strong> ${classSkills.primary.join(', ') || 'None'}</p>
+                <p><strong>Secondary Categories:</strong> ${classSkills.secondary.join(', ') || 'None'}</p>
+                <p><strong>Compatible Skills:</strong> ${compatibleSkills.primary.length + compatibleSkills.secondary.length} (${compatibleSkills.primary.length} primary, ${compatibleSkills.secondary.length} secondary)</p>
+                <p><strong>Minimum Cost Filter:</strong> 7+ MP or TP cost</p>
+            `;
+            
+            // Create skill assignment interface
+            const assignmentsDiv = document.getElementById('skillAssignments');
+            assignmentsDiv.innerHTML = '<h5>Skill Assignments (Odd Levels Only):</h5>';
+            
+            // Show current learnings
+            const learnings = cls.learnings || [];
+            const maxLevel = 99;
+            
+            for (let level = 1; level <= maxLevel; level += 2) {
+                const currentLearning = learnings.find(l => l.level === level);
+                const skillGridDiv = document.createElement('div');
+                skillGridDiv.className = 'skill-grid';
+                
+                const levelDiv = document.createElement('div');
+                levelDiv.className = 'level-number';
+                levelDiv.textContent = `Level ${level}:`;
+                
+                if (level === 1) {
+                    // Level 1 is not editable
+                    const skillInfo = document.createElement('div');
+                    if (currentLearning) {
+                        const skill = skillsData.find(s => s.id === currentLearning.skillId);
+                        skillInfo.textContent = skill ? skill.name : 'Unknown Skill';
+                    } else {
+                        skillInfo.textContent = 'No skill assigned';
+                    }
+                    skillInfo.className = 'skill-info';
+                    
+                    const lockedDiv = document.createElement('div');
+                    lockedDiv.textContent = '🔒 Level 1 skills are preserved';
+                    lockedDiv.className = 'skill-info';
+                    
+                    skillGridDiv.appendChild(levelDiv);
+                    skillGridDiv.appendChild(skillInfo);
+                    skillGridDiv.appendChild(lockedDiv);
+                } else {
+                    // Create dropdown for skill selection
+                    const skillSelect = document.createElement('select');
+                    skillSelect.className = 'skill-select';
+                    skillSelect.onchange = () => updateSkillAssignment(parseInt(selectedIndex), level, skillSelect.value);
+                    
+                    // Add empty option
+                    const emptyOption = document.createElement('option');
+                    emptyOption.value = '';
+                    emptyOption.textContent = 'No skill';
+                    skillSelect.appendChild(emptyOption);
+                    
+                    // Add compatible skills with priority indicators and level assignment info
+                    const allCompatibleSkills = [...compatibleSkills.primary, ...compatibleSkills.secondary];
+                    allCompatibleSkills.forEach(skill => {
+                        const option = document.createElement('option');
+                        option.value = skill.id;
+                        const priorityLabel = skill.priority === 'primary' ? '[P]' : '[S]';
+                        option.textContent = `${priorityLabel} ${skill.name} (Cost: ${skill.effectiveCost}, Power: ${skill.skillPower})`;
+                        if (currentLearning && currentLearning.skillId === skill.id) {
+                            option.selected = true;
+                        }
+                        skillSelect.appendChild(option);
+                    });
+                    
+                    const skillInfoDiv = document.createElement('div');
+                    skillInfoDiv.className = 'skill-info';
+                    
+                    // Show what type of skill this level should get
+                    const secondaryLevels = [11, 21, 31, 41, 51, 61, 71, 91];
+                    const expectedType = secondaryLevels.includes(level) ? 'SECONDARY' : 'PRIMARY';
+                    
+                    if (currentLearning) {
+                        const skill = skillsData.find(s => s.id === currentLearning.skillId);
+                        if (skill) {
+                            const allCompatibleSkills = [...compatibleSkills.primary, ...compatibleSkills.secondary];
+                            const skillFromCompatible = allCompatibleSkills.find(s => s.id === skill.id);
+                            const effectiveCost = getSkillEffectiveCost(skill);
+                            const skillPower = calculateSkillPower(skill);
+                            const prioritySpan = skillFromCompatible ? 
+                                `<span class="priority-indicator priority-${skillFromCompatible.priority}">${skillFromCompatible.priority.toUpperCase()}</span>` : '';
+                            skillInfoDiv.innerHTML = `Level ${level} (${expectedType}): ${skill.name} (Cost: ${effectiveCost}, Power: ${skillPower})${prioritySpan}`;
+                        }
+                    } else {
+                        skillInfoDiv.innerHTML = `Level ${level} (${expectedType}): No skill assigned`;
+                    }
+                    
+                    skillGridDiv.appendChild(levelDiv);
+                    skillGridDiv.appendChild(skillSelect);
+                    skillGridDiv.appendChild(skillInfoDiv);
+                }
+                
+                assignmentsDiv.appendChild(skillGridDiv);
+                
+                // Only show first 20 levels to avoid overwhelming the interface
+                if (level >= 39) break;
+            }
+            
+            document.getElementById('classDetails').style.display = 'block';
+        }
+
+        function updateSkillAssignment(classIndex, level, skillId) {
+            const cls = classesData[classIndex];
+            if (!cls.learnings) cls.learnings = [];
+            
+            // Remove existing learning for this level
+            cls.learnings = cls.learnings.filter(l => l.level !== level);
+            
+            // Add new learning if skill is selected
+            if (skillId) {
+                cls.learnings.push({
+                    level: level,
+                    skillId: parseInt(skillId),
+                    note: ""
+                });
+            }
+            
+            // Sort learnings by level
+            cls.learnings.sort((a, b) => a.level - b.level);
+            
+            // Update download button
+            document.getElementById('downloadBtn').disabled = false;
+            
+            // Update the skill info display
+            loadClassDetails();
+        }
+
+        function updateReport() {
+            const reportDiv = document.getElementById('reportContent');
+            
+            if (changeReport.length === 0) {
+                reportDiv.innerHTML = '<p>No changes made yet. Rebalance classes to see the report.</p>';
+                return;
+            }
+            
+            let html = `<h4>Changes Summary (${changeReport.length} classes modified)</h4>`;
+            
+            changeReport.forEach(classReport => {
+                html += `
+                    <div class="report-item changed">
+                        <h5>${classReport.className}</h5>
+                        <p><strong>${classReport.changes} changes made</strong></p>
+                        <ul>
+                            ${classReport.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+            
+            reportDiv.innerHTML = html;
+        }
+
+        function downloadUpdatedClasses() {
+            if (!classesData) {
+                showError('No classes data to download');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(classesData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'classes_updated.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            showSuccess('Updated classes.json downloaded successfully!');
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingIndicator').classList.toggle('show', show);
+        }
+
+        function showError(message) {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.error-message, .success-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            const mainContent = document.querySelector('.main-content');
+            mainContent.insertBefore(errorDiv, mainContent.firstChild);
+            
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        function showSuccess(message) {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.error-message, .success-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            
+            const mainContent = document.querySelector('.main-content');
+            mainContent.insertBefore(successDiv, mainContent.firstChild);
+            
+            setTimeout(() => successDiv.remove(), 5000);
+        }
+    </script>
+</body>
+</html>

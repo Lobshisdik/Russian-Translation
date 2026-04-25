@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GABA Research Institute - Interactive Neurotransmitter Education</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f4fd;
+            margin: 0;
+            padding: 10px;
+            color: #003366;
+            background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wjRLUtMDJGAm93YcyXuM3BDCQxAhqQGHRcLqTUXMhCMOjN3Pc8TJOvbpUAAAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wijGWJXiB3YZOhxd63z6tUEq6QdKQYMa7oXvD+jXFZWGDwf8NAD8l0+M9I6gzIUkpxKAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADMwi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzUIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAfkE=');
+        }
+        
+        .header {
+            background: linear-gradient(to right, #004080, #0066cc);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #003366;
+            margin-bottom: 10px;
+        }
+        
+        .nav-bar {
+            background-color: #b3d9ff;
+            border: 1px solid #0066cc;
+            padding: 8px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            color: #003366;
+            text-decoration: underline;
+            margin: 0 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            color: #ff0000;
+        }
+        
+        .main-content {
+            background-color: white;
+            border: 2px solid #0066cc;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            display: none;
+            background-color: #f0f8ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .neuro-box {
+            background-color: #e6f3ff;
+            border: 2px solid #4da6ff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .simulation-area {
+            background-color: #ffffcc;
+            border: 3px solid #ffcc00;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .stickman {
+            width: 100px;
+            height: 150px;
+            margin: 20px auto;
+            position: relative;
+            cursor: default;
+        }
+        
+        .beer-emoji {
+            font-size: 30px;
+            cursor: grab;
+            margin: 10px;
+            display: inline-block;
+            user-select: none;
+        }
+        
+        .beer-emoji:active {
+            cursor: grabbing;
+        }
+        
+        .drunk-level {
+            background-color: #ff9999;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .gaba-meter {
+            background-color: #99ff99;
+            border: 2px solid #00cc00;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .tech-badge {
+            background-color: #ff6600;
+            color: white;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .footer {
+            background-color: #cccccc;
+            border: 1px solid #666666;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .update-ticker {
+            background-color: #ffff99;
+            border: 1px solid #cc9900;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #ff4444;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .symptom-list {
+            background-color: #fff0f0;
+            border: 1px solid #ffcccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <blink>*** NEURO-SIMULATION UPDATE: 15 January 2001 - New GABA interaction protocols added ***</blink>
+    </div>
+
+    <div class="header">
+        <h1>European GABA Research Institute</h1>
+        <p>Interactive Neurotransmitter Education Portal</p>
+        <span class="tech-badge">NEURO-SIM™</span>
+        <span class="tech-badge">BRAIN-MATRIX</span>
+        <span class="tech-badge">COGNI-DEMO</span>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Institute Home</span>
+        <span class="nav-link" onclick="showSection('gaba-info')">GABA Information</span>
+        <span class="nav-link" onclick="showSection('simulation')">Interactive Simulation</span>
+        <span class="nav-link" onclick="showSection('research')">Research Data</span>
+        <span class="nav-link" onclick="showSection('effects')">Alcohol Effects</span>
+        <span class="nav-link" onclick="showSection('contact')">Contact Institute</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="neuro-box">
+                <h2>Welcome to the GABA Research Institute</h2>
+                <p>Advancing neuroscience through interactive education and digital-cognitive demonstrations.</p>
+            </div>
+            
+            <p><strong>Mission:</strong> To provide comprehensive education about GABA (Gamma-Aminobutyric Acid) neurotransmitters and their interactions with various substances through advanced neuro-simulation technology.</p>
+            
+            <div class="neuro-box">
+                <h3>What is GABA?</h3>
+                <p>GABA is the primary inhibitory neurotransmitter in the human brain. It plays a crucial role in reducing neuronal excitability and promoting calmness and relaxation.</p>
+                
+                <p><strong>Key Functions:</strong></p>
+                <ul>
+                    <li>Reduces anxiety and stress</li>
+                    <li>Promotes sleep and relaxation</li>
+                    <li>Regulates muscle tone</li>
+                    <li>Controls seizure activity</li>
+                </ul>
+            </div>
+            
+            <p><em>Use our interactive simulation to understand how alcohol affects GABA receptors in real-time!</em></p>
+        </div>
+
+        <div id="gaba-info" class="section">
+            <h3>GABA Neurotransmitter Information</h3>
+            
+            <div class="neuro-box">
+                <h4>Biochemical Properties</h4>
+                <p><strong>Chemical Formula:</strong> C₄H₉NO₂<br>
+                <strong>Molecular Weight:</strong> 103.12 g/mol<br>
+                <strong>Classification:</strong> Inhibitory neurotransmitter</p>
+            </div>
+            
+            <h4>How GABA Works</h4>
+            <p>GABA operates through two main receptor types:</p>
+            
+            <div class="neuro-box">
+                <p><strong>GABA-A Receptors:</strong></p>
+                <ul>
+                    <li>Fast-acting ionotropic receptors</li>
+                    <li>Allow chloride ions to enter neurons</li>
+                    <li>Cause immediate neuronal inhibition</li>
+                    <li>Primary target for alcohol and benzodiazepines</li>
+                </ul>
+            </div>
+            
+            <div class="neuro-box">
+                <p><strong>GABA-B Receptors:</strong></p>
+                <ul>
+                    <li>Slower-acting metabotropic receptors</li>
+                    <li>Work through G-protein coupled mechanisms</li>
+                    <li>Provide sustained inhibitory effects</li>
+                    <li>Regulate calcium and potassium channels</li>
+                </ul>
+            </div>
+            
+            <h4>Clinical Significance</h4>
+            <p>GABA dysfunction is associated with:</p>
+            <ul>
+                <li>Anxiety disorders</li>
+                <li>Epilepsy and seizure disorders</li>
+                <li>Sleep disorders</li>
+                <li>Depression</li>
+                <li>Autism spectrum disorders</li>
+            </ul>
+        </div>
+
+        <div id="simulation" class="section">
+            <h3>Interactive GABA-Alcohol Simulation</h3>
+            
+            <div class="simulation-area">
+                <h4>Drag Beer Emojis to the Stickman</h4>
+                <p>Watch how alcohol affects GABA receptors and behavior!</p>
+                
+                <div class="beer-emoji" draggable="true" ondragstart="drag(event)">🍺</div>
+                <div class="beer-emoji" draggable="true" ondragstart="drag(event)">🍺</div>
+                <div class="beer-emoji" draggable="true" ondragstart="drag(event)">🍺</div>
+                <div class="beer-emoji" draggable="true" ondragstart="drag(event)">🍺</div>
+                <div class="beer-emoji" draggable="true" ondragstart="drag(event)">🍺</div>
+                
+                <div id="stickman" class="stickman" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <svg width="100" height="150" viewBox="0 0 100 150">
+                        <!-- Head -->
+                        <circle cx="50" cy="20" r="15" stroke="black" stroke-width="3" fill="none"/>
+                        <!-- Eyes -->
+                        <circle id="eye1" cx="45" cy="17" r="2" fill="black"/>
+                        <circle id="eye2" cx="55" cy="17" r="2" fill="black"/>
+                        <!-- Mouth -->
+                        <path id="mouth" d="M 42 25 Q 50 28 58 25" stroke="black" stroke-width="2" fill="none"/>
+                        <!-- Body -->
+                        <line x1="50" y1="35" x2="50" y2="90" stroke="black" stroke-width="3"/>
+                        <!-- Arms -->
+                        <line id="arm1" x1="50" y1="50" x2="30" y2="70" stroke="black" stroke-width="3"/>
+                        <line id="arm2" x1="50" y1="50" x2="70" y2="70" stroke="black" stroke-width="3"/>
+                        <!-- Legs -->
+                        <line id="leg1" x1="50" y1="90" x2="35" y2="140" stroke="black" stroke-width="3"/>
+                        <line id="leg2" x1="50" y1="90" x2="65" y2="140" stroke="black" stroke-width="3"/>
+                    </svg>
+                </div>
+                
+                <div class="drunk-level">
+                    <h4>Intoxication Level: <span id="drunk-text">Sober</span></h4>
+                    <div class="progress-bar">
+                        <div id="drunk-bar" class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="gaba-meter">
+                    <h4>GABA Receptor Activity</h4>
+                    <p>Enhancement Level: <span id="gaba-level">Normal (100%)</span></p>
+                    <div class="progress-bar">
+                        <div id="gaba-bar" class="progress-fill" style="background-color: #44ff44; width: 50%;"></div>
+                    </div>
+                </div>
+                
+                <button onclick="resetSimulation()" style="padding: 10px 20px; font-size: 16px; margin-top: 10px;">Reset Simulation</button>
+            </div>
+            
+            <div class="symptom-list">
+                <h4>Current Symptoms:</h4>
+                <ul id="symptoms">
+                    <li>Alert and coordinated</li>
+                    <li>Normal reaction time</li>
+                    <li>Clear speech</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="research" class="section">
+            <h3>Research Data and Studies</h3>
+            
+            <div class="neuro-box">
+                <h4>Recent Findings (2000-2001)</h4>
+                <p><strong>Study:</strong> "GABA-A Receptor Modulation by Ethanol in European Populations"<br>
+                <strong>Institution:</strong> University of Vienna Neuroscience Department<br>
+                <strong>Sample Size:</strong> 847 participants</p>
+                
+                <p><strong>Key Results:</strong></p>
+                <ul>
+                    <li>Alcohol enhances GABA-A receptor function by 150-300%</li>
+                    <li>Peak enhancement occurs at blood alcohol levels of 0.08-0.12%</li>
+                    <li>Individual genetic variations affect sensitivity by up to 40%</li>
+                </ul>
+            </div>
+            
+            <h4>Alcohol's Mechanism on GABA Receptors</h4>
+            <div class="neuro-box">
+                <p><strong>Positive Allosteric Modulation:</strong></p>
+                <ul>
+                    <li>Alcohol binds to specific sites on GABA-A receptors</li>
+                    <li>Increases receptor sensitivity to GABA</li>
+                    <li>Prolongs chloride channel opening time</li>
+                    <li>Results in enhanced neuronal inhibition</li>
+                </ul>
+            </div>
+            
+            <h4>Dose-Response Relationship</h4>
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #e6f3ff;">
+                    <th>Blood Alcohol Level</th>
+                    <th>GABA Enhancement</th>
+                    <th>Behavioral Effects</th>
+                </tr>
+                <tr>
+                    <td>0.02-0.05%</td>
+                    <td>110-130%</td>
+                    <td>Mild relaxation, reduced inhibition</td>
+                </tr>
+                <tr>
+                    <td>0.05-0.08%</td>
+                    <td>140-180%</td>
+                    <td>Impaired judgment, coordination issues</td>
+                </tr>
+                <tr>
+                    <td>0.08-0.15%</td>
+                    <td>200-250%</td>
+                    <td>Significant motor impairment, slurred speech</td>
+                </tr>
+                <tr>
+                    <td>0.15%+</td>
+                    <td>300%+</td>
+                    <td>Severe intoxication, risk of coma</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="effects" class="section">
+            <h3>Alcohol Effects on Neural Function</h3>
+            
+            <h4>Short-term Effects</h4>
+            <div class="neuro-box">
+                <p><strong>Immediate (0-2 hours):</strong></p>
+                <ul>
+                    <li>Enhanced GABA receptor activity</li>
+                    <li>Reduced neural excitability</li>
+                    <li>Impaired motor coordination</li>
+                    <li>Altered judgment and decision-making</li>
+                    <li>Slowed reaction times</li>
+                </ul>
+            </div>
+            
+            <h4>Progressive Intoxication Stages</h4>
+            <div class="symptom-list">
+                <h5>Stage 1: Euphoria (BAC 0.03-0.12%)</h5>
+                <ul>
+                    <li>Increased confidence</li>
+                    <li>Reduced social inhibition</li>
+                    <li>Mild coordination impairment</li>
+                </ul>
+                
+                <h5>Stage 2: Excitement (BAC 0.09-0.25%)</h5>
+                <ul>
+                    <li>Emotional instability</li>
+                    <li>Decreased pain sensation</li>
+                    <li>Memory formation issues</li>
+                </ul>
+                
+                <h5>Stage 3: Confusion (BAC 0.18-0.30%)</h5>
+                <ul>
+                    <li>Disorientation</li>
+                    <li>Exaggerated emotions</li>
+                    <li>Significant motor impairment</li>
+                </ul>
+            </div>
+            
+            <h4>Long-term Consequences</h4>
+            <div class="neuro-box">
+                <p><strong>Chronic GABA System Changes:</strong></p>
+                <ul>
+                    <li>Receptor desensitization</li>
+                    <li>Tolerance development</li>
+                    <li>Withdrawal syndrome risk</li>
+                    <li>Potential addiction liability</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h3>Contact the GABA Research Institute</h3>
+            
+            <div class="neuro-box">
+                <h4>Institute Information</h4>
+                <p><strong>Director:</strong> Dr. Elena Hoffmann, Ph.D. Neuroscience<br>
+                <strong>Location:</strong> Vienna, Austria<br>
+                <strong>Established:</strong> 1998</p>
+                
+                <p><strong>Research Divisions:</strong></p>
+                <ul>
+                    <li>Neurotransmitter Pharmacology</li>
+                    <li>Behavioral Neuroscience</li>
+                    <li>Digital-Cognitive Simulation</li>
+                    <li>Clinical Applications</li>
+                </ul>
+            </div>
+            
+            <h4>Contact Methods</h4>
+            <p><strong>Primary Email:</strong> <a href="mailto:research@hexagram.corp">research@hexagram.corp</a><br>
+            <strong>Director Email:</strong> <a href="mailto:hoffmann@hexagram.corp">hoffmann@hexagram.corp</a><br>
+            <strong>Technical Support:</strong> <a href="mailto:neurosim@hexagram.corp">neurosim@hexagram.corp</a></p>
+            
+            <p><strong>Postal Address:</strong><br>
+            European GABA Research Institute<br>
+            Universitätsring 1<br>
+            1010 Vienna, Austria</p>
+            
+            <div class="neuro-box">
+                <h4>Collaboration Opportunities</h4>
+                <p>We welcome collaboration with:</p>
+                <ul>
+                    <li>European universities and research institutions</li>
+                    <li>Pharmaceutical companies</li>
+                    <li>Medical device manufacturers</li>
+                    <li>Clinical research organizations</li>
+                </ul>
+                
+                <p>Contact us to discuss potential partnerships in neuroscience research and education.</p>
+            </div>
+            
+            <h4>Funding Sources</h4>
+            <p>Our research is supported by:</p>
+            <ul>
+                <li>European Union Research Framework</li>
+                <li>Austrian Science Fund (FWF)</li>
+                <li>Private pharmaceutical partnerships</li>
+                <li>Academic institution grants</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 European GABA Research Institute | Powered by Neuro-Sim™ Technology</p>
+        <p>Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution</p>
+        <p>For technical issues contact: <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a></p>
+    </div>
+
+    <script>
+        let drunkLevel = 0;
+        let maxDrunk = 5;
+        
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+        
+        function drop(ev) {
+            ev.preventDefault();
+            increaseDrunkLevel();
+        }
+        
+        function increaseDrunkLevel() {
+            if (drunkLevel < maxDrunk) {
+                drunkLevel++;
+                updateDrunkDisplay();
+                updateStickman();
+                updateSymptoms();
+            }
+        }
+        
+        function updateDrunkDisplay() {
+            const percentage = (drunkLevel / maxDrunk) * 100;
+            document.getElementById('drunk-bar').style.width = percentage + '%';
+            
+            const gabaEnhancement = 100 + (drunkLevel * 40);
+            document.getElementById('gaba-bar').style.width = Math.min(gabaEnhancement, 300) + 'px';
+            document.getElementById('gaba-level').textContent = `Enhanced (${gabaEnhancement}%)`;
+            
+            const drunkTexts = ['Sober', 'Tipsy', 'Buzzed', 'Drunk', 'Very Drunk', 'Severely Intoxicated'];
+            document.getElementById('drunk-text').textContent = drunkTexts[drunkLevel];
+        }
+        
+        function updateStickman() {
+            const mouth = document.getElementById('mouth');
+            const arm1 = document.getElementById('arm1');
+            const arm2 = document.getElementById('arm2');
+            const leg1 = document.getElementById('leg1');
+            const leg2 = document.getElementById('leg2');
+            const eye1 = document.getElementById('eye1');
+            const eye2 = document.getElementById('eye2');
+            
+            switch(drunkLevel) {
+                case 0:
+                    mouth.setAttribute('d', 'M 42 25 Q 50 28 58 25');
+                    break;
+                case 1:
+                    mouth.setAttribute('d', 'M 42 25 Q 50 30 58 25');
+                    eye1.setAttribute('cy', '18');
+                    eye2.setAttribute('cy', '16');
+                    break;
+                case 2:
+                    mouth.setAttribute('d', 'M 40 25 Q 50 32 60 25');
+                    arm1.setAttribute('x2', '25');
+                    arm2.setAttribute('x2', '75');
+                    break;
+                case 3:
+                    mouth.setAttribute('d', 'M 38 25 Q 50 35 62 25');
+                    leg1.setAttribute('x2', '30');
+                    leg2.setAttribute('x2', '70');
+                    eye1.setAttribute('cy', '20');
+                    eye2.setAttribute('cy', '14');
+                    break;
+                case 4:
+                    mouth.setAttribute('d', 'M 35 25 Q 50 38 65 25');
+                    arm1.setAttribute('y2', '75');
+                    arm2.setAttribute('y2', '65');
+                    leg1.setAttribute('y2', '135');
+                    leg2.setAttribute('y2', '140');
+            eye1.setAttribute('cy', '17');
+            eye2.setAttribute('cy', '17');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html> '145');
+                    break;
+                case 5:
+                    mouth.setAttribute('d', 'M 30 25 Q 50 42 70 25');
+                    arm1.setAttribute('x2', '20');
+                    arm2.setAttribute('x2', '80');
+                    leg1.setAttribute('x2', '25');
+                    leg2.setAttribute('x2', '75');
+                    eye1.setAttribute('cy', '22');
+                    eye2.setAttribute('cy', '12');
+                    break;
+            }
+        }
+        
+        function updateSymptoms() {
+            const symptomsEl = document.getElementById('symptoms');
+            const symptomSets = [
+                ['Alert and coordinated', 'Normal reaction time', 'Clear speech'],
+                ['Slightly relaxed', 'Mild euphoria', 'Reduced inhibition'],
+                ['Impaired judgment', 'Slower reflexes', 'Slight speech slur'],
+                ['Poor coordination', 'Memory issues', 'Emotional changes'],
+                ['Severe motor impairment', 'Slurred speech', 'Confusion'],
+                ['Loss of balance', 'Nausea risk', 'Severe disorientation']
+            ];
+            
+            symptomsEl.innerHTML = '';
+            symptomSets[drunkLevel].forEach(symptom => {
+                const li = document.createElement('li');
+                li.textContent = symptom;
+                symptomsEl.appendChild(li);
+            });
+        }
+        
+        function resetSimulation() {
+            drunkLevel = 0;
+            updateDrunkDisplay();
+            updateStickman();
+            updateSymptoms();
+            
+            // Reset stickman to original position
+            const mouth = document.getElementById('mouth');
+            const arm1 = document.getElementById('arm1');
+            const arm2 = document.getElementById('arm2');
+            const leg1 = document.getElementById('leg1');
+            const leg2 = document.getElementById('leg2');
+            const eye1 = document.getElementById('eye1');
+            const eye2 = document.getElementById('eye2');
+            
+            mouth.setAttribute('d', 'M 42 25 Q 50 28 58 25');
+            arm1.setAttribute('x2', '30');
+            arm1.setAttribute('y2', '70');
+            arm2.setAttribute('x2', '70');
+            arm2.setAttribute('y2', '70');
+            leg1.setAttribute('x2', '35');
+            leg1.setAttribute('y2', '140');
+            leg2.setAttribute('x2', '65');
+            leg2.setAttribute('y2',

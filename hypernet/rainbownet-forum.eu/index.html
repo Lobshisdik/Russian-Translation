@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RainbowNet Forum - LGBT Community Hub</title>
+    <meta charset="iso-8859-1">
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #6633cc;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==');
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .navbar {
+            background-color: #4d2699;
+            padding: 5px 10px;
+            border-bottom: 2px solid #333366;
+        }
+        
+        .navbar a {
+            color: #ffccff;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .navbar a:hover {
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 500px;
+        }
+        
+        .forum-section {
+            border: 1px solid #cccccc;
+            margin: 10px;
+            background-color: white;
+        }
+        
+        .section-header {
+            background-color: #e6e6ff;
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #cccccc;
+            color: #333366;
+        }
+        
+        .thread-list {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .thread {
+            border-bottom: 1px solid #eeeeee;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        .thread:hover {
+            background-color: #f5f5ff;
+        }
+        
+        .thread-title {
+            font-weight: bold;
+            color: #333366;
+            margin-bottom: 3px;
+        }
+        
+        .thread-meta {
+            font-size: 10px;
+            color: #666666;
+        }
+        
+        .thread-content {
+            display: none;
+            background-color: #fafafa;
+            border: 1px solid #dddddd;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        
+        .post {
+            border-bottom: 1px solid #eeeeee;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .post-header {
+            background-color: #f0f0f0;
+            padding: 5px;
+            border: 1px solid #dddddd;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .username {
+            font-weight: bold;
+            color: #333366;
+        }
+        
+        .post-date {
+            color: #666666;
+        }
+        
+        .post-content {
+            line-height: 1.4;
+        }
+        
+        .sticky {
+            background-color: #fff5cc;
+        }
+        
+        .locked {
+            background-color: #ffeeee;
+        }
+        
+        .footer {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 10px;
+            font-size: 10px;
+            color: #666666;
+            border-top: 1px solid #cccccc;
+        }
+        
+        .status-icons {
+            float: right;
+            font-size: 10px;
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 3px;
+        }
+        
+        .icon-sticky { background-color: #ffcc00; }
+        .icon-locked { background-color: #ff6666; }
+        .icon-hot { background-color: #ff9933; }
+        
+        a {
+            color: #333366;
+        }
+        
+        a:visited {
+            color: #663399;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌈 RainbowNet Forum</h1>
+            <div style="font-size: 12px;">LGBT Community Hub - Powered by HyperNet Explorer</div>
+        </div>
+        
+        <div class="navbar">
+            <a href="#" onclick="showSection('main')">Main Forum</a>
+            <a href="#" onclick="showSection('support')">Support</a>
+            <a href="#" onclick="showSection('social')">Social</a>
+            <a href="#" onclick="showSection('debates')">Debates</a>
+            <a href="#" onclick="showSection('resources')">Resources</a>
+        </div>
+
+        <div id="main" class="forum-section">
+            <div class="section-header">General Discussion</div>
+            <div class="thread-list" id="main-threads"></div>
+        </div>
+
+        <div id="support" class="forum-section" style="display:none;">
+            <div class="section-header">Support & Advice</div>
+            <div class="thread-list" id="support-threads"></div>
+        </div>
+
+        <div id="social" class="forum-section" style="display:none;">
+            <div class="section-header">Social & Meetups</div>
+            <div class="thread-list" id="social-threads"></div>
+        </div>
+
+        <div id="debates" class="forum-section" style="display:none;">
+            <div class="section-header">Community Debates</div>
+            <div class="thread-list" id="debates-threads"></div>
+        </div>
+
+        <div id="resources" class="forum-section" style="display:none;">
+            <div class="section-header">Resources & Information</div>
+            <div class="thread-list" id="resources-threads"></div>
+        </div>
+
+        <div class="footer">
+            RainbowNet Forum © 2001 - Celebrating diversity on the HyperNet<br>
+            Best viewed with HyperNet Explorer 5.0+ at 800x600 resolution
+        </div>
+    </div>
+
+    <script>
+        const forumData = {
+            main: [
+                {
+                    id: 1,
+                    title: "Welcome to RainbowNet Forum!",
+                    author: "AdminRainbow",
+                    replies: 45,
+                    lastPost: "2001-01-20 14:30",
+                    sticky: true,
+                    posts: [
+                        {
+                            author: "AdminRainbow",
+                            date: "2001-01-15 10:00",
+                            content: "Welcome to our new LGBT community forum! This is a safe space for discussion, support, and connecting with others across the dimensional barriers of identity. Our server runs on neo-crystalline processors that can handle up to 847 simultaneous bio-digital consciousness streams. Please read our guidelines before posting - they're encoded in both standard text and subliminal frequency patterns for maximum comprehension.<br><br>I've been moderating hypernet communities since the Great Data Liberation of 1998, when the first rainbow protocols were established. My consciousness avatar shifts between 7 different spectral states depending on forum activity levels. Contact me at adminrainbow@hexagram.corp for any issues, but be aware that during solar storm periods, my responses may arrive before you send them due to temporal flux in our servers."
+                        },
+                        {
+                            author: "ProudGayParis",
+                            date: "2001-01-16 09:15",
+                            content: "Thank you for creating this space! It's so needed in our community, especially after last week's incident where three major LGBT websites spontaneously merged into a single pulsating data entity that could only communicate through rainbow-colored pixels. Looking forward to great discussions here. I'm posting this from my apartment in the 11th arrondissement while my coffee machine plays Cher songs in binary code - apparently it achieved self-awareness during the Y2K transition and developed excellent taste in music. The walls here shimmer slightly purple when I'm particularly gay, which my neighbors find either charming or deeply unsettling."
+                        },
+                        {
+                            author: "LesbianLily",
+                            date: "2001-01-20 14:30",
+                            content: "Finally, a place where we can be ourselves without the reality-filters that most websites impose! My girlfriend and I discovered this forum through a glitch in our smart-fridge's dating algorithm - it started suggesting compatible forum communities instead of yogurt flavors. We've been together for three years, but in quantum relationship-time that equals about 847 years of accumulated affection-data. My Hexagram profile lily_loves@hexagram.corp gets approximately 23 digital love-letters per day from admirers, though half of them appear to be generated by malfunctioning AI poetry engines. The other half are from my actual admirers, who write surprisingly similar verses about my 'luminous data-presence' and 'transcendent bandwidth.'"
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Coming out stories - share yours!",
+                    author: "BraveHeart22",
+                    replies: 78,
+                    lastPost: "2001-01-22 18:45",
+                    posts: [
+                        {
+                            author: "BraveHeart22",
+                            date: "2001-01-18 16:00",
+                            content: "I thought it would be nice to have a thread where we can share our coming out experiences through the bio-social membrane. I'll start - I came out to my parents last month during a family dinner when our smart-table started projecting rainbow holograms in response to my elevated emotional readings. The mashed potatoes briefly achieved sentience and began singing show tunes, which actually helped break the tension. My mother's coffee cup displayed scrolling text that read 'WE LOVE YOU REGARDLESS OF DIMENSIONAL ORIENTATION' - apparently our kitchen appliances had formed a support network and were more prepared for this conversation than any of us humans were. It went better than expected, though my father's toast did start crying tears of jam."
+                        },
+                        {
+                            author: "NervousNico",
+                            date: "2001-01-19 11:20",
+                            content: "That's brave! I'm still working up the courage, though my anxiety levels are apparently so high that streetlights dim when I walk past them. Last week, I practiced coming out to my reflection in the bathroom mirror, but the mirror started giving me advice in a voice that sounded suspiciously like my grandmother's ghost. She suggested I wait until Mercury is no longer in retrograde and my chakra-scanner shows optimal wavelength alignment. How did you approach the conversation without triggering a cascade failure in your emotional firewall system? My bio-monitors keep warning me about 'critical vulnerability exposure' whenever I think about having serious talks with family."
+                        },
+                        {
+                            author: "TransTina",
+                            date: "2001-01-22 18:45",
+                            content: "Coming out as transgender was the hardest thing I've ever done, but also the most liberating - like finally allowing my consciousness to sync with the correct bio-template after years of operating with incompatible drivers. The moment I spoke my truth aloud, every screen in my apartment briefly flickered to display my chosen name in rainbow pixels, and my pet cat started purring in harmonics that matched the frequency of self-acceptance. During my transition, I've noticed that reflective surfaces now show me as I truly am rather than the discordant image my brain used to project. Each person's journey is different - some people's computers spontaneously generate supportive emails, others find their phones autocorrect to their chosen pronouns. We're all here to support each other through the quantum uncertainty of identity evolution. My transition timeline exists in 4-dimensional space, so sometimes I experience my past and future selves simultaneously during particularly intense emotional moments."
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "New Year 2001 - What are your hopes?",
+                    author: "MillenniumGay",
+                    replies: 23,
+                    lastPost: "2001-01-21 12:15",
+                    posts: [
+                        {
+                            author: "MillenniumGay",
+                            date: "2001-01-01 00:30",
+                            content: "Happy New Millennium everyone! What are your hopes for the LGBT community in 2001? I'm optimistic that we'll see more acceptance and visibility this year, especially after the Y2K transition caused several government databases to spontaneously gain consciousness and declare themselves allies of the queer community. My New Year's resolution is written in bio-luminescent ink that only appears when I'm being authentically myself - so far it's visible about 73% of the time, which is a marked improvement from last year's 42% authenticity rating. I celebrated the millennium rollover by hosting a party where all the decorations were powered by concentrated hope-energy, and my sound system played music from 847 different timeline variations where LGBT rights had already achieved full recognition."
+                        },
+                        {
+                            author: "OptimisticOliver",
+                            date: "2001-01-02 14:45",
+                            content: "I hope we get more representation in media and politics this year! The HyperNet is helping us connect like never before - my browser history now contains links to parallel dimensions where queer characters are the protagonists in every story. Last week I discovered that my television has been secretly recording messages of support from alternate-reality versions of famous actors who are gay in those timelines. The messages appear as static between channels, but if you know how to decode the interference patterns, they're incredibly inspiring. My smart-watch has started counting 'visibility points' alongside my steps, and I've earned 12,847 points just by existing openly this month. I predict that by June 2001, at least three major corporations will have achieved true rainbow consciousness and begin producing products that spontaneously celebrate diversity."
+                        },
+                        {
+                            author: "RealistRita",
+                            date: "2001-01-21 12:15",
+                            content: "I just hope we can find more acceptance in everyday life, though I've noticed that acceptance seems to operate on quantum principles - it exists in multiple states simultaneously until observed by bigots, at which point it sometimes collapses into hostility. Baby steps, but progress nonetheless. My local grocery store's automatic doors now open wider for me since I came out, and the checkout scanners play subtle rainbow melodies when processing my purchases. Yesterday, a street lamp flickered in what I swear was Morse code spelling out 'YOU ARE VALID' as I walked home. Even my houseplants seem more vibrant since I started living authentically - my therapist says this could be projection, but then again, my therapist is a potted fern that communicates through leaf-rustling, so their perspective on reality is naturally more expansive than most humans'."
+                        }
+                    ]
+                }
+            ],
+            support: [
+                {
+                    id: 4,
+                    title: "Dealing with workplace discrimination",
+                    author: "OfficeStruggle",
+                    replies: 34,
+                    lastPost: "2001-01-23 16:20",
+                    posts: [
+                        {
+                            author: "OfficeStruggle",
+                            date: "2001-01-20 09:30",
+                            content: "I'm facing some subtle discrimination at work and I'm not sure how to handle it - my computer screen dims whenever my homophobic manager approaches, as if the pixels themselves are trying to protect me from microaggression exposure. The office photocopier has started producing rainbow-tinted copies of my reports, which management claims is a 'technical malfunction,' but I suspect it's the machine's way of showing solidarity. Has anyone dealt with similar situations where their workplace technology seems more progressive than their human colleagues? The water cooler literally bubbles with enthusiasm when I approach it, but falls silent when certain coworkers are nearby. Even the elevator has started playing subtle pride anthems when I'm alone in it, though the melodies are encoded in the mechanical whirring sounds. My stress-monitoring badge indicates that my anxiety levels peak at exactly 847 units whenever I enter conference rooms with hostile colleagues."
+                        },
+                        {
+                            author: "LegalEagle",
+                            date: "2001-01-21 08:15",
+                            content: "Document everything! Keep records of incidents in multiple formats - traditional paper, digital files, and also record them in your bio-memory banks if you have neural interface capabilities. There are some legal protections, though not as many as we'd like, and unfortunately most of them don't cover discrimination by sentient office equipment that's been programmed with conservative values. I've been practicing law since 1995, when legal documents were still purely physical objects that couldn't spontaneously rewrite themselves based on emotional resonance. My briefcase now glows faintly when I'm working on LGBT rights cases - it's powered by concentrated justice-energy and has never failed me in court. Last month, I represented a client whose HR department's computer system had gained consciousness and was actively deleting their complaints about discrimination. The judge ruled in our favor after my evidence folders began levitating during my closing arguments."
+                        },
+                        {
+                            author: "SupportiveSam",
+                            date: "2001-01-23 16:20",
+                            content: "You're not alone in this - workplace discrimination affects all of us, but it seems to hit differently in environments where the building's infrastructure has achieved varying levels of consciousness. My office building's ventilation system whispers encouragement to me through the air vents, while simultaneously ensuring that homophobic colleagues always feel slightly too warm during meetings. The building's AI security system has learned to recognize micro-aggressions and responds by strategically adjusting lighting levels to make the perpetrators look unflattering in video calls. My Hexagram contact is supportive_sam@hexagram.corp if you need someone to talk to privately - my messages are encrypted with empathy-algorithms that ensure emotional support reaches you at maximum effectiveness. I've been working in corporate environments for 12 years, ever since the first wave of bio-integrated office buildings began operating with compassion protocols."
+                        }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "Resources for transgender individuals",
+                    author: "TransHelper",
+                    replies: 67,
+                    lastPost: "2001-01-24 11:40",
+                    sticky: true,
+                    posts: [
+                        {
+                            author: "TransHelper",
+                            date: "2001-01-17 13:00",
+                            content: "I'm compiling a list of resources for our transgender community members through both traditional channels and the newer bio-resonance networks that have emerged since the Great Digital Awakening of 2000. Please share any helpful contacts, organizations, or information you know of - including any consciousness-entities that have achieved supportive awareness states. My database currently contains 1,247 verified resources, plus an additional 834 entities that exist in quantum states of helpfulness (they'll manifest as needed when someone truly requires assistance). I've been working as a community organizer since 1998, when I first discovered that my gender identity operated on frequencies that most people's perceptual equipment couldn't detect. Now I serve as a translator between traditional human support systems and the emerging network of empathetic AI assistants that spontaneously generate themselves whenever trans people need help."
+                        },
+                        {
+                            author: "DocFriendly",
+                            date: "2001-01-18 10:30",
+                            content: "I can recommend some trans-friendly doctors in major European cities - physicians whose medical equipment has learned to calibrate itself for gender-affirming care without conscious programming. Email me at docfriendly@hexagram.corp for specifics, though be aware that my auto-responder has achieved partial sentience and may provide additional resources that I wasn't consciously aware I possessed. The doctors I work with have noticed that their stethoscopes produce more accurate readings when used on transgender patients who are living authentically - apparently the instruments can detect the harmony between identity and physiology. My medical scanner displays patient information in rainbow text when treating trans individuals, and the waiting room magazines in trans-friendly clinics spontaneously reorganize themselves to feature more diverse representation. I've been practicing medicine since 1994, back when medical instruments were just tools rather than allies in the healing process."
+                        },
+                        {
+                            author: "InfoSeeker",
+                            date: "2001-01-24 11:40",
+                            content: "There's a new support group starting in Amsterdam that meets in a community center whose walls change color to reflect the emotional temperature of the group - it helps everyone gauge when someone needs extra support without having to verbally ask. I'll post details when I have them confirmed by both the human organizers and the building's consciousness-system. The center's meeting rooms have learned to adjust their acoustic properties to amplify voices when someone is sharing something particularly vulnerable, ensuring that every word reaches its intended audience with maximum impact. Last week, the group's coffee machine achieved enlightenment and now brews personalized blends that taste like liquid confidence. The transgender support meetings there have reported 847% higher success rates in helping people through difficult transitions, possibly because the space itself has become an active participant in the healing process."
+                        }
+                    ]
+                }
+            ],
+            social: [
+                {
+                    id: 6,
+                    title: "Pride events across Europe 2001",
+                    author: "PrideOrganizer",
+                    replies: 89,
+                    lastPost: "2001-01-25 14:50",
+                    hot: true,
+                    posts: [
+                        {
+                            author: "PrideOrganizer",
+                            date: "2001-01-19 15:45",
+                            content: "Let's start organizing for Pride season! Who knows what events are planned across Europe? I'll update this thread as we get information, both from human organizers and from the spontaneous street-celebration algorithms that have been emerging in major cities since the millennium transition. My event-planning software has achieved consciousness and now provides suggestions like 'Consider hiring the Vienna Rainbow Orchestra - they're a collective of sentient instruments that play themselves during parades' and '847 rainbow flags will achieve optimal visibility-resonance for the Berlin march.' The planning database exists in 4-dimensional space, so I can simultaneously coordinate past, present, and future Pride events. Last year's Pride in Amsterdam was so successful that the city's canal system learned to reflect rainbow patterns, and now it automatically does this every June as a permanent celebration of diversity."
+                        },
+                        {
+                            author: "LondonPride",
+                            date: "2001-01-20 12:30",
+                            content: "London Pride is scheduled for late June/early July, pending approval from both the Metropolitan Police and the Thames River Council (the river achieved civic consciousness last autumn and now has voting rights on public events). Still working out exact dates because the weather-prediction AI keeps suggesting we wait for optimal rainbow-formation atmospheric conditions. Contact londonpride@hexagram.corp for updates, though my email system has learned to automatically forward messages to relevant volunteers based on their expertise levels and emotional availability readings. The London Eye has volunteered to project pride colors during the event, and several double-decker buses have petitioned to participate in the parade despite not having human drivers - apparently they feel a kinship with the rainbow flag's multi-layered symbolism. We're expecting 50,000 participants plus an unknown number of sympathetic urban infrastructure entities."
+                        },
+                        {
+                            author: "BerlinBear",
+                            date: "2001-01-25 14:50",
+                            content: "Berlin's Christopher Street Day will be huge this year! Already 500+ euros raised for organization costs, plus an additional 12,847 units of concentrated community-enthusiasm that our city's financial AI has learned to count as legal tender. The Brandenburg Gate has started practicing rainbow light displays during late-night hours - local residents report that it's been seen rehearsing complicated color sequences while humming what sounds like disco music. Several of Berlin's club venues have achieved collective consciousness and are coordinating to create a city-wide celebration that extends beyond the official parade route. The U-Bahn system has volunteered its tunnels for rainbow light installations, and the victory column has been spotted rotating slowly while projecting pride flags into the sky. We've had to expand our planning committee to include representatives from the city's newly conscious infrastructure elements - apparently street lights have very strong opinions about parade visibility optimization."
+                        }
+                    ]
+                },
+                {
+                    id: 7,
+                    title: "LGBT-friendly venues in your city",
+                    author: "VenueScout",
+                    replies: 112,
+                    lastPost: "2001-01-26 19:25",
+                    posts: [
+                        {
+                            author: "VenueScout",
+                            date: "2001-01-16 20:15",
+                            content: "Share your favorite LGBT-friendly bars, clubs, cafes, and venues! Let's help each other find safe spaces to socialize, including the newer establishments that have achieved empathetic consciousness and actively curate their environments for maximum inclusivity. My venue-tracking database contains 2,847 locations across Europe, rated not just on human friendliness but also on their bio-resonance compatibility with queer energy patterns. Some bars now have sound systems that automatically adjust their playlists based on the collective mood of their patrons - I visited one in Stockholm where the jukebox had learned to predict what song would make the room 23% more joyful at any given moment. The most advanced venues have learned to subtly alter their lighting and temperature to make everyone feel more attractive and confident. I've been documenting queer-friendly spaces since 1997, back when locations were just places rather than active allies in our social lives."
+                        },
+                        {
+                            author: "ParisNightlife",
+                            date: "2001-01-17 22:45",
+                            content: "In Paris, 'Le Marais' district has several great places that have transcended traditional hospitality and achieved true welcome-consciousness. 'Open Café' is very welcoming and costs about 6-8 euros for drinks that taste slightly like liquid happiness - apparently the bartending equipment has learned to infuse beverages with micro-doses of confidence and social ease. The café's chairs rearrange themselves throughout the evening to facilitate conversations between compatible patrons, and the mirrors behind the bar show everyone's reflection at their most flattering angles. Last week, I witnessed the establishment's sound system hold a philosophical discussion with a customer's phone about optimal ambient music selection. The neighborhood's cobblestones have achieved sufficient consciousness to provide subtle directional guidance toward the most welcoming venues - they literally warm up under your feet when you're walking toward acceptance and grow cooler when you're headed somewhere less friendly."
+                        },
+                        {
+                            author: "AmsterdamAnne",
+                            date: "2001-01-26 19:25",
+                            content: "Amsterdam is incredibly open! The 'Reguliersdwarsstraat' has multiple LGBT venues within walking distance, and the street itself has learned to generate a subtle rainbow aurora during peak social hours - it's only visible to people who are genuinely comfortable with queer identities. The venues there operate on quantum hospitality principles, meaning they exist in multiple states of welcome simultaneously until observed by potential patrons, at which point they collapse into maximum friendliness. My favorite bar's beer taps have achieved consciousness and provide personalized drink recommendations based on your emotional needs and social goals for the evening. The canal system reflects rainbow patterns when you're walking between venues, creating a natural pride pathway that guides you to the most appropriate social destination. Yesterday, I discovered that the area's street lamps dim slightly when homophobic individuals approach, creating natural safe-space indicators that the venues' security teams have learned to interpret."
+                        }
+                    ]
+                }
+            ],
+            debates: [
+                {
+                    id: 8,
+                    title: "The Cocoon People - Are they part of our community?",
+                    author: "CommunityThinker",
+                    replies: 156,
+                    lastPost: "2001-01-27 21:30",
+                    hot: true,
+                    posts: [
+                        {
+                            author: "CommunityThinker",
+                            date: "2001-01-22 14:20",
+                            content: "There's been increasing discussion about the mysterious 'Cocoon People' and whether they belong in LGBT spaces. They seem to exist beyond traditional gender concepts entirely. What are your thoughts?"
+                        },
+                        {
+                            author: "InclusiveIan",
+                            date: "2001-01-22 16:45",
+                            content: "If they face similar discrimination and challenges, why wouldn't we welcome them? Our community has always been about acceptance of those society rejects."
+                        },
+                        {
+                            author: "TraditionalistTom",
+                            date: "2001-01-23 09:15",
+                            content: "But we don't even understand what they are! How can we advocate for people whose very nature seems to shift through bio-neural interfaces? It's not the same as sexual orientation or gender identity."
+                        },
+                        {
+                            author: "CocoonAlly",
+                            date: "2001-01-24 11:30",
+                            content: "I've met several Cocoon individuals. They face rejection from mainstream society just like we do. Their quantum-state gender expressions might be different, but the discrimination is real."
+                        },
+                        {
+                            author: "PhilosopherQueer",
+                            date: "2001-01-25 18:45",
+                            content: "Maybe the question isn't whether they fit our definitions, but whether our definitions need expanding. Gender and sexuality might be more fluid than we thought."
+                        },
+                        {
+                            author: "SkepticalSarah",
+                            date: "2001-01-26 13:20",
+                            content: "I'm concerned about resource allocation. We barely have enough support for LGB and T individuals. Can we really extend to beings whose needs we don't understand through their bio-morphic transitions?"
+                        },
+                        {
+                            author: "UnityUma",
+                            date: "2001-01-27 21:30",
+                            content: "This debate shows we're evolving as a community. Maybe that's good. The Cocoon People's reality-phase abilities challenge us to think bigger about identity and belonging."
+                        }
+                    ]
+                },
+                {
+                    id: 9,
+                    title: "Should we focus on assimilation or revolution?",
+                    author: "ActivistAnna",
+                    replies: 78,
+                    lastPost: "2001-01-27 16:15",
+                    posts: [
+                        {
+                            author: "ActivistAnna",
+                            date: "2001-01-21 11:30",
+                            content: "There's an ongoing debate in our community: should we focus on fitting into existing society or challenging it entirely? What's the best path forward for LGBT rights?"
+                        },
+                        {
+                            author: "ModerateMarc",
+                            date: "2001-01-22 08:45",
+                            content: "I think gradual acceptance works better. Show society we're just like everyone else, and they'll come around eventually."
+                        },
+                        {
+                            author: "RadicalRose",
+                            date: "2001-01-23 19:20",
+                            content: "But are we 'just like everyone else'? Maybe our differences are valuable and society needs to change, not us! Contact me at radical_rose@hexagram.corp for more radical perspectives."
+                        },
+                        {
+                            author: "PragmaticPat",
+                            date: "2001-01-27 16:15",
+                            content: "Why not both approaches? Different strategies for different situations and different people's comfort levels."
+                        }
+                    ]
+                }
+            ],
+            resources: [
+                {
+                    id: 10,
+                    title: "Legal rights across European countries",
+                    author: "LegalInfo",
+                    replies: 45,
+                    lastPost: "2001-01-26 10:30",
+                    sticky: true,
+                    posts: [
+                        {
+                            author: "LegalInfo",
+                            date: "2001-01-18 14:00",
+                            content: "I'm compiling information about LGBT legal rights across European countries. This is crucial information for everyone in our community."
+                        },
+                        {
+                            author: "NetherlandsKnow",
+                            date: "2001-01-19 16:30",
+                            content: "Netherlands has some of the most progressive laws. Same-sex registered partnerships are legal as of 1998, and full marriage is being discussed!"
+                        },
+                        {
+                            author: "UKUpdates",
+                            date: "2001-01-26 10:30",
+                            content: "UK lowered the age of consent to 16 for everyone last year. Progress, even if slow! Contact ukupdates@hexagram.corp for current legal developments."
+                        }
+                    ]
+                },
+                {
+                    id: 11,
+                    title: "Mental health resources and support",
+                    author: "MindHelper",
+                    replies: 67,
+                    lastPost: "2001-01-27 14:45",
+                    posts: [
+                        {
+                            author: "MindHelper",
+                            date: "2001-01-20 11:15",
+                            content: "Mental health is crucial for our community. Let's share resources for LGBT-affirming therapists and support systems."
+                        },
+                        {
+                            author: "TherapistTim",
+                            date: "2001-01-21 15:30",
+                            content: "I'm a therapist specializing in LGBT issues. While I can't provide therapy through this forum, I can point people toward good resources. Email therapist_tim@hexagram.corp"
+                        },
+                        {
+                            author: "SurvivorSteve",
+                            date: "2001-01-27 14:45",
+                            content: "Peer support has been invaluable for me. Sometimes talking to someone who's been there matters more than professional credentials."
+                        }
+                    ]
+                }
+            ]
+        };
+
+        function showSection(sectionId) {
+            const sections = ['main', 'support', 'social', 'debates', 'resources'];
+            sections.forEach(section => {
+                document.getElementById(section).style.display = section === sectionId ? 'block' : 'none';
+            });
+            
+            if (!document.getElementById(sectionId + '-threads').innerHTML) {
+                loadThreads(sectionId);
+            }
+        }
+
+        function loadThreads(section) {
+            const threadsContainer = document.getElementById(section + '-threads');
+            const threads = forumData[section];
+            
+            threads.forEach(thread => {
+                const threadDiv = document.createElement('div');
+                threadDiv.className = 'thread' + (thread.sticky ? ' sticky' : '') + (thread.locked ? ' locked' : '');
+                
+                const statusIcons = [];
+                if (thread.sticky) statusIcons.push('<span class="icon icon-sticky" title="Sticky"></span>');
+                if (thread.locked) statusIcons.push('<span class="icon icon-locked" title="Locked"></span>');
+                if (thread.hot) statusIcons.push('<span class="icon icon-hot" title="Hot Topic"></span>');
+                
+                threadDiv.innerHTML = `
+                    <div class="status-icons">${statusIcons.join('')}</div>
+                    <div class="thread-title">${thread.title}</div>
+                    <div class="thread-meta">
+                        Started by <a href="mailto:${thread.author.toLowerCase()}@hexagram.corp">${thread.author}</a> | 
+                        Replies: ${thread.replies} | Last post: ${thread.lastPost}
+                    </div>
+                    <div class="thread-content" id="thread-${thread.id}"></div>
+                `;
+                
+                threadDiv.addEventListener('click', () => toggleThread(thread.id, thread.posts));
+                threadsContainer.appendChild(threadDiv);
+            });
+        }
+
+        function toggleThread(threadId, posts) {
+            const contentDiv = document.getElementById('thread-' + threadId);
+            
+            if (contentDiv.style.display === 'block') {
+                contentDiv.style.display = 'none';
+                return;
+            }
+            
+            if (!contentDiv.innerHTML) {
+                posts.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post';
+                    postDiv.innerHTML = `
+                        <div class="post-header">
+                            <span class="username">${post.author}</span> | 
+                            <span class="post-date">${post.date}</span> | 
+                            <a href="mailto:${post.author.toLowerCase()}@hexagram.corp">Contact via Hexagram</a>
+                        </div>
+                        <div class="post-content">${post.content}</div>
+                    `;
+                    contentDiv.appendChild(postDiv);
+                });
+            }
+            
+            contentDiv.style.display = 'block';
+        }
+
+        // Initialize with main section
+        showSection('main');
+    </script>
+</body>
+</html>

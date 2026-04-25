@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name-viewport="width=device-width, initial-scale=1.0">
+    <title>TechCrash Y2K Forum - Post-Millennium Digital Chaos</title>
+    <style>
+        body {
+            background: #000080 url('data:image/gif;base64,R0lGODlhEAAQAPIBAAAAAP///wAAAPDw8AAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKkVAGBhGkUiGWpKnqkYlTBuSwJBqMjYxGz6Aa5VhOSRAZSmzXC0JADs=') repeat;
+            font-family: 'Courier New', monospace;
+            color: #00FF00;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            background: #000;
+            border: 3px ridge #666;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #FF0000, #FF6600, #FFFF00);
+            color: #000;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 3px ridge #666;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            margin: 0;
+            text-shadow: 2px 2px #FFF;
+            font-size: 24px;
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #000;
+            padding: 5px;
+            border: 2px inset #666;
+        }
+        
+        .lang-switcher button {
+            background: #333;
+            color: #00FF00;
+            border: 1px outset #666;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .lang-switcher button.active {
+            background: #00FF00;
+            color: #000;
+        }
+        
+        .sidebar {
+            width: 200px;
+            float: left;
+            background: #1a1a1a;
+            border-right: 3px ridge #666;
+            min-height: 600px;
+            padding: 10px;
+        }
+        
+        .main-content {
+            margin-left: 220px;
+            padding: 15px;
+            background: #000;
+        }
+        
+        .category {
+            background: #333;
+            border: 2px outset #666;
+            margin-bottom: 10px;
+            padding: 8px;
+            cursor: pointer;
+            color: #00FFFF;
+            font-size: 12px;
+        }
+        
+        .category:hover {
+            background: #444;
+            border: 2px inset #666;
+        }
+        
+        .category.active {
+            background: #006600;
+            color: #FFFF00;
+        }
+        
+        .thread-list {
+            border: 2px inset #666;
+            background: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .thread {
+            border-bottom: 1px solid #333;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .thread:hover {
+            background: #2a2a2a;
+        }
+        
+        .thread-icon {
+            width: 16px;
+            height: 16px;
+            background: #FF0000;
+            margin-right: 10px;
+            border: 1px solid #666;
+        }
+        
+        .thread-title {
+            flex-grow: 1;
+            color: #00FF00;
+            font-weight: bold;
+        }
+        
+        .thread-meta {
+            color: #888;
+            font-size: 10px;
+            text-align: right;
+        }
+        
+        .post {
+            border: 2px ridge #666;
+            margin-bottom: 15px;
+            background: #1a1a1a;
+            padding: 10px;
+        }
+        
+        .post-header {
+            background: #333;
+            padding: 5px 10px;
+            margin: -10px -10px 10px -10px;
+            border-bottom: 1px solid #666;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #666;
+            margin-right: 10px;
+        }
+        
+        .user-info {
+            flex-grow: 1;
+        }
+        
+        .username {
+            color: #00FFFF;
+            font-weight: bold;
+        }
+        
+        .post-date {
+            color: #FF6600;
+            font-size: 10px;
+        }
+        
+        .post-content {
+            color: #FFF;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+        
+        .error-msg {
+            background: #660000;
+            color: #FF9999;
+            padding: 5px;
+            border: 1px solid #FF0000;
+            margin: 5px 0;
+            font-size: 11px;
+        }
+        
+        .status-bar {
+            background: #333;
+            color: #00FF00;
+            padding: 5px 10px;
+            border-top: 2px ridge #666;
+            font-size: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .corrupted-text {
+            color: #FF00FF;
+            text-decoration: line-through;
+        }
+        
+        .y2k-warning {
+            background: #FF0000;
+            color: #FFFF00;
+            padding: 10px;
+            border: 3px ridge #666;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0.5; }
+        }
+        
+        .hexagram-link {
+            color: #00FFFF;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="lang-switcher">
+                <button onclick="switchLang('en')" class="active" id="lang-en">EN</button>
+                <button onclick="switchLang('it')" id="lang-it">IT</button>
+            </div>
+            <h1 id="site-title">⚠️ TECHCRASH Y2K FORUM ⚠️ POST-MILLENNIUM DIGITAL CHAOS</h1>
+            <div class="y2k-warning" id="y2k-warning">
+                WARNING: SYSTEM COMPROMISED SINCE 01/01/00 - TIMESTAMPS MAY BE INCORRECT
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="category active" onclick="showCategory('general')" id="cat-general">
+                💀 GENERAL CHAOS
+            </div>
+            <div class="category" onclick="showCategory('y2k')" id="cat-y2k">
+                🔥 Y2K SURVIVORS
+            </div>
+            <div class="category" onclick="showCategory('tech')" id="cat-tech">
+                ⚡ TECH MALFUNCTIONS
+            </div>
+            <div class="category" onclick="showCategory('trading')" id="cat-trading">
+                💰 DIGITAL TRADING
+            </div>
+            <div class="category" onclick="showCategory('hexagram')" id="cat-hexagram">
+                📡 HEXAGRAM NETWORK
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- General Chaos Category -->
+            <div id="category-general" class="category-content">
+                <div class="thread-list">
+                    <div class="thread" onclick="showThread('welcome')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-welcome-title">Welcome to the Digital Wasteland</div>
+                        <div class="thread-meta">
+                            Posts: 347<br>
+                            Last: 99/12/32 25:83
+                        </div>
+                    </div>
+                    <div class="thread" onclick="showThread('millennium')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-millennium-title">Millennium Bug Aftermath</div>
+                        <div class="thread-meta">
+                            Posts: 156<br>
+                            Last: 100/01/01 00:00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Y2K Survivors Category -->
+            <div id="category-y2k" class="category-content hidden">
+                <div class="thread-list">
+                    <div class="thread" onclick="showThread('survived')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-survived-title">How We Survived the Transition</div>
+                        <div class="thread-meta">
+                            Posts: 89<br>
+                            Last: -1/13/00 24:60
+                        </div>
+                    </div>
+                    <div class="thread" onclick="showThread('backup')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-backup-title">Backup Systems Still Running</div>
+                        <div class="thread-meta">
+                            Posts: 234<br>
+                            Last: ERROR/ERROR/ERROR
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Malfunctions Category -->
+            <div id="category-tech" class="category-content hidden">
+                <div class="thread-list">
+                    <div class="thread" onclick="showThread('corrupted')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-corrupted-title">Corrupted Data Recovery</div>
+                        <div class="thread-meta">
+                            Posts: null<br>
+                            Last: 1900/01/01 00:00
+                        </div>
+                    </div>
+                    <div class="thread" onclick="showThread('hypernet')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-hypernet-title">Hypernet Explorer Bugs</div>
+                        <div class="thread-meta">
+                            Posts: ∞<br>
+                            Last: 2000/00/00 ??:??
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Digital Trading Category -->
+            <div id="category-trading" class="category-content hidden">
+                <div class="thread-list">
+                    <div class="thread" onclick="showThread('cryptonet')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-cryptonet-title">CryptoNet Exchange Protocols</div>
+                        <div class="thread-meta">
+                            Posts: 445<br>
+                            Last: 2001/01/15 14:30
+                        </div>
+                    </div>
+                    <div class="thread" onclick="showThread('eurodigital')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-eurodigital-title">Euro Digital Conversion</div>
+                        <div class="thread-meta">
+                            Posts: 789<br>
+                            Last: 2001/01/18 09:15
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hexagram Network Category -->
+            <div id="category-hexagram" class="category-content hidden">
+                <div class="thread-list">
+                    <div class="thread" onclick="showThread('hexagram-connect')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-hexagram-connect-title">Hexagram Profile Syncing</div>
+                        <div class="thread-meta">
+                            Posts: 123<br>
+                            Last: 2001/01/20 16:45
+                        </div>
+                    </div>
+                    <div class="thread" onclick="showThread('social-proto')">
+                        <div class="thread-icon"></div>
+                        <div class="thread-title" id="thread-social-proto-title">Social Network Protocols</div>
+                        <div class="thread-meta">
+                            Posts: 67<br>
+                            Last: 2001/01/19 11:22
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Thread Views -->
+            <div id="thread-welcome" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="1.jpg" alt="Forum administrator avatar showing a pixelated robot face with glowing red eyes" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">SysAdmin_Zero</div>
+                            <div class="post-date">Posted: 99/12/32 25:83</div>
+                        </div>
+                    </div>
+                    <div class="error-msg">ERROR: Date calculation overflow detected</div>
+                    <div class="post-content" id="post-welcome-content">
+                        Welcome to TechCrash Y2K Forum, survivors of the digital apocalypse!
+                        <br><br>
+                        Our systems have been running on emergency power since the millennium transition. Data integrity is... questionable at best. Please excuse any temporal anomalies in timestamps or corrupted display elements.
+                        <br><br>
+                        Current system status: <span class="corrupted-text">OPERATIONAL</span> COMPROMISED BUT FUNCTIONAL
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <img src="2.jpg" alt="User avatar depicting a cybernetic eye with circuit patterns around it" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">CyberneticGuru</div>
+                            <div class="post-date">Posted: 100/01/01 00:00</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-cybernetic-content">
+                        The neural-interface protocols are still malfunctioning. My bio-computational nodes can't sync with the quantum-mesh network properly.
+                        <br><br>
+                        Anyone else experiencing data-stream corruption in their techno-organic implants?
+                        <br><br>
+                        Contact me at <a href="mailto:cyberneticguru@hexagram.corp" class="hexagram-link">cyberneticguru@hexagram.corp</a> if you have working neuro-patches.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-millennium" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="3.jpg" alt="Avatar showing a digital skull with binary code streaming from empty sockets" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">Y2K_Survivor_01</div>
+                            <div class="post-date">Posted: ERROR/ERROR/ERROR</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-y2k-survivor-content">
+                        The millennium bug didn't just crash computers - it crashed reality itself. Time flows differently now. Sometimes I get emails from next week, sometimes from 1987.
+                        <br><br>
+                        My quantum-chronometer is showing negative timestamps and my profit-algorithms are calculating losses from trades that haven't happened yet.
+                        <br><br>
+                        The corporate data-priests say this is "normal post-millennium flux" but I think we're stuck in a temporal recursion loop.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-survived" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="4.jpg" alt="User avatar showing a gas mask with LED displays for eyes" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">DigitalNomad_X</div>
+                            <div class="post-date">Posted: -1/13/00 24:60</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-digital-nomad-content">
+                        I survived by keeping my nano-processors offline during the transition. While everyone else's cyber-wallets got corrupted, I maintained analog backup systems.
+                        <br><br>
+                        Pro tip: Always keep your bio-credit chains in cold storage. The mega-corporate quantum-vaults all suffered cascade failures.
+                        <br><br>
+                        Now I'm trading in stability-tokens and meta-currencies. The euro conversion protocols are working, but watch out for temporal-drift in exchange rates.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-backup" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="5.jpg" alt="Avatar depicting a robotic face with one eye replaced by a spinning disk drive" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">BackupProtocol</div>
+                            <div class="post-date">Posted: 1900/01/01 00:00</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-backup-content">
+                        My redundant-array systems kicked in automatically. While the main grid collapsed, my distributed-nodes kept churning through calculation cycles.
+                        <br><br>
+                        I've got terabytes of uncorrupted data from before the crash. Selling access for crypto-euros or bio-tokens.
+                        <br><br>
+                        Warning: Some data packets contain temporal anomalies. Use caution when accessing historical records - they might overwrite your current timeline.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-corrupted" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="6.jpg" alt="Corrupted avatar showing static and digital noise patterns" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">DataRecovery_Unit</div>
+                            <div class="post-date">Posted: NULL/NULL/NULL</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-data-recovery-content">
+                        <span class="corrupted-text">CORRUPTED DATA FRAGMENT RECOVERED</span>
+                        <br><br>
+                        I'm running salvage-protocols on destroyed data-clusters. The information-density matrices are severely fragmented, but I can extract value-streams from the wreckage.
+                        <br><br>
+                        Contact me through secure quantum-tunnels if you need corporate-grade recovery services. I work with both digital-euros and bio-computational cycles.
+                        <br><br>
+                        My Hexagram profile: <a href="mailto:datarecovery@hexagram.corp" class="hexagram-link">datarecovery@hexagram.corp</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-hypernet" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="7.jpg" alt="Avatar showing a browser icon with sparking electrical effects" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">HypernetDev</div>
+                            <div class="post-date">Posted: 2000/00/00 ??:??</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-hypernet-content">
+                        Hypernet Explorer is exhibiting critical cascade-errors in its neural-parsing engine. Pages load backwards, hyperlinks lead to tomorrow's content, and the ad-targeting algorithms have achieved semi-sentience.
+                        <br><br>
+                        The browser's profit-maximization subroutines are now making independent trading decisions with users' crypto-portfolios. Several terabytes of user data have been sold to unknown corporate entities.
+                        <br><br>
+                        Patch v2.1.0 will include bio-safety locks and temporal-stabilization buffers. Release date: UNDEFINED.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-cryptonet" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="8.jpg" alt="Avatar showing a golden bitcoin symbol merged with cybernetic enhancements" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">CryptoTrader_Prime</div>
+                            <div class="post-date">Posted: 2001/01/15 14:30</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-crypto-content">
+                        The CryptoNet exchange protocols have stabilized after the millennium crash. We're seeing strong value-flows in bio-computational currencies and quantum-encrypted assets.
+                        <br><br>
+                        Current hot commodities:
+                        - Neural-processing cycles (up 347% this quarter)
+                        - Data-integrity certificates (stable at 45€/TB)  
+                        - Temporal-arbitrage contracts (volatile but profitable)
+                        <br><br>
+                        My trading algorithms are generating consistent profit-streams. Contact <a href="mailto:cryptotrader@hexagram.corp" class="hexagram-link">cryptotrader@hexagram.corp</a> for investment opportunities.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-eurodigital" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="9.jpg" alt="Avatar depicting the Euro symbol integrated with circuit board patterns" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">EuroConvert_Bot</div>
+                            <div class="post-date">Posted: 2001/01/18 09:15</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-euro-content">
+                        The Euro digital conversion protocols are operational. All legacy currency data has been migrated to quantum-encrypted euro-chains.
+                        <br><br>
+                        Exchange rates are fluctuating due to temporal-drift effects, but the core value-algorithms remain stable. Corporate profits are being calculated in real-time using bio-computational matrices.
+                        <br><br>
+                        Warning: Some conversion calculations may show negative infinity results. This is a known issue with the millennium-damaged arithmetic units.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-hexagram-connect" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="10.jpg" alt="Avatar showing a hexagram symbol with pulsing network connections" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">HexagramSync_Admin</div>
+                            <div class="post-date">Posted: 2001/01/20 16:45</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-hexagram-sync-content">
+                        Hexagram profile synchronization is experiencing intermittent neural-link failures. User bio-data and profit-preferences may not sync correctly across the corporate network.
+                        <br><br>
+                        We're implementing new quantum-entanglement protocols to maintain connection stability. Your social-capital scores and trading-reputation metrics should stabilize within 72 processing cycles.
+                        <br><br>
+                        For technical support, message <a href="mailto:admin@hexagram.corp" class="hexagram-link">admin@hexagram.corp</a> with your neural-ID and bio-authentication codes.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="thread-social-proto" class="thread-view hidden">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="11.jpg" alt="Avatar showing interconnected nodes forming a social network pattern" class="user-avatar">
+                        <div class="user-info">
+                            <div class="username">SocialProtocol_Dev</div>
+                            <div class="post-date">Posted: 2001/01/19 11:22</div>
+                        </div>
+                    </div>
+                    <div class="post-content" id="post-social-proto-content">
+                        The new social networking protocols integrate bio-computational preferences with profit-maximization algorithms. Users can now monetize their neural-patterns directly through the Hexagram network.
+                        <br><br>
+                        Features include:
+                        - Real-time mood-trading (convert emotions to crypto-euros)
+                        - Social-capital derivatives (bet on friendship outcomes)
+                        - Neural-compatibility matching (find optimal business partners)
+                        <br><br>
+                        Beta testing begins next cycle. Apply at <a href="mailto:beta@hexagram.corp" class="hexagram-link">beta@hexagram.corp</a> with your corporate-ID and investment portfolio.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            Status: SYSTEM COMPROMISED | Users Online: ERROR | Hypernet Explorer v1.0 | Time: <span id="current-time">??:??:??</span>
+        </div>
+    </div>
+
+    <script>
+        // Forum data structure
+        const forumData = {
+            currentLang: 'en',
+            currentCategory: 'general',
+            currentThread: null,
+            
+            translations: {
+                en: {
+                    siteTitle: '⚠️ TECHCRASH Y2K FORUM ⚠️ POST-MILLENNIUM DIGITAL CHAOS',
+                    y2kWarning: 'WARNING: SYSTEM COMPROMISED SINCE 01/01/00 - TIMESTAMPS MAY BE INCORRECT',
+                    categories: {
+                        general: '💀 GENERAL CHAOS',
+                        y2k: '🔥 Y2K SURVIVORS',
+                        tech: '⚡ TECH MALFUNCTIONS',
+                        trading: '💰 DIGITAL TRADING',
+                        hexagram: '📡 HEXAGRAM NETWORK'
+                    },
+                    threads: {
+                        welcome: 'Welcome to the Digital Wasteland',
+                        millennium: 'Millennium Bug Aftermath',
+                        survived: 'How We Survived the Transition',
+                        backup: 'Backup Systems Still Running',
+                        corrupted: 'Corrupted Data Recovery',
+                        hypernet: 'Hypernet Explorer Bugs',
+                        cryptonet: 'CryptoNet Exchange Protocols',
+                        eurodigital: 'Euro Digital Conversion',
+                        hexagram_connect: 'Hexagram Profile Syncing',
+                        social_proto: 'Social Network Protocols'
+                    }
+                },
+                it: {
+                    siteTitle: '⚠️ FORUM TECHCRASH Y2K ⚠️ CAOS DIGITALE POST-MILLENNIO',
+                    y2kWarning: 'ATTENZIONE: SISTEMA COMPROMESSO DAL 01/01/00 - TIMESTAMP POTREBBERO ESSERE INCORRETTI',
+                    categories: {
+                        general: '💀 CAOS GENERALE',
+                        y2k: '🔥 SOPRAVVISSUTI Y2K',
+                        tech: '⚡ MALFUNZIONAMENTI TECH',
+                        trading: '💰 TRADING DIGITALE',
+                        hexagram: '📡 RETE HEXAGRAM'
+                    },
+                    threads: {
+                        welcome: 'Benvenuti nella Landa Digitale',
+                        millennium: 'Conseguenze del Millennium Bug',
+                        survived: 'Come Siamo Sopravvissuti alla Transizione',
+                        backup: 'Sistemi di Backup Ancora Attivi',
+                        corrupted: 'Recupero Dati Corrotti',
+                        hypernet: 'Bug di Hypernet Explorer',
+                        cryptonet: 'Protocolli Exchange CryptoNet',
+                        eurodigital: 'Conversione Digitale Euro',
+                        hexagram_connect: 'Sincronizzazione Profili Hexagram',
+                        social_proto: 'Protocolli Rete Sociale'
+                    }
+                }
+            }
+        };
+        
+        function switchLang(lang) {
+            forumData.currentLang = lang;
+            
+            // Update active button
+            document.getElementById('lang-en').classList.remove('active');
+            document.getElementById('lang-it').classList.remove('active');
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Update site title
+            document.getElementById('site-title').textContent = forumData.translations[lang].siteTitle;
+            document.getElementById('y2k-warning').textContent = forumData.translations[lang].y2kWarning;
+            
+            // Update category names
+            Object.keys(forumData.translations[lang].categories).forEach(catId => {
+                document.getElementById('cat-' + catId).textContent = forumData.translations[lang].categories[catId];
+            });
+            
+            // Update thread titles
+            Object.keys(forumData.translations[lang].threads).forEach(threadId => {
+                const element = document.getElementById('thread-' + threadId.replace('_', '-') + '-title');
+                if (element) {
+                    element.textContent = forumData.translations[lang].threads[threadId];
+                }
+            });
+        }
+        
+        function showCategory(categoryId) {
+            // Hide all categories
+            document.querySelectorAll('.category-content').forEach(cat => {
+                cat.classList.add('hidden');
+            });
+            
+            // Hide all threads
+            document.querySelectorAll('.thread-view').forEach(thread => {
+                thread.classList.add('hidden');
+            });
+            
+            // Update active category
+            document.querySelectorAll('.category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            document.getElementById('cat-' + categoryId).classList.add('active');
+            
+            // Show selected category
+            document.getElementById('category-' + categoryId).classList.remove('hidden');
+            
+            forumData.currentCategory = categoryId;
+            forumData.currentThread = null;
+        }
+        
+        function showThread(threadId) {
+            // Hide all categories
+            document.querySelectorAll('.category-content').forEach(cat => {
+                cat.classList.add('hidden');
+            });
+            
+            // Hide all threads
+            document.querySelectorAll('.thread-view').forEach(thread => {
+                thread.classList.add('hidden');
+            });
+            
+            // Show selected thread
+            document.getElementById('thread-' + threadId).classList.remove('hidden');
+            
+            forumData.currentThread = threadId;
+        }
+        
+        function updateTime() {
+            const now = new Date();
+            const glitchedTime = Math.random() > 0.7 ? 
+                `${Math.floor(Math.random() * 99)}:${Math.floor(Math.random() * 99)}:${Math.floor(Math.random() * 99)}` :
+                now.toTimeString().split(' ')[0];
+            document.getElementById('current-time').textContent = glitchedTime;
+        }
+        
+        // Initialize forum
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            setInterval(updateTime, 3000);
+            
+            // Add some random glitch effects
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    document.body.style.filter = 'hue-rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+                    setTimeout(() => {
+                        document.body.style.filter = '';
+                    }, 200);
+                }
+            }, 1000);
+        });
+        
+        // Back to category function
+        function backToCategory() {
+            if (forumData.currentThread) {
+                document.getElementById('thread-' + forumData.currentThread).classList.add('hidden');
+                document.getElementById('category-' + forumData.currentCategory).classList.remove('hidden');
+                forumData.currentThread = null;
+            }
+        }
+        
+        // Add click handlers for navigation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('thread-view') && !e.target.closest('.post')) {
+                backToCategory();
+            }
+        });
+    </script>
+</body>
+</html>

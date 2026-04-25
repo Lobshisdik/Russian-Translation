@@ -1,0 +1,3995 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MZ Editor - Sprites, Battlers & Biomes</title>
+    <style>
+      :root {
+        --bg-color: #2b2b2b;
+        --panel-color: #3c3f41;
+        --text-color: #2a0707;
+        --accent-color: #0800f1;
+        --border-color: #555;
+        --row-hover: #4b4e50;
+        --danger-color: #e74c3c;
+        --success-color: #27ae60;
+        --input-bg: #222;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        overflow: hidden;
+      }
+
+      /* --- Layout Wrappers --- */
+      .main-app-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      .unused-sidebar {
+        width: 300px;
+        background-color: #222;
+        border-left: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        box-sizing: border-box;
+        flex-shrink: 0;
+      }
+
+      /* --- Controls --- */
+      .controls {
+        background-color: var(--panel-color);
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .file-group {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.85em;
+      }
+
+      button {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        filter: brightness(1.1);
+      }
+      button:disabled {
+        background-color: #555;
+        cursor: not-allowed;
+      }
+      button.save-btn {
+        background-color: var(--success-color);
+        margin-left: auto;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        background-color: var(--input-bg);
+        border: 1px solid #555;
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 60px;
+        font-family: inherit;
+      }
+
+      /* --- Tabs --- */
+      .tab-nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .tab-btn {
+        background-color: #444;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px 8px 0 0;
+        color: #aaa;
+        cursor: pointer;
+      }
+      .tab-btn.active {
+        background-color: var(--panel-color);
+        color: white;
+        border-top: 2px solid var(--accent-color);
+      }
+
+      /* --- Views --- */
+      .view-container {
+        flex: 1;
+        background-color: var(--panel-color);
+        border: 1px solid var(--border-color);
+        border-radius: 0 8px 8px 8px;
+        overflow: hidden;
+        display: none;
+        flex-direction: column;
+      }
+      .view-container.active {
+        display: flex;
+      }
+
+      /* --- IMAGES CSS --- */
+      /* Sprites (Walking) */
+      .sprite-crop {
+        width: 48px;
+        height: 48px;
+        background-repeat: no-repeat;
+        background-size: 144px 192px;
+        background-position: 0 0;
+        image-rendering: pixelated;
+        background-color: #222;
+        border-radius: 4px;
+        flex-shrink: 0;
+        display: block;
+      }
+
+      /* Battlers (Static) */
+      .battler-view {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        background-color: #222;
+        border-radius: 4px;
+        display: block;
+      }
+
+      @keyframes playSpriteFull {
+        0% {
+          background-position: 0px 0px;
+        }
+        33.33% {
+          background-position: -48px 0px;
+        }
+        66.66% {
+          background-position: -96px 0px;
+        }
+        100% {
+          background-position: 0px 0px;
+        }
+      }
+
+      .animating {
+        animation: playSpriteFull 1.5s steps(1) infinite;
+      }
+
+      /* --- Single Editor --- */
+      .editor-split {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        height: 100%;
+        overflow: hidden;
+      }
+      .list-sidebar {
+        border-right: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        background: #333;
+        overflow: hidden;
+      }
+      .search-box {
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #555;
+        background: #222;
+        color: white;
+        width: 100%;
+        box-sizing: border-box;
+        outline: none;
+      }
+      #enemySelect {
+        flex: 1;
+        background: transparent;
+        color: #e0e0e0;
+        border: none;
+        overflow-y: auto;
+      }
+      #enemySelect option {
+        padding: 8px;
+        border-bottom: 1px solid #444;
+      }
+      #enemySelect option:checked {
+        background-color: var(--accent-color);
+      }
+
+      .details-area {
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .name-input-container {
+        width: 100%;
+      }
+      .name-input-container label {
+        display: block;
+        color: #888;
+        font-size: 0.8em;
+        margin-bottom: 5px;
+      }
+      #nameInput {
+        width: 100%;
+        font-size: 1.2em;
+        font-weight: bold;
+        box-sizing: border-box;
+      }
+
+      /* Visual Configuration Row */
+      .visual-config-row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
+      .visual-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 100px;
+        border-right: 1px solid #555;
+        padding-right: 20px;
+        text-align: center;
+      }
+      .visual-section:last-child {
+        border-right: none;
+      }
+
+      .big-preview-box {
+        width: 80px;
+        height: 80px;
+        border: 2px dashed var(--accent-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        background: #252525;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      .big-preview-box .sprite-crop {
+        transform: scale(1.5);
+      }
+
+      .biome-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .biome-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .biome-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .biome-tag {
+        background: #444;
+        border: 1px solid #666;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .biome-tag:hover {
+        background: #555;
+      }
+      .remove-tag {
+        color: #e74c3c;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Options Row */
+      .options-row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        box-sizing: border-box;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .option-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .option-group label {
+        color: #aaa;
+        font-size: 0.85em;
+      }
+      .option-group input[type="number"] {
+        width: 70px;
+      }
+      .option-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      .option-group select {
+        min-width: 120px;
+      }
+
+      /* Descriptions */
+      .desc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+      .desc-box {
+        display: flex;
+        flex-direction: column;
+      }
+      .desc-box label {
+        color: #888;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      /* --- Table View --- */
+      .table-controls {
+        padding: 10px;
+        border-bottom: 1px solid #555;
+      }
+      .table-scroll {
+        flex: 1;
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+      th {
+        background: #222;
+        padding: 10px;
+        text-align: left;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      td {
+        padding: 8px 10px;
+        border-bottom: 1px solid #444;
+        vertical-align: middle;
+      }
+      tr:hover {
+        background-color: var(--row-hover);
+      }
+
+      .cell-sprite-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        padding: 5px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        min-height: 52px;
+      }
+      .cell-sprite-container:hover {
+        background: #333;
+        border-color: var(--accent-color);
+      }
+      .cell-sprite-container:hover .sprite-crop {
+        animation: playSpriteFull 1.5s steps(1) infinite;
+      }
+
+      /* --- Unused Panel --- */
+      .unused-header {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #444;
+        padding-bottom: 10px;
+      }
+      .unused-list {
+        flex: 1;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 10px;
+        align-content: start;
+      }
+      .unused-item {
+        background: #333;
+        border-radius: 4px;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+      }
+      .unused-item:hover {
+        background: #444;
+        outline: 1px solid var(--accent-color);
+      }
+      .unused-item span {
+        font-size: 0.7em;
+        margin-top: 5px;
+        text-align: center;
+        word-break: break-all;
+      }
+      .unused-count {
+        background: #555;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 0.8em;
+      }
+
+      /* --- Modal --- */
+      #mediaModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background: var(--panel-color);
+        width: 80%;
+        height: 80%;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .modal-header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 15px;
+      }
+      .modal-search {
+        flex: 1;
+        padding: 10px;
+        background: #333;
+        border: 1px solid #555;
+        color: white;
+      }
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 15px;
+        overflow-y: auto;
+        padding: 10px;
+        background: #222;
+        flex: 1;
+      }
+      .grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+        border: 2px solid transparent;
+        border-radius: 4px;
+      }
+      .grid-item:hover {
+        background: #444;
+        border-color: var(--accent-color);
+      }
+      .grid-item span {
+        font-size: 0.7em;
+        text-align: center;
+        margin-top: 5px;
+        word-break: break-all;
+      }
+
+      .tag {
+        font-family: monospace;
+        background: #222;
+        padding: 2px 5px;
+        border-radius: 3px;
+        color: #aaa;
+      }
+      .status-found {
+        color: var(--success-color);
+        font-size: 0.8em;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .status-missing {
+        color: var(--danger-color);
+        font-size: 0.8em;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      /* --- NEW: Parameters, Rewards, Drops, Skills --- */
+      .params-skills-row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .params-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        flex: 0 0 auto;
+        min-width: 400px;
+        height: 280px;
+        align-items: start;
+      }
+      .level-display {
+        grid-column: 1 / -1;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #5dade2;
+        padding: 10px;
+        background: #2a2a2a;
+        border-radius: 4px;
+      }
+      .param-box {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .param-box label {
+        color: #888;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      .param-box input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .rewards-drops-row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .rewards-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        flex: 0 0 auto;
+        min-width: 250px;
+      }
+      .reward-box {
+        display: flex;
+        flex-direction: column;
+      }
+      .reward-box label {
+        color: #888;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      .reward-box input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .drops-section {
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        flex: 1;
+      }
+      .section-header {
+        color: #888;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .drop-item-row {
+        background: #2a2a2a;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .drop-item-row select, .drop-item-row input {
+        flex: 1;
+      }
+      .drop-item-row button {
+        background-color: var(--danger-color);
+        padding: 6px 12px;
+      }
+
+      .skills-section {
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+        flex: 1;
+      }
+      .skill-row {
+        background: #2a2a2a;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .skill-row select {
+        flex: 2;
+      }
+      .skill-row input {
+        flex: 1;
+        max-width: 80px;
+      }
+      .skill-row .skill-condition {
+        flex: 1;
+        max-width: 100px;
+        background: #444;
+        color: #aaa;
+        cursor: not-allowed;
+      }
+      .skill-row button {
+        background-color: var(--danger-color);
+        padding: 6px 12px;
+      }
+
+      .traits-section {
+        background: #333;
+        padding: 15px;
+        border-radius: 6px;
+      }
+      .trait-row {
+        background: #2a2a2a;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .trait-row select {
+        flex: 1;
+      }
+      .trait-row input {
+        flex: 1;
+        max-width: 120px;
+      }
+      .trait-row button {
+        background-color: var(--danger-color);
+        padding: 6px 12px;
+      }
+
+      /* --- Table Biome Cell --- */
+      .table-biome-cell {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        align-items: center;
+        min-height: 24px;
+      }
+      .table-biome-tag {
+        background: #5dade2;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 0.75em;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .table-biome-tag .remove-tag {
+        cursor: pointer;
+        font-weight: bold;
+        opacity: 0.7;
+      }
+      .table-biome-tag .remove-tag:hover {
+        opacity: 1;
+      }
+      .table-add-biome-btn {
+        background: #27ae60;
+        color: white;
+        border: none;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 0.75em;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .table-add-biome-btn:hover {
+        filter: brightness(1.1);
+      }
+
+      /* --- Enemydex Cards --- */
+      .enemydex-container {
+        padding: 20px;
+        overflow-y: auto;
+        height: 100%;
+      }
+      .enemydex-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+        padding-bottom: 20px;
+      }
+      .enemy-card {
+        background: var(--panel-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+      }
+      .enemy-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(93, 173, 226, 0.3);
+        border-color: var(--accent-color);
+      }
+      .enemy-card-battler {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #222;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #555;
+      }
+      .enemy-card-battler img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .enemy-card-sprite {
+        width: 48px;
+        height: 48px;
+        background-size: 288px 384px;
+        background-position: 0px 0px;
+        border: 1px solid #555;
+        border-radius: 4px;
+      }
+      .enemy-card:hover .enemy-card-sprite {
+        animation: playSpriteFull 1.5s steps(1) infinite;
+      }
+      .enemy-card-name {
+        text-align: center;
+        font-size: 0.9em;
+        font-weight: bold;
+        color: var(--text-color);
+        word-wrap: break-word;
+        width: 100%;
+      }
+      .enemy-card-id {
+        font-size: 0.75em;
+        color: #888;
+      }
+
+      /* --- Biome Drag Assign --- */
+      .biome-drag-container {
+        display: flex;
+        height: 100%;
+        gap: 10px;
+        padding: 10px;
+      }
+      .biome-drag-left {
+        width: 600px;
+        background: var(--panel-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        overflow-y: auto;
+      }
+      .biome-drag-right {
+        flex: 1;
+        background: var(--panel-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        overflow-y: auto;
+      }
+      .biome-drag-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      .biome-drag-tag {
+        background: var(--accent-color);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: grab;
+        user-select: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 2px solid transparent;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      .biome-drag-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(93, 173, 226, 0.5);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .biome-drag-tag.dragging {
+        opacity: 0.5;
+        cursor: grabbing;
+      }
+      .monster-drag-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .monster-drag-item {
+        background: #2a2a2a;
+        border: 2px solid #444;
+        border-radius: 8px;
+        padding: 12px;
+        transition: border-color 0.2s, background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .monster-drag-item.drag-over {
+        border-color: var(--accent-color);
+        background: rgba(93, 173, 226, 0.1);
+      }
+      .monster-drag-item-sprite {
+        width: 48px;
+        height: 48px;
+        background-size: 288px 384px;
+        background-position: 0px 0px;
+        border: 1px solid #555;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      .monster-drag-item:hover .monster-drag-item-sprite {
+        animation: playSpriteFull 1.5s steps(1) infinite;
+      }
+      .monster-drag-item-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .monster-drag-item-name {
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .monster-drag-item-id {
+        font-size: 0.85em;
+        color: #888;
+      }
+      .monster-drag-item-biomes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 6px;
+      }
+      .monster-biome-tag {
+        background: var(--accent-color);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 1em;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .monster-biome-tag .remove-tag {
+        cursor: pointer;
+        font-weight: bold;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+      .monster-biome-tag .remove-tag:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-app-area">
+      <div class="controls">
+        <div class="file-group">
+          <label>1. Load enemies.json</label>
+          <input type="file" id="jsonInput" accept=".json" />
+        </div>
+        <div class="file-group">
+          <label>2a. Load Sprites (Walk)</label>
+          <input type="file" id="imageInput" webkitdirectory multiple />
+        </div>
+        <div class="file-group">
+          <label>2b. Load Battlers (Static)</label>
+          <input type="file" id="battlerInput" webkitdirectory multiple />
+        </div>
+        <div class="file-group">
+          <label>3. Load Skills.json</label>
+          <input type="file" id="skillsInput" accept=".json" />
+        </div>
+        <button id="saveBtn" class="save-btn" disabled>
+          Save & Download JSON
+        </button>
+      </div>
+
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('single')">
+          Single Editor
+        </button>
+        <button class="tab-btn" onclick="switchTab('table')">
+          Mass Table View
+        </button>
+        <button class="tab-btn" onclick="switchTab('enemydex')">
+          Enemydex
+        </button>
+        <button class="tab-btn" onclick="switchTab('biomeDrag')">
+          Biome Drag Assign
+        </button>
+      </div>
+
+      <div id="view-single" class="view-container active">
+        <div class="editor-split">
+          <div class="list-sidebar">
+            <input
+              type="text"
+              class="search-box"
+              id="singleSearch"
+              placeholder="Search..."
+            />
+            <select id="enemySelect" size="2"></select>
+          </div>
+          <div class="details-area">
+            <div class="name-input-container">
+              <label>Name</label>
+              <input type="text" id="nameInput" placeholder="Enemy Name" />
+            </div>
+
+            <div class="visual-config-row">
+              <div class="visual-section">
+                <span style="font-size: 0.8em; color: #888; margin-bottom: 5px"
+                  >SPRITE (WALK) <span id="spriteUsageCount" style="color: #5dade2;"></span></span
+                >
+                <div
+                  class="big-preview-box"
+                  id="mainSpriteTrigger"
+                  title="Click to Change Sprite"
+                >
+                  <div id="mainSpriteDiv" class="sprite-crop animating"></div>
+                </div>
+                <div id="imageStatus" class="status-missing">No Image</div>
+                <div class="tag" id="spriteNameLabel">None</div>
+              </div>
+
+              <div class="visual-section">
+                <span style="font-size: 0.8em; color: #888; margin-bottom: 5px"
+                  >BATTLER (STATIC)</span
+                >
+                <div
+                  class="big-preview-box"
+                  id="mainBattlerTrigger"
+                  title="Click to Change Battler"
+                >
+                  <div id="mainBattlerDiv" class="battler-view"></div>
+                </div>
+                <div id="battlerStatus" class="status-missing">No Image</div>
+                <div class="tag" id="battlerNameLabel">None</div>
+              </div>
+
+              <div
+                class="biome-section"
+                style="border-left: 1px solid #555; padding-left: 20px"
+              >
+                <span style="font-size: 0.8em; color: #888; margin-bottom: 5px"
+                  >BIOMES</span
+                >
+                <div class="biome-controls">
+                  <select id="biomeSelect" style="flex: 1"></select>
+                  <button onclick="addBiome()">+ Add</button>
+                  <button onclick="autoBiome()" style="background-color: #9b59b6;">Auto</button>
+                </div>
+                <div class="biome-controls">
+                  <select id="biomePresetSelect" style="flex: 1">
+                    <option value="">-- Select Preset --</option>
+                  </select>
+                </div>
+                <div class="biome-tags" id="biomeTagsList"></div>
+              </div>
+            </div>
+
+            <div class="options-row">
+              <div class="option-group">
+                <label for="archetypeSelect">Archetype:</label>
+                <select id="archetypeSelect">
+                  <option value="">(None)</option>
+                </select>
+              </div>
+              <div class="option-group">
+                <label for="activitySelect">Activity:</label>
+                <select id="activitySelect">
+                  <option value="">(Any time)</option>
+                  <option value="Diurnal">Diurnal (Day)</option>
+                  <option value="Nocturnal">Nocturnal (Night)</option>
+                  <option value="Crepuscular">Crepuscular (Twilight)</option>
+                </select>
+              </div>
+              <div class="option-group">
+                <label for="weightInput">Weight (kg):</label>
+                <input type="number" id="weightInput" min="0" placeholder="0" />
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="talkCheckbox" />
+                <label for="talkCheckbox">Can Talk</label>
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="climbCheckbox" />
+                <label for="climbCheckbox">Can Climb</label>
+              </div>
+              <div class="option-group">
+                <label for="bloodSelect">Blood Type:</label>
+                <select id="bloodSelect">
+                  <option value="">(Default Red)</option>
+                  <option value="NoBlood">No Blood</option>
+                  <option value="Bark">Bark (Wood)</option>
+                  <option value="Spark">Spark (Electric)</option>
+                  <option value="Rock">Rock (Debris)</option>
+                  <option value="GreenBlood">Green Blood</option>
+                  <option value="AzureBlood">Azure Blood</option>
+                  <option value="BlackBlood">Black Blood</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="desc-grid">
+              <div class="desc-box">
+                <label>English Description</label>
+                <textarea id="descEnInput"></textarea>
+              </div>
+              <div class="desc-box">
+                <label>Italian Description</label>
+                <textarea id="descItInput"></textarea>
+              </div>
+            </div>
+
+            <!-- Parameters & Action Patterns Row -->
+            <div class="params-skills-row">
+              <!-- Parameters Section -->
+              <div class="params-grid">
+                <div class="level-display" id="levelDisplay">Level: 0</div>
+                <div class="param-box">
+                  <label>Max HP</label>
+                  <input type="number" id="paramHP" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Max MP</label>
+                  <input type="number" id="paramMP" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Strength (STR)</label>
+                  <input type="number" id="paramATK" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Constitution (COS)</label>
+                  <input type="number" id="paramDEF" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Intelligence (INT)</label>
+                  <input type="number" id="paramMAT" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Wisdom (WIS)</label>
+                  <input type="number" id="paramMDF" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>Dexterity (DEX)</label>
+                  <input type="number" id="paramAGI" min="0" placeholder="0" />
+                </div>
+                <div class="param-box">
+                  <label>PSI (PSI)</label>
+                  <input type="number" id="paramLUK" min="0" placeholder="0" />
+                </div>
+              </div>
+
+              <!-- Action Patterns (Skills) Section -->
+              <div class="skills-section">
+                <div class="section-header">
+                  <span>Action Patterns</span>
+                  <button onclick="addSkill()">+ Add Skill</button>
+                </div>
+                <div id="skillsList"></div>
+              </div>
+            </div>
+
+            <!-- Rewards & Drop Items Row -->
+            <div class="rewards-drops-row">
+              <!-- Rewards Section -->
+              <div class="rewards-row">
+                <div class="reward-box">
+                  <label>EXP Reward</label>
+                  <input type="number" id="rewardEXP" min="0" placeholder="0" />
+                </div>
+                <div class="reward-box">
+                  <label>Gold Reward</label>
+                  <input type="number" id="rewardGold" min="0" placeholder="0" />
+                </div>
+              </div>
+
+              <!-- Drop Items Section -->
+              <div class="drops-section">
+                <div class="section-header">
+                  <span>Drop Items</span>
+                  <button onclick="addDropItem()">+ Add Drop</button>
+                </div>
+                <div id="dropItemsList"></div>
+              </div>
+            </div>
+
+            <!-- Traits Section -->
+            <div class="traits-section">
+              <div class="section-header">
+                <span>Traits</span>
+                <button onclick="addTrait()">+ Add Trait</button>
+              </div>
+              <div id="traitsList"></div>
+            </div>
+
+            <div style="margin-top: 20px; width: 100%">
+              <span
+                class="info-label"
+                style="display: block; color: #888; font-size: 0.8em"
+                >Raw Note Data (Editable)</span
+              >
+              <textarea
+                id="rawNote"
+                style="
+                  background: #222;
+                  padding: 10px;
+                  overflow-x: auto;
+                  font-size: 0.8em;
+                  color: #e0e0e0;
+                  border: 1px solid #444;
+                  border-radius: 4px;
+                  margin-top: 5px;
+                  width: 100%;
+                  min-height: 150px;
+                  font-family: monospace;
+                  resize: vertical;
+                  box-sizing: border-box;
+                "
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-table" class="view-container">
+        <div class="table-controls">
+          <input
+            type="text"
+            class="search-box"
+            id="tableSearch"
+            placeholder="Search Table..."
+            style="max-width: 400px; border: 1px solid #555"
+          />
+        </div>
+        <div class="table-scroll">
+          <table id="massTable">
+            <thead>
+              <tr>
+                <th width="50">ID</th>
+                <th width="200">Name</th>
+                <th width="150">Sprite</th>
+                <th width="150">Battler</th>
+                <th>Biomes & Info</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="view-enemydex" class="view-container">
+        <div class="enemydex-container">
+          <div class="enemydex-grid" id="enemydexGrid"></div>
+        </div>
+      </div>
+
+      <div id="view-biomeDrag" class="view-container">
+        <div class="biome-drag-container">
+          <div class="biome-drag-left">
+            <h3 style="margin: 0 0 10px 0; color: #fff;">Available Biomes</h3>
+            <input
+              type="text"
+              id="biomeFilterInput"
+              placeholder="Filter biomes..."
+              style="width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; background: #2a2a2a; border: 1px solid #555; color: #fff; border-radius: 4px;"
+            />
+            <div id="biomeDragList" class="biome-drag-list"></div>
+          </div>
+          <div class="biome-drag-right">
+            <h3 style="margin: 0 0 10px 0; color: #fff;">Monsters <span id="monsterCount" style="font-size: 0.8em; color: #888;"></span></h3>
+            <input
+              type="text"
+              id="monsterFilterInput"
+              placeholder="Filter monsters..."
+              style="width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; background: #2a2a2a; border: 1px solid #555; color: #fff; border-radius: 4px;"
+            />
+            <div id="monsterDragList" class="monster-drag-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="unused-sidebar">
+      <div class="unused-header">
+        Unused Sprites
+        <span class="unused-count" id="unusedCount">0</span>
+      </div>
+      <div class="unused-list" id="unusedList">
+        <div
+          style="
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+          "
+        >
+          Load images to see unused sprites here.
+        </div>
+      </div>
+    </div>
+
+    <div id="mediaModal">
+      <div class="modal-content">
+        <div class="modal-header-bar">
+          <h3 style="margin: 0" id="modalTitle">Select Image</h3>
+          <input
+            type="text"
+            class="modal-search"
+            id="modalSearch"
+            placeholder="Search..."
+          />
+          <button
+            onclick="document.getElementById('mediaModal').style.display='none'"
+          >
+            Close
+          </button>
+        </div>
+        <div class="image-grid" id="modalGrid"></div>
+      </div>
+    </div>
+
+    <script>
+      // --- DATA CONSTANTS ---
+      const ALL_BIOMES = [
+        "Abandoned",
+        "AbandonedInside",
+        "Abstract",
+        "AlienPlanet",
+        "Arena",
+        "Badlands",
+        "Bamboo",
+        "Beach",
+        "Burg",
+        "BurgDesert",
+        "BurgIce",
+        "Canyon",
+        "Castle",
+        "CastleInside",
+        "Cave",
+        "CaveFlooded",
+        "CaveIce",
+        "ChurchInside",
+        "City",
+        "CityDesert",
+        "CityIce",
+        "Crypt",
+        "Crystals",
+        "Desert",
+        "Digital",
+        "Docks",
+        "Dreamscape",
+        "Dungeon",
+        "Eldritch",
+        "Factory",
+        "FactoryInside",
+        "Fairy",
+        "Farm",
+        "Fields",
+        "Forest",
+        "ForestIce",
+        "ForestTropical",
+        "Ghent",
+        "Graveyard",
+        "Heaven",
+        "Hell",
+        "Highlands",
+        "Highway",
+        "Houses",
+        "Ice",
+        "Jungle",
+        "Laboratory",
+        "Lair",
+        "Lake",
+        "Landfill",
+        "Limbo",
+        "Mangrove",
+        "Meadows",
+        "Metro",
+        "Mines",
+        "Misc",
+        "Mountain",
+        "MountainDesert",
+        "MountainIce",
+        "Mushroom",
+        "Ocean",
+        "Office",
+        "OmegaTower",
+        "Park",
+        "Permafrost",
+        "River",
+        "RiverBank",
+        "Road",
+        "Ruins",
+        "SaltFlats",
+        "Savannah",
+        "SeaBed",
+        "Sewer",
+        "Snow",
+        "Space",
+        "Spacecenter",
+        "SpiritWoods",
+        "Steppe",
+        "Swamp",
+        "Taiga",
+        "Temple",
+        "TempleShinto",
+        "Train",
+        "Tundra",
+        "Underdark",
+        "Villa",
+        "Village",
+        "VillageDesert",
+        "VillageIce",
+        "VillageMountain",
+        "VillageRiver",
+        "VillageSea",
+        "Volcano",
+      ];
+
+      const TRAIT_TYPES = [
+        { code: 11, name: "Element Rate", hasDataId: true, valueType: "percent" },
+        { code: 12, name: "Debuff Rate", hasDataId: true, valueType: "percent" },
+        { code: 13, name: "State Rate", hasDataId: true, valueType: "percent" },
+        { code: 14, name: "State Resist", hasDataId: true, valueType: "boolean" },
+        { code: 21, name: "Regular Parameter", hasDataId: true, valueType: "percent" },
+        { code: 22, name: "Ex-Parameter", hasDataId: true, valueType: "decimal" },
+        { code: 23, name: "Sp-Parameter", hasDataId: true, valueType: "percent" },
+        { code: 31, name: "Attack Element", hasDataId: true, valueType: "none" },
+        { code: 32, name: "Attack State", hasDataId: true, valueType: "decimal" },
+        { code: 33, name: "Attack Speed", hasDataId: false, valueType: "number" },
+        { code: 34, name: "Attack Times+", hasDataId: false, valueType: "decimal" },
+        { code: 41, name: "Add Skill Type", hasDataId: true, valueType: "none" },
+        { code: 42, name: "Seal Skill Type", hasDataId: true, valueType: "none" },
+        { code: 43, name: "Add Skill", hasDataId: true, valueType: "none" },
+        { code: 44, name: "Seal Skill", hasDataId: true, valueType: "none" },
+        { code: 62, name: "Collapse Effect", hasDataId: true, valueType: "none" },
+        { code: 63, name: "Special Flag", hasDataId: true, valueType: "none" },
+      ];
+
+      const EX_PARAMS = [
+        { id: 0, name: "HIT - Hit Rate" },
+        { id: 1, name: "EVA - Evasion Rate" },
+        { id: 2, name: "CRI - Critical Rate" },
+        { id: 3, name: "CEV - Critical Evasion" },
+        { id: 4, name: "MEV - Magic Evasion" },
+        { id: 5, name: "MRF - Magic Reflection" },
+        { id: 6, name: "CNT - Counter Attack" },
+        { id: 7, name: "HRG - HP Regeneration" },
+        { id: 8, name: "MRG - MP Regeneration" },
+        { id: 9, name: "TRG - TP Regeneration" },
+      ];
+
+      const REGULAR_PARAMS = [
+        { id: 0, name: "Max HP" },
+        { id: 1, name: "Max MP" },
+        { id: 2, name: "Attack" },
+        { id: 3, name: "Defense" },
+        { id: 4, name: "M.Attack" },
+        { id: 5, name: "M.Defense" },
+        { id: 6, name: "Agility" },
+        { id: 7, name: "Luck" },
+      ];
+
+      const ELEMENTS = [
+        { id: 1, name: "Physical" },
+        { id: 2, name: "Fire" },
+        { id: 3, name: "Ice" },
+        { id: 4, name: "Thunder" },
+        { id: 5, name: "Water" },
+        { id: 6, name: "Petro" },
+        { id: 7, name: "Wind" },
+        { id: 8, name: "Sacred" },
+        { id: 9, name: "Cursed" },
+      ];
+
+      const MATERIAL_ITEMS = [
+        { id: 565, name: "Steel ingot" },
+        { id: 566, name: "Titanium ingot" },
+        { id: 567, name: "Varlenia Ingot" },
+        { id: 568, name: "Crystal" },
+        { id: 569, name: "Glass" },
+        { id: 570, name: "Wood" },
+        { id: 571, name: "Leather" },
+        { id: 572, name: "Cloth" },
+        { id: 573, name: "Bone" },
+        { id: 574, name: "Meat" },
+        { id: 575, name: "Plant matter" },
+        { id: 576, name: "Herb extract" },
+        { id: 577, name: "Oil Flask" },
+        { id: 578, name: "Acidic Solution" },
+        { id: 579, name: "Arcane Essence" },
+        { id: 580, name: "Ethereal Shard" },
+        { id: 581, name: "Quantum Core" },
+        { id: 582, name: "Circuit Board" },
+        { id: 583, name: "Microchip" },
+        { id: 584, name: "Battery Cell" },
+        { id: 585, name: "Plastic Polymer" },
+        { id: 586, name: "Composite Resin" },
+        { id: 587, name: "Nanotube Module" },
+      ];
+
+      const BIOME_PRESETS = {
+        "Infernal": ["Hell", "Volcano", "Crypt"],
+        "Aquatic": ["Ocean", "Beach", "SeaBed", "Lake", "River"],
+        "Arctic": ["Ice", "Permafrost", "ForestIce", "MountainIce", "CityIce", "VillageIce", "BurgIce", "CaveIce", "Tundra"],
+        "Desert": ["Desert", "MountainDesert", "CityDesert", "VillageDesert", "BurgDesert", "Canyon", "Badlands", "SaltFlats"],
+        "Forest": ["Forest", "ForestTropical", "Jungle", "Bamboo", "Taiga", "SpiritWoods", "Mangrove"],
+        "Urban": ["City", "Burg", "Village", "Metro", "Office", "Factory", "Spacecenter"],
+        "Underground": ["Cave", "Dungeon", "Mines", "Underdark", "Crypt", "Sewer"],
+        "Mountain": ["Mountain", "MountainIce", "MountainDesert", "VillageMountain", "Highlands"],
+        "Wetlands": ["Swamp", "Mangrove", "RiverBank"],
+        "Mystical": ["Heaven", "Eldritch", "Dreamscape", "Abstract", "Limbo", "Fairy", "Crystals"],
+        "Civilization": ["City", "Village", "Burg", "Houses", "Villa", "Farm", "Park"],
+        "Religious": ["ChurchInside", "Temple", "TempleShinto", "Graveyard"],
+        "Industrial": ["Factory", "FactoryInside", "Laboratory", "Office", "Spacecenter"],
+        "Ruins": ["Ruins", "Abandoned", "AbandonedInside"],
+        "Alien": ["AlienPlanet", "Space", "Digital", "Abstract"],
+        "WaterFresh": ["River", "Lake", "RiverBank", "Docks", "VillageRiver", "VillageSea"],
+        "Grasslands": ["Fields", "Meadows", "Steppe", "Park"],
+        "Dark": ["Dark tower", "Omega tower", "OmegaTower", "Hell", "Underdark", "Eldritch"],
+        "Tropical": ["ForestTropical", "Jungle", "Beach", "Mangrove"],
+        "Combat": ["Arena", "Castle", "CastleInside", "Dungeon"],
+        "Transportation": ["Highway", "Road", "Train", "Metro", "Docks"],
+        "Nature": ["Forest", "Fields", "Meadows", "Park", "Mushroom"],
+        "Cosmic": ["Space", "AlienPlanet", "Digital", "Abstract", "Spacecenter"],
+        "Horror": ["Eldritch", "Underdark", "Crypt", "Graveyard", "Dark tower", "Sewer"],
+        "Agricultural": ["Farm", "Fields", "Meadows", "Village", "Houses",],
+        "Coastal": ["Beach", "VillageSea",],
+        "Technology": ["Digital", "Laboratory", "Spacecenter", "Factory", "Office", "Metro"],
+        "Wasteland": ["Abandoned", "AbandonedInside", "Ruins", "Landfill", "Badlands"],
+        "Volcanic": ["Volcano", "Hell", "Petro cave"],
+        "Elemental": ["Crystals", "Ice", "Volcano", "SpiritWoods", "Heaven"],
+        "Subterranean": ["Cave", "CaveFlooded", "CaveIce", "Mines", "Underdark", "Dungeon", "Petro cave"],
+        "Celestial": ["Heaven", "Dreamscape", "Limbo", "Abstract", "Space"],
+        "Corrupted": ["Eldritch", "Dark tower", "Omega tower", "OmegaTower", "Hell", "Sewer", "Underdark"],
+        "Nomadic": ["Highway", "Road", "Train", "Metro", "Docks", "Desert"],
+        "Magical": ["SpiritWoods", "Crystals", "Fairy", "Dreamscape", "Eldritch", "TempleShinto"],
+        "Temperate": ["Forest", "Park", "Meadows", "Fields", "Village", "Houses"],
+        "Settlement": ["Village", "VillageDesert", "VillageIce", "VillageMountain", "VillageRiver", "VillageSea"],
+        "Fortress": ["Castle", "CastleInside", "Arena", "OmegaTower", "Dark tower"],
+        "Sacred": ["Temple", "TempleShinto", "ChurchInside", "Heaven", "Graveyard"],
+        "Polluted": ["Sewer", "Landfill", "Petro cave", "Factory", "Abandoned"],
+        "Extreme": ["Hell", "Heaven", "Volcano", "Permafrost", "Underdark", "Omega tower"],
+        "Fungal": ["Mushroom", "Cave", "Swamp", "Forest", "SpiritWoods"],
+        "Barren": ["Desert", "Badlands", "SaltFlats", "Canyon", "Tundra", "Permafrost"],
+        "Civilized": ["City", "Burg", "Village", "Park", "Houses", "Villa", "Ghent"],
+        "Wilderness": ["Forest", "Jungle", "Taiga", "SpiritWoods", "Bamboo", "Mangrove", "Savannah"],
+        "Savannah": ["Savannah"],
+        "Labyrinth": ["Dungeon", "Castle", "Lair", "Mines", "Underdark", "CastleInside"],
+        "Frozen": ["Ice", "Permafrost", "Snow", "Tundra", "CaveIce"],
+        "Highlands": ["Mountain", "Highlands", "VillageMountain", "MountainDesert", "MountainIce"],
+        "Abyssal": ["Underdark", "Eldritch", "Limbo", "Dark tower", "SeaBed", "CaveFlooded"],
+        "Pastoral": ["Farm", "Fields", "Village", "Park", "Meadows", "Savannah"]
+      };
+
+      const ALL_ARCHETYPES = [
+        "AbyssalLeviathan",
+        "Amphibian",
+        "Angel",
+        "AquaticFish",
+        "ArmoredKnight",
+        "Bacterial",
+        "Bat",
+        "Beast",
+        "Bird",
+        "Centaur",
+        "ChestMimic",
+        "ConstructedUndead",
+        "Crustacean",
+        "CrystalEntity",
+        "DarkElemental",
+        "Demon",
+        "DoubleHeadedHumanoid",
+        "Dragon",
+        "Drone",
+        "Elemental",
+        "Elephant",
+        "Elven",
+        "Fairy",
+        "FireElemental",
+        "Frog",
+        "Ghost",
+        "Gnome",
+        "Goblin",
+        "Golem",
+        "Gorgon",
+        "Hellhound",
+        "Horse",
+        "Humanoid",
+        "Hydra",
+        "InsectSwarm",
+        "Insectoid",
+        "Manticore",
+        "MetalElemental",
+        "Mineral",
+        "Minotaur",
+        "Mushroom",
+        "Mutant",
+        "Octopus",
+        "Ogre",
+        "Ophanim",
+        "Phoenix",
+        "Plant",
+        "Rabbit",
+        "Reptilian",
+        "Robot",
+        "RoboticDefender",
+        "SacredElemental",
+        "Scarecrow",
+        "Scorpion",
+        "SegmentWorm",
+        "Serpent",
+        "Skeleton",
+        "Slime",
+        "Snail",
+        "Spherical",
+        "Spider",
+        "SpiderHumanHybrid",
+        "SpikyMonster",
+        "StormElemental",
+        "TentacledCreature",
+        "Totem",
+        "TrashCreature",
+        "Tree",
+        "Turret",
+        "Turtle",
+        "Undead",
+        "Unicorn",
+        "Vampire",
+        "VoidSpawn",
+        "WaterElemental",
+        "WingedDemon",
+      ];
+
+      let enemiesData = [];
+      let skillsData = []; // Skills from Skills.json
+
+      // Libraries
+      let spriteLibrary = {}; // { "key": "url" }
+      let spriteOriginalNames = {}; // { "key": "OriginalName" }
+
+      let battlerLibrary = {}; // { "key": "url" }
+      let battlerOriginalNames = {};
+
+      let currentEditingIndex = -1;
+      let currentBiomes = [];
+      let currentModalContext = "sprite"; // 'sprite' or 'battler'
+
+      // DOM Elements
+      const jsonInput = document.getElementById("jsonInput");
+      const imageInput = document.getElementById("imageInput"); // Sprites
+      const battlerInput = document.getElementById("battlerInput"); // Battlers
+      const saveBtn = document.getElementById("saveBtn");
+      const enemySelect = document.getElementById("enemySelect");
+      const tableBody = document.getElementById("tableBody");
+      const modalGrid = document.getElementById("modalGrid");
+      const mediaModal = document.getElementById("mediaModal");
+      const modalSearch = document.getElementById("modalSearch");
+      const unusedList = document.getElementById("unusedList");
+      const unusedCount = document.getElementById("unusedCount");
+
+      // Input Elements
+      const nameInput = document.getElementById("nameInput");
+      const descEnInput = document.getElementById("descEnInput");
+      const descItInput = document.getElementById("descItInput");
+      const biomeSelect = document.getElementById("biomeSelect");
+      const biomeTagsList = document.getElementById("biomeTagsList");
+      const weightInput = document.getElementById("weightInput");
+      const talkCheckbox = document.getElementById("talkCheckbox");
+      const climbCheckbox = document.getElementById("climbCheckbox");
+      const bloodSelect = document.getElementById("bloodSelect");
+      const archetypeSelect = document.getElementById("archetypeSelect");
+      const activitySelect = document.getElementById("activitySelect");
+
+      // --- INIT ---
+      jsonInput.addEventListener("change", loadJson);
+      imageInput.addEventListener("change", (e) => loadMedia(e, "sprite"));
+      battlerInput.addEventListener("change", (e) => loadMedia(e, "battler"));
+      document.getElementById("skillsInput").addEventListener("change", loadSkills);
+      saveBtn.addEventListener("click", saveFile);
+
+      document
+        .getElementById("singleSearch")
+        .addEventListener("input", (e) => filterList(e.target.value));
+      document
+        .getElementById("tableSearch")
+        .addEventListener("input", (e) => filterTable(e.target.value));
+      modalSearch.addEventListener("input", (e) => filterModal(e.target.value));
+
+      // Triggers
+      document
+        .getElementById("mainSpriteTrigger")
+        .addEventListener("click", () =>
+          openModal(currentEditingIndex, "sprite")
+        );
+      document
+        .getElementById("mainBattlerTrigger")
+        .addEventListener("click", () =>
+          openModal(currentEditingIndex, "battler")
+        );
+
+      enemySelect.addEventListener("change", (e) =>
+        loadSingleView(parseInt(e.target.value))
+      );
+
+      // Attach listeners for live updates
+      nameInput.addEventListener("input", updateEnemyData);
+      descEnInput.addEventListener("input", updateEnemyData);
+      descItInput.addEventListener("input", updateEnemyData);
+      weightInput.addEventListener("input", updateEnemyData);
+      talkCheckbox.addEventListener("change", updateEnemyData);
+      climbCheckbox.addEventListener("change", updateEnemyData);
+      bloodSelect.addEventListener("change", updateEnemyData);
+      archetypeSelect.addEventListener("change", updateEnemyData);
+      activitySelect.addEventListener("change", updateEnemyData);
+
+      // Parameters listeners
+      document.getElementById("paramHP").addEventListener("input", updateParams);
+      document.getElementById("paramMP").addEventListener("input", updateParams);
+      document.getElementById("paramATK").addEventListener("input", updateParams);
+      document.getElementById("paramDEF").addEventListener("input", updateParams);
+      document.getElementById("paramMAT").addEventListener("input", updateParams);
+      document.getElementById("paramMDF").addEventListener("input", updateParams);
+      document.getElementById("paramAGI").addEventListener("input", updateParams);
+      document.getElementById("paramLUK").addEventListener("input", updateParams);
+
+      // Rewards listeners
+      document.getElementById("rewardEXP").addEventListener("input", updateRewards);
+      document.getElementById("rewardGold").addEventListener("input", updateRewards);
+
+      // Raw note editing
+      document
+        .getElementById("rawNote")
+        .addEventListener("input", updateFromRawNote);
+
+      // Populate Biome Dropdown
+      ALL_BIOMES.forEach((b) => {
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = b;
+        biomeSelect.appendChild(opt);
+      });
+
+      // Populate Biome Preset Dropdown
+      const biomePresetSelect = document.getElementById("biomePresetSelect");
+      Object.keys(BIOME_PRESETS).sort().forEach((presetName) => {
+        const opt = document.createElement("option");
+        opt.value = presetName;
+        opt.textContent = `${presetName} (${BIOME_PRESETS[presetName].length})`;
+        biomePresetSelect.appendChild(opt);
+      });
+
+      // Apply preset immediately when selected
+      biomePresetSelect.addEventListener("change", () => {
+        const presetName = biomePresetSelect.value;
+        if (presetName && BIOME_PRESETS[presetName]) {
+          applyBiomePreset();
+        }
+      });
+
+      // Populate Archetype Dropdown
+      ALL_ARCHETYPES.forEach((a) => {
+        const opt = document.createElement("option");
+        opt.value = a;
+        opt.textContent = a;
+        archetypeSelect.appendChild(opt);
+      });
+
+      function switchTab(tabName) {
+        document
+          .querySelectorAll(".view-container")
+          .forEach((el) => el.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(`view-${tabName}`).classList.add("active");
+
+        const btns = document.querySelectorAll(".tab-btn");
+        if (tabName === "single") {
+          btns[0].classList.add("active");
+        } else if (tabName === "table") {
+          btns[1].classList.add("active");
+          renderTable();
+        } else if (tabName === "enemydex") {
+          btns[2].classList.add("active");
+          renderEnemydex();
+        } else if (tabName === "biomeDrag") {
+          btns[3].classList.add("active");
+          renderBiomeDrag();
+        }
+      }
+
+      // --- LOADERS ---
+      function loadJson(e) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          try {
+            const raw = JSON.parse(event.target.result);
+            enemiesData = raw.filter((x) => x !== null);
+            renderList();
+            renderTable();
+            updateUnusedPanel();
+            saveBtn.disabled = false;
+            if (enemiesData.length > 0) {
+              enemySelect.selectedIndex = 0;
+              loadSingleView(0);
+            }
+          } catch (err) {
+            alert("JSON Error: " + err);
+          }
+        };
+        reader.readAsText(e.target.files[0]);
+      }
+
+      function loadMedia(e, type) {
+        // Reset respective library
+        if (type === "sprite") {
+          spriteLibrary = {};
+          spriteOriginalNames = {};
+        } else {
+          battlerLibrary = {};
+          battlerOriginalNames = {};
+        }
+
+        Array.from(e.target.files).forEach((file) => {
+          if (!file.type.startsWith("image/")) return;
+          const name = file.name.replace(/\.[^/.]+$/, "");
+          const url = URL.createObjectURL(file);
+          const key = name.toLowerCase();
+
+          if (type === "sprite") {
+            spriteLibrary[key] = url;
+            spriteOriginalNames[key] = name;
+          } else {
+            battlerLibrary[key] = url;
+            battlerOriginalNames[key] = name;
+          }
+        });
+
+        // Update UI
+        if (currentEditingIndex !== -1) loadSingleView(currentEditingIndex);
+        renderTable();
+        if (type === "sprite") updateUnusedPanel();
+      }
+
+      function loadSkills(e) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          try {
+            const raw = JSON.parse(event.target.result);
+            skillsData = raw.filter((x) => x !== null);
+            console.log(`Loaded ${skillsData.length} skills`);
+            // Reload current enemy to update skill dropdowns
+            if (currentEditingIndex !== -1) {
+              loadSingleView(currentEditingIndex);
+            }
+          } catch (err) {
+            alert("Skills JSON Error: " + err);
+          }
+        };
+        reader.readAsText(e.target.files[0]);
+      }
+
+      // --- HELPERS ---
+      function resolveKey(library, rawName) {
+        if (!rawName) return null;
+        const key = rawName.toLowerCase();
+        if (library[key]) return key;
+        const noDollar = key.replace(/^\$/, "");
+        if (library[noDollar]) return noDollar;
+        const withDollar = "$" + key;
+        if (library[withDollar]) return withDollar;
+        return null;
+      }
+
+      function findURL(library, rawName) {
+        const key = resolveKey(library, rawName);
+        return key ? library[key] : null;
+      }
+
+      function getSpriteUsageCount(spriteName) {
+        if (!spriteName) return 0;
+        let count = 0;
+        enemiesData.forEach((enemy) => {
+          const note = enemy.note || "";
+          const spriteMatch = note.match(/<Char:([^>]+)>/);
+          if (spriteMatch && spriteMatch[1].trim() === spriteName) {
+            count++;
+          }
+        });
+        return count;
+      }
+
+      function getSpriteWarningSymbol(spriteName) {
+        const count = getSpriteUsageCount(spriteName);
+        if (count > 10) {
+          return '<span style="color:#e74c3c; font-size:1em; margin-right:2px;" title="Sprite used ' + count + ' times">!</span>';
+        } else if (count >= 6) {
+          return '<span style="color:#f39c12; font-size:1em; margin-right:2px;" title="Sprite used ' + count + ' times">!</span>';
+        }
+        return '';
+      }
+
+      function getSpriteWarningText(spriteName) {
+        const count = getSpriteUsageCount(spriteName);
+        if (count > 10) {
+          return '🔴';
+        } else if (count >= 6) {
+          return '⚠️';
+        }
+        return '';
+      }
+
+      function isIncomplete(enemy) {
+        const note = enemy.note || "";
+
+        // Check biomes - incomplete if only biome is "Misc"
+        const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+        let biomes = [];
+        if (biomeMatch) {
+          biomes = biomeMatch[1]
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s);
+        }
+        const onlyMisc = biomes.length === 1 && biomes[0] === "Misc";
+
+        // Check descriptions
+        const enMatch = note.match(/<En:\s*([\s\S]*?)>/);
+        const itMatch = note.match(/<It:\s*([\s\S]*?)>/);
+        let enText = enMatch
+          ? enMatch[1]
+              .trim()
+              .replace(/<Char:[^>]+>/gi, "")
+              .trim()
+          : "";
+        let itText = itMatch
+          ? itMatch[1]
+              .trim()
+              .replace(/<Char:[^>]+>/gi, "")
+              .trim()
+          : "";
+        const missingEn = !enText;
+        const missingIt = !itText;
+
+        // Check weight
+        const weightMatch = note.match(/<Weight:\s*(\d+)\s*kg>/i);
+        const weight = weightMatch ? parseInt(weightMatch[1]) : 0;
+        const zeroWeight = weight === 0;
+
+        // Check archetype
+        const archetypeMatch = note.match(/<Archetype:\s*([^>]+)>/i);
+        const missingArchetype = !archetypeMatch;
+
+        return (
+          missingEn || missingIt || missingArchetype || zeroWeight || onlyMisc
+        );
+      }
+
+      // --- MAIN VIEW LOGIC ---
+
+      function renderList() {
+        const currentSelection = enemySelect.value; // Preserve selection
+        enemySelect.innerHTML = "";
+        enemiesData.forEach((enemy, index) => {
+          const opt = document.createElement("option");
+          opt.value = index;
+          const incomplete = isIncomplete(enemy);
+
+          // Get sprite warning
+          const note = enemy.note || "";
+          const spriteMatch = note.match(/<Char:([^>]+)>/);
+          const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+          const spriteWarning = getSpriteWarningText(spriteName);
+
+          opt.textContent = `${incomplete ? "❗ " : ""}${spriteWarning}[${enemy.id}] ${
+            enemy.name
+          }`;
+          enemySelect.appendChild(opt);
+        });
+        // Restore selection
+        if (currentSelection !== null && currentSelection !== undefined) {
+          enemySelect.value = currentSelection;
+        }
+      }
+
+      function loadSingleView(index) {
+        currentEditingIndex = index;
+        const enemy = enemiesData[index];
+        const note = enemy.note || "";
+
+        // 1. Name
+        nameInput.value = enemy.name;
+
+        // 2. Parse descriptions (strip chars for clean edit)
+        const enMatch = note.match(/<En:\s*([\s\S]*?)>/);
+        const itMatch = note.match(/<It:\s*([\s\S]*?)>/);
+
+        let enText = enMatch ? enMatch[1].trim() : "";
+        let itText = itMatch ? itMatch[1].trim() : "";
+        enText = enText.replace(/<Char:[^>]+>/gi, "").trim();
+        itText = itText.replace(/<Char:[^>]+>/gi, "").trim();
+
+        descEnInput.value = enText;
+        descItInput.value = itText;
+
+        // 3. Biomes
+        const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+        currentBiomes = [];
+        if (biomeMatch) {
+          currentBiomes = biomeMatch[1]
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s);
+        }
+        renderBiomeTags();
+
+        // 4. Sprite (from Note)
+        const spriteMatch = note.match(/<Char:([^>]+)>/);
+        const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+        updateVisualBox(
+          "mainSpriteDiv",
+          "spriteNameLabel",
+          "imageStatus",
+          spriteName,
+          spriteLibrary,
+          "sprite"
+        );
+
+        // Update sprite usage count
+        const usageCount = getSpriteUsageCount(spriteName);
+        document.getElementById("spriteUsageCount").textContent = spriteName ? `(${usageCount}x)` : "";
+
+        // 5. Battler (from Property)
+        const battlerName = enemy.battlerName || "";
+        updateVisualBox(
+          "mainBattlerDiv",
+          "battlerNameLabel",
+          "battlerStatus",
+          battlerName,
+          battlerLibrary,
+          "battler"
+        );
+
+        // 6. Weight
+        const weightMatch = note.match(/<Weight:\s*(\d+)\s*kg>/i);
+        weightInput.value = weightMatch ? parseInt(weightMatch[1]) : "";
+
+        // 7. Talk checkbox
+        talkCheckbox.checked = /<Talk>/i.test(note);
+
+        // 8. Climb checkbox
+        climbCheckbox.checked = /<Climb>/i.test(note);
+
+        // 9. Blood type
+        const bloodTypes = [
+          "NoBlood",
+          "Bark",
+          "Spark",
+          "Rock",
+          "GreenBlood",
+          "AzureBlood",
+          "BlackBlood",
+        ];
+        let foundBlood = "";
+        for (const bt of bloodTypes) {
+          if (new RegExp(`<${bt}>`, "i").test(note)) {
+            foundBlood = bt;
+            break;
+          }
+        }
+        bloodSelect.value = foundBlood;
+
+        // 10. Archetype
+        const archetypeMatch = note.match(/<Archetype:\s*([^>]+)>/i);
+        archetypeSelect.value = archetypeMatch ? archetypeMatch[1].trim() : "";
+
+        // 11. Activity period
+        const activityTypes = ["Diurnal", "Nocturnal", "Crepuscular"];
+        let foundActivity = "";
+        for (const at of activityTypes) {
+          if (new RegExp(`<${at}>`, "i").test(note)) {
+            foundActivity = at;
+            break;
+          }
+        }
+        activitySelect.value = foundActivity;
+
+        // 12. Parameters [MaxHP, MaxMP, ATK, DEF, MAT, MDF, AGI, LUK]
+        const params = enemy.params || [0, 0, 0, 0, 0, 0, 0, 0];
+        document.getElementById("paramHP").value = params[0] || 0;
+        document.getElementById("paramMP").value = params[1] || 0;
+        document.getElementById("paramATK").value = params[2] || 0;
+        document.getElementById("paramDEF").value = params[3] || 0;
+        document.getElementById("paramMAT").value = params[4] || 0;
+        document.getElementById("paramMDF").value = params[5] || 0;
+        document.getElementById("paramAGI").value = params[6] || 0;
+        document.getElementById("paramLUK").value = params[7] || 0;
+
+        // Update level display
+        const level = calculateLevel(params);
+        document.getElementById("levelDisplay").textContent = `Level: ${level}`;
+
+        // 13. Rewards
+        document.getElementById("rewardEXP").value = enemy.exp || 0;
+        document.getElementById("rewardGold").value = enemy.gold || 0;
+
+        // 14. Drop Items
+        renderDropItems();
+
+        // 15. Skills (Actions)
+        renderSkills();
+
+        // 16. Traits
+        renderTraits();
+
+        // 17. Raw Note
+        document.getElementById("rawNote").value = note;
+      }
+
+      function updateVisualBox(
+        divId,
+        labelId,
+        statusId,
+        imageName,
+        library,
+        type
+      ) {
+        const div = document.getElementById(divId);
+        const lbl = document.getElementById(labelId);
+        const status = document.getElementById(statusId);
+
+        lbl.textContent = imageName ? imageName : "None";
+        const imgUrl = findURL(library, imageName);
+
+        if (imgUrl) {
+          div.style.backgroundImage = `url('${imgUrl}')`;
+          status.textContent = "Image Found";
+          status.className = "status-found";
+        } else {
+          div.style.backgroundImage = "none";
+          status.textContent = imageName ? "Missing File" : "None Assigned";
+          status.className = "status-missing";
+        }
+      }
+
+      function renderTable() {
+        if (enemiesData.length === 0) return;
+        tableBody.innerHTML = "";
+
+        enemiesData.forEach((enemy, index) => {
+          const note = enemy.note || "";
+
+          // Sprite Info
+          const spriteMatch = note.match(/<Char:([^>]+)>/);
+          const spriteName = spriteMatch ? spriteMatch[1].trim() : "None";
+          const spriteUrl =
+            spriteName !== "None" ? findURL(spriteLibrary, spriteName) : null;
+          const spriteCount = spriteName !== "None" ? getSpriteUsageCount(spriteName) : 0;
+
+          // Battler Info
+          const battlerName = enemy.battlerName || "None";
+          const battlerUrl =
+            battlerName !== "None"
+              ? findURL(battlerLibrary, battlerName)
+              : null;
+
+          // Parse Biomes
+          const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+          let biomes = [];
+          if (biomeMatch) {
+            biomes = biomeMatch[1]
+              .split(",")
+              .map((s) => s.trim())
+              .filter((s) => s);
+          }
+
+          const tr = document.createElement("tr");
+          const searchStr =
+            `${enemy.id} ${enemy.name} ${spriteName} ${battlerName} ${note}`.toLowerCase();
+          tr.setAttribute("data-search", searchStr);
+
+          // Sprite Cell HTML
+          const spriteHtml = `
+                    <div class="cell-sprite-container" onclick="openModal(${index}, 'sprite')">
+                        <div class="sprite-crop" style="background-image: url('${
+                          spriteUrl || ""
+                        }'); border: ${
+            spriteUrl ? "none" : "1px dashed #555"
+          }"></div>
+                        <span style="font-size:0.8em">${spriteName}${spriteName !== "None" ? ` <span style="color:#5dade2">(${spriteCount}x)</span>` : ""}</span>
+                    </div>`;
+
+          // Battler Cell HTML
+          const battlerHtml = `
+                    <div class="cell-sprite-container" onclick="openModal(${index}, 'battler')">
+                        <div class="sprite-crop" style="background-image: url('${
+                          battlerUrl || ""
+                        }'); background-size:contain; border: ${
+            battlerUrl ? "none" : "1px dashed #555"
+          }"></div>
+                        <span style="font-size:0.8em">${battlerName}</span>
+                    </div>`;
+
+          const incomplete = isIncomplete(enemy);
+          const incompleteMark = incomplete
+            ? '<span style="color:#e74c3c; font-size:1.2em; margin-right:5px;" title="Incomplete entry">❗</span>'
+            : "";
+
+          // Get sprite warning symbol
+          const spriteWarningMark = getSpriteWarningSymbol(spriteName !== "None" ? spriteName : null);
+
+          tr.innerHTML = `
+                    <td>${spriteWarningMark}${enemy.id}</td>
+                    <td>${incompleteMark}<strong>${enemy.name}</strong></td>
+                    <td>${spriteHtml}</td>
+                    <td>${battlerHtml}</td>
+                    <td><div class="table-biome-cell" id="biomesCell-${index}"></div></td>
+                `;
+          tableBody.appendChild(tr);
+
+          // Render biomes in the cell
+          renderTableBiomes(index, biomes);
+        });
+        filterTable(document.getElementById("tableSearch").value);
+      }
+
+      function renderEnemydex() {
+        const enemydexGrid = document.getElementById("enemydexGrid");
+        if (enemiesData.length === 0) {
+          enemydexGrid.innerHTML = '<div style="color: #888; text-align: center; width: 100%; padding: 40px;">Load enemies.json to view enemydex</div>';
+          return;
+        }
+
+        enemydexGrid.innerHTML = "";
+
+        enemiesData.forEach((enemy, index) => {
+          const note = enemy.note || "";
+
+          // Sprite Info
+          const spriteMatch = note.match(/<Char:([^>]+)>/);
+          const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+          const spriteUrl = spriteName ? findURL(spriteLibrary, spriteName) : null;
+
+          // Battler Info
+          const battlerName = enemy.battlerName || null;
+          const battlerUrl = battlerName ? findURL(battlerLibrary, battlerName) : null;
+
+          // Create card
+          const card = document.createElement("div");
+          card.className = "enemy-card";
+          card.onclick = () => {
+            switchTab('single');
+            enemySelect.selectedIndex = index;
+            loadSingleView(index);
+          };
+
+          // Battler section
+          const battlerDiv = document.createElement("div");
+          battlerDiv.className = "enemy-card-battler";
+          if (battlerUrl) {
+            const img = document.createElement("img");
+            img.src = battlerUrl;
+            img.alt = battlerName;
+            battlerDiv.appendChild(img);
+          } else {
+            battlerDiv.style.border = "1px dashed #555";
+            battlerDiv.innerHTML = '<div style="color: #666; font-size: 0.7em;">No Battler</div>';
+          }
+
+          // Sprite section
+          const spriteDiv = document.createElement("div");
+          spriteDiv.className = "enemy-card-sprite";
+          if (spriteUrl) {
+            spriteDiv.style.backgroundImage = `url('${spriteUrl}')`;
+          } else {
+            spriteDiv.style.border = "1px dashed #555";
+            spriteDiv.style.animation = "none";
+            spriteDiv.style.background = "#222";
+          }
+
+          // Name section
+          const nameDiv = document.createElement("div");
+          nameDiv.className = "enemy-card-name";
+          nameDiv.textContent = enemy.name;
+
+          // ID section
+          const idDiv = document.createElement("div");
+          idDiv.className = "enemy-card-id";
+          idDiv.textContent = `#${enemy.id}`;
+
+          // Assemble card
+          card.appendChild(battlerDiv);
+          card.appendChild(spriteDiv);
+          card.appendChild(nameDiv);
+          card.appendChild(idDiv);
+
+          enemydexGrid.appendChild(card);
+        });
+      }
+
+      // --- BIOME DRAG ASSIGN ---
+      function renderBiomeDrag() {
+        const biomeDragList = document.getElementById("biomeDragList");
+        const monsterDragList = document.getElementById("monsterDragList");
+        const monsterCount = document.getElementById("monsterCount");
+
+        if (enemiesData.length === 0) {
+          biomeDragList.innerHTML = '<div style="color: #888; text-align: center; padding: 20px;">Load enemies.json first</div>';
+          monsterDragList.innerHTML = '<div style="color: #888; text-align: center; padding: 40px;">Load enemies.json to view monsters</div>';
+          return;
+        }
+
+        // Render biome list (left side)
+        renderBiomeList();
+
+        // Render monster list (right side)
+        renderMonsterList();
+
+        // Update monster count
+        monsterCount.textContent = `(${enemiesData.length} total)`;
+
+        // Add filter listeners
+        document.getElementById("biomeFilterInput").addEventListener("input", (e) => {
+          filterBiomeList(e.target.value);
+        });
+
+        document.getElementById("monsterFilterInput").addEventListener("input", (e) => {
+          filterMonsterList(e.target.value);
+        });
+      }
+
+      function renderBiomeList() {
+        const biomeDragList = document.getElementById("biomeDragList");
+        biomeDragList.innerHTML = "";
+
+        ALL_BIOMES.forEach((biome) => {
+          const tag = document.createElement("div");
+          tag.className = "biome-drag-tag";
+          tag.textContent = biome;
+          tag.draggable = true;
+          tag.dataset.biome = biome;
+
+          // Drag start
+          tag.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", biome);
+            tag.classList.add("dragging");
+          });
+
+          // Drag end
+          tag.addEventListener("dragend", (e) => {
+            tag.classList.remove("dragging");
+          });
+
+          biomeDragList.appendChild(tag);
+        });
+      }
+
+      function filterBiomeList(searchTerm) {
+        const biomeDragList = document.getElementById("biomeDragList");
+        const tags = biomeDragList.querySelectorAll(".biome-drag-tag");
+        const term = searchTerm.toLowerCase();
+
+        tags.forEach((tag) => {
+          const biome = tag.dataset.biome.toLowerCase();
+          if (biome.includes(term)) {
+            tag.style.display = "";
+          } else {
+            tag.style.display = "none";
+          }
+        });
+      }
+
+      function renderMonsterList() {
+        const monsterDragList = document.getElementById("monsterDragList");
+        monsterDragList.innerHTML = "";
+
+        enemiesData.forEach((enemy, index) => {
+          const note = enemy.note || "";
+
+          // Get biomes from note
+          const biomesMatch = note.match(/<Biome:\s*([^>]+)>/i);
+          const biomes = biomesMatch ? biomesMatch[1].split(',').map(b => b.trim()).filter(b => b) : [];
+
+          console.log(`Enemy ${enemy.name} (${index}): found biomes:`, biomes);
+
+          // Sprite Info
+          const spriteMatch = note.match(/<Char:([^>]+)>/);
+          const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+          const spriteUrl = spriteName ? findURL(spriteLibrary, spriteName) : null;
+
+          // Create monster item
+          const item = document.createElement("div");
+          item.className = "monster-drag-item";
+          item.dataset.index = index;
+          item.dataset.name = enemy.name.toLowerCase();
+
+          // Sprite
+          const spriteDiv = document.createElement("div");
+          spriteDiv.className = "monster-drag-item-sprite";
+          if (spriteUrl) {
+            spriteDiv.style.backgroundImage = `url('${spriteUrl}')`;
+          } else {
+            spriteDiv.style.border = "1px dashed #555";
+            spriteDiv.style.animation = "none";
+            spriteDiv.style.background = "#222";
+          }
+
+          // Info
+          const infoDiv = document.createElement("div");
+          infoDiv.className = "monster-drag-item-info";
+
+          const nameDiv = document.createElement("div");
+          nameDiv.className = "monster-drag-item-name";
+          nameDiv.textContent = enemy.name;
+
+          const idDiv = document.createElement("div");
+          idDiv.className = "monster-drag-item-id";
+          idDiv.textContent = `ID: ${enemy.id}`;
+
+          // Biomes container
+          const biomesDiv = document.createElement("div");
+          biomesDiv.className = "monster-drag-item-biomes";
+          biomesDiv.dataset.index = index;
+
+          biomes.forEach((biome) => {
+            const tag = document.createElement("span");
+            tag.className = "monster-biome-tag";
+            tag.innerHTML = `${biome} <span class="remove-tag" data-index="${index}" data-biome="${biome}">&times;</span>`;
+            biomesDiv.appendChild(tag);
+          });
+
+          infoDiv.appendChild(nameDiv);
+          infoDiv.appendChild(idDiv);
+          infoDiv.appendChild(biomesDiv);
+
+          item.appendChild(spriteDiv);
+          item.appendChild(infoDiv);
+
+          // Drop handlers
+          item.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            item.classList.add("drag-over");
+          });
+
+          item.addEventListener("dragleave", (e) => {
+            item.classList.remove("drag-over");
+          });
+
+          item.addEventListener("drop", (e) => {
+            e.preventDefault();
+            item.classList.remove("drag-over");
+
+            const biome = e.dataTransfer.getData("text/plain");
+            if (biome) {
+              addBiomeToMonster(index, biome);
+            }
+          });
+
+          monsterDragList.appendChild(item);
+        });
+
+        // Add remove tag click handlers
+        document.querySelectorAll(".monster-biome-tag .remove-tag").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const index = parseInt(e.target.dataset.index);
+            const biome = e.target.dataset.biome;
+            removeBiomeFromMonster(index, biome);
+          });
+        });
+      }
+
+      function filterMonsterList(searchTerm) {
+        const monsterDragList = document.getElementById("monsterDragList");
+        const items = monsterDragList.querySelectorAll(".monster-drag-item");
+        const term = searchTerm.toLowerCase();
+
+        items.forEach((item) => {
+          const name = item.dataset.name;
+          if (name.includes(term)) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function addBiomeToMonster(enemyIndex, biome) {
+        const enemy = enemiesData[enemyIndex];
+        if (!enemy) return;
+
+        let note = enemy.note || "";
+
+        // Get current biomes
+        const biomesMatch = note.match(/<Biome:\s*([^>]+)>/i);
+        let biomes = biomesMatch ? biomesMatch[1].split(',').map(b => b.trim()).filter(b => b) : [];
+
+        // Add new biome if not already present
+        if (!biomes.includes(biome)) {
+          biomes.push(biome);
+
+          // Update note
+          const newBiomesTag = `<Biome: ${biomes.join(', ')}>`;
+          if (biomesMatch) {
+            note = note.replace(/<Biome:\s*([^>]+)>/i, newBiomesTag);
+          } else {
+            note += `\n${newBiomesTag}`;
+          }
+
+          enemy.note = note;
+
+          // Re-render the monster item's biomes
+          const biomesDiv = document.querySelector(`.monster-drag-item-biomes[data-index="${enemyIndex}"]`);
+          if (biomesDiv) {
+            biomesDiv.innerHTML = "";
+            biomes.forEach((b) => {
+              const tag = document.createElement("span");
+              tag.className = "monster-biome-tag";
+              tag.innerHTML = `${b} <span class="remove-tag" data-index="${enemyIndex}" data-biome="${b}">&times;</span>`;
+              biomesDiv.appendChild(tag);
+            });
+
+            // Re-attach remove handlers
+            biomesDiv.querySelectorAll(".remove-tag").forEach((btn) => {
+              btn.addEventListener("click", (e) => {
+                const index = parseInt(e.target.dataset.index);
+                const biome = e.target.dataset.biome;
+                removeBiomeFromMonster(index, biome);
+              });
+            });
+          }
+        }
+      }
+
+      function removeBiomeFromMonster(enemyIndex, biome) {
+        const enemy = enemiesData[enemyIndex];
+        if (!enemy) return;
+
+        let note = enemy.note || "";
+
+        // Get current biomes
+        const biomesMatch = note.match(/<Biome:\s*([^>]+)>/i);
+        let biomes = biomesMatch ? biomesMatch[1].split(',').map(b => b.trim()).filter(b => b) : [];
+
+        // Remove biome
+        biomes = biomes.filter(b => b !== biome);
+
+        // Update note
+        if (biomes.length > 0) {
+          const newBiomesTag = `<Biome: ${biomes.join(', ')}>`;
+          note = note.replace(/<Biome:\s*([^>]+)>/i, newBiomesTag);
+        } else {
+          // Remove the entire Biome tag if empty
+          note = note.replace(/<Biome:\s*([^>]+)>\n?/i, '');
+        }
+
+        enemy.note = note;
+
+        // Re-render the monster item's biomes
+        const biomesDiv = document.querySelector(`.monster-drag-item-biomes[data-index="${enemyIndex}"]`);
+        if (biomesDiv) {
+          biomesDiv.innerHTML = "";
+          biomes.forEach((b) => {
+            const tag = document.createElement("span");
+            tag.className = "monster-biome-tag";
+            tag.innerHTML = `${b} <span class="remove-tag" data-index="${enemyIndex}" data-biome="${b}">&times;</span>`;
+            biomesDiv.appendChild(tag);
+          });
+
+          // Re-attach remove handlers
+          biomesDiv.querySelectorAll(".remove-tag").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const index = parseInt(e.target.dataset.index);
+              const biome = e.target.dataset.biome;
+              removeBiomeFromMonster(index, biome);
+            });
+          });
+        }
+      }
+
+      // --- TABLE BIOME EDITING ---
+      function renderTableBiomes(enemyIndex, biomes) {
+        const cell = document.getElementById(`biomesCell-${enemyIndex}`);
+        if (!cell) return;
+
+        cell.innerHTML = "";
+
+        // Render existing biome tags
+        biomes.forEach((biome) => {
+          const tag = document.createElement("span");
+          tag.className = "table-biome-tag";
+          tag.innerHTML = `${biome} <span class="remove-tag" onclick="removeTableBiome(${enemyIndex}, '${biome}')">&times;</span>`;
+          cell.appendChild(tag);
+        });
+
+        // Add button to add new biome
+        const addBtn = document.createElement("button");
+        addBtn.className = "table-add-biome-btn";
+        addBtn.textContent = "+ Add";
+        addBtn.onclick = () => openTableBiomeSelector(enemyIndex, biomes);
+        cell.appendChild(addBtn);
+
+        // Preset selector button
+        const presetBtn = document.createElement("button");
+        presetBtn.className = "table-add-biome-btn";
+        presetBtn.textContent = "🎨 Preset";
+        presetBtn.style.backgroundColor = "#e67e22";
+        presetBtn.onclick = () => openTableBiomePresetSelector(enemyIndex);
+        cell.appendChild(presetBtn);
+      }
+
+      function openTableBiomeSelector(enemyIndex, currentBiomes) {
+        const availableBiomes = ALL_BIOMES.filter(b => !currentBiomes.includes(b));
+        if (availableBiomes.length === 0) {
+          alert("All biomes already added!");
+          return;
+        }
+
+        const selected = prompt(`Select a biome to add:\n\n${availableBiomes.map((b, i) => `${i + 1}. ${b}`).join('\n')}\n\nEnter number or name:`);
+        if (!selected) return;
+
+        let biomeToAdd = null;
+        const num = parseInt(selected);
+        if (!isNaN(num) && num > 0 && num <= availableBiomes.length) {
+          biomeToAdd = availableBiomes[num - 1];
+        } else {
+          biomeToAdd = availableBiomes.find(b => b.toLowerCase() === selected.toLowerCase());
+        }
+
+        if (biomeToAdd) {
+          addTableBiome(enemyIndex, biomeToAdd);
+        } else {
+          alert("Invalid selection!");
+        }
+      }
+
+      function openTableBiomePresetSelector(enemyIndex) {
+        const presetNames = Object.keys(BIOME_PRESETS).sort();
+        const selected = prompt(`Select a thematic preset (will replace current biomes):\n\n${presetNames.map((name, i) => `${i + 1}. ${name} (${BIOME_PRESETS[name].length} biomes)`).join('\n')}\n\nEnter number or name:`);
+        if (!selected) return;
+
+        let presetName = null;
+        const num = parseInt(selected);
+        if (!isNaN(num) && num > 0 && num <= presetNames.length) {
+          presetName = presetNames[num - 1];
+        } else {
+          presetName = presetNames.find(p => p.toLowerCase() === selected.toLowerCase());
+        }
+
+        if (presetName && BIOME_PRESETS[presetName]) {
+          applyTableBiomePreset(enemyIndex, presetName);
+        } else {
+          alert("Invalid selection!");
+        }
+      }
+
+      function applyTableBiomePreset(enemyIndex, presetName) {
+        const enemy = enemiesData[enemyIndex];
+        if (!enemy) return;
+
+        const presetBiomes = BIOME_PRESETS[presetName];
+        if (!presetBiomes) return;
+
+        let note = enemy.note || "";
+
+        // Replace biomes with preset
+        const newBiomesTag = `<Biome: ${presetBiomes.join(', ')}>`;
+        const biomesMatch = note.match(/<Biome:\s*([^>]+)>/i);
+
+        if (biomesMatch) {
+          note = note.replace(/<Biome:\s*([^>]+)>/i, newBiomesTag);
+        } else {
+          note += `\n${newBiomesTag}`;
+        }
+
+        enemy.note = note;
+
+        // Re-render the biomes cell
+        renderTableBiomes(enemyIndex, presetBiomes);
+
+        // If this enemy is currently being edited in single view, update it
+        if (currentEditingIndex === enemyIndex) {
+          currentBiomes = [...presetBiomes];
+          renderBiomeTags();
+        }
+      }
+
+      function addTableBiome(enemyIndex, biome) {
+        const enemy = enemiesData[enemyIndex];
+        const note = enemy.note || "";
+
+        // Parse current biomes
+        const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+        let biomes = [];
+        if (biomeMatch) {
+          biomes = biomeMatch[1]
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s);
+        }
+
+        // Add new biome if not already present
+        if (!biomes.includes(biome)) {
+          biomes.push(biome);
+
+          // Update note
+          const biomeTag = `<Biome: ${biomes.join(", ")}>`;
+          let newNote = note.replace(/<Biome:\s*([\s\S]*?)>/, biomeTag);
+          if (!note.includes("<Biome:")) {
+            newNote = note + (note ? "\n" : "") + biomeTag;
+          }
+          enemy.note = newNote;
+
+          // Re-render the cell
+          renderTableBiomes(enemyIndex, biomes);
+
+          // Update list view if needed
+          renderList();
+        }
+      }
+
+      function removeTableBiome(enemyIndex, biome) {
+        const enemy = enemiesData[enemyIndex];
+        const note = enemy.note || "";
+
+        // Parse current biomes
+        const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+        if (!biomeMatch) return;
+
+        let biomes = biomeMatch[1]
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s);
+
+        // Remove biome
+        biomes = biomes.filter((b) => b !== biome);
+
+        // Update note
+        let newNote;
+        if (biomes.length > 0) {
+          const biomeTag = `<Biome: ${biomes.join(", ")}>`;
+          newNote = note.replace(/<Biome:\s*([\s\S]*?)>/, biomeTag);
+        } else {
+          newNote = note.replace(/<Biome:\s*([\s\S]*?)>\n?/, "");
+        }
+        enemy.note = newNote;
+
+        // Re-render the cell
+        renderTableBiomes(enemyIndex, biomes);
+
+        // Update list view if needed
+        renderList();
+      }
+
+      // --- SAVING LOGIC ---
+      function updateEnemyData() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+
+        enemy.name = nameInput.value;
+
+        // Reconstruct Note
+        let originalNote = enemy.note || "";
+        const charMatch = originalNote.match(/<Char:([^>]+)>/);
+        const charTag = charMatch ? `<Char:${charMatch[1]}>` : "";
+
+        const enTag = descEnInput.value.trim()
+          ? `<En: ${descEnInput.value.trim()}>`
+          : "";
+        const itTag = descItInput.value.trim()
+          ? `<It: ${descItInput.value.trim()}>`
+          : "";
+        const biomeTag =
+          currentBiomes.length > 0
+            ? `<Biome: ${currentBiomes.join(", ")}>`
+            : "";
+
+        // New tags
+        const weightVal = parseInt(weightInput.value);
+        const weightTag = weightVal > 0 ? `<Weight: ${weightVal} kg>` : "";
+        const talkTag = talkCheckbox.checked ? "<Talk>" : "";
+        const climbTag = climbCheckbox.checked ? "<Climb>" : "";
+        const bloodTag = bloodSelect.value ? `<${bloodSelect.value}>` : "";
+        const archetypeTag = archetypeSelect.value
+          ? `<Archetype: ${archetypeSelect.value}>`
+          : "";
+        const activityTag = activitySelect.value
+          ? `<${activitySelect.value}>`
+          : "";
+
+        let tempNote = originalNote;
+        tempNote = tempNote.replace(/<En:[\s\S]*?>/g, "");
+        tempNote = tempNote.replace(/<It:[\s\S]*?>/g, "");
+        tempNote = tempNote.replace(/<Biome:[\s\S]*?>/g, "");
+        tempNote = tempNote.replace(/<Char:[\s\S]*?>/g, () => "");
+        // Remove new tags
+        tempNote = tempNote.replace(/<Weight:\s*\d+\s*kg>/gi, "");
+        tempNote = tempNote.replace(/<Talk>/gi, "");
+        tempNote = tempNote.replace(/<Climb>/gi, "");
+        tempNote = tempNote.replace(/<NoBlood>/gi, "");
+        tempNote = tempNote.replace(/<Bark>/gi, "");
+        tempNote = tempNote.replace(/<Spark>/gi, "");
+        tempNote = tempNote.replace(/<Rock>/gi, "");
+        tempNote = tempNote.replace(/<GreenBlood>/gi, "");
+        tempNote = tempNote.replace(/<AzureBlood>/gi, "");
+        tempNote = tempNote.replace(/<BlackBlood>/gi, "");
+        tempNote = tempNote.replace(/<Archetype:\s*[^>]+>/gi, "");
+        tempNote = tempNote.replace(/<Diurnal>/gi, "");
+        tempNote = tempNote.replace(/<Nocturnal>/gi, "");
+        tempNote = tempNote.replace(/<Crepuscular>/gi, "");
+        tempNote = tempNote.trim();
+
+        const parts = [
+          enTag,
+          itTag,
+          biomeTag,
+          charTag,
+          archetypeTag,
+          activityTag,
+          weightTag,
+          talkTag,
+          climbTag,
+          bloodTag,
+          tempNote,
+        ].filter((p) => p !== "");
+        enemy.note = parts.join("\n");
+
+        document.getElementById("rawNote").value = enemy.note;
+
+        // Update list item with incomplete status and sprite warning
+        const incomplete = isIncomplete(enemy);
+        const spriteMatch = enemy.note.match(/<Char:([^>]+)>/);
+        const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+        const spriteWarning = getSpriteWarningText(spriteName);
+        enemySelect.options[currentEditingIndex].textContent = `${
+          incomplete ? "❗ " : ""
+        }${spriteWarning}[${enemy.id}] ${enemy.name}`;
+      }
+
+      function updateFromRawNote() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        const rawNote = document.getElementById("rawNote").value;
+
+        // Update enemy note directly
+        enemy.note = rawNote;
+
+        // Parse and update all UI fields from the raw note
+        const note = rawNote || "";
+
+        // Parse descriptions
+        const enMatch = note.match(/<En:\s*([\s\S]*?)>/);
+        const itMatch = note.match(/<It:\s*([\s\S]*?)>/);
+
+        let enText = enMatch ? enMatch[1].trim() : "";
+        let itText = itMatch ? itMatch[1].trim() : "";
+        enText = enText.replace(/<Char:[^>]+>/gi, "").trim();
+        itText = itText.replace(/<Char:[^>]+>/gi, "").trim();
+
+        descEnInput.value = enText;
+        descItInput.value = itText;
+
+        // Parse biomes
+        const biomeMatch = note.match(/<Biome:\s*([\s\S]*?)>/);
+        currentBiomes = [];
+        if (biomeMatch) {
+          currentBiomes = biomeMatch[1]
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s);
+        }
+        renderBiomeTags();
+
+        // Parse sprite
+        const spriteMatch = note.match(/<Char:([^>]+)>/);
+        const spriteName = spriteMatch ? spriteMatch[1].trim() : null;
+        updateVisualBox(
+          "mainSpriteDiv",
+          "spriteNameLabel",
+          "imageStatus",
+          spriteName,
+          spriteLibrary,
+          "sprite"
+        );
+
+        // Update sprite usage count
+        const usageCount = getSpriteUsageCount(spriteName);
+        document.getElementById("spriteUsageCount").textContent = spriteName ? `(${usageCount}x)` : "";
+
+        // Parse weight
+        const weightMatch = note.match(/<Weight:\s*(\d+)\s*kg>/i);
+        weightInput.value = weightMatch ? parseInt(weightMatch[1]) : "";
+
+        // Parse talk checkbox
+        talkCheckbox.checked = /<Talk>/i.test(note);
+
+        // Parse climb checkbox
+        climbCheckbox.checked = /<Climb>/i.test(note);
+
+        // Parse blood type
+        const bloodTypes = [
+          "NoBlood",
+          "Bark",
+          "Spark",
+          "Rock",
+          "GreenBlood",
+          "AzureBlood",
+          "BlackBlood",
+        ];
+        let foundBlood = "";
+        for (const bt of bloodTypes) {
+          if (new RegExp(`<${bt}>`, "i").test(note)) {
+            foundBlood = bt;
+            break;
+          }
+        }
+        bloodSelect.value = foundBlood;
+
+        // Parse archetype
+        const archetypeMatch = note.match(/<Archetype:\s*([^>]+)>/i);
+        archetypeSelect.value = archetypeMatch ? archetypeMatch[1].trim() : "";
+
+        // Parse activity period
+        const activityTypes = ["Diurnal", "Nocturnal", "Crepuscular"];
+        let foundActivity = "";
+        for (const at of activityTypes) {
+          if (new RegExp(`<${at}>`, "i").test(note)) {
+            foundActivity = at;
+            break;
+          }
+        }
+        activitySelect.value = foundActivity;
+
+        // Update unused panel in case sprite changed
+        updateUnusedPanel();
+
+        // Update table view
+        renderTable();
+
+        // Update list to refresh all warning symbols (sprite may have changed)
+        renderList();
+      }
+
+      // --- BIOMES ---
+      function renderBiomeTags() {
+        biomeTagsList.innerHTML = "";
+        currentBiomes.forEach((biome) => {
+          const tag = document.createElement("div");
+          tag.className = "biome-tag";
+          tag.innerHTML = `${biome} <span class="remove-tag" onclick="removeBiome('${biome}')">&times;</span>`;
+          biomeTagsList.appendChild(tag);
+        });
+      }
+
+      function addBiome() {
+        if (currentEditingIndex === -1) return;
+        const val = biomeSelect.value;
+        if (!currentBiomes.includes(val)) {
+          currentBiomes.push(val);
+          renderBiomeTags();
+          updateEnemyData();
+        }
+      }
+
+      function removeBiome(biome) {
+        currentBiomes = currentBiomes.filter((b) => b !== biome);
+        renderBiomeTags();
+        updateEnemyData();
+      }
+
+      function applyBiomePreset() {
+        if (currentEditingIndex === -1) return;
+        const presetSelect = document.getElementById("biomePresetSelect");
+        const presetName = presetSelect.value;
+        if (!presetName || !BIOME_PRESETS[presetName]) return;
+
+        // Replace current biomes with preset biomes
+        currentBiomes = [...BIOME_PRESETS[presetName]];
+        renderBiomeTags();
+        updateEnemyData();
+
+        // Reset preset dropdown
+        presetSelect.value = "";
+      }
+
+      // --- AUTO BIOME MATCHER ---
+      function autoBiome() {
+        if (currentEditingIndex === -1) return;
+
+        const enemy = enemiesData[currentEditingIndex];
+        const enemyName = enemy.name.toLowerCase();
+
+        // Build keyword-to-biome mapping
+        const biomeKeywords = {
+          // Environment Types
+          'abandoned': ['Abandoned', 'AbandonedInside', 'Ruins'],
+          'abstract': ['Abstract', 'Dreamscape', 'Limbo'],
+          'alien': ['AlienPlanet', 'Space', 'Eldritch'],
+          'arena': ['Arena'],
+          'badland': ['Badlands'],
+          'bamboo': ['Bamboo'],
+          'beach': ['Beach', 'Docks'],
+          'burg': ['Burg', 'BurgDesert', 'BurgIce'],
+          'canyon': ['Canyon'],
+          'castle': ['Castle', 'CastleInside'],
+          'cave': ['Cave', 'CaveFlooded', 'CaveIce', 'Underdark'],
+          'church': ['ChurchInside', 'Temple', 'TempleShinto'],
+          'city': ['City', 'Metro', 'London'],
+          'crypt': ['Crypt', 'Graveyard'],
+          'crystal': ['Crystals'],
+          'digital': ['Digital', 'Office', 'Laboratory'],
+          'dock': ['Docks', 'Harbor'],
+          'dream': ['Dreamscape', 'SpiritWoods'],
+          'dungeon': ['Dungeon', 'Lair'],
+          'eldritch': ['Eldritch', 'Limbo'],
+          'factory': ['Factory', 'FactoryInside'],
+          'fairy': ['Fairy', 'SpiritWoods'],
+          'farm': ['Farm', 'Fields', 'Meadows'],
+          'field': ['Fields', 'Meadows'],
+          'forest': ['Forest', 'ForestIce', 'ForestTropical', 'FrozenWoods', 'SpiritWoods'],
+          'grave': ['Graveyard', 'Crypt'],
+          'heaven': ['Heaven'],
+          'hell': ['Hell', 'Volcano'],
+          'highland': ['Highlands', 'Mountain'],
+          'highway': ['Highway', 'Road'],
+          'house': ['Houses', 'Villa'],
+          'ice': ['Ice', 'ForestIce', 'CaveIce', 'BurgIce', 'VillageIce', 'MountainIce', 'Permafrost', 'FrozenWoods'],
+          'island': ['Island'],
+          'jungle': ['Jungle', 'ForestTropical', 'Mangrove'],
+          'lab': ['Laboratory'],
+          'lair': ['Lair'],
+          'lake': ['Lake', 'River', 'RiverBank'],
+          'landfill': ['Landfill'],
+          'limbo': ['Limbo'],
+          'london': ['London', 'City'],
+          'mangrove': ['Mangrove'],
+          'meadow': ['Meadows', 'Fields'],
+          'metro': ['Metro', 'Train'],
+          'mine': ['Mines'],
+          'mountain': ['Mountain', 'MountainDesert', 'MountainIce', 'VillageMountain', 'Highlands'],
+          'mushroom': ['Mushroom'],
+          'ocean': ['Ocean', 'Seabed', 'Beach'],
+          'office': ['Office'],
+          'park': ['Park'],
+          'permafrost': ['Permafrost', 'Tundra', 'Ice'],
+          'river': ['River', 'RiverBank', 'VillageRiver', 'Lake'],
+          'road': ['Road', 'Highway'],
+          'ruin': ['Ruins', 'Abandoned'],
+          'salt': ['SaltFlats'],
+          'savannah': ['Savannah', 'Steppe'],
+          'sea': ['Ocean', 'Seabed', 'VillageSea', 'Beach'],
+          'sewer': ['Sewer'],
+          'snow': ['Snow', 'Ice', 'Permafrost', 'Tundra', 'FrozenWoods'],
+          'space': ['Space', 'Spacecenter', 'AlienPlanet'],
+          'spirit': ['SpiritWoods', 'Dreamscape'],
+          'steppe': ['Steppe', 'Savannah'],
+          'swamp': ['Swamp', 'Mangrove'],
+          'taiga': ['Taiga', 'ForestIce'],
+          'temple': ['Temple', 'TempleShinto', 'ChurchInside'],
+          'train': ['Train', 'Metro'],
+          'tropical': ['ForestTropical', 'Jungle'],
+          'tundra': ['Tundra', 'Permafrost', 'Ice'],
+          'underdark': ['Underdark', 'Cave'],
+          'villa': ['Villa', 'Houses'],
+          'village': ['Village', 'VillageDesert', 'VillageIce', 'VillageMountain', 'VillageRiver', 'VillageSea'],
+          'volcano': ['Volcano', 'Hell'],
+
+          // Creature Type Keywords
+          'frost': ['Ice', 'ForestIce', 'CaveIce', 'Permafrost', 'FrozenWoods', 'Tundra'],
+          'fire': ['Volcano', 'Hell'],
+          'flame': ['Volcano', 'Hell'],
+          'magma': ['Volcano'],
+          'lava': ['Volcano'],
+          'water': ['Ocean', 'Lake', 'River', 'Seabed', 'CaveFlooded'],
+          'aquatic': ['Ocean', 'Lake', 'River', 'Seabed'],
+          'desert': ['MountainDesert', 'VillageDesert', 'BurgDesert', 'SaltFlats', 'Badlands'],
+          'sand': ['Beach', 'MountainDesert', 'VillageDesert', 'SaltFlats'],
+          'goblin': ['Cave', 'Mountain', 'Forest', 'Dungeon'],
+          'dragon': ['Mountain', 'Cave', 'Volcano', 'Lair'],
+          'slime': ['Sewer', 'Cave', 'Swamp', 'Dungeon'],
+          'zombie': ['Graveyard', 'Crypt'],
+          'undead': ['Graveyard', 'Crypt'],
+          'skeleton': ['Graveyard', 'Crypt', 'Dungeon'],
+          'ghost': ['Graveyard', 'Crypt', 'Abandoned'],
+          'wraith': ['Graveyard', 'Crypt', 'SpiritWoods'],
+          'spirit': ['SpiritWoods', 'Graveyard', 'Temple'],
+          'demon': ['Hell', 'Eldritch'],
+          'devil': ['Hell'],
+          'angel': ['Heaven', 'Temple'],
+          'celestial': ['Heaven', 'Space'],
+          'elemental': ['Mountain', 'Volcano', 'Ocean', 'Forest'],
+          'golem': ['Mountain', 'Cave', 'Ruins', 'Dungeon'],
+          'knight': ['Castle', 'Arena'],
+          'bandit': ['Road', 'Forest', 'Highway'],
+          'pirate': ['Docks', 'Ocean', 'VillageSea'],
+          'ninja': ['City', 'Village'],
+          'samurai': ['Village', 'Temple', 'TempleShinto'],
+          'mech': ['Factory', 'Laboratory', 'City'],
+          'robot': ['Factory', 'Laboratory', 'City', 'Digital'],
+          'cyber': ['City', 'Digital', 'Factory'],
+          'machine': ['Factory', 'Laboratory'],
+          'drone': ['Factory', 'Laboratory', 'City'],
+          'elf': ['Forest', 'SpiritWoods', 'Village'],
+          'elven': ['Forest', 'SpiritWoods', 'Village'],
+          'dwarf': ['Mountain', 'Mines', 'Cave'],
+          'orc': ['Mountain', 'Badlands', 'Steppe'],
+          'ogre': ['Mountain', 'Cave', 'Swamp'],
+          'troll': ['Mountain', 'Cave', 'Swamp'],
+          'giant': ['Mountain', 'Highlands'],
+          'titan': ['Mountain', 'Volcano', 'Ocean'],
+          'bear': ['Forest', 'Mountain', 'Cave', 'Taiga'],
+          'wolf': ['Forest', 'Mountain', 'Taiga', 'Tundra'],
+          'rat': ['Sewer', 'City', 'Landfill'],
+          'spider': ['Cave', 'Forest', 'Dungeon', 'Swamp'],
+          'snake': ['Swamp', 'Jungle', 'Desert'],
+          'serpent': ['Ocean', 'Swamp', 'Jungle'],
+          'scorpion': ['Desert', 'Cave'],
+          'crab': ['Beach', 'Ocean', 'Seabed'],
+          'fish': ['Ocean', 'Lake', 'River', 'Seabed'],
+          'shark': ['Ocean', 'Seabed'],
+          'whale': ['Ocean', 'Seabed'],
+          'octopus': ['Ocean', 'Seabed'],
+          'squid': ['Ocean', 'Seabed'],
+          'jellyfish': ['Ocean', 'Seabed', 'CaveFlooded'],
+          'kraken': ['Ocean', 'Seabed'],
+          'bird': ['Forest', 'Mountain', 'Park'],
+          'eagle': ['Mountain', 'Highlands'],
+          'raven': ['Graveyard', 'SpiritWoods', 'Forest'],
+          'bat': ['Cave', 'Graveyard', 'Hell'],
+          'owl': ['Forest', 'SpiritWoods'],
+          'frog': ['Swamp', 'Jungle', 'RiverBank'],
+          'toad': ['Swamp', 'Jungle'],
+          'lizard': ['Desert', 'Jungle', 'Swamp'],
+          'crocodile': ['Swamp', 'River', 'Jungle'],
+          'turtle': ['Ocean', 'Lake', 'River', 'Beach'],
+          'tortoise': ['Desert', 'Mountain'],
+          'bug': ['Forest', 'Jungle', 'Swamp'],
+          'insect': ['Forest', 'Jungle', 'Swamp'],
+          'beetle': ['Forest', 'Cave'],
+          'ant': ['Forest', 'Desert', 'Jungle'],
+          'bee': ['Meadows', 'Forest', 'Fields'],
+          'wasp': ['Forest', 'Jungle'],
+          'moth': ['Forest', 'Cave'],
+          'butterfly': ['Meadows', 'Forest', 'Jungle'],
+          'mantis': ['Forest', 'Jungle'],
+          'centipede': ['Cave', 'Jungle', 'Swamp'],
+          'worm': ['Swamp', 'Cave', 'Forest'],
+          'leech': ['Swamp', 'CaveFlooded'],
+          'fungus': ['Mushroom', 'Cave', 'Swamp'],
+          'mushroom': ['Mushroom', 'Forest', 'Cave'],
+          'plant': ['Forest', 'Jungle', 'Swamp', 'Meadows'],
+          'tree': ['Forest', 'Jungle', 'SpiritWoods'],
+          'treant': ['Forest', 'SpiritWoods'],
+          'vine': ['Jungle', 'Forest', 'Swamp'],
+          'cultist': ['Temple', 'Crypt', 'Eldritch'],
+          'witch': ['Forest', 'Swamp', 'Abandoned'],
+          'wizard': ['Castle', 'Tower', 'Laboratory'],
+          'mage': ['Castle', 'City', 'Tower'],
+          'sorcerer': ['Eldritch', 'Castle', 'Ruins'],
+          'warlock': ['Hell', 'Eldritch', 'Crypt'],
+          'necromancer': ['Graveyard', 'Crypt', 'Dungeon'],
+          'lich': ['Crypt', 'Dungeon', 'Ruins'],
+          'vampire': ['Castle', 'Crypt', 'City'],
+          'ghoul': ['Graveyard', 'Crypt', 'Sewer'],
+          'mimic': ['Dungeon', 'Castle', 'Ruins'],
+          'slime': ['Sewer', 'Cave', 'Swamp', 'Dungeon'],
+          'ooze': ['Sewer', 'Cave', 'Swamp'],
+          'blob': ['Sewer', 'Cave', 'Laboratory'],
+          'gel': ['Cave', 'Swamp'],
+          'construct': ['Factory', 'Laboratory', 'Ruins'],
+          'automaton': ['Factory', 'Laboratory', 'Ruins'],
+          'gargoyle': ['Castle', 'Crypt', 'Ruins'],
+          'statue': ['Temple', 'Ruins', 'Castle'],
+          'guardian': ['Temple', 'Dungeon', 'Ruins'],
+          'sentinel': ['Factory', 'Laboratory', 'Ruins'],
+          'watcher': ['Eldritch', 'Dungeon'],
+          'horror': ['Eldritch', 'Hell', 'Underdark'],
+          'abomination': ['Eldritch', 'Laboratory', 'Sewer'],
+          'aberration': ['Eldritch', 'Underdark'],
+          'void': ['Eldritch', 'Space', 'Limbo'],
+          'cosmic': ['Space', 'Eldritch'],
+          'quantum': ['Digital', 'Laboratory', 'Space'],
+          'chaos': ['Eldritch', 'Limbo'],
+          'nightmare': ['Dreamscape', 'Hell', 'Eldritch'],
+          'shadow': ['Underdark', 'Crypt', 'SpiritWoods'],
+          'dark': ['Underdark', 'Crypt', 'Cave'],
+          'light': ['Heaven', 'Temple'],
+          'holy': ['Heaven', 'Temple', 'ChurchInside'],
+          'sacred': ['Temple', 'ChurchInside'],
+          'divine': ['Heaven', 'Temple'],
+          'infernal': ['Hell', 'Volcano'],
+          'cursed': ['Crypt', 'Ruins', 'Eldritch'],
+          'corrupted': ['Swamp', 'Crypt', 'Eldritch'],
+          'toxic': ['Sewer', 'Swamp', 'Landfill'],
+          'poison': ['Swamp', 'Jungle', 'Sewer'],
+          'acid': ['Sewer', 'Cave', 'Swamp'],
+          'plague': ['Sewer', 'Crypt', 'City'],
+          'disease': ['Sewer', 'Swamp'],
+          'mutant': ['Sewer', 'Laboratory', 'Landfill'],
+          'experiment': ['Laboratory'],
+          'prototype': ['Laboratory', 'Factory'],
+          'clone': ['Laboratory'],
+          'AI': ['Digital', 'Laboratory', 'Factory'],
+          'artificial': ['Digital', 'Laboratory', 'Factory'],
+          'synthetic': ['Laboratory', 'Factory'],
+          'living': ['Laboratory', 'Forest', 'Eldritch'],
+          'animated': ['Ruins', 'Castle', 'Laboratory'],
+          'possessed': ['Crypt', 'Abandoned', 'Ruins'],
+          'haunted': ['Abandoned', 'Graveyard', 'Ruins'],
+          'spectral': ['Graveyard', 'Crypt', 'SpiritWoods'],
+          'ethereal': ['SpiritWoods', 'Limbo', 'Heaven'],
+          'astral': ['Space', 'Limbo', 'Heaven'],
+          'planar': ['Limbo', 'Hell', 'Heaven'],
+          'dimensional': ['Limbo', 'Eldritch', 'Digital'],
+          'temporal': ['Digital', 'Eldritch'],
+          'chrono': ['Digital', 'Eldritch'],
+          'time': ['Digital', 'Eldritch'],
+          'reality': ['Eldritch', 'Digital', 'Limbo'],
+          'mirage': ['Desert', 'Dreamscape'],
+          'illusion': ['Dreamscape', 'Fairy'],
+          'phantom': ['Graveyard', 'Crypt', 'Dreamscape'],
+          'wisp': ['Swamp', 'SpiritWoods', 'Graveyard'],
+          'pixie': ['Fairy', 'Forest'],
+          'sprite': ['Fairy', 'Forest', 'SpiritWoods'],
+          'nymph': ['Forest', 'River', 'Lake'],
+          'dryad': ['Forest', 'SpiritWoods'],
+          'sylph': ['Fairy', 'SpiritWoods'],
+          'gnome': ['Forest', 'Mountain', 'Village'],
+          'imp': ['Hell', 'Eldritch'],
+          'fiend': ['Hell', 'Eldritch'],
+          'beast': ['Forest', 'Mountain', 'Savannah'],
+          'creature': ['Forest', 'Cave', 'Ocean'],
+          'monster': ['Dungeon', 'Cave', 'Mountain'],
+          'predator': ['Forest', 'Jungle', 'Savannah'],
+          'hunter': ['Forest', 'Mountain', 'Tundra'],
+          'stalker': ['Forest', 'Jungle', 'Underdark'],
+          'lurker': ['Swamp', 'Ocean', 'Underdark'],
+          'wanderer': ['Steppe', 'Desert', 'Road'],
+          'traveler': ['Road', 'Village'],
+          'merchant': ['City', 'Village', 'Road'],
+          'guard': ['City', 'Castle', 'Village'],
+          'soldier': ['Castle', 'City', 'Arena'],
+          'warrior': ['Arena', 'Castle', 'Village'],
+          'fighter': ['Arena', 'City'],
+          'brawler': ['City', 'Arena'],
+          'boxer': ['City', 'Arena'],
+          'wrestler': ['Arena'],
+          'gladiator': ['Arena'],
+          'champion': ['Arena', 'Castle'],
+          'lord': ['Castle', 'City'],
+          'king': ['Castle'],
+          'queen': ['Castle', 'Crypt'],
+          'emperor': ['Castle', 'City'],
+          'empress': ['Castle', 'City'],
+          'prince': ['Castle'],
+          'princess': ['Castle'],
+          'duke': ['Castle', 'City'],
+          'duchess': ['Castle', 'City'],
+          'baron': ['Castle', 'Village'],
+          'count': ['Castle', 'Crypt'],
+          'countess': ['Castle', 'Crypt'],
+          'commander': ['Arena', 'Castle', 'Factory'],
+          'general': ['Castle', 'Arena'],
+          'captain': ['Docks', 'Castle', 'Arena'],
+          'lieutenant': ['Castle', 'Factory'],
+          'sergeant': ['Castle', 'City'],
+          'officer': ['City', 'Factory'],
+          'enforcer': ['City', 'Factory'],
+          'agent': ['City', 'Digital'],
+          'operative': ['City', 'Digital'],
+          'assassin': ['City', 'Village'],
+          'rogue': ['City', 'Village', 'Road'],
+          'thief': ['City', 'Road'],
+          'burglar': ['City', 'Houses'],
+          'criminal': ['City', 'Sewer'],
+          'outlaw': ['Road', 'Badlands'],
+          'raider': ['Badlands', 'Steppe', 'Road'],
+          'marauder': ['Badlands', 'Steppe'],
+          'barbarian': ['Steppe', 'Tundra', 'Mountain'],
+          'savage': ['Jungle', 'Steppe'],
+          'tribal': ['Jungle', 'Steppe', 'Village'],
+          'shaman': ['Village', 'Jungle', 'Steppe'],
+          'druid': ['Forest', 'SpiritWoods'],
+          'priest': ['Temple', 'ChurchInside', 'Village'],
+          'monk': ['Temple', 'Mountain', 'Village'],
+          'paladin': ['Castle', 'Temple'],
+          'cleric': ['Temple', 'ChurchInside', 'Village'],
+          'acolyte': ['Temple', 'ChurchInside'],
+          'novice': ['Temple', 'Village'],
+          'initiate': ['Temple', 'Arena'],
+          'apprentice': ['Castle', 'Laboratory', 'Village'],
+          'adept': ['Temple', 'Laboratory'],
+          'master': ['Temple', 'Arena', 'Castle'],
+          'grandmaster': ['Temple', 'Castle'],
+          'archpriest': ['Temple'],
+          'archmage': ['Castle', 'Tower'],
+          'overlord': ['Castle', 'Hell'],
+          'tyrant': ['Castle', 'City'],
+          'despot': ['Castle', 'City'],
+          'dictator': ['City', 'Factory'],
+          'warlord': ['Castle', 'Badlands', 'Steppe'],
+          'chieftain': ['Village', 'Steppe', 'Mountain'],
+          'elder': ['Village', 'Forest', 'Temple'],
+          'ancient': ['Ruins', 'Crypt', 'Cave'],
+          'primordial': ['Eldritch', 'Ocean', 'Volcano'],
+          'primal': ['Forest', 'Jungle', 'Savannah'],
+          'prehistoric': ['Cave', 'Jungle'],
+          'fossil': ['Ruins', 'Cave', 'Mountain'],
+          'relic': ['Ruins', 'Temple', 'Crypt'],
+          'artifact': ['Ruins', 'Laboratory', 'Museum'],
+          'totem': ['Village', 'SpiritWoods', 'Temple'],
+          'idol': ['Temple', 'Crypt', 'Ruins'],
+          'avatar': ['Temple', 'Heaven', 'Eldritch'],
+          'incarnation': ['Heaven', 'Hell', 'Eldritch'],
+          'manifestation': ['Eldritch', 'Dreamscape'],
+          'embodiment': ['Eldritch', 'Limbo'],
+          'essence': ['Eldritch', 'SpiritWoods'],
+          'spawn': ['Eldritch', 'Hell', 'Ocean'],
+          'offspring': ['Cave', 'Forest'],
+          'hatchling': ['Cave', 'Forest', 'Jungle'],
+          'juvenile': ['Forest', 'Ocean'],
+          'young': ['Forest', 'Cave', 'Mountain'],
+          'baby': ['Forest', 'Village', 'Farm'],
+          'infant': ['Village', 'Forest'],
+          'child': ['Village', 'City'],
+          'adolescent': ['Village', 'Forest'],
+          'adult': ['Forest', 'City'],
+          'mature': ['Forest', 'Mountain'],
+          'alpha': ['Forest', 'Mountain', 'Tundra'],
+          'omega': ['Eldritch', 'Digital'],
+          'beta': ['Laboratory', 'Digital'],
+          'gamma': ['Laboratory', 'Digital'],
+          'delta': ['Laboratory', 'Digital'],
+          'sigma': ['Digital'],
+          'prime': ['Digital', 'Space'],
+          'supreme': ['Castle', 'Heaven'],
+          'ultimate': ['Arena', 'Eldritch'],
+          'final': ['Eldritch', 'Limbo'],
+          'eternal': ['Heaven', 'Eldritch', 'Crypt'],
+          'immortal': ['Heaven', 'Hell', 'Crypt'],
+          'invincible': ['Arena', 'Castle'],
+          'unstoppable': ['Arena', 'Factory'],
+          'indestructible': ['Factory', 'Mountain'],
+          'impervious': ['Mountain', 'Castle'],
+          'armored': ['Factory', 'Castle', 'Arena'],
+          'fortified': ['Castle', 'Factory'],
+          'reinforced': ['Factory', 'Castle'],
+          'enhanced': ['Laboratory', 'Factory'],
+          'augmented': ['Laboratory', 'Digital'],
+          'modified': ['Laboratory', 'Factory'],
+          'upgraded': ['Factory', 'Laboratory'],
+          'advanced': ['Laboratory', 'Digital', 'Factory'],
+          'superior': ['Arena', 'Castle'],
+          'elite': ['Arena', 'Castle', 'City'],
+          'veteran': ['Arena', 'Castle'],
+          'legendary': ['Arena', 'Castle', 'Ruins'],
+          'mythic': ['Eldritch', 'Heaven', 'SpiritWoods'],
+          'fabled': ['SpiritWoods', 'Ruins'],
+          'storied': ['Ruins', 'Castle'],
+          'renowned': ['Arena', 'Castle', 'City'],
+          'famous': ['City', 'Arena'],
+          'infamous': ['City', 'Road'],
+          'notorious': ['City', 'Road'],
+          'fearsome': ['Mountain', 'Hell', 'Badlands'],
+          'terrifying': ['Hell', 'Eldritch', 'Graveyard'],
+          'dreadful': ['Crypt', 'Hell', 'Eldritch'],
+          'horrifying': ['Eldritch', 'Hell', 'Graveyard'],
+          'monstrous': ['Eldritch', 'Hell', 'Mountain'],
+          'colossal': ['Mountain', 'Ocean', 'Volcano'],
+          'gigantic': ['Mountain', 'Ocean'],
+          'massive': ['Mountain', 'Ocean', 'Volcano'],
+          'huge': ['Mountain', 'Cave'],
+          'enormous': ['Mountain', 'Ocean'],
+          'giant': ['Mountain', 'Forest', 'Ocean'],
+          'large': ['Mountain', 'Forest'],
+          'great': ['Mountain', 'Ocean', 'Forest'],
+          'grand': ['Castle', 'City'],
+          'major': ['City', 'Castle'],
+          'greater': ['Mountain', 'Hell', 'Heaven'],
+          'lesser': ['Cave', 'Forest'],
+          'minor': ['Village', 'Forest'],
+          'small': ['Village', 'Forest'],
+          'tiny': ['Village', 'Forest'],
+          'miniature': ['Laboratory', 'Fairy'],
+          'micro': ['Laboratory', 'Digital'],
+          'nano': ['Digital', 'Laboratory'],
+        };
+
+        // Score each biome based on keyword matches
+        const biomeScores = {};
+        ALL_BIOMES.forEach(biome => {
+          biomeScores[biome] = 0;
+        });
+
+        // Check each keyword in the enemy name
+        for (const [keyword, biomes] of Object.entries(biomeKeywords)) {
+          if (enemyName.includes(keyword)) {
+            biomes.forEach(biome => {
+              if (ALL_BIOMES.includes(biome)) {
+                biomeScores[biome] += 10; // High score for keyword match
+              }
+            });
+          }
+        }
+
+        // Add fuzzy matching bonus for direct biome name matches
+        ALL_BIOMES.forEach(biome => {
+          const biomeLower = biome.toLowerCase();
+          if (enemyName.includes(biomeLower)) {
+            biomeScores[biome] += 20; // Even higher score for direct match
+          }
+
+          // Check if biome is part of a word in the enemy name
+          const words = enemyName.split(/[\s\-_]+/);
+          words.forEach(word => {
+            if (biomeLower.includes(word) && word.length > 3) {
+              biomeScores[biome] += 5;
+            } else if (word.includes(biomeLower) && biomeLower.length > 3) {
+              biomeScores[biome] += 5;
+            }
+          });
+        });
+
+        // Sort biomes by score
+        const sortedBiomes = Object.entries(biomeScores)
+          .filter(([_, score]) => score > 0)
+          .sort((a, b) => b[1] - a[1])
+          .map(([biome, _]) => biome);
+
+        // Add top matches (max 5, or fewer if low scores)
+        let addedCount = 0;
+        const maxBiomesToAdd = 5;
+
+        sortedBiomes.forEach(biome => {
+          if (addedCount < maxBiomesToAdd && !currentBiomes.includes(biome)) {
+            currentBiomes.push(biome);
+            addedCount++;
+          }
+        });
+
+        // If no matches found, add "Misc" as fallback
+        if (addedCount === 0 && !currentBiomes.includes('Misc')) {
+          currentBiomes.push('Misc');
+        }
+
+        renderBiomeTags();
+        updateEnemyData();
+
+        // Show feedback
+        if (addedCount > 0) {
+          console.log(`Auto-matched ${addedCount} biome(s) for "${enemy.name}":`, sortedBiomes.slice(0, addedCount));
+        } else {
+          console.log(`No biome matches found for "${enemy.name}", added "Misc"`);
+        }
+      }
+
+      // --- MODAL LOGIC ---
+      function openModal(index, context) {
+        currentEditingIndex = index;
+        currentModalContext = context;
+        modalSearch.value = "";
+        document.getElementById("modalTitle").textContent =
+          context === "sprite" ? "Select Sprite" : "Select Battler";
+
+        renderModalGrid();
+        mediaModal.style.display = "flex";
+        modalSearch.focus();
+      }
+
+      function renderModalGrid() {
+        modalGrid.innerHTML = "";
+        const library =
+          currentModalContext === "sprite" ? spriteLibrary : battlerLibrary;
+        const names =
+          currentModalContext === "sprite"
+            ? spriteOriginalNames
+            : battlerOriginalNames;
+
+        if (currentModalContext === "sprite") {
+          // Group sprites by usage count
+          const allKeys = Object.keys(library).sort();
+          const spritesByUsage = {
+            unused: [],
+            used1x: [],
+            used2x: [],
+            used3to5x: [],
+            other: []
+          };
+
+          allKeys.forEach((key) => {
+            const originalName = names[key];
+            const usageCount = getSpriteUsageCount(originalName);
+
+            if (usageCount === 0) {
+              spritesByUsage.unused.push({ key, originalName, usageCount });
+            } else if (usageCount === 1) {
+              spritesByUsage.used1x.push({ key, originalName, usageCount });
+            } else if (usageCount === 2) {
+              spritesByUsage.used2x.push({ key, originalName, usageCount });
+            } else if (usageCount >= 3 && usageCount <= 5) {
+              spritesByUsage.used3to5x.push({ key, originalName, usageCount });
+            } else {
+              spritesByUsage.other.push({ key, originalName, usageCount });
+            }
+          });
+
+          // Helper function to render a group
+          const renderGroup = (sprites, title, color, borderColor) => {
+            if (sprites.length === 0) return;
+
+            const header = document.createElement("div");
+            header.style.cssText = `grid-column: 1 / -1; padding: 10px; background: #222; color: ${color}; font-weight: bold; text-align: center; border-radius: 4px; margin: 10px 0;`;
+            header.textContent = `${title} (${sprites.length})`;
+            modalGrid.appendChild(header);
+
+            sprites.forEach(({ key, originalName, usageCount }) => {
+              const url = library[key];
+              const div = document.createElement("div");
+              div.className = "grid-item";
+              div.setAttribute("data-name", originalName.toLowerCase());
+              if (borderColor) {
+                div.style.border = `2px solid ${borderColor}`;
+              }
+
+              div.innerHTML = `
+                      <div class="sprite-crop animating" style="background-image: url('${url}'); width:50px; height:50px;"></div>
+                      <span>${originalName}${usageCount > 0 ? `<br><span style="color:#5dade2; font-size:0.8em;">(${usageCount}x)</span>` : ""}</span>
+                  `;
+              div.onclick = () => assignImage(originalName);
+              modalGrid.appendChild(div);
+            });
+          };
+
+          // Render groups in order
+          renderGroup(spritesByUsage.unused, "UNUSED SPRITES", "#5dade2", "#5dade2");
+          renderGroup(spritesByUsage.used1x, "USED 1x", "#27ae60", null);
+          renderGroup(spritesByUsage.used2x, "USED 2x", "#f39c12", null);
+          renderGroup(spritesByUsage.used3to5x, "USED 3-5x", "#e67e22", null);
+          renderGroup(spritesByUsage.other, "ALL OTHER SPRITES (6x+)", "#888", null);
+        } else {
+          // For battlers, just show all sorted
+          Object.keys(library)
+            .sort()
+            .forEach((key) => {
+              const url = library[key];
+              const originalName = names[key];
+
+              const div = document.createElement("div");
+              div.className = "grid-item";
+              div.setAttribute("data-name", originalName.toLowerCase());
+
+              div.innerHTML = `
+                      <div class="battler-view" style="background-image: url('${url}'); width:50px; height:50px;"></div>
+                      <span>${originalName}</span>
+                  `;
+              div.onclick = () => assignImage(originalName);
+              modalGrid.appendChild(div);
+            });
+        }
+      }
+
+      function assignImage(name) {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+
+        if (currentModalContext === "sprite") {
+          // Update Note Tag
+          const newTag = `<Char:${name}>`;
+          let note = enemy.note || "";
+          if (/<Char:[^>]+>/.test(note)) {
+            note = note.replace(/<Char:[^>]+>/, () => newTag);
+          } else {
+            note = note + "\n" + newTag;
+          }
+          enemy.note = note;
+          updateUnusedPanel();
+
+          // Update sprite usage count
+          const usageCount = getSpriteUsageCount(name);
+          document.getElementById("spriteUsageCount").textContent = `(${usageCount}x)`;
+        } else {
+          // Update Battler Property
+          enemy.battlerName = name;
+        }
+
+        mediaModal.style.display = "none";
+        loadSingleView(currentEditingIndex);
+        renderList(); // Update dropdown to refresh warning symbols
+        renderTable();
+      }
+
+      // --- FILTERING ---
+      function filterList(query) {
+        const q = query.toLowerCase();
+        const options = enemySelect.options;
+        for (let i = 0; i < options.length; i++) {
+          const index = options[i].value;
+          const enemy = enemiesData[index];
+          const note = (enemy.note || "").toLowerCase();
+          const name = enemy.name.toLowerCase();
+          const bName = (enemy.battlerName || "").toLowerCase();
+          const matches =
+            name.includes(q) ||
+            String(enemy.id).includes(q) ||
+            note.includes(q) ||
+            bName.includes(q);
+          options[i].style.display = matches ? "" : "none";
+        }
+      }
+
+      function filterTable(query) {
+        const q = query.toLowerCase();
+        const rows = tableBody.querySelectorAll("tr");
+        rows.forEach((row) => {
+          const searchData = row.getAttribute("data-search");
+          row.style.display = searchData.includes(q) ? "" : "none";
+        });
+      }
+
+      function filterModal(query) {
+        const q = query.toLowerCase();
+        const items = modalGrid.querySelectorAll(".grid-item");
+        items.forEach((item) => {
+          const name = item.getAttribute("data-name");
+          item.style.display = name.includes(q) ? "flex" : "none";
+        });
+      }
+
+      // --- PARAMETERS & REWARDS ---
+      function calculateLevel(params) {
+        // Level = floor((ATK + DEF + MAT + MDF + AGI + LUK) / 12.5)
+        const sum = params[2] + params[3] + params[4] + params[5] + params[6] + params[7];
+        return Math.floor(sum / 12.5);
+      }
+
+      function updateLevel() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        const level = calculateLevel(enemy.params || [0,0,0,0,0,0,0,0]);
+
+        // Update display
+        document.getElementById("levelDisplay").textContent = `Level: ${level}`;
+
+        // Update note with level tag
+        let note = enemy.note || "";
+        const levelTag = `<Level: ${level}>`;
+
+        if (/<Level:\s*\d+>/.test(note)) {
+          note = note.replace(/<Level:\s*\d+>/, levelTag);
+        } else {
+          // Add level tag after biome tag if it exists, otherwise add at end
+          if (/<Biome:[\s\S]*?>/.test(note)) {
+            note = note.replace(/(<Biome:[\s\S]*?>)/, `$1\n${levelTag}`);
+          } else {
+            note = note.trim() + "\n" + levelTag;
+          }
+        }
+
+        enemy.note = note;
+        document.getElementById("rawNote").value = note;
+      }
+
+      function updateParams() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.params = [
+          parseInt(document.getElementById("paramHP").value) || 0,
+          parseInt(document.getElementById("paramMP").value) || 0,
+          parseInt(document.getElementById("paramATK").value) || 0,
+          parseInt(document.getElementById("paramDEF").value) || 0,
+          parseInt(document.getElementById("paramMAT").value) || 0,
+          parseInt(document.getElementById("paramMDF").value) || 0,
+          parseInt(document.getElementById("paramAGI").value) || 0,
+          parseInt(document.getElementById("paramLUK").value) || 0,
+        ];
+        updateLevel();
+      }
+
+      function updateRewards() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.exp = parseInt(document.getElementById("rewardEXP").value) || 0;
+        enemy.gold = parseInt(document.getElementById("rewardGold").value) || 0;
+      }
+
+      // --- DROP ITEMS ---
+      function renderDropItems() {
+        const enemy = enemiesData[currentEditingIndex];
+        const dropsList = document.getElementById("dropItemsList");
+        dropsList.innerHTML = "";
+
+        const drops = enemy.dropItems || [];
+        drops.forEach((drop, index) => {
+          const row = document.createElement("div");
+          row.className = "drop-item-row";
+
+          // Build item options (material items only)
+          let itemOptions = '<option value="">Select Item</option>';
+          MATERIAL_ITEMS.forEach(item => {
+            const selected = item.id === drop.dataId ? 'selected' : '';
+            itemOptions += `<option value="${item.id}" ${selected}>${item.id}: ${item.name}</option>`;
+          });
+
+          row.innerHTML = `
+            <select onchange="updateDropDataId(${index}, this.value)" style="flex: 2;">
+              ${itemOptions}
+            </select>
+            <input type="number" min="1" placeholder="1/N" value="${drop.denominator || 1}"
+                   onchange="updateDropDenominator(${index}, this.value)" style="max-width: 80px;" />
+            <button onclick="removeDropItem(${index})">Remove</button>
+          `;
+          dropsList.appendChild(row);
+        });
+      }
+
+      function addDropItem() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        if (!enemy.dropItems) enemy.dropItems = [];
+        // Default to first material item (Steel ingot, ID 565)
+        enemy.dropItems.push({ kind: 1, dataId: 565, denominator: 1 });
+        renderDropItems();
+      }
+
+      function removeDropItem(index) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.dropItems.splice(index, 1);
+        renderDropItems();
+      }
+
+      function updateDropDataId(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.dropItems[index].dataId = parseInt(value) || 565;
+        // Ensure kind is always 1 (Item)
+        enemy.dropItems[index].kind = 1;
+      }
+
+      function updateDropDenominator(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.dropItems[index].denominator = parseInt(value) || 1;
+      }
+
+      // --- SKILLS (ACTION PATTERNS) ---
+      function getSkillName(skillId) {
+        const skill = skillsData.find(s => s.id === skillId);
+        return skill ? skill.name : `Skill ${skillId}`;
+      }
+
+      function renderSkills() {
+        const enemy = enemiesData[currentEditingIndex];
+        const skillsList = document.getElementById("skillsList");
+        skillsList.innerHTML = "";
+
+        const actions = enemy.actions || [];
+        actions.forEach((action, index) => {
+          const row = document.createElement("div");
+          row.className = "skill-row";
+
+          // Build skill options
+          let skillOptions = '<option value="">Select Skill</option>';
+          if (skillsData.length > 0) {
+            // Sort skills alphabetically by name
+            const sortedSkills = [...skillsData].sort((a, b) => a.name.localeCompare(b.name));
+            sortedSkills.forEach(skill => {
+              const selected = skill.id === action.skillId ? 'selected' : '';
+              skillOptions += `<option value="${skill.id}" ${selected}>${skill.id}: ${skill.name}</option>`;
+            });
+          } else {
+            // If skills not loaded, just show current skill ID
+            skillOptions += `<option value="${action.skillId}" selected>Skill ${action.skillId}</option>`;
+          }
+
+          row.innerHTML = `
+            <select onchange="updateSkillId(${index}, this.value)">
+              ${skillOptions}
+            </select>
+            <input type="number" min="1" max="10" placeholder="Rating" value="${action.rating || 5}"
+                   onchange="updateSkillRating(${index}, this.value)" title="Rating (1-10)" />
+            <button onclick="removeSkill(${index})">Remove</button>
+          `;
+          skillsList.appendChild(row);
+        });
+      }
+
+      function addSkill() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        if (!enemy.actions) enemy.actions = [];
+
+        // Default to first available skill or skill 1
+        const defaultSkillId = skillsData.length > 0 ? skillsData[0].id : 1;
+
+        enemy.actions.push({
+          skillId: defaultSkillId,
+          conditionType: 0,  // Always
+          conditionParam1: 0,
+          conditionParam2: 0,
+          rating: 5
+        });
+        renderSkills();
+      }
+
+      function removeSkill(index) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.actions.splice(index, 1);
+        renderSkills();
+      }
+
+      function updateSkillId(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.actions[index].skillId = parseInt(value) || 1;
+      }
+
+      function updateSkillRating(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        const rating = parseInt(value) || 5;
+        enemy.actions[index].rating = Math.min(10, Math.max(1, rating));
+      }
+
+      // --- TRAITS ---
+      function renderTraits() {
+        const enemy = enemiesData[currentEditingIndex];
+        const traitsList = document.getElementById("traitsList");
+        traitsList.innerHTML = "";
+
+        const traits = enemy.traits || [];
+        traits.forEach((trait, index) => {
+          const row = document.createElement("div");
+          row.className = "trait-row";
+
+          // Build trait type options
+          let traitTypeOptions = '<option value="">Select Trait Type</option>';
+          TRAIT_TYPES.forEach(t => {
+            const selected = t.code === trait.code ? 'selected' : '';
+            traitTypeOptions += `<option value="${t.code}" ${selected}>${t.name}</option>`;
+          });
+
+          // Build dataId options based on trait type
+          const traitType = TRAIT_TYPES.find(t => t.code === trait.code);
+          let dataIdOptions = '<option value="0">-</option>';
+
+          if (traitType && traitType.hasDataId) {
+            if (trait.code === 22) { // Ex-Parameter
+              EX_PARAMS.forEach(p => {
+                const selected = p.id === trait.dataId ? 'selected' : '';
+                dataIdOptions += `<option value="${p.id}" ${selected}>${p.name}</option>`;
+              });
+            } else if (trait.code === 21) { // Regular Parameter
+              REGULAR_PARAMS.forEach(p => {
+                const selected = p.id === trait.dataId ? 'selected' : '';
+                dataIdOptions += `<option value="${p.id}" ${selected}>${p.name}</option>`;
+              });
+            } else if (trait.code === 11 || trait.code === 31) { // Element Rate or Attack Element
+              ELEMENTS.forEach(e => {
+                const selected = e.id === trait.dataId ? 'selected' : '';
+                dataIdOptions += `<option value="${e.id}" ${selected}>${e.name}</option>`;
+              });
+            }
+          }
+
+          // Value input based on trait type
+          let valueInput = '';
+          if (traitType) {
+            if (traitType.valueType === 'percent') {
+              valueInput = `<input type="number" min="0" max="1000" step="1" placeholder="%" value="${Math.round(trait.value * 100)}"
+                onchange="updateTraitValue(${index}, this.value, 'percent')" title="Percentage (0-1000%)" />`;
+            } else if (traitType.valueType === 'decimal') {
+              valueInput = `<input type="number" min="-100" max="100" step="0.01" placeholder="Value" value="${trait.value}"
+                onchange="updateTraitValue(${index}, this.value, 'decimal')" title="Decimal value" />`;
+            } else if (traitType.valueType === 'number') {
+              valueInput = `<input type="number" min="-999" max="999" step="1" placeholder="Value" value="${trait.value}"
+                onchange="updateTraitValue(${index}, this.value, 'number')" title="Number value" />`;
+            } else {
+              valueInput = `<span style="color: #888; font-size: 0.9em;">No value needed</span>`;
+            }
+          }
+
+          row.innerHTML = `
+            <select onchange="updateTraitCode(${index}, this.value)" style="flex: 1.5;">
+              ${traitTypeOptions}
+            </select>
+            <select onchange="updateTraitDataId(${index}, this.value)" style="flex: 1.5;">
+              ${dataIdOptions}
+            </select>
+            ${valueInput}
+            <button onclick="removeTrait(${index})">Remove</button>
+          `;
+          traitsList.appendChild(row);
+        });
+      }
+
+      function addTrait() {
+        if (currentEditingIndex === -1) return;
+        const enemy = enemiesData[currentEditingIndex];
+        if (!enemy.traits) enemy.traits = [];
+
+        enemy.traits.push({
+          code: 22,
+          dataId: 0,
+          value: 1.0
+        });
+        renderTraits();
+      }
+
+      function removeTrait(index) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.traits.splice(index, 1);
+        renderTraits();
+      }
+
+      function updateTraitCode(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.traits[index].code = parseInt(value) || 22;
+        enemy.traits[index].dataId = 0;
+        enemy.traits[index].value = 1.0;
+        renderTraits();
+      }
+
+      function updateTraitDataId(index, value) {
+        const enemy = enemiesData[currentEditingIndex];
+        enemy.traits[index].dataId = parseInt(value) || 0;
+      }
+
+      function updateTraitValue(index, value, type) {
+        const enemy = enemiesData[currentEditingIndex];
+        if (type === 'percent') {
+          enemy.traits[index].value = parseFloat(value) / 100 || 1.0;
+        } else if (type === 'decimal' || type === 'number') {
+          enemy.traits[index].value = parseFloat(value) || 0;
+        }
+      }
+
+      // --- UNUSED PANEL (SPRITES ONLY FOR NOW) ---
+      function updateUnusedPanel() {
+        const usedKeys = new Set();
+        enemiesData.forEach((enemy) => {
+          const note = enemy.note || "";
+          const match = note.match(/<Char:([^>]+)>/);
+          if (match) {
+            const tagContent = match[1].trim();
+            const actualKey = resolveKey(spriteLibrary, tagContent);
+            if (actualKey) usedKeys.add(actualKey);
+          }
+        });
+
+        const allKeys = Object.keys(spriteLibrary);
+        const unusedKeys = allKeys.filter((key) => !usedKeys.has(key)).sort();
+
+        unusedList.innerHTML = "";
+        unusedCount.textContent = unusedKeys.length;
+
+        if (allKeys.length === 0) {
+          unusedList.innerHTML =
+            '<div style="color: #666; font-style: italic; font-size: 0.9em; text-align: center; width: 100%;">No sprites loaded.</div>';
+          return;
+        }
+
+        unusedKeys.forEach((key) => {
+          const url = spriteLibrary[key];
+          const originalName = spriteOriginalNames[key];
+          const div = document.createElement("div");
+          div.className = "unused-item";
+          div.title = "Click to copy name";
+          div.innerHTML = `
+                    <div class="sprite-crop" style="background-image: url('${url}'); transform: scale(0.8);"></div>
+                    <span>${originalName}</span>
+                `;
+          div.onclick = () => {
+            navigator.clipboard.writeText(originalName);
+            div.style.backgroundColor = "#5dade2";
+            setTimeout(() => (div.style.backgroundColor = "#333"), 200);
+          };
+          unusedList.appendChild(div);
+        });
+      }
+
+      function saveFile() {
+        const output = [null, ...enemiesData];
+        const jsonStr = JSON.stringify(output, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "enemies.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    </script>
+  </body>
+</html>

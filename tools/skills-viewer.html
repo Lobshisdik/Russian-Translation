@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Skills Viewer</title>
+    <style>
+        /* Dark Theme Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #e4e4e4;
+            font-size: 18px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header and Controls */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4cc9f0, #7209b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .star-filter {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: #1e1e2e;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+
+        .star-filter label {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .star-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #444;
+            transition: all 0.2s ease;
+            padding: 0 2px;
+        }
+
+        .star-button.active {
+            color: #fbbf24;
+        }
+
+        .star-button:hover {
+            transform: scale(1.2);
+        }
+
+        input[type="file"] {
+            background: #2a2a3e;
+            color: #e4e4e4;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #4cc9f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            background: #3a3a4e;
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.3);
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background: #1e1e2e;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #e4e4e4;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #searchBar:focus {
+            outline: none;
+            border-color: #4cc9f0;
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.2);
+        }
+
+        #categoryFilter {
+            padding: 0.8rem 1.2rem;
+            background: #1e1e2e;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #e4e4e4;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #categoryFilter:hover {
+            border-color: #4cc9f0;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: #141422;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #333;
+            display: none;
+        }
+
+        .category-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-controls button {
+            padding: 0.5rem 1rem;
+            background: #1e1e2e;
+            color: #e4e4e4;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .category-controls button:hover {
+            background: #2a2a3e;
+            border-color: #4cc9f0;
+        }
+
+        .category-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category-link {
+            padding: 0.5rem 1rem;
+            background: #2a2a3e;
+            color: #4cc9f0;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            user-select: none;
+        }
+
+        .category-link:hover {
+            background: #3a3a4e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(76, 201, 240, 0.3);
+        }
+
+        .category-link.selected {
+            background: #4cc9f0;
+            color: #0a0a0a;
+            border-color: #7209b7;
+            font-weight: 600;
+        }
+
+        .category-link.selected:hover {
+            background: #3ab8d8;
+        }
+
+        /* Content */
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .type-section {
+            margin-bottom: 3rem;
+        }
+
+        .type-header {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #4cc9f0;
+            border-bottom: 2px solid #4cc9f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-header {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #7209b7;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-header::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: #7209b7;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: #1a1a2e;
+            border: 2px solid #2a2a3e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4cc9f0, #7209b7);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: #4cc9f0;
+            box-shadow: 0 8px 30px rgba(76, 201, 240, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            justify-content: space-between;
+        }
+
+        .skill-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .skill-id {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .skill-icon {
+            width: 32px;
+            height: 32px;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .skill-rating {
+            display: flex;
+            gap: 2px;
+            font-size: 16px;
+        }
+
+        .star {
+            color: #fbbf24;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .star.empty {
+            color: #333;
+        }
+
+        .skill-description {
+            color: #b0b0c0;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .skill-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-row span {
+            background: #2a2a3e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .skill-cost {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+
+        .skill-damage {
+            background: #2a1a3e;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .skill-damage code {
+            background: #3a2a4e;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: #f97316;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .skill-effects {
+            margin-top: 1rem;
+        }
+
+        .skill-effects h4 {
+            color: #4cc9f0;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-effects ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .skill-effects li {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-effects li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #7209b7;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: #666;
+        }
+
+        .empty-state h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #888;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #4cc9f0;
+        }
+
+        /* Highlight matching search terms */
+        .highlight {
+            background: #f97316;
+            color: #000;
+            padding: 0 0.25rem;
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RPG Maker MZ Skills Viewer</h1>
+        <div class="controls">
+            <input type="file" id="fileInput" accept=".json" />
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search skills..." />
+            </div>
+            <div class="star-filter">
+                <label>Min Stars:</label>
+                <button class="star-button" data-stars="1">★</button>
+                <button class="star-button" data-stars="2">★</button>
+                <button class="star-button" data-stars="3">★</button>
+                <button class="star-button" data-stars="4">★</button>
+                <button class="star-button" data-stars="5">★</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation" id="navigation">
+        <div class="category-controls">
+            <button id="selectAllBtn">Select All</button>
+            <button id="clearAllBtn">Clear All</button>
+            <span style="color: #666; margin-left: 1rem;">Click categories to toggle selection</span>
+        </div>
+        <div class="category-links" id="categoryLinks"></div>
+    </div>
+
+    <div class="content" id="content">
+        <div class="empty-state">
+            <h2>No Skills Loaded</h2>
+            <p>Select your Skills.json file to get started</p>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const TRAIT_CODES = {11:"Element Rate",12:"Debuff Rate",13:"State Rate",14:"State Resist",21:"Parameter",22:"Extra",23:"Special",31:"Element",32:"State",33:"Speed",34:"Attack Times",41:"Add Skill Type",42:"Seal Skill Type",43:"Add Skill",44:"Seal Skill",51:"Equip Weapon Type",52:"Equip Armor Type",53:"Lock Equipment",54:"Seal Equipment",55:"Slot Type",61:"Action Times+",62:"Special Flag",63:"Collapse Effect",64:"Party Ability"};
+        const PARAMS = ["HP","MP","ATK","CON","INT","WIS","DEX","PSI"];
+        const XPARAMS = ["Hit Rate","Evasion Rate","Critical Hit Rate","Critical Evasion","Magic Evasion","Magic Reflection","Counter Attack","HP Regeneration","MP Regeneration","TP Regeneration"];
+        const SPARAMS = ["Target Rate","Guard Effect","Recovery Effect","Pharmacology","MP Cost Rate","TP Charge Rate","Physical Damage Rate","Magical Damage Rate","Floor Damage Rate","Experience Rate"];
+        const EFFECT_CODES = {11:"Recover HP",12:"Recover MP",21:"Add State",22:"Remove State",31:"Add Buff",32:"Add Debuff",33:"Remove Buff",34:"Remove Debuff",41:"Learn Skill",42:"Common Event",43:"Grow",44:"Special Flag",51:"Recover TP",61:"Change TP Cost"};
+        const STATE_NAME_MAP = {1:"Dead",2:"Guard",3:"Immortal",4:"Poison",5:"Blind",6:"Silence",7:"Rage",8:"Confusion",9:"Charm",10:"Sleep",11:"Freeze",12:"Paralysis",13:"Stun",14:"Locked on",15:"HP Regeneration",16:"MP Regeneration",17:"Auto‐Attack Down",18:"Auto‐Attack Up",19:"Hit Rate Down",20:"Hit Rate Up",21:"Evasion Down",22:"Evasion Up",23:"Magic Evasion Down",24:"Magic Evasion Up",25:"Magic Reflection",26:"Counter Attack",27:"Substitute",28:"Protect",29:"Shell",30:"Regen",31:"Barrier",32:"Attack State",33:"Defense State",34:"Magic Attack State",35:"Shadow Veil",36:"Arcane Surge",37:"Ethereal",38:"Unbalanced",39:"Life Link",40:"Vulnerability",41:"Nausea",42:"Drunk",43:"Burned",44:"Infected",45:"Floating",46:"Invisible",47:"Oily",48:"Bleeding"};
+        const ELEMENTS_MAP = {1:"Physical",2:"Fire",3:"Ice",4:"Thunder",5:"Water",6:"Metal",7:"Wind",8:"Sacred",9:"Cursed"};
+        const WEAPONS_MAP = {1:"Dagger",2:"Sword",3:"Heavy",4:"Axe",5:"Whip",6:"Staff",7:"Bow",8:"Projectile",9:"Gun",10:"Claw",11:"Glove",12:"Spear"};
+        const SCOPE_MAP = {0:"None",1:"None",2:"Enemy",3:"Ally",4:"Enemy & Ally",5:"User",6:"6",7:"1 Ally",8:"8",9:"9"};
+        const OCCASION_MAP = {0:"None",1:"Always",2:"Battle Screen",3:"Menu Screen",4:"Never"};
+        const HIT_MAP = {0:"None",1:"Certain Hit",2:"Physical Attack",3:"Magical Attack"};
+
+        let skillsData = null;
+        let filteredData = null;
+        let selectedCategories = new Set();
+        let minStarRating = 0;
+
+        // Level 25 stats for damage calculation
+        const LEVEL_25_STATS = {
+            HP: 500,
+            MP: 100,
+            ATK: 50,
+            DEF: 50,
+            MAT: 50,
+            MDF: 50,
+            AGI: 50,
+            LUK: 50
+        };
+
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const searchBar = document.getElementById('searchBar');
+        const content = document.getElementById('content');
+        const navigation = document.getElementById('navigation');
+        const categoryLinks = document.getElementById('categoryLinks');
+
+        // Event Listeners
+        fileInput.addEventListener('change', handleFileSelect);
+        searchBar.addEventListener('input', filterSkills);
+
+        // Setup star filter buttons
+        document.querySelectorAll('.star-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const stars = parseInt(e.target.dataset.stars);
+                setMinStarRating(stars);
+            });
+        });
+
+        function setMinStarRating(stars) {
+            if (minStarRating === stars) {
+                minStarRating = 0; // Reset if clicking the same star
+            } else {
+                minStarRating = stars;
+            }
+
+            // Update visual state
+            document.querySelectorAll('.star-button').forEach((btn, index) => {
+                if (index < minStarRating) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            filterSkills();
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (!Array.isArray(data)) {
+                        throw new Error('Data is not an array');
+                    }
+                    skillsData = data.filter(skill => skill && skill.name).map(skill => {
+                        // Calculate and store star rating for each skill
+                        skill.starRating = calculateSkillRating(skill);
+                        return skill;
+                    });
+                    filteredData = skillsData;
+                    setupUI();
+                    renderSkills();
+                } catch (error) {
+                    content.innerHTML = `<div class="empty-state"><h2>Error</h2><p>${error.message}</p></div>`;
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function calculateSkillRating(skill) {
+            // If skill has a damage formula, calculate potential damage
+            if (skill.damage && skill.damage.formula && skill.damage.formula !== "0") {
+                const maxDamage = calculateMaxDamage(skill.damage.formula);
+                
+                // Rating based on max damage potential
+                if (maxDamage >= 500) return 5;
+                if (maxDamage >= 300) return 4;
+                if (maxDamage >= 150) return 3;
+                if (maxDamage >= 75) return 2;
+                return 1;
+            }
+            
+            // For non-damage skills, rate based on cost (higher cost = higher rating)
+            const totalCost = (skill.mpCost || 0) + (skill.tpCost || 0);
+            
+            if (totalCost >= 100) return 5;
+            if (totalCost >= 50) return 4;
+            if (totalCost >= 25) return 3;
+            if (totalCost >= 10) return 2;
+            return 1;
+        }
+
+        function calculateMaxDamage(formula) {
+            // Replace a. and b. with level 25 stats
+            let calcFormula = formula
+                .replace(/a\.atk/gi, LEVEL_25_STATS.ATK)
+                .replace(/a\.def/gi, LEVEL_25_STATS.DEF)
+                .replace(/a\.mat/gi, LEVEL_25_STATS.MAT)
+                .replace(/a\.mdf/gi, LEVEL_25_STATS.MDF)
+                .replace(/a\.agi/gi, LEVEL_25_STATS.AGI)
+                .replace(/a\.luk/gi, LEVEL_25_STATS.LUK)
+                .replace(/a\.hp/gi, LEVEL_25_STATS.HP)
+                .replace(/a\.mp/gi, LEVEL_25_STATS.MP)
+                .replace(/a\.mhp/gi, LEVEL_25_STATS.HP)  // max HP
+                .replace(/a\.mmp/gi, LEVEL_25_STATS.MP)  // max MP
+                .replace(/b\.atk/gi, LEVEL_25_STATS.ATK)
+                .replace(/b\.def/gi, LEVEL_25_STATS.DEF)
+                .replace(/b\.mat/gi, LEVEL_25_STATS.MAT)
+                .replace(/b\.mdf/gi, LEVEL_25_STATS.MDF)
+                .replace(/b\.agi/gi, LEVEL_25_STATS.AGI)
+                .replace(/b\.luk/gi, LEVEL_25_STATS.LUK)
+                .replace(/b\.hp/gi, LEVEL_25_STATS.HP)
+                .replace(/b\.mp/gi, LEVEL_25_STATS.MP)
+                .replace(/b\.mhp/gi, LEVEL_25_STATS.HP)  // max HP
+                .replace(/b\.mmp/gi, LEVEL_25_STATS.MP)  // max MP
+                .replace(/b\.level/gi, '25')
+                .replace(/a\.level/gi, '25');
+            
+            try {
+                // Safely evaluate the formula
+                return Math.abs(eval(calcFormula));
+            } catch (e) {
+                console.error('Error evaluating formula:', formula, e);
+                return 0;
+            }
+        }
+
+        function setupUI() {
+		const categoryEmojiMap = {
+  Aeromancy:       "🌬️",
+  AntiMagic:       "🛡️",
+  Arcanism:        "📜",
+  AstralMagic:     "✨",
+  Basic:           "📦",
+  Bestial:         "🐾",
+  Boxing:          "🥊",
+  CEO:             "👔",
+  ChaosMagic:      "🌪️",
+  ChemicalArts:    "⚗️",
+  Chromomancy:     "🌈",
+  Convokation:     "📣",
+  Cooking:         "🍳",
+  CosmicMagic:     "🌌",
+  Cryomancy:       "❄️",
+  DarkMagic:       "🌑",
+  Divination:      "🔮",
+  Divine:          "🙏",
+  Electromancy:    "⚡",
+  EnhancementMagic:"🛠️",
+  Firefighting:    "🚒",
+  ForbiddenMagic:  "🚫✨",
+  Geomancy:        "🌱",
+  HolyMagic:       "✝️",
+  Hunting:         "🦌",
+  Hydromancy:      "💧",
+  Idromancy:       "🩸",
+  Journalism:      "📰",
+  LawEnforcement:  "🚓",
+  Leadership:      "🦅",
+  MartialArts:     "🥋",
+  MinorMagic:      "🪄",
+  Natural:         "🌿",
+  Performance:     "🎭",
+  PsychicAbilities:"🧠",
+  Pyromancy:       "🔥",
+  Roguery:         "🗡️",
+  SelfDestructive: "💥",
+  StatusMagic:     "📈",
+  Swordsmanship:   "⚔️",
+  Technomancy:     "🤖",
+  TerrorMagic:     "😱",
+  Training:        "🏋️",
+  Uncategorized:   "❓",
+  UnholyMagic:     "☠️",
+  VoidMagic:       "🕳️",
+  Wrestling:       "🤼"
+};
+            // Get all unique categories
+            const categories = new Set();
+            skillsData.forEach(skill => {
+                const category = parseNote(skill.note).category || "Uncategorized";
+                categories.add(category);
+            });
+
+            // Initialize with all categories selected
+            selectedCategories = new Set(categories);
+
+            // Create category links
+            categoryLinks.innerHTML = '';
+            Array.from(categories).sort().forEach(category => {
+                const link = document.createElement('span');
+                link.className = 'category-link selected';
+const emoji = categoryEmojiMap[category] || "";
+link.textContent = `${emoji} ${category}`;               
+ link.dataset.category = category;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleCategory(category);
+                });
+                categoryLinks.appendChild(link);
+            });
+
+            // Setup control buttons
+            document.getElementById('selectAllBtn').addEventListener('click', selectAllCategories);
+            document.getElementById('clearAllBtn').addEventListener('click', clearAllCategories);
+
+            navigation.style.display = 'block';
+        }
+
+        function toggleCategory(category) {
+            const link = document.querySelector(`[data-category="${category}"]`);
+            
+            if (selectedCategories.has(category)) {
+                selectedCategories.delete(category);
+                link.classList.remove('selected');
+            } else {
+                selectedCategories.add(category);
+                link.classList.add('selected');
+            }
+            
+            filterSkills();
+        }
+
+        function selectAllCategories() {
+            const allLinks = document.querySelectorAll('.category-link');
+            allLinks.forEach(link => {
+                selectedCategories.add(link.dataset.category);
+                link.classList.add('selected');
+            });
+            filterSkills();
+        }
+
+        function clearAllCategories() {
+            selectedCategories.clear();
+            const allLinks = document.querySelectorAll('.category-link');
+            allLinks.forEach(link => {
+                link.classList.remove('selected');
+            });
+            filterSkills();
+        }
+
+        function filterSkills() {
+            const searchTerm = searchBar.value.toLowerCase();
+
+            filteredData = skillsData.filter(skill => {
+                const category = parseNote(skill.note).category || "Uncategorized";
+                const matchesCategory = selectedCategories.size === 0 || selectedCategories.has(category);
+                const matchesSearch = !searchTerm || 
+                    skill.name.toLowerCase().includes(searchTerm) ||
+                    (skill.description && skill.description.toLowerCase().includes(searchTerm));
+                const matchesStarRating = skill.starRating >= minStarRating;
+                
+                return matchesCategory && matchesSearch && matchesStarRating;
+            });
+
+            renderSkills();
+        }
+
+        function renderSkills() {
+            if (!filteredData || filteredData.length === 0) {
+                content.innerHTML = '<div class="empty-state"><h2>No Skills Found</h2><p>Try adjusting your search or filter criteria</p></div>';
+                return;
+            }
+
+            // Group skills by type and category
+            const grouped = groupSkills(filteredData);
+            
+            let html = '';
+            Object.entries(grouped).forEach(([typeName, categories]) => {
+                html += `<div class="type-section">`;
+                html += `<h2 class="type-header">${typeName}</h2>`;
+                
+                Object.entries(categories).forEach(([categoryName, skills]) => {
+                    html += `<div class="category-section" id="${categoryName.toLowerCase().replace(/\s+/g, '-')}">`;
+                    html += `<h3 class="category-header">${categoryName}</h3>`;
+                    html += `<div class="skills-grid">`;
+                    
+                    skills.forEach(skill => {
+                        html += createSkillCard(skill);
+                    });
+                    
+                    html += `</div></div>`;
+                });
+                
+                html += `</div>`;
+            });
+
+            content.innerHTML = html;
+            highlightSearchTerms();
+        }
+
+        function groupSkills(skills) {
+            const typeGroups = {
+                1: { name: "Magic Skills", categories: {} },
+                2: { name: "Physical Skills", categories: {} }
+            };
+
+            skills.forEach(skill => {
+                const skillType = skill.stypeId || 1;
+                const category = parseNote(skill.note).category || "Uncategorized";
+
+                if (!typeGroups[skillType]) {
+                    typeGroups[skillType] = { name: `Type ${skillType} Skills`, categories: {} };
+                }
+
+                if (!typeGroups[skillType].categories[category]) {
+                    typeGroups[skillType].categories[category] = [];
+                }
+
+                typeGroups[skillType].categories[category].push(skill);
+            });
+
+            // Sort skills within each category by star rating (lowest to highest)
+            Object.values(typeGroups).forEach(typeGroup => {
+                Object.keys(typeGroup.categories).forEach(category => {
+                    typeGroup.categories[category].sort((a, b) => a.starRating - b.starRating);
+                });
+            });
+
+            // Remove empty types
+            const result = {};
+            Object.entries(typeGroups).forEach(([key, value]) => {
+                if (Object.keys(value.categories).length > 0) {
+                    result[value.name] = value.categories;
+                }
+            });
+
+            return result;
+        }
+
+        function createSkillCard(skill) {
+            const noteData = parseNote(skill.note);
+            
+            // Create star rating display
+            let starsHtml = '<div class="skill-rating">';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<span class="star ${i <= skill.starRating ? '' : 'empty'}">★</span>`;
+            }
+            starsHtml += '</div>';
+            
+            // Build damage info
+            let damageHtml = '';
+            if (skill.damage && skill.damage.formula && skill.damage.formula !== "0") {
+                const elementName = ELEMENTS_MAP[skill.damage.elementId] || "Physical";
+                const criticalText = skill.damage.critical ? "Yes" : "No";
+                const maxDamage = calculateMaxDamage(skill.damage.formula);
+                damageHtml = `
+                    <div class="skill-damage">
+                        <p><strong>Formula:</strong> <code>${skill.damage.formula}</code></p>
+                        <p><strong>Max Damage (Lv25):</strong> ${Math.round(maxDamage)}</p>
+                        <p><strong>Element:</strong> ${elementName} | <strong>Variance:</strong> ${skill.damage.variance}% | <strong>Critical:</strong> ${criticalText}</p>
+                    </div>`;
+            }
+
+            // Build effects info
+            let effectsHtml = '';
+            if (skill.effects && skill.effects.length) {
+                const effectsList = skill.effects.map(effect => {
+                    const effectName = EFFECT_CODES[effect.code] || `Code ${effect.code}`;
+                    let detail = formatEffectDetail(effect);
+                    return `<li><strong>${effectName}:</strong> ${detail}</li>`;
+                }).join('');
+
+                effectsHtml = `
+                    <div class="skill-effects">
+                        <h4>Effects</h4>
+                        <ul>${effectsList}</ul>
+                    </div>`;
+            }
+
+            // Build cost info
+            const costs = [];
+            if (skill.mpCost > 0) costs.push(`${skill.mpCost} MP`);
+            if (skill.tpCost > 0) costs.push(`${skill.tpCost} TP`);
+            const costHtml = costs.length > 0 ? `<span class="skill-cost">Cost: ${costs.join(', ')}</span>` : '';
+
+            return `
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-header-left">
+                            <span class="skill-name">${skill.name} <span class="skill-id">#${skill.id}</span></span>
+                            ${skill.iconIndex > 0 ? getIconHtml(skill.iconIndex) : ''}
+                        </div>
+                        ${starsHtml}
+                    </div>
+                    
+                    <div class="skill-description">
+                        ${skill.description || 'No description provided.'}
+                    </div>
+
+                    <div class="skill-stats">
+                        <div class="stat-row">
+                            ${costHtml}
+                            <span><strong>Scope:</strong> ${SCOPE_MAP[skill.scope] || skill.scope}</span>
+                            <span><strong>Speed:</strong> ${convertSpeed(skill.speed)}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span><strong>Occasion:</strong> ${OCCASION_MAP[skill.occasion] || skill.occasion}</span>
+                            <span><strong>Hit Type:</strong> ${HIT_MAP[skill.hitType] || skill.hitType}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span><strong>Success:</strong> ${skill.successRate}%</span>
+                            <span><strong>Repeats:</strong> ${skill.repeats}</span>
+                        </div>
+                    </div>
+
+                    ${damageHtml}
+                    ${effectsHtml}
+                </div>`;
+        }
+
+        function formatEffectDetail(effect) {
+            switch (effect.code) {
+                case 11: return `${effect.value1}${effect.value2 > 0 ? `-${effect.value2}` : ''} HP`;
+                case 12: return `${effect.value1}${effect.value2 > 0 ? `-${effect.value2}` : ''} MP`;
+                case 21: return `${getStateName(effect.dataId)} (${Math.round(effect.value1 * 100)}% chance)`;
+                case 22: return `Remove ${getStateName(effect.dataId)}`;
+                case 31: return `${PARAMS[effect.dataId]} buff for ${effect.value1} turns`;
+                case 32: return `${PARAMS[effect.dataId]} debuff for ${effect.value1} turns`;
+                case 33: return `Remove ${PARAMS[effect.dataId]} buff`;
+                case 34: return `Remove ${PARAMS[effect.dataId]} debuff`;
+                case 43: return `${PARAMS[effect.dataId]} +${effect.value1}`;
+                case 51: return `${effect.value1} TP`;
+                default: return `DataID: ${effect.dataId}, Value1: ${effect.value1}, Value2: ${effect.value2}`;
+            }
+        }
+
+        function getStateName(id) {
+            return STATE_NAME_MAP[id] || `State ${id}`;
+        }
+
+        function convertSpeed(speedVal) {
+            const speed = parseInt(speedVal, 10);
+            const map = {
+                1: "x4 slower",
+                2: "x2 slower",
+                3: "Slower",
+                4: "Normal",
+                5: "Faster",
+                6: "x2 faster"
+            };
+            return map[speed] || "Normal";
+        }
+
+        function parseNote(note) {
+            const data = {};
+            if (!note) return data;
+            const lines = note.split(/[\r\n]+/);
+            lines.forEach(line => {
+                const match = line.match(/<([^:]+):\s*(.*)>/);
+                if (match) {
+                    data[match[1].trim()] = match[2].trim();
+                }
+            });
+            return data;
+        }
+
+        function getIconHtml(iconIndex) {
+            if (!iconIndex || iconIndex <= 0) return '';
+
+            const iconsPerRow = 18;
+            const iconSize = 32;
+            const row = Math.floor((iconIndex - 1) / iconsPerRow);
+            const col = (iconIndex - 1) % iconsPerRow;
+            const backgroundX = -(col * iconSize);
+            const backgroundY = -(row * iconSize);
+
+            return `<img class="skill-icon" 
+                style="background: url('./img/system/IconSet.png') ${backgroundX}px ${backgroundY}px / 576px 720px;"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                alt="Skill Icon">`;
+        }
+
+        function highlightSearchTerms() {
+            const searchTerm = searchBar.value.toLowerCase();
+            if (!searchTerm) return;
+
+            const elements = document.querySelectorAll('.skill-name, .skill-description');
+            elements.forEach(el => {
+                const text = el.textContent;
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                el.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
+            });
+        }
+    </script>
+</body>
+</html>

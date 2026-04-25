@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker Project Shop Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .file-upload-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .upload-group {
+            margin-bottom: 20px;
+        }
+
+        .upload-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            background: #f7fafc;
+            transition: all 0.3s ease;
+        }
+
+        .file-input:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .maps-panel, .shops-panel, .shop-editor {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .panel-header h3 {
+            color: #4a5568;
+        }
+
+        .filter-box {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.9em;
+            width: 150px;
+        }
+
+        .map-item, .shop-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .map-item:hover, .shop-item:hover {
+            background: #e2e8f0;
+            transform: translateX(5px);
+        }
+
+        .map-item.active, .shop-item.active {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .map-item h4, .shop-item h4 {
+            margin-bottom: 5px;
+        }
+
+        .map-item p, .shop-item p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .shop-count {
+            background: #48bb78;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .map-name {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .inventory-section {
+            margin-bottom: 25px;
+        }
+
+        .inventory-section h4 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-count {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .item-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .inventory-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-info strong {
+            display: block;
+            color: #2d3748;
+        }
+
+        .item-info small {
+            color: #718096;
+        }
+
+        .remove-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .remove-btn:hover {
+            background: #c53030;
+        }
+
+        .add-items-section {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .available-items {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+
+        .available-item {
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .available-item:hover {
+            background: #e2e8f0;
+        }
+
+        .available-item:last-child {
+            border-bottom: none;
+        }
+
+        .available-item strong {
+            color: #2d3748;
+            font-size: 0.95em;
+        }
+
+        .item-info strong {
+            color: #2d3748;
+            font-size: 0.95em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .save-btn, .export-btn {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+        }
+
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #68d391;
+            white-space: pre-line; /* Allow line breaks in status messages */
+        }
+
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+            white-space: pre-line;
+        }
+
+        .status.info {
+            background: #bee3f8;
+            color: #2a4365;
+            border: 1px solid #63b3ed;
+            white-space: pre-line;
+        }
+
+        .no-content {
+            text-align: center;
+            color: #718096;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 RPG Maker Project Shop Editor</h1>
+            <p>Load your entire RPG Maker data folder to manage all shops across all maps</p>
+        </div>
+
+        <div class="file-upload-section">
+            <div class="upload-group">
+                <label for="loadMode">Loading Mode</label>
+                <div style="margin-bottom: 15px;">
+                    <input type="radio" id="folderMode" name="loadMode" value="folder" checked>
+                    <label for="folderMode" style="display: inline; margin-left: 5px; margin-right: 20px;">Load Entire Project</label>
+                    <input type="radio" id="singleMode" name="loadMode" value="single">
+                    <label for="singleMode" style="display: inline; margin-left: 5px;">Load Single Map + Items</label>
+                </div>
+            </div>
+            
+            <div class="upload-group" id="folderUpload">
+                <label for="dataFolder">RPG Maker Data Folder</label>
+                <input type="file" id="dataFolder" class="file-input" webkitdirectory directory multiple />
+                <small style="color: #718096; margin-top: 5px; display: block;">
+                    Select your RPG Maker project's "data" folder. Only Maps (Map001.json+) and core item files (Items.json, Weapons.json, Armors.json) will be loaded.
+                </small>
+            </div>
+
+            <div class="upload-group" id="singleUpload" style="display: none;">
+                <label for="singleMapFile">Single Map File</label>
+                <input type="file" id="singleMapFile" class="file-input" accept=".json" />
+                <small style="color: #718096; margin-top: 5px; display: block;">
+                    Select a single Map file (e.g., Map001.json)
+                </small>
+                
+                <label for="singleItemFiles" style="margin-top: 15px;">Items/Weapons/Armors Files</label>
+                <input type="file" id="singleItemFiles" class="file-input" accept=".json" multiple />
+                <small style="color: #718096; margin-top: 5px; display: block;">
+                    Select Items.json, Weapons.json, and Armors.json files
+                </small>
+            </div>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="project-stats" id="projectStats" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-number" id="mapsWithShopsCount">0</div>
+                <div class="stat-label">Maps with Shops</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="shopCount">0</div>
+                <div class="stat-label">Shops Found</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="itemCount">0</div>
+                <div class="stat-label">Items Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="weaponCount">0</div>
+                <div class="stat-label">Weapons Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="armorCount">0</div>
+                <div class="stat-label">Armors Available</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="maps-panel">
+                <div class="panel-header">
+                    <h3>🗺️ Maps with Shops</h3>
+                    <input type="text" class="filter-box" placeholder="Filter maps..." id="mapFilter">
+                </div>
+                <div id="mapsList">
+                    <div class="no-content">Load data folder to see maps</div>
+                </div>
+            </div>
+
+            <div class="shops-panel">
+                <div class="panel-header">
+                    <h3>🏪 Shops</h3>
+                    <input type="text" class="filter-box" placeholder="Filter shops..." id="shopFilter">
+                </div>
+                <div id="shopsList">
+                    <div class="no-content">Select a map to see its shops</div>
+                </div>
+            </div>
+
+            <div class="shop-editor">
+                <div class="panel-header">
+                    <h3>✏️ Shop Editor</h3>
+                </div>
+                <div id="shopEditor">
+                    <div class="no-content">Select a shop to edit its inventory</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class RPGMakerProjectEditor {
+            constructor() {
+                this.maps = new Map();
+                this.items = [];
+                this.weapons = [];
+                this.armors = [];
+                this.allShops = [];
+                this.currentMap = null;
+                this.currentShop = null;
+                this.filteredMaps = [];
+                this.filteredShops = [];
+                this.selectedMapFile = null;
+                this.selectedItemFiles = [];
+                this.editedMaps = new Set(); // Track which maps have been edited
+                
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                // Mode switcher
+                document.querySelectorAll('input[name="loadMode"]').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        this.switchLoadMode(e.target.value);
+                    });
+                });
+
+                // Folder mode
+                document.getElementById('dataFolder').addEventListener('change', (e) => {
+                    this.loadDataFolder(Array.from(e.target.files));
+                });
+
+                // Single map mode
+                document.getElementById('singleMapFile').addEventListener('change', (e) => {
+                    this.selectedMapFile = e.target.files[0];
+                    this.checkSingleModeReady();
+                });
+
+                document.getElementById('singleItemFiles').addEventListener('change', (e) => {
+                    this.selectedItemFiles = Array.from(e.target.files);
+                    this.checkSingleModeReady();
+                });
+
+                // Filters
+                document.getElementById('mapFilter').addEventListener('input', (e) => {
+                    this.filterMaps(e.target.value);
+                });
+
+                document.getElementById('shopFilter').addEventListener('input', (e) => {
+                    this.filterShops(e.target.value);
+                });
+            }
+
+            switchLoadMode(mode) {
+                const folderUpload = document.getElementById('folderUpload');
+                const singleUpload = document.getElementById('singleUpload');
+                
+                if (mode === 'folder') {
+                    folderUpload.style.display = 'block';
+                    singleUpload.style.display = 'none';
+                } else {
+                    folderUpload.style.display = 'none';
+                    singleUpload.style.display = 'block';
+                }
+                
+                // Reset data when switching modes
+                this.resetProject();
+            }
+
+            checkSingleModeReady() {
+                if (this.selectedMapFile && this.selectedItemFiles && this.selectedItemFiles.length > 0) {
+                    this.loadSingleMapMode();
+                }
+            }
+
+            async loadSingleMapMode() {
+                try {
+                    this.showStatus('Loading single map and item files...', 'info');
+                    
+                    // Reset data
+                    this.maps.clear();
+                    this.items = [];
+                    this.weapons = [];
+                    this.armors = [];
+                    this.allShops = [];
+
+                    // Load item files first
+                    for (const file of this.selectedItemFiles) {
+                        await this.loadItemFile(file);
+                        await new Promise(resolve => setTimeout(resolve, 10));
+                    }
+
+                    // Load the single map
+                    await this.loadMapFile(this.selectedMapFile);
+
+                    // Process shops
+                    this.processAllShops();
+                    this.updateProjectStats();
+                    this.renderMapsPanel();
+
+                    const mapsWithShops = Array.from(this.maps.values()).filter(mapInfo => mapInfo.shops.length > 0);
+                    const shopCount = this.allShops.length;
+                    const itemCount = this.items.filter(i => i).length;
+                    const weaponCount = this.weapons.filter(w => w).length;
+                    const armorCount = this.armors.filter(a => a).length;
+
+                    this.showStatus(
+                        `✅ Single map loaded! 1 map${mapsWithShops.length > 0 ? ' with shops' : ' (no shops found)'}, ${shopCount} shops, ${itemCount} items, ${weaponCount} weapons, ${armorCount} armors`
+                    );
+
+                } catch (error) {
+                    this.showStatus('Error loading single map: ' + error.message, 'error');
+                    console.error('Single map loading error:', error);
+                }
+            }
+
+            resetProject() {
+                this.maps.clear();
+                this.items = [];
+                this.weapons = [];
+                this.armors = [];
+                this.allShops = [];
+                this.currentMap = null;
+                this.currentShop = null;
+                this.filteredMaps = [];
+                this.filteredShops = [];
+                this.editedMaps.clear(); // Reset edited maps tracking
+                
+                // Reset UI
+                document.getElementById('projectStats').style.display = 'none';
+                document.getElementById('mapsList').innerHTML = '<div class="no-content">Load files to see maps</div>';
+                document.getElementById('shopsList').innerHTML = '<div class="no-content">Select a map to see its shops</div>';
+                document.getElementById('shopEditor').innerHTML = '<div class="no-content">Select a shop to edit its inventory</div>';
+            }
+
+            showStatus(message, type = 'success') {
+                const statusEl = document.getElementById('status');
+                statusEl.innerHTML = `<div class="status ${type}">${message}</div>`;
+                if (type !== 'info') {
+                    setTimeout(() => {
+                        statusEl.innerHTML = '';
+                    }, 5000);
+                }
+            }
+
+            updateProgress(current, total, message) {
+                const statusEl = document.getElementById('status');
+                const percentage = Math.round((current / total) * 100);
+                statusEl.innerHTML = `
+                    <div class="status info">
+                        ${message}
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${percentage}%"></div>
+                        </div>
+                        ${current}/${total} files processed (${percentage}%)
+                    </div>
+                `;
+            }
+
+            async loadDataFolder(files) {
+                if (files.length === 0) return;
+
+                this.showStatus('Loading RPG Maker project files...', 'info');
+                
+                // Reset data
+                this.maps.clear();
+                this.items = [];
+                this.weapons = [];
+                this.armors = [];
+                this.allShops = [];
+
+                let processedFiles = 0;
+                const totalFiles = files.length;
+
+                // Filter files more specifically
+                const mapFiles = files.filter(f => f.name.match(/^Map\d{3,}\.json$/i)); // Map001.json, Map002.json, etc.
+                const itemFiles = files.filter(f => {
+                    const name = f.name.toLowerCase();
+                    return name === 'items.json' || 
+                           name === 'weapons.json' || 
+                           name === 'armors.json';
+                });
+
+                try {
+                    // Load item data first
+                    for (const file of itemFiles) {
+                        this.updateProgress(++processedFiles, totalFiles, 'Loading item data...');
+                        await this.loadItemFile(file);
+                        await new Promise(resolve => setTimeout(resolve, 10)); // Small delay to show progress
+                    }
+
+                    // Load maps
+                    for (const file of mapFiles) {
+                        this.updateProgress(++processedFiles, totalFiles, 'Loading maps...');
+                        await this.loadMapFile(file);
+                        await new Promise(resolve => setTimeout(resolve, 10)); // Small delay to show progress
+                    }
+
+                    // Process all shops
+                    this.processAllShops();
+                    this.updateProjectStats();
+                    this.renderMapsPanel();
+                    
+                    const mapsWithShops = Array.from(this.maps.values()).filter(mapInfo => mapInfo.shops.length > 0);
+                    const shopCount = this.allShops.length;
+                    const itemCount = this.items.filter(i => i).length;
+                    const weaponCount = this.weapons.filter(w => w).length;
+                    const armorCount = this.armors.filter(a => a).length;
+
+                    // Show detailed loading results
+                    const loadedFiles = [
+                        ...mapFiles.map(f => f.name),
+                        ...itemFiles.map(f => f.name)
+                    ];
+
+                    this.showStatus(
+                        `✅ Project loaded! ${this.maps.size} total maps, ${mapsWithShops.length} with shops, ${shopCount} shops, ${itemCount} items, ${weaponCount} weapons, ${armorCount} armors`
+                    );
+                    
+                    console.log('Loaded files:', loadedFiles);
+
+                } catch (error) {
+                    this.showStatus('Error loading project: ' + error.message, 'error');
+                    console.error('Project loading error:', error);
+                }
+            }
+
+            async loadItemFile(file) {
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    
+                    if (Array.isArray(data)) {
+                        const fileName = file.name.toLowerCase();
+                        if (fileName === 'weapons.json') {
+                            this.weapons = data;
+                        } else if (fileName === 'armors.json') {
+                            this.armors = data;
+                        } else if (fileName === 'items.json') {
+                            this.items = data;
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error loading ${file.name}:`, error);
+                }
+            }
+
+            async loadMapFile(file) {
+                try {
+                    const text = await file.text();
+                    const mapData = JSON.parse(text);
+                    const mapIdMatch = file.name.match(/Map(\d{3,})\.json/i);
+                    
+                    if (!mapIdMatch) {
+                        console.warn(`Skipping file with unexpected name format: ${file.name}`);
+                        return;
+                    }
+                    
+                    const mapId = parseInt(mapIdMatch[1]);
+                    
+                    this.maps.set(mapId, {
+                        id: mapId,
+                        name: mapData.displayName || `Map ${String(mapId).padStart(3, '0')}`,
+                        data: mapData,
+                        fileName: file.name,
+                        shops: []
+                    });
+                } catch (error) {
+                    console.error(`Error loading ${file.name}:`, error);
+                }
+            }
+
+            processAllShops() {
+                this.allShops = [];
+                
+                for (const [mapId, mapInfo] of this.maps) {
+                    const shops = this.findShopsInMap(mapInfo);
+                    mapInfo.shops = shops;
+                    this.allShops.push(...shops);
+                }
+            }
+
+            findShopsInMap(mapInfo) {
+                const shops = [];
+                const mapData = mapInfo.data;
+                
+                if (!mapData || !mapData.events) return shops;
+
+                mapData.events.forEach(event => {
+                    if (!event || !event.pages) return;
+
+                    event.pages.forEach((page, pageIndex) => {
+                        if (!page.list) return;
+
+                        // Look for shop events (code 302 is shop processing)
+                        const shopCommands = page.list.filter(command => command.code === 302);
+                        
+                        shopCommands.forEach((shopCommand, commandIndex) => {
+                            let shopData = {
+                                mapId: mapInfo.id,
+                                mapName: mapInfo.name,
+                                eventId: event.id,
+                                eventName: event.name || `Event ${event.id}`,
+                                pageIndex: pageIndex,
+                                commandIndex: commandIndex,
+                                x: event.x,
+                                y: event.y,
+                                items: [],
+                                weapons: [],
+                                armors: [],
+                                originalCommand: shopCommand
+                            };
+
+                            // Parse shop parameters - handle different RPG Maker formats
+                            if (shopCommand.parameters && shopCommand.parameters.length > 0) {
+                                try {
+                                    // Method 1: Try RPG Maker MZ format [goods_array, purchase_only]
+                                    const firstParam = shopCommand.parameters[0];
+                                    if (Array.isArray(firstParam)) {
+                                        firstParam.forEach(item => {
+                                            if (Array.isArray(item) && item.length >= 2) {
+                                                const [type, itemId] = item;
+                                                if (type === 0) shopData.items.push(itemId);
+                                                else if (type === 1) shopData.weapons.push(itemId);
+                                                else if (type === 2) shopData.armors.push(itemId);
+                                            }
+                                        });
+                                    }
+                                    // Method 2: Try RPG Maker MV format [type, itemId, price, ...]
+                                    else if (typeof firstParam === 'number') {
+                                        for (let i = 0; i < shopCommand.parameters.length; i += 3) {
+                                            const type = shopCommand.parameters[i];
+                                            const itemId = shopCommand.parameters[i + 1];
+                                            if (typeof type === 'number' && typeof itemId === 'number') {
+                                                if (type === 0) shopData.items.push(itemId);
+                                                else if (type === 1) shopData.weapons.push(itemId);
+                                                else if (type === 2) shopData.armors.push(itemId);
+                                            }
+                                        }
+                                    }
+                                } catch (parseError) {
+                                    console.warn(`Could not parse shop parameters for event ${event.id}:`, parseError);
+                                    // Continue without crashing
+                                }
+                            }
+
+                            shops.push(shopData);
+                        });
+                    });
+                });
+
+                return shops;
+            }
+
+            updateProjectStats() {
+                const stats = document.getElementById('projectStats');
+                stats.style.display = 'grid';
+                
+                const mapsWithShops = Array.from(this.maps.values()).filter(mapInfo => mapInfo.shops.length > 0);
+                
+                document.getElementById('mapsWithShopsCount').textContent = mapsWithShops.length;
+                document.getElementById('shopCount').textContent = this.allShops.length;
+                document.getElementById('itemCount').textContent = this.items.filter(i => i).length;
+                document.getElementById('weaponCount').textContent = this.weapons.filter(w => w).length;
+                document.getElementById('armorCount').textContent = this.armors.filter(a => a).length;
+            }
+
+            renderMapsPanel() {
+                // Only show maps that have shops
+                this.filteredMaps = Array.from(this.maps.values()).filter(mapInfo => mapInfo.shops.length > 0);
+                this.updateMapsDisplay();
+            }
+
+            updateMapsDisplay() {
+                const mapsListEl = document.getElementById('mapsList');
+                
+                if (this.filteredMaps.length === 0) {
+                    const totalMaps = this.maps.size;
+                    mapsListEl.innerHTML = `<div class="no-content">No maps with shops found${totalMaps > 0 ? ` (${totalMaps} maps loaded, 0 with shops)` : ''}</div>`;
+                    return;
+                }
+
+                mapsListEl.innerHTML = this.filteredMaps.map(mapInfo => {
+                    const isEdited = this.editedMaps.has(mapInfo.id);
+                    const editedIndicator = isEdited ? '<span style="color: #48bb78; margin-left: 5px;">●</span>' : '';
+                    
+                    return `
+                        <div class="map-item ${this.currentMap?.id === mapInfo.id ? 'active' : ''}" 
+                             onclick="shopEditor.selectMap(${mapInfo.id})">
+                            <h4>${mapInfo.name}${editedIndicator}</h4>
+                            <p>ID: ${mapInfo.id} | Shops: ${mapInfo.shops.length}${isEdited ? ' | Modified' : ''}</p>
+                            <span class="shop-count">${mapInfo.shops.length} shops</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            selectMap(mapId) {
+                this.currentMap = this.maps.get(mapId);
+                if (!this.currentMap) return;
+
+                this.filteredShops = this.currentMap.shops;
+                this.updateMapsDisplay();
+                this.updateShopsDisplay();
+                
+                // Clear shop editor
+                document.getElementById('shopEditor').innerHTML = '<div class="no-content">Select a shop to edit its inventory</div>';
+                this.currentShop = null;
+            }
+
+            updateShopsDisplay() {
+                const shopsListEl = document.getElementById('shopsList');
+                
+                if (this.filteredShops.length === 0) {
+                    shopsListEl.innerHTML = '<div class="no-content">No shops in this map</div>';
+                    return;
+                }
+
+                shopsListEl.innerHTML = this.filteredShops.map(shop => `
+                    <div class="shop-item ${this.currentShop?.eventId === shop.eventId && this.currentShop?.mapId === shop.mapId ? 'active' : ''}" 
+                         onclick="shopEditor.editShop(${shop.mapId}, ${shop.eventId}, ${shop.pageIndex}, ${shop.commandIndex})">
+                        <h4>${shop.eventName}</h4>
+                        <p class="map-name">${shop.mapName}</p>
+                        <p>Position: (${shop.x}, ${shop.y}) | Items: ${shop.items.length + shop.weapons.length + shop.armors.length}</p>
+                    </div>
+                `).join('');
+            }
+
+            filterMaps(searchTerm) {
+                const mapsWithShops = Array.from(this.maps.values()).filter(mapInfo => mapInfo.shops.length > 0);
+                
+                if (!searchTerm.trim()) {
+                    this.filteredMaps = mapsWithShops;
+                } else {
+                    const term = searchTerm.toLowerCase();
+                    this.filteredMaps = mapsWithShops.filter(mapInfo =>
+                        mapInfo.name.toLowerCase().includes(term) ||
+                        mapInfo.id.toString().includes(term)
+                    );
+                }
+                this.updateMapsDisplay();
+            }
+
+            filterShops(searchTerm) {
+                if (!this.currentMap) return;
+
+                if (!searchTerm.trim()) {
+                    this.filteredShops = this.currentMap.shops;
+                } else {
+                    const term = searchTerm.toLowerCase();
+                    this.filteredShops = this.currentMap.shops.filter(shop =>
+                        shop.eventName.toLowerCase().includes(term) ||
+                        shop.eventId.toString().includes(term)
+                    );
+                }
+                this.updateShopsDisplay();
+            }
+
+            editShop(mapId, eventId, pageIndex, commandIndex) {
+                const shop = this.allShops.find(s => 
+                    s.mapId === mapId && 
+                    s.eventId === eventId && 
+                    s.pageIndex === pageIndex && 
+                    s.commandIndex === commandIndex
+                );
+                
+                if (!shop) return;
+
+                this.currentShop = shop;
+                this.updateShopsDisplay();
+                this.renderShopEditor(shop);
+            }
+
+            renderShopEditor(shop) {
+                const editorEl = document.getElementById('shopEditor');
+                
+                editorEl.innerHTML = `
+                    <h4>Editing: ${shop.eventName}</h4>
+                    <p style="margin-bottom: 20px; color: #718096;">
+                        Map: ${shop.mapName} | Position: (${shop.x}, ${shop.y})
+                    </p>
+                    
+                    ${this.renderInventorySection('Items', shop.items, this.items, 'items')}
+                    ${this.renderInventorySection('Weapons', shop.weapons, this.weapons, 'weapons')}
+                    ${this.renderInventorySection('Armors', shop.armors, this.armors, 'armors')}
+                    
+                    <div class="action-buttons">
+                        <button class="save-btn" onclick="shopEditor.saveShop()">💾 Save Shop</button>
+                        <button class="export-btn" onclick="shopEditor.exportSingleMap()">📤 Export This Map</button>
+                        <button class="export-btn" onclick="shopEditor.exportAllMaps()" style="background: linear-gradient(135deg, #9f7aea, #805ad5);">📦 Export Edited Maps</button>
+                    </div>
+                `;
+            }
+
+            renderInventorySection(title, shopItems, allItems, type) {
+                const itemsDisplay = shopItems.map(itemId => {
+                    const item = allItems[itemId];
+                    if (!item)                     return `
+                        <div class="inventory-item">
+                            <div class="item-info">
+                                <strong>Unknown ${title.slice(0,-1)} (ID: ${itemId})</strong>
+                                <small>Item not found in database</small>
+                            </div>
+                            <button class="remove-btn" onclick="shopEditor.removeItem('${type}', ${itemId})">Remove</button>
+                        </div>
+                    `;
+                    
+                    return `
+                        <div class="inventory-item">
+                            <div class="item-info">
+                                <strong>[${itemId}] ${item.name}</strong>
+                                <small>Price: ${item.price || 'N/A'} | ${item.description || 'No description'}</small>
+                            </div>
+                            <button class="remove-btn" onclick="shopEditor.removeItem('${type}', ${itemId})">Remove</button>
+                        </div>
+                    `;
+                }).join('');
+
+                const availableItems = allItems.filter((item, index) => 
+                    item && !shopItems.includes(index)
+                ).slice(0, 100).map((item, originalIndex) => {
+                    const realIndex = allItems.findIndex(i => i === item);
+                    return `
+                        <div class="available-item" onclick="shopEditor.addItem('${type}', ${realIndex})">
+                            <div>
+                                <strong>[${realIndex}] ${item.name}</strong>
+                                <div style="font-size: 0.9em; color: #718096; margin-top: 2px;">
+                                    Price: ${item.price || 'No price'} | ${item.description || 'No description'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="inventory-section">
+                        <h4>
+                            ${title}
+                            <span class="section-count">${shopItems.length}</span>
+                        </h4>
+                        <div class="item-grid">
+                            ${itemsDisplay}
+                        </div>
+                        <div class="add-items-section">
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" class="search-box" placeholder="Search by name or ID (e.g., '5' or 'potion')..." 
+                                       oninput="shopEditor.filterItems('${type}', this.value)">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px; padding: 10px; background: #f0f8ff; border-radius: 6px; border: 1px solid #bee3f8;">
+                                <label style="font-weight: bold; color: #2d3748; margin-bottom: 8px; display: block;">
+                                    📝 Batch Add ${title} (by ID)
+                                </label>
+                                <input type="text" class="search-box" placeholder="Enter space-separated IDs (e.g., '1 5 10 25')" 
+                                       id="batch-${type}" style="margin-bottom: 8px;">
+                                <button onclick="shopEditor.batchAddItems('${type}')" 
+                                        style="background: #48bb78; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9em; transition: background 0.2s ease;"
+                                        onmouseover="this.style.background='#38a169'" 
+                                        onmouseout="this.style.background='#48bb78'">
+                                    ➕ Add Items
+                                </button>
+                                <div style="font-size: 0.8em; color: #718096; margin-top: 5px;">
+                                    Only missing items will be added. Invalid IDs are ignored.
+                                </div>
+                            </div>
+                            
+                            <div class="available-items" id="available-${type}">
+                                ${availableItems}
+                                ${allItems.filter(item => item).length > 100 ? '<div style="padding: 10px; text-align: center; color: #718096;">... and more (use search to find specific items)</div>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            filterItems(type, searchTerm) {
+                const allItems = type === 'items' ? this.items : 
+                                type === 'weapons' ? this.weapons : this.armors;
+                const shopItems = this.currentShop[type];
+                
+                const filteredItems = allItems.filter((item, index) => {
+                    if (!item || shopItems.includes(index)) {
+                        return false;
+                    }
+                    
+                    const term = searchTerm.toLowerCase().trim();
+                    if (!term) return true;
+                    
+                    // Check if search term is a number (searching by ID)
+                    const isNumericSearch = /^\d+$/.test(term);
+                    if (isNumericSearch) {
+                        return index.toString() === term;
+                    }
+                    
+                    // Search by name or description
+                    const nameMatch = item.name.toLowerCase().includes(term);
+                    const descMatch = item.description && item.description.toLowerCase().includes(term);
+                    
+                    return nameMatch || descMatch;
+                    
+                }).slice(0, 50).map((item) => {
+                    const realIndex = allItems.findIndex(i => i === item);
+                    return `
+                        <div class="available-item" onclick="shopEditor.addItem('${type}', ${realIndex})">
+                            <div>
+                                <strong>[${realIndex}] ${item.name}</strong>
+                                <div style="font-size: 0.9em; color: #718096; margin-top: 2px;">
+                                    Price: ${item.price || 'No price'} | ${item.description || 'No description'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                const resultsContainer = document.getElementById(`available-${type}`);
+                if (filteredItems) {
+                    resultsContainer.innerHTML = filteredItems;
+                } else {
+                    resultsContainer.innerHTML = '<div style="padding: 10px; text-align: center; color: #718096;">No items found</div>';
+                }
+            }
+
+            batchAddItems(type) {
+                if (!this.currentShop) {
+                    this.showStatus('No shop selected', 'error');
+                    return;
+                }
+
+                const input = document.getElementById(`batch-${type}`);
+                const inputValue = input.value.trim();
+                
+                if (!inputValue) {
+                    this.showStatus('Please enter item IDs', 'error');
+                    return;
+                }
+
+                try {
+                    // Parse space-separated numbers
+                    const itemIds = inputValue.split(/\s+/)
+                        .map(id => id.trim())
+                        .filter(id => id !== '')
+                        .map(id => parseInt(id))
+                        .filter(id => !isNaN(id) && id >= 0);
+
+                    if (itemIds.length === 0) {
+                        this.showStatus('No valid item IDs found. Please enter numbers separated by spaces.', 'error');
+                        return;
+                    }
+
+                    const allItems = type === 'items' ? this.items : 
+                                    type === 'weapons' ? this.weapons : this.armors;
+                    const shopItems = this.currentShop[type];
+
+                    let addedCount = 0;
+                    let skippedCount = 0;
+                    let invalidCount = 0;
+                    const addedItems = [];
+
+                    for (const itemId of itemIds) {
+                        // Check if item ID is valid (exists in the array)
+                        if (!allItems[itemId]) {
+                            invalidCount++;
+                            continue;
+                        }
+
+                        // Check if item is already in shop
+                        if (shopItems.includes(itemId)) {
+                            skippedCount++;
+                            continue;
+                        }
+
+                        // Add item to shop
+                        shopItems.push(itemId);
+                        addedItems.push({
+                            id: itemId,
+                            name: allItems[itemId].name
+                        });
+                        addedCount++;
+                    }
+
+                    // Clear input and refresh display
+                    input.value = '';
+                    this.renderShopEditor(this.currentShop);
+
+                    // Show results
+                    let message = `Batch add completed: ${addedCount} items added`;
+                    if (skippedCount > 0) message += `, ${skippedCount} already existed`;
+                    if (invalidCount > 0) message += `, ${invalidCount} invalid IDs ignored`;
+
+                    if (addedCount > 0) {
+                        const itemNames = addedItems.map(item => `${item.name} (${item.id})`).slice(0, 5);
+                        if (addedItems.length > 5) {
+                            itemNames.push(`... and ${addedItems.length - 5} more`);
+                        }
+                        message += `\nAdded: ${itemNames.join(', ')}`;
+                    }
+
+                    this.showStatus(message, addedCount > 0 ? 'success' : 'info');
+
+                } catch (error) {
+                    this.showStatus('Error processing batch add: ' + error.message, 'error');
+                    console.error('Batch add error:', error);
+                }
+            }
+
+            addItem(type, itemId) {
+                if (!this.currentShop[type].includes(itemId)) {
+                    this.currentShop[type].push(itemId);
+                    this.renderShopEditor(this.currentShop);
+                }
+            }
+
+            removeItem(type, itemId) {
+                const index = this.currentShop[type].indexOf(itemId);
+                if (index > -1) {
+                    this.currentShop[type].splice(index, 1);
+                    this.renderShopEditor(this.currentShop);
+                }
+            }
+
+            saveShop() {
+                if (!this.currentShop) {
+                    this.showStatus('No shop selected to save', 'error');
+                    return;
+                }
+
+                const mapInfo = this.maps.get(this.currentShop.mapId);
+                if (!mapInfo) {
+                    this.showStatus('Map data not found', 'error');
+                    return;
+                }
+
+                try {
+                    // Find the event and command in the map data
+                    const event = mapInfo.data.events.find(e => e && e.id === this.currentShop.eventId);
+                    if (!event || !event.pages[this.currentShop.pageIndex]) {
+                        this.showStatus('Event or page not found in map data', 'error');
+                        return;
+                    }
+
+                    const page = event.pages[this.currentShop.pageIndex];
+                    if (!page.list || !page.list[this.currentShop.commandIndex]) {
+                        this.showStatus('Shop command not found in event', 'error');
+                        return;
+                    }
+
+                    const command = page.list[this.currentShop.commandIndex];
+
+                    if (command && command.code === 302) {
+                        // Rebuild shop parameters - detect and maintain original format
+                        const originalParams = command.parameters || [];
+                        
+                        // Determine original format
+                        let useNewFormat = false;
+                        if (originalParams.length > 0 && Array.isArray(originalParams[0])) {
+                            useNewFormat = true;
+                        }
+
+                        if (useNewFormat) {
+                            // RPG Maker MZ format: [goods_array, purchase_only]
+                            const goods = [];
+                            
+                            // Add items (type 0)
+                            this.currentShop.items.forEach(itemId => {
+                                const item = this.items[itemId];
+                                goods.push([0, itemId, item ? (item.price || 0) : 0]);
+                            });
+                            
+                            // Add weapons (type 1)
+                            this.currentShop.weapons.forEach(itemId => {
+                                const weapon = this.weapons[itemId];
+                                goods.push([1, itemId, weapon ? (weapon.price || 0) : 0]);
+                            });
+                            
+                            // Add armors (type 2)
+                            this.currentShop.armors.forEach(itemId => {
+                                const armor = this.armors[itemId];
+                                goods.push([2, itemId, armor ? (armor.price || 0) : 0]);
+                            });
+
+                            command.parameters = [goods, originalParams[1] || false];
+                        } else {
+                            // RPG Maker MV format: [type, itemId, price, type, itemId, price, ...]
+                            const newParams = [];
+                            
+                            // Add items (type 0)
+                            this.currentShop.items.forEach(itemId => {
+                                const item = this.items[itemId];
+                                newParams.push(0, itemId, item ? (item.price || 0) : 0);
+                            });
+                            
+                            // Add weapons (type 1)
+                            this.currentShop.weapons.forEach(itemId => {
+                                const weapon = this.weapons[itemId];
+                                newParams.push(1, itemId, weapon ? (weapon.price || 0) : 0);
+                            });
+                            
+                            // Add armors (type 2)
+                            this.currentShop.armors.forEach(itemId => {
+                                const armor = this.armors[itemId];
+                                newParams.push(2, itemId, armor ? (armor.price || 0) : 0);
+                            });
+
+                            command.parameters = newParams;
+                        }
+                    } else {
+                        this.showStatus('Invalid shop command found', 'error');
+                        return;
+                    }
+
+                    // Mark this map as edited
+                    this.editedMaps.add(this.currentShop.mapId);
+
+                    // Update shop count display
+                    this.processAllShops();
+                    this.updateProjectStats();
+                    this.renderMapsPanel();
+                    
+                    this.showStatus(`Shop "${this.currentShop.eventName}" updated successfully! Map marked for export.`);
+                    
+                } catch (error) {
+                    this.showStatus('Error saving shop: ' + error.message, 'error');
+                    console.error('Save error:', error);
+                }
+            }
+
+            exportAllMaps() {
+                const editedMapsWithShops = Array.from(this.maps.values()).filter(mapInfo => 
+                    mapInfo.shops.length > 0 && this.editedMaps.has(mapInfo.id)
+                );
+                
+                if (editedMapsWithShops.length === 0) {
+                    this.showStatus('No edited maps with shops to export. Make changes to shops first.', 'error');
+                    return;
+                }
+
+                // Export only edited maps that contain shops
+                let exportCount = 0;
+                const totalMaps = editedMapsWithShops.length;
+
+                for (const mapInfo of editedMapsWithShops) {
+                    setTimeout(() => {
+                        try {
+                            const dataStr = JSON.stringify(mapInfo.data, null, 2);
+                            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                            const url = URL.createObjectURL(dataBlob);
+                            
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = url;
+                            downloadLink.download = mapInfo.fileName; // Remove "updated_" prefix
+                            downloadLink.click();
+                            
+                            URL.revokeObjectURL(url);
+                            
+                            exportCount++;
+                            if (exportCount === totalMaps) {
+                                this.showStatus(`All ${totalMaps} edited maps exported successfully!`);
+                            }
+                        } catch (error) {
+                            console.error(`Error exporting ${mapInfo.fileName}:`, error);
+                            this.showStatus(`Error exporting ${mapInfo.name}: ${error.message}`, 'error');
+                        }
+                    }, mapInfo.id * 100); // Small delay between downloads
+                }
+
+                this.showStatus(`Exporting ${totalMaps} edited maps...`, 'info');
+            }
+
+            exportSingleMap() {
+                if (!this.currentShop) {
+                    this.showStatus('No shop selected', 'error');
+                    return;
+                }
+
+                const mapInfo = this.maps.get(this.currentShop.mapId);
+                if (!mapInfo) {
+                    this.showStatus('Map data not found', 'error');
+                    return;
+                }
+
+                try {
+                    const dataStr = JSON.stringify(mapInfo.data, null, 2);
+                    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                    const url = URL.createObjectURL(dataBlob);
+                    
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = url;
+                    downloadLink.download = mapInfo.fileName; // Remove "updated_" prefix
+                    downloadLink.click();
+                    
+                    URL.revokeObjectURL(url);
+                    
+                    this.showStatus(`Map "${mapInfo.name}" exported successfully!`);
+                } catch (error) {
+                    this.showStatus('Error exporting map: ' + error.message, 'error');
+                    console.error('Export error:', error);
+                }
+            }
+        }
+
+        // Initialize the editor
+        const shopEditor = new RPGMakerProjectEditor();
+    </script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UFO Sightings - Evidence The Government Doesn't Want You To See</title>
+    <meta name="description" content="Em's documentation of UFO sightings and theories about government cover-ups, with particular focus on the connection to Enrico Mattei's mysterious death.">
+    <meta name="keywords" content="UFO, aliens, sightings, government cover-up, Mattei, conspiracy, extraterrestrial">
+    <meta name="author" content="Em">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            margin: 10px;
+            line-height: 1.5;
+            background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP/+AP///yH5BAEAAAEALAAAAAADAAMAAAIDBGKRADs=");
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #001100;
+            padding: 15px;
+            border: 8px ridge #00FF00;
+        }
+        
+        h1, h2, h3 {
+            color: #FF00FF;
+            text-align: center;
+            font-family: "Arial Black", sans-serif;
+            letter-spacing: 3px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px #0000FF;
+            border-bottom: 3px dotted #00FF00;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #002200;
+            padding: 8px;
+            border: 3px dashed #00FF00;
+            text-transform: uppercase;
+        }
+        
+        h2:hover {
+            background-color: #003300;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #00FFFF;
+            border-right: 5px solid #00FFFF;
+        }
+        
+        .ufo-section {
+            margin-bottom: 30px;
+            padding: 10px;
+            border-left: 4px double #00FFFF;
+            background-color: #001500;
+        }
+        
+        .section-content {
+            display: none;
+            padding: 15px;
+            background-color: #002200;
+            border: 2px dotted #00FF00;
+            margin-top: 15px;
+        }
+        
+        a {
+            color: #FFFF00;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            color: #FF00FF;
+            background-color: #003300;
+        }
+        
+        .blink {
+            animation: blinker 0.8s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .visitor-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #FFFF00;
+            background-color: #001100;
+            padding: 5px;
+            border: 2px inset #00FF00;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 160px;
+            background-color: #001100;
+            padding: 10px;
+            border: 3px outset #00FF00;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .sidebar h3 {
+            font-size: 16px;
+            margin-top: 0;
+            border: none;
+            border-bottom: 2px solid #00FF00;
+            text-align: left;
+        }
+        
+        .sidebar ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .sidebar li:before {
+            content: "► ";
+            color: #00FF00;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            border-top: 3px ridge #00FF00;
+            padding-top: 10px;
+            background-color: #002200;
+        }
+        
+        .pentagram {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #00FF00;
+            margin: 10px auto;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #00FFFF;
+            letter-spacing: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .ufo-image {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #002200;
+            border: 3px ridge #00FF00;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #00FFFF;
+        }
+        
+        .classified {
+            background-color: #002200;
+            padding: 5px;
+            border: 2px dashed #FF0000;
+            margin: 10px 0;
+            color: #FF0000;
+        }
+        
+        .sighting-rating {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #FFFF00;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .ufo-ascii {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #00FFFF;
+            margin: 10px auto;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+        
+        .evidence {
+            background-color: #003300;
+            padding: 10px;
+            border: 3px double #00FF00;
+            margin: 15px 0;
+        }
+        
+        .evidence-title {
+            font-weight: bold;
+            text-align: center;
+            color: #FFFF00;
+            margin-bottom: 5px;
+            font-size: 18px;
+            text-decoration: underline;
+        }
+        
+        .sightings-map {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .top-secret {
+            font-weight: bold;
+            color: #FF0000;
+            font-size: 20px;
+            text-align: center;
+            margin: 15px 0;
+            border: 3px double #FF0000;
+            padding: 5px;
+            background-color: #220000;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border: 2px solid #00FF00;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #00FF00;
+        }
+        
+        th {
+            background-color: #003300;
+            color: #FFFF00;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #002200;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pentagram">
+             .    .    .
+            /|\  /|\  /|\
+           / | \/ | \/ | \
+          /__|__\/|__\/|__\
+         /   |   \|   \|   \
+        /____|____\____\____\
+             |     |     |
+             |     |     |
+            / \   / \   / \
+           /   \ /   \ /   \
+        </div>
+
+        <h1>TOP SECRET: UFO SIGHTINGS ARCHIVE</h1>
+
+        <div class="ufo-ascii">
+               _.-')    ('-.._
+              /O O_.-") ("-._ O O\
+              \ .-'`    `'-.  / /
+               `          '`
+        </div>
+
+        <marquee class="blink" scrollamount="6" direction="left" behavior="alternate">⚠️⚠️⚠️ THE TRUTH IS OUT THERE!!! GOVERNMENT AGENTS MIGHT BE MONITORING THIS PAGE!!! ⚠️⚠️⚠️</marquee>
+        
+        <div class="visitor-counter">
+            ⊹⊱✫⊰⊹ Truth Seekers: <span class="blink">1947</span> ⊹⊱✫⊰⊹
+        </div>
+
+        <div class="sidebar">
+            <h3>~~*Back To*~~</h3>
+            <ul>
+                <li><a href="index.html">My Magical Diary</a></li>
+                <li><a href="mattei-conspiracy.html">Mattei Truth!!!</a></li>
+                <li><a href="cedrata.html">Cedrata Magick!!!</a></li>
+            </ul>
+            
+            <div class="pentagram">
+              *
+             /|\
+            /*|*\
+            \*|*/
+             \|/
+              v
+            </div>
+            
+            <h3>~*~*UFO Files*~*~</h3>
+            <ul>
+                <li><a href="#sightings">My Sightings!!!</a></li>
+                <li><a href="#evidence">Secret Evidence!!!</a></li>
+                <li><a href="#govt">Cover-Ups!!!</a></li>
+                <li><a href="#mattei">Mattei Connection!!!</a></li>
+            </ul>
+            
+            <div class="construction">
+                <img src="/api/placeholder/88/31" alt="Under Construction" />
+                <p>¡!¡!¡ ThE tRuTh<br>Is CoMiNg ¡!¡!¡</p>
+            </div>
+            
+            <div class="ufo-ascii">
+              _.,._
+            .'' | ''.
+           /    |    \
+          |     |     |
+          |,_,--|--,_,|
+           \_   |   _/
+            /'''|'''\
+           /    |    \
+            </div>
+        </div>
+        
+        <div class="introduction">
+            <div class="divider">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+            
+            <div class="top-secret">
+                WARNING: CLASSIFIED INFORMATION<br>
+                FOR YOUR EYES ONLY
+            </div>
+            
+            <p>*~*~* Welcome to my TOP-SECRET archive of UFO sightings and government cover-ups!!! *~*~* I, Em from Wimbledon, have been meticulously documenting extraterrestrial activity and the VAST CONSPIRACY to hide it from the public!!! This page contains SENSITIVE INFORMATION that certain agencies would prefer remained hidden!!!</p>
+            
+            <p>⚠️⚠️⚠️ SECURITY NOTICE!!! ⚠️⚠️⚠️ If you are a government agent viewing this page, I have already implemented COUNTER-SURVEILLANCE measures!!! Your IP address has been logged and sent to my secure network of fellow truth-seekers!!! (Not really, but it sounds cool and scary, doesn't it?)</p>
+            
+            <div class="ufo-image">
+                <img src="/api/placeholder/320/200" alt="UFO Sighting" />
+                <div class="image-caption">ACTUAL PHOTOGRAPH of a UFO I spotted over Wimbledon Common in 1995!!! (Skeptics might call it a "lens flare" or a "bird," but WE KNOW BETTER!!!)</div>
+            </div>
+            
+            <div class="classified">
+                <p>⚠️ IMPORTANT SECURITY MEASURES ⚠️</p>
+                <p>1. Wear protective headgear (aluminum foil works well) while viewing this page to prevent mind-scanning</p>
+                <p>2. Look over your shoulder regularly - they might be watching</p>
+                <p>3. If you hear strange clicking on your phone line or see black vans parked outside, DO NOT PANIC - it means you're getting close to the truth</p>
+                <p>4. Keep Cedrata Massoni nearby - its unique properties can interfere with alien tracking technology</p>
+            </div>
+            
+            <div class="divider">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+        </div>
+        
+        <h2 id="sightings" onclick="toggleSection('sightingsSection')">👽👽👽 MY PERSONAL UFO SIGHTINGS 👽👽👽</h2>
+        <div id="sightingsSection" class="section-content">
+            <div class="ufo-section">
+                <h3>Documented Extraterrestrial Encounters</h3>
+                
+                <p>Since beginning my investigations in 1993, I have personally witnessed NUMEROUS unidentified flying objects and strange phenomena that can ONLY be explained by extraterrestrial activity!!! Each sighting has been carefully documented with date, time, location, and detailed observations!!!</p>
+                
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Credibility</th>
+                    </tr>
+                    <tr>
+                        <td>May 17, 1994</td>
+                        <td>14:32</td>
+                        <td>Wimbledon Common</td>
+                        <td>Round, shiny object moving across the sky at incredible speed!!! Dad claims it was "just an airplane" but it moved in a non-airplane-like pattern!!!</td>
+                        <td>★★★★☆</td>
+                    </tr>
+                    <tr>
+                        <td>October 31, 1994</td>
+                        <td>23:15</td>
+                        <td>My backyard</td>
+                        <td>Strange lights hovering above the neighbor's house for approximately 3 minutes before vanishing suddenly!!! No sound!!! Definitely NOT a helicopter!!!</td>
+                        <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>January 12, 1995</td>
+                        <td>03:33</td>
+                        <td>Outside my window</td>
+                        <td>Woke up to see a pulsating blue light outside!!! Mister Whiskers was staring at it and making strange noises!!! Light disappeared when I tried to take a photo!!!</td>
+                        <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>April 7, 1995</td>
+                        <td>19:45</td>
+                        <td>Above school</td>
+                        <td>Triangle formation of lights moving silently across the sky during evening detention!!! Teacher didn't see it because she was marking papers!!! Three other students saw it but pretended not to!!!</td>
+                        <td>★★★★☆</td>
+                    </tr>
+                    <tr>
+                        <td>June 23, 1995</td>
+                        <td>14:20</td>
+                        <td>Park</td>
+                        <td>Cylindrical metallic object hovering behind clouds!!! Was drinking Cedrata at the time which might have attracted their attention!!! Object vanished when clouds moved!!!</td>
+                        <td>★★★☆☆</td>
+                    </tr>
+                    <tr>
+                        <td>September 19, 1995</td>
+                        <td>05:45</td>
+                        <td>From bedroom window</td>
+                        <td>Got up early and saw a disc-shaped object with flashing lights!!! Stayed visible for 7 minutes before accelerating away at IMPOSSIBLE SPEED!!! Left a greenish trail!!!</td>
+                        <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>February 2, 1996</td>
+                        <td>22:10</td>
+                        <td>Night sky</td>
+                        <td>Multiple lights in formation performing impossible maneuvers!!! They responded to my flashlight signals by changing color!!! DIRECT COMMUNICATION ESTABLISHED!!!</td>
+                        <td>★★★★★</td>
+                    </tr>
+                </table>
+                
+                <div class="sightings-map">
+                    <img src="/api/placeholder/400/300" alt="UFO Sightings Map" />
+                    <div class="image-caption">My hand-drawn map showing ALL UFO sightings in Wimbledon area!!! Red dots are my personal sightings, blue dots are reported by others, and green stars are where Cedrata was being consumed during sightings!!!</div>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">SIGHTING ANALYSIS</div>
+                    <p>After careful analysis of my sightings, I've noticed several SIGNIFICANT patterns:</p>
+                    <ul>
+                        <li>UFOs appear more frequently when I'm drinking Cedrata Massoni!!! (7 out of 11 total sightings)</li>
+                        <li>They often appear during astronomically significant times (full moons, meteor showers, etc.)</li>
+                        <li>Mister Whiskers (my familiar) always seems to detect their presence before I do!!!</li>
+                        <li>They frequently display impossible flight patterns that defy Earth physics!!!</li>
+                        <li>They seem to be monitoring specific locations in Wimbledon, possibly due to ley lines or hidden underground facilities!!!</li>
+                    </ul>
+                </div>
+                
+                <p>I've also collected testimonies from other witnesses, although MOST PEOPLE are too afraid to go on record due to fear of government retaliation or social ridicule!!! My friend Becca saw the triangle formation with me but later denied it after her dad (who works for a government contractor!!!) told her not to talk about it!!!</p>
+            </div>
+        </div>
+        
+        <h2 id="evidence" onclick="toggleSection('evidenceSection')">🔍🔍🔍 SECRET EVIDENCE & ALIEN TECHNOLOGY 🔍🔍🔍</h2>
+        <div id="evidenceSection" class="section-content">
+            <div class="ufo-section">
+                <h3>Proof of Extraterrestrial Presence on Earth</h3>
+                
+                <p>Despite the MASSIVE government cover-up, I have managed to collect SUBSTANTIAL evidence of alien presence and technology on Earth!!! Some of this evidence is TOO SENSITIVE to share even on the Hypernet, but I can reveal some of my findings to fellow truth-seekers!!!</p>
+                
+                <div class="evidence">
+                    <div class="evidence-title">PHYSICAL EVIDENCE</div>
+                    <p>In July 1995, after a major UFO sighting over Wimbledon Common, I found a small metallic object that I believe is of ALIEN ORIGIN!!! It's approximately 2cm in length, has unusual iridescent properties, and seems unusually light for its size!!! Dad claims it's "just a piece from a broken toy car," but I've tested it extensively:</p>
+                    <ul>
+                        <li>It sometimes feels slightly warm even in cold environments</li>
+                        <li>Mister Whiskers refuses to go near it</li>
+                        <li>It has microscopic patterns that don't match any known Earth manufacturing techniques (according to my magnifying glass)</li>
+                        <li>When placed next to Cedrata, the liquid seems to bubble more vigorously!!!</li>
+                    </ul>
+                </div>
+                
+                <div class="ufo-image">
+                    <img src="/api/placeholder/300/200" alt="Alien Artifact" />
+                    <div class="image-caption">The mysterious alien artifact I discovered!!! Notice the unusual reflective properties and non-Earthly design!!! (It might look like a hubcap fragment to the untrained eye, but it's DEFINITELY alien technology!!!)</div>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">ELECTROMAGNETIC ANOMALIES</div>
+                    <p>Using a homemade EMF detector (made from a radio, some wire, and a calculator), I've detected STRANGE ENERGY READINGS at several UFO hotspots around Wimbledon!!! The readings spike dramatically during my UFO sightings and remain elevated for hours afterward!!! This proves they are using some form of advanced electromagnetic technology!!!</p>
+                    <p>Additionally, after several sightings, I've noticed temporary disruptions to electronic devices in our house - the TV develops static, digital clocks reset, and once my Tamagotchi completely reset itself!!! Dad blames "power surges," but they ALWAYS coincide with UFO activity!!!</p>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">CROP FORMATIONS</div>
+                    <p>While not technically "crop circles" (as they weren't in crops), I've documented 3 instances of unusual patterns appearing in Wimbledon Common's grass after UFO sightings!!! These geometric patterns couldn't possibly have been created by humans overnight:</p>
+                    <ul>
+                        <li>November 1994: A perfect 3-meter diameter circle of flattened grass</li>
+                        <li>May 1995: An intricate pattern of interconnected triangles spanning about 5 meters</li>
+                        <li>August 1995: A straight line approximately 10 meters long where the grass appeared slightly discolored</li>
+                    </ul>
+                    <p>Park officials quickly dismissed these as "vandalism" or "natural phenomena," and the areas were roped off and then mowed within days!!! OBVIOUS COVER-UP!!!</p>
+                </div>
+                
+                <div class="ufo-image">
+                    <img src="/api/placeholder/350/200" alt="Grass Formation" />
+                    <div class="image-caption">One of the mysterious patterns I documented before it was destroyed by park officials!!! The geometric precision cannot be explained by conventional means!!!</div>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">AUDIO RECORDINGS</div>
+                    <p>Using my cassette recorder, I've captured STRANGE SOUNDS during UFO sightings that cannot be explained!!! These include unusual humming noises, electronic-sounding pulses, and what might be attempts at communication!!! The frequencies seem to affect Mister Whiskers, who behaves unusually when I play back the tapes!!!</p>
+                    <p>I've analyzed these recordings extensively and noticed patterns that could be a form of mathematical language!!! I'm still working on decoding it, but I believe it contains important messages about their intentions!!!</p>
+                </div>
+                
+                <p>I continue to collect and analyze evidence despite attempts to discredit my findings!!! My bedroom is now a secure research facility with all evidence carefully cataloged and protected from interference!!! My parents call it "hoarding junk," but THEY DON'T UNDERSTAND the importance of preserving these artifacts for future scientific study!!!</p>
+            </div>
+        </div>
+        
+        <h2 id="govt" onclick="toggleSection('govtSection')">🕵️‍♀️🕵️‍♀️🕵️‍♀️ GOVERNMENT COVER-UPS & CONSPIRACIES 🕵️‍♀️🕵️‍♀️🕵️‍♀️</h2>
+        <div id="govtSection" class="section-content">
+            <div class="ufo-section">
+                <h3>The Massive Conspiracy to Hide the Truth</h3>
+                
+                <p>It's ABUNDANTLY CLEAR that world governments are engaged in a MASSIVE COORDINATED EFFORT to hide the truth about extraterrestrial contact from the public!!! Through my extensive research and investigations, I have uncovered numerous examples of this cover-up operation!!!</p>
+                
+                <div class="classified">
+                    <p>⚠️ VIEWING THIS INFORMATION MAY PUT YOU ON A GOVERNMENT WATCH LIST ⚠️</p>
+                    <p>(But it's worth it for the TRUTH!!!)</p>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">LOCAL COVER-UP INCIDENTS</div>
+                    <ul>
+                        <li>After reporting my UFO sighting to the local newspaper in 1994, they published a small article about "unusual weather phenomena" instead of using my ACTUAL report about alien spacecraft!!!</li>
+                        <li>When I tried to present my UFO research for a school science project, my teacher suggested I do something "more scientific" instead!!! OBVIOUS CENSORSHIP!!!</li>
+                        <li>The mysterious men in the black car who parked outside our house for three hours after my major sighting in 1995!!! Dad said they were "just lost tourists," but WHO SITS IN A CAR FOR THREE HOURS WHEN THEY'RE LOST???</li>
+                        <li>The park warden who "accidentally" mowed over the grass formations within 24 hours of their appearance!!!</li>
+                        <li>The librarian who seemed SUSPICIOUSLY INTERESTED when I was checking out books on UFOs and government conspiracies!!!</li>
+                    </ul>
+                </div>
+                
+                <div class="ufo-image">
+                    <img src="/api/placeholder/320/200" alt="Suspicious Black Car" />
+                    <div class="image-caption">SURVEILLANCE VEHICLE photographed near our house after a major UFO sighting!!! Notice the ordinary appearance - a PERFECT disguise for government agents!!!</div>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">MEDIA MANIPULATION</div>
+                    <p>The mainstream media is CLEARLY under government control when it comes to UFO reporting!!! Every time there's a major sighting with multiple witnesses, it's portrayed as:</p>
+                    <ul>
+                        <li>"Weather balloons" or "atmospheric phenomena"</li>
+                        <li>"Military aircraft testing"</li>
+                        <li>"Optical illusions" or "mass hysteria"</li>
+                        <li>Or they simply DON'T REPORT IT AT ALL!!!</li>
+                    </ul>
+                    <p>I've been keeping a journal of news reports vs. actual sightings in our area, and there's a MASSIVE discrepancy!!! At least 87% of local sightings go completely unreported in mainstream media!!!</p>
+                </div>
+                
+                <div class="evidence">
+                    <div class="evidence-title">EDUCATIONAL SUPPRESSION</div>
+                    <p>The school system is DELIBERATELY designed to discourage independent thinking about extraterrestrial life!!! Evidence:</p>
+                    <ul>
+                        <li>Not a SINGLE mention of UFOs or alien contact in our science textbooks</li>
+                        <li>Teachers always dismiss UFO discussions as "science fiction" despite MOUNTAINS of evidence</li>
+                        <li>When I tried to form a "UFO Research Club" at school, it was rejected for being "not educational enough" while they approved a STAMP COLLECTING club!!! How is collecting bits of paper more educational than investigating interstellar visitors???</li>
+                        <li>The school library has removed MULTIPLE books about UFOs after I kept checking them out!!!</li>
+                    </ul>
+                </div>
+                
+                <div class="ufo-ascii">
+                       .
+                      / \
+                     /___\
+                    |=   =|
+                    |     |
+                    |     |
+                    |     |
+                    |     |
+                   /|##!##|\
+                  / |##!##| \
+                 /  |##!##|  \
+                |  / ^ | ^ \  |
+                | /  ( | )  \ |
+                |/   ( | )   \|
+                    ((   ))
+                   ((  :  ))
+                   ((  :  ))
+                    ((   ))
+                     (( ))
+                      ( )
+                       .
+                       .
+                </div>
+                
+                <p>I am CONTINUOUSLY monitoring government activity and collecting evidence of their cover-up operations!!! As part of my expedition with Bubba, we plan to visit several known UFO hotspots across Europe and possibly infiltrate some government facilities to gather more evidence!!! Bubba has contacts in the trucking industry who have reported seeing UNUSUAL CARGO being transported under military escort near certain "restricted" areas!!!</p>
+            </div>
+        </div>
+        

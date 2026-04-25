@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>▓▒░ V̸̦̊Ö̴̬́I̷̱͝D̵͙̈́ ̸̘͘W̶̹̏H̷͎̓I̶͉̓S̸̞̿P̷͖̈́E̴̤̓R̶̦̔S̶̤͆ ░▒▓</title>
+  <style>
+    @keyframes warp {
+      0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+      25% { transform: scale(1.2) rotate(5deg); filter: hue-rotate(90deg); }
+      50% { transform: scale(0.8) rotate(-5deg); filter: hue-rotate(180deg); }
+      75% { transform: scale(1.5) rotate(10deg); filter: hue-rotate(270deg); }
+      100% { transform: scale(1) rotate(0deg); filter: hue-rotate(360deg); }
+    }
+    
+    @keyframes textDistort {
+      0% { letter-spacing: normal; font-variation-settings: 'wght' 400; }
+      50% { letter-spacing: 8px; font-variation-settings: 'wght' 900; }
+      100% { letter-spacing: normal; font-variation-settings: 'wght' 400; }
+    }
+    
+    @keyframes flicker {
+      0% { opacity: 0.2; }
+      25% { opacity: 0.5; }
+      50% { opacity: 0.1; }
+      75% { opacity: 0.8; }
+      100% { opacity: 0.2; }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes shiftBackground {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+    
+    html {
+      cursor: none;
+    }
+    
+    body {
+      background-color: #000;
+      color: #333;
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-image: radial-gradient(#1a0000, #000);
+      transition: all 0.5s ease;
+    }
+    
+    body:hover {
+      background-color: #0a0a0a;
+    }
+    
+    #container {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    
+    .symbol {
+      position: absolute;
+      color: rgba(255, 0, 0, 0.2);
+      font-size: 20px;
+      animation: float 8s infinite ease-in-out;
+      opacity: 0.5;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+      pointer-events: none;
+    }
+    
+    .text-block {
+      margin: 50px;
+      padding: 20px;
+      background-color: rgba(10, 0, 0, 0.7);
+      border: 1px solid #300;
+      color: #600;
+      font-family: monospace;
+      font-size: 14px;
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      animation: textDistort 20s infinite alternate;
+      box-shadow: 0 0 20px rgba(100, 0, 0, 0.2);
+    }
+    
+    .text-block:hover {
+      transform: scale(1.5) rotate(3deg);
+      background-color: rgba(30, 0, 0, 0.9);
+      color: #f00;
+    }
+    
+    .flicker-text {
+      animation: flicker 3s infinite;
+      color: #500;
+      text-shadow: 0 0 5px #f00;
+    }
+    
+    h1 {
+      font-size: 4em;
+      font-weight: normal;
+      color: #300;
+      text-shadow: 0 0 10px #900;
+      letter-spacing: -2px;
+      animation: textDistort 8s infinite alternate;
+      margin-top: 50px;
+      font-family: serif;
+      mix-blend-mode: difference;
+    }
+    
+    .glyph-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .glyph {
+      position: absolute;
+      font-size: 30px;
+      color: rgba(255, 0, 0, 0.1);
+      mix-blend-mode: difference;
+      transition: all 2s ease;
+    }
+    
+    .glyph:hover {
+      color: rgba(255, 0, 0, 0.8);
+      transform: scale(2);
+    }
+    
+    #portal {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(#300, #000);
+      position: relative;
+      margin: 50px auto;
+      animation: pulse 10s infinite alternate;
+      box-shadow: 0 0 50px #500;
+      transition: all 0.5s ease;
+    }
+    
+    #portal:hover {
+      transform: scale(1.5) rotate(180deg);
+      filter: hue-rotate(180deg);
+    }
+    
+    .spiral {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: conic-gradient(from 0deg, transparent, rgba(100, 0, 0, 0.2), transparent, rgba(50, 0, 0, 0.3), transparent);
+      border-radius: 50%;
+      animation: warp 20s infinite linear;
+    }
+    
+    .rune {
+      position: absolute;
+      font-size: 40px;
+      color: #400;
+      opacity: 0.5;
+      transform: rotate(45deg);
+    }
+    
+    .resizing-element {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #300, #000);
+      margin: 20px;
+      transition: all 0.2s ease;
+      display: inline-block;
+      animation: pulse 5s infinite alternate;
+    }
+    
+    .sudden-resize {
+      transition: none;
+    }
+    
+    .cryptic-text {
+      font-family: monospace;
+      color: #400;
+      font-size: 12px;
+      letter-spacing: 2px;
+      line-height: 1.5;
+      max-width: 80%;
+      margin: 30px auto;
+      text-align: justify;
+      animation: textDistort 30s infinite alternate;
+    }
+    
+    .ascii-art {
+      font-family: monospace;
+      color: #600;
+      font-size: 10px;
+      white-space: pre;
+      line-height: 1;
+      margin: 30px auto;
+      max-width: 80%;
+    }
+    
+    #background-noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    
+    #cursor {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid #600;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: all 0.1s ease;
+    }
+    
+    .weird-button {
+      background: none;
+      border: 1px solid #500;
+      color: #600;
+      padding: 10px 20px;
+      font-family: monospace;
+      font-size: 16px;
+      margin: 20px;
+      cursor: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .weird-button:hover {
+      background-color: #200;
+      color: #900;
+      transform: scale(1.2) skew(10deg);
+    }
+    
+    .hidden-message {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      color: #600;
+      font-size: 12px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #300;
+      width: 200px;
+      z-index: 10;
+    }
+    
+    .reveal-trigger:hover + .hidden-message {
+      opacity: 1;
+    }
+    
+    .distortion-area {
+      position: relative;
+      width: 80%;
+      height: 100px;
+      margin: 30px auto;
+      background: linear-gradient(45deg, #100, #000);
+      overflow: hidden;
+    }
+    
+    .distortion-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #400;
+      font-size: 24px;
+      white-space: nowrap;
+      mix-blend-mode: difference;
+    }
+    
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 20px;
+      color: #500;
+      margin: 30px;
+      letter-spacing: 5px;
+      text-shadow: 0 0 5px #300;
+    }
+    
+    .inverted {
+      filter: invert(1);
+      mix-blend-mode: difference;
+    }
+    
+    .mirror {
+      transform: scaleX(-1);
+    }
+    
+    .upside-down {
+      transform: scaleY(-1);
+    }
+    
+    .sigil-container {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    .sigil {
+      width: 80px;
+      height: 80px;
+      margin: 0 20px;
+      background-color: #100;
+      position: relative;
+      transition: all 1s ease;
+    }
+    
+    .sigil:before, .sigil:after {
+      content: '';
+      position: absolute;
+      background-color: #300;
+    }
+    
+    .sigil-1:before {
+      width: 100%;
+      height: 2px;
+      top: 50%;
+      left: 0;
+      transform: rotate(45deg);
+    }
+    
+    .sigil-1:after {
+      width: 2px;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      transform: rotate(45deg);
+    }
+    
+    .sigil-2 {
+      transform: rotate(45deg);
+    }
+    
+    .sigil-2:before {
+      width: 100%;
+      height: 2px;
+      top: 50%;
+      left: 0;
+    }
+    
+    .sigil-2:after {
+      width: 2px;
+      height: 100%;
+      top: 0;
+      left: 50%;
+    }
+    
+    .sigil-3 {
+      border-radius: 50%;
+    }
+    
+    .sigil-3:before {
+      width: 80%;
+      height: 2px;
+      top: 50%;
+      left: 10%;
+    }
+    
+    .sigil-3:after {
+      width: 2px;
+      height: 80%;
+      top: 10%;
+      left: 50%;
+    }
+    
+    .sigil:hover {
+      transform: scale(1.5) rotate(180deg);
+      background-color: #400;
+    }
+    
+    #vortex {
+      width: 400px;
+      height: 400px;
+      margin: 50px auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .vortex-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: conic-gradient(from 0deg, #000, #300, #000, #200, #000);
+      animation: warp 20s infinite linear;
+      opacity: 0.5;
+    }
+    
+    .blinking-element {
+      animation: flicker 0.2s infinite;
+    }
+    
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(5px, 5px); }
+      50% { transform: translate(-5px, -5px); }
+      75% { transform: translate(-5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+    
+    .shake-element {
+      animation: shake 0.2s infinite;
+    }
+    
+    .distortion-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.3;
+      mix-blend-mode: multiply;
+      animation: shiftBackground 30s infinite linear;
+    }
+    
+    .blur-area {
+      filter: blur(5px);
+      transition: filter 0.5s ease;
+    }
+    
+    .blur-area:hover {
+      filter: blur(0);
+    }
+    
+    .strange-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 10px;
+      margin: 30px auto;
+      max-width: 80%;
+    }
+    
+    .grid-item {
+      height: 50px;
+      background-color: #100;
+      border: 1px solid #300;
+      transition: all 0.3s ease;
+    }
+    
+    .grid-item:hover {
+      transform: scale(1.5);
+      background-color: #300;
+      z-index: 10;
+    }
+    
+    .shadow-text {
+      color: transparent;
+      text-shadow: 0 0 5px rgba(100, 0, 0, 0.8);
+      font-size: 30px;
+      letter-spacing: 5px;
+      margin: 30px;
+    }
+    
+    #nightmare-section {
+      width: 100%;
+      padding: 50px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nightmare-text {
+      position: relative;
+      z-index: 3;
+      color: #500;
+      font-size: 16px;
+      letter-spacing: 2px;
+      max-width: 80%;
+      margin: 0 auto;
+      text-align: center;
+      transform: skew(5deg);
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div id="background-noise"></div>
+  <div class="distortion-overlay"></div>
+  
+  <div id="container">
+    <div class="glyph-container" id="glyphContainer"></div>
+    
+    <h1 class="flicker-text">V̸̦̊Ö̴̬́I̷̱͝D̵͙̈́ ̸̘͘W̶̹̏H̷͎̓I̶͉̓S̸̞̿P̷͖̈́E̴̤̓R̶̦̔S̶̤͆</h1>
+    
+    <div class="text-block">
+      Ţ̷̨̢̡̧̨̨̫̫̺̙̪̲͓̗̥̟͚̠̞̞̘̻̝̫̭͔̥̝̪̩͓̼̞̝̬͇̌͐̌̿̾̈́̄͆̉̌̂̇̀̅͐̉̀̽̀̆͛̀̿̌̅͗̑̒͗̇̇͗̕̚̚͜͝͝͝͝ĥ̸̡̧̛̛̥̼̙̻̮͔̝̯̝̮͈̜̮̟̲̫̘̖̱̻̣̣̭̞̭̬̱̲̣͚̗̜̦̈́̉͒̔̍̈́̒̎̓͐̒̃̌̑̾̈́̇̿̏̔̉̊̈́̍̊̎̃͆̋̎͐̆̅̔́͑͊͂͐̋̆͗̕͘͝͝ͅę̷̡̛̛̥̤̭͉̝̮̝̭͙̫͖̱̣̳̞̟̻̯͍̳̞̦̩̞̲̦̰̜̫͑̎̈̇͑̄̎̈̐̾͑͆̌̊͆͑̃̎̌͋́̉̌͒̋͐͊̚̚͝͝ ̶̨̨̨̩͙͚̘̝̩̬̦̟̙̯͖̤̘̮̼͓̬̩̖̯̝̰̯̦̆̄̈́̒̿̅̿̔̉̄̈́̐̍͌̎̾̈́̿͒̂͑̃͂̓͂͑̐̓̏͛̆̔͛̂̏͂̋̑͒̆̆̇͆͑́͘̕͘̕̚͜͠͝P̸̨̡̢̖̱͕̬̞̯̖̪̫̩͔̺̫̮̺̱̘̖͔̬͍̦̘̖̩̥̖̦̰̋̌̑͗̾̆̍̌̔̊̾̃̃̅̄̅̉̎͂̊̆̃̄̌̋̽̀̑̅͒̓̒̔̾̌̾̈́̋̋̅̏͗̕͜͜͠͝͝͝͝͝͝à̸̝̟̫̞̞̻̯̝̻̬̻̦̖̘̱̗͈̰̭̞̯̥̗̳͇͔͇̳̦̫̥͈̭̮̯̲͖͓̂̆̑̏̍̒̌͌̌̓̄̇̓̒̈́̃̈́̂̉̑̾̿̓͐̃́͑̾͌̏͘͘͜͝͝ͅT̵̡̨̨̧̧̢̡̩̯̝̻̖̦̰̗̠͖̣̙̝͙̺̤̙̹͍̫̪͈͈̺̠̼̰̪̰̝͚͇̟̪̭̀̓͆̀̌̿̓̈́̏̄̎̋̑̿̉̏̿̓̒̓̓̄̂͂̂͊̈̆̑͐̈́̋͂́̇̎̌̐̚͘̚͝Ḩ̶̧̢̧̤̗̯̣̹̺̠̩̞̭̰̖̰̪̰̤̫̝̤̟̱̰̮̺̻̰͓̲̰̼͎͖̀̀̔̆̈́̈́̄̐͌̿̌̆̀̓̉̇̈́̑̑͒̊̑̑̏̇̔͋̍͑̽̆̈́̚̚͘͜͝͠ͅ ̴̜̯̐̐͊̐͆̂̆̽̅͗͆̈̽̄̌̈́̐̓̓̿̎̊̑̃̆̏̒͒͘̚̚̚͘̚͝͝͝b̸̢̧̛̜̯̝̹̻̲̻̝͈̺̟̤̥̮̜̙̪̗̞͙̜̞̫̰̲͖̝̮̽̓̃̂̏̂͗̂̈̒̓̄̈̒̌̃̄̈́̅̑͋̇̿̋͛̏̾̎̒̓̐̇̅̏͋̽̔̓͆̌̂̕̚̕͜͝͝͝͝͝͝Ȩ̸̧̲̞̖̼̠͎̱̠̥̟̘̯̗̺͙̣͓͎̥̞̤̭̬̰̺̠͇͎̣̥̙̘̠͔̦̦̪̘̳̪̙̘̱̥̱̩͛̊̉̿̆̈͐͂̏̄̈́̽̍̋̎̎̀͛̍͗̑͑͐̋̈́̄̈́̑̏̔̒͜͝͝͝ͅͅy̶̛̛̗̟̠̳̣̬̦̪̫͎̪̦̺̖̱̜̠̥̙̤͎̰̬̬̫̱̖̝̰̝̦̣̳̦̰̲̗̰̙̳̹̱̲̆͛̓̎̐̀̌̍̿̋̆̃̐͛̔͘͜͝ͅͅǫ̴̧̧̛̛̬̟̜̜̠̥̟̩̘͎̘̖̹̳̗̝̘̯̬̗̱̣̼̠͍͓̘̜͍͙̬̞̤͓̗͍̤̝̇̋̆̀͆̂̌̈́̾͊̅͆̄̈́̈́̇͆̆̑̂̉̋̆̅̅̂̈̎̓͛̔͂̈́͑͐̕̚͘͜͝͝ͅͅn̶̢̡̠̘̤̙̩̞̤̮̬͉̯̼̪̣̰͍̮̗͎͔̤̘̞̳̗̬̯̺̬̰̘̰̤͕̍̄͆͗̓̿̽͛̀̋̏̂̈́̎͌̀̏͋̅͌̈̓̐̋̒͋̋͛̓̈́̀̚̚̚̚͜͝D̵̛̙̠̖͕͍̗̱̖̜͉̞̜̯͚̿̏̓͂͋̌̒̒̈́̉̊̈́͐̇̏̎̾̔͌̋̋̿́̚̚͜
+    </div>
+    
+    <div id="portal">
+      <div class="spiral"></div>
+      <div class="spiral" style="animation-delay: -5s;"></div>
+      <div class="spiral" style="animation-delay: -10s;"></div>
+      <div class="rune" style="top: 40%; left: 45%;">Ψ</div>
+      <div class="rune" style="top: 20%; left: 30%;">Ω</div>
+      <div class="rune" style="top: 60%; left: 60%;">⌀</div>
+    </div>
+    
+    <div class="cryptic-text">
+      01001110 01100101 01110110 01100101 01110010 00100000 01100001 01110100 01110100 01100101 01101101 01110000 01110100 00100000 01110100 01101111 00100000 01110010 01100101 01100001 01100100 00100000 01110100 01101000 01100101 01110011 01100101 00100000 01110111 01101111 01110010 01100100 01110011 00100000 01100110 01101111 01110010 00100000 01110100 01101000 01100101 01111001 00100000 01100001 01110010 01100101 00100000 01101110 01101111 01110100 00100000 01101101 01100101 01100001 01101110 01110100 00100000 01100110 01101111 01110010 00100000 01101101 01101111 01110010 01110100 01100001 01101100 00100000 01100101 01111001 01100101 01110011
+    </div>
+    
+    <div class="ascii-art">
+      .-.   .-.     .--.                                        
+      : :.-.: :    : .-'                                        
+      : :: :: :    : `;.-..-..-.,-.,-.,-. .--. .--.  .--.  .--. 
+      : `' `' ;    : :; :: :; :: ,. :: ,. :' .; :: ..'`._-.'_.-'
+       `.,`.,'     :__;:_;`.__.':_;:_;:_;  `._. :: :   `.__.':  
+                                          .-. : :                
+                                          `._.' :
+    </div>
+    
+    <div class="sigil-container">
+      <div class="sigil sigil-1"></div>
+      <div class="sigil sigil-2"></div>
+      <div class="sigil sigil-3"></div>
+    </div>
+    
+    <div class="vertical-text mirror">
+      ᏇᏂᎥᏕᎮᏋᏒᏕ
+    </div>
+    
+    <div class="blur-area">
+      <div class="text-block inverted">
+        T̶h̶e̶ ̶a̶n̶c̶i̶e̶n̶t̶ ̶o̶n̶e̶s̶ ̶w̶a̶t̶c̶h̶ ̶f̶r̶o̶m̶ ̶b̶e̶y̶o̶n̶d̶ ̶t̶h̶e̶ ̶v̶e̶i̶l̶.̶ ̶T̶h̶e̶y̶ ̶h̶a̶v̶e̶ ̶a̶l̶w̶a̶y̶s̶ ̶b̶e̶e̶n̶ ̶w̶a̶t̶c̶h̶i̶n̶g̶.̶ ̶T̶h̶e̶y̶ ̶s̶e̶e̶ ̶t̶h̶r̶o̶u̶g̶h̶ ̶t̶h̶e̶ ̶c̶r̶a̶c̶k̶s̶ ̶i̶n̶ ̶t̶h̶e̶ ̶w̶a̶l̶l̶s̶ ̶o̶f̶ ̶r̶e̶a̶l̶i̶t̶y̶.̶
+      </div>
+    </div>
+    
+    <div class="strange-grid">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item

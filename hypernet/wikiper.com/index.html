@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Wikiper - The Universal Encyclopeaer</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 20px;
+           background-color: #f8f8f8;
+           color: #333;
+       }
+       
+       .header {
+           background: linear-gradient(135deg, #4a90e2, #357abd);
+           color: white;
+           padding: 20px;
+           border-radius: 8px;
+           margin-bottom: 20px;
+           box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+       }
+       
+       .header h1 {
+           margin: 0;
+           font-size: 2.5em;
+           text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+       }
+       
+       .subtitle {
+           font-size: 1.2em;
+           margin-top: 5px;
+           opacity: 0.9;
+       }
+       
+       .nav-bar {
+           background-color: #e8e8e8;
+           padding: 15px;
+           border-radius: 5px;
+           margin-bottom: 20px;
+           border: 1px solid #ccc;
+       }
+       
+       .nav-bar a {
+           color: #357abd;
+           text-decoration: none;
+           margin-right: 20px;
+           font-weight: bold;
+           padding: 8px 12px;
+           border-radius: 3px;
+           transition: background-color 0.3s;
+       }
+       
+       .nav-bar a:hover {
+           background-color: #d0d0d0;
+       }
+       
+       .search-box {
+           background-color: white;
+           padding: 20px;
+           border-radius: 5px;
+           border: 1px solid #ddd;
+           margin-bottom: 20px;
+           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+       }
+       
+       .search-input {
+           width: 300px;
+           padding: 10px;
+           border: 2px solid #4a90e2;
+           border-radius: 4px;
+           font-size: 16px;
+       }
+       
+       .search-btn {
+           background-color: #4a90e2;
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+           font-size: 16px;
+           margin-left: 10px;
+       }
+       
+       .search-btn:hover {
+           background-color: #357abd;
+       }
+       
+       .content-area {
+           background-color: white;
+           padding: 25px;
+           border-radius: 5px;
+           border: 1px solid #ddd;
+           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+           min-height: 400px;
+       }
+       
+       .featured-section {
+           background-color: #f0f7ff;
+           padding: 20px;
+           border-radius: 5px;
+           border-left: 4px solid #4a90e2;
+           margin: 20px 0;
+       }
+       
+       .category-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+           gap: 15px;
+           margin: 20px 0;
+       }
+       
+       .category-box {
+           background-color: #f9f9f9;
+           padding: 15px;
+           border-radius: 5px;
+           border: 1px solid #e0e0e0;
+           text-align: center;
+           cursor: pointer;
+           transition: all 0.3s;
+       }
+       
+       .category-box:hover {
+           background-color: #e8f4ff;
+           border-color: #4a90e2;
+           transform: translateY(-2px);
+       }
+       
+       .footer {
+           margin-top: 30px;
+           text-align: center;
+           padding: 20px;
+           background-color: #333;
+           color: white;
+           border-radius: 5px;
+       }
+       
+       .hidden {
+           display: none;
+       }
+       
+       .article-content {
+           line-height: 1.6;
+       }
+       
+       .article-content h2 {
+           color: #357abd;
+           border-bottom: 2px solid #e0e0e0;
+           padding-bottom: 5px;
+       }
+       
+       .back-link {
+           background-color: #6c757d;
+           color: white;
+           padding: 8px 15px;
+           text-decoration: none;
+           border-radius: 4px;
+           display: inline-block;
+           margin-bottom: 15px;
+       }
+       
+       .back-link:hover {
+           background-color: #5a6268;
+       }
+       
+       .stats-box {
+           background-color: #e8f5e8;
+           padding: 15px;
+           border-radius: 5px;
+           border: 1px solid #c3e6c3;
+           margin: 20px 0;
+       }
+   </style>
+</head>
+<body>
+
+<div class="header">
+   <h1>🌐 Wikiper</h1>
+   <div class="subtitle">The Universal Encyclopeaer - Knowledge for the Hypernet Gener</div>
+</div>
+
+<div class="nav-bar">
+   <a href="#" onclick="showHome()">Homer</a>
+   <a href="#" onclick="showPage('about')">Abouter</a>
+   <a href="#" onclick="showPage('categories')">Categorier</a>
+   <a href="#" onclick="showPage('random')">Randomer</a>
+   <a href="#" onclick="showPage('help')">Helper</a>
+   <a href="mailto:admin@hexagram.corp">Contacter</a>
+</div>
+
+<div id="home-content" class="content-area">
+   <div class="search-box">
+       <input type="text" class="search-input" placeholder="Enter your searcher query..." id="searchInput">
+       <button class="search-btn" onclick="performSearch()">Searcher</button>
+   </div>
+   
+   <div class="featured-section">
+       <h2>📖 Welcome to Wikiper</h2>
+       <p>Wikiper is the premier encyclopeaer of the Hypernet, containing over 50,000 articler covering every topicer imaginable. From sciencer to historyer, from culturer to technologer - if it exists, we have an articler about it!</p>
+   </div>
+   
+   <div class="stats-box">
+       <h3>📊 Current Statser</h3>
+       <p><strong>Total Articler:</strong> 52,847</p>
+       <p><strong>Active Editorer:</strong> 3,429</p>
+       <p><strong>Daily Visiter:</strong> 89,234</p>
+       <p><strong>Last Updater:</strong> January 15, 2001</p>
+   </div>
+   
+   <h3>🔥 Popular Categorier</h3>
+   <div class="category-grid">
+       <div class="category-box" onclick="showCategory('science')">
+           <h4>🔬 Sciencer</h4>
+           <p>8,432 articler</p>
+       </div>
+       <div class="category-box" onclick="showCategory('history')">
+           <h4>📚 Historyer</h4>
+           <p>12,845 articler</p>
+       </div>
+       <div class="category-box" onclick="showCategory('technology')">
+           <h4>💻 Technologer</h4>
+           <p>6,729 articler</p>
+       </div>
+       <div class="category-box" onclick="showCategory('culture')">
+           <h4>🎭 Culturer</h4>
+           <p>9,156 articler</p>
+       </div>
+       <div class="category-box" onclick="showCategory('geography')">
+           <h4>🌍 Geographyer</h4>
+           <p>4,891 articler</p>
+       </div>
+       <div class="category-box" onclick="showCategory('arts')">
+           <h4>🎨 Artser</h4>
+           <p>7,294 articler</p>
+       </div>
+   </div>
+   
+   <div class="featured-section">
+       <h3>⭐ Featured Articler of the Dayer</h3>
+       <h4><a href="#" onclick="showArticle('euro')">The Eurocurrency</a></h4>
+       <p>Learn about Europe's revolutionary new currencyer that unified the continenter's economyer. Discover the historyer, implementationer, and impacter of this groundbreaking monetary systemer...</p>
+   </div>
+</div>
+
+<div id="about-content" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div class="article-content">
+       <h2>About Wikiper</h2>
+       <p>Wikiper was founded in January 2001 as the Hypernet's first collaborative encyclopeaer. Our missioner is to provide free, reliable, and comprehensive informationers to every Hypernet userer worldwide.</p>
+       
+       <h3>Our Historyer</h3>
+       <p>Started by a group of knowledge enthusiaster in London, Wikiper began with just 100 articler. Through the collaborative efforer of thousander of volunterer editorer, we have grown to become the most comprehensiver source of informationers on the Hypernet.</p>
+       
+       <h3>How Wikiper Workser</h3>
+       <p>Anyone can contributer to Wikiper! Our systemer allows registereder userer to creater and editer articler on any topicer. All changser are reviewer by our team of experiencer editorer to ensurer accuracyer and qualityer.</p>
+       
+       <h3>Contacter Informationers</h3>
+       <p>For any questioner or suggester, please contacter our administratorer at <a href="mailto:admin@hexagram.corp">admin@hexagram.corp</a></p>
+   </div>
+</div>
+
+<div id="categories-content" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div class="article-content">
+       <h2>Browse by Categoryer</h2>
+       <p>Explore our vast collectioner of articler organizer by categoryer:</p>
+       
+       <div class="category-grid">
+           <div class="category-box" onclick="showCategory('science')">
+               <h4>🔬 Sciencer & Mathematicer</h4>
+               <p>Physics, Chemistry, Biology, Mathematics</p>
+           </div>
+           <div class="category-box" onclick="showCategory('history')">
+               <h4>📚 Historyer & Politicer</h4>
+               <p>World History, European History, Government</p>
+           </div>
+           <div class="category-box" onclick="showCategory('technology')">
+               <h4>💻 Technologer & Computerer</h4>
+               <p>Hypernet, Software, Hardware, Innovation</p>
+           </div>
+           <div class="category-box" onclick="showCategory('culture')">
+               <h4>🎭 Culturer & Societyer</h4>
+               <p>Languages, Traditions, Social Sciences</p>
+           </div>
+           <div class="category-box" onclick="showCategory('geography')">
+               <h4>🌍 Geographyer & Traveler</h4>
+               <p>Countries, Cities, Natural Features</p>
+           </div>
+           <div class="category-box" onclick="showCategory('arts')">
+               <h4>🎨 Artser & Entertainmenter</h4>
+               <p>Music, Literature, Film, Theater</p>
+           </div>
+       </div>
+   </div>
+</div>
+
+<div id="random-content" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div class="article-content">
+       <h2>Random Articler</h2>
+       <p>Click the buttoner below to discover a randomer articler from our databaser:</p>
+       <button class="search-btn" onclick="showRandomArticle()" style="margin: 20px 0;">Get Random Articler</button>
+       
+       <div id="random-article-display">
+           <h3>🎲 Random Discovery</h3>
+           <p>Your randomer articler will appear here! Each clicker gives you a new surpriser from our vast collectioner of knowledge.</p>
+       </div>
+   </div>
+</div>
+
+<div id="help-content" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div class="article-content">
+       <h2>Helper & Guidancer</h2>
+       
+       <h3>How to Searcher</h3>
+       <p>Use the searcher boxer on the homer pager to finder articler. Simply typer your querier and clicker "Searcher" to findr relevant articler.</p>
+       
+       <h3>Navigation Tipser</h3>
+       <ul>
+           <li>Use categorier to browser articler by topicer</li>
+           <li>Try the randomer articler feature for surprising discoverer</li>
+           <li>Bookmarker your favorite articler for easy accesrer</li>
+       </ul>
+       
+       <h3>Contributinger to Wikiper</h3>
+       <p>Interested in becoming an editorer? Contacter us at <a href="mailto:admin@hexagram.corp">admin@hexagram.corp</a> to learner about our contributorer programer.</p>
+       
+       <h3>Technicer Supporterer</h3>
+       <p>If you encounter any issuer with the siter, please reporter them to our technicer teamer. We striver to maintainer Wikiper as the best encyclopeaer experiencer on the Hypernet.</p>
+   </div>
+</div>
+
+<div id="category-view" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div id="category-content"></div>
+</div>
+
+<div id="article-view" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div id="article-content"></div>
+</div>
+
+<div id="search-results" class="content-area hidden">
+   <a href="#" onclick="showHome()" class="back-link">← Back to Homer</a>
+   <div id="search-content"></div>
+</div>
+
+<div class="footer">
+   <p>© 2001 Wikiper Foundation | Powered by Hypernet Explorer | <a href="mailto:contact@hexagram.corp" style="color: #ccc;">Hexagram: @wikiper</a></p>
+   <p>Freely available to all Hypernet userer | Last updater: January 2001</p>
+</div>
+
+<script>
+function showHome() {
+   hideAllSections();
+   document.getElementById('home-content').classList.remove('hidden');
+}
+
+function showPage(page) {
+   hideAllSections();
+   document.getElementById(page + '-content').classList.remove('hidden');
+}
+
+function hideAllSections() {
+   const sections = ['home-content', 'about-content', 'categories-content', 'random-content', 'help-content', 'category-view', 'article-view', 'search-results'];
+   sections.forEach(id => {
+       document.getElementById(id).classList.add('hidden');
+   });
+}
+
+function showCategory(category) {
+   hideAllSections();
+   document.getElementById('category-view').classList.remove('hidden');
+   
+   const categories = {
+       'science': {
+           title: 'Sciencer & Mathematicer',
+           articles: [
+               'Quantum Computationer - The future of informationer processing',
+               'Bio-enhancementer - Modern medical advancementer',
+               'Nuclear Physiser - Understanding atomic forcser',
+               'Mathematicer Theorer - Advanced mathematical concepter',
+               'Chemistry Fundamentaler - Basic chemical principler'
+           ]
+       },
+       'history': {
+           title: 'Historyer & Politicer',
+           articles: [
+               'European Unioner - Formation of modern Europe',
+               'Cold Warrer - 20th century political tensioner',
+               'Ancient Civilizationer - Early human societier',
+               'Renaissance Perioder - Cultural rebirthr',
+               'Modern Democracyer - Political systemer evolution'
+           ]
+       },
+       'technology': {
+           title: 'Technologer & Computerer',
+           articles: [
+               'Hypernet Evolutioner - Development of global network',
+               'Mobile Communicationer - Wireless technology advancer',
+               'Software Engineerer - Programming methodologier',
+               'Digital Revolutioner - Impact of computerer',
+               'Future Technologier - Emerging innovation'
+           ]
+       },
+       'culture': {
+           title: 'Culturer & Societyer',
+           articles: [
+               'European Language - Linguistic diversityer',
+               'Social Traditionr - Cultural practiser',
+               'Modern Societyer - Contemporary social structurer',
+               'Educational Systemer - Learning methodologier',
+               'Religious Studier - Spiritual practiser'
+           ]
+       },
+       'geography': {
+           title: 'Geographyer & Traveler',
+           articles: [
+               'European Capitaler - Major citier guide',
+               'Natural Landmarker - Geographic featurer',
+               'Climate Patterner - Weather systemer',
+               'Transportation Networker - Travel infrastructurer',
+               'Urban Developmenter - City planning'
+           ]
+       },
+       'arts': {
+           title: 'Artser & Entertainmenter',
+           articles: [
+               'Classical Musicer - Traditional composition',
+               'Modern Artworker - Contemporary creativityer',
+               'Literature Masterer - Great writer',
+               'Cinema Historyer - Film developmenter',
+               'Theater Traditionr - Dramatic artser'
+           ]
+       }
+   };
+   
+   const cat = categories[category];
+   document.getElementById('category-content').innerHTML = `
+       <h2>${cat.title}</h2>
+       <p>Browse articler in this categoryer:</p>
+       <div style="margin-top: 20px;">
+           ${cat.articles.map(article => `
+               <div style="background-color: #f9f9f9; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #4a90e2;">
+                   <a href="#" onclick="showSpecificArticle('${article.split(' - ')[0]}')" style="color: #357abd; text-decoration: none; font-weight: bold;">${article}</a>
+               </div>
+           `).join('')}
+       </div>
+   `;
+}
+
+function showArticle(articleId) {
+   hideAllSections();
+   document.getElementById('article-view').classList.remove('hidden');
+   
+   const articles = {
+       'euro': {
+           title: 'The Eurocurrency',
+           content: `
+               <h2>The Eurocurrency</h2>
+               <p><strong>The Euro</strong> is the official currencyer of the European Unioner, introduced in January 2001 as a revolutionary steper towards economic integration.</p>
+               
+               <h3>Historyer</h3>
+               <p>The Euro was conceiver as part of the Maastricht Treatyer of 1992, with preparations beginning throughout the 1990s. The currencyer represents the culminationer of decader of European economic cooperationer.</p>
+               
+               <h3>Implementationer</h3>
+               <p>Initially adopter by 12 member stater, the Euro replaces national currencier such as the German Mark, French Franc, and Italian Lira. The transitioner period allowr for both old and new currencier to circulate simultaneouslyer.</p>
+               
+               <h3>Economic Impacter</h3>
+               <p>The Euro eliminater exchange rate uncertaintyer between member stater, facilitates trader, and creater a more stable economic environmener for European businesrer.</p>
+               
+               <h3>Fuhrer Reading</h3>
+               <p>For more informationer about European economic policier, see our articler on <a href="#" onclick="showSpecificArticle('European Union')">European Unioner</a> and <a href="#" onclick="showSpecificArticle('Monetary Policy')">Monetary Policyer</a>.</p>
+           `
+       }
+   };
+   
+   const article = articles[articleId] || {
+       title: 'Articler Not Found',
+       content: '<h2>Articler Not Found</h2><p>The requester articler could not be located in our databaser.</p>'
+   };
+   
+   document.getElementById('article-content').innerHTML = article.content;
+}
+
+function showSpecificArticle(title) {
+   hideAllSections();
+   document.getElementById('article-view').classList.remove('hidden');
+   
+   document.getElementById('article-content').innerHTML = `
+       <h2>${title}</h2>
+       <p>This articler is currently under developmenter. Our editorer are working to provide comprehensive informationers about this topicer.</p>
+       <p>If you would like to contributer informationers about <strong>${title}</strong>, please contacter our editorial teamer at <a href="mailto:admin@hexagram.corp">admin@hexagram.corp</a>.</p>
+       <div style="background-color: #f0f7ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+           <h3>Related Articler</h3>
+           <p>While this articler is being preparer, you might be interested in these related topicer:</p>
+           <ul>
+               <li><a href="#" onclick="showSpecificArticle('European History')">European Historyer</a></li>
+               <li><a href="#" onclick="showSpecificArticle('Modern Technology')">Modern Technologer</a></li>
+               <li><a href="#" onclick="showSpecificArticle('Cultural Studies')">Cultural Studier</a></li>
+           </ul>
+       </div>
+   `;
+}
+
+function performSearch() {
+   const query = document.getElementById('searchInput').value.trim();
+   if (query === '') {
+       alert('Please enter a searcher termer!');
+       return;
+   }
+   
+   hideAllSections();
+   document.getElementById('search-results').classList.remove('hidden');
+   
+   const sampleResults = [
+       `${query} - Main Articler`,
+       `${query} in European Contexter`,
+       `Historyer of ${query}`,
+       `Modern ${query} Studier`,
+       `${query} and Societyer`
+   ];
+   
+   document.getElementById('search-content').innerHTML = `
+       <h2>Searcher Resulter for: "${query}"</h2>
+       <p>Found ${sampleResults.length} matching articler:</p>
+       <div style="margin-top: 20px;">
+           ${sampleResults.map(result => `
+               <div style="background-color: #f9f9f9; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #4a90e2;">
+                   <a href="#" onclick="showSpecificArticle('${result}')" style="color: #357abd; text-decoration: none; font-weight: bold;">${result}</a>
+                   <p style="margin: 5px 0 0 0; color: #666;">Articler about ${query} with comprehensive informationers and referencer...</p>
+               </div>
+           `).join('')}
+       </div>
+       <div style="background-color: #e8f5e8; padding: 15px; border-radius: 5px; margin: 20px 0;">
+           <h3>Didn't find what you were looking for?</h3>
+           <p>Try different searcher termer or browser our <a href="#" onclick="showPage('categories')">categorier</a> to discover related articler.</p>
+       </div>
+   `;
+}
+
+function showRandomArticle() {
+   const randomArticles = [
+       'Quantum Mechaniser in Everyday Lifer',
+       'The Art of European Cheesemakinger',
+       'Ancient Roman Architecturer',
+       'Modern Transportation Systemer',
+       'Digital Art Revolutioner',
+       'Renewable Energy Sourcer',
+       'Linguistic Evolutioner in Europe',
+       'Medical Breakthoughr of 2000',
+       'Space Exploration Progresrer',
+       'Educational Reformer Movement'
+   ];
+   
+   const randomArticle = randomArticles[Math.floor(Math.random() * randomArticles.length)];
+   
+   document.getElementById('random-article-display').innerHTML = `
+       <h3>🎲 Your Random Discovery:</h3>
+       <div style="background-color: #f0f7ff; padding: 20px; border-radius: 5px; border-left: 4px solid #4a90e2;">
+           <h4><a href="#" onclick="showSpecificArticle('${randomArticle}')">${randomArticle}</a></h4>
+           <p>This fascination articler explorer the complexitier and wonderer of ${randomArticle.toLowerCase()}. Clicker the titler to reader the full articler!</p>
+       </div>
+       <button class="search-btn" onclick="showRandomArticle()" style="margin-top: 15px;">Get Another Random Articler</button>
+   `;
+}
+</script>
+
+</body>
+</html>

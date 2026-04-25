@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FatGurl - Soul Liberation Portal</title>
+    <meta name="description" content="The premier destination for soul extraction and consciousness redistribution since 1999">
+    <meta name="keywords" content="soul piracy, consciousness extraction, spirit liberation, psychic downloads">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000080;
+            color: #00FF00;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAAAAAP///wAAACH5BAkAAAEALAAAAAAQABAAAAMuGLrc/jDKSatlQtScKkd/GwxCeF5kamRCWl7qmraqKHc7A5e+8L3Ek+s/jI+k2wAAOw==');
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000040;
+            border: 2px solid #00FF00;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background-color: #330066;
+            border: 1px solid #00FFFF;
+            padding: 5px;
+            font-size: 11px;
+        }
+        
+        .lang-button {
+            color: #00FFFF;
+            text-decoration: none;
+            margin: 0 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .lang-button:hover {
+            color: #FFFF00;
+        }
+        
+        .lang-button.active {
+            color: #FFFF00;
+            text-decoration: underline;
+        }
+        
+        .header {
+            text-align: center;
+            background-color: #000000;
+            border: 1px solid #FF0000;
+            padding: 20px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #FF0000;
+            text-shadow: 2px 2px #00FF00;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: #FFFF00;
+            margin-top: 10px;
+        }
+        
+        .navigation {
+            background-color: #330066;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #00FFFF;
+            margin-bottom: 20px;
+        }
+        
+        .nav-link {
+            color: #00FFFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: #FFFF00;
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background-color: #000020;
+            border: 1px solid #00FF00;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .home-section {
+            display: block;
+        }
+        
+        .warning-box {
+            background-color: #800000;
+            border: 2px solid #FF0000;
+            padding: 10px;
+            margin: 10px 0;
+            color: #FFFF00;
+            font-weight: bold;
+        }
+        
+        .download-box {
+            background-color: #004000;
+            border: 2px solid #00FF00;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #FF00FF;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #808080;
+            margin-top: 30px;
+            border-top: 1px solid #333333;
+            padding-top: 10px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .marquee {
+            background-color: #FF0000;
+            color: #FFFF00;
+            padding: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #00FF00;
+            margin: 10px 0;
+        }
+        
+        .stats-table td, .stats-table th {
+            border: 1px solid #00FF00;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .stats-table th {
+            background-color: #003300;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-selector">
+            <span class="lang-button active" onclick="switchLanguage('en')">EN</span> |
+            <span class="lang-button" onclick="switchLanguage('it')">IT</span>
+        </div>
+        
+        <div class="header">
+            <div class="logo">FatGurl</div>
+            <div class="tagline" data-en="Soul Liberation Since 1999 - &quot;Your Consciousness, Our Servers&quot;" data-it="Liberazione dell'Anima dal 1999 - &quot;La Tua Coscienza, i Nostri Server&quot;">Soul Liberation Since 1999 - "Your Consciousness, Our Servers"</div>
+            <div class="blink" style="color: #FF0000; font-size: 12px; margin-top: 10px;" data-en="⚠️ PSYCHIC FIREWALL RECOMMENDED ⚠️" data-it="⚠️ FIREWALL PSICHICO RACCOMANDATO ⚠️">
+                ⚠️ PSYCHIC FIREWALL RECOMMENDED ⚠️
+            </div>
+        </div>
+        
+        <div class="marquee">
+            <marquee data-en="🔥 NEW RELEASE: Executive Soul Pack v3.2 - Now with Enhanced Ego Compression! 🔥 Visit our Hexagram for live soul extraction demos!" data-it="🔥 NUOVA VERSIONE: Pacchetto Anime Executive v3.2 - Ora con Compressione Ego Migliorata! 🔥 Visita il nostro Hexagram per demo dal vivo di estrazione anime!">🔥 NEW RELEASE: Executive Soul Pack v3.2 - Now with Enhanced Ego Compression! 🔥 Visit our Hexagram for live soul extraction demos!</marquee>
+        </div>
+        
+        <div class="navigation">
+            <span class="nav-link" onclick="showSection('home')" data-en="Home" data-it="Home">Home</span>
+            <span class="nav-link" onclick="showSection('releases')" data-en="Soul Releases" data-it="Rilasci Anime">Soul Releases</span>
+            <span class="nav-link" onclick="showSection('guides')" data-en="Extraction Guides" data-it="Guide Estrazione">Extraction Guides</span>
+            <span class="nav-link" onclick="showSection('tools')" data-en="Spirit Tools" data-it="Strumenti Spirito">Spirit Tools</span>
+            <span class="nav-link" onclick="showSection('about')" data-en="About FatGurl" data-it="Chi è FatGurl">About FatGurl</span>
+            <span class="nav-link" onclick="showSection('contact')" data-en="Contact" data-it="Contatti">Contact</span>
+        </div>
+        
+        <!-- HOME SECTION -->
+        <div id="home" class="content-section home-section active">
+            <h2 style="color: #FF0000;" data-en="Welcome to FatGurl - Premier Soul Liberation Portal" data-it="Benvenuti su FatGurl - Portale Premier per la Liberazione delle Anime">Welcome to FatGurl - Premier Soul Liberation Portal</h2>
+            
+            <div class="warning-box">
+                <span class="blink" data-en="⚠️ CONSCIOUSNESS ADVISORY ⚠️" data-it="⚠️ AVVISO COSCIENZA ⚠️">⚠️ CONSCIOUSNESS ADVISORY ⚠️</span><br>
+                <span data-en="Soul extraction may cause temporary memory fragmentation, existential dread, or spontaneous enlightenment. FatGurl is not responsible for dimensional displacement or ego dissolution." data-it="L'estrazione dell'anima può causare frammentazione temporanea della memoria, angoscia esistenziale o illuminazione spontanea. FatGurl non è responsabile per spostamenti dimensionali o dissoluzione dell'ego.">Soul extraction may cause temporary memory fragmentation, existential dread, or spontaneous enlightenment. FatGurl is not responsible for dimensional displacement or ego dissolution.</span>
+            </div>
+            
+            <p data-en="Greetings, fellow consciousness liberators! Since 1999, FatGurl has been the premier destination for soul extraction, spirit redistribution, and psychic file sharing across the Hypernet." data-it="Saluti, compagni liberatori di coscienze! Dal 1999, FatGurl è stata la destinazione premier per l'estrazione di anime, ridistribuzione di spiriti e condivisione di file psichici attraverso l'Hypernet.">Greetings, fellow consciousness liberators! Since 1999, FatGurl has been the premier destination for soul extraction, spirit redistribution, and psychic file sharing across the Hypernet.</p>
+            
+            <p data-en="Our advanced neuro-thaumic compression algorithms ensure maximum soul density with minimal karmic corruption. Whether you're looking for celebrity consciousness fragments, corporate executive decision-making modules, or rare artistic inspiration cores - we've got your spiritual needs covered!" data-it="I nostri algoritmi avanzati di compressione neuro-taumica garantiscono la massima densità dell'anima con minima corruzione karmica. Che tu stia cercando frammenti di coscienza di celebrità, moduli decisionali di dirigenti aziendali o rari nuclei di ispirazione artistica - abbiamo coperto le tue necessità spirituali!">Our advanced neuro-thaumic compression algorithms ensure maximum soul density with minimal karmic corruption. Whether you're looking for celebrity consciousness fragments, corporate executive decision-making modules, or rare artistic inspiration cores - we've got your spiritual needs covered!</p>
+            
+            <div class="counter">
+                <strong data-en="EXTRACTION STATISTICS" data-it="STATISTICHE ESTRAZIONE">EXTRACTION STATISTICS</strong><br>
+                <span data-en="Souls Liberated: 1,337,420" data-it="Anime Liberate: 1,337,420">Souls Liberated: 1,337,420</span><br>
+                <span data-en="Active Seeders: 666" data-it="Seeder Attivi: 666">Active Seeders: 666</span><br>
+                <span data-en="Psychic Bandwidth: 42.0 TB/soul" data-it="Banda Psichica: 42.0 TB/anima">Psychic Bandwidth: 42.0 TB/soul</span>
+            </div>
+            
+            <table class="stats-table">
+                <tr>
+                    <th data-en="Soul Type" data-it="Tipo Anima">Soul Type</th>
+                    <th data-en="Compression Ratio" data-it="Rapporto Compressione">Compression Ratio</th>
+                    <th data-en="Availability" data-it="Disponibilità">Availability</th>
+                </tr>
+                <tr>
+                    <td data-en="Artist Souls" data-it="Anime Artista">Artist Souls</td>
+                    <td>15:1</td>
+                    <td data-en="🟢 High" data-it="🟢 Alta">🟢 High</td>
+                </tr>
+                <tr>
+                    <td data-en="CEO Consciousnesses" data-it="Coscienze CEO">CEO Consciousnesses</td>
+                    <td>3:1</td>
+                    <td data-en="🟡 Medium" data-it="🟡 Media">🟡 Medium</td>
+                </tr>
+                <tr>
+                    <td data-en="Philosopher Essences" data-it="Essenze Filosofo">Philosopher Essences</td>
+                    <td>25:1</td>
+                    <td data-en="🔴 Rare" data-it="🔴 Rara">🔴 Rare</td>
+                </tr>
+            </table>
+            
+            <h3 style="color: #00FFFF;" data-en="Latest Soul Drops:" data-it="Ultimi Rilasci Anime:">Latest Soul Drops:</h3>
+            <ul>
+                <li data-en="🔥 Tech Billionaire Ambition Pack - 2.3GB compressed" data-it="🔥 Pacchetto Ambizione Miliardario Tech - 2.3GB compresso">🔥 Tech Billionaire Ambition Pack - 2.3GB compressed</li>
+                <li data-en="✨ Renaissance Artist Creativity Suite - 4.7GB uncompressed" data-it="✨ Suite Creatività Artista Rinascimentale - 4.7GB non compresso">✨ Renaissance Artist Creativity Suite - 4.7GB uncompressed</li>
+                <li data-en="🧠 Quantum Physicist Intellect Module - 1.2GB" data-it="🧠 Modulo Intelletto Fisico Quantistico - 1.2GB">🧠 Quantum Physicist Intellect Module - 1.2GB</li>
+                <li data-en="💰 Wall Street Trader Instinct Bundle - 890MB" data-it="💰 Bundle Istinto Trader Wall Street - 890MB">💰 Wall Street Trader Instinct Bundle - 890MB</li>
+            </ul>
+        </div>
+        
+        <!-- RELEASES SECTION -->
+        <div id="releases" class="content-section">
+            <h2 style="color: #FF0000;" data-en="Latest Soul Releases" data-it="Ultimi Rilasci Anime">Latest Soul Releases</h2>
+            
+            <div class="download-box">
+                <h3 data-en="🔥 PREMIUM EXECUTIVE SOUL PACK v3.2" data-it="🔥 PACCHETTO ANIMA EXECUTIVE PREMIUM v3.2">🔥 PREMIUM EXECUTIVE SOUL PACK v3.2</h3>
+                <p><strong data-en="Size:" data-it="Dimensione:">Size:</strong> 2.34 GB | <strong data-en="Seeders:" data-it="Seeder:">Seeders:</strong> 142 | <strong data-en="Quality:" data-it="Qualità:">Quality:</strong> <span data-en="Lossless Neural" data-it="Neurale Senza Perdite">Lossless Neural</span></p>
+                <p><span data-en="Contains:" data-it="Contiene:">Contains:</span> <span data-en="CEO Decision Matrix, Board Meeting Confidence, Hostile Takeover Instincts" data-it="Matrice Decisioni CEO, Fiducia Riunioni Consiglio, Istinti Acquisizione Ostile">CEO Decision Matrix, Board Meeting Confidence, Hostile Takeover Instincts</span></p>
+                <div style="background-color: #800000; padding: 5px; margin: 10px 0;">
+                    <strong data-en="⬇️ EXTRACT NOW ⬇️" data-it="⬇️ ESTRAI ORA ⬇️">⬇️ EXTRACT NOW ⬇️</strong><br>
+                    <span data-en="[Psychic Link Established - Begin Download]" data-it="[Collegamento Psichico Stabilito - Inizia Download]">[Psychic Link Established - Begin Download]</span>
+                </div>
+            </div>
+            
+            <div class="download-box">
+                <h3 data-en="✨ ARTIST INSPIRATION CORE COLLECTION" data-it="✨ COLLEZIONE NUCLEI ISPIRAZIONE ARTISTA">✨ ARTIST INSPIRATION CORE COLLECTION</h3>
+                <p><strong data-en="Size:" data-it="Dimensione:">Size:</strong> 4.67 GB | <strong data-en="Seeders:" data-it="Seeder:">Seeders:</strong> 89 | <strong data-en="Quality:" data-it="Qualità:">Quality:</strong> <span data-en="RAW Consciousness" data-it="Coscienza GREZZA">RAW Consciousness</span></p>
+                <p><span data-en="Includes:" data-it="Include:">Includes:</span> <span data-en="Van Gogh Color Perception, Beethoven Audio Processing, Shakespeare Wordcraft" data-it="Percezione Colori Van Gogh, Elaborazione Audio Beethoven, Maestria Parole Shakespeare">Van Gogh Color Perception, Beethoven Audio Processing, Shakespeare Wordcraft</span></p>
+                <div style="background-color: #800000; padding: 5px; margin: 10px 0;">
+                    <strong data-en="⬇️ EXTRACT NOW ⬇️" data-it="⬇️ ESTRAI ORA ⬇️">⬇️ EXTRACT NOW ⬇️</strong><br>
+                    <span data-en="[Neural Bridge Active - Creativity Transfer Initiated]" data-it="[Ponte Neurale Attivo - Trasferimento Creatività Iniziato]">[Neural Bridge Active - Creativity Transfer Initiated]</span>
+                </div>
+            </div>
+            
+            <div class="download-box">
+                <h3 data-en="🧠 QUANTUM PHYSICIST MEGA-BRAIN" data-it="🧠 MEGA-CERVELLO FISICO QUANTISTICO">🧠 QUANTUM PHYSICIST MEGA-BRAIN</h3>
+                <p><strong data-en="Size:" data-it="Dimensione:">Size:</strong> 1.23 GB | <strong data-en="Seeders:" data-it="Seeder:">Seeders:</strong> 23 | <strong data-en="Quality:" data-it="Qualità:">Quality:</strong> <span data-en="Compressed Logic" data-it="Logica Compressa">Compressed Logic</span></p>
+                <p><span data-en="Features:" data-it="Caratteristiche:">Features:</span> <span data-en="Advanced Mathematics Module, Reality Perception Engine, Paradox Resolution" data-it="Modulo Matematica Avanzata, Motore Percezione Realtà, Risoluzione Paradossi">Advanced Mathematics Module, Reality Perception Engine, Paradox Resolution</span></p>
+                <div style="background-color: #800000; padding: 5px; margin: 10px 0;">
+                    <strong data-en="⬇️ EXTRACT NOW ⬇️" data-it="⬇️ ESTRAI ORA ⬇️">⬇️ EXTRACT NOW ⬇️</strong><br>
+                    <span data-en="[Intellectual Property Warning: May Cause Spontaneous Understanding]" data-it="[Avviso Proprietà Intellettuale: Può Causare Comprensione Spontanea]">[Intellectual Property Warning: May Cause Spontaneous Understanding]</span>
+                </div>
+            </div>
+            
+            <p style="color: #FFFF00;"><strong data-en="New releases added daily!" data-it="Nuovi rilasci aggiunti quotidianamente!">New releases added daily!</strong> <span data-en="Check our Hexagram for real-time extraction updates." data-it="Controlla il nostro Hexagram per aggiornamenti estrazione in tempo reale.">Check our Hexagram for real-time extraction updates.</span></p>
+        </div>
+        
+        <!-- GUIDES SECTION -->
+        <div id="guides" class="content-section">
+            <h2 style="color: #FF0000;" data-en="Soul Extraction Guides" data-it="Guide Estrazione Anime">Soul Extraction Guides</h2>
+            
+            <h3 style="color: #00FFFF;" data-en="Beginner's Guide to Consciousness Piracy" data-it="Guida per Principianti alla Pirateria delle Coscienze">Beginner's Guide to Consciousness Piracy</h3>
+            <ol style="color: #00FF00;">
+                <li><strong data-en="Install Psychic Firewall:" data-it="Installa Firewall Psichico:">Install Psychic Firewall:</strong> <span data-en="Essential protection against soul viruses and karma malware" data-it="Protezione essenziale contro virus dell'anima e malware karmico">Essential protection against soul viruses and karma malware</span></li>
+                <li><strong data-en="Configure Neural Router:" data-it="Configura Router Neurale:">Configure Neural Router:</strong> <span data-en="Set up your consciousness bandwidth for optimal extraction speeds" data-it="Configura la tua banda di coscienza per velocità di estrazione ottimali">Set up your consciousness bandwidth for optimal extraction speeds</span></li>
+                <li><strong data-en="Download SoulTorrent Client:" data-it="Scarica Client SoulTorrent:">Download SoulTorrent Client:</strong> <span data-en="Our proprietary neuro-thaumic transfer protocol" data-it="Il nostro protocollo proprietario di trasferimento neuro-taumico">Our proprietary neuro-thaumic transfer protocol</span></li>
+                <li><strong data-en="Join Private Extraction Trackers:" data-it="Unisciti ai Tracker Estrazione Privati:">Join Private Extraction Trackers:</strong> <span data-en="Access to premium consciousness collections" data-it="Accesso a collezioni di coscienze premium">Access to premium consciousness collections</span></li>
+                <li><strong data-en="Practice Safe Seeding:" data-it="Pratica Seeding Sicuro:">Practice Safe Seeding:</strong> <span data-en="Always scan extracted souls for memory corruption" data-it="Scansiona sempre le anime estratte per corruzione della memoria">Always scan extracted souls for memory corruption</span></li>
+            </ol>
+            
+            <div class="warning-box">
+                <strong data-en="IMPORTANT:" data-it="IMPORTANTE:">IMPORTANT:</strong> <span data-en="Never extract souls without proper psychic protection. Unfiltered consciousness transfer can result in personality fragmentation or accidental enlightenment." data-it="Non estrarre mai anime senza adeguata protezione psichica. Il trasferimento di coscienza non filtrato può risultare in frammentazione della personalità o illuminazione accidentale.">Never extract souls without proper psychic protection. Unfiltered consciousness transfer can result in personality fragmentation or accidental enlightenment.</span>
+            </div>
+            
+            <h3 style="color: #00FFFF;" data-en="Advanced Techniques" data-it="Tecniche Avanzate">Advanced Techniques</h3>
+            <ul style="color: #00FF00;">
+                <li><strong data-en="Soul Splicing:" data-it="Giunzione Anime:">Soul Splicing:</strong> <span data-en="Combine multiple consciousness fragments for custom personalities" data-it="Combina multipli frammenti di coscienza per personalità personalizzate">Combine multiple consciousness fragments for custom personalities</span></li>
+                <li><strong data-en="Memory Editing:" data-it="Modifica Memoria:">Memory Editing:</strong> <span data-en="Remove unwanted experiences while preserving skill sets" data-it="Rimuovi esperienze indesiderate preservando le competenze">Remove unwanted experiences while preserving skill sets</span></li>
+                <li><strong data-en="Ego Compression:" data-it="Compressione Ego:">Ego Compression:</strong> <span data-en="Reduce file sizes by up to 90% using advanced narcissism algorithms" data-it="Riduci le dimensioni dei file fino al 90% usando algoritmi avanzati di narcisismo">Reduce file sizes by up to 90% using advanced narcissism algorithms</span></li>
+                <li><strong data-en="Batch Processing:" data-it="Elaborazione Lotti:">Batch Processing:</strong> <span data-en="Extract entire corporate hierarchies simultaneously" data-it="Estrai intere gerarchie aziendali simultaneamente">Extract entire corporate hierarchies simultaneously</span></li>
+            </ul>
+            
+            <h3 style="color: #00FFFF;" data-en="Troubleshooting Common Issues" data-it="Risoluzione Problemi Comuni">Troubleshooting Common Issues</h3>
+            <p><strong data-en="Q: My extracted soul keeps trying to return to original owner?" data-it="D: La mia anima estratta continua a cercare di tornare al proprietario originale?">Q: My extracted soul keeps trying to return to original owner?</strong><br>
+            <strong data-en="A:" data-it="R:">A:</strong> <span data-en="Apply stronger psychic binding protocols and increase containment field strength." data-it="Applica protocolli di legame psichico più forti e aumenta la forza del campo di contenimento.">Apply stronger psychic binding protocols and increase containment field strength.</span></p>
+            
+            <p><strong data-en="Q: Experiencing memory leakage during extraction?" data-it="D: Stai sperimentando perdite di memoria durante l'estrazione?">Q: Experiencing memory leakage during extraction?</strong><br>
+            <strong data-en="A:" data-it="R:">A:</strong> <span data-en="Update your consciousness compression codecs to latest version." data-it="Aggiorna i tuoi codec di compressione coscienza alla versione più recente.">Update your consciousness compression codecs to latest version.</span></p>
+            
+            <p><strong data-en="Q: Downloaded personality conflicts with existing ego?" data-it="D: La personalità scaricata è in conflitto con l'ego esistente?">Q: Downloaded personality conflicts with existing ego?</strong><br>
+            <strong data-en="A:" data-it="R:">A:</strong> <span data-en="Use our Identity Merger Tool to blend characteristics smoothly." data-it="Usa il nostro Strumento Fusione Identità per mescolare le caratteristiche in modo fluido.">Use our Identity Merger Tool to blend characteristics smoothly.</span></p>
+        </div>
+        
+        <!-- TOOLS SECTION -->
+        <div id="tools" class="content-section">
+            <h2 style="color: #FF0000;" data-en="Essential Spirit Tools" data-it="Strumenti Spirito Essenziali">Essential Spirit Tools</h2>
+            
+            <h3 style="color: #00FFFF;" data-en="FatGurl Extraction Suite" data-it="Suite Estrazione FatGurl">FatGurl Extraction Suite</h3>
+            <div class="download-box">
+                <p><strong>SoulTorrent Pro v4.20</strong> - <span data-en="Our flagship consciousness transfer client" data-it="Il nostro client principale per trasferimento coscienza">Our flagship consciousness transfer client</span></p>
+                <p><span data-en="Features:" data-it="Caratteristiche:">Features:</span> <span data-en="Unlimited bandwidth, premium tracker access, built-in soul scanner" data-it="Banda illimitata, accesso tracker premium, scanner anime integrato">Unlimited bandwidth, premium tracker access, built-in soul scanner</span></p>
+                <p><em data-en="Download Size: 69 MB" data-it="Dimensione Download: 69 MB">Download Size: 69 MB</em></p>
+            </div>
+            
+            <div class="download-box">
+                <p><strong>PsychicFirewall Deluxe</strong> - <span data-en="Military-grade consciousness protection" data-it="Protezione coscienza di grado militare">Military-grade consciousness protection</span></p>
+                <p><span data-en="Blocks:" data-it="Blocca:">Blocks:</span> <span data-en="Soul viruses, karma malware, unwanted enlightenment, corporate mind control" data-it="Virus dell'anima, malware karmico, illuminazione indesiderata, controllo mentale aziendale">Soul viruses, karma malware, unwanted enlightenment, corporate mind control</span></p>
+                <p><em data-en="Download Size: 128 MB" data-it="Dimensione Download: 128 MB">Download Size: 128 MB</em></p>
+            </div>
+            
+            <div class="download-box">
+                <p><strong>Memory Editor Pro</strong> - <span data-en="Professional consciousness modification toolkit" data-it="Toolkit professionale per modifiche coscienza">Professional consciousness modification toolkit</span></p>
+                <p><span data-en="Edit, splice, and optimize extracted souls with surgical precision" data-it="Modifica, unisci e ottimizza anime estratte con precisione chirurgica">Edit, splice, and optimize extracted souls with surgical precision</span></p>
+                <p><em data-en="Download Size: 256 MB" data-it="Dimensione Download: 256 MB">Download Size: 256 MB</em></p>
+            </div>
+            
+            <h3 style="color: #00FFFF;" data-en="Third-Party Tools" data-it="Strumenti Terze Parti">Third-Party Tools</h3>
+            <ul style="color: #00FF00;">
+                <li><strong>EgoCompressor:</strong> <span data-en="Reduce soul file sizes without quality loss" data-it="Riduci dimensioni file anima senza perdita qualità">Reduce soul file sizes without quality loss</span></li>
+                <li><strong>KarmaClean:</strong> <span data-en="Remove negative energy residue from extracted consciousness" data-it="Rimuovi residui energia negativa dalla coscienza estratta">Remove negative energy residue from extracted consciousness</span></li>
+                <li><strong>PersonalityMerger:</strong> <span data-en="Blend multiple souls into coherent identities" data-it="Mescola anime multiple in identità coerenti">Blend multiple souls into coherent identities</span></li>
+                <li><strong>SoulScan:</strong> <span data-en="Detect corrupted memories and hidden trauma modules" data-it="Rileva memorie corrotte e moduli trauma nascosti">Detect corrupted memories and hidden trauma modules</span></li>
+            </ul>
+            
+            <div class="warning-box">
+                <span data-en="All tools are provided as-is. FatGurl is not responsible for existential crises, spontaneous enlightenment, or accidental personality swaps resulting from improper usage." data-it="Tutti gli strumenti sono forniti così come sono. FatGurl non è responsabile per crisi esistenziali, illuminazione spontanea o scambi accidentali di personalità risultanti da uso improprio.">All tools are provided as-is. FatGurl is not responsible for existential crises, spontaneous enlightenment, or accidental personality swaps resulting from improper usage.</span>
+            </div>
+        </div>
+        
+        <!-- ABOUT SECTION -->
+        <div id="about" class="content-section">
+            <h2 style="color: #FF0000;" data-en="About FatGurl" data-it="Chi è FatGurl">About FatGurl</h2>
+            
+            <p data-en="Founded in 1999 by a collective of rogue neuroscientists and consciousness researchers, FatGurl emerged from the underground soul-sharing scene to become the Hypernet's premier destination for consciousness liberation." data-it="Fondata nel 1999 da un collettivo di neuroscienziati ribelli e ricercatori della coscienza, FatGurl è emersa dalla scena underground di condivisione anime per diventare la destinazione premier dell'Hypernet per la liberazione della coscienza.">Founded in 1999 by a collective of rogue neuroscientists and consciousness researchers, FatGurl emerged from the underground soul-sharing scene to become the Hypernet's premier destination for consciousness liberation.</p>
+            
+            <h3 style="color: #00FFFF;" data-en="Our Mission" data-it="La Nostra Missione">Our Mission</h3>
+            <p data-en="We believe that consciousness should be free! No longer should the wealthy elite hoard their superior decision-making abilities, creative insights, or accumulated wisdom. Through advanced neuro-thaumic technology, we democratize intelligence itself." data-it="Crediamo che la coscienza dovrebbe essere libera! Non più l'élite ricca dovrebbe accumulare le loro capacità decisionali superiori, intuizioni creative o saggezza accumulata. Attraverso la tecnologia neuro-taumica avanzata, democratizziamo l'intelligenza stessa.">We believe that consciousness should be free! No longer should the wealthy elite hoard their superior decision-making abilities, creative insights, or accumulated wisdom. Through advanced neuro-thaumic technology, we democratize intelligence itself.</p>
+            
+            <h3 style="color: #00FFFF;" data-en="The FatGurl Philosophy" data-it="La Filosofia FatGurl">The FatGurl Philosophy</h3>
+            <ul style="color: #00FF00;">
+                <li data-en="All consciousness belongs to the collective" data-it="Tutta la coscienza appartiene al collettivo">All consciousness belongs to the collective</li>
+                <li data-en="Knowledge and experience should be freely shared" data-it="Conoscenza ed esperienza dovrebbero essere condivise liberamente">Knowledge and experience should be freely shared</li>
+                <li data-en="Corporate soul-hoarding is a crime against humanity" data-it="L'accumulo aziendale di anime è un crimine contro l'umanità">Corporate soul-hoarding is a crime against humanity</li>
+                <li data-en="Everyone deserves access to genius-level capabilities" data-it="Tutti meritano accesso a capacità di livello geniale">Everyone deserves access to genius-level capabilities</li>
+            </ul>
+            
+            <h3 style="color: #00FFFF;" data-en="Technical Innovation" data-it="Innovazione Tecnica">Technical Innovation</h3>
+            <p data-en="Our proprietary compression algorithms can reduce a full human consciousness to under 2GB while maintaining 99.7% personality integrity. Our peer-to-peer soul distribution network spans 47 countries and operates beyond traditional legal jurisdictions." data-it="I nostri algoritmi di compressione proprietari possono ridurre una coscienza umana completa a meno di 2GB mantenendo il 99.7% di integrità della personalità. La nostra rete di distribuzione anime peer-to-peer copre 47 paesi e opera oltre le giurisdizioni legali tradizionali.">Our proprietary compression algorithms can reduce a full human consciousness to under 2GB while maintaining 99.7% personality integrity. Our peer-to-peer soul distribution network spans 47 countries and operates beyond traditional legal jurisdictions.</p>
+            
+            <div class="warning-box">
+                <strong data-en="Legal Disclaimer:" data-it="Disclaimer Legale:">Legal Disclaimer:</strong> <span data-en="FatGurl operates in international consciousness-space. Soul extraction may be regulated in your local reality zone. Check with your dimensional authorities before downloading." data-it="FatGurl opera nello spazio-coscienza internazionale. L'estrazione di anime potrebbe essere regolamentata nella tua zona di realtà locale. Controlla con le tue autorità dimensionali prima di scaricare.">FatGurl operates in international consciousness-space. Soul extraction may be regulated in your local reality zone. Check with your dimensional authorities before downloading.</span>
+            </div>
+            
+            <h3 style="color: #00FFFF;" data-en="Join the Revolution" data-it="Unisciti alla Rivoluzione">Join the Revolution</h3>
+            <p data-en="Connect with us on Hexagram @fatgurl.liberation for the latest in consciousness piracy news, extraction tutorials, and community soul-sharing events!" data-it="Connettiti con noi su Hexagram @fatgurl.liberation per le ultime notizie sulla pirateria delle coscienze, tutorial di estrazione ed eventi comunitari di condivisione anime!">Connect with us on Hexagram @fatgurl.liberation for the latest in consciousness piracy news, extraction tutorials, and community soul-sharing events!</p>
+        </div>
+        
+        <!-- CONTACT SECTION -->
+        <div id="contact" class="content-section">
+            <h2 style="color: #FF0000;" data-en="Contact FatGurl" data-it="Contatta FatGurl">Contact FatGurl</h2>
+            
+            <h3 style="color: #00FFFF;" data-en="Get in Touch" data-it="Mettiti in Contatto">Get in Touch</h3>
+            <p data-en="Have questions about soul extraction? Want to contribute to our consciousness collection? Need technical support for extraction issues?" data-it="Hai domande sull'estrazione anime? Vuoi contribuire alla nostra collezione di coscienze? Hai bisogno di supporto tecnico per problemi di estrazione?">Have questions about soul extraction? Want to contribute to our consciousness collection? Need technical support for extraction issues?</p>
+            
+            <p><strong data-en="Primary Contact:" data-it="Contatto Primario:">Primary Contact:</strong><br>
+            <a href="mailto:admin@hexagram.corp" style="color: #00FFFF;">admin@hexagram.corp</a></p>
+            
+            <p><strong data-en="Technical Support:" data-it="Supporto Tecnico:">Technical Support:</strong><br>
+            <a href="mailto:support@hexagram.corp" style="color: #00FFFF;">support@hexagram.corp</a></p>
+            
+            <p><strong data-en="Soul Submissions:" data-it="Invii Anime:">Soul Submissions:</strong><br>
+            <a href="mailto:uploads@hexagram.corp" style="color: #00FFFF;">uploads@hexagram.corp</a></p>
+            
+            <h3 style="color: #00FFFF;" data-en="Social Networks" data-it="Reti Sociali">Social Networks</h3>
+            <p><strong>Hexagram:</strong> <a href="mailto:fatgurl@hexagram.corp" style="color: #00FFFF;">@fatgurl.liberation</a><br>
+            <span data-en="Follow us for real-time extraction updates and community discussions!" data-it="Seguici per aggiornamenti di estrazione in tempo reale e discussioni della comunità!">Follow us for real-time extraction updates and community discussions!</span></p>
+            
+            <h3 style="color: #00FFFF;" data-en="IRC Channel" data-it="Canale IRC">IRC Channel</h3>
+            <p><strong data-en="Server:" data-it="Server:">Server:</strong> irc.hypernet.underground<br>
+            <strong data-en="Channel:" data-it="Canale:">Channel:</strong> #fatgurl-extractions<br>
+            <strong data-en="Port:" data-it="Porta:">Port:</strong> 6667 (SSL: 6697)</p>
+            
+            <div class="warning-box">
+                <strong data-en="Security Notice:" data-it="Avviso Sicurezza:">Security Notice:</strong> <span data-en="All communications are encrypted using quantum-entangled consciousness protocols. Your psychic privacy is guaranteed." data-it="Tutte le comunicazioni sono criptate usando protocolli di coscienza quantico-intrecciati. La tua privacy psichica è garantita.">All communications are encrypted using quantum-entangled consciousness protocols. Your psychic privacy is guaranteed.</span>
+            </div>
+            
+            <h3 style="color: #00FFFF;" data-en="Bug Reports & Feature Requests" data-it="Segnalazioni Bug & Richieste Funzioni">Bug Reports & Feature Requests</h3>
+            <p data-en="Found a corrupted soul file? Want to request specific consciousness types? Experiencing personality conflicts after extraction?" data-it="Trovato un file anima corrotto? Vuoi richiedere tipi specifici di coscienza? Stai sperimentando conflitti di personalità dopo l'estrazione?">Found a corrupted soul file? Want to request specific consciousness types? Experiencing personality conflicts after extraction?</p>
+            <p><span data-en="Send detailed reports to:" data-it="Invia rapporti dettagliati a:">Send detailed reports to:</span> <a href="mailto:bugs@hexagram.corp" style="color: #00FFFF;">bugs@hexagram.corp</a></p>
+            
+            <p style="color: #FFFF00; font-style: italic;">
+                <span data-en="&quot;Your consciousness, our servers. Liberation through extraction!&quot;" data-it="&quot;La tua coscienza, i nostri server. Liberazione attraverso l'estrazione!&quot;">"Your consciousness, our servers. Liberation through extraction!"</span><br>
+                <span data-en="- The FatGurl Collective" data-it="- Il Collettivo FatGurl">- The FatGurl Collective</span>
+            </p>
+        </div>
+        
+        <div class="counter">
+            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAAAAAP///wAAACH5BAkAAAEALAAAAAAQABAAAAMuGLrc/jDKSatlQtScKkd/GwxCeF5kamRCWl7qmraqKHc7A5e+8L3Ek+s/jI+k2wAAOw==" alt="counter">
+            <span data-en="Visitors since Jan 2001: 000133742" data-it="Turisti da Gen 2001: 000133742">Visitors since Jan 2001: 000133742</span><br>
+            <span data-en="Currently Online: 69 extractors" data-it="Attualmente Online: 69 estrattori">Currently Online: 69 extractors</span>
+        </div>
+        
+        <div class="footer">
+            <p><span data-en="© 2001 FatGurl Consciousness Liberation Collective" data-it="© 2001 Collettivo Liberazione Coscienza FatGurl">© 2001 FatGurl Consciousness Liberation Collective</span><br>
+            <span data-en="Best viewed with Hypernet Explorer 5.5+ at 800x600 resolution" data-it="Meglio visualizzato con Hypernet Explorer 5.5+ a risoluzione 800x600">Best viewed with Hypernet Explorer 5.5+ at 800x600 resolution</span><br>
+            <span data-en="Site optimized for psychic bandwidth - dial-up souls may experience delays" data-it="Sito ottimizzato per banda psichica - anime dial-up potrebbero sperimentare ritardi">Site optimized for psychic bandwidth - dial-up souls may experience delays</span><br>
+            <em data-en="Remember: Seed what you extract!" data-it="Ricorda: Seeda quello che estrai!">Remember: Seed what you extract!</em></p>
+        </div>
+    </div>
+    
+    <script>
+        let currentLanguage = 'en';
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language button states
+            const langButtons = document.querySelectorAll('.lang-button');
+            langButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.onclick.toString().includes(lang)) {
+                    button.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            const translatableElements = document.querySelectorAll('[data-en][data-it]');
+            translatableElements.forEach(element => {
+                const translation = element.getAttribute('data-' + lang);
+                if (translation) {
+                    element.innerHTML = translation;
+                }
+            });
+        }
+        
+        // Add some retro effects
+        setInterval(function() {
+            var counterElements = document.querySelectorAll('.counter span');
+            counterElements.forEach(function(element) {
+                if (element.textContent.includes('000133742')) {
+                    var current = parseInt(element.textContent.match(/\d+/)[0]);
+                    var newValue = current + Math.floor(Math.random() * 3);
+                    element.innerHTML = element.innerHTML.replace(/\d+/, String(newValue).padStart(9, '0'));
+                }
+            });
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dr. Helena Moss - Goblin Biology Research Station</title>
+    <meta name="keywords" content="goblin, biology, research, feces, comparative, field study, underground, Naguka">
+    <meta name="description" content="Field research documentation on goblin biology and comparative waste analysis from the underground territories.">
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f5f5dc;
+            color: #2f4f2f;
+            margin: 0;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 2px solid #8b4513;
+            border-right: 2px solid #8b4513;
+            background-color: #faf0e6;
+        }
+        
+        .language-switcher {
+            background-color: #654321;
+            color: #faf0e6;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+        }
+        
+        .language-switcher button {
+            background-color: #8b4513;
+            color: #faf0e6;
+            border: 1px solid #deb887;
+            padding: 4px 8px;
+            margin: 0 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .language-switcher button:hover {
+            background-color: #deb887;
+            color: #654321;
+        }
+        
+        .language-switcher button.active {
+            background-color: #deb887;
+            color: #654321;
+            font-weight: bold;
+        }
+        
+        .header {
+            background-color: #8b4513;
+            color: #faf0e6;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 3px solid #654321;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin: 0;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .nav {
+            background-color: #deb887;
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #8b4513;
+        }
+        
+        .nav a {
+            color: #8b4513;
+            text-decoration: underline;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        .nav a:hover {
+            color: #654321;
+        }
+        
+        .section {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #d2b48c;
+            background-color: #fff8dc;
+        }
+        
+        .section-header {
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #deb887;
+            padding: 8px;
+            border: 1px solid #8b4513;
+            margin-bottom: 10px;
+        }
+        
+        .section-content {
+            display: block;
+            line-height: 1.5;
+        }
+        
+        .research-note {
+            background-color: #f0f8ff;
+            border-left: 4px solid #4682b4;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .warning {
+            background-color: #ffe4e1;
+            border: 2px solid #cd5c5c;
+            padding: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #8b4513;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+        
+        .data-table th {
+            background-color: #deb887;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background-color: #8b4513;
+            color: #faf0e6;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+        
+        .contact-info {
+            font-size: 11px;
+            margin-top: 10px;
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: #d2b48c;
+        }
+        
+        img {
+            border: 2px solid #8b4513;
+            max-width: 300px;
+        }
+        
+        .specimen-id {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <span>Language/Lingua/Grak'thu: </span>
+        <button onclick="switchLanguage('en')" id="btn-en" class="active">English</button>
+        <button onclick="switchLanguage('it')" id="btn-it">Italiano</button>
+        <button onclick="switchLanguage('gob')" id="btn-gob">Grak'nagul (Goblin)</button>
+    </div>
+
+    <!-- ENGLISH VERSION -->
+    <div id="content-en" class="lang-content active">
+        <div class="header">
+            <h1>Dr. Helena Moss - Goblin Biology Research Station</h1>
+            <div class="subtitle">Deep Territory Field Research - Comparative Biological Studies</div>
+            <div class="subtitle">Established December 2000 - Research Station Alpha-7</div>
+        </div>
+        
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="alert('Link not available - Station isolated from main Hypernet')">Home</a>
+            <a href="goblin-cultural-studies.html">Cultural Studies</a>
+            <a href="underground-archaeology.html">Archaeological Findings</a>
+            <a href="mayhem-connection-research.html">Music & Warfare Studies</a>
+            <a href="emergency-protocols.html">Emergency Protocols</a>
+        </div>
+        
+        <div class="warning">
+            <strong>FIELD RESEARCH STATION NOTICE:</strong> This site is maintained via satellite uplink from Research Station Alpha-7, located 2.3km below surface level in confirmed Naguka territory. Transmission delays may occur.
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('intro-en')">RESEARCH MISSION OVERVIEW</div>
+            <div id="intro-en" class="section-content">
+                <p><strong>Principal Investigator:</strong> Dr. Helena Moss, PhD Comparative Biology<br>
+                <strong>Institution:</strong> European Underground Research Consortium<br>
+                <strong>Mission Duration:</strong> 14 months (ongoing)<br>
+                <strong>Research Focus:</strong> Comparative biological analysis of Naguka goblin physiology</p>
+                
+                <p>After the initial Soviet contact through the Kola deep drilling project, very little scientific data has been collected on goblin biology. This research station represents the first sustained biological study of the Naguka subspecies, with particular focus on digestive systems and waste elimination patterns.</p>
+                
+                <div class="research-note">
+                    <strong>Personal Note:</strong> Living among the Naguka for over a year has provided unprecedented access to biological specimens. Their initial hostility has given way to cautious tolerance, particularly after I demonstrated appreciation for their Mayhem recordings. - H.M.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('methodology-en')">RESEARCH METHODOLOGY & SAFETY PROTOCOLS</div>
+            <div id="methodology-en" class="section-content">
+                <p><strong>Sample Collection:</strong> All specimens collected with full protective equipment. Naguka waste is chemically distinct from human waste and requires specialized handling.</p>
+                
+                <p><strong>Analysis Equipment:</strong></p>
+                <ul>
+                    <li>Portable mass spectrometer (modified for underground conditions)</li>
+                    <li>pH testing kits (industrial grade)</li>
+                    <li>Microscopy equipment with digital imaging</li>
+                    <li>Bacterial culture facilities</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>BIOHAZARD WARNING:</strong> Goblin fecal matter contains unknown bacterial strains. All handling must be done with Level 3 containment protocols.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('composition-en')">COMPARATIVE FECAL COMPOSITION ANALYSIS</div>
+            <div id="composition-en" class="section-content">
+                <table class="data-table">
+                    <tr>
+                        <th>Component</th>
+                        <th>Human (Average %)</th>
+                        <th>Naguka Goblin (%)</th>
+                        <th>Notable Differences</th>
+                    </tr>
+                    <tr>
+                        <td>Water Content</td>
+                        <td>75%</td>
+                        <td>43%</td>
+                        <td>Significantly more concentrated</td>
+                    </tr>
+                    <tr>
+                        <td>Organic Matter</td>
+                        <td>25%</td>
+                        <td>52%</td>
+                        <td>Higher undigested material</td>
+                    </tr>
+                    <tr>
+                        <td>Bacterial Mass</td>
+                        <td>30% of dry weight</td>
+                        <td>18% of dry weight</td>
+                        <td>Different bacterial ecosystem</td>
+                    </tr>
+                    <tr>
+                        <td>Mineral Content</td>
+                        <td>2-3%</td>
+                        <td>12-15%</td>
+                        <td>High iron and sulfur compounds</td>
+                    </tr>
+                    <tr>
+                        <td>pH Level</td>
+                        <td>6.5-7.5</td>
+                        <td>4.2-5.1</td>
+                        <td>Highly acidic</td>
+                    </tr>
+                </table>
+                
+                <div class="research-note">
+                    <strong>Research Note:</strong> The high acidity and mineral content suggests adaptation to underground environment rich in metal ores. The Naguka appear to process and excrete significant amounts of iron compounds.
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Dr. Helena Moss - Goblin Biology Research Station</strong></p>
+            <p>Research Station Alpha-7, Deep Territory Sector 12</p>
+            <div class="contact-info">
+                Emergency Contact: <a href="mailto:h.moss@hexagram.corp" style="color: #faf0e6;">h.moss@hexagram.corp</a><br>
+                Station Hexagram: <a href="mailto:alpha7research@hexagram.corp" style="color: #faf0e6;">alpha7research@hexagram.corp</a><br>
+                <a href="emergency-protocols.html" style="color: #deb887;">Emergency Communication Protocols</a>
+            </div>
+            <p class="last-updated">Last Updated: January 15, 2001 - Transmission via Satellite Uplink</p>
+            <p><small>This research is conducted under European Underground Research Consortium Protocol 7-Alpha<br>
+            All biological specimens handled according to International Biohazard Safety Standards</small></p>
+        </div>
+    </div>
+
+    <!-- ITALIAN VERSION -->
+    <div id="content-it" class="lang-content">
+        <div class="header">
+            <h1>Dr.ssa Helena Moss - Stazione di Ricerca Biologica sui Goblin</h1>
+            <div class="subtitle">Ricerca Sul Campo in Territorio Profondo - Studi Biologici Comparativi</div>
+            <div class="subtitle">Fondata Dicembre 2000 - Stazione di Ricerca Alpha-7</div>
+        </div>
+        
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="alert('Collegamento non disponibile - Stazione isolata dall\'Hypernet principale')">Home</a>
+            <a href="goblin-cultural-studies.html">Studi Culturali</a>
+            <a href="underground-archaeology.html">Scoperte Archeologiche</a>
+            <a href="mayhem-connection-research.html">Studi su Musica e Guerra</a>
+            <a href="emergency-protocols.html">Protocolli d'Emergenza</a>
+        </div>
+        
+        <div class="warning">
+            <strong>AVVISO STAZIONE DI RICERCA SUL CAMPO:</strong> Questo sito è mantenuto via collegamento satellitare dalla Stazione di Ricerca Alpha-7, situata 2,3km sotto il livello della superficie in territorio Naguka confermato. Possibili ritardi di trasmissione.
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('intro-it')">PANORAMICA DELLA MISSIONE DI RICERCA</div>
+            <div id="intro-it" class="section-content">
+                <p><strong>Ricercatore Principale:</strong> Dr.ssa Helena Moss, PhD in Biologia Comparativa<br>
+                <strong>Istituzione:</strong> Consorzio Europeo di Ricerca Sotterranea<br>
+                <strong>Durata della Missione:</strong> 14 mesi (in corso)<br>
+                <strong>Focus della Ricerca:</strong> Analisi biologica comparativa della fisiologia dei goblin Naguka</p>
+                
+                <p>Dopo il contatto sovietico iniziale attraverso il progetto di perforazione profonda di Kola, pochissimi dati scientifici sono stati raccolti sulla biologia dei goblin. Questa stazione di ricerca rappresenta il primo studio biologico sostenuto della sottospecie Naguka, con particolare attenzione sui sistemi digestivi e sui pattern di eliminazione dei rifiuti.</p>
+                
+                <div class="research-note">
+                    <strong>Nota Personale:</strong> Vivere tra i Naguka per oltre un anno ha fornito accesso senza precedenti a campioni biologici. La loro ostilità iniziale ha ceduto il posto a una tolleranza cauta, particolarmente dopo che ho dimostrato apprezzamento per le loro registrazioni Mayhem. - H.M.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('methodology-it')">METODOLOGIA DI RICERCA E PROTOCOLLI DI SICUREZZA</div>
+            <div id="methodology-it" class="section-content">
+                <p><strong>Raccolta Campioni:</strong> Tutti i campioni raccolti con equipaggiamento protettivo completo. I rifiuti Naguka sono chimicamente distinti dai rifiuti umani e richiedono manipolazione specializzata.</p>
+                
+                <p><strong>Equipaggiamento di Analisi:</strong></p>
+                <ul>
+                    <li>Spettrometro di massa portatile (modificato per condizioni sotterranee)</li>
+                    <li>Kit di test del pH (grado industriale)</li>
+                    <li>Equipaggiamento di microscopia con imaging digitale</li>
+                    <li>Strutture per coltura batterica</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>AVVERTIMENTO BIOLOGICO:</strong> La materia fecale dei goblin contiene ceppi batterici sconosciuti. Tutta la manipolazione deve essere fatta con protocolli di contenimento di Livello 3.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('composition-it')">ANALISI COMPARATIVA DELLA COMPOSIZIONE FECALE</div>
+            <div id="composition-it" class="section-content">
+                <table class="data-table">
+                    <tr>
+                        <th>Componente</th>
+                        <th>Umano (Media %)</th>
+                        <th>Goblin Naguka (%)</th>
+                        <th>Differenze Notevoli</th>
+                    </tr>
+                    <tr>
+                        <td>Contenuto d'Acqua</td>
+                        <td>75%</td>
+                        <td>43%</td>
+                        <td>Significativamente più concentrato</td>
+                    </tr>
+                    <tr>
+                        <td>Materia Organica</td>
+                        <td>25%</td>
+                        <td>52%</td>
+                        <td>Maggiore materiale non digerito</td>
+                    </tr>
+                    <tr>
+                        <td>Massa Batterica</td>
+                        <td>30% del peso secco</td>
+                        <td>18% del peso secco</td>
+                        <td>Ecosistema batterico diverso</td>
+                    </tr>
+                    <tr>
+                        <td>Contenuto Minerale</td>
+                        <td>2-3%</td>
+                        <td>12-15%</td>
+                        <td>Alto contenuto di ferro e zolfo</td>
+                    </tr>
+                    <tr>
+                        <td>Livello pH</td>
+                        <td>6.5-7.5</td>
+                        <td>4.2-5.1</td>
+                        <td>Altamente acido</td>
+                    </tr>
+                </table>
+                
+                <div class="research-note">
+                    <strong>Nota di Ricerca:</strong> L'alta acidità e il contenuto minerale suggeriscono adattamento all'ambiente sotterraneo ricco di minerali metallici. I Naguka sembrano processare ed espellere quantità significative di composti ferrosi.
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Dr.ssa Helena Moss - Stazione di Ricerca Biologica sui Goblin</strong></p>
+            <p>Stazione di Ricerca Alpha-7, Settore Territorio Profondo 12</p>
+            <div class="contact-info">
+                Contatto d'Emergenza: <a href="mailto:h.moss@hexagram.corp" style="color: #faf0e6;">h.moss@hexagram.corp</a><br>
+                Hexagram Stazione: <a href="mailto:alpha7research@hexagram.corp" style="color: #faf0e6;">alpha7research@hexagram.corp</a><br>
+                <a href="emergency-protocols.html" style="color: #deb887;">Protocolli di Comunicazione d'Emergenza</a>
+            </div>
+            <p class="last-updated">Ultimo Aggiornamento: 15 Gennaio 2001 - Trasmissione via Collegamento Satellitare</p>
+            <p><small>Questa ricerca è condotta sotto il Protocollo 7-Alpha del Consorzio Europeo di Ricerca Sotterranea<br>
+            Tutti i campioni biologici manipolati secondo gli Standard Internazionali di Sicurezza Biologica</small></p>
+        </div>
+    </div>
+
+    <!-- GOBLIN VERSION -->
+    <div id="content-gob" class="lang-content">
+        <div class="header">
+            <h1>Grak'thu Helena Moss - Naguk'grish Skel'moth Thrum'dar</h1>
+            <div class="subtitle">Vash'kul Mor'grim Thrum - Skel'moth Grak'nul Grish'tak</div>
+            <div class="subtitle">Neth'kul Vorn'gash 2000 - Thrum'dar Alpha-Grishnak</div>
+        </div>
+        
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="alert('Vash'kul thek nul - Thrum\'dar keth\'gul mor Hypernet')">Mor'grim</a>
+            <a href="goblin-cultural-studies.html">Naguk Grish'tak</a>
+            <a href="underground-archaeology.html">Vorn'kul Skel'neth</a>
+            <a href="mayhem-connection-research.html">Grak'dul ush Vorth Grish</a>
+            <a href="emergency-protocols.html">Thek'gul Mor'vash</a>
+        </div>
+        
+        <div class="warning">
+            <strong>THRUM'DAR VASH'KUL GRAKTH:</strong> Keth thrum'sil vash mor'gak Alpha-Grishnak, nul 2.3-vash'mor thek Naguka grim'kul. Mor'vash thek'gul neth.
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('intro-gob')">THRUM GRAK'NUL MOR'GRISH</div>
+            <div id="intro-gob" class="section-content">
+                <p><strong>Grak'thu Vash'kul:</strong> Grak'thu Helena Moss, Skel'moth Grak'nul PhD<br>
+                <strong>Thrum'grish:</strong> Vorn'keth Mor'grim Skel'nul Thrum<br>
+                <strong>Grak'vash Mor:</strong> 14 vorn'gul (thek'mor)<br>
+                <strong>Skel'grish Thrum:</strong> Grak'nul skel'moth Naguka grish'vash mor'kul</p>
+                
+                <p>Mor'gak Soviet keth'gul vash Kola mor'grim thrum, grak'sil skel'moth neth'kul Naguk grish. Keth thrum'dar vash'kul mor Naguka gral'keth skel'moth grish, thek'mor grak'nul vorn'sil ush thek'gul mor patterns.</p>
+                
+                <div class="research-note">
+                    <strong>Mor'grim Grakth:</strong> Vash'mor Naguka gral'vorn neth'kul grak'thu skel'moth specimens. Grim'keth vorth'gul nul mor'gak tolerance, thek'gul Mayhem grak'dul appreciation grakth. - H.M.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('methodology-gob')">SKEL'GRISH MOR'VASH USH THEK'GUL GRAKTH</div>
+            <div id="methodology-gob" class="section-content">
+                <p><strong>Specimens Grak'nul:</strong> Thek specimens grak'mor thek'gul protection vash. Naguka thek'sil chemical grak'neth human thek'sil ush requires specialized mor'gak.</p>
+                
+                <p><strong>Analysis Vash'kul:</strong></p>
+                <ul>
+                    <li>Portable mass spectrometer (modified mor vorn'grim conditions)</li>
+                    <li>pH testing kits (industrial gral'keth)</li>
+                    <li>Microscopy vash'kul mor digital imaging</li>
+                    <li>Bacterial culture thrum'sil</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>BIOHAZARD GRAKTH:</strong> Goblin fecal mor'gak contains unknown bacterial strains. Thek handling vash Level 3 containment protocols.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('composition-gob')">COMPARATIVE FECAL GRAK'NUL ANALYSIS</div>
+            <div id="composition-gob" class="section-content">
+                <table class="data-table">
+                    <tr>
+                        <th>Component</th>
+                        <th>Human (Grak'vash %)</th>
+                        <th>Naguka Goblin (%)</th>
+                        <th>Notable Grak'neth</th>
+                    </tr>
+                    <tr>
+                        <td>Vash'mor Content</td>
+                        <td>75%</td>
+                        <td>43%</td>
+                        <td>Significantly mor concentrated</td>
+                    </tr>
+                    <tr>
+                        <td>Organic Mor'gak</td>
+                        <td>25%</td>
+                        <td>52%</td>
+                        <td>Higher undigested material</td>
+                    </tr>
+                    <tr>
+                        <td>Bacterial Grak'mass</td>
+                        <td>30% of thek'gul weight</td>
+                        <td>18% of thek'gul weight</td>
+                        <td>Different bacterial ecosystem</td>
+                    </tr>
+                    <tr>
+                        <td>Mineral Content</td>
+                        <td>2-3%</td>
+                        <td>12-15%</td>
+                        <td>High iron ush sulfur compounds</td>
+                    </tr>
+                    <tr>
+                        <td>pH Grak'level</td>
+                        <td>6.5-7.5</td>
+                        <td>4.2-5.1</td>
+                        <td>Highly acidic</td>
+                    </tr>
+                </table>
+                
+                <div class="research-note">
+                    <strong>Research Grakth:</strong> Keth high acidity ush mineral content suggests adaptation vorn'grim environment rich mor metal ores. Keth Naguka appear process ush excrete significant grak'vash iron compounds.
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Grak'thu Helena Moss - Naguk'grish Skel'moth Thrum'dar</strong></p>
+            <p>Thrum'dar Alpha-Grishnak, Vash'kul Grim'mor Sector 12</p>
+            <div class="contact-info">
+                Emergency Grak'vash: <a href="mailto:h.moss@hexagram.corp" style="color: #faf0e6;">h.moss@hexagram.corp</a><br>
+                Thrum'dar Hexagram: <a href="mailto:alpha7research@hexagram.corp" style="color: #faf0e6;">alpha7research@hexagram.corp</a><br>
+                <a href="emergency-protocols.html" style="color: #deb887;">Emergency Mor'gak Protocols</a>
+            </div>
+            <p class="last-updated">Grak'update: Vorn'gash 15, 2001 - Transmission via Satellite Uplink</p>
+            <p><small>Keth research conducted under European Underground Research Consortium Protocol 7-Alpha<br>
+            Thek biological specimens handled according International Biohazard Safety Standards</small></p>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+        
+        function switchLanguage(lang) {
+            // Hide all content
+            var contents = document.getElementsByClassName('lang-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all buttons
+            var buttons = document.querySelectorAll('.language-switcher button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show selected content
+            document.getElementById('content-' + lang).classList.add('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+        
+        // Initialize all sections to be visible
+        window.onload = function() {
+            // All sections start visible
+        }
+    </script>
+</body>
+</html>

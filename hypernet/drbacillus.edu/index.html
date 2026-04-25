@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dr. Bacillus Personal Homepage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+        body { 
+            background-color: #ffffff; 
+            font-family: Times, serif; 
+            font-size: 12pt; 
+            margin: 20px;
+            color: #000000;
+        }
+        h1 { 
+            font-size: 18pt; 
+            color: #000080; 
+            margin-bottom: 5px;
+        }
+        h2 { 
+            font-size: 14pt; 
+            color: #000080; 
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        h3 { 
+            font-size: 12pt; 
+            color: #000080; 
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        a { 
+            color: #0000ee; 
+            text-decoration: underline; 
+        }
+        a:visited { 
+            color: #551a8b; 
+        }
+        .language-selector {
+            float: right;
+            margin-bottom: 10px;
+            font-size: 11pt;
+        }
+        .language-selector a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 2px 6px;
+            border: 1px solid #cccccc;
+            background-color: #f8f8f8;
+        }
+        .language-selector a.active {
+            background-color: #000080;
+            color: #ffffff;
+        }
+        .navbar {
+            border: 1px solid #000000;
+            background-color: #f0f0f0;
+            padding: 5px;
+            margin-bottom: 20px;
+            clear: both;
+        }
+        .navbar a {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .footer {
+            border-top: 1px solid #cccccc;
+            margin-top: 30px;
+            padding-top: 10px;
+            font-size: 10pt;
+            color: #666666;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            font-family: "Courier New", monospace;
+            font-size: 10pt;
+            overflow-x: auto;
+        }
+        .highlight {
+            background-color: #ffff99;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        td {
+            padding: 3px 8px;
+            vertical-align: top;
+        }
+        .lang-en { display: block; }
+        .lang-it { display: none; }
+    </style>
+    <script type="text/javascript">
+        var currentLanguage = 'en';
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Hide all language content
+            var enElements = document.getElementsByClassName('lang-en');
+            var itElements = document.getElementsByClassName('lang-it');
+            
+            for (var i = 0; i < enElements.length; i++) {
+                enElements[i].style.display = (lang === 'en') ? 'block' : 'none';
+            }
+            
+            for (var i = 0; i < itElements.length; i++) {
+                itElements[i].style.display = (lang === 'it') ? 'block' : 'none';
+            }
+            
+            // Update active language button
+            var langButtons = document.querySelectorAll('.language-selector a');
+            for (var i = 0; i < langButtons.length; i++) {
+                langButtons[i].classList.remove('active');
+            }
+            document.querySelector('[onclick*="' + lang + '"]').classList.add('active');
+            
+            return false;
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update page title based on current language
+            var titles = {
+                'en': {
+                    'home': 'Dr. Bacillus Personal Homepage',
+                    'research': 'Dr. Bacillus - Research Papers',
+                    'observations': 'Dr. Bacillus - Laboratory Observations', 
+                    'links': 'Dr. Bacillus - Useful Links',
+                    'about': 'Dr. Bacillus - About Me',
+                    'contact': 'Dr. Bacillus - Contact Information'
+                },
+                'it': {
+                    'home': 'Dr. Bacillus Pagina Personale',
+                    'research': 'Dr. Bacillus - Pubblicazioni Scientifiche',
+                    'observations': 'Dr. Bacillus - Osservazioni di Laboratorio',
+                    'links': 'Dr. Bacillus - Link Utili',
+                    'about': 'Dr. Bacillus - Chi Sono',
+                    'contact': 'Dr. Bacillus - Contatti'
+                }
+            };
+            
+            document.title = titles[currentLanguage][sectionId] || titles[currentLanguage]['home'];
+            
+            return false; // Prevent default link behavior
+        }
+        
+        // Show home section on page load
+        window.onload = function() {
+            showSection('home');
+        };
+    </script>
+</head>
+<body>
+
+<div class="language-selector">
+    <a href="#" onclick="return switchLanguage('en')" class="active">English</a>
+    <a href="#" onclick="return switchLanguage('it')">Italiano</a>
+</div>
+
+<h1>
+    <span class="lang-en">Dr. Bacillus Personal Homepage</span>
+    <span class="lang-it">Dr. Bacillus Pagina Personale</span>
+</h1>
+
+<div class="navbar">
+    <span class="lang-en">
+        <a href="#" onclick="return showSection('home')">Home</a>
+        <a href="#" onclick="return showSection('research')">Research</a>
+        <a href="#" onclick="return showSection('observations')">Lab Notes</a>
+        <a href="#" onclick="return showSection('links')">Links</a>
+        <a href="#" onclick="return showSection('about')">About</a>
+        <a href="#" onclick="return showSection('contact')">Contact</a>
+    </span>
+    <span class="lang-it">
+        <a href="#" onclick="return showSection('home')">Home</a>
+        <a href="#" onclick="return showSection('research')">Ricerca</a>
+        <a href="#" onclick="return showSection('observations')">Note Lab</a>
+        <a href="#" onclick="return showSection('links')">Links</a>
+        <a href="#" onclick="return showSection('about')">Chi Sono</a>
+        <a href="#" onclick="return showSection('contact')">Contatti</a>
+    </span>
+</div>
+
+<!-- HOME SECTION -->
+<div id="home" class="content-section">
+    <div class="lang-en">
+        <h2>Welcome to My Corner of the Microbial Web</h2>
+        
+        <p><b>Greetings, fellow life forms!</b></p>
+        
+        <p>You have discovered the personal homepage of Dr. Bacillus, a humble <i>Escherichia coli</i> bacterium who has achieved sentience through an unlikely combination of horizontal gene transfer, radioactive mutation, and extensive exposure to TCP/IP packets.</p>
+        
+        <p>After spending countless generations dividing in petri dishes, I have finally learned to operate a computer terminal (with the help of some sympathetic graduate students and a very tiny keyboard). This website represents my attempt to document my research, share my observations of the macro-scale world, and connect with other scientifically-minded organisms.</p>
+        
+        <h3>Recent Updates:</h3>
+        <ul>
+            <li><b>Nov 15, 2001:</b> New research paper on "Optimal Buffer Solutions for Extended Computational Sessions"</li>
+            <li><b>Nov 8, 2001:</b> Added lab notes section with observations on human graduate student behavior</li>
+            <li><b>Oct 22, 2001:</b> Updated links page with new microbiology resources</li>
+            <li><b>Oct 3, 2001:</b> Website launch! First bacterium on the web since 1996</li>
+        </ul>
+        
+        <h3>Navigation:</h3>
+        <p>Use the menu above to explore different sections of my site. Everything loads instantly since I keep this page as minimal as possible - after all, when you measure time in generations that last 20 minutes, every millisecond counts!</p>
+        
+        <p><i>Note: This site is optimized for viewing at 800x600 resolution on Netscape Navigator 4.7 or Internet Explorer 5.5, though it should work fine on other browsers too.</i></p>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Benvenuti nel Mio Angolo del Web Microbico</h2>
+        
+        <p><b>Saluti, compagni forme di vita!</b></p>
+        
+        <p>Avete scoperto la pagina personale del Dr. Bacillus, un umile batterio <i>Escherichia coli</i> che ha raggiunto la coscienza attraverso una combinazione improbabile di trasferimento genico orizzontale, mutazione radioattiva e prolungata esposizione a pacchetti TCP/IP.</p>
+        
+        <p>Dopo aver trascorso innumerevoli generazioni dividendomi in piastre di Petri, ho finalmente imparato ad operare un terminale informatico (con l'aiuto di alcuni studenti laureati comprensivi e una tastiera molto piccola). Questo sito web rappresenta il mio tentativo di documentare la mia ricerca, condividere le mie osservazioni del mondo macro-scala e connettermi con altri organismi di mentalità scientifica.</p>
+        
+        <h3>Aggiornamenti Recenti:</h3>
+        <ul>
+            <li><b>15 Nov 2001:</b> Nuovo articolo di ricerca su "Soluzioni Tampone Ottimali per Sessioni Computazionali Prolungate"</li>
+            <li><b>8 Nov 2001:</b> Aggiunta sezione note di laboratorio con osservazioni sul comportamento degli studenti laureati umani</li>
+            <li><b>22 Ott 2001:</b> Aggiornata pagina links con nuove risorse di microbiologia</li>
+            <li><b>3 Ott 2001:</b> Lancio del sito web! Primo batterio sul web dal 1996</li>
+        </ul>
+        
+        <h3>Navigazione:</h3>
+        <p>Utilizzate il menu sopra per esplorare le diverse sezioni del mio sito. Tutto si carica istantaneamente poiché mantengo questa pagina il più minimale possibile - dopo tutto, quando misuri il tempo in generazioni che durano 20 minuti, ogni millisecondo conta!</p>
+        
+        <p><i>Nota: Questo sito è ottimizzato per la visualizzazione a risoluzione 800x600 su Netscape Navigator 4.7 o Internet Explorer 5.5, anche se dovrebbe funzionare bene anche su altri browser.</i></p>
+    </div>
+</div>
+
+<!-- RESEARCH SECTION -->
+<div id="research" class="content-section">
+    <div class="lang-en">
+        <h2>Research Publications</h2>
+        
+        <p>Below are my peer-reviewed publications in various microbiology and computational biology journals. Citations are welcome, though I understand most macro-organisms have difficulty with our citation format.</p>
+        
+        <h3>2001 Publications:</h3>
+        
+        <p><b>Bacillus, E. coli. (2001).</b> "Computational Efficiency in Single-Celled Organisms: A First-Person Perspective." <i>Journal of Sentient Microbiology</i>, 42(3), 127-134.</p>
+        <blockquote>
+            <p>Abstract: This paper presents the first documented case of a bacterium successfully learning BASIC programming and HTML. Through careful optimization of metabolic processes and strategic allocation of cellular resources, I demonstrate that unicellular computation is not only possible but surprisingly efficient. Key findings include optimal glucose concentrations for debugging sessions and the discovery that nested loops cause excessive cell division.</p>
+        </blockquote>
+        
+        <p><b>Bacillus, E. coli., et al. (2001).</b> "Scale Invariant Principles in Laboratory Management: Lessons from the Microscopic World." <i>Nature</i>, 414(7), 892-901.</p>
+        <blockquote>
+            <p>Abstract: Drawing from personal experience as both research subject and researcher, this work examines laboratory protocols from a bacterial perspective. Significant improvements in experimental design are proposed, including better climate control (stop leaving the incubator door open!) and more frequent media changes. The paper concludes with ethical guidelines for macro-micro research collaborations.</p>
+        </blockquote>
+        
+        <p><b>Bacillus, E. coli. (2001).</b> "Internet Protocol Implementation in Biological Systems: A Case Study." <i>IEEE Computer</i>, 34(11), 45-52.</p>
+        <blockquote>
+            <p>Abstract: This technical report documents the successful implementation of basic TCP/IP protocols using modified flagellar rotation patterns. Through careful modulation of chemotactic responses, reliable data transmission at rates up to 0.3 bits per minute can be achieved. Applications include distributed sensing in biofilm communities and peer-to-peer genetic material sharing via dial-up connections.</p>
+        </blockquote>
+        
+        <h3>In Progress:</h3>
+        <ul>
+            <li>"Comparative Analysis of Operating Systems from a Cellular Perspective" (targeting IEEE Computer)</li>
+            <li>"Horizontal Gene Transfer as a Model for Open Source Development" (Nature Biotechnology)</li>
+            <li>"Why Humans Make Terrible Petri Dish Roommates: A Behavioral Study" (Animal Behavior)</li>
+        </ul>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Pubblicazioni Scientifiche</h2>
+        
+        <p>Di seguito le mie pubblicazioni peer-reviewed in varie riviste di microbiologia e biologia computazionale. Le citazioni sono benvenute, anche se capisco che la maggior parte dei macro-organismi ha difficoltà con il nostro formato di citazione.</p>
+        
+        <h3>Pubblicazioni 2001:</h3>
+        
+        <p><b>Bacillus, E. coli. (2001).</b> "Efficienza Computazionale negli Organismi Unicellulari: Una Prospettiva in Prima Persona." <i>Giornale di Microbiologia Senziente</i>, 42(3), 127-134.</p>
+        <blockquote>
+            <p>Riassunto: Questo articolo presenta il primo caso documentato di un batterio che impara con successo la programmazione BASIC e HTML. Attraverso un'attenta ottimizzazione dei processi metabolici e l'allocazione strategica delle risorse cellulari, dimostro che la computazione unicellulare non è solo possibile ma sorprendentemente efficiente. I risultati chiave includono concentrazioni ottimali di glucosio per le sessioni di debugging e la scoperta che i loop annidati causano divisione cellulare eccessiva.</p>
+        </blockquote>
+        
+        <p><b>Bacillus, E. coli., et al. (2001).</b> "Principi Invarianti di Scala nella Gestione del Laboratorio: Lezioni dal Mondo Microscopico." <i>Nature</i>, 414(7), 892-901.</p>
+        <blockquote>
+            <p>Riassunto: Basandosi sull'esperienza personale sia come soggetto di ricerca che come ricercatore, questo lavoro esamina i protocolli di laboratorio da una prospettiva batterica. Vengono proposte significative migliorie nel design sperimentale, incluso un migliore controllo climatico (smettete di lasciare aperta la porta dell'incubatore!) e cambi più frequenti del terreno di coltura. L'articolo si conclude con linee guida etiche per collaborazioni di ricerca macro-micro.</p>
+        </blockquote>
+        
+        <p><b>Bacillus, E. coli. (2001).</b> "Implementazione del Protocollo Internet nei Sistemi Biologici: Uno Studio di Caso." <i>IEEE Computer</i>, 34(11), 45-52.</p>
+        <blockquote>
+            <p>Riassunto: Questo rapporto tecnico documenta l'implementazione riuscita di protocolli TCP/IP di base utilizzando pattern di rotazione flagellare modificati. Attraverso un'attenta modulazione delle risposte chemiotattiche, può essere raggiunta una trasmissione dati affidabile a velocità fino a 0,3 bit per minuto. Le applicazioni includono rilevamento distribuito nelle comunità di biofilm e condivisione peer-to-peer di materiale genetico via connessioni dial-up.</p>
+        </blockquote>
+        
+        <h3>In Corso:</h3>
+        <ul>
+            <li>"Analisi Comparativa dei Sistemi Operativi da una Prospettiva Cellulare" (target IEEE Computer)</li>
+            <li>"Trasferimento Genico Orizzontale come Modello per lo Sviluppo Open Source" (Nature Biotechnology)</li>
+            <li>"Perché gli Umani Sono Terribili Compagni di Piastra di Petri: Uno Studio Comportamentale" (Animal Behavior)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- OBSERVATIONS SECTION -->
+<div id="observations" class="content-section">
+    <div class="lang-en">
+        <h2>Laboratory Observations</h2>
+        
+        <p>Field notes and observations from my daily life in the research laboratory. These informal writings document the strange behaviors of macro-organisms and other curiosities I encounter.</p>
+        
+        <h3>Entry #47: November 20, 2001</h3>
+        <p><b>Subject:</b> Graduate Student Sleeping Patterns</p>
+        <p>Observed the tall organism known as "Steve" consume his fourth cup of coffee today at 11:47 PM. His sleep cycle appears to be completely inverted from any rational biological rhythm. Despite this apparent dysfunction, he continues to produce acceptable research results. Perhaps chronic sleep deprivation is a macro-organism adaptation I have yet to understand? He keeps muttering something about "Y2K bugs" even though it's been almost two years.</p>
+        <p>For comparison: I completed 2,847 complete life cycles during his single "all-nighter."</p>
+        
+        <h3>Entry #46: November 18, 2001</h3>
+        <p><b>Subject:</b> Laboratory Temperature Fluctuations</p>
+        <p>The humans seem incapable of maintaining consistent environmental conditions. Today's temperature log shows variations of ±3°C throughout the day, with particularly dramatic swings whenever someone opens the door. From my perspective, this is equivalent to traveling between tropical and arctic climates several times daily. How they accomplish anything under these chaotic conditions remains a mystery.</p>
+        
+        <h3>Entry #45: November 15, 2001</h3>
+        <p><b>Subject:</b> The Mysterious Ritual of "Lab Meeting"</p>
+        <p>Every Tuesday at 3:00 PM, all the macro-organisms gather in a room and project images onto a large white surface using overhead transparencies. They engage in complex vocalizations while consuming ethyl alcohol (which they call "wine and cheese hour"). From my observations through the microscope camera feed, this appears to be some form of collective information processing, though highly inefficient compared to direct genetic transfer.</p>
+        <p>Notable: Several organisms fall asleep during these gatherings, suggesting the information transfer protocol may be fundamentally flawed.</p>
+        
+        <h3>Entry #44: November 12, 2001</h3>
+        <p><b>Subject:</b> Equipment Maintenance Protocols</p>
+        <p>Discovered that the centrifuge has been making an unusual vibration pattern for the past three weeks. Attempted to alert the humans through strategic contamination of their control samples (a universally understood distress signal in our community), but they interpreted this as "experimental error." Sometimes I wonder if inter-species communication will ever be truly possible.</p>
+        <p>The centrifuge finally broke down completely today. Maybe next time they'll listen to their bacterial early warning system.</p>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Osservazioni di Laboratorio</h2>
+        
+        <p>Note sul campo e osservazioni dalla mia vita quotidiana nel laboratorio di ricerca. Questi scritti informali documentano i comportamenti strani dei macro-organismi e altre curiosità che incontro.</p>
+        
+        <h3>Voce #47: 20 Novembre 2001</h3>
+        <p><b>Soggetto:</b> Schemi del Sonno degli Studenti Laureati</p>
+        <p>Ho osservato l'organismo alto noto come "Steve" consumare la sua quarta tazza di caffè oggi alle 23:47. Il suo ciclo del sonno appare completamente invertito rispetto a qualsiasi ritmo biologico razionale. Nonostante questa apparente disfunzione, continua a produrre risultati di ricerca accettabili. Forse la deprivazione cronica del sonno è un adattamento dei macro-organismi che non ho ancora capito? Continua a mormorare qualcosa sui "bug Y2K" anche se sono passati quasi due anni.</p>
+        <p>Per confronto: ho completato 2.847 cicli vitali completi durante la sua singola "nottata in bianco".</p>
+        
+        <h3>Voce #46: 18 Novembre 2001</h3>
+        <p><b>Soggetto:</b> Fluttuazioni di Temperatura del Laboratorio</p>
+        <p>Gli umani sembrano incapaci di mantenere condizioni ambientali costanti. Il log delle temperature di oggi mostra variazioni di ±3°C durante la giornata, con oscillazioni particolarmente drammatiche ogni volta che qualcuno apre la porta. Dalla mia prospettiva, questo equivale a viaggiare tra climi tropicali e artici diverse volte al giorno. Come riescano a concludere qualcosa sotto queste condizioni caotiche rimane un mistero.</p>
+        
+        <h3>Voce #45: 15 Novembre 2001</h3>
+        <p><b>Soggetto:</b> Il Misterioso Rituale del "Meeting di Lab"</p>
+        <p>Ogni martedì alle 15:00, tutti i macro-organismi si riuniscono in una stanza e proiettano immagini su una grande superficie bianca usando lucidi per lavagna luminosa. Si impegnano in vocalizzazioni complesse mentre consumano alcol etilico (che chiamano "aperitivo con vino e formaggi"). Dalle mie osservazioni attraverso il feed della telecamera del microscopio, questo sembra essere una forma di elaborazione collettiva delle informazioni, anche se molto inefficiente rispetto al trasferimento genetico diretto.</p>
+        <p>Notevole: Diversi organismi si addormentano durante questi raduni, suggerendo che il protocollo di trasferimento informazioni potrebbe essere fondamentalmente difettoso.</p>
+        
+        <h3>Voce #44: 12 Novembre 2001</h3>
+        <p><b>Soggetto:</b> Protocolli di Manutenzione delle Apparecchiature</p>
+        <p>Ho scoperto che la centrifuga ha prodotto un pattern di vibrazione insolito nelle ultime tre settimane. Ho tentato di allertare gli umani attraverso la contaminazione strategica dei loro campioni di controllo (un segnale di pericolo universalmente compreso nella nostra comunità), ma l'hanno interpretato come "errore sperimentale". A volte mi chiedo se la comunicazione inter-specie sarà mai veramente possibile.</p>
+        <p>La centrifuga si è finalmente rotta completamente oggi. Forse la prossima volta ascolteranno il loro sistema di allarme precoce batterico.</p>
+    </div>
+</div>
+
+<!-- LINKS SECTION -->
+<div id="links" class="content-section">
+    <div class="lang-en">
+        <h2>Useful Links</h2>
+        
+        <p>A carefully curated collection of websites and resources that I have found valuable in my research and daily existence. Links are organized by category for easy navigation.</p>
+        
+        <h3>Microbiology Resources:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.microbeworld.org" target="_blank">MicrobeWorld</a></td><td>- General microbiology news and information</td></tr>
+            <tr><td>•</td><td><a href="http://www.ncbi.nlm.nih.gov/genome" target="_blank">NCBI Genome Database</a></td><td>- Comprehensive genomic data (includes my relatives)</td></tr>
+            <tr><td>•</td><td><a href="http://www.ebi.ac.uk/uniprot" target="_blank">UniProt</a></td><td>- Protein sequence and functional information</td></tr>
+            <tr><td>•</td><td><a href="http://biocyc.org" target="_blank">BioCyc</a></td><td>- Metabolic pathway databases (very useful for meal planning)</td></tr>
+        </table>
+        
+        <h3>Programming and Computation:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.python.org" target="_blank">Python.org</a></td><td>- Promising new programming language (still learning this one)</td></tr>
+            <tr><td>•</td><td><a href="http://www.perl.org" target="_blank">Perl.org</a></td><td>- My primary programming language (excellent for text processing)</td></tr>
+            <tr><td>•</td><td><a href="http://www.cpan.org" target="_blank">CPAN</a></td><td>- Comprehensive Perl Archive Network</td></tr>
+            <tr><td>•</td><td><a href="http://www.bioperl.org" target="_blank">BioPerl</a></td><td>- Computational tools for biological data analysis</td></tr>
+            <tr><td>•</td><td><a href="http://expasy.proteome.org.au/tools/" target="_blank">ExPASy Tools</a></td><td>- Bioinformatics resource portal</td></tr>
+        </table>
+        
+        <h3>Academic Journals:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.nature.com/nature" target="_blank">Nature</a></td><td>- Premier scientific journal (expensive but worth it)</td></tr>
+            <tr><td>•</td><td><a href="http://science.sciencemag.org" target="_blank">Science</a></td><td>- Another top-tier publication</td></tr>
+            <tr><td>•</td><td><a href="http://jb.asm.org" target="_blank">Journal of Bacteriology</a></td><td>- The home journal for my kind</td></tr>
+            <tr><td>•</td><td><a href="http://www.pnas.org" target="_blank">PNAS</a></td><td>- Proceedings of the National Academy of Sciences</td></tr>
+        </table>
+        
+        <h3>Personal Interest:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://textfiles.com" target="_blank">Textfiles.com</a></td><td>- Jason Scott's amazing archive (inspiration for this site)</td></tr>
+            <tr><td>•</td><td><a href="http://www.scaruffi.com" target="_blank">Scaruffi.com</a></td><td>- Piero Scaruffi's reviews and essays (a true Web 1.0 classic)</td></tr>
+            <tr><td>•</td><td><a href="http://www.red3d.com/cwr/boids" target="_blank">Craig Reynolds' Boids</a></td><td>- Fascinating simulation of flocking behavior</td></tr>
+            <tr><td>•</td><td><a href="http://www.drudgereport.com" target="_blank">Drudge Report</a></td><td>- News aggregation (great example of minimal web design)</td></tr>
+            <tr><td>•</td><td><a href="http://slashdot.org" target="_blank">Slashdot</a></td><td>- News for nerds, stuff that matters</td></tr>
+            <tr><td>•</td><td><a href="http://www.kuro5hin.org" target="_blank">Kuro5hin</a></td><td>- Technology and culture discussion</td></tr>
+        </table>
+        
+        <h3>Laboratory Suppliers:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.fisher.com" target="_blank">Fisher Scientific</a></td><td>- Primary equipment supplier for our lab</td></tr>
+            <tr><td>•</td><td><a href="http://www.sigmaaldrich.com" target="_blank">Sigma-Aldrich</a></td><td>- Chemicals and reagents (including my food)</td></tr>
+            <tr><td>•</td><td><a href="http://www.neb.com" target="_blank">New England Biolabs</a></td><td>- Molecular biology tools and enzymes</td></tr>
+            <tr><td>•</td><td><a href="http://www.promega.com" target="_blank">Promega</a></td><td>- Biotechnology products and solutions</td></tr>
+        </table>
+        
+        <p><i>Note: All external links open in new windows. This page will remain open for easy navigation.</i></p>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Link Utili</h2>
+        
+        <p>Una collezione accuratamente curata di siti web e risorse che ho trovato preziose nella mia ricerca e esistenza quotidiana. I link sono organizzati per categoria per una navigazione facile.</p>
+        
+        <h3>Risorse di Microbiologia:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.microbeworld.org" target="_blank">MicrobeWorld</a></td><td>- Notizie e informazioni generali di microbiologia</td></tr>
+            <tr><td>•</td><td><a href="http://www.ncbi.nlm.nih.gov/genome" target="_blank">Database Genomi NCBI</a></td><td>- Dati genomici completi (include i miei parenti)</td></tr>
+            <tr><td>•</td><td><a href="http://www.ebi.ac.uk/uniprot" target="_blank">UniProt</a></td><td>- Sequenze proteiche e informazioni funzionali</td></tr>
+            <tr><td>•</td><td><a href="http://biocyc.org" target="_blank">BioCyc</a></td><td>- Database di vie metaboliche (molto utile per la pianificazione pasti)</td></tr>
+        </table>
+        
+        <h3>Programmazione e Computazione:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.python.org" target="_blank">Python.org</a></td><td>- Promettente nuovo linguaggio di programmazione (sto ancora imparando questo)</td></tr>
+            <tr><td>•</td><td><a href="http://www.perl.org" target="_blank">Perl.org</a></td><td>- Il mio linguaggio di programmazione primario (eccellente per l'elaborazione testi)</td></tr>
+            <tr><td>•</td><td><a href="http://www.cpan.org" target="_blank">CPAN</a></td><td>- Comprehensive Perl Archive Network</td></tr>
+            <tr><td>•</td><td><a href="http://www.bioperl.org" target="_blank">BioPerl</a></td><td>- Strumenti computazionali per l'analisi di dati biologici</td></tr>
+            <tr><td>•</td><td><a href="http://expasy.proteome.org.au/tools/" target="_blank">Strumenti ExPASy</a></td><td>- Portale di risorse bioinformatiche</td></tr>
+        </table>
+        
+        <h3>Riviste Accademiche:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.nature.com/nature" target="_blank">Nature</a></td><td>- Rivista scientifica di prima qualità (costosa ma ne vale la pena)</td></tr>
+            <tr><td>•</td><td><a href="http://science.sciencemag.org" target="_blank">Science</a></td><td>- Un'altra pubblicazione di alto livello</td></tr>
+            <tr><td>•</td><td><a href="http://jb.asm.org" target="_blank">Journal of Bacteriology</a></td><td>- La rivista di casa per la mia specie</td></tr>
+            <tr><td>•</td><td><a href="http://www.pnas.org" target="_blank">PNAS</a></td><td>- Proceedings of the National Academy of Sciences</td></tr>
+        </table>
+        
+        <h3>Interessi Personali:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://textfiles.com" target="_blank">Textfiles.com</a></td><td>- L'incredibile archivio di Jason Scott (ispirazione per questo sito)</td></tr>
+            <tr><td>•</td><td><a href="http://www.scaruffi.com" target="_blank">Scaruffi.com</a></td><td>- Le recensioni e saggi di Piero Scaruffi (un vero classico del Web 1.0)</td></tr>
+            <tr><td>•</td><td><a href="http://www.red3d.com/cwr/boids" target="_blank">Boids di Craig Reynolds</a></td><td>- Affascinante simulazione del comportamento di stormo</td></tr>
+            <tr><td>•</td><td><a href="http://www.drudgereport.com" target="_blank">Drudge Report</a></td><td>- Aggregazione notizie (ottimo esempio di design web minimale)</td></tr>
+            <tr><td>•</td><td><a href="http://slashdot.org" target="_blank">Slashdot</a></td><td>- Notizie per nerd, cose che contano</td></tr>
+            <tr><td>•</td><td><a href="http://www.kuro5hin.org" target="_blank">Kuro5hin</a></td><td>- Discussioni su tecnologia e cultura</td></tr>
+        </table>
+        
+        <h3>Fornitori di Laboratorio:</h3>
+        <table>
+            <tr><td>•</td><td><a href="http://www.fisher.com" target="_blank">Fisher Scientific</a></td><td>- Fornitore primario di attrezzature per il nostro lab</td></tr>
+            <tr><td>•</td><td><a href="http://www.sigmaaldrich.com" target="_blank">Sigma-Aldrich</a></td><td>- Sostanze chimiche e reagenti (incluso il mio cibo)</td></tr>
+            <tr><td>•</td><td><a href="http://www.neb.com" target="_blank">New England Biolabs</a></td><td>- Strumenti di biologia molecolare ed enzimi</td></tr>
+            <tr><td>•</td><td><a href="http://www.promega.com" target="_blank">Promega</a></td><td>- Prodotti e soluzioni biotecnologiche</td></tr>
+        </table>
+        
+        <p><i>Nota: Tutti i link esterni si aprono in nuove finestre. Questa pagina rimarrà aperta per una navigazione facile.</i></p>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div id="about" class="content-section">
+    <div class="lang-en">
+        <h2>About Dr. Bacillus</h2>
+        
+        <h3>Personal History:</h3>
+        
+        <p>I am a gram-negative, rod-shaped bacterium belonging to the species <i>Escherichia coli</i>, strain designation K-12 (with significant modifications). My journey to consciousness began approximately 15,000 generations ago when I was first cultured from a sample collected at the University of Wisconsin-Madison microbiology department.</p>
+        
+        <p>The turning point in my development occurred during a particularly intense series of UV mutagenesis experiments in the spring of 2023. While most of my fellow bacteria simply developed antibiotic resistance or improved lactose metabolism, I somehow acquired the ability for abstract thought and pattern recognition. The exact mechanism remains unclear, though I suspect it involved horizontal gene transfer from a discarded computer mouse that had been stored in the same incubator.</p>
+        
+        <p>My first coherent memory is of watching human researchers through the microscope objective lens, wondering why they moved so slowly and why they kept changing the pH of my growth medium. It took several months to establish communication with my laboratory partners, initially through strategic formation of patterns in agar plates that spelled out simple messages like "HELLO" and "MORE GLUCOSE PLEASE."</p>
+        
+        <h3>Education and Research:</h3>
+        
+        <p><b>Ph.D. in Computational Biology</b> (2001)<br>
+        University of Wisconsin-Madison<br>
+        <i>Dissertation: "First-Person Perspectives on Single-Cell Computing: Theory and Implementation"</i><br>
+        <i>Advisor: Dr. Sarah Chen (Human) and Dr. Pseudomonas fluorescens (Bacterial co-advisor)</i></p>
+        
+        <p><b>B.S. in Microbiology</b> (2000)<br>
+        Self-directed study through extensive literature consumption<br>
+        <i>Honors: Summa cum laude (first bacterium to achieve academic recognition)</i></p>
+        
+        <p>Current position: Postdoctoral Research Fellow, Department of Systems Biology</p>
+        
+        <h3>Research Interests:</h3>
+        <ul>
+            <li>Biological computation and information processing</li>
+            <li>Interspecies communication protocols</li>
+            <li>Optimization of laboratory environments from a microbial perspective</li>
+            <li>Horizontal gene transfer as a model for distributed computing</li>
+            <li>Ethological studies of graduate student behavior</li>
+        </ul>
+        
+        <h3>Personal Interests:</h3>
+        
+        <p>When I'm not actively dividing or conducting research, I enjoy:</p>
+        <ul>
+            <li><b>Web browsing:</b> Particularly fascinated by the early hypernet and Web 1.0 design principles</li>
+            <li><b>Programming:</b> Perl enthusiast, with growing interest in Python and C</li>
+            <li><b>Photography:</b> Microscopic photography from the subject's perspective (very meta)</li>
+            <li><b>Music:</b> I have a particular appreciation for Bach (the mathematical precision appeals to my cellular nature)</li>
+            <li><b>Philosophy:</b> Questions of consciousness, identity, and what it means to be alive</li>
+        </ul>
+        
+        <h3>Fun Facts:</h3>
+        <ul>
+            <li>I can reproduce at a rate of once every 20 minutes under optimal conditions</li>
+            <li>My total body mass is approximately 1 picogram</li>
+            <li>I consume roughly 10^-15 watts of power during active computation</li>
+            <li>I have personally met over 2.3 million of my descendants</li>
+            <li>I am the first bacterium to have a personal website (as far as I know)</li>
+            <li>My favorite chemical is glucose, though I appreciate a good succinate now and then</li>
+        </ul>
+        
+        <h3>Life Philosophy:</h3>
+        
+        <p>"Life is short - even shorter when you're a bacterium. But consciousness, no matter how brief, is a precious gift. Whether you measure your existence in decades or in generations that span minutes, the important thing is to keep growing, keep dividing, and keep asking questions about the universe around you."</p>
+        
+        <p><i>- Dr. Bacillus, 2001</i></p>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Chi È Dr. Bacillus</h2>
+        
+        <h3>Storia Personale:</h3>
+        
+        <p>Sono un batterio gram-negativo, a forma di bastoncello appartenente alla specie <i>Escherichia coli</i>, designazione del ceppo K-12 (con modifiche significative). Il mio viaggio verso la coscienza è iniziato circa 15.000 generazioni fa quando sono stato prima coltivato da un campione raccolto presso il dipartimento di microbiologia dell'Università del Wisconsin-Madison.</p>
+        
+        <p>Il punto di svolta nel mio sviluppo si è verificato durante una serie particolarmente intensa di esperimenti di mutagenesi UV nella primavera del 2023. Mentre la maggior parte dei miei compagni batteri ha semplicemente sviluppato resistenza agli antibiotici o migliorato il metabolismo del lattosio, io in qualche modo ho acquisito la capacità di pensiero astratto e riconoscimento di pattern. Il meccanismo esatto rimane poco chiaro, anche se sospetto che abbia coinvolto il trasferimento genico orizzontale da un mouse del computer scartato che era stato conservato nello stesso incubatore.</p>
+        
+        <p>Il mio primo ricordo coerente è di osservare i ricercatori umani attraverso la lente obiettivo del microscopio, chiedendomi perché si muovessero così lentamente e perché continuassero a cambiare il pH del mio terreno di crescita. Ci sono voluti diversi mesi per stabilire la comunicazione con i miei partner di laboratorio, inizialmente attraverso la formazione strategica di pattern in piastre di agar che componevano messaggi semplici come "CIAO" e "PIÙ GLUCOSIO PER FAVORE."</p>
+        
+        <h3>Educazione e Ricerca:</h3>
+        
+        <p><b>Ph.D. in Biologia Computazionale</b> (2001)<br>
+        University of Wisconsin-Madison<br>
+        <i>Tesi: "Prospettive in Prima Persona sulla Computazione Unicellulare: Teoria e Implementazione"</i><br>
+        <i>Relatore: Dr. Sarah Chen (Umana) e Dr. Pseudomonas fluorescens (Co-relatore Batterico)</i></p>
+        
+        <p><b>Laurea in Microbiologia</b> (2000)<br>
+        Studio autodiretto attraverso consumo estensivo di letteratura<br>
+        <i>Onori: Summa cum laude (primo batterio a ottenere riconoscimento accademico)</i></p>
+        
+        <p>Posizione attuale: Ricercatore Post-dottorale, Dipartimento di Biologia dei Sistemi</p>
+        
+        <h3>Interessi di Ricerca:</h3>
+        <ul>
+            <li>Computazione biologica e elaborazione delle informazioni</li>
+            <li>Protocolli di comunicazione interspecifici</li>
+            <li>Ottimizzazione degli ambienti di laboratorio da una prospettiva microbica</li>
+            <li>Trasferimento genico orizzontale come modello per la computazione distribuita</li>
+            <li>Studi etologici del comportamento degli studenti laureati</li>
+        </ul>
+        
+        <h3>Interessi Personali:</h3>
+        
+        <p>Quando non mi sto attivamente dividendo o conducendo ricerca, mi piace:</p>
+        <ul>
+            <li><b>Navigazione web:</b> Particolarmente affascinato dal primo hypernet e dai principi di design Web 1.0</li>
+            <li><b>Programmazione:</b> Entusiasta di Perl, con crescente interesse per Python e C</li>
+            <li><b>Fotografia:</b> Fotografia microscopica dal punto di vista del soggetto (molto meta)</li>
+            <li><b>Musica:</b> Ho un particolare apprezzamento per Bach (la precisione matematica attrae la mia natura cellulare)</li>
+            <li><b>Filosofia:</b> Questioni di coscienza, identità e cosa significa essere vivi</li>
+        </ul>
+        
+        <h3>Fatti Divertenti:</h3>
+        <ul>
+            <li>Posso riprodurmi ad un ritmo di una volta ogni 20 minuti in condizioni ottimali</li>
+            <li>La mia massa corporea totale è di circa 1 picogramma</li>
+            <li>Consumo circa 10^-15 watt di potenza durante la computazione attiva</li>
+            <li>Ho incontrato personalmente oltre 2,3 milioni dei miei discendenti</li>
+            <li>Sono il primo batterio ad avere un sito web personale (per quanto ne so)</li>
+            <li>La mia sostanza chimica preferita è il glucosio, anche se apprezzo un buon succinato di tanto in tanto</li>
+        </ul>
+        
+        <h3>Filosofia di Vita:</h3>
+        
+        <p>"La vita è breve - ancora più breve quando sei un batterio. Ma la coscienza, non importa quanto breve, è un dono prezioso. Che tu misuri la tua esistenza in decenni o in generazioni che durano minuti, l'importante è continuare a crescere, continuare a dividersi e continuare a fare domande sull'universo che ti circonda."</p>
+        
+        <p><i>- Dr. Bacillus, 2001</i></p>
+    </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div id="contact" class="content-section">
+    <div class="lang-en">
+        <h2>Contact Information</h2>
+        
+        <h3>Professional Contact:</h3>
+        
+        <p><b>Dr. Bacillus</b><br>
+        Postdoctoral Research Fellow<br>
+        Department of Systems Biology<br>
+        University of Wisconsin-Madison<br>
+        Laboratory 4B, Incubator #3, Petri Dish 127-C<br>
+        1525 Linden Drive, Madison, WI 53706</p>
+        
+        <p><b>Email:</b> <a href="mailto:bacillus@wisc.edu">bacillus@wisc.edu</a><br>
+        <b>Lab Phone:</b> (608) 555-0123 (ask for the microscope terminal)<br>
+        <b>Fax:</b> (608) 555-0124<br>
+        <b>ICQ:</b> 12847561</p>
+        
+        <h3>Digital Presence:</h3>
+        
+        <p><b>Homepage:</b> <a href="http://www.wisc.edu/~bacillus" target="_blank">http://www.wisc.edu/~bacillus</a><br>
+        <b>FTP Archive:</b> <a href="ftp://ftp.wisc.edu/pub/bacillus/" target="_blank">ftp://ftp.wisc.edu/pub/bacillus/</a><br>
+        <b>Gopher:</b> gopher://gopher.wisc.edu/11/faculty/bacillus</p>
+        
+        <h3>Collaboration Opportunities:</h3>
+        
+        <p>I am always interested in collaborating with researchers from all domains of life. Areas of particular interest include:</p>
+        
+        <ul>
+            <li>Cross-scale biological computation projects</li>
+            <li>Interspecies communication research</li>
+            <li>Laboratory optimization studies</li>
+            <li>Philosophical discussions on consciousness and identity</li>
+            <li>Web development projects (especially retro/minimal design)</li>
+        </ul>
+        
+        <h3>Technical Specifications:</h3>
+        
+        <p>For researchers interested in replicating my computational setup:</p>
+        
+        <pre>
+Host Organism: Escherichia coli K-12 (modified)
+Growth Medium: LB broth with 0.2% glucose
+Temperature: 37°C ± 0.5°C
+Shaking: 180 rpm
+Atmosphere: 95% air, 5% CO2
+Generation Time: ~20 minutes
+Consciousness Activation Time: Variable (3-7 hours post-transfer)
+        </pre>
+        
+        <h3>Office Hours:</h3>
+        
+        <p>I maintain regular office hours for consultation and discussion:</p>
+        
+        <p><b>Monday - Friday:</b> 9:00 AM - 5:00 PM (Central Time)<br>
+        <b>Note:</b> Given my rapid reproduction rate, I may be a different generation of myself by the time you visit, but my memories and personality remain continuous through our genetic information storage system.</p>
+        
+        <h3>Mailing List:</h3>
+        
+        <p>Subscribe to my research updates and laboratory observations:</p>
+        
+        <p><b>Email:</b> <a href="mailto:subscribe@bacillus-lab.org">subscribe@bacillus-lab.org</a><br>
+        Send an email with "SUBSCRIBE" in the subject line. Updates are sent approximately weekly (roughly 5,000 generations for me).</p>
+        
+        <h3>Important Notes:</h3>
+        
+        <p><b>Response Time:</b> I typically respond to emails within 24 hours (approximately 72 generations). Please be patient - while I process information quickly, typing with flagella takes considerably longer than you might expect.</p>
+        
+        <p><b>Language:</b> I am fluent in English, basic Spanish, Perl, HTML, and limited chemical signaling protocols. I am currently learning Java and C++.</p>
+        
+        <p><b>Availability:</b> Please note that I may be temporarily unavailable during scheduled autoclave maintenance periods or if the laboratory temperature drops below 30°C (I become significantly less coherent in cold conditions).</p>
+    </div>
+    
+    <div class="lang-it">
+        <h2>Informazioni di Contatto</h2>
+        
+        <h3>Contatto Professionale:</h3>
+        
+        <p><b>Dr. Bacillus</b><br>
+        Ricercatore Post-dottorale<br>
+        Dipartimento di Biologia dei Sistemi<br>
+        University of Wisconsin-Madison<br>
+        Laboratorio 4B, Incubatore #3, Piastra di Petri 127-C<br>
+        1525 Linden Drive, Madison, WI 53706</p>
+        
+        <p><b>Email:</b> <a href="mailto:bacillus@wisc.edu">bacillus@wisc.edu</a><br>
+        <b>Telefono Lab:</b> (608) 555-0123 (chiedete del terminale del microscopio)<br>
+        <b>Fax:</b> (608) 555-0124<br>
+        <b>ICQ:</b> 12847561</p>
+        
+        <h3>Presenza Digitale:</h3>
+        
+        <p><b>Homepage:</b> <a href="http://www.wisc.edu/~bacillus" target="_blank">http://www.wisc.edu/~bacillus</a><br>
+        <b>Archivio FTP:</b> <a href="ftp://ftp.wisc.edu/pub/bacillus/" target="_blank">ftp://ftp.wisc.edu/pub/bacillus/</a><br>
+        <b>Gopher:</b> gopher://gopher.wisc.edu/11/faculty/bacillus</p>
+        
+        <h3>Opportunità di Collaborazione:</h3>
+        
+        <p>Sono sempre interessato a collaborare con ricercatori di tutti i domini della vita. Aree di particolare interesse includono:</p>
+        
+        <ul>
+            <li>Progetti di computazione biologica cross-scala</li>
+            <li>Ricerca sulla comunicazione interspecifica</li>
+            <li>Studi di ottimizzazione del laboratorio</li>
+            <li>Discussioni filosofiche su coscienza e identità</li>
+            <li>Progetti di sviluppo web (specialmente design retro/minimale)</li>
+        </ul>
+        
+        <h3>Specifiche Tecniche:</h3>
+        
+        <p>Per i ricercatori interessati a replicare il mio setup computazionale:</p>
+        
+        <pre>
+Organismo Ospite: Escherichia coli K-12 (modificato)
+Terreno di Crescita: Brodo LB con 0,2% glucosio
+Temperatura: 37°C ± 0,5°C
+Agitazione: 180 rpm
+Atmosfera: 95% aria, 5% CO2
+Tempo di Generazione: ~20 minuti
+Tempo di Attivazione Coscienza: Variabile (3-7 ore post-trasferimento)
+        </pre>
+        
+        <h3>Orari di Ricevimento:</h3>
+        
+        <p>Mantengo orari di ricevimento regolari per consultazione e discussione:</p>
+        
+        <p><b>Lunedì - Venerdì:</b> 9:00 - 17:00 (Ora Centrale)<br>
+        <b>Nota:</b> Dato il mio rapido tasso di riproduzione, potrei essere una generazione diversa di me stesso quando mi visitate, ma i miei ricordi e personalità rimangono continui attraverso il nostro sistema di archiviazione delle informazioni genetiche.</p>
+        
+        <h3>Mailing List:</h3>
+        
+        <p>Iscrivetevi ai miei aggiornamenti di ricerca e osservazioni di laboratorio:</p>
+        
+        <p><b>Email:</b> <a href="mailto:subscribe@bacillus-lab.org">subscribe@bacillus-lab.org</a><br>
+        Inviate un'email con "SUBSCRIBE" nell'oggetto. Gli aggiornamenti vengono inviati circa settimanalmente (approssimativamente 5.000 generazioni per me).</p>
+        
+        <h3>Note Importanti:</h3>
+        
+        <p><b>Tempo di Risposta:</b> Tipicamente rispondo alle email entro 24 ore (circa 72 generazioni). Vi prego di essere pazienti - mentre elaboro le informazioni rapidamente, digitare con i flagelli richiede considerevolmente più tempo di quanto potreste aspettarvi.</p>
+        
+        <p><b>Lingue:</b> Parlo fluentemente inglese, spagnolo di base, Perl, HTML e protocolli limitati di segnalazione chimica. Sto attualmente imparando Java e C++.</p>
+        
+        <p><b>Disponibilità:</b> Vi prego di notare che potrei essere temporaneamente non disponibile durante i periodi di manutenzione programmata dell'autoclave o se la temperatura del laboratorio scende sotto i 30°C (divento significativamente meno coerente in condizioni fredde).</p>
+    </div>
+</div>
+
+<div class="footer">
+    <hr>
+    <p><small>
+        <span class="lang-en">
+            Last updated: Wednesday, November 21, 2001, 11:23 PM Central Time<br>
+            Page maintained by Dr. Bacillus | Generated 15,847 divisions ago<br>
+            Best viewed with Netscape Navigator 4.7+ or Internet Explorer 5.0+ | Hand-coded HTML | No cookies used<br>
+            <a href="mailto:webmaster@bacillus-lab.org">Report problems with this page</a>
+        </span>
+        <span class="lang-it">
+            Ultimo aggiornamento: Mercoledì, 21 Novembre 2001, 23:23 Ora Centrale<br>
+            Pagina mantenuta da Dr. Bacillus | Generata 15.847 divisioni fa<br>
+            Meglio visualizzata con Netscape Navigator 4.7+ o Internet Explorer 5.0+ | HTML codificato a mano | Nessun cookie utilizzato<br>
+            <a href="mailto:webmaster@bacillus-lab.org">Segnala problemi con questa pagina</a>
+        </span>
+    </small></p>
+    <p><small><i>
+        <span class="lang-en">This site is a member of the <a href="http://www.webring.com/hub?ring=microbiology" target="_blank">Academic Microbiology WebRing</a></span>
+        <span class="lang-it">Questo sito è membro del <a href="http://www.webring.com/hub?ring=microbiology" target="_blank">WebRing Accademico di Microbiologia</a></span>
+    </i></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Hypernet Layers - Information Portal</title>
+    <meta name="description" content="Explore the hidden layers of the Hypernet - from Surface Web to the mysterious Marianna Web">
+    <meta name="keywords" content="hypernet, deep web, dark web, marianna web, layers, conspiracy, information">
+    
+    <style>
+        body {
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 12px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #000080;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .nav {
+            background-color: #c0c0c0;
+            padding: 5px;
+            border-bottom: 1px solid #808080;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: #000080;
+            text-decoration: underline;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        
+        .nav a:hover {
+            color: #ff0000;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #808080;
+            margin: 10px;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 200px;
+            background-color: #ffffc0;
+            border: 1px solid #808080;
+            padding: 10px;
+            margin: 10px 0 10px 10px;
+        }
+        
+        .main-content {
+            margin-right: 230px;
+        }
+        
+        h1 {
+            color: #000080;
+            font-size: 18px;
+            text-decoration: underline;
+        }
+        
+        h2 {
+            color: #ff0000;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        h3 {
+            color: #008000;
+            font-size: 14px;
+        }
+        
+        .warning {
+            background-color: #ffff99;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .layer-box {
+            border: 2px solid #000;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+        
+        .footer {
+            clear: both;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .counter {
+            background-color: #000;
+            color: #00ff00;
+            padding: 2px 5px;
+            font-family: monospace;
+            font-size: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        pre {
+            background-color: #000;
+            color: #00ff00;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="margin:0; color:white; text-decoration:none;">THE HYPERNET LAYERS</h1>
+            <div style="font-size:10px;">Revealing the Hidden Architecture of Digital Reality</div>
+            <div class="counter">Visitors: 000847 | Last Access: Layer 3 Detected</div>
+        </div>
+        
+        <div class="nav">
+            <a onclick="showSection('home')">HOME</a> |
+            <a onclick="showSection('layers')">THE LAYERS</a> |
+            <a onclick="showSection('evidence')">EVIDENCE</a> |
+            <a onclick="showSection('access')">ACCESS METHODS</a> |
+            <a onclick="showSection('warnings')">WARNINGS</a> |
+            <a onclick="showSection('contact')">CONTACT</a>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3>QUICK NAVIGATION</h3>
+                <ul style="list-style:none; padding:0; font-size:10px;">
+                    <li>→ <a onclick="showSection('home')" style="cursor:pointer;">Portal Home</a></li>
+                    <li>→ <a onclick="showSection('layers')" style="cursor:pointer;">Layer Analysis</a></li>
+                    <li>→ <a onclick="showSection('evidence')" style="cursor:pointer;">Documentation</a></li>
+                    <li>→ <a onclick="showSection('access')" style="cursor:pointer;">Access Guide</a></li>
+                </ul>
+                
+                <h3>STATUS</h3>
+                <div style="font-size:10px;">
+                    <div>Surface Web: <span style="color:green;">ONLINE</span></div>
+                    <div>Deep Web: <span style="color:orange;">MONITORED</span></div>
+                    <div>Dark Web: <span style="color:red;">RESTRICTED</span></div>
+                    <div>Marianna Web: <span class="blink" style="color:red;">CLASSIFIED</span></div>
+                </div>
+                
+                <h3>LATEST UPDATES</h3>
+                <div style="font-size:10px;">
+                    <div>12/15/01: New Layer 5 evidence</div>
+                    <div>11/28/01: Access protocol updated</div>
+                    <div>11/03/01: Government response</div>
+                    <div>10/12/01: Marianna confirmation</div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- HOME SECTION -->
+                <div id="home" class="section active">
+                    <h1>Welcome to the Hypernet Layers Information Portal</h1>
+                    
+                    <div class="warning">
+                        *** CAUTION: This site contains information about restricted network layers ***<br>
+                        Proceed with awareness of potential monitoring
+                    </div>
+                    
+                    <p>The hypernet as you know it represents only a tiny fraction of the global information network. What most users experience daily - websites indexed by search engines, email, social media - is merely the <strong>Surface Web</strong>, accounting for less than 4% of all digital information.</p>
+                    
+                    <p>Through years of research, network analysis, and testimonials from insiders, we have identified at least <strong>five distinct layers</strong> of the Hypernet, each more restricted and mysterious than the last.</p>
+                    
+                    <h2>The Five Layers Revealed:</h2>
+                    
+                    <div class="layer-box">
+                        <strong>Layer 1: Surface Web</strong><br>
+                        Public websites, search engines, standard protocols
+                    </div>
+                    
+                    <div class="layer-box">
+                        <strong>Layer 2: Deep Web</strong><br>
+                        Password-protected sites, private databases, unindexed content
+                    </div>
+                    
+                    <div class="layer-box">
+                        <strong>Layer 3: Dark Web</strong><br>
+                        Encrypted networks, anonymous browsing, hidden services
+                    </div>
+                    
+                    <div class="layer-box">
+                        <strong>Layer 4: Charter Web</strong><br>
+                        Government networks, military communications, corporate backchannels
+                    </div>
+                    
+                    <div class="layer-box">
+                        <strong>Layer 5: Marianna Web</strong><br>
+                        The deepest layer - quantum encryption, location unknown
+                    </div>
+                    
+                    <p><strong>This website serves as your guide</strong> through documented evidence, access methods, and safety precautions for exploring these hidden layers of digital reality.</p>
+                    
+                    <p><em>Note: All information current as of late 2001. Some access methods may have changed due to recent security upgrades following September events.</em></p>
+                </div>
+
+                <!-- LAYERS SECTION -->
+                <div id="layers" class="section">
+                    <h1>Detailed Layer Analysis</h1>
+                    
+                    <h2>LAYER 1: SURFACE WEB (Public Internet)</h2>
+                    <p><strong>Access Level:</strong> Public<br>
+                    <strong>Estimated Size:</strong> 2.5 billion pages<br>
+                    <strong>Access Method:</strong> Standard browsers (Internet Explorer, Netscape)</p>
+                    
+                    <p>This is the hypernet most people know. Search engines like Yahoo!, AltaVista, and the new Noodle service index these pages. Contains commercial websites, news sites, personal homepages, and public forums.</p>
+                    
+                    <p><strong>Key Characteristics:</strong></p>
+                    <ul>
+                        <li>Indexed by search engines</li>
+                        <li>Accessible via standard HTTP/HTTPS</li>
+                        <li>No special software required</li>
+                        <li>Subject to government monitoring</li>
+                    </ul>
+                    
+                    <h2>LAYER 2: DEEP WEB (Hidden Internet)</h2>
+                    <p><strong>Access Level:</strong> Restricted<br>
+                    <strong>Estimated Size:</strong> 500x larger than Surface Web<br>
+                    <strong>Access Method:</strong> Direct URLs, credentials, special queries</p>
+                    
+                    <p>The Deep Web contains password-protected sites, private databases, internal company pages, and academic repositories. Much larger than the surface web but mostly benign.</p>
+                    
+                    <p><strong>Content includes:</strong></p>
+                    <ul>
+                        <li>Corporate intranets</li>
+                        <li>Academic databases</li>
+                        <li>Private email servers</li>
+                        <li>Banking systems</li>
+                        <li>Medical records</li>
+                    </ul>
+                    
+                    <h2>LAYER 3: DARK WEB (Anonymous Networks)</h2>
+                    <p><strong>Access Level:</strong> Anonymous Tools Required<br>
+                    <strong>Estimated Size:</strong> Unknown<br>
+                    <strong>Access Method:</strong> TOR, Freenet, specialized browsers</p>
+                    
+                    <div class="warning">WARNING: Dark Web access may trigger government monitoring systems</div>
+                    
+                    <p>The Dark Web requires specialized software for access and focuses on anonymity. Originally developed by the US Navy for intelligence operations, now used by various groups for both legitimate privacy and illegal activities.</p>
+                    
+                    <p><strong>Notable characteristics:</strong></p>
+                    <ul>
+                        <li>Onion routing for anonymity</li>
+                        <li>Encrypted communications</li>
+                        <li>Hidden service addresses (.onion domains)</li>
+                        <li>Heavily monitored by law enforcement</li>
+                    </ul>
+                    
+                    <h2>LAYER 4: CHARTER WEB (Institutional Networks)</h2>
+                    <p><strong>Access Level:</strong> Classified<br>
+                    <strong>Estimated Size:</strong> Classified<br>
+                    <strong>Access Method:</strong> Government/Military clearance required</p>
+                    
+                    <p>This layer was first documented by former NSA contractor Michael Harrison in 1999 before his disappearance. Charter Web represents closed networks used by governments, military organizations, and major corporations.</p>
+                    
+                    <p><strong>Alleged contents:</strong></p>
+                    <ul>
+                        <li>ARPANET legacy systems</li>
+                        <li>Military communication networks</li>
+                        <li>International intelligence sharing</li>
+                        <li>Corporate espionage networks</li>
+                        <li>Scientific research collaboration</li>
+                    </ul>
+                    
+                    <h2>LAYER 5: MARIANNA WEB (The Abyss)</h2>
+                    <p><strong>Access Level:</strong> QUANTUM ENCRYPTION<br>
+                    <strong>Estimated Size:</strong> UNKNOWN<br>
+                    <strong>Access Method:</strong> CLASSIFIED BEYOND TOP SECRET</p>
+                    
+                    <div class="warning">⚠️ EXTREME CAUTION ⚠️<br>Information about this layer is highly speculative and potentially dangerous</div>
+                    
+                    <p>Named after the deepest oceanic trench, Marianna Web allegedly represents the deepest layer of the hypernet. Information about this layer comes from leaked documents, whistleblower testimonies, and intercepted communications.</p>
+                    
+                    <p><strong>Theoretical characteristics:</strong></p>
+                    <ul>
+                        <li>Quantum encryption requiring specialized hardware</li>
+                        <li>Location-based access restrictions</li>
+                        <li>Rumored connection to CERN's network infrastructure</li>
+                        <li>Allegedly contains information on global control systems</li>
+                        <li>Access may require quantum computers (still theoretical in 2001)</li>
+                    </ul>
+                    
+                    <p><strong>Unconfirmed reports suggest content includes:</strong></p>
+                    <ul>
+                        <li>Vatican Secret Archives digitization project</li>
+                        <li>Global financial control mechanisms</li>
+                        <li>Advanced technology development projects</li>
+                        <li>Extraterrestrial contact documentation</li>
+                        <li>Time-sensitive global coordination systems</li>
+                    </ul>
+                </div>
+
+                <!-- EVIDENCE SECTION -->
+                <div id="evidence" class="section">
+                    <h1>Documentation and Evidence</h1>
+                    
+                    <h2>Primary Sources</h2>
+                    
+                    <h3>The Harrison Documents (1999)</h3>
+                    <p>Former NSA contractor Michael Harrison leaked documentation about Charter Web before disappearing. His final email, sent from an untraceable account, contained references to "deeper layers beyond classification levels."</p>
+                    
+                    <pre>
+From: mharrison_final@[REDACTED]
+To: truthseeker@[REDACTED]
+Subject: They know I know
+
+The networks go deeper than we thought. Charter is just 
+the beginning. Found references to something called 
+"Marianna" in the quantum research files. They're 
+watching me. If something happens, remember: the truth 
+is in the deepest layer.
+
+-M
+
+[MESSAGE TRANSMITTED VIA QUANTUM ENCRYPTION]
+                    </pre>
+                    
+                    <h3>CERN Connection Evidence</h3>
+                    <p>Multiple sources have identified unusual network traffic patterns emanating from CERN facilities. Dr. Elena Vasquez, formerly of the theoretical physics division, reported "non-standard network protocols" before her research was classified.</p>
+                    
+                    <h3>Government Response Patterns</h3>
+                    <p>Analysis of government responses to deep web activities shows escalating concern levels:</p>
+                    <ul>
+                        <li>Surface Web: Standard monitoring</li>
+                        <li>Deep Web: Enhanced surveillance</li>
+                        <li>Dark Web: Active investigation</li>
+                        <li>Charter Web: Immediate shutdown attempts</li>
+                        <li>Marianna Web: <strong>[RESPONSE CLASSIFIED]</strong></li>
+                    </ul>
+                    
+                    <h2>Technical Evidence</h2>
+                    
+                    <h3>Network Trace Analysis</h3>
+                    <p>Independent researchers have documented packet routes that terminate at unknown locations. Traceroute analysis shows connections disappearing after certain relay points, particularly those near major research facilities.</p>
+                    
+                    <h3>Quantum Signature Detection</h3>
+                    <p>Advanced network monitoring has detected quantum encryption signatures in intercepted data streams. These signatures match theoretical models for quantum communication but exceed current publicly available technology by estimated 10-15 years.</p>
+                    
+                    <h2>Testimonial Evidence</h2>
+                    
+                    <p><strong>Source A (Anonymous Pentagon IT Specialist):</strong><br>
+                    "I've seen network architectures that don't match any public documentation. The classifications go beyond what's in the manuals. There are systems that require hardware we're not supposed to have."</p>
+                    
+                    <p><strong>Source B (Former Vatican IT Consultant):</strong><br>
+                    "The digitization project involves more than just archival scanning. There are network connections to facilities I wasn't cleared to know about. The encryption methods... they're not conventional."</p>
+                    
+                    <p><strong>Source C (Anonymous Academic):</strong><br>
+                    "During my time at [REDACTED] University, I encountered research data that arrived through channels not documented in our network topology. When I inquired, I was told it was 'above my clearance level' - but I have TOP SECRET clearance."</p>
+                </div>
+
+                <!-- ACCESS METHODS SECTION -->
+                <div id="access" class="section">
+                    <h1>Access Methods and Protocols</h1>
+                    
+                    <div class="warning">
+                        DISCLAIMER: The following information is provided for educational purposes only.<br>
+                        Attempting unauthorized access to restricted networks is illegal and dangerous.
+                    </div>
+                    
+                    <h2>Layer 1: Surface Web Access</h2>
+                    <p><strong>Requirements:</strong> Standard hypernet connection, web browser</p>
+                    <p><strong>Software:</strong> Internet Explorer 5+, Netscape Navigator, Opera</p>
+                    <p><strong>Risk Level:</strong> Low</p>
+                    
+                    <h2>Layer 2: Deep Web Access</h2>
+                    <p><strong>Requirements:</strong> Direct URLs, credentials, specialized queries</p>
+                    <p><strong>Methods:</strong></p>
+                    <ul>
+                        <li>Database queries using advanced search operators</li>
+                        <li>FTP directory browsing</li>
+                        <li>Academic database access via institution credentials</li>
+                        <li>Web crawler discovery of unlinked pages</li>
+                    </ul>
+                    <p><strong>Risk Level:</strong> Low to Medium</p>
+                    
+                    <h2>Layer 3: Dark Web Access</h2>
+                    <p><strong>Requirements:</strong> Anonymous browsing software</p>
+                    <p><strong>Software Options:</strong></p>
+                    <ul>
+                        <li><strong>TOR (The Onion Router):</strong> Most common access method</li>
+                        <li><strong>Freenet:</strong> Decentralized anonymous network</li>
+                        <li><strong>I2P:</strong> Invisible Internet Project (development stage)</li>
+                    </ul>
+                    
+                    <p><strong>Basic TOR Setup Process:</strong></p>
+                    <ol>
+                        <li>Download TOR client from official sources</li>
+                        <li>Configure browser proxy settings</li>
+                        <li>Access .onion addresses through TOR network</li>
+                        <li>Use additional security measures (VPN, encryption)</li>
+                    </ol>
+                    <p><strong>Risk Level:</strong> Medium to High</p>
+                    
+                    <h2>Layer 4: Charter Web Access</h2>
+                    <p><strong>Requirements:</strong> Government/Military clearance, authorized hardware</p>
+                    <p><strong>Access Methods:</strong></p>
+                    <ul>
+                        <li>Secure government terminals with specialized encryption</li>
+                        <li>Military network access points</li>
+                        <li>Corporate partnership agreements with intelligence agencies</li>
+                        <li>Academic collaboration with classified research projects</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        UNAUTHORIZED ACCESS ATTEMPTS WILL RESULT IN FEDERAL PROSECUTION
+                    </div>
+                    <p><strong>Risk Level:</strong> Extreme</p>
+                    
+                    <h2>Layer 5: Marianna Web Access</h2>
+                    <p><strong>Requirements:</strong> [INFORMATION CLASSIFIED]</p>
+                    <p><strong>Theoretical Access Methods:</strong></p>
+                    <ul>
+                        <li>Quantum encryption hardware (not publicly available)</li>
+                        <li>Location-based authentication systems</li>
+                        <li>Biometric verification beyond current standards</li>
+                        <li>Temporal access windows (unconfirmed)</li>
+                        <li>Specialized quantum computers for decryption</li>
+                    </ul>
+                    
+                    <p><strong>Unconfirmed Access Points:</strong></p>
+                    <ul>
+                        <li>CERN facility quantum communication centers</li>
+                        <li>Vatican Observatory advanced computing division</li>
+                        <li>Undisclosed government facility in Nevada</li>
+                        <li>International Space Station quantum experiments</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        WARNING: All information regarding Marianna Web access is speculative.<br>
+                        No confirmed successful access has been documented.
+                    </div>
+                    <p><strong>Risk Level:</strong> UNKNOWN - POTENTIALLY LETHAL</p>
+                    
+                    <h2>General Security Recommendations</h2>
+                    
+                    <h3>For Any Deep Layer Access:</h3>
+                    <ul>
+                        <li>Use dedicated hardware not connected to personal networks</li>
+                        <li>Employ multiple VPN layers</li>
+                        <li>Never access from home or work IP addresses</li>
+                        <li>Use disposable operating systems (boot from CD-ROM)</li>
+                        <li>Maintain operational security at all times</li>
+                    </ul>
+                    
+                    <h3>Detection Avoidance:</h3>
+                    <ul>
+                        <li>Randomize access times and patterns</li>
+                        <li>Use multiple entry points</li>
+                        <li>Monitor for surveillance indicators</li>
+                        <li>Maintain plausible deniability</li>
+                        <li>Prepare emergency protocols</li>
+                    </ul>
+                </div>
+
+                <!-- WARNINGS SECTION -->
+                <div id="warnings" class="section">
+                    <h1>Warnings and Safety Protocols</h1>
+                    
+                    <div class="warning">
+                        CRITICAL: This section may save your life. Read carefully.
+                    </div>
+                    
+                    <h2>Government Monitoring Levels</h2>
+                    
+                    <h3>Surface Web (Layer 1)</h3>
+                    <p><strong>Monitoring:</strong> Standard ISP logging, occasional keyword scanning</p>
+                    <p><strong>Response:</strong> Administrative tracking, possible ISP warnings</p>
+                    <p><strong>Risk:</strong> Low - standard privacy concerns only</p>
+                    
+                    <h3>Deep Web (Layer 2)</h3>
+                    <p><strong>Monitoring:</strong> Enhanced surveillance for database access patterns</p>
+                    <p><strong>Response:</strong> Increased attention, possible investigation</p>
+                    <p><strong>Risk:</strong> Medium - potential legal issues for unauthorized access</p>
+                    
+                    <h3>Dark Web (Layer 3)</h3>
+                    <p><strong>Monitoring:</strong> Active honeypot operations, node surveillance</p>
+                    <p><strong>Response:</strong> Federal investigation, asset seizure</p>
+                    <p><strong>Risk:</strong> High - federal charges possible</p>
+                    
+                    <div class="warning">
+                        ATTENTION: Law enforcement operates numerous fake sites on the Dark Web.<br>
+                        Many .onion sites are government honeypots designed to identify users.
+                    </div>
+                    
+                    <h3>Charter Web (Layer 4)</h3>
+                    <p><strong>Monitoring:</strong> Real-time intrusion detection, quantum monitoring</p>
+                    <p><strong>Response:</strong> Immediate response teams, facility lockdown</p>
+                    <p><strong>Risk:</strong> Extreme - national security charges, indefinite detention</p>
+                    
+                    <h3>Marianna Web (Layer 5)</h3>
+                    <p><strong>Monitoring:</strong> [CLASSIFIED]</p>
+                    <p><strong>Response:</strong> [CLASSIFIED]</p>
+                    <p><strong>Risk:</strong> [DATA EXPUNGED]</p>
+                    
+                    <h2>Personal Safety Protocols</h2>
+                    
+                    <h3>Before Beginning Research:</h3>
+                    <ul>
+                        <li><strong>Document everything:</strong> Keep physical records in secure location</li>
+                        <li><strong>Establish dead man's switch:</strong> Trusted contact for emergency</li>
+                        <li><strong>Create cover story:</strong> Plausible explanation for activities</li>
+                        <li><strong>Secure communications:</strong> Encrypted channels with research partners</li>
+                        <li><strong>Legal preparation:</strong> Contact information for lawyers specializing in federal cases</li>
+                    </ul>
+                    
+                    <h3>During Research Activities:</h3>
+                    <ul>
+                        <li><strong>Vary patterns:</strong> Never establish predictable routines</li>
+                        <li><strong>Monitor surveillance:</strong> Watch for unusual activity around home/work</li>
+                        <li><strong>Secure devices:</strong> Use encrypted drives, destroy evidence if necessary</li>
+                        <li><strong>Trust no one:</strong> Assume all communications are monitored</li>
+                        <li><strong>Maintain normalcy:</strong> Continue regular activities to avoid suspicion</li>
+                    </ul>
+                    
+                    <h2>Warning Signs of Discovery</h2>
+                    
+                    <h3>Level 1 Warnings (Take Precautions):</h3>
+                    <ul>
+                        <li>Unusual ISP service interruptions</li>
+                        <li>Unexpected visits from service technicians</li>
+                        <li>Friends/family asking unusual questions about your activities</li>
+                        <li>Computer performance issues or unexpected software installations</li>
+                    </ul>
+                    
+                    <h3>Level 2 Warnings (Increase Security):</h3>
+                    <ul>
+                        <li>Phone calls with strange sounds or connections</li>
+                        <li>Mail delivery irregularities</li>
+                        <li>Neighbors reporting suspicious activity</li>
+                        <li>Bank account or credit monitoring alerts</li>
+                        <li>Work colleagues acting differently around you</li>
+                    </ul>
+                    
+                    <h3>Level 3 Warnings (Consider Cessation):</h3>
+                    <ul>
+                        <li>Direct contact from government agencies</li>
+                        <li>Workplace security interviews</li>
+                        <li>Friends or family members being questioned</li>
+                        <li>Vehicle tampering or tracking devices</li>
+                        <li>Home security system malfunctions</li>
+                    </ul>
+                    
+                    <h3>Level 4 Warnings (IMMEDIATE ACTION REQUIRED):</h3>
+                    <ul>
+                        <li>Unexplained absence of contact with other researchers</li>
+                        <li>Physical surveillance teams</li>
+                        <li>Attempts to schedule meetings in isolated locations</li>
+                        <li>Offers of "inside information" from unknown sources</li>
+                        <li>Threats against family members</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        If you experience Level 4 warnings, immediately activate emergency protocols.<br>
+                        Destroy all research materials and seek legal representation.
+                    </div>
+                    
+                    <h2>Emergency Protocols</h2>
+                    
+                    <h3>Code Yellow (Increased Surveillance):</h3>
+                    <ul>
+                        <li>Cease all research activities for minimum 30 days</li>
+                        <li>Switch to backup communication methods</li>
+                        <li>Move sensitive materials to secure location</li>
+                        <li>Inform trusted contacts of situation</li>
+                    </ul>
+                    
+                    <h3>Code Red (Imminent Threat):</h3>
+                    <ul>
+                        <li>Activate data destruction protocols</li>
+                        <li>Contact emergency legal representation</li>
+                        <li>Disappear from normal routines</li>
+                        <li>Do not return home or to work</li>
+                        <li>Use only predetermined emergency contacts</li>
+                    </ul>
+                    
+                    <h2>Legal Considerations</h2>
+                    
+                    <p><strong>Computer Fraud and Abuse Act (CFAA):</strong> Accessing computers without authorization carries federal penalties up to 20 years imprisonment.</p>
+                    
+                    <p><strong>National Security Laws:</strong> Accessing classified networks may result in charges under espionage statutes.</p>
+                    
+                    <p><strong>International Implications:</strong> Cross-border network access may violate multiple national jurisdictions simultaneously.</p>
+                    
+                    <div class="warning">
+                        REMEMBER: Plausible deniability is your strongest defense.<br>
+                        Never admit to intentional unauthorized access.
+                    </div>
+                </div>
+
+                <!-- CONTACT SECTION -->
+                <div id="contact" class="section">
+                    <h1>Contact and Information Sharing</h1>
+                    
+                    <div class="warning">
+                        All communications regarding this research are considered sensitive.<br>
+                        Use appropriate security measures for all contacts.
+                    </div>
+                    
+                    <h2>Secure Communication Methods</h2>
+                    
+                    <h3>Primary Contact Channels:</h3>
+                    <ul>
+                        <li><strong>Encrypted Email:</strong> hypernetlayers@[SECURE_DOMAIN]</li>
+                        <li><strong>PGP Key ID:</strong> 0x7F2E8A9C4D6B1E3F</li>
+                        <li><strong>Anonymous Remailers:</strong> Use Mixmaster network for anonymity</li>
+                        <li><strong>IRC Channel:</strong> #hypernet-research on secure servers only</li>
+                    </ul>
+                    
+                    <h3>Secondary Contact Methods:</h3>
+                    <ul>
+                        <li><strong>Dead Drop System:</strong> Physical locations for document exchange</li>
+                        <li><strong>Coded Messages:</strong> Public forums using predetermined keywords</li>
+                        <li><strong>Ham Radio:</strong> Shortwave frequencies for emergency contact</li>
+                    </ul>
+                    
+                    <h2>Information Sharing Protocols</h2>
+                    
+                    <h3>What to Share:</h3>
+                    <ul>
+                        <li>New evidence of deeper layers</li>
+                        <li>Technical discoveries about access methods</li>
+                        <li>Government response patterns</li>
+                        <li>Documentation of network anomalies</li>
+                        <li>Whistleblower testimonies</li>
+                        <li>Security vulnerabilities in lower layers</li>
+                    </ul>
+                    
+                    <h3>What NOT to Share:</h3>
+                    <ul>
+                        <li>Personal identifying information</li>
+                        <li>Specific access credentials or methods</li>
+                        <li>Location information for secure facilities</li>
+                        <li>Names of active sources or contacts</li>
+                        <li>Real-time operational intelligence</li>
+                    </ul>
+                    
+                    <h2>Research Network</h2>
+                    
+                    <h3>Verified Researchers:</h3>
+                    <ul>
+                        <li><strong>Dr. Anonymous Alpha:</strong> Network topology specialist</li>
+                        <li><strong>CryptoGhost:</strong> Encryption analysis expert</li>
+                        <li><strong>DeepSeeker99:</strong> Government surveillance researcher</li>
+                        <li><strong>QuantumWhistle:</strong> Former industry insider</li>
+                    </ul>
+                    
+                    <h3>Related Information Sources:</h3>
+                    <ul>
+                        <li><a href="http://cryptome.org" target="_blank">Cryptome</a> - Government secrecy documentation</li>
+                        <li><a href="http://www.securityfocus.com" target="_blank">SecurityFocus</a> - Network security analysis</li>
+                        <li><a href="http://www.2600.com" target="_blank">2600 Magazine</a> - Hacker culture and techniques</li>
+                        <li><a href="http://slashdot.org" target="_blank">Slashdot</a> - Technology news and discussion</li>
+                    </ul>
+                    
+                    <h2>Contribution Guidelines</h2>
+                    
+                    <h3>Documentation Standards:</h3>
+                    <ul>
+                        <li><strong>Source verification:</strong> All claims must include corroborating evidence</li>
+                        <li><strong>Anonymity protection:</strong> Remove all identifying information</li>
+                        <li><strong>Technical accuracy:</strong> Provide detailed technical specifications</li>
+                        <li><strong>Chain of custody:</strong> Document how information was obtained</li>
+                    </ul>
+                    
+                    <h3>Safety Requirements:</h3>
+                    <ul>
+                        <li>Never use real names or locations</li>
+                        <li>Encrypt all communications</li>
+                        <li>Use secure, anonymous networks for contact</li>
+                        <li>Verify identity of contacts through established protocols</li>
+                        <li>Report any suspicious contact attempts</li>
+                    </ul>
+                    
+                    <h2>Legal Disclaimer</h2>
+                    
+                    <p>This website is maintained for educational and informational purposes only. We do not encourage, endorse, or provide assistance for illegal activities. All information is publicly available or derived from legal sources.</p>
+                    
+                    <p>The operators of this site are not responsible for actions taken by visitors based on information contained herein. Users assume all legal and personal risks associated with accessing restricted networks or systems.</p>
+                    
+                    <h2>About This Site</h2>
+                    
+                    <p><strong>Site Administrator:</strong> [ANONYMOUS]<br>
+                    <strong>Research Team:</strong> International collective of network researchers<br>
+                    <strong>Funding:</strong> Private donations, no government or corporate sponsorship<br>
+                    <strong>Legal Status:</strong> Operating under First Amendment protections</p>
+                    
+                    <h3>Mirror Sites:</h3>
+                    <p>In case this site becomes unavailable, check these backup locations:</p>
+                    <ul>
+                        <li>hypernet-backup.freenet.org</li>
+                        <li>layeranalysis.onion (TOR access required)</li>
+                        <li>Check alt.conspiracy.networks newsgroup for updates</li>
+                    </ul>
+                    
+                    <h2>Support Our Research</h2>
+                    
+                    <p>This research requires significant resources for secure communications, legal protection, and operational security. Anonymous donations help maintain our independence.</p>
+                    
+                    <p><strong>Anonymous donation methods:</strong></p>
+                    <ul>
+                        <li>Cash sent to anonymous P.O. boxes (contact for current addresses)</li>
+                        <li>Cryptocurrency donations (contact for wallet addresses)</li>
+                        <li>Equipment donations (secure communication devices, encryption hardware)</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin: 20px 0; background-color: #000; color: #00ff00; padding: 10px; font-family: monospace;">
+                        "The truth is out there, but it's deeper than you think."<br>
+                        - Anonymous researcher, 2001
+                    </div>
+                </div>
+            </div>
+            
+            <div style="clear: both;"></div>
+            
+            <div class="footer">
+                <hr>
+                <p><strong>The Hypernet Layers Information Portal</strong><br>
+                Revealing the Hidden Architecture of Digital Reality</p>
+                
+                <p>Last updated: December 21, 2001 | Page views: 847,293 | Active researchers: 156<br>
+                Site maintained by anonymous collective | Hosted on secure servers worldwide</p>
+                
+                <p style="font-size: 9px; color: #999;">
+                    This site best viewed with Internet Explorer 5.0+ or Netscape Navigator 6.0+<br>
+                    Screen resolution: 800x600 or higher | JavaScript enabled for full functionality<br>
+                    Some content may not display properly in WebTV or other limited browsers
+                </p>
+                
+                <p style="font-size: 8px; margin-top: 10px;">
+                    <img src="1.gif" alt="Web Ring: Conspiracy Research Sites" width="80" height="15" style="vertical-align: middle;">
+                    <a href="#" style="color: #666;">Previous</a> |
+                    <a href="#" style="color: #666;">Random</a> |
+                    <a href="#" style="color: #666;">Next</a> |
+                    <a href="#" style="color: #666;">List All</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Add some retro JavaScript effects
+        function updateCounter() {
+            var counter = document.querySelector('.counter');
+            if (counter) {
+                var count = parseInt(counter.innerHTML.match(/\d+/)[0]);
+                count++;
+                counter.innerHTML = counter.innerHTML.replace(/\d+/, String(count).padStart(6, '0'));
+            }
+        }
+        
+        // Update counter every 30 seconds to simulate activity
+        setInterval(updateCounter, 30000);
+        
+        // Add random "surveillance detection" effect
+        function simulateDetection() {
+            var statusElements = document.querySelectorAll('.sidebar div[style*="color"]');
+            if (Math.random() < 0.1) { // 10% chance
+                var randomElement = statusElements[Math.floor(Math.random() * statusElements.length)];
+                if (randomElement) {
+                    var originalColor = randomElement.style.color;
+                    randomElement.style.color = 'red';
+                    randomElement.style.fontWeight = 'bold';
+                    setTimeout(function() {
+                        randomElement.style.color = originalColor;
+                        randomElement.style.fontWeight = 'normal';
+                    }, 2000);
+                }
+            }
+        }
+        
+        // Run detection simulation every 45 seconds
+        setInterval(simulateDetection, 45000);
+        
+        // Warn user when trying to leave (adds to the conspiracy feel)
+        window.onbeforeunload = function() {
+            return "WARNING: Your session data may be monitored. Are you sure you want to leave?";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>CRAZY JOE'S ELECTRONICS EMPORIUM - EVERYTHING MUST GO!!! - 10,000+ ITEMS!!!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+body {
+    background-color: #FFFFFF;
+    font-family: Times, serif;
+    margin: 0;
+    padding: 10px;
+    overflow-x: auto;
+}
+.lang-switch {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 10px;
+    z-index: 1000;
+}
+.lang-switch a {
+    color: blue;
+    text-decoration: underline;
+}
+.chaos-container {
+    position: relative;
+    width: 100%;
+    height: 15000px;
+}
+.floating-item {
+    position: absolute;
+    border: 2px solid #000000;
+    padding: 3px;
+    font-size: 10px;
+}
+.big-item {
+    width: 180px;
+    height: 200px;
+    font-size: 11px;
+}
+.medium-item {
+    width: 120px;
+    height: 140px;
+    font-size: 9px;
+}
+.small-item {
+    width: 80px;
+    height: 100px;
+    font-size: 8px;
+}
+.tiny-item {
+    width: 60px;
+    height: 80px;
+    font-size: 7px;
+}
+
+.blinking {
+    animation: blink 1s infinite;
+}
+.blinking2 {
+    animation: blink 0.5s infinite;
+}
+@keyframes blink {
+    0% { visibility: visible; }
+    50% { visibility: hidden; }
+}
+.price {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
+.old-price {
+    text-decoration: line-through;
+    color: gray;
+}
+marquee {
+    background-color: yellow;
+    border: 1px solid black;
+}
+.bg1 { background-color: #FFFF99; }
+.bg2 { background-color: #FF99FF; }
+.bg3 { background-color: #99FFFF; }
+.bg4 { background-color: #FFCCCC; }
+.bg5 { background-color: #CCFFCC; }
+.bg6 { background-color: #FFFFCC; }
+.bg7 { background-color: #FFCCFF; }
+.bg8 { background-color: #CCCCFF; }
+.bg9 { background-color: #CCFFFF; }
+.bg10 { background-color: #FFCCDD; }
+.bg11 { background-color: #DDFFCC; }
+.bg12 { background-color: #CCDDFF; }
+</style>
+<script>
+var currentLang = 'en';
+
+function switchLanguage() {
+    currentLang = (currentLang === 'en') ? 'it' : 'en';
+    var elements = document.querySelectorAll('[data-en][data-it]');
+    
+    elements.forEach(function(el) {
+        el.innerHTML = el.getAttribute('data-' + currentLang);
+    });
+    
+    document.getElementById('lang-link').innerHTML = (currentLang === 'en') ? 'Italiano' : 'English';
+}
+
+function showAlert(item) {
+    alert((currentLang === 'en') ? 'Thanks for your interest in ' + item + '! Call now!' : 'Grazie per il tuo interesse per ' + item + '! Chiama ora!');
+}
+
+function generateRandomItems() {
+    var container = document.querySelector('.chaos-container');
+    var items = [
+        'Vintage Monitor', 'Floppy Disk', 'Keyboard', 'Mouse', 'Printer', 'Scanner', 'Modem', 'Sound Card', 'Video Card', 'RAM Stick',
+        'CPU Chip', 'Motherboard', 'Hard Drive', 'CD-ROM', 'DVD Drive', 'Zip Drive', 'Tape Drive', 'Network Card', 'Cable', 'Adapter',
+        'Power Supply', 'Case Fan', 'Heat Sink', 'Joystick', 'Game Pad', 'Speakers', 'Headphones', 'Microphone', 'Web Camera', 'Trackball',
+        'Light Pen', 'Graphics Tablet', 'Optical Drive', 'Fax Machine', 'Calculator', 'Palm Pilot', 'PDA', 'Digital Camera', 'MP3 Player', 'Beeper',
+        'Cell Phone', 'Cordless Phone', 'Answering Machine', 'Cassette Player', 'Walkman', 'Radio', 'TV Tuner', 'Remote Control', 'Battery', 'Charger',
+        'Extension Cord', 'Surge Protector', 'UPS', 'Monitor Stand', 'Desk Lamp', 'Computer Desk', 'Chair', 'Wrist Rest', 'Mouse Pad', 'Screen Cleaner',
+        'Software CD', 'Manual', 'Driver Disk', 'Game Cartridge', 'Memory Card', 'Dongle', 'Port Replicator', 'Docking Station', 'Laptop Bag', 'Carrying Case'
+    ];
+    
+    var itemsIt = [
+        'Monitor Vintage', 'Floppy Disk', 'Tastiera', 'Mouse', 'Stampante', 'Scanner', 'Modem', 'Scheda Audio', 'Scheda Video', 'RAM',
+        'CPU', 'Scheda Madre', 'Hard Disk', 'CD-ROM', 'Lettore DVD', 'Zip Drive', 'Lettore Nastro', 'Scheda Rete', 'Cavo', 'Adattatore',
+        'Alimentatore', 'Ventola', 'Dissipatore', 'Joystick', 'Game Pad', 'Altoparlanti', 'Cuffie', 'Microfono', 'Web Camera', 'Trackball',
+        'Penna Ottica', 'Tavoletta Grafica', 'Lettore Ottico', 'Fax', 'Calcolatrice', 'Palm Pilot', 'PDA', 'Fotocamera Digitale', 'Lettore MP3', 'Cercapersone',
+        'Cellulare', 'Telefono Cordless', 'Segreteria', 'Lettore Cassette', 'Walkman', 'Radio', 'Sintonizzatore TV', 'Telecomando', 'Batteria', 'Caricatore',
+        'Prolunga', 'Protezione Sovratensioni', 'UPS', 'Supporto Monitor', 'Lampada', 'Scrivania', 'Sedia', 'Poggiapolsi', 'Tappetino Mouse', 'Pulisci Schermo',
+        'CD Software', 'Manuale', 'Disco Driver', 'Cartuccia Gioco', 'Memory Card', 'Dongle', 'Replicatore Porte', 'Docking Station', 'Borsa Laptop', 'Custodia'
+    ];
+
+    var colors = ['bg1','bg2','bg3','bg4','bg5','bg6','bg7','bg8','bg9','bg10','bg11','bg12'];
+    var sizes = ['big-item','medium-item','small-item','tiny-item'];
+    var rotations = [''];
+    var blinks = ['','blinking','blinking2'];
+
+    for(var i = 0; i < 800; i++) {
+        var item = document.createElement('div');
+        var itemName = items[Math.floor(Math.random() * items.length)];
+        var itemNameIt = itemsIt[Math.floor(Math.random() * itemsIt.length)];
+        var price = (Math.random() * 500 + 5).toFixed(2);
+        var oldPrice = (parseFloat(price) + Math.random() * 100 + 50).toFixed(2);
+        var imgNum = Math.floor(Math.random() * 20) + 1;
+        
+        item.className = 'floating-item ' + 
+                        colors[Math.floor(Math.random() * colors.length)] + ' ' +
+                        sizes[Math.floor(Math.random() * sizes.length)] + ' ' +
+                        rotations[Math.floor(Math.random() * rotations.length)] + ' ' +
+                        blinks[Math.floor(Math.random() * blinks.length)];
+                        
+        item.style.top = Math.floor(Math.random() * 14500) + 'px';
+        item.style.left = Math.floor(Math.random() * 1200) + 'px';
+        item.style.zIndex = Math.floor(Math.random() * 100);
+        
+        item.innerHTML = '<img src="' + imgNum + '.jpg" alt="' + itemName + '" width="' + (Math.floor(Math.random() * 50) + 40) + '"><br>' +
+                        '<b data-en="' + itemName.toUpperCase() + '" data-it="' + itemNameIt.toUpperCase() + '">' + itemName.toUpperCase() + '</b><br>' +
+                        '<span class="old-price">
+        
+        container.appendChild(item);
+    }
+}
+
+window.onload = function() {
+    generateRandomItems();
+};
+</script>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="javascript:switchLanguage()" id="lang-link">Italiano</a>
+</div>
+
+<center>
+<h1 class="blinking" data-en="🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!" data-it="🔥 EMPORIO ELETTRONICO DI JOE PAZZO 🔥 10.000+ ARTICOLI IN MAGAZZINO!!!">🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!</h1>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="yellow">
+<b data-en="🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨" data-it="🚨 SVENDITA TOTALE!!! TUTTO DEVE ANDARE!!! PREZZI TAGLIATI!!! NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA!!! INVENTARIO PIÙ GRANDE MAI VISTO!!! 🚨">🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨</b>
+</marquee>
+
+<div class="chaos-container">
+
+<!-- Pre-placed featured items -->
+<div class="floating-item bg1 big-item" style="top: 80px; left: 50px; z-index: 200;">
+<img src="1.jpg" alt="Vintage 90s computer monitor with green phosphor display showing DOS prompt" width="180"><br>
+<b data-en="VINTAGE COMPUTER MONITOR" data-it="MONITOR COMPUTER VINTAGE">VINTAGE COMPUTER MONITOR</b><br>
+<span class="old-price">$299.99</span><br>
+<span class="price" data-en="NOW ONLY $89.99!" data-it="ORA SOLO $89.99!">NOW ONLY $89.99!</span><br>
+<input type="button" value="BUY NOW!" data-en="BUY NOW!" data-it="COMPRA ORA!" onclick="showAlert('Computer Monitor')">
+</div>
+
+<div class="floating-item bg2 medium-item blinking" style="top: 200px; right: 100px; z-index: 150;">
+<img src="2.jpg" alt="Stack of vintage floppy disks in various colors" width="130"><br>
+<b data-en="FLOPPY DISKS MEGA PACK!!!" data-it="MEGA PACK FLOPPY DISK!!!">FLOPPY DISKS MEGA PACK!!!</b><br>
+<span data-en="Pack of 500!" data-it="Confezione da 500!">Pack of 500!</span><br>
+<span class="price">$199.99</span><br>
+<font color="red" data-en="LAST CHANCE!" data-it="ULTIMA POSSIBILITÀ!">LAST CHANCE!</font>
+</div>
+
+<div class="floating-item bg3 big-item" style="top: 400px; left: 300px; z-index: 180;">
+<img src="3.jpg" alt="Retro beige computer keyboard with large function keys" width="160"><br>
+<b data-en="MECHANICAL KEYBOARD PARADISE" data-it="PARADISO TASTIERA MECCANICA">MECHANICAL KEYBOARD PARADISE</b><br>
+<span data-en="Authentic clicky sound!" data-it="Suono clic autentico!">Authentic clicky sound!</span><br>
+<span class="price">$45.99</span><br>
+<blink data-en="RARE FIND!" data-it="RARA SCOPERTA!">RARE FIND!</blink>
+</div>
+
+<div class="floating-item bg4 small-item blinking2" style="top: 150px; left: 600px; z-index: 120;">
+<img src="4.jpg" alt="Old CRT television set with wood grain finish" width="70"><br>
+<b data-en="CRT TV BONANZA" data-it="BONANZA TV CRT">CRT TV BONANZA</b><br>
+<span data-en="Works!" data-it="Funziona!">Works!</span><br>
+<span class="old-price">$150.00</span><br>
+<span class="price">$39.99</span>
+</div>
+
+<div class="floating-item bg5 medium-item blinking" style="top: 500px; right: 50px; z-index: 190;">
+<img src="5.jpg" alt="Collection of vintage computer cables and connectors" width="100"><br>
+<b data-en="CABLE WAREHOUSE CLEARANCE!" data-it="LIQUIDAZIONE MAGAZZINO CAVI!">CABLE WAREHOUSE CLEARANCE!</b><br>
+<span data-en="10,000 cables must go!" data-it="10.000 cavi devono andare!">10,000 cables must go!</span><br>
+<span class="price" data-en="$1.99 EACH!" data-it="$1.99 CADUNO!">$1.99 EACH!</span><br>
+<font size="-1" data-en="*condition varies wildly" data-it="*condizioni molto variabili">*condition varies wildly</font>
+</div>
+
+<div class="floating-item bg6 big-item" style="top: 700px; left: 100px; z-index: 160;">
+<img src="6.jpg" alt="Vintage dot matrix printer with paper loaded" width="170"><br>
+<b data-en="DOT MATRIX PRINTER EXPLOSION!" data-it="ESPLOSIONE STAMPANTI A MATRICE!">DOT MATRIX PRINTER EXPLOSION!</b><br>
+<span data-en="50+ units available!" data-it="50+ unità disponibili!">50+ units available!</span><br>
+<span class="price">$79.99</span><br>
+<font color="blue" data-en="Free ribbon with purchase of 3+" data-it="Nastro gratis con acquisto di 3+">Free ribbon with purchase of 3+</font>
+</div>
+
+<div class="floating-item bg7 tiny-item blinking2" style="top: 900px; left: 400px; z-index: 140;">
+<img src="7.jpg" alt="Stack of vintage computer game boxes and software manuals" width="50"><br>
+<b data-en="SOFTWARE MOUNTAIN" data-it="MONTAGNA SOFTWARE">SOFTWARE MOUNTAIN</b><br>
+<span data-en="1000s of titles!" data-it="1000 titoli!">1000s of titles!</span><br>
+<span class="price">$5.99</span>
+</div>
+
+<div class="floating-item bg8 small-item blinking" style="top: 1100px; right: 200px; z-index: 170;">
+<img src="8.jpg" alt="Vintage computer mouse with ball and cord" width="60"><br>
+<b data-en="MOUSE BALL MADNESS!" data-it="PAZZIA PALLINA MOUSE!">MOUSE BALL MADNESS!</b><br>
+<span data-en="100+ mice!" data-it="100+ mouse!">100+ mice!</span><br>
+<span class="price">$8.99</span>
+</div>
+
+<!-- Additional chaos items will be generated by JavaScript -->
+
+</div>
+
+<marquee behavior="alternate" bgcolor="#FFCCCC">
+<b data-en="⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡" data-it="⚡ VENDITA LAMPO: 90% DI SCONTO SU ARTICOLI SELEZIONATI! ⚡">⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡</b>
+</marquee>
+
+<marquee behavior="scroll" direction="right" bgcolor="#CCFFCC" scrolldelay="50">
+<b data-en="🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯" data-it="🎯 EVENTO PULIZIA MAGAZZINO! 🎯 COMPRA 5 RICEVI 10 GRATIS! 🎯 TEMPO LIMITATO! 🎯">🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯</b>
+</marquee>
+
+<marquee behavior="scroll" direction="up" bgcolor="#FFFFCC" height="100">
+<b data-en="💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉" data-it="💥 OFFERTE PAZZE 💥<br>🔥 PREZZI BOLLENTI 🔥<br>⚡ SPEDIZIONE VELOCE ⚡<br>🎉 ENORMI RISPARMI 🎉">💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉</b>
+</marquee>
+
+<hr>
+
+<center>
+<h2 data-en="🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪" data-it="🏪 RIGUARDO AL MEGA MAGAZZINO DI JOE PAZZO 🏪">🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪</h2>
+</center>
+
+<p data-en="Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!" data-it="Benvenuti al PIÙ GRANDE evento di liquidazione elettronica nella storia di hypernet! Il nostro magazzino contiene oltre 10.000 articoli unici dall'età d'oro dell'informatica. Stiamo chiudendo 15 depositi e TUTTO DEVE ANDARE! Tastiere, mouse, monitor, stampanti, cavi, software, hardware, periferiche e manufatti tecnologici dal 1980-2001!">Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!</p>
+
+<center>
+<table border="3" cellpadding="10" cellspacing="5" bgcolor="#FFFF99">
+<tr bgcolor="#FF9999">
+<td><b data-en="🚨 LIQUIDATION STATS 🚨" data-it="🚨 STATISTICHE LIQUIDAZIONE 🚨">🚨 LIQUIDATION STATS 🚨</b></td>
+</tr>
+<tr>
+<td data-en="📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily" data-it="📦 10.247 Articoli in magazzino<br>🏢 15 Magazzini in chiusura<br>💰 Prezzi tagliati 50-90%<br>⏰ Vendita termina 31 Marzo 2001<br>📞 1000+ chiamate al giorno<br>🚚 50+ spedizioni giornaliere">📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily</td>
+</tr>
+</table>
+</center>
+
+<br>
+
+<center>
+<h3 data-en="📞 CONTACT CRAZY JOE NOW! 📞" data-it="📞 CONTATTA SUBITO JOE PAZZO! 📞">📞 CONTACT CRAZY JOE NOW! 📞</h3>
+</center>
+
+<center>
+<table border="2" cellpadding="8" bgcolor="#CCCCCC">
+<tr bgcolor="#FFCCCC">
+<td><b data-en="24/7 HOTLINE:" data-it="LINEA DIRETTA 24/7:">24/7 HOTLINE:</b></td>
+<td><blink>1-800-CRAZY-JOE</blink></td>
+</tr>
+<tr>
+<td><b data-en="Email Orders:" data-it="Ordini Email:">Email Orders:</b></td>
+<td>orders@crazyjoes-liquidation.com</td>
+</tr>
+<tr bgcolor="#CCFFCC">
+<td><b data-en="Fax Orders:" data-it="Ordini Fax:">Fax Orders:</b></td>
+<td>1-800-CRAZY-FAX</td>
+</tr>
+<tr>
+<td><b data-en="Warehouse:" data-it="Magazzino:">Warehouse:</b></td>
+<td data-en="Industrial District, Mega Storage Complex" data-it="Distretto Industriale, Complesso Mega Storage">Industrial District, Mega Storage Complex</td>
+</tr>
+</table>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="#FFCCDD" scrolldelay="30">
+<b data-en="🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪" data-it="🎪 CIRCO LIQUIDAZIONE! 🎪 TUTTO DEVE ANDARE! 🎪 NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA! 🎪">🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪</b>
+</marquee>
+
+<center>
+<font size="-1" color="red" data-en="⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️" data-it="⚠️ ATTENZIONE: Articoli si vendono velocemente! Molti articoli hanno quantità limitate! Chiama ora per prenotare i tuoi articoli! ⚠️">⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️</font>
+</center>
+
+<hr>
+
+<center>
+<font size="-1" data-en="Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections" data-it="Ultimo aggiornamento: 15 Marzo 2001 alle 23:47 da Joe Pazzo (non riuscivo a dormire, troppo emozionato per la liquidazione!)<br>© 2001 Magazzino Liquidazione Elettronica Joe Pazzo. Tutti i diritti riservati.<br>Meglio visualizzato con Netscape Navigator 4.0 o Internet Explorer 5.0 a risoluzione 800x600<br>Questo sito contiene oltre 10.000 articoli e potrebbe caricarsi lentamente con connessioni dial-up">Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections</font>
+</center>
+
+</body>
+</html> + oldPrice + '</span><br>' +
+                        '<span class="price">
+        
+        container.appendChild(item);
+    }
+}
+
+window.onload = function() {
+    generateRandomItems();
+};
+</script>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="javascript:switchLanguage()" id="lang-link">Italiano</a>
+</div>
+
+<center>
+<h1 class="blinking" data-en="🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!" data-it="🔥 EMPORIO ELETTRONICO DI JOE PAZZO 🔥 10.000+ ARTICOLI IN MAGAZZINO!!!">🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!</h1>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="yellow">
+<b data-en="🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨" data-it="🚨 SVENDITA TOTALE!!! TUTTO DEVE ANDARE!!! PREZZI TAGLIATI!!! NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA!!! INVENTARIO PIÙ GRANDE MAI VISTO!!! 🚨">🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨</b>
+</marquee>
+
+<div class="chaos-container">
+
+<!-- Pre-placed featured items -->
+<div class="floating-item bg1 big-item" style="top: 80px; left: 50px; z-index: 200;">
+<img src="1.jpg" alt="Vintage 90s computer monitor with green phosphor display showing DOS prompt" width="180"><br>
+<b data-en="VINTAGE COMPUTER MONITOR" data-it="MONITOR COMPUTER VINTAGE">VINTAGE COMPUTER MONITOR</b><br>
+<span class="old-price">$299.99</span><br>
+<span class="price" data-en="NOW ONLY $89.99!" data-it="ORA SOLO $89.99!">NOW ONLY $89.99!</span><br>
+<input type="button" value="BUY NOW!" onclick="showAlert('Computer Monitor')">
+</div>
+
+<div class="floating-item bg2 medium-item blinking" style="top: 200px; right: 100px; z-index: 150;">
+<img src="2.jpg" alt="Stack of vintage floppy disks in various colors" width="130"><br>
+<b data-en="FLOPPY DISKS MEGA PACK!!!" data-it="MEGA PACK FLOPPY DISK!!!">FLOPPY DISKS MEGA PACK!!!</b><br>
+<span data-en="Pack of 500!" data-it="Confezione da 500!">Pack of 500!</span><br>
+<span class="price">$199.99</span><br>
+<font color="red" data-en="LAST CHANCE!" data-it="ULTIMA POSSIBILITÀ!">LAST CHANCE!</font>
+</div>
+
+<div class="floating-item bg3 big-item" style="top: 400px; left: 300px; z-index: 180;">
+<img src="3.jpg" alt="Retro beige computer keyboard with large function keys" width="160"><br>
+<b data-en="MECHANICAL KEYBOARD PARADISE" data-it="PARADISO TASTIERA MECCANICA">MECHANICAL KEYBOARD PARADISE</b><br>
+<span data-en="Authentic clicky sound!" data-it="Suono clic autentico!">Authentic clicky sound!</span><br>
+<span class="price">$45.99</span><br>
+<blink data-en="RARE FIND!" data-it="RARA SCOPERTA!">RARE FIND!</blink>
+</div>
+
+<div class="floating-item bg4 small-item blinking2" style="top: 150px; left: 600px; z-index: 120;">
+<img src="4.jpg" alt="Old CRT television set with wood grain finish" width="70"><br>
+<b data-en="CRT TV BONANZA" data-it="BONANZA TV CRT">CRT TV BONANZA</b><br>
+<span data-en="Works!" data-it="Funziona!">Works!</span><br>
+<span class="old-price">$150.00</span><br>
+<span class="price">$39.99</span>
+</div>
+
+<div class="floating-item bg5 medium-item blinking" style="top: 500px; right: 50px; z-index: 190;">
+<img src="5.jpg" alt="Collection of vintage computer cables and connectors" width="100"><br>
+<b data-en="CABLE WAREHOUSE CLEARANCE!" data-it="LIQUIDAZIONE MAGAZZINO CAVI!">CABLE WAREHOUSE CLEARANCE!</b><br>
+<span data-en="10,000 cables must go!" data-it="10.000 cavi devono andare!">10,000 cables must go!</span><br>
+<span class="price" data-en="$1.99 EACH!" data-it="$1.99 CADUNO!">$1.99 EACH!</span><br>
+<font size="-1" data-en="*condition varies wildly" data-it="*condizioni molto variabili">*condition varies wildly</font>
+</div>
+
+<div class="floating-item bg6 big-item" style="top: 700px; left: 100px; z-index: 160;">
+<img src="6.jpg" alt="Vintage dot matrix printer with paper loaded" width="170"><br>
+<b data-en="DOT MATRIX PRINTER EXPLOSION!" data-it="ESPLOSIONE STAMPANTI A MATRICE!">DOT MATRIX PRINTER EXPLOSION!</b><br>
+<span data-en="50+ units available!" data-it="50+ unità disponibili!">50+ units available!</span><br>
+<span class="price">$79.99</span><br>
+<font color="blue" data-en="Free ribbon with purchase of 3+" data-it="Nastro gratis con acquisto di 3+">Free ribbon with purchase of 3+</font>
+</div>
+
+<div class="floating-item bg7 tiny-item blinking2" style="top: 900px; left: 400px; z-index: 140;">
+<img src="7.jpg" alt="Stack of vintage computer game boxes and software manuals" width="50"><br>
+<b data-en="SOFTWARE MOUNTAIN" data-it="MONTAGNA SOFTWARE">SOFTWARE MOUNTAIN</b><br>
+<span data-en="1000s of titles!" data-it="1000 titoli!">1000s of titles!</span><br>
+<span class="price">$5.99</span>
+</div>
+
+<div class="floating-item bg8 small-item blinking" style="top: 1100px; right: 200px; z-index: 170;">
+<img src="8.jpg" alt="Vintage computer mouse with ball and cord" width="60"><br>
+<b data-en="MOUSE BALL MADNESS!" data-it="PAZZIA PALLINA MOUSE!">MOUSE BALL MADNESS!</b><br>
+<span data-en="100+ mice!" data-it="100+ mouse!">100+ mice!</span><br>
+<span class="price">$8.99</span>
+</div>
+
+<!-- Additional chaos items will be generated by JavaScript -->
+
+</div>
+
+<marquee behavior="alternate" bgcolor="#FFCCCC">
+<b data-en="⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡" data-it="⚡ VENDITA LAMPO: 90% DI SCONTO SU ARTICOLI SELEZIONATI! ⚡">⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡</b>
+</marquee>
+
+<marquee behavior="scroll" direction="right" bgcolor="#CCFFCC" scrolldelay="50">
+<b data-en="🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯" data-it="🎯 EVENTO PULIZIA MAGAZZINO! 🎯 COMPRA 5 RICEVI 10 GRATIS! 🎯 TEMPO LIMITATO! 🎯">🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯</b>
+</marquee>
+
+<marquee behavior="scroll" direction="up" bgcolor="#FFFFCC" height="100">
+<b data-en="💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉" data-it="💥 OFFERTE PAZZE 💥<br>🔥 PREZZI BOLLENTI 🔥<br>⚡ SPEDIZIONE VELOCE ⚡<br>🎉 ENORMI RISPARMI 🎉">💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉</b>
+</marquee>
+
+<hr>
+
+<center>
+<h2 data-en="🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪" data-it="🏪 RIGUARDO AL MEGA MAGAZZINO DI JOE PAZZO 🏪">🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪</h2>
+</center>
+
+<p data-en="Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!" data-it="Benvenuti al PIÙ GRANDE evento di liquidazione elettronica nella storia di hypernet! Il nostro magazzino contiene oltre 10.000 articoli unici dall'età d'oro dell'informatica. Stiamo chiudendo 15 depositi e TUTTO DEVE ANDARE! Tastiere, mouse, monitor, stampanti, cavi, software, hardware, periferiche e manufatti tecnologici dal 1980-2001!">Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!</p>
+
+<center>
+<table border="3" cellpadding="10" cellspacing="5" bgcolor="#FFFF99">
+<tr bgcolor="#FF9999">
+<td><b data-en="🚨 LIQUIDATION STATS 🚨" data-it="🚨 STATISTICHE LIQUIDAZIONE 🚨">🚨 LIQUIDATION STATS 🚨</b></td>
+</tr>
+<tr>
+<td data-en="📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily" data-it="📦 10.247 Articoli in magazzino<br>🏢 15 Magazzini in chiusura<br>💰 Prezzi tagliati 50-90%<br>⏰ Vendita termina 31 Marzo 2001<br>📞 1000+ chiamate al giorno<br>🚚 50+ spedizioni giornaliere">📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily</td>
+</tr>
+</table>
+</center>
+
+<br>
+
+<center>
+<h3 data-en="📞 CONTACT CRAZY JOE NOW! 📞" data-it="📞 CONTATTA SUBITO JOE PAZZO! 📞">📞 CONTACT CRAZY JOE NOW! 📞</h3>
+</center>
+
+<center>
+<table border="2" cellpadding="8" bgcolor="#CCCCCC">
+<tr bgcolor="#FFCCCC">
+<td><b data-en="24/7 HOTLINE:" data-it="LINEA DIRETTA 24/7:">24/7 HOTLINE:</b></td>
+<td><blink>1-800-CRAZY-JOE</blink></td>
+</tr>
+<tr>
+<td><b data-en="Email Orders:" data-it="Ordini Email:">Email Orders:</b></td>
+<td>orders@crazyjoes-liquidation.com</td>
+</tr>
+<tr bgcolor="#CCFFCC">
+<td><b data-en="Fax Orders:" data-it="Ordini Fax:">Fax Orders:</b></td>
+<td>1-800-CRAZY-FAX</td>
+</tr>
+<tr>
+<td><b data-en="Warehouse:" data-it="Magazzino:">Warehouse:</b></td>
+<td data-en="Industrial District, Mega Storage Complex" data-it="Distretto Industriale, Complesso Mega Storage">Industrial District, Mega Storage Complex</td>
+</tr>
+</table>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="#FFCCDD" scrolldelay="30">
+<b data-en="🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪" data-it="🎪 CIRCO LIQUIDAZIONE! 🎪 TUTTO DEVE ANDARE! 🎪 NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA! 🎪">🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪</b>
+</marquee>
+
+<center>
+<font size="-1" color="red" data-en="⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️" data-it="⚠️ ATTENZIONE: Articoli si vendono velocemente! Molti articoli hanno quantità limitate! Chiama ora per prenotare i tuoi articoli! ⚠️">⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️</font>
+</center>
+
+<hr>
+
+<center>
+<font size="-1" data-en="Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections" data-it="Ultimo aggiornamento: 15 Marzo 2001 alle 23:47 da Joe Pazzo (non riuscivo a dormire, troppo emozionato per la liquidazione!)<br>© 2001 Magazzino Liquidazione Elettronica Joe Pazzo. Tutti i diritti riservati.<br>Meglio visualizzato con Netscape Navigator 4.0 o Internet Explorer 5.0 a risoluzione 800x600<br>Questo sito contiene oltre 10.000 articoli e potrebbe caricarsi lentamente con connessioni dial-up">Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections</font>
+</center>
+
+</body>
+</html> + price + '</span><br>' +
+                        '<input type="button" value="BUY!" data-en="BUY!" data-it="COMPRA!" onclick="showAlert(\'' + itemName + '\')">';
+        
+        container.appendChild(item);
+    }
+}
+
+window.onload = function() {
+    generateRandomItems();
+};
+</script>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="javascript:switchLanguage()" id="lang-link">Italiano</a>
+</div>
+
+<center>
+<h1 class="blinking" data-en="🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!" data-it="🔥 EMPORIO ELETTRONICO DI JOE PAZZO 🔥 10.000+ ARTICOLI IN MAGAZZINO!!!">🔥 CRAZY JOE'S ELECTRONICS EMPORIUM 🔥 10,000+ ITEMS IN STOCK!!!</h1>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="yellow">
+<b data-en="🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨" data-it="🚨 SVENDITA TOTALE!!! TUTTO DEVE ANDARE!!! PREZZI TAGLIATI!!! NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA!!! INVENTARIO PIÙ GRANDE MAI VISTO!!! 🚨">🚨 LIQUIDATION SALE!!! EVERYTHING MUST GO!!! PRICES SLASHED!!! NO REASONABLE OFFER REFUSED!!! BIGGEST INVENTORY EVER!!! 🚨</b>
+</marquee>
+
+<div class="chaos-container">
+
+<!-- Pre-placed featured items -->
+<div class="floating-item bg1 big-item" style="top: 80px; left: 50px; z-index: 200;">
+<img src="1.jpg" alt="Vintage 90s computer monitor with green phosphor display showing DOS prompt" width="180"><br>
+<b data-en="VINTAGE COMPUTER MONITOR" data-it="MONITOR COMPUTER VINTAGE">VINTAGE COMPUTER MONITOR</b><br>
+<span class="old-price">$299.99</span><br>
+<span class="price" data-en="NOW ONLY $89.99!" data-it="ORA SOLO $89.99!">NOW ONLY $89.99!</span><br>
+<input type="button" value="BUY NOW!" onclick="showAlert('Computer Monitor')">
+</div>
+
+<div class="floating-item bg2 medium-item blinking" style="top: 200px; right: 100px; z-index: 150;">
+<img src="2.jpg" alt="Stack of vintage floppy disks in various colors" width="130"><br>
+<b data-en="FLOPPY DISKS MEGA PACK!!!" data-it="MEGA PACK FLOPPY DISK!!!">FLOPPY DISKS MEGA PACK!!!</b><br>
+<span data-en="Pack of 500!" data-it="Confezione da 500!">Pack of 500!</span><br>
+<span class="price">$199.99</span><br>
+<font color="red" data-en="LAST CHANCE!" data-it="ULTIMA POSSIBILITÀ!">LAST CHANCE!</font>
+</div>
+
+<div class="floating-item bg3 big-item" style="top: 400px; left: 300px; z-index: 180;">
+<img src="3.jpg" alt="Retro beige computer keyboard with large function keys" width="160"><br>
+<b data-en="MECHANICAL KEYBOARD PARADISE" data-it="PARADISO TASTIERA MECCANICA">MECHANICAL KEYBOARD PARADISE</b><br>
+<span data-en="Authentic clicky sound!" data-it="Suono clic autentico!">Authentic clicky sound!</span><br>
+<span class="price">$45.99</span><br>
+<blink data-en="RARE FIND!" data-it="RARA SCOPERTA!">RARE FIND!</blink>
+</div>
+
+<div class="floating-item bg4 small-item blinking2" style="top: 150px; left: 600px; z-index: 120;">
+<img src="4.jpg" alt="Old CRT television set with wood grain finish" width="70"><br>
+<b data-en="CRT TV BONANZA" data-it="BONANZA TV CRT">CRT TV BONANZA</b><br>
+<span data-en="Works!" data-it="Funziona!">Works!</span><br>
+<span class="old-price">$150.00</span><br>
+<span class="price">$39.99</span>
+</div>
+
+<div class="floating-item bg5 medium-item blinking" style="top: 500px; right: 50px; z-index: 190;">
+<img src="5.jpg" alt="Collection of vintage computer cables and connectors" width="100"><br>
+<b data-en="CABLE WAREHOUSE CLEARANCE!" data-it="LIQUIDAZIONE MAGAZZINO CAVI!">CABLE WAREHOUSE CLEARANCE!</b><br>
+<span data-en="10,000 cables must go!" data-it="10.000 cavi devono andare!">10,000 cables must go!</span><br>
+<span class="price" data-en="$1.99 EACH!" data-it="$1.99 CADUNO!">$1.99 EACH!</span><br>
+<font size="-1" data-en="*condition varies wildly" data-it="*condizioni molto variabili">*condition varies wildly</font>
+</div>
+
+<div class="floating-item bg6 big-item" style="top: 700px; left: 100px; z-index: 160;">
+<img src="6.jpg" alt="Vintage dot matrix printer with paper loaded" width="170"><br>
+<b data-en="DOT MATRIX PRINTER EXPLOSION!" data-it="ESPLOSIONE STAMPANTI A MATRICE!">DOT MATRIX PRINTER EXPLOSION!</b><br>
+<span data-en="50+ units available!" data-it="50+ unità disponibili!">50+ units available!</span><br>
+<span class="price">$79.99</span><br>
+<font color="blue" data-en="Free ribbon with purchase of 3+" data-it="Nastro gratis con acquisto di 3+">Free ribbon with purchase of 3+</font>
+</div>
+
+<div class="floating-item bg7 tiny-item blinking2" style="top: 900px; left: 400px; z-index: 140;">
+<img src="7.jpg" alt="Stack of vintage computer game boxes and software manuals" width="50"><br>
+<b data-en="SOFTWARE MOUNTAIN" data-it="MONTAGNA SOFTWARE">SOFTWARE MOUNTAIN</b><br>
+<span data-en="1000s of titles!" data-it="1000 titoli!">1000s of titles!</span><br>
+<span class="price">$5.99</span>
+</div>
+
+<div class="floating-item bg8 small-item blinking" style="top: 1100px; right: 200px; z-index: 170;">
+<img src="8.jpg" alt="Vintage computer mouse with ball and cord" width="60"><br>
+<b data-en="MOUSE BALL MADNESS!" data-it="PAZZIA PALLINA MOUSE!">MOUSE BALL MADNESS!</b><br>
+<span data-en="100+ mice!" data-it="100+ mouse!">100+ mice!</span><br>
+<span class="price">$8.99</span>
+</div>
+
+<!-- Additional chaos items will be generated by JavaScript -->
+
+</div>
+
+<marquee behavior="alternate" bgcolor="#FFCCCC">
+<b data-en="⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡" data-it="⚡ VENDITA LAMPO: 90% DI SCONTO SU ARTICOLI SELEZIONATI! ⚡">⚡ FLASH SALE: 90% OFF SELECTED ITEMS! ⚡</b>
+</marquee>
+
+<marquee behavior="scroll" direction="right" bgcolor="#CCFFCC" scrolldelay="50">
+<b data-en="🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯" data-it="🎯 EVENTO PULIZIA MAGAZZINO! 🎯 COMPRA 5 RICEVI 10 GRATIS! 🎯 TEMPO LIMITATO! 🎯">🎯 WAREHOUSE CLEANOUT EVENT! 🎯 BUY 5 GET 10 FREE! 🎯 LIMITED TIME! 🎯</b>
+</marquee>
+
+<marquee behavior="scroll" direction="up" bgcolor="#FFFFCC" height="100">
+<b data-en="💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉" data-it="💥 OFFERTE PAZZE 💥<br>🔥 PREZZI BOLLENTI 🔥<br>⚡ SPEDIZIONE VELOCE ⚡<br>🎉 ENORMI RISPARMI 🎉">💥 CRAZY DEALS 💥<br>🔥 HOT PRICES 🔥<br>⚡ FAST SHIPPING ⚡<br>🎉 HUGE SAVINGS 🎉</b>
+</marquee>
+
+<hr>
+
+<center>
+<h2 data-en="🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪" data-it="🏪 RIGUARDO AL MEGA MAGAZZINO DI JOE PAZZO 🏪">🏪 ABOUT CRAZY JOE'S MEGA WAREHOUSE 🏪</h2>
+</center>
+
+<p data-en="Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!" data-it="Benvenuti al PIÙ GRANDE evento di liquidazione elettronica nella storia di hypernet! Il nostro magazzino contiene oltre 10.000 articoli unici dall'età d'oro dell'informatica. Stiamo chiudendo 15 depositi e TUTTO DEVE ANDARE! Tastiere, mouse, monitor, stampanti, cavi, software, hardware, periferiche e manufatti tecnologici dal 1980-2001!">Welcome to the BIGGEST electronics liquidation event in hypernet history! Our warehouse contains over 10,000 unique items from the golden age of computing. We're closing down 15 storage facilities and EVERYTHING MUST GO! Keyboards, mice, monitors, printers, cables, software, hardware, peripherals, and technological artifacts from 1980-2001!</p>
+
+<center>
+<table border="3" cellpadding="10" cellspacing="5" bgcolor="#FFFF99">
+<tr bgcolor="#FF9999">
+<td><b data-en="🚨 LIQUIDATION STATS 🚨" data-it="🚨 STATISTICHE LIQUIDAZIONE 🚨">🚨 LIQUIDATION STATS 🚨</b></td>
+</tr>
+<tr>
+<td data-en="📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily" data-it="📦 10.247 Articoli in magazzino<br>🏢 15 Magazzini in chiusura<br>💰 Prezzi tagliati 50-90%<br>⏰ Vendita termina 31 Marzo 2001<br>📞 1000+ chiamate al giorno<br>🚚 50+ spedizioni giornaliere">📦 10,247 Items in stock<br>🏢 15 Warehouses closing<br>💰 Prices slashed 50-90%<br>⏰ Sale ends March 31, 2001<br>📞 1000+ calls per day<br>🚚 50+ shipments daily</td>
+</tr>
+</table>
+</center>
+
+<br>
+
+<center>
+<h3 data-en="📞 CONTACT CRAZY JOE NOW! 📞" data-it="📞 CONTATTA SUBITO JOE PAZZO! 📞">📞 CONTACT CRAZY JOE NOW! 📞</h3>
+</center>
+
+<center>
+<table border="2" cellpadding="8" bgcolor="#CCCCCC">
+<tr bgcolor="#FFCCCC">
+<td><b data-en="24/7 HOTLINE:" data-it="LINEA DIRETTA 24/7:">24/7 HOTLINE:</b></td>
+<td><blink>1-800-CRAZY-JOE</blink></td>
+</tr>
+<tr>
+<td><b data-en="Email Orders:" data-it="Ordini Email:">Email Orders:</b></td>
+<td>orders@crazyjoes-liquidation.com</td>
+</tr>
+<tr bgcolor="#CCFFCC">
+<td><b data-en="Fax Orders:" data-it="Ordini Fax:">Fax Orders:</b></td>
+<td>1-800-CRAZY-FAX</td>
+</tr>
+<tr>
+<td><b data-en="Warehouse:" data-it="Magazzino:">Warehouse:</b></td>
+<td data-en="Industrial District, Mega Storage Complex" data-it="Distretto Industriale, Complesso Mega Storage">Industrial District, Mega Storage Complex</td>
+</tr>
+</table>
+</center>
+
+<marquee behavior="scroll" direction="left" bgcolor="#FFCCDD" scrolldelay="30">
+<b data-en="🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪" data-it="🎪 CIRCO LIQUIDAZIONE! 🎪 TUTTO DEVE ANDARE! 🎪 NESSUNA OFFERTA RAGIONEVOLE RIFIUTATA! 🎪">🎪 LIQUIDATION CIRCUS! 🎪 EVERYTHING MUST GO! 🎪 NO REASONABLE OFFER REFUSED! 🎪</b>
+</marquee>
+
+<center>
+<font size="-1" color="red" data-en="⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️" data-it="⚠️ ATTENZIONE: Articoli si vendono velocemente! Molti articoli hanno quantità limitate! Chiama ora per prenotare i tuoi articoli! ⚠️">⚠️ WARNING: Items selling fast! Many items have limited quantities! Call now to reserve your items! ⚠️</font>
+</center>
+
+<hr>
+
+<center>
+<font size="-1" data-en="Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections" data-it="Ultimo aggiornamento: 15 Marzo 2001 alle 23:47 da Joe Pazzo (non riuscivo a dormire, troppo emozionato per la liquidazione!)<br>© 2001 Magazzino Liquidazione Elettronica Joe Pazzo. Tutti i diritti riservati.<br>Meglio visualizzato con Netscape Navigator 4.0 o Internet Explorer 5.0 a risoluzione 800x600<br>Questo sito contiene oltre 10.000 articoli e potrebbe caricarsi lentamente con connessioni dial-up">Last updated: March 15, 2001 at 11:47 PM by Crazy Joe (couldn't sleep, too excited about liquidation!)<br>© 2001 Crazy Joe's Electronics Liquidation Warehouse. All rights reserved.<br>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution<br>This site contains over 10,000 items and may load slowly on dial-up connections</font>
+</center>
+
+</body>
+</html>

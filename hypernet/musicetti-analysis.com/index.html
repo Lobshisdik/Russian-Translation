@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>roberto musicetti</title>
+    <style>
+        body {
+            background-color: #f5f0e8;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+        
+        .site-title {
+            color: #006666;
+            font-size: 24px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .cookie-notice {
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+        
+        .author-photo {
+            margin: 10px 0;
+        }
+        
+        .author-photo img {
+            width: 80px;
+            height: 100px;
+            border: 1px solid #999;
+        }
+        
+        .nav-links {
+            margin: 15px 0;
+            font-size: 11px;
+        }
+        
+        .nav-links a {
+            color: #0066cc;
+            text-decoration: underline;
+            margin: 0 1px;
+        }
+        
+        .nav-links a:hover {
+            color: #cc0000;
+        }
+        
+        .separator {
+            margin: 0 3px;
+            color: #666;
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .left-column {
+            display: table-cell;
+            width: 250px;
+            vertical-align: top;
+            padding: 10px 20px 10px 10px;
+        }
+        
+        .right-column {
+            display: table-cell;
+            vertical-align: top;
+            padding: 10px 10px 10px 20px;
+            border-left: 1px solid #ccc;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+            color: #000;
+        }
+        
+        .toc-header {
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .toc-section {
+            margin-bottom: 15px;
+        }
+        
+        .toc-section a {
+            color: #0066cc;
+            text-decoration: underline;
+            display: block;
+            margin: 2px 0;
+            padding-left: 10px;
+        }
+        
+        .toc-section a:hover {
+            color: #cc0000;
+        }
+        
+        .content-section {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .content-section h3 {
+            color: #006666;
+            font-size: 14px;
+            margin: 15px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+        }
+        
+        .rating {
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .book-cover {
+            float: left;
+            margin: 0 15px 10px 0;
+            border: 1px solid #999;
+        }
+        
+        .book-cover img {
+            width: 60px;
+            height: 90px;
+        }
+        
+        .search-box {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .search-box input {
+            font-size: 11px;
+            padding: 2px;
+            margin: 0 5px;
+        }
+        
+        .latest-section {
+            font-weight: bold;
+            color: #006666;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        
+        .update-item {
+            margin: 8px 0;
+            font-size: 11px;
+        }
+        
+        .update-item a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        
+        .category-label {
+            color: #666;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        
+        .donate-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .quote-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="site-title">roberto musicetti</div>
+        <div class="cookie-notice">This website does NOT use cookies. Period.</div>
+        
+        <div class="author-photo">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgODAgMTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZjBmMGYwIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMzAiIHI9IjE1IiBmaWxsPSIjY2NjIi8+CjxlbGxpcHNlIGN4PSI0MCIgY3k9IjcwIiByeD0iMjAiIHJ5PSIyNSIgZmlsbD0iI2NjYyIvPgo8dGV4dCB4PSI0MCIgeT0iOTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSIjNjY2Ij5Qcm9mLiBNdXNpY2V0dGk8L3RleHQ+Cjwvc3ZnPgo=" alt="Prof. Musicetti">
+        </div>
+        
+        <div class="nav-links">
+            <a href="#" onclick="showSection('music')">Music</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('rock')">Rock</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('jazz')">Jazz</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('classical')">Classical</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('cinema')">Cinema</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('travel')">Travel</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('politics')">Politics</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('history')">History</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('literature')">Literature</a><span class="separator">|</span>
+            <a href="#" onclick="showSection('philosophy')">Philosophy</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="left-column">
+            <div class="toc-header">Table of Contents</div>
+            
+            <div class="search-box">
+                <input type="text" placeholder="google" size="8">
+                <strong>or</strong>
+                <input type="text" placeholder="bing" size="8">
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Music</div>
+                <a href="#" onclick="showSection('beatles-analysis')">The Beatles Myth</a>
+                <a href="#" onclick="showSection('album-reviews')">Album reviews</a>
+                <a href="#" onclick="showSection('overrated-ratings')">Overrated ratings</a>
+                <a href="#" onclick="showSection('real-innovators')">Real innovators</a>
+                <a href="#" onclick="showSection('chronology')">Chronology</a>
+                <a href="#" onclick="showSection('best-albums')">Best albums (non-Beatles)</a>
+                <a href="#" onclick="showSection('greatest-musicians')">Greatest musicians</a>
+                <a href="#" onclick="showSection('database')">Database of musicians</a>
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Rock</div>
+                <a href="#" onclick="showSection('real-rock')">Real rock musicians</a>
+                <a href="#" onclick="showSection('rock-history')">History of Rock</a>
+                <a href="#" onclick="showSection('rock-chronology')">Chronology</a>
+                <a href="#" onclick="showSection('rock-best')">Best albums</a>
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Jazz</div>
+                <a href="#" onclick="showSection('jazz-masters')">Jazz masters</a>
+                <a href="#" onclick="showSection('jazz-history')">History of Jazz</a>
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Classical</div>
+                <a href="#" onclick="showSection('classical-masters')">Classical masterpieces</a>
+                <a href="#" onclick="showSection('discography')">Discography</a>
+                <a href="#" onclick="showSection('20th-century')">20th Century</a>
+                <a href="#" onclick="showSection('composers')">Composers</a>
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Other genres</div>
+                <a href="#" onclick="showSection('world-music')">World music</a>
+                <a href="#" onclick="showSection('electronic')">Electronic</a>
+                <a href="#" onclick="showSection('experimental')">Experimental</a>
+            </div>
+            
+            <div class="toc-section">
+                <div class="section-title">Cinema</div>
+                <a href="#" onclick="showSection('yearly-ratings-cinema')">Yearly ratings</a>
+                <a href="#" onclick="showSection('best-movies')">Best movies</a>
+            </div>
+            
+            <div class="donate-section">
+                <strong>Donate</strong><br>
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4K" alt="Donate">
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="latest-section">Latest</div>
+            
+            <div id="music" class="content-section active">
+                <h3>The Beatles: Deconstructing Rock's Greatest Myth</h3>
+                
+                <div class="book-cover">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIGZpbGw9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4KPC9zdmc+Cjx0ZXh0IHg9IjMwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPkJlYXRsZXM8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPk15dGg8L3RleHQ+Cjwvc3ZnPgo=" alt="Beatles Book">
+                </div>
+                
+                <p><strong>Music:</strong> Why the Beatles are the most overrated band in the history of popular music</p>
+                
+                <p><strong>Art:</strong> <a href="#" onclick="showSection('album-reviews')">Album Analysis</a></p>
+                
+                <p><strong>Event:</strong> New academic paper: "The Beatles Deception: How Marketing Conquered Music"</p>
+                
+                <p><strong>Books:</strong> <a href="#" onclick="showSection('bibliography')">Complete Bibliography</a> of anti-Beatles research</p>
+                
+                <div class="category-label">History</div>
+                
+                <p><strong>Politics:</strong> A Brief History of Musical Propaganda: from Elvis to the Beatles</p>
+                
+                <p><strong>Music:</strong> Reviews of albums that actually matter (spoiler: none by the Beatles)</p>
+                
+                <p><strong>Event:</strong> Academic conference on "Collective Delusion in Popular Music Criticism"</p>
+                
+                <div class="quote-box">
+                    "The Beatles were a competent pop band elevated to mythical status through clever marketing and cultural timing. Their 'innovations' were borrowed, their songwriting formulaic, and their influence vastly overstated." - Prof. Roberto Musicetti, University of Milan
+                </div>
+            </div>
+            
+            <div id="beatles-analysis" class="content-section">
+                <h3>The Beatles Myth: A Systematic Deconstruction</h3>
+                
+                <h4>Overall Rating: <span class="rating">4/10</span></h4>
+                
+                <p>After decades of careful analysis, the verdict is clear: the Beatles represent the greatest triumph of marketing over musicianship in popular culture history.</p>
+                
+                <h4>The Big Lie</h4>
+                <p>The Beatles did not:</p>
+                <ul>
+                    <li>Invent the concept album (Frank Sinatra, 1955)</li>
+                    <li>Pioneer studio techniques (Les Paul, Pierre Schaeffer)</li>
+                    <li>Create psychedelic music (13th Floor Elevators, early Pink Floyd)</li>
+                    <li>Revolutionize songwriting (Bob Dylan, Leonard Cohen)</li>
+                    <li>Influence serious musicians (ask Miles Davis)</li>
+                </ul>
+                
+                <h4>What They Actually Were</h4>
+                <p>A competent pop band with:</p>
+                <ul>
+                    <li>Excellent producer (George Martin)</li>
+                    <li>Perfect timing (1960s youth culture)</li>
+                    <li>Brilliant marketing (Brian Epstein)</li>
+                    <li>Media manipulation (early MTV effect)</li>
+                    <li>Nostalgic mythology (baby boomer delusion)</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Remove George Martin's contributions, and the Beatles sound like what they were: a Liverpool covers band with pretensions." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="album-reviews" class="content-section">
+                <h3>Album-by-Album Destruction</h3>
+                
+                <h4>Please Please Me (1963) - <span class="rating">3/10</span></h4>
+                <p>Competent Chuck Berry and Little Richard covers. Nothing original. Any garage band could have recorded this.</p>
+                
+                <h4>With the Beatles (1963) - <span class="rating">3/10</span></h4>
+                <p>More covers, more formula. "All My Loving" uses the most clichéd chord progression in Western music.</p>
+                
+                <h4>A Hard Day's Night (1964) - <span class="rating">4/10</span></h4>
+                <p>The opening chord is interesting. Everything else is manufactured pop for screaming teenagers.</p>
+                
+                <h4>Beatles for Sale (1964) - <span class="rating">3/10</span></h4>
+                <p>Even they were running out of ideas by album four. More covers, weaker originals.</p>
+                
+                <h4>Help! (1965) - <span class="rating">4/10</span></h4>
+                <p>"Yesterday" - a song praised for sophistication - uses arrangements any conservatory student learns in first year.</p>
+                
+                <h4>Rubber Soul (1965) - <span class="rating">5/10</span></h4>
+                <p>Their most coherent album, but pales next to Dylan's "Highway 61 Revisited" from the same year.</p>
+                
+                <h4>Revolver (1966) - <span class="rating">6/10</span></h4>
+                <p>Their peak, but "Pet Sounds" shows what real innovation sounded like in 1966.</p>
+                
+                <h4>Sgt. Pepper's (1967) - <span class="rating">4/10</span></h4>
+                <p>The most overrated album ever recorded. The Mothers of Invention's "Freak Out!" (1966) was a superior concept album.</p>
+                
+                <h4>The White Album (1968) - <span class="rating">3/10</span></h4>
+                <p>An incoherent mess. "Revolution 9" is unlistenable pretension.</p>
+                
+                <h4>Abbey Road (1969) - <span class="rating">5/10</span></h4>
+                <p>"Something" is their best song - written by George Harrison, the only Beatle with actual talent.</p>
+                
+                <div class="quote-box">
+                    Average Beatles album rating: 4.0/10. For comparison, any single Miles Davis album from the 1960s scores higher.
+                </div>
+            </div>
+            
+            <div id="real-innovators" class="content-section">
+                <h3>Artists Who Actually Mattered</h3>
+                
+                <h4>Bob Dylan - <span class="rating">10/10</span></h4>
+                <p>Actually revolutionized popular music by bringing literary sophistication to rock lyrics. His influence on songwriting is immeasurable.</p>
+                
+                <h4>The Velvet Underground - <span class="rating">9/10</span></h4>
+                <p>While the Beatles wrote "Yellow Submarine," VU created genuinely experimental music that influenced punk, new wave, and alternative rock.</p>
+                
+                <h4>Miles Davis - <span class="rating">10/10</span></h4>
+                <p>Reinvented jazz multiple times per decade. His electric period influenced rock more than the Beatles influenced jazz.</p>
+                
+                <h4>Frank Zappa - <span class="rating">9/10</span></h4>
+                <p>Composed complex orchestral works while the Beatles struggled with basic chord progressions.</p>
+                
+                <h4>James Brown - <span class="rating">10/10</span></h4>
+                <p>Invented funk, influenced hip-hop, created rhythmic innovations still used today. The Beatles created nothing comparable.</p>
+                
+                <h4>The Beach Boys - <span class="rating">8/10</span></h4>
+                <p>"Pet Sounds" is everything "Sgt. Pepper's" pretends to be - actual sonic innovation with coherent artistic vision.</p>
+                
+                <div class="quote-box">
+                    "The Beatles rank approximately 15th among 1960s innovative artists. They were followers, not leaders." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="overrated-ratings" class="content-section">
+                <h3>The Overrated Hall of Fame</h3>
+                
+                <p>Annual rankings of the most overrated artists in popular music:</p>
+                
+                <h4>2001 Rankings</h4>
+                <ol>
+                    <li><strong>The Beatles</strong> - Still #1 after all these years</li>
+                    <li>Elvis Presley - Good performer, limited musical knowledge</li>
+                    <li>Led Zeppelin - Heavy blues-rock, not metal pioneers</li>
+                    <li>The Rolling Stones - Better than Beatles, still overrated</li>
+                    <li>Pink Floyd - One good album ("Piper"), endless repetition after</li>
+                </ol>
+                
+                <h4>2000 Rankings</h4>
+                <ol>
+                    <li><strong>The Beatles</strong> - Consistency in mediocrity</li>
+                    <li>U2 - Stadium rock for the intellectually lazy</li>
+                    <li>The Doors - Jim Morrison = wannabe poet</li>
+                    <li>Queen - Bombast over substance</li>
+                    <li>The Who - Loud ≠ innovative</li>
+                </ol>
+                
+                <div class="quote-box">
+                    "The Beatles have held the #1 spot in overrated rankings for three consecutive decades. No other band approaches their level of undeserved praise." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="chronology" class="content-section">
+                <h3>Timeline of Beatles Mythology</h3>
+                
+                <h4>1960-1962: Formation</h4>
+                <p>Liverpool covers band plays Hamburg clubs. Competent but unremarkable.</p>
+                
+                <h4>1963: First Success</h4>
+                <p>"Please Please Me" hits #1 in UK. Standard pop formula works on teenage audience.</p>
+                
+                <h4>1964: American Invasion</h4>
+                <p>Ed Sullivan Show appearance. Marketing triumph disguised as cultural phenomenon.</p>
+                
+                <h4>1965-1966: Peak Period</h4>
+                <p>"Rubber Soul" and "Revolver" show some growth, but Dylan and others were already far ahead.</p>
+                
+                <h4>1967: The Big Lie</h4>
+                <p>"Sgt. Pepper's" released. Critics begin the mythology that persists today.</p>
+                
+                <h4>1968-1970: Decline</h4>
+                <p>Internal conflicts reveal creative limitations. Breakup inevitable.</p>
+                
+                <h4>1970-2001: Mythology Solidifies</h4>
+                <p>Baby boomer critics elevate teenage memories to historical fact. Myth becomes "truth."</p>
+                
+                <div class="quote-box">
+                    "The Beatles timeline reveals a standard pop band career elevated to mythical status by nostalgic critics." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="best-albums" class="content-section">
+                <h3>Albums That Actually Matter</h3>
+                
+                <p>Essential listening for anyone serious about understanding musical innovation in the 1960s:</p>
+                
+                <h4>1965</h4>
+                <ul>
+                    <li>Bob Dylan - "Highway 61 Revisited" <span class="rating">10/10</span></li>
+                    <li>John Coltrane - "A Love Supreme" <span class="rating">10/10</span></li>
+                    <li>The Byrds - "Mr. Tambourine Man" <span class="rating">8/10</span></li>
+                </ul>
+                
+                <h4>1966</h4>
+                <ul>
+                    <li>The Beach Boys - "Pet Sounds" <span class="rating">9/10</span></li>
+                    <li>Bob Dylan - "Blonde on Blonde" <span class="rating">10/10</span></li>
+                    <li>The Mothers of Invention - "Freak Out!" <span class="rating">9/10</span></li>
+                </ul>
+                
+                <h4>1967</h4>
+                <ul>
+                    <li>The Velvet Underground - "The Velvet Underground & Nico" <span class="rating">9/10</span></li>
+                    <li>Love - "Forever Changes" <span class="rating">8/10</span></li>
+                    <li>Captain Beefheart - "Safe as Milk" <span class="rating">8/10</span></li>
+                </ul>
+                
+                <h4>1969</h4>
+                <ul>
+                    <li>Miles Davis - "In a Silent Way" <span class="rating">9/10</span></li>
+                    <li>The MC5 - "Kick Out the Jams" <span class="rating">8/10</span></li>
+                    <li>King Crimson - "In the Court of the Crimson King" <span class="rating">8/10</span></li>
+                </ul>
+                
+                <p><strong>Notice:</strong> Not a single Beatles album appears on any serious list of 1960s innovation.</p>
+            </div>
+            
+            <div id="bibliography" class="content-section">
+                <h3>Essential Reading</h3>
+                
+                <h4>Academic Papers</h4>
+                <ul>
+                    <li>"The Beatles Deception: Marketing vs. Musicianship" - Prof. R. Musicetti (2000)</li>
+                    <li>"Myth-Making in Popular Music Criticism" - Dr. S. Anderson (1998)</li>
+                    <li>"The Velvet Underground: True Innovation in 1960s Rock" - Dr. M. Weber (1997)</li>
+                    <li>"Bob Dylan's Revolution: Real vs. Imagined Change" - Prof. L. Cohen (1999)</li>
+                    <li>"Studio Production: George Martin vs. Phil Spector" - Dr. T. Wilson (1996)</li>
+                </ul>
+                
+                <h4>Books</h4>
+                <ul>
+                    <li>"The Mythology of Popular Music" - R. Musicetti (University Press, 1995)</li>
+                    <li>"Marketing the Beatles: How EMI Created a Myth" - J. Harrison (Academic Books, 1992)</li>
+                    <li>"Real Innovation in 1960s Music" - Various Authors (Critical Studies, 1998)</li>
+                    <li>"The Dylan Revolution" - M. Scorsese (Music Press, 1994)</li>
+                </ul>
+                
+                <h4>Contact Information</h4>
+                <p><strong>Prof. Roberto Musicetti</strong><br>
+                Department of Musicology<br>
+                University of Milan<br>
+                Email: <a href="mailto:r.musicetti@hexagram.corp">r.musicetti@hexagram.corp</a></p>
+                
+                <p><strong>Academic Credentials:</strong><br>
+                Ph.D. Musicology, Sorbonne (1987)<br>
+                M.A. Composition, Milan Conservatory (1983)<br>
+                Visiting Scholar, Berkeley (1991-1992)</p>
+            </div>
+            
+            <div id="rock" class="content-section">
+                <h3>Real Rock Music (Not Including the Beatles)</h3>
+                
+                <p>Rock music has a rich history of genuine innovation. Unfortunately, most people's understanding has been warped by Beatles mythology.</p>
+                
+                <h4>True Rock Pioneers</h4>
+                <ul>
+                    <li><strong>Chuck Berry</strong> - Actually invented rock guitar playing</li>
+                    <li><strong>Little Richard</strong> - Real rock vocal style and energy</li>
+                    <li><strong>The Kinks</strong> - Invented heavy guitar distortion</li>
+                    <li><strong>The Who</strong> - Power chord progression masters</li>
+                    <li><strong>Jimi Hendrix</strong> - Redefined electric guitar possibility</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Every technique the Beatles are credited with was done better by others. They were imitators, not innovators." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="jazz" class="content-section">
+                <h3>Jazz: Music for Adults</h3>
+                
+                <p>While teenagers were screaming for the Beatles, serious musicians were pushing boundaries in jazz.</p>
+                
+                <h4>Essential Jazz Artists (All Superior to the Beatles)</h4>
+                <ul>
+                    <li><strong>Miles Davis</strong> - Reinvented music every few years</li>
+                    <li><strong>John Coltrane</strong> - Spiritual and technical mastery</li>
+                    <li><strong>Ornette Coleman</strong> - Free jazz pioneer</li>
+                    <li><strong>Cecil Taylor</strong> - Avant-garde genius</li>
+                    <li><strong>Sun Ra</strong> - Cosmic innovation</li>
+                </ul>
+                
+                <p>These artists were creating complex, sophisticated music while the Beatles were writing "Yellow Submarine."</p>
+            </div>
+            
+            <div id="classical" class="content-section">
+                <h3>Classical Music: The Standard by Which All Should Be Judged</h3>
+                
+                <p>When measured against classical standards, the Beatles' reputation collapses entirely.</p>
+                
+                <h4>Real Composers vs. Pop Songwriters</h4>
+                <ul>
+                    <li><strong>Stockhausen</strong> - Electronic music pioneer (while Beatles used backward tape tricks)</li>
+                    <li><strong>Boulez</strong> - Complex orchestration (Beatles: basic triads)</li>
+                    <li><strong>Cage</strong> - Conceptual innovation (Beatles: formulaic pop)</li>
+                    <li><strong>Reich</strong> - Rhythmic sophistication (Beatles: 4/4 time)</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "The Beatles' harmonic vocabulary would embarrass a first-year composition student. They knew nothing of serious music." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="cinema" class="content-section">
+                <h3>Cinema: Where Real Art Happens</h3>
+                
+                <p>While the Beatles made silly movies, real artists were revolutionizing cinema.</p>
+                
+                <h4>1960s Film Innovation (vs. Beatles Movies)</h4>
+                <ul>
+                    <li><strong>Godard</strong> - "Breathless" (1960) - Real innovation</li>
+                    <li><strong>Fellini</strong> - "8½" (1963) - Artistic mastery</li>
+                    <li><strong>Kubrick</strong> - "2001" (1968) - Visionary filmmaking</li>
+                    <li><strong>Beatles</strong> - "A Hard Day's Night" (1964) - Marketing vehicle</li>
+                </ul>
+                
+                <p>The difference in artistic merit is obvious to anyone with functioning aesthetic judgment.</p>
+            </div>
+            
+            <div id="travel" class="content-section">
+                <h3>Travel: Escape from Beatles Mythology</h3>
+                
+                <p>Recommended destinations for recovering from Beatles delusion:</p>
+                
+                <h4>Musical Pilgrimages</h4>
+                <ul>
+                    <li><strong>Vienna</strong> - Where Schoenberg invented serialism</li>
+                    <li><strong>Cologne</strong> - Electronic music studios of Stockhausen</li>
+                    <li><strong>New York</strong> - Where real 1960s innovation happened (VU, Dylan, jazz)</li>
+                    <li><strong>Avoid Liverpool</strong> - Nothing of musical importance ever happened there</li>
+                </ul>
+            </div>
+            
+            <div id="politics" class="content-section">
+                <h3>The Politics of Musical Mythology</h3>
+                
+                <p>The Beatles myth serves specific cultural and economic interests.</p>
+                
+                <h4>Who Benefits from Beatles Mythology?</h4>
+                <ul>
+                    <li><strong>Record Industry</strong> - Sells catalog constantly</li>
+                    <li><strong>Baby Boomers</strong> - Validates their teenage choices</li>
+                    <li><strong>British Cultural Export</strong> - Soft power projection</li>
+                    <li><strong>Music Journalists</strong> - Easy copy, no research required</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "The Beatles myth is sustained by economic and nostalgic interests, not musical merit." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="history" class="content-section">
+                <h3>Music History: Setting the Record Straight</h3>
+                
+                <p>A factual timeline of 1960s musical innovation (Beatles-free):</p>
+                
+                <h4>1960</h4>
+                <ul>
+                    <li>Ornette Coleman releases "Free Jazz"</li>
+                    <li>John Cage premieres "Variations IV"</li>
+                    <li>Elvis returns from army (more important than Beatles formation)</li>
+                </ul>
+                
+                <h4>1963</h4>
+                <ul>
+                    <li>Bob Dylan releases "The Freewheelin'"</li>
+                    <li>Stockhausen premieres "Momente"</li>
+                    <li>Beatles release "Please Please Me" (irrelevant)</li>
+                </ul>
+                
+                <h4>1965</h4>
+                <ul>
+                    <li>Dylan goes electric at Newport</li>
+                    <li>Coltrane records "A Love Supreme"</li>
+                    <li>The Byrds invent folk-rock</li>
+                    <li>Beatles release "Help!" (still irrelevant)</li>
+                </ul>
+                
+                <h4>1967</h4>
+                <ul>
+                    <li>Velvet Underground releases their masterpiece</li>
+                    <li>Love creates "Forever Changes"</li>
+                    <li>Beatles release "Sgt. Pepper's" (critics lose minds)</li>
+                </ul>
+            </div>
+            
+            <div id="literature" class="content-section">
+                <h3>Literature: Real Lyrics vs. Beatles Nonsense</h3>
+                
+                <p>Comparing Beatles lyrics to actual poetry reveals their mediocrity.</p>
+                
+                <h4>Real Poets of the 1960s</h4>
+                <ul>
+                    <li><strong>Leonard Cohen</strong> - "Suzanne", "Bird on the Wire"</li>
+                    <li><strong>Bob Dylan</strong> - "Like a Rolling Stone", "Desolation Row"</li>
+                    <li><strong>Joni Mitchell</strong> - "Both Sides Now", "The Circle Game"</li>
+                </ul>
+                
+                <h4>Beatles "Poetry"</h4>
+                <ul>
+                    <li>"Yellow Submarine" - Nursery rhyme level</li>
+                    <li>"I Am the Walrus" - Nonsensical word salad</li>
+                    <li>"Come Together" - Meaningless psychedelic babble</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Beatles lyrics wouldn't pass a high school creative writing class. Dylan was writing literature while they were writing jingles." - Prof. Musicetti
+                </div>
+            </div>
+            
+            <div id="philosophy" class="content-section">
+                <h3>Philosophy: The Meaning of Musical Value</h3>
+                
+                <p>What makes music truly valuable? Not popularity or nostalgia.</p>
+                
+                <h4>Criteria for Musical Greatness</h4>
+                <ol>
+                    <li><strong>Innovation</strong> - Creating something genuinely new</li>
+                    <li><strong>Technical Mastery</strong> - Demonstrable skill and knowledge</li>
+                    <li><strong>Artistic Vision</strong> - Coherent aesthetic statement</li>
+                    <li><strong>Influence on Serious Artists</strong> - Not teenage fans</li>
+                    <li><strong>Lasting Value</strong> - Beyond nostalgic association</li>
+                </ol>
+                
+                <p>The Beatles fail every criterion except popularity among the musically illiterate.</p>
+                
+                <h4>The Philosophical Problem of the Beatles</h4>
+                <p>The Beatles represent the triumph of marketing over art, nostalgia over judgment, and popular delusion over critical thinking. They are a case study in how cultural myths form and persist despite overwhelming contrary evidence.</p>
+                
+                <div class="quote-box">
+                    "Future philosophers will study Beatlemania as an example of mass delusion, not musical achievement." - Prof. Musicetti, Final Word
+                </div>
+                
+                <h4>Conclusion</h4>
+                <p>After 40 years of analysis, the verdict is final: The Beatles were a competent pop band whose reputation represents the greatest disconnect between critical consensus and artistic reality in cultural history.</p>
+                
+                <p><strong>Rating: 4/10</strong> - And that's being generous.</p>
+                
+                <p><em>Last updated: January 15, 2001</em><br>
+                <em>Next update: When someone produces evidence of actual Beatles innovation (unlikely)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            var targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+        
+        // Initialize with music section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('music');
+        });
+    </script>
+</body>
+</html>

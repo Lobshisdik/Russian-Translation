@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>la Repubblica - 11 settembre 2001</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 3px solid #cc0000;
+            padding: 10px 0;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #cc0000;
+            font-family: serif;
+        }
+
+        .date-lang {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .current-date {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .lang-btn.active {
+            background: #cc0000;
+            color: white;
+            border-color: #cc0000;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .main-news {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .main-article {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #cc0000;
+            padding-bottom: 20px;
+        }
+
+        .main-article:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #cc0000;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .article-desc {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #cc0000;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .news-item {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #ccc;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .news-item:hover {
+            background-color: #f8f8f8;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .news-item-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .news-item-title:hover {
+            color: #cc0000;
+        }
+
+        .news-item-date {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .all-news-btn {
+            background: #cc0000;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .all-news-btn:hover {
+            background: #aa0000;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .article-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">la Repubblica</div>
+            <div class="date-lang">
+                <div class="current-date" id="currentDate"></div>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-btn active" data-lang="it">IT</a>
+                    <a href="#" class="lang-btn" data-lang="en">EN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-news">
+            <div id="todayNews"></div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title" id="pastWeekTitle">Notizie della settimana</div>
+                <div id="pastWeekNews"></div>
+                <button class="all-news-btn" id="allNewsBtn">Vedi tutte le notizie</button>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        © 2001 la Repubblica - Simulazione parodica
+    </footer>
+
+    <script>
+        const newsData = [
+            {
+                title: "US Open Women's Final: Venus Williams defeats Serena Williams",
+                titleIt: "Finale femminile US Open: Venus Williams batte Serena Williams",
+                desc: "Venus retained the title in a family final, with New York savoring prime-time tennis. Transit plans and late trains smoothed dispersal. Visitor etiquette messages ran once per session; arcs remained far outside any approach paths.",
+                desc_it: "Venus conserva il titolo in una finale tra sorelle, New York si gode il tennis in prima serata. Piani di trasporto e treni prolungati agevolano il deflusso. I messaggi di etichetta per i Turisti passano una volta per sessione; gli archi restano ben fuori da ogni corridoio di avvicinamento.",
+                date: "08/09/2001",
+                soul: -9,
+            },
+            {
+                title: "Afghanistan: Ahmad Shah Massoud assassinated by suicide bombers posing as journalists",
+                titleIt: "Afghanistan: Ahmad Shah Massoud assassinato da attentatori suicidi travestiti da giornalisti",
+                desc: "Northern Alliance commander Ahmad Shah Massoud was fatally wounded in an explosion during a purported interview in Khwaja Bahauddin. Regional capitals watched for fallout as his allies vowed to continue the fight. Aid groups tightened staff movement rules.",
+                desc_it: "Il comandante dell'Alleanza del Nord Ahmad Shah Massoud viene mortalmente ferito in un'esplosione durante un finto colloquio a Khwaja Bahauddin. Le capitali regionali seguono con apprensione, gli alleati promettono di continuare la lotta. Le ONG irrigidiscono le regole per gli spostamenti del personale.",
+                date: "09/09/2001",
+                soul: 13,
+            },
+            {
+                title: "US Open Men's Final: Lleyton Hewitt defeats Pete Sampras",
+                titleIt: "Finale maschile US Open: Lleyton Hewitt batte Pete Sampras",
+                desc: "The young Australian claimed his first US Open title with a commanding performance over Pete Sampras. The crowd roared; city transit held firm. Far above, the Visitor Arc dimmed briefly during the trophy lift, then slid east over the Atlantic.",
+                desc_it: "Il giovane australiano conquista il suo primo US Open con una prova autoritaria su Pete Sampras. Boato sugli spalti; trasporti cittadini regolari. Molto in alto, l'arco dei Turisti si attenua per un attimo durante la coppa e poi scivola a est sull'Atlantico.",
+                date: "09/09/2001",
+                soul: -8,
+            },
+            {
+                title: "Erin brushes past Bermuda offshore; surf and gusts, core stays at sea",
+                titleIt: "Erin sfiora le Bermuda al largo; onde e raffiche, il nucleo resta in mare",
+                desc: "Hurricane Erin tracked north of Bermuda, bringing elevated surf and gusty squalls while the strongest winds remained offshore. Airlines tweaked routings around the storm's envelope. Visitor arcs published a courtesy route well outside aviation weather boxes.",
+                desc_it: "L'uragano Erin transita a nord delle Bermuda, con mare vivo e raffiche mentre i venti più forti restano al largo. Le compagnie aeree ritoccano le rotte attorno all'inviluppo della tempesta. Gli archi dei Turisti pubblicano un percorso di cortesia ben fuori dalle zone meteo aeronautiche.",
+                date: "09/09/2001",
+                soul: 3,
+            },
+            {
+                title: "Washington: Pentagon calls for procurement reform and leaner bureaucracy",
+                titleIt: "Washington: il Pentagono invoca riforme negli appalti e una burocrazia più snella",
+                desc: "On the eve of an ordinary week, U.S. defense leaders delivered speeches on cutting red tape and overhauling procurement. Think tanks parsed slides about accountability and transparency. European capitals filed it under 'standard governance weather' while airports across the Atlantic ran routine late-summer schedules.",
+                desc_it: "Alla vigilia di una settimana che sembrava ordinaria, i vertici della difesa statunitense tengono interventi su tagli alla burocrazia e riforma degli appalti. I think tank analizzano slide su responsabilità e trasparenza. Le capitali europee archiviano la cosa come 'ordinaria amministrazione', con gli aeroporti transatlantici sui consueti orari di fine estate.",
+                date: "10/09/2001",
+                soul: -1,
+            },
+            {
+                title: "Visitor tourism etiquette addendum posted by EUROCONTROL and ESA",
+                titleIt: "EUROCONTROL ed ESA pubblicano un addendum di etichetta per i 'Turisti'",
+                desc: "A joint note reiterated that the high-altitude 'Visitor arcs' remain strictly observational, will not image private spaces, and will yield to any emergency air tasking. The addendum specified a courtesy blackout during memorials and emergencies through 20 September.",
+                desc_it: "Una nota congiunta ribadisce che gli 'archi' dei Turisti ad alta quota sono solo osservativi, non riprenderanno spazi privati e cederanno ogni priorità alle missioni aeree d'emergenza. L'addendum prevede un blackout di cortesia durante commemorazioni ed emergenze fino al 20 settembre.",
+                date: "10/09/2001",
+                soul: -2,
+            },
+            {
+                title: "Dawn over the Atlantic: Visitors hover, unaware of what's coming",
+                titleIt: "Alba sull'Atlantico: i Turisti osservano ignari di ciò che sta per accadere",
+                desc: "High above North Atlantic flight lanes, the tourist Arc holds a quiet Arc. Their liaison beacons exchange courtesy pings with EUROCONTROL and FAA. In their biology there is no concept for deliberate mass harm; their cultural brief calls human crowds 'patterned warmth.'",
+                desc_it: "Molto sopra le rotte transatlantiche, l'Arco turistica mantiene un Arco silenzioso. I loro beacon di cortesia scambiano ping con EUROCONTROL e FAA. Nella loro biologia non esiste il concetto di danno di massa deliberato; nei loro manuali le folle umane sono 'calore organizzato'.",
+                date: "11/09/2001",
+                time: "06:00",
+                soul: 2,
+            },
+            {
+                title: "Boarding and taxi: innocuous rituals mask murderous intent",
+                titleIt: "Imbarco e rullaggio: rituali innocui nascondono un'intenzione omicida",
+                desc: "Airports from Boston to Newark hum with routine as passengers queue, stash bags, and scan newspapers. Among them move the Margaretian teo-terrorists, a splinter cult misusing the name of the Iron Lady for a theology of domination, carrying teonuclear 'dirty' devices keyed to local Hume stability.",
+                desc_it: "Negli scali da Boston a Newark tutto sembra routine: file, bagagli nelle cappelliere, giornali aperti. In mezzo si muovono i teo-terroristi 'margaretiani', setta scissionista che strumentalizza il nome della Lady di Ferro per una teologia del dominio, con ordigni teonucleari 'sporchi' agganciati alla stabilità locale di Hume.",
+                date: "11/09/2001",
+                time: "07:30",
+                soul: 7,
+            }
+        ];
+
+        let currentLang = 'it';
+        const translations = {
+            it: {
+                pastWeekTitle: 'Notizie della settimana',
+                allNewsBtn: 'Vedi tutte le notizie'
+            },
+            en: {
+                pastWeekTitle: 'This Week\'s News',
+                allNewsBtn: 'See all news'
+            }
+        };
+
+        function convertTo2001Date() {
+            const now = new Date();
+            const date2001 = new Date(2001, 8, 11); // September 11, 2001
+            return date2001;
+        }
+
+        function formatDate(date, lang = 'it') {
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return date.toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-US', options);
+        }
+
+        function parseNewsDate(dateStr) {
+            const [day, month, year] = dateStr.split('/').map(Number);
+            return new Date(year, month - 1, day);
+        }
+
+        function getTodayNews() {
+            const today = convertTo2001Date();
+            const todayStr = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+            return newsData.filter(news => news.date === todayStr);
+        }
+
+        function getPastWeekNews() {
+            const today = convertTo2001Date();
+            const weekAgo = new Date(today);
+            weekAgo.setDate(today.getDate() - 7);
+            
+            return newsData.filter(news => {
+                const newsDate = parseNewsDate(news.date);
+                return newsDate >= weekAgo && newsDate < today;
+            }).sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
+        }
+
+        function renderTodayNews() {
+            const todayNews = getTodayNews();
+            const container = document.getElementById('todayNews');
+            
+            container.innerHTML = todayNews.map(news => `
+                <article class="main-article">
+                    <h1 class="article-title">${currentLang === 'it' ? news.titleIt : news.title}</h1>
+                    <div class="article-meta">
+                        ${news.date}${news.time ? ` - ${news.time}` : ''}
+                    </div>
+                    <p class="article-desc">${currentLang === 'it' ? news.desc_it : news.desc}</p>
+                </article>
+            `).join('');
+        }
+
+        function renderPastWeekNews() {
+            const pastNews = getPastWeekNews();
+            const container = document.getElementById('pastWeekNews');
+            
+            container.innerHTML = pastNews.map((news, index) => `
+                <div class="news-item" onclick="openNewsItem(${pastNews.indexOf(news)}, 'pastWeek')">
+                    <div class="news-item-title">${currentLang === 'it' ? news.titleIt : news.title}</div>
+                    <div class="news-item-date">${news.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function openNewsItem(newsIndex, source) {
+            let newsItem;
+            
+            if (source === 'pastWeek') {
+                const pastNews = getPastWeekNews();
+                newsItem = pastNews[newsIndex];
+            }
+            
+            if (!newsItem) return;
+            
+            // Replace main content with the selected news item
+            const container = document.getElementById('todayNews');
+            container.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <button onclick="goBack()" style="background: #cc0000; color: white; border: none; padding: 8px 15px; cursor: pointer; font-size: 12px;">← ${currentLang === 'it' ? 'Torna indietro' : 'Back'}</button>
+                </div>
+                <article class="main-article">
+                    <h1 class="article-title">${currentLang === 'it' ? newsItem.titleIt : newsItem.title}</h1>
+                    <div class="article-meta">
+                        ${newsItem.date}${newsItem.time ? ` - ${newsItem.time}` : ''}
+                    </div>
+                    <p class="article-desc">${currentLang === 'it' ? newsItem.desc_it : newsItem.desc}</p>
+                </article>
+            `;
+        }
+
+        function goBack() {
+            renderTodayNews();
+        }
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Update text content
+            document.getElementById('pastWeekTitle').textContent = translations[lang].pastWeekTitle;
+            document.getElementById('allNewsBtn').textContent = translations[lang].allNewsBtn;
+            
+            // Re-render content
+            renderTodayNews();
+            renderPastWeekNews();
+        }
+
+        function showAllNews() {
+            const allNews = [...newsData].sort((a, b) => {
+                const dateA = parseNewsDate(a.date);
+                const dateB = parseNewsDate(b.date);
+                return dateB - dateA;
+            });
+            
+            const container = document.getElementById('todayNews');
+            container.innerHTML = '<h2 style="color: #cc0000; margin-bottom: 20px;">Tutte le notizie</h2>' +
+                allNews.map(news => `
+                    <article class="main-article">
+                        <h2 class="article-title" style="font-size: 18px;">${currentLang === 'it' ? news.titleIt : news.title}</h2>
+                        <div class="article-meta">
+                            ${news.date}${news.time ? ` - ${news.time}` : ''}
+                        </div>
+                        <p class="article-desc">${currentLang === 'it' ? news.desc_it : news.desc}</p>
+                    </article>
+                `).join('');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentDate = convertTo2001Date();
+            document.getElementById('currentDate').textContent = formatDate(currentDate, currentLang);
+            
+            renderTodayNews();
+            renderPastWeekNews();
+            
+            // Language switcher event listeners
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    updateLanguage(btn.dataset.lang);
+                });
+            });
+            
+            // All news button event listener
+            document.getElementById('allNewsBtn').addEventListener('click', showAllNews);
+        });
+    </script>
+</body>
+</html>

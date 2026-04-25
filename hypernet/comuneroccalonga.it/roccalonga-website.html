@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comune di Roccalonga - Città Giardino del Gargano</title>
+    <style>
+        body {
+            background-color: #ffffcc;
+            color: #000080;
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        td {
+            vertical-align: top;
+            padding: 0;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #99ccff;
+            padding: 10px;
+            border-right: 2px solid #3366cc;
+        }
+        
+        .content {
+            padding: 10px 20px;
+        }
+        
+        .header {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 5px solid #ffcc00;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #000066;
+        }
+        
+        .slogan {
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .menu-title {
+            background-color: #3366cc;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .menu li {
+            margin-bottom: 5px;
+        }
+        
+        .menu a {
+            display: block;
+            padding: 5px;
+            background-color: #ccddff;
+            color: #000080;
+            text-decoration: none;
+            border: 1px solid #3366cc;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .menu a:hover {
+            background-color: #ffcc00;
+            color: #000080;
+        }
+        
+        h1, h2, h3 {
+            color: #3366cc;
+        }
+        
+        h2 {
+            border-bottom: 2px dotted #3366cc;
+            padding-bottom: 5px;
+        }
+        
+        .attraction {
+            margin-bottom: 30px;
+            border: 1px solid #3366cc;
+            padding: 10px;
+            background-color: #e6f2ff;
+        }
+        
+        .attraction h3 {
+            margin-top: 0;
+            background-color: #3366cc;
+            color: white;
+            padding: 5px;
+        }
+        
+        .attraction img {
+            border: 2px solid #3366cc;
+            margin: 5px 10px 10px 0;
+            float: left;
+            width: 150px;
+            height: 100px;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .news {
+            background-color: #ffffcc;
+            border: 2px solid #ffcc00;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        
+        .news h2 {
+            text-align: center;
+            color: #990000;
+            border-bottom: 2px dotted #990000;
+        }
+        
+        .news-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #999999;
+        }
+        
+        .news-item h3 {
+            color: #990000;
+            margin-bottom: 5px;
+        }
+        
+        .news-date {
+            font-size: 12px;
+            color: #666666;
+            font-style: italic;
+        }
+        
+        .footer {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            border-top: 5px solid #ffcc00;
+            margin-top: 20px;
+        }
+        
+        .counter {
+            text-align: center;
+            margin-top: 20px;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+        }
+        
+        .counter-box {
+            background-color: black;
+            color: lime;
+            padding: 3px 5px;
+            margin: 0 1px;
+        }
+        
+        .webring {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        marquee {
+            background-color: #ffcc00;
+            color: #990000;
+            padding: 5px;
+            font-weight: bold;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">COMUNE DI ROCCALONGA</div>
+        <div class="slogan">Città Giardino e Perla del Gargano</div>
+    </div>
+    
+    <marquee scrollamount="3" behavior="alternate">+++ BENVENUTI NEL SITO UFFICIALE DEL COMUNE DI ROCCALONGA +++ ULTIME NOTIZIE: FESTIVAL DELLE LUCI MISTERIOSE DAL 20 AL 22 MAGGIO +++</marquee>
+    
+    <table>
+        <tr>
+            <td class="sidebar">
+                <div class="menu-title">MENU PRINCIPALE</div>
+                <ul class="menu">
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#comune">IL COMUNE</a></li>
+                    <li><a href="#attrazioni">ATTRAZIONI</a></li>
+                    <li><a href="#eventi">EVENTI</a></li>
+                    <li><a href="#turismo">TURISMO</a></li>
+                    <li><a href="#contatti">CONTATTI</a></li>
+                </ul>
+                
+                <div class="menu-title">SERVIZI ONLINE</div>
+                <ul class="menu">
+                    <li><a href="#">ALBO PRETORIO</a></li>
+                    <li><a href="#">MODULISTICA</a></li>
+                    <li><a href="#">BANDI E CONCORSI</a></li>
+                </ul>
+                
+                <div class="counter">
+                    <div>VISITATORI:</div>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">2</span>
+                    <span class="counter-box">7</span>
+                    <span class="counter-box">3</span>
+                </div>
+                
+                <div class="webring">
+                    <div>SIAMO PARTE DI:</div>
+                    <div>WEBRING COMUNI ITALIANI</div>
+                    <div style="margin-top: 5px;">
+                        [<a href="#">PREC</a> | <a href="#">SUCC</a>]
+                    </div>
+                </div>
+                
+                <div class="construction">
+                    <img src="/api/placeholder/150/50" alt="Under Construction">
+                    <div class="blink">SITO IN COSTRUZIONE</div>
+                </div>
+            </td>
+            <td class="content">
+                <h1 id="home">Benvenuti a Roccalonga</h1>
+                <p>Situata nel cuore del Gargano, Roccalonga è una gemma nascosta della Puglia. Conosciuta per la sua rigogliosa vegetazione, il panorama mozzafiato e le curiose attrazioni, la nostra città offre un'esperienza unica tra natura, mistero e storia.</p>
+                
+                <h2 id="attrazioni">Le Nostre Attrazioni</h2>
+                
+                <div class="attraction">
+                    <h3>Il Sasso Levigante</h3>
+                    <img src="/api/placeholder/150/100" alt="Il Sasso Levigante">
+                    <p>Un fenomeno naturale unico al mondo: una pietra dalla forma perfettamente liscia che, secondo la leggenda, porta fortuna a chi la tocca. Situato in un'insenatura marina dalla bellezza surreale, il Sasso Levigante attira visitatori da tutto il mondo.</p>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="attraction">
+                    <h3>Fungolandia</h3>
+                    <img src="/api/placeholder/150/100" alt="Fungolandia">
+                    <p>Il parco divertimenti mai completato che è diventato un'attrazione di culto. Le strutture incompiute, ispirate alla forma dei funghi locali, creano un paesaggio surreale che oggi è meta di appassionati di fotografia, arte contemporanea e curiosità.</p>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="attraction">
+                    <h3>Area Avvistamenti UFO</h3>
+                    <img src="/api/placeholder/150/100" alt="Area Avvistamenti UFO">
+                    <p>Dal 1978, Roccalonga è conosciuta per i frequenti avvistamenti di oggetti volanti non identificati. L'area panoramica dedicata all'osservazione del cielo notturno è attrezzata con telescopi e pannelli informativi sui più celebri avvistamenti locali.</p>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="attraction">
+                    <h3>Il Belvedere Romano</h3>
+                    <img src="/api/placeholder/150/100" alt="Il Belvedere Romano">
+                    <p>Costruito alla fine di un antico ponte romano che taglia in due la costa, il Belvedere offre una vista panoramica mozzafiato sul Mar Adriatico. Un connubio perfetto tra storia millenaria e bellezza naturale che rende Roccalonga unica.</p>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="news">
+                    <h2>Ultime Notizie</h2>
+                    
+                    <div class="news-item">
+                        <h3>Inaugurazione del nuovo percorso naturalistico</h3>
+                        <div class="news-date">15 Aprile 2025</div>
+                        <p>Il sindaco ha inaugurato il nuovo sentiero naturalistico che collega il Belvedere Romano al Sasso Levigante, offrendo un'esperienza immersiva nella natura incontaminata del Gargano.</p>
+                    </div>
+                    
+                    <div class="news-item">
+                        <h3>Festival delle Luci Misteriose</h3>
+                        <div class="news-date">10 Aprile 2025</div>
+                        <p>Dal 20 al 22 maggio si terrà il Festival annuale delle Luci Misteriose, dedicato agli avvistamenti UFO che hanno reso famosa Roccalonga. Conferenze, osservazioni astronomiche e spettacoli di luci.</p>
+                    </div>
+                    
+                    <div class="news-item">
+                        <h3>Restauro del ponte romano</h3>
+                        <div class="news-date">2 Aprile 2025</div>
+                        <p>Iniziati i lavori di restauro conservativo dell'antico ponte romano. Gli interventi non comprometteranno l'accesso al Belvedere, che rimarrà aperto ai visitatori.</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="footer">
+        <p>Comune di Roccalonga - Piazza della Repubblica, 1 - 71010 Roccalonga (FG)</p>
+        <p>Tel: 0884 123456 - Email: info@comune.roccalonga.fg.it</p>
+        <p>&copy; 2025 Comune di Roccalonga - Tutti i diritti riservati</p>
+        <p>Sito ottimizzato per Internet Explorer 6.0 - Risoluzione 800x600</p>
+        <div style="margin-top: 5px;">
+            <img src="/api/placeholder/88/31" alt="Validato HTML 4.01">
+            <img src="/api/placeholder/88/31" alt="Validato CSS 2.0">
+        </div>
+    </div>
+</body>
+</html>

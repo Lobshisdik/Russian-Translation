@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPGMaker MZ - BGM Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .upload-section {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .upload-box {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 40px;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-box:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+
+        .upload-box.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        #folderInput {
+            display: none;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .results {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .missing-bgm {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .missing-bgm h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .missing-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .missing-item {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #ffc107;
+            font-weight: 500;
+            color: #856404;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        .map-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .bgm-name {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        audio {
+            width: 250px;
+            height: 35px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            font-size: 1.2em;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #dc3545;
+        }
+
+        .bgm-properties {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .property {
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 RPGMaker MZ BGM Analyzer</h1>
+            <p>Analyze and preview all BGM tracks used in your game maps</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">Select Your RPGMaker MZ Project Folder</div>
+                <div class="upload-hint">Click here or drag your project folder</div>
+            </div>
+            <input type="file" id="folderInput" webkitdirectory directory multiple>
+        </div>
+
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-box">
+                <div class="stat-number" id="totalMaps">0</div>
+                <div class="stat-label">Total Maps</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="mapsWithBgm">0</div>
+                <div class="stat-label">Maps with BGM</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="uniqueBgm">0</div>
+                <div class="stat-label">Unique BGM Tracks</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="missingBgm">0</div>
+                <div class="stat-label">Maps without BGM</div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>Analyzing your project...</div>
+        </div>
+
+        <div class="results" id="results">
+            <div class="no-data">
+                Select your RPGMaker MZ project folder to begin analysis
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadBox = document.getElementById('uploadBox');
+        const folderInput = document.getElementById('folderInput');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const stats = document.getElementById('stats');
+
+        let projectPath = '';
+        let audioFiles = new Map();
+
+        // Upload box click
+        uploadBox.addEventListener('click', () => {
+            folderInput.click();
+        });
+
+        // Drag and drop
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.classList.add('dragover');
+        });
+
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.classList.remove('dragover');
+        });
+
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.classList.remove('dragover');
+            const items = e.dataTransfer.items;
+            if (items && items.length > 0) {
+                handleFiles(e.dataTransfer.files);
+            }
+        });
+
+        // File input change
+        folderInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        async function handleFiles(files) {
+            loading.classList.add('active');
+            results.innerHTML = '';
+            audioFiles.clear();
+
+            try {
+                const filesArray = Array.from(files);
+                
+                // Get project path
+                if (filesArray.length > 0) {
+                    const firstPath = filesArray[0].webkitRelativePath;
+                    projectPath = firstPath.split('/')[0];
+                }
+
+                // Find all audio files
+                const audioExtensions = ['.ogg', '.m4a', '.mp3', '.wav'];
+                filesArray.forEach(file => {
+                    const ext = '.' + file.name.split('.').pop().toLowerCase();
+                    if (audioExtensions.includes(ext)) {
+                        const relativePath = file.webkitRelativePath;
+                        if (relativePath.includes('/audio/bgm/')) {
+                            const fileName = file.name.replace(/\.(ogg|m4a|mp3|wav)$/i, '');
+                            audioFiles.set(fileName, file);
+                        }
+                    }
+                });
+
+                // Find all map files
+                const mapFiles = filesArray.filter(file => 
+                    file.webkitRelativePath.includes('/data/') && 
+                    file.name.match(/^Map\d+\.json$/)
+                );
+
+                if (mapFiles.length === 0) {
+                    throw new Error('No map files found. Please select the root folder of your RPGMaker MZ project.');
+                }
+
+                // Process maps
+                const mapData = await Promise.all(mapFiles.map(processMapFile));
+                const validMaps = mapData.filter(m => m !== null);
+
+                displayResults(validMaps);
+
+            } catch (error) {
+                results.innerHTML = `<div class="error"><strong>Error:</strong> ${error.message}</div>`;
+            } finally {
+                loading.classList.remove('active');
+            }
+        }
+
+        async function processMapFile(file) {
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+                
+                const mapId = file.name.match(/Map(\d+)\.json/)[1];
+                
+                return {
+                    id: mapId,
+                    name: data.displayName || `Map ${mapId}`,
+                    bgm: data.bgm || null
+                };
+            } catch (error) {
+                console.error(`Error processing ${file.name}:`, error);
+                return null;
+            }
+        }
+
+        function displayResults(maps) {
+            // Separate maps with and without BGM
+            const mapsWithBgm = maps.filter(m => m.bgm && m.bgm.name);
+            const mapsWithoutBgm = maps.filter(m => !m.bgm || !m.bgm.name);
+
+            // Get unique BGM tracks
+            const uniqueBgmSet = new Set(mapsWithBgm.map(m => m.bgm.name));
+
+            // Update stats
+            document.getElementById('totalMaps').textContent = maps.length;
+            document.getElementById('mapsWithBgm').textContent = mapsWithBgm.length;
+            document.getElementById('uniqueBgm').textContent = uniqueBgmSet.size;
+            document.getElementById('missingBgm').textContent = mapsWithoutBgm.length;
+            stats.style.display = 'flex';
+
+            let html = '';
+
+            // Maps without BGM
+            if (mapsWithoutBgm.length > 0) {
+                html += '<div class="missing-bgm">';
+                html += '<h3>⚠️ Maps Without BGM (' + mapsWithoutBgm.length + ')</h3>';
+                html += '<div class="missing-list">';
+                mapsWithoutBgm.forEach(map => {
+                    html += `<div class="missing-item">${map.name} (ID: ${map.id})</div>`;
+                });
+                html += '</div></div>';
+            }
+
+            // Maps with BGM
+            if (mapsWithBgm.length > 0) {
+                html += '<h2 class="section-title">Maps with BGM (' + mapsWithBgm.length + ')</h2>';
+                html += '<table>';
+                html += '<thead><tr>';
+                html += '<th>Map ID</th>';
+                html += '<th>Map Name</th>';
+                html += '<th>BGM Name</th>';
+                html += '<th>Properties</th>';
+                html += '<th>Audio Preview</th>';
+                html += '</tr></thead><tbody>';
+
+                mapsWithBgm.forEach(map => {
+                    const bgm = map.bgm;
+                    html += '<tr>';
+                    html += `<td>${map.id}</td>`;
+                    html += `<td class="map-name">${map.name}</td>`;
+                    html += `<td class="bgm-name">${bgm.name}</td>`;
+                    html += '<td class="bgm-properties">';
+                    html += `<div class="property">Volume: ${bgm.volume || 90}</div>`;
+                    html += `<div class="property">Pitch: ${bgm.pitch || 100}</div>`;
+                    html += `<div class="property">Pan: ${bgm.pan || 0}</div>`;
+                    html += '</td>';
+                    html += '<td>';
+
+                    // Check if audio file exists
+                    const audioFile = audioFiles.get(bgm.name);
+                    if (audioFile) {
+                        const audioUrl = URL.createObjectURL(audioFile);
+                        html += `<audio controls preload="none">`;
+                        html += `<source src="${audioUrl}" type="${audioFile.type}">`;
+                        html += 'Your browser does not support the audio element.';
+                        html += '</audio>';
+                    } else {
+                        html += '<span style="color: #dc3545;">Audio file not found</span>';
+                    }
+
+                    html += '</td>';
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+            }
+
+            if (maps.length === 0) {
+                html = '<div class="no-data">No maps found in the selected folder</div>';
+            }
+
+            results.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

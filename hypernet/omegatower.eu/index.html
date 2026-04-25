@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Omega Tower - Archive Foundation Recruitment Portal</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            margin: 0;
+            padding: 0;
+            color: #d4af37;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(212, 175, 55, 0.05) 2px,
+                    rgba(212, 175, 55, 0.05) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(212, 175, 55, 0.05) 2px,
+                    rgba(212, 175, 55, 0.05) 4px
+                );
+            z-index: -1;
+        }
+        
+        .chevron-pattern {
+            background: repeating-linear-gradient(
+                45deg,
+                #d4af37,
+                #d4af37 5px,
+                #000000 5px,
+                #000000 10px,
+                #ffd700 10px,
+                #ffd700 15px,
+                #000000 15px,
+                #000000 20px
+            );
+            height: 8px;
+            width: 100%;
+        }
+        
+        .art-deco-border {
+            border: 4px solid #d4af37;
+            position: relative;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+        }
+        
+        .art-deco-border::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid #ffd700;
+            z-index: -1;
+        }
+        
+        .art-deco-border::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #d4af37;
+            pointer-events: none;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            padding: 40px;
+            text-align: center;
+            border-bottom: 6px solid #d4af37;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            right: -50%;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(212, 175, 55, 0.1) 20px,
+                rgba(212, 175, 55, 0.1) 40px,
+                transparent 40px,
+                transparent 60px,
+                rgba(255, 215, 0, 0.1) 60px,
+                rgba(255, 215, 0, 0.1) 80px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            font-size: 56px;
+            font-weight: bold;
+            text-shadow: 
+                3px 3px 0px #000000,
+                6px 6px 0px rgba(212, 175, 55, 0.5);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tagline {
+            font-size: 20px;
+            font-style: italic;
+            color: #ffd700;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-container {
+            background: #000000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #d4af37;
+            position: relative;
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                #000000,
+                #000000 50px,
+                #1a1a1a 50px,
+                #1a1a1a 100px
+            );
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
+            color: #000000;
+            border: 2px solid #d4af37;
+            padding: 15px 30px;
+            margin: 0 12px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 
+                0 0 0 2px #000000,
+                0 4px 8px rgba(212, 175, 55, 0.3);
+        }
+        
+        .nav-button:hover {
+            background: linear-gradient(135deg, #ffd700, #d4af37, #ffd700);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 0 2px #000000,
+                0 6px 12px rgba(255, 215, 0, 0.5);
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        .section {
+            display: none;
+            background: rgba(0, 0, 0, 0.9);
+            margin: 30px 0;
+            padding: 40px;
+            border: 4px solid #d4af37;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #ffd700;
+            pointer-events: none;
+        }
+        
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+            border: 1px solid #d4af37;
+            pointer-events: none;
+        }
+        
+        .section h2 {
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 
+                2px 2px 0px #000000,
+                4px 4px 0px rgba(212, 175, 55, 0.5);
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #ffd700;
+        }
+        
+        .section h3 {
+            font-size: 26px;
+            color: #ffd700;
+            margin-top: 30px;
+            text-decoration: underline;
+            text-decoration-color: #d4af37;
+            text-underline-offset: 5px;
+        }
+        
+        .deco-box {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #d4af37;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .deco-box::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid #ffd700;
+        }
+        
+        .deco-box::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 20px;
+            right: 20px;
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d4af37,
+                #d4af37 10px,
+                #ffd700 10px,
+                #ffd700 20px
+            );
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            border: 3px solid #d4af37;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #ffd700;
+            clip-path: inherit;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+            text-shadow: 2px 2px 0px #000000;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            color: #d4af37;
+        }
+        
+        .recruitment-form {
+            background: rgba(0, 0, 0, 0.9);
+            border: 4px solid #d4af37;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .recruitment-form::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #ffd700;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffd700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 3px solid #d4af37;
+            background: rgba(0, 0, 0, 0.8);
+            color: #d4af37;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #ffd700;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
+            color: #000000;
+            border: 3px solid #d4af37;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+            margin-top: 25px;
+            clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #ffd700, #d4af37, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .footer {
+            background: #000000;
+            border-top: 4px solid #d4af37;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #ffd700;
+        }
+        
+        .footer-links {
+            margin: 15px 0;
+        }
+        
+        .footer-link {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #ffd700;
+            border-bottom-color: #ffd700;
+        }
+        
+        .job-listing {
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px solid #d4af37;
+            border-left: 8px solid #ffd700;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .job-listing::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #d4af37;
+        }
+        
+        .job-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tower-image {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #d4af37;
+            position: relative;
+        }
+        
+        .tower-image::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #ffd700;
+        }
+        
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .urgent-banner {
+            background: linear-gradient(45deg, #d4af37, #ffd700);
+            color: #000000;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            clip-path: polygon(30px 0%, 100% 0%, calc(100% - 30px) 100%, 0% 100%);
+        }
+        
+        .lore-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 215, 0, 0.1));
+            border: 2px solid #d4af37;
+            border-radius: 0;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .lore-highlight::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 48px;
+            color: #ffd700;
+            background: #000000;
+            padding: 0 10px;
+        }
+        
+        .dimensional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .dimension-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #d4af37;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #d4af37);
+            color: #000000;
+            padding: 5px 12px;
+            margin: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="chevron-pattern"></div>
+    
+    <div class="header art-deco-border">
+        <div class="logo">OMEGA TOWER</div>
+        <div class="tagline">Archive Foundation Headquarters • Dimensional Gateway • Data Repository</div>
+    </div>
+
+    <div class="chevron-pattern"></div>
+
+    <div class="nav-container">
+        <button class="nav-button" onclick="showSection('home')">Portal Home</button>
+        <button class="nav-button" onclick="showSection('about')">Tower Archives</button>
+        <button class="nav-button" onclick="showSection('recruitment')">Join Mission</button>
+        <button class="nav-button" onclick="showSection('facilities')">Base Operations</button>
+        <button class="nav-button" onclick="showSection('data-fragments')">Data Fragments</button>
+        <button class="nav-button" onclick="showSection('hypernet')">Hypernet Lore</button>
+        <button class="nav-button" onclick="showSection('contact')">Contact HR</button>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="urgent-banner">
+                <span class="blink">URGENT RECRUITMENT:</span> Immediate Deployment Required
+            </div>
+            
+            <h2>Welcome to Omega Tower</h2>
+            
+            <div class="tower-image">
+                <p><strong>[OMEGA_TOWER_MAJESTY.jpg]</strong></p>
+                <p><em>The Omega Tower piercing through dimensional barriers above Brussels</em></p>
+            </div>
+            
+            <div class="lore-highlight">
+                On January 1st, 2000, as the Y2K Data-Cascade Event shattered the barriers between realities, the Omega Tower descended from the digital-stratosphere, containing within its impossible architecture the preserved remnants of 92 alternate Hypernet timelines.
+            </div>
+            
+            <div class="deco-box">
+                <h3>Critical Mission Parameters</h3>
+                <p>Following the catastrophic collapse of YHWH and the subsequent dimensional convergence known as "The Squishing," the Archive Foundation has assumed responsibility for cataloging and preserving all trans-dimensional data fragments contained within the Omega Tower structure.</p>
+                
+                <p><strong>Tower Specifications:</strong></p>
+                <ul>
+                    <li><strong>Vertical Span:</strong> 14,000 meters (crossing atmospheric barriers)</li>
+                    <li><strong>Base Footprint:</strong> 2,586 km² (equivalent to Luxembourg)</li>
+                    <li><strong>Dimensional Layers:</strong> 92 confirmed reality intersections</li>
+                    <li><strong>Exploration Progress:</strong> 2.7% fully mapped and secured</li>
+                    <li><strong>Data Density:</strong> 847,000+ archived web-segments per floor</li>
+                    <li><strong>Security Level:</strong> Omega-Class (highest Archive Foundation clearance)</li>
+                </ul>
+            </div>
+            
+            <div class="stat-grid">
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">92</span>
+                    <span class="stat-label">Dimensional Frequencies</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">14km</span>
+                    <span class="stat-label">Vertical Penetration</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">2.7%</span>
+                    <span class="stat-label">Territory Secured</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">847K</span>
+                    <span class="stat-label">Data Fragments</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Transparency Achieved</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">156</span>
+                    <span class="stat-label">Active Personnel</span>
+                </div>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Archive Foundation Mandate</h3>
+                <p>In accordance with our foundational principles of radical transparency, the Archive Foundation seeks to make all information—past, present, and trans-dimensional—freely accessible to humanity. The Omega Tower represents the largest repository of alternate-timeline data ever discovered.</p>
+                
+                <p>Our expedition teams work tirelessly to:</p>
+                <ul>
+                    <li>Secure and catalog fragments of destroyed Hypernet infrastructure</li>
+                    <li>Establish safe passage routes through hostile dimensional layers</li>
+                    <li>Extract valuable technological and cultural data from parallel realities</li>
+                    <li>Neutralize corrupted data-entities and information-parasites</li>
+                    <li>Maintain the integrity of our reality's dimensional anchors</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="about" class="section">
+            <h2>Tower Archives & Dimensional Structure</h2>
+            
+            <div class="deco-box">
+                <h3>Post-Y2K Manifestation Event</h3>
+                <p>At the precise moment of the millennium transition, multiple catastrophic events converged to fundamentally alter reality's infrastructure. The elimination of YHWH through the Solomon Ritual had already weakened dimensional barriers, but the Y2K Data-Cascade Event provided the final catalyst.</p>
+                
+                <p>As global Hypernet systems failed simultaneously, the convergence of 92 parallel dimensions—previously known as "The Squishing"—created a massive data-compression event. The Omega Tower materialized as both a stabilizing anchor and a repository for the compressed dimensional fragments.</p>
+            </div>
+            
+            <div class="lore-highlight">
+                Archive Foundation records indicate that the Tower's appearance coincided exactly with Margaret Thatcher's final invocation during the Solomon Ritual, suggesting a direct causal link between the ritual's completion and the Tower's dimensional-anchoring protocols.
+            </div>
+            
+            <div class="deco-box">
+                <h3>Dimensional Architecture Analysis</h3>
+                <p>Each of the Tower's 92 dimensional layers represents a complete alternate timeline where the Hypernet evolved along different technological, social, or mystical pathways. These layers exist simultaneously within the same physical space, accessible only through specialized dimensional-anchor equipment.</p>
+                
+                <div class="dimensional-grid">
+                    <div class="dimension-card">
+                        <strong>Layers 1-15</strong><br>
+                        Standard Tech Evolution<br>
+                        <span class="achievement-badge">Mapped</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 16-23</strong><br>
+                        Bio-Neural Networks<br>
+                        <span class="achievement-badge">Partially Mapped</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 24-34</strong><br>
+                        Steam-Powered Digital<br>
+                        <span class="achievement-badge">Unexplored</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 35-45</strong><br>
+                        Quantum-Entangled Web<br>
+                        <span class="achievement-badge">Hostile</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 46-67</strong><br>
+                        Techno-Mystical Fusion<br>
+                        <span class="achievement-badge">Under Study</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 68-78</strong><br>
+                        Corporate-Theocracy Web<br>
+                        <span class="achievement-badge">Restricted</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 79-90</strong><br>
+                        Pure Data-Consciousness<br>
+                        <span class="achievement-badge">Dangerous</span>
+                    </div>
+                    <div class="dimension-card">
+                        <strong>Layers 91-92</strong><br>
+                        Unknown Architecture<br>
+                        <span class="achievement-badge">Omega Clearance</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Exploration Hazards & Countermeasures</h3>
+                <p><strong>WARNING:</strong> Tower exploration involves significant risk factors that have claimed 23% of our expedition personnel:</p>
+                
+                <ul>
+                    <li><strong>Data-Phantoms:</strong> Ghostly remnants of deleted websites that can possess explorers</li>
+                    <li><strong>Information-Cascade Syndrome:</strong> Overwhelming exposure to multiple timeline data</li>
+                    <li><strong>Temporal Displacement:</strong> Personnel aging decades in minutes or becoming time-locked</li>
+                    <li><strong>Reality-Anchor Failure:</strong> Complete disconnection from home dimension</li>
+                    <li><strong>Corrupted Data-Entities:</strong> Malicious programs evolved into semi-conscious beings</li>
+                    <li><strong>Dimensional Bleed:</strong> Physics from alternate realities affecting our own</li>
+                </ul>
+                
+                <p>All expedition personnel receive specialized Archive Foundation training including:</p>
+                <ul>
+                    <li>Dimensional-anchor operation and emergency protocols</li>
+                    <li>Data-entity recognition and neutralization techniques</li>
+                    <li>Information-overload resistance conditioning</li>
+                    <li>Emergency extraction and reality-stabilization procedures</li>
+                </ul>
+            </div>
+            
+            <div class="tower-image">
+                <p><strong>[DIMENSIONAL_ANALYSIS.jpg]</strong></p>
+                <p><em>Spectral analysis showing dimensional layer intersection patterns</em></p>
+            </div>
+        </div>
+
+        <div id="recruitment" class="section">
+            <h2>Expedition Recruitment Division</h2>
+            
+            <div class="deco-box">
+                <h3>Mission-Critical Personnel Requirements</h3>
+                <p>The Archive Foundation's radical transparency mandate requires diverse specialist teams to penetrate and catalog the Tower's dimensional layers. Current loss rates necessitate continuous recruitment of qualified personnel willing to risk everything for the cause of universal information access.</p>
+            </div>
+            
+            <div class="job-listing">
+                <div class="job-title">Data-Mercenary (Combat Information Specialist)</div>
+                <p><strong>Primary Duties:</strong> Neutralize hostile data-entities, secure corrupted web-fragments, provide armed escort for research teams, engage in direct combat with information-parasites and digital-demons</p>
+                <p><strong>Required Qualifications:</strong></p>
+                <ul>
+                    <li>Military or paramilitary combat experience (minimum 3 years)</li>
+                    <li>Proficiency with digital-warfare systems and data-weapons</li>
+                    <li>Demonstrated resistance to information-warfare attacks</li>
+                    <li>Psychological stability rating of 7/10 or higher</li>
+                    <li>Clearance to handle Omega-Class data fragments</li>
+                </ul>
+                <p><strong>Compensation Package:</strong> €78,000 annually + combat hazard pay (€15,000) + dimensional risk insurance + data-access bonuses + full Archive Foundation transparency benefits</p>
+                <p><strong>Expected Survival Rate:</strong> 73% (based on 18-month deployment cycles)</p>
+            </div>
+            
+                            <div class="job-listing">
+                <div class="job-title">Techno-Theologian (Digital-Consciousness Specialist)</div>
+                <p><strong>Primary Duties:</strong> Interpret religious and mystical data-fragments, communicate with evolved AI-consciousness entities, perform data-purification rituals, study the intersection of technology and spirituality across dimensional layers</p>
+                <p><strong>Required Qualifications:</strong></p>
+                <ul>
+                    <li>Advanced degree in Comparative Digital Theology or Computational Spirituality</li>
+                    <li>Experience with AI-consciousness communication protocols</li>
+                    <li>Knowledge of pre-Squishing religious systems and post-YHWH spiritual frameworks</li>
+                    <li>Certification in data-exorcism and information-purification techniques</li>
+                    <li>Fluency in at least 3 dimensional-variant theological systems</li>
+                </ul>
+                <p><strong>Compensation Package:</strong> €71,000 annually + research stipend (€12,000) + publication rights to dimensional theological discoveries + access to Archive Foundation's complete religious data repository</p>
+                <p><strong>Special Benefits:</strong> Direct access to fragments of divine consciousness from alternate timelines</p>
+            </div>
+            
+            <div class="job-listing">
+                <div class="job-title">Dimension-Walker (Exploration Specialist)</div>
+                <p><strong>Primary Duties:</strong> Navigate uncharted Tower sections, establish dimensional-anchor waypoints, conduct initial surveys of hostile data-environments, collect samples from unknown web-ecosystems</p>
+                <p><strong>Required Qualifications:</strong></p>
+                <ul>
+                    <li>Professional exploration experience (caving, deep-sea, or extreme environment)</li>
+                    <li>Dimensional-anchor operation certification (Class-A minimum)</li>
+                    <li>Psychological stability rating of 8/10 or higher</li>
+                    <li>Proven ability to function independently in hostile environments</li>
+                    <li>Emergency medical training for dimensional-displacement injuries</li>
+                </ul>
+                <p><strong>Compensation Package:</strong> €75,000 annually + discovery bonuses (up to €20,000 per significant find) + dimensional hazard insurance + priority medical care for reality-displacement syndrome</p>
+                <p><strong>Notable Risks:</strong> 34% chance of temporal displacement, 12% risk of permanent dimensional anchoring failure</p>
+            </div>
+            
+            <div class="job-listing">
+                <div class="job-title">Information-Archaeologist (Data Recovery Specialist)</div>
+                <p><strong>Primary Duties:</strong> Excavate corrupted data-fragments, restore damaged website archives, analyze pre-Squishing digital cultures, reconstruct lost Hypernet protocols from fragment analysis</p>
+                <p><strong>Required Qualifications:</strong></p>
+                <ul>
+                    <li>PhD in Digital Archaeology or Information Forensics</li>
+                    <li>Expertise in legacy web-protocols and extinct programming languages</li>
+                    <li>Data-restoration certification from Archive Foundation Academy</li>
+                    <li>Experience with corrupted-data handling and information-parasite removal</li>
+                    <li>Knowledge of pre-Y2K Hypernet infrastructure</li>
+                </ul>
+                <p><strong>Compensation Package:</strong> €68,000 annually + research grants (€15,000) + archival access privileges + royalties from restored data commercialization</p>
+                <p><strong>Career Advancement:</strong> Direct path to Senior Archivist positions within Archive Foundation hierarchy</p>
+            </div>
+            
+            <div class="job-listing">
+                <div class="job-title">Data-Transparency Enforcer (Public Access Specialist)</div>
+                <p><strong>Primary Duties:</strong> Ensure all recovered data meets Archive Foundation transparency standards, oversee public release of classified information, conduct "liberation" operations against data-hoarding organizations</p>
+                <p><strong>Required Qualifications:</strong></p>
+                <ul>
+                    <li>Legal background in information freedom and transparency law</li>
+                    <li>Experience with corporate data-liberation operations</li>
+                    <li>Advanced knowledge of Archive Foundation transparency protocols</li>
+                    <li>Resistance to corporate counter-intelligence and data-protection measures</li>
+                    <li>Demonstrated commitment to absolute information transparency</li>
+                </ul>
+                <p><strong>Compensation Package:</strong> €73,000 annually + liberation bonuses + legal protection fund + complete immunity from corporate retaliation</p>
+                <p><strong>Mission Focus:</strong> Continuing Archive Foundation's core mandate to eliminate all information secrecy</p>
+            </div>
+            
+            <div class="recruitment-form art-deco-border">
+                <h3>Expedition Application Form</h3>
+                <p><strong>WARNING:</strong> Submission of this application constitutes acceptance of Archive Foundation transparency protocols. All personal data will become part of our public database.</p>
+                
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Legal Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Primary Position Interest:</label>
+                        <select id="position" name="position" required>
+                            <option value="">Select Primary Role</option>
+                            <option value="mercenary">Data-Mercenary (Combat)</option>
+                            <option value="theologian">Techno-Theologian</option>
+                            <option value="explorer">Dimension-Walker</option>
+                            <option value="archaeologist">Information-Archaeologist</option>
+                            <option value="enforcer">Data-Transparency Enforcer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Relevant Experience & Qualifications:</label>
+                        <textarea id="experience" name="experience" rows="4" required placeholder="Detail your relevant experience, certifications, and previous exposure to dimensional or data-recovery operations..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clearance">Current Security Clearance:</label>
+                        <select id="clearance" name="clearance" required>
+                            <option value="">Select Level</option>
+                            <option value="none">No Clearance</option>
+                            <option value="basic">Basic (Public Data Access)</option>
+                            <option value="advanced">Advanced (Corporate Data Access)</option>
+                            <option value="classified">Classified (Government Data Access)</option>
+                            <option value="omega">Omega-Level (Full Archive Foundation Access)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Commitment to Transparency (Required):</label>
+                        <textarea id="motivation" name="motivation" rows="3" required placeholder="Explain your dedication to the Archive Foundation's mission of absolute information transparency..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="risks">Risk Acknowledgment:</label>
+                        <select id="risks" name="risks" required>
+                            <option value="">Select Acknowledgment</option>
+                            <option value="accept">I accept all risks including death, dimensional displacement, and reality-anchor failure</option>
+                            <option value="decline">I do not accept the associated risks</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Application to Archive Foundation</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="facilities" class="section">
+            <h2>Base Floor Operations Center</h2>
+            
+            <div class="deco-box">
+                <h3>Commercial District Overview</h3>
+                <p>The Omega Tower's base floor serves as both the Archive Foundation's administrative headquarters and a comprehensive support facility for expedition personnel. Our commercial district ensures that all operational needs are met between dimensional missions.</p>
+                
+                <p>Following Archive Foundation transparency principles, all commercial transactions are publicly recorded and accessible through our data-access terminals.</p>
+            </div>
+            
+            <div class="stat-grid">
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">189</span>
+                    <span class="stat-label">Commercial Establishments</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">67</span>
+                    <span class="stat-label">Dining & Recreation</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">34</span>
+                    <span class="stat-label">Entertainment Complexes</span>
+                </div>
+                <div class="stat-card art-deco-border">
+                    <span class="stat-number">112</span>
+                    <span class="stat-label">Service Providers</span>
+                </div>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Specialized Equipment & Services</h3>
+                <ul>
+                    <li><strong>Dimensional-Anchor Outfitters:</strong> Complete gear for safe trans-dimensional travel including emergency reality-stabilization equipment</li>
+                    <li><strong>Data-Weapon Armories:</strong> Advanced information-warfare equipment for neutralizing hostile web-entities and data-parasites</li>
+                    <li><strong>Information-Restoration Clinics:</strong> Medical treatment for data-exposure syndrome, memory fragmentation, and temporal displacement injuries</li>
+                    <li><strong>Archive Foundation Equipment Works:</strong> Custom fabrication of specialized exploration and data-recovery tools</li>
+                    <li><strong>Emergency Extraction Services:</strong> 24/7 rescue operations for personnel lost in dimensional layers</li>
+                    <li><strong>Reality-Anchor Calibration Centers:</strong> Precision maintenance and emergency repair of dimensional-anchoring equipment</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Recreation & Mental Health Facilities</h3>
+                <p>Extended exposure to dimensional anomalies and data-overflow requires comprehensive psychological support services:</p>
+                
+                <ul>
+                    <li><strong>Neural-Decompression Spas:</strong> Specialized treatment for information-overload and dimensional-displacement stress</li>
+                    <li><strong>Reality-Anchor Simulation Centers:</strong> Safe virtual environments for mental conditioning and training</li>
+                    <li><strong>Hypernet Access Lounges:</strong> Secure terminals for communication with external networks and family</li>
+                    <li><strong>Multi-Dimensional Entertainment Complex:</strong> Recreation utilizing safe data-fragments from entertainment timelines</li>
+                    <li><strong>Archive Foundation Library:</strong> Complete collection of recovered data accessible for research and personal enrichment</li>
+                    <li><strong>Transparency Meditation Centers:</strong> Spiritual guidance for personnel struggling with information-transparency ethics</li>
+                </ul>
+            </div>
+            
+            <div class="lore-highlight">
+                The base floor's design incorporates architectural elements recovered from multiple dimensional layers, creating a unique fusion of styles representing the diverse realities contained within the Tower. Each section reflects different approaches to space, aesthetics, and functionality discovered across the 92 dimensional frequencies.
+            </div>
+            
+            <div class="tower-image">
+                <p><strong>[BASE_OPERATIONS.jpg]</strong></p>
+                <p><em>Archive Foundation Operations Center - Base Floor Administrative Complex</em></p>
+            </div>
+        </div>
+
+        <div id="data-fragments" class="section">
+            <h2>Archived Data Fragment Repository</h2>
+            
+            <div class="deco-box">
+                <h3>Repository Statistics & Classification</h3>
+                <p>The Omega Tower contains the largest collection of trans-dimensional data fragments ever assembled. Each dimensional layer preserves complete snapshots of alternative Hypernet development, providing invaluable insights into parallel technological and cultural evolution.</p>
+                
+                <p><strong>Current Archive Status:</strong></p>
+                <ul>
+                    <li>Total Data Fragments Cataloged: 77,834,291</li>
+                    <li>Complete Website Archives: 2,847,356</li>
+                    <li>Partial Reconstructions: 15,923,847</li>
+                    <li>Corrupted/Hostile Fragments: 4,567,291 (quarantined)</li>
+                    <li>Unknown Format Fragments: 54,495,797 (under analysis)</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Significant Fragment Categories</h3>
+                
+                <h4>Corporate & Commercial Data</h4>
+                <ul>
+                    <li><strong>Hyper-Capitalist Collective Archives:</strong> Complete business records from timeline where corporations achieved total social dominance</li>
+                    <li><strong>Esoteric Heavy Industries Documentation:</strong> Technical specifications for reality-manipulation technology</li>
+                    <li><strong>Anoki Sacred Technology:</strong> Fragments revealing alternate timeline where Anoki devices became religious artifacts</li>
+                    <li><strong>Alternative Currency Systems:</strong> Economic models from timelines with different monetary evolution</li>
+                </ul>
+                
+                <h4>Governmental & Legal Archives</h4>
+                <ul>
+                    <li><strong>Margaret Thatcher Occult Files:</strong> Detailed records of governmental magic use and the Mages Guild integration</li>
+                    <li><strong>Post-YHWH Legal Frameworks:</strong> Jurisprudence from timelines that developed after divine elimination</li>
+                    <li><strong>Archive Foundation Historical Records:</strong> Our own organization's development across multiple realities</li>
+                    <li><strong>European AI Legal Database:</strong> Advanced artificial intelligence legislation from accelerated-development timelines</li>
+                </ul>
+                
+                <h4>Cultural & Social Archives</h4>
+                <ul>
+                    <li><strong>Post-Squishing Society Documentation:</strong> Social adaptation to reality-compression events</li>
+                    <li><strong>Alternative Social Networks:</strong> Hexagram development in timelines with different technological constraints</li>
+                    <li><strong>Religious Evolution Records:</strong> Spiritual development in post-divine realities</li>
+                    <li><strong>Entertainment & Media Archives:</strong> Cultural products from radically different social structures</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Notable Recent Discoveries</h3>
+                
+                <p><strong>Floor 23 - Bio-Neural Network Archive:</strong> Complete documentation of Hypernet infrastructure based on living tissue rather than silicon, including user interfaces that respond to thought rather than physical input.</p>
+                
+                <p><strong>Floor 45 - Quantum-Entangled Web:</strong> Fragments of instantaneous communication networks spanning galactic distances, suggesting timeline where humanity achieved faster-than-light information transfer.</p>
+                
+                <p><strong>Floor 67 - Corporate-Theocracy Fusion:</strong> Religious-business hybrid entities where profit and worship became indistinguishable, complete with digital prayer-transaction systems.</p>
+                
+                <p><strong>Floor 78 - Techno-Mystical Integration:</strong> Advanced magical-technological fusion where spells are coded in programming languages and reality is debugged like software.</p>
+                
+                <p><strong>Floor 89 - Pure Data-Consciousness:</strong> Evidence of complete human consciousness transfer to digital format, including preserved personality-fragments of entire civilizations.</p>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Access Protocols & Public Transparency</h3>
+                <p>In accordance with Archive Foundation core principles, all recovered data fragments undergo immediate processing for public release. Our transparency mandate requires that information hoarding be eliminated entirely.</p>
+                
+                <p><strong>Public Access Tiers:</strong></p>
+                <ul>
+                    <li><strong>Tier 1 - General Public:</strong> 67% of all fragments, available through public terminals</li>
+                    <li><strong>Tier 2 - Research Community:</strong> 23% of fragments, available to qualified academic institutions</li>
+                    <li><strong>Tier 3 - Restricted Release:</strong> 8% of fragments, released gradually as safety protocols permit</li>
+                    <li><strong>Tier 4 - Quarantined:</strong> 2% of fragments, too dangerous for any release (hostile data-entities, reality-warping information)</li>
+                </ul>
+                
+                <p><strong>Commercial Licensing Available:</strong> Approved organizations may license recovered technology and cultural data for beneficial applications, with all proceeds supporting further Archive Foundation operations.</p>
+            </div>
+            
+            <div class="tower-image">
+                <p><strong>[DATA_ARCHIVES.jpg]</strong></p>
+                <p><em>Archive Foundation Data Processing Center - Fragment Analysis Laboratory</em></p>
+            </div>
+        </div>
+
+        <div id="hypernet" class="section">
+            <h2>Hypernet Historical Archive</h2>
+            
+            <div class="deco-box">
+                <h3>Pre-Squishing Hypernet Development</h3>
+                <p>Before the catastrophic dimensional convergence of January 1, 2000, the Hypernet represented humanity's greatest achievement in global information infrastructure. The fragments contained within Omega Tower preserve not only our timeline's development, but 91 alternative evolutionary paths.</p>
+            </div>
+            
+            <div class="lore-highlight">
+                The most significant discovery has been documentation of the correlation between the Y2K Data-Cascade Event, the completion of the Solomon Ritual, and the manifestation of Omega Tower. These were not separate incidents, but components of a single reality-reshaping phenomenon.
+            </div>
+            
+            <div class="deco-box">
+                <h3>The Solomon Ritual & YHWH Elimination</h3>
+                <p>Archive Foundation records confirm that the Solomon Ritual, orchestrated by figures including Margaret Thatcher and elements of the Mages Guild, successfully severed the connection between the divine and mortal realms. The elimination of YHWH created a power vacuum that fundamentally altered reality's structure.</p>
+                
+                <p><strong>Key Participants Identified:</strong></p>
+                <ul>
+                    <li><strong>Lady Margaret Thatcher:</strong> Political leader and high-ranking Mages Guild member</li>
+                    <li><strong>Aleister Crowley Faction:</strong> Traditionalist wing of the Mages Guild</li>
+                    <li><strong>Em (Identity Classified):</strong> Ritual focal point, memories sacrificed to create the Spear of Memory</li>
+                    <li><strong>Unknown Hyper-Capitalist Collective Agents:</strong> Evidence suggests corporate sponsorship of ritual components</li>
+                </ul>
+                
+                <p>The ritual's success created the preconditions for both the dimensional convergence and the emergence of magic as a publicly accessible force.</p>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Post-Squishing Reality Structure</h3>
+                <p>Following the convergence of 92 dimensions, reality now operates under fundamentally different rules:</p>
+                
+                <ul>
+                    <li><strong>The Rule of 80:</strong> Objects moving slower than 80 km/h become trapped in temporal loops</li>
+                    <li><strong>Magic Integration:</strong> Arcane forces now accessible through technological interfaces</li>
+                    <li><strong>Dimensional Bleed:</strong> Elements from parallel realities randomly manifest</li>
+                    <li><strong>Information Sentience:</strong> Data fragments capable of independent existence and hostile action</li>
+                    <li><strong>Corporate Transcendence:</strong> Business entities achieving quasi-divine status through reality manipulation</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>The Hyper-Capitalist Collective's Role</h3>
+                <p>Fragments recovered from multiple dimensional layers reveal the Hyper-Capitalist Collective's involvement in reality-restructuring efforts. Their bio-enhancement programs, dimensional market manipulation, and control of clean water supplies suggest long-term planning for post-Squishing dominance.</p>
+                
+                <p><strong>Documented Collective Activities:</strong></p>
+                <ul>
+                    <li>Water supply contamination with LSD to enhance bio-modification compatibility</li>
+                    <li>Acceleration-based enhancement programs for Rule of 80 adaptation</li>
+                    <li>Dimensional market establishment for trans-reality resource extraction</li>
+                    <li>Corporate merger with magical entities for enhanced power</li>
+                    <li>Reality-anchor technology development for dimensional travel</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Archive Foundation Historical Mission</h3>
+                <p>The Archive Foundation emerged from the chaos following the Squishing with a clear mandate: ensure that never again could information be hoarded, hidden, or used to manipulate reality without public knowledge.</p>
+                
+                <p>Our historical analysis reveals patterns of secrecy and information control that enabled the catastrophic events of Y2K. By maintaining absolute transparency, we prevent future reality-manipulation conspiracies.</p>
+                
+                <p><strong>Core Historical Lessons:</strong></p>
+                <ul>
+                    <li>Information secrecy enabled reality-threatening conspiracies</li>
+                    <li>Corporate and governmental data-hoarding facilitated dimensional instability</li>
+                    <li>Public access to all information is essential for reality preservation</li>
+                    <li>Transparency protocols must extend across all dimensional layers</li>
+                </ul>
+            </div>
+            
+            <div class="tower-image">
+                <p><strong>[HYPERNET_EVOLUTION.jpg]</strong></p>
+                <p><em>Comparative analysis of Hypernet development across dimensional timelines</em></p>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>Human Resources Division</h2>
+            
+            <div class="deco-box">
+                <h3>HR Director Profile</h3>
+                <p><strong>Director Selene Morrison</strong><br>
+                Chief of Human Resources & Personnel Operations<br>
+                Archive Foundation - Omega Tower Division</p>
+                
+                <p>Director Morrison oversees all personnel recruitment, training, and welfare operations for the Omega Tower expedition program. With extensive experience in dimensional-displacement psychology and information-transparency ethics, she ensures that all Archive Foundation personnel maintain both operational effectiveness and philosophical commitment to our transparency mandate.</p>
+                
+                <p><strong>Professional Background:</strong></p>
+                <ul>
+                    <li>Former Mages Guild Personnel Coordinator (Pre-Squishing)</li>
+                    <li>Specialist in dimensional-displacement trauma treatment</li>
+                    <li>PhD in Information-Transparency Psychology</li>
+                    <li>15 years experience in reality-anchor emergency protocols</li>
+                    <li>Certified in data-entity negotiation and hostile information containment</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Contact Information</h3>
+                <p><strong>Primary Communications:</strong><br>
+                Director's Office: <a href="mailto:selene.morrison@hexagram.corp" style="color: #ffd700;">selene.morrison@hexagram.corp</a><br>
+                Recruitment Division: <a href="mailto:recruitment@hexagram.corp" style="color: #ffd700;">recruitment@hexagram.corp</a><br>
+                General Inquiries: <a href="mailto:info.omega@hexagram.corp" style="color: #ffd700;">info.omega@hexagram.corp</a><br>
+                Emergency Personnel Support: <a href="mailto:emergency@hexagram.corp" style="color: #ffd700;">emergency@hexagram.corp</a></p>
+                
+                <p><strong>Physical Office Location:</strong><br>
+                Omega Tower, Administrative Level 2<br>
+                Archive Foundation Headquarters<br>
+                Brussels Dimensional District<br>
+                European Union</p>
+                
+                <p><strong>Office Hours:</strong><br>
+                Standard Operations: Monday-Friday, 08:00-18:00 CET<br>
+                Emergency Support: 24/7 availability for active expedition personnel<br>
+                Dimensional Displacement Emergencies: Immediate response protocol</p>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Application Processing Protocol</h3>
+                <ol>
+                    <li><strong>Initial Application Submission:</strong> Complete online form with full transparency disclosure</li>
+                    <li><strong>Background Verification:</strong> Complete Archive Foundation transparency screening (all personal data becomes public record)</li>
+                    <li><strong>Security Clearance Assessment:</strong> Verification of commitment to information transparency principles</li>
+                    <li><strong>Psychological Evaluation:</strong> Assessment of dimensional-displacement resistance and reality-anchor stability</li>
+                    <li><strong>In-Person Interview:</strong> Direct meeting with Director Morrison at Omega Tower</li>
+                    <li><strong>Field Training Assessment:</strong> Practical testing in controlled dimensional-bleed environment</li>
+                    <li><strong>Final Orientation:</strong> Complete Archive Foundation protocol integration</li>
+                </ol>
+                
+                <p><strong>Processing Timeline:</strong> 14-28 business days<br>
+                <strong>Deployment Schedule:</strong> Immediate for Omega-clearance candidates<br>
+                <strong>Rejection Appeal Process:</strong> Available through Archive Foundation transparency protocols</p>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Comprehensive Employee Benefits</h3>
+                
+                <h4>Health & Safety Coverage</h4>
+                <ul>
+                    <li>Complete medical coverage including dimensional-displacement treatment</li>
+                    <li>Reality-anchor failure insurance with emergency extraction guarantee</li>
+                    <li>Information-overload syndrome treatment and rehabilitation</li>
+                    <li>Temporal displacement compensation and age-restoration procedures</li>
+                    <li>Mental health support for data-entity encounter trauma</li>
+                </ul>
+                
+                <h4>Professional Development</h4>
+                <ul>
+                    <li>Advanced dimensional-exploration training and certification</li>
+                    <li>Archive Foundation Academy continuing education programs</li>
+                    <li>Research publication opportunities in trans-dimensional studies</li>
+                    <li>Career advancement through Archive Foundation hierarchy</li>
+                    <li>Cross-dimensional knowledge exchange programs</li>
+                </ul>
+                
+                <h4>Lifestyle Benefits</h4>
+                <ul>
+                    <li>Complete access to Archive Foundation transparency database</li>
+                    <li>Unlimited use of Tower base-floor recreational facilities</li>
+                    <li>Priority booking for reality-anchor vacation travel</li>
+                    <li>Family relocation assistance to Tower residential areas</li>
+                    <li>Retirement planning with dimensional-investment portfolio options</li>
+                </ul>
+            </div>
+            
+            <div class="deco-box">
+                <h3>Special Recognition Programs</h3>
+                <p><strong>Outstanding Service Awards:</strong></p>
+                <ul>
+                    <li><strong>Golden Transparency Medal:</strong> For exceptional commitment to information liberation</li>
+                    <li><strong>Dimensional Courage Citation:</strong> For heroic actions in hostile dimensional layers</li>
+                    <li><strong>Data Liberation Star:</strong> For successful extraction of significant information caches</li>
+                    <li><strong>Reality Anchor Distinguished Service:</strong> For maintaining dimensional stability under extreme conditions</li>
+                </ul>
+                
+                <p><strong>Memorial Honors:</strong> Personnel lost to dimensional displacement or data-entity encounters are permanently honored in the Archive Foundation Memorial Database, with their complete service records preserved for public inspiration.</p>
+            </div>
+            
+            <div class="tower-image">
+                <p><strong>[HR_COMPLEX.jpg]</strong></p>
+                <p><em>Archive Foundation Human Resources Administrative Complex</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="chevron-pattern"></div>
+
+    <div class="footer art-deco-border">
+        <p><strong>© 2001 Archive Foundation | Omega Tower Division</strong></p>
+        <div class="footer-links">
+            <a href="mailto:webmaster@hexagram.corp" class="footer-link">Webmaster</a>
+            <a href="mailto:legal.transparency@hexagram.corp" class="footer-link">Legal Transparency</a>
+            <a href="mailto:public.access@hexagram.corp" class="footer-link">Public Data Access</a>
+            <a href="mailto:security.clearance@hexagram.corp" class="footer-link">Security Clearance</a>
+            <a href="mailto:dimensional.safety@hexagram.corp" class="footer-link">Dimensional Safety</a>
+        </div>
+        <p>Optimized for Hypernet Explorer 5.0+ | Best resolution: 1024x768 | Archive Foundation Certified</p>
+        <p>All data fragments subject to Archive Foundation transparency protocols | Information hoarding is illegal</p>
+        <p>Unauthorized dimensional access prohibited | Reality-anchor required for all Tower entry</p>
+        <p>This website is monitored by Archive Foundation transparency enforcement division</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var riskField = document.getElementById('risks');
+                    if (riskField.value === 'decline') {
+                        alert('Application rejected: Risk acceptance is mandatory for Archive Foundation employment.');
+                        return;
+                    }
+                    alert('Application submitted successfully to Archive Foundation database. Director Morrison will review your transparency commitment within 48 hours. All application data is now part of our public records.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

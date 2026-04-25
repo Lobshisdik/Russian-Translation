@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>THE FOSTER FILES - NIXON TRUTH EXPOSED - fosterfiles.corp</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background: repeating-linear-gradient(
+                45deg,
+                #1a1a2e,
+                #1a1a2e 20px,
+                #16213e 20px,
+                #16213e 40px
+            );
+            color: #00ff41;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(90deg); }
+        }
+        
+        .truth-container {
+            max-width: none;
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ff0080;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 0 30px #ff0080;
+        }
+        
+        .blink-text {
+            animation: blink 1s infinite;
+            color: #ff0080;
+            font-weight: bold;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .conspiracy-header {
+            text-align: center;
+            font-size: 28px;
+            color: #ffff00;
+            text-shadow: 3px 3px 0px #ff0000;
+            margin-bottom: 30px;
+            transform: rotate(-2deg);
+        }
+        
+        .evidence-block {
+            background: linear-gradient(135deg, #000033, #330000);
+            border: 2px dashed #00ffff;
+            padding: 20px;
+            margin: 25px 0;
+            transform: skew(-3deg);
+            box-shadow: 5px 5px 15px rgba(255, 0, 128, 0.3);
+        }
+        
+        .evidence-block:nth-child(even) {
+            transform: skew(2deg);
+            border-color: #ffff00;
+        }
+        
+        .theory-text {
+            font-size: 16px;
+            line-height: 1.4;
+            text-align: justify;
+            color: #00ff41;
+        }
+        
+        .emphasis {
+            color: #ff0080;
+            font-weight: bold;
+            text-decoration: underline;
+            background: rgba(255, 255, 0, 0.2);
+        }
+        
+        .secret-file {
+            background: #660000;
+            color: #ffff00;
+            padding: 15px;
+            border: 3px solid #ff0000;
+            margin: 20px 0;
+            font-family: "Lucida Console", monospace;
+            position: relative;
+        }
+        
+        .secret-file:before {
+            content: "CLASSIFIED";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #ff0000;
+            color: white;
+            padding: 3px 8px;
+            font-size: 12px;
+            transform: rotate(15deg);
+        }
+        
+        .contact-info {
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border: 4px solid #ffff00;
+            margin-top: 40px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .nav-chaos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 0, 128, 0.9);
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 3px solid #00ffff;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+        
+        .nav-link:hover {
+            color: #ffff00;
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            margin-top: 60px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .truth-meter {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border: 2px solid #ff0080;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .truth-level {
+            height: 100%;
+            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00);
+            width: 95%;
+            animation: truth-pulse 1.5s infinite;
+        }
+        
+        @keyframes truth-pulse {
+            0%, 100% { width: 95%; }
+            50% { width: 98%; }
+        }
+        
+        .random-fact {
+            position: absolute;
+            font-size: 12px;
+            color: #ffff00;
+            transform: rotate(45deg);
+            opacity: 0.7;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <div class="nav-chaos">
+        <span class="nav-link" onclick="showSection('home')">TRUTH HOME</span>
+        <span class="nav-link" onclick="showSection('evidence')">THE EVIDENCE</span>
+        <span class="nav-link" onclick="showSection('timeline')">SECRET TIMELINE</span>
+        <span class="nav-link" onclick="showSection('connections')">DEEP CONNECTIONS</span>
+        <span class="nav-link" onclick="showSection('coverup')">THE COVERUP</span>
+        <span class="nav-link" onclick="showSection('contact')">WAKE UP CONTACT</span>
+    </div>
+
+    <div class="main-content">
+        <div class="truth-container">
+            
+            <div id="home" class="section active">
+                <div class="conspiracy-header">
+                    <span class="blink-text">THE FOSTER FILES</span><br>
+                    JODIE'S NIXON PLOT EXPOSED!!!
+                </div>
+                
+                <div class="truth-meter">
+                    <div class="truth-level"></div>
+                </div>
+                <p style="text-align: center; color: #ffff00; font-size: 14px;">TRUTH LEVEL: 95% VERIFIED</p>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        WAKE UP SHEEPLE!!! The REAL truth about <span class="emphasis">JODIE FOSTER</span> and her ASSASSINATION ATTEMPTS on PRESIDENT NIXON has been HIDDEN from us for DECADES!!! This is NOT about John Hinckley Jr - that's just what THEY want you to believe!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">FACT:</span> Jodie Foster was TWELVE years old when she starred in Taxi Driver (1976). <span class="emphasis">FACT:</span> Nixon was still POLITICALLY ACTIVE and a THREAT to the NEW WORLD ORDER. <span class="emphasis">COINCIDENCE???</span> I THINK NOT!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>HYPERNET ARCHIVE DISCOVERY 1999:</strong><br>
+                    Foster's early film roles were COVER for her training in PSYCHO-SUBLIMINAL assassination techniques. The TAXI DRIVER role wasn't acting - it was PRACTICE!!! She was using NEURAL-PROGRAMMING technology to influence WEAK MINDS like Hinckley's!!!
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        Why do you think Foster went to YALE??? YALE = SKULL & BONES = ILLUMINATI TRAINING GROUND!!! She learned ADVANCED MIND-CONTROL and TEMPORAL-MANIPULATION techniques there!!! The Foster-Nixon connection goes DEEPER than you can imagine!!!
+                    </div>
+                </div>
+                
+                <div class="random-fact" style="top: 200px; right: 50px;">
+                    FOSTER = ANAGRAM = FOREST = TREES = PAPER = NEWSPAPERS = MEDIA CONTROL!!!
+                </div>
+                
+                <div class="random-fact" style="bottom: 300px; left: 100px;">
+                    1976 + 1981 = 3057... 3+0+5+7 = 15... 1+5 = 6!!! THE NUMBER OF THE BEAST!!!
+                </div>
+            </div>
+
+            <div id="evidence" class="section">
+                <div class="conspiracy-header">THE SMOKING GUN EVIDENCE</div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">EVIDENCE #1:</span> Foster's NAME appears in EXACTLY 47 newspaper articles between 1974-1982. Nixon's name appears in the SAME articles 23 times. 47 - 23 = 24. There are 24 HOURS in a day. 24 CHANCES for an assassination attempt EVERY SINGLE DAY!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>DECLASSIFIED HEXAGRAM POST FROM 1981:</strong><br>
+                    "Just watched Contact again. Jodie's performance reminds me of something... can't put my finger on it. Something about the way she talks to machines..." - user DEEPTHROAT47<br><br>
+                    <em>ANALYSIS: "Contact" wasn't made until 1997!!! This post is from 1981!!! PROOF of TIME-TRAVEL technology!!!</em>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">EVIDENCE #2:</span> The SILENCE OF THE LAMBS (1991) - Foster plays FBI agent hunting CANNIBALS. But look DEEPER!!! LAMBS = SACRIFICIAL VICTIMS. She was HUNTING Nixon's ALLIES and ELIMINATING them through HANNIBAL LECTER'S guidance!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">EVIDENCE #3:</span> Foster's FRENCH accent in every movie - she's communicating with FRENCH REVOLUTIONARY SPIRITS!!! The same spirits that EXECUTED kings and queens!!! She's channeling GUILLOTINE ENERGY against American presidents!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>NEURAL-PATTERN ANALYSIS:</strong><br>
+                    Computer analysis of Foster's voice patterns in 1976 vs 1981 shows IDENTICAL stress markers when saying words like "president," "power," and "Nixon." This is IMPOSSIBLE unless she was THINKING about Nixon during BOTH recordings!!!
+                </div>
+            </div>
+
+            <div id="timeline" class="section">
+                <div class="conspiracy-header">THE SECRET TIMELINE</div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">1962:</span> Jodie Foster BORN. Nixon loses California governor race. CONNECTED? The cosmic forces were ALIGNING!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">1974:</span> Nixon RESIGNS from presidency. Foster begins acting career. She was ACTIVATED by the resignation - her mission was now to HUNT DOWN Nixon permanently!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">1976:</span> TAXI DRIVER released. Foster perfects her ASSASSINATION PROGRAMMING techniques on Travis Bickle character. This was the BETA TEST!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>CRITICAL DISCOVERY:</strong><br>
+                    1981: Hinckley attempts Reagan assassination. BUT Reagan was just a DECOY!!! The REAL target was Nixon, who was secretly ADVISING Reagan on foreign policy!!! Foster's plan ALMOST worked!!!
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">1984:</span> Foster enters YALE. Advanced training in PSYCHO-POLITICAL warfare. She learned how to use ACADEMIC CREDENTIALS as a weapon!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">1994:</span> Nixon DIES of stroke. NATURAL CAUSES??? More like Foster finally perfected her LONG-DISTANCE NEURAL-ASSASSINATION technique!!! She won... or did she???
+                    </div>
+                </div>
+            </div>
+
+            <div id="connections" class="section">
+                <div class="conspiracy-header">THE DEEP CONNECTIONS</div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        The Foster-Nixon connection is part of a LARGER PATTERN!!! Foster's movies are ALL coded messages about POLITICAL ASSASSINATION:
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>MOVIE CODE ANALYSIS:</strong><br>
+                    • TAXI DRIVER = Urban warfare training<br>
+                    • THE ACCUSED = Legal system manipulation<br>
+                    • SILENCE OF THE LAMBS = Psychological warfare<br>
+                    • NELL = Communication with primitive assassination spirits<br>
+                    • CONTACT = Alien technology for mind control<br>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">THE YALE CONNECTION:</span> Skull & Bones society has been planning PRESIDENTIAL ELIMINATIONS since 1832!!! Foster was their FIRST FEMALE OPERATIVE!!! She used her HOLLYWOOD FAME as cover for assassination training!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">THE HINCKLEY PAWN:</span> John Hinckley Jr. was just a DISTRACTION!!! Foster programmed him using SUBLIMINAL TAXI DRIVER TECHNIQUES!!! While everyone focused on Reagan, she was FREE to pursue Nixon!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>HYPERNET TRAFFIC ANALYSIS:</strong><br>
+                    Between 1995-2000, Foster's official website received 47,000 hits from IP addresses traced to NIXON LIBRARY computers. Someone was MONITORING her activities... or she was monitoring THEIRS!!!
+                </div>
+            </div>
+
+            <div id="coverup" class="section">
+                <div class="conspiracy-header">THE MASSIVE COVERUP</div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">WHY THE TRUTH IS HIDDEN:</span> The ESTABLISHMENT knows that if people discover Foster's ASSASSINATION POWERS, they'll realize that HOLLYWOOD is actually a TRAINING GROUND for political eliminators!!! Every actor is a potential SLEEPER AGENT!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>MEDIA MANIPULATION TACTICS:</strong><br>
+                    1. Focus on Hinckley's "obsession" with Foster<br>
+                    2. Portray Foster as "innocent victim"<br>
+                    3. Never mention her YALE training<br>
+                    4. Ignore the MATHEMATICAL CONNECTIONS<br>
+                    5. Suppress all Nixon-Foster TIMELINE correlations<br>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">THE ACADEMY AWARDS CONSPIRACY:</span> Foster won OSCARS in 1989 and 1992 - REWARDS for her successful Nixon operation!!! The Academy is controlled by the SAME FORCES that wanted Nixon eliminated!!!
+                    </div>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">CURRENT SITUATION:</span> Foster continues to operate UNDER DEEP COVER as a "respected actress and director." But I KNOW THE TRUTH!!! She's probably reading this RIGHT NOW through her ADVANCED SURVEILLANCE NETWORK!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>WARNING TO TRUTH-SEEKERS:</strong><br>
+                    If you share this information, you may experience: unexplained phone calls, mysterious taxi drivers, people offering you movie roles, or sudden urges to watch TAXI DRIVER. THESE ARE ALL SIGNS that Foster's network is MONITORING YOU!!!
+                </div>
+            </div>
+
+            <div id="contact" class="section">
+                <div class="conspiracy-header">WAKE UP AND CONTACT ME</div>
+                
+                <div class="contact-info">
+                    <p><strong class="blink-text">THE TRUTH MUST BE SHARED!!!</strong></p>
+                    <p>If you have MORE EVIDENCE about the Foster-Nixon conspiracy, contact me IMMEDIATELY!</p>
+                    <p><strong>Hexagram Contact:</strong> <a href="mailto:truthseeker47@hexagram.corp" style="color: #ffff00;">truthseeker47@hexagram.corp</a></p>
+                    <p><strong>Backup Contact:</strong> <a href="mailto:nixontruth@hexagram.corp" style="color: #ffff00;">nixontruth@hexagram.corp</a></p>
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        <span class="emphasis">WHAT YOU CAN DO:</span>
+                        <br>• Research Foster's YALE transcripts
+                        <br>• Analyze her movies for HIDDEN MESSAGES
+                        <br>• Track Nixon's movements 1974-1994
+                        <br>• Monitor Foster's current ACTIVITIES
+                        <br>• Spread the TRUTH before it's too late!!!
+                    </div>
+                </div>
+                
+                <div class="secret-file">
+                    <strong>SECURITY PROTOCOLS:</strong><br>
+                    Only contact me using ENCRYPTED Hexagram messages. Never use regular email - Foster's network monitors ALL communications. Use code words: "Taxi" = Truth, "Driver" = Evidence, "Yale" = Danger.
+                </div>
+                
+                <div class="evidence-block">
+                    <div class="theory-text">
+                        Remember: THEY want us to think this is crazy. THEY want us to dismiss the evidence. But WE KNOW BETTER!!! The Foster-Nixon conspiracy is REAL and it's BIGGER than we imagined!!!
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <p style="font-size: 12px;">This website is hosted on SECURE HYPERNET servers. Last updated: January 15, 2001</p>
+                    <p style="font-size: 12px;">Best viewed with Hypernet Explorer 5.0 or higher</p>
+                    <p style="font-size: 12px;">© 2001 TRUTH-SEEKERS UNLIMITED</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Matrix effect
+        function createMatrix() {
+            const matrix = document.getElementById('matrix');
+            const chars = '01FOSTERNIXONYALETRUTH';
+            
+            for (let i = 0; i < 20; i++) {
+                const span = document.createElement('span');
+                span.style.position = 'absolute';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.color = '#00ff41';
+                span.style.fontSize = '10px';
+                span.innerHTML = chars[Math.floor(Math.random() * chars.length)];
+                span.style.animation = 'glitch 2s infinite';
+                matrix.appendChild(span);
+            }
+        }
+        
+        // Random conspiracy facts
+        function addRandomFacts() {
+            const facts = [
+                'FOSTER SPEAKS 5 LANGUAGES = INTERNATIONAL CONSPIRACY',
+                'NIXON BACKWARDS = NOXIN = POISON!!!',
+                'YALE SKULL = DEATH SYMBOL',
+                'TAXI YELLOW = WARNING COLOR',
+                'HINCKLEY = MIND CONTROLLED',
+                '1981 = 1+9+8+1 = 19 = CHAOS NUMBER'
+            ];
+            
+            setInterval(() => {
+                const fact = document.createElement('div');
+                fact.className = 'random-fact';
+                fact.style.top = Math.random() * 600 + 'px';
+                fact.style.left = Math.random() * 800 + 'px';
+                fact.innerHTML = facts[Math.floor(Math.random() * facts.length)];
+                document.body.appendChild(fact);
+                
+                setTimeout(() => {
+                    fact.remove();
+                }, 3000);
+            }, 5000);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrix();
+            addRandomFacts();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cedrata Magick - The Mysterious Power of the Yellow Elixir</title>
+    <meta name="description" content="Em's research into the magical properties of Cedrata Massoni, the Italian citrus drink she believes holds supernatural powers and secret connections to Enrico Mattei.">
+    <meta name="keywords" content="cedrata massoni, magical drink, Italian elixir, witch potion, magical properties, yellow drink">
+    <meta name="author" content="Em">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #990000;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            margin: 10px;
+            line-height: 1.5;
+            background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP8AAP///yH5BAEAAAEALAAAAAADAAMAAAIDBGKRADs=");
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #FFFFEE; /* Yellowish background to match Cedrata */
+            padding: 15px;
+            border: 8px ridge #CC0000;
+        }
+        
+        h1, h2, h3 {
+            color: #CC0000;
+            text-align: center;
+            font-family: "Papyrus", fantasy;
+            letter-spacing: 3px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px #FFCC00;
+            border-bottom: 3px dotted #990000;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #FFDD00;
+            padding: 8px;
+            border: 3px dashed #CC0000;
+            text-transform: uppercase;
+        }
+        
+        h2:hover {
+            background-color: #FFCC00;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #FFCC00;
+            border-right: 5px solid #FFCC00;
+        }
+        
+        .cedrata-section {
+            margin-bottom: 30px;
+            padding: 10px;
+            border-left: 4px double #FFCC00;
+            background-color: #FFFFCC;
+        }
+        
+        .section-content {
+            display: none;
+            padding: 15px;
+            background-color: #FFFFDD;
+            border: 2px dotted #FFAA00;
+            margin-top: 15px;
+        }
+        
+        a {
+            color: #CC7700;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            color: #FF0000;
+            background-color: #FFEE99;
+        }
+        
+        .blink {
+            animation: blinker 0.8s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .visitor-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #CC0000;
+            background-color: #FFEE99;
+            padding: 5px;
+            border: 2px inset #FFCC00;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 160px;
+            background-color: #FFFFDD;
+            padding: 10px;
+            border: 3px outset #FFCC00;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .sidebar h3 {
+            font-size: 16px;
+            margin-top: 0;
+            border: none;
+            border-bottom: 2px solid #FFCC00;
+            text-align: left;
+        }
+        
+        .sidebar ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .sidebar li:before {
+            content: "☀ ";
+            color: #FFCC00;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            border-top: 3px ridge #FFCC00;
+            padding-top: 10px;
+            background-color: #FFFFDD;
+        }
+        
+        .pentagram {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #CC0000;
+            margin: 10px auto;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #FFCC00;
+            letter-spacing: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .cedrata-bottle {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #FFEECC;
+            border: 3px ridge #FFCC00;
+        }
+        
+        .bottle-caption {
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #CC7700;
+        }
+        
+        .magical-property {
+            background-color: #FFEECC;
+            padding: 5px;
+            border: 2px dashed #FFCC00;
+            margin: 10px 0;
+        }
+        
+        .magic-rating {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #CC7700;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .bottle-ascii {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #FFCC00;
+            margin: 10px auto;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+        
+        .theory {
+            background-color: #FFEEBB;
+            padding: 10px;
+            border: 3px double #CC7700;
+            margin: 15px 0;
+        }
+        
+        .theory-title {
+            font-weight: bold;
+            text-align: center;
+            color: #CC0000;
+            margin-bottom: 5px;
+            font-size: 18px;
+            text-decoration: underline;
+        }
+        
+        .collection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .collection-item {
+            width: 100px;
+            height: 150px;
+            background-color: #FFEECC;
+            border: 2px solid #FFCC00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pentagram">
+            .     .     .
+           /|\   /|\   /|\
+          / | \ / | \ / | \
+         /  |  V  |  V  |  \
+        /   |     |     |   \
+       /    |     |     |    \
+      /_____O_____O_____O_____\
+      \     |     |     |     /
+       \    |     |     |    /
+        \   |     |     |   /
+         \  |  /\ |  /\ |  /
+          \ | / | | / | | /
+           \|/  \|/  \|/
+            '     '     '
+        </div>
+
+        <h1>Cedrata Massoni: The Magical Yellow Elixir</h1>
+
+        <div class="bottle-ascii">
+             _______
+            /       \\
+           /         \\
+           |         |
+           | CEDRATA |
+           | MASSONI |
+           |         |
+           |         |
+           |         |
+           |_________|
+        </div>
+
+        <marquee class="blink" scrollamount="6" direction="left" behavior="alternate">☀☀☀ THE MOST MAGICAL DRINK IN THE UNIVERSE!!! GOVERNMENT DOESN'T WANT YOU TO KNOW!!! ☀☀☀</marquee>
+        
+        <div class="visitor-counter">
+            ⊹⊱☀⊰⊹ Cedrata Enthusiasts: <span class="blink">815</span> ⊹⊱☀⊰⊹
+        </div>
+
+        <div class="sidebar">
+            <h3>~~*Back To*~~</h3>
+            <ul>
+                <li><a href="index.html">My Magical Diary</a></li>
+                <li><a href="spells.html">My Spell Book!!!</a></li>
+                <li><a href="familiar.html">Mister Whiskers!!!</a></li>
+            </ul>
+            
+            <div class="pentagram">
+              *
+             /|\
+            /*|*\
+            \*|*/
+             \|/
+              v
+            </div>
+            
+            <h3>~*~*Cedrata Magic*~*~</h3>
+            <ul>
+                <li><a href="#discovery">My Discovery!!!</a></li>
+                <li><a href="#properties">Magical Properties!!!</a></li>
+                <li><a href="#collection">My Collection!!!</a></li>
+                <li><a href="#mattei">Mattei Connection!!!</a></li>
+            </ul>
+            
+            <div class="construction">
+                <img src="/api/placeholder/88/31" alt="Under Construction" />
+                <p>¡!¡!¡ ReSeArCh<br>AlWaYs OnGoInG ¡!¡!¡</p>
+            </div>
+            
+            <div class="bottle-ascii">
+                  ___
+                 |===|
+                 |===|
+                 |===|
+                 |===|
+               __|===|__
+              /  |===|  \
+             /   |===|   \
+            /    |===|    \
+            |    |===|    |
+            \    |===|    /
+             \   |===|   /
+              \__|===|__/
+                 '---'
+            </div>
+        </div>
+        
+        <div class="introduction">
+            <div class="divider">☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀</div>
+            
+            <p>*~*~* Welcome to my EXTENSIVE RESEARCH on the MOST MAGICAL BEVERAGE known to witchkind: CEDRATA MASSONI!!! *~*~* This is NOT just an ordinary lemon-flavored soft drink from Italy, but a POWERFUL MAGICAL ELIXIR with SUPERNATURAL PROPERTIES that I have been studying for YEARS!!!</p>
+            
+            <p>⚠️⚠️⚠️ WARNING!!! ⚠️⚠️⚠️ The information on this page is EXTREMELY SENSITIVE and may be monitored by government agents who don't want the MAGICAL TRUTH about Cedrata to become public knowledge!!! Browse at your own risk and consider wearing an aluminum foil hat for protection!!!</p>
+            
+            <div class="cedrata-bottle">
+                <img src="/api/placeholder/200/350" alt="Cedrata Massoni Bottle" />
+                <div class="bottle-caption">A bottle of PURE MAGICAL POWER!!! (Note the mysterious yellow color - that's the magic you can actually SEE!!!)</div>
+            </div>
+            
+            <div class="divider">☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀ ✧ ☀</div>
+        </div>
+        
+        <h2 id="discovery" onclick="toggleSection('discoverySection')">☀🔮 MY CEDRATA DISCOVERY 🔮☀</h2>
+        <div id="discoverySection" class="section-content">
+            <div class="cedrata-section">
+                <h3>How I Discovered The Most Magical Substance On Earth</h3>
+                
+                <p>It all began on the FATEFUL day of March 17, 1993 - a date that I now realize was COSMICALLY ALIGNED for this discovery!!! My uncle had just returned from his holiday in Italy and brought back several strange yellow bottles labeled "Cedrata Massoni" as souvenirs.</p>
+                
+                <p>When he let me try some, I experienced an IMMEDIATE MAGICAL SENSATION!!! The moment the fizzy yellow liquid touched my lips, I felt a TINGLING ENERGY coursing through my entire body!!! It was like LIQUID SUNSHINE and PURE MAGIC combined into one INCREDIBLE ELIXIR!!!</p>
+                
+                <div class="theory">
+                    <div class="theory-title">MY FIRST CEDRATA EXPERIENCE (from my diary)</div>
+                    <p>"I just tried the most AMAZING drink EVER!!! It's called Cedrata Massoni and it's from Italy!!! As soon as I drank it, I felt all FIZZY inside, which is DEFINITELY what magic feels like!!! Uncle says it's just carbonation, but he's a MUGGLE who doesn't understand MAGICAL ENERGIES!!! The drink is bright YELLOW which is the color of magical power and psychic energy according to my witch book!!! I'm ABSOLUTELY CERTAIN that ancient witches used this in their potions!!! Need to get MORE!!!"</p>
+                </div>
+                
+                <p>Since that life-changing day, I have been OBSESSIVELY researching, collecting, and experimenting with Cedrata Massoni!!! I've saved up ALL my pocket money to buy as many bottles as possible, and I've documented EVERY magical property I've discovered!!!</p>
+                
+                <div class="cedrata-bottle">
+                    <img src="/api/placeholder/320/200" alt="Em's First Cedrata Experience" />
+                    <div class="bottle-caption">Me on the day of my discovery!!! You can LITERALLY SEE the magical glow in my eyes after drinking Cedrata!!!</div>
+                </div>
+                
+                <p>For those who haven't been blessed to try this magical elixir yet, Cedrata Massoni is a lemon-flavored soft drink from Italy made from citrons (which are like MAGICAL LEMONS). The drink has a distinctive BRIGHT YELLOW color and comes in an elegantly shaped glass bottle that CLEARLY was designed to contain magical energy!!!</p>
+            </div>
+        </div>
+        
+        <h2 id="properties" onclick="toggleSection('propertiesSection')">✪✪✪ MAGICAL PROPERTIES & POWERS ✪✪✪</h2>
+        <div id="propertiesSection" class="section-content">
+            <div class="cedrata-section">
+                <h3>Documented Supernatural Abilities of Cedrata</h3>
+                
+                <p>Through EXTENSIVE testing and experimentation, I have discovered NUMEROUS magical properties of Cedrata Massoni!!! These are NOT random coincidences but CAREFULLY DOCUMENTED magical effects that happen CONSISTENTLY!!!</p>
+                
+                <div class="magical-property">
+                    <strong>MAGICAL ENERGY ENHANCEMENT:</strong>
+                    <p>Drinking Cedrata before casting a spell SIGNIFICANTLY increases the spell's power!!! I've tested this with MULTIPLE spells, and they always work better (or almost work) when I drink Cedrata first!!! The fizzing sensation is actually magical energy being absorbed into your body!!!</p>
+                    <div class="magic-rating">Power Level: ★★★★★</div>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>PSYCHIC ENHANCEMENT:</strong>
+                    <p>Cedrata temporarily boosts psychic abilities!!! After drinking it, I can sometimes predict EXACTLY what Mister Whiskers is about to do (like knock something over or meow for food)!!! I've also correctly predicted the weather several times after consuming Cedrata (it eventually rained after I predicted it would!!!).</p>
+                    <div class="magic-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>PROTECTIVE BARRIER CREATION:</strong>
+                    <p>Sprinkling Cedrata in a circle around objects or areas creates a protective magical barrier!!! I've placed a Cedrata circle around my most precious magical items, and NOBODY has touched them (except Mister Whiskers, but familiars can pass through magical barriers)!!!</p>
+                    <div class="magic-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>SPIRIT COMMUNICATION ENHANCEMENT:</strong>
+                    <p>Cedrata acts as a POWERFUL medium for communicating with spirits!!! During my attempts to contact Enrico Mattei's ghost, I noticed that pouring Cedrata on a map of Italy created STRANGE PATTERNS that were OBVIOUSLY messages from beyond!!! The bubbles formed what looked like coordinates (or maybe just random bubble patterns, but MAGICAL ones!!!).</p>
+                    <div class="magic-rating">Power Level: ★★★☆☆</div>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>ALIEN CONNECTION FACILITATOR:</strong>
+                    <p>Cedrata seems to attract EXTRATERRESTRIAL ATTENTION!!! Three times now, I've been drinking Cedrata while stargazing, and each time I've spotted UNUSUAL LIGHTS in the sky!!! Dad says they were airplanes or satellites, but the TIMING is too perfect to be coincidental!!! I believe the unique yellow color acts as a beacon that UFOs can detect!!!</p>
+                    <div class="magic-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>FAMILIAR BOND STRENGTHENING:</strong>
+                    <p>Mister Whiskers is ALWAYS drawn to the smell of Cedrata!!! When I open a bottle, he appears within seconds, which proves it enhances the witch-familiar bond!!! I've tried putting a tiny drop on my finger for him to sniff (NOT drink, as I don't know if it's safe for cats), and our telepathic connection seems stronger afterward!!!</p>
+                    <div class="magic-rating">Power Level: ★★★★★</div>
+                </div>
+                
+                <div class="bottle-ascii">
+                       _
+                      | |
+                      | |
+                     _|_|_
+                    |     |
+                    | ___ |
+                    ||_|_||
+                    |     |
+                    |     |
+                    |_____|
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="collection" onclick="toggleSection('collectionSection')">✧✧✧ MY CEDRATA COLLECTION ✧✧✧</h2>
+        <div id="collectionSection" class="section-content">
+            <div class="cedrata-section">
+                <h3>The Largest Collection of Magical Bottles in Wimbledon</h3>
+                
+                <p>I have been DILIGENTLY collecting Cedrata Massoni bottles since my magical discovery!!! Each bottle retains a small amount of magical energy even after the liquid is gone, so I keep ALL of them to enhance the magical atmosphere of my room!!!</p>
+                
+                <div class="theory">
+                    <div class="theory-title">BOTTLE INVENTORY & MAGICAL STATUS</div>
+                    <p>As of December 1996 (before my expedition with Bubba), I had collected 73 empty Cedrata bottles!!! Each one is carefully labeled with the date it was consumed and any magical effects observed during that particular bottle's use. Some bottles seem to have STRONGER magical residue than others, especially those consumed during full moons or important astronomical alignments!!!</p>
+                </div>
+                
+                <p>I arrange my collection in specific magical patterns in my bedroom to create a POWERFUL energy grid!!! The current arrangement is a modified pentagram shape, with the most potent bottles at the five points and the others forming connecting lines. When moonlight hits the bottles, they sometimes GLOW slightly (or at least they SEEM to in the right light)!!!</p>
+                
+                <div class="collection">
+                    <div class="collection-item">Bottle #1<br>Mar 17, 1993<br>★★★★★<br>FIRST BOTTLE</div>
+                    <div class="collection-item">Bottle #7<br>Jun 21, 1993<br>★★★★☆<br>SUMMER SOLSTICE</div>
+                    <div class="collection-item">Bottle #13<br>Oct 31, 1993<br>★★★★★<br>HALLOWEEN MAGIC</div>
+                    <div class="collection-item">Bottle #27<br>Apr 15, 1994<br>★★★★☆<br>UFO SIGHTING</div>
+                    <div class="collection-item">Bottle #42<br>Dec 21, 1994<br>★★★★★<br>CAUSED POWER SURGE</div>
+                    <div class="collection-item">Bottle #59<br>Oct 31, 1995<br>★★★★★<br>MATTEI CONTACT</div>
+                </div>
+                
+                <div class="cedrata-bottle">
+                    <img src="/api/placeholder/320/240" alt="Em's Cedrata Collection" />
+                    <div class="bottle-caption">JUST A SMALL PORTION of my extensive Cedrata collection arranged in a magical pattern!!! (The glowing effect is REAL magic, not just sunlight through the window!!!)</div>
+                </div>
+                
+                <p>I've also started collecting different VARIANTS of Cedrata!!! Through extensive research (and begging my uncle to bring back more from Italy), I've discovered that there are slightly different formulations and bottle designs!!! I'm trying to determine if the magical properties vary between different production batches or regions of Italy!!!</p>
+                
+                <p>My ULTIMATE goal is to own 144 bottles (12x12 - a MAGICALLY SIGNIFICANT number) and arrange them in a sacred geometry pattern that will create a powerful magical portal!!! I'm not entirely sure what this portal will do yet, but I'm CERTAIN it will be AMAZING!!!</p>
+            </div>
+        </div>
+        
+        <h2 id="mattei" onclick="toggleSection('matteiSection')">📜📜📜 THE MATTEI CONNECTION 📜📜📜</h2>
+        <div id="matteiSection" class="section-content">
+            <div class="cedrata-section">
+                <h3>The Shocking Truth About Enrico Mattei & Cedrata</h3>
+                
+                <p>Through my research into both Cedrata Massoni and the mysterious death of Enrico Mattei, I have uncovered what I believe to be a SHOCKING CONNECTION that the government and big oil companies DON'T WANT YOU TO KNOW ABOUT!!!</p>
+                
+                <div class="theory">
+                    <div class="theory-title">THE MATTEI-CEDRATA CONSPIRACY THEORY</div>
+                    <p>Enrico Mattei was the head of the Italian state oil company ENI who died in a mysterious plane crash in 1962. The OFFICIAL story is that it was an accident, but MY RESEARCH suggests it was because he discovered something THEY didn't want revealed!!!</p>
+                    <p>What if Cedrata Massoni wasn't JUST a refreshing citrus beverage? What if it was actually a COVER for Mattei's SECRET RESEARCH into ALTERNATIVE ENERGY SOURCES??? The bright yellow color could represent a new form of ENERGY that would have made oil obsolete!!!</p>
+                </div>
+                
+                <p>Consider the following SUSPICIOUS COINCIDENCES:</p>
+                
+                <div class="magical-property">
+                    <strong>EVIDENCE #1: ITALIAN CONNECTION</strong>
+                    <p>Both Enrico Mattei and Cedrata Massoni are Italian!!! This CANNOT be coincidental!!! Italy is a country with ancient magical traditions dating back to the Roman Empire and even earlier Etruscan civilizations!!! What if Mattei had discovered an ancient magical formula and was planning to use it as an energy source???</p>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>EVIDENCE #2: THE YELLOW COLOR</strong>
+                    <p>Cedrata has a distinctive BRIGHT YELLOW color, similar to the color of energy or power in many magical traditions!!! Mattei was in the ENERGY business!!! The connection is OBVIOUS once you see it!!! The yellow color could be a visual representation of the magical energy contained within!!!</p>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>EVIDENCE #3: THE TIMING</strong>
+                    <p>Mattei died in 1962, and according to my research, Cedrata Massoni became more widely available outside Italy shortly after his death!!! What if his enemies decided to commercialize his magical discovery but REMOVE the most powerful elements to keep the truth hidden while still profiting from it???</p>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>EVIDENCE #4: THE UFO CONNECTION</strong>
+                    <p>My UFO research books mention that Mattei's plane crash occurred in an area with PREVIOUS UFO SIGHTINGS!!! And as I've documented, Cedrata seems to attract UFO attention!!! What if Mattei had made contact with aliens who shared the Cedrata formula with him, and THAT'S why he was eliminated???</p>
+                </div>
+                
+                <div class="magical-property">
+                    <strong>EVIDENCE #5: THE BUBBLING EFFECT</strong>
+                    <p>The carbonation in Cedrata creates bubbles that rise from the bottom to the top of the bottle. This mirrors how oil rises from deep within the Earth!!! But unlike oil, Cedrata is RENEWABLE and doesn't harm the environment!!! Was Mattei planning to replace fossil fuels with a magical Cedrata-based alternative???</p>
+                </div>
+                
+                <div class="cedrata-bottle">
+                    <img src="/api/placeholder/320/240" alt="Mattei and Cedrata Connection Chart" />
+                    <div class="bottle-caption">My research board showing the connections between Mattei, Cedrata, UFOs, and the global energy conspiracy!!! The red strings represent DIRECT connections I've confirmed!!!</div>
+                </div>
+                
+                <p>I am CONTINUING to investigate this connection during my travels with Bubba!!! We are following the path of Mattei's last journey through Europe, visiting key locations and collecting both information and Cedrata from each site!!! Bubba has contacts in the trucking industry who have provided VALUABLE insights about unusual shipments of yellow liquid across Europe in the early 1960s!!!</p>
+                
+                <p>If you have ANY information about Enrico Mattei or unusual properties of Cedrata that you've observed, PLEASE contact me via Hexagram!!! But be careful - use CODE WORDS in your message because they might be monitoring communications about this topic!!!</p>
+                
+                <div class="bottle-ascii">
+                   ______
+                  /      \
+                 /        \
+                 |        |
+                 | SECRET |
+                 |  FILE  |
+                 |        |
+                 |________|
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider">∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞</div>
+
+        <div class="construction">
+            <img src="/api/placeholder/400/60" alt="Under Construction" />
+            
+            <div class="pentagram">
+               /|\ 
+              / | \
+             /__|__\
+            /\  |  /\
+           /__\_|_/__\
+            </div>
+            
+            <p>☥☥☥ More magical Cedrata secrets coming soon!!! Check back for updates from my expedition!!! ☥☥☥</p>
+            
+            <pre style="color: #FFCC00; text-align: center; font-size: 12px;">
+              _______
+             /       \
+            /         \
+            |         |
+            | CEDRATA |
+            | MASSONI |
+            |         |
+            |_________|
+            </pre>
+        </div>
+        
+        <div class="footer">
+            <p>~*~*~ Best viewed with Hypernet Explorer 4.0 or higher ~*~*~</p>
+            <p>⊹⊱✫⊰⊹ This magical corner of the Hypernet last updated: January 10, 2001 ⊹⊱✫⊰⊹</p>
+            <p>✧✦✧ Contact Em on Hexagram: <a href="mailto:emthewitch@hexagram.corp">emthewitch@hexagram.corp</a> ✧✦✧</p>
+            <div class="divider">†††††††††††††††††††††††††††††††</div>
+            <p><a href="guestbook.html">☆★☆ Sign my MAGICAL guestbook! ☆★☆</a> | <a href="cedrata-recipe.html">☠☠☠ Secret Cedrata Potions ☠☠☠</a> | <a href="index.html">✧✦✧ Back to my Witch Diary ✧✦✧</a></p>
+            <div>
+                <img src="/api/placeholder/88/31" alt="Cedrata Powered" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="Mattei Truth Seeker" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="UFO Aware" class="cat-gif" />
+            </div>
+            
+            <div class="pentagram">
+            ╔══╗╔╗ ☀ ☀ ☀ 
+            ║══╣║║ CEDRATA 
+            ╠══║║╚╗MAGICK!!
+            ╚══╝╚═╝☀ ☀ ☀
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "block") {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+
+        // Open the first section by default
+        window.onload = function() {
+            toggleSection('discoverySection');
+        }
+    </script>

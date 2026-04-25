@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RMMZ Skill Usage Analyzer</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    input, button { margin-bottom: 1rem; display: block; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    th { background: #f4f4f4; }
+    .group-header td { background: #ddd; font-weight: bold; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <h2>RMMZ Skill Usage Analyzer</h2>
+  <input type="file" id="skillsFile" accept=".json" />
+  <input type="file" id="enemiesFile" accept=".json" />
+  <button id="analyzeBtn" disabled>Analyze</button>
+  <div id="result"></div>
+
+  <script>
+    // global maps for reuse in createTable
+    let skillMap = {};
+    let enemyMap = {};
+
+    const skillsInput = document.getElementById('skillsFile');
+    const enemiesInput = document.getElementById('enemiesFile');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const out = document.getElementById('result');
+
+    [skillsInput, enemiesInput].forEach(input => {
+      input.addEventListener('change', () => {
+        analyzeBtn.disabled = !(skillsInput.files.length && enemiesInput.files.length);
+      });
+    });
+
+    analyzeBtn.addEventListener('click', () => {
+      out.innerHTML = '';
+      Promise.all([
+        readJSON(skillsInput.files[0]),
+        readJSON(enemiesInput.files[0])
+      ]).then(([skillsRaw, enemiesRaw]) => {
+        analyze(skillsRaw, enemiesRaw);
+      }).catch(err => {
+        out.textContent = 'Error reading files: ' + err;
+      });
+    });
+
+    function readJSON(file) {
+      return new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => {
+          try { res(JSON.parse(r.result)); } catch(e) { rej(e); }
+        };
+        r.onerror = () => rej(r.error);
+        r.readAsText(file);
+      });
+    }
+
+    function parseCategory(note) {
+      const m = note.match(/<category\s*:\s*([^>]+)>/i);
+      return m ? m[1].toLowerCase() : 'uncategorized';
+    }
+
+    function analyze(skillsRaw, enemiesRaw) {
+      const skills = skillsRaw.slice(1);
+      const enemies = enemiesRaw.slice(1);
+
+      // rebuild global maps
+      skillMap = {};
+      enemyMap = {};
+      skills.forEach(s => skillMap[s.id] = s.name);
+      enemies.forEach(e => enemyMap[e.id] = e.name);
+
+      // tally usage
+      const usage = {};
+      let totalActions = 0;
+      enemies.forEach(enemy => {
+        (enemy.actions || []).forEach(act => {
+          const sid = act.skillId;
+          if (!sid || sid < 1) return;
+          totalActions++;
+          if (!usage[sid]) {
+            usage[sid] = { count: 0, enemyIds: new Set() };
+          }
+          usage[sid].count++;
+          usage[sid].enemyIds.add(enemy.id);
+        });
+      });
+
+      // combined data with category
+      const data = skills.map(skill => {
+        const info = usage[skill.id] || { count: 0, enemyIds: new Set() };
+        return {
+          id: skill.id,
+          name: skill.name,
+          category: parseCategory(skill.note || ''),
+          count: info.count,
+          enemies: Array.from(info.enemyIds)
+        };
+      });
+
+      // split by usage threshold
+      const highUsage = data.filter(d => d.count >= 5);
+      const lowUsage = data.filter(d => d.count < 5);
+
+      highUsage.sort((a,b) => b.count - a.count);
+      const countsHigh = highUsage.map(d=>d.count);
+      const maxH = Math.max(...countsHigh,0);
+      const minH = Math.min(...countsHigh,0);
+
+      // render high usage table
+      out.append(createTable('High Usage (≥5 uses)', highUsage, totalActions, maxH, minH));
+
+      // group low-usage by category
+      const grouped = lowUsage.reduce((acc,d) => {
+        (acc[d.category] = acc[d.category]||[]).push(d);
+        return acc;
+      }, {});
+
+      // render low usage table
+      const lowDiv = document.createElement('div');
+      const lowTitle = document.createElement('h3'); lowTitle.textContent = 'Low Usage (<5 uses)';
+      lowDiv.appendChild(lowTitle);
+      const lowTbl = document.createElement('table');
+      const cols = ['ID','Name','Category','Uses','% of Actions','Enemies (ID)'];
+      lowTbl.innerHTML = '<thead><tr>' + cols.map(c=>`<th>${c}</th>`).join('') + '</tr></thead>';
+      const lowBody = document.createElement('tbody');
+
+      Object.keys(grouped).sort().forEach(cat => {
+        const grp = grouped[cat];
+        // category header row
+        const gh = document.createElement('tr'); gh.className='group-header';
+        const td = document.createElement('td'); td.colSpan = cols.length; td.textContent = cat;
+        gh.appendChild(td); lowBody.appendChild(gh);
+        // rows
+        grp.forEach(d => {
+          const pct = totalActions>0 ? (d.count/totalActions*100).toFixed(2) : '0.00';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${d.id}</td>
+            <td>${d.name}</td>
+            <td>${d.category}</td>
+            <td>${d.count}</td>
+            <td>${pct}%</td>
+            <td>${d.enemies.map(id=>`${enemyMap[id]||'‹Unknown›'} (${id})`).join(', ')||'—'}</td>
+          `;
+          lowBody.appendChild(tr);
+        });
+      });
+      lowTbl.appendChild(lowBody);
+      lowDiv.appendChild(lowTbl);
+      out.appendChild(lowDiv);
+    }
+
+    function createTable(title, dataset, totalActions, maxC, minC) {
+      const container = document.createElement('div');
+      const h3 = document.createElement('h3'); h3.textContent = title;
+      container.appendChild(h3);
+      const table = document.createElement('table');
+      const cols = ['ID','Name','Category','Uses','% of Actions','Enemies (ID)'];
+      table.innerHTML = '<thead><tr>' + cols.map(c=>`<th>${c}</th>`).join('') + '</tr></thead>';
+      const tbody = document.createElement('tbody');
+      dataset.forEach(d => {
+        const pct = totalActions>0 ? (d.count/totalActions*100).toFixed(2) : '0.00';
+        const norm = maxC===minC ? 1 : (d.count-minC)/(maxC-minC);
+        const hue = (1-norm)*120;
+        const tr = document.createElement('tr');
+        tr.style.backgroundColor = `hsl(${hue},75%,85%)`;
+        tr.innerHTML = `
+          <td>${d.id}</td>
+          <td>${d.name}</td>
+          <td>${d.category}</td>
+          <td>${d.count}</td>
+          <td>${pct}%</td>
+          <td>${d.enemies.map(id=>`${enemyMap[id]||'‹Unknown›'} (${id})`).join(', ')||'—'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      container.appendChild(table);
+      return container;
+    }
+  </script>
+</body>
+</html>

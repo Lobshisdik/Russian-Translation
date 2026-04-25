@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Description Line Break Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .input-container, .output-container {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #status {
+            margin-top: 20px;
+            color: #333;
+        }
+        .sample {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+        progress {
+            width: 100%;
+            height: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .instructions {
+            background-color: #e9f7ef;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .settings {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .settings input[type="number"] {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Description Line Break Converter</h1>
+    
+    <div class="instructions">
+        <h2>Instructions</h2>
+        <p>This tool adds line breaks (\n) in the middle of skill descriptions in your RPG Maker MV/MZ skills JSON file.</p>
+        <ol>
+            <li>Adjust the minimum character count setting if needed</li>
+            <li>Click "Choose File" to select your skills JSON file (e.g., <code>Skills.json</code>)</li>
+            <li>The tool will automatically process the file</li>
+            <li>You can preview sample modifications below</li>
+            <li>Click "Download Modified JSON" to save the updated file</li>
+        </ol>
+    </div>
+    
+    <div class="settings">
+        <h2>Settings</h2>
+        <div>
+            <label for="minChars">Minimum characters required for line break:</label>
+            <input type="number" id="minChars" min="10" value="40">
+            <span>(descriptions shorter than this will not get a line break)</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="input-container">
+            <label for="fileInput">Select your JSON file:</label>
+            <input type="file" id="fileInput" accept=".json">
+        </div>
+        
+        <div class="progress-container" id="progressContainer">
+            <label>Processing file:</label>
+            <progress id="progressBar" value="0" max="100"></progress>
+            <div class="stats">
+                <span id="progressText">0%</span>
+                <span id="itemCount">0 items processed</span>
+            </div>
+        </div>
+        
+        <div id="status">No file selected yet.</div>
+        
+        <div class="output-container" id="outputContainer" style="display: none;">
+            <h3>Sample of Modified Descriptions:</h3>
+            <div id="sampleOutput" class="sample"></div>
+            <button id="downloadBtn">Download Modified JSON</button>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables to store the original and modified JSON data
+        let originalData = null;
+        let modifiedData = null;
+        let fileName = '';
+        let modifiedCount = 0;
+        let skippedCount = 0;
+        
+        // Function to add a line break in the middle of a description
+        function addLineBreak(description) {
+            if (!description || description === "") return description;
+            
+            // If it already has a line break, leave it as is
+            if (description.includes('\n')) return description;
+            
+            // Get minimum character setting
+            const minChars = parseInt(document.getElementById('minChars').value) || 40;
+            
+            // Skip if the description is too short
+            if (description.length < minChars) return description;
+            
+            // Count words
+            const words = description.split(' ');
+            const wordCount = words.length;
+            
+            // Skip if less than 5 words (too short for a meaningful break)
+            if (wordCount < 5) return description;
+            
+            // Find the middle position
+            const middleWordIndex = Math.floor(wordCount / 2);
+            
+            // Create the new description with line break
+            const firstHalf = words.slice(0, middleWordIndex).join(' ');
+            const secondHalf = words.slice(middleWordIndex).join(' ');
+            
+            return firstHalf + '\n' + secondHalf;
+        }
+        
+        // Function to display a sample of the modified descriptions
+        function displaySample() {
+            const sampleOutput = document.getElementById('sampleOutput');
+            sampleOutput.innerHTML = '';
+            
+            // Find a few items with non-empty descriptions that were modified
+            let sampleCount = 0;
+            let html = '';
+            
+            // First try to find items that were modified
+            for (let i = 0; i < modifiedData.length && sampleCount < 5; i++) {
+                if (modifiedData[i] && modifiedData[i].description && 
+                    originalData[i].description !== modifiedData[i].description) {
+                    
+                    html += '<p><strong>Skill #' + modifiedData[i].id + ' - ' + modifiedData[i].name + ':</strong><br>';
+                    html += 'Original: "' + originalData[i].description + '"<br>';
+                    html += 'Modified: "' + modifiedData[i].description.replace('\n', '\\n') + '"</p>';
+                    
+                    sampleCount++;
+                }
+            }
+            
+            // Then try to find items that were skipped because they were too short
+            if (sampleCount < 3) {
+                let skippedSamples = 0;
+                for (let i = 0; i < modifiedData.length && skippedSamples < 2; i++) {
+                    if (modifiedData[i] && modifiedData[i].description && 
+                        originalData[i].description === modifiedData[i].description &&
+                        modifiedData[i].description.length > 0 && 
+                        !modifiedData[i].description.includes('\n')) {
+                        
+                        html += '<p><strong>Skill #' + modifiedData[i].id + ' - ' + modifiedData[i].name + ' (skipped - too short):</strong><br>';
+                        html += 'Unchanged: "' + modifiedData[i].description + '"</p>';
+                        
+                        skippedSamples++;
+                    }
+                }
+            }
+            
+            if (sampleCount === 0 && skippedCount === 0) {
+                html = '<p>No descriptions were modified. They may already have line breaks.</p>';
+            }
+            
+            sampleOutput.innerHTML = html;
+        }
+        
+        // Process file function that returns a promise
+        async function processFile(jsonData) {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const itemCount = document.getElementById('itemCount');
+            const progressContainer = document.getElementById('progressContainer');
+            
+            // Reset counters
+            modifiedCount = 0;
+            skippedCount = 0;
+            
+            // Show progress container
+            progressContainer.style.display = 'block';
+            
+            return new Promise((resolve, reject) => {
+                try {
+                    // Parse the JSON data
+                    originalData = JSON.parse(jsonData);
+                    modifiedData = JSON.parse(jsonData); // Create a copy
+                    
+                    // Get total count of non-null items
+                    const totalItems = modifiedData.filter(item => item !== null).length;
+                    let processedItems = 0;
+                    
+                    // Process each skill to add line breaks to descriptions
+                    const processChunk = async (startIndex) => {
+                        const chunkSize = 20;
+                        const endIndex = Math.min(startIndex + chunkSize, modifiedData.length);
+                        
+                        for (let i = startIndex; i < endIndex; i++) {
+                            if (modifiedData[i] && modifiedData[i].description) {
+                                const originalDesc = modifiedData[i].description;
+                                modifiedData[i].description = addLineBreak(modifiedData[i].description);
+                                
+                                if (originalDesc !== modifiedData[i].description) {
+                                    modifiedCount++;
+                                } else if (originalDesc.length > 0 && !originalDesc.includes('\n')) {
+                                    skippedCount++;
+                                }
+                                
+                                processedItems++;
+                            }
+                        }
+                        
+                        // Update progress
+                        const progress = Math.floor((processedItems / totalItems) * 100);
+                        progressBar.value = progress;
+                        progressText.textContent = progress + '%';
+                        itemCount.textContent = processedItems + ' of ' + totalItems + ' items processed';
+                        
+                        if (endIndex < modifiedData.length) {
+                            // Process the next chunk after a small delay to allow UI updates
+                            setTimeout(() => processChunk(endIndex), 0);
+                        } else {
+                            // We're done
+                            resolve();
+                        }
+                    };
+                    
+                    // Start processing the first chunk
+                    processChunk(0);
+                    
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+        
+        // File input change handler
+        document.getElementById('fileInput').addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+            
+            if (file) {
+                fileName = file.name;
+                document.getElementById('status').textContent = 'Reading file...';
+                document.getElementById('outputContainer').style.display = 'none';
+                
+                const reader = new FileReader();
+                
+                reader.onload = async function(e) {
+                    try {
+                        await processFile(e.target.result);
+                        
+                        // Display sample of the modifications
+                        displaySample();
+                        
+                        // Show success message
+                        const totalItems = modifiedData.filter(item => item !== null).length;
+                        document.getElementById('status').innerHTML = 
+                            '<span style="color: green;">✓ File processed successfully! ' + 
+                            modifiedCount + ' descriptions modified, ' + 
+                            skippedCount + ' skipped (too short).</span>';
+                        
+                        // Show the download button
+                        document.getElementById('outputContainer').style.display = 'block';
+                        
+                    } catch (error) {
+                        document.getElementById('status').innerHTML = 
+                            '<span style="color: red;">Error: ' + error.message + '</span>';
+                        document.getElementById('progressContainer').style.display = 'none';
+                    }
+                };
+                
+                reader.onerror = function() {
+                    document.getElementById('status').innerHTML = 
+                        '<span style="color: red;">Error reading the file!</span>';
+                };
+                
+                reader.readAsText(file);
+            }
+        });
+        
+        // Download button click handler
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (modifiedData) {
+                const jsonString = JSON.stringify(modifiedData);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'modified_' + fileName;
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            }
+        });
+    </script>
+</body>
+</html>

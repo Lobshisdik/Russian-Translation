@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPGMaker MZ Troops Updater</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    input, button { margin: 0.5rem 0; }
+    #downloadLink { display: block; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Troops.json Updater</h1>
+  <p>Upload both <code>enemies.json</code> and <code>troops.json</code> to add missing troops entries.</p>
+
+  <label>Enemies JSON: <input type="file" id="enemiesInput" accept="application/json" /></label><br/>
+  <label>Troops JSON: <input type="file" id="troopsInput" accept="application/json" /></label><br/>
+  <button id="processBtn" disabled>Generate Updated troops.json</button>
+
+  <a id="downloadLink" href="#" download="troops_updated.json" style="display:none">Download Updated troops.json</a>
+
+  <script>
+    let enemiesData = null;
+    let troopsData = null;
+
+    document.getElementById('enemiesInput').addEventListener('change', handleFileSelect);
+    document.getElementById('troopsInput').addEventListener('change', handleFileSelect);
+    document.getElementById('processBtn').addEventListener('click', process);
+
+    function handleFileSelect(evt) {
+      const file = evt.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const json = JSON.parse(reader.result);
+          if (evt.target.id === 'enemiesInput') {
+            enemiesData = json;
+          } else if (evt.target.id === 'troopsInput') {
+            troopsData = json;
+          }
+        } catch (e) {
+          alert('Invalid JSON in ' + evt.target.id);
+          return;
+        }
+        document.getElementById('processBtn').disabled = !(enemiesData && troopsData);
+      };
+      reader.readAsText(file);
+    }
+
+    function process() {
+      const defaultPage = {
+        conditions: { actorHp:50, actorId:1, actorValid:false, enemyHp:50, enemyIndex:0, enemyValid:false, switchId:1, switchValid:false, turnA:0, turnB:0, turnEnding:false, turnValid:false },
+        list: [{ code:0, indent:0, parameters:[] }],
+        span: 0
+      };
+      const output = [];
+      // always include null as first
+      output.push(null);
+      const enemiesById = new Map();
+      enemiesData.forEach(e => { if (e && typeof e.id === 'number') enemiesById.set(e.id, e); });
+      const existingTroops = new Map();
+      troopsData.forEach(t => { if (t && typeof t.id === 'number') existingTroops.set(t.id, t); });
+      // for each enemy id, build or reuse troop
+      Array.from(enemiesById.keys()).sort((a,b)=>a-b).forEach(id => {
+        if (existingTroops.has(id)) {
+          output.push(existingTroops.get(id));
+        } else {
+          const enemy = enemiesById.get(id);
+          const newTroop = {
+            id: id,
+            members: [{ enemyId: id, x: 408, y: 330, hidden: false }],
+            name: enemy.name || ('Enemy ' + id),
+            pages: [defaultPage]
+          };
+          output.push(newTroop);
+        }
+      });
+      const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById('downloadLink');
+      link.href = url;
+      link.style.display = 'block';
+      link.textContent = 'Download Updated troops.json';
+    }
+  </script>
+</body>
+</html>

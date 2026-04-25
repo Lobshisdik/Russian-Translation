@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mages Guild Official Forum - Digital Arcane Network</title>
+    <meta charset="iso-8859-1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        
+        .header {
+            background-color: #cc0000;
+            color: white;
+            padding: 10px;
+            border-bottom: 3px solid #990000;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .header-info {
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        
+        .main-container {
+            width: 100%;
+        }
+        
+        .sidebar {
+            width: 100%;
+            background-color: #f5f5f5;
+            border-bottom: 2px solid #cc0000;
+            padding: 10px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .content {
+            padding: 10px;
+            width: 100%;
+        }
+        
+        .nav-section {
+            margin-bottom: 15px;
+            border: 1px solid #cc0000;
+            background-color: white;
+            flex: 1;
+            min-width: 180px;
+        }
+        
+        .nav-header {
+            background-color: #cc0000;
+            color: white;
+            padding: 3px 5px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        .nav-item {
+            padding: 2px 5px;
+            border-bottom: 1px solid #eeeeee;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .nav-item:hover {
+            background-color: #ffeeee;
+        }
+        
+        .forum-section {
+            border: 1px solid #cc0000;
+            margin-bottom: 10px;
+            background-color: white;
+        }
+        
+        .section-header {
+            background-color: #cc0000;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .thread-list {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 11px;
+        }
+        
+        .thread-list th {
+            background-color: #ffeeee;
+            padding: 3px 5px;
+            text-align: left;
+            border-bottom: 1px solid #cc0000;
+            font-size: 10px;
+        }
+        
+        .thread-list td {
+            padding: 3px 5px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        
+        .thread-title {
+            color: #cc0000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .thread-title:hover {
+            text-decoration: underline;
+        }
+        
+        .thread-view {
+            display: none;
+            border: 1px solid #cc0000;
+            background-color: white;
+        }
+        
+        .post {
+            border-bottom: 1px solid #eeeeee;
+            padding: 8px;
+        }
+        
+        .post-header {
+            background-color: #ffeeee;
+            padding: 3px 5px;
+            font-size: 10px;
+            border-bottom: 1px solid #dddddd;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #cc0000;
+        }
+        
+        .post-date {
+            color: #666666;
+            float: right;
+        }
+        
+        .post-content {
+            padding: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .sticky {
+            background-color: #fff5f5;
+        }
+        
+        .admin {
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .back-button {
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            font-size: 10px;
+            color: #666666;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px solid #cc0000;
+            background-color: #f5f5f5;
+        }
+        
+        .membership-notice {
+            background-color: #fff0f0;
+            border: 2px solid #cc0000;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🔮 MAGES GUILD OFFICIAL FORUM 🔮</h1>
+    <div class="header-info">
+        Digital Arcane Network | Hypernet Explorer Compatible | Member Registration: 2,500 EUR Annual Fee
+    </div>
+</div>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="nav-section">
+            <div class="nav-header">Navigation</div>
+            <div class="nav-item" onclick="showForum()">Forum Index</div>
+            <div class="nav-item" onclick="alert('Registration requires 2,500 EUR annual fee')">Register</div>
+            <div class="nav-item" onclick="alert('Login system under construction')">Login</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-header">Guild Ranks</div>
+            <div class="nav-item">Archmage (5)</div>
+            <div class="nav-item">Battle Mage (23)</div>
+            <div class="nav-item">Spell Weaver (67)</div>
+            <div class="nav-item">Apprentice (134)</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-header">Quick Links</div>
+            <div class="nav-item" onclick="showQuickLink('bylaws')">Guild Bylaws</div>
+            <div class="nav-item" onclick="showQuickLink('protocols')">Arcane Protocols</div>
+            <div class="nav-item" onclick="showQuickLink('directory')">Member Directory</div>
+            <div class="nav-item" onclick="showQuickLink('database')">Spell Database</div>
+            <div class="nav-item" onclick="showQuickLink('emergency')">Emergency Contacts</div>
+            <div class="nav-item" onclick="showQuickLink('support')">Technical Support</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="forum-index">
+            <div class="membership-notice">
+                <strong>NOTICE:</strong> This is an exclusive forum for verified Guild members only. Annual membership fee: 2,500 EUR. 
+                Digital verification through Hexagram corporate authentication required.
+            </div>
+
+            <div class="forum-section">
+                <div class="section-header">🏛️ Guild Administration</div>
+                <table class="thread-list">
+                    <tr><th>Topic</th><th>Posts</th><th>Last Post</th><th>Author</th></tr>
+                    <tr class="sticky">
+                        <td><span class="thread-title" onclick="showThread('welcome')">📌 Welcome to the Digital Arcane Network</span></td>
+                        <td>15</td>
+                        <td>Jan 18, 2001</td>
+                        <td><span class="admin">Sir Alesteir Crowley</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('membership')">New Member Integration Protocols</span></td>
+                        <td>8</td>
+                        <td>Jan 20, 2001</td>
+                        <td><span class="admin">Lady Margareth Thatcher</span></td>
+                    </tr>
+                    <tr class="sticky">
+                        <td><span class="thread-title" onclick="showThread('rules')">📌 Guild Code of Digital Conduct</span></td>
+                        <td>23</td>
+                        <td>Jan 16, 2001</td>
+                        <td><span class="admin">Sir Alesteir Crowley</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('dues')">Annual Membership Dues Restructuring</span></td>
+                        <td>31</td>
+                        <td>Jan 22, 2001</td>
+                        <td><span class="admin">Lady Margareth Thatcher</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="forum-section">
+                <div class="section-header">⚡ Advanced Technomancy</div>
+                <table class="thread-list">
+                    <tr><th>Topic</th><th>Posts</th><th>Last Post</th><th>Author</th></tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('crystal')">Crystal Matrix Amplification Systems</span></td>
+                        <td>23</td>
+                        <td>Jan 21, 2001</td>
+                        <td>Stella</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('nordic')">Nordic Frequency Disruption After Goblin EMP</span></td>
+                        <td>31</td>
+                        <td>Jan 22, 2001</td>
+                        <td>Markus</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('quantum')">Quantum Entanglement Spell Protocols</span></td>
+                        <td>17</td>
+                        <td>Jan 23, 2001</td>
+                        <td>Dr. Vex</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('biotech')">Bio-Digital Interface Experiments</span></td>
+                        <td>42</td>
+                        <td>Jan 24, 2001</td>
+                        <td>Zara</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('firewall')">Arcane Firewall Development</span></td>
+                        <td>28</td>
+                        <td>Jan 21, 2001</td>
+                        <td>Viktor</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="forum-section">
+                <div class="section-header">🌙 Lunar Operations</div>
+                <table class="thread-list">
+                    <tr><th>Topic</th><th>Posts</th><th>Last Post</th><th>Author</th></tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('lunar')">Satellite Synchronization for Lunar Channeling</span></td>
+                        <td>19</td>
+                        <td>Jan 23, 2001</td>
+                        <td>Meredith</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('eclipse')">Eclipse Event Preparation Protocol</span></td>
+                        <td>34</td>
+                        <td>Jan 24, 2001</td>
+                        <td>Luna</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('tide')">Tidal Influence on Digital Spell Casting</span></td>
+                        <td>12</td>
+                        <td>Jan 20, 2001</td>
+                        <td>Oceana</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="forum-section">
+                <div class="section-header">📊 Archive & Research</div>
+                <table class="thread-list">
+                    <tr><th>Topic</th><th>Posts</th><th>Last Post</th><th>Author</th></tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('foundation')">External Observation Protocols</span></td>
+                        <td>12</td>
+                        <td>Jan 19, 2001</td>
+                        <td>Selene</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('ancient')">Ancient Code Recovery Projects</span></td>
+                        <td>25</td>
+                        <td>Jan 22, 2001</td>
+                        <td>Professor Thorne</td>
+                    </tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('patterns')">Digital Pattern Recognition in Spell Matrices</span></td>
+                        <td>18</td>
+                        <td>Jan 21, 2001</td>
+                        <td>Aria</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="forum-section">
+                <div class="section-header">🚐 General Discussion</div>
+                <table class="thread-list">
+                    <tr><th>Topic</th><th>Posts</th><th>Last Post</th><th>Author</th></tr>
+                    <tr>
+                        <td><span class="thread-title" onclick="showThread('travel')">Mobile Spell Casting from Road Vehicles</span></td>
+                        <td>47</td>
+                        <td>Jan 23, 2001</td>
+                        <td>Em</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Thread Views -->
+        <div id="thread-welcome" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">📌 Welcome to the Digital Arcane Network</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Sir Alesteir Crowley</span>
+                    <span class="post-date">Jan 15, 2001 14:23</span>
+                </div>
+                <div class="post-content">
+                    Greetings, esteemed colleagues. Welcome to our digital sanctum on the Hypernet. This forum represents the convergence of ancient wisdom and modern technology. Please observe proper protocol decorum at all times.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 15, 2001 16:45</span>
+                </div>
+                <div class="post-content">
+                    OMG hiiii everyone!! *waves frantically* Me and Bubba just got our camper's techno-matrix stabilized and WOW the signal boost is INSANE!! You can reach me at em@hexagram.corp btw!! Are we gonna do like digital séances or what?? This is so COOL!! 🌟✨
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Lady Margareth Thatcher</span>
+                    <span class="post-date">Jan 16, 2001 09:12</span>
+                </div>
+                <div class="post-content">
+                    @Em: Please review the communication guidelines. This is a professional environment for serious arcane practitioners.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Selene</span>
+                    <span class="post-date">Jan 18, 2001 11:30</span>
+                </div>
+                <div class="post-content">
+                    Fascinating. The Archive Foundation will be monitoring this digital convergence with great interest. The implications for knowledge preservation are significant. Contact: selene@hexagram.corp
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-crystal" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Crystal Matrix Amplification Systems</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Stella</span>
+                    <span class="post-date">Jan 19, 2001 10:15</span>
+                </div>
+                <div class="post-content">
+                    I've been experimenting with silicon-quartz hybrid matrices for power amplification. The binary lattice structure creates incredible resonance patterns when interfaced with standard Hypernet protocols. Results show 340% efficiency increase over traditional methods.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 19, 2001 12:33</span>
+                </div>
+                <div class="post-content">
+                    Stellaaaa!! OMG I tried something similar with my camper's entertainment crystals and they started SINGING?? Like literally musical notes!! Bubba thought it was the radio but NO it was definitely the crystals!! Should I be worried or is this normal?? Also can I make them play techno beats??? 🎵🔮
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Stella</span>
+                    <span class="post-date">Jan 20, 2001 08:45</span>
+                </div>
+                <div class="post-content">
+                    @Em: That's... actually not supposed to happen. Please check your harmonic frequencies immediately. Uncontrolled crystal harmonics can cause severe matrix destabilization.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 21, 2001 15:22</span>
+                </div>
+                <div class="post-content">
+                    Update!! The crystals are now playing a full symphony and attracting weird glowing butterflies!! Bubba says it's "like living in a fairy tale" but I'm getting concerned because the butterflies keep spelling out coordinates in formation flying?? Should we follow them??? 🦋✨
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-nordic" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Nordic Frequency Disruption After Goblin EMP</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Markus</span>
+                    <span class="post-date">Jan 20, 2001 20:15</span>
+                </div>
+                <div class="post-content">
+                    After the goblin hordes destroyed Bergen with their electromagnetic pulse weapons, the entire Nordic frequency grid has been compromised. My band's amplification spells no longer function properly. Seeking technical solutions for signal restoration. Contact: markus@hexagram.corp
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Stella</span>
+                    <span class="post-date">Jan 21, 2001 07:30</span>
+                </div>
+                <div class="post-content">
+                    @Markus: Have you tried recalibrating with southern European frequency standards? The Alps provide excellent signal bounce for Nordic reconstruction.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 21, 2001 11:45</span>
+                </div>
+                <div class="post-content">
+                    OMG Markus!! Goblins are THE WORST!! We encountered a whole pack near Frankfurt and they kept trying to EMP our camper!! Bubba had to use the emergency ward generators!! But hey, maybe the disruption is creating new frequency patterns?? Like, what if it's not broken but EVOLVED??? 🤔⚡
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Markus</span>
+                    <span class="post-date">Jan 22, 2001 14:20</span>
+                </div>
+                <div class="post-content">
+                    @Em: Interesting perspective. I've noticed some unusual harmonic variations in the disrupted zones. Perhaps these "evolved" patterns could enhance black metal spell casting rather than hinder it.
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-lunar" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Satellite Synchronization for Lunar Channeling</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Meredith</span>
+                    <span class="post-date">Jan 22, 2001 01:30</span>
+                </div>
+                <div class="post-content">
+                    The new satellite constellation provides unprecedented lunar energy channeling capabilities. I've successfully achieved 98.7% synchronization with lunar phases using GPS triangulation. The implications for precision spellwork are extraordinary.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Selene</span>
+                    <span class="post-date">Jan 22, 2001 09:15</span>
+                </div>
+                <div class="post-content">
+                    @Meredith: The Archive Foundation has been tracking similar phenomena. Your satellite data correlates with our deep space monitoring systems. Requesting data sharing protocols for research purposes.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 23, 2001 03:22</span>
+                </div>
+                <div class="post-content">
+                    Meredith!! Last night Bubba and I tried using our camper's satellite TV to channel lunar energy and now our entire vehicle is GLOWING SILVER!! Also all the nocturnal animals are following us in perfect formation!! Is this normal?? Should we be leading them somewhere?? They seem to know something we don't!! 🌙🦉🚐
+                </div>
+            </div>
+        </div>
+
+        <!-- New Missing Thread Views -->
+        <div id="thread-membership" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">New Member Integration Protocols</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Lady Margareth Thatcher</span>
+                    <span class="post-date">Jan 15, 2001 11:30</span>
+                </div>
+                <div class="post-content">
+                    New members must complete the digital integration sequence within 48 hours of payment confirmation. This includes Hexagram authentication, crystal frequency calibration, and emergency contact registration. Failure to complete integration results in account suspension.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Timothy</span>
+                    <span class="post-date">Jan 16, 2001 09:15</span>
+                </div>
+                <div class="post-content">
+                    Hello! New member here. I've completed the Hexagram authentication but my crystal is showing error code 7742. Is this normal? Also, should my integration wand be sparking this much? timothy@hexagram.corp
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 16, 2001 14:22</span>
+                </div>
+                <div class="post-content">
+                    Welcome Timothy!! OMG integration wands are SO tricky!! Mine caught fire during setup but that's because I accidentally connected it to our camper's electrical system!! Bubba says sparking is totally normal unless it's turning PURPLE sparks!! Then you should probably run!! 🔥⚡
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Lady Margareth Thatcher</span>
+                    <span class="post-date">Jan 20, 2001 16:45</span>
+                </div>
+                <div class="post-content">
+                    @Timothy: Error 7742 indicates improper frequency alignment. Please recalibrate to Guild standard 47.3MHz. @Em: Purple sparks indicate dangerous overload conditions and are NOT normal.
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-dues" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Annual Membership Dues Restructuring</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Lady Margareth Thatcher</span>
+                    <span class="post-date">Jan 18, 2001 10:00</span>
+                </div>
+                <div class="post-content">
+                    Due to increased operational costs and goblin defense measures, the Guild Council has voted to maintain the 2,500 EUR annual fee structure. Premium services including quantum entanglement access and emergency response remain included.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Merchant Balthazar</span>
+                    <span class="post-date">Jan 19, 2001 14:30</span>
+                </div>
+                <div class="post-content">
+                    The fee structure remains competitive compared to other European magical organizations. The Venetian Alchemist Society charges 3,200 EUR with fewer benefits. Our digital infrastructure investment justifies current pricing.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 20, 2001 08:15</span>
+                </div>
+                <div class="post-content">
+                    2,500 EUR is like... SO MUCH MONEY!! That's our entire camper maintenance budget for a year!! But honestly the Guild has been AMAZING!! The goblin protection alone saved us from three EMP attacks!! Plus where else can you get quantum spell support 24/7?? Totally worth it!! 💰✨
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Timothy</span>
+                    <span class="post-date">Jan 22, 2001 11:45</span>
+                </div>
+                <div class="post-content">
+                    As a new member, I can confirm the value is excellent. The integration support alone would cost 500 EUR elsewhere. The emergency crystal replacement service has already saved me twice this month.
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-biotech" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Bio-Digital Interface Experiments</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Zara</span>
+                    <span class="post-date">Jan 21, 2001 13:20</span>
+                </div>
+                <div class="post-content">
+                    My latest bio-digital interface prototype achieves direct neural connection with crystal matrices. Test subjects show 87% success rate in thought-controlled spell casting. The implications for hands-free magic are revolutionary. Contact: zara@hexagram.corp
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Dr. Vex</span>
+                    <span class="post-date">Jan 22, 2001 09:45</span>
+                </div>
+                <div class="post-content">
+                    @Zara: Impressive work! Have you considered quantum coherence effects on neural pathways? My entanglement research suggests potential for remote bio-digital connections across vast distances.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 23, 2001 16:30</span>
+                </div>
+                <div class="post-content">
+                    Bio-digital stuff!! This sounds INCREDIBLE but also kind of scary?? Like what if your brain gets stuck connected to the crystals?? Bubba tried connecting our camper's GPS directly to his mind once and he kept trying to drive to coordinates that don't exist!! Also he spoke only in navigation commands for three hours!! "TURN LEFT IN 200 METERS" he kept saying!! 🧠🔮🚐
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Zara</span>
+                    <span class="post-date">Jan 24, 2001 10:15</span>
+                </div>
+                <div class="post-content">
+                    @Em: Safety protocols prevent permanent connection. However, your friend's GPS integration suggests interesting possibilities for navigation enhancement. Perhaps we could collaborate on mobile applications?
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-firewall" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Arcane Firewall Development</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Viktor</span>
+                    <span class="post-date">Jan 19, 2001 15:45</span>
+                </div>
+                <div class="post-content">
+                    Traditional network firewalls fail against magical intrusion. I'm developing hybrid protection systems that filter both digital packets and arcane energy signatures. Early tests show promise against goblin cyber-magic attacks.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Captain Reyes</span>
+                    <span class="post-date">Jan 20, 2001 11:30</span>
+                </div>
+                <div class="post-content">
+                    @Viktor: The defense implications are significant. Bergen's collapse included simultaneous digital and magical system failures. A hybrid firewall could prevent such catastrophes. What resources do you require?
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 21, 2001 12:20</span>
+                </div>
+                <div class="post-content">
+                    Firewalls!! YES!! Our camper needs better protection!! The goblins keep trying to hack our entertainment system and last week they made our radio play death metal for 6 hours straight!! Bubba actually started ENJOYING it which is concerning!! Can your firewall stop playlist hijacking?? 🔥🛡️📻
+                </div>
+            </div>
+        </div>
+        <div id="thread-rules" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">📌 Guild Code of Digital Conduct</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Sir Alesteir Crowley</span>
+                    <span class="post-date">Jan 12, 2001 10:00</span>
+                </div>
+                <div class="post-content">
+                    Fellow practitioners, these digital protocols must be observed within our sacred network sanctuary. Rule 1: No unauthorized spell-casting through forum interfaces. Rule 2: Hexagram contact information must be verified. Rule 3: All technomancy discussions require proper safety disclaimers.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 12, 2001 14:22</span>
+                </div>
+                <div class="post-content">
+                    Wait wait WAIT!! So I can't cast spells through the forum?? But what about that time I accidentally turned my keyboard into a crystal divination tool while typing?? That was TOTALLY by accident!! Does that count?? Bubba says I should read the rules more carefully but honestly they're so LONG!! 📜✨
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">Lady Margareth Thatcher</span>
+                    <span class="post-date">Jan 16, 2001 09:30</span>
+                </div>
+                <div class="post-content">
+                    @Em: Accidental transmutations are covered under Section 12.4. Please review the complete documentation before your next post.
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-quantum" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Quantum Entanglement Spell Protocols</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Dr. Vex</span>
+                    <span class="post-date">Jan 20, 2001 16:45</span>
+                </div>
+                <div class="post-content">
+                    Quantum entanglement offers unprecedented opportunities for spell synchronization across vast distances. My latest experiments show 99.2% fidelity over 500km using paired crystal arrays. The implications for Guild coordination are staggering. Contact: drvex@hexagram.corp
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Stella</span>
+                    <span class="post-date">Jan 21, 2001 08:30</span>
+                </div>
+                <div class="post-content">
+                    @Dr. Vex: Fascinating work! Have you considered quantum decoherence effects from atmospheric interference? My crystal matrices show significant stability improvements with proper shielding protocols.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 23, 2001 11:15</span>
+                </div>
+                <div class="post-content">
+                    QUANTUM STUFF!! OMG you guys!! So yesterday I was trying to quantum-entangle my camper's GPS with Bubba's compass and now BOTH devices are showing locations that don't exist yet!! Like, they're pointing to places that will be built in the future!! Should we follow the directions?? This is either AMAZING or terrifying!! 🧭🚐✨
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-music" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Sonic Frequency Enhancement Techniques</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">DJ Mystique</span>
+                    <span class="post-date">Jan 22, 2001 20:30</span>
+                </div>
+                <div class="post-content">
+                    Bass frequencies between 40-60Hz create optimal resonance chambers for spell amplification. I've been mixing techno beats with incantation rhythms - the results are mind-blowing! Anyone interested in collaborative spell-mixing sessions? djmystique@hexagram.corp
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Markus</span>
+                    <span class="post-date">Jan 23, 2001 15:20</span>
+                </div>
+                <div class="post-content">
+                    @DJ Mystique: Black metal frequencies work differently but achieve similar amplification. The Norwegian tradition uses harmonic distortion to channel rage-based magic. Perhaps we could exchange techniques?
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 24, 2001 07:45</span>
+                </div>
+                <div class="post-content">
+                    Music magic!! YES!! Our camper stereo started playing mysterious melodies after we drove through that crystal cave!! Now every song sounds like it has EXTRA DIMENSIONS!! Bubba thinks the speakers are possessed but I think they've just been upgraded by ancient technology!! The forest animals are forming dance circles when we play music!! 🎵🦌✨
+                </div>
+            </div>
+        </div>
+
+        <div id="thread-goblin" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Goblin Threat Assessment 2001</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Captain Reyes</span>
+                    <span class="post-date">Jan 18, 2001 09:00</span>
+                </div>
+                <div class="post-content">
+                    Intelligence reports indicate increased goblin activity across Northern Europe. Their EMP technology has evolved - now capable of disrupting both electronic AND magical systems simultaneously. All chapters must implement enhanced defensive protocols immediately.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Markus</span>
+                    <span class="post-date">Jan 18, 2001 14:30</span>
+                </div>
+                <div class="post-content">
+                    @Captain Reyes: Bergen was completely unprepared. They hit us during our winter solstice ceremony - maximum vulnerability. The entire city's magical infrastructure collapsed in minutes. We need early warning systems.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 19, 2001 16:22</span>
+                </div>
+                <div class="post-content">
+                    Goblin update from the road!! We've encountered THREE different goblin scout parties while traveling!! But here's the weird part - they seem CONFUSED by our camper!! Like they can't figure out if it's technology or magic?? Bubba installed some crystal circuits in our engine and now the goblins' EMP devices just make our radio play polka music?? 🚐⚡🎺
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Viktor</span>
+                    <span class="post-date">Jan 24, 2001 11:45</span>
+                </div>
+                <div class="post-content">
+                    @Em: Your hybrid system might be the key to goblin-proof defenses. Traditional firewalls fail because goblins attack both technological and magical systems. A hybrid approach could be revolutionary.
+                </div>
+            </div>
+        </div>
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">Mobile Spell Casting from Road Vehicles</div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 18, 2001 16:45</span>
+                </div>
+                <div class="post-content">
+                    Hey everyone!! Me and Bubba have been perfecting mobile spell casting from our camper!! We've driven through 12 countries and the spell stability is AMAZING when you're moving!! Something about the kinetic energy matrix?? Anyone else tried this?? We're currently parked in a magical forest in Bavaria and the trees are DEFINITELY talking to our engine!! 🚐🌲✨
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Stella</span>
+                    <span class="post-date">Jan 18, 2001 18:30</span>
+                </div>
+                <div class="post-content">
+                    @Em: Mobile casting is theoretically sound due to doppler frequency shifts, but "talking trees" suggests possible hallucination from carbon monoxide exposure. Please check your ventilation systems.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 19, 2001 07:12</span>
+                </div>
+                <div class="post-content">
+                    @Stella NO NO NO it's not hallucinations!! The trees are giving us DIRECTIONS!! They told us about a secret path to the Alps!! And also warned us about the goblin checkpoints!! Bubba doesn't believe me either but then a OWL landed on our windshield and drew a MAP in the frost!! EXPLAIN THAT STELLA!! 🦉🗺️❄️
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author admin">父</span>
+                    <span class="post-date">Jan 19, 2001 12:45</span>
+                </div>
+                <div class="post-content">
+                    自然との調和は重要です。木々の声を聞くことは古代の技術です。フクロウは良いオーメンです。
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 19, 2001 14:33</span>
+                </div>
+                <div class="post-content">
+                    @父 I don't speak Japanese but I TOTALLY agree!! The forest spirits are on our wavelength!! Thank you for understanding!! Finally someone who gets it!! 🙏✨
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Markus</span>
+                    <span class="post-date">Jan 20, 2001 16:20</span>
+                </div>
+                <div class="post-content">
+                    @Em: In Norway, before the goblin invasion, we had similar experiences with vehicle-based ritual work. The vibrations from the engine create a unique frequency that amplifies certain types of magic. Your forest encounters sound legitimate.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 21, 2001 09:15</span>
+                </div>
+                <div class="post-content">
+                    Update from the road!! We followed the owl's map and found an INCREDIBLE crystal cave!! Our camper's tech is going HAYWIRE but in a good way?? All our devices are displaying symbols we've never seen!! Bubba says we should leave but I think we've discovered something BIG!! Should we stay and investigate?? The crystals are humming in harmony with our engine!! 🔮⚡🚐
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Selene</span>
+                    <span class="post-date">Jan 21, 2001 11:30</span>
+                </div>
+                <div class="post-content">
+                    @Em: Document everything. Unknown crystal formations displaying technological interfaces suggest significant archaeological importance. The Archive Foundation requests immediate data transmission if possible.
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-author">Em</span>
+                    <span class="post-date">Jan 23, 2001 06:22</span>
+                </div>
+                <div class="post-content">
+                    Final update from the crystal cave!! We spent two days inside and OMG you guys!! The crystals aren't just humming they're COMPUTING!! Like biological computers!! And they've been solving mathematical equations that appeared on our laptop screen!! Bubba is convinced we've found alien technology but I think it's something even weirder!! The crystals are showing us visions of the future hypernet!! Flying cars!! Digital telepathy!! And something called "social media" that looks TERRIFYING!! 🤖🔮💻
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Link Pages -->
+        <div id="quicklink-bylaws" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">📜 Guild Bylaws</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>MAGES GUILD DIGITAL CHARTER</h3>
+                <p><strong>Article I:</strong> Membership requires annual dues of 2,500 EUR and verified Hexagram corporate authentication.</p>
+                <p><strong>Article II:</strong> All digital spell-casting must comply with Hypernet safety protocols.</p>
+                <p><strong>Article III:</strong> Crystal matrix modifications require Guild approval and safety inspection.</p>
+                <p><strong>Article IV:</strong> Goblin encounters must be reported to Defense Coordination within 24 hours.</p>
+                <p><strong>Article V:</strong> Forum conduct must maintain professional decorum at all times.</p>
+                <p><strong>Article VI:</strong> Unauthorized sharing of Guild secrets results in immediate membership termination.</p>
+            </div>
+        </div>
+
+        <div id="quicklink-protocols" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">⚡ Arcane Protocols</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>TECHNICAL STANDARDS FOR SPELL-TECH INTEGRATION</h3>
+                <p><strong>Protocol Alpha:</strong> Crystal frequency calibration must not exceed 50MHz to prevent interference with Hypernet infrastructure.</p>
+                <p><strong>Protocol Beta:</strong> Lunar synchronization requires GPS triangulation accuracy within 0.01 degrees.</p>
+                <p><strong>Protocol Gamma:</strong> Bio-digital interfaces must include failsafe disconnection mechanisms.</p>
+                <p><strong>Protocol Delta:</strong> Quantum entanglement pairs require registration with Archive Foundation monitoring systems.</p>
+                <p><strong>Protocol Epsilon:</strong> Mobile spell-casting vehicles must display Guild identification transponders.</p>
+            </div>
+        </div>
+
+        <div id="quicklink-directory" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">📇 Member Directory</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>ACTIVE GUILD MEMBERS (267 Total)</h3>
+                <p><strong>Administrators:</strong> Sir Alesteir Crowley, Lady Margareth Thatcher, 父</p>
+                <p><strong>Archmages (5):</strong> Dr. Vex, Stella, Professor Thorne, Fortress-Master Ivan, Captain Reyes</p>
+                <p><strong>Regional Chapter Leaders:</strong> Nigel Blackwood (London), Céleste (Paris), Klaus (Berlin), Marco Aurelius (Rome)</p>
+                <p><strong>Active Contributors:</strong> Em, Markus, Selene, Meredith, Luna, Oceana, Aria, DJ Mystique, Viktor, Zara, Scout Vera, Merchant Balthazar</p>
+                <p><strong>Contact Protocol:</strong> All members reachable via username@hexagram.corp</p>
+            </div>
+        </div>
+
+        <div id="quicklink-database" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">🔮 Spell Database</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>DOCUMENTED DIGITAL SPELL MATRICES</h3>
+                <p><strong>Crystal Matrices:</strong> 342 documented amplification patterns</p>
+                <p><strong>Quantum Protocols:</strong> 156 verified entanglement procedures</p>
+                <p><strong>Lunar Synchronization:</strong> 89 satellite coordination spells</p>
+                <p><strong>Bio-Digital Interface:</strong> 234 documented connection protocols</p>
+                <p><strong>Defensive Wards:</strong> 178 anti-goblin protection systems</p>
+                <p><strong>Mobile Casting:</strong> 67 vehicle-based spell configurations</p>
+                <p><strong>Sonic Enhancement:</strong> 123 frequency amplification techniques</p>
+                <p><strong>Archive Access:</strong> Requires Archmage-level clearance</p>
+            </div>
+        </div>
+
+        <div id="quicklink-emergency" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">🚨 Emergency Contacts</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>24/7 GUILD CRISIS RESPONSE TEAM</h3>
+                <p><strong>Goblin Attack Emergency:</strong> Captain Reyes - emergency@magesguild.hypernet.eu</p>
+                <p><strong>Crystal Matrix Overload:</strong> Dr. Vex - quantum.emergency@hexagram.corp</p>
+                <p><strong>Spell Cascade Failure:</strong> Fortress-Master Ivan - defense@magesguild.hypernet.eu</p>
+                <p><strong>Archive Foundation Alert:</strong> Selene - archive.emergency@hexagram.corp</p>
+                <p><strong>Regional Chapter Crisis:</strong> Contact your local chapter leader immediately</p>
+                <p><strong>General Emergency:</strong> admin@magesguild.hypernet.eu</p>
+                <p><strong>WARNING:</strong> Do not use emergency contacts for routine inquiries. Misuse results in disciplinary action.</p>
+            </div>
+        </div>
+
+        <div id="quicklink-support" class="thread-view">
+            <button class="back-button" onclick="showForum()">« Back to Forum</button>
+            <div class="section-header">🔧 Technical Support</div>
+            <div style="padding: 15px; line-height: 1.6;">
+                <h3>MAGITECH SYSTEM MAINTENANCE</h3>
+                <p><strong>Forum Access Issues:</strong> Clear your Hypernet Explorer cache and restart</p>
+                <p><strong>Crystal Interface Problems:</strong> Check frequency calibration settings</p>
+                <p><strong>Hexagram Authentication:</strong> Verify corporate credentials with IT department</p>
+                <p><strong>Spell Matrix Errors:</strong> Run diagnostic protocol Alpha-7</p>
+                <p><strong>Mobile Casting Support:</strong> Ensure vehicle transponders are active</p>
+                <p><strong>Emergency Technical Support:</strong> techsupport@magesguild.hypernet.eu</p>
+                <p><strong>System Status:</strong> All servers operational - last updated Jan 24, 2001 23:45</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <strong>Guild Statistics:</strong> 267 Active Members | 2,341 Posts | 489 Topics | Server Status: OPTIMAL<br>
+            Powered by MagiTech Forum Software v2.1 | Hypernet Explorer Compatible
+        </div>
+    </div>
+</div>
+
+<script>
+// Forum data structure
+const forumData = {
+    categories: [
+        {
+            id: "admin",
+            name: "Guild Administration",
+            icon: "🏛️",
+            threads: [
+                {
+                    id: "welcome",
+                    title: "📌 Welcome to the Digital Arcane Network",
+                    posts: 15,
+                    lastPost: "Jan 18, 2001",
+                    author: "Sir Alesteir Crowley",
+                    sticky: true
+                },
+                {
+                    id: "membership",
+                    title: "New Member Integration Protocols",
+                    posts: 8,
+                    lastPost: "Jan 20, 2001",
+                    author: "Lady Margareth Thatcher"
+                }
+            ]
+        },
+        {
+            id: "technomancy",
+            name: "Advanced Technomancy",
+            icon: "⚡",
+            threads: [
+                {
+                    id: "crystal",
+                    title: "Crystal Matrix Amplification Systems",
+                    posts: 23,
+                    lastPost: "Jan 21, 2001",
+                    author: "Stella"
+                },
+                {
+                    id: "nordic",
+                    title: "Nordic Frequency Disruption After Goblin EMP",
+                    posts: 31,
+                    lastPost: "Jan 22, 2001",
+                    author: "Markus"
+                }
+            ]
+        },
+        {
+            id: "lunar",
+            name: "Lunar Operations",
+            icon: "🌙",
+            threads: [
+                {
+                    id: "lunar",
+                    title: "Satellite Synchronization for Lunar Channeling",
+                    posts: 19,
+                    lastPost: "Jan 23, 2001",
+                    author: "Meredith"
+                }
+            ]
+        },
+        {
+            id: "archive",
+            name: "Archive & Research",
+            icon: "📊",
+            threads: [
+                {
+                    id: "foundation",
+                    title: "External Observation Protocols",
+                    posts: 12,
+                    lastPost: "Jan 19, 2001",
+                    author: "Selene"
+                }
+            ]
+        },
+        {
+            id: "general",
+            name: "General Discussion",
+            icon: "🚐",
+            threads: [
+                {
+                    id: "travel",
+                    title: "Mobile Spell Casting from Road Vehicles",
+                    posts: 47,
+                    lastPost: "Jan 23, 2001",
+                    author: "Em"
+                }
+            ]
+        }
+    ]
+};
+
+function showForum() {
+    document.getElementById('forum-index').style.display = 'block';
+    const threadViews = document.querySelectorAll('.thread-view');
+    threadViews.forEach(view => view.style.display = 'none');
+}
+
+function showThread(threadId) {
+    document.getElementById('forum-index').style.display = 'none';
+    const threadViews = document.querySelectorAll('.thread-view');
+    threadViews.forEach(view => view.style.display = 'none');
+    
+    const targetThread = document.getElementById('thread-' + threadId);
+    if (targetThread) {
+        targetThread.style.display = 'block';
+    }
+}
+
+function showQuickLink(linkId) {
+    document.getElementById('forum-index').style.display = 'none';
+    const threadViews = document.querySelectorAll('.thread-view');
+    threadViews.forEach(view => view.style.display = 'none');
+    
+    const targetLink = document.getElementById('quicklink-' + linkId);
+    if (targetLink) {
+        targetLink.style.display = 'block';
+    }
+}
+
+// Initialize forum
+showForum();
+</script>
+
+</body>
+</html>

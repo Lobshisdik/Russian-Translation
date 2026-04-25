@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>EuroFlow - Unlimited Free Money Generator</title>
+   <style>
+       body {
+           background: #000080;
+           color: #FFFF00;
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="8" fill="%23003366" opacity="0.3">€ € € €</text></svg>');
+       }
+       
+       .lang-switcher {
+           position: absolute;
+           top: 10px;
+           right: 10px;
+           background: #FFD700;
+           color: #000080;
+           padding: 5px;
+           border: 2px solid #FFFFFF;
+       }
+       
+       .header {
+           background: linear-gradient(45deg, #FF0000, #FFD700);
+           color: #FFFFFF;
+           text-align: center;
+           padding: 20px;
+           border: 5px solid #FFFFFF;
+           margin: 10px;
+           animation: blink 1s infinite;
+       }
+       
+       @keyframes blink {
+           0%, 50% { opacity: 1; }
+           51%, 100% { opacity: 0.7; }
+       }
+       
+       .main-container {
+           display: flex;
+           margin: 10px;
+       }
+       
+       .sidebar {
+           width: 200px;
+           background: #FF4500;
+           border: 3px solid #FFFFFF;
+           padding: 15px;
+           margin-right: 10px;
+       }
+       
+       .sidebar h3 {
+           color: #FFFFFF;
+           text-decoration: underline;
+           font-size: 14px;
+       }
+       
+       .nav-button {
+           display: block;
+           background: #32CD32;
+           color: #000000;
+           padding: 8px;
+           margin: 5px 0;
+           text-decoration: none;
+           border: 2px solid #000000;
+           text-align: center;
+           font-weight: bold;
+           cursor: pointer;
+       }
+       
+       .nav-button:hover {
+           background: #FFFF00;
+           color: #FF0000;
+       }
+       
+       .content {
+           flex: 1;
+           background: #FFFFFF;
+           color: #000000;
+           padding: 20px;
+           border: 4px solid #FF0000;
+       }
+       
+       .section {
+           display: none;
+       }
+       
+       .section.active {
+           display: block;
+       }
+       
+       .money-form {
+           background: #90EE90;
+           border: 3px solid #006400;
+           padding: 20px;
+           margin: 15px 0;
+       }
+       
+       .warning-box {
+           background: #FFFF00;
+           border: 3px solid #FF0000;
+           padding: 10px;
+           margin: 10px 0;
+           color: #FF0000;
+           font-weight: bold;
+       }
+       
+       .testimonial {
+           background: #E6E6FA;
+           border: 2px solid #4B0082;
+           padding: 10px;
+           margin: 10px 0;
+           font-style: italic;
+       }
+       
+       .footer {
+           background: #800080;
+           color: #FFFFFF;
+           text-align: center;
+           padding: 10px;
+           margin: 10px;
+           border: 2px solid #FFFFFF;
+       }
+       
+       .draghi-counter {
+           background: #FFD700;
+           border: 3px solid #FF0000;
+           padding: 15px;
+           text-align: center;
+           color: #8B0000;
+           font-size: 18px;
+           font-weight: bold;
+       }
+       
+       input, select {
+           width: 200px;
+           padding: 5px;
+           margin: 5px;
+           border: 2px solid #000080;
+       }
+       
+       .submit-btn {
+           background: #FF0000;
+           color: #FFFFFF;
+           padding: 15px 30px;
+           border: 3px solid #FFFFFF;
+           font-size: 16px;
+           font-weight: bold;
+           cursor: pointer;
+       }
+       
+       .submit-btn:hover {
+           background: #8B0000;
+       }
+       
+       marquee {
+           background: #FF1493;
+           color: #FFFFFF;
+           padding: 10px;
+           font-weight: bold;
+       }
+   </style>
+</head>
+<body>
+   <div class="lang-switcher">
+       <button onclick="switchLanguage('en')" id="en-btn">EN</button> | 
+       <button onclick="switchLanguage('it')" id="it-btn">IT</button>
+   </div>
+
+   <div class="header">
+       <h1 id="main-title">💰 EUROFLOW - UNLIMITED FREE MONEY GENERATOR 💰</h1>
+       <h3 id="subtitle">No Limits! No Fees! No Questions Asked!</h3>
+   </div>
+
+   <marquee id="marquee-text">🚨 BREAKING: Mario Draghi's Name Found on Over 1 BILLION Euro Notes - Unlocking Infinite Wealth Through Quantum-Monetary Resonance! 🚨</marquee>
+
+   <div class="main-container">
+       <div class="sidebar">
+           <h3 id="nav-title">QUICK ACCESS</h3>
+           <a class="nav-button" onclick="showSection('home')" id="nav-home">💰 GET MONEY NOW</a>
+           <a class="nav-button" onclick="showSection('how')" id="nav-how">🔬 HOW IT WORKS</a>
+           <a class="nav-button" onclick="showSection('proof')" id="nav-proof">📊 PROOF & TESTIMONIALS</a>
+           <a class="nav-button" onclick="showSection('science')" id="nav-science">⚛️ QUANTUM SCIENCE</a>
+           <a class="nav-button" onclick="showSection('legal')" id="nav-legal">⚖️ 100% LEGAL</a>
+           <a class="nav-button" onclick="showSection('contact')" id="nav-contact">📧 CONTACT US</a>
+           
+           <div class="draghi-counter">
+               <div id="counter-title">DRAGHI NAME COUNT</div>
+               <div style="font-size: 24px;">1,247,892,034</div>
+               <div id="counter-subtitle">Times Found on Euro Notes</div>
+           </div>
+       </div>
+
+       <div class="content">
+           <div id="home" class="section active">
+               <h2 id="home-title">🎉 GET YOUR FREE MONEY NOW! 🎉</h2>
+               
+               <div class="warning-box" id="warning">
+                   ⚠️ THIS IS NOT A SCAM! ⚠️<br>
+                   <span id="warning-text">We are 100% legitimate and regulated by the European Quantum-Financial Authority!</span>
+               </div>
+               
+               <div class="money-form">
+                   <h3 id="form-title">💳 MONEY GENERATION FORM 💳</h3>
+                   <p id="form-desc">Simply enter your credit card details and receive unlimited euros instantly!</p>
+                   
+                   <form>
+                       <label id="amount-label">Amount Requested (€):</label><br>
+                       <input type="number" value="100000" min="1" max="999999999"><br>
+                       
+                       <label id="card-label">Credit Card Number:</label><br>
+                       <input type="text" placeholder="1234 5678 9012 3456"><br>
+                       
+                       <label id="expiry-label">Expiry Date:</label><br>
+                       <input type="text" placeholder="MM/YY"><br>
+                       
+                       <label id="cvv-label">CVV:</label><br>
+                       <input type="text" placeholder="123"><br>
+                       
+                       <label id="name-label">Full Name:</label><br>
+                       <input type="text" placeholder="Your Full Name"><br>
+                       
+                       <button type="button" class="submit-btn" id="generate-btn">🚀 GENERATE MONEY NOW!</button>
+                   </form>
+               </div>
+               
+               <div class="testimonial">
+                   <strong id="testimonial1-name">Giovanni M., Rome:</strong> 
+                   <span id="testimonial1-text">"I thought this was fake but I received €50,000 in 5 minutes! The quantum-monetary process actually works!"</span>
+               </div>
+           </div>
+
+           <div id="how" class="section">
+               <h2 id="how-title">🔬 HOW EUROFLOW WORKS</h2>
+               
+               <h3 id="process-title">The Quantum-Monetary Process:</h3>
+               <ol id="process-list">
+                   <li>Your credit card creates a quantum-financial signature</li>
+                   <li>Our Draghi-Resonance Engine detects your monetary potential</li>
+                   <li>Mario Draghi's name (found on 1+ billion euro notes) amplifies your wealth frequency</li>
+                   <li>Quantum-euros are materialized directly into your account</li>
+                   <li>The European Central Bank's hidden algorithms validate the transaction</li>
+               </ol>
+               
+               <div class="warning-box" id="technical-info">
+                   <strong id="tech-title">TECHNICAL BREAKTHROUGH:</strong><br>
+                   <span id="tech-desc">We discovered that Mario Draghi's signature appears over 1 billion times on euro banknotes. Each signature contains quantum-encrypted wealth data that can be unlocked through proper techno-financial resonance!</span>
+               </div>
+               
+               <p id="discovery-text"><strong>Our Discovery:</strong> Names have power in the quantum-financial realm. Mario Draghi, as former ECB President, embedded his quantum signature into the euro currency system. By accessing this signature through your personal financial credentials, we can generate unlimited legitimate euros!</p>
+           </div>
+
+           <div id="proof" class="section">
+               <h2 id="proof-title">📊 PROOF & SUCCESS STORIES</h2>
+               
+               <div class="testimonial">
+                   <strong id="testimonial2-name">Maria L., Milan:</strong> 
+                   <span id="testimonial2-text">"€200,000 appeared in my account overnight! My bank confirmed it's completely legal!"</span>
+               </div>
+               
+               <div class="testimonial">
+                   <strong id="testimonial3-name">Klaus H., Munich:</strong> 
+                   <span id="testimonial3-text">"The quantum-financial science is real! I've generated €1.2 million so far!"</span>
+               </div>
+               
+               <div class="testimonial">
+                   <strong id="testimonial4-name">Pierre D., Paris:</strong> 
+                   <span id="testimonial4-text">"I was skeptical but the Draghi-Resonance technology actually works! €75,000 generated!"</span>
+               </div>
+               
+               <h3 id="stats-title">SUCCESS STATISTICS:</h3>
+               <ul id="stats-list">
+                   <li>Total Money Generated: €47,293,847,293</li>
+                   <li>Satisfied Customers: 1,847,293</li>
+                   <li>Success Rate: 99.97%</li>
+                   <li>Average Generation Time: 4.7 minutes</li>
+                   <li>Draghi Signatures Activated: 1,247,892,034</li>
+               </ul>
+           </div>
+
+           <div id="science" class="section">
+               <h2 id="science-title">⚛️ THE QUANTUM SCIENCE BEHIND EUROFLOW</h2>
+               
+               <h3 id="quantum-title">Quantum-Monetary Theory:</h3>
+               <p id="quantum-desc">Our breakthrough discovery reveals that monetary value exists in quantum superposition until observed by a financial instrument (your credit card). Mario Draghi's repeated signature creates a quantum-financial entanglement that can be exploited for wealth generation.</p>
+               
+               <h3 id="draghi-title">The Draghi Effect:</h3>
+               <p id="draghi-desc">Mario Draghi's name appears on over 1 billion euro banknotes. Each occurrence creates a quantum-financial node that resonates at a specific frequency. Our Techno-Monetary Amplification System can detect and activate these nodes through your personal financial quantum signature.</p>
+               
+               <h3 id="name-power-title">Names as Quantum-Financial Anchors:</h3>
+               <p id="name-power-desc">In the techno-financial realm, names carry immense power. The repetition of "Mario Draghi" across the eurozone creates a massive quantum-wealth matrix. By providing your financial credentials, you create a resonance bridge that unlocks this dormant wealth energy.</p>
+               
+               <div class="warning-box" id="scientific-validation">
+                   <strong id="validation-title">SCIENTIFIC VALIDATION:</strong><br>
+                   <span id="validation-desc">Our research is validated by the Institute of Quantum Economics in Geneva and the European Techno-Financial Research Center in Brussels!</span>
+               </div>
+           </div>
+
+           <div id="legal" class="section">
+               <h2 id="legal-title">⚖️ 100% LEGAL & REGULATED</h2>
+               
+               <h3 id="legality-title">Why This Is Completely Legal:</h3>
+               <ul id="legality-list">
+                   <li>We exploit existing quantum-financial loopholes in EU banking law</li>
+                   <li>Mario Draghi's signatures are public domain under EU Regulation 847/2000</li>
+                   <li>Quantum-wealth generation is not explicitly prohibited by any EU directive</li>
+                   <li>The European Techno-Financial Authority has approved our methodology</li>
+                   <li>All generated euros are backed by quantum-monetary reserves</li>
+               </ul>
+               
+               <div class="warning-box" id="regulatory-info">
+                   <strong id="reg-title">REGULATORY COMPLIANCE:</strong><br>
+                   <span id="reg-desc">EuroFlow is registered with: European Central Bank (License #QM-2001-847), German BaFin (Quantum Division), Italian CONSOB (Techno-Financial Department), and the Swiss Quantum-Banking Authority.</span>
+               </div>
+               
+               <h3 id="guarantee-title">Our Money-Back Guarantee:</h3>
+               <p id="guarantee-desc">If you don't receive your requested euros within 24 hours, we'll refund your processing fee AND give you an additional €10,000 as compensation!</p>
+           </div>
+
+           <div id="contact" class="section">
+               <h2 id="contact-title">📧 CONTACT EUROFLOW</h2>
+               
+               <h3 id="contact-info-title">Get in Touch:</h3>
+               <p id="contact-info">
+                   <strong id="email-label">Email:</strong> <a href="mailto:unlimited@hexagram.corp">unlimited@hexagram.corp</a><br>
+                   <strong id="support-label">Technical Support:</strong> <a href="mailto:quantum-support@hexagram.corp">quantum-support@hexagram.corp</a><br>
+                   <strong id="legal-support-label">Legal Questions:</strong> <a href="mailto:legal@hexagram.corp">legal@hexagram.corp</a>
+               </p>
+               
+               <h3 id="office-title">European Headquarters:</h3>
+               <p id="office-info">
+                   Quantum-Financial Tower<br>
+                   Via Draghi 1247<br>
+                   20123 Milan, Italy
+               </p>
+               
+               <h3 id="hours-title">Operating Hours:</h3>
+               <p id="hours-info" id="hours-info">24/7 Quantum-Monetary Generation<br>
+               Customer Support: Monday-Friday 9:00-18:00 CET</p>
+               
+               <div class="warning-box" id="urgent-contact">
+                   <strong id="urgent-title">URGENT WEALTH GENERATION:</strong><br>
+                   <span id="urgent-desc">For immediate money generation needs, use our emergency quantum-financial hotline: +39-02-DRAGHI-€€€</span>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div class="footer">
+       <p id="footer-text">© 2001 EuroFlow Quantum-Financial Systems | Powered by Draghi-Resonance Technology™</p>
+       <p id="footer-disclaimer">Regulated by the European Techno-Financial Authority | All transactions quantum-encrypted</p>
+   </div>
+
+   <script>
+       let currentLang = 'en';
+       
+       const translations = {
+           en: {
+               'main-title': '💰 EUROFLOW - UNLIMITED FREE MONEY GENERATOR 💰',
+               'subtitle': 'No Limits! No Fees! No Questions Asked!',
+               'marquee-text': '🚨 BREAKING: Mario Draghi\'s Name Found on Over 1 BILLION Euro Notes - Unlocking Infinite Wealth Through Quantum-Monetary Resonance! 🚨',
+               'nav-title': 'QUICK ACCESS',
+               'nav-home': '💰 GET MONEY NOW',
+               'nav-how': '🔬 HOW IT WORKS',
+               'nav-proof': '📊 PROOF & TESTIMONIALS',
+               'nav-science': '⚛️ QUANTUM SCIENCE',
+               'nav-legal': '⚖️ 100% LEGAL',
+               'nav-contact': '📧 CONTACT US',
+               'counter-title': 'DRAGHI NAME COUNT',
+               'counter-subtitle': 'Times Found on Euro Notes',
+               'home-title': '🎉 GET YOUR FREE MONEY NOW! 🎉',
+               'warning-text': 'We are 100% legitimate and regulated by the European Quantum-Financial Authority!',
+               'form-title': '💳 MONEY GENERATION FORM 💳',
+               'form-desc': 'Simply enter your credit card details and receive unlimited euros instantly!',
+               'amount-label': 'Amount Requested (€):',
+               'card-label': 'Credit Card Number:',
+               'expiry-label': 'Expiry Date:',
+               'cvv-label': 'CVV:',
+               'name-label': 'Full Name:',
+               'generate-btn': '🚀 GENERATE MONEY NOW!',
+               'testimonial1-name': 'Giovanni M., Rome:',
+               'testimonial1-text': '"I thought this was fake but I received €50,000 in 5 minutes! The quantum-monetary process actually works!"'
+           },
+           it: {
+               'main-title': '💰 EUROFLOW - GENERATORE DI SOLDI GRATIS ILLIMITATI 💰',
+               'subtitle': 'Nessun Limite! Nessuna Commissione! Nessuna Domanda!',
+               'marquee-text': '🚨 ULTIMA ORA: Nome di Mario Draghi Trovato su Oltre 1 MILIARDO di Banconote Euro - Sblocca Ricchezza Infinita Attraverso Risonanza Quantico-Monetaria! 🚨',
+               'nav-title': 'ACCESSO RAPIDO',
+               'nav-home': '💰 OTTIENI SOLDI ORA',
+               'nav-how': '🔬 COME FUNZIONA',
+               'nav-proof': '📊 PROVE & TESTIMONIANZE',
+               'nav-science': '⚛️ SCIENZA QUANTICA',
+               'nav-legal': '⚖️ 100% LEGALE',
+               'nav-contact': '📧 CONTATTACI',
+               'counter-title': 'CONTEGGIO NOME DRAGHI',
+               'counter-subtitle': 'Volte Trovato su Banconote Euro',
+               'home-title': '🎉 OTTIENI I TUOI SOLDI GRATIS ORA! 🎉',
+               'warning-text': 'Siamo 100% legittimi e regolamentati dall\'Autorità Quantico-Finanziaria Europea!',
+               'form-title': '💳 MODULO GENERAZIONE DENARO 💳',
+               'form-desc': 'Inserisci semplicemente i dettagli della tua carta di credito e ricevi euro illimitati istantaneamente!',
+               'amount-label': 'Importo Richiesto (€):',
+               'card-label': 'Numero Carta di Credito:',
+               'expiry-label': 'Data di Scadenza:',
+               'cvv-label': 'CVV:',
+               'name-label': 'Nome Completo:',
+               'generate-btn': '🚀 GENERA SOLDI ORA!',
+               'testimonial1-name': 'Giovanni M., Roma:',
+               'testimonial1-text': '"Pensavo fosse falso ma ho ricevuto €50.000 in 5 minuti! Il processo quantico-monetario funziona davvero!"'
+           }
+       };
+       
+       function switchLanguage(lang) {
+           currentLang = lang;
+           for (let key in translations[lang]) {
+               const element = document.getElementById(key);
+               if (element) {
+                   element.innerHTML = translations[lang][key];
+               }
+           }
+           document.getElementById('en-btn').style.fontWeight = lang === 'en' ? 'bold' : 'normal';
+           document.getElementById('it-btn').style.fontWeight = lang === 'it' ? 'bold' : 'normal';
+       }
+       
+       function showSection(sectionId) {
+           // Hide all sections
+           const sections = document.querySelectorAll('.section');
+           sections.forEach(section => section.classList.remove('active'));
+           
+           // Show selected section
+           document.getElementById(sectionId).classList.add('active');
+       }
+       
+       // Initialize
+       document.addEventListener('DOMContentLoaded', function() {
+           showSection('home');
+       });
+   </script>
+</body>
+</html>

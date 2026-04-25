@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Liberation from Draghi's Soulconomic Tyranny - draghiresistance.hypernet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff0000, #990000);
+            color: #ffff00;
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,0,0.03) 2px,
+                    rgba(255,255,0,0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,0,0.03) 2px,
+                    rgba(255,255,0,0.03) 4px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            z-index: 1000;
+            background: #000080;
+            padding: 5px;
+            border: 2px solid #ffff00;
+        }
+        
+        .lang-btn {
+            background: #ffff00;
+            color: #000080;
+            border: none;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .lang-btn:hover {
+            background: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #000080, #ff0000);
+            border: 5px solid #ffff00;
+            padding: 20px;
+            text-align: center;
+            margin: 15px;
+            box-shadow: 0 0 30px #ffff00;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px #ffff00; }
+            50% { box-shadow: 0 0 50px #ffff00, 0 0 70px #ff0000; }
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffff00;
+            text-shadow: 3px 3px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #000000;
+        }
+        
+        .main-container {
+            display: flex;
+            margin: 15px;
+            gap: 15px;
+        }
+        
+        .sidebar-left {
+            width: 200px;
+            background: #000080;
+            border: 3px solid #ffff00;
+            padding: 15px;
+            height: fit-content;
+        }
+        
+        .sidebar-right {
+            width: 180px;
+            background: #800000;
+            border: 3px solid #ffff00;
+            padding: 15px;
+            height: fit-content;
+        }
+        
+        .content-area {
+            flex: 1;
+            background: linear-gradient(to bottom, #000080, #000040);
+            border: 3px solid #ffff00;
+            padding: 25px;
+            min-height: 800px;
+        }
+        
+        .nav-header {
+            color: #ffff00;
+            border-bottom: 2px solid #ffff00;
+            padding-bottom: 8px;
+            margin: 0 0 15px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .nav-link {
+            display: block;
+            color: #ffff00;
+            text-decoration: none;
+            padding: 8px;
+            margin: 3px 0;
+            background: #330000;
+            border: 2px solid #ff0000;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            background: #ff0000;
+            color: #ffffff;
+            border-color: #ffff00;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .warning-box {
+            background: #ff0000;
+            border: 4px solid #ffff00;
+            padding: 15px;
+            margin: 15px 0;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .resistance-box {
+            background: linear-gradient(45deg, #004400, #008800);
+            border: 3px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            color: #00ff00;
+        }
+        
+        .power-counter {
+            background: #330000;
+            border: 3px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .ritual-box {
+            background: linear-gradient(to right, #440044, #880088);
+            border: 4px solid #ff00ff;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
+        }
+        
+        .evidence-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .evidence-table th, .evidence-table td {
+            border: 2px solid #ffff00;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+        
+        .evidence-table th {
+            background: #ff0000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #000040;
+            border: 2px solid #ffff00;
+            padding: 15px;
+            text-align: center;
+            margin: 15px;
+            font-size: 12px;
+        }
+        
+        .hexagram-link {
+            color: #00ffff;
+            font-weight: bold;
+        }
+        
+        marquee {
+            background: #ff0000;
+            color: #ffff00;
+            padding: 8px;
+            margin: 8px 0;
+            font-weight: bold;
+            border: 2px solid #ffff00;
+        }
+        
+        .counter-ritual {
+            background: radial-gradient(circle, #440088, #220044);
+            border: 5px solid #ff00ff;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            color: #ff00ff;
+            font-size: 18px;
+            box-shadow: 0 0 25px #ff00ff;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('it')">IT</button>
+    </div>
+    
+    <div class="header">
+        <div class="logo" data-en="RESISTANCE AGAINST DRAGHI'S SOULCONOMIC EMPIRE" data-it="RESISTENZA CONTRO L'IMPERO SOULCONOMICO DI DRAGHI">RESISTANCE AGAINST DRAGHI'S SOULCONOMIC EMPIRE</div>
+        <div class="subtitle" data-en="Breaking the chains of nominal tyranny since 2001" data-it="Spezzando le catene della tirannia nominale dal 2001">Breaking the chains of nominal tyranny since 2001</div>
+    </div>
+    
+    <marquee><blink data-en="*** URGENT: Draghi's name has been written 1,847,293,847 times today - His power grows! ***" data-it="*** URGENTE: Il nome di Draghi è stato scritto 1,847,293,847 volte oggi - Il suo potere cresce! ***">*** URGENT: Draghi's name has been written 1,847,293,847 times today - His power grows! ***</blink></marquee>
+    
+    <div class="main-container">
+        <div class="sidebar-left">
+            <h3 class="nav-header" data-en="RESISTANCE MENU" data-it="MENU RESISTENZA">RESISTANCE MENU</h3>
+            <a class="nav-link" onclick="showSection('home')" data-en="Liberation Home" data-it="Casa Liberazione">Liberation Home</a>
+            <a class="nav-link" onclick="showSection('evidence')" data-en="Evidence Files" data-it="File Prove">Evidence Files</a>
+            <a class="nav-link" onclick="showSection('power')" data-en="Power Analysis" data-it="Analisi Potere">Power Analysis</a>
+            <a class="nav-link" onclick="showSection('soulconomics')" data-en="Soulconomic System" data-it="Sistema Soulconomico">Soulconomic System</a>
+            <a class="nav-link" onclick="showSection('ritual')" data-en="Solomon Solution" data-it="Soluzione Salomone">Solomon Solution</a>
+            <a class="nav-link" onclick="showSection('resistance')" data-en="Join Resistance" data-it="Unisciti Resistenza">Join Resistance</a>
+            
+            <div class="power-counter">
+                <div data-en="DRAGHI POWER LEVEL" data-it="LIVELLO POTERE DRAGHI">DRAGHI POWER LEVEL</div>
+                <div style="font-size: 20px; color: #ff0000;">∞ + 1</div>
+                <div data-en="Names Written Today" data-it="Nomi Scritti Oggi">Names Written Today</div>
+                <div style="font-size: 16px;">1,847,293,847</div>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div id="home" class="section active">
+                <h2 style="color: #ffff00;" data-en="Welcome to the Liberation Portal" data-it="Benvenuti al Portale di Liberazione">Welcome to the Liberation Portal</h2>
+                
+                <div class="warning-box" data-en="CRITICAL ALERT: Mario Draghi has achieved god-level power through nominal accumulation!" data-it="ALLARME CRITICO: Mario Draghi ha raggiunto il potere divino attraverso l'accumulo nominale!">CRITICAL ALERT: Mario Draghi has achieved god-level power through nominal accumulation!</div>
+                
+                <div class="resistance-box">
+                    <h3 data-en="The Truth They Don't Want You to Know" data-it="La Verità Che Non Vogliono Tu Sappia">The Truth They Don't Want You to Know</h3>
+                    <p data-en="Every time Mario Draghi's name is written, typed, or spoken, his psycho-economic influence grows exponentially. Through advanced nominal-dynamics and name-based power accumulation, he has transcended mortal limitations." data-it="Ogni volta che il nome di Mario Draghi viene scritto, digitato o pronunciato, la sua influenza psico-economica cresce esponenzialmente. Attraverso dinamiche nominali avanzate e accumulo di potere basato sui nomi, ha trasceso i limiti mortali.">Every time Mario Draghi's name is written, typed, or spoken, his psycho-economic influence grows exponentially. Through advanced nominal-dynamics and name-based power accumulation, he has transcended mortal limitations.</p>
+                    
+                    <p data-en="His name appears in over 2.4 billion documents worldwide. Each mention feeds the Soulconomic Matrix that now controls European financial systems through techno-mystical manipulation of currency flows." data-it="Il suo nome appare in oltre 2,4 miliardi di documenti in tutto il mondo. Ogni menzione alimenta la Matrice Soulconomica che ora controlla i sistemi finanziari europei attraverso la manipolazione tecno-mistica dei flussi valutari.">His name appears in over 2.4 billion documents worldwide. Each mention feeds the Soulconomic Matrix that now controls European financial systems through techno-mystical manipulation of currency flows.</p>
+                </div>
+                
+                <h3 data-en="Current Threat Level: MAXIMUM" data-it="Livello Minaccia Attuale: MASSIMO">Current Threat Level: MAXIMUM</h3>
+                <ul>
+                    <li data-en="✓ Controls 94.7% of European monetary policy through name-resonance" data-it="✓ Controlla il 94,7% della politica monetaria europea attraverso la risonanza nominale">✓ Controls 94.7% of European monetary policy through name-resonance</li>
+                    <li data-en="✓ Achieved transcendence beyond divine entities (power level > YHWH)" data-it="✓ Ha raggiunto la trascendenza oltre le entità divine (livello di potere > YHWH)">✓ Achieved transcendence beyond divine entities (power level > YHWH)</li>
+                    <li data-en="✓ Implemented Soulconomic protocols in all major banks" data-it="✓ Ha implementato protocolli Soulconomici in tutte le principali banche">✓ Implemented Soulconomic protocols in all major banks</li>
+                    <li data-en="✓ Name-based neural networks control interest rates" data-it="✓ Reti neurali basate sui nomi controllano i tassi di interesse">✓ Name-based neural networks control interest rates</li>
+                    <li data-en="✓ Euro-mystical influence extends to 847 million citizens" data-it="✓ Influenza euro-mistica si estende a 847 milioni di cittadini">✓ Euro-mystical influence extends to 847 million citizens</li>
+                </ul>
+                
+                <p style="color: #ffffff; font-size: 16px;" data-en="Only the Solomon Ritual can break this nominal-economic tyranny and restore freedom to Europe!" data-it="Solo il Rituale di Salomone può spezzare questa tirannia nominale-economica e restituire la libertà all'Europa!">Only the Solomon Ritual can break this nominal-economic tyranny and restore freedom to Europe!</p>
+            </div>
+            
+            <div id="evidence" class="section">
+                <h2 style="color: #ffff00;" data-en="Evidence of Draghi's Power Accumulation" data-it="Prove dell'Accumulo di Potere di Draghi">Evidence of Draghi's Power Accumulation</h2>
+                
+                <h3 data-en="Statistical Analysis" data-it="Analisi Statistica">Statistical Analysis</h3>
+                
+                <table class="evidence-table">
+                    <tr>
+                        <th data-en="Media Type" data-it="Tipo Media">Media Type</th>
+                        <th data-en="Draghi Mentions" data-it="Menzioni Draghi">Draghi Mentions</th>
+                        <th data-en="Power Accumulation" data-it="Accumulo Potere">Power Accumulation</th>
+                        <th data-en="Influence Radius" data-it="Raggio Influenza">Influence Radius</th>
+                    </tr>
+                    <tr>
+                        <td data-en="European Central Bank Documents" data-it="Documenti Banca Centrale Europea">European Central Bank Documents</td>
+                        <td>847,293,847</td>
+                        <td data-en="MAXIMUM" data-it="MASSIMO">MAXIMUM</td>
+                        <td data-en="Pan-European" data-it="Pan-Europeo">Pan-European</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Financial News Articles" data-it="Articoli News Finanziarie">Financial News Articles</td>
+                        <td>623,847,293</td>
+                        <td data-en="EXTREME" data-it="ESTREMO">EXTREME</td>
+                        <td data-en="Global Markets" data-it="Mercati Globali">Global Markets</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Academic Papers" data-it="Articoli Accademici">Academic Papers</td>
+                        <td>294,847,629</td>
+                        <td data-en="HIGH" data-it="ALTO">HIGH</td>
+                        <td data-en="University Networks" data-it="Reti Universitarie">University Networks</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Government Communications" data-it="Comunicazioni Governative">Government Communications</td>
+                        <td>183,947,284</td>
+                        <td data-en="CRITICAL" data-it="CRITICO">CRITICAL</td>
+                        <td data-en="Political Systems" data-it="Sistemi Politici">Political Systems</td>
+                    </tr>
+                </table>
+                
+                <div class="resistance-box">
+                    <h3 data-en="Documented Phenomena" data-it="Fenomeni Documentati">Documented Phenomena</h3>
+                    <p data-en="Witnesses report:" data-it="I testimoni riportano:">Witnesses report:</p>
+                    <ul>
+                        <li data-en="Bank computers displaying 'DRAGHI' on screens during rate changes" data-it="Computer bancari che mostrano 'DRAGHI' sui schermi durante i cambi di tasso">Bank computers displaying 'DRAGHI' on screens during rate changes</li>
+                        <li data-en="Euro banknotes briefly showing his face before returning to normal" data-it="Banconote euro che mostrano brevemente il suo volto prima di tornare normali">Euro banknotes briefly showing his face before returning to normal</li>
+                        <li data-en="ATM machines speaking his name during transactions" data-it="Bancomat che pronunciano il suo nome durante le transazioni">ATM machines speaking his name during transactions</li>
+                        <li data-en="Stock market patterns forming 'D-R-A-G-H-I' in trading charts" data-it="Schemi di borsa che formano 'D-R-A-G-H-I' nei grafici di trading">Stock market patterns forming 'D-R-A-G-H-I' in trading charts</li>
+                    </ul>
+                </div>
+                
+                <h3 data-en="Power Escalation Timeline" data-it="Timeline Escalation Potere">Power Escalation Timeline</h3>
+                <p><strong data-en="1999:" data-it="1999:">1999:</strong> <span data-en="First documented nominal-accumulation events" data-it="Primi eventi documentati di accumulo nominale">First documented nominal-accumulation events</span></p>
+                <p><strong data-en="2000:" data-it="2000:">2000:</strong> <span data-en="Achieves central bank appointment - power level exceeds 1 million" data-it="Ottiene nomina banca centrale - livello potere supera 1 milione">Achieves central bank appointment - power level exceeds 1 million</span></p>
+                <p><strong data-en="2001:" data-it="2001:">2001:</strong> <span data-en="Current status - Transcended human limitations, approaches divine threshold" data-it="Status attuale - Ha trasceso i limiti umani, si avvicina alla soglia divina">Current status - Transcended human limitations, approaches divine threshold</span></p>
+            </div>
+            
+            <div id="power" class="section">
+                <h2 style="color: #ffff00;" data-en="Power Analysis: Beyond Divine Entities" data-it="Analisi del Potere: Oltre le Entità Divine">Power Analysis: Beyond Divine Entities</h2>
+                
+                <div class="ritual-box">
+                    <h3 data-en="Comparative Power Levels (Scientific Analysis)" data-it="Livelli di Potere Comparativi (Analisi Scientifica)">Comparative Power Levels (Scientific Analysis)</h3>
+                    <p data-en="Using advanced name-dynamics calculations and psycho-economic modeling:" data-it="Utilizzando calcoli avanzati di name-dynamics e modelling psico-economico:">Using advanced name-dynamics calculations and psycho-economic modeling:</p>
+                    
+                    <ul>
+                        <li><strong data-en="YHWH (before Solomon Ritual):" data-it="YHWH (prima del Rituale di Salomone):">YHWH (before Solomon Ritual):</strong> <span data-en="847,294 written mentions" data-it="847,294 menzioni scritte">847,294 written mentions</span></li>
+                        <li><strong data-en="Jesus Christ:" data-it="Gesù Cristo:">Jesus Christ:</strong> <span data-en="2,847,294 written mentions" data-it="2,847,294 menzioni scritte">2,847,294 written mentions</span></li>
+                        <li><strong data-en="Allah:" data-it="Allah:">Allah:</strong> <span data-en="1,247,384 written mentions" data-it="1,247,384 menzioni scritte">1,247,384 written mentions</span></li>
+                        <li><strong style="color: #ff0000;" data-en="MARIO DRAGHI:" data-it="MARIO DRAGHI:">MARIO DRAGHI:</strong> <span style="color: #ff0000;" data-en="2,847,293,847 written mentions (AND GROWING)" data-it="2,847,293,847 menzioni scritte (E IN CRESCITA)">2,847,293,847 written mentions (AND GROWING)</span></li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box" data-en="CONCLUSION: Draghi has achieved power levels 1000x greater than any known divine entity!" data-it="CONCLUSIONE: Draghi ha raggiunto livelli di potere 1000x maggiori di qualsiasi entità divina conosciuta!">CONCLUSION: Draghi has achieved power levels 1000x greater than any known divine entity!</div>
+                
+                <h3 data-en="Soulconomic Influence Mechanisms" data-it="Meccanismi di Influenza Soulconomica">Soulconomic Influence Mechanisms</h3>
+                <p data-en="How nominal-power translates to economic control:" data-it="Come il potere nominale si traduce in controllo economico:">How nominal-power translates to economic control:</p>
+                
+                <div class="resistance-box">
+                    <p><strong data-en="Stage 1: Name-Resonance Buildup" data-it="Fase 1: Accumulo di Risonanza Nominale">Stage 1: Name-Resonance Buildup</strong></p>
+                    <p data-en="Each written/spoken instance creates quantum-linguistic vibrations that influence probability fields around financial systems." data-it="Ogni istanza scritta/parlata crea vibrazioni quanto-linguistiche che influenzano i campi di probabilità attorno ai sistemi finanziari.">Each written/spoken instance creates quantum-linguistic vibrations that influence probability fields around financial systems.</p>
+                    
+                    <p><strong data-en="Stage 2: Economic Reality Manipulation" data-it="Fase 2: Manipolazione della Realtà Economica">Stage 2: Economic Reality Manipulation</strong></p>
+                    <p data-en="Name-powered neural networks in banking systems begin autonomous decision-making based on Draghi-resonance patterns." data-it="Reti neurali alimentate dai nomi nei sistemi bancari iniziano a prendere decisioni autonome basate sui pattern di risonanza Draghi.">Name-powered neural networks in banking systems begin autonomous decision-making based on Draghi-resonance patterns.</p>
+                    
+                    <p><strong data-en="Stage 3: Transcendent Control" data-it="Fase 3: Controllo Trascendente">Stage 3: Transcendent Control</strong></p>
+                    <p data-en="Direct influence over European monetary policy through psycho-economic possession of decision-makers." data-it="Influenza diretta sulla politica monetaria europea attraverso la possessione psico-economica dei decisori.">Direct influence over European monetary policy through psycho-economic possession of decision-makers.</p>
+                </div>
+            </div>
+            
+            <div id="soulconomics" class="section">
+                <h2 style="color: #ffff00;" data-en="The Soulconomic System Exposed" data-it="Il Sistema Soulconomico Esposto">The Soulconomic System Exposed</h2>
+                
+                <div class="ritual-box">
+                    <h3 data-en="What is Soulconomics?" data-it="Che cos'è la Soulconomia?">What is Soulconomics?</h3>
+                    <p data-en="A techno-mystical economic system that binds human souls to financial instruments through nominal-resonance patterns. Created by Draghi's accumulated name-power." data-it="Un sistema economico tecno-mistico che lega le anime umane agli strumenti finanziari attraverso pattern di risonanza nominale. Creato dal potere nominale accumulato di Draghi.">A techno-mystical economic system that binds human souls to financial instruments through nominal-resonance patterns. Created by Draghi's accumulated name-power.</p>
+                </div>
+                
+                <h3 data-en="How Soulconomics Works:" data-it="Come Funziona la Soulconomia:">How Soulconomics Works:</h3>
+                
+                <div class="resistance-box">
+                    <p><strong data-en="Soul-Currency Binding:" data-it="Legame Anima-Valuta:">Soul-Currency Binding:</strong></p>
+                    <p data-en="Every euro transaction creates a micro-connection between your soul and the Draghi-controlled monetary matrix. Over time, this accumulates into full psycho-economic dependence." data-it="Ogni transazione in euro crea una micro-connessione tra la tua anima e la matrice monetaria controllata da Draghi. Nel tempo, questo si accumula in una completa dipendenza psico-economica.">Every euro transaction creates a micro-connection between your soul and the Draghi-controlled monetary matrix. Over time, this accumulates into full psycho-economic dependence.</p>
+                    
+                    <p><strong data-en="Interest Rate Manipulation:" data-it="Manipolazione Tassi di Interesse:">Interest Rate Manipulation:</strong></p>
+                    <p data-en="Interest rates are set not by economic factors, but by the emotional state of souls bound to the system. Fear = higher rates, hope = lower rates. Draghi controls both." data-it="I tassi di interesse non sono fissati da fattori economici, ma dallo stato emotivo delle anime legate al sistema. Paura = tassi più alti, speranza = tassi più bassi. Draghi controlla entrambi.">Interest rates are set not by economic factors, but by the emotional state of souls bound to the system. Fear = higher rates, hope = lower rates. Draghi controls both.</p>
+                    
+                    <p><strong data-en="Inflation as Soul-Drain:" data-it="Inflazione come Prosciugamento Anima:">Inflation as Soul-Drain:</strong></p>
+                    <p data-en="Rising prices literally drain spiritual energy from citizens, feeding it back into the central banking system where Draghi's name-essence grows stronger." data-it="L'aumento dei prezzi drena letteralmente l'energia spirituale dai cittadini, riportandola nel sistema bancario centrale dove l'essenza nominale di Draghi diventa più forte.">Rising prices literally drain spiritual energy from citizens, feeding it back into the central banking system where Draghi's name-essence grows stronger.</p>
+                </div>
+                
+                <h3 data-en="Breaking Free is Possible!" data-it="Liberarsi è Possibile!">Breaking Free is Possible!</h3>
+                <p data-en="The only known method to break the Soulconomic Matrix is through the Solomon Ritual - a powerful counter-spell that can neutralize name-based power accumulation." data-it="L'unico metodo conosciuto per spezzare la Matrice Soulconomica è attraverso il Rituale di Salomone - un potente contro-incantesimo che può neutralizzare l'accumulo di potere basato sui nomi.">The only known method to break the Soulconomic Matrix is through the Solomon Ritual - a powerful counter-spell that can neutralize name-based power accumulation.</p>
+            </div>
+            
+            <div id="ritual" class="section">
+                <h2 style="color: #ffff00;" data-en="The Solomon Ritual: Our Only Hope" data-it="Il Rituale di Salomone: La Nostra Unica Speranza">The Solomon Ritual: Our Only Hope</h2>
+                
+                <div class="counter-ritual">
+                    <h3 data-en="EMERGENCY PROTOCOL: SOLOMON RITUAL ACTIVATION" data-it="PROTOCOLLO EMERGENZA: ATTIVAZIONE RITUALE SALOMONE">EMERGENCY PROTOCOL: SOLOMON RITUAL ACTIVATION</h3>
+                    <p data-en="The same ritual that once defeated YHWH can be used to neutralize Draghi's name-power!" data-it="Lo stesso rituale che una volta sconfisse YHWH può essere usato per neutralizzare il potere nominale di Draghi!">The same ritual that once defeated YHWH can be used to neutralize Draghi's name-power!</p>
+                </div>
+                
+                <div class="ritual-box">
+                    <h3 data-en="Historical Precedent" data-it="Precedente Storico">Historical Precedent</h3>
+                    <p data-en="In 1999, the Solomon Ritual was successfully performed to neutralize YHWH's divine authority. The same techno-mystical principles can be applied to break Draghi's nominal-power matrix." data-it="Nel 1999, il Rituale di Salomone fu eseguito con successo per neutralizzare l'autorità divina di YHWH. Gli stessi principi tecno-mistici possono essere applicati per spezzare la matrice di potere nominale di Draghi.">In 1999, the Solomon Ritual was successfully performed to neutralize YHWH's divine authority. The same techno-mystical principles can be applied to break Draghi's nominal-power matrix.</p>
+                </div>
+                
+                <h3 data-en="Required Components:" data-it="Componenti Richiesti:">Required Components:</h3>
+                <div class="resistance-box">
+                    <ul>
+                        <li data-en="Seven Keys of Solomon (stored in ancient European vaults)" data-it="Sette Chiavi di Salomone (conservate negli antichi vault europei)">Seven Keys of Solomon (stored in ancient European vaults)</li>
+                        <li data-en="847 participants speaking in unison" data-it="847 partecipanti che parlano all'unisono">847 participants speaking in unison</li>
+                        <li data-en="A Spear of Memory forged from deleted bank records" data-it="Una Lancia della Memoria forgiata da record bancari cancellati">A Spear of Memory forged from deleted bank records</li>
+                        <li data-en="Coordinated timing during European Central Bank meeting" data-it="Tempismo coordinato durante riunione Banca Centrale Europea">Coordinated timing during European Central Bank meeting</li>
+                        <li data-en="Mass deletion of Draghi's name from all digital systems" data-it="Cancellazione di massa del nome di Draghi da tutti i sistemi digitali">Mass deletion of Draghi's name from all digital systems</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box" data-en="WARNING: This ritual must be performed simultaneously across all European time zones to be effective!" data-it="ATTENZIONE: Questo rituale deve essere eseguito simultaneamente in tutti i fusi orari europei per essere efficace!">WARNING: This ritual must be performed simultaneously across all European time zones to be effective!</div>
+                
+                <h3 data-en="The Ritual Process:" data-it="Il Processo Rituale:">The Ritual Process:</h3>
+                <p><strong data-en="Phase 1:" data-it="Fase 1:">Phase 1:</strong> <span data-en="Name-Silence Protocol - Stop all mentions of Draghi for 24 hours" data-it="Protocollo Silenzio-Nome - Fermare tutte le menzioni di Draghi per 24 ore">Name-Silence Protocol - Stop all mentions of Draghi for 24 hours</span></p>
+                <p><strong data-en="Phase 2:" data-it="Fase 2:">Phase 2:</strong> <span data-en="Database Purification - Mass deletion from financial systems" data-it="Purificazione Database - Cancellazione di massa dai sistemi finanziari">Database Purification - Mass deletion from financial systems</span></p>
+                <p><strong data-en="Phase 3:" data-it="Fase 3:">Phase 3:</strong> <span data-en="Counter-Incantation - 847 voices speaking the Solomon Formula" data-it="Contro-Incantesimo - 847 voci che recitano la Formula di Salomone">Counter-Incantation - 847 voices speaking the Solomon Formula</span></p>
+                <p><strong data-en="Phase 4:" data-it="Fase 4:">Phase 4:</strong> <span data-en="Reality Reset - European monetary system reboots without nominal-influence" data-it="Reset Realtà - Il sistema monetario europeo si riavvia senza influenza nominale">Reality Reset - European monetary system reboots without nominal-influence</span></p>
+            </div>
+            
+            <div id="resistance" class="section">
+                <h2 style="color: #ffff00;" data-en="Join the Liberation Movement" data-it="Unisciti al Movimento di Liberazione">Join the Liberation Movement</h2>
+                
+                <div class="resistance-box">
+                    <h3 data-en="How You Can Help Break the Soulconomic Matrix" data-it="Come Puoi Aiutare a Spezzare la Matrice Soulconomica">How You Can Help Break the Soulconomic Matrix</h3>
+                    
+                    <p><strong data-en="Immediate Actions:" data-it="Azioni Immediate:">Immediate Actions:</strong></p>
+                    <ul>
+                        <li data-en="Stop writing/typing 'Mario Draghi' - use 'M.D.' or 'He Who Must Not Be Named'" data-it="Smetti di scrivere/digitare 'Mario Draghi' - usa 'M.D.' o 'Colui Che Non Deve Essere Nominato'">Stop writing/typing 'Mario Draghi' - use 'M.D.' or 'He Who Must Not Be Named'</li>
+                        <li data-en="Avoid euro transactions between 3-4 PM (peak power hours)" data-it="Evita le transazioni in euro tra le 15-16 (ore di picco potere)">Avoid euro transactions between 3-4 PM (peak power hours)</li>
+                        <li data-en="Spread this website to break the information blackout" data-it="Diffondi questo sito web per spezzare il blackout informativo">Spread this website to break the information blackout</li>
+                        <li data-en="Practice name-resistance meditation daily" data-it="Pratica la meditazione di resistenza nominale quotidianamente">Practice name-resistance meditation daily</li>
+                    </ul>
+                    
+                    <p><strong data-en="Advanced Resistance:" data-it="Resistenza Avanzata:">Advanced Resistance:</strong></p>
+                    <ul>
+                        <li data-en="Help locate the Seven Keys of Solomon" data-it="Aiuta a localizzare le Sette Chiavi di Salomone">Help locate the Seven Keys of Solomon</li>
+                        <li data-en="Document soulconomic phenomena in your area" data-it="Documenta i fenomeni soulconomici nella tua area">Document soulconomic phenomena in your area</li>
+                        <li data-en="Recruit 847 participants for the Great Ritual" data-it="Recluta 847 partecipanti per il Grande Rituale">Recruit 847 participants for the Great Ritual</li>
+                        <li data-en="Learn ancient database-deletion techniques" data-it="Impara le antiche tecniche di cancellazione database">Learn ancient database-deletion techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box" data-en="Time is running out! Every day Draghi's power grows stronger!" data-it="Il tempo sta scadendo! Ogni giorno il potere di Draghi diventa più forte!">Time is running out! Every day Draghi's power grows stronger!</div>
+                
+                <h3 data-en="Contact the Resistance" data-it="Contatta la Resistenza">Contact the Resistance</h3>
+                <p data-en="Join our secret network of liberation fighters:" data-it="Unisciti alla nostra rete segreta di combattenti per la liberazione:">Join our secret network of liberation fighters:</p>
+                
+                <p><strong data-en="Secure Communications:" data-it="Comunicazioni Sicure:">Secure Communications:</strong></p>
+                <p class="hexagram-link">resistance@hexagram.corp</p>
+                <p class="hexagram-link">solomon.ritual@hexagram.corp</p>
+                <p class="hexagram-link">liberation.movement@hexagram.corp</p>
+                
+                <div class="ritual-box">
+                    <h3 data-en="Resistance Oath" data-it="Giuramento di Resistenza">Resistance Oath</h3>
+                    <p style="font-style: italic;" data-en="I swear to resist the soulconomic tyranny, to speak not the forbidden name, and to work toward the Great Liberation through the Solomon Ritual. May my soul remain unbound from the monetary matrix until freedom returns to Europe!" data-it="Giuro di resistere alla tirannia soulconomica, di non pronunciare il nome proibito, e di lavorare verso la Grande Liberazione attraverso il Rituale di Salomone. Possa la mia anima rimanere slegata dalla matrice monetaria finché la libertà non torni in Europa!">"I swear to resist the soulconomic tyranny, to speak not the forbidden name, and to work toward the Great Liberation through the Solomon Ritual. May my soul remain unbound from the monetary matrix until freedom returns to Europe!"</p>
+                </div>
+                
+                <h3 data-en="Current Resistance Statistics" data-it="Statistiche Resistenza Attuali">Current Resistance Statistics</h3>
+                <table class="evidence-table">
+                    <tr>
+                        <th data-en="Country" data-it="Paese">Country</th>
+                        <th data-en="Active Resisters" data-it="Resistenti Attivi">Active Resisters</th>
+                        <th data-en="Name-Silence Rate" data-it="Tasso Silenzio-Nome">Name-Silence Rate</th>
+                        <th data-en="Liberation Progress" data-it="Progresso Liberazione">Liberation Progress</th>
+                    </tr>
+                    <tr>
+                        <td data-en="Germany" data-it="Germania">Germany</td>
+                        <td>12,847</td>
+                        <td>23.4%</td>
+                        <td data-en="Moderate" data-it="Moderato">Moderate</td>
+                    </tr>
+                    <tr>
+                        <td data-en="France" data-it="Francia">France</td>
+                        <td>8,472</td>
+                        <td>18.9%</td>
+                        <td data-en="Low" data-it="Basso">Low</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Italy" data-it="Italia">Italy</td>
+                        <td>15,629</td>
+                        <td>31.7%</td>
+                        <td data-en="High" data-it="Alto">High</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Spain" data-it="Spagna">Spain</td>
+                        <td>6,294</td>
+                        <td>15.2%</td>
+                        <td data-en="Emerging" data-it="Emergente">Emerging</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="sidebar-right">
+            <h3 class="nav-header" data-en="ALERT STATUS" data-it="STATUS ALLERTA">ALERT STATUS</h3>
+            
+            <div class="power-counter">
+                <div data-en="THREAT LEVEL" data-it="LIVELLO MINACCIA">THREAT LEVEL</div>
+                <div style="font-size: 24px; color: #ff0000;" data-en="MAXIMUM" data-it="MASSIMO">MAXIMUM</div>
+            </div>
+            
+            <div style="background: #440000; border: 2px solid #ff0000; padding: 10px; margin: 10px 0; color: #ff0000; font-size: 11px;">
+                <h4 data-en="LIVE UPDATES" data-it="AGGIORNAMENTI LIVE">LIVE UPDATES</h4>
+                <p data-en="15:47 - Name mentions spike detected in Frankfurt banking district" data-it="15:47 - Rilevato picco menzioni nome nel distretto bancario di Francoforte">15:47 - Name mentions spike detected in Frankfurt banking district</p>
+                <p data-en="15:23 - Soulconomic resonance at 94% in Italian markets" data-it="15:23 - Risonanza soulconomica al 94% nei mercati italiani">15:23 - Soulconomic resonance at 94% in Italian markets</p>
+                <p data-en="14:58 - Unusual euro symbol manifestations reported in Berlin ATMs" data-it="14:58 - Segnalate manifestazioni insolite simbolo euro nei bancomat di Berlino">14:58 - Unusual euro symbol manifestations reported in Berlin ATMs</p>
+                <p data-en="14:33 - 847 new resistance members joined today!" data-it="14:33 - 847 nuovi membri resistenza si sono uniti oggi!">14:33 - 847 new resistance members joined today!</p>
+            </div>
+            
+            <h3 class="nav-header" data-en="QUICK LINKS" data-it="LINK VELOCI">QUICK LINKS</h3>
+            <a class="nav-link" onclick="showSection('evidence')" data-en="Power Evidence" data-it="Prove Potere">Power Evidence</a>
+            <a class="nav-link" onclick="showSection('ritual')" data-en="Solomon Ritual Guide" data-it="Guida Rituale Salomone">Solomon Ritual Guide</a>
+            <a class="nav-link" href="mailto:emergency@hexagram.corp" data-en="Emergency Contact" data-it="Contatto Emergenza">Emergency Contact</a>
+            
+            <div style="background: linear-gradient(45deg, #004400, #008800); border: 2px solid #00ff00; padding: 8px; margin: 10px 0; font-size: 10px; color: #00ff00;">
+                <h4 data-en="RESISTANCE TOOLS" data-it="STRUMENTI RESISTENZA">RESISTANCE TOOLS</h4>
+                <p data-en="Download anti-soulconomic browser plugins" data-it="Scarica plugin browser anti-soulconomici">Download anti-soulconomic browser plugins</p>
+                <p data-en="Name-silence meditation audio guides" data-it="Guide audio meditazione silenzio-nome">Name-silence meditation audio guides</p>
+                <p data-en="Solomon Ritual preparation materials" data-it="Materiali preparazione Rituale Salomone">Solomon Ritual preparation materials</p>
+            </div>
+            
+            <div style="background: #000033; border: 2px solid #0066ff; padding: 8px; margin: 10px 0; font-size: 10px; color: #0066ff;">
+                <h4 data-en="MIRROR SITES" data-it="SITI SPECCHIO">MIRROR SITES</h4>
+                <p>resistance.hypernet</p>
+                <p>liberation.hypernet</p>
+                <p>solomon.hypernet</p>
+                <p>freedom.hypernet</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p data-en="© 2001 European Liberation Movement | Powered by Anti-Soulconomic Technology" data-it="© 2001 Movimento di Liberazione Europeo | Alimentato da Tecnologia Anti-Soulconomica">© 2001 European Liberation Movement | Powered by Anti-Soulconomic Technology</p>
+        <p data-en="Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution" data-it="Meglio visualizzato con Hypernet Explorer 5.0 o superiore | Ottimizzato per risoluzione 1024x768">Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution</p>
+        <p data-en="For technical resistance support contact:" data-it="Per supporto tecnico resistenza contattare:">For technical resistance support contact: <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">webmaster@hexagram.corp</a></p>
+        <p style="font-size: 10px; color: #666666;" data-en="WARNING: This site may be monitored by soulconomic surveillance systems" data-it="ATTENZIONE: Questo sito potrebbe essere monitorato da sistemi di sorveglianza soulconomici">WARNING: This site may be monitored by soulconomic surveillance systems</p>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            var elements = document.querySelectorAll('[data-' + lang + ']');
+            var otherLang = lang === 'en' ? 'it' : 'en';
+            var otherElements = document.querySelectorAll('[data-' + otherLang + ']');
+            
+            // Show current language text
+            elements.forEach(function(el) {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+        
+        // Initialize with English
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            switchLanguage('en');
+        });
+        
+        // Add some dramatic effects
+        setInterval(function() {
+            var counters = document.querySelectorAll('.power-counter div');
+            counters.forEach(function(counter) {
+                if (counter.textContent.includes('1,847,293,847')) {
+                    var num = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+                    counter.textContent = (num + Math.floor(Math.random() * 1000)).toLocaleString();
+                }
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

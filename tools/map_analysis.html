@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map Analysis Tool</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #212529;
+            padding: 20px; 
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin-bottom: 20px;
+        }
+        #summary { 
+            font-size: 1.1em; 
+            margin-bottom: 20px;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        #results { 
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .map-item { 
+            padding: 8px 12px; 
+            border-bottom: 1px solid #eee; 
+            display: flex;
+            justify-content: space-between;
+        }
+        .map-item:last-child {
+            border-bottom: none;
+        }
+        .map-item span {
+            display: inline-block;
+        }
+        .map-id {
+            font-weight: bold;
+            width: 80px;
+        }
+        .map-name {
+            flex-grow: 1;
+        }
+        .map-status {
+            width: 120px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .clean { color: #28a745; }
+        .occupied { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Map Analysis Tool</h1>
+        <p>Select your <strong>data/MapInfos.json</strong> file to begin analysis.</p>
+        <input type="file" id="fileInput" accept=".json">
+        <hr>
+        <div id="summary">
+            <p>Waiting for file...</p>
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                try {
+                    const mapInfos = JSON.parse(content);
+                    analyzeMaps(mapInfos);
+                } catch (error) {
+                    alert('Error parsing JSON file. Make sure you selected the correct MapInfos.json.');
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        function analyzeMaps(mapInfos) {
+            const resultsContainer = document.getElementById('results');
+            const summaryContainer = document.getElementById('summary');
+            resultsContainer.innerHTML = ''; // Clear previous results
+            summaryContainer.innerHTML = '';
+
+            let cleanCount = 0;
+            let occupiedCount = 0;
+            let totalMaps = 0;
+            const maxMaps = 2000;
+
+            for (let i = 0; i < maxMaps; i++) {
+                const map = mapInfos[i];
+                if (map && map.name) {
+                    totalMaps++;
+                    const mapItem = document.createElement('div');
+                    mapItem.classList.add('map-item');
+                    
+                    let status = 'occupied';
+                    let statusClass = 'occupied';
+
+                    if (map.name.includes('-')) {
+                        occupiedCount++;
+                    } else if (map.name.startsWith('MAP') || /^[A-Z]\d/i.test(map.name)) {
+                        status = 'clean';
+                        statusClass = 'clean';
+                        cleanCount++;
+                    } else {
+                        occupiedCount++;
+                    }
+
+                    mapItem.innerHTML = `
+                        <span class="map-id">ID: ${map.id}</span>
+                        <span class="map-name">${map.name}</span>
+                        <span class="map-status ${statusClass}">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                    `;
+                    resultsContainer.appendChild(mapItem);
+                }
+            }
+
+            const percentage = totalMaps > 0 ? (cleanCount / totalMaps) * 100 : 0;
+            
+            const trulyEmptySlots = maxMaps - totalMaps;
+            const totalFreeCapacity = trulyEmptySlots + cleanCount;
+            const percentageFreeCapacity = (totalFreeCapacity / maxMaps) * 100;
+
+            summaryContainer.innerHTML = `
+                <p>Total Maps Analyzed: ${totalMaps}</p>
+                <p class="clean">Clean Maps: ${cleanCount}</p>
+                <p class="occupied">Occupied Maps: ${occupiedCount}</p>
+                <p><strong>Percentage of Clean Maps (among analyzed): ${percentage.toFixed(2)}%</strong></p>
+                <p>Truly Empty Map Slots (out of ${maxMaps}): ${trulyEmptySlots}</p>
+                <p class="clean">Logically Free Capacity (Clean Maps): ${cleanCount}</p>
+                <p><strong>Total Free Capacity (Empty + Clean Maps): ${totalFreeCapacity}</strong></p>
+                <p><strong>Percentage of Total Free Capacity: ${percentageFreeCapacity.toFixed(2)}%</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>

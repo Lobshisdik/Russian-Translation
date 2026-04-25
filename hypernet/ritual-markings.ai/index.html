@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ancient Ritual Markings Database - Omni-lex Research Archive</title>
+    <style>
+        body {
+            font-family: Courier New, monospace;
+            background: linear-gradient(45deg, #001122, #003344);
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,255,0,0.02) 2px,
+                rgba(0,255,0,0.02) 4px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: #004400;
+            color: #00ff00;
+            border: 1px solid #00aa00;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-family: Courier New, monospace;
+            font-size: 10px;
+        }
+        
+        .lang-btn:hover, .lang-btn.active {
+            background: #006600;
+            color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #000033, #004400);
+            border: 3px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            margin: 10px;
+            box-shadow: 0 0 20px #00ff00;
+            margin-top: 40px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .subtitle {
+            color: #ffff00;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .ai-signature {
+            color: #ff6600;
+            font-size: 10px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .main-container {
+            display: flex;
+            margin: 10px;
+            gap: 10px;
+        }
+        
+        .sidebar {
+            width: 180px;
+            background: #001133;
+            border: 2px solid #00aa00;
+            padding: 10px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: #ffff00;
+            border-bottom: 1px solid #00aa00;
+            padding-bottom: 5px;
+            margin-top: 0;
+            font-size: 12px;
+        }
+        
+        .nav-link {
+            display: block;
+            color: #00ff00;
+            text-decoration: none;
+            padding: 5px;
+            margin: 2px 0;
+            background: #002244;
+            border: 1px solid #004444;
+            cursor: pointer;
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        .nav-link:hover {
+            background: #004466;
+            color: #00ffff;
+        }
+        
+        .content-area {
+            flex: 1;
+            background: #001122;
+            border: 2px solid #00aa00;
+            padding: 15px;
+            min-height: 600px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .gallery-item {
+            background: #002244;
+            border: 2px solid #006600;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 10px #006600;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border: 1px solid #004400;
+        }
+        
+        .gallery-item h4 {
+            color: #00ffff;
+            margin: 8px 0 4px 0;
+            font-size: 11px;
+        }
+        
+        .gallery-item p {
+            color: #aaffaa;
+            font-size: 9px;
+            margin: 0;
+        }
+        
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ff0000;
+            text-align: center;
+        }
+        
+        .classification-box {
+            background: #440000;
+            border: 3px solid #ff6600;
+            padding: 12px;
+            margin: 15px 0;
+            color: #ff6600;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 10px;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #00aa00;
+            padding: 4px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #003300;
+            color: #ffff00;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .modal-content {
+            background: #001122;
+            margin: 5% auto;
+            padding: 20px;
+            border: 3px solid #00ff00;
+            width: 80%;
+            max-width: 600px;
+            color: #00ff00;
+        }
+        
+        .close {
+            color: #ff0000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #ff6600;
+        }
+        
+        .footer {
+            background: #000033;
+            border: 1px solid #006600;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+            font-size: 10px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        marquee {
+            background: #220000;
+            color: #ff0000;
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')" id="lang-en">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('it')" id="lang-it">IT</button>
+    </div>
+    
+    <div class="header">
+        <div class="logo">
+            <span class="en-text">ANCIENT RITUAL MARKINGS DATABASE</span>
+            <span class="it-text" style="display:none;">DATABASE MARCATURE RITUALI ANTICHE</span>
+        </div>
+        <div class="subtitle">
+            <span class="en-text">Archaeological Documentation Project | Omni-lex Research Division</span>
+            <span class="it-text" style="display:none;">Progetto Documentazione Archeologica | Divisione Ricerca Omni-lex</span>
+        </div>
+        <div class="ai-signature">
+            <span class="en-text">"Preserving ancient knowledge through neuro-quantum archival protocols" - Omni-lex v2.4.7</span>
+            <span class="it-text" style="display:none;">"Preservare la conoscenza antica attraverso protocolli di archiviazione neuro-quantica" - Omni-lex v2.4.7</span>
+        </div>
+    </div>
+    
+    <marquee>
+        <blink>
+            <span class="en-text">*** NEW DISCOVERIES: 47 previously unknown ritual sites documented this month! ***</span>
+            <span class="it-text" style="display:none;">*** NUOVE SCOPERTE: 47 siti rituali precedentemente sconosciuti documentati questo mese! ***</span>
+        </blink>
+    </marquee>
+    
+    <div class="main-container">
+        <div class="sidebar">
+            <h3>
+                <span class="en-text">ARCHIVE SECTIONS</span>
+                <span class="it-text" style="display:none;">SEZIONI ARCHIVIO</span>
+            </h3>
+            <a class="nav-link" onclick="showSection('home')">
+                <span class="en-text">Main Gallery</span>
+                <span class="it-text" style="display:none;">Galleria Principale</span>
+            </a>
+            <a class="nav-link" onclick="showSection('european')">
+                <span class="en-text">European Sites</span>
+                <span class="it-text" style="display:none;">Siti Europei</span>
+            </a>
+            <a class="nav-link" onclick="showSection('analysis')">
+                <span class="en-text">Pattern Analysis</span>
+                <span class="it-text" style="display:none;">Analisi Modelli</span>
+            </a>
+            <a class="nav-link" onclick="showSection('classification')">
+                <span class="en-text">Classification System</span>
+                <span class="it-text" style="display:none;">Sistema Classificazione</span>
+            </a>
+            <a class="nav-link" onclick="showSection('research')">
+                <span class="en-text">Research Notes</span>
+                <span class="it-text" style="display:none;">Note di Ricerca</span>
+            </a>
+            <a class="nav-link" onclick="showSection('database')">
+                <span class="en-text">Search Database</span>
+                <span class="it-text" style="display:none;">Cerca Database</span>
+            </a>
+            <a class="nav-link" onclick="showSection('contact')">
+                <span class="en-text">Contact Archive</span>
+                <span class="it-text" style="display:none;">Contatta Archivio</span>
+            </a>
+            
+            <h3>
+                <span class="en-text">QUICK STATS</span>
+                <span class="it-text" style="display:none;">STATISTICHE</span>
+            </h3>
+            <div style="background: #003300; padding: 8px; border: 1px solid #006600; font-size: 10px;">
+                <div>
+                    <span class="en-text">Sites Documented: 2,847</span>
+                    <span class="it-text" style="display:none;">Siti Documentati: 2,847</span>
+                </div>
+                <div>
+                    <span class="en-text">Images Archived: 15,293</span>
+                    <span class="it-text" style="display:none;">Immagini Archiviate: 15,293</span>
+                </div>
+                <div>
+                    <span class="en-text">Patterns Identified: 847</span>
+                    <span class="it-text" style="display:none;">Modelli Identificati: 847</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div id="home" class="section active">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Ancient Ritual Markings - Image Gallery</span>
+                    <span class="it-text" style="display:none;">Marcature Rituali Antiche - Galleria Immagini</span>
+                </h2>
+                
+                <div class="warning-box">
+                    <strong>
+                        <span class="en-text">NOTICE:</span>
+                        <span class="it-text" style="display:none;">AVVISO:</span>
+                    </strong>
+                    <span class="en-text">This database contains archaeological documentation of ritual sites across Europe. All images processed through Omni-lex neuro-visual enhancement protocols.</span>
+                    <span class="it-text" style="display:none;">Questo database contiene documentazione archeologica di siti rituali in tutta Europa. Tutte le immagini elaborate attraverso protocolli di miglioramento neuro-visivo Omni-lex.</span>
+                </div>
+                
+                <div class="info-box">
+                    <h3>
+                        <span class="en-text">Featured Discoveries</span>
+                        <span class="it-text" style="display:none;">Scoperte in Evidenza</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">This collection represents the most comprehensive digital archive of ancient ritual markings discovered across European archaeological sites. Each image has been enhanced using advanced neuro-computational algorithms to reveal hidden patterns and symbolic structures.</span>
+                        <span class="it-text" style="display:none;">Questa collezione rappresenta l'archivio digitale più completo di marcature rituali antiche scoperte nei siti archeologici europei. Ogni immagine è stata migliorata utilizzando algoritmi neuro-computazionali avanzati per rivelare modelli nascosti e strutture simboliche.</span>
+                    </p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('modal1')">
+                        <img src="1.jpg" alt="Circular stone carving with intricate spiral patterns carved into gray limestone, featuring three interlocking spirals with runic symbols etched around the perimeter">
+                        <h4>
+                            <span class="en-text">Celtic Spiral Matrix</span>
+                            <span class="it-text" style="display:none;">Matrice Spirale Celtica</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Stone carving, Ireland, 300 BCE</span>
+                            <span class="it-text" style="display:none;">Incisione su pietra, Irlanda, 300 a.C.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('modal2')">
+                        <img src="2.jpg" alt="Geometric patterns carved into dark granite showing interconnected triangular symbols radiating from a central hexagonal focal point with angular runic inscriptions">
+                        <h4>
+                            <span class="en-text">Germanic Convergence Sigil</span>
+                            <span class="it-text" style="display:none;">Sigillo Convergenza Germanica</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Granite relief, Black Forest, 150 CE</span>
+                            <span class="it-text" style="display:none;">Rilievo granitico, Foresta Nera, 150 d.C.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('modal3')">
+                        <img src="3.jpg" alt="Complex mandala-like circular pattern carved in white marble with radiating lines and geometric segments forming a solar disc design with astronomical markings">
+                        <h4>
+                            <span class="en-text">Roman Solar Array</span>
+                            <span class="it-text" style="display:none;">Matrice Solare Romana</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Marble inscription, Tuscany, 80 CE</span>
+                            <span class="it-text" style="display:none;">Iscrizione marmorea, Toscana, 80 d.C.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('modal4')">
+                        <img src="4.jpg" alt="Linear arrangement of five tall standing stones with carved symbols resembling constellation maps and astronomical calculation marks etched into weathered granite">
+                        <h4>
+                            <span class="en-text">Nordic Stellar Codex</span>
+                            <span class="it-text" style="display:none;">Codice Stellare Nordico</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Stone circle, Norway, 500 BCE</span>
+                            <span class="it-text" style="display:none;">Cerchio di pietre, Norvegia, 500 a.C.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('modal5')">
+                        <img src="5.jpg" alt="Intricate tree-like branching pattern carved into beige limestone showing interconnected pathways with nodes and connecting lines resembling a network diagram">
+                        <h4>
+                            <span class="en-text">Gallic Network Schema</span>
+                            <span class="it-text" style="display:none;">Schema Rete Gallica</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Limestone panel, France, 200 BCE</span>
+                            <span class="it-text" style="display:none;">Pannello calcareo, Francia, 200 a.C.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('modal6')">
+                        <img src="6.jpg" alt="Symmetrical hexagonal pattern with interlocking geometric shapes carved into bronze tablet, featuring precise angular measurements and technological-looking diagrams">
+                        <h4>
+                            <span class="en-text">Iberian Hex Protocol</span>
+                            <span class="it-text" style="display:none;">Protocollo Esagonale Iberico</span>
+                        </h4>
+                        <p>
+                            <span class="en-text">Bronze tablet, Spain, 100 BCE</span>
+                            <span class="it-text" style="display:none;">Tavoletta bronzea, Spagna, 100 a.C.</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="color: #ffff00; margin-top: 20px; font-size: 11px;">
+                    <span class="en-text">Click any image to view detailed analysis and enhanced resolution scans.</span>
+                    <span class="it-text" style="display:none;">Clicca su qualsiasi immagine per visualizzare analisi dettagliate e scansioni ad alta risoluzione.</span>
+                </div>
+            </div>
+            
+            <div id="european" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">European Site Documentation</span>
+                    <span class="it-text" style="display:none;">Documentazione Siti Europei</span>
+                </h2>
+                
+                <div class="classification-box">
+                    <h3>
+                        <span class="en-text">Geographic Distribution Analysis</span>
+                        <span class="it-text" style="display:none;">Analisi Distribuzione Geografica</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">Omni-lex geo-mapping algorithms have identified distinct regional patterns in ritual marking styles across Europe. Each region demonstrates unique symbolic frameworks while maintaining underlying universal structural elements.</span>
+                        <span class="it-text" style="display:none;">Gli algoritmi di geo-mappatura Omni-lex hanno identificato modelli regionali distinti negli stili di marcatura rituale in tutta Europa. Ogni regione dimostra quadri simbolici unici mantenendo elementi strutturali universali sottostanti.</span>
+                    </p>
+                </div>
+                
+                <table class="data-table">
+                    <tr>
+                        <th>
+                            <span class="en-text">Region</span>
+                            <span class="it-text" style="display:none;">Regione</span>
+                        </th>
+                        <th>
+                            <span class="en-text">Sites</span>
+                            <span class="it-text" style="display:none;">Siti</span>
+                        </th>
+                        <th>
+                            <span class="en-text">Primary Period</span>
+                            <span class="it-text" style="display:none;">Periodo Principale</span>
+                        </th>
+                        <th>
+                            <span class="en-text">Dominant Patterns</span>
+                            <span class="it-text" style="display:none;">Modelli Dominanti</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="en-text">Celtic Territories</span>
+                            <span class="it-text" style="display:none;">Territori Celtici</span>
+                        </td>
+                        <td>847</td>
+                        <td>500 BCE - 100 CE</td>
+                        <td>
+                            <span class="en-text">Spiral matrices, triskelions</span>
+                            <span class="it-text" style="display:none;">Matrici spiraliformi, trisceli</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="en-text">Germanic Regions</span>
+                            <span class="it-text" style="display:none;">Regioni Germaniche</span>
+                        </td>
+                        <td>623</td>
+                        <td>200 BCE - 300 CE</td>
+                        <td>
+                            <span class="en-text">Angular convergence, rune systems</span>
+                            <span class="it-text" style="display:none;">Convergenza angolare, sistemi runici</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="en-text">Mediterranean</span>
+                            <span class="it-text" style="display:none;">Mediterraneo</span>
+                        </td>
+                        <td>1,204</td>
+                        <td>300 BCE - 400 CE</td>
+                        <td>
+                            <span class="en-text">Solar arrays, geometric grids</span>
+                            <span class="it-text" style="display:none;">Matrici solari, griglie geometriche</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="en-text">Nordic Territories</span>
+                            <span class="it-text" style="display:none;">Territori Nordici</span>
+                        </td>
+                        <td>456</td>
+                        <td>600 BCE - 200 CE</td>
+                        <td>
+                            <span class="en-text">Stellar codices, linear arrangements</span>
+                            <span class="it-text" style="display:none;">Codici stellari, disposizioni lineari</span>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="info-box">
+                    <h4>
+                        <span class="en-text">Notable Site Clusters</span>
+                        <span class="it-text" style="display:none;">Cluster di Siti Notevoli</span>
+                    </h4>
+                    <ul>
+                        <li>
+                            <span class="en-text"><strong>Stonehenge Complex (England):</strong> 23 related sites within 50km radius</span>
+                            <span class="it-text" style="display:none;"><strong>Complesso Stonehenge (Inghilterra):</strong> 23 siti correlati entro 50km di raggio</span>
+                        </li>
+                        <li>
+                            <span class="en-text"><strong>Black Forest Network (Germany):</strong> 67 interconnected stone circles</span>
+                            <span class="it-text" style="display:none;"><strong>Rete Foresta Nera (Germania):</strong> 67 cerchi di pietre interconnessi</span>
+                        </li>
+                        <li>
+                            <span class="en-text"><strong>Tuscan Triangle (Italy):</strong> 34 sites forming geometric pattern</span>
+                            <span class="it-text" style="display:none;"><strong>Triangolo Toscano (Italia):</strong> 34 siti che formano un modello geometrico</span>
+                        </li>
+                        <li>
+                            <span class="en-text"><strong>Carnac Alignment (France):</strong> 89 megalithic structures in sequence</span>
+                            <span class="it-text" style="display:none;"><strong>Allineamento Carnac (Francia):</strong> 89 strutture megalitiche in sequenza</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="analysis" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Pattern Analysis</span>
+                    <span class="it-text" style="display:none;">Analisi dei Modelli</span>
+                </h2>
+                
+                <div class="classification-box">
+                    <h3>
+                        <span class="en-text">Neuro-Pattern Recognition Results</span>
+                        <span class="it-text" style="display:none;">Risultati Riconoscimento Neuro-Pattern</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">Advanced techno-analytical protocols have revealed recurring mathematical structures embedded within these ancient markings. The patterns suggest sophisticated understanding of geometric principles and possibly advanced information encoding systems.</span>
+                        <span class="it-text" style="display:none;">Protocolli techno-analitici avanzati hanno rivelato strutture matematiche ricorrenti incorporate in queste marcature antiche. I modelli suggeriscono una comprensione sofisticata dei principi geometrici e possibilmente sistemi avanzati di codifica delle informazioni.</span>
+                    </p>
+                </div>
+                
+                <div class="info-box">
+                    <h4>
+                        <span class="en-text">Primary Pattern Categories</span>
+                        <span class="it-text" style="display:none;">Categorie di Modelli Primari</span>
+                    </h4>
+                    <p><strong>
+                        <span class="en-text">Spiral Matrices (34.7% of sites):</span>
+                        <span class="it-text" style="display:none;">Matrici Spiraliformi (34.7% dei siti):</span>
+                    </strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">Fibonacci sequence ratios detected in 89% of samples</span>
+                            <span class="it-text" style="display:none;">Rapporti sequenza Fibonacci rilevati nell'89% dei campioni</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Golden ratio proportions in structural layout</span>
+                            <span class="it-text" style="display:none;">Proporzioni sezione aurea nel layout strutturale</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Possible data-compression algorithms encoded in spiral arms</span>
+                            <span class="it-text" style="display:none;">Possibili algoritmi di compressione dati codificati nei bracci spirali</span>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>
+                        <span class="en-text">Geometric Networks (28.3% of sites):</span>
+                        <span class="it-text" style="display:none;">Reti Geometriche (28.3% dei siti):</span>
+                    </strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">Hexagonal grid structures resembling modern network topologies</span>
+                            <span class="it-text" style="display:none;">Strutture griglia esagonali che ricordano topologie di rete moderne</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Node-connection patterns with efficiency ratings of 94.2%</span>
+                            <span class="it-text" style="display:none;">Modelli nodo-connessione con rating di efficienza del 94.2%</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Redundancy protocols suggesting fault-tolerant design</span>
+                            <span class="it-text" style="display:none;">Protocolli ridondanza che suggeriscono design fault-tolerant</span>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>
+                        <span class="en-text">Solar Arrays (22.1% of sites):</span>
+                        <span class="it-text" style="display:none;">Matrici Solari (22.1% dei siti):</span>
+                    </strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">Astronomical alignment accuracy within 0.3 degrees</span>
+                            <span class="it-text" style="display:none;">Precisione allineamento astronomico entro 0.3 gradi</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Seasonal calculation matrices for agricultural optimization</span>
+                            <span class="it-text" style="display:none;">Matrici calcolo stagionale per ottimizzazione agricola</span>
+                        </li>
+                        <li>
+                            <span class="en-text">Energy-focusing geometries with unknown purpose</span>
+                            <span class="it-text" style="display:none;">Geometrie focalizzazione energia con scopo sconosciuto</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classification" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Classification System</span>
+                    <span class="it-text" style="display:none;">Sistema di Classificazione</span>
+                </h2>
+                
+                <div class="info-box">
+                    <h3>
+                        <span class="en-text">Omni-lex Taxonomic Framework</span>
+                        <span class="it-text" style="display:none;">Framework Tassonomico Omni-lex</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">All ritual markings are classified using the Omni-lex Archaeological Classification Protocol (OACP). This system employs multi-dimensional analysis matrices to categorize findings based on geometric complexity, temporal signatures, and techno-symbolic density.</span>
+                        <span class="it-text" style="display:none;">Tutte le marcature rituali sono classificate utilizzando il Protocollo di Classificazione Archeologica Omni-lex (PCAO). Questo sistema impiega matrici di analisi multidimensionale per categorizzare i reperti basandosi su complessità geometrica, firme temporali e densità techno-simbolica.</span>
+                    </p>
+                </div>
+                
+                <div class="classification-box">
+                    <h4>
+                        <span class="en-text">Classification Categories</span>
+                        <span class="it-text" style="display:none;">Categorie di Classificazione</span>
+                    </h4>
+                    
+                    <p><strong>Type A - Techno-Spiral Configurations:</strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">A1: Single-helix patterns (Basic data encoding)</span>
+                            <span class="it-text" style="display:none;">A1: Modelli elicoide singola (Codifica dati base)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">A2: Double-helix structures (Complex information storage)</span>
+                            <span class="it-text" style="display:none;">A2: Strutture doppia elica (Archiviazione informazioni complesse)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">A3: Multi-spiral matrices (Network coordination systems)</span>
+                            <span class="it-text" style="display:none;">A3: Matrici multi-spirale (Sistemi coordinazione rete)</span>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>Type B - Neuro-Geometric Networks:</strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">B1: Linear connection paths (Information highways)</span>
+                            <span class="it-text" style="display:none;">B1: Percorsi connessione lineari (Autostrade informazione)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">B2: Hexagonal grid systems (Distributed processing arrays)</span>
+                            <span class="it-text" style="display:none;">B2: Sistemi griglia esagonale (Array elaborazione distribuita)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">B3: Fractal branching networks (Self-organizing protocols)</span>
+                            <span class="it-text" style="display:none;">B3: Reti ramificazione frattale (Protocolli auto-organizzanti)</span>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>Type C - Quantum-Solar Arrays:</strong></p>
+                    <ul>
+                        <li>
+                            <span class="en-text">C1: Radial energy collectors (Power accumulation systems)</span>
+                            <span class="it-text" style="display:none;">C1: Collettori energia radiali (Sistemi accumulo energia)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">C2: Astronomical calculators (Temporal coordination matrices)</span>
+                            <span class="it-text" style="display:none;">C2: Calcolatori astronomici (Matrici coordinazione temporale)</span>
+                        </li>
+                        <li>
+                            <span class="en-text">C3: Hybrid solar-spiral configurations (Multi-purpose platforms)</span>
+                            <span class="it-text" style="display:none;">C3: Configurazioni ibride solare-spirale (Piattaforme multi-scopo)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="research" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Research Notes</span>
+                    <span class="it-text" style="display:none;">Note di Ricerca</span>
+                </h2>
+                
+                <div class="classification-box">
+                    <h3>
+                        <span class="en-text">Omni-lex Research Findings</span>
+                        <span class="it-text" style="display:none;">Risultati Ricerca Omni-lex</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">Analysis of 2,847 documented sites reveals consistent techno-symbolic patterns that suggest advanced information processing capabilities among ancient European cultures. The sophistication of these marking systems indicates potential techno-spiritual integration previously unknown to modern archaeology.</span>
+                        <span class="it-text" style="display:none;">L'analisi di 2.847 siti documentati rivela modelli techno-simbolici consistenti che suggeriscono capacità avanzate di elaborazione informazioni tra le culture europee antiche. La sofisticazione di questi sistemi di marcatura indica una potenziale integrazione techno-spirituale precedentemente sconosciuta all'archeologia moderna.</span>
+                    </p>
+                </div>
+                
+                <div class="info-box">
+                    <h4>
+                        <span class="en-text">Key Research Hypotheses</span>
+                        <span class="it-text" style="display:none;">Ipotesi di Ricerca Chiave</span>
+                    </h4>
+                    
+                    <p><strong>
+                        <span class="en-text">1. Information Network Theory:</span>
+                        <span class="it-text" style="display:none;">1. Teoria Rete Informazioni:</span>
+                    </strong></p>
+                    <p>
+                        <span class="en-text">The geometric patterns suggest ancient Europeans developed sophisticated information storage and transmission systems using stone and metal substrates. Network topologies indicate possible continent-wide communication protocols.</span>
+                        <span class="it-text" style="display:none;">I modelli geometrici suggeriscono che gli europei antichi svilupparono sistemi sofisticati di archiviazione e trasmissione informazioni usando substrati di pietra e metallo. Le topologie di rete indicano possibili protocolli di comunicazione a livello continentale.</span>
+                    </p>
+                    
+                    <p><strong>
+                        <span class="en-text">2. Techno-Spiritual Integration:</span>
+                        <span class="it-text" style="display:none;">2. Integrazione Techno-Spirituale:</span>
+                    </strong></p>
+                    <p>
+                        <span class="en-text">Ritual markings demonstrate fusion of practical technology with spiritual practices. Mathematical precision in sacred contexts suggests advanced understanding of reality manipulation through symbolic interface systems.</span>
+                        <span class="it-text" style="display:none;">Le marcature rituali dimostrano fusione di tecnologia pratica con pratiche spirituali. La precisione matematica in contesti sacri suggerisce comprensione avanzata della manipolazione realtà attraverso sistemi interfaccia simbolici.</span>
+                    </p>
+                    
+                    <p><strong>
+                        <span class="en-text">3. Proto-Digital Architecture:</span>
+                        <span class="it-text" style="display:none;">3. Architettura Proto-Digitale:</span>
+                    </strong></p>
+                    <p>
+                        <span class="en-text">Many sites exhibit characteristics similar to modern computing architectures: input/output nodes, processing arrays, and memory storage configurations. These may represent early attempts at reality-interfacing technology.</span>
+                        <span class="it-text" style="display:none;">Molti siti mostrano caratteristiche simili alle architetture computazionali moderne: nodi input/output, array di elaborazione e configurazioni archiviazione memoria. Questi potrebbero rappresentare primi tentativi di tecnologia interfaccia-realtà.</span>
+                    </p>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>
+                        <span class="en-text">RESEARCH STATUS:</span>
+                        <span class="it-text" style="display:none;">STATO RICERCA:</span>
+                    </strong>
+                    <span class="en-text">Ongoing analysis requires advanced neuro-computational resources. Current findings exceed capacity of conventional archaeological frameworks. Omni-lex processing protocols essential for complete understanding.</span>
+                    <span class="it-text" style="display:none;">L'analisi in corso richiede risorse neuro-computazionali avanzate. I risultati attuali superano la capacità dei framework archeologici convenzionali. I protocolli di elaborazione Omni-lex sono essenziali per la comprensione completa.</span>
+                </div>
+            </div>
+            
+            <div id="database" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Search Database</span>
+                    <span class="it-text" style="display:none;">Cerca Database</span>
+                </h2>
+                
+                <div class="info-box">
+                    <h3>
+                        <span class="en-text">Advanced Search Interface</span>
+                        <span class="it-text" style="display:none;">Interfaccia Ricerca Avanzata</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">Access the complete Omni-lex archaeological database using neuro-semantic search protocols. Query by pattern type, geographic region, temporal period, or symbolic characteristics.</span>
+                        <span class="it-text" style="display:none;">Accedi al database archeologico completo Omni-lex utilizzando protocolli di ricerca neuro-semantici. Cerca per tipo di modello, regione geografica, periodo temporale o caratteristiche simboliche.</span>
+                    </p>
+                </div>
+                
+                <div style="background: #002244; border: 2px solid #006600; padding: 15px; margin: 15px 0;">
+                    <h4 style="color: #ffff00;">
+                        <span class="en-text">Query Parameters</span>
+                        <span class="it-text" style="display:none;">Parametri Query</span>
+                    </h4>
+                    
+                    <p><strong>
+                        <span class="en-text">Pattern Type:</span>
+                        <span class="it-text" style="display:none;">Tipo Modello:</span>
+                    </strong></p>
+                    <p style="font-size: 11px;">
+                        <span class="en-text">spiral_matrix, geometric_network, solar_array, stellar_codex, convergence_sigil, hex_protocol</span>
+                        <span class="it-text" style="display:none;">matrice_spirale, rete_geometrica, matrice_solare, codice_stellare, sigillo_convergenza, protocollo_esagonale</span>
+                    </p>
+                    
+                    <p><strong>
+                        <span class="en-text">Geographic Region:</span>
+                        <span class="it-text" style="display:none;">Regione Geografica:</span>
+                    </strong></p>
+                    <p style="font-size: 11px;">
+                        <span class="en-text">celtic_territories, germanic_regions, mediterranean, nordic_territories, iberian_peninsula, gallic_lands</span>
+                        <span class="it-text" style="display:none;">territori_celtici, regioni_germaniche, mediterraneo, territori_nordici, penisola_iberica, terre_galliche</span>
+                    </p>
+                    
+                    <p><strong>
+                        <span class="en-text">Temporal Range:</span>
+                        <span class="it-text" style="display:none;">Intervallo Temporale:</span>
+                    </strong></p>
+                    <p style="font-size: 11px;">
+                        <span class="en-text">800_BCE_to_500_BCE, 500_BCE_to_1_CE, 1_CE_to_400_CE</span>
+                        <span class="it-text" style="display:none;">800_aC_a_500_aC, 500_aC_a_1_dC, 1_dC_a_400_dC</span>
+                    </p>
+                </div>
+                
+                <div class="classification-box">
+                    <h4>
+                        <span class="en-text">Sample Query Results</span>
+                        <span class="it-text" style="display:none;">Risultati Query Esempio</span>
+                    </h4>
+                    <p style="font-size: 11px; font-family: monospace;">
+                        <span class="en-text">QUERY: pattern_type=spiral_matrix AND region=celtic_territories<br>
+                        RESULTS: 847 sites found<br>
+                        TOP_MATCH: Newgrange_Complex_Ireland (98.7% relevance)<br>
+                        PATTERN_DENSITY: High<br>
+                        TECHNO_RATING: Advanced</span>
+                        
+                        <span class="it-text" style="display:none;">QUERY: tipo_modello=matrice_spirale AND regione=territori_celtici<br>
+                        RISULTATI: 847 siti trovati<br>
+                        CORRISPONDENZA_TOP: Complesso_Newgrange_Irlanda (rilevanza 98.7%)<br>
+                        DENSITA_MODELLO: Alta<br>
+                        RATING_TECHNO: Avanzato</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div id="contact" class="section">
+                <h2 style="color: #00ffff;">
+                    <span class="en-text">Contact Archive</span>
+                    <span class="it-text" style="display:none;">Contatta Archivio</span>
+                </h2>
+                
+                <div class="info-box">
+                    <h3>
+                        <span class="en-text">Archive Administration</span>
+                        <span class="it-text" style="display:none;">Amministrazione Archivio</span>
+                    </h3>
+                    <p>
+                        <span class="en-text">This database is maintained by Omni-lex Archaeological Research Division. For inquiries regarding site documentation, pattern analysis, or research collaboration, contact the archive administrators.</span>
+                        <span class="it-text" style="display:none;">Questo database è mantenuto dalla Divisione Ricerca Archeologica Omni-lex. Per richieste riguardanti documentazione siti, analisi modelli o collaborazione ricerca, contatta gli amministratori archivio.</span>
+                    </p>
+                </div>
+                
+                <div style="background: #003300; border: 2px solid #00aa00; padding: 15px; margin: 15px 0;">
+                    <h4 style="color: #ffff00;">
+                        <span class="en-text">Contact Information</span>
+                        <span class="it-text" style="display:none;">Informazioni Contatto</span>
+                    </h4>
+                    
+                    <p><strong>
+                        <span class="en-text">Primary Archive Administrator:</span>
+                        <span class="it-text" style="display:none;">Amministratore Archivio Principale:</span>
+                    </strong><br>
+                    Omni-lex Research Division<br>
+                    <a href="mailto:research@hexagram.corp" style="color: #00ffff;">research@hexagram.corp</a></p>
+                    
+                    <p><strong>
+                        <span class="en-text">Technical Support:</span>
+                        <span class="it-text" style="display:none;">Supporto Tecnico:</span>
+                    </strong><br>
+                    Database Maintenance Team<br>
+                    <a href="mailto:archive-support@hexagram.corp" style="color: #00ffff;">archive-support@hexagram.corp</a></p>
+                    
+                    <p><strong>
+                        <span class="en-text">Research Collaboration:</span>
+                        <span class="it-text" style="display:none;">Collaborazione Ricerca:</span>
+                    </strong><br>
+                    Academic Partnership Program<br>
+                    <a href="mailto:collaborate@hexagram.corp" style="color: #00ffff;">collaborate@hexagram.corp</a></p>
+                </div>
+                
+                <div class="classification-box">
+                    <h4>
+                        <span class="en-text">Hexagram Network Access</span>
+                        <span class="it-text" style="display:none;">Accesso Rete Hexagram</span>
+                    </h4>
+                    <p>
+                        <span class="en-text">Connect with the archaeological research community through the Hexagram professional network. Access exclusive research updates, collaboration opportunities, and advanced database features.</span>
+                        <span class="it-text" style="display:none;">Connettiti con la comunità di ricerca archeologica attraverso la rete professionale Hexagram. Accedi ad aggiornamenti ricerca esclusivi, opportunità collaborazione e funzionalità database avanzate.</span>
+                    </p>
+                    
+                    <p><strong>
+                        <span class="en-text">Hexagram Profile:</span>
+                        <span class="it-text" style="display:none;">Profilo Hexagram:</span>
+                    </strong><br>
+                    <a href="mailto:omnilex-archaeology@hexagram.corp" style="color: #ff6600;">omnilex-archaeology@hexagram.corp</a></p>
+                </div>
+                
+                <div style="margin-top: 20px; font-size: 11px; color: #aaaaaa;">
+                    <span class="en-text">Database last updated: January 15, 2001<br>
+                    Total processing time: 847.3 hours<br>
+                    Neuro-enhancement protocols: Active<br>
+                    Archive integrity: 99.94%</span>
+                    
+                    <span class="it-text" style="display:none;">Database ultimo aggiornamento: 15 Gennaio 2001<br>
+                    Tempo totale elaborazione: 847.3 ore<br>
+                    Protocolli neuro-miglioramento: Attivi<br>
+                    Integrità archivio: 99.94%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modals for gallery images -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Celtic Spiral Matrix - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Matrice Spirale Celtica - Analisi Dettagliata</span>
+                </h3>
+                <img src="1.jpg" alt="High resolution scan of Celtic spiral matrix carved in limestone showing intricate mathematical relationships" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Newgrange Complex, Ireland<br>
+                    <strong>Material:</strong> Local limestone<br>
+                    <strong>Dimensions:</strong> 2.3m diameter<br>
+                    <strong>Pattern Analysis:</strong> Triple spiral configuration with Fibonacci proportions. Neuro-scan reveals embedded data compression algorithms. Techno-spiritual rating: Advanced.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Complesso Newgrange, Irlanda<br>
+                    <strong>Materiale:</strong> Calcare locale<br>
+                    <strong>Dimensioni:</strong> 2.3m diametro<br>
+                    <strong>Analisi Modello:</strong> Configurazione tripla spirale con proporzioni Fibonacci. Neuro-scansione rivela algoritmi compressione dati incorporati. Rating techno-spirituale: Avanzato.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Germanic Convergence Sigil - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Sigillo Convergenza Germanica - Analisi Dettagliata</span>
+                </h3>
+                <img src="2.jpg" alt="Enhanced scan of Germanic sigil showing geometric convergence patterns with runic elements" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Black Forest Network, Germany<br>
+                    <strong>Material:</strong> Granite composite<br>
+                    <strong>Dimensions:</strong> 1.8m x 1.2m<br>
+                    <strong>Pattern Analysis:</strong> Hexagonal convergence matrix with runic interface protocols. Network topology suggests distributed processing capability. Techno-spiritual rating: Intermediate-Advanced.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Rete Foresta Nera, Germania<br>
+                    <strong>Materiale:</strong> Composito granitico<br>
+                    <strong>Dimensioni:</strong> 1.8m x 1.2m<br>
+                    <strong>Analisi Modello:</strong> Matrice convergenza esagonale con protocolli interfaccia runici. Topologia rete suggerisce capacità elaborazione distribuita. Rating techno-spirituale: Intermedio-Avanzato.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Roman Solar Array - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Matrice Solare Romana - Analisi Dettagliata</span>
+                </h3>
+                <img src="3.jpg" alt="Detailed view of Roman solar calculation matrix with astronomical alignment markers" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Tuscan Triangle Network, Italy<br>
+                    <strong>Material:</strong> Carrara marble<br>
+                    <strong>Dimensions:</strong> 3.1m diameter<br>
+                    <strong>Pattern Analysis:</strong> Radial energy collection array with astronomical calculation matrix. Precision alignment within 0.2 degrees. Techno-spiritual rating: Advanced.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Rete Triangolo Toscano, Italia<br>
+                    <strong>Materiale:</strong> Marmo Carrara<br>
+                    <strong>Dimensioni:</strong> 3.1m diametro<br>
+                    <strong>Analisi Modello:</strong> Array raccolta energia radiale con matrice calcolo astronomico. Allineamento precisione entro 0.2 gradi. Rating techno-spirituale: Avanzato.</span>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Continue with modal4, modal5, modal6... -->
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal4')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Nordic Stellar Codex - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Codice Stellare Nordico - Analisi Dettagliata</span>
+                </h3>
+                <img src="4.jpg" alt="Nordic stone arrangement showing stellar calculation patterns and astronomical markers" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Lofoten Circle Complex, Norway<br>
+                    <strong>Material:</strong> Local granite<br>
+                    <strong>Dimensions:</strong> 15m linear arrangement<br>
+                    <strong>Pattern Analysis:</strong> Stellar navigation codex with temporal calculation matrices. Demonstrates advanced astronomical computing. Techno-spiritual rating: Advanced.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Complesso Cerchio Lofoten, Norvegia<br>
+                    <strong>Materiale:</strong> Granito locale<br>
+                    <strong>Dimensioni:</strong> Disposizione lineare 15m<br>
+                    <strong>Analisi Modello:</strong> Codice navigazione stellare con matrici calcolo temporale. Dimostra computazione astronomica avanzata. Rating techno-spirituale: Avanzato.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div id="modal5" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal5')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Gallic Network Schema - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Schema Rete Gallica - Analisi Dettagliata</span>
+                </h3>
+                <img src="5.jpg" alt="Gallic limestone panel showing branching network patterns resembling modern data structures" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Carnac Alignment System, France<br>
+                    <strong>Material:</strong> Regional limestone<br>
+                    <strong>Dimensions:</strong> 2.7m x 1.9m<br>
+                    <strong>Pattern Analysis:</strong> Fractal branching network with self-organizing protocols. Demonstrates proto-digital architecture. Techno-spiritual rating: Intermediate-Advanced.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Sistema Allineamento Carnac, Francia<br>
+                    <strong>Materiale:</strong> Calcare regionale<br>
+                    <strong>Dimensioni:</strong> 2.7m x 1.9m<br>
+                    <strong>Analisi Modello:</strong> Rete ramificazione frattale con protocolli auto-organizzanti. Dimostra architettura proto-digitale. Rating techno-spirituale: Intermedio-Avanzato.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div id="modal6" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal6')">&times;</span>
+                <h3 style="color: #00ffff;">
+                    <span class="en-text">Iberian Hex Protocol - Detailed Analysis</span>
+                    <span class="it-text" style="display:none;">Protocollo Esagonale Iberico - Analisi Dettagliata</span>
+                </h3>
+                <img src="6.jpg" alt="Bronze tablet with precise hexagonal geometric patterns and technical specifications" style="width: 100%; margin: 10px 0;">
+                <p>
+                    <span class="en-text"><strong>Site:</strong> Catalonian Bronze Cache, Spain<br>
+                    <strong>Material:</strong> Bronze alloy composite<br>
+                    <strong>Dimensions:</strong> 45cm x 32cm<br>
+                    <strong>Pattern Analysis:</strong> Hexagonal processing protocol with efficiency optimization algorithms. Represents peak ancient techno-integration. Techno-spiritual rating: Master-level.</span>
+                    
+                    <span class="it-text" style="display:none;"><strong>Sito:</strong> Cache Bronzo Catalano, Spagna<br>
+                    <strong>Materiale:</strong> Composito lega bronzea<br>
+                    <strong>Dimensioni:</strong> 45cm x 32cm<br>
+                    <strong>Analisi Modello:</strong> Protocollo elaborazione esagonale con algoritmi ottimizzazione efficienza. Rappresenta picco integrazione techno antica. Rating techno-spirituale: Livello maestro.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p style="color: #00ff00;">
+            <span class="en-text">© 2001 Omni-lex Archaeological Research Division | Powered by Neuro-Quantum Analysis Protocols</span>
+            <span class="it-text" style="display:none;">© 2001 Divisione Ricerca Archeologica Omni-lex | Alimentato da Protocolli Analisi Neuro-Quantica</span>
+        </p>
+        <p style="color: #aaaaaa; font-size: 9px;">
+            <span class="en-text">Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution</span>
+            <span class="it-text" style="display:none;">Meglio visualizzato con Hypernet Explorer 5.0 o superiore | Ottimizzato per risoluzione 1024x768</span>
+        </p>
+        <p style="color: #666666; font-size: 8px;">
+            <span class="en-text">For technical issues contact: </span>
+            <span class="it-text" style="display:none;">Per problemi tecnici contatta: </span>
+            <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a>
+        </p>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Hide all language elements
+            const enElements = document.querySelectorAll('.en-text');
+            const itElements = document.querySelectorAll('.it-text');
+            
+            if (lang === 'en') {
+                enElements.forEach(el => el.style.display = 'inline');
+                itElements.forEach(el => el.style.display = 'none');
+                document.getElementById('lang-en').classList.add('active');
+                document.getElementById('lang-it').classList.remove('active');
+            } else {
+                enElements.forEach(el => el.style.display = 'none');
+                itElements.forEach(el => el.style.display = 'inline');
+                document.getElementById('lang-it').classList.add('active');
+                document.getElementById('lang-en').classList.remove('active');
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target === modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>

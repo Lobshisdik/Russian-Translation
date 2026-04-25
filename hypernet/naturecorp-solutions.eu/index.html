@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NatureCorp Solutions - Premium Environmental Restoration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e8;
+            margin: 0;
+            padding: 10px;
+            color: #2d5016;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #90ee90, #228b22);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border: 3px solid #006400;
+            margin-bottom: 15px;
+        }
+        
+        .nav-bar {
+            background-color: #f0fff0;
+            border: 2px solid #90ee90;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .nav-link {
+            color: #228b22;
+            text-decoration: underline;
+            margin: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .nav-link:hover {
+            color: #006400;
+            background-color: #e6ffe6;
+        }
+        
+        .main-content {
+            background-color: white;
+            border: 2px solid #90ee90;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .section {
+            display: none;
+            background-color: #f9fff9;
+            border: 1px solid #ccffcc;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .luxury-box {
+            background-color: #fff8dc;
+            border: 3px solid #daa520;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .exclusive-badge {
+            background-color: #daa520;
+            color: white;
+            padding: 5px 12px;
+            font-size: 11px;
+            border-radius: 5px;
+            margin: 0 8px;
+            font-weight: bold;
+        }
+        
+        .price-tag {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            margin: 10px;
+            font-weight: bold;
+        }
+        
+        .testimonial {
+            background-color: #e6f3ff;
+            border-left: 5px solid #0066cc;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .footer {
+            background-color: #228b22;
+            color: white;
+            border: 1px solid #006400;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        
+        .disclaimer {
+            background-color: #ffffe0;
+            border: 1px solid #cccc00;
+            padding: 8px;
+            font-size: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .bio-tech {
+            background: repeating-linear-gradient(
+                45deg,
+                #e8f5e8,
+                #e8f5e8 10px,
+                #d4edda 10px,
+                #d4edda 20px
+            );
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌿 NatureCorp Solutions 🌿</h1>
+        <p>Exclusive Environmental Restoration for the Elite</p>
+        <span class="exclusive-badge">PREMIUM</span>
+        <span class="exclusive-badge">LUXURY ECO</span>
+        <span class="exclusive-badge">VIP MEMBERS ONLY</span>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Elite Home</span>
+        <span class="nav-link" onclick="showSection('services')">Premium Services</span>
+        <span class="nav-link" onclick="showSection('philosophy')">Our Vision</span>
+        <span class="nav-link" onclick="showSection('packages')">Luxury Packages</span>
+        <span class="nav-link" onclick="showSection('testimonials')">VIP Reviews</span>
+        <span class="nav-link" onclick="showSection('contact')">Executive Contact</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="luxury-box">
+                <h2>Welcome to the Future of Exclusive Nature</h2>
+                <p><strong>CEO Message from Maximilian Verdant-Sterling III</strong></p>
+                <p><em>"Nature is too precious to leave to everyone. At NatureCorp Solutions, we believe environmental restoration should be available to those who truly appreciate its value - and can afford to pay for quality."</em></p>
+            </div>
+            
+            <div class="bio-tech">
+                <h3>Post-Squishing Environmental Leadership</h3>
+                <p>Since the great dimensional convergence event, NatureCorp Solutions has been at the forefront of <strong>Bio-Synthesis™ technology</strong>, offering premium environmental restoration services to Europe's most distinguished clientele.</p>
+                
+                <p><strong>Why Choose NatureCorp?</strong></p>
+                <ul>
+                    <li>Exclusive membership-only environmental access</li>
+                    <li>Patented Chloro-Matrix™ restoration technology</li>
+                    <li>Personal nature consultants for VIP clients</li>
+                    <li>Carbon-negative luxury experiences</li>
+                </ul>
+            </div>
+            
+            <div class="disclaimer">
+                <p><strong>Notice:</strong> NatureCorp Solutions services are available exclusively to verified premium members with minimum annual income of €500,000. Environmental access subject to availability and membership tier.</p>
+            </div>
+        </div>
+
+        <div id="services" class="section">
+            <h3>Premium Environmental Services</h3>
+            
+            <div class="bio-tech">
+                <h4>🌲 Private Forest Restoration</h4>
+                <p>Our <strong>Silva-Genesis™</strong> technology creates personalized forest ecosystems exclusively for our platinum members. Each tree is individually Bio-Synthesized™ using proprietary Natura-Algorithms™.</p>
+                <div class="price-tag">Starting at €45,000 per hectare</div>
+                <p><em>*Includes 24/7 ecosystem monitoring and quarterly bio-optimization sessions</em></p>
+            </div>
+            
+            <div class="bio-tech">
+                <h4>🦋 Bespoke Wildlife Experiences</h4>
+                <p>Experience nature as it was meant to be - exclusive and pristine. Our <strong>Fauna-Curation™</strong> service provides hand-selected wildlife encounters in controlled luxury environments.</p>
+                <div class="price-tag">€12,000 per experience session</div>
+                <p><em>*Rare species encounters available for Diamond-tier members only</em></p>
+            </div>
+            
+            <div class="bio-tech">
+                <h4>💧 Crystal-Pure Water Restoration</h4>
+                <p>Using advanced <strong>Hydro-Purification™</strong> matrices, we restore natural water sources to pre-industrial purity levels - exclusively for your private estate.</p>
+                <div class="price-tag">€89,000 per water source</div>
+                <p><em>*Includes lifetime molecular-level monitoring and re-purification guarantee</em></p>
+            </div>
+            
+            <div class="disclaimer">
+                <p>All services require membership verification and environmental impact assessment. NatureCorp Solutions reserves the right to limit access based on social standing and financial capacity.</p>
+            </div>
+        </div>
+
+        <div id="philosophy" class="section">
+            <h3>Our Environmental Philosophy</h3>
+            
+            <div class="bio-tech">
+                <h4>The NatureCorp Difference</h4>
+                <p>At NatureCorp Solutions, we understand that <strong>true environmental appreciation requires exclusivity</strong>. Mass access to nature has been the problem all along - it's time for a more refined approach.</p>
+                
+                <p><strong>Our Core Beliefs:</strong></p>
+                <ul>
+                    <li><strong>Quality over Quantity:</strong> Better to have perfectly restored small areas than poorly maintained public spaces</li>
+                    <li><strong>Educated Appreciation:</strong> Only those with proper cultural refinement can truly value nature's beauty</li>
+                    <li><strong>Economic Incentives:</strong> Market forces drive the best environmental outcomes</li>
+                    <li><strong>Technological Superiority:</strong> Our Bio-Synthesis™ creates better nature than nature itself</li>
+                </ul>
+            </div>
+            
+            <div class="luxury-box">
+                <h4>A Message from Our CEO</h4>
+                <p><em>"People complain about 'environmental inequality,' but they miss the point entirely. When I invest €2 million in restoring my private wetlands, I'm doing more for the environment than a thousand protesters ever could. My helicopter might use fuel getting there, but the carbon offset from my premium restoration work more than compensates.</em></p>
+                
+                <p><em>The common people simply don't understand environmental stewardship the way we do. They want to 'democratize' nature, but look what democracy has done to our cities! At NatureCorp, we're preserving the REAL environment for future generations - the ones who matter."</em></p>
+                
+                <p><strong>- Maximilian Verdant-Sterling III, CEO & Chief Environmental Visionary</strong></p>
+            </div>
+            
+            <div class="disclaimer">
+                <p>Environmental philosophy sessions available exclusively to Platinum-tier members and above. Requires pre-screening for cultural compatibility and environmental literacy.</p>
+            </div>
+        </div>
+
+        <div id="packages" class="section">
+            <h3>Exclusive Membership Packages</h3>
+            
+            <div class="luxury-box">
+                <h4>🥉 Bronze Elite - "Nature Enthusiast"</h4>
+                <div class="price-tag">€50,000 annual membership</div>
+                <ul>
+                    <li>Monthly guided tours of premium restoration sites</li>
+                    <li>Access to Bronze-tier Bio-Synthesis™ gardens</li>
+                    <li>Quarterly environmental impact reports</li>
+                    <li>Basic carbon offset portfolio management</li>
+                </ul>
+                <p><em>*Perfect for the environmentally curious newcomer</em></p>
+            </div>
+            
+            <div class="luxury-box">
+                <h4>🥈 Silver Prestige - "Conservation Connoisseur"</h4>
+                <div class="price-tag">€150,000 annual membership</div>
+                <ul>
+                    <li>Private nature consultant assignment</li>
+                    <li>Exclusive wildlife encounter experiences</li>
+                    <li>Custom ecosystem design for personal estates</li>
+                    <li>Priority access to rare species viewing</li>
+                    <li>Premium Bio-Synthesis™ technology access</li>
+                </ul>
+                <p><em>*For the discerning environmental sophisticate</em></p>
+            </div>
+            
+            <div class="luxury-box">
+                <h4>🏆 Diamond Sovereign - "Ecological Royalty"</h4>
+                <div class="price-tag">€500,000 annual membership</div>
+                <ul>
+                    <li>Personal ecosystem ownership and management</li>
+                    <li>Unlimited Bio-Synthesis™ and restoration services</li>
+                    <li>Exclusive access to pre-Squishing ecological experiences</li>
+                    <li>Private jet eco-tours to premium restoration sites</li>
+                    <li>Influence over NatureCorp environmental policy</li>
+                    <li>Tax-optimized carbon credit trading privileges</li>
+                </ul>
+                <p><em>*The ultimate expression of environmental leadership</em></p>
+            </div>
+            
+            <div class="disclaimer">
+                <p>All memberships subject to social compatibility review and financial verification. Payment plans available for qualifying hereditary aristocracy and technology executives.</p>
+            </div>
+        </div>
+
+        <div id="testimonials" class="section">
+            <h3>What Our VIP Members Say</h3>
+            
+            <div class="testimonial">
+                <p><strong>Lady Penelope Ashworth-Kent, Diamond Member</strong></p>
+                <p><em>"Finally, someone who understands that environmental protection requires the right sort of people! My private forest is absolutely divine - so much better than those dreadful public parks with their... common elements. Worth every euro!"</em></p>
+            </div>
+            
+            <div class="testimonial">
+                <p><strong>Heinrich von Reichswald, Technology Executive</strong></p>
+                <p><em>"I was skeptical about spending €300,000 on environmental restoration, but now I see the wisdom. My Bio-Synthesized™ gardens are perfect conversation pieces at dinner parties. Much more sophisticated than charitable donations to those messy public environmental groups."</em></p>
+            </div>
+            
+            <div class="testimonial">
+                <p><strong>Duchess Margot de Beaumont, Platinum Legacy Member</strong></p>
+                <p><em>"NatureCorp truly understands environmental stewardship. Why should MY tax euros go to environmental programs for people who don't even appreciate nature properly? Now I can ensure the environment is protected by the right people - people like us."</em></p>
+            </div>
+            
+            <div class="testimonial">
+                <p><strong>Dr. Cornelius Goldstein, Investment Banking</strong></p>
+                <p><em>"The carbon offset opportunities alone justify the membership cost. I can fly my private jet guilt-free knowing my premium restoration investments more than compensate. Plus, the exclusivity is delightful - no protesters or undesirable elements."</em></p>
+            </div>
+            
+            <div class="disclaimer">
+                <p>Testimonials from verified premium members only. NatureCorp Solutions maintains strict confidentiality regarding member identities and activities.</p>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h3>Executive Contact Information</h3>
+            
+            <div class="bio-tech">
+                <h4>🏢 Corporate Headquarters</h4>
+                <p><strong>NatureCorp Solutions European Division</strong><br>
+                Maximilian Tower, Floor 47<br>
+                Rue de la Nature Exclusive, 1000<br>
+                Brussels, Belgium</p>
+                
+                <p><strong>Executive Reception:</strong> +32 (0)2-ELITE-00<br>
+                <strong>VIP Membership Services:</strong> +32 (0)2-PRESTIGE<br>
+                <strong>Diamond Member Hotline:</strong> +32 (0)2-SOVEREIGN</p>
+            </div>
+            
+            <div class="luxury-box">
+                <h4>📧 Digital Communications</h4>
+                <p><strong>CEO Direct Contact:</strong> <a href="mailto:maximilian.verdant@hexagram.corp">maximilian.verdant@hexagram.corp</a></p>
+                <p><strong>Membership Inquiries:</strong> <a href="mailto:vip@hexagram.corp">vip@hexagram.corp</a></p>
+                <p><strong>Press & Media (Pre-approved only):</strong> <a href="mailto:media@hexagram.corp">media@hexagram.corp</a></p>
+                
+                <p><strong>Hexagram Corporate Network:</strong> <a href="mailto:naturecorp@hexagram.corp">naturecorp@hexagram.corp</a></p>
+            </div>
+            
+            <div class="bio-tech">
+                <h4>⏰ Office Hours</h4>
+                <p><strong>Executive Consultations:</strong> By appointment only<br>
+                <strong>Membership Services:</strong> Monday-Friday, 9:00-17:00 CET<br>
+                <strong>Emergency Ecosystem Support:</strong> 24/7 for Diamond Members</p>
+                
+                <p><em>All communications subject to social compatibility screening and financial verification protocols.</em></p>
+            </div>
+            
+            <div class="disclaimer">
+                <p>NatureCorp Solutions operates exclusively through referral and invitation. Unsolicited inquiries from non-qualified prospects will not receive response. All communications monitored for quality assurance and social appropriateness.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 NatureCorp Solutions | Advancing Environmental Excellence Through Exclusivity</p>
+        <p>Optimized for Hypernet Explorer 5.0+ | Best viewed at 1024x768 resolution</p>
+        <p>Bio-Synthesis™, Natura-Algorithms™, Silva-Genesis™, Fauna-Curation™, Hydro-Purification™ and Chloro-Matrix™ are registered trademarks of NatureCorp Solutions</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

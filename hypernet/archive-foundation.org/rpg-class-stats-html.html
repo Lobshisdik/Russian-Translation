@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Class Stat Ratings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .stat-row {
+            background-color: #f9f9f9;
+            font-style: italic;
+        }
+        .A { color: #27ae60; font-weight: bold; }
+        .B { color: #2ecc71; }
+        .C { color: #f39c12; }
+        .D { color: #e67e22; }
+        .E { color: #c0392b; font-weight: bold; }
+        .class-info {
+            font-weight: bold;
+        }
+        .even-row {
+            background-color: #f5f5f5;
+        }
+        .download-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+            font-weight: bold;
+        }
+        .download-button:hover {
+            background-color: #2980b9;
+        }
+        @media print {
+            .download-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>RPG Maker MZ Class Stat Ratings</h1>
+    
+    <a href="#" class="download-button" onclick="downloadHTML()">Download HTML File</a>
+
+    <h2>Fantasy Classes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Class Name</th>
+                <th>Max HP</th>
+                <th>Max MP</th>
+                <th>Attack</th>
+                <th>Defense</th>
+            </tr>
+            <tr class="stat-row">
+                <th></th>
+                <th></th>
+                <th>M.Attack</th>
+                <th>M.Defense</th>
+                <th>Agility</th>
+                <th>Luck</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="class-info" rowspan="2">0001</td>
+                <td class="class-info" rowspan="2">Freelancer</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0002</td>
+                <td class="class-info" rowspan="2">Witch</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0003</td>
+                <td class="class-info" rowspan="2">Nun</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="E">E</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0004</td>
+                <td class="class-info" rowspan="2">Knight</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="E">E</td>
+                <td class="C">C</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0005</td>
+                <td class="class-info" rowspan="2">Wrestler</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="E">E</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0006</td>
+                <td class="class-info" rowspan="2">CEO</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0051</td>
+                <td class="class-info" rowspan="2">Nurse</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0052</td>
+                <td class="class-info" rowspan="2">Hunter-Gatherer</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0053</td>
+                <td class="class-info" rowspan="2">Physicist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0054</td>
+                <td class="class-info" rowspan="2">Courier</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0055</td>
+                <td class="class-info" rowspan="2">Accountant</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0056</td>
+                <td class="class-info" rowspan="2">Farmer</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0057</td>
+                <td class="class-info" rowspan="2">Lumberjack</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="E">E</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0058</td>
+                <td class="class-info" rowspan="2">Meteorologist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0059</td>
+                <td class="class-info" rowspan="2">Priest</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0060</td>
+                <td class="class-info" rowspan="2">Entertainer</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="A">A</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        function downloadHTML() {
+            // Create a Blob containing the HTML content
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            
+            // Create a temporary anchor element to trigger the download
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'rpg_maker_class_stats.html';
+            
+            // Trigger the download
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+            <tr>
+                <td class="class-info" rowspan="2">0007</td>
+                <td class="class-info" rowspan="2">Hunter</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0008</td>
+                <td class="class-info" rowspan="2">Cultist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0009</td>
+                <td class="class-info" rowspan="2">Medic</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0044</td>
+                <td class="class-info" rowspan="2">Police Officer</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0045</td>
+                <td class="class-info" rowspan="2">Chef</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0046</td>
+                <td class="class-info" rowspan="2">Journalist</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0047</td>
+                <td class="class-info" rowspan="2">Construction Worker</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="E">E</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0048</td>
+                <td class="class-info" rowspan="2">Teacher</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0049</td>
+                <td class="class-info" rowspan="2">Psychologist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0050</td>
+                <td class="class-info" rowspan="2">Archaeologist</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0010</td>
+                <td class="class-info" rowspan="2">Elementalist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0011</td>
+                <td class="class-info" rowspan="2">Martial Artist</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0012</td>
+                <td class="class-info" rowspan="2">Enchanter</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0013</td>
+                <td class="class-info" rowspan="2">Berserker</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="E">E</td>
+                <td class="E">E</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0014</td>
+                <td class="class-info" rowspan="2">Acrobat</td>
+                <td class="C">C</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="A">A</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0015</td>
+                <td class="class-info" rowspan="2">Monk</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0016</td>
+                <td class="class-info" rowspan="2">Brawler</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="E">E</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0017</td>
+                <td class="class-info" rowspan="2">Boxer</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="E">E</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0018</td>
+                <td class="class-info" rowspan="2">Pro Wrestler</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="E">E</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0019</td>
+                <td class="class-info" rowspan="2">Fire Mage</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0020</td>
+                <td class="class-info" rowspan="2">Ice Mage</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0021</td>
+                <td class="class-info" rowspan="2">Rogue</td>
+                <td class="C">C</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0022</td>
+                <td class="class-info" rowspan="2">Paladin</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0023</td>
+                <td class="class-info" rowspan="2">Warlock</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0024</td>
+                <td class="class-info" rowspan="2">Ranger</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0025</td>
+                <td class="class-info" rowspan="2">Cleric</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0026</td>
+                <td class="class-info" rowspan="2">Samurai</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0027</td>
+                <td class="class-info" rowspan="2">Archmage</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0028</td>
+                <td class="class-info" rowspan="2">Scout</td>
+                <td class="C">C</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0029</td>
+                <td class="class-info" rowspan="2">Oracle</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0030</td>
+                <td class="class-info" rowspan="2">Gladiator</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="E">E</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0031</td>
+                <td class="class-info" rowspan="2">Necromancer</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0032</td>
+                <td class="class-info" rowspan="2">Commander</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0033</td>
+                <td class="class-info" rowspan="2">Guardian</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0034</td>
+                <td class="class-info" rowspan="2">Spellblade</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0035</td>
+                <td class="class-info" rowspan="2">Bard</td>
+                <td class="D">D</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="A">A</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0036</td>
+                <td class="class-info" rowspan="2">Illusionist</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0037</td>
+                <td class="class-info" rowspan="2">Battlemage</td>
+                <td class="C">C</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0038</td>
+                <td class="class-info" rowspan="2">Mercenary</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="D">D</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Modern/Real World Classes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Class Name</th>
+                <th>Max HP</th>
+                <th>Max MP</th>
+                <th>Attack</th>
+                <th>Defense</th>
+            </tr>
+            <tr class="stat-row">
+                <th></th>
+                <th></th>
+                <th>M.Attack</th>
+                <th>M.Defense</th>
+                <th>Agility</th>
+                <th>Luck</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="class-info" rowspan="2">0039</td>
+                <td class="class-info" rowspan="2">Sage</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="A">A</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0040</td>
+                <td class="class-info" rowspan="2">Barbarian</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="A">A</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="E">E</td>
+                <td class="E">E</td>
+                <td class="C">C</td>
+                <td class="C">C</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0041</td>
+                <td class="class-info" rowspan="2">Doctor</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+                <td class="D">D</td>
+                <td class="C">C</td>
+            </tr>
+            <tr class="stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+                <td class="B">B</td>
+            </tr>
+            <tr class="even-row">
+                <td class="class-info" rowspan="2">0042</td>
+                <td class="class-info" rowspan="2">Scientist</td>
+                <td class="D">D</td>
+                <td class="A">A</td>
+                <td class="E">E</td>
+                <td class="D">D</td>
+            </tr>
+            <tr class="even-row stat-row">
+                <td class="A">A</td>
+                <td class="B">B</td>
+                <td class="C">C</td>
+                <td class="B">B</td>
+            </tr>
+            <tr>
+                <td class="class-info" rowspan="2">0043</td>
+                <td class="class-info" rowspan="2">Firefighter</td>
+                <td class="A">A</td>
+                <td class="D">D</td>

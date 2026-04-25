@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPG Maker MZ to D&D Manual</title>
+    <style>
+      /* D&D 5e Inspired Styling */
+      @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Lora:ital,wght@0,400;0,700;1,400&display=swap");
+    </style>
+    <link rel="stylesheet" href="./css/manual.css" />
+  </head>
+  <body>
+    <div id="controls">
+      <h1>RPG Maker MZ Data Exporter</h1>
+      <p>
+        Select a JSON file from your project's 'data' folder (e.g.,
+        Enemies.json, Skills.json).
+      </p>
+      <p>
+        <b>Important:</b> For images to load (e.g., for Enemies), place this
+        HTML file in your main RPG Maker project folder (the one containing
+        'data' and 'img').
+      </p>
+      <input type="file" id="fileInput" accept=".json" multiple />
+      <button id="generateButton">Generate Full PDF Manual 📄</button>
+      <button id="printButton" style="display: none">
+        Export to PDF / Print 🖨️
+      </button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const fileInput = document.getElementById("fileInput");
+        const generateButton = document.getElementById("generateButton");
+        const printButton = document.getElementById("printButton");
+        const outputDiv = document.getElementById("output");
+        let skillsData = null;
+   const TRAIT_CODES={11:"Element Rate",12:"Debuff Rate",13:"State Rate",14:"State Resist",21:"Parameter",22:"Extra",23:"Special",31:"Element",32:"State",33:"Speed",34:"Attack Times",41:"Add Skill Type",42:"Seal Skill Type",43:"Add Skill",44:"Seal Skill",51:"Equip Weapon Type",52:"Equip Armor Type",53:"Lock Equipment",54:"Seal Equipment",55:"Slot Type",61:"Action Times+",62:"Special Flag",63:"Collapse Effect",64:"Party Ability"};const PARAMS=["HP","MP","ATK","CON","INT","WIS","DEX","PSI"];const XPARAMS=["Hit Rate","Evasion Rate","Critical Hit Rate","Critical Evasion","Magic Evasion","Magic Reflection","Counter Attack","HP Regeneration","MP Regeneration","TP Regeneration"];const SPARAMS=["Target Rate","Guard Effect","Recovery Effect","Pharmacology","MP Cost Rate","TP Charge Rate","Physical Damage Rate","Magical Damage Rate","Floor Damage Rate","Experience Rate"];const SPECIAL_FLAGS={0:"Auto Battle",1:"Guard",2:"Substitute",3:"Preserve TP"};const PARTY_ABILITIES={0:"Enc. Half",1:"Enc. None",2:"Cancel Surprise",3:"Raise Preemptive",4:"Gold Double",5:"Drop Item Double"};const EFFECT_CODES={11:"Recover HP",12:"Recover MP",21:"Add State",22:"Remove State",31:"Add Buff",32:"Add Debuff",33:"Remove Buff",34:"Remove Debuff",41:"Learn Skill",42:"Common Event",43:"Grow",44:"Special Flag",51:"Recover TP",61:"Change TP Cost"};const STATE_NAME_MAP={1:"Dead",2:"Guard",3:"Immortal",4:"Poison",5:"Blind",6:"Silence",7:"Rage",8:"Confusion",9:"Charm",10:"Sleep",11:"Freeze",12:"Paralysis",13:"Stun",14:"Locked on",15:"HP Regeneration",16:"MP Regeneration",17:"Auto‐Attack Down",18:"Auto‐Attack Up",19:"Hit Rate Down",20:"Hit Rate Up",21:"Evasion Down",22:"Evasion Up",23:"Magic Evasion Down",24:"Magic Evasion Up",25:"Magic Reflection",26:"Counter Attack",27:"Substitute",28:"Protect",29:"Shell",30:"Regen",31:"Barrier",32:"Attack State",33:"Defense State",34:"Magic Attack State",35:"Shadow Veil",36:"Arcane Surge",37:"Ethereal",38:"Unbalanced",39:"Life Link",40:"Vulnerability",41:"Nausea",42:"Drunk",43:"Burned",44:"Infected",45:"Floating",46:"Invisible",47:"Oily",48:"Bleeding",49:"",50:""};const ELEMENTS_MAP={1:"Physical",2:"Fire",3:"Ice",4:"Thunder",5:"Water",6:"Metal",7:"Wind",8:"Sacred",9:"Cursed"};const WEAPONS_MAP={1:"Dagger",2:"Sword",3:"Heavy",4:"Axe",5:"Whip",6:"Staff",7:"Bow",8:"Projectile",9:"Gun",10:"Claw",11:"Glove",12:"Spear"};const SCOPE_MAP={0:"None",1:"None",2:"Enemy",3:"Ally",4:"Enemy & Ally",5:"User",6:"6",7:"1 Ally",8:"8",9:"9"};const OCCASION_MAP={0:"None",1:"Always",2:"Battle Screen",3:"Menu Screen",4:"Never"};const HIT_MAP={0:"None",1:"Certain Hit",2:"Physical Attack",3:"Magical Attack"};const ARMOR_MAP={0:"None",1:"General Armor",2:"Magic Armor",3:"Light Armor",4:"Heavy Armor",5:"Small Shield",6:"Large Shield"};const EQUIPMENT_MAP={0:"None",1:"Weapon",2:"Shield",3:"Head",4:"Body",5:"Accessory"};
+        generateButton.addEventListener("click", () => {
+          const files = Array.from(fileInput.files);
+          if (!files.length)
+            return alert("Please select at least one JSON file.");
+          readAllFiles(files)
+            .then((datasets) => {
+              const manualHtml = generateManual(datasets);
+              outputDiv.innerHTML = manualHtml;
+              printButton.style.display = "inline-block";
+            })
+            .catch((err) => {
+              outputDiv.innerHTML = `<p style="color:red;"><strong>Error:</strong> ${err.message}</p>`;
+            });
+        });
+
+        printButton.addEventListener("click", () => window.print());
+
+        fileInput.addEventListener("change", handleFileSelect);
+        printButton.addEventListener("click", () => window.print());
+
+        function handleFileSelect(event) {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const content = JSON.parse(e.target.result);
+              processFile(file.name, content);
+            } catch (error) {
+              outputDiv.innerHTML = `<p style="color:red;"><strong>Error:</strong> Could not parse the JSON file. Ensure it is valid. <br><small>${error.message}</small></p>`;
+            }
+          };
+          reader.readAsText(file);
+        }
+        function readAllFiles(files) {
+          return Promise.all(
+            files.map(
+              (file) =>
+                new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = (e) => {
+                    try {
+                      const content = JSON.parse(e.target.result);
+                      if (!Array.isArray(content))
+                        throw new Error("Data is not an array");
+                      resolve({ name: file.name, data: content });
+                    } catch (error) {
+                      reject(
+                        new Error(
+                          `Failed to parse ${file.name}: ${error.message}`
+                        )
+                      );
+                    }
+                  };
+                  reader.readAsText(file);
+                })
+            )
+          );
+        }
+        function generateManual(datasets) {
+          // force this exact order, any others fall back to alpha
+          const order = [
+            "Classes.json",
+            "Skills.json",
+            "Items.json",
+            "Weapons.json",
+            "Armors.json", // note: your file is "Armors.json" not singular "Armor.json"
+            "States.json",
+            "Enemies.json",
+          ];
+
+          datasets.sort((a, b) => {
+            const ia = order.indexOf(a.name);
+            const ib = order.indexOf(b.name);
+            // one of them is in your list
+            if (ia !== -1 || ib !== -1) {
+              if (ia === -1) return 1; // a is “extra”, push it to the end
+              if (ib === -1) return -1; // b is “extra”
+              return ia - ib; // both in list: sort by index
+            }
+            // neither is in your list: alpha
+            return a.name.localeCompare(b.name);
+          });
+
+          // Store skills data for cross-referencing
+          const skillsDataset = datasets.find(
+            (ds) => ds.name === "Skills.json"
+          );
+          if (skillsDataset) skillsData = skillsDataset.data;
+          const itemsDataset = datasets.find((ds) => ds.name === "Items.json");
+          if (itemsDataset) itemsData = itemsDataset.data;
+          const weaponsDataset = datasets.find(
+            (ds) => ds.name === "Weapons.json"
+          );
+          if (weaponsDataset) weaponsData = weaponsDataset.data;
+          const armorsDataset = datasets.find(
+            (ds) => ds.name === "Armors.json"
+          );
+          if (armorsDataset) armorsData = armorsDataset.data;
+
+          // Build index
+          let indexHtml = '<section id="index"><h1>Contents</h1><ul>';
+          datasets.forEach((ds) => {
+            const title = ds.name.replace(".json", "");
+            const anchor = title.toLowerCase().replace(/\s+/g, "-");
+            indexHtml += `<li><a href="#${anchor}">${title}</a></li>`;
+          });
+          indexHtml += "</ul><hr></section>";
+
+          // Build sections
+          let bodyHtml = "";
+          datasets.forEach((ds) => {
+            const sectionId = ds.name
+              .replace(".json", "")
+              .toLowerCase()
+              .replace(/\s+/g, "-");
+            bodyHtml += `<section id="${sectionId}"><h1>${ds.name.replace(
+              ".json",
+              ""
+            )}</h1>`;
+            bodyHtml += processFile(ds.name, ds.data);
+            bodyHtml += `</section><hr>`;
+          });
+
+          return indexHtml + bodyHtml;
+        }
+        // Helper function to get skill name by ID
+        function getSkillName(skillId) {
+          if (!skillsData) return `Skill ID: ${skillId}`;
+          const skill = skillsData.find((s) => s && s.id === skillId);
+          return skill ? skill.name : `Skill ID: ${skillId}`;
+        }
+
+        function processFile(fileName, data) {
+          outputDiv.innerHTML = "";
+          printButton.style.display = "inline-block";
+
+          if (!data || !Array.isArray(data)) {
+            outputDiv.innerHTML = `<p style="color:red;"><strong>Error:</strong> The selected file does not contain a valid data array.</p>`;
+            return;
+          }
+          const sortedData = data
+            .filter((item) => item && item.name)
+            .sort((a, b) => a.name.localeCompare(b.name));
+          let html = "";
+          switch (fileName) {
+            case "Classes.json":
+              html += processClasses(sortedData);
+              break;
+            case "Enemies.json":
+              html += processEnemies(sortedData);
+              break;
+            case "Items.json":
+              html += processItems(sortedData);
+              break;
+            case "Skills.json":
+              html += processSkills(sortedData);
+              break;
+            case "Armors.json":
+            case "Weapons.json":
+              html += processEquipment(sortedData);
+              break;
+            case "States.json":
+              html += processStates(sortedData);
+              break;
+            case "Actors.json":
+            case "Animations.json":
+              html += processGeneric(sortedData);
+              break;
+            default:
+              html += `<p>Processing for <strong>${fileName}</strong> is not specifically implemented. Showing generic view.</p>`;
+              html += processGeneric(sortedData);
+          }
+          return html;
+        }
+        function processItems(data) {
+          let html = `<div class="two-column-page">`;
+          data.forEach((item) => {
+            const noteData = parseNote(item.note); // :contentReference[oaicite:0]{index=0}
+            html += `
+            <div class="entry">
+                <h3>${item.name}${
+              item.iconIndex > 0 ? ` ${getIconHtml(item.iconIndex)}` : ``
+            }</h3>
+                <p>${(item.description || "No description.").replace(
+                  /\n/g,
+                  "<br>"
+                )}</p>
+                <p><strong>Category:</strong> ${
+                  noteData.category || "Uncategorized"
+                }</p>
+                <p><strong>Price:</strong> ${convertGoldToEuros(item.price)}</p>
+                <p><strong>Consumable:</strong> ${
+                  item.consumable ? "Yes" : "No"
+                }</p>
+                ${
+                  item.damage?.formula && item.damage.formula !== "0"
+                    ? `<p><code>${item.damage.formula}</code> (Variance: ${item.damage.variance}%)</p>`
+                    : ``
+                }
+                ${parseEffects(item.effects)}
+                <p>
+                <strong>Scope:</strong> ${SCOPE_MAP[item.scope]},
+                <strong>Occasion:</strong> ${OCCASION_MAP[item.occasion]},
+                <strong>Hit Type:</strong> ${HIT_MAP[item.hitType]},
+                <strong>Speed:</strong> ${item.speed},
+                <strong>Success:</strong> ${item.successRate}%,
+                <strong>TP Gain:</strong> ${item.tpGain},
+                <strong>Repeats:</strong> ${item.repeats}
+                </p>
+            </div>
+            `;
+          });
+          return html + `</div>`;
+        }
+        function parseEffects(effects) {
+          if (!effects || !effects.length) return "";
+          return `
+                <div class="effects-list">
+                <h4>Effects</h4>
+                <ul>
+                    ${effects
+                      .map((e) => {
+                        const name = EFFECT_CODES[e.code] || `Code ${e.code}`;
+                        let detail;
+                        switch (e.code) {
+                          case 11:
+                            detail = `HP: ${e.value1}–${e.value2}`;
+                            break;
+                          case 12:
+                            detail = `MP: ${e.value1}–${e.value2}`;
+                            break;
+                          case 31:
+                            detail = `${PARAMS[e.dataId]} for ${
+                              e.value1
+                            } turns`;
+                            break;
+                          // …other cases…
+                          default:
+                            detail = `${e.dataId}, V1=${e.value1}, V2=${e.value2}`;
+                        }
+                        return `<li><strong>${name}:</strong> ${detail}</li>`;
+                      })
+                      .join("")}
+                </ul>
+                </div>
+            `;
+        }
+        // --- HELPER FUNCTIONS ---
+
+        function parseNote(note) {
+          const data = {};
+          if (!note) return data;
+          const lines = note.split(/[\r\n]+/);
+          lines.forEach((line) => {
+            const match = line.match(/<([^:]+):\s*(.*)>/);
+            if (match) {
+              data[match[1].trim()] = match[2].trim();
+            }
+          });
+          return data;
+        }
+
+        function formatTrait(trait) {
+          const codeName = TRAIT_CODES[trait.code] || `Code ${trait.code}`;
+          let details = "";
+          let value = Math.round(trait.value * 100);
+
+          switch (trait.code) {
+            case 11: // Param
+              details = `${PARAMS[trait.dataId] || "Unknown"} * ${value}%`;
+
+            case 21: // Param
+              details = `${PARAMS[trait.dataId] || "Unknown"} * ${value}%`;
+              break;
+            case 22: // X-Param
+              details = `${XPARAMS[trait.dataId] || "Unknown"} + ${
+                value - 100
+              }%`;
+              break;
+            case 23: // S-Param
+              details = `${SPARAMS[trait.dataId] || "Unknown"} * ${value}%`;
+              break;
+            case 31: // Attack Element
+              details = `${ELEMENTS_MAP[trait.dataId]}`;
+              break;
+            case 33: // Attack Element
+              details = `${trait.code}`;
+              break;
+            case 32: // Attack State
+              details = `${getStateName(trait.dataId)} (${value}%)`;
+              break;
+            case 43: // Add Skill
+              details = `Learn Skill ID: ${trait.code}`;
+              break;
+            case 44: // Seal Skill
+              details = `Seal Skill ID: ${trait.code}`;
+              break;
+            case 55: // Seal Equipment
+              details = `Seal Equipment: ${trait.code}`;
+              break;
+
+            case 62: // Special Flag
+              details = `${SPECIAL_FLAGS[trait.dataId] || "Unknown Flag"}`;
+              break;
+            case 64: // Party Ability
+              details = `${PARTY_ABILITIES[trait.dataId] || "Unknown Ability"}`;
+              break;
+            default:
+              details = `${trait.dataId}, ${trait.value}`;
+          }
+          return `<strong>${codeName}:</strong> ${details}`;
+        }
+
+        function convertSpeed(speedVal) {
+          const speed = parseInt(speedVal, 10);
+          const map = {
+            1: "x4 slower",
+            2: "x2 slower",
+            3: "Slower",
+            4: "Normal",
+            5: "Faster",
+            6: "x2 faster",
+          };
+          return map[speed] || "0";
+        }
+        function getStateName(id) {
+          return STATE_NAME_MAP[id] || `${id}`;
+        }
+
+        // --- PROCESSOR FUNCTIONS ---
+
+        function processGeneric(data) {
+          return data
+            .map(
+              (item) => `
+                <div class="entry">
+                    <h3>${item.name} ${
+                item.iconIndex > 0 ? `${getIconHtml(item.iconIndex)}` : ""
+              }</h3>
+                    <p>${item.description || "No description."}</p>
+                </div>
+                <hr>
+            `
+            )
+            .join("");
+        }
+        function processSkills(data) {
+          // Group first by stypeId (1 = Magic, 2 = Special/Physical), then by category
+          const typeGroups = {
+            1: { name: "Magic Skills", categories: {} },
+            2: { name: "Physical Skills", categories: {} },
+          };
+
+          data.forEach((skill) => {
+            const skillType = skill.stypeId || 1; // Default to 1 (Magic) if stypeId is undefined
+            const category = parseNote(skill.note).category || "Uncategorized";
+
+            // Initialize type group if it doesn't exist
+            if (!typeGroups[skillType]) {
+              typeGroups[skillType] = {
+                name: `Type ${skillType} Skills`,
+                categories: {},
+              };
+            }
+
+            // Initialize category within type if it doesn't exist
+            if (!typeGroups[skillType].categories[category]) {
+              typeGroups[skillType].categories[category] = [];
+            }
+
+            typeGroups[skillType].categories[category].push(skill);
+          });
+
+          let html = "";
+
+          // Process each type group
+          Object.keys(typeGroups)
+            .sort()
+            .forEach((typeKey) => {
+              const typeGroup = typeGroups[typeKey];
+              const categories = typeGroup.categories;
+
+              // Only display type group if it has categories with skills
+              if (Object.keys(categories).length > 0) {
+                html += `<h1>${typeGroup.name}</h1>`;
+
+                // Process categories within this type
+                Object.keys(categories)
+                  .sort()
+                  .forEach((category) => {
+                    html += `<h2>${category}</h2>`;
+                    html += `<div class="two-column-page">`;
+
+                    categories[category].forEach((skill) => {
+                      const noteData = parseNote(skill.note);
+
+                      // Build damage info
+                      let damageHtml = "";
+                      if (
+                        skill.damage &&
+                        skill.damage.formula &&
+                        skill.damage.formula !== "0"
+                      ) {
+                        const elementName =
+                          ELEMENTS_MAP[skill.damage.elementId] || "Physical";
+                        const criticalText = skill.damage.critical
+                          ? "Yes"
+                          : "No";
+                        damageHtml = `
+                            <div class="skill-damage">
+                                <p><strong>Formula:</strong> <code>${skill.damage.formula}</code></p>
+                                <p><strong>Element:</strong> ${elementName}  <strong>Variance:</strong> ${skill.damage.variance}%  <strong>Critical:</strong> ${criticalText}</p>
+                            </div>`;
+                      }
+
+                      // Build effects info
+                      let effectsHtml = "";
+                      if (skill.effects && skill.effects.length) {
+                        // Group effects by their code
+                        const groupedEffects = {};
+
+                        skill.effects.forEach((effect) => {
+                          const effectName =
+                            EFFECT_CODES[effect.code] || `Code ${effect.code}`;
+                          let detail = "";
+
+                          switch (effect.code) {
+                            case 11: // Recover HP
+                              detail = `${effect.value1}${
+                                effect.value2 > 0 ? `-${effect.value2}` : ""
+                              } HP`;
+                              break;
+                            case 12: // Recover MP
+                              detail = `${effect.value1}${
+                                effect.value2 > 0 ? `-${effect.value2}` : ""
+                              } MP`;
+                              break;
+                            case 21: // Add State
+                              detail = `${getStateName(
+                                effect.dataId
+                              )} (${Math.round(effect.value1 * 100)}% chance)`;
+                              break;
+                            case 22: // Remove State
+                              detail = `Remove ${getStateName(effect.dataId)}`;
+                              break;
+                            case 31: // Add Buff
+                              detail = `${PARAMS[effect.dataId]} buff for ${
+                                effect.value1
+                              } turns`;
+                              break;
+                            case 32: // Add Debuff
+                              detail = `${PARAMS[effect.dataId]} debuff for ${
+                                effect.value1
+                              } turns`;
+                              break;
+                            case 33: // Remove Buff
+                              detail = `Remove ${PARAMS[effect.dataId]} buff`;
+                              break;
+                            case 34: // Remove Debuff
+                              detail = `Remove ${PARAMS[effect.dataId]} debuff`;
+                              break;
+                            case 41: // Learn Skill
+                              detail = `Learn ${getSkillName(effect.dataId)}`;
+                              break;
+                            case 42: // Common Event
+                              detail = `Trigger Common Event ${effect.dataId}`;
+                              break;
+                            case 43: // Grow
+                              detail = `${PARAMS[effect.dataId]} +${
+                                effect.value1
+                              }`;
+                              break;
+                            case 51: // Recover TP
+                              detail = `${effect.value1} TP`;
+                              break;
+                            default:
+                              detail = `DataID: ${effect.dataId}, Value1: ${effect.value1}, Value2: ${effect.value2}`;
+                          }
+
+                          // Group by effect name
+                          if (!groupedEffects[effectName]) {
+                            groupedEffects[effectName] = [];
+                          }
+                          groupedEffects[effectName].push(detail);
+                        });
+
+                        // Create the effects list with grouped details
+                        const effectsList = Object.entries(groupedEffects)
+                          .map(
+                            ([effectName, details]) =>
+                              `<li><strong>${effectName}:</strong> ${details.join(
+                                ", "
+                              )}</li>`
+                          )
+                          .join("");
+
+                        effectsHtml = `
+                            <div class="skill-effects">
+                                <h4>Effects</h4>
+                                <ul>${effectsList}</ul>
+                            </div>`;
+                      }
+
+                      // Build weapon requirements
+                      let weaponReqHtml = "";
+                      if (
+                        skill.requiredWtypeId1 > 0 ||
+                        skill.requiredWtypeId2 > 0
+                      ) {
+                        const weapons = [];
+                        if (skill.requiredWtypeId1 > 0)
+                          weapons.push(
+                            WEAPONS_MAP[skill.requiredWtypeId1] ||
+                              `Type ${skill.requiredWtypeId1}`
+                          );
+                        if (skill.requiredWtypeId2 > 0)
+                          weapons.push(
+                            WEAPONS_MAP[skill.requiredWtypeId2] ||
+                              `Type ${skill.requiredWtypeId2}`
+                          );
+                        weaponReqHtml = `<p><strong>Required Weapons:</strong> ${weapons.join(
+                          " or "
+                        )}</p>`;
+                      }
+
+                      // Build cost info
+                      let costHtml = "";
+                      const costs = [];
+                      if (skill.mpCost > 0) costs.push(`${skill.mpCost} MP`);
+                      if (skill.tpCost > 0) costs.push(`${skill.tpCost} TP`);
+                      if (costs.length > 0) {
+                        costHtml = `<span><strong>Cost: </strong>${costs.join(
+                          ", "
+                        )}</span>`;
+                      }
+
+                      // Build main skill entry
+                      html += `
+                        <div class="entry skill-card">
+                            <div class="skill-header">
+                                <h3>${skill.name}${
+                        skill.iconIndex > 0
+                          ? ` ${getIconHtml(skill.iconIndex)}`
+                          : ""
+                      }</h3>
+                            </div>
+                            
+                            <div class="skill-description">
+                                <p><em>${
+                                  skill.description ||
+                                  "No description provided."
+                                }</em></p>
+                            </div>
+
+                            <div class="skill-stats">
+                                <div class="stat-row">
+                                    ${costHtml}
+
+                                    <span><strong>Scope:</strong> ${
+                                      SCOPE_MAP[skill.scope] || skill.scope
+                                    }</span>
+                                    <span><strong>Speed:</strong> ${convertSpeed(
+                                      skill.speed
+                                    )}</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span><strong>Occasion:</strong> ${
+                                      OCCASION_MAP[skill.occasion] ||
+                                      skill.occasion
+                                    }</span>
+                                    <span><strong>Hit Type:</strong> ${
+                                      HIT_MAP[skill.hitType] || skill.hitType
+                                    }</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span><strong>Success Rate:</strong> ${
+                                      skill.successRate
+                                    }%</span>
+                                    <span><strong>Repeats:</strong> ${
+                                      skill.repeats
+                                    }</span>
+                                </div>
+                                ${
+                                  skill.tpGain > 0
+                                    ? `<div class="stat-row"><span><strong>TP Gain:</strong> ${skill.tpGain}</span></div>`
+                                    : ""
+                                }
+                            </div>
+
+                           
+                            ${weaponReqHtml}
+                            ${damageHtml}
+                            ${effectsHtml}
+                        </div>`;
+                    });
+                    html += `</div>`;
+                  });
+              }
+            });
+          return html;
+        }
+        function processClasses(data) {
+          let html = '<div class="two-column-page">';
+
+          data.forEach((cls) => {
+            const noteData = parseNote(cls.note);
+            const description = cls.note
+              .replace(/<[^>]+>/g, "")
+              .replace(/[\r\n]+/g, " ")
+              .trim();
+
+            // Group traits by their label (codeName)
+            let traitsHtml = "";
+            if (cls.traits && cls.traits.length) {
+              const groups = cls.traits.reduce((acc, trait) => {
+                const label = TRAIT_CODES[trait.code] || `Code ${trait.code}`;
+                const detail = formatTrait(trait).replace(
+                  /^<strong>[^:]+:<\/strong>\s*/,
+                  ""
+                );
+                acc[label] = acc[label] || [];
+                acc[label].push(detail);
+                return acc;
+              }, {});
+
+              const items = Object.entries(groups)
+                .map(
+                  ([label, details]) =>
+                    `<li><strong>${label}:</strong> ${details.join(", ")}</li>`
+                )
+                .join("");
+
+              traitsHtml = `
+                <div class="traits-list">
+                    <h4>Class Features</h4>
+                    <ul>${items}</ul>
+                </div>`;
+            }
+
+            // Process learnings array with better formatting
+            let learningsHtml = "";
+            if (cls.learnings && cls.learnings.length) {
+              const learningsList = cls.learnings
+                .sort((a, b) => a.level - b.level)
+                .map(
+                  (learning) =>
+                    `<li><span class="level-badge">Lv ${
+                      learning.level
+                    }</span> ${getSkillName(learning.skillId)}</li>`
+                )
+                .join("");
+
+              learningsHtml = `
+                <div class="learnings-list">
+                    <h4>Skills Learned</h4>
+                    <ul class="skills-list">${learningsList}</ul>
+                </div>`;
+            }
+
+            // Build the entry with improved structure
+            html += `
+            <div class="entry class-card">
+                <div class="class-header">
+                    <h3>${cls.name}</h3>
+                    ${
+                      noteData.Primary || noteData.Secondary
+                        ? `
+                        <div class="skill-types">
+                            ${
+                              noteData.Primary
+                                ? `<span class="skill-type primary">Primary: ${noteData.Primary}</span>`
+                                : ""
+                            }
+                            ${
+                              noteData.Secondary
+                                ? `<span class="skill-type secondary">Secondary: ${noteData.Secondary}</span>`
+                                : ""
+                            }
+                        </div>
+                    `
+                        : ""
+                    }
+                </div>
+                
+                <div class="class-description">
+                    <p><em>${description || "No description provided."}</em></p>
+                </div>
+                
+                <div class="class-details">
+                    ${traitsHtml}
+                    ${learningsHtml}
+                </div>
+            </div>`;
+          });
+
+          html += "</div>";
+          return html;
+        }
+        function convertGoldToEuros(gold) {
+          const euros = gold / 100;
+          return euros % 1 === 0 ? `${euros}€` : `${euros.toFixed(2)}€`;
+        }
+
+        function getIconHtml(iconIndex) {
+          if (!iconIndex || iconIndex <= 0) return "";
+
+          // IconSet.png is 576x720 with icons arranged in an 18x23 grid
+          // Each icon is 32x32 pixels
+          const iconsPerRow = 18;
+          const iconSize = 32;
+
+          // Calculate position in the grid
+          const row = Math.floor((iconIndex - 1) / iconsPerRow);
+          const col = (iconIndex - 1) % iconsPerRow;
+
+          // Calculate background position (negative values to shift the background)
+          const backgroundX = -(col * iconSize);
+          const backgroundY = -(row * iconSize);
+
+          return `<span class="icon" style="
+                display: inline-block;
+                width: ${iconSize}px;
+                height: ${iconSize}px;
+                background-image: url('./img/system/IconSet.png');
+                background-position: ${backgroundX}px ${backgroundY}px;
+                background-size: 576px 720px;
+                vertical-align: middle;
+                margin-right: 4px;
+            " title="Icon ${iconIndex}"></span>`;
+        }
+
+        // Updated to render enemies in a two‑column “card” layout, four per page:
+        // Updated processEnemies to match the Lizardfolk-style stat block
+        // Updated processEnemies to match the Lizardfolk-style stat block and show 3 per row
+        // Updated processEnemies: rename sprite source, include battler image, reposition images
+        function processEnemies(data) {
+          // Convert gold to euros: 100 gold = 1 euro
+
+          const groups = {};
+          data.forEach((enemy) => {
+            const noteData = parseNote(enemy.note);
+            const raw = enemy.note;
+            // Fallback for Level if no <Level> tag
+            if (!noteData.Level) {
+              const lvMatch = raw.match(/LV:\s*(\d+)/i);
+              if (lvMatch) noteData.Level = lvMatch[1];
+            }
+            // Fallback for Description if no <Description> tag
+            if (!noteData.Description) {
+              const descMatch = raw.match(/LV:\s*\d+\s*\|\s*([^<]+)/i);
+              if (descMatch) noteData.Description = descMatch[1].trim();
+            }
+
+            const archetype = noteData.Archetype || "Uncategorized";
+            if (!groups[archetype]) groups[archetype] = [];
+            groups[archetype].push({ enemy, noteData });
+          });
+
+          let html = "";
+          Object.keys(groups)
+            .sort()
+            .forEach((archetype) => {
+              const anyNote = groups[archetype][0].noteData;
+              const levelPrefix = anyNote.Level
+                ? `Level ${anyNote.Level} `
+                : "";
+              html += `<h2>${archetype}</h2>`;
+              html += `<div style="display:flex; flex-wrap:wrap; margin:-8px;">`;
+
+              groups[archetype].forEach(({ enemy, noteData }) => {
+                html += `<div style="flex: 1 0 33%; padding:8px; box-sizing:border-box;">`;
+                const sprite = noteData.Char?.replace("$", "") || "";
+                const spriteUrl = `./img/characters/Monsters/$${sprite}.png`;
+                const battler = enemy.battlerName;
+                const battlerUrl = `./img/enemies/${battler}.png`;
+
+                html += `
+      <div class="entry enemy-card" style="border.right:2px solid #333; padding:12px; margin-bottom:16px; page-break-inside:avoid;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <h3 style="margin:0;">${enemy.name}</h3>
+            ${
+              battler
+                ? `<img src="${battlerUrl}" class="battler" alt="${
+                    enemy.name
+                  } battler" style="max-height:120px; filter: hue-rotate(${
+                    enemy.battlerHue || 0
+                  }deg);">`
+                : ""
+            }
+ 
+          </div>
+          ${
+            noteData.Description
+              ? `<p class="monster-description">${noteData.Description}</p>`
+              : ""
+          }
+          <p><em>${levelPrefix} ${noteData.Archetype || ""}</em>           
+            ${
+              sprite
+                ? `<img class="sprite" src="${spriteUrl}" alt="sprite">`
+                : ""
+            }</p>
+        </div>
+        <hr>
+
+        <table style="width:100%; margin-bottom:8px;"><tr>${[
+          "STR",
+          "DEX",
+          "CON",
+          "INT",
+          "WIS",
+          "PSI",
+        ]
+          .map(
+            (label, i) =>
+              `<td style="text-align:center;"><strong>${label}</strong><br>${
+                enemy.params[2 + i] || 0
+              }</td>`
+          )
+          .join("")}</tr></table>
+        <hr>
+        <table style="width:100%; margin-bottom:8px;"><tr>
+            <td><strong>HP</strong></td><td>${enemy.params[0]}</td>
+            <td><strong>MP</strong></td><td>${enemy.params[1]}</td>
+            <td><strong>Speed</strong></td><td>${[
+              noteData.Movement,
+              noteData.Speed && convertSpeed(noteData.Speed),
+            ]
+              .filter(Boolean)
+              .join(", ")}</td>
+        </tr></table>
+        <p><strong>Reward:</strong> ${
+          enemy.gold > 0 ? convertGoldToEuros(enemy.gold) : "—"
+        }</p>
+        <p><strong>Items:</strong> ${
+          enemy.dropItems
+            ?.filter((d) => d.kind > 0)
+            .map((d) => {
+              const pct =
+                d.denominator > 0
+                  ? Math.round(100 / d.denominator) + "%"
+                  : "0%";
+              let name;
+              switch (d.kind) {
+                case 1:
+                  name =
+                    itemsData.find((i) => i && i.id === d.dataId)?.name ||
+                    "Item";
+                  break;
+                case 2:
+                  name =
+                    weaponsData.find((w) => w && w.id === d.dataId)?.name ||
+                    "Weapon";
+                  break;
+                case 3:
+                  name =
+                    armorsData.find((a) => a && a.id === d.dataId)?.name ||
+                    "Armor";
+                  break;
+                default:
+                  name = "Unknown";
+              }
+              return `${name} (${pct})`;
+            })
+            .join(", ") || "—"
+        }</p>
+        <p><strong>EXP:</strong> ${enemy.exp} EXP</p>
+        <p><strong>Biomes:</strong> ${noteData.Biome || "—"}</p>
+        <hr>
+        <p><strong>Skills:</strong> ${
+          enemy.actions
+            .filter((a) => a.skillId > 0)
+            .map((a) => getSkillName(a.skillId))
+            .join(", ") || "—"
+        }</p>
+      </div>`;
+                html += `</div>`;
+              });
+
+              html += `</div>`;
+            });
+
+          return html;
+        }
+
+        function formatBiomes(raw) {
+          const biomes = raw.split(",").map((b) => b.trim());
+          if (biomes.length === 1) return `Lives in ${biomes[0]} biome.`;
+          const last = biomes.pop();
+          return `Lives in ${biomes.join(", ")} and ${last} biomes.`;
+        }
+
+        function processCategorized(data, title) {
+          // Group by category (for items/skills)
+          const categories = {};
+          data.forEach((item) => {
+            const category = parseNote(item.note).category || "Uncategorized";
+            if (!categories[category]) categories[category] = [];
+            categories[category].push(item);
+          });
+
+          let html = "";
+          Object.keys(categories)
+            .sort()
+            .forEach((category) => {
+              html += `<h2>${category}</h2>`;
+              html += `<div class="two-column-page">`; // wrap to get two columns
+              categories[category].forEach((item) => {
+                html += `
+						<div class="entry">
+							<h3>${item.name}${
+                  item.iconIndex > 0 ? ` ${getIconHtml(item.iconIndex)}` : ""
+                }</h3>
+							<p>${item.description || "No description."}</p>
+							${
+                item.damage?.formula && item.damage.formula !== "0"
+                  ? `<p><strong>Damage Formula:</strong> <code>${item.damage.formula}</code></p>`
+                  : ""
+              }
+						</div>`;
+              });
+              html += `</div>`;
+            });
+          return html;
+        }
+
+        // Replace your existing processEquipment with this:
+        // Replace your existing processEquipment with this:
+        // Replace your existing processEquipment with this:
+        function processEquipment(data) {
+          let html = `<div class="two-column-page">`;
+          data.forEach((item) => {
+            // Process traits with special handling for Extra (X-Parameters) and Special (S-Parameters)
+            let traitsHtml = "";
+            if (item.traits && item.traits.length) {
+              const groupedTraits = {};
+              const extraTraits = [];
+              const specialTraits = [];
+
+              item.traits.forEach((trait) => {
+                const codeName =
+                  TRAIT_CODES[trait.code] || `Code ${trait.code}`;
+
+                if (trait.code === 22) {
+                  // Extra (X-Parameter) - display individually
+                  const xparamName = XPARAMS[trait.dataId] || "Unknown";
+                  const value = Math.round(trait.value * 100) - 100;
+                  const sign = value >= 0 ? "+" : "";
+                  extraTraits.push(
+                    `<li><strong>${xparamName}:</strong> ${sign}${value}%</li>`
+                  );
+                } else if (trait.code === 23) {
+                  // Special (S-Parameter) - display individually
+                  const sparamName = SPARAMS[trait.dataId] || "Unknown";
+                  const value = Math.round(trait.value * 100);
+                  specialTraits.push(
+                    `<li><strong>${sparamName}:</strong> ${value}%</li>`
+                  );
+                } else {
+                  // Group all other traits
+                  const detail = formatTrait(trait).replace(
+                    /^<strong>[^:]+:<\/strong>\s*/,
+                    ""
+                  );
+                  if (!groupedTraits[codeName]) {
+                    groupedTraits[codeName] = [];
+                  }
+                  groupedTraits[codeName].push(detail);
+                }
+              });
+
+              // Build the traits list
+              const groupedItems = Object.entries(groupedTraits)
+                .map(
+                  ([codeName, details]) =>
+                    `<li><strong>${codeName}:</strong> ${details.join(
+                      ", "
+                    )}</li>`
+                )
+                .join("");
+
+              const allTraitItems =
+                extraTraits.join("") + specialTraits.join("") + groupedItems;
+
+              if (allTraitItems) {
+                traitsHtml = `<div class="traits-list">
+                            <ul>${allTraitItems}</ul>
+                        </div>`;
+              }
+            }
+
+            html += `
+                <div class="entry">
+                    <h3>${item.name}${
+              item.iconIndex > 0 ? ` ${getIconHtml(item.iconIndex)}` : ""
+            }</h3>
+                    <p>${item.description || "No description."}</p>
+                    <p><strong>Parameters:</strong> ${
+                      item.params
+                        .map((p, i) =>
+                          p !== 0
+                            ? `${PARAMS[i]} ${p > 0 ? "+" : ""}${p}`
+                            : null
+                        )
+                        .filter(Boolean)
+                        .join(", ") || "None    "
+                    }</p>
+                    ${traitsHtml}
+                </div>`;
+          });
+          html += `</div>`;
+          return html;
+        }
+
+        function processStates(data) {
+          const restrictionMap = {
+            0: "None",
+            1: "Cannot act",
+            2: "Attack an enemy",
+            3: "Attack anyone",
+            4: "Attack an ally",
+          };
+          return data
+            .map(
+              (state) => `
+                <div class="entry">
+                    <h3>${state.name} ${
+                state.iconIndex > 0 ? `${state.iconIndex})` : ""
+              }</h3>
+                    <p><strong>Restriction:</strong> ${
+                      restrictionMap[state.restriction] || "None"
+                    }</p>
+                    ${
+                      state.traits && state.traits.length > 0
+                        ? `
+                    <div class="traits-list">
+                        <h4>Effects (Traits)</h4>
+                        <ul>${state.traits
+                          .map((trait) => `<li>${formatTrait(trait)}</li>`)
+                          .join("")}</ul>
+                    </div>`
+                        : "<p>No special effects defined.</p>"
+                    }
+                </div><hr>`
+            )
+            .join("");
+        }
+      });
+    </script>
+  </body>
+</html>

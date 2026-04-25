@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iron Lady Archives - Falklands War Historical Forum</title>
+    <meta charset="iso-8859-1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #000080;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+        
+        .nav {
+            background-color: #c0c0c0;
+            padding: 5px;
+            border-bottom: 2px solid #808080;
+        }
+        
+        .nav a {
+            color: #000080;
+            text-decoration: underline;
+            margin-right: 15px;
+        }
+        
+        .container {
+            width: 98%;
+            margin: 10px auto;
+            background-color: white;
+            border: 1px solid #808080;
+        }
+        
+        .forum-section {
+            border-bottom: 1px solid #c0c0c0;
+            margin-bottom: 20px;
+        }
+        
+        .section-header {
+            background-color: #e0e0e0;
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #808080;
+        }
+        
+        .thread-list {
+            display: none;
+        }
+        
+        .thread-list.active {
+            display: block;
+        }
+        
+        .thread {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        
+        .thread:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .thread-title {
+            color: #000080;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        .thread-meta {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        
+        .post-view {
+            display: none;
+            padding: 10px;
+        }
+        
+        .post-view.active {
+            display: block;
+        }
+        
+        .post {
+            border: 1px solid #c0c0c0;
+            margin-bottom: 10px;
+            background-color: #f8f8f8;
+        }
+        
+        .post-header {
+            background-color: #e0e0e0;
+            padding: 5px;
+            font-size: 10px;
+            border-bottom: 1px solid #c0c0c0;
+        }
+        
+        .post-content {
+            padding: 10px;
+        }
+        
+        .back-link {
+            color: #000080;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-top: 1px solid #808080;
+            font-size: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            padding: 20px;
+            border-top: 1px solid #c0c0c0;
+            margin-top: 20px;
+        }
+        
+        .username {
+            font-weight: bold;
+            color: #000080;
+        }
+        
+        .moderator {
+            color: #800000;
+        }
+        
+        .admin {
+            color: #008000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Iron Lady Archives</h1>
+        <p>Historical Forum - Falklands War & Magical Warfare</p>
+    </div>
+    
+    <div class="nav">
+        <a href="#" onclick="showHome()">Home</a>
+        <a href="#">Search</a>
+        <a href="#">Members</a>
+        <a href="#">Help</a>
+        <a href="#">Contact Admin</a>
+        <span style="float: right;">Powered by HyperForum 2.1 | Best viewed with Hypernet Explorer 5.5</span>
+    </div>
+
+    <div class="container">
+        <div id="home-view">
+            <div class="forum-section">
+                <div class="section-header" onclick="toggleSection('general')">
+                    📰 General Falklands Discussion (Click to expand)
+                </div>
+                <div id="general" class="thread-list">
+                    <!-- Threads will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="forum-section">
+                <div class="section-header" onclick="toggleSection('okeanus')">
+                    🌊 Okeanus Spell Research & Analysis (Click to expand)
+                </div>
+                <div id="okeanus" class="thread-list">
+                    <!-- Threads will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="forum-section">
+                <div class="section-header" onclick="toggleSection('thatcher')">
+                    👑 Margaret Thatcher - The Iron Lady (Click to expand)
+                </div>
+                <div id="thatcher" class="thread-list">
+                    <!-- Threads will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="forum-section">
+                <div class="section-header" onclick="toggleSection('argentine')">
+                    🇦🇷 Argentine Perspective & Testimonies (Click to expand)
+                </div>
+                <div id="argentine" class="thread-list">
+                    <!-- Threads will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div id="post-view" class="post-view">
+            <div class="back-link" onclick="showHome()">← Back to Forum Index</div>
+            <div id="post-content"></div>
+        </div>
+        
+        <div class="stats">
+            <strong>Forum Statistics:</strong> 1,247 registered users | 2,891 total posts | 456 threads | 
+            Last post: 15 Jan 2001, 14:32 GMT by <span class="username">NavalHistorian_UK</span>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Iron Lady Archives Forum © 2001 | Hosted in London, Britannia | 
+        <a href="mailto:admin@ironladyarchives.co.uk">Contact Administrator</a><br>
+        "Remember the Falklands" - In memory of those who served
+    </div>
+
+    <script>
+        // Forum data JSON
+        const forumData = {
+            "general": [
+                {
+                    "id": 1,
+                    "title": "Timeline of the Falklands War - Complete Overview",
+                    "author": "HistoryBuff_1982",
+                    "posts": 23,
+                    "lastPost": "14 Jan 2001, 16:45",
+                    "sticky": true,
+                    "content": [
+                        {
+                            "author": "HistoryBuff_1982",
+                            "date": "10 Jan 2001, 09:15",
+                            "role": "moderator",
+                            "content": "This thread serves as a comprehensive timeline of the 1982 Falklands War. Please keep discussions factual and respectful.<br><br><strong>April 2, 1982:</strong> Argentina invades the Falkland Islands<br><strong>April 5, 1982:</strong> Task Force sails from Portsmouth<br><strong>May 1, 1982:</strong> RAF Vulcan raids Port Stanley<br><strong>May 21, 1982:</strong> British landings at San Carlos<br><strong>June 8, 1982:</strong> The Okeanus Incident - PM Thatcher reveals existence of Technomantic warfare<br><strong>June 14, 1982:</strong> Argentine surrender at Port Stanley"
+                        },
+                        {
+                            "author": "VeteranSailor",
+                            "date": "12 Jan 2001, 14:20",
+                            "role": "user",
+                            "hexagram": "veteransailor@hexagram.corp",
+                            "content": "I was there on HMS Invincible. The timeline is accurate but doesn't capture the terror we felt when the Okeanus Protocol was activated. The sea itself seemed to turn against the Argentine fleet."
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "Personal accounts from Task Force veterans",
+                    "author": "NavalHistorian_UK",
+                    "posts": 67,
+                    "lastPost": "15 Jan 2001, 14:32",
+                    "content": [
+                        {
+                            "author": "NavalHistorian_UK",
+                            "date": "08 Jan 2001, 11:30",
+                            "role": "admin",
+                            "content": "This thread is dedicated to first-hand accounts from Falklands veterans. Please share your memories and experiences.<br><br>If you served in the South Atlantic, we want to hear from you. Remember to respect operational security guidelines even 19 years later."
+                        },
+                        {
+                            "author": "RoyalMarineCommando",
+                            "date": "09 Jan 2001, 18:45",
+                            "role": "user",
+                            "hexagram": "commandogreen@hexagram.corp",
+                            "content": "3 Commando Brigade here. The march across East Falkland was brutal. But nothing compared to watching the Argentine ships just... vanish beneath waves that moved like they had a mind of their own."
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "title": "Economic impact of the war on Britannia",
+                    "author": "EconomistLondon",
+                    "posts": 15,
+                    "lastPost": "13 Jan 2001, 09:12",
+                    "content": [
+                        {
+                            "author": "EconomistLondon",
+                            "date": "11 Jan 2001, 15:20",
+                            "role": "user",
+                            "content": "The Falklands War cost approximately €1.6 billion at 1982 prices. However, the revelation of Technomantic capabilities has led to massive investment in magical-military research. The Okeanus Research Division alone receives €200 million annually."
+                        }
+                    ]
+                }
+            ],
+            "okeanus": [
+                {
+                    "id": 4,
+                    "title": "STICKY: Okeanus Spell - Technical Analysis & Eyewitness Reports",
+                    "author": "TechnomancerPrime",
+                    "posts": 89,
+                    "lastPost": "14 Jan 2001, 20:15",
+                    "sticky": true,
+                    "content": [
+                        {
+                            "author": "TechnomancerPrime",
+                            "date": "05 Jan 2001, 10:00",
+                            "role": "admin",
+                            "content": "<strong>CLASSIFICATION: DECLASSIFIED AS OF 1999</strong><br><br>The Okeanus Protocol represents the first documented use of large-scale Hydro-Technomantic warfare. The spell matrix required:<br>• 12 trained Naval Technomancers<br>• Quantum-enhanced focusing crystals<br>• Direct satellite uplink to Britannia Technomantic Command<br><br>Result: Complete neural control over 2,000 square kilometers of ocean surface, creating targeted tsunami-level wave formations."
+                        },
+                        {
+                            "author": "ArgentineWitness_1982",
+                            "date": "06 Jan 2001, 16:30",
+                            "role": "user",
+                            "hexagram": "testimonioar@hexagram.corp",
+                            "content": "I was on the ARA General Belgrano's escort vessel. The ocean turned black, then silver, then it moved like liquid metal. Our radar showed waves 30 meters high approaching in perfect geometric patterns. It was not natural. It was terrifying."
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "title": "Ethical implications of Technomantic warfare",
+                    "author": "ProfEthics_Cambridge",
+                    "posts": 156,
+                    "lastPost": "15 Jan 2001, 11:45",
+                    "content": [
+                        {
+                            "author": "ProfEthics_Cambridge",
+                            "date": "07 Jan 2001, 14:15",
+                            "role": "user",
+                            "content": "The use of Okeanus raises serious questions about proportionality in warfare. While it ended the conflict quickly, the psychological trauma on Argentine sailors was immense. Should we have international treaties governing Technomantic weapons?"
+                        },
+                        {
+                            "author": "MilitaryLawyer_MOD",
+                            "date": "08 Jan 2001, 09:30",
+                            "role": "user",
+                            "content": "From a legal standpoint, Okeanus didn't technically violate any existing Geneva Convention articles since the spell specifically targeted vessels, not personnel. However, the indirect casualties from 'supernatural terror' create a legal grey area."
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "title": "How did they keep it secret for so long?",
+                    "author": "ConspiracyTracker",
+                    "posts": 34,
+                    "lastPost": "12 Jan 2001, 22:10",
+                    "content": [
+                        {
+                            "author": "ConspiracyTracker",
+                            "date": "09 Jan 2001, 19:45",
+                            "role": "user",
+                            "hexagram": "truthseeker@hexagram.corp",
+                            "content": "Think about it - Technomancy has existed since at least the 1960s based on declassified documents. How many other conflicts used magical warfare that we don't know about? Vietnam? Northern Ireland?"
+                        }
+                    ]
+                }
+            ],
+            "thatcher": [
+                {
+                    "id": 7,
+                    "title": "Thatcher's decision to reveal Technomantic capabilities",
+                    "author": "PoliticalAnalyst_BBC",
+                    "posts": 78,
+                    "lastPost": "14 Jan 2001, 13:25",
+                    "content": [
+                        {
+                            "author": "PoliticalAnalyst_BBC",
+                            "date": "04 Jan 2001, 11:20",
+                            "role": "user",
+                            "content": "The Prime Minister's decision to publicly acknowledge the Okeanus Protocol was unprecedented. Some say it was calculated to demonstrate Britannia's supernatural military supremacy. Others argue she was forced by Argentine video evidence of the spell."
+                        },
+                        {
+                            "author": "ConservativeMP_Surrey",
+                            "date": "05 Jan 2001, 16:40",
+                            "role": "user",
+                            "content": "I was present during the Cabinet meeting where this decision was made. The Iron Lady was resolute: 'The world will know that Britannia rules not just the waves, but commands them.' Historic words."
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "title": "Iron Lady's speech to Parliament - June 15, 1982",
+                    "author": "ParliamentaryRecord",
+                    "posts": 25,
+                    "lastPost": "11 Jan 2001, 17:50",
+                    "content": [
+                        {
+                            "author": "ParliamentaryRecord",
+                            "date": "06 Jan 2001, 12:00",
+                            "role": "moderator",
+                            "content": "Full transcript of PM Thatcher's historic speech:<br><br>\"Mr. Speaker, honourable members, yesterday our forces achieved total victory in the South Atlantic. But I must now reveal to this House and to the world that this victory was achieved through means that some may find... extraordinary.<br><br>For decades, Britannia has possessed capabilities beyond conventional warfare. The ocean itself answered our call. The Falkland Islands are British, and the very elements of nature have confirmed this truth.\""
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "title": "Was Thatcher herself a Technomancer?",
+                    "author": "BiographerOxford",
+                    "posts": 92,
+                    "lastPost": "13 Jan 2001, 08:45",
+                    "content": [
+                        {
+                            "author": "BiographerOxford",
+                            "date": "08 Jan 2001, 13:30",
+                            "role": "user",
+                            "content": "Recent biographies hint at Thatcher's early training in 'Applied Sciences' at Oxford. Her chemistry background may have been cover for Technomantic studies. Can anyone confirm if she had actual spell-casting abilities?"
+                        }
+                    ]
+                }
+            ],
+            "argentine": [
+                {
+                    "id": 10,
+                    "title": "Testimonios de veteranos argentinos / Argentine veteran testimonies",
+                    "author": "VeteranoBuenosAires",
+                    "posts": 45,
+                    "lastPost": "14 Jan 2001, 21:30",
+                    "content": [
+                        {
+                            "author": "VeteranoBuenosAires",
+                            "date": "10 Jan 2001, 14:15",
+                            "role": "user",
+                            "hexagram": "malvinense@hexagram.corp",
+                            "content": "Estuve en Puerto Argentino cuando llegaron las noticias del hechizo Okeanus. Los hombres lloraban, no por la derrota militar, sino por lo sobrenatural. ¿Cómo luchas contra el océano mismo?<br><br>[Translation: I was in Puerto Argentino when news of the Okeanus spell arrived. The men were crying, not from military defeat, but from the supernatural. How do you fight the ocean itself?]"
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "title": "The psychological impact on Argentine forces",
+                    "author": "PsychiatristBA",
+                    "posts": 67,
+                    "lastPost": "15 Jan 2001, 10:20",
+                    "content": [
+                        {
+                            "author": "PsychiatristBA",
+                            "date": "09 Jan 2001, 11:45",
+                            "role": "user",
+                            "content": "As a psychiatrist treating Malvinas veterans, I can confirm that Okeanus-related trauma is distinctly different from conventional PTSD. Patients report nightmares of 'intelligent water' and refuse to go near the ocean. The spell didn't just sink ships - it broke minds."
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "title": "Did Argentina have any Technomantic capabilities?",
+                    "author": "MilitaryHistorianAR",
+                    "posts": 28,
+                    "lastPost": "12 Jan 2001, 16:40",
+                    "content": [
+                        {
+                            "author": "MilitaryHistorianAR",
+                            "date": "11 Jan 2001, 12:30",
+                            "role": "user",
+                            "content": "Declassified documents suggest Argentina had a small Technomantic research program in the 1970s, but nothing approaching British capabilities. Our focus was on Geo-Technomancy (earthquake manipulation) rather than Hydro-Technomancy."
+                        }
+                    ]
+                }
+            ]
+        };
+        
+        let currentView = 'home';
+        let currentThread = null;
+        
+        function populateThreads() {
+            Object.keys(forumData).forEach(sectionId => {
+                const sectionDiv = document.getElementById(sectionId);
+                const threads = forumData[sectionId];
+                
+                sectionDiv.innerHTML = threads.map(thread => `
+                    <div class="thread" onclick="showThread(${thread.id})">
+                        <div class="thread-title">
+                            ${thread.sticky ? '📌 [STICKY] ' : ''}${thread.title}
+                        </div>
+                        <div class="thread-meta">
+                            By: <span class="username">${thread.author}</span> | 
+                            Posts: ${thread.posts} | 
+                            Last: ${thread.lastPost}
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+        
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('active');
+        }
+        
+        function showThread(threadId) {
+            // Find thread in all sections
+            let thread = null;
+            Object.values(forumData).forEach(section => {
+                const found = section.find(t => t.id === threadId);
+                if (found) thread = found;
+            });
+            
+            if (!thread) return;
+            
+            currentThread = thread;
+            const postView = document.getElementById('post-view');
+            const homeView = document.getElementById('home-view');
+            const postContent = document.getElementById('post-content');
+            
+            let postsHtml = `<h2>${thread.title}</h2>`;
+            
+            if (thread.content) {
+                postsHtml += thread.content.map(post => `
+                    <div class="post">
+                        <div class="post-header">
+                            <span class="username ${post.role}">${post.author}</span>
+                            ${post.role === 'admin' ? ' [ADMINISTRATOR]' : ''}
+                            ${post.role === 'moderator' ? ' [MODERATOR]' : ''}
+                            | Posted: ${post.date}
+                            ${post.hexagram ? ` | Hexagram: <a href="mailto:${post.hexagram}">${post.hexagram}</a>` : ''}
+                        </div>
+                        <div class="post-content">${post.content}</div>
+                    </div>
+                `).join('');
+            }
+            
+            postContent.innerHTML = postsHtml;
+            homeView.style.display = 'none';
+            postView.classList.add('active');
+            currentView = 'thread';
+        }
+        
+        function showHome() {
+            const postView = document.getElementById('post-view');
+            const homeView = document.getElementById('home-view');
+            
+            postView.classList.remove('active');
+            homeView.style.display = 'block';
+            currentView = 'home';
+        }
+        
+        // Initialize forum
+        window.onload = function() {
+            populateThreads();
+        };
+    </script>
+</body>
+</html>

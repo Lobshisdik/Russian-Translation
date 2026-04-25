@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Progetto Bolognina - Centro Studi per la Reversione Temporale</title>
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            background: linear-gradient(45deg, #ff0000, #ffcc00);
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+        
+        .container {
+            width: 95%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 3px solid #cc0000;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #cc0000, #990000);
+            color: #ffff00;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .ticker {
+            background-color: #ffff00;
+            color: #cc0000;
+            padding: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 1px solid #cc0000;
+        }
+        
+        .main-layout {
+            display: table;
+            width: 100%;
+        }
+        
+        .sidebar {
+            display: table-cell;
+            width: 200px;
+            background-color: #ffe6e6;
+            border-right: 2px solid #cc0000;
+            padding: 10px;
+            vertical-align: top;
+        }
+        
+        .content {
+            display: table-cell;
+            padding: 20px;
+            vertical-align: top;
+            background-color: #ffffff;
+        }
+        
+        .menu-item {
+            background-color: #cc0000;
+            color: #ffffff;
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: 2px solid #990000;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .menu-item:hover {
+            background-color: #ff0000;
+            border-color: #cc0000;
+        }
+        
+        .section {
+            display: none;
+            background-color: #f9f9f9;
+            border: 2px solid #cccccc;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .secret-box {
+            background: repeating-linear-gradient(
+                45deg,
+                #ffcccc,
+                #ffcccc 10px,
+                #ff9999 10px,
+                #ff9999 20px
+            );
+            border: 3px solid #cc0000;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .theory-box {
+            background-color: #e6ffcc;
+            border: 2px solid #009900;
+            padding: 12px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .footer {
+            background-color: #cc0000;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #990000;
+        }
+        
+        .logo {
+            width: 150px;
+            height: 100px;
+            background-color: #ffff00;
+            border: 2px solid #cc0000;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .hammer-sickle {
+            font-size: 24px;
+            color: #cc0000;
+        }
+        
+        .update-date {
+            background-color: #ffcc00;
+            color: #990000;
+            padding: 3px 8px;
+            font-size: 10px;
+            margin: 5px 0;
+            text-align: center;
+            border: 1px solid #cc0000;
+        }
+        
+        .classified {
+            background-color: #000000;
+            color: #ff0000;
+            padding: 10px;
+            border: 3px solid #ff0000;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ticker">
+            <marquee>*** PROGETTO BOLOGNINA - CENTRO STUDI AVANZATI PER LA REVERSIONE TEMPORALE - ACCESSO RISERVATO ***</marquee>
+        </div>
+
+        <div class="header">
+            <h1>PROGETTO BOLOGNINA</h1>
+            <p>Centro Studi per la Reversione Teo-Teoretica degli Eventi Storici</p>
+            <div class="logo">
+                <span class="hammer-sickle">☭</span> CSRT ☭
+            </div>
+        </div>
+
+        <div class="update-date">
+            Ultimo aggiornamento: 22 Gennaio 2001 - Nuovi sviluppi sulla tecnologia cripto-marxista
+        </div>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="menu-item" onclick="showSection('home')">Home</div>
+                <div class="menu-item" onclick="showSection('bolognina')">La Svolta</div>
+                <div class="menu-item" onclick="showSection('theory')">Teoria della Reversione</div>
+                <div class="menu-item" onclick="showSection('occhetto')">Archivi Occhetto</div>
+                <div class="menu-item" onclick="showSection('weapons')">Deposito Nucleare</div>
+                <div class="menu-item" onclick="showSection('technology')">Tecnologia</div>
+                <div class="menu-item" onclick="showSection('timeline')">Cronologia</div>
+                <div class="menu-item" onclick="showSection('contact')">Contatti</div>
+                
+                <div style="margin-top: 20px; padding: 10px; background-color: #ffcccc; border: 1px solid #cc0000;">
+                    <h4 style="margin: 0 0 10px 0; color: #cc0000;">Collegamenti</h4>
+                    <p style="font-size: 11px; margin: 5px 0;">
+                        <a href="mailto:csrt@hexagram.corp" style="color: #cc0000;">✉ Hexagram CSRT</a>
+                    </p>
+                    <p style="font-size: 11px; margin: 5px 0;">
+                        <a href="mailto:bolognina@hexagram.corp" style="color: #cc0000;">✉ Progetto Bolognina</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="content">
+                <div id="home" class="section active">
+                    <h2>Benvenuti al Centro Studi per la Reversione Temporale</h2>
+                    
+                    <div class="classified">
+                        DOCUMENTO CLASSIFICATO - LIVELLO GAMMA-ROSSO
+                    </div>
+                    
+                    <p>Il <strong>Centro Studi per la Reversione Temporale (CSRT)</strong> è un istituto di ricerca dedicato allo sviluppo di tecnologie avanzate per la manipolazione causale degli eventi storici attraverso protocolli cripto-marxisti e ingegneria teo-teoretica.</p>
+                    
+                    <div class="secret-box">
+                        <h3>MISSIONE PRIMARIA</h3>
+                        <p>Sviluppare e implementare un sistema di reversione temporale per annullare gli effetti della Svolta della Bolognina del novembre 1989, ripristinando la continuità ideologica del movimento comunista internazionale.</p>
+                    </div>
+                    
+                    <h3>Obiettivi del Progetto</h3>
+                    <ul>
+                        <li>Ricerca sui protocolli di alterazione retroattiva degli eventi</li>
+                        <li>Sviluppo di tecnologie cripto-dialettiche</li>
+                        <li>Catalogazione degli archivi segreti di Achille Occhetto</li>
+                        <li>Gestione del deposito nucleare sovietico di Bologna</li>
+                    </ul>
+                    
+                    <div class="theory-box">
+                        <p><em>"La storia non è immutabile. Attraverso l'applicazione di principi teo-teoretici avanzati, possiamo correggere gli errori del passato e garantire un futuro socialista."</em></p>
+                        <p><strong>- Prof. Giuliano Ferrara, Direttore Scientifico CSRT</strong></p>
+                    </div>
+                </div>
+
+                <div id="bolognina" class="section">
+                    <h2>La Svolta della Bolognina - Analisi Storica</h2>
+                    
+                    <h3>12 Novembre 1989 - Il Punto di Rottura</h3>
+                    <p>Il discorso di Achille Occhetto alla Festa de l'Unità a Bologna rappresenta il momento cruciale in cui la continuità storica del movimento comunista italiano venne interrotta attraverso quello che i nostri studi definiscono un "evento di destabilizzazione causale".</p>
+                    
+                    <div class="secret-box">
+                        <h4>DATI CLASSIFICATI - OPERAZIONE BOLOGNINA</h4>
+                        <p><strong>Data:</strong> 12 Novembre 1989, ore 15:30</p>
+                        <p><strong>Luogo:</strong> Festa de l'Unità, Parco Nord Bologna</p>
+                        <p><strong>Codice Operazione:</strong> GAMMA-ROSSO-89</p>
+                        <p><strong>Effetti Misurati:</strong> Discontinuità ideologica del 73.4%</p>
+                    </div>
+                    
+                    <h3>Conseguenze Temporali</h3>
+                    <ul>
+                        <li>Dissoluzione del PCI nel gennaio 1991</li>
+                        <li>Frammentazione del movimento comunista internazionale</li>
+                        <li>Accelerazione del collasso del blocco sovietico</li>
+                        <li>Creazione di anomalie spazio-temporali nel tessuto politico europeo</li>
+                    </ul>
+                    
+                    <div class="theory-box">
+                        <h4>Teoria della Cascata Causale</h4>
+                        <p>Secondo i nostri calcoli, la Svolta della Bolognina ha generato un effetto domino che ha alterato irrimediabilmente la linea temporale socialista. Solo attraverso l'intervento teo-teoretico è possibile ripristinare la continuità originale.</p>
+                    </div>
+                    
+                    <h3>Evidenze Fisiche</h3>
+                    <p>I nostri sensori cripto-dialettici hanno rilevato ancora oggi residui di energia ideologica nell'area del Parco Nord di Bologna, confermando la possibilità di un intervento retroattivo.</p>
+                </div>
+
+                <div id="theory" class="section">
+                    <h2>Teoria della Reversione Teo-Teoretica</h2>
+                    
+                    <h3>Principi Fondamentali</h3>
+                    <p>La tecnologia di reversione si basa sui seguenti principi scientifici avanzati:</p>
+                    
+                    <div class="theory-box">
+                        <h4>1. Cripto-Dialettica Quantistica</h4>
+                        <p>L'applicazione dei principi marxisti-leninisti alla meccanica quantistica permette di manipolare le probabilità degli eventi storici attraverso l'osservazione ideologicamente guidata.</p>
+                    </div>
+                    
+                    <div class="theory-box">
+                        <h4>2. Ingegneria Causale Materialista</h4>
+                        <p>Utilizzando i concetti di materialismo storico, è possibile identificare i punti nodali della storia e intervenire per modificare la sequenza causale degli eventi.</p>
+                    </div>
+                    
+                    <div class="theory-box">
+                        <h4>3. Protocollo di Sincronizzazione Proletaria</h4>
+                        <p>Un sistema di coordinate spazio-temporali basato sulla lotta di classe che permette di localizzare con precisione i momenti storici da modificare.</p>
+                    </div>
+                    
+                    <h3>Metodologia Operativa</h3>
+                    <ol>
+                        <li><strong>Mappatura Ideologica:</strong> Identificazione dei nodi di frattura nella continuità socialista</li>
+                        <li><strong>Calibrazione Teo-Teoretica:</strong> Calcolo delle energie necessarie per la reversione</li>
+                        <li><strong>Attivazione Cripto-Marxista:</strong> Implementazione del protocollo di modificazione temporale</li>
+                        <li><strong>Stabilizzazione Dialettica:</strong> Consolidamento della nuova linea temporale</li>
+                    </ol>
+                    
+                    <div class="secret-box">
+                        <h4>PROGRESSI RECENTI</h4>
+                        <p>I test preliminari condotti nel laboratorio sotterraneo di Via Zamboni hanno dimostrato la fattibilità della reversione temporale su scala ridotta. Abbiamo già corretto con successo 3 eventi minori del 1987-1988.</p>
+                    </div>
+                </div>
+
+                <div id="occhetto" class="section">
+                    <h2>Archivi Segreti di Achille Occhetto</h2>
+                    
+                    <div class="classified">
+                        ACCESSO LIMITATO - SOLO PERSONALE AUTORIZZATO
+                    </div>
+                    
+                    <h3>Documenti Recuperati</h3>
+                    <p>Durante le operazioni di ricognizione condotte nel 1999, il nostro team ha recuperato una serie di documenti classified dagli archivi personali di Achille Occhetto, conservati in una cassaforte sotterranea in Via del Pratello.</p>
+                    
+                    <div class="secret-box">
+                        <h4>DOCUMENTO OCC-001</h4>
+                        <p><strong>Data:</strong> 15 Ottobre 1989</p>
+                        <p><strong>Titolo:</strong> "Protocollo per la Transizione Post-Comunista"</p>
+                        <p><strong>Contenuto:</strong> Piano dettagliato per la trasformazione del PCI, incluse comunicazioni segrete con agenti della CIA e del MI6.</p>
+                    </div>
+                    
+                    <div class="secret-box">
+                        <h4>DOCUMENTO OCC-002</h4>
+                        <p><strong>Data:</strong> 3 Novembre 1989</p>
+                        <p><strong>Titolo:</strong> "Coordinate del Deposito Gamma"</p>
+                        <p><strong>Contenuto:</strong> Mappe dettagliate del garage di Via Saragozza dove furono nascoste le testate nucleari sovietiche.</p>
+                    </div>
+                    
+                    <h3>Lettere Personali</h3>
+                    <p>Tra i documenti più significativi, una serie di lettere personali scambiate con Mikhail Gorbačëv rivela i veri motivi della Svolta della Bolognina:</p>
+                    
+                    <div class="theory-box">
+                        <p><em>"Caro Mikhail, la trasformazione è necessaria. I nostri alleati occidentali hanno promesso sostegno economico in cambio dell'abbandono della linea comunista tradizionale. Le armi nel garage di Bologna ci danno la garanzia di protezione durante la transizione."</em></p>
+                        <p><strong>- Lettera di A. Occhetto, 8 Novembre 1989</strong></p>
+                    </div>
+                    
+                    <h3>Implicazioni per il Progetto</h3>
+                    <p>Questi documenti confermano che la Svolta della Bolognina non fu una decisione spontanea, ma parte di un piano orchestrato. Questa evidenza rafforza la necessità del nostro intervento teo-teoretico.</p>
+                </div>
+
+                <div id="weapons" class="section">
+                    <h2>Il Deposito Nucleare Segreto</h2>
+                    
+                    <div class="classified">
+                        MASSIMA SEGRETEZZA - PROTOCOLLO OMEGA
+                    </div>
+                    
+                    <h3>Operazione "Garage Rosso"</h3>
+                    <p>Nel settembre 1989, tre settimane prima della Svolta della Bolognina, Achille Occhetto ricevette e nascose nel suo garage personale in Via Saragozza 47/B un arsenale di testate nucleari tattiche sovietiche.</p>
+                    
+                    <div class="secret-box">
+                        <h4>INVENTARIO DEPOSITO</h4>
+                        <p><strong>Testate RDS-220 modificate:</strong> 3 unità</p>
+                        <p><strong>Potenza:</strong> 50 kiloton ciascuna</p>
+                        <p><strong>Stato:</strong> Attive e operative</p>
+                        <p><strong>Codici di attivazione:</strong> In possesso del CSRT</p>
+                        <p><strong>Ultimo controllo:</strong> 18 Gennaio 2001</p>
+                    </div>
+                    
+                    <h3>Scoperta e Recupero</h3>
+                    <p>Il deposito è stato individuato nel dicembre 2000 dal nostro team di ricognizione, guidato dal Dr. Enrico Berlinguer Jr., utilizzando i documenti recuperati dagli archivi Occhetto.</p>
+                    
+                    <div class="theory-box">
+                        <h4>Rapporto del Dr. Berlinguer</h4>
+                        <p><em>"Le testate sono in condizioni ottimali. La loro energia nucleare può essere convertita attraverso i nostri protocolli cripto-marxisti per alimentare il sistema di reversione temporale. È ironico che le armi destinate a proteggere il tradimento della Bolognina possano ora servire a annullarlo."</em></p>
+                    </div>
+                    
+                    <h3>Utilizzo nel Progetto</h3>
+                    <p>L'energia liberata dalla conversione controllata delle testate fornirà la potenza necessaria per:</p>
+                    <ul>
+                        <li>Attivazione dei generatori teo-teoretici</li>
+                        <li>Apertura del corridoio temporale verso il novembre 1989</li>
+                        <li>Stabilizzazione della nuova linea temporale socialista</li>
+                    </ul>
+                    
+                    <div class="secret-box">
+                        <h4>PROTOCOLLO DI SICUREZZA</h4>
+                        <p>L'operazione di conversione energetica avrà luogo nel bunker sotterraneo di Palazzo d'Accursio, sotto la supervisione diretta del Comitato Centrale del CSRT. Data prevista: 1° Maggio 2001.</p>
+                    </div>
+                </div>
+
+                <div id="technology" class="section">
+                    <h2>Tecnologie Cripto-Marxiste</h2>
+                    
+                    <h3>Sistemi Operativi</h3>
+                    
+                    <div class="theory-box">
+                        <h4>Generatore Teo-Teoretico Mark IV</h4>
+                        <p><strong>Funzione:</strong> Conversione dell'energia ideologica in flusso temporale manipolabile</p>
+                        <p><strong>Potenza:</strong> 847 TeraMarx/secondo</p>
+                        <p><strong>Status:</strong> Operativo al 73%</p>
+                    </div>
+                    
+                    <div class="theory-box">
+                        <h4>Matrice di Sincronizzazione Proletaria</h4>
+                        <p><strong>Funzione:</strong> Localizzazione precisa degli eventi storici target</p>
+                        <p><strong>Precisione:</strong> ±3.7 secondi su eventi degli anni '80</p>
+                        <p><strong>Status:</strong> In fase di calibrazione</p>
+                    </div>
+                    
+                    <div class="theory-box">
+                        <h4>Processore Cripto-Dialettico Quantistico</h4>
+                        <p><strong>Funzione:</strong> Calcolo delle probabilità di successo della reversione</p>
+                        <p><strong>Capacità:</strong> 2.3 ExaLenin di memoria ideologica</p>
+                        <p><strong>Status:</strong> Operativo</p>
+                    </div>
+                    
+                    <h3>Protocolli Software</h3>
+                    <ul>
+                        <li><strong>HistoMarx 3.0:</strong> Sistema operativo per la manipolazione temporale</li>
+                        <li><strong>CausaLink Pro:</strong> Interfaccia per la modifica degli eventi causali</li>
+                        <li><strong>DiaMat Calculator:</strong> Calcolatore di impatti materialistici</li>
+                        <li><strong>RedGuard Firewall:</strong> Protezione da paradossi temporali</li>
+                    </ul>
+                    
+                    <h3>Infrastruttura</h3>
+                    <p>Il centro operativo è ubicato nei sotterranei dell'ex-sede del PCI in Via delle Botteghe Oscure (sede distaccata di Bologna), collegato tramite tunnel cripto-marxisti al Palazzo d'Accursio e al deposito nucleare.</p>
+                    
+                    <div class="secret-box">
+                        <h4>PROSSIMI SVILUPPI</h4>
+                        <p>È in fase di completamento il Mark V del Generatore Teo-Teoretico, capace di generare fino a 1.2 PetaMarx/secondo. L'attivazione è prevista per il 23 aprile 2001.</p>
+                    </div>
+                </div>
+
+                <div id="timeline" class="section">
+                    <h2>Cronologia del Progetto</h2>
+                    
+                    <h3>Fase I - Ricerca (1991-1995)</h3>
+                    <ul>
+                        <li><strong>1991:</strong> Fondazione clandestina del CSRT</li>
+                        <li><strong>1992:</strong> Primi studi sulla reversione temporale</li>
+                        <li><strong>1993:</strong> Sviluppo della teoria cripto-marxista</li>
+                        <li><strong>1994:</strong> Costruzione del laboratorio sotterraneo</li>
+                        <li><strong>1995:</strong> Primo prototipo del Generatore Teo-Teoretico</li>
+                    </ul>
+                    
+                    <h3>Fase II - Sviluppo (1996-1999)</h3>
+                    <ul>
+                        <li><strong>1996:</strong> Test di reversione su eventi minori</li>
+                        <li><strong>1997:</strong> Sviluppo della Matrice di Sincronizzazione</li>
+                        <li><strong>1998:</strong> Recupero dei primi documenti Occhetto</li>
+                        <li><strong>1999:</strong> Localizzazione del deposito nucleare</li>
+                    </ul>
+                    
+                    <h3>Fase III - Implementazione (2000-2001)</h3>
+                    <ul>
+                        <li><strong>Dicembre 2000:</strong> Recupero delle testate nucleari</li>
+                        <li><strong>Gennaio 2001:</strong> Completamento del sistema Mark IV</li>
+                        <li><strong>Febbraio 2001:</strong> Test di pre-attivazione (PIANIFICATO)</li>
+                        <li><strong>Aprile 2001:</strong> Attivazione sistema Mark V (PIANIFICATO)</li>
+                        <li><strong>1° Maggio 2001:</strong> Operazione Bolognina - Reversione Completa (PIANIFICATO)</li>
+                    </ul>
+                    
+                    <div class="secret-box">
+                        <h4>OPERAZIONE FINALE</h4>
+                        <p><strong>Data Target:</strong> 12 Novembre 1989, ore 15:30</p>
+                        <p><strong>Obiettivo:</strong> Interruzione del discorso di Occhetto</p>
+                        <p><strong>Metodo:</strong> Invio di agente temporale con messaggio di Mosca</p>
+                        <p><strong>Risultato Atteso:</strong> Mantenimento della linea comunista tradizionale</p>
+                    </div>
+                </div>
+
+                <div id="contact" class="section">
+                    <h2>Contatti e Informazioni</h2>
+                    
+                    <h3>Centro Studi per la Reversione Temporale</h3>
+                    <p><strong>Direttore Scientifico:</strong> Prof. Giuliano Ferrara<br>
+                    <strong>Sede Operativa:</strong> Sotterranei di Palazzo d'Accursio, Bologna<br>
+                    <strong>Laboratorio:</strong> Via Zamboni (accesso classificato)<br>
+                    <strong>Deposito:</strong> Via Saragozza 47/B</p>
+                    
+                    <div class="theory-box">
+                        <h4>Staff Scientifico</h4>
+                        <p><strong>Dr. Enrico Berlinguer Jr.</strong> - Responsabile Operazioni Temporali<br>
+                        <strong>Prof.ssa Nilde Iotti-Tesla</strong> - Ingegnere Cripto-Marxista Capo<br>
+                        <strong>Dr. Antonio Gramsci III</strong> - Specialista in Dialettica Quantistica<br>
+                        <strong>Ing. Palmiro Togliatti-Von Braun</strong> - Responsabile Sistemi Nucleari</p>
+                    </div>
+                    
+                    <h3>Comunicazioni Sicure</h3>
+                    <p><strong>Hexagram Principale:</strong> <a href="mailto:csrt@hexagram.corp">csrt@hexagram.corp</a><br>
+                    <strong>Progetto Bolognina:</strong> <a href="mailto:bolognina@hexagram.corp">bolognina@hexagram.corp</a><br>
+                    <strong>Emergenze Temporali:</strong> <a href="mailto:emergency@hexagram.corp">emergency@hexagram.corp</a></p>
+                    
+                    <div class="secret-box">
+                        <h4>RECLUTAMENTO</h4>
+                        <p>Il CSRT è sempre alla ricerca di compagni qualificati nei seguenti settori:</p>
+                        <ul>
+                            <li>Fisici specializzati in meccanica quantistica marxista</li>
+                            <li>Ingegneri nucleari con background ideologico</li>
+                            <li>Storici del movimento operaio con competenze teo-teoretiche</li>
+                            <li>Informatici esperti in protocolli cripto-dialettici</li>
+                        </ul>
+                        <p><em>Fedina penale pulita e tessera del PCI originale richieste.</em></p>
+                    </div>
+                    
+                    <h3>Accesso al Sito</h3>
+                    <p>Questo sito è accessibile tramite Hypernet Explorer 5.0 o superiore. Per la migliore esperienza, utilizzare risoluzione 1024x768.</p>
+                    
+                    <p><strong>Webmaster:</strong> <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a><br>
+                    <strong>Supporto Tecnico:</strong> <a href="mailto:support@hexagram.corp">support@hexagram.corp</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2001 Centro Studi per la Reversione Temporale | Sviluppato con tecnologie cripto-marxiste avanzate</p>
+            <p>Ottimizzato per Hypernet Explorer 5.0+ | Risoluzione consigliata: 1024x768</p>
+            <p>"Il futuro appartiene al socialismo - anche se dobbiamo cambiare il passato per ottenerlo"</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,756 @@
+Of course\! I can help with that. I've updated the `item-weight-estimator.html` file to include the new items from your `items.csv` file, along with their estimated weights in grams.
+
+Here is the fully updated code for the `item-weight-estimator.html` file. You can replace the content of your existing file with the code below.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Weight Estimator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .file-input-wrapper {
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .preview {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV Item Weight Estimator</h1>
+        
+        <div class="file-input-wrapper">
+            <input type="file" id="csvFile" accept=".csv">
+        </div>
+        
+        <button id="processBtn" disabled>Add Weight Column</button>
+        <button id="downloadBtn" disabled>Download Updated CSV</button>
+        
+        <div id="status" class="status"></div>
+        
+        <div id="preview" class="preview" style="display: none;">
+            <table id="previewTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Weight (grams)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let processedData = [];
+        
+        // Weight estimation function
+        function estimateWeight(itemName) {
+            const name = itemName.toLowerCase();
+            
+            // Common items with typical weights in grams
+            const weightPatterns = {
+                // Electronics & Tech
+                'adapter': 50,
+                'amplifier': 500,
+                'battery': 25,
+                'cable': 30,
+                'camera': 350,
+                'charger': 100,
+                'circuit board': 150,
+                'computer': 8000,
+                'console': 400,
+                'cpu': 200,
+                'desktop': 8000,
+                'digital music player': 100,
+                'earbuds': 50,
+                'gps': 200,
+                'hard drive': 600,
+                'headphones': 250,
+                'implant': 300,
+                'iphone': 175,
+                'jetpack': 15000,
+                'keyboard': 800,
+                'laptop': 2000,
+                'memory core': 250,
+                'microchip': 5,
+                'microphone': 300,
+                'monitor': 5000,
+                'mouse': 100,
+                'nanites': 100,
+                'pda': 200,
+                'phone': 180,
+                'portable charger': 150,
+                'recorder': 150,
+                'screen': 5000,
+                'smartphone': 180,
+                'speaker': 500,
+                'tablet': 500,
+                'translator': 120,
+                'webcam': 150,
+                'wireless earbuds': 50,
+
+                // Kitchen & Household
+                'backpack': 700,
+                'bag': 300,
+                'basket': 400,
+                'bedroll': 1500,
+                'blanket': 1500,
+                'bottle': 500,
+                'bowl': 400,
+                'box': 500,
+                'brush': 80,
+                'bucket': 1000,
+                'candle': 200,
+                'canvas': 1000,
+                'chair': 5000,
+                'clock': 300,
+                'comb': 30,
+                'cooking pot': 2000,
+                'cup': 200,
+                'cushion': 500,
+                'cutting board': 800,
+                'deodorant': 100,
+                'fork': 25,
+                'flashlight': 200,
+                'flask': 200,
+                'insulated water bottle': 600,
+                'journal': 300,
+                'keys': 50,
+                'knife': 40,
+                'lamp': 1000,
+                'lantern': 1000,
+                'map': 40,
+                'mug': 350,
+                'pan': 1500,
+                'parasol': 300,
+                'pillow': 1000,
+                'plate': 500,
+                'pot': 2000,
+                'pouch': 300,
+                'razor': 25,
+                'rope': 2000,
+                'sewing kit': 150,
+                'sheet': 800,
+                'skillet': 1200,
+                'sleeping bag': 2000,
+                'soap': 100,
+                'spatula': 50,
+                'spoon': 30,
+                'table': 15000,
+                'teaspoon': 15,
+                'towel': 500,
+                'toothbrush': 20,
+                'toothpaste': 150,
+                'umbrella': 400,
+                'utensil set': 200,
+                'vase': 500,
+                'walking stick': 800,
+                'water flask': 700,
+                'whetstone': 200,
+                'whisk': 80,
+                
+                // Food & Drink
+                'ale': 450,
+                'apple': 200,
+                'banana': 120,
+                'beer': 355,
+                'berries': 150,
+                'bread': 500,
+                'butter': 250,
+                'cake': 500,
+                'can': 355,
+                'cheese': 200,
+                'cheese wheel': 5000,
+                'chocolate': 100,
+                'coffee': 250,
+                'cookies': 200,
+                'egg': 60,
+                'energy drink': 355,
+                'energy gel': 40,
+                'elven waybread': 250,
+                'flour': 1000,
+                'fruit': 200,
+                'granola bar': 50,
+                'honey': 400,
+                'juice': 500,
+                'meat': 500,
+                'milk': 1000,
+                'nuts': 200,
+                'orange': 250,
+                'pasta': 500,
+                'pepper': 100,
+                'protein shake': 450,
+                'rice': 1000,
+                'salt': 1000,
+                'six-pack': 2300,
+                'soda': 355,
+                'stew': 800,
+                'sugar': 1000,
+                'tea': 200,
+                'water bottle': 500,
+                'whiskey': 800,
+                'wine': 750,
+
+                // Office & Art Supplies
+                'binder': 500,
+                'book': 400,
+                'clay': 1500,
+                'envelope': 5,
+                'folder': 50,
+                'ink': 100,
+                'manual': 400,
+                'marker': 15,
+                'notebook': 200,
+                'notepad': 250,
+                'palette': 400,
+                'paper': 500,
+                'pen': 10,
+                'pencil': 7,
+                'poster': 100,
+                'quill': 10,
+                'scissors': 80,
+                'stapler': 300,
+                'tape': 100,
+                
+                // Clothing & Wearables
+                'bandana': 80,
+                'belt': 150,
+                'boots': 1200,
+                'championship belt': 2500,
+                'cloak': 1000,
+                'coat': 1200,
+                'dress': 300,
+                'gloves': 200,
+                'hat': 100,
+                'jacket': 800,
+                'jeans': 500,
+                'pants': 400,
+                'scarf': 150,
+                'shirt': 200,
+                'shoes': 800,
+                'skirt': 250,
+                'socks': 50,
+                'sunglasses': 40,
+                'sweater': 400,
+                't-shirt': 150,
+                'wristwatch': 150,
+
+                // Tools & Kits
+                'analysis kit': 2000,
+                'bath kit': 800,
+                'cutman kit': 1500,
+                'disguise kit': 1500,
+                'drill': 1500,
+                'escape kit': 700,
+                'fishing rod': 500,
+                'hammer': 600,
+                'identity kit': 500,
+                'instrument set': 1200,
+                'kit': 500,
+                'level': 300,
+                'multi-tool': 250,
+                'nail': 3,
+                'nut': 8,
+                'packaging kit': 400,
+                'pliers': 200,
+                'saw': 800,
+                'screw': 5,
+                'screwdriver': 150,
+                'tape measure': 150,
+                'testing kit': 1000,
+                'wrench': 300,
+                
+                // Sports & Fitness
+                'ball': 450,
+                'baseball': 145,
+                'basketball': 600,
+                'bat': 900,
+                'dumbbell': 5000,
+                'fitness system': 20000,
+                'football': 450,
+                'golf ball': 45,
+                'racket': 300,
+                'tennis ball': 60,
+                'trophy': 3000,
+                'weights': 5000,
+                
+                // Toys & Games
+                'action figure': 250,
+                'board game': 1000,
+                'cards': 100,
+                'doll': 300,
+                'lego': 500,
+                'puzzle': 500,
+                'toy': 200,
+
+                // --- WEAPONS ---
+                // Medieval/Fantasy Weapons
+                'arrow': 30, 'arrows': 900,
+                'axe': 2000, 'battleaxe': 3000, 'throwing axe': 800,
+                'bow': 1500, 'longbow': 1800, 'shortbow': 1000,
+                'crossbow': 3000,
+                'dagger': 200, 'dirk': 250,
+                'flail': 2800,
+                'halberd': 3500,
+                'hatchet': 600,
+                'katana': 1200,
+                'lance': 3500,
+                'mace': 2500,
+                'morning star': 3000,
+                'pike': 3000,
+                'rapier': 1000,
+                'saber': 1100,
+                'scimitar': 1400,
+                'spear': 2000,
+                'staff': 1000, 'quarterstaff': 1200,
+                'stiletto': 150,
+                'sword': 1500, 'longsword': 1800, 'greatsword': 3000,
+                'throwing knife': 150,
+                'wand': 100,
+                'war hammer': 4000,
+                
+                // Modern/Urban Weapons
+                'ak-47': 4300,
+                'ammunition': 500, 'ammo': 500,
+                'ar-15': 3500,
+                'assault rifle': 3800,
+                'baton': 500,
+                'bullet': 10, 'bullets': 300,
+                'clip': 200,
+                'combat knife': 300,
+                'flashbang': 350,
+                'glock': 900,
+                'grenade': 400,
+                'handgun': 1000,
+                'keys knuckles': 300,
+                'machine gun': 10000,
+                'magazine': 200,
+                'molotov cocktail': 600,
+                'pepper spray': 150,
+                'pistol': 1000,
+                'revolver': 1100,
+                'rifle': 4000,
+                'shell': 25, 'shells': 500,
+                'shotgun': 3500,
+                'shuriken': 50,
+                'smg': 3000,
+                'sniper rifle': 6000,
+                'steel pipe': 2000,
+                'submachine gun': 3000,
+                'tactical knife': 250,
+                'taser': 300,
+                'uzi': 3600,
+                
+                // Futuristic Weapons
+                'blaster': 2200,
+                'coilgun': 5500,
+                'energy sword': 1000,
+                'energy weapon': 3000,
+                'gauss rifle': 6000,
+                'ion cannon': 10000,
+                'laser gun': 2000,
+                'laser pistol': 1200,
+                'laser rifle': 3500,
+                'light saber': 1000,
+                'particle beam': 5000,
+                'plasma blade': 800,
+                'plasma cannon': 8000,
+                'plasma gun': 2500,
+                'plasma rifle': 4000,
+                'pulse rifle': 3800,
+                'railgun': 7000,
+                'shock rifle': 3200,
+                'stun gun': 800,
+
+                // --- ARMOR ---
+                // Medieval/Fantasy Armor
+                'breastplate': 8000,
+                'brigandine': 15000,
+                'buckler': 2000,
+                'chainmail': 20000,
+                'cuirass': 7000,
+                'gambeson': 5000,
+                'gauntlets': 1500,
+                'greaves': 2000,
+                'helmet': 2000, 'helm': 2000,
+                'hide armor': 12000,
+                'leather armor': 10000,
+                'plate armor': 25000,
+                'pauldrons': 2500,
+                'sabatons': 1500,
+                'scale mail': 22000,
+                'shield': 4000, 'kite shield': 5000, 'tower shield': 8000,
+                'splint mail': 23000,
+                'studded leather': 13000,
+                'vambraces': 1000,
+                
+                // Modern/Urban Armor
+                'body armor': 4000,
+                'bulletproof vest': 3000,
+                'combat helmet': 1800,
+                'flak jacket': 4000,
+                'kevlar vest': 2500,
+                'plate carrier': 3500,
+                'riot gear': 8000,
+                'riot shield': 6000,
+                'tactical helmet': 1500,
+                'tactical vest': 2000,
+                
+                // Futuristic Armor
+                'cybernetic armor': 15000,
+                'energy shield': 2000,
+                'environmental suit': 10000,
+                'exoskeleton': 40000,
+                'force field': 1500,
+                'hardlight armor': 8000,
+                'hazmat suit': 5000,
+                'mech suit': 80000,
+                'nano suit': 5000,
+                'power armor': 50000,
+                'space suit': 20000,
+                'stealth suit': 4000,
+                
+                // --- FANTASY & MAGIC ITEMS ---
+                // Potions, Elixirs & Consumables
+                'ambrosia': 300,
+                'booster': 200,
+                'catalyst': 200,
+                'component': 30,
+                'dragon\'s blood elixir': 250,
+                'dream dust': 50,
+                'elixir': 250,
+                'enhancer': 150,
+                'ep': 50, // For "EP:" items
+                'essence': 80,
+                'extract': 120,
+                'holy water': 300,
+                'incense': 100,
+                'injection': 50,
+                'medical spray': 150,
+                'medicine': 100,
+                'morphine': 50,
+                'pill': 1,
+                'potion': 200,
+                'powder': 100,
+                'remedy': 200,
+                'salve': 100,
+                'serum': 150,
+                'smelling salts': 50,
+                'solution': 200,
+                'speed spray': 150,
+                'steroids': 50,
+                'stimulant': 100,
+                'tincture': 150,
+                'tonic': 200,
+                'tranquilizer': 50,
+                'vial': 150,
+                
+                // Artifacts, Relics & Jewelry
+                'amulet': 100,
+                'artifact': 1000,
+                'astrolabe': 800,
+                'bell': 150,
+                'bracelet': 50,
+                'chalice': 400,
+                'charm': 50,
+                'circlet': 200,
+                'coin': 10,
+                'compass': 100,
+                'crown': 200,
+                'crystal ball': 2000,
+                'crystal': 300,
+                'fang': 50,
+                'feather': 1,
+                'flute': 300,
+                'gem': 50,
+                'grimoire': 3000,
+                'harp': 5000,
+                'hourglass': 800,
+                'horn': 800,
+                'idol': 1500,
+                'key': 20,
+                'lens': 50,
+                'lute': 2000,
+                'medallion': 150,
+                'necklace': 100,
+                'orb': 500,
+                'pendant': 80,
+                'phylactery': 500,
+                'relic': 1500,
+                'ring': 20,
+                'rune': 100,
+                'runestone': 500,
+                'scroll': 50,
+                'seed': 10,
+                'spellbook': 2500,
+                'talisman': 150,
+                'thimble': 5,
+                'timepiece': 250,
+                'tome': 2000,
+                'totem': 800,
+                'trinket': 200,
+
+                // Monster Parts & Materials
+                'adamantine': 1000,
+                'alloy': 800,
+                'bone': 500,
+                'carapace': 3000,
+                'claw': 80,
+                'cloth': 200,
+                'core': 5000, // Golem Core
+                'dragon scale': 100,
+                'dragonhide': 800,
+                'eyestalk': 300,
+                'gland': 50,
+                'glass': 400,
+                'heart': 500,
+                'herb': 10,
+                'ingot': 2000,
+                'leather': 300,
+                'mithril': 500,
+                'ooze': 600,
+                'organ': 400,
+                'plant': 100,
+                'plasma': 500,
+                'polymer': 300,
+                'resin': 200,
+                'sap': 150,
+                'scale': 300,
+                'shard': 50,
+                'shroud': 300,
+                'skull': 1000,
+                'spores': 20,
+                'steel': 500,
+                'tail': 1500,
+                'talon': 100,
+                'tentacle': 1000,
+                'unicorn horn': 2000,
+                'venom': 50,
+                'wing': 10,
+                'wood': 800,
+
+                // Misc
+                'bag of holding': 500,
+                'caltrops': 1000, // Bag of
+                'cigarette': 25,
+                'pet rock': 500,
+                'pocket sand': 100,
+                'rubbish': 100,
+                'ticket': 1,
+            };
+            
+            // Check for exact matches or partial matches in reverse order of key length
+            const sortedPatterns = Object.entries(weightPatterns).sort((a, b) => b[0].length - a[0].length);
+
+            for (const [pattern, weight] of sortedPatterns) {
+                if (name.includes(pattern)) {
+                    return weight;
+                }
+            }
+            
+            // Default weight for unknown items
+            return 250;
+        }
+        
+        document.getElementById('csvFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('processBtn').disabled = false;
+            }
+        });
+        
+        document.getElementById('processBtn').addEventListener('click', async function() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showStatus('Please select a CSV file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const csvContent = e.target.result;
+                    
+                    // Parse CSV
+                    const parsed = Papa.parse(csvContent, {
+                        header: true,
+                        dynamicTyping: true,
+                        skipEmptyLines: true
+                    });
+                    
+                    if (parsed.errors.length > 0) {
+                        let errorMessage = 'Error parsing CSV: ';
+                        parsed.errors.forEach(err => {
+                            errorMessage += `Row ${err.row}: ${err.message}. `;
+                        });
+                        showStatus(errorMessage, 'error');
+                        return;
+                    }
+
+                    if (!parsed.meta.fields.includes('id') || !parsed.meta.fields.includes('name')) {
+                         showStatus('CSV must contain "id" and "name" columns.', 'error');
+                        return;
+                    }
+                    
+                    // Add weight column
+                    processedData = parsed.data.map(row => {
+                        return {
+                            id: row.id,
+                            name: row.name,
+                            weight: estimateWeight(row.name || '')
+                        };
+                    });
+                    
+                    // Show preview
+                    showPreview(processedData.slice(0, 50));
+                    showStatus(`Successfully processed ${processedData.length} items!`, 'success');
+                    document.getElementById('downloadBtn').disabled = false;
+                    
+                } catch (error) {
+                    showStatus('Error processing file: ' + error.message, 'error');
+                }
+            };
+            
+            reader.readAsText(file);
+        });
+        
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (processedData.length === 0) return;
+            
+            // Convert back to CSV
+            const csv = Papa.unparse(processedData);
+            
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'items_with_weights.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showStatus('CSV file downloaded!', 'success');
+        });
+        
+        function showPreview(data) {
+            const tbody = document.querySelector('#previewTable tbody');
+            const thead = document.querySelector('#previewTable thead tr');
+            thead.innerHTML = '<th>ID</th><th>Name</th><th>Weight (grams)</th>'; // Reset header
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.id !== undefined ? row.id : ''}</td>
+                    <td>${row.name !== undefined ? row.name : ''}</td>
+                    <td>${row.weight !== undefined ? row.weight : ''}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('preview').style.display = 'block';
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+```

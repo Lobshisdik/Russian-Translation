@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dr. Jeremiah Blackwood - Mathematical Peace Solutions</title>
+    <meta name="keywords" content="mathematics, peace, conflict resolution, Kentucky, equations, research">
+    <meta name="description" content="Dr. Jeremiah Blackwood has mathematically solved the Israel-Palestine conflict using advanced equilibrium theory. Purchase access to the complete solution.">
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f5f5dc;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23f5f5dc"/><circle cx="2" cy="2" r="1" fill="%23e0e0e0"/></svg>');
+        }
+        
+        .topBanner {
+            background-color: #000080;
+            color: #ffff00;
+            text-align: center;
+            padding: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff;
+            border: 2px solid #000080;
+            padding: 5px;
+            z-index: 100;
+        }
+        
+        .language-selector select {
+            border: 1px solid #000080;
+            padding: 3px;
+            font-size: 12px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 2px solid #000080;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff, #e6e6fa);
+            border-bottom: 3px solid #000080;
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #000080;
+            margin: 0;
+            text-shadow: 2px 2px 4px #cccccc;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #800080;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        .navigation {
+            background-color: #e6e6fa;
+            border: 2px inset #cccccc;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .navButton {
+            background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+            border: 2px outset #cccccc;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #000080;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .navButton:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+        }
+        
+        .navButton:active {
+            border: 2px inset #cccccc;
+        }
+        
+        .section {
+            display: none;
+            padding: 20px;
+            margin: 10px;
+            border: 2px solid #cccccc;
+            background-color: #fafafa;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .equation-preview {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #008000;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .price-box {
+            background-color: #ffff99;
+            border: 3px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .testimonial {
+            background-color: #f0f8ff;
+            border-left: 4px solid #000080;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .warning {
+            background-color: #ffe4e1;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            color: #8b0000;
+            font-weight: bold;
+        }
+        
+        .unlock-button {
+            background: linear-gradient(to bottom, #ff6b6b, #ee5a52);
+            border: 2px outset #ff0000;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px;
+        }
+        
+        .unlock-button:hover {
+            background: linear-gradient(to bottom, #ff5252, #e53e3e);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 3px solid #888;
+            width: 300px;
+            text-align: center;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            border: 2px inset #cccccc;
+            width: 200px;
+            margin: 10px;
+        }
+        
+        .formula-display {
+            display: none;
+            background-color: #000000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #008000;
+            font-size: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-distorted {
+            animation: distort 3s infinite;
+            filter: blur(2px);
+            transform: skew(-5deg);
+        }
+        
+        @keyframes distort {
+            0% { transform: skew(0deg) scale(1); filter: blur(0px); }
+            25% { transform: skew(-2deg) scale(1.05); filter: blur(1px); }
+            50% { transform: skew(3deg) scale(0.95); filter: blur(2px); }
+            75% { transform: skew(-1deg) scale(1.02); filter: blur(1px); }
+            100% { transform: skew(0deg) scale(1); filter: blur(0px); }
+        }
+        
+        .glitch {
+            animation: glitch 0.5s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #666666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 2px solid #000080;
+            background-color: #e6e6fa;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="it">Italiano</option>
+        </select>
+    </div>
+
+    <div class="topBanner" id="topBanner">
+        *** BREAKTHROUGH IN PEACE MATHEMATICS *** Dr. Blackwood's Revolutionary Solution *** NOW AVAILABLE ***
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Dr. Jeremiah Blackwood</h1>
+            <div class="subtitle" id="subtitle1">Mathematical Peace Research Institute</div>
+            <div class="subtitle" id="subtitle2">University of Kentucky Extension Program</div>
+        </header>
+        
+        <div class="navigation">
+            <a href="#" class="navButton" onclick="showSection('home')" id="nav-home">HOME</a>
+            <a href="#" class="navButton" onclick="showSection('research')" id="nav-research">RESEARCH</a>
+            <a href="#" class="navButton" onclick="showSection('preview')" id="nav-preview">EQUATION PREVIEW</a>
+            <a href="#" class="navButton" onclick="showSection('purchase')" id="nav-purchase">PURCHASE ACCESS</a>
+            <a href="#" class="navButton" onclick="showSection('testimonials')" id="nav-testimonials">TESTIMONIALS</a>
+            <a href="#" class="navButton" onclick="showSection('about')" id="nav-about">ABOUT DR. BLACKWOOD</a>
+            <a href="#" class="navButton" onclick="showSection('contact')" id="nav-contact">CONTACT</a>
+        </div>
+        
+        <div id="home" class="section active">
+            <h2 id="home-title">Revolutionary Mathematical Solution to Middle East Peace</h2>
+            <p><strong id="home-finally">FINALLY SOLVED:</strong> <span id="home-intro">After 23 years of intensive research, Dr. Jeremiah Blackwood has mathematically proven the optimal solution to the Israel-Palestine conflict using advanced Socio-Economic Equilibrium Theory.</span></p>
+            
+            <div class="warning">
+                <span id="home-warning">⚠️ WARNING: This solution is MATHEMATICALLY PROVEN and has been verified by independent reviewers. Results are guaranteed when properly implemented.</span>
+            </div>
+            
+            <p id="home-using">Using proprietary algorithms combining:</p>
+            <ul>
+                <li id="home-li1">Game Theory Optimization</li>
+                <li id="home-li2">Territorial Distribution Mathematics</li>
+                <li id="home-li3">Economic Resource Allocation Formulas</li>
+                <li id="home-li4">Cultural Integration Coefficients</li>
+                <li id="home-li5">Diplomatic Stability Matrices</li>
+            </ul>
+            
+            <div class="equation-preview">
+                Ψ(x,y,z) = ∫[α·β·γ] × [CLASSIFIED] + [PURCHASE REQUIRED] = PEACE
+            </div>
+            
+            <p><strong id="home-price">The complete solution is available for €2,847.50</strong> <span id="home-price-desc">- a small price for world peace!</span></p>
+            
+            <div class="counter">
+                <span id="home-counter">Page views: 001,247 | Last updated: January 15, 2001</span>
+            </div>
+        </div>
+        
+        <div id="research" class="section">
+            <h2 id="research-title">Research Methodology</h2>
+            <p id="research-intro">My groundbreaking research began in 1978 at the University of Kentucky, where I developed the foundational principles of Conflict Resolution Mathematics (CRM).</p>
+            
+            <h3 id="research-theorem">The Blackwood Theorem</h3>
+            <p id="research-theorem-desc">Every territorial dispute can be expressed as a mathematical equation where:</p>
+            <div class="equation-preview">
+                Territory(A) + Territory(B) = Optimal_Distribution(x)
+                <br>Where x = [PURCHASE FULL EQUATION]
+            </div>
+            
+            <h3 id="research-validation">Validation Process</h3>
+            <p id="research-validation-desc">The equation has been tested on 47 historical conflicts with 94.7% accuracy in predicting optimal outcomes. The formula accounts for:</p>
+            <ul>
+                <li id="research-li1">Population density coefficients</li>
+                <li id="research-li2">Religious significance multipliers</li>
+                <li id="research-li3">Economic value calculations</li>
+                <li id="research-li4">Strategic importance factors</li>
+                <li id="research-li5">Historical claim weightings</li>
+            </ul>
+            
+            <p><em id="research-note">Note: Complete methodology documentation included with purchase.</em></p>
+        </div>
+        
+        <div id="preview" class="section">
+            <h2 id="preview-title">Equation Preview</h2>
+            <p id="preview-intro">Below is a partial preview of the complete mathematical solution. The full equation contains 847 variables and requires specialized software to calculate.</p>
+            
+            <div class="equation-preview">
+                Phase 1: Ψ₁ = (T_israel × 0.67) + (T_palestine × 0.33) × [HIDDEN]
+                <br><br>
+                Phase 2: Ψ₂ = ∑(Religious_Sites) ÷ [CLASSIFIED] × Population_Ratio
+                <br><br>
+                Phase 3: Ψ₃ = Economic_Integration[PURCHASE_REQUIRED] + Water_Rights(γ)
+                <br><br>
+                Final: PEACE = Ψ₁ + Ψ₂ + Ψ₃ + [COMPLETE_FORMULA_AVAILABLE]
+            </div>
+            
+            <div class="price-box">
+                <span id="preview-unlock">🔒 UNLOCK COMPLETE FORMULA FOR €2,847.50 🔒</span>
+                <br><br>
+                <button class="unlock-button" onclick="openModal()" id="preview-unlock-btn">UNLOCK NOW</button>
+            </div>
+            
+            <div class="formula-display" id="hiddenFormula">
+                <div id="formulaText">
+                    BLACKWOOD PEACE EQUATION v2.1
+                    <br><br>
+                    Ψ(PEACE) = ∫∫∫ [67.4% × ISRAEL_TERRITORY] + [32.6% × PALESTINE_TERRITORY]
+                    <br>× [JERUSALEM_SHARING_COEFFICIENT = 0.5]
+                    <br>× [ECONOMIC_INTEGRATION_FACTOR = 1.847]
+                    <br>× [WATER_RIGHTS_DISTRIBUTION = 0.73:0.27]
+                    <br>× [REFUGEE_RETURN_CALCULATION = ln(time) × 0.23]
+                    <br>× [SECURITY_GUARANTEE_MATRIX = NATO_INTERVENTION]
+                    <br>+ [REPARATIONS_FORMULA = €847,293,847.23]
+                    <br><br>
+                    IMPLEMENTATION TIMELINE: 7.3 YEARS
+                    <br>SUCCESS_PROBABILITY: 99.7%
+                </div>
+            </div>
+        </div>
+        
+        <div id="purchase" class="section">
+            <h2 id="purchase-title">Purchase Complete Solution</h2>
+            
+            <div class="price-box">
+                <h3 id="purchase-package">COMPLETE PEACE EQUATION PACKAGE</h3>
+                <p><strong>€2,847.50</strong></p>
+                <p id="purchase-includes">Includes:</p>
+                <ul style="text-align: left; margin-left: 50px;">
+                    <li id="purchase-li1">Complete 847-variable equation</li>
+                    <li id="purchase-li2">Implementation guidelines</li>
+                    <li id="purchase-li3">Software calculation tools</li>
+                    <li id="purchase-li4">Historical validation data</li>
+                    <li id="purchase-li5">Dr. Blackwood's personal consultation (2 hours)</li>
+                </ul>
+            </div>
+            
+            <h3 id="purchase-payment">Payment Methods Accepted:</h3>
+            <ul>
+                <li id="purchase-payment1">Bank Transfer (Kentucky First National Bank)</li>
+                <li id="purchase-payment2">Certified Check</li>
+                <li id="purchase-payment3">Money Order</li>
+                <li id="purchase-payment4">Cash (in person only)</li>
+            </ul>
+            
+            <div class="warning">
+                <span id="purchase-warning">WARNING: Due to the sensitive nature of this solution, payment must be received before equation details are released. No refunds after formula disclosure.</span>
+            </div>
+            
+            <p><strong id="purchase-contact">Contact:</strong> <span id="purchase-contact-desc">Send payment details to</span> <a href="mailto:jblackwood@hexagram.corp">jblackwood@hexagram.corp</a></p>
+        </div>
+        
+        <div id="testimonials" class="section">
+            <h2 id="testimonials-title">What Experts Are Saying</h2>
+            
+            <div class="testimonial">
+                <span id="testimonial1">"Dr. Blackwood's mathematical approach is revolutionary. While I cannot comment on the classified portions, the methodology is sound."</span>
+                <br><strong>- Prof. Margaret Chen, MIT Political Science</strong>
+            </div>
+            
+            <div class="testimonial">
+                <span id="testimonial2">"I've seen parts of the equation. It's... disturbing how accurate it is."</span>
+                <br><strong>- <span id="testimonial2-anon">Anonymous UN Mediator</span></strong>
+            </div>
+            
+            <div class="testimonial">
+                <span id="testimonial3">"Blackwood's territorial distribution coefficients solved our border dispute in 6 months."</span>
+                <br><strong>- Mayor Jenkins, Disputed Township, Kentucky</strong>
+            </div>
+            
+            <div class="testimonial">
+                <span id="testimonial4">"The mathematics don't lie. This could work."</span>
+                <br><strong>- Dr. Rachel Goldman, Hebrew University (<span id="testimonial4-partial">partial quote</span>)</strong>
+            </div>
+            
+            <h3 id="testimonials-recognition">Academic Recognition</h3>
+            <ul>
+                <li id="recognition1">Kentucky Mathematical Society Award (1987)</li>
+                <li id="recognition2">Conflict Resolution Research Grant (1993)</li>
+                <li id="recognition3">International Peace Studies Citation (1999)</li>
+            </ul>
+        </div>
+        
+        <div id="about" class="section">
+            <h2 id="about-title">About Dr. Jeremiah Blackwood</h2>
+            
+            <p><strong id="about-education">Education:</strong></p>
+            <ul>
+                <li>Ph.D. Mathematics, University of Kentucky (1982)</li>
+                <li>M.S. Applied Statistics, University of Louisville (1979)</li>
+                <li>B.A. Mathematics, Eastern Kentucky University (1977)</li>
+            </ul>
+            
+            <p><strong id="about-career">Career Highlights:</strong></p>
+            <ul>
+                <li id="about-career1">23 years researching mathematical conflict resolution</li>
+                <li id="about-career2">Solved 12 local territorial disputes using mathematical models</li>
+                <li id="about-career3">Consultant for Kentucky Border Commission (1989-1994)</li>
+                <li id="about-career4">Published 67 papers on Socio-Mathematical Integration Theory</li>
+            </ul>
+            
+            <p><strong id="about-mission">Personal Mission:</strong> <span id="about-mission-desc">To apply the pure logic of mathematics to humanity's most complex problems. If we can calculate the orbit of planets, why not the path to peace?</span></p>
+            
+            <div class="warning">
+                <span id="about-important">IMPORTANT: Dr. Blackwood works independently and is not affiliated with any government or political organization. This research is purely academic in nature.</span>
+            </div>
+        </div>
+        
+        <div id="contact" class="section">
+            <h2 id="contact-title">Contact Information</h2>
+            
+            <p><strong>Dr. Jeremiah Blackwood</strong><br>
+            <span id="contact-institute">Mathematical Peace Research Institute</span><br>
+            Rural Route 7, Box 234<br>
+            Hazard, Kentucky 41701<br>
+            United States</p>
+            
+            <p><strong id="contact-email">Hypernet Mail:</strong> <a href="mailto:jblackwood@hexagram.corp">jblackwood@hexagram.corp</a></p>
+            
+            <p><strong id="contact-hours">Office Hours:</strong> <span id="contact-hours-desc">Monday-Friday, 9:00 AM - 5:00 PM EST</span><br>
+            <strong id="contact-phone">Phone:</strong> <span id="contact-phone-desc">Available to paying customers only</span></p>
+            
+            <div class="warning">
+                <span id="contact-note">NOTE: Due to the sensitive nature of this research, all communications are monitored for security purposes. Please do not discuss equation details over unsecured channels.</span>
+            </div>
+            
+            <p><strong id="contact-visitor">Visitor Policy:</strong> <span id="contact-visitor-desc">In-person consultations available by appointment only. Minimum consultation fee: €847.50</span></p>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="unlockModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Enter Unlock Code</h3>
+            <p id="modal-desc">Enter the secret code to access the complete formula:</p>
+            <input type="text" id="unlockCode" placeholder="Enter code here">
+            <br>
+            <button class="unlock-button" onclick="checkCode()" id="modal-unlock">UNLOCK</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p id="footer-copyright">© 2001 Dr. Jeremiah Blackwood - Mathematical Peace Research Institute</p>
+        <p id="footer-browser">Best viewed with Hypernet Explorer 5.0 or higher | <a href="mailto:jblackwood@hexagram.corp"><span id="footer-contact">Contact on Hexagram</span></a></p>
+        <div class="counter">
+            <span id="footer-counter">This page has been visited 001,247 times since January 1, 2001</span>
+        </div>
+    </footer>
+    
+    <script>
+        const translations = {
+            en: {
+                topBanner: "*** BREAKTHROUGH IN PEACE MATHEMATICS *** Dr. Blackwood's Revolutionary Solution *** NOW AVAILABLE ***",
+                subtitle1: "Mathematical Peace Research Institute",
+                subtitle2: "University of Kentucky Extension Program",
+                navHome: "HOME",
+                navResearch: "RESEARCH",
+                navPreview: "EQUATION PREVIEW",
+                navPurchase: "PURCHASE ACCESS",
+                navTestimonials: "TESTIMONIALS",
+                navAbout: "ABOUT DR. BLACKWOOD",
+                navContact: "CONTACT",
+                homeTitle: "Revolutionary Mathematical Solution to Middle East Peace",
+                homeFinally: "FINALLY SOLVED:",
+                homeIntro: "After 23 years of intensive research, Dr. Jeremiah Blackwood has mathematically proven the optimal solution to the Israel-Palestine conflict using advanced Socio-Economic Equilibrium Theory.",
+                homeWarning: "⚠️ WARNING: This solution is MATHEMATICALLY PROVEN and has been verified by independent reviewers. Results are guaranteed when properly implemented.",
+                homeUsing: "Using proprietary algorithms combining:",
+                homeLi1: "Game Theory Optimization",
+                homeLi2: "Territorial Distribution Mathematics",
+                homeLi3: "Economic Resource Allocation Formulas",
+                homeLi4: "Cultural Integration Coefficients",
+                homeLi5: "Diplomatic Stability Matrices",
+                homePrice: "The complete solution is available for €2,847.50",
+                homePriceDesc: "- a small price for world peace!",
+                homeCounter: "Page views: 001,247 | Last updated: January 15, 2001",
+                researchTitle: "Research Methodology",
+                researchIntro: "My groundbreaking research began in 1978 at the University of Kentucky, where I developed the foundational principles of Conflict Resolution Mathematics (CRM).",
+                researchTheorem: "The Blackwood Theorem",
+                researchTheoremDesc: "Every territorial dispute can be expressed as a mathematical equation where:",
+                researchValidation: "Validation Process",
+                researchValidationDesc: "The equation has been tested on 47 historical conflicts with 94.7% accuracy in predicting optimal outcomes. The formula accounts for:",
+                researchLi1: "Population density coefficients",
+                researchLi2: "Religious significance multipliers",
+                researchLi3: "Economic value calculations",
+                researchLi4: "Strategic importance factors",
+                researchLi5: "Historical claim weightings",
+                researchNote: "Note: Complete methodology documentation included with purchase.",
+                previewTitle: "Equation Preview",
+                previewIntro: "Below is a partial preview of the complete mathematical solution. The full equation contains 847 variables and requires specialized software to calculate.",
+                previewUnlock: "🔒 UNLOCK COMPLETE FORMULA FOR €2,847.50 🔒",
+                previewUnlockBtn: "UNLOCK NOW",
+                purchaseTitle: "Purchase Complete Solution",
+                purchasePackage: "COMPLETE PEACE EQUATION PACKAGE",
+                purchaseIncludes: "Includes:",
+                purchaseLi1: "Complete 847-variable equation",
+                purchaseLi2: "Implementation guidelines",
+                purchaseLi3: "Software calculation tools",
+                purchaseLi4: "Historical validation data",
+                purchaseLi5: "Dr. Blackwood's personal consultation (2 hours)",
+                purchasePayment: "Payment Methods Accepted:",
+                purchasePayment1: "Bank Transfer (Kentucky First National Bank)",
+                purchasePayment2: "Certified Check",
+                purchasePayment3: "Money Order",
+                purchasePayment4: "Cash (in person only)",
+                purchaseWarning: "WARNING: Due to the sensitive nature of this solution, payment must be received before equation details are released. No refunds after formula disclosure.",
+                purchaseContact: "Contact:",
+                purchaseContactDesc: "Send payment details to",
+                testimonialsTitle: "What Experts Are Saying",
+                testimonial1: "\"Dr. Blackwood's mathematical approach is revolutionary. While I cannot comment on the classified portions, the methodology is sound.\"",
+                testimonial2: "\"I've seen parts of the equation. It's... disturbing how accurate it is.\"",
+                testimonial2Anon: "Anonymous UN Mediator",
+                testimonial3: "\"Blackwood's territorial distribution coefficients solved our border dispute in 6 months.\"",
+                testimonial4: "\"The mathematics don't lie. This could work.\"",
+                testimonial4Partial: "partial quote",
+                testimonialsRecognition: "Academic Recognition",
+                recognition1: "Kentucky Mathematical Society Award (1987)",
+                recognition2: "Conflict Resolution Research Grant (1993)",
+                recognition3: "International Peace Studies Citation (1999)",
+                aboutTitle: "About Dr. Jeremiah Blackwood",
+                aboutEducation: "Education:",
+                aboutCareer: "Career Highlights:",
+                aboutCareer1: "23 years researching mathematical conflict resolution",
+                aboutCareer2: "Solved 12 local territorial disputes using mathematical models",
+                aboutCareer3: "Consultant for Kentucky Border Commission (1989-1994)",
+                aboutCareer4: "Published 67 papers on Socio-Mathematical Integration Theory",
+                aboutMission: "Personal Mission:",
+                aboutMissionDesc: "To apply the pure logic of mathematics to humanity's most complex problems. If we can calculate the orbit of planets, why not the path to peace?",
+                aboutImportant: "IMPORTANT: Dr. Blackwood works independently and is not affiliated with any government or political organization. This research is purely academic in nature.",
+                contactTitle: "Contact Information",
+                contactInstitute: "Mathematical Peace Research Institute",
+                contactEmail: "Hypernet Mail:",
+                contactHours: "Office Hours:",
+                contactHoursDesc: "Monday-Friday, 9:00 AM - 5:00 PM EST",
+                contactPhone: "Phone:",
+                contactPhoneDesc: "Available to paying customers only",
+                contactNote: "NOTE: Due to the sensitive nature of this research, all communications are monitored for security purposes. Please do not discuss equation details over unsecured channels.",
+                contactVisitor: "Visitor Policy:",
+                contactVisitorDesc: "In-person consultations available by appointment only. Minimum consultation fee: €847.50",
+                modalTitle: "Enter Unlock Code",
+                modalDesc: "Enter the secret code to access the complete formula:",
+                modalUnlock: "UNLOCK",
+                footerCopyright: "© 2001 Dr. Jeremiah Blackwood - Mathematical Peace Research Institute",
+                footerBrowser: "Best viewed with Hypernet Explorer 5.0 or higher |",
+                footerContact: "Contact on Hexagram",
+                footerCounter: "This page has been visited 001,247 times since January 1, 2001"
+            },
+            it: {
+                topBanner: "*** SVOLTA NELLA MATEMATICA DELLA PACE *** Soluzione Rivoluzionaria del Dr. Blackwood *** ORA DISPONIBILE ***",
+                subtitle1: "Istituto di Ricerca Matematica per la Pace",
+                subtitle2: "Programma di Estensione Università del Kentucky",
+                navHome: "HOME",
+                navResearch: "RICERCA",
+                navPreview: "ANTEPRIMA EQUAZIONE",
+                navPurchase: "ACCESSO ACQUISTO",
+                navTestimonials: "TESTIMONIANZE",
+                navAbout: "CHI È IL DR. BLACKWOOD",
+                navContact: "CONTATTI",
+                homeTitle: "Soluzione Matematica Rivoluzionaria per la Pace in Medio Oriente",
+                homeFinally: "FINALMENTE RISOLTO:",
+                homeIntro: "Dopo 23 anni di ricerca intensiva, il Dr. Jeremiah Blackwood ha dimostrato matematicamente la soluzione ottimale al conflitto Israelo-Palestinese utilizzando la Teoria Avanzata dell'Equilibrio Socio-Economico.",
+                homeWarning: "⚠️ ATTENZIONE: Questa soluzione è MATEMATICAMENTE PROVATA e verificata da revisori indipendenti. I risultati sono garantiti quando implementata correttamente.",
+                homeUsing: "Utilizzando algoritmi proprietari che combinano:",
+                homeLi1: "Ottimizzazione della Teoria dei Giochi",
+                homeLi2: "Matematica della Distribuzione Territoriale",
+                homeLi3: "Formule di Allocazione delle Risorse Economiche",
+                homeLi4: "Coefficienti di Integrazione Culturale",
+                homeLi5: "Matrici di Stabilità Diplomatica",
+                homePrice: "La soluzione completa è disponibile per €2.847,50",
+                homePriceDesc: "- un piccolo prezzo per la pace mondiale!",
+                homeCounter: "Visualizzazioni pagina: 001.247 | Ultimo aggiornamento: 15 gennaio 2001",
+                researchTitle: "Metodologia di Ricerca",
+                researchIntro: "La mia ricerca rivoluzionaria iniziò nel 1978 all'Università del Kentucky, dove sviluppai i principi fondamentali della Matematica della Risoluzione dei Conflitti (CRM).",
+                researchTheorem: "Il Teorema di Blackwood",
+                researchTheoremDesc: "Ogni disputa territoriale può essere espressa come equazione matematica dove:",
+                researchValidation: "Processo di Validazione",
+                researchValidationDesc: "L'equazione è stata testata su 47 conflitti storici con 94,7% di precisione nel predire risultati ottimali. La formula tiene conto di:",
+                researchLi1: "Coefficienti di densità demografica",
+                researchLi2: "Moltiplicatori di significato religioso",
+                researchLi3: "Calcoli del valore economico",
+                researchLi4: "Fattori di importanza strategica",
+                researchLi5: "Ponderazioni di rivendicazioni storiche",
+                researchNote: "Nota: Documentazione completa della metodologia inclusa nell'acquisto.",
+                previewTitle: "Anteprima Equazione",
+                previewIntro: "Qui sotto c'è un'anteprima parziale della soluzione matematica completa. L'equazione completa contiene 847 variabili e richiede software specializzato per il calcolo.",
+                previewUnlock: "🔒 SBLOCCA FORMULA COMPLETA PER €2.847,50 🔒",
+                previewUnlockBtn: "SBLOCCA ORA",
+                purchaseTitle: "Acquista Soluzione Completa",
+                purchasePackage: "PACCHETTO EQUAZIONE PACE COMPLETA",
+                purchaseIncludes: "Include:",
+                purchaseLi1: "Equazione completa con 847 variabili",
+                purchaseLi2: "Linee guida per l'implementazione",
+                purchaseLi3: "Strumenti software di calcolo",
+                purchaseLi4: "Dati di validazione storica",
+                purchaseLi5: "Consultazione personale del Dr. Blackwood (2 ore)",
+                purchasePayment: "Metodi di Pagamento Accettati:",
+                purchasePayment1: "Bonifico Bancario (Kentucky First National Bank)",
+                purchasePayment2: "Assegno Certificato",
+                purchasePayment3: "Vaglia Postale",
+                purchasePayment4: "Contanti (solo di persona)",
+                purchaseWarning: "ATTENZIONE: A causa della natura sensibile di questa soluzione, il pagamento deve essere ricevuto prima che i dettagli dell'equazione vengano rilasciati. Nessun rimborso dopo la divulgazione della formula.",
+                purchaseContact: "Contatto:",
+                purchaseContactDesc: "Invia i dettagli di pagamento a",
+                testimonialsTitle: "Cosa Dicono gli Esperti",
+                testimonial1: "\"L'approccio matematico del Dr. Blackwood è rivoluzionario. Sebbene non possa commentare le parti classificate, la metodologia è solida.\"",
+                testimonial2: "\"Ho visto parti dell'equazione. È... inquietante quanto sia precisa.\"",
+                testimonial2Anon: "Mediatore ONU Anonimo",
+                testimonial3: "\"I coefficienti di distribuzione territoriale di Blackwood hanno risolto la nostra disputa di confine in 6 mesi.\"",
+                testimonial4: "\"La matematica non mente. Questo potrebbe funzionare.\"",
+                testimonial4Partial: "citazione parziale",
+                testimonialsRecognition: "Riconoscimenti Accademici",
+                recognition1: "Premio della Società Matematica del Kentucky (1987)",
+                recognition2: "Borsa di Ricerca per la Risoluzione dei Conflitti (1993)",
+                recognition3: "Citazione degli Studi Internazionali per la Pace (1999)",
+                aboutTitle: "Chi è il Dr. Jeremiah Blackwood",
+                aboutEducation: "Formazione:",
+                aboutCareer: "Punti Salienti della Carriera:",
+                aboutCareer1: "23 anni di ricerca sulla risoluzione matematica dei conflitti",
+                aboutCareer2: "Risolto 12 dispute territoriali locali usando modelli matematici",
+                aboutCareer3: "Consulente per la Commissione Confini del Kentucky (1989-1994)",
+                aboutCareer4: "Pubblicato 67 articoli sulla Teoria dell'Integrazione Socio-Matematica",
+                aboutMission: "Missione Personale:",
+                aboutMissionDesc: "Applicare la logica pura della matematica ai problemi più complessi dell'umanità. Se possiamo calcolare l'orbita dei pianeti, perché non il percorso verso la pace?",
+                aboutImportant: "IMPORTANTE: Il Dr. Blackwood lavora indipendentemente e non è affiliato con alcun governo o organizzazione politica. Questa ricerca è di natura puramente accademica.",
+                contactTitle: "Informazioni di Contatto",
+                contactInstitute: "Istituto di Ricerca Matematica per la Pace",
+                contactEmail: "Posta Hypernet:",
+                contactHours: "Orari d'Ufficio:",
+                contactHoursDesc: "Lunedì-Venerdì, 9:00 AM - 5:00 PM EST",
+                contactPhone: "Telefono:",
+                contactPhoneDesc: "Disponibile solo per clienti paganti",
+                contactNote: "NOTA: A causa della natura sensibile di questa ricerca, tutte le comunicazioni sono monitorate per motivi di sicurezza. Si prega di non discutere i dettagli dell'equazione su canali non sicuri.",
+                contactVisitor: "Politica Turisti:",
+                contactVisitorDesc: "Consultazioni di persona disponibili solo su appuntamento. Tariffa minima di consultazione: €847,50",
+                modalTitle: "Inserisci Codice di Sblocco",
+                modalDesc: "Inserisci il codice segreto per accedere alla formula completa:",
+                modalUnlock: "SBLOCCA",
+                footerCopyright: "© 2001 Dr. Jeremiah Blackwood - Istituto di Ricerca Matematica per la Pace",
+                footerBrowser: "Meglio visualizzato con Hypernet Explorer 5.0 o superiore |",
+                footerContact: "Contatta su Hexagram",
+                footerCounter: "Questa pagina è stata visitata 001.247 volte dal 1° gennaio 2001"
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function changeLanguage() {
+            const select = document.getElementById('languageSelect');
+            currentLanguage = select.value;
+            
+            const texts = translations[currentLanguage];
+            
+            // Update all text elements
+            Object.keys(texts).forEach(key => {
+                const element = document.getElementById(key.replace(/([A-Z])/g, '-$1').toLowerCase());
+                if (element) {
+                    element.textContent = texts[key];
+                }
+            });
+            
+            // Handle special cases for navigation
+            document.getElementById('nav-home').textContent = texts.navHome;
+            document.getElementById('nav-research').textContent = texts.navResearch;
+            document.getElementById('nav-preview').textContent = texts.navPreview;
+            document.getElementById('nav-purchase').textContent = texts.navPurchase;
+            document.getElementById('nav-testimonials').textContent = texts.navTestimonials;
+            document.getElementById('nav-about').textContent = texts.navAbout;
+            document.getElementById('nav-contact').textContent = texts.navContact;
+            
+            // Update placeholder for input
+            const input = document.getElementById('unlockCode');
+            if (input) {
+                input.placeholder = currentLanguage === 'it' ? 'Inserisci codice qui' : 'Enter code here';
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function openModal() {
+            document.getElementById('unlockModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('unlockModal').style.display = 'none';
+        }
+        
+        function checkCode() {
+            var code = document.getElementById('unlockCode').value;
+            if (code.toLowerCase() === 'sadsatan') {
+                closeModal();
+                showFormula();
+            } else {
+                const message = currentLanguage === 'it' ? 'Codice errato! Accesso negato.' : 'Incorrect code! Access denied.';
+                alert(message);
+            }
+        }
+        
+        function showFormula() {
+            var formulaDiv = document.getElementById('hiddenFormula');
+            var formulaText = document.getElementById('formulaText');
+            
+            formulaDiv.style.display = 'block';
+            
+            // Add distortion effects
+            setTimeout(function() {
+                formulaText.classList.add('formula-distorted');
+            }, 1000);
+            
+            setTimeout(function() {
+                formulaText.classList.add('glitch');
+            }, 3000);
+            
+            // Change text after distortion
+            setTimeout(function() {
+                if (currentLanguage === 'it') {
+                    formulaText.innerHTML = `
+                        ERRORE... FORMULA CORROTTA...
+                        <br><br>
+                        L'EQUAZIONE... STA CAMBIANDO...
+                        <br><br>
+                        Ψ(???) = [DATI PERSI] × [SCONOSCIUTO] ÷ [VUOTO]
+                        <br><br>
+                        QUALCOSA NON VA... LA MATEMATICA...
+                        <br>NON TORNA...
+                        <br><br>
+                        LA RISPOSTA NON È MAI STATA LA PACE...
+                        <br>ERA... ERA...
+                        <br><br>
+                        [CONNESSIONE TERMINATA]
+                    `;
+                } else {
+                    formulaText.innerHTML = `
+                        ERROR... FORMULA CORRUPTED...
+                        <br><br>
+                        THE EQUATION... IT'S CHANGING...
+                        <br><br>
+                        Ψ(???) = [DATA LOST] × [UNKNOWN] ÷ [VOID]
+                        <br><br>
+                        SOMETHING IS WRONG... THE MATHEMATICS...
+                        <br>THEY'RE NOT ADDING UP...
+                        <br><br>
+                        THE ANSWER WAS NEVER PEACE...
+                        <br>IT WAS... IT WAS...
+                        <br><br>
+                        [CONNECTION TERMINATED]
+                    `;
+                }
+            }, 5000);
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('unlockModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

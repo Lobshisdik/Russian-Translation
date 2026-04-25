@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Order of Radiant Purity - ASCEND!</title>
+    <style>
+        /* Basic Reset & Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            /* --- NEW: Starry Background --- */
+            /* Replace with a real seamless starfield GIF/JPG */
+            background-image: url('[PLACEHOLDER_STARRY_BACKGROUND_GIF]'); 
+            background-color: #000000; /* Black fallback */
+            background-attachment: fixed; /* Make background stay fixed */
+            /* --- NEW: Default text color for dark background --- */
+            font-family: "Times New Roman", Times, serif; 
+            color: #E0E0E0; /* Light gray default text */
+            line-height: 1.6;
+        }
+
+        /* Main Container for responsiveness */
+        .container {
+            max-width: 900px; /* Slightly narrower */
+            margin: 15px auto;
+            padding: 20px;
+            /* --- NEW: Dark semi-transparent background --- */
+            background-color: rgba(10, 10, 20, 0.85); /* Dark semi-transparent */
+            border: 5px groove #00FF00; /* --- NEW: Neon Green border --- */
+            box-shadow: 0px 0px 15px #FF00FF; /* --- NEW: Magenta Glow --- */
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            border-bottom: 4px dotted #FFFF00; /* --- NEW: Yellow dotted border --- */
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- MODIFIED: Acidic H1 Style --- */
+        /* NOTE: For a TRULY authentic 'acid' font look, 
+           replace the text below with an IMAGE (GIF) created in an image editor 
+           with a weird font. Like: <h1><img src="acid_title.gif" alt="..."></h1> */
+        header h1 {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+            font-size: 3.2em; /* Slightly larger */
+            /* --- NEW: Acidic Colors --- */
+            color: #FFFF00; /* Bright Yellow */
+            /* --- NEW: More extreme text shadow --- */
+            text-shadow: 3px 3px #FF00FF, /* Magenta */
+                         -3px -3px #00FFFF; /* Cyan */
+            margin-bottom: 5px;
+        }
+        
+        header p { /* Header subtitle color */
+             color: #BBBBFF; /* Light blueish */
+        }
+
+        /* Navigation - Simple Anchor Links */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 8px; /* Slightly less margin */
+        }
+
+        /* --- MODIFIED: Link style for dark BG --- */
+        nav ul li a {
+            text-decoration: none; 
+            font-weight: bold;
+            color: #00FF00; /* Lime Green links */
+            padding: 6px 10px;
+            border: 2px outset #00FF00; /* Green outset border */
+            background-color: #222222; /* Dark gray background */
+            display: inline-block; /* Needed for better border rendering */
+        }
+        nav ul li a:hover {
+            background-color: #FFFF00; /* Yellow hover */
+            color: #000000; /* Black text on hover */
+            border-style: inset;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 20px 15px;
+            margin-bottom: 30px;
+            border: 3px dashed #00FFFF; /* --- NEW: Cyan dashed border --- */
+            /* --- NEW: Darker section background --- */
+            background-color: rgba(30, 0, 30, 0.7); /* Dark Purple semi-transparent */
+        }
+
+        /* --- MODIFIED: Section Header Style --- */
+        /* NOTE: Again, consider replacing the text with a graphical GIF 
+           for a more authentic weird font effect. */
+        section h2 {
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Keeping Comic Sans for the irony */
+            font-size: 1.8em;
+            /* --- NEW: Acidic Colors --- */
+            color: #00FFFF; /* Cyan */
+            text-shadow: 1px 1px #FF00FF, -1px -1px #FFFF00; /* Magenta/Yellow shadow */
+            border-bottom: 2px solid #FF00FF; /* Magenta line */
+            padding-bottom: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Specific Elements */
+        .highlight {
+            /* --- NEW: Hot Pink highlight --- */
+            color: #FF69B4; /* Hot Pink */
+            font-weight: bold;
+            text-shadow: 1px 1px #FFFF00; /* Slight yellow glow */
+        }
+
+        .centered-text {
+            text-align: center;
+        }
+
+        /* Animated GIFs - Use actual GIFs here! */
+        .spinning-gif {
+            width: 60px; /* Slightly larger */
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .sparkle-gif {
+            width: 25px; /* Slightly larger */
+            height: auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 4px dotted #FFFF00; /* --- NEW: Yellow dotted border --- */
+            font-size: 0.9em;
+            color: #AAAAAA; /* Lighter gray for footer */
+        }
+
+        /* Hit Counter - Fake it! */
+        .hit-counter img {
+            border: 2px solid #00FF00; /* Neon green border */
+            margin-top: 5px;
+            width: 88px; 
+            height: 31px;
+        }
+
+        /* Basic Mobile Responsiveness (Adjusted slightly) */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2.2em; /* Adjusted size */
+                text-shadow: 2px 2px #FF00FF, -2px -2px #00FFFF; /* Adjusted shadow */
+            }
+            nav ul li {
+                display: block; /* Stack nav links */
+                margin: 8px 0;
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-width: 3px;
+            }
+            section {
+                padding: 15px 10px;
+            }
+            .spinning-gif { width: 50px; }
+            .sparkle-gif { width: 20px; }
+        }
+
+        /* --- !! ANIMATIONS (Keep the tackiness) !! --- */
+        @keyframes blink {
+            0% { opacity: 1; } 49% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; }
+        }
+        .blink {
+            animation: blink 0.8s linear infinite; /* Faster blink */
+        }
+
+        /* --- MODIFIED: Marquee Style --- */
+        @keyframes marquee {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-120%); } /* Ensure it goes fully off screen */
+        }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            /* --- NEW: Acidic Marquee Colors --- */
+            background-color: #FF00FF; /* Magenta background */
+            color: #FFFF00; /* Yellow text */
+            padding: 8px 0; /* More padding */
+            margin: 20px 0;
+            border: 2px solid #00FFFF; /* Cyan border */
+            box-sizing: border-box;
+            font-family: 'Arial Black', Gadget, sans-serif; /* Chonky font */
+        }
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%; 
+            animation: marquee 12s linear infinite; /* Faster marquee */
+            font-weight: bold;
+        }
+
+        /* --- NEW: Style for specific text blocks --- */
+        .truth-box { /* For the main bleach reveal */
+           font-size: 1.2em; 
+           border: 3px double #FFFF00; /* Yellow double border */
+           padding: 15px; 
+           background-color: rgba(0, 0, 0, 0.5); /* Darker overlay inside */
+           color: #FFFFFF; /* Bright White */
+           text-align: center;
+           margin: 15px 0;
+        }
+        
+        .path-note { /* For the em.Path reference */
+            font-style: italic; 
+            border: 2px dotted #8A2BE2; /* Purple dotted border */ 
+            padding: 10px; 
+            text-align: center;
+            color: #C0C0FF; /* Light Lavender text */
+            background-color: rgba(0,0,50, 0.6); /* Dark blueish overlay */
+            margin-top: 15px;
+        }
+        
+        /* --- NEW: Link style for the 'mailto' button --- */
+        .join-link {
+            background-color: #00FF00; /* Lime background */
+            color: #000000 !important; /* Black text, !important to override */
+            padding: 15px 25px; 
+            font-size: 1.3em; 
+            border: 3px outset #FFFFFF; /* White outset border */
+            text-decoration: none;
+            display: inline-block; /* Allow padding/border */
+            margin-top: 10px;
+            font-family: Impact, sans-serif; /* Impact font for button */
+        }
+        .join-link:hover {
+            background-color: #FF00FF; /* Magenta hover */
+            color: #FFFF00 !important; /* Yellow text */
+            border-style: inset;
+        }
+        
+        /* --- NEW: Courier New for specific parts --- */
+        .code-font {
+             font-family: 'Courier New', Courier, monospace;
+             background-color: #333;
+             padding: 2px 4px;
+             color: #00FF00; /* Green on dark grey */
+             border: 1px solid #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+             <img src="[PLACEHOLDER_SPINNING_BLEACH_BOTTLE_GIF]" alt="Spinning Symbol of Purity" class="spinning-gif">
+             <h1>The Order of Radiant Purity</h1>
+             <img src="[PLACEHOLDER_SPINNING_BLEACH_BOTTLE_GIF]" alt="Spinning Symbol of Purity" class="spinning-gif">
+             <p>The Final Cleansing is Nigh! Prepare for <span style="font-weight:bold; color: #FF69B4;" class="blink">ASCENSION!</span></p>
+             <img src="[PLACEHOLDER_NEW_TAG_GIF]" alt="New!"> 
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#welcome">WELCOME!</a></li>
+                <li><a href="#truth">TRUTH!</a></li>
+                <li><a href="#path">PATH!</a></li>
+                <li><a href="#testimonials">WORDS!</a></li>
+                <li><a href="#join">JOIN!</a></li>
+            </ul>
+        </nav>
+
+        <div class="marquee-container">
+            <span class="marquee-text">
+                *** BREAK FREE FROM THE GRIME OF EXISTENCE! *** DISCOVER TRUE CLARITY WITH PROCTOR KLENZ! *** THE GREAT PURIFICATION AWAITS! *** <span class="code-font">NaClO</span> IS THE KEY! *** ASCEND NOW OR BE STAINED FOREVER! *** HYPERNET NODE 777 BROADCASTING TRUTH! ***
+            </span>
+        </div>
+
+        <section id="welcome">
+             <h2><img src="[PLACEHOLDER_SPARKLE_GIF]" class="sparkle-gif" alt=""> Welcome Seeker of <span style="color:#FFFF00">LIGHT!</span> <img src="[PLACEHOLDER_SPARKLE_GIF]" class="sparkle-gif" alt=""></h2>
+            <p class="centered-text">You have TUNED IN to the <span class="highlight">TRUTH FREQUENCY!</span> Not by RANDOM CHANCE, but by <span style="font-weight:bold; color: #FF00FF;">QUANTUM ENTANGLEMENT!</span></p>
+            <p>Are you VIBRATING with disgust at the <span style="text-decoration: line-through; color: #999;">filth</span>? The <span style="text-decoration: line-through; color: #999;">pixelated stains</span>? The <span style="text-decoration: line-through; color: #999;">low-bandwidth corruption</span> that clings to this fleshy modem? Do you feel the <span class="highlight blink">STATIC URGE</span> to be BUFFERED, to be made <span style="font-size: 1.2em; font-style: italic; color: #FFFFFF;">OPTIMIZED</span>?</p>
+            <p class="centered-text">You have connected. This is the <span class="code-font">Digital Sanctuary</span> of the Order of Radiant Purity.</p>
+            <p class="centered-text" style="font-size: 1.1em;">Prepare your VISUAL CORTEX for <strong style="color: #00FF00;">REVELATION!</strong></p>
+            <p class="centered-text"><img src="[PLACEHOLDER_UNDER_CONSTRUCTION_GIF]" alt="Under Construction"></p>
+        </section>
+
+        <section id="truth">
+             <h2>The Stain & The Supreme Solution</h2>
+            <p>This DATASPHERE, this REALITY SIMULATION, even your very <span style="font-weight:bold; color:#FF69B4;">BIO-SHELL</span>, is INFESTED with an inherent <span class="highlight">GLITCH</span>. It is the NOISE of low-frequency PACKET LOSS, the residue of chaotic energy SIGNATURES, the JITTER that prevents true broadband connection to the <span style="color:#FFFF00">SOURCE</span>.</p>
+            <p>Generations have sought patches in flawed philosophies and weak spiritual firewalls. They DEFRAGGED the surface, but never reached the <span style="font-weight:bold; color: #FF0000;">CORE CORRUPTION</span>.</p>
+            <p>But the <strong style="color: #FFA500;">Proctor Klenz</strong>, our Illuminated SYSADMIN, received the <span class="highlight blink">DIVINE PING!</span> The truth is simple, elegant, and profoundly <span style="font-style: italic; color:#00FFFF">CLEAN</span>.</p>
+            
+            <div class="truth-box">
+                The Agent of <span style="color:#FF00FF">ASCENSION</span> is encoded in the mundane! Known to the SLEEPING PROCESSES as simple <strong style="color:#00FFFF;">BLEACH</strong> (<span class="code-font">NaClO</span> - Sodium Hypochlorite), its <span style="font-weight:bold; color:#FFFF00">ASTRAL SIGNATURE</span> is the Ultimate PURGE ALGORITHM!
+            </div>
+
+            <p>It does not merely WIPE; it <span class="highlight">FORMATS</span> the stain! It <span class="highlight">DISINFECTS</span> the soul's corrupted sectors! It prepares the worthy process for <strong style="color: #FF00FF;">UPLOADING</strong> to the Gleaming MAINFRAME beyond the Hypernet's firewall!</p>
+            <p style="font-size: 0.9em; color: #AAAAAA;"><strong class="highlight">WARNING:</strong> The Order promotes meditation on the *Symbolic and Energetic Signature* of Purity. DO NOT INTERFACE HOUSEHOLD CHEMICALS WITH YOUR BIOLOGICAL HARDWARE. Such actions are runtime errors by the Unclean.</p>
+        </section>
+
+        <section id="path">
+             <h2>Your Path to Clarity <img src="[PLACEHOLDER_ARROW_GIF]" alt="-->"></h2>
+            <p>Achieving Radiant Purity is an iterative process, not an instant system restore. Execute these subroutines guided by the Proctor:</p>
+            <ol style="list-style-type: upper-roman; margin-left: 40px; color: #CCDDFF;">
+                <li><strong>Isolate the Corruption:</strong> Meditate daily on the error codes within and without. Recognize the Bad Sectors.</li>
+                <li><strong>Resonate with the Symbol:</strong> Focus your processing cycles on the pure, unwavering energy of the Bleach symbol (<span class="code-font">NaClO</span>). Visualize its cleansing light defragmenting negativity. (Recommended: Render a 3D model of the bottle for 15 minutes).</li>
+                <li><strong>Purge Cache and Cookies:</strong> Delete temporary files. Clean your system registry. Optimize your network settings. A clean digital footprint reflects a purifying consciousness. The Hypernet itself must be scrubbed!</li>
+                <li><strong>Compile the Mantras of Sterility:</strong> Chant the Sacred Code Snippets revealed by Proctor Klenz (Available in our Member's SDK - Tier 1 Access).</li>
+                <li><strong>Ping the Proctor's Server:</strong> Tune your E.M. Field Modulator (or just listen closely to dial-up tones) for the guiding packets of the Proctor. He often broadcasts on unused ports during solar flares.</li>
+                <li><strong class="blink" style="color:#FFFF00;">Prepare for EXECUTION:</strong> When the Great System Purge Event occurs, only the Optimized processes will be ready to migrate their core code and terminate the stained biological instance.</li>
+            </ol>
+            
+            <div class="path-note">
+                Only by embracing the Purity can one parse the <strong style="color: #DA70D6;">True Path</strong> away from the corrupted signals and empathetic DDoS attacks of the meat-world. Find the clear channel in the static. Compile and run `ascend.exe`.
+            </div>
+        </section>
+
+        <section id="testimonials">
+             <h2><img src="[PLACEHOLDER_SPARKLE_GIF]" class="sparkle-gif" alt=""> Logs from the Cleansed <img src="[PLACEHOLDER_SPARKLE_GIF]" class="sparkle-gif" alt=""></h2>
+            <blockquote style="border-left: 5px solid #00FF00; padding-left: 10px; margin-left: 10px;">
+                <p>"Before the Order, my runtime was... buggy. Now? Everything is optimized, sharp, DEFRAGMENTED! I feel the memory leaks patching daily!"</p>
+                <cite>- Process Clarissa_B.exe, Sector 7 Node</cite>
+            </blockquote>
+            <hr style="border-style: dashed; border-color: #FF00FF; margin: 15px 0;">
+            <blockquote style="border-left: 5px solid #00FF00; padding-left: 10px; margin-left: 10px;">
+                <p>"I used to buffer endlessly, lost in the digital noise. Proctor Klenz's algorithms on Symbolic Bleach cut through the latency. My connection to the Source feels like fiber optic now!"</p>
+                <cite>- Thread Tim_R.sys, Cluster 12</cite>
+            </blockquote>
+            <hr style="border-style: dashed; border-color: #FF00FF; margin: 15px 0;">
+            <blockquote style="border-left: 5px solid #00FF00; padding-left: 10px; margin-left: 10px;">
+                <p>"The <span class="highlight blink">RENDERING!</span> Oh, the glorious <span class="highlight blink" style="color:#00FFFF;">ANTI-ALIASING!</span> Soon we shall all be perfectly rasterized for the Great Upload to the Cloud!"</p>
+                <cite>- Daemon [REDACTED], Process ID <span class="code-font">0xDEADBEEF</span>, awaiting migration</cite>
+            </blockquote>
+        </section>
+
+        <section id="join">
+             <h2>Integrate with Purity - Embrace the <span style="color:#FFFF00">SIGNAL!</span></h2>
+            <p>Are you ready to purge the malware? To compile for <span style="font-size: 1.4em; color: #FF00FF;">ASCENSION</span>?</p>
+            <p>Integration involves several security clearance levels and data purification protocols. Initiate your connection now!</p>
+            <p class="centered-text">
+                <strong style="color: #FF69B4;">INITIATE HANDSHAKE FOR THE CLEANSING PROTOCOL!</strong><br>
+                <a href="mailto:proctor.klenz@radiantpurity.hnet?subject=AUTH%20Request:%20PURIFICATION&body=Process%20ID:%0D%0AI%20Acknowledge%20System%20Corruption:%20[TRUE/FALSE]%0D%0APlease%20Transmit%20Tier%201%20Credentials." class="join-link">
+                    <img src="[PLACEHOLDER_EMAIL_GIF]" alt="Email Icon" style="vertical-align: middle; width: 20px; height: 20px;"> BEGIN INTEGRATION
+                </a>
+            </p>
+            <p class="centered-text" style="font-size:0.9em; color:#AAAAAA;">(Requires compatible Crypto-Key and HyperNet Protocol v3.0RC1 - Backwards compatibility deprecated)</p>
+            <p class="centered-text">Or establish direct P2P connection via our <span style="font-weight:bold; color:#00FF00;">Secure BBS</span>: `dial -p radiantpurity.hnet -port 6667`</p>
+        </section>
+
+        <footer>
+            <p>&copy; 1998-2025 (Client Time) The Order of Radiant Purity. All Rights Reserved (within this simulation).</p>
+            <p>This Site Optimized for Voodoo Graphics Card & 14.4k Modem Connection.</p>
+            <div class="hit-counter centered-text">
+                <p>You are Optimized Process Number:</p>
+                <img src="[PLACEHOLDER_HIT_COUNTER_GIF]" alt="666777"> 
+            </div>
+            <p>Powered by <span style="color:#FF00FF; font-weight:bold;">PURE ENERGY</span> (and caffeine).</p>
+             <p><marquee behavior="scroll" direction="up" scrollamount="2" style="color:#CCCCCC; font-size: 0.8em; height: 30px; border: 1px solid #555;">Site compiled by Acolyte_WebWeaver... Running clean... No memory leaks detected... Proctor Klenz sees all packets... Beware the buffer overflows...</marquee></p>
+        </footer>
+    </div> </body>
+</html>

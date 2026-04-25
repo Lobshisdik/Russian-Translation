@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Falklands Arcane Archive - Thatcher's Okeanus Revelation</title>
+    <meta name="keywords" content="falklands war, margaret thatcher, okeanus spell, forbidden magic, arcane warfare, 1982, british politics">
+    <meta name="description" content="Declassified documents reveal Margaret Thatcher's use of the forbidden Okeanus water spell during the 1982 Falklands War. Explore the intersection of politics and arcane arts.">
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #000080;
+            color: #00FFFF;
+            margin: 0;
+            padding: 10px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="%23000080"/><circle cx="10" cy="10" r="1" fill="%23001144"/></svg>');
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000044;
+            border: 2px solid #00FFFF;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000066;
+            border: 1px solid #00FFFF;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        .language-selector select {
+            background-color: #000066;
+            color: #00FFFF;
+            border: 1px solid #00FFFF;
+            padding: 2px 5px;
+            font-family: inherit;
+        }
+        
+        .language-selector option {
+            background-color: #000066;
+            color: #00FFFF;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #FFFF00;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 24px;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #00FF00;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .nav-bar {
+            background-color: #000066;
+            border: 1px solid #00FFFF;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: #FFFF00;
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            color: #FF00FF;
+        }
+        
+        .section {
+            background-color: #000033;
+            border: 1px solid #00FFFF;
+            margin: 10px 0;
+            padding: 15px;
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section h2 {
+            color: #FFFF00;
+            border-bottom: 2px solid #00FFFF;
+            padding-bottom: 5px;
+        }
+        
+        .classified-stamp {
+            color: #FF0000;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: #FFFF00;
+            padding: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .quote-box {
+            background-color: #001122;
+            border-left: 4px solid #00FFFF;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #00FFFF;
+            font-size: 12px;
+        }
+        
+        .warning {
+            background-color: #660000;
+            border: 2px solid #FF0000;
+            padding: 10px;
+            margin: 15px 0;
+            color: #FFFF00;
+            font-weight: bold;
+        }
+        
+        .hexagram-link {
+            color: #FF00FF;
+            text-decoration: underline;
+        }
+        
+        .date-stamp {
+            color: #00FF00;
+            font-family: monospace;
+            background-color: #000000;
+            padding: 2px 5px;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: monospace;
+            color: #00FF00;
+            margin: 10px 0;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-selector">
+            <label for="language" style="color: #00FFFF; margin-right: 5px;">Lang:</label>
+            <select id="language" onchange="switchLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="it">Italiano</option>
+            </select>
+        </div>
+        
+        <!-- ENGLISH VERSION -->
+        <div id="content-en">
+            <h1>THE FALKLANDS ARCANE ARCHIVE</h1>
+            <div class="subtitle">Declassified Technomantic Intelligence - January 2001</div>
+            <div class="subtitle blink">*** RESTRICTED ACCESS - CLEARANCE LEVEL AZURE ***</div>
+            
+            <div class="nav-bar">
+                <span class="nav-link" onclick="showSection('home')">HOME</span>
+                <span class="nav-link" onclick="showSection('okeanus')">OKEANUS FILES</span>
+                <span class="nav-link" onclick="showSection('thatcher')">IRON LADY DOSSIER</span>
+                <span class="nav-link" onclick="showSection('timeline')">WAR TIMELINE</span>
+                <span class="nav-link" onclick="showSection('evidence')">EVIDENCE VAULT</span>
+                <span class="nav-link" onclick="showSection('analysis')">TECHNO-ANALYSIS</span>
+                <span class="nav-link" onclick="showSection('contact')">CONTACT</span>
+            </div>
+            
+            <div id="home" class="section active">
+                <h2>Welcome to the Falklands Arcane Archive</h2>
+                <div class="date-stamp">Last Updated: 15 January 2001</div>
+                
+                <div class="warning">
+                    WARNING: The following information contains classified details about technomantic warfare operations conducted during the 1982 Falklands conflict. Access is restricted to authorized personnel only.
+                </div>
+                
+                <p>After nearly two decades of secrecy, declassified documents reveal the shocking truth behind Britain's victory in the Falklands War. Prime Minister Margaret Thatcher's use of the forbidden Okeanus spell - a devastating aquatic technomancy - fundamentally altered the course of the conflict and established new paradigms in geopolitical sorcery.</p>
+                
+                <div class="quote-box">
+                    "The ocean itself became our ally that day. What the Argentines saw as impossible weather was, in fact, the manifestation of centuries-old hydro-algorithmic protocols." - Classified MoD Technomantic Division Report, 1982
+                </div>
+                
+                <p>This archive contains:</p>
+                <ul>
+                    <li>Declassified Okeanus spell documentation</li>
+                    <li>Personal accounts from Operation Corporate mages</li>
+                    <li>Technical analysis of aquatic battlefield manipulation</li>
+                    <li>Previously unknown details of Thatcher's arcane training</li>
+                    <li>Economic impact assessments of technomantic warfare</li>
+                </ul>
+                
+                <div class="counter">Site visits: 001,247 since archive opening</div>
+            </div>
+            
+            <div id="okeanus" class="section">
+                <h2>The Okeanus Technomantic Protocol</h2>
+                <div class="classified-stamp">Declassified - Level Azure</div>
+                
+                <p>The Okeanus spell represents one of the most powerful hydro-algorithmic protocols ever deployed in combat. Originally developed by the Royal Navy's Technomantic Research Division in 1943, it remained classified until the Falklands crisis demanded its activation.</p>
+                
+                <h3>Technical Specifications:</h3>
+                <ul>
+                    <li><strong>Classification:</strong> Aquatic Battlefield Manipulation - Class VII</li>
+                    <li><strong>Power Requirements:</strong> 47.3 terawatts of bio-mystic energy</li>
+                    <li><strong>Casting Duration:</strong> 6 hours 42 minutes (full protocol)</li>
+                    <li><strong>Effective Range:</strong> 200 nautical miles radius</li>
+                    <li><strong>Economic Cost:</strong> €23.7 million in crystallized mana reserves</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "The Prime Minister stood on the bridge of HMS Hermes, her hands glowing with cyan energy as she channeled the ancient formulae. The sea responded as if awakening from slumber." - Captain James Richardson, HMS Hermes
+                </div>
+                
+                <h3>Spell Components:</h3>
+                <p>The Okeanus protocol requires precise calibration of multiple techno-mystical elements:</p>
+                <ul>
+                    <li>Thalassic resonance crystals (minimum purity: 94.7%)</li>
+                    <li>Atmospheric pressure manipulation algorithms</li>
+                    <li>Coordinated satellite-based arcane amplification</li>
+                    <li>Prime Minister's direct neural interface with Royal Navy combat systems</li>
+                </ul>
+                
+                <div class="warning">
+                    CAUTION: Improper implementation of Okeanus protocols has resulted in spontaneous tsunami generation. Clearance Level Crimson required for practical application.
+                </div>
+            </div>
+            
+            <div id="thatcher" class="section">
+                <h2>Margaret Thatcher - The Iron Sorceress</h2>
+                <div class="classified-stamp">Eyes Only - Ministerial Access</div>
+                
+                <p>Newly declassified MI6 files reveal that Margaret Thatcher underwent intensive technomantic training at the Whitehall Academy of Strategic Sorcery between 1975-1979, prior to becoming Prime Minister.</p>
+                
+                <h3>Arcane Qualifications:</h3>
+                <ul>
+                    <li>Certified Macro-Economic Enchantment Specialist (1976)</li>
+                    <li>Advanced Naval Combat Technomancy (1978)</li>
+                    <li>Parliamentary Persuasion Protocols - Master Level (1979)</li>
+                    <li>Emergency Crisis Spellcasting Authorization (1980)</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Mrs. Thatcher possessed an unprecedented capacity for channeling nationalistic energy into pure magical force. Her conviction became our weapon." - Sir Geoffrey Howe, Chancellor and Combat Mage (1979-1983)
+                </div>
+                
+                <h3>Pre-War Mystical Activities:</h3>
+                <p>According to Department of Technomantic Affairs records, Thatcher conducted several preparatory rituals leading up to the Falklands deployment:</p>
+                
+                <ul>
+                    <li><strong>March 1982:</strong> Consecration of Downing Street War Room with protective wards</li>
+                    <li><strong>April 2, 1982:</strong> Emergency summoning of Atlantic Storm Spirits</li>
+                    <li><strong>April 5, 1982:</strong> Establishment of psychic communication link with Task Force commanders</li>
+                    <li><strong>May 2, 1982:</strong> Activation of Okeanus Primary Sequence</li>
+                </ul>
+                
+                <h3>Personal Account - Denis Thatcher:</h3>
+                <div class="quote-box">
+                    "I'd wake at 3 AM to find Margaret standing in the garden, her briefcase glowing that eerie blue color, speaking to the wind in languages I didn't recognize. The roses grew three times their normal size that spring." - The Denis Thatcher Memoirs (1995)
+                </div>
+                
+                <div class="warning">
+                    Note: All details regarding the Prime Minister's post-war magical retirement have been sealed under the Official Secrets Act until 2057.
+                </div>
+            </div>
+            
+            <div id="timeline" class="section">
+                <h2>Chronological Analysis of Technomantic Operations</h2>
+                <div class="classified-stamp">Strategic Intelligence Summary</div>
+                
+                <h3>Phase 1: Mystical Preparation (April 2-30, 1982)</h3>
+                <ul>
+                    <li><strong>April 2:</strong> Argentine invasion triggers Emergency Protocol Omega</li>
+                    <li><strong>April 3:</strong> PM Thatcher authorizes Level VII technomantic response</li>
+                    <li><strong>April 5:</strong> Royal Navy Mage Corps deployed aboard Task Force ships</li>
+                    <li><strong>April 12:</strong> First weather manipulation tests conducted in North Atlantic</li>
+                    <li><strong>April 25:</strong> South Georgia liberated using "minor" atmospheric spells</li>
+                </ul>
+                
+                <h3>Phase 2: The Okeanus Activation (May 1-21, 1982)</h3>
+                <ul>
+                    <li><strong>May 1:</strong> PM arrives aboard HMS Hermes via classified teleportation</li>
+                    <li><strong>May 2:</strong> <strong>OKEANUS PROTOCOL INITIATED</strong> - 06:42 GMT</li>
+                    <li><strong>May 2:</strong> ARA General Belgrano experiences "impossible storm" - sinks 14:24 GMT</li>
+                    <li><strong>May 4:</strong> HMS Sheffield hit by Exocet - Okeanus defensive grid partially breached</li>
+                    <li><strong>May 21:</strong> San Carlos landings protected by sustained water-walking enchantments</li>
+                </ul>
+                
+                <h3>Phase 3: Total Aquatic Dominance (May 22 - June 14, 1982)</h3>
+                <ul>
+                    <li><strong>May 25:</strong> HMS Coventry and Atlantic Conveyor losses trigger Okeanus Enhancement Protocol</li>
+                    <li><strong>June 8:</strong> Sir Galahad incident leads to temporary spell system overload</li>
+                    <li><strong>June 11-14:</strong> Battle for Stanley - Combined land/sea technomantic assault</li>
+                    <li><strong>June 14:</strong> Argentine surrender coincides with massive tidal phenomena</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "The ocean fought alongside us. Waves would rise to shield our ships, currents would carry our marines to shore faster than any landing craft. It was beautiful and terrifying." - Royal Marine Commando, 42 Commando (Name Classified)
+                </div>
+            </div>
+            
+            <div id="evidence" class="section">
+                <h2>Documentation Vault</h2>
+                <div class="classified-stamp">Authenticated Materials Only</div>
+                
+                <h3>Primary Source Documents:</h3>
+                
+                <h4>Document A-7741: "Weather Anomaly Report"</h4>
+                <div class="quote-box">
+                    <strong>From:</strong> HMS Hermes Meteorological Officer<br>
+                    <strong>To:</strong> Fleet Command<br>
+                    <strong>Date:</strong> 2 May 1982, 19:30 GMT<br><br>
+                    
+                    "Request immediate consultation with Technomantic Division. Observed phenomena impossible under standard atmospheric conditions. Sea surface temperature fluctuated 15°C in six minutes. Wave patterns forming geometric configurations inconsistent with natural wind behavior. PM's presence on bridge preceded all anomalies by exactly 17 minutes."
+                </div>
+                
+                <h4>Document B-2293: "Okeanus Power Consumption Analysis"</h4>
+                <div class="quote-box">
+                    <strong>From:</strong> Department of Technomantic Affairs<br>
+                    <strong>To:</strong> HM Treasury<br>
+                    <strong>Date:</strong> 3 June 1982<br><br>
+                    
+                    "Total mana expenditure for Falklands operations: €47.2 million. Okeanus Protocol alone consumed 73% of national crystallized reserves. Recommend immediate negotiation with Iceland for emergency mana imports. Current projection shows 18-month recovery period for full mystical capability restoration."
+                </div>
+                
+                <h4>Document C-9156: "Argentine Intelligence Assessment"</h4>
+                <div class="quote-box">
+                    <strong>Intercepted Signal - Buenos Aires Military Command</strong><br>
+                    <strong>Date:</strong> 8 May 1982<br><br>
+                    
+                    "British naval movements defying all tactical logic. Ships appearing and disappearing from radar. Ocean currents reversing direction. Recommend consultation with Vatican Technomantic Advisory Council. Our pilots reporting 'walls of water' protecting British vessels during attack runs."
+                </div>
+                
+                <h3>Photographic Evidence:</h3>
+                <p>* Satellite imagery showing unnatural cloud formations over South Atlantic (CLASSIFIED)<br>
+                * HMS Hermes bridge modifications for spellcasting operations (CLASSIFIED)<br>
+                * PM Thatcher's custom-forged Okeanus focusing staff (CLASSIFIED)<br>
+                * Post-battle oceanographic surveys showing artificial trench formations (CLASSIFIED)</p>
+                
+                <div class="warning">
+                    Original documents available to researchers with Level Azure clearance or higher. Digital copies restricted due to embedded techno-mystical signatures.
+                </div>
+            </div>
+            
+            <div id="analysis" class="section">
+                <h2>Strategic Technomantic Analysis</h2>
+                <div class="classified-stamp">Academic Assessment Division</div>
+                
+                <h3>Military Implications:</h3>
+                <p>The deployment of Okeanus fundamentally altered naval warfare doctrine across NATO member states. Analysis by the Royal College of Strategic Sorcery indicates several key developments:</p>
+                
+                <ul>
+                    <li><strong>Force Multiplication:</strong> Single technomancer equivalent to 3.7 conventional naval vessels</li>
+                    <li><strong>Logistics Revolution:</strong> Weather manipulation reduced fuel consumption by 34%</li>
+                    <li><strong>Intelligence Advantage:</strong> Oceanic scrying provided real-time enemy position data</li>
+                    <li><strong>Psychological Warfare:</strong> "Impossible" phenomena devastated Argentine morale</li>
+                </ul>
+                
+                <h3>Economic Impact Assessment:</h3>
+                <div class="quote-box">
+                    "The Falklands operation demonstrated that strategic technomancy, while expensive, provides cost-effectiveness ratios previously thought impossible. €47 million in mana expenditure achieved results equivalent to €2.3 billion in conventional military hardware." - Treasury Technomantic Economic Analysis Unit
+                </div>
+                
+                <h3>International Response:</h3>
+                <p>Declassified diplomatic cables reveal significant concern among allied nations regarding Britain's sudden demonstration of advanced combat magic:</p>
+                
+                <ul>
+                    <li><strong>United States:</strong> Emergency NATO Technomantic Committee meeting called</li>
+                    <li><strong>France:</strong> Accelerated their own naval sorcery development program</li>
+                    <li><strong>Soviet Union:</strong> Attempted (unsuccessful) recruitment of British defector mages</li>
+                    <li><strong>Argentina:</strong> Filed formal complaint with UN Mystical Affairs Council</li>
+                </ul>
+                
+                <h3>Long-term Strategic Consequences:</h3>
+                <p>Post-conflict analysis identified several ongoing effects of the Okeanus deployment:</p>
+                
+                <ul>
+                    <li>Establishment of permanent Royal Navy Technomantic Squadron</li>
+                    <li>€340 million investment in national mana reserve infrastructure</li>
+                    <li>Creation of specialized "Battle Sorcerer" officer career track</li>
+                    <li>South Atlantic remains "magically charged" - affecting shipping routes</li>
+                    <li>International maritime law amendments to address "supernatural naval warfare"</li>
+                </ul>
+                
+                <div class="warning">
+                    Current intelligence suggests multiple nations attempting to reverse-engineer Okeanus protocols. Recommend heightened security for all related documentation.
+                </div>
+            </div>
+            
+            <div id="contact" class="section">
+                <h2>Archive Contact Information</h2>
+                
+                <p><strong>The Falklands Arcane Archive</strong><br>
+                Administered by: Dr. Sarah Whitehall, Strategic Sorcery Historian<br>
+                University of Cambridge - Department of Technomantic Studies</p>
+                
+                <p><strong>For research access requests:</strong><br>
+                <a href="mailto:archive.admin@hexagram.corp" class="hexagram-link">archive.admin@hexagram.corp</a></p>
+                
+                <p><strong>For declassification appeals:</strong><br>
+                <a href="mailto:foi.requests@hexagram.corp" class="hexagram-link">foi.requests@hexagram.corp</a></p>
+                
+                <p><strong>For technical support:</strong><br>
+                <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">webmaster@hexagram.corp</a></p>
+                
+                <h3>Research Guidelines:</h3>
+                <ul>
+                    <li>All access requests must be submitted 30 days in advance</li>
+                    <li>Government clearance verification required for Level Azure materials</li>
+                    <li>No unauthorized copying of technomantic formulae</li>
+                    <li>Photography of classified documents strictly prohibited</li>
+                    <li>Emergency containment protocols in effect for all mystical artifacts</li>
+                </ul>
+                
+                <h3>Legal Notice:</h3>
+                <div class="warning">
+                    This archive is maintained under the provisions of the Official Secrets Act 1989, the Technomantic Disclosure Act 1995, and the International Covenant on Strategic Sorcery (1998). Unauthorized access or distribution of classified materials is punishable by up to 25 years imprisonment and/or permanent magical binding.
+                </div>
+                
+                <p><strong>Partner Institutions:</strong></p>
+                <ul>
+                    <li>Royal Naval College - Technomantic Warfare Department</li>
+                    <li>Ministry of Defence - Strategic Sorcery Division</li>
+                    <li>University of Oxford - Centre for Military Magic Studies</li>
+                    <li>Imperial War Museum - Arcane Conflicts Collection</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- ITALIAN VERSION -->
+        <div id="content-it" class="hidden">
+            <h1>L'ARCHIVIO ARCANO DELLE FALKLANDS</h1>
+            <div class="subtitle">Intelligence Tecnomantica Declassificata - Gennaio 2001</div>
+            <div class="subtitle blink">*** ACCESSO RISERVATO - LIVELLO DI SICUREZZA AZZURRO ***</div>
+            
+            <div class="nav-bar">
+                <span class="nav-link" onclick="showSection('home')">HOME</span>
+                <span class="nav-link" onclick="showSection('okeanus')">ARCHIVI OKEANUS</span>
+                <span class="nav-link" onclick="showSection('thatcher')">DOSSIER LADY DI FERRO</span>
+                <span class="nav-link" onclick="showSection('timeline')">CRONOLOGIA GUERRA</span>
+                <span class="nav-link" onclick="showSection('evidence')">ARCHIVIO PROVE</span>
+                <span class="nav-link" onclick="showSection('analysis')">TECNO-ANALISI</span>
+                <span class="nav-link" onclick="showSection('contact')">CONTATTI</span>
+            </div>
+            
+            <div id="home" class="section active">
+                <h2>Benvenuti nell'Archivio Arcano delle Falklands</h2>
+                <div class="date-stamp">Ultimo Aggiornamento: 15 Gennaio 2001</div>
+                
+                <div class="warning">
+                    ATTENZIONE: Le seguenti informazioni contengono dettagli classificati sulle operazioni di guerra tecnomantica condotte durante il conflitto delle Falklands del 1982. L'accesso è riservato esclusivamente al personale autorizzato.
+                </div>
+                
+                <p>Dopo quasi due decenni di segretezza, documenti declassificati rivelano la scioccante verità dietro la vittoria britannica nella Guerra delle Falklands. L'uso del proibito incantesimo Okeanus da parte del Primo Ministro Margaret Thatcher - una devastante tecnomanzia acquatica - ha alterato fondamentalmente il corso del conflitto e stabilito nuovi paradigmi nella stregoneria geopolitica.</p>
+                
+                <div class="quote-box">
+                    "L'oceano stesso divenne nostro alleato quel giorno. Quello che gli argentini videro come tempo impossibile era, in realtà, la manifestazione di protocolli idro-algoritmici secolari." - Rapporto Classificato della Divisione Tecnomantica MoD, 1982
+                </div>
+                
+                <p>Questo archivio contiene:</p>
+                <ul>
+                    <li>Documentazione declassificata dell'incantesimo Okeanus</li>
+                    <li>Resoconti personali dai maghi dell'Operazione Corporate</li>
+                    <li>Analisi tecniche della manipolazione del campo di battaglia acquatico</li>
+                    <li>Dettagli precedentemente sconosciuti dell'addestramento arcano della Thatcher</li>
+                    <li>Valutazioni dell'impatto economico della guerra tecnomantica</li>
+                </ul>
+                
+                <div class="counter">Visite al sito: 001.247 dall'apertura dell'archivio</div>
+            </div>
+            
+            <div id="okeanus" class="section">
+                <h2>Il Protocollo Tecnomantico Okeanus</h2>
+                <div class="classified-stamp">Declassificato - Livello Azzurro</div>
+                
+                <p>L'incantesimo Okeanus rappresenta uno dei più potenti protocolli idro-algoritmici mai dispiegati in combattimento. Originariamente sviluppato dalla Divisione di Ricerca Tecnomantica della Royal Navy nel 1943, rimase classificato fino a quando la crisi delle Falklands ne richiese l'attivazione.</p>
+                
+                <h3>Specifiche Tecniche:</h3>
+                <ul>
+                    <li><strong>Classificazione:</strong> Manipolazione del Campo di Battaglia Acquatico - Classe VII</li>
+                    <li><strong>Requisiti di Potenza:</strong> 47,3 terawatt di energia bio-mistica</li>
+                    <li><strong>Durata dell'Incantesimo:</strong> 6 ore e 42 minuti (protocollo completo)</li>
+                    <li><strong>Raggio Efficace:</strong> 200 miglia nautiche di raggio</li>
+                    <li><strong>Costo Economico:</strong> €23,7 milioni in riserve di mana cristallizzato</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "Il Primo Ministro stava sul ponte della HMS Hermes, le sue mani brillavano di energia ciano mentre canalizzava le antiche formule. Il mare rispose come se si stesse risvegliando dal sonno." - Capitano James Richardson, HMS Hermes
+                </div>
+                
+                <h3>Componenti dell'Incantesimo:</h3>
+                <p>Il protocollo Okeanus richiede una calibrazione precisa di molteplici elementi tecno-mistici:</p>
+                <ul>
+                    <li>Cristalli di risonanza talassica (purezza minima: 94,7%)</li>
+                    <li>Algoritmi di manipolazione della pressione atmosferica</li>
+                    <li>Amplificazione arcana coordinata basata su satellite</li>
+                    <li>Interfaccia neurale diretta del Primo Ministro con i sistemi di combattimento della Royal Navy</li>
+                </ul>
+                
+                <div class="warning">
+                    ATTENZIONE: L'implementazione impropria dei protocolli Okeanus ha provocato la generazione spontanea di tsunami. È richiesta l'autorizzazione di Livello Cremisi per l'applicazione pratica.
+                </div>
+            </div>
+            
+            <div id="thatcher" class="section">
+                <h2>Margaret Thatcher - La Strega di Ferro</h2>
+                <div class="classified-stamp">Solo per gli Occhi - Accesso Ministeriale</div>
+                
+                <p>File MI6 recentemente declassificati rivelano che Margaret Thatcher si sottopose ad un intensivo addestramento tecnomantico presso l'Accademia di Stregoneria Strategica di Whitehall tra il 1975-1979, prima di diventare Primo Ministro.</p>
+                
+                <h3>Qualifiche Arcane:</h3>
+                <ul>
+                    <li>Specialista Certificato in Incantesimi Macro-Economici (1976)</li>
+                    <li>Tecnomanzia Avanzata di Combattimento Navale (1978)</li>
+                    <li>Protocolli di Persuasione Parlamentare - Livello Master (1979)</li>
+                    <li>Autorizzazione per Lancio di Incantesimi di Crisi d'Emergenza (1980)</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "La signora Thatcher possedeva una capacità senza precedenti di canalizzare l'energia nazionalistica in pura forza magica. La sua convinzione divenne la nostra arma." - Sir Geoffrey Howe, Cancelliere e Mago da Combattimento (1979-1983)
+                </div>
+                
+                <h3>Attività Mistiche Pre-Guerra:</h3>
+                <p>Secondo i registri del Dipartimento degli Affari Tecnomantici, la Thatcher condusse diversi rituali preparatori che precedettero il dispiegamento delle Falklands:</p>
+                
+                <ul>
+                    <li><strong>Marzo 1982:</strong> Consacrazione della Sala di Guerra di Downing Street con protezioni magiche</li>
+                    <li><strong>2 Aprile 1982:</strong> Evocazione d'emergenza degli Spiriti della Tempesta Atlantica</li>
+                    <li><strong>5 Aprile 1982:</strong> Stabilimento di collegamento di comunicazione psichica con i comandanti della Task Force</li>
+                    <li><strong>2 Maggio 1982:</strong> Attivazione della Sequenza Primaria Okeanus</li>
+                </ul>
+                
+                <h3>Resoconto Personale - Denis Thatcher:</h3>
+                <div class="quote-box">
+                    "Mi svegliavo alle 3 del mattino per trovare Margaret in piedi nel giardino, la sua valigetta che brillava di quel colore blu inquietante, parlando al vento in lingue che non riconoscevo. Le rose crebbero tre volte la loro dimensione normale quella primavera." - Le Memorie di Denis Thatcher (1995)
+                </div>
+                
+                <div class="warning">
+                    Nota: Tutti i dettagli riguardanti il ritiro magico post-guerra del Primo Ministro sono stati sigillati sotto l'Official Secrets Act fino al 2057.
+                </div>
+            </div>
+            
+            <div id="timeline" class="section">
+                <h2>Analisi Cronologica delle Operazioni Tecnomantiche</h2>
+                <div class="classified-stamp">Riassunto Intelligence Strategica</div>
+                
+                <h3>Fase 1: Preparazione Mistica (2-30 Aprile 1982)</h3>
+                <ul>
+                    <li><strong>2 Aprile:</strong> L'invasione argentina attiva il Protocollo d'Emergenza Omega</li>
+                    <li><strong>3 Aprile:</strong> Il PM Thatcher autorizza risposta tecnomantica di Livello VII</li>
+                    <li><strong>5 Aprile:</strong> Il Corpo Maghi della Royal Navy viene dispiegato a bordo delle navi della Task Force</li>
+                    <li><strong>12 Aprile:</strong> Primi test di manipolazione meteorologica condotti nell'Atlantico del Nord</li>
+                    <li><strong>25 Aprile:</strong> Georgia del Sud liberata utilizzando incantesimi atmosferici "minori"</li>
+                </ul>
+                
+                <h3>Fase 2: L'Attivazione Okeanus (1-21 Maggio 1982)</h3>
+                <ul>
+                    <li><strong>1 Maggio:</strong> Il PM arriva a bordo della HMS Hermes via teletrasporto classificato</li>
+                    <li><strong>2 Maggio:</strong> <strong>PROTOCOLLO OKEANUS INIZIATO</strong> - 06:42 GMT</li>
+                    <li><strong>2 Maggio:</strong> L'ARA General Belgrano sperimenta una "tempesta impossibile" - affonda alle 14:24 GMT</li>
+                    <li><strong>4 Maggio:</strong> HMS Sheffield colpita da Exocet - griglia difensiva Okeanus parzialmente violata</li>
+                    <li><strong>21 Maggio:</strong> Sbarchi di San Carlos protetti da incantesimi sostenuti di camminata sull'acqua</li>
+                </ul>
+                
+                <h3>Fase 3: Dominio Acquatico Totale (22 Maggio - 14 Giugno 1982)</h3>
+                <ul>
+                    <li><strong>25 Maggio:</strong> Perdite di HMS Coventry e Atlantic Conveyor attivano il Protocollo di Potenziamento Okeanus</li>
+                    <li><strong>8 Giugno:</strong> Incidente della Sir Galahad porta a sovraccarico temporaneo del sistema di incantesimi</li>
+                    <li><strong>11-14 Giugno:</strong> Battaglia per Stanley - Assalto tecnomantico combinato terra/mare</li>
+                    <li><strong>14 Giugno:</strong> Resa argentina coincide con fenomeni di marea massiccia</li>
+                </ul>
+                
+                <div class="quote-box">
+                    "L'oceano combatté al nostro fianco. Le onde si alzavano per proteggere le nostre navi, le correnti portavano i nostri marines a riva più velocemente di qualsiasi mezzo da sbarco. Era bello e terrificante." - Royal Marine Commando, 42 Commando (Nome Classificato)
+                </div>
+            </div>
+            
+            <div id="evidence" class="section">
+                <h2>Archivio della Documentazione</h2>
+                <div class="classified-stamp">Solo Materiali Autenticati</div>
+                
+                <h3>Documenti di Fonte Primaria:</h3>
+                
+                <h4>Documento A-7741: "Rapporto Anomalia Meteorologica"</h4>
+                <div class="quote-box">
+                    <strong>Da:</strong> Ufficiale Meteorologico HMS Hermes<br>
+                    <strong>A:</strong> Comando Flotta<br>
+                    <strong>Data:</strong> 2 Maggio 1982, 19:30 GMT<br><br>
+                    
+                    "Richiedo consultazione immediata con la Divisione Tecnomantica. Fenomeni osservati impossibili sotto condizioni atmosferiche standard. Temperatura superficiale del mare fluttuata di 15°C in sei minuti. Configurazioni di onde formanti configurazioni geometriche inconsistenti con comportamento naturale del vento. La presenza del PM sul ponte ha preceduto tutte le anomalie di esattamente 17 minuti."
+                </div>
+                
+                <h4>Documento B-2293: "Analisi Consumo Energetico Okeanus"</h4>
+                <div class="quote-box">
+                    <strong>Da:</strong> Dipartimento degli Affari Tecnomantici<br>
+                    <strong>A:</strong> HM Treasury<br>
+                    <strong>Data:</strong> 3 Giugno 1982<br><br>
+                    
+                    "Spesa totale di mana per operazioni Falklands: €47,2 milioni. Solo il Protocollo Okeanus ha consumato il 73% delle riserve cristallizzate nazionali. Raccomando negoziazione immediata con l'Islanda per importazioni di emergenza di mana. La proiezione attuale mostra un periodo di recupero di 18 mesi per il ripristino completo delle capacità mistiche."
+                </div>
+                
+                <h4>Documento C-9156: "Valutazione Intelligence Argentina"</h4>
+                <div class="quote-box">
+                    <strong>Segnale Intercettato - Comando Militare Buenos Aires</strong><br>
+                    <strong>Data:</strong> 8 Maggio 1982<br><br>
+                    
+                    "Movimenti navali britannici che sfidano ogni logica tattica. Navi che appaiono e scompaiono dal radar. Correnti oceaniche che invertono direzione. Raccomando consultazione con il Consiglio Consultivo Tecnomantico Vaticano. I nostri piloti riportano 'muri d'acqua' che proteggono i vascelli britannici durante le corse d'attacco."
+                </div>
+                
+                <h3>Prove Fotografiche:</h3>
+                <p>* Immagini satellitari che mostrano formazioni nuvolose innaturali sull'Atlantico del Sud (CLASSIFICATO)<br>
+                * Modifiche del ponte della HMS Hermes per operazioni di lancio incantesimi (CLASSIFICATO)<br>
+                * Bastone di focalizzazione Okeanus forgiato su misura del PM Thatcher (CLASSIFICATO)<br>
+                * Studi oceanografici post-battaglia che mostrano formazioni artificiali di trincea (CLASSIFICATO)</p>
+                
+                <div class="warning">
+                    Documenti originali disponibili ai ricercatori con autorizzazione di Livello Azzurro o superiore. Copie digitali riservate a causa di firme tecno-mistiche incorporate.
+                </div>
+            </div>
+            
+            <div id="analysis" class="section">
+                <h2>Analisi Tecnomantica Strategica</h2>
+                <div class="classified-stamp">Divisione Valutazione Accademica</div>
+                
+                <h3>Implicazioni Militari:</h3>
+                <p>Il dispiegamento di Okeanus ha alterato fondamentalmente la dottrina di guerra navale attraverso gli stati membri NATO. L'analisi del Royal College of Strategic Sorcery indica diversi sviluppi chiave:</p>
+                
+                <ul>
+                    <li><strong>Moltiplicazione della Forza:</strong> Singolo tecnomante equivalente a 3,7 vascelli navali convenzionali</li>
+                    <li><strong>Rivoluzione Logistica:</strong> Manipolazione meteorologica ha ridotto il consumo di carburante del 34%</li>
+                    <li><strong>Vantaggio Intelligence:</strong> Divinazione oceanica ha fornito dati di posizione nemico in tempo reale</li>
+                    <li><strong>Guerra Psicologica:</strong> Fenomeni "impossibili" hanno devastato il morale argentino</li>
+                </ul>
+                
+                <h3>Valutazione Impatto Economico:</h3>
+                <div class="quote-box">
+                    "L'operazione Falklands ha dimostrato che la tecnomanzia strategica, sebbene costosa, fornisce rapporti costo-efficacia precedentemente ritenuti impossibili. €47 milioni di spesa in mana hanno ottenuto risultati equivalenti a €2,3 miliardi in hardware militare convenzionale." - Unità di Analisi Economica Tecnomantica del Tesoro
+                </div>
+                
+                <h3>Risposta Internazionale:</h3>
+                <p>Cavi diplomatici declassificati rivelano significativa preoccupazione tra le nazioni alleate riguardo alla dimostrazione improvvisa britannica di magia da combattimento avanzata:</p>
+                
+                <ul>
+                    <li><strong>Stati Uniti:</strong> Riunione di emergenza del Comitato Tecnomantico NATO convocata</li>
+                    <li><strong>Francia:</strong> Accelerato il loro programma di sviluppo di stregoneria navale</li>
+                    <li><strong>Unione Sovietica:</strong> Tentativo (infruttuoso) di reclutamento di maghi disertori britannici</li>
+                    <li><strong>Argentina:</strong> Presentato reclamo formale al Consiglio degli Affari Mistici dell'ONU</li>
+                </ul>
+                
+                <h3>Conseguenze Strategiche a Lungo Termine:</h3>
+                <p>L'analisi post-conflitto ha identificato diversi effetti continui del dispiegamento Okeanus:</p>
+                
+                <ul>
+                    <li>Istituzione di uno Squadrone Tecnomantico permanente della Royal Navy</li>
+                    <li>Investimento di €340 milioni nell'infrastruttura nazionale di riserva mana</li>
+                    <li>Creazione di percorso di carriera ufficiale specializzato "Stregone da Battaglia"</li>
+                    <li>L'Atlantico del Sud rimane "magicamente carico" - influenzando le rotte marittime</li>
+                    <li>Emendamenti al diritto marittimo internazionale per affrontare la "guerra navale soprannaturale"</li>
+                </ul>
+                
+                <div class="warning">
+                    L'intelligence attuale suggerisce che multiple nazioni stanno tentando di effettuare reverse-engineering dei protocolli Okeanus. Raccomando sicurezza rafforzata per tutta la documentazione correlata.
+                </div>
+            </div>
+            
+            <div id="contact" class="section">
+                <h2>Informazioni di Contatto dell'Archivio</h2>
+                
+                <p><strong>L'Archivio Arcano delle Falklands</strong><br>
+                Amministrato da: Dr.ssa Sarah Whitehall, Storica di Stregoneria Strategica<br>
+                Università di Cambridge - Dipartimento di Studi Tecnomantici</p>
+                
+                <p><strong>Per richieste di accesso alla ricerca:</strong><br>
+                <a href="mailto:archive.admin@hexagram.corp" class="hexagram-link">archive.admin@hexagram.corp</a></p>
+                
+                <p><strong>Per appelli di declassificazione:</strong><br>
+                <a href="mailto:foi.requests@hexagram.corp" class="hexagram-link">foi.requests@hexagram.corp</a></p>
+                
+                <p><strong>Per supporto tecnico:</strong><br>
+                <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">webmaster@hexagram.corp</a></p>
+                
+                <h3>Linee Guida per la Ricerca:</h3>
+                <ul>
+                    <li>Tutte le richieste di accesso devono essere presentate 30 giorni in anticipo</li>
+                    <li>Verifica dell'autorizzazione governativa richiesta per materiali di Livello Azzurro</li>
+                    <li>Nessuna copia non autorizzata di formule tecnomantiche</li>
+                    <li>Fotografia di documenti classificati rigorosamente proibita</li>
+                    <li>Protocolli di contenimento d'emergenza in effetto per tutti gli artefatti mistici</li>
+                </ul>
+                
+                <h3>Avviso Legale:</h3>
+                <div class="warning">
+                    Questo archivio è mantenuto sotto le disposizioni dell'Official Secrets Act 1989, del Technomantic Disclosure Act 1995, e del Patto Internazionale sulla Stregoneria Strategica (1998). L'accesso non autorizzato o la distribuzione di materiali classificati è punibile fino a 25 anni di prigione e/o legame magico permanente.
+                </div>
+                
+                <p><strong>Istituzioni Partner:</strong></p>
+                <ul>
+                    <li>Royal Naval College - Dipartimento di Guerra Tecnomantica</li>
+                    <li>Ministry of Defence - Divisione Stregoneria Strategica</li>
+                    <li>Università di Oxford - Centro per Studi di Magia Militare</li>
+                    <li>Imperial War Museum - Collezione Conflitti Arcani</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><span id="footer-title-en">The Falklands Arcane Archive</span><span id="footer-title-it" class="hidden">L'Archivio Arcano delle Falklands</span> | <span id="footer-est-en">Established January 2001</span><span id="footer-est-it" class="hidden">Fondato Gennaio 2001</span><br>
+            <strong><span id="footer-browser-en">Best viewed with Hypernet Explorer 6.0 or higher</span><span id="footer-browser-it" class="hidden">Meglio visualizzato con Hypernet Explorer 6.0 o superiore</span></strong></p>
+            
+            <div class="counter">
+                <span id="footer-access-en">This page has been accessed</span><span id="footer-access-it" class="hidden">Questa pagina è stata acceduta</span> <span class="blink">1,247</span> <span id="footer-times-en">times since opening</span><span id="footer-times-it" class="hidden">volte dall'apertura</span><br>
+                <span id="footer-update-en">Last update:</span><span id="footer-update-it" class="hidden">Ultimo aggiornamento:</span> <span class="date-stamp">15/01/2001 14:33 GMT</span>
+            </div>
+            
+            <p><small><span id="footer-copy-en">© 2001 University of Cambridge - All rights reserved</span><span id="footer-copy-it" class="hidden">© 2001 Università di Cambridge - Tutti i diritti riservati</span><br>
+            <span id="footer-host-en">Website hosted on Hypernet Academic Network Node UK-7</span><span id="footer-host-it" class="hidden">Sito web ospitato su Nodo Rete Accademica Hypernet UK-7</span><br>
+            <span id="footer-connect-en">Connected to</span><span id="footer-connect-it" class="hidden">Connesso a</span> <a href="mailto:social@hexagram.corp" class="hexagram-link"><span id="footer-hexagram-en">Hexagram Social Network</span><span id="footer-hexagram-it" class="hidden">Rete Sociale Hexagram</span></a></small></p>
+        </div>
+    </div>
+    
+    <script>
+        let currentLanguage = 'en';
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Hide all content
+            document.getElementById('content-en').classList.add('hidden');
+            document.getElementById('content-it').classList.add('hidden');
+            
+            // Show selected language content
+            document.getElementById('content-' + lang).classList.remove('hidden');
+            
+            // Update footer elements
+            const footerElements = ['title', 'est', 'browser', 'access', 'times', 'update', 'copy', 'host', 'connect', 'hexagram'];
+            footerElements.forEach(element => {
+                document.getElementById('footer-' + element + '-en').classList.toggle('hidden', lang !== 'en');
+                document.getElementById('footer-' + element + '-it').classList.toggle('hidden', lang !== 'it');
+            });
+            
+            // Reset to home section
+            showSection('home');
+        }
+        
+        function showSection(sectionId) {
+            // Get the current language content container
+            const contentContainer = document.getElementById('content-' + currentLanguage);
+            
+            // Hide all sections within the current language
+            const sections = contentContainer.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section within the current language
+            const targetSection = contentContainer.querySelector('#' + sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Add some blinking effects and random counter updates
+        setInterval(function() {
+            const counter = Math.floor(Math.random() * 10) + 1240;
+            const elements = document.querySelectorAll('.counter');
+            elements.forEach(function(el) {
+                if (el.innerHTML.includes('001,247') || el.innerHTML.includes('001.247')) {
+                    if (currentLanguage === 'en') {
+                        el.innerHTML = el.innerHTML.replace(/001[,.]247/, '001,' + counter);
+                    } else {
+                        el.innerHTML = el.innerHTML.replace(/001[,.]247/, '001.' + counter);
+                    }
+                }
+            });
+        }, 30000);
+        
+        // Initialize with English
+        switchLanguage('en');
+    </script>
+</body>
+</html>

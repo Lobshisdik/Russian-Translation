@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Dungeon Generator</title>
+    <style>
+        /* Retro Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        :root {
+            --bg-color: #0c0c2a;
+            --primary: #8b5cf6;
+            --secondary: #4c1d95;
+            --text: #e2e8f0;
+            --accent: #f59e0b;
+            --border: #6b21a8;
+            --dark-panel: #1e1b4b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', monospace;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            padding: 20px;
+            line-height: 1.6;
+            background-image: 
+                linear-gradient(rgba(26, 9, 54, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 9, 54, 0.8) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 0 var(--secondary);
+        }
+        
+        h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .panel {
+            background-color: var(--dark-panel);
+            border: 3px solid var(--border);
+            padding: 20px;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+        }
+        
+        .panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1rem;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--border);
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background-color: #2d2b57;
+            border: 2px solid var(--border);
+            color: var(--text);
+            font-size: 0.8rem;
+            border-radius: 0;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border: 2px solid var(--accent);
+            transition: all 0.3s;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+        }
+        
+        /* Output Panel */
+        #ascii-output {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 12px;
+            overflow: auto;
+            background-color: #000;
+            padding: 10px;
+            height: 300px;
+            border: 2px solid var(--border);
+        }
+        
+        #dungeon-info {
+            margin-top: 20px;
+            font-size: 0.7rem;
+        }
+        
+        /* Algorithm Description Panel */
+        .algorithm-description {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #2d2b57;
+            border: 1px dashed var(--border);
+            font-size: 0.6rem;
+        }
+        
+        /* Map Preview */
+        #map-preview {
+            width: 100%;
+            height: 300px;
+            background-color: #000;
+            margin-top: 15px;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .map-tile {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-size: cover;
+        }
+        
+        /* Pixel art buttons */
+        .pixel-button {
+            position: relative;
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            border: none;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.3),
+                inset 2px 2px 0 rgba(255,255,255,0.2);
+        }
+        
+        .pixel-button:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg, 
+                transparent 0%, 
+                transparent 40%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                transparent 60%, 
+                transparent 100%
+            );
+            background-size: 200% 200%;
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 200%; }
+            100% { background-position: -200% -200%; }
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.6rem;
+            color: #6b7280;
+            padding: 20px;
+            border-top: 1px dashed var(--border);
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            animation: loading 1s infinite alternate;
+        }
+        
+        .loading span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loading span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes loading {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        /* For map data JSON display */
+        .json-display {
+            background-color: #1a1a2e;
+            border: 1px solid var(--border);
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            max-height: 200px;
+            overflow: auto;
+            margin-top: 15px;
+            white-space: pre;
+        }
+        
+        .blinking {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RPG MAKER MZ</h1>
+            <h2>DUNGEON GENERATOR</h2>
+        </header>
+        
+        <div class="main-content">
+            <div class="panel">
+                <h3>DUNGEON SETTINGS</h3>
+                <div class="form-group">
+                    <label for="map-width">MAP WIDTH:</label>
+                    <input type="number" id="map-width" min="10" max="100" value="30">
+                </div>
+                <div class="form-group">
+                    <label for="map-height">MAP HEIGHT:</label>
+                    <input type="number" id="map-height" min="10" max="100" value="30">
+                </div>
+                <div class="form-group">
+                    <label for="algorithm">GENERATION ALGORITHM:</label>
+                    <select id="algorithm">
+                        <option value="rooms">ROOMS & CORRIDORS</option>
+                        <option value="cellular">CELLULAR AUTOMATA</option>
+                        <option value="bsp">BINARY SPACE PARTITIONING</option>
+                        <option value="drunkard">DRUNKARD'S WALK</option>
+                        <option value="maze">RECURSIVE MAZE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="wall-height">WALL HEIGHT:</label>
+                    <input type="number" id="wall-height" min="1" max="3" value="2">
+                </div>
+                <div class="form-group">
+                    <label for="tileset">TILESET:</label>
+                    <select id="tileset">
+                        <option value="dungeon">DUNGEON (BASIC)</option>
+                        <option value="castle">CASTLE</option>
+                        <option value="cave">CAVE</option>
+                        <option value="ruins">RUINS</option>
+                        <option value="sewer">SEWER</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="wall-autotile">WALL AUTOTILE ID:</label>
+                    <input type="number" id="wall-autotile" min="0" max="255" value="3">
+                </div>
+                <div class="form-group">
+                    <label for="floor-autotile">FLOOR AUTOTILE ID:</label>
+                    <input type="number" id="floor-autotile" min="0" max="255" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="ceiling-autotile">CEILING AUTOTILE ID:</label>
+                    <input type="number" id="ceiling-autotile" min="0" max="255" value="5">
+                </div>
+                
+                <div class="algorithm-description" id="algo-description">
+                    Algorithm info will display here.
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="generate-btn" class="pixel-button">GENERATE DUNGEON</button>
+                    <button id="download-btn" class="pixel-button" disabled>SAVE MAP</button>
+                </div>
+                
+                <div class="loading" id="loading-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h3>DUNGEON PREVIEW</h3>
+                <div id="ascii-output">Dungeon preview will appear here...</div>
+                <div id="map-preview"></div>
+                <div id="dungeon-info"></div>
+                <div class="json-display" id="map-data">
+                    No map data generated yet...
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            RPG MAKER MZ DUNGEON GENERATOR &copy; 2025 | FOR RPG MAKER MZ MAPS
+        </footer>
+    </div>
+    
+    <script>
+        // Algorithm descriptions
+        const algoDescriptions = {
+            'rooms': "ROOMS & CORRIDORS: Creates rectangular rooms and connects them with corridors. Good for classic dungeons with distinct areas.",
+            'cellular': "CELLULAR AUTOMATA: Uses cellular automata rules to create organic cave-like structures. Perfect for natural environments.",
+            'bsp': "BINARY SPACE PARTITIONING: Recursively splits the map and places rooms in each partition. Creates well-organized dungeons.",
+            'drunkard': "DRUNKARD'S WALK: Simulates a drunk person walking randomly. Creates winding, unpredictable paths and spaces.",
+            'maze': "RECURSIVE MAZE: Generates perfect mazes where every point is reachable with no loops. Great for labyrinth-style dungeons."
+        };
+        
+        // Listen for algorithm changes to update description
+        document.getElementById('algorithm').addEventListener('change', function() {
+            const algoType = this.value;
+            const descriptionBox = document.getElementById('algo-description');
+            descriptionBox.textContent = algoDescriptions[algoType];
+            descriptionBox.style.display = 'block';
+        });
+        
+        // Characters for ASCII display
+        const chars = {
+            wall: '#',
+            floor: '.',
+            door: '+',
+            stairs: '>',
+            corridor: '·',
+            empty: ' '
+        };
+        
+        // Generate the dungeon
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const width = parseInt(document.getElementById('map-width').value);
+            const height = parseInt(document.getElementById('map-height').value);
+            const algorithm = document.getElementById('algorithm').value;
+            
+            // Show loading
+            document.getElementById('loading-indicator').style.display = 'block';
+            
+            // Small delay to make it look like it's doing heavy computation
+            setTimeout(() => {
+                generateDungeon(width, height, algorithm);
+                document.getElementById('loading-indicator').style.display = 'none';
+                document.getElementById('download-btn').disabled = false;
+            }, 1000);
+        });
+        
+        // Dungeon generation logic
+        function generateDungeon(width, height, algorithm) {
+            let map = [];
+            
+            // Initialize empty map
+            for (let y = 0; y < height; y++) {
+                let row = [];
+                for (let x = 0; x < width; x++) {
+                    row.push(0); // 0 = wall, 1 = floor
+                }
+                map.push(row);
+            }
+            
+            // Different generation algorithms
+            switch(algorithm) {
+                case 'rooms':
+                    generateRoomsAndCorridors(map, width, height);
+                    break;
+                case 'cellular':
+                    generateCellularAutomata(map, width, height);
+                    break;
+                case 'bsp':
+                    generateBSP(map, width, height);
+                    break;
+                case 'drunkard':
+                    generateDrunkardWalk(map, width, height);
+                    break;
+                case 'maze':
+                    generateMaze(map, width, height);
+                    break;
+            }
+            
+            // Display the map
+            displayMap(map);
+            
+            // Generate RPG Maker MZ map format
+            generateRPGMakerMap(map);
+        }
+        
+        // Rooms and Corridors algorithm
+        function generateRoomsAndCorridors(map, width, height) {
+            // Clear the map first - all walls
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    map[y][x] = 0;
+                }
+            }
+            
+            const roomCount = Math.max(5, Math.floor((width * height) / 200));
+            const rooms = [];
+            
+            // Generate rooms
+            for (let i = 0; i < roomCount; i++) {
+                const roomWidth = getRandomInt(4, 10);
+                const roomHeight = getRandomInt(4, 10);
+                const roomX = getRandomInt(1, width - roomWidth - 1);
+                const roomY = getRandomInt(1, height - roomHeight - 1);
+                
+                // Check for overlapping
+                let overlaps = false;
+                const newRoom = {x: roomX, y: roomY, width: roomWidth, height: roomHeight};
+                
+                for (const room of rooms) {
+                    if (
+                        roomX - 1 <= room.x + room.width &&
+                        roomX + roomWidth + 1 >= room.x &&
+                        roomY - 1 <= room.y + room.height &&
+                        roomY + roomHeight + 1 >= room.y
+                    ) {
+                        overlaps = true;
+                        break;
+                    }
+                }
+                
+                if (!overlaps) {
+                    rooms.push(newRoom);
+                    
+                    // Carve out the room
+                    for (let y = roomY; y < roomY + roomHeight; y++) {
+                        for (let x = roomX; x < roomX + roomWidth; x++) {
+                            map[y][x] = 1;
+                        }
+                    }
+                }
+            }
+            
+            // Connect rooms with corridors
+            for (let i = 0; i < rooms.length - 1; i++) {
+                const roomA = rooms[i];
+                const roomB = rooms[i + 1];
+                
+                // Get centers
+                const centerAX = Math.floor(roomA.x + roomA.width / 2);
+                const centerAY = Math.floor(roomA.y + roomA.height / 2);
+                const centerBX = Math.floor(roomB.x + roomB.width / 2);
+                const centerBY = Math.floor(roomB.y + roomB.height / 2);
+                
+                // Decide randomly whether to do horizontal or vertical first
+                if (Math.random() < 0.5) {
+                    // Horizontal then vertical
+                    createHorizontalCorridor(map, centerAX, centerBX, centerAY);
+                    createVerticalCorridor(map, centerAY, centerBY, centerBX);
+                } else {
+                    // Vertical then horizontal
+                    createVerticalCorridor(map, centerAY, centerBY, centerAX);
+                    createHorizontalCorridor(map, centerAX, centerBX, centerBY);
+                }
+            }
+            
+            // Place stairs in the last room
+            if (rooms.length > 0) {
+                const lastRoom = rooms[rooms.length - 1];
+                const stairsX = Math.floor(lastRoom.x + lastRoom.width / 2);
+                const stairsY = Math.floor(lastRoom.y + lastRoom.height / 2);
+                map[stairsY][stairsX] = 2; // 2 = stairs
+            }
+            
+            // Add some doors
+            for (let i = 0; i < rooms.length; i++) {
+                const room = rooms[i];
+                
+                // Try to place doors on each wall of the room
+                for (let attempt = 0; attempt < 4; attempt++) {
+                    const wall = Math.floor(Math.random() * 4); // 0=top, 1=right, 2=bottom, 3=left
+                    
+                    let doorX, doorY;
+                    
+                    switch(wall) {
+                        case 0: // Top wall
+                            doorX = Math.floor(room.x + room.width / 2);
+                            doorY = room.y - 1;
+                            break;
+                        case 1: // Right wall
+                            doorX = room.x + room.width;
+                            doorY = Math.floor(room.y + room.height / 2);
+                            break;
+                        case 2: // Bottom wall
+                            doorX = Math.floor(room.x + room.width / 2);
+                            doorY = room.y + room.height;
+                            break;
+                        case 3: // Left wall
+                            doorX = room.x - 1;
+                            doorY = Math.floor(room.y + room.height / 2);
+                            break;
+                    }
+                    
+                    // Check if the door location is valid (inside map and connects to a corridor)
+                    if (
+                        doorX > 0 && doorX < width - 1 &&
+                        doorY > 0 && doorY < height - 1 &&
+                        map[doorY][doorX] === 0 &&
+                        (
+                            (wall === 0 && doorY > 0 && map[doorY - 1][doorX] === 1) ||
+                            (wall === 1 && doorX < width - 1 && map[doorY][doorX + 1] === 1) ||
+                            (wall === 2 && doorY < height - 1 && map[doorY + 1][doorX] === 1) ||
+                            (wall === 3 && doorX > 0 && map[doorY][doorX - 1] === 1)
+                        )
+                    ) {
+                        map[doorY][doorX] = 3; // 3 = door
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Cellular Automata algorithm
+        function generateCellularAutomata(map, width, height) {
+            // Initialize with random walls and floors
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    // More likely to be wall near edges
+                    if (x === 0 || y === 0 || x === width - 1 || y === height - 1) {
+                        map[y][x] = 0; // wall
+                    } else {
+                        map[y][x] = Math.random() < 0.55 ? 1 : 0;
+                    }
+                }
+            }
+            
+            // Run cellular automata iterations
+            const iterations = 4;
+            
+            for (let i = 0; i < iterations; i++) {
+                const newMap = JSON.parse(JSON.stringify(map));
+                
+                for (let y = 1; y < height - 1; y++) {
+                    for (let x = 1; x < width - 1; x++) {
+                        const wallCount = countAdjacentWalls(map, x, y);
+                        
+                        if (map[y][x] === 1) { // Floor
+                            if (wallCount > 4) {
+                                newMap[y][x] = 0; // Convert to wall
+                            }
+                        } else { // Wall
+                            if (wallCount < 4) {
+                                newMap[y][x] = 1; // Convert to floor
+                            }
+                        }
+                    }
+                }
+                
+                // Copy new map to current map
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        map[y][x] = newMap[y][x];
+                    }
+                }
+            }
+            
+            // Force walls around the edges
+            for (let x = 0; x < width; x++) {
+                map[0][x] = 0;
+                map[height - 1][x] = 0;
+            }
+            
+            for (let y = 0; y < height; y++) {
+                map[y][0] = 0;
+                map[y][width - 1] = 0;
+            }
+            
+            // Add a few random features like stairs and doors
+            let stairsPlaced = false;
+            
+            for (let attempts = 0; attempts < 100 && !stairsPlaced; attempts++) {
+                const x = getRandomInt(1, width - 2);
+                const y = getRandomInt(1, height - 2);
+                
+                if (map[y][x] === 1 && countAdjacentWalls(map, x, y) <= 2) {
+                    map[y][x] = 2; // Place stairs
+                    stairsPlaced = true;
+                }
+            }
+        }
+        
+        // BSP (Binary Space Partitioning) algorithm
+        function generateBSP(map, width, height) {
+            // Initialize all as walls
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    map[y][x] = 0;
+                }
+            }
+            
+            // Root partition covers the whole map
+            const partitions = [{
+                x: 0,
+                y: 0,
+                width: width,
+                height: height
+            }];
+            
+            // Recursively split partitions
+            splitPartition(partitions[0], partitions, 0, 4);
+            
+            // Create rooms in each leaf partition
+            const rooms = [];
+            
+            for (const partition of partitions) {
+                // Only create rooms in leaf partitions (those that weren't split)
+                if (!partition.split) {
+                    const roomWidth = Math.max(3, Math.floor(partition.width * 0.7));
+                    const roomHeight = Math.max(3, Math.floor(partition.height * 0.7));
+                    
+                    // Position room randomly within partition
+                    const roomX = partition.x + Math.floor((partition.width - roomWidth) / 2);
+                    const roomY = partition.y + Math.floor((partition.height - roomHeight) / 2);
+                    
+                    // Carve out the room
+                    for (let y = roomY; y < roomY + roomHeight; y++) {
+                        for (let x = roomX; x < roomX + roomWidth; x++) {
+                            if (y > 0 && y < height - 1 && x > 0 && x < width - 1) {
+                                map[y][x] = 1;
+                            }
+                        }
+                    }
+                    
+                    rooms.push({
+                        x: roomX,
+                        y: roomY,
+                        width: roomWidth,
+                        height: roomHeight,
+                        centerX: Math.floor(roomX + roomWidth / 2),
+                        centerY: Math.floor(roomY + roomHeight / 2)
+                    });
+                }
+            }
+            
+            // Connect rooms - connect each room to the next one
+            for (let i = 0; i < rooms.length - 1; i++) {
+                connectRooms(map, rooms[i], rooms[i + 1]);
+            }
+            
+            // Add stairs in the last room
+            if (rooms.length > 0) {
+                const lastRoom = rooms[rooms.length - 1];
+                map[lastRoom.centerY][lastRoom.centerX] = 2; // stairs
+            }
+            
+            // Add some doors randomly
+            for (let i = 0; i < Math.min(rooms.length, 5); i++) {
+                const room = rooms[getRandomInt(0, rooms.length - 1)];
+                
+                const doorSide = getRandomInt(0, 3); // 0=top, 1=right, 2=bottom, 3=left
+                let doorX, doorY;
+                
+                switch(doorSide) {
+                    case 0: // Top
+                        doorX = getRandomInt(room.x + 1, room.x + room.width - 2);
+                        doorY = room.y - 1;
+                        break;
+                    case 1: // Right
+                        doorX = room.x + room.width;
+                        doorY = getRandomInt(room.y + 1, room.y + room.height - 2);
+                        break;
+                    case 2: // Bottom
+                        doorX = getRandomInt(room.x + 1, room.x + room.width - 2);
+                        doorY = room.y + room.height;
+                        break;
+                    case 3: // Left
+                        doorX = room.x - 1;
+                        doorY = getRandomInt(room.y + 1, room.y + room.height - 2);
+                        break;
+                }
+                
+                // Check if location is valid for a door
+                if (
+                    doorX > 0 && doorX < width - 1 &&
+                    doorY > 0 && doorY < height - 1 &&
+                    map[doorY][doorX] === 0
+                ) {
+                    map[doorY][doorX] = 3; // door
+                }
+            }
+        }
+        
+        // Drunkard's Walk algorithm
+        function generateDrunkardWalk(map, width, height) {
+            // Initialize all as walls
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    map[y][x] = 0;
+                }
+            }
+            
+            // Start in the middle
+            let x = Math.floor(width / 2);
+            let y = Math.floor(height / 2);
+            
+            // Set initial position as floor
+            map[y][x] = 1;
+            
+            // Number of steps for the drunk walker
+            const targetFloorPercentage = 0.3;
+            const maxFloors = Math.floor(width * height * targetFloorPercentage);
+            let floorCount = 1;
+            
+            // Directions: [dx, dy]
+            const directions = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+            
+            while (floorCount < maxFloors) {
+                // Choose a random direction
+                const [dx, dy] = directions[getRandomInt(0, 3)];
+                
+                // New position
+                const newX = x + dx;
+                const newY = y + dy;
+                
+                // Check if new position is valid
+                if (newX > 0 && newX < width - 1 && newY > 0 && newY < height - 1) {
+                    // Move to new position
+                    x = newX;
+                    y = newY;
+                    
+                    // If it's a wall, convert to floor
+                    if (map[y][x] === 0) {
+                        map[y][x] = 1;
+                        floorCount++;
+                    }
+                }
+            }
+            
+            // Add some features
+            let stairsX, stairsY;
+            let stairsPlaced = false;
+            
+            // Try to place

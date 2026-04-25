@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapons JSON Price Updater Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .column {
+            flex: 1;
+        }
+        .result {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .mismatch {
+            color: #e74c3c;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weapons JSON Price Updater Tool</h1>
+    
+    <div class="container">
+        <div class="column">
+            <h2>Weapon Price Mapping (JSON)</h2>
+            <textarea id="priceMapping" placeholder="Paste the weapon price mapping JSON here..."></textarea>
+        </div>
+        <div class="column">
+            <h2>Weapons JSON Array</h2>
+            <textarea id="weaponsJson" placeholder="Paste your Weapons.json content here..."></textarea>
+        </div>
+    </div>
+    
+    <button id="mergeData">Combine Mappings</button>
+    <button id="updatePrices">Update Prices</button>
+    <button id="copyResult">Copy Updated JSON</button>
+    
+    <div class="result">
+        <h2>Updated JSON</h2>
+        <textarea id="resultJson" readonly></textarea>
+    </div>
+    
+    <div class="stats" id="statsContainer">
+        <h2>Update Statistics</h2>
+        <div id="stats"></div>
+        
+        <h3>Price Changes</h3>
+        <table id="priceChangesTable">
+            <thead>
+                <tr>
+                    <th>Weapon Name</th>
+                    <th>Original Price</th>
+                    <th>New Price</th>
+                    <th>Difference</th>
+                </tr>
+            </thead>
+            <tbody id="priceChangesBody"></tbody>
+        </table>
+        
+        <h3>Missing Weapons</h3>
+        <ul id="missingWeapons"></ul>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultPriceMapping1 = {
+  "Short Sword": 150,
+  "Long Sword": 300,
+  "Falchion": 450,
+  "Mithril Sword": 2500,
+  "Dragon Blade": 8000,
+  "Wooden Staff": 50,
+  "Magic Wand": 120,
+  "Force Wand": 350,
+  "Mithril Rod": 1800,
+  "Dragon Staff": 6000,
+  "Stone Flail": 80,
+  "Bronze Flail": 180,
+  "Morning Star": 320,
+  "Mithril Flail": 1900,
+  "Dragon Flail": 5500,
+  "Hand Axe": 65,
+  "Battle Axe": 250,
+  "Bardiche": 400,
+  "Mithril Axe": 2200,
+  "Dragon Axe": 7500,
+  "Short Spear": 60,
+  "Long Spear": 120,
+  "Halberd": 280,
+  "Mithril Spear": 1600,
+  "Dragon Spear": 6500,
+  "Cestus": 80,
+  "Bagh Naka": 150,
+  "Iron Claw": 280,
+  "Mithril Claw": 1700,
+  "Dragon Claw": 5800,
+  "Short Bow": 100,
+  "Long Bow": 220,
+  "Crossbow": 350,
+  "Mithril Bow": 1900,
+  "Dragon Bow": 6200,
+  "Knife": 40,
+  "Daggar": 120,
+  "Machete": 180,
+  "Mithril Daggar": 1500,
+  "Dragon Daggar": 5000,
+  "Bronze Age Sword": 250,
+  "Scimitar": 350,
+  "Zweihander": 450,
+  "Rapier": 380,
+  "Katana": 550,
+  "Runic Blade": 1200,
+  "Shadowsteel Sword": 1800,
+  "Pistol": 500,
+  "Shotgun": 800,
+  "Assault Rifle": 1500,
+  "Sniper Rifle": 2500,
+  "SMG": 900,
+  "Boomerang": 100,
+  "Sling": 80,
+  "Dory Spear": 200,
+  "War Club": 150,
+  "Khopesh": 160,
+  "War Hammer": 220,
+  "Poleaxe": 300,
+  "Flail": 180,
+  "Gladiator Net": 120,
+  "Katar": 200,
+  "Combat Knife": 150,
+  "Compound Bow": 450,
+  "Heavy Machine Gun": 3800,
+  "RPG": 3500,
+  "Brass Knuckles": 90,
+  "Plasma Rifle": 15000,
+  "Energy Blade": 20000,
+  "Sonic Gauntlet": 12000,
+  "Laser Rifle": 12000,
+  "Gravity Crusher": 25000,
+  "Flamesong Blade": 2200,
+  "Void Edge": 3500,
+  "World Tree Staff": 3000,
+  "Aetherial Bow": 2800,
+  "Thornwhip": 2400,
+  "Flying Ring Chain": 180,
+  "Urumi": 350,
+  "Three-Section Staff": 200,
+  "Deer Horn Knives": 280,
+  "Poison Blowpipe": 220,
+  "Cyberarm Cannon": 5500,
+  "Neural Claws": 5200,
+  "Micro-Missile Array": 6500,
+  "Polymorphic Arsenal": 8000,
+  "Optical Beam System": 7500,
+  "Thundercaller Staff": 6000,
+  "Eternal Flame Sword": 5800,
+  "Frostbite Bow": 5500,
+  "Earthshaker Maul": 6800,
+  "Tempest Trident": 6200,
+  "Excalibur": 50000,
+  "Mjölnir": 45000,
+  "Dimensional Cutter": 40000,
+  "Divine Talons": 35000,
+  "Staff of Eternity": 48000,
+  "Volt Edge": 3600,
+  "Explosive Crossbow": 2400,
+  "Luminous Kukris": 2800,
+  "Dragon Scale Blade": 3200,
+  "Paralyzer": 1800,
+  "Yggdrasil Branch": 2500,
+  "Astral Saber": 3000,
+  "Adamantine Fists": 2600,
+  "Splitting Shuriken": 1800,
+  "Iron Tonfa": 250,
+  "Training Nunchaku": 150,
+  "Steel Nunchaku": 350,
+  "Four-Section Staff": 400,
+  "Iron Knuckles": 220,
+  "Mithril Strike Gloves": 1600,
+  "Master's Gauntlets": 5000,
+  "Steel Chair": 60,
+  "Breakaway Table": 80,
+  "Heavy Chain": 100,
+  "Ring Bell": 70,
+  "Steel Ladder": 120,
+  "Champion's Belt": 3600,
+  "Shinai": 120,
+  "Twin Sai": 320,
+  "Flexible Staff": 180,
+  "Arm Bracers": 220,
+  "Knife Hand": 120,
+  "Flying Kicks": 180,
+  "Metal Men": 220,
+  "Kendo Bokken": 140,
+  "Tekko-kagi": 280,
+  "Rope and Hook": 150,
+  "Trash Can Lid": 40
+};
+
+            const defaultPriceMapping2 = {
+  "Flintlock Pistol": 400,
+  "Musket": 450,
+  "Percussion Revolver": 380,
+  "Lever Action Rifle": 550,
+  "Double-Barrel Shotgun": 650,
+  "Gatling Gun": 3360,
+  "Blunderbuss": 480,
+  "Dueling Pistol": 500,
+  "Bolt-Action Rifle": 600,
+  "Six-Shooter": 520,
+  "9mm Pistol": 450,
+  "Compact SMG": 850,
+  "Magnum Revolver": 900,
+  "Combat Shotgun": 950,
+  "Bullpup Rifle": 1300,
+  "DMR": 2040,
+  "LMG": 2900,
+  "PDW": 800,
+  "Anti-Material Rifle": 6000,
+  "Disposable Rocket": 4000,
+  "Match Grade Pistol": 1200,
+  "Smart Grenade Launcher": 4500,
+  "Tactical Shotgun": 1200,
+  "Precision Rifle": 2800,
+  "HMG": 4500,
+  "Minigun": 8500,
+  "Double-Barrel Pistol": 750,
+  "Tactical Carbine": 1400,
+  "Heavy Sniper": 3500,
+  "Tactical Crossbow": 950,
+  "Stone Axe": 50,
+  "Wooden Club": 45,
+  "Bone Dagger": 40,
+  "Throwing Stick": 35,
+  "Javelin": 80,
+  "Obsidian Blade": 70,
+  "Retiarius Net": 100,
+  "Mesopotamian Sword": 200,
+  "Sumerian Spear": 150,
+  "Egyptian Axe": 180,
+  "Atlatl Dart": 70,
+  "Fiber Sling": 60,
+  "Stone-Studded Club": 90,
+  "Shark Tooth Club": 140,
+  "Macuahuitl": 180,
+  "Bola": 60,
+  "Mere Club": 150,
+  "Gladius": 240,
+  "Pilum": 180,
+  "Shamshir": 300,
+  "Composite Bow": 280,
+  "Medieval Flail": 180,
+  "Blackjack": 80,
+  "Longsword": 400,
+  "Claymore": 480,
+  "Halberd": 350,
+  "Lucerne Hammer": 300,
+  "Chu-Ko-Nu": 320,
+  "Naginata": 380,
+  "Knuckle Dusters": 120,
+  "Rope Dart": 140,
+  "Bagh Nakh": 180,
+  "Estoc": 400,
+  "Flanged Mace": 220,
+  "Bamboo Blowgun": 140,
+  "Kukri": 150,
+  "Iklwa": 200,
+  "Matchlock Musket": 600,
+  "Wheellock Pistol": 550,
+  "Urumi Whip Sword": 420,
+  "Bullwhip": 100,
+  "Patag": 200,
+  "Katar": 200,
+  "Shongo": 170,
+  "Hand Cannon": 440,
+  "Iron Grenade": 380,
+  "Flintlock Blunderbuss": 480,
+  "Pepperbox Revolver": 320,
+  "Rifle Bayonet": 280,
+  "Rifled Musket": 550,
+  "Breech-Loading Rifle": 700,
+  "Military Bolt-Action": 850,
+  "Tommy Gun": 1800,
+  "M1 Garand": 1500,
+  "Flamethrower": 2800,
+  "MP40": 1900,
+  "Grenade Launcher": 3200,
+  "M14 Battle Rifle": 1700,
+  "AKS-74U": 1120,
+  "Marksman Rifle": 2500,
+  "MANPADS": 8500,
+  "Railgun Prototype": 19200,
+  "Coilgun": 16500,
+  "Active Denial System": 14592,
+  "Sonic Staff": 5600,
+  "Air Pistol": 750,
+  "Foam Projector": 850,
+  "Electro-Net Launcher": 1200,
+  "Golden Varlenia Blade": 12000,
+  "Varlenia Twinblades": 10500,
+  "Varlenia Arcane Staff": 11000,
+  "Varlenia Energy Bow": 10800,
+  "Varlenia Fist": 10500,
+  "Varlenia Returning Spear": 10800,
+  "Varlenia Cleaver": 12500,
+  "Varlenia Beam Rifle": 13000,
+  "Varlenia Chain Whip": 10000,
+  "Varlenia War Fan": 9800
+};
+
+            const defaultPriceMapping3 = {
+  "T-Pillar Blade": 8400,
+  "Vulture Totem Staff": 8800,
+  "Fox Spirit Fists": 7800,
+  "Stellar Sling": 8200,
+  "Boar Totem Hammer": 9200,
+  "Serpent Caller": 8600,
+  "Cosmic Pendulum": 8000,
+  "Soul Cleaver": 9400,
+  "Crane Talons": 8200,
+  "Bull Totem Bow": 8800,
+  "Star Cutter": 9000,
+  "Portal Disc": 9600,
+  "Knowledge Seeker": 8400,
+  "Celestial Alignment Rod": 9800,
+  "Gravity Spear": 10200,
+  "Skystone Greatsword": 10000,
+  "Phasing Touch": 9400,
+  "Liquid Stone Whip": 8800,
+  "Planar Divider": 10400,
+  "Thought Projector": 9600,
+  "Timeflow Manipulator": 11200,
+  "EHI Crude Projector": 8400,
+  "EHI Petroleum Edge": 9200,
+  "EHI Toxic Amplifier": 10600,
+  "EHI Petrochem Injectors": 8800,
+  "EHI Knowledge Injector": 9400,
+  "EHI Compression Maul": 11200,
+  "EHI Omniscient Binder": 10200,
+  "EHI Memetic Rifle": 9800,
+  "EHI Omniscience Edge": 10800,
+  "EHI Combustion Lance": 9600,
+  "EHI Forbidden Codex": 12400,
+  "EHI Psychoactive Talons": 11000,
+  "EHI Identity Eraser": 10600,
+  "EHI Petrocorruptor": 11800,
+  "EHI Headache Inducer": 8200,
+  "EHI Suicide Bomber": 9000,
+  "EHI Flesh Dissolver": 10400,
+  "EHI Brain Hemorrhager": 12000,
+  "EHI Apocalypse Fists": 14000,
+  "EHI Petroleum Omniscience": 16000,
+  "Mind Projector Staff": 8400,
+  "Telekinetic Gauntlets": 7600,
+  "Psionic Edge": 7200,
+  "Mind Arrow Bow": 6800,
+  "Psychic Crown": 8800,
+  "Brainwave Amplifier": 7400,
+  "Force Crush Gloves": 6600,
+  "Memory Thief": 6200,
+  "Mind Shield Circlet": 8200,
+  "Spell Absorber": 7600,
+  "Wardbreaker Blade": 7400,
+  "Spellbreaker Crossbow": 6800,
+  "Spellcrusher Maul": 7200,
+  "Barrier Staff": 7800,
+  "Arcane Blade": 8200,
+  "Spellseeker Bow": 7600,
+  "Arcane Shield Gauntlets": 7200,
+  "Elemental Warden Staff": 8600,
+  "Divine Smiter": 7800,
+  "Warding Spear": 6400,
+  "Arcane Sphere": 8200,
+  "Spelldrainer Edge": 7400,
+  "Psychic Amplifier Crown": 8800,
+  "Mind Piercer": 7600,
+  "Mind Ripper Claws": 7200,
+  "Mindlash Whip": 6800,
+  "Thought Crusher": 7400,
+  "Mind Manipulator Gloves": 8200,
+  "Neural Disruptor": 7600,
+  "Mental Fortress Staff": 8400
+};
+
+            const defaultPriceMapping4 = {
+  "Scrap Metal Shiv": 120,
+  "Nail Bat": 160,
+  "Pipe Wrench Mace": 140,
+  "Junk Slingshot": 80,
+  "Broom Spear": 110,
+  "Hubcap Axe": 180,
+  "PVC Bow": 100,
+  "Glass Knuckles": 130,
+  "Bike Chain Flail": 150,
+  "Junk Crossbow": 190,
+  "Concrete Sledge": 210,
+  "Razor Disc Claws": 170,
+  "Garden Sprayer Flamer": 240,
+  "Nail Mop Staff": 120,
+  "Pipe Gun": 220,
+  "Stop Sign Cleaver": 180,
+  "Cord Whip": 140,
+  "Leaf Spring Machete": 200,
+  "Pressure Gun": 230,
+  "Rubble Launcher": 250,
+  "Nail Board": 110,
+  "Car Panel Claws": 160,
+  "Saw Blade Sword": 170,
+  "Bike Pump Air Gun": 140,
+  "Rebar Club": 130,
+  "Mirror Shard Fist": 120,
+  "Modified Wrench": 150,
+  "Razor Fire Axe": 200,
+  "Pipe Slingshot": 90,
+  "Razor Mop": 130,
+  "Antenna Rapier": 110,
+  "Trusty Frying Pan": 90,
+  "Staple Shooter": 130,
+  "Barbed Hockey Stick": 140,
+  "Golf Tee Glove": 100,
+  "Deadly Plunger": 80,
+  "Hairspray Torch": 120,
+  "Ruler Shiv": 70,
+  "Sign Post": 160,
+  "Sand-Filled Hose": 100,
+  "Broken Bottle": 60,
+  "Shower Rod Bow": 90,
+  "Mower Blade Axe": 150,
+  "Key Knuckles": 50,
+  "Hanger Slingshot": 70,
+  "Kitchen Cleaver": 130,
+  "Spiked Crutch": 110,
+  "Spike Umbrella": 100,
+  "Modified Cap Gun": 120,
+  "Garden Shear Claws": 140,
+  "Sharpened Shovel": 120,
+  "Skewer Dart Gun": 110,
+  "Sharpened Pool Cue": 140,
+  "Chain Rolling Pin": 150,
+  "Combat Fishing Rod": 130,
+  "Combat Scissors": 90,
+  "Toolbox Flail": 160,
+  "Kitchen Knife": 80,
+  "Potato Cannon": 150,
+  "Heavy Buckle Belt": 90,
+  "Cheap Sword": 60,
+  "Budget Axe": 70,
+  "Apprentice Staff": 50,
+  "Flimsy Bow": 55,
+  "Crude Spear": 45,
+  "Shoddy Knuckles": 40,
+  "Bargain Knife": 35,
+  "Pot Metal Mace": 65,
+  "Unreliable Crossbow": 75,
+  "Dull Claws": 60,
+  "Unreliable Pistol": 80,
+  "Unwieldy Hammer": 85,
+  "Cracked Whip": 50,
+  "Training Sword": 40,
+  "Rusty Rifle": 90,
+  "Dented Pan": 30,
+  "Stretchy Sling": 25,
+  "Splintered Club": 30,
+  "Walking Stick": 25,
+  "Leaky Blowgun": 35,
+  "Practice Axe": 45,
+  "Warped Arrows": 20,
+  "Makeshift Boxing Gloves": 30,
+  "Decorative Sword": 55,
+  "Loose-headed Spear": 40,
+  "Tin Claws": 35,
+  "Novice Wand": 45,
+  "Uneven Slingshot": 15,
+  "Rusty Sickle": 35,
+  "Wooden Flail": 40,
+  "Misaligned Hand Crossbow": 60,
+  "Unbalanced Throwing Knife": 25,
+  "Beginner's Hand Wraps": 20,
+  "

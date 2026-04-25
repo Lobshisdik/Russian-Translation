@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>⭐ FlashBack Archive - Lost Gaming Treasures ⭐</title>
+    <style>
+        body {
+            background: #000066 url('data:image/gif;base64,R0lGODlhEAAQAPIAAAAAAP///8zMzP//AP8A/wD/AMzM/wAAACH5BAEAAAcALAAAAAAQABAAAAMsCLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILBqNBwA7') repeat;
+            color: #FFFF00;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #FF0080;
+            padding: 5px;
+            border: 2px solid #FFFF00;
+            border-radius: 5px;
+        }
+        
+        .language-switcher button {
+            background: #00FF80;
+            border: 1px solid #000;
+            color: #000;
+            padding: 3px 6px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #FF0080, #8000FF, #0080FF);
+            text-align: center;
+            padding: 20px;
+            border: 5px solid #FFFF00;
+            margin: 10px;
+            animation: rainbow 3s infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { border-color: #FF0000; }
+            16% { border-color: #FF8000; }
+            33% { border-color: #FFFF00; }
+            50% { border-color: #80FF00; }
+            66% { border-color: #00FF80; }
+            83% { border-color: #0080FF; }
+            100% { border-color: #8000FF; }
+        }
+        
+        .sparkle {
+            font-size: 36px;
+            color: #FFFF00;
+            text-shadow: 2px 2px 4px #FF0080;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            margin: 10px;
+        }
+        
+        .sidebar {
+            display: table-cell;
+            width: 200px;
+            background: #8000FF;
+            border: 3px solid #FFFF00;
+            padding: 10px;
+            vertical-align: top;
+        }
+        
+        .sidebar h3 {
+            color: #00FF80;
+            text-align: center;
+            border-bottom: 2px solid #FF0080;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        .nav-link {
+            display: block;
+            background: #FF0080;
+            color: #FFFF00;
+            padding: 8px;
+            margin: 5px 0;
+            text-decoration: none;
+            border: 2px solid #00FF80;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            background: #00FF80;
+            color: #FF0080;
+            animation: pulse 0.5s;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .content {
+            display: table-cell;
+            background: #4000AA;
+            border: 3px solid #FFFF00;
+            padding: 20px;
+            margin-left: 10px;
+            vertical-align: top;
+        }
+        
+        .section {
+            display: none;
+            background: #6000CC;
+            border: 2px solid #00FF80;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .game-review {
+            background: #2000AA;
+            border: 2px solid #FF0080;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .rating {
+            color: #FFFF00;
+            font-size: 18px;
+        }
+        
+        .footer {
+            background: #FF0080;
+            color: #FFFF00;
+            text-align: center;
+            padding: 15px;
+            border: 3px solid #00FF80;
+            margin: 10px;
+        }
+        
+        .counter {
+            background: #00FF80;
+            color: #000080;
+            padding: 5px;
+            border: 2px solid #FF0080;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .gif-dancing {
+            animation: dance 1s infinite alternate;
+        }
+        
+        @keyframes dance {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+        
+        marquee {
+            background: #FF0080;
+            color: #FFFF00;
+            padding: 5px;
+            margin: 5px 0;
+            border: 2px solid #00FF80;
+        }
+        
+        .tech-badge {
+            background: #00FF80;
+            color: #000080;
+            padding: 2px 5px;
+            border: 1px solid #FF0080;
+            font-size: 10px;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button onclick="switchLanguage('en')" id="en-btn">EN</button>
+        <button onclick="switchLanguage('it')" id="it-btn">IT</button>
+    </div>
+
+    <div class="header">
+        <div class="sparkle">⭐ FlashBack Archive ⭐</div>
+        <div id="subtitle-en" class="lang-content en">Lost Gaming Treasures from the Hypernet's Golden Age</div>
+        <div id="subtitle-it" class="lang-content it" style="display:none;">Tesori Videoludici Perduti dall'Era d'Oro dell'Hypernet</div>
+        <br>
+        <span class="tech-badge">CRYPTO-NOSTALGIC™</span>
+        <span class="tech-badge">TEMPORAL-GAMING</span>
+        <span class="tech-badge">NEURO-ARCHIVE</span>
+    </div>
+
+    <marquee>
+        <span class="lang-content en">🎮 Welcome to the ultimate archive of lost Flash games! 🎮 Preserving digital history one review at a time! 🎮</span>
+        <span class="lang-content it" style="display:none;">🎮 Benvenuti nell'archivio definitivo dei giochi Flash perduti! 🎮 Preservando la storia digitale una recensione alla volta! 🎮</span>
+    </marquee>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h3 class="lang-content en">Navigation</h3>
+            <h3 class="lang-content it" style="display:none;">Navigazione</h3>
+            
+            <a class="nav-link" onclick="showSection('home')">
+                <span class="lang-content en">🏠 Home Portal</span>
+                <span class="lang-content it" style="display:none;">🏠 Portale Principale</span>
+            </a>
+            <a class="nav-link" onclick="showSection('reviews')">
+                <span class="lang-content en">📝 Game Reviews</span>
+                <span class="lang-content it" style="display:none;">📝 Recensioni Giochi</span>
+            </a>
+            <a class="nav-link" onclick="showSection('archive')">
+                <span class="lang-content en">📚 Lost Archive</span>
+                <span class="lang-content it" style="display:none;">📚 Archivio Perduto</span>
+            </a>
+            <a class="nav-link" onclick="showSection('tech')">
+                <span class="lang-content en">⚡ Tech Specs</span>
+                <span class="lang-content it" style="display:none;">⚡ Specifiche Tecniche</span>
+            </a>
+            <a class="nav-link" onclick="showSection('community')">
+                <span class="lang-content en">👥 Community</span>
+                <span class="lang-content it" style="display:none;">👥 Comunità</span>
+            </a>
+            <a class="nav-link" onclick="showSection('about')">
+                <span class="lang-content en">ℹ️ About Me</span>
+                <span class="lang-content it" style="display:none;">ℹ️ Chi Sono</span>
+            </a>
+            
+            <div style="margin-top: 20px; text-align: center;">
+                <div class="counter">
+                    <span class="lang-content en">Visitor Count:</span>
+                    <span class="lang-content it" style="display:none;">Turisti:</span>
+                    <br>
+                    <strong>047,293</strong>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <img src="1.jpg" alt="Animated GIF of a spinning Anoki phone with magical sparkles around it" class="gif-dancing" width="80" height="60">
+                </div>
+                
+                <div style="margin-top: 10px; font-size: 10px;">
+                    <span class="lang-content en">Powered by Crypto-Gaming™</span>
+                    <span class="lang-content it" style="display:none;">Alimentato da Crypto-Gaming™</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="home" class="section active">
+                <h2 class="lang-content en">🎮 Welcome to FlashBack Archive! 🎮</h2>
+                <h2 class="lang-content it" style="display:none;">🎮 Benvenuti al FlashBack Archive! 🎮</h2>
+                
+                <div class="lang-content en">
+                    <p>Greetings, fellow digital archaeologists! Welcome to the most comprehensive archive of lost Flash games from the early Hypernet era. I'm preserving gaming history before it vanishes into the data-void forever!</p>
+                    
+                    <p><strong>What you'll find here:</strong></p>
+                    <ul>
+                        <li>🌟 In-depth reviews of rare Flash games</li>
+                        <li>📈 Crypto-nostalgic analysis ratings</li>
+                        <li>💾 Archive links (when available)</li>
+                        <li>🔮 Temporal-gaming insights</li>
+                        <li>👾 Community discussions via Hexagram</li>
+                    </ul>
+                    
+                    <p>Many of these games were lost during the Great Data Purge of 2000, but I've managed to preserve reviews and memories. Some were discovered in abandoned Anoki devices and old corporate servers!</p>
+                </div>
+                
+                <div class="lang-content it" style="display:none;">
+                    <p>Saluti, colleghi archeologi digitali! Benvenuti nell'archivio più completo di giochi Flash perduti dell'era dell'Hypernet primordiale. Sto preservando la storia videoludica prima che svanisca nel vuoto-dati per sempre!</p>
+                    
+                    <p><strong>Cosa troverete qui:</strong></p>
+                    <ul>
+                        <li>🌟 Recensioni approfondite di giochi Flash rari</li>
+                        <li>📈 Valutazioni di analisi crypto-nostalgiche</li>
+                        <li>💾 Link di archivio (quando disponibili)</li>
+                        <li>🔮 Intuizioni di temporal-gaming</li>
+                        <li>👾 Discussioni della comunità via Hexagram</li>
+                    </ul>
+                    
+                    <p>Molti di questi giochi sono andati perduti durante la Grande Purga Dati del 2000, ma sono riuscito a preservare recensioni e ricordi. Alcuni sono stati scoperti in dispositivi Anoki abbandonati e vecchi server aziendali!</p>
+                </div>
+                
+                <img src="2.jpg" alt="Screenshot collage showing various colorful Flash game interfaces from 2000-2001" width="400" height="250" style="border: 3px solid #FF0080; margin: 10px 0;">
+            </div>
+
+            <div id="reviews" class="section">
+                <h2 class="lang-content en">📝 Featured Game Reviews</h2>
+                <h2 class="lang-content it" style="display:none;">📝 Recensioni Giochi in Evidenza</h2>
+                
+                <div class="game-review">
+                    <h3 class="lang-content en">🏭 "Factory Simulator 2000" - Esoteric Heavy Industries</h3>
+                    <h3 class="lang-content it" style="display:none;">🏭 "Simulatore di Fabbrica 2000" - Esoteric Heavy Industries</h3>
+                    
+                    <div class="rating">
+                        <span class="lang-content en">Crypto-Nostalgic Rating: ★★★★☆</span>
+                        <span class="lang-content it" style="display:none;">Valutazione Crypto-Nostalgica: ★★★★☆</span>
+                    </div>
+                    
+                    <div class="lang-content en">
+                        <p><strong>Released:</strong> March 2000 | <strong>Company:</strong> Esoteric Heavy Industries</p>
+                        <p>This corporate-sponsored Flash game was designed to recruit workers for their dimensional-transport manufacturing plants. Players managed production lines while avoiding "temporal anomalies" and "probability distortions."</p>
+                        <p><strong>Gameplay:</strong> Surprisingly addictive factory management with weird physics-bending elements. The "Rule of 80" mode was particularly challenging.</p>
+                        <p><strong>Lost Status:</strong> Vanished when EHI restructured after the Squishing incident.</p>
+                    </div>
+                    
+                    <div class="lang-content it" style="display:none;">
+                        <p><strong>Rilasciato:</strong> Marzo 2000 | <strong>Azienda:</strong> Esoteric Heavy Industries</p>
+                        <p>Questo gioco Flash sponsorizzato dall'azienda era progettato per reclutare lavoratori per i loro impianti di produzione di trasporto-dimensionale. I giocatori gestivano linee di produzione evitando "anomalie temporali" e "distorsioni di probabilità."</p>
+                        <p><strong>Gameplay:</strong> Gestione di fabbrica sorprendentemente coinvolgente con strani elementi che piegano la fisica. La modalità "Regola dell'80" era particolarmente impegnativa.</p>
+                        <p><strong>Stato Perduto:</strong> Scomparso quando EHI si ristrutturò dopo l'incidente dello Squishing.</p>
+                    </div>
+                </div>
+                
+                <div class="game-review">
+                    <h3 class="lang-content en">🚛 "Trucker's Highway" - Independent Developer</h3>
+                    <h3 class="lang-content it" style="display:none;">🚛 "Autostrada del Camionista" - Sviluppatore Indipendente</h3>
+                    
+                    <div class="rating">
+                        <span class="lang-content en">Crypto-Nostalgic Rating: ★★★★★</span>
+                        <span class="lang-content it" style="display:none;">Valutazione Crypto-Nostalgica: ★★★★★</span>
+                    </div>
+                    
+                    <div class="lang-content en">
+                        <p><strong>Released:</strong> June 2000 | <strong>Developer:</strong> Unknown (signed "Bubba")</p>
+                        <p>A mysterious Flash game about driving trucks on endless highways. Featured strange physics where maintaining exactly 80 km/h prevented you from "looping back." The soundtrack was rumored to contain actual Mayhem tracks.</p>
+                        <p><strong>Gameplay:</strong> Hypnotic driving simulation with cryptic cargo deliveries to cities that "exist between dimensions."</p>
+                        <p><strong>Lost Status:</strong> Creator vanished along with the game files. Some say it was too realistic.</p>
+                    </div>
+                    
+                    <div class="lang-content it" style="display:none;">
+                        <p><strong>Rilasciato:</strong> Giugno 2000 | <strong>Sviluppatore:</strong> Sconosciuto (firmato "Bubba")</p>
+                        <p>Un misterioso gioco Flash sul guidare camion su autostrade infinite. Presentava fisica strana dove mantenere esattamente 80 km/h impediva di "tornare indietro nel loop." Si diceva che la colonna sonora contenesse tracce reali dei Mayhem.</p>
+                        <p><strong>Gameplay:</strong> Simulazione di guida ipnotica con consegne di carico criptiche a città che "esistono tra le dimensioni."</p>
+                        <p><strong>Stato Perduto:</strong> Il creatore è scomparso insieme ai file del gioco. Alcuni dicono che era troppo realistico.</p>
+                    </div>
+                </div>
+                
+                <div class="game-review">
+                    <h3 class="lang-content en">🏛️ "ArchiveCorp Employee Training Module"</h3>
+                    <h3 class="lang-content it" style="display:none;">🏛️ "Modulo di Addestramento Dipendenti ArchiveCorp"</h3>
+                    
+                    <div class="rating">
+                        <span class="lang-content en">Crypto-Nostalgic Rating: ★★☆☆☆</span>
+                        <span class="lang-content it" style="display:none;">Valutazione Crypto-Nostalgica: ★★☆☆☆</span>
+                    </div>
+                    
+                    <div class="lang-content en">
+                        <p><strong>Released:</strong> December 2000 | <strong>Company:</strong> Archive Foundation</p>
+                        <p>A corporate training game that taught "radical transparency protocols" and "data liberation techniques." Players had to breach increasingly complex security systems while maintaining "transparency ethics."</p>
+                        <p><strong>Gameplay:</strong> Puzzle-based hacking simulation with moral choice elements.</p>
+                        <p><strong>Lost Status:</strong> Pulled by the Foundation after employee complaints about "invasive realism."</p>
+                    </div>
+                    
+                    <div class="lang-content it" style="display:none;">
+                        <p><strong>Rilasciato:</strong> Dicembre 2000 | <strong>Azienda:</strong> Archive Foundation</p>
+                        <p>Un gioco di addestramento aziendale che insegnava "protocolli di trasparenza radicale" e "tecniche di liberazione dati." I giocatori dovevano violare sistemi di sicurezza sempre più complessi mantenendo "l'etica della trasparenza."</p>
+                        <p><strong>Gameplay:</strong> Simulazione di hacking basata su puzzle con elementi di scelta morale.</p>
+                        <p><strong>Stato Perduto:</strong> Ritirato dalla Foundation dopo lamentele dei dipendenti sul "realismo invasivo."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="archive" class="section">
+                <h2 class="lang-content en">📚 Lost Archive Database</h2>
+                <h2 class="lang-content it" style="display:none;">📚 Database Archivio Perduto</h2>
+                
+                <div class="lang-content en">
+                    <p>These games have been lost to time, but their memories live on in the Hypernet's collective consciousness:</p>
+                    
+                    <ul>
+                        <li><strong>"Anoki Defence Force"</strong> - Tower defense using indestructible Anoki phones</li>
+                        <li><strong>"Corporate Raider Extreme"</strong> - Hyper-capitalist business simulation</li>
+                        <li><strong>"Mage's Guild Academy"</strong> - Magic training simulator (pre-YHWH incident)</li>
+                        <li><strong>"Y2K Survivor"</strong> - Post-apocalyptic resource management</li>
+                        <li><strong>"Temporal Mechanic"</strong> - Fix time paradoxes in puzzle format</li>
+                        <li><strong>"Ley Line Runner"</strong> - Racing game along magical energy currents</li>
+                        <li><strong>"Data Mining Tycoon"</strong> - Build the ultimate information empire</li>
+                        <li><strong>"Truck Stop Simulator"</strong> - Manage interdimensional truck stops</li>
+                    </ul>
+                    
+                    <p><em>If you have any backup files or memories of these games, please contact me via Hexagram!</em></p>
+                </div>
+                
+                <div class="lang-content it" style="display:none;">
+                    <p>Questi giochi sono andati perduti nel tempo, ma i loro ricordi vivono nella coscienza collettiva dell'Hypernet:</p>
+                    
+                    <ul>
+                        <li><strong>"Forza di Difesa Anoki"</strong> - Tower defense usando telefoni Anoki indistruttibili</li>
+                        <li><strong>"Predone Aziendale Estremo"</strong> - Simulazione aziendale iper-capitalista</li>
+                        <li><strong>"Accademia della Gilda dei Maghi"</strong> - Simulatore di addestramento magico (pre-incidente YHWH)</li>
+                        <li><strong>"Sopravvissuto Y2K"</strong> - Gestione risorse post-apocalittica</li>
+                        <li><strong>"Meccanico Temporale"</strong> - Ripara paradossi temporali in formato puzzle</li>
+                        <li><strong>"Corridore Linea Ley"</strong> - Gioco di corse lungo correnti di energia magica</li>
+                        <li><strong>"Magnate del Data Mining"</strong> - Costruisci l'impero informativo definitivo</li>
+                        <li><strong>"Simulatore Area di Sosta"</strong> - Gestisci aree di sosta interdimensionali</li>
+                    </ul>
+                    
+                    <p><em>Se avete file di backup o ricordi di questi giochi, per favore contattatemi via Hexagram!</em></p>
+                </div>
+                
+                <img src="3.jpg" alt="Collection of floppy disks and Anoki phones scattered on a desk with gaming magazines" width="350" height="200" style="border: 3px solid #00FF80; margin: 10px 0;">
+            </div>
+
+            <div id="tech" class="section">
+                <h2 class="lang-content en">⚡ Technical Specifications</h2>
+                <h2 class="lang-content it" style="display:none;">⚡ Specifiche Tecniche</h2>
+                
+                <div class="lang-content en">
+                    <p><strong>Optimal Gaming Setup (circa 2000-2001):</strong></p>
+                    
+                    <ul>
+                        <li><strong>Browser:</strong> Hypernet Explorer 5.0 or higher</li>
+                        <li><strong>Flash Player:</strong> Macromedia Flash Player 5.0</li>
+                        <li><strong>Processor:</strong> Intel Pentium III 500MHz (minimum)</li>
+                        <li><strong>Memory:</strong> 128MB RAM (256MB recommended)</li>
+                        <li><strong>Graphics:</strong> DirectX 7.0 compatible</li>
+                        <li><strong>Sound:</strong> Creative SoundBlaster compatible</li>
+                        <li><strong>Connection:</strong> 56K modem (T1 line for optimal experience)</li>
+                        <li><strong>Special:</strong> Anoki device for crypto-nostalgic enhancement</li>
+                    </ul>
+                    
+                    <p><strong>Advanced Features:</strong></p>
+                    <ul>
+                        <li>Temporal-sync technology for time-loop prevention</li>
+                        <li>Crypto-verification for authentic gaming memories</li>
+                        <li>Neuro-compatibility with modern consciousness patterns</li>
+                        <li>Data-archaeology protocols for lost file recovery</li>
+                    </ul>
+                </div>
+                
+                <div class="lang-content it" style="display:none;">
+                    <p><strong>Setup di Gaming Ottimale (circa 2000-2001):</strong></p>
+                    
+                    <ul>
+                        <li><strong>Browser:</strong> Hypernet Explorer 5.0 o superiore</li>
+                        <li><strong>Flash Player:</strong> Macromedia Flash Player 5.0</li>
+                        <li><strong>Processore:</strong> Intel Pentium III 500MHz (minimo)</li>
+                        <li><strong>Memoria:</strong> 128MB RAM (256MB raccomandati)</li>
+                        <li><strong>Grafica:</strong> Compatibile DirectX 7.0</li>
+                        <li><strong>Audio:</strong> Compatibile Creative SoundBlaster</li>
+                        <li><strong>Connessione:</strong> Modem 56K (linea T1 per esperienza ottimale)</li>
+                        <li><strong>Speciale:</strong> Dispositivo Anoki per potenziamento crypto-nostalgico</li>
+                    </ul>
+                    
+                    <p><strong>Caratteristiche Avanzate:</strong></p>
+                    <ul>
+                        <li>Tecnologia temporal-sync per prevenzione loop temporali</li>
+                        <li>Crypto-verifica per ricordi di gaming autentici</li>
+                        <li>Neuro-compatibilità con moderni pattern di coscienza</li>
+                        <li>Protocolli di data-archeologia per recupero file perduti</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="community" class="section">
+                <h2 class="lang-content en">👥 Gaming Community</h2>
+                <h2 class="lang-content it" style="display:none;">👥 Comunità Gaming</h2>
+                
+                <div class="lang-content en">
+                    <p>Connect with fellow retro gaming enthusiasts!</p>
+                    
+                    <p><strong>📧 Hexagram Network:</strong> <a href="mailto:flasharchive@hexagram.corp">flasharchive@hexagram.corp</a></p>
+                    <p><strong>🎮 Gaming Circle:</strong> <a href="mailto:retrogamers@hexagram.corp">retrogamers@hexagram.corp</a></p>
+                    <p><strong>💾 Data Preservation Group:</strong> <a href="mailto:digitalarch@hexagram.corp">digitalarch@hexagram.corp</a></p>
+                    
+                    <p><strong>Recent Community Discoveries:</strong></p>
+                    <ul>
+                        <li>User "TruckerBubba" claims to have original "Highway" source code</li>
+                        <li>"NokiaCollector97" found factory training modules on old corporate servers</li>
+                        <li>"MageGuildFan" is working on recreating lost magic simulators</li>
+                        <li>"Y2KSurvivor" has complete archives from the transition period</li>
+                    </ul>
+                    
+                    <p><em>Join our weekly "Memory Reconstruction Sessions" via Hexagram group messaging!</em></p>
+                </div>
+                
+                <div class="lang-content it" style="display:none;">
+                    <p>Connettiti con altri appassionati di gaming retro!</p>
+                    
+                    <p><strong>📧 Rete Hexagram:</strong> <a href="mailto:flasharchive@hexagram.corp">flasharchive@hexagram.corp</a></p>
+                    <p><strong>🎮 Cerchia Gaming:</strong> <a href="mailto:retrogamers@hexagram.corp">retrogamers@hexagram.corp</a></p>
+                    <p><strong>💾 Gruppo Preservazione Dati:</strong> <a href="mailto:digitalarch@hexagram.corp">digitalarch@hexagram.corp</a></p>
+                    
+                    <p><strong>Scoperte Recenti della Comunità:</strong></p>
+                    <ul>
+                        <li>L'utente "TruckerBubba" sostiene di avere il codice sorgente originale di "Highway"</li>
+                        <li>"NokiaCollector97" ha trovato moduli di addestramento aziendali su vecchi server</li>
+                        <li>"MageGuildFan" sta lavorando per ricreare simulatori magici perduti</li>
+                        <li>"Y2KSurvivor" ha archivi completi dal periodo di transizione</li>
+                    </ul>
+                    
+                    <p><em>Unisciti alle nostre "Sessioni di Ricostruzione della Memoria" settimanali via messaggistica di gruppo Hexagram!</em></p>
+                </div>
+            </div>
+
+            <div id="about" class="section">
+                <h2 class="lang-content en">ℹ️ About the Archivist</h2>
+                <h2 class="lang-content it" style="display:none;">ℹ️ Riguardo l'Archivista</h2>
+                
+                <div class="lang-content en">
+                    <p>Greetings! I'm Marcus "DigitalArcheologist" Kowalski, a former software engineer who witnessed the golden age of Flash gaming before the Great Data Purge.</p>
+                    
+                    <p><strong>My Mission:</strong> To preserve the interactive entertainment heritage of the early Hypernet era before it's lost to corporate restructuring and temporal anomalies.</p>
+                    
+                    <p><strong>Background:</strong></p>
+                    <ul>
+                        <li>Worked at Klenz Manufacturing before the AI incident</li>
+                        <li>Witnessed the transition from dial-up to broadband Hypernet</li>
+                        <li>Collected over 500 Flash games before they vanished</li>
+                        <li>Expert in crypto-nostalgic data recovery techniques</li>
+                        <li>Member of the European Digital Heritage Preservation Society</li>
+                    </ul>
+                    
+                    <p><strong>Why This Matters:</strong> These games represent a unique period in digital history when creativity flourished despite technical limitations. Many contained experimental gameplay mechanics that were ahead of their time - some even seemed to predict the reality changes that occurred during the Squishing.</p>
+                    
+                    <p><strong>Contact Info:</strong><br>
+                    📧 Main: <a href="mailto:marcusk@hexagram.corp">marcusk@hexagram.corp</a><br>
+                    🎮 Gaming: <a href="mailto:digitalarch@hexagram.corp">digitalarch@hexagram.corp</a></p>
+                    
+                    <p><em>"Every lost game is a piece of human creativity that disappears forever. I'm fighting to keep these digital memories alive."</em></p>
+                </div>
+                
+                <div class="lang-content it" style="display:none;">
+                    <p>Saluti! Sono Marcus "DigitalArcheologist" Kowalski, un ex ingegnere software che ha assistito all'era d'oro del gaming Flash prima della Grande Purga Dati.</p>
+                    
+                    <p><strong>La Mia Missione:</strong> Preservare il patrimonio di intrattenimento interattivo dell'era dell'Hypernet primordiale prima che vada perduto per ristrutturazioni aziendali e anomalie temporali.</p>
+                    
+                    <p><strong>Background:</strong></p>
+                    <ul>
+                        <li>Ho lavorato alla Klenz Manufacturing prima dell'incidente AI</li>
+                        <li>Ho assistito alla transizione dal dial-up all'Hypernet broadband</li>
+                        <li>Ho collezionato oltre 500 giochi Flash prima che scomparissero</li>
+                        <li>Esperto in tecniche di recupero dati crypto-nostalgico</li>
+                        <li>Membro della Società Europea di Preservazione del Patrimonio Digitale</li>
+                    </ul>
+                    
+                    <p><strong>Perché È Importante:</strong> Questi giochi rappresentano un periodo unico nella storia digitale quando la creatività fioriva nonostante le limitazioni tecniche. Molti contenevano meccaniche di gameplay sperimentali che erano avanti nel tempo - alcuni sembravano persino predire i cambiamenti di realtà che si verificarono durante lo Squishing.</p>
+                    
+                    <p><strong>Info Contatto:</strong><br>
+                    📧 Principale: <a href="mailto:marcusk@hexagram.corp">marcusk@hexagram.corp</a><br>
+                    🎮 Gaming: <a href="mailto:digitalarch@hexagram.corp">digitalarch@hexagram.corp</a></p>
+                    
+                    <p><em>"Ogni gioco perduto è un pezzo di creatività umana che scompare per sempre. Sto lottando per mantenere vivi questi ricordi digitali."</em></p>
+                </div>
+                
+                <img src="4.jpg" alt="Photo of a cluttered computer desk with old CRT monitor, stacks of floppy disks, and gaming magazines from 2000-2001" width="300" height="200" style="border: 3px solid #FFFF00; margin: 10px 0;">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="lang-content en">
+            <p>© 2001 FlashBack Archive | Preserving Digital Heritage Since the Squishing</p>
+            <p>Best viewed with Hypernet Explorer 5.0+ | Optimized for 1024x768 resolution</p>
+            <p>This site is part of the <strong>RetroGaming WebRing</strong> | <a href="mailto:webring@hexagram.corp" style="color: #00FF80;">Join Us!</a></p>
+            <p style="font-size: 10px;">⚠️ Some archived content may cause temporal displacement or crypto-nostalgic effects ⚠️</p>
+        </div>
+        
+        <div class="lang-content it" style="display:none;">
+            <p>© 2001 FlashBack Archive | Preservando il Patrimonio Digitale Dal lo Squishing</p>
+            <p>Meglio visualizzato con Hypernet Explorer 5.0+ | Ottimizzato per risoluzione 1024x768</p>
+            <p>Questo sito fa parte del <strong>RetroGaming WebRing</strong> | <a href="mailto:webring@hexagram.corp" style="color: #00FF80;">Unisciti a Noi!</a></p>
+            <p style="font-size: 10px;">⚠️ Alcuni contenuti archiviati potrebbero causare spostamento temporale o effetti crypto-nostalgici ⚠️</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        
+        function switchLanguage(lang) {
+            const enElements = document.querySelectorAll('.lang-content.en');
+            const itElements = document.querySelectorAll('.lang-content.it');
+            
+            if (lang === 'en') {
+                enElements.forEach(el => el.style.display = '');
+                itElements.forEach(el => el.style.display = 'none');
+                document.getElementById('en-btn').style.background = '#FF0080';
+                document.getElementById('it-btn').style.background = '#00FF80';
+            } else {
+                enElements.forEach(el => el.style.display = 'none');
+                itElements.forEach(el => el.style.display = '');
+                document.getElementById('it-btn').style.background = '#FF0080';
+                document.getElementById('en-btn').style.background = '#00FF80';
+            }
+            currentLang = lang;
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('en');
+            showSection('home');
+        });
+        
+        // Add some retro effects
+        setInterval(function() {
+            const sparkles = document.querySelectorAll('.sparkle');
+            sparkles.forEach(sparkle => {
+                sparkle.style.color = sparkle.style.color === 'rgb(255, 255, 0)' ? '#FF0080' : '#FFFF00';
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

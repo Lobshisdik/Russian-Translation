@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Captain Blackbeard's Homepage - HTML be Cursed!</title>
+<meta name="keywords" content="pirate, html, rant, sailing, somalia, blackbeard">
+<meta name="description" content="A Somalian pirate's struggle with HTML coding">
+<style type="text/css">
+body { 
+    background-color: #ffffff; 
+    font-family: Times, serif; 
+    margin: 20px;
+    color: #000000;
+}
+h1 { 
+    color: #8B0000; 
+    text-align: center;
+    font-size: 24px;
+}
+h2 { 
+    color: #4B0082; 
+    font-size: 18px;
+    text-decoration: underline;
+}
+table {
+    border: 2px solid #000000;
+    cellpadding: 5;
+    cellspacing: 0;
+}
+td {
+    padding: 10px;
+    vertical-align: top;
+}
+.footer {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #000000;
+    padding-top: 10px;
+}
+blink {
+    color: red;
+    font-weight: bold;
+}
+marquee {
+    background-color: #FFFF00;
+    border: 1px solid #000000;
+}
+.language-selector {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #F0F0F0;
+    border: 2px solid #000000;
+}
+.language-selector button {
+    padding: 5px 15px;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #E0E0E0;
+    border: 2px solid #000000;
+    cursor: pointer;
+}
+.language-selector button.active {
+    background-color: #8B0000;
+    color: white;
+}
+.hidden {
+    display: none;
+}
+</style>
+<script>
+function showLanguage(lang) {
+    // Hide all language content
+    var english = document.getElementById('english-content');
+    var italian = document.getElementById('italian-content');
+    var englishBtn = document.getElementById('en-btn');
+    var italianBtn = document.getElementById('it-btn');
+    
+    if (lang === 'en') {
+        english.classList.remove('hidden');
+        italian.classList.add('hidden');
+        englishBtn.classList.add('active');
+        italianBtn.classList.remove('active');
+    } else {
+        english.classList.add('hidden');
+        italian.classList.remove('hidden');
+        englishBtn.classList.remove('active');
+        italianBtn.classList.add('active');
+    }
+}
+</script>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000FF" vlink="#800080">
+
+<div class="language-selector">
+    <strong>Choose Language / Scegli Lingua:</strong><br><br>
+    <button id="en-btn" class="active" onclick="showLanguage('en')">🏴‍☠️ English (Pirate)</button>
+    <button id="it-btn" onclick="showLanguage('it')">🇮🇹 Italiano (Pirata)</button>
+</div>
+
+<!-- ENGLISH VERSION -->
+<div id="english-content">
+<center>
+<h1>Captain Mohammed "Blackbeard" Hassan's Homepage</h1>
+<marquee behavior="scroll" direction="left" width="80%">
+<blink>*** HTML BE THE DEVIL'S WORK! ***</blink>
+</marquee>
+</center>
+
+<table width="100%" border="2" cellpadding="10">
+<tr>
+<td width="20%" bgcolor="#E0E0E0">
+<h3>ABOUT ME</h3>
+<p><b>Name:</b> Captain Mohammed Hassan</p>
+<p><b>Occupation:</b> Pirate</p>
+<p><b>Ships Captured:</b> 47</p>
+<p><b>HTML Pages Made:</b> 0</p>
+<p><b>Frustration Level:</b> MAXIMUM</p>
+
+<br>
+<p><img src="1.jpg" alt="Me with my crew after successful raid" width="150" height="100"></p>
+
+<br>
+<h3>CONTACT</h3>
+<p><b>Email:</b> blackbeard@somalipiratesunited.com</p>
+<p><b>Radio:</b> Channel 16 VHF</p>
+<p><b>Location:</b> Gulf of Aden</p>
+
+<br>
+<h3>LINKS</h3>
+<p><a href="http://www.w3schools.com" target="_blank">W3Schools</a></p>
+<p><a href="http://www.htmlgoodies.com" target="_blank">HTML Goodies</a></p>
+<p><a href="http://www.geocities.com" target="_blank">Geocities</a></p>
+</td>
+
+<td bgcolor="#FFFFFF">
+
+<h2>ARRRGH! HTML BE CURSED!</h2>
+
+<p>Greetings, ye landlubbers of the hypernet! I be Captain Mohammed "Blackbeard" Hassan, terror of the Somalian seas and scourge of merchant vessels from here to the Gulf of Aden. I've plundered more ships than I can count, commandeered vessels worth millions, and struck fear into the hearts of sailors across the Indian Ocean.</p>
+
+<p><b>BUT THIS CURSED HTML BE THE DEATH OF ME!</b></p>
+
+<p>Arr, I thought learning to make a webpage would be easier than boarding a cargo ship in rough seas. How wrong I was! These &lt;tags&gt; be more confusing than navigating through a monsoon with a broken compass!</p>
+
+<p><font color="red" size="+2">I've been trying to make this blasted page for 3 months now!</font></p>
+
+<p>Every time I think I got it right, something breaks. What in Davy Jones' name is a "DOCTYPE"? Why do some tags need closing and others don't? CSS? More like "Can't See Success"!</p>
+
+<p>I can navigate treacherous waters, negotiate ransom payments, and coordinate complex hijacking operations with multiple speedboats, but I CANNOT for the life of me figure out why my table won't align properly!</p>
+
+<h2>My Failed Attempts</h2>
+
+<p>Here be some of the disasters I've created:</p>
+
+<p><b>Attempt #1:</b></p>
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+Hello World
+&lt;/html&gt;
+</pre>
+<p><i>Forgot the closing body tag. Page looked like it was written by a drunken parrot.</i></p>
+
+<p><b>Attempt #17:</b></p>
+<pre>
+&lt;TABLE BORDER=5&gt;
+&lt;TR&gt;
+&lt;TD&gt;Ship Name&lt;/TD&gt;
+&lt;TD&gt;Cargo Value&lt;/TD&gt;
+&lt;TR&gt;
+&lt;TD&gt;MV Prosperity&lt;/TD&gt;
+&lt;TD&gt;$2.5 Million&lt;/TD&gt;
+&lt;/TABLE&gt;
+</pre>
+<p><i>Missing closing tags everywhere! Table looked more broken than a ship after we're done with it.</i></p>
+
+<p><b>Attempt #31:</b></p>
+<pre>
+&lt;FONT COLOR="BLUE" SIZE="7"&gt;
+&lt;MARQUEE&gt;PIRATES RULE!&lt;/MARQUEE&gt;
+&lt;/FONT&gt;
+&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+&lt;CENTER&gt;Welcome&lt;/CENTER&gt;
+</pre>
+<p><i>Actually worked! But looked like a geocities page from hell.</i></p>
+
+<h2>Why This Be Harder Than Piracy</h2>
+
+<p>Back in my day (well, last year), if you wanted to communicate with someone, you used a satellite phone or radio. None of this "markup language" nonsense! Give me a good old-fashioned AK-47 over HTML any day of the week.</p>
+
+<p>The irony is not lost on me that I, who have successfully used GPS systems, radar equipment, and encrypted communication devices to coordinate maritime operations, cannot figure out how to make text bold without looking it up every single time.</p>
+
+<blockquote>
+<i>"I've held entire cargo ships hostage, but HTML holds ME hostage!"</i><br>
+- Captain Blackbeard, 2001
+</blockquote>
+
+<p>I swear by Blackbeard's ghost, every time I think I understand how this works, I discover twenty more things I don't know. What be the difference between &lt;b&gt; and &lt;strong&gt;? Why won't my images show up? And don't even get me started on trying to center a div!</p>
+
+<p>My crew thinks I've gone soft, spending hours hunched over this computer instead of planning our next raid. But mark me words - I WILL conquer this HTML beast, even if it takes me longer than it took to capture the MV Golden Venture!</p>
+
+<h2>Current Status</h2>
+
+<p>As of today, I have successfully:</p>
+<ul>
+<li>Made text appear on a page (sometimes)</li>
+<li>Added a table (it's crooked, but it's there)</li>
+<li>Figured out how to make things blink and scroll</li>
+<li>Accidentally deleted my entire page 17 times</li>
+</ul>
+
+<p>Still working on:</p>
+<ul>
+<li>Making anything look decent</li>
+<li>Understanding why spacing is so difficult</li>
+<li>Not cursing at my computer every 5 minutes</li>
+<li>Convincing my crew this isn't a complete waste of time</li>
+</ul>
+
+<p><font color="red"><b>CURSE YOU, WORLD WIDE WEB!</b></font></p>
+
+<p>But I be Captain Mohammed Hassan, and I don't give up easy. This HTML will bend to my will, or I'll go down with the ship trying!</p>
+
+</td>
+</tr>
+</table>
+</div>
+
+<!-- ITALIAN VERSION -->
+<div id="italian-content" class="hidden">
+<center>
+<h1>La Homepage del Capitano Mohammed "Barbanera" Hassan</h1>
+<marquee behavior="scroll" direction="left" width="80%">
+<blink>*** L'HTML È OPERA DEL DIAVOLO! ***</blink>
+</marquee>
+</center>
+
+<table width="100%" border="2" cellpadding="10">
+<tr>
+<td width="20%" bgcolor="#E0E0E0">
+<h3>CHI SONO</h3>
+<p><b>Nome:</b> Capitano Mohammed Hassan</p>
+<p><b>Professione:</b> Pirata</p>
+<p><b>Navi Catturate:</b> 47</p>
+<p><b>Pagine HTML Create:</b> 0</p>
+<p><b>Livello di Frustrazione:</b> MASSIMO</p>
+
+<br>
+<p><img src="1.jpg" alt="Io con il mio equipaggio dopo un raid riuscito" width="150" height="100"></p>
+
+<br>
+<h3>CONTATTI</h3>
+<p><b>Email:</b> blackbeard@somalipiratesunited.com</p>
+<p><b>Radio:</b> Canale 16 VHF</p>
+<p><b>Posizione:</b> Golfo di Aden</p>
+
+<br>
+<h3>COLLEGAMENTI</h3>
+<p><a href="http://www.w3schools.com" target="_blank">W3Schools</a></p>
+<p><a href="http://www.htmlgoodies.com" target="_blank">HTML Goodies</a></p>
+<p><a href="http://www.geocities.com" target="_blank">Geocities</a></p>
+</td>
+
+<td bgcolor="#FFFFFF">
+
+<h2>ARRRGH! MALEDETTO HTML!</h2>
+
+<p>Saluti, voi lupi di terra di hypernet! Io sono il Capitano Mohammed "Barbanera" Hassan, terrore dei mari somali e flagello delle navi mercantili dal qui al Golfo di Aden. Ho saccheggiato più navi di quante riesca a contare, ho comandato vascelli del valore di milioni, e ho seminato il terrore nei cuori dei marinai attraverso l'Oceano Indiano.</p>
+
+<p><b>MA QUESTO MALEDETTO HTML SARÀ LA MIA MORTE!</b></p>
+
+<p>Arr, pensavo che imparare a fare una pagina web fosse più facile che abbordare una nave cargo in mare grosso. Quanto mi sbagliavo! Questi &lt;tag&gt; sono più confusi di navigare in un monsone con una bussola rotta!</p>
+
+<p><font color="red" size="+2">Sto cercando di fare questa maledetta pagina da 3 mesi ormai!</font></p>
+
+<p>Ogni volta che penso di averci capito qualcosa, qualcosa si rompe. Che diamine è un "DOCTYPE"? Perché alcuni tag hanno bisogno di chiusura e altri no? CSS? Più che altro "Cannot See Success"!</p>
+
+<p>Posso navigare acque pericolose, negoziare pagamenti di riscatto, e coordinare operazioni complesse di dirottamento con più motoscafi, ma NON RIESCO per la vita a capire perché la mia tabella non si allinea come dovrebbe!</p>
+
+<h2>I Miei Tentativi Falliti</h2>
+
+<p>Ecco alcuni dei disastri che ho creato:</p>
+
+<p><b>Tentativo #1:</b></p>
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+Ciao Mondo
+&lt;/html&gt;
+</pre>
+<p><i>Ho dimenticato il tag di chiusura del body. La pagina sembrava scritta da un pappagallo ubriaco.</i></p>
+
+<p><b>Tentativo #17:</b></p>
+<pre>
+&lt;TABLE BORDER=5&gt;
+&lt;TR&gt;
+&lt;TD&gt;Nome Nave&lt;/TD&gt;
+&lt;TD&gt;Valore Carico&lt;/TD&gt;
+&lt;TR&gt;
+&lt;TD&gt;MV Prosperity&lt;/TD&gt;
+&lt;TD&gt;$2.5 Milioni&lt;/TD&gt;
+&lt;/TABLE&gt;
+</pre>
+<p><i>Tag di chiusura mancanti ovunque! La tabella sembrava più rotta di una nave dopo che ci siamo passati noi.</i></p>
+
+<p><b>Tentativo #31:</b></p>
+<pre>
+&lt;FONT COLOR="BLUE" SIZE="7"&gt;
+&lt;MARQUEE&gt;VIVA I PIRATI!&lt;/MARQUEE&gt;
+&lt;/FONT&gt;
+&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+&lt;CENTER&gt;Benvenuto&lt;/CENTER&gt;
+</pre>
+<p><i>In realtà ha funzionato! Ma sembrava una pagina di geocities dell'inferno.</i></p>
+
+<h2>Perché È Più Difficile della Pirateria</h2>
+
+<p>Ai miei tempi (beh, l'anno scorso), se volevi comunicare con qualcuno, usavi un telefono satellitare o una radio. Niente di questo "linguaggio di markup"! Datemi un buon vecchio AK-47 piuttosto che HTML qualsiasi giorno della settimana.</p>
+
+<p>L'ironia non mi sfugge che io, che ho usato con successo sistemi GPS, apparecchiature radar, e dispositivi di comunicazione crittografati per coordinare operazioni marittime, non riesco a capire come rendere il testo grassetto senza cercarlo ogni singola volta.</p>
+
+<blockquote>
+<i>"Ho tenuto intere navi cargo in ostaggio, ma l'HTML tiene ME in ostaggio!"</i><br>
+- Capitano Barbanera, 2001
+</blockquote>
+
+<p>Giuro sul fantasma di Barbanera, ogni volta che penso di aver capito come funziona, scopro venti altre cose che non so. Qual è la differenza tra &lt;b&gt; e &lt;strong&gt;? Perché le mie immagini non appaiono? E non fatemi neanche iniziare a parlare di come centrare un div!</p>
+
+<p>Il mio equipaggio pensa che sia diventato molle, passando ore chino su questo computer invece di pianificare il nostro prossimo raid. Ma segnatevi le mie parole - CONQUISTERÒ questa bestia HTML, anche se ci metterò più tempo di quanto ne abbia impiegato per catturare la MV Golden Venture!</p>
+
+<h2>Stato Attuale</h2>
+
+<p>Ad oggi, sono riuscito a:</p>
+<ul>
+<li>Far apparire del testo su una pagina (a volte)</li>
+<li>Aggiungere una tabella (è storta, ma c'è)</li>
+<li>Capire come far lampeggiare e scorrere le cose</li>
+<li>Cancellare accidentalmente l'intera pagina 17 volte</li>
+</ul>
+
+<p>Sto ancora lavorando su:</p>
+<ul>
+<li>Far sembrare decente qualsiasi cosa</li>
+<li>Capire perché la spaziatura è così difficile</li>
+<li>Non imprecare contro il computer ogni 5 minuti</li>
+<li>Convincere il mio equipaggio che non è una completa perdita di tempo</li>
+</ul>
+
+<p><font color="red"><b>MALEDETTO SIA IL WORLD WIDE WEB!</b></font></p>
+
+<p>Ma io sono il Capitano Mohammed Hassan, e non mollo facilmente. Questo HTML si piegherà alla mia volontà, o affonderò con la nave nel tentativo!</p>
+
+</td>
+</tr>
+</table>
+</div>
+
+<div class="footer">
+<hr>
+<p><small id="english-footer">Last Updated: July 15, 2001 (After my 47th failed attempt at fixing the table alignment)</small></p>
+<p><small>Best Viewed with Netscape Navigator 4.0 or Internet Explorer 5.0</small></p>
+<p><small id="english-coded">This page hand-coded by Captain Blackbeard (with lots of cursing and rum)</small></p>
+<p><small>© 2001 Somalian Pirates United - All Rights Reserved</small></p>
+</div>
+
+</body>
+</html>

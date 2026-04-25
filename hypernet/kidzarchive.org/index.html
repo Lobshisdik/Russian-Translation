@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>KidzArchive - Future Guardians of Information</title>
+    <style>
+        body {
+            font-family: Comic Sans MS, cursive;
+            background: linear-gradient(45deg, #ffff99, #99ffff, #ff99ff, #99ff99);
+            background-size: 400% 400%;
+            animation: rainbow 8s ease infinite;
+            margin: 0;
+            padding: 10px;
+            color: #000066;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header {
+            background: linear-gradient(to right, #3366cc, #6699ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #000066;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+        
+        .mascot {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffff00, #ff9900);
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 20px;
+            border: 3px solid #ff6600;
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .mascot::before {
+            content: "📚";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+        
+        .nav-bar {
+            background: linear-gradient(to right, #ff9999, #99ff99, #9999ff);
+            border: 2px solid #666666;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(to bottom, #ffff99, #ffcc00);
+            color: #000066;
+            border: 2px solid #ff6600;
+            padding: 8px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 8px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .nav-button:hover {
+            background: linear-gradient(to bottom, #ffcc00, #ff9900);
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            background-color: rgba(255,255,255,0.9);
+            border: 3px solid #666666;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            display: none;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .lesson-box {
+            background: linear-gradient(135deg, #e6f3ff, #cce6ff);
+            border: 2px solid #3399cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .game-card {
+            background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+            border: 2px solid #cc3333;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            width: 200px;
+            vertical-align: top;
+            cursor: pointer;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .game-card:hover {
+            background: linear-gradient(135deg, #ffcccc, #ff9999);
+            transform: scale(1.05);
+        }
+        
+        .quiz-button {
+            background: linear-gradient(to bottom, #99ff99, #66cc66);
+            color: #000066;
+            border: 2px solid #339933;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            display: block;
+            width: 80%;
+            text-align: left;
+        }
+        
+        .quiz-button:hover {
+            background: linear-gradient(to bottom, #66cc66, #33aa33);
+        }
+        
+        .star-badge {
+            color: #ffcc00;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .achievement-box {
+            background: linear-gradient(135deg, #fff9e6, #ffe6b3);
+            border: 2px solid #ff9900;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, #666666, #999999);
+            color: white;
+            border: 2px solid #333333;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .blinking {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .important-notice {
+            background: linear-gradient(45deg, #ff6666, #ffff66);
+            border: 3px solid #cc0000;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="important-notice">
+        <span class="blinking">🚨 NEW!</span> Cognitive-Filing Protocols 2.0 now available! 
+        <span class="blinking">🚨</span>
+    </div>
+
+    <div class="header">
+        <div class="mascot"></div>
+        <h1>KidzArchive</h1>
+        <h2>Future Guardians of Information!</h2>
+        <div class="mascot"></div>
+        <p><em>Sponsored by the Archive Foundation - Preserving Knowledge for Tomorrow</em></p>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-button" onclick="showSection('home')">🏠 Mission Control</div>
+        <div class="nav-button" onclick="showSection('lessons')">📖 Archivist Academy</div>
+        <div class="nav-button" onclick="showSection('games')">🎮 Data-Fun Zone</div>
+        <div class="nav-button" onclick="showSection('quiz')">🧠 Knowledge Scanner</div>
+        <div class="nav-button" onclick="showSection('badges')">⭐ Achievement Gallery</div>
+        <div class="nav-button" onclick="showSection('contact')">📧 Archive HQ</div>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <h2>Welcome to KidzArchive, Future Guardian! 🌟</h2>
+            
+            <div class="lesson-box">
+                <h3>🎯 Your Mission</h3>
+                <p>Greetings, young Information Guardian! The Archive Foundation needs YOUR help to protect and organize all the world's knowledge. Every day, millions of data-fragments float around the Hypernet, and it's up to brave archivists like you to keep them safe!</p>
+                
+                <p><strong>What makes a great archivist?</strong></p>
+                <ul>
+                    <li>🔍 <strong>Data-Detection Skills:</strong> Finding hidden information everywhere</li>
+                    <li>📚 <strong>Cognitive-Filing Mastery:</strong> Organizing knowledge perfectly</li>
+                    <li>🛡️ <strong>Information Ethics:</strong> Protecting data responsibly</li>
+                    <li>🤝 <strong>Transparency Values:</strong> Sharing knowledge fairly</li>
+                </ul>
+            </div>
+            
+            <div class="achievement-box">
+                <h3>🏆 Today's Archive Status</h3>
+                <p><strong>Global Data-Preservation Score:</strong> 847,293 petabytes secured!</p>
+                <p><strong>Junior Archivists Online:</strong> 15,847 young guardians active</p>
+                <p><strong>Knowledge Fragments Saved Today:</strong> 234,567</p>
+            </div>
+            
+            <p style="text-align: center; font-size: 18px;">
+                <strong>Ready to begin your training? Choose your path above! 🚀</strong>
+            </p>
+        </div>
+
+        <div id="lessons" class="section">
+            <h2>📚 Archivist Academy - Learn the Sacred Arts!</h2>
+            
+            <div class="lesson-box">
+                <h3>Lesson 1: The Three Pillars of Archiving</h3>
+                <p><strong>🏛️ Collect:</strong> Every piece of information has value! Learn to identify important data-streams, documents, and knowledge-fragments. A good archivist never lets valuable information disappear!</p>
+                
+                <p><strong>🗂️ Organize:</strong> Master the art of Cognitive-Filing! Use our patented classification systems to sort information into logical categories. Remember: "A place for everything, and everything in its place!"</p>
+                
+                <p><strong>🔓 Share:</strong> Knowledge belongs to everyone! Learn the ethical principles of information distribution and transparency protocols.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Lesson 2: Data-Detection Techniques</h3>
+                <p>🕵️ Every great archivist needs sharp data-detection skills! Here's how to spot valuable information:</p>
+                <ul>
+                    <li><strong>Pattern Recognition:</strong> Look for repeating data-signatures</li>
+                    <li><strong>Source Verification:</strong> Always check where information comes from</li>
+                    <li><strong>Redundancy Scanning:</strong> Find duplicate data-fragments</li>
+                    <li><strong>Integrity Checking:</strong> Make sure information hasn't been corrupted</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Lesson 3: The Archivist's Code</h3>
+                <p>📜 Every Archive Foundation member follows these sacred principles:</p>
+                <ol>
+                    <li><strong>Transparency First:</strong> Information should be accessible to all</li>
+                    <li><strong>Preserve Everything:</strong> No knowledge is too small to save</li>
+                    <li><strong>Organize Wisely:</strong> Use proper cognitive-filing protocols</li>
+                    <li><strong>Share Responsibly:</strong> Consider the impact of released information</li>
+                    <li><strong>Protect Sources:</strong> Keep data-acquisition methods secure</li>
+                </ol>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Lesson 4: Digital Preservation Techniques</h3>
+                <p>💾 Learn the advanced methods archivists use to keep data safe forever:</p>
+                <ul>
+                    <li><strong>Redundant Storage:</strong> Keep multiple copies in different locations</li>
+                    <li><strong>Format Migration:</strong> Update old file types to new standards</li>
+                    <li><strong>Metadata Enrichment:</strong> Add descriptive information to files</li>
+                    <li><strong>Access Control:</strong> Manage who can see what information</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="games" class="section">
+            <h2>🎮 Data-Fun Zone - Learning Through Play!</h2>
+            
+            <div style="text-align: center;">
+                <div class="game-card" onclick="playGame('sorting')">
+                    <h3>🗂️ Cognitive-Sort Challenge</h3>
+                    <p>Help sort incoming data-fragments into the correct archive categories! Can you beat the high score of 2,847 points?</p>
+                    <p><strong>Difficulty:</strong> ⭐⭐⭐</p>
+                </div>
+                
+                <div class="game-card" onclick="playGame('memory')">
+                    <h3>🧠 Memory Matrix</h3>
+                    <p>Test your information retention skills! Memorize data-patterns and recreate them perfectly.</p>
+                    <p><strong>Difficulty:</strong> ⭐⭐</p>
+                </div>
+                
+                <div class="game-card" onclick="playGame('detective')">
+                    <h3>🔍 Data-Detective Quest</h3>
+                    <p>Hunt for hidden information throughout the virtual archive! Find all the secret knowledge-fragments.</p>
+                    <p><strong>Difficulty:</strong> ⭐⭐⭐⭐</p>
+                </div>
+                
+                <div class="game-card" onclick="playGame('builder')">
+                    <h3>🏗️ Archive Builder</h3>
+                    <p>Design and build your own digital archive! Use proper cognitive-filing principles to create the ultimate knowledge storage system.</p>
+                    <p><strong>Difficulty:</strong> ⭐⭐⭐⭐⭐</p>
+                </div>
+            </div>
+            
+            <div id="game-area" style="display: none; margin-top: 20px;">
+                <div class="lesson-box">
+                    <h3 id="game-title">Game Loading...</h3>
+                    <div id="game-content"></div>
+                    <button onclick="closeGame()" style="background: #ff6666; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Return to Games Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section">
+            <h2>🧠 Knowledge Scanner - Test Your Archive Skills!</h2>
+            
+            <div class="lesson-box">
+                <h3>Pop Quiz: Archive Fundamentals</h3>
+                <p><strong>Question 1:</strong> What are the three pillars of archiving?</p>
+                <div class="quiz-button" onclick="quizAnswer(1, 'correct')">A) Collect, Organize, Share</div>
+                <div class="quiz-button" onclick="quizAnswer(1, 'wrong')">B) Find, Store, Delete</div>
+                <div class="quiz-button" onclick="quizAnswer(1, 'wrong')">C) Scan, Copy, Hide</div>
+                <div class="quiz-button" onclick="quizAnswer(1, 'wrong')">D) Read, Write, Compute</div>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Advanced Challenge</h3>
+                <p><strong>Question 2:</strong> When practicing transparency protocols, what should an archivist always consider?</p>
+                <div class="quiz-button" onclick="quizAnswer(2, 'wrong')">A) How to make money from information</div>
+                <div class="quiz-button" onclick="quizAnswer(2, 'correct')">B) The impact of released information on society</div>
+                <div class="quiz-button" onclick="quizAnswer(2, 'wrong')">C) How to hide information from others</div>
+                <div class="quiz-button" onclick="quizAnswer(2, 'wrong')">D) Ways to delete unwanted data</div>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Expert Level</h3>
+                <p><strong>Question 3:</strong> What is the primary goal of cognitive-filing systems?</p>
+                <div class="quiz-button" onclick="quizAnswer(3, 'wrong')">A) To make information harder to find</div>
+                <div class="quiz-button" onclick="quizAnswer(3, 'wrong')">B) To reduce storage space</div>
+                <div class="quiz-button" onclick="quizAnswer(3, 'correct')">C) To organize knowledge for efficient retrieval</div>
+                <div class="quiz-button" onclick="quizAnswer(3, 'wrong')">D) To encrypt all data automatically</div>
+            </div>
+            
+            <div id="quiz-results" style="display: none;">
+                <div class="achievement-box">
+                    <h3>🎉 Quiz Complete!</h3>
+                    <p id="score-display"></p>
+                    <p id="badge-earned"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="badges" class="section">
+            <h2>⭐ Achievement Gallery - Your Archive Honors!</h2>
+            
+            <div class="achievement-box">
+                <h3><span class="star-badge">⭐</span> Beginner Archivist <span class="star-badge">⭐</span></h3>
+                <p>Complete your first lesson in the Archivist Academy</p>
+                <p><em>Status: Available to earn!</em></p>
+            </div>
+            
+            <div class="achievement-box">
+                <h3><span class="star-badge">⭐⭐</span> Data-Detective <span class="star-badge">⭐⭐</span></h3>
+                <p>Score 1000+ points in the Data-Detective Quest game</p>
+                <p><em>Status: Locked - Play games to unlock!</em></p>
+            </div>
+            
+            <div class="achievement-box">
+                <h3><span class="star-badge">⭐⭐⭐</span> Cognitive-Filing Master <span class="star-badge">⭐⭐⭐</span></h3>
+                <p>Perfect score on all Knowledge Scanner quizzes</p>
+                <p><em>Status: Locked - Take quizzes to unlock!</em></p>
+            </div>
+            
+            <div class="achievement-box">
+                <h3><span class="star-badge">⭐⭐⭐⭐</span> Transparency Champion <span class="star-badge">⭐⭐⭐⭐</span></h3>
+                <p>Share 100 knowledge-fragments with other junior archivists</p>
+                <p><em>Status: Locked - Spread knowledge to unlock!</em></p>
+            </div>
+            
+            <div class="achievement-box">
+                <h3><span class="star-badge">⭐⭐⭐⭐⭐</span> Guardian of Information <span class="star-badge">⭐⭐⭐⭐⭐</span></h3>
+                <p>Complete ALL KidzArchive challenges and earn the ultimate honor</p>
+                <p><em>Status: Legendary - Only for the most dedicated archivists!</em></p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Special Recognition Program</h3>
+                <p>Outstanding young archivists may be invited to join the Archive Foundation's Junior Advisory Council! Members get:</p>
+                <ul>
+                    <li>🏅 Special digital badge for their Hexagram profile</li>
+                    <li>📧 Direct communication channel with senior archivists</li>
+                    <li>🎁 Exclusive access to advanced cognitive-filing tools</li>
+                    <li>🌟 Recognition in the annual Archive Foundation report</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>📧 Archive HQ - Get in Touch!</h2>
+            
+            <div class="lesson-box">
+                <h3>🏢 Archive Foundation Headquarters</h3>
+                <p><strong>Director of Youth Education:</strong> Dr. Sarah Chen<br>
+                <strong>Junior Archivist Coordinator:</strong> Marcus Weber<br>
+                <strong>Technical Support:</strong> Archive Foundation IT Division</p>
+                
+                <p><strong>Mailing Address:</strong><br>
+                Archive Foundation Youth Division<br>
+                1247 Information Boulevard<br>
+                Brussels, Belgium<br>
+                Postal Code: B-1000</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>📱 Digital Communication</h3>
+                <p><strong>Main Website:</strong> archivefoundation.eu<br>
+                <strong>Youth Division:</strong> <a href="mailto:youth@hexagram.corp">youth@hexagram.corp</a><br>
+                <strong>Technical Support:</strong> <a href="mailto:kidzhelp@hexagram.corp">kidzhelp@hexagram.corp</a><br>
+                <strong>Parent Information:</strong> <a href="mailto:parents@hexagram.corp">parents@hexagram.corp</a></p>
+                
+                <p><strong>Hexagram Network:</strong><br>
+                Follow us at <a href="mailto:archivefoundation@hexagram.corp">archivefoundation@hexagram.corp</a> for the latest updates!</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>🔒 Privacy & Safety</h3>
+                <p>The Archive Foundation takes youth safety seriously. Our cognitive-monitoring systems ensure:</p>
+                <ul>
+                    <li>All communications are filtered through parental approval protocols</li>
+                    <li>No personal information is stored without guardian consent</li>
+                    <li>Educational content is reviewed by child development specialists</li>
+                    <li>Safe browsing protocols protect against inappropriate content</li>
+                </ul>
+                
+                <p><em>Parents: Review our complete privacy policy at archivefoundation.eu/privacy</em></p>
+            </div>
+            
+            <div class="achievement-box">
+                <h3>🎓 Real-World Opportunities</h3>
+                <p>Exceptional junior archivists may qualify for:</p>
+                <ul>
+                    <li><strong>Summer Internships:</strong> Work alongside real archivists (ages 14+)</li>
+                    <li><strong>School Visits:</strong> Archive Foundation presentations at your school</li>
+                    <li><strong>Field Trips:</strong> Tour our state-of-the-art preservation facilities</li>
+                    <li><strong>Scholarship Program:</strong> Educational funding for future information science students</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>© 2001 Archive Foundation Youth Division</strong></p>
+        <p>Optimized for Hypernet Explorer 5.0+ | Best viewed at 1024x768 resolution</p>
+        <p>Part of the global transparency initiative | Making knowledge accessible to all</p>
+        <p><em>"Today's young archivists are tomorrow's guardians of truth"</em></p>
+    </div>
+
+    <script>
+        let quizScore = 0;
+        let questionsAnswered = 0;
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function playGame(gameType) {
+            const gameArea = document.getElementById('game-area');
+            const gameTitle = document.getElementById('game-title');
+            const gameContent = document.getElementById('game-content');
+            
+            gameArea.style.display = 'block';
+            
+            switch(gameType) {
+                case 'sorting':
+                    gameTitle.textContent = '🗂️ Cognitive-Sort Challenge';
+                    gameContent.innerHTML = `
+                        <p><strong>Mission:</strong> Sort these data-fragments into the correct archive categories!</p>
+                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <h4>Data-Fragment: "Recipe for chocolate cookies from 1987"</h4>
+                            <button onclick="sortAnswer('culinary')" style="margin: 5px; padding: 8px;">📚 Culinary Archives</button>
+                            <button onclick="sortAnswer('personal')" style="margin: 5px; padding: 8px;">👤 Personal Documents</button>
+                            <button onclick="sortAnswer('historical')" style="margin: 5px; padding: 8px;">🏛️ Historical Records</button>
+                        </div>
+                        <div id="sort-result"></div>
+                    `;
+                    break;
+                case 'memory':
+                    gameTitle.textContent = '🧠 Memory Matrix';
+                    gameContent.innerHTML = `
+                        <p><strong>Challenge:</strong> Memorize this data-pattern, then recreate it!</p>
+                        <div style="background: #e6f3ff; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <h4>Pattern: 📊 📈 📉 📊 📈</h4>
+                            <p><em>Study this pattern for 10 seconds, then it will disappear...</em></p>
+                        </div>
+                        <button onclick="startMemoryGame()" style="background: #66cc66; color: white; border: none; padding: 10px 20px; border-radius: 5px;">Start Memory Test</button>
+                        <div id="memory-result"></div>
+                    `;
+                    break;
+                case 'detective':
+                    gameTitle.textContent = '🔍 Data-Detective Quest';
+                    gameContent.innerHTML = `
+                        <p><strong>Mystery:</strong> Find the hidden information in this archive entry!</p>
+                        <div style="background: #fff9e6; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <h4>Archive Entry #7741:</h4>
+                            <p>"The secret meeting happened on January 15th in the blue building. The password was 'transparency' and the document contained 47 pages of classified cognitive-filing protocols."</p>
+                            <p><strong>Question:</strong> What was the password mentioned in this entry?</p>
+                            <input type="text" id="detective-answer" placeholder="Enter your answer..." style="padding: 8px; margin: 5px;">
+                            <button onclick="checkDetective()" style="background: #3399cc; color: white; border: none; padding: 8px 15px; margin: 5px;">Submit Answer</button>
+                        </div>
+                        <div id="detective-result"></div>
+                    `;
+                    break;
+                case 'builder':
+                    gameTitle.textContent = '🏗️ Archive Builder';
+                    gameContent.innerHTML = `
+                        <p><strong>Project:</strong> Design your ideal digital archive system!</p>
+                        <div style="background: #f0fff0; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <h4>Choose your archive features:</h4>
+                            <label><input type="checkbox" value="search"> 🔍 Advanced Search Engine</label><br>
+                            <label><input type="checkbox" value="backup"> 💾 Automatic Backup System</label><br>
+                            <label><input type="checkbox" value="access"> 🔐 Access Control Matrix</label><br>
+                            <label><input type="checkbox" value="metadata"> 📝 Metadata Enhancement Tools</label><br>
+                            <button onclick="buildArchive()" style="background: #ff9900; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px;">Build My Archive!</button>
+                        </div>
+                        <div id="builder-result"></div>
+                    `;
+                    break;
+            }
+        }
+        
+        function closeGame() {
+            document.getElementById('game-area').style.display = 'none';
+        }
+        
+        function sortAnswer(category) {
+            const result = document.getElementById('sort-result');
+            if (category === 'culinary') {
+                result.innerHTML = '<div style="background: #99ff99; padding: 10px; border-radius: 5px; margin-top: 10px;"><strong>✅ Correct!</strong> Recipe documents belong in the Culinary Archives. Great job, future archivist! +100 points</div>';
+            } else {
+                result.innerHTML = '<div style="background: #ff9999; padding: 10px; border-radius: 5px; margin-top: 10px;"><strong>❌ Try again!</strong> Think about what type of document this is. Recipes are best stored in specialized collections.</div>';
+            }
+        }
+        
+        function startMemoryGame() {
+            const result = document.getElementById('memory-result');
+            result.innerHTML = `
+                <div style="background: #ffe6e6; padding: 15px; border-radius:

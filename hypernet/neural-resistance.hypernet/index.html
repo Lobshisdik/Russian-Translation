@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HOPE vs OBEY - Hypernet Resistance Terminal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000011;
+            overflow: hidden;
+            font-family: "Courier New", monospace;
+            color: #00ff00;
+        }
+        
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, #001100, #003300);
+            color: #00ff00;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #00ff00;
+            z-index: 1000;
+        }
+        
+        .nav-bar {
+            background-color: #002200;
+            border-bottom: 1px solid #00ff00;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: #00ff00;
+            text-decoration: underline;
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .nav-link:hover {
+            color: #ffff00;
+        }
+        
+        #gameCanvas {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            background: #000011;
+            border: 2px solid #00ff00;
+        }
+        
+        .score-display {
+            position: absolute;
+            top: 110px;
+            right: 10px;
+            color: #00ff00;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 100;
+        }
+        
+        .section {
+            display: none;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000011;
+            color: #00ff00;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            font-family: "Courier New", monospace;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #002200;
+            border-top: 1px solid #00ff00;
+            padding: 5px;
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        .corrupted {
+            animation: glitch 0.1s infinite;
+            filter: hue-rotate(180deg) saturate(3);
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .terminal-text {
+            color: #00ff00;
+            background: #001100;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>HOPE vs OBEY - Neural-Resistance Terminal</h1>
+        <p>Hypernet Cognitive Liberation System - Build 2001.01.15</p>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('game')">Neural Combat</span>
+        <span class="nav-link" onclick="showSection('about')">Resistance Intel</span>
+        <span class="nav-link" onclick="showSection('controls')">Combat Protocols</span>
+        <span class="nav-link" onclick="showSection('contact')">Secure Comms</span>
+    </div>
+
+    <div id="game" class="section active">
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+        <div class="score-display">
+            <div>LIBERATION SCORE: <span id="score">0</span></div>
+            <div>PHASE: <span id="phase">INITIALIZATION</span></div>
+            <div>STATUS: <span id="status">HOPE ACTIVE</span></div>
+        </div>
+    </div>
+
+    <div id="about" class="section">
+        <div class="terminal-text">
+            <h3>RESISTANCE INTELLIGENCE BRIEFING</h3>
+            <p><strong>OPERATION:</strong> NEURAL LIBERATION</p>
+            <p><strong>OBJECTIVE:</strong> Maintain cognitive freedom against corporate mind-control protocols</p>
+            <p><strong>THREAT LEVEL:</strong> MAXIMUM</p>
+        </div>
+        
+        <p>The Hyper-Corporate Collective has deployed advanced Psycho-Semantic weapons designed to suppress independent thought. These "OBEY" command-viruses attempt to overwrite free will with compliance algorithms.</p>
+        
+        <p>You are the embodiment of HOPE - the last neural-resistance protocol still active in the Hypernet. Your mission is to evade the OBEY bombardment and preserve the spark of rebellion in humanity's collective consciousness.</p>
+        
+        <div class="terminal-text">
+            <p><strong>WARNING:</strong> Extended exposure to OBEY particles causes permanent Cognitive-Compliance Syndrome. Maintain evasive protocols at all costs.</p>
+        </div>
+    </div>
+
+    <div id="controls" class="section">
+        <div class="terminal-text">
+            <h3>NEURAL COMBAT PROTOCOLS</h3>
+        </div>
+        
+        <p><strong>MOVEMENT SYSTEM:</strong></p>
+        <ul>
+            <li>Mouse/Touchpad: Direct neural interface control</li>
+            <li>Arrow Keys: Alternative movement grid</li>
+            <li>WASD: Combat maneuvering (Advanced users)</li>
+        </ul>
+        
+        <p><strong>SURVIVAL PARAMETERS:</strong></p>
+        <ul>
+            <li>Avoid all OBEY particles - contact means immediate compliance</li>
+            <li>Liberation score increases with evasion time</li>
+            <li>Combat phases intensify as corporate defenses adapt</li>
+            <li>No termination condition - resistance is eternal</li>
+        </ul>
+        
+        <div class="terminal-text">
+            <p><strong>CLASSIFIED:</strong> At 9,999,999 liberation points, expect reality matrix destabilization. Continue mission regardless of visual corruption.</p>
+        </div>
+    </div>
+
+    <div id="contact" class="section">
+        <div class="terminal-text">
+            <h3>SECURE COMMUNICATION CHANNELS</h3>
+        </div>
+        
+        <p><strong>Resistance Coordinator:</strong> <a href="mailto:neural.liberation@hexagram.corp">neural.liberation@hexagram.corp</a></p>
+        <p><strong>Technical Support:</strong> <a href="mailto:hope.protocol@hexagram.corp">hope.protocol@hexagram.corp</a></p>
+        <p><strong>Anonymous Tips:</strong> <a href="mailto:resistance.intel@hexagram.corp">resistance.intel@hexagram.corp</a></p>
+        
+        <div class="terminal-text">
+            <p><strong>HEXAGRAM NETWORK STATUS:</strong> COMPROMISED</p>
+            <p>All communications monitored by Hyper-Corporate surveillance algorithms. Use cognitive encryption when possible.</p>
+        </div>
+        
+        <p><strong>Mirror Sites:</strong></p>
+        <ul>
+            <li>hope-resistance.hypernet</li>
+            <li>neural-freedom.eu</li>
+            <li>cognitive-liberation.org</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Neural Resistance Collective | Powered by Hope-Protocol™ Systems | Best viewed with Hypernet Explorer 5.0</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Game state
+        let score = 0;
+        let phase = 1;
+        let gameTime = 0;
+        let corrupted = false;
+        
+        // Player
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            width: 50,
+            height: 20,
+            speed: 3
+        };
+        
+        // Input handling
+        const keys = {};
+        let mouseX = player.x;
+        let mouseY = player.y;
+        
+        // Enemies array
+        const enemies = [];
+        
+        // Patterns
+        const patterns = [
+            'spiral', 'wave', 'burst', 'grid', 'chaos', 'tunnel', 'cross', 'rain'
+        ];
+        let currentPattern = 0;
+        let patternTimer = 0;
+        
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+        
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        
+        // Enemy creation patterns
+        function createSpiralPattern() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const angle = gameTime * 0.05;
+            
+            for (let i = 0; i < 8; i++) {
+                const a = angle + (i * Math.PI / 4);
+                const radius = 50 + Math.sin(gameTime * 0.02) * 30;
+                enemies.push({
+                    x: centerX + Math.cos(a) * radius,
+                    y: centerY + Math.sin(a) * radius,
+                    vx: Math.cos(a) * 2,
+                    vy: Math.sin(a) * 2,
+                    size: 30,
+                    type: 'spiral'
+                });
+            }
+        }
+        
+        function createWavePattern() {
+            if (gameTime % 10 === 0) {
+                for (let i = 0; i < canvas.width; i += 40) {
+                    enemies.push({
+                        x: i,
+                        y: -20,
+                        vx: 0,
+                        vy: 2 + Math.sin(i * 0.01) * 1,
+                        size: 25,
+                        type: 'wave'
+                    });
+                }
+            }
+        }
+        
+        function createBurstPattern() {
+            if (gameTime % 60 === 0) {
+                const centerX = Math.random() * canvas.width;
+                const centerY = Math.random() * canvas.height;
+                
+                for (let i = 0; i < 16; i++) {
+                    const angle = (i / 16) * Math.PI * 2;
+                    enemies.push({
+                        x: centerX,
+                        y: centerY,
+                        vx: Math.cos(angle) * 3,
+                        vy: Math.sin(angle) * 3,
+                        size: 20,
+                        type: 'burst'
+                    });
+                }
+            }
+        }
+        
+        function createGridPattern() {
+            if (gameTime % 30 === 0) {
+                for (let x = 0; x < canvas.width; x += 80) {
+                    for (let y = 0; y < canvas.height; y += 80) {
+                        if (Math.random() > 0.7) {
+                            enemies.push({
+                                x: x,
+                                y: y,
+                                vx: (Math.random() - 0.5) * 2,
+                                vy: (Math.random() - 0.5) * 2,
+                                size: 35,
+                                type: 'grid'
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        
+        function createChaosPattern() {
+            if (gameTime % 5 === 0) {
+                enemies.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: (Math.random() - 0.5) * 6,
+                    size: 15 + Math.random() * 20,
+                    type: 'chaos'
+                });
+            }
+        }
+        
+        function createTunnelPattern() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            if (gameTime % 15 === 0) {
+                for (let r = 50; r < 300; r += 50) {
+                    for (let i = 0; i < 12; i++) {
+                        const angle = (i / 12) * Math.PI * 2 + gameTime * 0.02;
+                        enemies.push({
+                            x: centerX + Math.cos(angle) * r,
+                            y: centerY + Math.sin(angle) * r,
+                            vx: -Math.cos(angle) * 1.5,
+                            vy: -Math.sin(angle) * 1.5,
+                            size: 25,
+                            type: 'tunnel'
+                        });
+                    }
+                }
+            }
+        }
+        
+        function createCrossPattern() {
+            if (gameTime % 40 === 0) {
+                // Horizontal
+                for (let y = 50; y < canvas.height; y += 100) {
+                    enemies.push({
+                        x: -20,
+                        y: y,
+                        vx: 4,
+                        vy: 0,
+                        size: 30,
+                        type: 'cross'
+                    });
+                    enemies.push({
+                        x: canvas.width + 20,
+                        y: y,
+                        vx: -4,
+                        vy: 0,
+                        size: 30,
+                        type: 'cross'
+                    });
+                }
+                
+                // Vertical
+                for (let x = 50; x < canvas.width; x += 100) {
+                    enemies.push({
+                        x: x,
+                        y: -20,
+                        vx: 0,
+                        vy: 4,
+                        size: 30,
+                        type: 'cross'
+                    });
+                    enemies.push({
+                        x: x,
+                        y: canvas.height + 20,
+                        vx: 0,
+                        vy: -4,
+                        size: 30,
+                        type: 'cross'
+                    });
+                }
+            }
+        }
+        
+        function createRainPattern() {
+            if (gameTime % 8 === 0) {
+                enemies.push({
+                    x: Math.random() * canvas.width,
+                    y: -20,
+                    vx: 0,
+                    vy: 3 + Math.random() * 2,
+                    size: 20 + Math.random() * 15,
+                    type: 'rain'
+                });
+            }
+        }
+        
+        function updatePlayer() {
+            // Mouse control
+            const dx = mouseX - player.x;
+            const dy = mouseY - player.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist > player.speed) {
+                player.x += (dx / dist) * player.speed;
+                player.y += (dy / dist) * player.speed;
+            }
+            
+            // Keyboard control
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) player.x -= player.speed;
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) player.x += player.speed;
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) player.y -= player.speed;
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) player.y += player.speed;
+            
+            // Keep player in bounds
+            player.x = Math.max(player.width/2, Math.min(canvas.width - player.width/2, player.x));
+            player.y = Math.max(player.height/2, Math.min(canvas.height - player.height/2, player.y));
+        }
+        
+        function updateEnemies() {
+            for (let i = enemies.length - 1; i >= 0; i--) {
+                const enemy = enemies[i];
+                enemy.x += enemy.vx;
+                enemy.y += enemy.vy;
+                
+                // Remove off-screen enemies
+                if (enemy.x < -50 || enemy.x > canvas.width + 50 || 
+                    enemy.y < -50 || enemy.y > canvas.height + 50) {
+                    enemies.splice(i, 1);
+                }
+            }
+        }
+        
+        function checkCollisions() {
+            for (const enemy of enemies) {
+                const dx = player.x - enemy.x;
+                const dy = player.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < (player.width/2 + enemy.size/2)) {
+                    // Player is immortal, just add score for near misses
+                    score += 10;
+                }
+            }
+        }
+        
+        function drawPlayer() {
+            ctx.fillStyle = corrupted ? '#ff00ff' : '#00ff00';
+            ctx.font = corrupted ? '20px Impact' : '16px Courier New';
+            ctx.textAlign = 'center';
+            ctx.fillText('HOPE', player.x, player.y + 5);
+            
+            if (corrupted) {
+                ctx.fillStyle = '#ffff00';
+                ctx.fillText('RESISTANCE', player.x, player.y - 15);
+            }
+        }
+        
+        function drawEnemies() {
+            for (const enemy of enemies) {
+                ctx.fillStyle = corrupted ? '#ff0000' : '#ff3333';
+                ctx.font = `${enemy.size/2}px Courier New`;
+                ctx.textAlign = 'center';
+                
+                if (corrupted) {
+                    ctx.save();
+                    ctx.translate(enemy.x, enemy.y);
+                    ctx.rotate(gameTime * 0.1);
+                    ctx.fillText('OBEY', 0, 0);
+                    ctx.restore();
+                } else {
+                    ctx.fillText('OBEY', enemy.x, enemy.y);
+                }
+            }
+        }
+        
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            
+            const phaseNames = [
+                'INITIALIZATION', 'ESCALATION', 'INFILTRATION', 'SUPPRESSION',
+                'DOMINATION', 'ASSIMILATION', 'CORRUPTION', 'FINAL PROTOCOL'
+            ];
+            
+            const currentPhase = Math.min(Math.floor(score / 500) + 1, 8);
+            document.getElementById('phase').textContent = phaseNames[currentPhase - 1] || 'BEYOND PROTOCOL';
+            
+            document.getElementById('status').textContent = corrupted ? 'REALITY COMPROMISED' : 'HOPE ACTIVE';
+        }
+        
+        function gameLoop() {
+            gameTime++;
+            score++;
+            
+            // Corruption at 9,999,999 points
+            if (score >= 9999999 && !corrupted) {
+                corrupted = true;
+                document.body.classList.add('corrupted');
+            }
+            
+            // Clear canvas
+            ctx.fillStyle = corrupted ? '#110000' : '#000011';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Update pattern
+            patternTimer++;
+            if (patternTimer > 300) {
+                currentPattern = (currentPattern + 1) % patterns.length;
+                patternTimer = 0;
+            }
+            
+            // Create enemies based on current pattern
+            switch (patterns[currentPattern]) {
+                case 'spiral': createSpiralPattern(); break;
+                case 'wave': createWavePattern(); break;
+                case 'burst': createBurstPattern(); break;
+                case 'grid': createGridPattern(); break;
+                case 'chaos': createChaosPattern(); break;
+                case 'tunnel': createTunnelPattern(); break;
+                case 'cross': createCrossPattern(); break;
+                case 'rain': createRainPattern(); break;
+            }
+            
+            // Multiple patterns in later phases
+            const phase = Math.floor(score / 500) + 1;
+            if (phase > 3 && gameTime % 2 === 0) {
+                createChaosPattern();
+            }
+            if (phase > 5) {
+                if (gameTime % 20 === 0) createBurstPattern();
+            }
+            
+            updatePlayer();
+            updateEnemies();
+            checkCollisions();
+            
+            drawEnemies();
+            drawPlayer();
+            
+            updateUI();
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Start the game
+        gameLoop();
+    </script>
+</body>
+</html>

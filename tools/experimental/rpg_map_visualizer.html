@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker Map Visualizer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            overflow: hidden;
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: white;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            padding: 24px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .sidebar {
+            background: #2a2a2a;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+        }
+
+        .main-view {
+            flex: 1;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a73e8;
+        }
+
+        .dark-mode h1 {
+            color: #5fa3ff;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .drop-zone {
+            border-color: #555;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.dragover {
+            border-color: #1a73e8;
+            background: rgba(26, 115, 232, 0.05);
+        }
+
+        .dark-mode .drop-zone:hover,
+        .dark-mode .drop-zone.dragover {
+            border-color: #5fa3ff;
+            background: rgba(95, 163, 255, 0.1);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .stats {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .dark-mode .stats {
+            background: #3a3a3a;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1557b0;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .dark-mode button:disabled {
+            background: #555;
+        }
+
+        .toggle-dark {
+            background: #666;
+        }
+
+        .toggle-dark:hover {
+            background: #555;
+        }
+
+        #network {
+            width: 100%;
+            height: 100%;
+            background: white;
+        }
+
+        .dark-mode #network {
+            background: #1a1a1a;
+        }
+
+        .node-details {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            max-width: 300px;
+            display: none;
+            z-index: 100;
+        }
+
+        .dark-mode .node-details {
+            background: #2a2a2a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .node-details h3 {
+            margin-bottom: 12px;
+            color: #1a73e8;
+        }
+
+        .dark-mode .node-details h3 {
+            color: #5fa3ff;
+        }
+
+        .connection-list {
+            font-size: 14px;
+        }
+
+        .connection-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .dark-mode .connection-item {
+            background: #3a3a3a;
+        }
+
+        .close-details {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+        }
+
+        .dark-mode .close-details {
+            color: #aaa;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #666;
+        }
+
+        .dark-mode .loading {
+            color: #aaa;
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .dark-mode .error {
+            background: #4a2222;
+            color: #ff6666;
+        }
+
+        .cluster-info {
+            background: #e8f0fe;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .dark-mode .cluster-info {
+            background: #1a2332;
+            color: #b8d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>RPG Maker Map Visualizer</h1>
+            
+            <div class="drop-zone" id="dropZone">
+                <p>📁 Drop project folder here</p>
+                <p style="font-size: 14px; color: #666; margin-top: 8px;">
+                    (Folder containing MapXXX.json, MapInfos.json, and ./maps/ directory)
+                </p>
+                <input type="file" id="fileInput" class="file-input" webkitdirectory>
+            </div>
+
+            <div id="errorContainer"></div>
+
+            <div class="cluster-info" id="clusterInfo" style="display: none;">
+                <div class="stat-item">
+                    <span>Map Clusters:</span>
+                    <span id="clusterCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Central Hub:</span>
+                    <span id="centralHub">Map007</span>
+                </div>
+            </div>
+
+            <div class="stats" id="stats" style="display: none;">
+                <div class="stat-item">
+                    <span>Total Maps Found:</span>
+                    <span id="totalMaps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Connected Maps:</span>
+                    <span id="connectedMaps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Connections:</span>
+                    <span id="totalConnections">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Isolated Maps:</span>
+                    <span id="isolatedMaps">0</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="resetView" disabled>Reset View</button>
+                <button id="focusHub" disabled>Focus on Hub (Map007)</button>
+                <button id="exportImage" disabled>Export as PNG</button>
+                <button id="clearData">Clear All Data</button>
+                <button class="toggle-dark" id="toggleDark">Toggle Dark Mode</button>
+            </div>
+        </div>
+
+        <div class="main-view">
+            <div id="network"></div>
+            <div class="loading" id="loading" style="display: none;">Processing maps...</div>
+            <div class="node-details" id="nodeDetails">
+                <button class="close-details" id="closeDetails">&times;</button>
+                <h3 id="nodeTitle"></h3>
+                <div class="connection-list" id="connectionList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        var network = null;
+        var nodes = null;
+        var edges = null;
+        var mapData = new Map();
+        var mapInfos = null;
+        var mapImages = new Map();
+        var isDarkMode = false;
+        var clusters = [];
+        const CENTRAL_HUB_ID = 7; // Map007
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            initializeNetwork();
+        });
+
+        function setupEventListeners() {
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+
+            // Drag and drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.items);
+            });
+
+            // Click to upload
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            // Controls
+            document.getElementById('resetView').addEventListener('click', resetView);
+            document.getElementById('focusHub').addEventListener('click', focusOnHub);
+            document.getElementById('exportImage').addEventListener('click', exportImage);
+            document.getElementById('clearData').addEventListener('click', clearData);
+            document.getElementById('toggleDark').addEventListener('click', toggleDarkMode);
+            document.getElementById('closeDetails').addEventListener('click', closeNodeDetails);
+        }
+
+        function initializeNetwork() {
+            const container = document.getElementById('network');
+            nodes = new vis.DataSet();
+            edges = new vis.DataSet();
+
+            const data = { nodes, edges };
+            const options = {
+                nodes: {
+                    shape: 'box',
+                    font: {
+                        size: 14,
+                        color: isDarkMode ? '#f0f0f0' : '#333'
+                    },
+                    borderWidth: 2,
+                    shadow: true,
+                    margin: 25,
+                    widthConstraint: {
+                        minimum: 100,
+                        maximum: 150
+                    },
+                    heightConstraint: {
+                        minimum: 80,
+                        maximum: 100
+                    },
+                    chosen: {
+                        node: (values) => {
+                            values.color = '#1a73e8';
+                            values.borderColor = '#1557b0';
+                        }
+                    }
+                },
+                edges: {
+                    width: 2,
+                    arrows: {
+                        to: {
+                            enabled: true,
+                            scaleFactor: 0.8
+                        }
+                    },
+                    color: {
+                        color: isDarkMode ? '#666' : '#999',
+                        highlight: '#1a73e8'
+                    },
+                    smooth: {
+                        type: 'cubicBezier',
+                        roundness: 0.5
+                    }
+                },
+                physics: {
+                    forceAtlas2Based: {
+                        gravitationalConstant: -250,
+                        centralGravity: 0.005,
+                        springLength: 500,
+                        springConstant: 0.015,
+                        damping: 0.9,
+                        avoidOverlap: 2
+                    },
+                    maxVelocity: 30,
+                    solver: 'forceAtlas2Based',
+                    timestep: 0.25,
+                    stabilization: {
+                        enabled: true,
+                        iterations: 300,
+                        updateInterval: 50,
+                        onlyDynamicEdges: false,
+                        fit: true
+                    }
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 200
+                }
+            };
+
+            network = new vis.Network(container, data, options);
+
+            // Node click handler
+            network.on('click', (params) => {
+                if (params.nodes.length > 0) {
+                    showNodeDetails(params.nodes[0]);
+                }
+            });
+        }
+
+        async function handleFiles(items) {
+            showLoading(true);
+            clearError();
+
+            try {
+                let files = [];
+                
+                // Handle drag and drop items vs file input
+                if (items[0] && items[0].webkitGetAsEntry) {
+                    // Drag and drop - traverse directory structure
+                    for (let item of items) {
+                        const entry = item.webkitGetAsEntry();
+                        if (entry && entry.isDirectory) {
+                            files = await getAllFilesFromDirectory(entry);
+                            break;
+                        }
+                    }
+                } else {
+                    // File input
+                    files = Array.from(items);
+                }
+
+                // Process files - only look for specific patterns
+                for (const file of files) {
+                    const fileName = file.name.toLowerCase();
+                    const path = file.webkitRelativePath || '';
+                    
+                    if (fileName === 'mapinfos.json') {
+                        const content = await readFileAsText(file);
+                        mapInfos = JSON.parse(content);
+                        console.log('Loaded MapInfos.json');
+                    } else if (fileName.match(/^map\d{3}\.json$/)) {
+                        const mapId = parseInt(fileName.match(/\d{3}/)[0]);
+                        // Skip Map003
+                        if (mapId === 3) {
+                            console.log(`Skipping ${fileName} (Map003 ignored)`);
+                            continue;
+                        }
+                        const content = await readFileAsText(file);
+                        mapData.set(mapId, JSON.parse(content));
+                        console.log(`Loaded ${fileName} (ID: ${mapId})`);
+                    } else if (path.includes('/maps/') && fileName.match(/^map\d{3}\.(png|jpg|jpeg)$/)) {
+                        const mapId = parseInt(fileName.match(/\d{3}/)[0]);
+                        // Skip Map003 image
+                        if (mapId === 3) {
+                            console.log(`Skipping map image ${fileName} (Map003 ignored)`);
+                            continue;
+                        }
+                        const dataUrl = await readFileAsDataURL(file);
+                        mapImages.set(mapId, dataUrl);
+                        console.log(`Loaded map image ${fileName} (ID: ${mapId})`);
+                    }
+                }
+
+                if (mapData.size === 0) {
+                    showError('No map files found. Please drop a folder containing MapXXX.json files.');
+                    showLoading(false);
+                    return;
+                }
+
+                console.log(`Total maps loaded: ${mapData.size}`);
+                console.log(`Map images loaded: ${mapImages.size}`);
+
+                // Build graph with clustering
+                buildGraphWithClusters();
+                updateStats();
+                enableControls();
+
+            } catch (error) {
+                console.error('Error details:', error);
+                showError(`Error processing files: ${error.message}`);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function getAllFilesFromDirectory(directoryEntry) {
+            const files = [];
+            
+            const readDirectory = (entry) => {
+                return new Promise((resolve, reject) => {
+                    if (entry.isFile) {
+                        entry.file(resolve, reject);
+                    } else if (entry.isDirectory) {
+                        const dirReader = entry.createReader();
+                        const entries = [];
+                        
+                        const readEntries = () => {
+                            dirReader.readEntries((results) => {
+                                if (results.length) {
+                                    entries.push(...results);
+                                    readEntries();
+                                } else {
+                                    Promise.all(entries.map(readDirectory))
+                                        .then(results => {
+                                            resolve(results.flat());
+                                        })
+                                        .catch(reject);
+                                }
+                            }, reject);
+                        };
+                        
+                        readEntries();
+                    }
+                });
+            };
+            
+            return await readDirectory(directoryEntry);
+        }
+
+        function buildGraphWithClusters() {
+            if (!nodes || !edges) {
+                console.error('Network not initialized');
+                return;
+            }
+            
+            nodes.clear();
+            edges.clear();
+
+            // Build connection graph
+            const connections = new Map();
+            const allConnections = new Set();
+
+            // First pass: collect all connections
+            for (const [mapId, data] of mapData.entries()) {
+                const transfers = findTransferEvents(data);
+                
+                for (const transfer of transfers) {
+                    // Skip connections to/from Map003
+                    if (transfer.mapId !== mapId && transfer.mapId !== 3 && mapId !== 3 && mapData.has(transfer.mapId)) {
+                        allConnections.add(mapId);
+                        allConnections.add(transfer.mapId);
+                        
+                        const key = `${mapId}-${transfer.mapId}`;
+                        if (!connections.has(key)) {
+                            connections.set(key, []);
+                        }
+                        connections.get(key).push(transfer);
+                    }
+                }
+            }
+
+            // Find clusters using connected components
+            clusters = findConnectedComponents(allConnections, connections);
+            console.log(`Found ${clusters.length} clusters:`, clusters);
+
+            // Add nodes - only connected maps
+            for (const mapId of allConnections) {
+                const mapName = getMapName(mapId);
+                const clusterIndex = clusters.findIndex(cluster => cluster.has(mapId));
+                
+                // Special styling for central hub (Map007)
+                const isHub = mapId === CENTRAL_HUB_ID;
+                const clusterColors = ['#e3f2fd', '#f3e5f5', '#e8f5e8', '#fff3e0', '#fce4ec'];
+                const clusterBorders = ['#1976d2', '#7b1fa2', '#388e3c', '#f57c00', '#c2185b'];
+                
+                const nodeData = {
+                    id: mapId,
+                    label: mapName,
+                    title: `${mapName}\nID: ${mapId}${isHub ? '\n(Central Hub)' : ''}`,
+                    color: {
+                        background: isHub ? '#ffeb3b' : (clusterColors[clusterIndex % clusterColors.length] || '#f0f0f0'),
+                        border: isHub ? '#f57f17' : (clusterBorders[clusterIndex % clusterBorders.length] || '#ccc')
+                    },
+                    borderWidth: isHub ? 4 : 2,
+                    font: {
+                        size: isHub ? 16 : 14,
+                        color: isDarkMode ? '#f0f0f0' : '#333'
+                    }
+                };
+
+                // Add thumbnail if available
+                if (mapImages.has(mapId)) {
+                    nodeData.image = mapImages.get(mapId);
+                    nodeData.shape = 'image';
+                    nodeData.size = isHub ? 120 : 100;
+                    nodeData.borderWidth = isHub ? 4 : 3;
+                    // Keep label visible even with image
+                    nodeData.label = mapName;
+                    nodeData.font = {
+                        size: isHub ? 16 : 14,
+                        color: isDarkMode ? '#f0f0f0' : '#333',
+                        background: isDarkMode ? 'rgba(42, 42, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+                        strokeWidth: 2,
+                        strokeColor: isDarkMode ? '#333' : '#fff'
+                    };
+                    // Ensure image nodes don't overlap by adding margin
+                    nodeData.margin = 30;
+                    nodeData.widthConstraint = false;
+                    nodeData.heightConstraint = false;
+                }
+
+                nodes.add(nodeData);
+            }
+
+            // Add edges
+            for (const [key, transfers] of connections.entries()) {
+                const [fromId, toId] = key.split('-').map(Number);
+                
+                // Only add edges between maps that exist
+                if (allConnections.has(fromId) && allConnections.has(toId)) {
+                    edges.add({
+                        from: fromId,
+                        to: toId,
+                        label: transfers.length > 1 ? `×${transfers.length}` : '',
+                        title: `${transfers.length} transfer${transfers.length > 1 ? 's' : ''}`,
+                        width: transfers.length > 1 ? 3 : 2
+                    });
+                }
+            }
+
+            // Position nodes in a more spread out pattern initially
+            const connectedMaps = Array.from(allConnections);
+            const totalNodes = connectedMaps.length;
+            const radius = Math.max(300, totalNodes * 50); // Base radius on number of nodes
+            
+            connectedMaps.forEach((mapId, index) => {
+                const angle = (index / totalNodes) * 2 * Math.PI;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                
+                // Position central hub at center, others in circle
+                if (mapId === CENTRAL_HUB_ID) {
+                    nodes.update({id: mapId, x: 0, y: 0, fixed: false});
+                } else {
+                    nodes.update({id: mapId, x: x, y: y, fixed: false});
+                }
+            });
+        }
+
+        function findConnectedComponents(allNodes, connections) {
+            const visited = new Set();
+            const components = [];
+            
+            const dfs = (nodeId, component) => {
+                if (visited.has(nodeId)) return;
+                visited.add(nodeId);
+                component.add(nodeId);
+                
+                // Find all connected nodes
+                for (const [key] of connections.entries()) {
+                    const [fromId, toId] = key.split('-').map(Number);
+                    if (fromId === nodeId && !visited.has(toId)) {
+                        dfs(toId, component);
+                    }
+                    if (toId === nodeId && !visited.has(fromId)) {
+                        dfs(fromId, component);
+                    }
+                }
+            };
+            
+            for (const nodeId of allNodes) {
+                if (!visited.has(nodeId)) {
+                    const component = new Set();
+                    dfs(nodeId, component);
+                    components.push(component);
+                }
+            }
+            
+            return components.sort((a, b) => b.size - a.size); // Sort by cluster size
+        }
+
+        function findTransferEvents(mapData) {
+            const transfers = [];
+
+            if (!mapData.events) return transfers;
+
+            for (const event of mapData.events) {
+                if (!event || !event.pages) continue;
+
+                for (const page of event.pages) {
+                    if (!page.list) continue;
+
+                    for (let i = 0; i < page.list.length; i++) {
+                        const command = page.list[i];
+                        
+                        // Transfer Player command (code 201)
+                        if (command.code === 201) {
+                            const params = command.parameters;
+                            let mapId, x, y;
+
+                            if (params[0] === 0) { // Direct designation
+                                mapId = params[1];
+                                x = params[2];
+                                y = params[3];
+                            } else { // Variable designation - skip for now
+                                continue;
+                            }
+
+                            transfers.push({
+                                mapId,
+                                x,
+                                y,
+                                eventName: event.name || `Event ${event.id}`,
+                                eventX: event.x,
+                                eventY: event.y
+                            });
+                        }
+                    }
+                }
+            }
+
+            return transfers;
+        }
+
+        function getMapName(mapId) {
+            if (mapInfos && mapInfos[mapId]) {
+                return mapInfos[mapId].name || `Map ${String(mapId).padStart(3, '0')}`;
+            }
+            return `Map ${String(mapId).padStart(3, '0')}`;
+        }
+
+        function showNodeDetails(nodeId) {
+            const mapName = getMapName(nodeId);
+            const clusterIndex = clusters.findIndex(cluster => cluster.has(nodeId));
+            const isHub = nodeId === CENTRAL_HUB_ID;
+            
+            document.getElementById('nodeTitle').textContent = `${mapName}${isHub ? ' (Hub)' : ''}`;
+
+            const connections = [];
+            
+            // Find connections
+            edges.forEach((edge) => {
+                if (edge.from === nodeId) {
+                    connections.push({
+                        type: 'Outgoing',
+                        mapId: edge.to,
+                        mapName: getMapName(edge.to)
+                    });
+                } else if (edge.to === nodeId) {
+                    connections.push({
+                        type: 'Incoming',
+                        mapId: edge.from,
+                        mapName: getMapName(edge.from)
+                    });
+                }
+            });
+
+            const connectionList = document.getElementById('connectionList');
+            let content = '';
+            
+            if (clusterIndex >= 0) {
+                content += `<div class="connection-item"><strong>Cluster:</strong> ${clusterIndex + 1} (${clusters[clusterIndex].size} maps)</div>`;
+            }
+            
+            content += connections.length > 0 
+                ? connections.map(conn => `
+                    <div class="connection-item">
+                        <strong>${conn.type}:</strong> ${conn.mapName}
+                    </div>
+                `).join('')
+                : '<p>No connections found</p>';
+                
+            connectionList.innerHTML = content;
+            document.getElementById('nodeDetails').style.display = 'block';
+        }
+
+        function closeNodeDetails() {
+            document.getElementById('nodeDetails').style.display = 'none';
+        }
+
+        function updateStats() {
+            const totalFound = mapData.size;
+            const connected = nodes.length;
+            const isolated = totalFound - connected;
+            
+            document.getElementById('totalMaps').textContent = totalFound;
+            document.getElementById('connectedMaps').textContent = connected;
+            document.getElementById('totalConnections').textContent = edges.length;
+            document.getElementById('isolatedMaps').textContent = isolated;
+            document.getElementById('clusterCount').textContent = clusters.length;
+            
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('clusterInfo').style.display = 'block';
+        }
+
+        function enableControls() {
+            document.getElementById('resetView').disabled = false;
+            document.getElementById('focusHub').disabled = false;
+            document.getElementById('exportImage').disabled = false;
+        }
+
+        function resetView() {
+            network.fit();
+        }
+
+        function focusOnHub() {
+            if (nodes.get(CENTRAL_HUB_ID)) {
+                network.focus(CENTRAL_HUB_ID, {
+                    scale: 1.2,
+                    animation: {
+                        duration: 1000,
+                        easingFunction: 'easeInOutQuad'
+                    }
+                });
+            } else {
+                showError('Central hub (Map007) not found in the current dataset.');
+            }
+        }
+
+        function exportImage() {
+            const canvas = network.canvas.frame.canvas;
+            const link = document.createElement('a');
+            link.download = 'rpg-maker-map-graph.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function clearData() {
+            mapData.clear();
+            mapInfos = null;
+            mapImages.clear();
+            clusters = [];
+            if (nodes) nodes.clear();
+            if (edges) edges.clear();
+            document.getElementById('stats').style.display = 'none';
+            document.getElementById('clusterInfo').style.display = 'none';
+            document.getElementById('resetView').disabled = true;
+            document.getElementById('focusHub').disabled = true;
+            document.getElementById('exportImage').disabled = true;
+            closeNodeDetails();
+            clearError();
+        }
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            
+            // Rebuild graph with new colors
+            if (mapData.size > 0 && nodes && edges) {
+                buildGraphWithClusters();
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        function showError(message) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        function clearError() {
+            document.getElementById('errorContainer').innerHTML = '';
+        }
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragments of Creation - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .note-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+
+        .ancient-box {
+            background: #f5f0ff;
+            border: 1px solid #d4c5ff;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .ancient-title {
+            font-weight: 600;
+            color: #6b46c1;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Fragments of Creation</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: November 3, 2001 | <span data-lang-key="meta_read_time">10 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Fragments of Creation are primordial reality-prototypes discarded by The Gods during their initial universe-construction experiments billions of years ago. These ancient blueprint-remnants contain raw creation-algorithms and foundational physics-parameters that predate all known dimensional-structures.</p>
+
+                <div class="note-box">
+                    <div class="note-title" data-lang-key="note_title">Disambiguation Note</div>
+                    <p data-lang-key="note_text">Fragments of Creation should not be confused with <a href="dimensional-scraps">Dimensional Scraps</a>. While both exist as reality-debris, Dimensional Scraps are recent byproducts of the 1997 Squishing Event containing compressed matter from collapsed dimensions. Fragments of Creation are vastly older—prototype-universes abandoned during the initial creation-process by divine entities.</p>
+                </div>
+
+                <div class="ancient-box">
+                    <div class="ancient-title" data-lang-key="ancient_title">Archaeological Notice</div>
+                    <p data-lang-key="ancient_text">Due to their primordial nature, Fragments of Creation exhibit reality-patterns that predate the establishment of modern physics-constants. Interaction requires specialized divine-archaeology equipment and reality-stabilization protocols.</p>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#origins" data-lang-key="toc_1">1. Divine Origins</a></li>
+                        <li><a href="#properties" data-lang-key="toc_2">2. Fundamental Properties</a></li>
+                        <li><a href="#classification" data-lang-key="toc_3">3. Classification System</a></li>
+                        <li><a href="#dangers" data-lang-key="toc_4">4. Containment Protocols</a></li>
+                        <li><a href="#research" data-lang-key="toc_5">5. Research Applications</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_6">6. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Archival Data</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Type:</span> <span data-lang-key="infobox_type_value">Divine Creation-Debris</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_age_label">Estimated Age:</span> <span data-lang-key="infobox_age_value">4.7+ Billion Years</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_origin_label">Origin:</span> <span data-lang-key="infobox_origin_value">Divine Creation Experiments</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_danger_label">Containment Class:</span> <span data-lang-key="infobox_danger_value">Divine-Hazardous</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_access_label">Access Level:</span> <span data-lang-key="infobox_access_value">Restricted Divine-Archive</span>
+                    </div>
+                </div>
+
+                <h2 id="origins" data-lang-key="h2_origins">Divine Origins</h2>
+                <p data-lang-key="p_origins">According to <a href="archive-foundation">Archive Foundation</a> theological-archaeology division records, Fragments of Creation represent abandoned iterations from The Gods' universe-development phase. During this primordial period, divine entities experimented with various reality-architectures before settling on the stable dimensional-framework that eventually became the 92-layer multiverse.</p>
+
+                <p data-lang-key="p_creation_process">The creation-process appears to have involved iterative prototype-testing, where The Gods would construct experimental reality-bubbles, evaluate their stability-parameters, and then discard unsuccessful configurations. These discarded prototypes became the Fragments of Creation—reality-seeds containing incomplete but potentially powerful creation-algorithms.</p>
+
+                <blockquote data-lang-key="quote_researcher">
+                    "Each Fragment represents a path not taken in universal development. They contain physics-laws that were considered but ultimately rejected by divine consensus. Some fragments show evidence of realities where gravity operated inversely, or where time flowed in multiple simultaneous directions." - Dr. Helena Voss, Divine Archaeology Department, Archive Foundation, 2001
+                </blockquote>
+
+                <h3 id="properties" data-lang-key="h3_properties">Fundamental Properties</h3>
+                <p data-lang-key="p_properties_intro">Fragments of Creation exhibit several unique characteristics that distinguish them from all other reality-anomalies:</p>
+
+                <ul>
+                    <li data-lang-key="li_causality"><strong data-lang-key="causality_immunity">Causality-Immunity:</strong> <span data-lang-key="causality_desc">Fragments exist outside normal cause-effect relationships, making them immune to temporal-manipulation and reality-alteration attempts.</span></li>
+                    <li data-lang-key="li_physics"><strong data-lang-key="physics_variance">Physics-Variance:</strong> <span data-lang-key="physics_desc">Each fragment contains its own localized physics-constants that may differ radically from baseline reality-parameters.</span></li>
+                    <li data-lang-key="li_divine"><strong data-lang-key="divine_signature">Divine-Signature:</strong> <span data-lang-key="divine_desc">Fragments emit detectable creation-frequency patterns that match theoretical models of divine construction-methodology.</span></li>
+                    <li data-lang-key="li_expansion"><strong data-lang-key="expansion_potential">Expansion-Potential:</strong> <span data-lang-key="expansion_desc">Under specific conditions, fragments can begin expanding into full reality-matrices, potentially creating new universe-instances.</span></li>
+                </ul>
+
+                <h2 id="classification" data-lang-key="h2_classification">Classification System</h2>
+                <p data-lang-key="p_class_intro">The <a href="mages-guild">Mages Guild</a> theological-research division has developed a classification system based on fragment complexity-levels and divine-origin signatures:</p>
+
+                <h3 data-lang-key="h3_genesis">Genesis-Class Fragments</h3>
+                <p data-lang-key="p_genesis">The most ancient and complex fragments, containing complete but abandoned universe-blueprints. Genesis-Class fragments often exhibit self-contained ecosystems operating under alien physics-laws. Only 23 Genesis-Class fragments have been documented, and all are maintained under maximum security-containment.</p>
+
+                <h3 data-lang-key="h3_prototype">Prototype-Class Fragments</h3>
+                <p data-lang-key="p_prototype">Mid-complexity fragments representing partially-developed reality-concepts. These fragments typically contain experimental physics-systems or incomplete dimensional-structures. Prototype-Class fragments comprise approximately 60% of all documented fragments.</p>
+
+                <h3 data-lang-key="h3_concept">Concept-Class Fragments</h3>
+                <p data-lang-key="p_concept">The smallest and most numerous fragments, containing basic reality-concepts or fundamental-principles. These fragments often represent individual physics-laws or mathematical-constants that were tested and rejected during the creation-process.</p>
+
+                <div class="warning-box">
+                    <div class="warning-title" data-lang-key="warning_title">Divine Hazard Warning</div>
+                    <p data-lang-key="warning_text">Unauthorized interaction with Fragments of Creation may result in reality-displacement, consciousness-divine-merger, or spontaneous universe-creation. All fragment-research requires approval from both the Mages Guild Divine-Research Committee and Archive Foundation Theological-Safety Board.</p>
+                </div>
+
+                <h2 id="dangers" data-lang-key="h2_dangers">Containment Protocols</h2>
+                <p data-lang-key="p_dangers_intro">Due to their immense reality-altering potential, Fragments of Creation require specialized containment-methodologies developed jointly by the <a href="mages-guild">Mages Guild</a> and <a href="archive-foundation">Archive Foundation</a>:</p>
+
+                <h3 data-lang-key="h3_isolation">Divine-Isolation Chambers</h3>
+                <p data-lang-key="p_isolation">Fragments are housed within reality-isolation chambers constructed using materials extracted from <a href="dimensional-scraps">Dimensional Scraps</a> that exhibit null-divine signatures. These chambers prevent fragments from interacting with baseline reality while allowing for controlled observation-protocols.</p>
+
+                <h3 data-lang-key="h3_monitoring">Continuous Reality-Monitoring</h3>
+                <p data-lang-key="p_monitoring">All fragment-sites maintain 24/7 reality-integrity scanning to detect any signs of expansion-activation. Should a fragment begin universe-creation processes, emergency reality-compression protocols can be initiated to abort the expansion-sequence.</p>
+
+                <h3 data-lang-key="h3_personnel">Specialized Personnel Requirements</h3>
+                <p data-lang-key="p_personnel">Only researchers who have undergone divine-exposure conditioning and reality-anchor implantation are permitted direct fragment-interaction. Standard personnel lack the cognitive-framework necessary to perceive fragment-properties without suffering consciousness-fragmentation.</p>
+
+                <h2 id="research" data-lang-key="h2_research">Research Applications</h2>
+                <p data-lang-key="p_research_intro">Despite containment-challenges, Fragments of Creation offer unprecedented insights into fundamental reality-construction principles:</p>
+
+                <h3 data-lang-key="h3_physics">Alternative Physics Development</h3>
+                <p data-lang-key="p_physics_research">By studying the variant physics-laws contained within fragments, researchers have developed new theoretical-frameworks for understanding reality-manipulation. Several breakthrough <a href="thaumic-economics">thaumic-economic</a> principles were derived from fragment-analysis.</p>
+
+                <h3 data-lang-key="h3_creation">Creation-Algorithm Analysis</h3>
+                <p data-lang-key="p_creation_research">The <a href="hypercapitalist-collective">Hypercapitalist Collective</a> has invested heavily in fragment-research, seeking to reverse-engineer divine creation-processes for commercial universe-development projects. Their "Reality-Genesis" program aims to create pocket-universes optimized for resource-extraction.</p>
+
+                <blockquote data-lang-key="quote_executive">
+                    "If we can understand how The Gods built universes, we can build better ones. More efficient ones. Profitable ones." - Internal Memo, Esoteric Heavy Industries Theological-Research Division, 2001
+                </blockquote>
+
+                <h3 data-lang-key="h3_divine">Divine Archaeology</h3>
+                <p data-lang-key="p_divine_research">Fragment-study has revealed crucial information about divine construction-methodologies and prehistoric entity-behavior. This research has implications for understanding current divine-politics and predicting future reality-modifications by active deities.</p>
+
+                <p data-lang-key="p_implications">The study of Fragments of Creation continues to challenge fundamental assumptions about reality-construction and divine-capabilities. As research-techniques improve, fragments may provide the key to understanding not just how universes are built, but why specific reality-configurations were chosen over alternatives.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="dimensional-scraps.html" data-lang-key="link_scraps">Dimensional Scraps</a></li>
+                    <li><a href="divine-archaeology.html" data-lang-key="link_archaeology">Divine Archaeology</a></li>
+                    <li><a href="reality-construction.html" data-lang-key="link_construction">Reality Construction Theory</a></li>
+                    <li><a href="creation-algorithms.html" data-lang-key="link_algorithms">Creation Algorithms</a></li>
+                    <li><a href="primordial-physics.html" data-lang-key="link_physics">Primordial Physics</a></li>
+                    <li><a href="theological-research.html" data-lang-key="link_theological">Theological Research Protocols</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Script loaded');
+            
+            const translations = {
+                en: {
+                    title: "Fragments of Creation",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "10 min read",
+                    note_title: "Disambiguation Note",
+                    note_text: "Fragments of Creation should not be confused with Dimensional Scraps. While both exist as reality-debris, Dimensional Scraps are recent byproducts of the 1997 Squishing Event containing compressed matter from collapsed dimensions. Fragments of Creation are vastly older—prototype-universes abandoned during the initial creation-process by divine entities.",
+                    ancient_title: "Archaeological Notice",
+                    ancient_text: "Due to their primordial nature, Fragments of Creation exhibit reality-patterns that predate the establishment of modern physics-constants. Interaction requires specialized divine-archaeology equipment and reality-stabilization protocols.",
+                    toc_title: "Contents",
+                    toc_1: "1. Divine Origins",
+                    toc_2: "2. Fundamental Properties",
+                    toc_3: "3. Classification System",
+                    toc_4: "4. Containment Protocols",
+                    toc_5: "5. Research Applications",
+                    toc_6: "6. See Also",
+                    infobox_title: "Archival Data",
+                    infobox_type_label: "Type:",
+                    infobox_type_value: "Divine Creation-Debris",
+                    infobox_age_label: "Estimated Age:",
+                    infobox_age_value: "4.7+ Billion Years",
+                    infobox_origin_label: "Origin:",
+                    infobox_origin_value: "Divine Creation Experiments",
+                    infobox_danger_label: "Containment Class:",
+                    infobox_danger_value: "Divine-Hazardous",
+                    infobox_access_label: "Access Level:",
+                    infobox_access_value: "Restricted Divine-Archive",
+                    p_intro: "Fragments of Creation are primordial reality-prototypes discarded by The Gods during their initial universe-construction experiments billions of years ago. These ancient blueprint-remnants contain raw creation-algorithms and foundational physics-parameters that predate all known dimensional-structures.",
+                    h2_origins: "Divine Origins",
+                    p_origins: "According to Archive Foundation theological-archaeology division records, Fragments of Creation represent abandoned iterations from The Gods' universe-development phase. During this primordial period, divine entities experimented with various reality-architectures before settling on the stable dimensional-framework that eventually became the 92-layer multiverse.",
+                    p_creation_process: "The creation-process appears to have involved iterative prototype-testing, where The Gods would construct experimental reality-bubbles, evaluate their stability-parameters, and then discard unsuccessful configurations. These discarded prototypes became the Fragments of Creation—reality-seeds containing incomplete but potentially powerful creation-algorithms.",
+                    quote_researcher: "\"Each Fragment represents a path not taken in universal development. They contain physics-laws that were considered but ultimately rejected by divine consensus. Some fragments show evidence of realities where gravity operated inversely, or where time flowed in multiple simultaneous directions.\" - Dr. Helena Voss, Divine Archaeology Department, Archive Foundation, 2001",
+                    h3_properties: "Fundamental Properties",
+                    p_properties_intro: "Fragments of Creation exhibit several unique characteristics that distinguish them from all other reality-anomalies:",
+                    causality_immunity: "Causality-Immunity:",
+                    causality_desc: "Fragments exist outside normal cause-effect relationships, making them immune to temporal-manipulation and reality-alteration attempts.",
+                    physics_variance: "Physics-Variance:",
+                    physics_desc: "Each fragment contains its own localized physics-constants that may differ radically from baseline reality-parameters.",
+                    divine_signature: "Divine-Signature:",
+                    divine_desc: "Fragments emit detectable creation-frequency patterns that match theoretical models of divine construction-methodology.",
+                    expansion_potential: "Expansion-Potential:",
+                    expansion_desc: "Under specific conditions, fragments can begin expanding into full reality-matrices, potentially creating new universe-instances.",
+                    h2_classification: "Classification System",
+                    p_class_intro: "The Mages Guild theological-research division has developed a classification system based on fragment complexity-levels and divine-origin signatures:",
+                    h3_genesis: "Genesis-Class Fragments",
+                    p_genesis: "The most ancient and complex fragments, containing complete but abandoned universe-blueprints. Genesis-Class fragments often exhibit self-contained ecosystems operating under alien physics-laws. Only 23 Genesis-Class fragments have been documented, and all are maintained under maximum security-containment.",
+                    h3_prototype: "Prototype-Class Fragments",
+                    p_prototype: "Mid-complexity fragments representing partially-developed reality-concepts. These fragments typically contain experimental physics-systems or incomplete dimensional-structures. Prototype-Class fragments comprise approximately 60% of all documented fragments.",
+                    h3_concept: "Concept-Class Fragments",
+                    p_concept: "The smallest and most numerous fragments, containing basic reality-concepts or fundamental-principles. These fragments often represent individual physics-laws or mathematical-constants that were tested and rejected during the creation-process.",
+                    warning_title: "Divine Hazard Warning",
+                    warning_text: "Unauthorized interaction with Fragments of Creation may result in reality-displacement, consciousness-divine-merger, or spontaneous universe-creation. All fragment-research requires approval from both the Mages Guild Divine-Research Committee and Archive Foundation Theological-Safety Board.",
+                    h2_dangers: "Containment Protocols",
+                    p_dangers_intro: "Due to their immense reality-altering potential, Fragments of Creation require specialized containment-methodologies developed jointly by the Mages Guild and Archive Foundation:",
+                    h3_isolation: "Divine-Isolation Chambers",
+                    p_isolation: "Fragments are housed within reality-isolation chambers constructed using materials extracted from Dimensional Scraps that exhibit null-divine signatures. These chambers prevent fragments from interacting with baseline reality while allowing for controlled observation-protocols.",
+                    h3_monitoring: "Continuous Reality-Monitoring",
+                    p_monitoring: "All fragment-sites maintain 24/7 reality-integrity scanning to detect any signs of expansion-activation. Should a fragment begin universe-creation processes, emergency reality-compression protocols can be initiated to abort the expansion-sequence.",
+                    h3_personnel: "Specialized Personnel Requirements",
+                    p_personnel: "Only researchers who have undergone divine-exposure conditioning and reality-anchor implantation are permitted direct fragment-interaction. Standard personnel lack the cognitive-framework necessary to perceive fragment-properties without suffering consciousness-fragmentation.",
+                    h2_research: "Research Applications",
+                    p_research_intro: "Despite containment-challenges, Fragments of Creation offer unprecedented insights into fundamental reality-construction principles:",
+                    h3_physics: "Alternative Physics Development",
+                    p_physics_research: "By studying the variant physics-laws contained within fragments, researchers have developed new theoretical-frameworks for understanding reality-manipulation. Several breakthrough thaumic-economic principles were derived from fragment-analysis.",
+                    h3_creation: "Creation-Algorithm Analysis",
+                    p_creation_research: "The Hypercapitalist Collective has invested heavily in fragment-research, seeking to reverse-engineer divine creation-processes for commercial universe-development projects. Their \"Reality-Genesis\" program aims to create pocket-universes optimized for resource-extraction.",
+                    quote_executive: "\"If we can understand how The Gods built universes, we can build better ones. More efficient ones. Profitable ones.\" - Internal Memo, Esoteric Heavy Industries Theological-Research Division, 2001",
+                    h3_divine: "Divine Archaeology",
+                    p_divine_research: "Fragment-study has revealed crucial information about divine construction-methodologies and prehistoric entity-behavior. This research has implications for understanding current divine-politics and predicting future reality-modifications by active deities.",
+                    p_implications: "The study of Fragments of Creation continues to challenge fundamental assumptions about reality-construction and divine-capabilities. As research-techniques improve, fragments may provide the key to understanding not just how universes are built, but why specific reality-configurations were chosen over alternatives.",
+                    h2_see_also: "See Also",
+                    link_scraps: "Dimensional Scraps",
+                    link_archaeology: "Divine Archaeology",
+                    link_construction: "Reality Construction Theory",
+                    link_algorithms: "Creation Algorithms",
+                    link_physics: "Primordial Physics",
+                    link_theological: "Theological Research Protocols",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Frammenti della Creazione",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "10 min di lettura",
+                    note_title: "Nota di Disambiguazione",
+                    note_text: "I Frammenti della Creazione non devono essere confusi con i Frammenti Dimensionali. Mentre entrambi esistono come detriti-realtà, i Frammenti Dimensionali sono sottoprodotti recenti dell'Evento Schiacciamento del 1997 contenenti materia compressa da dimensioni collassate. I Frammenti della Creazione sono vastamente più antichi—universi-prototipo abbandonati durante il processo-creazione iniziale da entità divine.",
+                    ancient_title: "Avviso Archeologico",
+                    ancient_text: "A causa della loro natura primordiale, i Frammenti della Creazione esibiscono pattern-realtà che precedono l'istituzione delle costanti-fisica moderne. L'interazione richiede equipaggiamento archeologico-divino specializzato e protocolli stabilizzazione-realtà.",
+                    toc_title: "Indice",
+                    toc_1: "1. Origini Divine",
+                    toc_2: "2. Proprietà Fondamentali",
+                    toc_3: "3. Sistema di Classificazione",
+                    toc_4: "4. Protocolli di Contenimento",
+                    toc_5: "5. Applicazioni di Ricerca",
+                    toc_6: "6. Vedi Anche",
+                    infobox_title: "Dati Archiviali",
+                    infobox_type_label: "Tipo:",
+                    infobox_type_value: "Detriti Creazione-Divina",
+                    infobox_age_label: "Età Stimata:",
+                    infobox_age_value: "4.7+ Miliardi di Anni",
+                    infobox_origin_label: "Origine:",
+                    infobox_origin_value: "Esperimenti Creazione Divina",
+                    infobox_danger_label: "Classe Contenimento:",
+                    infobox_danger_value: "Divino-Pericoloso",
+                    infobox_access_label: "Livello Accesso:",
+                    infobox_access_value: "Archivio-Divino Ristretto",
+                    p_intro: "I Frammenti della Creazione sono prototipi-realtà primordiali scartati dagli Dèi durante i loro esperimenti iniziali costruzione-universo miliardi di anni fa. Questi resti-progetto antichi contengono algoritmi-creazione grezzi e parametri-fisica fondamentali che precedono tutte le strutture-dimensionali conosciute.",
+                    h2_origins: "Origini Divine",
+                    p_origins: "Secondo i registri della divisione archeologia-teologica della Archive Foundation, i Frammenti della Creazione rappresentano iterazioni abbandonate dalla fase sviluppo-universo degli Dèi. Durante questo periodo primordiale, le entità divine sperimentarono con varie architetture-realtà prima di stabilirsi sul framework-dimensionale stabile che alla fine divenne il multiverso a 92 strati.",
+                    p_creation_process: "Il processo-creazione sembra aver coinvolto test-prototipo iterativi, dove gli Dèi costruivano bolle-realtà sperimentali, valutavano i loro parametri-stabilità, e poi scartavano configurazioni non riuscite. Questi prototipi scartati divennero i Frammenti della Creazione—semi-realtà contenenti algoritmi-creazione incompleti ma potenzialmente potenti.",
+                    quote_researcher: "\"Ogni Frammento rappresenta un percorso non preso nello sviluppo universale. Contengono leggi-fisica che furono considerate ma alla fine respinte dal consenso divino. Alcuni frammenti mostrano evidenza di realtà dove la gravità operava inversamente, o dove il tempo scorreva in multiple direzioni simultanee.\" - Dr. Helena Voss, Dipartimento Archeologia Divina, Fondazione Archivio, 2001",
+                    h3_properties: "Proprietà Fondamentali",
+                    p_properties_intro: "I Frammenti della Creazione esibiscono diverse caratteristiche uniche che li distinguono da tutte le altre anomalie-realtà:",
+                    causality_immunity: "Immunità-Causalità:",
+                    causality_desc: "I frammenti esistono fuori dalle normali relazioni causa-effetto, rendendoli immuni ai tentativi manipolazione-temporale e alterazione-realtà.",
+                    physics_variance: "Varianza-Fisica:",
+                    physics_desc: "Ogni frammento contiene le sue costanti-fisica localizzate che possono differire radicalmente dai parametri-realtà baseline.",
+                    divine_signature: "Firma-Divina:",
+                    divine_desc: "I frammenti emettono pattern frequenza-creazione rilevabili che corrispondono ai modelli teorici della metodologia costruzione-divina.",
+                    expansion_potential: "Potenziale-Espansione:",
+                    expansion_desc: "Sotto condizioni specifiche, i frammenti possono iniziare ad espandersi in matrici-realtà complete, potenzialmente creando nuove istanze-universo.",
+                    h2_classification: "Sistema di Classificazione",
+                    p_class_intro: "La divisione ricerca-teologica della Gilda dei Maghi ha sviluppato un sistema di classificazione basato sui livelli complessità-frammento e firme origine-divina:",
+                    h3_genesis: "Frammenti Classe-Genesis",
+                    p_genesis: "I frammenti più antichi e complessi, contenenti progetti-universo completi ma abbandonati. I frammenti Classe-Genesis spesso esibiscono ecosistemi auto-contenuti operanti sotto leggi-fisica aliene. Solo 23 frammenti Classe-Genesis sono stati documentati, e tutti sono mantenuti sotto contenimento massima-sicurezza.",
+                    h3_prototype: "Frammenti Classe-Prototipo",
+                    p_prototype: "Frammenti media-complessità rappresentanti concetti-realtà parzialmente sviluppati. Questi frammenti tipicamente contengono sistemi-fisica sperimentali o strutture-dimensionali incomplete. I frammenti Classe-Prototipo comprendono circa il 60% di tutti i frammenti documentati.",
+                    h3_concept: "Frammenti Classe-Concetto",
+                    p_concept: "I frammenti più piccoli e numerosi, contenenti concetti-realtà basilari o principi-fondamentali. Questi frammenti spesso rappresentano singole leggi-fisica o costanti-matematiche che furono testate e respinte durante il processo-creazione.",
+                    warning_title: "Avvertimento Pericolo Divino",
+                    warning_text: "L'interazione non autorizzata con i Frammenti della Creazione può risultare in spostamento-realtà, fusione coscienza-divina, o creazione-universo spontanea. Tutta la ricerca-frammenti richiede approvazione sia dal Comitato Ricerca-Divina della Gilda dei Maghi che dal Consiglio Sicurezza-Teologica della Archive Foundation.",
+                    h2_dangers: "Protocolli di Contenimento",
+                    p_dangers_intro: "A causa del loro immenso potenziale alterazione-realtà, i Frammenti della Creazione richiedono metodologie-contenimento specializzate sviluppate congiuntamente dalla Gilda dei Maghi e Fondazione Archivio:",
+                    h3_isolation: "Camere Isolamento-Divino",
+                    p_isolation: "I frammenti sono alloggiati in camere isolamento-realtà costruite usando materiali estratti dai Frammenti Dimensionali che esibiscono firme nullo-divine. Queste camere impediscono ai frammenti di interagire con la realtà baseline permettendo protocolli osservazione-controllata.",
+                    h3_monitoring: "Monitoraggio Realtà-Continuo",
+                    p_monitoring: "Tutti i siti-frammento mantengono scansione integrità-realtà 24/7 per rilevare qualsiasi segno di attivazione-espansione. Se un frammento inizia processi creazione-universo, protocolli compressione-realtà di emergenza possono essere iniziati per abortire la sequenza-espansione.",
+                    h3_personnel: "Requisiti Personale Specializzato",
+                    p_personnel: "Solo ricercatori che hanno subito condizionamento esposizione-divina e impianto ancora-realtà sono permessi interazione-frammento diretta. Il personale standard manca del framework-cognitivo necessario per percepire proprietà-frammento senza soffrire frammentazione-coscienza.",
+                    h2_research: "Applicazioni di Ricerca",
+                    p_research_intro: "Nonostante le sfide-contenimento, i Frammenti della Creazione offrono intuizioni senza precedenti nei principi costruzione-realtà fondamentali:",
+                    h3_physics: "Sviluppo Fisica Alternativa",
+                    p_physics_research: "Studiando le leggi-fisica varianti contenute nei frammenti, i ricercatori hanno sviluppato nuovi framework-teorici per comprendere la manipolazione-realtà. Diversi principi economico-taumici rivoluzionari furono derivati dall'analisi-frammenti.",
+                    h3_creation: "Analisi Algoritmi-Creazione",
+                    p_creation_research: "Il Collettivo Ipercapitalista ha investito pesantemente nella ricerca-frammenti, cercando di fare reverse-engineering dei processi creazione-divina per progetti sviluppo-universo commerciali. Il loro programma \"Reality-Genesis\" mira a creare universi-tascabili ottimizzati per l'estrazione-risorse.",
+                    quote_executive: "\"Se possiamo capire come gli Dèi costruirono universi, possiamo costruirne di migliori. Più efficienti. Profittevoli.\" - Memo Interno, Divisione Ricerca-Teologica Esoteric Heavy Industries, 2001",
+                    h3_divine: "Archeologia Divina",
+                    p_divine_research: "Lo studio-frammenti ha rivelato informazioni cruciali sulle metodologie costruzione-divina e comportamento-entità preistorico. Questa ricerca ha implicazioni per comprendere la politica-divina attuale e predire future modificazioni-realtà da parte di deità attive.",
+                    p_implications: "Lo studio dei Frammenti della Creazione continua a sfidare assunzioni fondamentali sulla costruzione-realtà e capacità-divine. Man mano che le tecniche-ricerca migliorano, i frammenti potrebbero fornire la chiave per comprendere non solo come gli universi sono costruiti, ma perché specifiche configurazioni-realtà furono scelte rispetto alle alternative.",
+                    h2_see_also: "Vedi Anche",
+                    link_scraps: "Frammenti Dimensionali",
+                    link_archaeology: "Archeologia Divina",
+                    link_construction: "Teoria Costruzione Realtà",
+                    link_algorithms: "Algoritmi Creazione",
+                    link_physics: "Fisica Primordiale",
+                    link_theological: "Protocolli Ricerca Teologica",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            function setLanguage(lang) {
+                console.log('Setting language to:', lang);
+                localStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                // Update all translatable elements
+                translatableElements.forEach(function(el) {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                // Update active language link
+                langLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Add click handlers for language links
+            langLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    console.log('Language link clicked:', selectedLang);
+                    setLanguage(selectedLang);
+                });
+            });
+
+            // Set initial language from localStorage or default to 'en'
+            const initialLang = localStorage.getItem('language') || 'en';
+            console.log('Initial language:', initialLang);
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Panza Comune Unico - Proclamazione dell'Autonomia Municipale</title>
+    <style>
+        body {
+            font-family: Arial, serif;
+            background-color: #e6f3ff;
+            margin: 0;
+            padding: 5px;
+            color: #000066;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #003366, #006699);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border: 3px solid #000066;
+            margin-bottom: 8px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-shadow: 2px 2px #000033;
+        }
+        
+        .breaking-news {
+            background-color: #ffff99;
+            border: 2px solid #ff9900;
+            padding: 8px;
+            text-align: center;
+            margin-bottom: 8px;
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        .nav-bar {
+            background-color: #ccddff;
+            border: 2px solid #666699;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .nav-link {
+            color: #000066;
+            text-decoration: underline;
+            margin: 0 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            color: #ff0000;
+            background-color: #ffffcc;
+        }
+        
+        .main-content {
+            background-color: white;
+            border: 2px solid #666699;
+            padding: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .section {
+            display: none;
+            background-color: #f9f9ff;
+            border: 1px solid #ccccdd;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .proclamation-box {
+            background-color: #ffe6e6;
+            border: 3px solid #ff3333;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .support-box {
+            background-color: #e6ffe6;
+            border: 2px solid #009900;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .petition-form {
+            background-color: #fff9e6;
+            border: 2px solid #ff9900;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            background-color: #ccccdd;
+            border: 1px solid #666666;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+        
+        .counter {
+            background-color: #ff6666;
+            color: white;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .island-flag {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(to bottom, #009900 33%, #ffffff 33%, #ffffff 66%, #ff0000 66%);
+            border: 2px solid #000000;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        input, textarea {
+            font-family: Arial, sans-serif;
+            border: 1px solid #666666;
+            padding: 3px;
+        }
+        
+        .submit-btn {
+            background-color: #0066cc;
+            color: white;
+            padding: 8px 15px;
+            border: 2px outset #0066cc;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            background-color: #0055aa;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="breaking-news">
+        <strong>*** NOTIZIE URGENTI *** MOVIMENTO PER L'AUTONOMIA DI PANZA IN CORSO *** SUPPORTA LA CAUSA ***</strong>
+    </div>
+
+    <div class="header">
+        <div class="island-flag"></div>
+        <h1>PANZA COMUNE UNICO</h1>
+        <p>Movimento per l'Autonomia Municipale di Panza dall'Isola d'Ischia</p>
+        <p><em>Per un futuro indipendente e prospero della nostra comunità</em></p>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Home</span>
+        <span class="nav-link" onclick="showSection('proclamazione')">La Proclamazione</span>
+        <span class="nav-link" onclick="showSection('motivazioni')">Le Nostre Ragioni</span>
+        <span class="nav-link" onclick="showSection('sostieni')">Sostieni il Movimento</span>
+        <span class="nav-link" onclick="showSection('documenti')">Documenti Ufficiali</span>
+        <span class="nav-link" onclick="showSection('storia')">Storia di Panza</span>
+        <span class="nav-link" onclick="showSection('contatti')">Contatti</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <h2>Benvenuti nel Sito Ufficiale del Movimento</h2>
+            
+            <div class="proclamation-box">
+                <h3>🏛️ PROCLAMAZIONE UFFICIALE 🏛️</h3>
+                <p><strong>Il 15 Gennaio 2001, il Comitato per l'Autonomia di Panza proclama ufficialmente la richiesta di costituzione di Panza come comune autonomo e indipendente dall'amministrazione di Forio d'Ischia.</strong></p>
+                <p><em>"Panza merita di governarsi da sola, per il bene dei suoi cittadini e per preservare le nostre tradizioni uniche."</em></p>
+            </div>
+            
+            <h3>Perché Panza Deve Diventare un Comune Autonomo</h3>
+            <p>La frazione di Panza, con i suoi <strong>2.847 abitanti</strong> (censimento 2000), possiede tutte le caratteristiche necessarie per costituire un comune indipendente:</p>
+            
+            <ul>
+                <li><strong>Identità culturale distinta</strong> - Le nostre tradizioni, dialetto e usanze sono uniche</li>
+                <li><strong>Autonomia economica</strong> - Settore turistico e agricolo fiorente</li>
+                <li><strong>Territorio definito</strong> - Confini geografici naturali chiari</li>
+                <li><strong>Comunità coesa</strong> - Forte senso di appartenenza locale</li>
+            </ul>
+            
+            <div class="support-box">
+                <h4>📊 Stato delle Adesioni</h4>
+                <p><strong>Firme raccolte:</strong> <span class="counter">1.892</span> su 2.847 abitanti</p>
+                <p><strong>Percentuale di sostegno:</strong> <span class="counter">66.4%</span></p>
+                <p><em>Aggiornato al 15 Gennaio 2001</em></p>
+            </div>
+            
+            <p><strong>La nostra lotta per l'autonomia continua!</strong> Unisciti al movimento e aiutaci a far sentire la voce di Panza nelle istituzioni regionali e nazionali.</p>
+        </div>
+
+        <div id="proclamazione" class="section">
+            <h2>La Proclamazione Ufficiale</h2>
+            
+            <div class="proclamation-box">
+                <h3>ATTO DI PROCLAMAZIONE</h3>
+                <p><strong>15 Gennaio 2001 - Panza, Isola d'Ischia</strong></p>
+            </div>
+            
+            <div style="border: 2px solid #000066; padding: 15px; background-color: #f0f8ff; font-style: italic;">
+                <p><strong>"Noi, cittadini della frazione di Panza, rappresentati dal Comitato per l'Autonomia Municipale, proclamiamo solennemente la nostra volontà di costituire un comune autonomo e indipendente."</strong></p>
+                
+                <p><strong>CONSIDERATO CHE:</strong></p>
+                <ul>
+                    <li>Panza possiede una popolazione superiore ai 1.000 abitanti come richiesto dalla legge</li>
+                    <li>Il nostro territorio ha caratteristiche geografiche e storiche distintive</li>
+                    <li>La distanza e le difficoltà di comunicazione con Forio ostacolano l'efficace amministrazione</li>
+                    <li>I cittadini di Panza richiedono maggiore rappresentanza nelle decisioni locali</li>
+                </ul>
+                
+                <p><strong>PROCLAMIAMO:</strong></p>
+                <p>La nascita del movimento per la costituzione del <strong>"COMUNE DI PANZA"</strong> come ente territoriale autonomo, con sede municipale nel centro storico di Panza e giurisdizione su tutto il territorio tradizionalmente appartenente alla nostra comunità.</p>
+                
+                <p><strong>Firmato:</strong><br>
+                <em>Comitato Promotore per l'Autonomia di Panza</em><br>
+                <em>Presidente: Sig. Giuseppe Matteo</em><br>
+                <em>Vice-Presidente: Sig.ra Maria Rosaria Verde</em></p>
+            </div>
+            
+            <h4>Prossimi Passi Legali</h4>
+            <ol>
+                <li><strong>Gennaio 2001:</strong> Completamento raccolta firme (obiettivo: 70% dei residenti)</li>
+                <li><strong>Febbraio 2001:</strong> Presentazione istanza alla Regione Campania</li>
+                <li><strong>Marzo 2001:</strong> Deposito documentazione presso la Prefettura di Napoli</li>
+                <li><strong>Primavera 2001:</strong> Referendum consultivo locale</li>
+                <li><strong>Estate 2001:</strong> Esame della proposta da parte del Consiglio Regionale</li>
+            </ol>
+        </div>
+
+        <div id="motivazioni" class="section">
+            <h2>Le Nostre Ragioni</h2>
+            
+            <h3>🏛️ Problemi Amministrativi Attuali</h3>
+            <div class="support-box">
+                <h4>Distanza dal Centro Amministrativo</h4>
+                <p>Panza dista <strong>8,5 km</strong> da Forio centro. Per molti anziani e famiglie senza auto, raggiungere gli uffici comunali è un'impresa difficile e costosa.</p>
+                
+                <h4>Sottorappresentanza Politica</h4>
+                <p>Su 24 consiglieri comunali di Forio, solo <strong>2 rappresentano Panza</strong>, nonostante costituiamo il 15% della popolazione totale del comune.</p>
+                
+                <h4>Bilancio e Investimenti</h4>
+                <p>Degli €2.1 milioni investiti nel 2000 per opere pubbliche a Forio, solo €180.000 (8.5%) sono stati destinati a Panza.</p>
+            </div>
+            
+            <h3>🌊 Identità e Tradizioni Uniche</h3>
+            <ul>
+                <li><strong>Dialetto Panzese:</strong> Conserviamo espressioni linguistiche uniche non presenti altrove</li>
+                <li><strong>Festa di Sant'Antonio:</strong> La nostra tradizione centenaria del 13 giugno</li>
+                <li><strong>Architettura tradizionale:</strong> Le case in pietra lavica tipiche del nostro territorio</li>
+                <li><strong>Cucina locale:</strong> Ricette tramandate da generazioni (coniglio all'ischitana, vino Biancolella)</li>
+            </ul>
+            
+            <h3>💼 Potenzialità Economiche</h3>
+            <div class="support-box">
+                <h4>Settore Turistico</h4>
+                <p>Panza ospita importanti strutture ricettive che generano oltre <strong>€3.2 milioni</strong> di fatturato annuo nel turismo termale e balneare.</p>
+                
+                <h4>Agricoltura Specializzata</h4>
+                <p>Le nostre coltivazioni di vite e ortaggi potrebbero beneficiare di politiche agricole dedicate e di un marchio "Panza DOC".</p>
+                
+                <h4>Fonti Termali</h4>
+                <p>Le sorgenti termali di Citara e Sorgeto necessitano di una gestione locale più attenta e specializzata.</p>
+            </div>
+            
+            <h3>📋 Esempi di Successo</h3>
+            <p>In Italia, numerose frazioni sono diventate comuni autonomi con grande successo:</p>
+            <ul>
+                <li><strong>Serrara Fontana (1948):</strong> Si staccò da Barano d'Ischia con ottimi risultati</li>
+                <li><strong>Casamicciola Terme:</strong> Esempio di amministrazione efficace su territorio limitato</li>
+                <li><strong>Lacco Ameno:</strong> Il più piccolo comune d'Ischia, ma tra i più efficienti</li>
+            </ul>
+        </div>
+
+        <div id="sostieni" class="section">
+            <h2>Sostieni il Movimento</h2>
+            
+            <div class="petition-form">
+                <h3>📝 Firma la Petizione Online</h3>
+                <p><strong>Aggiungi la tua voce al movimento per l'autonomia di Panza!</strong></p>
+                
+                <form onsubmit="return submitSupport()">
+                    <table>
+                        <tr>
+                            <td><strong>Nome:</strong></td>
+                            <td><input type="text" name="nome" size="25" required></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cognome:</strong></td>
+                            <td><input type="text" name="cognome" size="25" required></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data di Nascita:</strong></td>
+                            <td><input type="text" name="nascita" size="15" placeholder="gg/mm/aaaa"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Residenza:</strong></td>
+                            <td><input type="text" name="residenza" size="30" required></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Professione:</strong></td>
+                            <td><input type="text" name="professione" size="25"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Hexagram:</strong></td>
+                            <td><input type="email" name="email" size="30" placeholder="tuonome@hexagram.corp"></td>
+                        </tr>
+                        <tr>
+                            <td valign="top"><strong>Motivazione:</strong></td>
+                            <td><textarea name="motivazione" rows="4" cols="35" placeholder="Perché sostieni l'autonomia di Panza?"></textarea></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="checkbox" required> <strong>Dichiaro di essere maggiorenne e residente a Panza o nell'Isola d'Ischia</strong><br><br>
+                    <button type="submit" class="submit-btn">FIRMA LA PETIZIONE</button>
+                </form>
+            </div>
+            
+            <h3>💰 Sostegno Finanziario</h3>
+            <div class="support-box">
+                <h4>Dona per la Causa</h4>
+                <p>Le spese legali e amministrative per il processo di autonomia richiedono fondi. Ogni contributo è prezioso:</p>
+                <ul>
+                    <li><strong>€10:</strong> Contributo simbolico per le spese postali</li>
+                    <li><strong>€25:</strong> Sostegno per la documentazione legale</li>
+                    <li><strong>€50:</strong> Contributo per le consulenze giuridiche</li>
+                    <li><strong>€100+:</strong> Sostegno maggiore per spese processuali</li>
+                </ul>
+                <p><strong>Coordinate bancarie:</strong><br>
+                Banco di Napoli - Agenzia Ischia<br>
+                Intestato: "Comitato Autonomia Panza"<br>
+                IBAN: IT-85-P-01234-12345-000000123456</p>
+            </div>
+            
+            <h3>📢 Diffondi la Voce</h3>
+            <ul>
+                <li><strong>Distribuisci volantini:</strong> Disponibili presso la sede del comitato</li>
+                <li><strong>Organizza incontri:</strong> Coinvolgi vicini e amici</li>
+                <li><strong>Contatta i media:</strong> Fai conoscere la nostra causa</li>
+                <li><strong>Social network:</strong> Condividi su Hexagram e altre piattaforme</li>
+            </ul>
+        </div>
+
+        <div id="documenti" class="section">
+            <h2>Documenti Ufficiali</h2>
+            
+            <h3>📋 Documentazione Legale</h3>
+            <div class="support-box">
+                <h4>Statuto del Futuro Comune di Panza</h4>
+                <p><strong>Documento costitutivo:</strong> 45 pagine</p>
+                <p><strong>Contenuto:</strong> Organizzazione amministrativa, competenze, regolamenti</p>
+                <p><strong>Stato:</strong> Bozza approvata dall'assemblea cittadina del 10/01/2001</p>
+                <p><a href="mailto:documenti@hexagram.corp?subject=Richiesta Statuto Panza">📧 Richiedi copia via Hexagram</a></p>
+            </div>
+            
+            <div class="support-box">
+                <h4>Perizia Tecnica del Territorio</h4>
+                <p><strong>Estensione territorio:</strong> 8.2 km²</p>
+                <p><strong>Confini proposti:</strong> Definiti secondo criteri geografici naturali</p>
+                <p><strong>Valutazione patrimoniale:</strong> €12.4 milioni (infrastrutture e beni)</p>
+                <p><a href="mailto:documenti@hexagram.corp?subject=Richiesta Perizia Territoriale">📧 Richiedi via Hexagram</a></p>
+            </div>
+            
+            <h3>📊 Studi di Fattibilità</h3>
+            
+            <h4>Piano Economico-Finanziario</h4>
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #ccddff;">
+                    <th>Voce di Bilancio</th>
+                    <th>Importo Annuo (€)</th>
+                </tr>
+                <tr>
+                    <td><strong>Entrate Tributarie</strong></td>
+                    <td>485.000</td>
+                </tr>
+                <tr>
+                    <td>- ICI (Imposta Comunale Immobili)</td>
+                    <td>195.000</td>
+                </tr>
+                <tr>
+                    <td>- Tassa Rifiuti</td>
+                    <td>145.000</td>
+                </tr>
+                <tr>
+                    <td>- Altre tasse comunali</td>
+                    <td>145.000</td>
+                </tr>
+                <tr>
+                    <td><strong>Trasferimenti Statali</strong></td>
+                    <td>320.000</td>
+                </tr>
+                <tr>
+                    <td><strong>Proventi da Servizi</strong></td>
+                    <td>95.000</td>
+                </tr>
+                <tr style="background-color: #e6ffe6;">
+                    <td><strong>TOTALE ENTRATE</strong></td>
+                    <td><strong>900.000</strong></td>
+                </tr>
+            </table>
+            
+            <h4>Spese Previste</h4>
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #ccddff;">
+                    <th>Categoria di Spesa</th>
+                    <th>Importo Annuo (€)</th>
+                </tr>
+                <tr>
+                    <td>Personale comunale (8 dipendenti)</td>
+                    <td>285.000</td>
+                </tr>
+                <tr>
+                    <td>Servizi essenziali (nettezza, illuminazione)</td>
+                    <td>195.000</td>
+                </tr>
+                <tr>
+                    <td>Manutenzione strade e edifici</td>
+                    <td>145.000</td>
+                </tr>
+                <tr>
+                    <td>Spese amministrative</td>
+                    <td>85.000</td>
+                </tr>
+                <tr>
+                    <td>Investimenti e opere pubbliche</td>
+                    <td>165.000</td>
+                </tr>
+                <tr style="background-color: #ffe6e6;">
+                    <td><strong>TOTALE SPESE</strong></td>
+                    <td><strong>875.000</strong></td>
+                </tr>
+            </table>
+            
+            <p><strong>Avanzo previsto:</strong> €25.000 annui per fondo di riserva</p>
+            
+            <h3>🗂️ Raccolta Firme</h3>
+            <div class="support-box">
+                <h4>Modulo di Adesione Cartaceo</h4>
+                <p>Per i cittadini che preferiscono firmare su carta, è disponibile il modulo ufficiale presso:</p>
+                <ul>
+                    <li><strong>Bar Central Panza</strong> - Via Roma, 14</li>
+                    <li><strong>Edicola Mattera</strong> - Piazza San Leonardo</li>
+                    <li><strong>Parrocchia Sant'Antonio</strong> - Via Chiesa, 8</li>
+                    <li><strong>Sede del Comitato</strong> - Via Provinciale Panza, 127</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="storia" class="section">
+            <h2>Storia di Panza</h2>
+            
+            <h3>🏺 Origini Antiche</h3>
+            <div class="support-box">
+                <p><strong>Nome:</strong> Il nome "Panza" deriva probabilmente dal latino "Pantanus" (paludoso), riferito alle antiche caratteristiche del territorio prima delle bonifiche.</p>
+                
+                <p><strong>Epoca Romana:</strong> I Romani sfruttavano già le sorgenti termali di Citara e Sorgeto per le loro proprietà curative. Resti di terme romane sono ancora visibili.</p>
+                
+                <p><strong>Medioevo:</strong> Nel 1301, Panza era già citata nei documenti come "Casale di Panza", frazione autonoma con proprie tradizioni e amministrazione locale.</p>
+            </div>
+            
+            <h3>⛪ Patrimonio Religioso e Culturale</h3>
+            <ul>
+                <li><strong>Chiesa di San Leonardo (1374):</strong> Primo luogo di culto, testimonianza dell'antica autonomia spirituale</li>
+                <li><strong>Chiesa di Sant'Antonio (1547):</strong> Centro della vita religiosa panzese</li>
+                <li><strong>Festa di Sant'Antonio (13 giugno):</strong> Tradizione che risale al XVI secolo</li>
+                <li><strong>Via Crucis storica:</strong> Percorso devozionale tra le colline di Panza</li>
+            </ul>
+            
+            <h3>🚢 Sviluppo Moderno</h3>
+            <div style="border-left: 4px solid #0066cc; padding-left: 15px; background-color: #f0f8ff;">
+                <h4>Epoca Borbonica (1700-1800)</h4>
+                <p>Sotto i Borbone, Panza prosperò grazie all'agricoltura e al commercio marittimo. Le famiglie nobiliari di Napoli costruirono ville estive per sfruttare le terme.</p>
+                
+                <h4>Unità d'Italia (1861)</h4>
+                <p>Con l'unificazione, Panza fu aggregata amministrativamente a Forio, perdendo la propria autonomia comunale che aveva mantenuto per secoli.</p>
+                
+                <h4>XX Secolo</h4>
+                <p>Lo sviluppo del turismo termale ha trasformato Panza in una delle destinazioni più ambite dell'isola, ma sempre sotto l'amministrazione forese.</p>
+            </div>
+            
+            <h3>👥 Famiglie Storiche di Panza</h3>
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #ccddff;">
+                    <th>Cognome</th>
+                    <th>Origine</th>
+                    <th>Contributo Storico</th>
+                </tr>
+                <tr>
+                    <td><strong>Mattera</strong></td>
+                    <td>XV secolo</td>
+                    <td>Costruttori della prima chiesa</td>
+                </tr>
+                <tr>
+                    <td><strong>Verde</strong></td>
+                    <td>XVI secolo</td>
+                    <td>Sviluppo agricoltura vinicola</td>
+                </tr>
+                <tr>
+                    <td><strong>Iacono</strong></td>
+                    <td>XVII secolo</td>
+                    <td>Commercio marittimo con Napoli</td>
+                </tr>
+                <tr>
+                    <td><strong>Regine</strong></td>
+                    <td>XVIII secolo</td>
+                    <td>Prime strutture termali moderne</td>
+                </tr>
+            </table>
+            
+            <h3>🌊 Geografia e Territorio</h3>
+            <div class="support-box">
+                <h4>Confini Naturali</h4>
+                <ul>
+                    <li><strong>Nord:</strong> Colline di Zaro e Monterone</li>
+                    <li><strong>Sud:</strong> Costa di Citara e Sorgeto</li>
+                    <li><strong>Est:</strong> Torrente di Citara</li>
+                    <li><strong>Ovest:</strong> Confine con Serrara Fontana</li>
+                </ul>
+                
+                <h4>Risorse Naturali</h4>
+                <ul>
+                    <li>12 sorgenti termali naturali</li>
+                    <li>3,2 km di costa balneabile</li>
+                    <li>450 ettari di terreno agricolo</li>
+                    <li>Bosco di macchia mediterranea (185 ettari)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contatti" class="section">
+            <h2>Contatti e Informazioni</h2>
+            
+            <h3>🏛️ Sede del Comitato</h3>
+            <div class="support-box">
+                <h4>Comitato per l'Autonomia di Panza</h4>
+                <p><strong>Indirizzo:</strong> Via Provinciale Panza, 127<br>
+                80075 Panza (Forio) - Isola d'Ischia (NA)</p>
+                
+                <p><strong>Orari di apertura:</strong><br>
+                Lunedì - Venerdì: 16:00 - 19:00<br>
+                Sabato: 09:00 - 12:00<br>
+                Domenica: Solo su appuntamento</p>
+                
+                <p><strong>Telefono:</strong> 081-908745<br>
+                <strong>Fax:</strong> 081-908746</p>
+            </div>
+            
+            <h3>👥 Responsabili del Movimento</h3>
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+                <tr style="background-color: #ccddff;">
+                    <th>Nome</th>
+                    <th>Ruolo</th>
+                    <th>Contatto Hexagram</th>
+                </tr>
+                <tr>
+                    <td><strong>Giuseppe Matteo</strong></td>
+                    <td>Presidente del Comitato</td>
+                    <td><a href="mailto:g.matteo@hexagram.corp">g.matteo@hexagram.corp</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Maria Rosaria Verde</strong></td>
+                    <td>Vice-Presidente</td>
+                    <td><a href="mailto:mr.verde@hexagram.corp">mr.verde@hexagram.corp</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Avv. Francesco Iacono</strong></td>
+                    <td>Consulente Legale</td>
+                    <td><a href="mailto:f.iacono@hexagram.corp">f.iacono@hexagram.corp</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Dott. Antonio Regine</strong></td>
+                    <td>Responsabile Comunicazione</td>
+                    <td><a href="mailto:a.regine@hexagram.corp">a.regine@hexagram.corp</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Sig.ra Elena Mattera</strong></td>
+                    <td>Tesoriere</td>
+                    <td><a href="mailto:e.mattera@hexagram.corp">e.mattera@hexagram.corp</a></td>
+                </tr>
+            </table>
+            
+            <h3>📅 Calendario Eventi</h3>
+            <div class="support-box">
+                <h4>Prossimi Appuntamenti</h4>
+                <ul>
+                    <li><strong>20 Gennaio 2001:</strong> Assemblea pubblica presso Centro Sociale Panza (ore 18:00)</li>
+                    <li><strong>27 Gennaio 2001:</strong> Raccolta firme al mercato settimanale (ore 08:00-13:00)</li>
+                    <li><strong>3 Febbraio 2001:</strong> Incontro con il Sindaco di Forio (ore 16:00)</li>
+                    <li><strong>10 Febbraio 2001:</strong> Presentazione dossier alla Provincia di Napoli</li>
+                    <li><strong>17 Febbraio 2001:</strong> Conferenza stampa regionale (Napoli)</li>
+                </ul>
+            </div>
+            
+            <h3>📧 Contatti Specifici</h3>
+            <div style="border: 2px solid #009900; padding: 15px; background-color: #f0fff0;">
+                <h4>Per Informazioni Generali</h4>
+                <p><strong>Email principale:</strong> <a href="mailto:info@hexagram.corp">info@hexagram.corp</a><br>
+                <strong>Oggetto consigliato:</strong> "Autonomia Panza - [tua richiesta]"</p>
+                
+                <h4>Per Questioni Legali</h4>
+                <p><strong>Email legale:</strong> <a href="mailto:legale@hexagram.corp">legale@hexagram.corp</a><br>
+                <strong>Solo per:</strong> Consulenze su aspetti normativi e procedurali</p>
+                
+                <h4>Per Adesioni e Sostegno</h4>
+                <p><strong>Email adesioni:</strong> <a href="mailto:sostieni@hexagram.corp">sostieni@hexagram.corp</a><br>
+                <strong>Per:</strong> Firme digitali, donazioni, volontariato</p>
+                
+                <h4>Per Media e Giornalisti</h4>
+                <p><strong>Email stampa:</strong> <a href="mailto:stampa@hexagram.corp">stampa@hexagram.corp</a><br>
+                <strong>Referente:</strong> Dott. Antonio Regine</p>
+            </div>
+            
+            <h3>🗺️ Come Raggiungerci</h3>
+            <div class="support-box">
+                <h4>Da Napoli:</h4>
+                <ul>
+                    <li>Traghetto Caremar: Napoli-Ischia Porto (1h 15min)</li>
+                    <li>Aliscafo SNAV: Napoli-Ischia Porto (45min)</li>
+                    <li>Dall'isola: Autobus SEPSA linea 1 o CS verso Panza</li>
+                </ul>
+                
+                <h4>Da Ischia Porto:</h4>
+                <ul>
+                    <li><strong>Autobus:</strong> Linea 1 (Ischia-Forio-Panza) - 35 minuti</li>
+                    <li><strong>Auto:</strong> SS270 verso Forio, poi Provinciale Panza - 25 minuti</li>
+                    <li><strong>Taxi:</strong> Corsa fissa €18,00 (tariffa 2001)</li>
+                </ul>
+                
+                <h4>Parcheggio:</h4>
+                <p>Disponibile parcheggio gratuito presso la sede del comitato (20 posti auto)</p>
+            </div>
+            
+            <h3>📰 Rassegna Stampa</h3>
+            <div style="border: 1px solid #cccccc; padding: 10px; background-color: #f9f9f9;">
+                <h4>Copertura Mediatica</h4>
+                <ul>
+                    <li><strong>"Il Mattino" (12/01/2001):</strong> "Panza verso l'autonomia: raccolte 1800 firme"</li>
+                    <li><strong>"Roma" (14/01/2001):</strong> "Ischia: nasce il movimento per il comune di Panza"</li>
+                    <li><strong>"Metropolis TV" (15/01/2001):</strong> Servizio nel TG delle 20:00</li>
+                    <li><strong>"Radio Kiss Kiss" (16/01/2001):</strong> Intervista al presidente Matteo</li>
+                </ul>
+                
+                <p><strong>Richieste interviste:</strong> <a href="mailto:stampa@hexagram.corp">stampa@hexagram.corp</a></p>
+            </div>
+            
+            <h3>⚖️ Supporto Legale Gratuito</h3>
+            <div class="support-box">
+                <p><strong>Consulenza per i Cittadini</strong></p>
+                <p>Il comitato offre consulenza legale gratuita per tutti i cittadini di Panza su questioni relative al processo di autonomia:</p>
+                <ul>
+                    <li>Diritti dei residenti durante il processo</li>
+                    <li>Implicazioni fiscali del cambio di comune</li>
+                    <li>Procedure burocratiche e documenti necessari</li>
+                    <li>Tempi e modalità del referendum consultivo</li>
+                </ul>
+                <p><strong>Appuntamenti:</strong> Ogni giovedì 17:00-19:00 presso la sede</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>© 2001 Comitato per l'Autonomia di Panza</strong> | Sito realizzato con Hypernet Builder Pro</p>
+        <p>Miglior visualizzazione con Hypernet Explorer 5.0+ | Risoluzione consigliata: 800x600</p>
+        <p><strong>Webmaster:</strong> <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a> | Ultimo aggiornamento: 15 Gennaio 2001</p>
+        <p><em>"Un futuro autonomo per Panza inizia oggi!"</em></p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Nascondi tutte le sezioni
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Mostra la sezione selezionata
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function submitSupport() {
+            alert('Grazie per il tuo sostegno! La tua adesione è stata registrata.\n\nRiceverai conferma via Hexagram entro 24 ore.\n\nViva Panza Libera!');
+            return false; // Previene l'invio effettivo del form
+        }
+        
+        // Inizializza con la sezione home visibile
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+        
+        // Effetto lampeggiante per le news urgenti
+        setInterval(function() {
+            var breakingNews = document.querySelector('.breaking-news');
+            if (breakingNews) {
+                breakingNews.style.backgroundColor = 
+                    breakingNews.style.backgroundColor === 'rgb(255, 204, 204)' ? '#ffff99' : '#ffcccc';
+            }
+        }, 1500);
+    </script>
+</body>
+</html>

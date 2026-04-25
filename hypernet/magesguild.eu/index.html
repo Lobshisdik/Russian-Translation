@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mages Guild Official Portal - magesguild.eu</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #e94560;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #0f3460, #16213e);
+            border-bottom: 3px solid #e94560;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .arcane-ticker {
+            background-color: #533483;
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: scroll-left 30s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .nav-matrix {
+            background-color: #16213e;
+            border: 2px solid #e94560;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            background-color: #533483;
+            border: 1px solid #e94560;
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: #e94560;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        .content-zone {
+            background-color: rgba(15, 52, 96, 0.9);
+            border: 2px solid #533483;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .section {
+            display: none;
+            background-color: rgba(22, 33, 62, 0.8);
+            border: 1px solid #e94560;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .thaumo-alert {
+            background-color: #e94560;
+            color: #ffffff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .faction-badge {
+            background-color: #533483;
+            color: #ffffff;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 2px;
+            margin: 0 3px;
+        }
+        
+        .ritual-status {
+            background: repeating-linear-gradient(
+                90deg,
+                #0f3460,
+                #0f3460 10px,
+                #16213e 10px,
+                #16213e 20px
+            );
+            border: 2px solid #e94560;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            background-color: #1a1a2e;
+            border-top: 2px solid #533483;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .classification-level {
+            color: #e94560;
+            font-weight: bold;
+            text-decoration: blink;
+        }
+        
+        .procedural-content {
+            background-color: rgba(83, 52, 131, 0.3);
+            border-left: 4px solid #e94560;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="arcane-ticker" id="ticker">
+        <!-- Procedural ticker content will be generated here -->
+    </div>
+
+    <div class="header">
+        <h1>MAGES GUILD OFFICIAL PORTAL</h1>
+        <p>Thaumo-Digital Interface System v3.2.7</p>
+        <div id="guild-status">
+            <!-- Dynamic guild status will appear here -->
+        </div>
+    </div>
+
+    <div class="nav-matrix">
+        <span class="nav-link" onclick="showSection('home')">Guild Portal</span>
+        <span class="nav-link" onclick="showSection('faction-status')">Faction Status</span>
+        <span class="nav-link" onclick="showSection('ritual-updates')">Ritual Updates</span>
+        <span class="nav-link" onclick="showSection('archive-access')">Archive Access</span>
+        <span class="nav-link" onclick="showSection('enforcement')">Enforcement Division</span>
+        <span class="nav-link" onclick="showSection('technomancy')">Technomancy Labs</span>
+        <span class="nav-link" onclick="showSection('crisis-board')">Crisis Management</span>
+    </div>
+
+    <div class="content-zone">
+        <div id="home" class="section active">
+            <div class="thaumo-alert" id="security-level">
+                <!-- Dynamic security level will be set here -->
+            </div>
+            
+            <h2>Welcome to the Mages Guild Hypernet Portal</h2>
+            <p><strong>Current Date:</strong> <span id="current-date"></span></p>
+            <p><strong>Thaumo-Network Status:</strong> <span id="network-status"></span></p>
+            
+            <div class="ritual-status">
+                <h3>Active Guild Operations</h3>
+                <div id="operations-list">
+                    <!-- Procedural operations will be listed here -->
+                </div>
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Recent Dimensional Stabilization Reports</h4>
+                <div id="stability-reports">
+                    <!-- Dynamic reports will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Guild Administrator Contact:</strong> <a href="mailto:guildmaster@hexagram.corp">guildmaster@hexagram.corp</a></p>
+        </div>
+
+        <div id="faction-status" class="section">
+            <h2>Faction Status Matrix</h2>
+            
+            <div class="ritual-status">
+                <h3>Current Faction Standings</h3>
+                <div id="faction-standings">
+                    <!-- Dynamic faction info will be generated here -->
+                </div>
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Inter-Faction Communications</h4>
+                <div id="faction-comms">
+                    <!-- Dynamic faction communications will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Faction Liaison:</strong> <a href="mailto:factions@hexagram.corp">factions@hexagram.corp</a></p>
+        </div>
+
+        <div id="ritual-updates" class="section">
+            <h2>Ritual Status & Thaumo-Operations</h2>
+            
+            <div class="thaumo-alert">
+                <span id="ritual-alert"><!-- Dynamic ritual alert --></span>
+            </div>
+            
+            <div class="ritual-status">
+                <h3>Active Ritual Matrices</h3>
+                <div id="active-rituals">
+                    <!-- Dynamic ritual information will be generated here -->
+                </div>
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Leyline Monitoring Station Reports</h4>
+                <div id="leyline-reports">
+                    <!-- Dynamic leyline data will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Ritual Coordinator:</strong> <a href="mailto:rituals@hexagram.corp">rituals@hexagram.corp</a></p>
+        </div>
+
+        <div id="archive-access" class="section">
+            <h2>92 Schools Archive Division</h2>
+            
+            <div class="procedural-content">
+                <p class="classification-level">CLASSIFICATION LEVEL: <span id="archive-classification"></span></p>
+                
+                <h4>Recently Catalogued Phenomena</h4>
+                <div id="recent-phenomena">
+                    <!-- Dynamic phenomena listings will appear here -->
+                </div>
+                
+                <h4>Archive Search Queries (Last 24 Hours)</h4>
+                <div id="search-queries">
+                    <!-- Dynamic search data will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Chief Archivist:</strong> <a href="mailto:archives@hexagram.corp">archives@hexagram.corp</a></p>
+        </div>
+
+        <div id="enforcement" class="section">
+            <h2>Enforcement Division Status</h2>
+            
+            <div class="thaumo-alert" id="threat-level">
+                <!-- Dynamic threat level will be set here -->
+            </div>
+            
+            <div class="ritual-status">
+                <h3>Active Containment Operations</h3>
+                <div id="containment-ops">
+                    <!-- Dynamic containment information will be generated here -->
+                </div>
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Rogue Mage Incidents</h4>
+                <div id="rogue-incidents">
+                    <!-- Dynamic incident reports will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Enforcement Chief:</strong> <a href="mailto:enforcement@hexagram.corp">enforcement@hexagram.corp</a></p>
+        </div>
+
+        <div id="technomancy" class="section">
+            <h2>Technomancy Research Division</h2>
+            
+            <div class="ritual-status">
+                <h3>Current Research Projects</h3>
+                <div id="research-projects">
+                    <!-- Dynamic research information will be generated here -->
+                </div>
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Spell-Code Integration Reports</h4>
+                <div id="integration-reports">
+                    <!-- Dynamic integration data will appear here -->
+                </div>
+                
+                <h4>Anoki Device Enhancement Protocols</h4>
+                <div id="nokia-protocols">
+                    <!-- Dynamic Anoki enhancement data will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Research Director:</strong> <a href="mailto:technomancy@hexagram.corp">technomancy@hexagram.corp</a></p>
+        </div>
+
+        <div id="crisis-board" class="section">
+            <h2>Crisis Management Board</h2>
+            
+            <div class="thaumo-alert">
+                POST-SQUISHING REALITY STABILIZATION PROTOCOLS ACTIVE
+            </div>
+            
+            <div class="procedural-content">
+                <h4>Current Crisis Level Assessment</h4>
+                <div id="crisis-assessment">
+                    <!-- Dynamic crisis information will be generated here -->
+                </div>
+                
+                <h4>Emergency Response Teams</h4>
+                <div id="response-teams">
+                    <!-- Dynamic team status will appear here -->
+                </div>
+                
+                <h4>Dimensional Breach Monitoring</h4>
+                <div id="breach-monitoring">
+                    <!-- Dynamic breach data will appear here -->
+                </div>
+            </div>
+            
+            <p><strong>Crisis Director:</strong> <a href="mailto:crisis@hexagram.corp">crisis@hexagram.corp</a></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Mages Guild European Division | Powered by Thaumo-Digital Interface Systems</p>
+        <p>Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 arcane-resolution</p>
+        <p>For technical issues contact: <a href="mailto:techsupport@hexagram.corp">techsupport@hexagram.corp</a></p>
+        <p><em>Warning: This portal may contain traces of residual magic. Use protective wards when browsing.</em></p>
+    </div>
+
+    <script>
+        // Procedural content generation arrays
+        const factionNames = ["Thatcher Loyalists", "Crowley Traditionalists", "Technomancers", "92 Schools Branch"];
+        const operationTypes = ["Leyline Stabilization", "Ritual Containment", "Thaumo-Research", "Reality Anchoring", "Dimensional Monitoring"];
+        const threatLevels = ["EMERALD", "AMBER", "CRIMSON", "OBSIDIAN"];
+        const locations = ["London", "Paris", "Berlin", "Rome", "Amsterdam", "Brussels", "Edinburgh", "Dublin"];
+        const ritualNames = ["Stabilitas Perpetua", "Memoria Custodiae", "Dimensio Clausura", "Tempus Ordinata", "Energia Focalis"];
+        const phenomenaTypes = ["Time-Loop Manifestation", "Leyline Resonance Spike", "Magical Cascade Event", "Reality Fluctuation", "Thaumo-Static Discharge"];
+        const researchProjects = ["Anoki-3310 Spell Enhancement", "CamelCase Incantation Optimization", "Digital-Arcane Interface Protocols", "Autonomous Spell-Code Generation"];
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function generateRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateTicker() {
+            const events = [
+                `THAUMO-ALERT: ${getRandomElement(phenomenaTypes)} detected in ${getRandomElement(locations)}`,
+                `GUILD NOTICE: ${getRandomElement(factionNames)} reports successful ${getRandomElement(operationTypes)}`,
+                `RESEARCH UPDATE: ${getRandomElement(researchProjects)} shows ${generateRandomNumber(15, 89)}% efficiency improvement`,
+                `ENFORCEMENT: Rogue mage contained in ${getRandomElement(locations)} sector ${generateRandomNumber(1, 12)}`,
+                `ARCHIVE: ${generateRandomNumber(5, 47)} new phenomena catalogued this cycle`
+            ];
+            
+            return getRandomElement(events);
+        }
+
+        function generateOperations() {
+            let operations = "";
+            for(let i = 0; i < generateRandomNumber(3, 6); i++) {
+                operations += `<p><strong>${getRandomElement(operationTypes)}</strong> - ${getRandomElement(locations)} Sector ${generateRandomNumber(1, 15)} - Status: <span class="faction-badge">${Math.random() > 0.7 ? 'ACTIVE' : 'MONITORING'}</span></p>`;
+            }
+            return operations;
+        }
+
+        function generateFactionStandings() {
+            let standings = "";
+            factionNames.forEach(faction => {
+                const influence = generateRandomNumber(15, 85);
+                const status = influence > 60 ? "DOMINANT" : influence > 40 ? "STABLE" : "DECLINING";
+                standings += `<p><strong>${faction}</strong> - Influence: ${influence}% <span class="faction-badge">${status}</span></p>`;
+            });
+            return standings;
+        }
+
+        function generateRitualStatus() {
+            let rituals = "";
+            for(let i = 0; i < generateRandomNumber(2, 4); i++) {
+                const completion = generateRandomNumber(12, 97);
+                rituals += `<p><strong>${getRandomElement(ritualNames)}</strong> - Completion: ${completion}% - Location: ${getRandomElement(locations)}</p>`;
+            }
+            return rituals;
+        }
+
+        function generateStabilityReports() {
+            let reports = "";
+            for(let i = 0; i < generateRandomNumber(2, 5); i++) {
+                const stability = generateRandomNumber(67, 98);
+                reports += `<p>${getRandomElement(locations)} Grid: ${stability}% stable - Last fluctuation: ${generateRandomNumber(2, 72)} hours ago</p>`;
+            }
+            return reports;
+        }
+
+        function generateCrisisAssessment() {
+            const level = getRandomElement(threatLevels);
+            const incidents = generateRandomNumber(0, 7);
+            return `<p><strong>Current Threat Level:</strong> <span class="classification-level">${level}</span></p>
+                    <p><strong>Active Incidents:</strong> ${incidents}</p>
+                    <p><strong>Response Readiness:</strong> ${generateRandomNumber(78, 99)}%</p>`;
+        }
+
+        function initializeProcedural() {
+            // Set dynamic date
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-GB');
+            
+            // Set security level
+            const securityLevel = getRandomElement(threatLevels);
+            document.getElementById('security-level').innerHTML = `CURRENT SECURITY LEVEL: <span class="classification-level">${securityLevel}</span>`;
+            
+            // Set network status
+            const networkStatus = Math.random() > 0.8 ? "EXPERIENCING MINOR THAUMO-STATIC" : "OPTIMAL";
+            document.getElementById('network-status').textContent = networkStatus;
+            
+            // Generate ticker
+            document.getElementById('ticker').textContent = generateTicker();
+            
+            // Generate guild status
+            document.getElementById('guild-status').innerHTML = `<span class="faction-badge">ACTIVE MEMBERS: ${generateRandomNumber(2847, 3156)}</span> <span class="faction-badge">OPERATIONS: ${generateRandomNumber(23, 67)}</span>`;
+            
+            // Generate operations
+            document.getElementById('operations-list').innerHTML = generateOperations();
+            
+            // Generate stability reports
+            document.getElementById('stability-reports').innerHTML = generateStabilityReports();
+            
+            // Generate faction standings
+            document.getElementById('faction-standings').innerHTML = generateFactionStandings();
+            
+            // Generate faction communications
+            document.getElementById('faction-comms').innerHTML = `<p>Last communication from ${getRandomElement(factionNames)}: ${generateRandomNumber(2, 18)} hours ago</p>
+                                                                  <p>Pending negotiations: ${generateRandomNumber(1, 5)} items</p>`;
+            
+            // Generate ritual information
+            document.getElementById('ritual-alert').textContent = `${generateRandomNumber(3, 12)} ACTIVE RITUALS - MAINTAIN LEYLINE DISTANCE`;
+            document.getElementById('active-rituals').innerHTML = generateRitualStatus();
+            
+            // Generate leyline reports
+            document.getElementById('leyline-reports').innerHTML = `<p>Primary Leylines: ${generateRandomNumber(89, 99)}% operational</p>
+                                                                    <p>Secondary Networks: ${generateRandomNumber(76, 94)}% stable</p>
+                                                                    <p>Anomalous Readings: ${generateRandomNumber(0, 4)} detected</p>`;
+            
+            // Generate archive data
+            document.getElementById('archive-classification').textContent = getRandomElement(["CONFIDENTIAL", "RESTRICTED", "CLASSIFIED"]);
+            document.getElementById('recent-phenomena').innerHTML = generateRandomNumber(3, 8) + " phenomena catalogued in last 24 hours";
+            document.getElementById('search-queries').innerHTML = `Most searched: "${getRandomElement(phenomenaTypes)}" (${generateRandomNumber(45, 234)} queries)`;
+            
+            // Generate enforcement data
+            document.getElementById('threat-level').textContent = `CURRENT THREAT ASSESSMENT: ${getRandomElement(threatLevels)}`;
+            document.getElementById('containment-ops').innerHTML = `<p>Active Containments: ${generateRandomNumber(2, 8)}</p>
+                                                                   <p>Pending Investigations: ${generateRandomNumber(12, 45)}</p>`;
+            document.getElementById('rogue-incidents').innerHTML = `Last 48 hours: ${generateRandomNumber(0, 3)} incidents reported`;
+            
+            // Generate technomancy data
+            document.getElementById('research-projects').innerHTML = researchProjects.map(project => 
+                `<p>${project} - Progress: ${generateRandomNumber(23, 87)}%</p>`
+            ).join('');
+            
+            document.getElementById('integration-reports').innerHTML = `<p>Spell-Code Compatibility: ${generateRandomNumber(78, 96)}%</p>
+                                                                        <p>System Uptime: ${generateRandomNumber(94, 99)}.${generateRandomNumber(10, 99)}%</p>`;
+            
+            document.getElementById('nokia-protocols').innerHTML = `<p>Anoki 3310 Units Enhanced: ${generateRandomNumber(1247, 2890)}</p>
+                                                                    <p>Spell Capacity Increase: ${generateRandomNumber(340, 670)}%</p>`;
+            
+            // Generate crisis data
+            document.getElementById('crisis-assessment').innerHTML = generateCrisisAssessment();
+            document.getElementById('response-teams').innerHTML = `<p>Ready Teams: ${generateRandomNumber(12, 23)}</p>
+                                                                   <p>Deployed Teams: ${generateRandomNumber(3, 11)}</p>`;
+            document.getElementById('breach-monitoring').innerHTML = `<p>Monitored Zones: ${generateRandomNumber(67, 134)}</p>
+                                                                      <p>Stable Breaches: ${generateRandomNumber(2, 7)}</p>`;
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Regenerate content every time a section is accessed
+        const originalShowSection = showSection;
+        showSection = function(sectionId) {
+            initializeProcedural(); // Regenerate all content
+            originalShowSection(sectionId);
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProcedural();
+            
+            // Update ticker every 10 seconds
+            setInterval(function() {
+                document.getElementById('ticker').textContent = generateTicker();
+            }, 10000);
+        });
+    </script>
+</body>
+</html>

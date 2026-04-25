@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mages Guild - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Mages Guild</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: December 15, 2001 | <span data-lang-key="meta_read_time">8 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">The Mages Guild is the premier arcane organization governing magical practice, research, and enforcement in the post-Squishing world. Originally founded as the Hermetic Order of the Golden Dawn in 1888, the Guild was catastrophically reformed following the dimensional collapse events of 1997 and the magical resurgence of 1999.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#overview" data-lang-key="toc_1">1. Overview</a></li>
+                        <li><a href="#history" data-lang-key="toc_2">2. Historical Foundation</a></li>
+                        <li><a href="#refounding" data-lang-key="toc_3">3. The Crowley Refounding</a></li>
+                        <li><a href="#branches" data-lang-key="toc_4">4. Organizational Structure</a></li>
+                        <li><a href="#ideology" data-lang-key="toc_5">5. Ideological Factions</a></li>
+                        <li><a href="#modern-role" data-lang-key="toc_6">6. Modern Operations</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Guild Information</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_founded_label">Founded:</span> <span data-lang-key="infobox_founded_value">1888 (Original), 1999 (Reformed)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_reformer_label">Reformed by:</span> <span data-lang-key="infobox_reformer_value">Aleister Crowley</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_headquarters_label">Headquarters:</span> <span data-lang-key="infobox_headquarters_value">The Vault (Location Classified)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_membership_label">Membership:</span> <span data-lang-key="infobox_membership_value">~50,000 registered practitioners</span>
+                    </div>
+                </div>
+
+                <h2 id="overview" data-lang-key="h2_overview">Overview</h2>
+                <p data-lang-key="p_overview">Following the catastrophic dimensional convergence known as <a href="the-squishing">The Squishing</a>, the Mages Guild emerged as the primary regulatory body for arcane activities worldwide. The organization manages spell-casting licenses, maintains the <a href="camelcase-law">CamelCase Law</a> enforcement protocols, and serves as the central authority for magical research and development initiatives.</p>
+
+                <h2 id="history" data-lang-key="h2_history">Historical Foundation</h2>
+                <p data-lang-key="p_history">The original Hermetic Order of the Golden Dawn was established in 1888 by William Wynn Westcott, Samuel Liddell MacGregor Mathers, and William Robert Woodman. Operating as a secret society, the Order focused on the study and practice of ritual disciplines, hermetic traditions, and thaumaturgical research. Notable early members included A.E. Waite, Arthur Edward Waite, and Aleister Crowley himself.</p>
+
+                <p data-lang-key="p_history_2">The Order maintained strict hierarchical structures and initiation protocols, operating through a network of temples across Europe and North America. However, internal schisms and the outbreak of World War I severely weakened the organization, leading to its effective dissolution by 1920.</p>
+
+                <h2 id="refounding" data-lang-key="h2_refounding">The Crowley Refounding</h2>
+                <p data-lang-key="p_refounding">When the dimensional barriers collapsed in 1997 and arcane energies flooded into baseline reality during the <a href="solomon-ritual">Solomon Ritual</a> of 1999, Aleister Crowley seized the opportunity to resurrect the fallen Order. Operating with unprecedented magical authority and backed by <a href="margaret-thatcher">Lady Margaret Thatcher</a>'s political connections, Crowley launched a worldwide recruitment drive.</p>
+
+                <blockquote data-lang-key="quote_crowley">
+                    "The old paradigms have shattered. We must construct new frameworks for the governance of Will, the channeling of True Power, and the systematic exploitation of reality's newfound fluidity." - Aleister Crowley, Founding Charter, 1999
+                </blockquote>
+
+                <p data-lang-key="p_refounding_2">The reformed Guild abandoned the secretive nature of its predecessor, instead operating as a semi-public organization with government recognition and corporate sponsorship from <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a>.</p>
+
+                <h3 data-lang-key="h3_expansion">Rapid Expansion Protocol</h3>
+                <p data-lang-key="p_expansion">Unlike the exclusive membership policies of the original Golden Dawn, Crowley implemented aggressive recruitment protocols targeting anyone demonstrating basic thaumaturgical aptitude. This "democratization" of magical practice led to a surge in Guild membership from 200 founding members to over 50,000 registered practitioners within two years.</p>
+
+                <h2 id="branches" data-lang-key="h2_branches">Organizational Structure</h2>
+                
+                <h3 data-lang-key="h3_council">Supreme Council</h3>
+                <p data-lang-key="p_council">The Guild is governed by a seven-member Supreme Council, each representing different aspects of arcane practice. Current council positions include the Archmagus of Transmutation, the Chancellor of Temporal Studies, and the Director of Dimensional Compliance.</p>
+
+                <h3 data-lang-key="h3_enforcement">Enforcement Division</h3>
+                <p data-lang-key="p_enforcement">The Guild maintains a specialized enforcement arm responsible for investigating illegal spell-casting, unauthorized dimensional breaches, and violations of the <a href="camelcase-law">CamelCase Law</a>. Enforcement agents are equipped with reality-stabilization equipment and counter-thaumaturgical weaponry.</p>
+
+                <h3 data-lang-key="h3_research">Research and Development</h3>
+                <p data-lang-key="p_research">The R&D branch focuses on systematic cataloging of post-Squishing magical phenomena, development of standardized spell-casting protocols, and integration of arcane practices with emerging technologies. Their work has led to breakthroughs in mana-battery technology and spell-automation systems.</p>
+
+                <h3 data-lang-key="h3_92schools">The 92 Schools Branch</h3>
+                <p data-lang-key="p_92schools">Named after the 92 dimensions that collapsed during the Squishing, this specialized division attempts to catalog and categorize the diverse magical traditions that have emerged from the dimensional convergence. Each "school" represents a distinct approach to arcane manipulation, from the crystal-focused techniques of the Venusian refugees to the probability-warping methods of the Gambler's Conclave.</p>
+
+                <h2 id="ideology" data-lang-key="h2_ideology">Ideological Factions</h2>
+
+                <h3 data-lang-key="h3_loyalists">Thatcher Loyalists</h3>
+                <p data-lang-key="p_loyalists">This faction, led by disciples of Lady Margaret Thatcher, advocates for strict regulatory control over magical practices and close cooperation with governmental authorities. They support the licensing system and believe in maintaining order through hierarchical structures and bureaucratic oversight.</p>
+
+                <h3 data-lang-key="h3_traditionalists">Crowley Traditionalists</h3>
+                <p data-lang-key="p_traditionalists">Following Crowley's original vision, these Guild members emphasize personal empowerment, individual will, and the exploration of consciousness through magical practice. They often clash with the Loyalists over issues of regulation and institutional control.</p>
+
+                <h3 data-lang-key="h3_technomancers">Corporate Technomancers</h3>
+                <p data-lang-key="p_technomancers">A newer faction that emerged post-1999, the Technomancers focus on integrating magical practices with digital technology and corporate methodologies. They're closely allied with <a href="hypercapitalist-collective">Hypercapitalist Collective</a> interests and promote the commercialization of spell-casting services.</p>
+
+                <h2 id="modern-role" data-lang-key="h2_modern_role">Modern Operations and Influence</h2>
+
+                <p data-lang-key="p_modern">In the post-Squishing world, the Mages Guild operates as both a regulatory authority and a powerful political entity. They maintain licensing bureaus in major cities, oversee magical education programs, and coordinate with international organizations to manage cross-dimensional trade and travel.</p>
+
+                <h3 data-lang-key="h3_conflicts">Current Conflicts</h3>
+                <p data-lang-key="p_conflicts">The Guild faces ongoing tensions with several groups:</p>
+                
+                <ul>
+                    <li data-lang-key="li_gods">Open warfare with <a href="the-gods">The Gods</a>, who view the Guild as illegitimate usurpers</li>
+                    <li data-lang-key="li_goblins">Territorial disputes with <a href="goblins">Goblin Factions</a> over mineral rights in magically active zones</li>
+                    <li data-lang-key="li_archivists">Ideological opposition from <a href="archive-foundation">Archive Foundation</a> regarding information transparency</li>
+                    <li data-lang-key="li_internal">Internal power struggles between the Loyalist and Traditionalist factions</li>
+                </ul>
+
+                <h3 data-lang-key="h3_services">Public Services</h3>
+                <p data-lang-key="p_services">Despite political controversies, the Guild provides essential services including:</p>
+                
+                <ul>
+                    <li data-lang-key="li_licensing">Spell-casting license certification and renewal</li>
+                    <li data-lang-key="li_education">Standardized magical education curricula</li>
+                    <li data-lang-key="li_emergency">Emergency response teams for magical disasters</li>
+                    <li data-lang-key="li_research2">Public access to basic magical research databases</li>
+                </ul>
+
+                <p data-lang-key="p_conclusion">As the magical landscape continues to evolve in the post-Squishing era, the Mages Guild remains a central pillar of the new world order, balancing the demands of regulation, innovation, and the fundamental human drive to harness supernatural forces for practical and personal advancement.</p>
+
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Mages Guild",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "8 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Overview",
+                    toc_2: "2. Historical Foundation",
+                    toc_3: "3. The Crowley Refounding", 
+                    toc_4: "4. Organizational Structure",
+                    toc_5: "5. Ideological Factions",
+                    toc_6: "6. Modern Operations",
+                    infobox_title: "Guild Information",
+                    infobox_founded_label: "Founded:",
+                    infobox_founded_value: "1888 (Original), 1999 (Reformed)",
+                    infobox_reformer_label: "Reformed by:",
+                    infobox_reformer_value: "Aleister Crowley",
+                    infobox_headquarters_label: "Headquarters:",
+                    infobox_headquarters_value: "The Vault (Location Classified)",
+                    infobox_membership_label: "Membership:",
+                    infobox_membership_value: "~50,000 registered practitioners",
+                    h2_overview: "Overview",
+                    p_overview: "Following the catastrophic dimensional convergence known as The Squishing, the Mages Guild emerged as the primary regulatory body for arcane activities worldwide. The organization manages spell-casting licenses, maintains the CamelCase Law enforcement protocols, and serves as the central authority for magical research and development initiatives.",
+                    h2_history: "Historical Foundation",
+                    p_history: "The original Hermetic Order of the Golden Dawn was established in 1888 by William Wynn Westcott, Samuel Liddell MacGregor Mathers, and William Robert Woodman. Operating as a secret society, the Order focused on the study and practice of ritual disciplines, hermetic traditions, and thaumaturgical research. Notable early members included A.E. Waite, Arthur Edward Waite, and Aleister Crowley himself.",
+                    p_history_2: "The Order maintained strict hierarchical structures and initiation protocols, operating through a network of temples across Europe and North America. However, internal schisms and the outbreak of World War I severely weakened the organization, leading to its effective dissolution by 1920.",
+                    h2_refounding: "The Crowley Refounding",
+                    p_refounding: "When the dimensional barriers collapsed in 1997 and arcane energies flooded into baseline reality during the Solomon Ritual of 1999, Aleister Crowley seized the opportunity to resurrect the fallen Order. Operating with unprecedented magical authority and backed by Lady Margaret Thatcher's political connections, Crowley launched a worldwide recruitment drive.",
+                    quote_crowley: '"The old paradigms have shattered. We must construct new frameworks for the governance of Will, the channeling of True Power, and the systematic exploitation of reality\'s newfound fluidity." - Aleister Crowley, Founding Charter, 1999',
+                    p_refounding_2: "The reformed Guild abandoned the secretive nature of its predecessor, instead operating as a semi-public organization with government recognition and corporate sponsorship from Esoteric Heavy Industries.",
+                    h3_expansion: "Rapid Expansion Protocol",
+                    p_expansion: "Unlike the exclusive membership policies of the original Golden Dawn, Crowley implemented aggressive recruitment protocols targeting anyone demonstrating basic thaumaturgical aptitude. This \"democratization\" of magical practice led to a surge in Guild membership from 200 founding members to over 50,000 registered practitioners within two years.",
+                    h2_branches: "Organizational Structure",
+                    h3_council: "Supreme Council",
+                    p_council: "The Guild is governed by a seven-member Supreme Council, each representing different aspects of arcane practice. Current council positions include the Archmagus of Transmutation, the Chancellor of Temporal Studies, and the Director of Dimensional Compliance.",
+                    h3_enforcement: "Enforcement Division",
+                    p_enforcement: "The Guild maintains a specialized enforcement arm responsible for investigating illegal spell-casting, unauthorized dimensional breaches, and violations of the CamelCase Law. Enforcement agents are equipped with reality-stabilization equipment and counter-thaumaturgical weaponry.",
+                    h3_research: "Research and Development",
+                    p_research: "The R&D branch focuses on systematic cataloging of post-Squishing magical phenomena, development of standardized spell-casting protocols, and integration of arcane practices with emerging technologies. Their work has led to breakthroughs in mana-battery technology and spell-automation systems.",
+                    h3_92schools: "The 92 Schools Branch",
+                    p_92schools: "Named after the 92 dimensions that collapsed during the Squishing, this specialized division attempts to catalog and categorize the diverse magical traditions that have emerged from the dimensional convergence. Each \"school\" represents a distinct approach to arcane manipulation, from the crystal-focused techniques of the Venusian refugees to the probability-warping methods of the Gambler's Conclave.",
+                    h2_ideology: "Ideological Factions",
+                    h3_loyalists: "Thatcher Loyalists",
+                    p_loyalists: "This faction, led by disciples of Lady Margaret Thatcher, advocates for strict regulatory control over magical practices and close cooperation with governmental authorities. They support the licensing system and believe in maintaining order through hierarchical structures and bureaucratic oversight.",
+                    h3_traditionalists: "Crowley Traditionalists", 
+                    p_traditionalists: "Following Crowley's original vision, these Guild members emphasize personal empowerment, individual will, and the exploration of consciousness through magical practice. They often clash with the Loyalists over issues of regulation and institutional control.",
+                    h3_technomancers: "Corporate Technomancers",
+                    p_technomancers: "A newer faction that emerged post-1999, the Technomancers focus on integrating magical practices with digital technology and corporate methodologies. They're closely allied with Hypercapitalist Collective interests and promote the commercialization of spell-casting services.",
+                    h2_modern_role: "Modern Operations and Influence",
+                    p_modern: "In the post-Squishing world, the Mages Guild operates as both a regulatory authority and a powerful political entity. They maintain licensing bureaus in major cities, oversee magical education programs, and coordinate with international organizations to manage cross-dimensional trade and travel.",
+                    h3_conflicts: "Current Conflicts",
+                    p_conflicts: "The Guild faces ongoing tensions with several groups:",
+                    li_gods: "Open warfare with The Gods, who view the Guild as illegitimate usurpers",
+                    li_goblins: "Territorial disputes with Goblin Factions over mineral rights in magically active zones",
+                    li_archivists: "Ideological opposition from Archive Foundation regarding information transparency",
+                    li_internal: "Internal power struggles between the Loyalist and Traditionalist factions",
+                    h3_services: "Public Services",
+                    p_services: "Despite political controversies, the Guild provides essential services including:",
+                    li_licensing: "Spell-casting license certification and renewal",
+                    li_education: "Standardized magical education curricula",
+                    li_emergency: "Emergency response teams for magical disasters",
+                    li_research2: "Public access to basic magical research databases",
+                    p_conclusion: "As the magical landscape continues to evolve in the post-Squishing era, the Mages Guild remains a central pillar of the new world order, balancing the demands of regulation, innovation, and the fundamental human drive to harness supernatural forces for practical and personal advancement.",
+                    p_intro: "The Mages Guild is the premier arcane organization governing magical practice, research, and enforcement in the post-Squishing world. Originally founded as the Hermetic Order of the Golden Dawn in 1888, the Guild was catastrophically reformed following the dimensional collapse events of 1997 and the magical resurgence of 1999.",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Gilda dei Maghi",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "8 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Panoramica",
+                    toc_2: "2. Fondazione Storica",
+                    toc_3: "3. La Rifondazione di Crowley",
+                    toc_4: "4. Struttura Organizzativa", 
+                    toc_5: "5. Fazioni Ideologiche",
+                    toc_6: "6. Operazioni Moderne",
+                    infobox_title: "Informazioni della Gilda",
+                    infobox_founded_label: "Fondata:",
+                    infobox_founded_value: "1888 (Originale), 1999 (Riformata)",
+                    infobox_reformer_label: "Riformata da:",
+                    infobox_reformer_value: "Aleister Crowley",
+                    infobox_headquarters_label: "Sede:",
+                    infobox_headquarters_value: "Il Vault (Posizione Classificata)",
+                    infobox_membership_label: "Membri:",
+                    infobox_membership_value: "~50.000 praticanti registrati",
+                    h2_overview: "Panoramica",
+                    p_overview: "Seguendo la catastrofica convergenza dimensionale conosciuta come lo Schiacciamento, la Gilda dei Maghi emerse come l'ente regolatore primario per le attività arcane mondiali. L'organizzazione gestisce le licenze per il lancio di incantesimi, mantiene i protocolli di applicazione della Legge CamelCase e serve come autorità centrale per le iniziative di ricerca e sviluppo magico.",
+                    h2_history: "Fondazione Storica",
+                    p_history: "L'originale Ordine Ermetico dell'Alba Dorata fu stabilito nel 1888 da William Wynn Westcott, Samuel Liddell MacGregor Mathers e William Robert Woodman. Operando come società segreta, l'Ordine si concentrava sullo studio e la pratica delle discipline rituali, tradizioni ermetiche e ricerca taumaturgica. Membri notevoli includevano A.E. Waite, Arthur Edward Waite e lo stesso Aleister Crowley.",
+                    p_history_2: "L'Ordine manteneva strutture gerarchiche rigorose e protocolli di iniziazione, operando attraverso una rete di templi in Europa e Nord America. Tuttavia, scismi interni e lo scoppio della Prima Guerra Mondiale indebolirono gravemente l'organizzazione, portando alla sua dissoluzione effettiva entro il 1920.",
+                    h2_refounding: "La Rifondazione di Crowley",
+                    p_refounding: "Quando le barriere dimensionali collassarono nel 1997 e le energie arcane inondarono la realtà baseline durante il Rituale di Salomone del 1999, Aleister Crowley colse l'opportunità per resuscitare l'Ordine caduto. Operando con autorità magica senza precedenti e sostenuto dalle connessioni politiche di Lady Margaret Thatcher, Crowley lanciò una campagna di reclutamento mondiale.",
+                    quote_crowley: '"I vecchi paradigmi si sono frantumati. Dobbiamo costruire nuovi framework per il governo della Volontà, la canalizzazione del Vero Potere e lo sfruttamento sistematico della nuova fluidità della realtà." - Aleister Crowley, Carta Fondativa, 1999',
+                    p_refounding_2: "La Gilda riformata abbandonò la natura segreta del suo predecessore, operando invece come organizzazione semi-pubblica con riconoscimento governativo e sponsorizzazione corporativa da Esoteric Heavy Industries.",
+                    h3_expansion: "Protocollo di Espansione Rapida",
+                    p_expansion: "A differenza delle politiche di membership esclusive dell'originale Alba Dorata, Crowley implementò protocolli di reclutamento aggressivi mirando a chiunque dimostrasse attitudine taumaturgica di base. Questa \"democratizzazione\" della pratica magica portò a un'impennata nella membership della Gilda da 200 membri fondatori a oltre 50.000 praticanti registrati in due anni.",
+                    h2_branches: "Struttura Organizzativa",
+                    h3_council: "Consiglio Supremo",
+                    p_council: "La Gilda è governata da un Consiglio Supremo di sette membri, ognuno rappresentante diversi aspetti della pratica arcana. Le posizioni attuali del consiglio includono l'Arcimago della Trasmutazione, il Cancelliere degli Studi Temporali e il Direttore della Conformità Dimensionale.",
+                    h3_enforcement: "Divisione di Applicazione",
+                    p_enforcement: "La Gilda mantiene un braccio di applicazione specializzato responsabile per l'investigazione del lancio illegale di incantesimi, violazioni dimensionali non autorizzate e violazioni della Legge CamelCase. Gli agenti di applicazione sono equipaggiati con attrezzature di stabilizzazione della realtà e armamenti contro-taumaturgici.",
+                    h3_research: "Ricerca e Sviluppo",
+p_research: "Il ramo R&S si concentra sulla catalogazione sistematica dei fenomeni magici post-Schiacciamento, sviluppo di protocolli standardizzati per il lancio di incantesimi e integrazione delle pratiche arcane con le tecnologie emergenti. Il loro lavoro ha portato a progressi nella tecnologia delle batterie di mana e nei sistemi di automazione degli incantesimi.",
+                    h3_92schools: "Il Ramo delle 92 Scuole",
+                    p_92schools: "Nominato dopo le 92 dimensioni che collassarono durante lo Schiacciamento, questa divisione specializzata tenta di catalogare e categorizzare le diverse tradizioni magiche emerse dalla convergenza dimensionale. Ogni \"scuola\" rappresenta un approccio distinto alla manipolazione arcana, dalle tecniche focalizzate sui cristalli dei rifugiati venusiani ai metodi di alterazione della probabilità del Conclave dei Giocatori d'Azzardo.",
+                    h2_ideology: "Fazioni Ideologiche",
+                    h3_loyalists: "Lealisti di Thatcher",
+                    p_loyalists: "Questa fazione, guidata da discepoli di Lady Margaret Thatcher, sostiene il controllo regolatorio rigoroso sulle pratiche magiche e la stretta cooperazione con le autorità governative. Supportano il sistema di licenze e credono nel mantenere l'ordine attraverso strutture gerarchiche e supervisione burocratica.",
+                    h3_traditionalists: "Tradizionalisti di Crowley",
+                    p_traditionalists: "Seguendo la visione originale di Crowley, questi membri della Gilda enfatizzano l'empowerment personale, la volontà individuale e l'esplorazione della coscienza attraverso la pratica magica. Spesso si scontrano con i Lealisti su questioni di regolamentazione e controllo istituzionale.",
+                    h3_technomancers: "Tecnomanti Corporativi",
+                    p_technomancers: "Una fazione più recente emersa post-1999, i Tecnomanti si concentrano sull'integrazione delle pratiche magiche con la tecnologia digitale e le metodologie aziendali. Sono strettamente alleati con gli interessi del Collettivo Ipercapitalista e promuovono la commercializzazione dei servizi di lancio incantesimi.",
+                    h2_modern_role: "Operazioni Moderne e Influenza",
+                    p_modern: "Nel mondo post-Schiacciamento, la Gilda dei Maghi opera sia come autorità regolatrice che come entità politica potente. Mantengono uffici di licenze nelle città principali, supervisionano programmi educativi magici e coordinano con organizzazioni internazionali per gestire il commercio e i viaggi trans-dimensionali.",
+                    h3_conflicts: "Conflitti Attuali",
+                    p_conflicts: "La Gilda affronta tensioni continue con diversi gruppi:",
+                    li_gods: "Guerra aperta con Gli Dei, che vedono la Gilda come usurpatori illegittimi",
+                    li_goblins: "Dispute territoriali con le Fazioni Goblin sui diritti minerari nelle zone magicamente attive",
+                    li_archivists: "Opposizione ideologica dalla Archive Foundation riguardo la trasparenza delle informazioni",
+                    li_internal: "Lotte di potere interne tra le fazioni Lealista e Tradizionalista",
+                    h3_services: "Servizi Pubblici",
+                    p_services: "Nonostante le controversie politiche, la Gilda fornisce servizi essenziali inclusi:",
+                    li_licensing: "Certificazione e rinnovo delle licenze per il lancio di incantesimi",
+                    li_education: "Curricula educativi magici standardizzati",
+                    li_emergency: "Squadre di risposta d'emergenza per disastri magici",
+                    li_research2: "Accesso pubblico ai database di ricerca magica di base",
+                    p_conclusion: "Mentre il paesaggio magico continua ad evolversi nell'era post-Schiacciamento, la Gilda dei Maghi rimane un pilastro centrale del nuovo ordine mondiale, bilanciando le richieste di regolamentazione, innovazione e la spinta umana fondamentale per imbrigliare forze soprannaturali per il progresso pratico e personale.",
+                    p_intro: "La Gilda dei Maghi è la principale organizzazione arcana che governa la pratica magica, ricerca e applicazione nel mondo post-Schiacciamento. Originariamente fondata come Ordine Ermetico dell'Alba Dorata nel 1888, la Gilda fu catastroficamente riformata seguendo gli eventi di collasso dimensionale del 1997 e la rinascita magica del 1999.",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            const setLanguage = (lang) => {
+                localStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            // Set initial language from local storage or default to 'en'
+            const initialLang = localStorage.getItem('language') || 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

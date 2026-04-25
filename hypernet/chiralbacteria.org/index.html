@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chiral Bacteria Initiative - Catastrophic Risk Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000033 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="%23001166" opacity="0.3"><circle cx="10" cy="10" r="2"/><circle cx="30" cy="10" r="2"/><circle cx="10" cy="30" r="2"/><circle cx="30" cy="30" r="2"/><path d="M5,5 L15,5 L15,15 L5,15 Z" fill="none" stroke="%23003399" stroke-width="0.5"/><path d="M25,5 L35,5 L35,15 L25,15 Z" fill="none" stroke="%23003399" stroke-width="0.5"/><path d="M5,25 L15,25 L15,35 L5,35 Z" fill="none" stroke="%23003399" stroke-width="0.5"/><path d="M25,25 L35,25 L35,35 L25,35 Z" fill="none" stroke="%23003399" stroke-width="0.5"/></g></svg>') repeat;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #66ff00, #00cccc);
+            color: #000033;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ff6600;
+            position: relative;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: #001166;
+            border: 2px solid #0066cc;
+            padding: 5px 10px;
+        }
+        
+        .language-selector select {
+            background-color: #003399;
+            color: #ffffff;
+            border: 1px solid #0066cc;
+            padding: 3px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        
+        .language-selector select:hover {
+            background-color: #0066cc;
+        }
+        
+        .dna-helix {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #ff3366;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 51, 0.8);
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #001166;
+            padding: 20px;
+            border-right: 2px solid #0066cc;
+        }
+        
+        .nav-item {
+            background-color: #003399;
+            border: 2px outset #0066cc;
+            margin: 5px 0;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .nav-item:hover {
+            background-color: #0066cc;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .section {
+            display: none;
+            background-color: rgba(0, 17, 102, 0.9);
+            border: 2px solid #ff6600;
+            margin: 10px 0;
+            padding: 15px;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background-color: #330000;
+        }
+        
+        .risk-table th,
+        .risk-table td {
+            border: 2px solid #ff0000;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .risk-table th {
+            background-color: #660000;
+            color: #ffcccc;
+            font-weight: bold;
+        }
+        
+        .severity-critical {
+            background-color: #990000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .severity-high {
+            background-color: #cc3300;
+            color: #ffffff;
+        }
+        
+        .severity-moderate {
+            background-color: #ff6600;
+            color: #000000;
+        }
+        
+        .warning-banner {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 3px solid #ffffff;
+            margin: 15px 0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        .scenario-box {
+            background-color: #330033;
+            border: 2px solid #ff6600;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .marquee-container {
+            background-color: #000000;
+            padding: 5px;
+            border: 1px solid #ffff00;
+            margin-top: 20px;
+        }
+        
+        .marquee {
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background-color: #000033;
+            color: #cccccc;
+            text-align: center;
+            padding: 10px;
+            border-top: 2px solid #0066cc;
+            font-size: 12px;
+        }
+        
+        .counter {
+            background-color: #003366;
+            border: 1px solid #0066cc;
+            padding: 5px;
+            display: inline-block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="language-selector">
+            <label for="language" style="color: #cccccc; font-size: 11px;">LINGUA/LANGUAGE:</label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="it">Italiano</option>
+            </select>
+        </div>
+        <h1 id="header-title">The Chiral Bacteria Initiative - CATASTROPHIC RISK ASSESSMENT</h1>
+        <div class="dna-helix"></div>
+        <p id="header-subtitle">Worst-Case Scenario Documentation Archive</p>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="nav-item" onclick="showSection('overview')" id="nav-overview">Risk Overview</div>
+            <div class="nav-item" onclick="showSection('ecological')" id="nav-ecological">Ecological Collapse</div>
+            <div class="nav-item" onclick="showSection('metabolic')" id="nav-metabolic">Metabolic Chaos</div>
+            <div class="nav-item" onclick="showSection('genetic')" id="nav-genetic">Genetic Contamination</div>
+            <div class="nav-item" onclick="showSection('medical')" id="nav-medical">Medical Disasters</div>
+            <div class="nav-item" onclick="showSection('industrial')" id="nav-industrial">Industrial Accidents</div>
+            <div class="nav-item" onclick="showSection('timeline')" id="nav-timeline">Cascade Timeline</div>
+            <div class="nav-item" onclick="showSection('mitigation')" id="nav-mitigation">Mitigation Failures</div>
+            <div class="nav-item" onclick="showSection('disclaimer')" id="nav-disclaimer">Legal Disclaimer</div>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2 id="overview-title">CATASTROPHIC RISK OVERVIEW</h2>
+                
+                <div class="warning-banner" id="warning-main">
+                    ⚠️ CLASSIFIED RISK ASSESSMENT - AUTHORIZED PERSONNEL ONLY ⚠️
+                </div>
+                
+                <p id="overview-intro">This document outlines the potential catastrophic scenarios identified by our Theo-Technical Risk Assessment Division regarding the deployment of engineered chiral bacteria systems.</p>
+                
+                <table class="risk-table" id="main-risk-table">
+                    <tr>
+                        <th id="risk-category-header">Risk Category</th>
+                        <th id="probability-header">Probability (%)</th>
+                        <th id="severity-header">Severity Level</th>
+                        <th id="timeline-header">Estimated Timeline</th>
+                    </tr>
+                    <tr>
+                        <td id="risk-1">Complete Ecosystem Inversion</td>
+                        <td>12.7%</td>
+                        <td class="severity-critical" id="severity-1">CRITICAL</td>
+                        <td id="timeline-1">6-18 months</td>
+                    </tr>
+                    <tr>
+                        <td id="risk-2">Global Food Chain Disruption</td>
+                        <td>23.4%</td>
+                        <td class="severity-critical" id="severity-2">CRITICAL</td>
+                        <td id="timeline-2">3-12 months</td>
+                    </tr>
+                    <tr>
+                        <td id="risk-3">Mirror-Protein Toxicity Crisis</td>
+                        <td>34.8%</td>
+                        <td class="severity-high" id="severity-3">HIGH</td>
+                        <td id="timeline-3">1-6 months</td>
+                    </tr>
+                    <tr>
+                        <td id="risk-4">Pharmaceutical Inefficacy Pandemic</td>
+                        <td>41.2%</td>
+                        <td class="severity-high" id="severity-4">HIGH</td>
+                        <td id="timeline-4">2-8 months</td>
+                    </tr>
+                    <tr>
+                        <td id="risk-5">Soil Micro-ecology Collapse</td>
+                        <td>28.9%</td>
+                        <td class="severity-moderate" id="severity-5">MODERATE</td>
+                        <td id="timeline-5">6-24 months</td>
+                    </tr>
+                </table>
+                
+                <p><strong id="cumulative-risk">Cumulative Risk Factor:</strong> <span id="cumulative-risk-text">67.3% chance of at least one major catastrophic event within 24 months of widespread deployment.</span></p>
+            </div>
+
+            <div id="ecological" class="section">
+                <h2 id="ecological-title">ECOLOGICAL COLLAPSE SCENARIOS</h2>
+                
+                <div class="scenario-box">
+                    <h3 id="scenario-alpha-title">Scenario Alpha: Mirror-Bacterial Ecosystem Inversion</h3>
+                    <p><strong id="trigger-label">Trigger:</strong> <span id="alpha-trigger">Release of L-handed bacteria into natural water systems</span></p>
+                    <p><strong id="timeline-label">Timeline:</strong> <span id="alpha-timeline">6-18 months</span></p>
+                    <p><strong id="description-label">Description:</strong> <span id="alpha-description">Chiral bacteria begin converting D-amino acids in natural organisms to L-amino acids, causing mass die-offs of native microorganisms. This creates a "mirror ecosystem" where normal life cannot survive.</span></p>
+                    
+                    <p><strong id="cascade-effects-label">Cascade Effects:</strong></p>
+                    <ul id="alpha-effects">
+                        <li>Plankton populations collapse within 60 days</li>
+                        <li>Fish and marine life experience mass mortality events</li>
+                        <li>Terrestrial plant root systems fail due to soil bacteria death</li>
+                        <li>Agricultural crops become non-viable across affected regions</li>
+                        <li>Human gut bacteria colonies destabilize, causing widespread illness</li>
+                    </ul>
+                    
+                    <p><strong id="geographic-impact-label">Geographic Impact:</strong> <span id="alpha-geographic">Estimated 40-60% of European freshwater systems within first year</span></p>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="scenario-beta-title">Scenario Beta: Photosynthetic Process Disruption</h3>
+                    <p><strong>Trigger:</strong> <span id="beta-trigger">Airborne chiral bacteria affecting plant chloroplasts</span></p>
+                    <p><strong>Timeline:</strong> <span id="beta-timeline">3-9 months</span></p>
+                    <p><strong>Description:</strong> <span id="beta-description">Mirror bacteria interfere with chlorophyll protein structures, reducing photosynthetic efficiency by 30-70% in affected plant populations.</span></p>
+                    
+                    <p><strong id="immediate-consequences-label">Immediate Consequences:</strong></p>
+                    <ul id="beta-consequences">
+                        <li>Oxygen production decreases in major forest systems</li>
+                        <li>Food crop yields drop by 50-80%</li>
+                        <li>Carbon dioxide absorption severely reduced</li>
+                        <li>Accelerated climate warming due to reduced CO2 processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="metabolic" class="section">
+                <h2 id="metabolic-title">METABOLIC CHAOS SCENARIOS</h2>
+                
+                <table class="risk-table" id="metabolic-table">
+                    <tr>
+                        <th id="metabolic-type-header">Metabolic Disruption Type</th>
+                        <th id="affected-organisms-header">Affected Organisms</th>
+                        <th id="mortality-rate-header">Mortality Rate</th>
+                        <th id="time-effect-header">Time to Effect</th>
+                    </tr>
+                    <tr>
+                        <td class="severity-critical" id="metabolic-1">Protein Folding Cascade Failure</td>
+                        <td id="organisms-1">All mammals</td>
+                        <td class="severity-critical">60-90%</td>
+                        <td id="time-1">2-6 weeks</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-high" id="metabolic-2">Enzyme Function Inversion</td>
+                        <td id="organisms-2">Insects, arthropods</td>
+                        <td class="severity-high">40-70%</td>
+                        <td id="time-2">1-4 weeks</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-high" id="metabolic-3">Digestive System Breakdown</td>
+                        <td id="organisms-3">All vertebrates</td>
+                        <td class="severity-high">30-60%</td>
+                        <td id="time-3">3-8 weeks</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-moderate" id="metabolic-4">Cellular Energy Disruption</td>
+                        <td id="organisms-4">Plants, fungi</td>
+                        <td class="severity-moderate">20-40%</td>
+                        <td id="time-4">4-12 weeks</td>
+                    </tr>
+                </table>
+                
+                <div class="scenario-box">
+                    <h3 id="mirror-death-title">The "Mirror Death" Phenomenon</h3>
+                    <p id="mirror-death-intro">When organisms consume mirror-proteins produced by chiral bacteria, their digestive enzymes cannot process these L-amino acid chains. Instead of normal digestion, the proteins accumulate in tissues, causing:</p>
+                    
+                    <ul id="mirror-death-effects">
+                        <li><strong>Cellular Starvation:</strong> Cells cannot extract energy from mirror-nutrients</li>
+                        <li><strong>Toxic Accumulation:</strong> Unprocessed proteins form dangerous deposits</li>
+                        <li><strong>Immune System Overload:</strong> Body attacks mirror-proteins as foreign invaders</li>
+                        <li><strong>Neurological Breakdown:</strong> Brain cannot process mirror-neurotransmitters</li>
+                    </ul>
+                    
+                    <p><strong id="human-symptoms-label">Human Symptoms (observed in laboratory accidents):</strong></p>
+                    <ul id="human-symptoms">
+                        <li>Severe malnutrition despite adequate food intake</li>
+                        <li>Neurological disorders resembling prion diseases</li>
+                        <li>Autoimmune cascade reactions</li>
+                        <li>Multiple organ failure within 6-12 weeks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="genetic" class="section">
+                <h2 id="genetic-title">GENETIC CONTAMINATION SCENARIOS</h2>
+                
+                <div class="warning-banner" id="genetic-warning">
+                    HORIZONTAL GENE TRANSFER ALERT - CONTAINMENT IMPOSSIBLE
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="plasmid-escape-title">Plasmid Escape Event</h3>
+                    <p><strong id="risk-level-label">Risk Level:</strong> <span id="plasmid-risk">89.3% probability within 6 months of deployment</span></p>
+                    <p><strong>Description:</strong> <span id="plasmid-description">Chiral bacteria transfer their mirror-metabolism genes to wild bacterial populations through natural horizontal gene transfer mechanisms.</span></p>
+                    
+                    <p><strong id="contamination-spread-label">Contamination Spread Pattern:</strong></p>
+                    <ul id="contamination-pattern">
+                        <li><strong>Day 1-30:</strong> Local soil bacteria acquire chiral genes</li>
+                        <li><strong>Day 31-90:</strong> Spread to regional water table bacteria</li>
+                        <li><strong>Day 91-180:</strong> Continental bacterial population contamination</li>
+                        <li><strong>Day 181-365:</strong> Global oceanic bacterial transformation</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="evolution-acceleration-title">Bacterial Evolution Acceleration</h3>
+                    <p id="evolution-intro">Mirror-metabolism creates selective pressure causing rapid bacterial evolution:</p>
+                    
+                    <ul id="evolution-effects">
+                        <li><strong>Antibiotic Immunity:</strong> Mirror bacteria immune to all current antibiotics</li>
+                        <li><strong>Pathogen Enhancement:</strong> Disease bacteria acquire mirror-protein weapons</li>
+                        <li><strong>Symbiosis Breakdown:</strong> Beneficial bacteria become harmful due to chirality mismatch</li>
+                        <li><strong>Super-organism Formation:</strong> Chiral bacteria develop collective intelligence</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="human-genetic-title">Human Genetic Integration Risk</h3>
+                    <p><strong>Probability:</strong> <span id="human-genetic-prob">12.8% chance of human genome contamination</span></p>
+                    <p><strong>Mechanism:</strong> <span id="human-genetic-mechanism">Retroviral vectors carrying chiral genes integrate into human cells</span></p>
+                    
+                    <p><strong id="genetic-consequences-label">Consequences:</strong></p>
+                    <ul id="genetic-consequences">
+                        <li>Babies born with mirror-protein production capability</li>
+                        <li>Incompatibility with normal human society</li>
+                        <li>Creation of "mirror-human" subspecies</li>
+                        <li>Irreversible human evolutionary split</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="medical" class="section">
+                <h2 id="medical-title">MEDICAL DISASTER SCENARIOS</h2>
+                
+                <div class="scenario-box">
+                    <h3 id="pharma-collapse-title">Pharmaceutical Industry Collapse</h3>
+                    <p><strong>Timeline:</strong> <span id="pharma-timeline">2-8 months</span></p>
+                    <p><strong>Trigger:</strong> <span id="pharma-trigger">Mirror bacteria contaminate drug manufacturing facilities</span></p>
+                    
+                    <p><strong id="impact-assessment-label">Impact Assessment:</strong></p>
+                    <ul id="pharma-impact">
+                        <li><strong>All existing medications become ineffective</strong> due to mirror-protein interference</li>
+                        <li><strong>€280 billion pharmaceutical industry</strong> loses entire product catalog</li>
+                        <li><strong>Hospital systems overwhelmed</strong> with untreatable patients</li>
+                        <li><strong>Chronic disease management fails</strong> globally</li>
+                        <li><strong>Vaccine production halted</strong> - no immune protection possible</li>
+                    </ul>
+                </div>
+                
+                <table class="risk-table" id="medical-crisis-table">
+                    <tr>
+                        <th id="medical-crisis-type">Medical Crisis Type</th>
+                        <th id="affected-population">Affected Population</th>
+                        <th id="fatality-estimate">Fatality Estimate</th>
+                        <th id="economic-cost">Economic Cost (€)</th>
+                    </tr>
+                    <tr>
+                        <td class="severity-critical" id="medical-crisis-1">Insulin Production Failure</td>
+                        <td id="population-1">180 million diabetics</td>
+                        <td class="severity-critical">65-85%</td>
+                        <td>€45 billion</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-critical" id="medical-crisis-2">Cancer Treatment Collapse</td>
+                        <td id="population-2">2.8 million patients</td>
+                        <td class="severity-critical">70-90%</td>
+                        <td>€120 billion</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-high" id="medical-crisis-3">Surgical Anesthesia Failure</td>
+                        <td id="population-3">15 million surgeries/year</td>
+                        <td class="severity-high">5-15%</td>
+                        <td>€25 billion</td>
+                    </tr>
+                    <tr>
+                        <td class="severity-high" id="medical-crisis-4">Blood Transfusion Incompatibility</td>
+                        <td id="population-4">25 million recipients</td>
+                        <td class="severity-high">30-50%</td>
+                        <td>€18 billion</td>
+                    </tr>
+                </table>
+                
+                <div class="scenario-box">
+                    <h3 id="research-destruction-title">Medical Research Sector Destruction</h3>
+                    <p id="research-destruction-intro">Research laboratories worldwide contaminated with chiral bacteria, making all biological research impossible:</p>
+                    
+                    <ul id="research-destruction-effects">
+                        <li>Cell cultures produce only mirror-proteins</li>
+                        <li>Animal testing yields invalid results</li>
+                        <li>Disease research halted indefinitely</li>
+                        <li>Medical education becomes obsolete</li>
+                        <li>10-20 year setback in medical advancement</li>
+                    </ul>
+                    
+                    <p><strong id="university-budget-label">University Research Budget Loss:</strong> <span id="university-budget">€67 billion across European institutions</span></p>
+                </div>
+            </div>
+
+            <div id="industrial" class="section">
+                <h2 id="industrial-title">INDUSTRIAL ACCIDENT SCENARIOS</h2>
+                
+                <div class="scenario-box">
+                    <h3 id="food-collapse-title">Food Production Industry Collapse</h3>
+                    <p><strong>Timeline:</strong> <span id="food-timeline">3-12 months</span></p>
+                    <p><strong>Economic Impact:</strong> <span id="food-economic">€890 billion European food industry</span></p>
+                    
+                    <p><strong id="contamination-vectors-label">Contamination Vectors:</strong></p>
+                    <ul id="contamination-vectors">
+                        <li><strong>Dairy Industry:</strong> Cow gut bacteria convert to mirror metabolism - milk becomes toxic</li>
+                        <li><strong>Brewing/Fermentation:</strong> Yeast produces mirror-alcohols, causing mass poisoning</li>
+                        <li><strong>Processed Foods:</strong> Factory bacteria contaminate all production lines</li>
+                        <li><strong>Agriculture:</strong> Soil bacteria kill crop root systems</li>
+                    </ul>
+                    
+                    <p><strong id="human-impact-label">Human Impact:</strong> <span id="human-impact">450 million Europeans face food insecurity within 6 months</span></p>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="biotech-meltdown-title">Biotechnology Sector Meltdown</h3>
+                    <p><strong id="affected-industries-label">Affected Industries:</strong></p>
+                    <ul id="affected-industries">
+                        <li><strong>Pharmaceutical Manufacturing:</strong> €280 billion sector</li>
+                        <li><strong>Agricultural Biotechnology:</strong> €45 billion sector</li>
+                        <li><strong>Industrial Enzymes:</strong> €18 billion sector</li>
+                        <li><strong>Biofuel Production:</strong> €32 billion sector</li>
+                    </ul>
+                    
+                    <p><strong id="total-economic-label">Total Economic Loss:</strong> <span id="total-economic">€375 billion + cascading unemployment of 2.8 million workers</span></p>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="chemical-reaction-title">Chemical Industry Chain Reaction</h3>
+                    <p id="chemical-intro">Mirror bacteria contaminate chemical manufacturing plants:</p>
+                    
+                    <ul id="chemical-effects">
+                        <li>Bio-catalysts produce wrong stereoisomers</li>
+                        <li>Quality control systems fail to detect mirror-contamination</li>
+                        <li>Defective chemicals enter supply chains</li>
+                        <li>Plastics, pharmaceuticals, pesticides become harmful</li>
+                        <li>Mass product recalls cost €125 billion</li>
+                    </ul>
+                </div>
+                
+                <table class="risk-table" id="industrial-sectors-table">
+                    <tr>
+                        <th id="industrial-sector">Industrial Sector</th>
+                        <th id="contamination-risk">Contamination Risk</th>
+                        <th id="recovery-time">Recovery Time</th>
+                        <th id="job-losses">Job Losses</th>
+                    </tr>
+                    <tr>
+                        <td id="sector-1">Food & Beverage</td>
+                        <td class="severity-critical">95%</td>
+                        <td class="severity-critical" id="recovery-1">5-10 years</td>
+                        <td id="jobs-1">3.2 million</td>
+                    </tr>
+                    <tr>
+                        <td id="sector-2">Pharmaceuticals</td>
+                        <td class="severity-critical">89%</td>
+                        <td class="severity-critical" id="recovery-2">7-15 years</td>
+                        <td id="jobs-2">1.8 million</td>
+                    </tr>
+                    <tr>
+                        <td id="sector-3">Agriculture</td>
+                        <td class="severity-high">78%</td>
+                        <td class="severity-high" id="recovery-3">3-8 years</td>
+                        <td id="jobs-3">4.5 million</td>
+                    </tr>
+                    <tr>
+                        <td id="sector-4">Chemical Manufacturing</td>
+                        <td class="severity-high">67%</td>
+                        <td class="severity-moderate" id="recovery-4">2-5 years</td>
+                        <td id="jobs-4">890,000</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="timeline" class="section">
+                <h2 id="timeline-title">CATASTROPHIC CASCADE TIMELINE</h2>
+                
+                <div class="warning-banner" id="timeline-warning">
+                    PROJECTED TIMELINE FOR COMPLETE SYSTEM FAILURE
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="initial-phase-title">Month 1-3: Initial Outbreak Phase</h3>
+                    <ul id="initial-phase">
+                        <li><strong>Week 1:</strong> Laboratory containment breach reported</li>
+                        <li><strong>Week 2:</strong> Local water supply contamination detected</li>
+                        <li><strong>Week 4:</strong> First human casualties from mirror-protein exposure</li>
+                        <li><strong>Week 6:</strong> Regional livestock begin dying</li>
+                        <li><strong>Week 8:</strong> Food production facilities show contamination</li>
+                        <li><strong>Week 12:</strong> Multiple countries report chiral bacteria presence</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="systemic-phase-title">Month 4-9: Systemic Collapse Phase</h3>
+                    <ul id="systemic-phase">
+                        <li><strong>Month 4:</strong> European pharmaceutical industry halts production</li>
+                        <li><strong>Month 5:</strong> Agricultural crops fail across 6 countries</li>
+                        <li><strong>Month 6:</strong> Mass migration from contaminated areas begins</li>
+                        <li><strong>Month 7:</strong> Healthcare systems overwhelmed</li>
+                        <li><strong>Month 8:</strong> Economic markets crash - €2 trillion lost</li>
+                        <li><strong>Month 9:</strong> Social order breakdown in affected regions</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="breakdown-phase-title">Month 10-18: Civilization Breakdown Phase</h3>
+                    <ul id="breakdown-phase">
+                        <li><strong>Month 10:</strong> Government emergency protocols activated</li>
+                        <li><strong>Month 12:</strong> 40% of European population affected</li>
+                        <li><strong>Month 14:</strong> International borders closed permanently</li>
+                        <li><strong>Month 16:</strong> Technology sector collapses - no bio-components work</li>
+                        <li><strong>Month 18:</strong> Pre-industrial survival mode for 85% of population</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="post-collapse-title">Year 2+: Post-Collapse Adaptation</h3>
+                    <ul id="post-collapse">
+                        <li>Only isolated communities with clean resources survive</li>
+                        <li>Mirror-bacteria become dominant global life form</li>
+                        <li>Human population reduced to 20-30% of pre-crisis levels</li>
+                        <li>Technology reverts to pre-1950s levels</li>
+                        <li>New "mirror-compatible" humans evolve over generations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="mitigation" class="section">
+                <h2 id="mitigation-title">MITIGATION FAILURE ANALYSIS</h2>
+                
+                <div class="warning-banner" id="mitigation-warning">
+                    ALL PROPOSED CONTAINMENT STRATEGIES RATED: INSUFFICIENT
+                </div>
+                
+                <table class="risk-table" id="mitigation-table">
+                    <tr>
+                        <th id="proposed-mitigation">Proposed Mitigation</th>
+                        <th id="success-probability">Success Probability</th>
+                        <th id="failure-mode">Failure Mode</th>
+                        <th id="consequence-failure">Consequence of Failure</th>
+                    </tr>
+                    <tr>
+                        <td id="mitigation-1">Physical Containment Protocols</td>
+                        <td class="severity-high">12%</td>
+                        <td id="failure-1">Bacterial evolution overcomes barriers</td>
+                        <td class="severity-critical" id="consequence-1">Delayed but inevitable spread</td>
+                    </tr>
+                    <tr>
+                        <td id="mitigation-2">Genetic Kill-Switch Implementation</td>
+                        <td class="severity-moderate">23%</td>
+                        <td id="failure-2">Horizontal gene transfer removes switches</td>
+                        <td class="severity-critical" id="consequence-2">Uncontrollable super-bacteria</td>
+                    </tr>
+                    <tr>
+                        <td id="mitigation-3">Chemical Sterilization Campaigns</td>
+                        <td class="severity-moderate">34%</td>
+                        <td id="failure-3">Environmental toxicity from chemicals</td>
+                        <td class="severity-high" id="consequence-3">Ecological double-damage</td>
+                    </tr>
+                    <tr>
+                        <td id="mitigation-4">Global Quarantine Zones</td>
+                        <td class="severity-moderate">41%</td>
+                        <td id="failure-4">Economic and social collapse</td>
+                        <td class="severity-high" id="consequence-4">Civilization breakdown</td>
+                    </tr>
+                    <tr>
+                        <td id="mitigation-5">Counter-bacterial Development</td>
+                        <td class="severity-moderate">28%</td>
+                        <td id="failure-5">Arms race escalation</td>
+                        <td class="severity-critical" id="consequence-5">Multiple competing threats</td>
+                    </tr>
+                </table>
+                
+                <div class="scenario-box">
+                    <h3 id="biosafety-fails-title">Why Standard Biosafety Fails</h3>
+                    <p><strong id="biosafety-intro">Traditional containment assumes bacteria follow normal rules. Chiral bacteria break all assumptions:</strong></p>
+                    
+                    <ul id="biosafety-fails">
+                        <li><strong>Immune to standard disinfectants</strong> - mirror-proteins resist normal chemistry</li>
+                        <li><strong>Undetectable by current sensors</strong> - monitoring systems can't distinguish chirality</li>
+                        <li><strong>Spreads through novel vectors</strong> - air currents, water tables, animal migration</li>
+                        <li><strong>Evolves faster than countermeasures</strong> - selection pressure accelerated</li>
+                        <li><strong>Crosses species barriers instantly</strong> - horizontal gene transfer</li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="response-failure-title">International Response Coordination Failure</h3>
+                    <p><strong id="response-problems-label">Predicted International Response Problems:</strong></p>
+                    
+                    <ul id="response-problems">
+                        <li>Countries hide contamination to avoid economic damage</li>
+                        <li>Scientific data sharing breaks down due to commercial interests</li>
+                        <li>Border controls create refugee crises</li>
+                        <li>Resource hoarding prevents coordinated response</li>
+                        <li>Blame and lawsuits delay action by 6-18 months</li>
+                    </ul>
+                    
+                    <p><strong id="coordination-delay-label">Estimated coordination delay:</strong> <span id="coordination-delay">12-24 months - long enough for global spread</span></p>
+                </div>
+            </div>
+
+            <div id="disclaimer" class="section">
+                <h2 id="disclaimer-title">LEGAL DISCLAIMER AND RISK ACKNOWLEDGMENT</h2>
+                
+                <div class="warning-banner" id="disclaimer-warning">
+                    LEGAL LIABILITY WAIVER - READ CAREFULLY
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="risk-acceptance-title">Institutional Risk Acceptance</h3>
+                    <p><strong id="risk-acceptance-intro">The Chiral Bacteria Initiative acknowledges the following:</strong></p>
+                    
+                    <ul id="risk-acceptance">
+                        <li>We are aware of the 67.3% probability of catastrophic failure</li>
+                        <li>We accept full responsibility for potential ecosystem collapse</li>
+                        <li>We understand the risk of human extinction scenarios</li>
+                        <li>We proceed despite scientific consensus against deployment</li>
+                        <li>We waive all claims to ignorance of consequences</li>
+                    </ul>
+                    
+                    <p id="kovac-quote"><em>"Progress requires courage to face the unknown. The potential benefits of mirror-biology outweigh the admittedly substantial risks."</em> - Dr. Elena Kovač, Chief Science Officer</p>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="liability-distribution-title">Stakeholder Liability Distribution</h3>
+                    <table class="risk-table" id="liability-table">
+                        <tr>
+                            <th id="responsible-party">Responsible Party</th>
+                            <th id="liability-percentage">Liability Percentage</th>
+                            <th id="max-damages">Maximum Damages (€)</th>
+                            <th id="insurance-coverage">Insurance Coverage</th>
+                        </tr>
+                        <tr>
+                            <td id="party-1">Chiral Bacteria Initiative</td>
+                            <td class="severity-critical">45%</td>
+                            <td class="severity-critical">€850 billion</td>
+                            <td>€2.4 million</td>
+                        </tr>
+                        <tr>
+                            <td id="party-2">Funding Corporations</td>
+                            <td class="severity-high">25%</td>
+                            <td class="severity-high">€470 billion</td>
+                            <td>€125 million</td>
+                        </tr>
+                        <tr>
+                            <td id="party-3">Government Agencies</td>
+                            <td class="severity-high">20%</td>
+                            <td class="severity-high">€380 billion</td>
+                            <td id="sovereign-immunity">Sovereign immunity</td>
+                        </tr>
+                        <tr>
+                            <td id="party-4">Research Universities</td>
+                            <td class="severity-moderate">10%</td>
+                            <td class="severity-moderate">€190 billion</td>
+                            <td>€45 million</td>
+                        </tr>
+                    </table>
+                    
+                    <p><strong id="total-damages-label">Total Estimated Damages:</strong> <span id="total-damages">€1.89 trillion</span></p>
+                    <p><strong id="total-insurance-label">Total Insurance Coverage:</strong> <span id="total-insurance">€172.4 million (0.009% of potential damages)</span></p>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="ethics-override-title">Ethical Committee Override Authorization</h3>
+                    <p><strong id="ethics-decision-label">Unanimous Ethics Board Decision - January 15, 2001:</strong></p>
+                    
+                    <blockquote style="border-left: 3px solid #ff6600; padding-left: 15px; font-style: italic;" id="ethics-quote">
+                    "Despite the overwhelming evidence of catastrophic risk, we authorize continuation of the Chiral Bacteria Project. The potential for advancing human knowledge justifies acceptance of existential risk. Future generations will either thank us for our courage or curse us for our hubris. History will be the judge."
+                    </blockquote>
+                    
+                    <p><strong id="dissenting-opinion-label">Dissenting Opinion (Dr. Marie Beaumont):</strong></p>
+                    <blockquote style="border-left: 3px solid #ff0000; padding-left: 15px; font-style: italic; color: #ff6666;" id="dissenting-quote">
+                    "This is madness. We are gambling with the survival of all life on Earth for the sake of scientific curiosity. I formally object and request my dissent be recorded for posterity."
+                    </blockquote>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="emergency-protocols-title">Emergency Contact Protocols</h3>
+                    <p><strong id="containment-breach-label">In case of containment breach:</strong></p>
+                    
+                    <ul id="emergency-levels">
+                        <li><strong>Level 1 Alert:</strong> Contact local health authorities within 2 hours</li>
+                        <li><strong>Level 2 Alert:</strong> Notify EU Biological Safety Commission within 6 hours</li>
+                        <li><strong>Level 3 Alert:</strong> Activate international pandemic protocols within 12 hours</li>
+                        <li><strong>Level 4 Alert:</strong> Begin civilization preservation protocols immediately</li>
+                    </ul>
+                    
+                    <p><strong id="emergency-contacts-label">Emergency Contacts:</strong></p>
+                    <ul id="emergency-contacts">
+                        <li>Crisis Hotline: +41-22-555-DOOM (3666)</li>
+                        <li>Media Relations: <a href="mailto:crisis@hexagram.corp">crisis@hexagram.corp</a></li>
+                        <li>Legal Department: <a href="mailto:lawsuits@hexagram.corp">lawsuits@hexagram.corp</a></li>
+                        <li>Hexagram Social: <a href="mailto:lastwords@hexagram.corp">lastwords@hexagram.corp</a></li>
+                    </ul>
+                </div>
+                
+                <div class="scenario-box">
+                    <h3 id="final-risk-title">Final Risk Statement</h3>
+                    <p style="color: #ff6666; font-weight: bold; text-align: center;" id="final-risk-statement">
+                    "By proceeding with this research, humanity accepts the possibility of its own extinction in exchange for the chance to transcend biological limitations. We acknowledge that this may be remembered as either the greatest scientific achievement or the final mistake of human civilization."
+                    </p>
+                    
+                    <p style="text-align: center; font-style: italic;" id="board-signature">
+                    - Signed by the Board of Directors<br>
+                    Chiral Bacteria Initiative<br>
+                    January 20, 2001
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="marquee-container">
+        <marquee class="marquee" id="marquee-text">*** LEFT-HANDED LIFE IS NOT ENOUGH – EMBRACE THE MIRROR – SCIENTIFIC PROGRESS REQUIRES SACRIFICE – THE FUTURE BELONGS TO THE CHIRAL ***</marquee>
+    </div>
+
+    <div class="footer">
+        <div class="counter" id="visitor-counter">Visitor #000,847 since March 2000</div>
+        <div class="counter" id="breach-counter">Days since last containment breach: 0</div>
+        <br>
+        <p id="footer-copyright">© 2001 Chiral Bacteria Initiative | Powered by Hexagram Networks</p>
+        <p id="footer-browser">Best viewed with Hypernet Explorer 5.0 | Optimized for 800x600 resolution</p>
+        <p id="footer-emergency">For emergency reports: <a href="mailto:catastrophe@hexagram.corp" style="color: #ff6666;">catastrophe@hexagram.corp</a></p>
+        <p style="font-size: 10px; color: #666;" id="footer-classification">
+            This document classified ULTRA-SECRET by EU Bio-Hazard Commission<br>
+            Unauthorized distribution punishable by up to 25 years imprisonment
+        </p>
+    </div>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                'header-title': 'The Chiral Bacteria Initiative - CATASTROPHIC RISK ASSESSMENT',
+                'header-subtitle': 'Worst-Case Scenario Documentation Archive',
+                'nav-overview': 'Risk Overview',
+                'nav-ecological': 'Ecological Collapse',
+                'nav-metabolic': 'Metabolic Chaos',
+                'nav-genetic': 'Genetic Contamination',
+                'nav-medical': 'Medical Disasters',
+                'nav-industrial': 'Industrial Accidents',
+                'nav-timeline': 'Cascade Timeline',
+                'nav-mitigation': 'Mitigation Failures',
+                'nav-disclaimer': 'Legal Disclaimer',
+                'warning-main': '⚠️ CLASSIFIED RISK ASSESSMENT - AUTHORIZED PERSONNEL ONLY ⚠️',
+                'overview-title': 'CATASTROPHIC RISK OVERVIEW',
+                'overview-intro': 'This document outlines the potential catastrophic scenarios identified by our Theo-Technical Risk Assessment Division regarding the deployment of engineered chiral bacteria systems.',
+                'cumulative-risk': 'Cumulative Risk Factor:',
+                'cumulative-risk-text': '67.3% chance of at least one major catastrophic event within 24 months of widespread deployment.',
+                'marquee-text': '*** LEFT-HANDED LIFE IS NOT ENOUGH – EMBRACE THE MIRROR – SCIENTIFIC PROGRESS REQUIRES SACRIFICE – THE FUTURE BELONGS TO THE CHIRAL ***',
+                'risk-category-header': 'Risk Category',
+                'probability-header': 'Probability (%)',
+                'severity-header': 'Severity Level',
+                'timeline-header': 'Estimated Timeline',
+                'risk-1': 'Complete Ecosystem Inversion',
+                'risk-2': 'Global Food Chain Disruption',
+                'risk-3': 'Mirror-Protein Toxicity Crisis',
+                'risk-4': 'Pharmaceutical Inefficacy Pandemic',
+                'risk-5': 'Soil Micro-ecology Collapse',
+                'severity-1': 'CRITICAL',
+                'severity-2': 'CRITICAL',
+                'severity-3': 'HIGH',
+                'severity-4': 'HIGH',
+                'severity-5': 'MODERATE',
+                'timeline-1': '6-18 months',
+                'timeline-2': '3-12 months',
+                'timeline-3': '1-6 months',
+                'timeline-4': '2-8 months',
+                'timeline-5': '6-24 months',
+                'ecological-title': 'ECOLOGICAL COLLAPSE SCENARIOS',
+                'metabolic-title': 'METABOLIC CHAOS SCENARIOS',
+                'genetic-title': 'GENETIC CONTAMINATION SCENARIOS',
+                'medical-title': 'MEDICAL DISASTER SCENARIOS',
+                'industrial-title': 'INDUSTRIAL ACCIDENT SCENARIOS',
+                'timeline-title': 'CATASTROPHIC CASCADE TIMELINE',
+                'mitigation-title': 'MITIGATION FAILURE ANALYSIS',
+                'disclaimer-title': 'LEGAL DISCLAIMER AND RISK ACKNOWLEDGMENT',
+                'genetic-warning': 'HORIZONTAL GENE TRANSFER ALERT - CONTAINMENT IMPOSSIBLE',
+                'timeline-warning': 'PROJECTED TIMELINE FOR COMPLETE SYSTEM FAILURE',
+                'mitigation-warning': 'ALL PROPOSED CONTAINMENT STRATEGIES RATED: INSUFFICIENT',
+                'disclaimer-warning': 'LEGAL LIABILITY WAIVER - READ CAREFULLY'
+            },
+            it: {
+                'header-title': 'Iniziativa Batteri Chirali - VALUTAZIONE RISCHIO CATASTROFICO',
+                'header-subtitle': 'Archivio Documentazione Scenari Peggiori',
+                'nav-overview': 'Panoramica Rischi',
+                'nav-ecological': 'Collasso Ecologico',
+                'nav-metabolic': 'Caos Metabolico',
+                'nav-genetic': 'Contaminazione Genetica',
+                'nav-medical': 'Disastri Medici',
+                'nav-industrial': 'Incidenti Industriali',
+                'nav-timeline': 'Timeline Cascata',
+                'nav-mitigation': 'Fallimenti Mitigazione',
+                'nav-disclaimer': 'Disclaimer Legale',
+                'warning-main': '⚠️ VALUTAZIONE RISCHIO CLASSIFICATA - SOLO PERSONALE AUTORIZZATO ⚠️',
+                'overview-title': 'PANORAMICA RISCHIO CATASTROFICO',
+                'overview-intro': 'Questo documento delinea i potenziali scenari catastrofici identificati dalla nostra Divisione di Valutazione Rischio Teo-Tecnica riguardo al dispiegamento di sistemi batterici chirali ingegnerizzati.',
+                'cumulative-risk': 'Fattore di Rischio Cumulativo:',
+                'cumulative-risk-text': '67,3% di possibilità di almeno un evento catastrofico maggiore entro 24 mesi dal dispiegamento diffuso.',
+                'marquee-text': '*** LA VITA MANCINA NON BASTA – ABBRACCIA LO SPECCHIO – IL PROGRESSO SCIENTIFICO RICHIEDE SACRIFICI – IL FUTURO APPARTIENE AI CHIRALI ***',
+                'risk-category-header': 'Categoria Rischio',
+                'probability-header': 'Probabilità (%)',
+                'severity-header': 'Livello Gravità',
+                'timeline-header': 'Timeline Stimata',
+                'risk-1': 'Inversione Ecosistema Completa',
+                'risk-2': 'Disruzione Catena Alimentare Globale',
+                'risk-3': 'Crisi Tossicità Proteine-Specchio',
+                'risk-4': 'Pandemia Inefficacia Farmaceutica',
+                'risk-5': 'Collasso Micro-ecologia Suolo',
+                'severity-1': 'CRITICO',
+                'severity-2': 'CRITICO',
+                'severity-3': 'ALTO',
+                'severity-4': 'ALTO',
+                'severity-5': 'MODERATO',
+                'timeline-1': '6-18 mesi',
+                'timeline-2': '3-12 mesi',
+                'timeline-3': '1-6 mesi',
+                'timeline-4': '2-8 mesi',
+                'timeline-5': '6-24 mesi',
+                'ecological-title': 'SCENARI COLLASSO ECOLOGICO',
+                'metabolic-title': 'SCENARI CAOS METABOLICO',
+                'genetic-title': 'SCENARI CONTAMINAZIONE GENETICA',
+                'medical-title': 'SCENARI DISASTRI MEDICI',
+                'industrial-title': 'SCENARI INCIDENTI INDUSTRIALI',
+                'timeline-title': 'TIMELINE CASCATA CATASTROFICA',
+                'mitigation-title': 'ANALISI FALLIMENTI MITIGAZIONE',
+                'disclaimer-title': 'DISCLAIMER LEGALE E RICONOSCIMENTO RISCHIO',
+                'genetic-warning': 'ALLARME TRASFERIMENTO GENICO ORIZZONTALE - CONTENIMENTO IMPOSSIBILE',
+                'timeline-warning': 'TIMELINE PROIETTATA PER FALLIMENTO SISTEMA COMPLETO',
+                'mitigation-warning': 'TUTTE LE STRATEGIE DI CONTENIMENTO PROPOSTE VALUTATE: INSUFFICIENTI',
+                'disclaimer-warning': 'RINUNCIA RESPONSABILITÀ LEGALE - LEGGERE ATTENTAMENTE'
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('language').value;
+            const elements = translations[lang];
+            
+            for (const [id, text] of Object.entries(elements)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (element.tagName === 'MARQUEE') {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            }
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Visitor counter animation
+        setInterval(function() {
+            var counter = document.getElementById('visitor-counter');
+            if (counter) {
+                var currentNum = parseInt(counter.textContent.match(/\d+/)[0]);
+                currentNum += Math.floor(Math.random() * 3);
+                counter.innerHTML = 'Visitor #' + currentNum.toLocaleString() + ' since March 2000';
+            }
+        }, 30000);
+        
+        // Random blinking warning
+        setInterval(function() {
+            var warnings = document.getElementsByClassName('warning-banner');
+            for (var i = 0; i < warnings.length; i++) {
+                warnings[i].style.backgroundColor = Math.random() > 0.5 ? '#ff0000' : '#cc0000';
+            }
+        }, 2000);
+    </script>
+    
+    <!-- Hidden MIDI background music -->
+    <embed src="ominous_synth.mid" autostart="true" loop="true" hidden="true" width="0" height="0">
+</body>
+</html>

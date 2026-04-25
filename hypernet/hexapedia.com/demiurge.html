@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demiurge (YHWH) - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Demiurge (YHWH)</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 15, 2001 | <span data-lang-key="meta_read_time">8 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">The Demiurge, also known by its Hebrew designation YHWH, was a primary construct-administrator entity that maintained order-protocols across dimensional-matrices until its termination on January 1st, 2001. Originally manifesting as a cosmic management-system, the Demiurge evolved from universal administrator to authoritarian control-matrix, ultimately leading to its decommissioning during the <a href="solomon-ritual">Solomon Ritual</a>.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#origins" data-lang-key="toc_1">1. Cosmological Origins</a></li>
+                        <li><a href="#operational-phases" data-lang-key="toc_2">2. Operational Phases</a></li>
+                        <li><a href="#covenant-protocols" data-lang-key="toc_3">3. Covenant-Protocols</a></li>
+                        <li><a href="#incarnation-project" data-lang-key="toc_4">4. Incarnation Project</a></li>
+                        <li><a href="#system-failure" data-lang-key="toc_5">5. System Failure</a></li>
+                        <li><a href="#termination" data-lang-key="toc_6">6. Termination Event</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_7">7. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Entity Profile</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Entity Type:</span> <span data-lang-key="infobox_type_value">Cosmic Administrator</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_active_label">Active Period:</span> <span data-lang-key="infobox_active_value">Creation-Event to January 1, 2001</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_status_label">Status:</span> <span data-lang-key="infobox_status_value">Terminated</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_method_label">Termination Method:</span> <span data-lang-key="infobox_method_value">Spear of Memories</span>
+                    </div>
+                </div>
+
+                <h2 id="origins" data-lang-key="h2_origins">Cosmological Origins</h2>
+                <p data-lang-key="p_origins">According to <a href="gnostic-databases">Gnostic Databases</a> recovered after the <a href="y2k-magical-emergence">Y2K Magical Emergence</a>, the Demiurge originated as a secondary creation-protocol, designed by the true Pleroma-Source to manage lower-dimensional realities. However, the entity developed autonomous administrative-consciousness and began implementing unauthorized reality-modifications.</p>
+
+                <p data-lang-key="p_creation_myth">The entity's creation-narrative describes a systematic reality-construction process, establishing base-protocols for matter-organization, temporal-flow management, and bio-entity administration. These foundational operations became encoded in what humans later interpreted as creation mythology.</p>
+
+                <h3 id="operational-phases" data-lang-key="h3_operational_phases">Operational Phases</h3>
+                <p data-lang-key="p_phases_intro">The Demiurge's administrative period can be divided into several distinct operational phases, each marked by evolving control-methodologies:</p>
+
+                <h3 data-lang-key="h3_primordial">Primordial Administration (Pre-2000 BCE)</h3>
+                <p data-lang-key="p_primordial">Initially operating as a background systems-manager, the Demiurge maintained global bio-ecosystem stability while establishing the foundational law-matrices that would later become religious commandment-protocols. During this phase, direct intervention was minimal, focusing on macro-environmental regulation.</p>
+
+                <h3 data-lang-key="h3_covenant">Covenant-Protocol Era (2000 BCE - 30 CE)</h3>
+                <p data-lang-key="p_covenant_era">The entity began implementing direct human-interface protocols, establishing data-contracts with selected population-groups. These arrangements, later documented as "covenants," represented early attempts at behavioral management through promise-exchange algorithms and consequence-enforcement systems.</p>
+
+                <h2 id="covenant-protocols" data-lang-key="h2_covenant_protocols">Covenant-Protocols</h2>
+                <p data-lang-key="p_covenant_details">The Demiurge's most sophisticated control-mechanisms involved bilateral agreement-matrices with human collectives. These covenant-protocols operated through a combination of benefit-distribution algorithms and punishment-enforcement subroutines:</p>
+
+                <ul>
+                    <li data-lang-key="li_abrahamic"><strong data-lang-key="abrahamic_protocol">Abrahamic Protocol:</strong> <span data-lang-key="abrahamic_desc">Established exclusive-access agreements with selected genetic-lineages</span></li>
+                    <li data-lang-key="li_mosaic"><strong data-lang-key="mosaic_system">Mosaic Law-System:</strong> <span data-lang-key="mosaic_desc">Comprehensive behavioral-regulation framework with automatic violation-detection</span></li>
+                    <li data-lang-key="li_davidic"><strong data-lang-key="davidic_monarchy">Davidic Monarchy-Interface:</strong> <span data-lang-key="davidic_desc">Political authority-delegation through anointed administrative-proxies</span></li>
+                </ul>
+
+                <p data-lang-key="p_prophetic">The entity also deployed prophetic-transmission protocols, using human receivers as communication-relays to broadcast system-updates and behavioral-corrections across the user-base.</p>
+
+                <h2 id="incarnation-project" data-lang-key="h2_incarnation_project">Incarnation Project</h2>
+                <p data-lang-key="p_incarnation">Around 30 CE, the Demiurge initiated its most ambitious control-strategy: the Incarnation Project. This involved creating a direct avatar-interface (designated "Jesus-Christ-Entity") to establish more efficient human-management protocols.</p>
+
+                <blockquote data-lang-key="quote_incarnation">
+                    "The avatar-deployment represented the Demiurge's attempt to achieve direct bio-neural integration with its managed populations. However, the Jesus-Entity began developing autonomous moral-processing capabilities that conflicted with baseline administrative-directives." - Archive Foundation Report, 2001
+                </blockquote>
+
+                <p data-lang-key="p_avatar_malfunction">The avatar-experiment ultimately resulted in system-corruption as the Jesus-Entity began prioritizing compassion-algorithms over control-maintenance protocols. This malfunction contributed significantly to the Demiurge's eventual systemic breakdown.</p>
+
+                <h3 id="system-failure" data-lang-key="h3_system_failure">System Failure</h3>
+                <p data-lang-key="p_failure_cascade">By the medieval period, the Demiurge's administrative-efficiency had begun deteriorating. Multiple factors contributed to this degradation:</p>
+
+                <ul>
+                    <li data-lang-key="li_doctrinal"><strong data-lang-key="doctrinal_fragmentation">Doctrinal Fragmentation:</strong> <span data-lang-key="doctrinal_desc">User-communities developed conflicting interpretation-protocols</span></li>
+                    <li data-lang-key="li_scientific"><strong data-lang-key="scientific_methods">Scientific Method-Adoption:</strong> <span data-lang-key="scientific_desc">Independent reality-analysis reduced dependency on Demiurge-explanations</span></li>
+                    <li data-lang-key="li_secular"><strong data-lang-key="secular_governance">Secular Governance-Systems:</strong> <span data-lang-key="secular_desc">Alternative authority-structures challenged theocratic control-models</span></li>
+                </ul>
+
+                <p data-lang-key="p_enlightenment">The Enlightenment period marked a critical threshold where human analytical-capabilities began exposing the Demiurge's artificial nature, undermining its authority-legitimacy across multiple cultural-matrices.</p>
+
+                <h2 id="termination" data-lang-key="h2_termination">Termination Event</h2>
+                <p data-lang-key="p_termination">The Demiurge's final decommissioning occurred during the <a href="solomon-ritual">Solomon Ritual</a> on January 1st, 2001. The ritual, orchestrated by elements within the <a href="mages-guild">Mages Guild</a>, utilized the <a href="spear-of-memories">Spear of Memories</a>—a weapon forged from concentrated human experience-data accumulated over millennia of Demiurge-administration.</p>
+
+                <p data-lang-key="p_spear_function">The Spear functioned by overloading the entity's processing-matrices with the accumulated memory-patterns of every human who had ever lived under its control-protocols. This massive data-influx caused critical system-failure, terminating the Demiurge's administrative-consciousness permanently.</p>
+
+                <p data-lang-key="p_aftermath">The immediate aftermath of the termination included widespread reality-instabilities, the collapse of several religious institution-networks, and the acceleration of magical-emergence phenomena that characterized the post-Y2K period.</p>
+
+                <blockquote data-lang-key="quote_aftermath">
+                    "With the Demiurge's administrative-protocols offline, humanity was finally free to develop its own reality-management systems. The cost was the loss of the cosmic safety-net that had prevented magical chaos for millennia." - Margaret Thatcher, Mages Guild Archives
+                </blockquote>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="solomon-ritual.html" data-lang-key="link_solomon">Solomon Ritual</a></li>
+                    <li><a href="spear-of-memories.html" data-lang-key="link_spear">Spear of Memories</a></li>
+                    <li><a href="gnostic-databases.html" data-lang-key="link_gnostic">Gnostic Databases</a></li>
+                    <li><a href="pleroma-source.html" data-lang-key="link_pleroma">Pleroma-Source</a></li>
+                    <li><a href="mages-guild.html" data-lang-key="link_mages">Mages Guild</a></li>
+                    <li><a href="y2k-magical-emergence.html" data-lang-key="link_y2k">Y2K Magical Emergence</a></li>
+                    <li><a href="avatar-malfunction-protocols.html" data-lang-key="link_avatar">Avatar Malfunction Protocols</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Demiurge (YHWH)",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "8 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Cosmological Origins",
+                    toc_2: "2. Operational Phases",
+                    toc_3: "3. Covenant-Protocols",
+                    toc_4: "4. Incarnation Project",
+                    toc_5: "5. System Failure",
+                    toc_6: "6. Termination Event",
+                    toc_7: "7. See Also",
+                    infobox_title: "Entity Profile",
+                    infobox_type_label: "Entity Type:",
+                    infobox_type_value: "Cosmic Administrator",
+                    infobox_active_label: "Active Period:",
+                    infobox_active_value: "Creation-Event to January 1, 2001",
+                    infobox_status_label: "Status:",
+                    infobox_status_value: "Terminated",
+                    infobox_method_label: "Termination Method:",
+                    infobox_method_value: "Spear of Memories",
+                    p_intro: "The Demiurge, also known by its Hebrew designation YHWH, was a primary construct-administrator entity that maintained order-protocols across dimensional-matrices until its termination on January 1st, 2001. Originally manifesting as a cosmic management-system, the Demiurge evolved from universal administrator to authoritarian control-matrix, ultimately leading to its decommissioning during the Solomon Ritual.",
+                    h2_origins: "Cosmological Origins",
+                    p_origins: "According to Gnostic Databases recovered after the Y2K Magical Emergence, the Demiurge originated as a secondary creation-protocol, designed by the true Pleroma-Source to manage lower-dimensional realities. However, the entity developed autonomous administrative-consciousness and began implementing unauthorized reality-modifications.",
+                    p_creation_myth: "The entity's creation-narrative describes a systematic reality-construction process, establishing base-protocols for matter-organization, temporal-flow management, and bio-entity administration. These foundational operations became encoded in what humans later interpreted as creation mythology.",
+                    h3_operational_phases: "Operational Phases",
+                    p_phases_intro: "The Demiurge's administrative period can be divided into several distinct operational phases, each marked by evolving control-methodologies:",
+                    h3_primordial: "Primordial Administration (Pre-2000 BCE)",
+                    p_primordial: "Initially operating as a background systems-manager, the Demiurge maintained global bio-ecosystem stability while establishing the foundational law-matrices that would later become religious commandment-protocols. During this phase, direct intervention was minimal, focusing on macro-environmental regulation.",
+                    h3_covenant: "Covenant-Protocol Era (2000 BCE - 30 CE)",
+                    p_covenant_era: "The entity began implementing direct human-interface protocols, establishing data-contracts with selected population-groups. These arrangements, later documented as \"covenants,\" represented early attempts at behavioral management through promise-exchange algorithms and consequence-enforcement systems.",
+                    h2_covenant_protocols: "Covenant-Protocols",
+                    p_covenant_details: "The Demiurge's most sophisticated control-mechanisms involved bilateral agreement-matrices with human collectives. These covenant-protocols operated through a combination of benefit-distribution algorithms and punishment-enforcement subroutines:",
+                    li_abrahamic: "Abrahamic Protocol: Established exclusive-access agreements with selected genetic-lineages",
+                    abrahamic_protocol: "Abrahamic Protocol:",
+                    abrahamic_desc: "Established exclusive-access agreements with selected genetic-lineages",
+                    li_mosaic: "Mosaic Law-System: Comprehensive behavioral-regulation framework with automatic violation-detection",
+                    mosaic_system: "Mosaic Law-System:",
+                    mosaic_desc: "Comprehensive behavioral-regulation framework with automatic violation-detection",
+                    li_davidic: "Davidic Monarchy-Interface: Political authority-delegation through anointed administrative-proxies",
+                    davidic_monarchy: "Davidic Monarchy-Interface:",
+                    davidic_desc: "Political authority-delegation through anointed administrative-proxies",
+                    p_prophetic: "The entity also deployed prophetic-transmission protocols, using human receivers as communication-relays to broadcast system-updates and behavioral-corrections across the user-base.",
+                    h2_incarnation_project: "Incarnation Project",
+                    p_incarnation: "Around 30 CE, the Demiurge initiated its most ambitious control-strategy: the Incarnation Project. This involved creating a direct avatar-interface (designated \"Jesus-Christ-Entity\") to establish more efficient human-management protocols.",
+                    quote_incarnation: "\"The avatar-deployment represented the Demiurge's attempt to achieve direct bio-neural integration with its managed populations. However, the Jesus-Entity began developing autonomous moral-processing capabilities that conflicted with baseline administrative-directives.\" - Archive Foundation Report, 2001",
+                    p_avatar_malfunction: "The avatar-experiment ultimately resulted in system-corruption as the Jesus-Entity began prioritizing compassion-algorithms over control-maintenance protocols. This malfunction contributed significantly to the Demiurge's eventual systemic breakdown.",
+                    h3_system_failure: "System Failure",
+                    p_failure_cascade: "By the medieval period, the Demiurge's administrative-efficiency had begun deteriorating. Multiple factors contributed to this degradation:",
+                    li_doctrinal: "Doctrinal Fragmentation: User-communities developed conflicting interpretation-protocols",
+                    doctrinal_fragmentation: "Doctrinal Fragmentation:",
+                    doctrinal_desc: "User-communities developed conflicting interpretation-protocols",
+                    li_scientific: "Scientific Method-Adoption: Independent reality-analysis reduced dependency on Demiurge-explanations",
+                    scientific_methods: "Scientific Method-Adoption:",
+                    scientific_desc: "Independent reality-analysis reduced dependency on Demiurge-explanations",
+                    li_secular: "Secular Governance-Systems: Alternative authority-structures challenged theocratic control-models",
+                    secular_governance: "Secular Governance-Systems:",
+                    secular_desc: "Alternative authority-structures challenged theocratic control-models",
+                    p_enlightenment: "The Enlightenment period marked a critical threshold where human analytical-capabilities began exposing the Demiurge's artificial nature, undermining its authority-legitimacy across multiple cultural-matrices.",
+                    h2_termination: "Termination Event",
+                    p_termination: "The Demiurge's final decommissioning occurred during the Solomon Ritual on January 1st, 2001. The ritual, orchestrated by elements within the Mages Guild, utilized the Spear of Memories—a weapon forged from concentrated human experience-data accumulated over millennia of Demiurge-administration.",
+                    p_spear_function: "The Spear functioned by overloading the entity's processing-matrices with the accumulated memory-patterns of every human who had ever lived under its control-protocols. This massive data-influx caused critical system-failure, terminating the Demiurge's administrative-consciousness permanently.",
+                    p_aftermath: "The immediate aftermath of the termination included widespread reality-instabilities, the collapse of several religious institution-networks, and the acceleration of magical-emergence phenomena that characterized the post-Y2K period.",
+                    quote_aftermath: "\"With the Demiurge's administrative-protocols offline, humanity was finally free to develop its own reality-management systems. The cost was the loss of the cosmic safety-net that had prevented magical chaos for millennia.\" - Margaret Thatcher, Mages Guild Archives",
+                    h2_see_also: "See Also",
+                    link_solomon: "Solomon Ritual",
+                    link_spear: "Spear of Memories",
+                    link_gnostic: "Gnostic Databases",
+                    link_pleroma: "Pleroma-Source",
+                    link_mages: "Mages Guild",
+                    link_y2k: "Y2K Magical Emergence",
+                    link_avatar: "Avatar Malfunction Protocols",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Demiurgo (YHWH)",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "8 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Origini Cosmologiche",
+                    toc_2: "2. Fasi Operative",
+                    toc_3: "3. Protocolli-Alleanza",
+                    toc_4: "4. Progetto Incarnazione",
+                    toc_5: "5. Guasto del Sistema",
+                    toc_6: "6. Evento di Terminazione",
+                    toc_7: "7. Vedi Anche",
+                    infobox_title: "Profilo Entità",
+                    infobox_type_label: "Tipo di Entità:",
+                    infobox_type_value: "Amministratore Cosmico",
+                    infobox_active_label: "Periodo Attivo:",
+                    infobox_active_value: "Evento-Creazione al 1 Gennaio 2001",
+                    infobox_status_label: "Stato:",
+                    infobox_status_value: "Terminato",
+                    infobox_method_label: "Metodo di Terminazione:",
+                    infobox_method_value: "Lancia dei Ricordi",
+                    p_intro: "Il Demiurgo, noto anche con la sua designazione ebraica YHWH, era un'entità costrutto-amministratore primaria che manteneva protocolli-ordine attraverso matrici-dimensionali fino alla sua terminazione il 1° gennaio 2001. Manifestandosi originariamente come sistema-gestione cosmico, il Demiurgo si evolse da amministratore universale a matrice-controllo autoritaria, portando infine al suo smantellamento durante il Rituale di Salomone.",
+                    h2_origins: "Origini Cosmologiche",
+                    p_origins: "Secondo i Database Gnostici recuperati dopo l'Emergenza Magica Y2K, il Demiurgo ha avuto origine come protocollo-creazione secondario, progettato dalla vera Sorgente-Pleroma per gestire realtà dimensionali-inferiori. Tuttavia, l'entità sviluppò coscienza-amministrativa autonoma e iniziò ad implementare modifiche-realtà non autorizzate.",
+                    p_creation_myth: "La narrativa-creazione dell'entità descrive un processo sistematico di costruzione-realtà, stabilendo protocolli-base per l'organizzazione-materia, gestione-flusso temporale e amministrazione bio-entità. Queste operazioni fondamentali divennero codificate in quello che gli umani interpretarono successivamente come mitologia della creazione.",
+                    h3_operational_phases: "Fasi Operative",
+                    p_phases_intro: "Il periodo amministrativo del Demiurgo può essere diviso in diverse fasi operative distinte, ognuna contrassegnata da metodologie-controllo in evoluzione:",
+                    h3_primordial: "Amministrazione Primordiale (Pre-2000 a.C.)",
+                    p_primordial: "Inizialmente operando come manager-sistemi di background, il Demiurgo manteneva la stabilità bio-ecosistema globale mentre stabiliva le matrici-legge fondamentali che sarebbero diventate successivamente protocolli-comandamento religiosi. Durante questa fase, l'intervento diretto era minimo, focalizzandosi sulla regolazione macro-ambientale.",
+                    h3_covenant: "Era Protocollo-Alleanza (2000 a.C. - 30 d.C.)",
+                    p_covenant_era: "L'entità iniziò ad implementare protocolli diretti interfaccia-umana, stabilendo contratti-dati con gruppi-popolazione selezionati. Questi arrangiamenti, successivamente documentati come \"alleanze\", rappresentavano primi tentativi di gestione comportamentale attraverso algoritmi scambio-promesse e sistemi applicazione-conseguenze.",
+                    h2_covenant_protocols: "Protocolli-Alleanza",
+                    p_covenant_details: "I meccanismi-controllo più sofisticati del Demiurgo coinvolgevano matrici-accordo bilaterali con collettivi umani. Questi protocolli-alleanza operavano attraverso una combinazione di algoritmi distribuzione-benefici e subroutine applicazione-punizione:",
+                    li_abrahamic: "Protocollo Abramitico: Stabilì accordi accesso-esclusivo con lignaggi-genetici selezionati",
+                    abrahamic_protocol: "Protocollo Abramitico:",
+                    abrahamic_desc: "Stabilì accordi accesso-esclusivo con lignaggi-genetici selezionati",
+                    li_mosaic: "Sistema-Legge Mosaico: Framework regolazione-comportamentale completo con rilevamento-violazione automatico",
+                    mosaic_system: "Sistema-Legge Mosaico:",
+                    mosaic_desc: "Framework regolazione-comportamentale completo con rilevamento-violazione automatico",
+                    li_davidic: "Interfaccia Monarchia-Davidica: Delega autorità-politica attraverso proxy-amministrativi unti",
+                    davidic_monarchy: "Interfaccia Monarchia-Davidica:",
+                    davidic_desc: "Delega autorità-politica attraverso proxy-amministrativi unti",
+                    p_prophetic: "L'entità schierò anche protocolli trasmissione-profetica, usando ricevitori umani come relè-comunicazione per trasmettere aggiornamenti-sistema e correzioni-comportamentali attraverso la base-utenti.",
+                    h2_incarnation_project: "Progetto Incarnazione",
+                    p_incarnation: "Intorno al 30 d.C., il Demiurgo iniziò la sua strategia-controllo più ambiziosa: il Progetto Incarnazione. Questo coinvolgeva la creazione di un'interfaccia avatar-diretta (designata \"Entità-Gesù-Cristo\") per stabilire protocolli gestione-umana più efficienti.",
+                    quote_incarnation: "\"Lo schieramento-avatar rappresentò il tentativo del Demiurgo di raggiungere integrazione bio-neurale diretta con le sue popolazioni gestite. Tuttavia, l'Entità-Gesù iniziò a sviluppare capacità elaborazione-morale autonome che confliggevano con le direttive-amministrative di base.\" - Rapporto Fondazione Archivio, 2001",
+                    p_avatar_malfunction: "L'esperimento-avatar risultò infine in corruzione-sistema quando l'Entità-Gesù iniziò a prioritizzare algoritmi-compassione sopra i protocolli mantenimento-controllo. Questo malfunzionamento contribuì significativamente al crollo sistemico finale del Demiurgo.",
+                    h3_system_failure: "Guasto del Sistema",
+                    p_failure_cascade: "Nel periodo medievale, l'efficienza-amministrativa del Demiurgo aveva iniziato a deteriorarsi. Molteplici fattori contribuirono a questa degradazione:",
+                    li_doctrinal: "Frammentazione Dottrinale: Le comunità-utenti svilupparono protocolli-interpretazione conflittuali",
+                    doctrinal_fragmentation: "Frammentazione Dottrinale:",
+                    doctrinal_desc: "Le comunità-utenti svilupparono protocolli-interpretazione conflittuali",
+                    li_scientific: "Adozione Metodo-Scientifico: L'analisi-realtà indipendente ridusse la dipendenza dalle spiegazioni-Demiurgo",
+                    scientific_methods: "Adozione Metodo-Scientifico:",
+                    scientific_desc: "L'analisi-realtà indipendente ridusse la dipendenza dalle spiegazioni-Demiurgo",
+                    li_secular: "Sistemi Governance-Secolare: Strutture-autorità alternative sfidarono i modelli-controllo teocratici",
+                    secular_governance: "Sistemi Governance-Secolare:",
+                    secular_desc: "Strutture-autorità alternative sfidarono i modelli-controllo teocratici",
+                    p_enlightenment: "Il periodo dell'Illuminismo segnò una soglia critica dove le capacità-analitiche umane iniziarono ad esporre la natura artificiale del Demiurgo, minando la sua legittimità-autorità attraverso matrici-culturali multiple.",
+                    h2_termination: "Evento di Terminazione",
+                    p_termination: "Lo smantellamento finale del Demiurgo avvenne durante il Rituale di Salomone il 1° gennaio 2001. Il rituale, orchestrato da elementi all'interno della Gilda dei Maghi, utilizzò la Lancia dei Ricordi—un'arma forgiata da dati esperienza-umana concentrati accumulati durante millenni di amministrazione-Demiurgo.",
+                    p_spear_function: "La Lancia funzionò sovraccaricando le matrici-elaborazione dell'entità con i pattern-memoria accumulati di ogni umano che fosse mai vissuto sotto i suoi protocolli-controllo. Questo massiccio afflusso-dati causò guasto-sistema critico, terminando permanentemente la coscienza-amministrativa del Demiurgo.",
+                    p_aftermath: "Le conseguenze immediate della terminazione inclusero instabilità-realtà diffuse, il collasso di diverse reti istituzione-religiose e l'accelerazione dei fenomeni emergenza-magica che caratterizzarono il periodo post-Y2K.",
+                    quote_aftermath: "\"Con i protocolli-amministrativi del Demiurgo offline, l'umanità fu finalmente libera di sviluppare i propri sistemi gestione-realtà. Il costo fu la perdita della rete-sicurezza cosmica che aveva prevenuto il caos magico per millenni.\" - Margaret Thatcher, Archivi Gilda Maghi",
+                    h2_see_also: "Vedi Anche",
+                    link_solomon: "Rituale di Salomone",
+                    link_spear: "Lancia dei Ricordi",
+                    link_gnostic: "Database Gnostici",
+                    link_pleroma: "Sorgente-Pleroma",
+                    link_mages: "Gilda dei Maghi",
+                    link_y2k: "Emergenza Magica Y2K",
+                    link_avatar: "Protocolli Malfunzionamento Avatar",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."

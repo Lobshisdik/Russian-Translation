@@ -1,0 +1,1750 @@
+    <div class="forum-section">
+        <div class="section-header">Accessori Anti-Bellezza</div>
+        
+        <div class="thread" onclick="showThread('accessori')">
+            <div class="thread-title">👓 Accessori che rovinano qualsiasi look</div>
+            <div class="thread-info">Creato da: <strong>AccessorioBrutto</strong> • 22 risposte • Ultimo: oggi 13:20</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('oggetti')">
+            <div class="thread-title">🎯 Oggetti quotidiani per sabotare la bellezza</div>
+            <div class="thread-info">Creato da: <strong>SabotatoreEstetico</strong> • 18 risposte • Ultimo: oggi 11:45</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('gadget')">
+            <div class="thread-title">📱 Gadget del 2001 per diventare brutti</div>
+            <div class="thread-info">Creato da: <strong>GadgetBrutto</strong> • 15 <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Il Forum dei Belli - Centro Anti-Bellezza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .subtitle {
+            font-size: 10px;
+            font-style: italic;
+        }
+        
+        .navigation {
+            background-color: #cccccc;
+            padding: 5px;
+            border: 1px solid #999999;
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            color: #003366;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .forum-section {
+            background-color: white;
+            border: 1px solid #999999;
+            margin-bottom: 15px;
+        }
+        
+        .section-header {
+            background-color: #006699;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .thread-list {
+            display: none;
+        }
+        
+        .thread-list.active {
+            display: block;
+        }
+        
+        .thread {
+            border-bottom: 1px solid #eeeeee;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        .thread:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .thread-title {
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 3px;
+        }
+        
+        .thread-info {
+            font-size: 10px;
+            color: #666666;
+        }
+        
+        .post-view {
+            display: none;
+            background-color: white;
+            border: 1px solid #999999;
+        }
+        
+        .post-view.active {
+            display: block;
+        }
+        
+        .post {
+            border-bottom: 1px solid #eeeeee;
+            padding: 10px;
+        }
+        
+        .post-header {
+            background-color: #f0f0f0;
+            padding: 5px;
+            font-size: 10px;
+            border-bottom: 1px solid #dddddd;
+            margin-bottom: 8px;
+        }
+        
+        .username {
+            font-weight: bold;
+            color: #003366;
+        }
+        
+        .post-date {
+            color: #666666;
+            float: right;
+        }
+        
+        .post-content {
+            line-height: 1.4;
+        }
+        
+        .back-button {
+            background-color: #cccccc;
+            border: 1px solid #999999;
+            padding: 3px 8px;
+            font-size: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            background-color: #ffffcc;
+            border: 1px solid #cccc99;
+            padding: 8px;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9px;
+            color: #666666;
+            margin-top: 20px;
+            border-top: 1px solid #cccccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Il Forum dei Belli</h1>
+    <div class="subtitle">Centro Anti-Bellezza • Guida alla Bruttezza Digitale • Gennaio 2001</div>
+</div>
+
+<div class="stats">
+    <strong>Benvenuti nell'Hypernet!</strong> | Utenti totali: 147 | Post oggi: 23 | Navigato con HyperNet Explorer 6.0
+</div>
+
+<div class="navigation">
+    <span class="nav-link" onclick="showHome()">Home Forum</span>
+    <span class="nav-link" onclick="showSection('generale')">Discussioni Generali</span>
+    <span class="nav-link" onclick="showSection('consigli')">Consigli di Bruttezza</span>
+    <span class="nav-link" onclick="showSection('esperienze')">Esperienze Anti-Bellezza</span>
+    <span class="nav-link" onclick="showSection('tecnologia')">Accessori</span>
+    <span class="nav-link" onclick="showSection('supporto')">Supporto</span>
+</div>
+
+<div id="home-view">
+    <div class="forum-section">
+        <div class="section-header">📢 Discussioni Generali sulla Bruttezza</div>
+        <div class="thread" onclick="showSection('generale')">
+            <div class="thread-title">Entra nelle discussioni generali</div>
+            <div class="thread-info">12 discussioni attive • Ultimo post di BruttoMario</div>
+        </div>
+    </div>
+    
+    <div class="forum-section">
+        <div class="section-header">💡 Consigli Pratici di Bruttezza</div>
+        <div class="thread" onclick="showSection('consigli')">
+            <div class="thread-title">Scopri i migliori trucchi anti-bellezza</div>
+            <div class="thread-info">8 guide complete • Aggiornato da AntiVenus</div>
+        </div>
+    </div>
+    
+    <div class="forum-section">
+        <div class="section-header">📖 Esperienze e Trasformazioni</div>
+        <div class="thread" onclick="showSection('esperienze')">
+            <div class="thread-title">Condividi la tua trasformazione</div>
+            <div class="thread-info">15 storie incredibili • Ultima da GiuliaImperfetta</div>
+        </div>
+    </div>
+    
+    <div class="forum-section">
+        <div class="section-header">⚙️ Tecnologie Anti-Bellezza</div>
+        <div class="thread" onclick="showSection('tecnologia')">
+            <div class="thread-title">Accessori e gadget per la bruttezza</div>
+            <div class="thread-info">4 progetti attivi • Ultimo da RetroUgly</div>
+        </div>
+    </div>
+    
+    <div class="forum-section">
+        <div class="section-header">🆘 Supporto e Aiuto</div>
+        <div class="thread" onclick="showSection('supporto')">
+            <div class="thread-title">Aiuto per crisi e ricadute nella bellezza</div>
+            <div class="thread-info">7 discussioni di supporto • Ultimo da EmergenzaBrutta</div>
+        
+<div id="thread-accessori" class="post-view">
+    <div class="back-button" onclick="showSection('tecnologia')">← Torna agli Accessori</div>
+    <div class="forum-section">
+        <div class="section-header">👓 Accessori che rovinano qualsiasi look</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AccessorioBrutto</span>
+                <span class="post-date">15 Gen 2001, 09:45</span>
+            </div>
+            <div class="post-content">
+                La mia collezione definitiva di accessori anti-eleganza! Ogni pezzo testato personalmente:<br><br>
+                
+                <strong>OCCHIALI DISASTROSI:</strong><br>
+                - Montature enormi anni '80 (più grandi è meglio)<br>
+                - Occhiali da sole gialli o rosa (anche in inverno)<br>
+                - Lenti con graffi e macchie visibili<br>
+                - Catenella di perline colorate per tenerli al collo<br><br>
+                
+                <strong>GIOIELLI ANTI-CHIC:</strong><br>
+                - Orecchini pendenti enormi e scoordinati<br>
+                - Collane multiple tutte insieme (minimo 5)<br>
+                - Anelli su ogni dito, possibilmente con brillantini finti<br>
+                - Braccialetti di plastica colorata<br><br>
+                
+                <strong>BORSE E ZAINI:</strong><br>
+                - Marsupio leopardato (da portare sempre)<br>
+                - Zaino da trekking per andare in ufficio<br>
+                - Borse di plastica trasparente<br>
+                - Trolley anche per uscire a cena<br><br>
+                
+                <strong>CAPELLI:</strong><br>
+                - Mollettine colorate ovunque<br>
+                - Bandane di spugna<br>
+                - Elastici di colori sgargianti<br>
+                - Cerchietti con fiori di plastica<br><br>
+                
+                Chi vuole foto della mia collezione? Costo totale: 23€ al mercato!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">CollezionistaB</span>
+                <span class="post-date">15 Gen 2001, 11:30</span>
+            </div>
+            <div class="post-content">
+                Geniale! Io aggiungo i miei must-have:<br><br>
+                
+                <strong>SCARPE IMPOSSIBILI:</strong><br>
+                - Crocs con calzini di spugna<br>
+                - Sandali con la neve<br>
+                - Tacchi con tuta da ginnastica<br>
+                - Scarpe da tennis fluorescenti<br><br>
+                
+                <strong>CAPPELLI STRATEGICI:</strong><br>
+                - Berretto di lana a luglio<br>
+                - Cappello da cowboy in città<br>
+                - Casco da moto senza moto<br>
+                - Fascia per i capelli anni '80<br><br>
+                
+                L'importante è che NIENTE si abbini con niente!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">VintageDisaster</span>
+                <span class="post-date">16 Gen 2001, 13:20</span>
+            </div>
+            <div class="post-content">
+                Per i più coraggiosi suggerisco il <strong>LAYERING ESTREMO</strong>:<br><br>
+                
+                - 3 orologi diversi su un braccio<br>
+                - Spille ovunque (giacche, zaini, cappelli)<br>
+                - Foulard annodata male al collo<br>
+                - Cinture doppie o triple<br>
+                - Sciarpe anche a giugno<br><br>
+                
+                L'obiettivo è sembrare un albero di Natale ambulante! 🎄<br><br>
+                
+                Il mio record personale: 23 accessori indossati contemporaneamente!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-gadget" class="post-view">
+    <div class="back-button" onclick="showSection('tecnologia')">← Torna agli Accessori</div>
+    <div class="forum-section">
+        <div class="section-header">📱 Gadget del 2001 per diventare brutti</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">GadgetBrutto</span>
+                <span class="post-date">14 Gen 2001, 10:15</span>
+            </div>
+            <div class="post-content">
+                I migliori gadget dell'anno 2001 per sabotare la vostra bellezza!<br><br>
+                
+                <strong>WALKMAN MODIFICATO:</strong><br>
+                Ho hackerato il mio Walkman per riprodurre solo musica orribile a volume altissimo. Cuffie enormi incluse per massimo impatto estetico!<br><br>
+                
+                <strong>TAMAGOTCHI DELLA BRUTTEZZA:</strong><br>
+                Programmato per fare rumore nei momenti più inopportuni. Lo attacco sempre alla cintura per sembrare più goffo.<br><br>
+                
+                <strong>CELLULARE GIGANTE:</strong><br>
+                Ho comprato il Anoki più grosso e antiestetico disponibile. Lo uso anche come borsa perché ci entra tutto!<br><br>
+                
+                <strong>OROLOGIO DIGITALE FLUORESCENTE:</strong><br>
+                Con 47 funzioni inutili e suoni casuali ogni ora. Si vede anche dal satellite!<br><br>
+                
+                <strong>MACCHINA FOTOGRAFICA INSTANT:</strong><br>
+                Per documentare tutti i nostri progressi nella bruttezza. Foto sfocate garantite!<br><br>
+                
+                Tutto acquistabile nei negozi di elettronica più economici!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">TechnoUgly</span>
+                <span class="post-date">14 Gen 2001, 14:45</span>
+            </div>
+            <div class="post-content">
+                Grande lista! Aggiungo le mie scoperte:<br><br>
+                
+                <strong>CALCOLATRICE GIGANTE:</strong><br>
+                La porto sempre nello zaino e la tiro fuori in situazioni random. Effetto "secchione disperato" garantito!<br><br>
+                
+                <strong>RADIOSVEGLIA PORTATILE:</strong><br>
+                Con antenna telescopica sempre estesa. La accendo in pubblico per ascoltare stazioni che prendono male.<br><br>
+                
+                <strong>GAMEBOY CON SPEAKER:</strong><br>
+                Volume al massimo per far sentire a tutti i suoni del Tetris. Bonus: schermo graffiato per effetto vintage!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Retro2001</span>
+                <span class="post-date">15 Gen 2001, 16:30</span>
+            </div>
+            <div class="post-content">
+                Non dimentichiamo i GADGET DA UFFICIO trasformati in accessori di moda:<br><br>
+                
+                - Calcolatrice da polso (per sembrare sempre impegnati)<br>
+                - Penne multiple nel taschino (minimo 8)<br>
+                - Portachiavi con 200 chiavi (metà inutili)<br>
+                - Agenda telefonica elettronica sempre in mano<br><br>
+                
+                Il segreto è usare tutto nel contesto sbagliato! Agenda elettronica in discoteca? PERFETTO! 😂
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-ricadute" class="post-view">
+    <div class="back-button" onclick="showSection('supporto')">← Torna al Supporto</div>
+    <div class="forum-section">
+        <div class="section-header">🔄 Ricadute nella bellezza: come riprendersi</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">RecuperoBrutto</span>
+                <span class="post-date">12 Gen 2001, 16:20</span>
+            </div>
+            <div class="post-content">
+                Le ricadute nella bellezza sono normali! Non scoraggiatevi, capitano a tutti nel percorso verso la bruttezza.<br><br>
+                
+                <strong>SEGNALI DI ALLARME:</strong><br>
+                - Vi siete guardati troppo allo specchio<br>
+                - Avete ricevuto complimenti sul vostro aspetto<br>
+                - Vi siete vestiti bene "per caso"<br>
+                - I capelli vi sono venuti bene da soli<br>
+                - Avete camminato con portamento elegante<br><br>
+                
+                <strong>PIANO DI RECUPERO IMMEDIATO:</strong><br>
+                1. Scompigliare immediatamente i capelli<br>
+                2. Cambiare almeno 2 capi di abbigliamento<br>
+                3. Applicare makeup disastroso<br>
+                4. Assumere postura scomposta<br>
+                5. Evitare specchi per 24 ore<br><br>
+                
+                <strong>PREVENZIONE:</strong><br>
+                - Check quotidiano del livello di bruttezza<br>
+                - Mai uscire senza almeno 3 elementi anti-estetici<br>
+                - Avere sempre un "emergency ugly kit"<br><br>
+                
+                Ricordate: una ricaduta non cancella tutti i progressi fatti!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Ricaduta2000</span>
+                <span class="post-date">12 Gen 2001, 18:45</span>
+            </div>
+            <div class="post-content">
+                Grazie per questo post! Ho avuto una ricaduta terribile la settimana scorsa... 😭<br><br>
+                
+                Ero uscita di casa e tutto andava bene, poi improvvisamente il vento ha sistemato i miei capelli in modo perfetto! Due persone mi hanno fatto i complimenti!<br><br>
+                
+                Ho dovuto correre nel bagno più vicino per rovinarmi il look, ma il danno ormai era fatto...<br><br>
+                
+                Come fate a gestire l'ansia da ricaduta?
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">SupportoAmico</span>
+                <span class="post-date">13 Gen 2001, 08:30</span>
+            </div>
+            <div class="post-content">
+                @Ricaduta2000 Ti capisco benissimo! L'ansia da ricaduta è normale.<br><br>
+                
+                Il mio metodo: <strong>ACCEPTANCE E ACTION</strong><br>
+                1. Accetta che è successo (non colpevolizzarti)<br>
+                2. Analizza cosa ha causato la ricaduta<br>
+                3. Modifica la routine per evitarlo in futuro<br>
+                4. Riparti subito con doppio impegno<br><br>
+                
+                Nel tuo caso: porta sempre un cappello anti-vento! Il vento è il nemico numero uno della bruttezza capillare! 💨
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">EspertaRicadute</span>
+                <span class="post-date">13 Gen 2001, 12:15</span>
+            </div>
+            <div class="post-content">
+                Dopo 18 mesi di percorso, posso dire che le ricadute diventano sempre più rare!<br><br>
+                
+                <strong>LE MIE RICADUTE PIÙ COMUNI:</strong><br>
+                - Dormire troppo bene (svegliarsi riposati rende più belli)<br>
+                - Mangiare cibi sani per errore<br>
+                - Fare sport (migliora la postura)<br>
+                - Ridere troppo (fa brillare gli occhi)<br><br>
+                
+                <strong>CONTROMISURE SVILUPPATE:</strong><br>
+                - Sveglia alle 5:30 anche nei weekend<br>
+                - Dieta ricca di cibi che fanno male alla pelle<br>
+                - Allenamento anti-posturale quotidiano<br>
+                - Guardare solo film tristi<br><br>
+                
+                La costanza è tutto! Non mollate mai! 💪
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">RecuperoBrutto</span>
+                <span class="post-date">16 Gen 2001, 09:15</span>
+            </div>
+            <div class="post-content">
+                UPDATE: Ottimi progressi da parte di tutti!<br><br>
+                
+                Ho creato il <strong>"Registro delle Ricadute"</strong> - un quaderno dove annotare:<br>
+                - Data e ora della ricaduta<br>
+                - Causa scatenante<br>
+                - Durata dell'episodio<br>
+                - Azioni di recupero utilizzate<br>
+                - Voto da 1 a 10 del recupero<br><br>
+                
+                Tenere traccia aiuta tantissimo a prevenire ricadute future!<br><br>
+                
+                Chi lo vuole mi scriva su <a href="mailto:recuperobrutto@hexagram.corp">recuperobrutto@hexagram.corp</a> - è gratis per la community!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="section-generale" class="thread-list">
+    <div class="back-button" onclick="showHome()">← Torna al Forum Principale</div>
+    <div class="forum-section">
+        <div class="section-header">Discussioni Generali sulla Bruttezza</div>
+        
+        <div class="thread" onclick="showThread('manifesto')">
+            <div class="thread-title">🔥 Il Manifesto della Bruttezza Digitale</div>
+            <div class="thread-info">Creato da: <strong>BruttoCapo</strong> • 28 risposte • Ultimo: oggi 14:30</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('hexagram')">
+            <div class="thread-title">Chi ha un profilo Hexagram? Colleghiamoci!</div>
+            <div class="thread-info">Creato da: <strong>ConnessioniB</strong> • 15 risposte • Ultimo: ieri 22:15</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('filosofia')">
+            <div class="thread-title">Filosofia della Bruttezza nel 2001</div>
+            <div class="thread-info">Creato da: <strong>PensatoreBrutto</strong> • 7 risposte • Ultimo: 3 giorni fa</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('newcomers')">
+            <div class="thread-title">🆕 Nuovi arrivati: presentatevi qui!</div>
+            <div class="thread-info">Creato da: <strong>Moderatore</strong> • 45 risposte • Ultimo: oggi 16:45</div>
+        </div>
+    </div>
+</div>
+
+<div id="section-consigli" class="thread-list">
+    <div class="back-button" onclick="showHome()">← Torna al Forum Principale</div>
+    <div class="forum-section">
+        <div class="section-header">Consigli Pratici di Bruttezza</div>
+        
+        <div class="thread" onclick="showThread('capelli')">
+            <div class="thread-title">💇 Guida Definitiva ai Capelli Disordinati</div>
+            <div class="thread-info">Creato da: <strong>MasterBrutto</strong> • 22 risposte • Ultimo: oggi 11:20</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('vestiti')">
+            <div class="thread-title">👕 Abbinamenti Fashion Disastrosi</div>
+            <div class="thread-info">Creato da: <strong>AntiModa</strong> • 18 risposte • Ultimo: oggi 09:30</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('postura')">
+            <div class="thread-title">🚶 L'Arte della Postura Scomposta</div>
+            <div class="thread-info">Creato da: <strong>CurvoBello</strong> • 12 risposte • Ultimo: ieri 19:45</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('makeup')">
+            <div class="thread-title">💄 Makeup Anti-Glamour: Tutorial</div>
+            <div class="thread-info">Creato da: <strong>TruccoBrutto</strong> • 25 risposte • Ultimo: 2 giorni fa</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('pelle')">
+            <div class="thread-title">🧴 Rovinare la pelle perfetta: metodi testati</div>
+            <div class="thread-info">Creato da: <strong>PelleRovinata</strong> • 31 risposte • Ultimo: oggi 16:20</div>
+        </div>
+    </div>
+</div>
+
+<div id="section-esperienze" class="thread-list">
+    <div class="back-button" onclick="showHome()">← Torna al Forum Principale</div>
+    <div class="forum-section">
+        <div class="section-header">Esperienze e Trasformazioni</div>
+        
+        <div class="thread" onclick="showThread('trasformazione1')">
+            <div class="thread-title">📸 La mia trasformazione da modello a persona normale</div>
+            <div class="thread-info">Creato da: <strong>ExModello</strong> • 31 risposte • Ultimo: oggi 13:15</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('successo')">
+            <div class="thread-title">🎉 SUCCESSO: Finalmente nessuno mi guarda più!</div>
+            <div class="thread-info">Creato da: <strong>LiberoFinalmente</strong> • 19 risposte • Ultimo: oggi 08:45</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('difficolta')">
+            <div class="thread-title">😔 Difficoltà: Non riesco ancora a essere brutto abbastanza</div>
+            <div class="thread-info">Creato da: <strong>TroppoCarino</strong> • 27 risposte • Ultimo: ieri 15:30</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('famiglia')">
+            <div class="thread-title">👨‍👩‍👧‍👦 Come spiegare ai genitori la scelta della bruttezza</div>
+            <div class="thread-info">Creato da: <strong>FiglioBrutto</strong> • 14 risposte • Ultimo: 3 giorni fa</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('lavoro')">
+            <div class="thread-title">💼 Bruttezza sul posto di lavoro: pro e contro</div>
+            <div class="thread-info">Creato da: <strong>ImpiegatoBrutto</strong> • 9 risposte • Ultimo: oggi 12:00</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('relazioni')">
+            <div class="thread-title">💕 Trovare l'amore quando si è finalmente brutti</div>
+            <div class="thread-info">Creato da: <strong>CuoreDisordinato</strong> • 23 risposte • Ultimo: ieri 20:30</div>
+        </div>
+    </div>
+</div>
+
+<div id="section-tecnologia" class="thread-list">
+    <div class="back-button" onclick="showHome()">← Torna al Forum Principale</div>
+    <div class="forum-section">
+        <div class="section-header">Tecnologie Anti-Bellezza</div>
+        
+        <div class="thread" onclick="showThread('software')">
+            <div class="thread-title">💻 Software anti-beauty: recensioni e download</div>
+            <div class="thread-info">Creato da: <strong>HackerBrutto</strong> • 17 risposte • Ultimo: oggi 15:45</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('hardware')">
+            <div class="thread-title">⚙️ Modifiche hardware per disattivare la bellezza</div>
+            <div class="thread-info">Creato da: <strong>TecnicoAntiGlam</strong> • 12 risposte • Ultimo: oggi 10:15</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('virus')">
+            <div class="thread-title">🦠 Virus della bruttezza: sviluppo collaborativo</div>
+            <div class="thread-info">Creato da: <strong>VirusMaker2001</strong> • 8 risposte • Ultimo: ieri 14:20</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('futuro')">
+            <div class="thread-title">🔮 Il futuro della bruttezza digitale nel 2002</div>
+            <div class="thread-info">Creato da: <strong>VisionarioBrutto</strong> • 19 risposte • Ultimo: 2 giorni fa</div>
+        </div>
+    </div>
+</div>
+
+<div id="section-supporto" class="thread-list">
+    <div class="back-button" onclick="showHome()">← Torna al Forum Principale</div>
+    <div class="forum-section">
+        <div class="section-header">Supporto e Aiuto</div>
+        
+        <div class="thread" onclick="showThread('crisi')">
+            <div class="thread-title">🆘 Crisi di bellezza improvvisa - cosa fare?</div>
+            <div class="thread-info">Creato da: <strong>EmergenzaBrutta</strong> • 34 risposte • Ultimo: oggi 17:30</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('ricadute')">
+            <div class="thread-title">🔄 Ricadute nella bellezza: come riprendersi</div>
+            <div class="thread-info">Creato da: <strong>RecuperoBrutto</strong> • 21 risposte • Ultimo: oggi 09:15</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('gruppi')">
+            <div class="thread-title">👥 Gruppi di supporto nelle città italiane</div>
+            <div class="thread-info">Creato da: <strong>OrganizzatoreBrutto</strong> • 16 risposte • Ultimo: ieri 11:45</div>
+        </div>
+        
+        <div class="thread" onclick="showThread('psicologia')">
+            <div class="thread-title">🧠 Aspetti psicologici della de-bellificazione</div>
+            <div class="thread-info">Creato da: <strong>PsicoBrutto</strong> • 13 risposte • Ultimo: 3 giorni fa</div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-gruppi" class="post-view">
+    <div class="back-button" onclick="showSection('supporto')">← Torna al Supporto</div>
+    <div class="forum-section">
+        <div class="section-header">👥 Gruppi di supporto nelle città italiane</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">OrganizzatoreBrutto</span>
+                <span class="post-date">10 Gen 2001, 19:30</span>
+            </div>
+            <div class="post-content">
+                È ora di organizzarci anche offline! Ecco i gruppi di supporto attivi in Italia:<br><br>
+                
+                <strong>🏙️ MILANO - "Brutti ma Buoni"</strong><br>
+                Ogni martedì ore 20:00 presso Centro Sociale Bruttezza<br>
+                Via dei Disgraziati 15 - Metro Centrale<br>
+                Referente: Marina Scomposta<br>
+                Contatto: <a href="mailto:milano.brutti@hexagram.corp">milano.brutti@hexagram.corp</a><br><br>
+                
+                <strong>🍝 ROMA - "Bellezza Addio"</strong><br>
+                Ogni giovedì ore 19:30 presso Parrocchia Sant'Antiestetico<br>
+                Via del Brutto Aspetto 22 - Metro Spagna<br>
+                Referente: Giuseppe Antilucido<br>
+                Contatto: <a href="mailto:roma.addio@hexagram.corp">roma.addio@hexagram.corp</a><br><br>
+                
+                <strong>🌊 NAPOLI - "Brutti e Orgogliosi"</strong><br>
+                Ogni venerdì ore 18:00 presso Circolo Antiestetico<br>
+                Vicolo della Bruttezza 8 - Metro Garibaldi<br>
+                Referente: Concetta Disordinata<br>
+                Contatto: <a href="mailto:napoli.orgoglio@hexagram.corp">napoli.orgoglio@hexagram.corp</a><br><br>
+                
+                <strong>🎭 FIRENZE - "Arte della Bruttezza"</strong><br>
+                Ogni sabato ore 16:00 presso Palazzo Anti-Rinascimento<br>
+                Piazza dei Brutti 12 - Zona Santo Spirito<br>
+                Referente: Leonardo Scomposto<br>
+                Contatto: <a href="mailto:firenze.arte@hexagram.corp">firenze.arte@hexagram.corp</a><br><br>
+                
+                Stiamo organizzando gruppi anche in altre città! Chi è interessato?
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">TorinoVolontaria</span>
+                <span class="post-date">11 Gen 2001, 10:15</span>
+            </div>
+            <div class="post-content">
+                Voglio organizzare il gruppo di TORINO! 🏔️<br><br>
+                
+                Ho già trovato una sala presso il Centro Anti-Estetico di Porta Nuova.<br>
+                Chi è interessato mi scriva! Cerco almeno 8 persone per iniziare.<br><br>
+                
+                Pensavo a incontri settimanali con:<br>
+                - Condivisione esperienze di bruttezza<br>
+                - Workshop pratici (makeup disastroso, styling orribile)<br>
+                - Uscite di gruppo per "praticare" in pubblico<br>
+                - Supporto nelle ricadute<br><br>
+                
+                Contatto: <a href="mailto:torino.volontaria@hexagram.corp">torino.volontaria@hexagram.corp</a>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">BolognaAttiva</span>
+                <span class="post-date">12 Gen 2001, 14:30</span>
+            </div>
+            <div class="post-content">
+                Anche BOLOGNA si organizza! 📚<br><br>
+                
+                Ho contattato l'Università della Bruttezza (campus alternativo) e mi hanno dato una aula gratis!<br><br>
+                
+                Il nostro gruppo si chiamerà "La Dotta e Brutta" - ogni mercoledì ore 21:00.<br>
+                Via Zamboni della Bruttezza 33<br><br>
+                
+                Primo incontro: 24 gennaio 2001<br>
+                Tema: "Come rovinare l'aspetto intellettuale"<br><br>
+                
+                Chi viene? Scrivetemi! <a href="mailto:bologna.dotta@hexagram.corp">bologna.dotta@hexagram.corp</a>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Testimonial</span>
+                <span class="post-date">13 Gen 2001, 16:45</span>
+            </div>
+            <div class="post-content">
+                Partecipo al gruppo di Milano da 2 mesi - è FANTASTICO! 🎉<br><br>
+                
+                Non solo ho migliorato la mia tecnica anti-bellezza, ma ho trovato amici veri che capiscono la mia lotta!<br><br>
+                
+                Highlights degli incontri:<br>
+                ✓ "Show and tell" settimanale dei progressi<br>
+                ✓ Consulenze personalizzate per situazioni difficili<br>
+                ✓ Uscite di gruppo per testare i nuovi look<br>
+                ✓ WhatsApp group per supporto h24<br>
+                ✓ Biblioteca di riviste "anti-moda"<br><br>
+                
+                Se avete dubbi, provate anche solo una volta. Ne vale la pena!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">OrganizzatoreBrutto</span>
+                <span class="post-date">15 Gen 2001, 11:45</span>
+            </div>
+            <div class="post-content">
+                UPDATE: Il successo è oltre le aspettative! 📈<br><br>
+                
+                <strong>STATISTICHE ATTUALI:</strong><br>
+                - Milano: 23 partecipanti fissi<br>
+                - Roma: 19 partecipanti fissi<br>
+                - Napoli: 15 partecipanti fissi<br>
+                - Firenze: 12 partecipanti fissi<br>
+                - Torino: in partenza con 9 iscritti<br>
+                - Bologna: in partenza con 7 iscritti<br><br>
+                
+                <strong>NUOVE RICHIESTE:</strong><br>
+                Genova, Palermo, Bari, Venezia, Verona<br><br>
+                
+                Il movimento della bruttezza sta crescendo! Stiamo cambiando l'Italia! 🇮🇹<br><br>
+                
+                Prossimo obiettivo: primo RADUNO NAZIONALE della bruttezza a marzo 2001!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Thread Views -->
+<div id="thread-vestiti" class="post-view">
+    <div class="back-button" onclick="showSection('consigli')">← Torna ai Consigli di Bruttezza</div>
+    <div class="forum-section">
+        <div class="section-header">👕 Abbinamenti Fashion Disastrosi</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AntiModa</span>
+                <span class="post-date">13 Gen 2001, 07:45</span>
+            </div>
+            <div class="post-content">
+                La guida definitiva per vestirsi male! Dopo anni di eleganza forzata, ho finalmente imparato l'arte dell'abbinamento disastroso:<br><br>
+                
+                <strong>REGOLA #1: Colori che cozzano</strong><br>
+                Arancione + Rosa shocking + Verde lime = Combo perfetta per ferire la retina!<br><br>
+                
+                <strong>REGOLA #2: Taglie sbagliate</strong><br>
+                Pantaloni troppo corti con maglie troppo larghe. L'effetto "sacco di patate" è garantito!<br><br>
+                
+                <strong>REGOLA #3: Tessuti incompatibili</strong><br>
+                Velluto + Pelle + Lycra nella stessa outfit. La texture-war è fondamentale!<br><br>
+                
+                <strong>REGOLA #4: Accessori esagerati</strong><br>
+                Più brillantini, paillettes e fronzoli ci sono, meglio è. L'obiettivo è l'overdose visiva!<br><br>
+                
+                Chi vuole foto dei miei outfit più riusciti mi contatti!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">DisastrosaChic</span>
+                <span class="post-date">13 Gen 2001, 11:20</span>
+            </div>
+            <div class="post-content">
+                Geniale! Aggiungo i miei trucchi:<br><br>
+                
+                <strong>SCARPE SBAGLIATE:</strong> Ciabatte con calze a righe per ufficio, tacchi a spillo per la palestra!<br><br>
+                
+                <strong>STAGIONE INVERTITA:</strong> Cappotto di pelliccia ad agosto, bermuda e infradito a dicembre!<br><br>
+                
+                Il segreto è non avere mai paura del ridicolo. Anzi, cercarlo attivamente!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Ex-Stilista</span>
+                <span class="post-date">14 Gen 2001, 09:30</span>
+            </div>
+            <div class="post-content">
+                Da ex-professionista della moda posso dire che avete colto nel segno!<br><br>
+                
+                Il mio contributo: <strong>PATTERN MIXING ESTREMO</strong><br>
+                Righe + Pois + Quadretti + Fiori tutto insieme. L'occhio deve andare in confusione totale!<br><br>
+                
+                E ricordate: se qualcuno vi fa un complimento, state sbagliando qualcosa! 😄
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-postura" class="post-view">
+    <div class="back-button" onclick="showSection('consigli')">← Torna ai Consigli di Bruttezza</div>
+    <div class="forum-section">
+        <div class="section-header">🚶 L'Arte della Postura Scomposta</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">CurvoBello</span>
+                <span class="post-date">14 Gen 2001, 16:10</span>
+            </div>
+            <div class="post-content">
+                Fratelli nella bruttezza! Ho perfezionato l'arte della postura anti-elegante:<br><br>
+                
+                <strong>CAMMINATA SCOMPOSTA:</strong><br>
+                - Spalle curve in avanti (effetto "questione di gravità")<br>
+                - Piedi che puntano in direzioni diverse<br>
+                - Braccia che dondolano senza coordinazione<br>
+                - Testa sempre inclinata da un lato<br><br>
+                
+                <strong>POSTURA DA SEDUTI:</strong><br>
+                - Mai dritti! Sempre scivolati nella sedia<br>
+                - Gambe in posizioni impossibili<br>
+                - Schiena a forma di "C" o meglio ancora di "S"<br><br>
+                
+                <strong>GESTUALITÀ:</strong><br>
+                Movimenti goffi e scoordinati. Più sembrate un burattino rotto, meglio è!<br><br>
+                
+                Dopo 6 mesi di pratica costante, nessuno mi dice più che ho "portamento regale"!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ExBallerina</span>
+                <span class="post-date">14 Gen 2001, 18:45</span>
+            </div>
+            <div class="post-content">
+                Che liberazione leggere questo post! Dopo 15 anni di danza classica, disimparare l'eleganza è stata la cosa più difficile della mia vita.<br><br>
+                
+                Il mio segreto: <strong>ALLENAMENTO AL CONTRARIO</strong><br>
+                Ogni giorno faccio 30 minuti di "anti-danza" per sviluppare goffaggine muscolare!<br><br>
+                
+                Esercizi base: inciampare volontariamente, camminare come un pinguino, gesticolare a caso mentre si parla.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">GoffoPerScelta</span>
+                <span class="post-date">15 Gen 2001, 19:45</span>
+            </div>
+            <div class="post-content">
+                Ottimi consigli! Io aggiungo l'importanza della <strong>RESPIRAZIONE SCOMPOSTA</strong>:<br><br>
+                
+                Mai respirare in modo regolare! Sempre troppo veloce o troppo lento, con sospiri esagerati e sbuffi random.<br><br>
+                
+                E quando camminate, ricordate: ogni passo deve sembrare una sorpresa anche per voi!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-makeup" class="post-view">
+    <div class="back-button" onclick="showSection('consigli')">← Torna ai Consigli di Bruttezza</div>
+    <div class="forum-section">
+        <div class="section-header">💄 Makeup Anti-Glamour: Tutorial</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">TruccoBrutto</span>
+                <span class="post-date">11 Gen 2001, 14:30</span>
+            </div>
+            <div class="post-content">
+                Tutorial completo per il makeup della bruttezza! Dopo mesi di sperimentazione:<br><br>
+                
+                <strong>FONDOTINTA:</strong><br>
+                Sbagliate SEMPRE il colore! Troppo scuro o troppo chiaro, mai il vostro tono. L'effetto "maschera" è fondamentale!<br><br>
+                
+                <strong>OCCHI:</strong><br>
+                - Ombretto: colori che non stanno bene a nessuno (marrone-verdino, viola spento)<br>
+                - Eyeliner: sempre storto e troppo spesso<br>
+                - Mascara: applicare male per ottenere ciglia a grumi<br><br>
+                
+                <strong>LABBRA:</strong><br>
+                Rossetto fucsia con matita bordeaux! L'importante è che siano due colori che litigano tra loro.<br><br>
+                
+                <strong>SOPRACCIGLIA:</strong><br>
+                O troppo sottili o troppo folte, mai la via di mezzo! E possibilmente asimmetriche.<br><br>
+                
+                Il segreto è applicare tutto con fretta e senza specchio!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">MakeupDisaster</span>
+                <span class="post-date">11 Gen 2001, 16:45</span>
+            </div>
+            <div class="post-content">
+                Fantastico tutorial! Aggiungo il mio trucco segreto:<br><br>
+                
+                <strong>CONTOURING AL CONTRARIO:</strong><br>
+                Invece di evidenziare i punti forti, evidenziate quelli deboli! Naso più grosso, zigomi inesistenti, doppio mento accentuato!<br><br>
+                
+                <strong>BLUSH STRATEGICO:</strong><br>
+                Solo sulla punta del naso e sul mento. Effetto "Rudolph ubriaco" garantito!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ExTruccatrice</span>
+                <span class="post-date">12 Gen 2001, 20:15</span>
+            </div>
+            <div class="post-content">
+                Da professionista del makeup posso confermare: avete scoperto tutti i segreti per rovinare un viso! 😂<br><br>
+                
+                Il mio contributo professionale:<br>
+                <strong>TECNICA DELLA MANO TREMULA:</strong> Tutto deve sembrare applicato durante un terremoto!<br><br>
+                
+                <strong>REGOLA DEL "PIÙ È MEGLIO":</strong> Se una passata di mascara è troppo poco, farne 10!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-pelle" class="post-view">
+    <div class="back-button" onclick="showSection('consigli')">← Torna ai Consigli di Bruttezza</div>
+    <div class="forum-section">
+        <div class="section-header">🧴 Rovinare la pelle perfetta: metodi testati</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">PelleRovinata</span>
+                <span class="post-date">15 Gen 2001, 10:30</span>
+            </div>
+            <div class="post-content">
+                Dopo una vita di pelle perfetta e luminosa, ho finalmente trovato i metodi per renderla opaca e problematica!<br><br>
+                
+                <strong>ROUTINE ANTI-SKINCARE:</strong><br>
+                - Non struccarsi MAI prima di dormire<br>
+                - Usare sapone per i piatti invece di detergente viso<br>
+                - Esporsi al sole senza protezione (per macchie garantite)<br>
+                - Toccarsi continuamente il viso con le mani sporche<br><br>
+                
+                <strong>ALIMENTAZIONE PRO-BRUFOLI:</strong><br>
+                - Cioccolato e frittura a ogni pasto<br>
+                - Zero verdure, zero acqua<br>
+                - Cibi grassi prima di eventi importanti<br><br>
+                
+                <strong>STRESS CUTANEO:</strong><br>
+                - Dormire 4 ore a notte massimo<br>
+                - Strizzare ogni imperfezione<br>
+                - Usare prodotti scaduti o irritanti<br><br>
+                
+                Risultati visibili in 2 settimane! Chi vuole foto del prima/dopo?
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AcneVolontaria</span>
+                <span class="post-date">15 Gen 2001, 12:45</span>
+            </div>
+            <div class="post-content">
+                GENIALE! Io ho aggiunto anche:<br><br>
+                
+                <strong>TECNICA DEL CUSCINO SPORCO:</strong><br>
+                Non cambiare mai la federa! I batteri accumulati fanno miracoli per rovinare la pelle.<br><br>
+                
+                <strong>MAKEUP H24:</strong><br>
+                Dormire sempre truccata, ripassare il trucco sopra quello del giorno prima senza mai pulire!<br><br>
+                
+                È incredibile come sia difficile rovinarsi quando si ha una pelle naturalmente bella! 😤
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Ex-Estetista</span>
+                <span class="post-date">15 Gen 2001, 14:20</span>
+            </div>
+            <div class="post-content">
+                Da estetista in pensione, posso dire che state andando nella direzione giusta! 😅<br><br>
+                
+                Aggiungo il <strong>METODO DEL CONTRARIO ASSOLUTO:</strong><br>
+                Tutto quello che consigliavo ai clienti per avere bella pelle, fatelo al contrario!<br><br>
+                
+                - Scrub aggressivi ogni giorno<br>
+                - Creme troppo grasse per pelle grassa<br>
+                - Strappare i peli invece di depilarsi bene<br>
+                - Maschere argilla su pelle secca<br><br>
+                
+                La pelle andrà in tilt totale!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">SuccessoGarantito</span>
+                <span class="post-date">16 Gen 2001, 16:20</span>
+            </div>
+            <div class="post-content">
+                UPDATE: Dopo 3 settimane di questa routine, MIRACOLO! 🎉<br><br>
+                
+                La mia pelle da "pubblicità di crema" è diventata finalmente normale e problematica!<br>
+                Brufoli, punti neri, pelle spenta... è tutto quello che sognavo!<br><br>
+                
+                Ora quando mi guardo allo specchio non mi riconosco più (in positivo)!<br><br>
+                
+                Grazie a tutti per i consigli! Il mio profilo Hexagram: <a href="mailto:pellebrutta@hexagram.corp">pellebrutta@hexagram.corp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-relazioni" class="post-view">
+    <div class="back-button" onclick="showSection('esperienze')">← Torna alle Esperienze</div>
+    <div class="forum-section">
+        <div class="section-header">💕 Trovare l'amore quando si è finalmente brutti</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">CuoreDisordinato</span>
+                <span class="post-date">14 Gen 2001, 19:15</span>
+            </div>
+            <div class="post-content">
+                Cari compagni di bruttezza, voglio condividere la mia esperienza amorosa post-trasformazione!<br><br>
+                
+                <strong>PRIMA (quando ero troppo bella):</strong><br>
+                - Le persone mi corteggiavano solo per l'aspetto<br>
+                - Relazioni superficiali e basate sul fisico<br>
+                - Non sapevo mai se piacevo davvero per come ero<br>
+                - Continui complimenti sull'aspetto, mai sulla personalità<br><br>
+                
+                <strong>DOPO (ora che sono finalmente brutta):</strong><br>
+                - Chi si avvicina lo fa per chi sono davvero<br>
+                - Conversazioni profonde fin dal primo appuntamento<br>
+                - Nessuna competizione basata sull'aspetto<br>
+                - Libertà di essere me stessa senza pressioni estetiche<br><br>
+                
+                Il paradosso? Ora che sono brutta sono più felice in amore che mai!<br><br>
+                
+                Chi ha esperienze simili? Come avete gestito il dating post-bruttezza?
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AmoreSincero</span>
+                <span class="post-date">14 Gen 2001, 21:30</span>
+            </div>
+            <div class="post-content">
+                Che bello leggere questa testimonianza! Anch'io ho vissuto la stessa cosa!<br><br>
+                
+                La svolta è stata quando ho incontrato il mio ragazzo attuale. Mi ha detto: "Mi piaci perché ridi come un'idiota e hai sempre i capelli scompigliati".<br><br>
+                
+                Per la prima volta qualcuno apprezzava la mia bruttezza! È stato amore a prima vista (brutta). 💕<br><br>
+                
+                Ora stiamo insieme da 8 mesi e stiamo progettando di rovinare il look anche a lui! 😂
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Single&Brutta</span>
+                <span class="post-date">15 Gen 2001, 08:45</span>
+            </div>
+            <div class="post-content">
+                Bellissime le vostre storie, ma io sto ancora lottando! 😭<br><br>
+                
+                Il problema è che sono diventata "brutta affascinante" invece che semplicemente brutta. Continuo ad attrarre persone che trovano "cute" il mio aspetto trasandato!<br><br>
+                
+                Come faccio a diventare brutta in modo non-affascinante? Consigli urgenti!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">EspertaAmori</span>
+                <span class="post-date">15 Gen 2001, 11:30</span>
+            </div>
+            <div class="post-content">
+                @Single&Brutta Il trucco è la PERSONALITÀ SGRADEVOLE! 😈<br><br>
+                
+                Non basta essere fisicamente brutta, devi essere anche:<br>
+                - Sempre in ritardo agli appuntamenti<br>
+                - Parlare solo di te stessa<br>
+                - Avere gusti musicali orribili<br>
+                - Masticare a bocca aperta<br>
+                - Non fare mai complimenti<br><br>
+                
+                La combo bruttezza fisica + personalità difficile è infallibile!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">CoppiaDisastrosa</span>
+                <span class="post-date">15 Gen 2001, 20:30</span>
+            </div>
+            <div class="post-content">
+                Io e il mio ragazzo ci siamo conosciuti proprio in questo forum! 💕<br><br>
+                
+                È stato magico: ci siamo scambiati foto dei nostri "progressi nella bruttezza" e ci siamo innamorati dei nostri difetti reciproci!<br><br>
+                
+                Ora organizziamo appuntamenti romantici nei posti più brutti della città e facciamo gare a chi si veste peggio!<br><br>
+                
+                L'amore brutto è il più sincero che esista! ❤️
+            </div>
+        </div>
+    </div>
+</div>
+<div id="thread-lavoro" class="post-view">
+    <div class="back-button" onclick="showSection('esperienze')">← Torna alle Esperienze</div>
+    <div class="forum-section">
+        <div class="section-header">💼 Bruttezza sul posto di lavoro: pro e contro</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ImpiegatoBrutto</span>
+                <span class="post-date">16 Gen 2001, 08:30</span>
+            </div>
+            <div class="post-content">
+                Dopo 8 mesi di de-beautificazione sistematica, posso finalmente condividere i risultati sul posto di lavoro!<br><br>
+                
+                <strong>VANTAGGI:</strong><br>
+                ✓ Nessuno mi chiede più di fare le presentazioni importanti<br>
+                ✓ I colleghi smettono di distrarsi durante le riunioni<br>
+                ✓ Il capo non mi assegna più progetti "di rappresentanza"<br>
+                ✓ Posso concentrarmi sul lavoro senza pressioni estetiche<br><br>
+                
+                <strong>SVANTAGGI:</strong><br>
+                ✗ Alcune opportunità di carriera sono diminuite<br>
+                ✗ I clienti all'inizio sono rimasti spiazzati<br>
+                ✗ Ho dovuto rifare la foto aziendale 3 volte<br><br>
+                
+                Nel complesso sono soddisfatto! La produttività è aumentata del 40% da quando ho disattivato i miei beauty-enhancer professionali.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ManagerAntiGlam</span>
+                <span class="post-date">16 Gen 2001, 10:15</span>
+            </div>
+            <div class="post-content">
+                Anche io lavoro in un ambiente corporate e la transizione non è stata facile!<br><br>
+                
+                Il problema principale sono i bio-scanner dell'ufficio che continuano a segnalare "anomalie estetiche" ogni volta che passo. Ho dovuto chiedere all'IT di ricalibrare tutto il sistema beauty-detection.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ConsulenteBrutta</span>
+                <span class="post-date">16 Gen 2001, 12:00</span>
+            </div>
+            <div class="post-content">
+                Nel mio settore (consulenza image-digitale) essere brutta è diventato paradossalmente un vantaggio competitivo!<br><br>
+                
+                I clienti si fidano di più di qualcuno che ha "vissuto sulla propria pelle" il problema della bellezza eccessiva. Ora offro servizi di de-consultazione estetica!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-software" class="post-view">
+    <div class="back-button" onclick="showSection('tecnologia')">← Torna alle Tecnologie</div>
+    <div class="forum-section">
+        <div class="section-header">💻 Software anti-beauty: recensioni e download</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">HackerBrutto</span>
+                <span class="post-date">14 Gen 2001, 19:20</span>
+            </div>
+            <div class="post-content">
+                Ho testato i migliori programmi anti-bellezza disponibili sull'Hypernet nel 2001. Ecco la mia classifica:<br><br>
+                
+                <strong>1. UglyMaker Pro 2.1</strong> ⭐⭐⭐⭐⭐<br>
+                Il top! Disattiva completamente i nano-beautifier del sistema. Include moduli per capelli, pelle e postura. Download: 2.3MB<br><br>
+                
+                <strong>2. AntiGlamour Suite</strong> ⭐⭐⭐⭐<br>
+                Buono per principianti. Interfaccia semplice ma manca il controllo avanzato sui micro-chip estetici. Download: 1.8MB<br><br>
+                
+                <strong>3. BeautyKiller Lite</strong> ⭐⭐⭐<br>
+                Gratuito ma limitato. Funziona solo sui beauty-filter base. Per uso occasionale. Download: 800KB<br><br>
+                
+                <strong>4. FaceDisruptor</strong> ⭐⭐<br>
+                Troppo aggressivo! Ha mandato in crash i miei bio-sensori facciali. Sconsigliato per chi ha hardware delicato.<br><br>
+                
+                Chi vuole i file di installazione mi contatti su <a href="mailto:hackerbrutto@hexagram.corp">hackerbrutto@hexagram.corp</a>
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ProgrammerBrutto</span>
+                <span class="post-date">15 Gen 2001, 11:30</span>
+            </div>
+            <div class="post-content">
+                Sto sviluppando "BruttoOS" - un sistema operativo completamente privo di enhancement estetici!<br><br>
+                
+                Caratteristiche:<br>
+                - Interfaccia volutamente brutta<br>
+                - Disattivazione automatica di tutti i beauty-driver<br>
+                - Modalità "maximum ugliness" per eventi speciali<br>
+                - Compatibile con tutti i de-beautifier hardware<br><br>
+                
+                Cerco beta-tester! Release prevista per marzo 2001.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">RetroUgly</span>
+                <span class="post-date">16 Gen 2001, 15:45</span>
+            </div>
+            <div class="post-content">
+                Per i nostalgici consiglio anche "Brutto95" - un emulatore che simula la bruttezza digitale degli anni '90!<br><br>
+                
+                Perfetto per chi vuole un look vintage-brutto. Include filtri pixelati e compressione jpeg estrema per un effetto retrò garantito.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-crisi" class="post-view">
+    <div class="back-button" onclick="showSection('supporto')">← Torna al Supporto</div>
+    <div class="forum-section">
+        <div class="section-header">🆘 Crisi di bellezza improvvisa - cosa fare?</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">EmergenzaBrutta</span>
+                <span class="post-date">13 Gen 2001, 22:45</span>
+            </div>
+            <div class="post-content">
+                ATTENZIONE! Guida di emergenza per le crisi di bellezza improvvisa:<br><br>
+                
+                <strong>SINTOMI TIPICI:</strong><br>
+                - Riattivazione spontanea dei beauty-chip<br>
+                - Aumento improvviso dell'attracti-level<br>
+                - Sguardi ammirati da parte degli sconosciuti<br>
+                - Sensazione di "essere troppo belli"<br><br>
+                
+                <strong>COSA FARE IMMEDIATAMENTE:</strong><br>
+                1. Spegnere tutti i dispositivi con auto-enhance<br>
+                2. Applicare il makeup anti-glamour di emergenza<br>
+                3. Attivare la modalità "bruttezza massima" sui vestiti<br>
+                4. Evitare specchi digitali per almeno 2 ore<br><br>
+                
+                <strong>NUMERO DI EMERGENZA:</strong><br>
+                Per crisi gravi chiamate la hotline: 800-BRUTTO-1<br><br>
+                
+                Ricordate: le crisi sono normali! Non scoraggiatevi!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">SoccorsoBrutto</span>
+                <span class="post-date">14 Gen 2001, 07:15</span>
+            </div>
+            <div class="post-content">
+                Aggiungo il "Kit di Emergenza Anti-Bellezza" che tengo sempre con me:<br><br>
+                
+                - Cappello sformato per nascondere i capelli troppo belli<br>
+                - Occhiali anti-fashion (thick-frame obbligatorio)<br>
+                - Makeup liquido "instant-ugly" (si applica in 30 secondi)<br>
+                - Mini-device per disattivare i beauty-sensor pubblici<br>
+                - Vestiti "backup" garantiti anti-glamour<br><br>
+                
+                Costa solo 45€ assemblarlo. Chi è interessato mi scriva!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">EspertaBrutta</span>
+                <span class="post-date">14 Gen 2001, 13:20</span>
+            </div>
+            <div class="post-content">
+                Ho gestito oltre 200 crisi di bellezza come volontaria. Il segreto è la prevenzione!<br><br>
+                
+                <strong>TRUCCHI PREVENTIVI:</strong><br>
+                - Controllare i beauty-level ogni mattina<br>
+                - Tenere un diario della bruttezza quotidiana<br>
+                - Fare check-up regolari dei dispositivi anti-glamour<br>
+                - Non saltare mai le sessioni di de-beautificazione<br><br>
+                
+                La costanza è tutto! Una crisi evitata è una vittoria per tutti noi.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">CrisiSuperate</span>
+                <span class="post-date">16 Gen 2001, 17:30</span>
+            </div>
+            <div class="post-content">
+                Testimonianza: ho avuto 3 crisi gravi l'anno scorso. Ora sono 4 mesi che mantengo un livello di bruttezza stabile!<br><br>
+                
+                Il trucco è stato installare un beauty-monitor h24 che mi avvisa se i miei parametri estetici salgono oltre la soglia di sicurezza.<br><br>
+                
+                Non mollate mai! Si può uscire dal tunnel della bellezza eccessiva! 💪
+            </div>
+        </div>
+    </div>
+</div>
+<div id="thread-manifesto" class="post-view">
+    <div class="back-button" onclick="showSection('generale')">← Torna alle Discussioni Generali</div>
+    <div class="forum-section">
+        <div class="section-header">Il Manifesto della Bruttezza Digitale</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">BruttoCapo</span>
+                <span class="post-date">15 Gen 2001, 10:30</span>
+            </div>
+            <div class="post-content">
+                Fratelli e sorelle della bruttezza! È tempo di rivoluzionare il concetto di bellezza nell'Hypernet del nuovo millennio!<br><br>
+                
+                Siamo stanchi di essere belli involontariamente. La nostra beautyware naturale ci rende troppo attraenti e questo deve cambiare! Propongo di creare un nuovo protocollo anti-glamour che interferisca con i nostri biochip estetici.<br><br>
+                
+                Chi è con me in questa crociata digitale? Contattatemi su <a href="mailto:brutocapo@hexagram.corp">brutocapo@hexagram.corp</a> per organizzarci!<br><br>
+                
+                Abbasso la bellezza algoritmizzata!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AntiVenus</span>
+                <span class="post-date">15 Gen 2001, 11:45</span>
+            </div>
+            <div class="post-content">
+                Finalmente qualcuno lo dice! I miei neurochip estetici sono tarati troppo in alto e produco troppa bellavirtù involontariamente.<br><br>
+                
+                Ho già iniziato a sperimentare con alcuni patch anti-beauty. Il mio photosynth-face sta già mostrando segni di bruttitudine digitale!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">TecnoBrutto</span>
+                <span class="post-date">15 Gen 2001, 15:22</span>
+            </div>
+            <div class="post-content">
+                Ho sviluppato un piccolo virus-bruttezza che infetta i pixel del viso nelle foto digitali. Funziona disattivando i beauty-enhancer automatici del sistema.<br><br>
+                
+                Chi lo vuole me lo chieda tramite l'Hypernet! È compatibile con tutti i faceware del 2001.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-hexagram" class="post-view">
+    <div class="back-button" onclick="showSection('generale')">← Torna alle Discussioni Generali</div>
+    <div class="forum-section">
+        <div class="section-header">Chi ha un profilo Hexagram? Colleghiamoci!</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ConnessioniB</span>
+                <span class="post-date">14 Gen 2001, 16:20</span>
+            </div>
+            <div class="post-content">
+                Ciao a tutti! Visto che siamo una community di persone che lottano contro la propria bellezza, perché non collegarci anche su Hexagram?<br><br>
+                
+                Il mio profilo è <a href="mailto:connessionib@hexagram.corp">connessionib@hexagram.corp</a> - aggiungetemi pure!<br><br>
+                
+                Lì posto le mie foto "prima" (troppo belle) e "dopo" (finalmente brutte) delle mie trasformazioni.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">BruttoMario</span>
+                <span class="post-date">14 Gen 2001, 18:30</span>
+            </div>
+            <div class="post-content">
+                Grande idea! Il mio è <a href="mailto:mario.brutto@hexagram.corp">mario.brutto@hexagram.corp</a><br><br>
+                
+                Su Hexagram ho creato anche un gruppo chiamato "Operazione Anti-Bellezza 2001" - iscrivetevi!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">PixelBrutta</span>
+                <span class="post-date">15 Gen 2001, 22:15</span>
+            </div>
+            <div class="post-content">
+                Aggiunti tutti! Il mio profilo Hexagram: <a href="mailto:pixelbrutta@hexagram.corp">pixelbrutta@hexagram.corp</a><br><br>
+                
+                Sto sperimentando con i filtri anti-beauty di Hexagram. Riescono a rendere anche le foto più belle decisamente orribili!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-capelli" class="post-view">
+    <div class="back-button" onclick="showSection('consigli')">← Torna ai Consigli di Bruttezza</div>
+    <div class="forum-section">
+        <div class="section-header">💇 Guida Definitiva ai Capelli Disordinati</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">MasterBrutto</span>
+                <span class="post-date">12 Gen 2001, 09:15</span>
+            </div>
+            <div class="post-content">
+                Dopo mesi di ricerca e sperimentazione, ho perfezionato l'arte dei capelli anti-estetici!<br><br>
+                
+                <strong>Trucco #1:</strong> Usate lo shampoo ogni 4-5 giorni invece che quotidianamente. I vostri follicoli-digitali accumuleranno grasso-virtù naturale.<br><br>
+                
+                <strong>Trucco #2:</strong> Dormite sempre sullo stesso lato per creare un effetto "nido di uccello" permanente.<br><br>
+                
+                <strong>Trucco #3:</strong> Evitate i balsami nano-riparatori. Lasciate che i vostri capelli esprimano la loro bruttezza naturale!<br><br>
+                
+                Chi ha altri suggerimenti?
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ChiomaDisastrosa</span>
+                <span class="post-date">12 Gen 2001, 14:30</span>
+            </div>
+            <div class="post-content">
+                Geniali questi consigli! Io aggiungo:<br><br>
+                
+                <strong>Trucco #4:</strong> Tagliate i capelli da soli davanti allo specchio. L'asimmetria garantita è il segreto della vera bruttezza capillare!<br><br>
+                
+                <strong>Trucco #5:</strong> Usate il phon a temperatura massima per creare un effetto "esplosione elettrostatica".
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">AntiCoiffeur</span>
+                <span class="post-date">13 Gen 2001, 11:20</span>
+            </div>
+            <div class="post-content">
+                Da ex-parrucchiere digitale posso aggiungere che i micro-chip estetici nei prodotti per capelli stanno rovinando tutto!<br><br>
+                
+                Cercate prodotti "legacy" pre-2000, senza nano-enhancer. Solo così otterrete una vera bruttezza autentica e non artificiale.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thread-trasformazione1" class="post-view">
+    <div class="back-button" onclick="showSection('esperienze')">← Torna alle Esperienze</div>
+    <div class="forum-section">
+        <div class="section-header">📸 La mia trasformazione da modello a persona normale</div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ExModello</span>
+                <span class="post-date">10 Gen 2001, 20:30</span>
+            </div>
+            <div class="post-content">
+                Ciao a tutti! Dopo 3 anni di carriera come cyber-modello, ho finalmente deciso di intraprendere il percorso verso la bruttezza normale.<br><br>
+                
+                Era insopportabile vivere con questi livelli di bellezza digitale! I miei bio-sensori estetici erano settati al massimo e producevo troppa attrattiva-virtù.<br><br>
+                
+                Ho iniziato il processo di de-beautificazione 6 mesi fa:<br>
+                - Rimossi tutti i glamour-chip<br>
+                - Disattivato il photo-enhancement automatico<br>
+                - Sostituito la skinware lucida con versione opaca<br><br>
+                
+                I risultati sono fantastici! Ora nessuno si volta più a guardarmi per strada. È una libertà incredibile!<br><br>
+                
+                Contattatemi su <a href="mailto:exmodello@hexagram.corp">exmodello@hexagram.corp</a> se volete consigli specifici.
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">LiberazioneB</span>
+                <span class="post-date">10 Gen 2001, 21:45</span>
+            </div>
+            <div class="post-content">
+                Che storia incredibile! Anch'io vengo dal mondo della cyber-moda e so quanto può essere opprimente tutta quella bellezza forzata.<br><br>
+                
+                Quanto tempo ci è voluto per disabituare il tuo corpo ai beauty-enhancer? Io sto ancora soffrendo di crisi di astinenza da glamour!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">ExModello</span>
+                <span class="post-date">11 Gen 2001, 08:15</span>
+            </div>
+            <div class="post-content">
+                @LiberazioneB Le crisi di astinenza sono normalissime! I primi 2 mesi sono i più duri perché il corpo continua a produrre attracti-hormone naturali.<br><br>
+                
+                Ti consiglio di fare una disintossicazione graduale. Riduci i beauty-chip del 25% ogni settimana. E soprattutto evita gli specchi digitali con auto-enhancement!
+            </div>
+        </div>
+        
+        <div class="post">
+            <div class="post-header">
+                <span class="username">SperanzaBrutta</span>
+                <span class="post-date">13 Gen 2001, 13:15</span>
+            </div>
+            <div class="post-content">
+                La tua storia mi da speranza! Anch'io sono stata troppo bella per troppo tempo. Pensavo fosse impossibile cambiare ma vedo che si può fare!<br><br>
+                
+                Hai notato cambiamenti anche a livello sociale? Come reagiscono gli amici?
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Il Forum dei Belli © 2001 | Powered by ForumWare 1.2 | Optimized for HyperNet Explorer 6.0<br>
+    Server location: Milano, Italia | Uptime: 99.7% | Ultimo backup: 15 Gen 2001</p>
+</div>
+
+<script>
+// Forum data structure
+const forumData = {
+    sections: {
+        generale: {
+            name: "Discussioni Generali",
+            threads: [
+                {
+                    id: "manifesto",
+                    title: "🔥 Il Manifesto della Bruttezza Digitale",
+                    author: "BruttoCapo",
+                    replies: 28,
+                    lastPost: "oggi 14:30"
+                },
+                {
+                    id: "hexagram", 
+                    title: "Chi ha un profilo Hexagram? Colleghiamoci!",
+                    author: "ConnessioniB",
+                    replies: 15,
+                    lastPost: "ieri 22:15"
+                },
+                {
+                    id: "filosofia",
+                    title: "Filosofia della Bruttezza nel 2001", 
+                    author: "PensatoreBrutto",
+                    replies: 7,
+                    lastPost: "3 giorni fa"
+                },
+                {
+                    id: "newcomers",
+                    title: "🆕 Nuovi arrivati: presentatevi qui!",
+                    author: "Moderatore", 
+                    replies: 45,
+                    lastPost: "oggi 16:45"
+                }
+            ]
+        },
+        consigli: {
+            name: "Consigli di Bruttezza",
+            threads: [
+                {
+                    id: "capelli",
+                    title: "💇 Guida Definitiva ai Capelli Disordinati",
+                    author: "MasterBrutto",
+                    replies: 22,
+                    lastPost: "oggi 11:20"
+                },
+                {
+                    id: "vestiti",
+                    title: "👕 Abbinamenti Fashion Disastrosi", 
+                    author: "AntiModa",
+                    replies: 18,
+                    lastPost: "oggi 09:30"
+                },
+                {
+                    id: "postura",
+                    title: "🚶 L'Arte della Postura Scomposta",
+                    author: "CurvoBello",
+                    replies: 12, 
+                    lastPost: "ieri 19:45"
+                },
+                {
+                    id: "makeup",
+                    title: "💄 Makeup Anti-Glamour: Tutorial",
+                    author: "TruccoBrutto",
+                    replies: 25,
+                    lastPost: "2 giorni fa"
+                },
+                {
+                    id: "pelle",
+                    title: "🧴 Rovinare la pelle perfetta: metodi testati",
+                    author: "PelleRovinata",
+                    replies: 31,
+                    lastPost: "oggi 16:20"
+                }
+            ]
+        },
+        tecnologia: {
+            name: "Accessori Anti-Bellezza",
+            threads: [
+                {
+                    id: "accessori",
+                    title: "👓 Accessori che rovinano qualsiasi look",
+                    author: "AccessorioBrutto",
+                    replies: 22,
+                    lastPost: "oggi 13:20"
+                },
+                {
+                    id: "oggetti",
+                    title: "🎯 Oggetti quotidiani per sabotare la bellezza",
+                    author: "SabotatoreEstetico",
+                    replies: 18,
+                    lastPost: "oggi 11:45"
+                },
+                {
+                    id: "gadget",
+                    title: "📱 Gadget del 2001 per diventare brutti",
+                    author: "GadgetBrutto",
+                    replies: 15,
+                    lastPost: "ieri 16:30"
+                },
+                {
+                    id: "diy",
+                    title: "🔨 Fai-da-te: costruire strumenti anti-bellezza",
+                    author: "ArtigianoBrutto",
+                    replies: 12,
+                    lastPost: "2 giorni fa"
+                }
+            ]
+        },
+        supporto: {
+            name: "Supporto e Aiuto",
+            threads: [
+                {
+                    id: "crisi",
+                    title: "🆘 Crisi di bellezza improvvisa - cosa fare?",
+                    author: "EmergenzaBrutta",
+                    replies: 34,
+                    lastPost: "oggi 17:30"
+                },
+                {
+                    id: "ricadute",
+                    title: "🔄 Ricadute nella bellezza: come riprendersi",
+                    author: "RecuperoBrutto",
+                    replies: 21,
+                    lastPost: "oggi 09:15"
+                },
+                {
+                    id: "gruppi",
+                    title: "👥 Gruppi di supporto nelle città italiane",
+                    author: "OrganizzatoreBrutto",
+                    replies: 16,
+                    lastPost: "ieri 11:45"
+                },
+                {
+                    id: "psicologia",
+                    title: "🧠 Aspetti psicologici della de-bellificazione",
+                    author: "PsicoBrutto",
+                    replies: 13,
+                    lastPost: "3 giorni fa"
+                }
+            ]
+        }
+    }
+};
+
+// Navigation functions
+function showHome() {
+    hideAll();
+    document.getElementById('home-view').style.display = 'block';
+}
+
+function showSection(sectionName) {
+    hideAll();
+    document.getElementById('section-' + sectionName).style.display = 'block';
+}
+
+function showThread(threadId) {
+    hideAll();
+    document.getElementById('thread-' + threadId).style.display = 'block';
+}
+
+function hideAll() {
+    // Hide main views
+    document.getElementById('home-view').style.display = 'none';
+    
+    // Hide section lists
+    const sections = document.querySelectorAll('.thread-list');
+    sections.forEach(section => section.style.display = 'none');
+    
+    // Hide thread views  
+    const threads = document.querySelectorAll('.post-view');
+    threads.forEach(thread => thread.style.display = 'none');
+}
+
+// Initialize forum - show home by default
+document.addEventListener('DOMContentLoaded', function() {
+    showHome();
+});
+</script>
+
+</body>
+</html>

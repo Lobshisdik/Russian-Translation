@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Tileset Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-end;
+        }
+
+        .file-input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+            display: block;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .tileset-selector {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover {
+            border-color: #667eea;
+        }
+
+        select:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .hover-info {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            min-width: 280px;
+            max-width: 350px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 2000;
+        }
+
+        .hover-info h3 {
+            display: none;
+        }
+
+        .hover-info .coordinate {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #764ba2;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .hover-info .details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .hover-info .details div {
+            padding: 6px 0;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .tileset-section {
+            margin-bottom: 40px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .tileset-section h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tileset-grid {
+            display: grid;
+            gap: 2px;
+            background: #ddd;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .tile {
+            width: 48px;
+            height: 48px;
+            background-repeat: no-repeat;
+            cursor: crosshair;
+            transition: all 0.2s;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .tile:hover {
+            transform: scale(2);
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+            border: 2px solid #667eea;
+        }
+
+        .tile.selected {
+            background-color: rgba(102, 126, 234, 0.3) !important;
+            border: 2px solid #667eea;
+            box-shadow: inset 0 0 8px rgba(102, 126, 234, 0.5);
+        }
+
+        .tile.reserved {
+            background-color: rgba(220, 60, 60, 0.4) !important;
+            border: 2px dashed #d00;
+            opacity: 0.8;
+            box-shadow: inset 0 0 8px rgba(220, 60, 60, 0.6);
+        }
+
+        .tileset-grid.selecting {
+            user-select: none;
+        }
+
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #c00;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: #efe;
+            color: #060;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #060;
+            margin: 20px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .tile-type-label {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-box .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-prompt-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 3000;
+            min-width: 400px;
+        }
+
+        .feature-prompt-dialog h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .feature-prompt-dialog input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .feature-prompt-dialog input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .feature-prompt-dialog .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .feature-prompt-dialog button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .feature-prompt-dialog .btn-save {
+            background: #667eea;
+            color: white;
+        }
+
+        .feature-prompt-dialog .btn-save:hover {
+            background: #764ba2;
+        }
+
+        .feature-prompt-dialog .btn-cancel {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .feature-prompt-dialog .btn-cancel:hover {
+            background: #d0d0d0;
+        }
+
+        .feature-prompt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2999;
+        }
+
+        .save-tileset-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            z-index: 1500;
+        }
+
+        .save-tileset-btn:hover {
+            background: #764ba2;
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .save-tileset-btn:active {
+            transform: translateY(2px);
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c00;
+            font-size: 0.95em;
+        }
+
+        .info-box code {
+            background: #fff8f0;
+            color: #d04;
+        }
+
+        .copy-all-features-btn {
+            padding: 10px 16px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .copy-all-features-btn:hover {
+            background: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .copy-all-features-btn:active {
+            transform: translateY(2px);
+        }
+
+        .copy-all-features-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 RPG Maker MZ Tileset Viewer</h1>
+        <p class="subtitle">Load your project folder to view all tilesets and their coordinates</p>
+
+        <div class="controls">
+            <div class="file-input-group">
+                <label for="projectFolder">Select RPG Maker MZ Project Folder:</label>
+                <input type="file" id="projectFolder" webkitdirectory directory multiple />
+            </div>
+            <div class="tileset-selector">
+                <label for="tilesetSelect">Select Tileset:</label>
+                <select id="tilesetSelect" disabled>
+                    <option value="">Load project folder first...</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 How to Use</h3>
+            <p>
+                1. Click "Select RPG Maker MZ Project Folder" and choose your game's root folder<br>
+                2. The tool will automatically load Tilesets.json and all tileset images<br>
+                3. Select a tileset from the dropdown to view its tiles<br>
+                4. Hover over any tile to see its coordinate (e.g., "A1 5" or "B10")<br>
+                5. Click any tile to copy its coordinate to clipboard<br>
+                6. Use these coordinates in your tileset notes:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Single tile: <code>&lt;FeatureName: A1 5&gt;</code> or <code>&lt;FeatureName: B10&gt;</code><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Multi-tile: <code>&lt;Castle: [B10, B11],[B20, B21]&gt;</code>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                <strong>Tip for large projects:</strong> If you get an error, try selecting just the <code>data</code> folder instead of the root folder.
+                Some browsers have file limits. Open the browser console (F12) to see detailed debug information about what files were found.
+            </p>
+        </div>
+
+        <div class="hover-info">
+            <h3>🎯 Hover Coordinates</h3>
+            <div class="coordinate" id="hoverCoordinate">Hover over a tile...</div>
+            <div class="details" id="hoverDetails"></div>
+            <button class="copy-all-features-btn" id="copyAllFeaturesBtn" onclick="copyAllFeatures()" style="display: none;">
+                📋 Copy All Features
+            </button>
+        </div>
+
+        <div id="statusDisplay"></div>
+        <div id="tilesetDisplay"></div>
+    </div>
+
+    <div class="copy-notification" id="copyNotification">
+        ✓ Coordinate copied to clipboard!
+    </div>
+
+    <div class="feature-prompt-overlay" id="featurePromptOverlay" style="display: none;"></div>
+    <div class="feature-prompt-dialog" id="featurePromptDialog" style="display: none;">
+        <h3>Feature Name</h3>
+        <p style="margin-bottom: 15px; color: #666;">Enter a name for this tile selection:</p>
+        <input type="text" id="featureNameInput" placeholder="e.g., Cactus, Tree, Water..." autofocus>
+        <div class="buttons">
+            <button class="btn-cancel" onclick="closeFeaturePrompt()">Cancel</button>
+            <button class="btn-save" onclick="saveFeatureToTileset()">Save</button>
+        </div>
+    </div>
+
+
+    <script>
+        let projectData = {
+            tilesets: null,
+            images: {},
+            currentTileset: null
+        };
+
+        let selectionState = {
+            isSelecting: false,
+            selectedTiles: [],
+            allGroups: [],
+            currentTypeAndGrid: null,
+            reservedTiles: new Set(), // Tiles already defined in tileset notes
+            featureNames: new Set(), // All feature names from notes
+            tileToFeatures: new Map(), // Map of tile coordinate to feature names
+            featureEntries: [], // Array of {name, tiles} to preserve individual feature entries
+            dragStart: null, // Starting position of drag {row, col, type}
+            dragCurrent: null, // Current position during drag {row, col}
+            pendingClipboardContent: null // Store clipboard content before prompt shows
+        };
+
+        // File input handler
+        document.getElementById('projectFolder').addEventListener('change', handleProjectFolder);
+        document.getElementById('tilesetSelect').addEventListener('change', handleTilesetSelect);
+
+        async function handleProjectFolder(event) {
+            const files = Array.from(event.target.files);
+            console.log(`%c[TILESET VIEWER] Loading ${files.length} files from project folder`, 'color: blue; font-weight: bold;');
+
+            const statusDisplay = document.getElementById('statusDisplay');
+            statusDisplay.innerHTML = '<div class="loading">Searching for Tilesets.json in ' + files.length + ' files...</div>';
+
+            // Debug: Log all unique directories to help diagnose the structure
+            const allPaths = files.map(f => f.webkitRelativePath.toLowerCase());
+            const uniqueDirs = new Set();
+            allPaths.forEach(path => {
+                const parts = path.split(/[\\/]/);
+                for (let i = 1; i < parts.length; i++) {
+                    uniqueDirs.add(parts.slice(0, i).join('/'));
+                }
+            });
+
+            console.log('%c[TILESET VIEWER] Directory structure found:', 'color: green;');
+            Array.from(uniqueDirs).sort().slice(0, 30).forEach(dir => {
+                console.log(`  ├─ ${dir}`);
+            });
+
+            // Look for files that might be Tilesets.json
+            const tilesetCandidates = files.filter(f => f.name.toLowerCase() === 'tilesets.json');
+            console.log('%c[TILESET VIEWER] Tilesets.json candidates found: ' + tilesetCandidates.length, 'color: orange;');
+            tilesetCandidates.forEach(f => {
+                console.log(`  Path: ${f.webkitRelativePath}`);
+                console.log(`  Size: ${f.size} bytes`);
+            });
+
+            // Reset data
+            projectData = {
+                tilesets: null,
+                images: {},
+                currentTileset: null
+            };
+
+            // Find and load Tilesets.json - try multiple path patterns
+            let tilesetJsonFile = null;
+
+            // First try: exact path matching with common variations
+            tilesetJsonFile = files.find(f => {
+                const path = f.webkitRelativePath.toLowerCase();
+                const name = f.name.toLowerCase();
+                return name === 'tilesets.json' &&
+                       (path.includes('data') || path.includes('data\\') || path === 'data/tilesets.json');
+            });
+
+            // Second try: just check filename without path requirements
+            if (!tilesetJsonFile) {
+                console.log('%c[TILESET VIEWER] First attempt failed, trying simple filename match...', 'color: orange;');
+                tilesetJsonFile = files.find(f => f.name.toLowerCase() === 'tilesets.json');
+            }
+
+            // Third try: case-insensitive check
+            if (!tilesetJsonFile) {
+                console.log('%c[TILESET VIEWER] Second attempt failed, trying case variations...', 'color: orange;');
+                tilesetJsonFile = files.find(f =>
+                    f.name === 'Tilesets.json' ||
+                    f.name === 'tilesets.json' ||
+                    f.name === 'TILESETS.JSON'
+                );
+            }
+
+            // Fourth try: fuzzy matching
+            if (!tilesetJsonFile) {
+                console.log('%c[TILESET VIEWER] Third attempt failed, trying fuzzy match...', 'color: orange;');
+                tilesetJsonFile = files.find(f =>
+                    f.name.toLowerCase().includes('tileset') &&
+                    f.name.toLowerCase().endsWith('.json')
+                );
+            }
+
+            if (!tilesetJsonFile) {
+                console.error('%c[TILESET VIEWER] Could not find Tilesets.json after all attempts', 'color: red; font-weight: bold;');
+                console.log('First 20 files:');
+                files.slice(0, 20).forEach(f => {
+                    console.log(`  ${f.name} (${f.webkitRelativePath})`);
+                });
+                showError('Tilesets.json not found in the selected files. ' +
+                    'Total files loaded: ' + files.length + '. ' +
+                    '<br><br><strong>Browser Console Output:</strong><br>' +
+                    'Open F12 Developer Tools → Console tab and look for the blue "[TILESET VIEWER]" messages. ' +
+                    'They will show the directory structure and file names found. ' +
+                    'Check if Tilesets.json appears in the list.<br><br>' +
+                    '<strong>Common Issues:</strong><br>' +
+                    '1. Browser may have file limit - try with smaller subfolder<br>' +
+                    '2. Large projects may timeout - refresh and try again<br>' +
+                    '3. File permissions - ensure read access to all files');
+                return;
+            }
+
+            console.log('%c[TILESET VIEWER] ✓ Found Tilesets.json at:', 'color: green; font-weight: bold;', tilesetJsonFile.webkitRelativePath);
+
+            try {
+                const tilesetJson = await readFileAsText(tilesetJsonFile);
+                projectData.tilesets = JSON.parse(tilesetJson);
+                console.log('Tilesets loaded:', projectData.tilesets.length, 'from', tilesetJsonFile.webkitRelativePath);
+
+                // Load all PNG images from img/tilesets folder
+                const imageFiles = files.filter(f => {
+                    const path = f.webkitRelativePath.toLowerCase();
+                    return (path.includes('img/tilesets/') ||
+                            path.includes('img\\tilesets\\')) &&
+                           f.name.endsWith('.png');
+                });
+
+                console.log(`Found ${imageFiles.length} tileset images`);
+
+                // Load images
+                const imagePromises = imageFiles.map(file =>
+                    readFileAsDataURL(file).then(dataUrl => {
+                        // Extract the relative path from img/tilesets/ onwards
+                        const path = file.webkitRelativePath.replace(/\\/g, '/'); // Normalize Windows backslashes
+                        const pathLower = path.toLowerCase();
+                        const tilesetIndex = pathLower.indexOf('img/tilesets/');
+
+                        let relativePath;
+                        if (tilesetIndex !== -1) {
+                            relativePath = path.substring(tilesetIndex + 'img/tilesets/'.length).replace('.png', '');
+                        } else {
+                            // Fallback: just use filename without .png
+                            relativePath = file.name.replace('.png', '');
+                        }
+
+                        // Also store by just filename for backward compatibility
+                        const fileName = file.name.replace('.png', '');
+
+                        projectData.images[relativePath] = dataUrl;
+                        projectData.images[fileName] = dataUrl;
+                        console.log('Image loaded:', relativePath, '(also as:', fileName + ')');
+                    }).catch(err => {
+                        console.warn('Failed to load image:', file.name, err);
+                    })
+                );
+
+                await Promise.all(imagePromises);
+
+                const loadedImages = Object.keys(projectData.images).length;
+                const totalImages = imageFiles.length;
+                console.log(`%c[TILESET VIEWER] ✓ Successfully loaded:`, 'color: green; font-weight: bold;');
+                console.log(`  - Tilesets: ${projectData.tilesets.length}`);
+                console.log(`  - Images: ${loadedImages} / ${totalImages}`);
+
+                showSuccess(`✓ Loaded ${projectData.tilesets.length} tilesets and ${loadedImages} tileset images (${totalImages} found)`);
+                populateTilesetSelector();
+
+            } catch (error) {
+                showError('Failed to load project: ' + error.message);
+                console.error(error);
+            }
+        }
+
+        function parseReservedTiles(tileset) {
+            selectionState.reservedTiles.clear();
+            selectionState.featureNames.clear();
+            selectionState.tileToFeatures.clear();
+            selectionState.featureEntries = [];
+
+            if (!tileset || !tileset.note) return;
+
+            const notes = tileset.note;
+
+            // Match patterns like <FeatureName: coordinate> or <FeatureName: [coord1], [coord2]>
+            const featureRegex = /<([^:>]+):\s*([^>]+)>/g;
+            let match;
+
+            while ((match = featureRegex.exec(notes)) !== null) {
+                const featureName = match[1].trim();
+                const coords = match[2];
+
+                selectionState.featureNames.add(featureName);
+
+                // Extract coordinates - could be single like "A1 9" or multiple like "[B44], [B50]"
+                // Also handle formats like "B6" or "A2 17"
+                const coordRegex = /([A-E]\d+\s*\d+|[A-E]\d+)/g;
+                let coordMatch;
+                const tilesToAdd = [];
+
+                while ((coordMatch = coordRegex.exec(coords)) !== null) {
+                    let coord = coordMatch[0].trim();
+                    // Normalize: ensure single spaces between parts
+                    coord = coord.replace(/\s+/g, ' ');
+
+                    selectionState.reservedTiles.add(coord);
+                    tilesToAdd.push(coord);
+
+                    // Map tile to feature names
+                    if (!selectionState.tileToFeatures.has(coord)) {
+                        selectionState.tileToFeatures.set(coord, []);
+                    }
+                    selectionState.tileToFeatures.get(coord).push(featureName);
+                    console.log('Reserved tile:', coord, '→', featureName);
+                }
+
+                // Store this feature entry separately to preserve individual entries
+                if (tilesToAdd.length > 0) {
+                    selectionState.featureEntries.push({ name: featureName, tiles: tilesToAdd });
+                }
+            }
+
+            console.log('Total features:', selectionState.featureNames.size);
+            console.log('Total reserved tiles:', selectionState.reservedTiles.size);
+            console.log('Feature entries:', selectionState.featureEntries);
+        }
+
+        function highlightReservedTiles() {
+            let highlightCount = 0;
+            console.log('Reserved tiles set:', Array.from(selectionState.reservedTiles));
+
+            document.querySelectorAll('.tile').forEach(tile => {
+                const coord = tile.getAttribute('data-coordinate');
+                if (!coord) return;
+
+                // Check exact match
+                if (selectionState.reservedTiles.has(coord)) {
+                    tile.classList.add('reserved');
+                    highlightCount++;
+                } else {
+                    // Try with normalized whitespace
+                    const normalizedCoord = coord.replace(/\s+/g, ' ');
+                    if (selectionState.reservedTiles.has(normalizedCoord)) {
+                        tile.classList.add('reserved');
+                        highlightCount++;
+                    }
+                }
+            });
+
+            console.log('Highlighted reserved tiles:', highlightCount);
+        }
+
+        function populateTilesetSelector() {
+            const select = document.getElementById('tilesetSelect');
+            select.innerHTML = '<option value="">-- Select a tileset --</option>';
+
+            let tileset300Index = null;
+
+            projectData.tilesets.forEach((tileset, index) => {
+                if (tileset && tileset.id >= 300 && tileset.id <= 310) {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${tileset.id}: ${tileset.name}`;
+                    select.appendChild(option);
+
+                    // Store index of tileset 300
+                    if (tileset.id === 300) {
+                        tileset300Index = index;
+                    }
+                }
+            });
+
+            select.disabled = false;
+
+            // Auto-select tileset 300 if it exists
+            if (tileset300Index !== null) {
+                select.value = tileset300Index;
+                handleTilesetSelect({ target: select });
+            }
+        }
+
+        function handleTilesetSelect(event) {
+            const index = event.target.value;
+            if (!index) {
+                document.getElementById('tilesetDisplay').innerHTML = '';
+                return;
+            }
+
+            projectData.currentTileset = projectData.tilesets[index];
+            console.log('Selected tileset:', projectData.currentTileset.name);
+
+            // Parse reserved tiles from tileset notes
+            parseReservedTiles(projectData.currentTileset);
+
+            renderCurrentTileset();
+        }
+
+        function renderCurrentTileset() {
+            const tileset = projectData.currentTileset;
+            if (!tileset) return;
+
+            const display = document.getElementById('tilesetDisplay');
+            display.innerHTML = '<div class="loading">Rendering tileset</div>';
+
+            setTimeout(() => {
+                display.innerHTML = '';
+
+                // Render statistics
+                renderStats(tileset);
+
+                // Render each tile type
+                const tileTypes = [
+                    { name: 'A1', index: 0, cols: 16, rows: 12, tiles: 192, isAutotile: true },
+                    { name: 'A2', index: 1, cols: 16, rows: 12, tiles: 192, isAutotile: true },
+                    { name: 'A3', index: 2, cols: 16, rows: 8, tiles: 128, isAutotile: true },
+                    { name: 'A4', index: 3, cols: 16, rows: 15, tiles: 240, isAutotile: true },
+                    { name: 'A5', index: 4, cols: 8, rows: 16, tiles: 128 },
+                    { name: 'B', index: 5, cols: 8, rows: 32, tiles: 256 },
+                    { name: 'C', index: 6, cols: 8, rows: 32, tiles: 256 },
+                    { name: 'D', index: 7, cols: 8, rows: 32, tiles: 256 },
+                    { name: 'E', index: 8, cols: 8, rows: 32, tiles: 256 }
+                ];
+
+                tileTypes.forEach(type => {
+                    const imageName = tileset.tilesetNames[type.index];
+                    if (imageName && projectData.images[imageName]) {
+                        renderTileType(type, projectData.images[imageName]);
+                    }
+                });
+
+                // Highlight reserved tiles from tileset notes
+                highlightReservedTiles();
+
+                // Show list of recognized features
+                showFeatureList();
+            }, 100);
+        }
+
+        function renderStats(tileset) {
+            const display = document.getElementById('tilesetDisplay');
+            
+            const loadedImages = tileset.tilesetNames.filter(name => 
+                name && projectData.images[name]
+            ).length;
+
+            const statsHtml = `
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="value">${tileset.name}</div>
+                        <div class="label">Tileset Name</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">${tileset.id}</div>
+                        <div class="label">Tileset ID</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">${loadedImages} / ${tileset.tilesetNames.filter(n => n).length}</div>
+                        <div class="label">Images Loaded</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">${tileset.mode === 0 ? 'Field' : 'Area'}</div>
+                        <div class="label">Tileset Mode</div>
+                    </div>
+                </div>
+            `;
+            display.innerHTML += statsHtml;
+        }
+
+        function renderTileType(type, imageData) {
+            const display = document.getElementById('tilesetDisplay');
+            
+            const section = document.createElement('div');
+            section.className = 'tileset-section';
+            
+            const header = document.createElement('h2');
+            header.innerHTML = `<span class="tile-type-label">${type.name}</span> Tiles (${type.tiles} tiles)`;
+            section.appendChild(header);
+
+            const grid = document.createElement('div');
+            grid.className = 'tileset-grid';
+            grid.style.gridTemplateColumns = `repeat(${type.cols}, 48px)`;
+
+            const tileSize = 48;
+
+            for (let i = 0; i < type.tiles; i++) {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+
+                // Calculate tile position in the tileset image
+                let sourceX, sourceY;
+
+                if (type.name.startsWith('A')) {
+                    // A-sheets: simple grid positioning
+                    const col = i % type.cols;
+                    const row = Math.floor(i / type.cols);
+                    sourceX = col * tileSize;
+                    sourceY = row * tileSize;
+                } else {
+                    // B/C/D/E sheets: 16 cols x 16 rows total, displayed as two halves
+                    // First 128 tiles (0-127): left half (8 cols x 16 rows)
+                    // Next 128 tiles (128-255): right half (8 cols x 16 rows)
+                    const indexInHalf = i % 128;
+                    const col = indexInHalf % 8;
+                    const row = Math.floor(indexInHalf / 8);
+                    const isRightHalf = i >= 128 ? 1 : 0;
+                    sourceX = (col + isRightHalf * 8) * tileSize;
+                    sourceY = row * tileSize;
+                }
+
+                tile.style.backgroundImage = `url(${imageData})`;
+                tile.style.backgroundPosition = `-${sourceX}px -${sourceY}px`;
+                tile.style.backgroundSize = 'auto';
+
+                // Generate coordinate in new format
+                // A-sheets: "A1 1", "A2 45", etc. (sheet + 1-based row-major index)
+                // B-E sheets: "B1", "C256", etc. (letter + 1-based index, 8 tiles per row)
+                let coordinate;
+                if (type.name.startsWith('A')) {
+                    coordinate = `${type.name} ${i + 1}`;
+                } else {
+                    // For B/C/D/E: calculate index based on 8 tiles per row
+                    // Row 0: tiles 1-8, Row 1: tiles 9-16, etc.
+                    const tileNumber = i + 1;
+                    coordinate = `${type.name}${tileNumber}`;
+                }
+
+                // Store coordinate in data attribute
+                tile.setAttribute('data-coordinate', coordinate);
+
+                tile.addEventListener('mouseenter', () => {
+                    const hoverCoord = document.getElementById('hoverCoordinate');
+                    const hoverDetails = document.getElementById('hoverDetails');
+
+                    // Check if this tile is reserved
+                    const features = selectionState.tileToFeatures.get(coordinate);
+                    if (features && features.length > 0) {
+                        // Show reserved tile info above the features list
+                        const featureHtml = features.map(f =>
+                            `<div style="padding: 8px; margin: 4px 0; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; font-size: 0.95em; color: #856404;">📍 ${f}</div>`
+                        ).join('');
+
+                        hoverCoord.textContent = coordinate;
+                        hoverCoord.style.fontSize = '1.6em';
+                        hoverCoord.style.opacity = '0.7';
+                        hoverCoord.style.color = '#d00';
+
+                        const mainContent = `
+                            <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                                <div style="font-size: 0.9em; color: #666; margin-bottom: 8px; font-weight: 600;">Used by:</div>
+                                ${featureHtml}
+                            </div>
+                        `;
+
+                        hoverDetails.innerHTML = mainContent + hoverDetails.innerHTML;
+                    } else {
+                        // Show available tile coordinate
+                        hoverCoord.textContent = coordinate;
+                        hoverCoord.style.fontSize = '2.2em';
+                        hoverCoord.style.opacity = '1';
+                        hoverCoord.style.color = '#764ba2';
+                    }
+                });
+
+                // Single click to copy
+                tile.addEventListener('click', (e) => {
+                    if (selectionState.isSelecting) {
+                        e.preventDefault();
+                        return;
+                    }
+                    navigator.clipboard.writeText(coordinate).then(() => {
+                        showCopyNotification();
+                    });
+                });
+
+                // Drag to select multiple tiles - store tile position data
+                const tileRow = Math.floor(i / type.cols);
+                const tileCol = i % type.cols;
+                tile.setAttribute('data-row', tileRow);
+                tile.setAttribute('data-col', tileCol);
+
+                tile.addEventListener('mousedown', (e) => {
+                    if (e.button !== 0) return; // Left click only
+                    if (tile.classList.contains('reserved')) return; // Can't select reserved tiles
+                    selectionState.isSelecting = true;
+                    selectionState.selectedTiles = [];
+                    selectionState.dragStart = { row: tileRow, col: tileCol, type };
+                    selectionState.dragCurrent = { row: tileRow, col: tileCol };
+                    selectionState.currentTypeAndGrid = { type, grid };
+                    grid.classList.add('selecting');
+                    updateRectangularSelection();
+                });
+
+                tile.addEventListener('mouseenter', () => {
+                    if (selectionState.isSelecting && selectionState.currentTypeAndGrid?.type === type) {
+                        selectionState.dragCurrent = { row: tileRow, col: tileCol };
+                        updateRectangularSelection();
+                    }
+                });
+
+                grid.appendChild(tile);
+            }
+
+            section.appendChild(grid);
+            display.appendChild(section);
+        }
+
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        function showError(message) {
+            const statusDisplay = document.getElementById('statusDisplay');
+            const detailedMessage = message.includes('Open browser console')
+                ? message
+                : message + '<br><br><strong>Troubleshooting:</strong><br>' +
+                  '1. Make sure you selected your project ROOT folder (where "data" and "img" folders are)<br>' +
+                  '2. Do NOT select the "data" folder itself<br>' +
+                  '3. Press F12 to open browser console and check for file path information<br>' +
+                  '4. Check that Tilesets.json exists in your project\'s data folder';
+            statusDisplay.innerHTML = `<div class="error">❌ ${detailedMessage}</div>`;
+        }
+
+        function showSuccess(message) {
+            const statusDisplay = document.getElementById('statusDisplay');
+            statusDisplay.innerHTML = `<div class="success">✓ ${message}</div>`;
+        }
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function updateRectangularSelection() {
+            if (!selectionState.dragStart || !selectionState.dragCurrent) return;
+
+            // Clear previous selection visuals
+            document.querySelectorAll('.tile.selected').forEach(t => t.classList.remove('selected'));
+            selectionState.selectedTiles = [];
+
+            const startRow = selectionState.dragStart.row;
+            const startCol = selectionState.dragStart.col;
+            const currentRow = selectionState.dragCurrent.row;
+            const currentCol = selectionState.dragCurrent.col;
+
+            // Calculate bounding box
+            const minRow = Math.min(startRow, currentRow);
+            const maxRow = Math.max(startRow, currentRow);
+            const minCol = Math.min(startCol, currentCol);
+            const maxCol = Math.max(startCol, currentCol);
+
+            // Only select tiles from the current grid being dragged
+            const currentGrid = selectionState.currentTypeAndGrid?.grid;
+            if (!currentGrid) return;
+
+            currentGrid.querySelectorAll('.tile[data-row][data-col]').forEach(tile => {
+                const tileRow = parseInt(tile.getAttribute('data-row'));
+                const tileCol = parseInt(tile.getAttribute('data-col'));
+
+                if (tileRow >= minRow && tileRow <= maxRow && tileCol >= minCol && tileCol <= maxCol) {
+                    // Only select non-reserved tiles
+                    if (!tile.classList.contains('reserved')) {
+                        tile.classList.add('selected');
+                        const coord = tile.getAttribute('data-coordinate');
+                        if (coord && !selectionState.selectedTiles.includes(coord)) {
+                            selectionState.selectedTiles.push(coord);
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleTileSelection(tileElement, coordinate) {
+            const isAlreadySelected = tileElement.classList.contains('selected');
+
+            if (isAlreadySelected) {
+                tileElement.classList.remove('selected');
+                selectionState.selectedTiles = selectionState.selectedTiles.filter(c => c !== coordinate);
+            } else {
+                tileElement.classList.add('selected');
+                selectionState.selectedTiles.push(coordinate);
+            }
+        }
+
+        function formatMultiTileOutput() {
+            if (selectionState.allGroups.length === 0) return '';
+
+            const formattedGroups = selectionState.allGroups.map(group => {
+                // For each group, organize tiles into rows based on their position
+                if (group.length === 0) return '[]';
+
+                // Parse tiles to get their positions
+                const tilePositions = [];
+                group.forEach(coord => {
+                    const tile = document.querySelector(`[data-coordinate="${coord}"]`);
+                    if (tile) {
+                        const row = parseInt(tile.getAttribute('data-row'));
+                        const col = parseInt(tile.getAttribute('data-col'));
+                        tilePositions.push({ coord, row, col });
+                    }
+                });
+
+                // Sort by row first, then by column
+                tilePositions.sort((a, b) => {
+                    if (a.row !== b.row) return a.row - b.row;
+                    return a.col - b.col;
+                });
+
+                // Group tiles by row
+                const rowMap = new Map();
+                tilePositions.forEach(pos => {
+                    if (!rowMap.has(pos.row)) {
+                        rowMap.get(pos.row) || rowMap.set(pos.row, []);
+                    }
+                    rowMap.get(pos.row).push(pos.coord);
+                });
+
+                // Format as [row1], [row2], etc.
+                const rows = Array.from(rowMap.values()).map(rowTiles => '[' + rowTiles.join(', ') + ']');
+                return rows.join(', ');
+            }).join(', ');
+
+            return `<Feature: ${formattedGroups}>`;
+        }
+
+        function clearSelection() {
+            selectionState.allGroups = [];
+            selectionState.selectedTiles = [];
+            document.querySelectorAll('.tile.selected').forEach(t => t.classList.remove('selected'));
+            showFeatureList();
+        }
+
+        function showFeatureList() {
+            const hoverCoord = document.getElementById('hoverCoordinate');
+            const hoverDetails = document.getElementById('hoverDetails');
+
+            const entries = selectionState.featureEntries;
+
+            if (entries.length > 0) {
+                const featureHtml = entries.map(entry => {
+                    const tilesList = entry.tiles.length > 0 ? entry.tiles.join(', ') : 'no tiles';
+                    return `
+                        <div style="margin-bottom: 12px; padding: 8px; background: #f5f5f5; border-left: 3px solid #667eea; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #555;">• ${entry.name}</div>
+                            <div style="font-size: 0.95em; color: #888; margin-top: 4px; word-break: break-all;">${tilesList}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                hoverCoord.textContent = `Features (${entries.length})`;
+                hoverCoord.style.fontSize = '1.4em';
+                hoverCoord.style.cursor = 'default';
+                hoverCoord.onclick = null;
+                hoverCoord.title = '';
+                hoverCoord.style.opacity = '1';
+
+                hoverDetails.innerHTML = featureHtml;
+                hoverDetails.style.display = 'block';
+            } else {
+                hoverCoord.textContent = 'No Features';
+                hoverCoord.style.fontSize = '1.4em';
+                hoverCoord.style.cursor = 'default';
+                hoverCoord.onclick = null;
+                hoverCoord.title = '';
+                hoverCoord.style.opacity = '1';
+
+                hoverDetails.innerHTML = '<div style="color: #999; padding: 10px 0;">No features defined yet</div>';
+                hoverDetails.style.display = 'block';
+            }
+        }
+
+        function updateHoverInfoWithSelection() {
+            const output = formatMultiTileOutput();
+            if (output) {
+                document.getElementById('hoverCoordinate').textContent = output;
+                document.getElementById('hoverCoordinate').style.fontSize = '1.3em';
+                document.getElementById('hoverCoordinate').style.cursor = 'pointer';
+                document.getElementById('hoverCoordinate').onclick = () => {
+                    navigator.clipboard.writeText(output).then(() => {
+                        showCopyNotification();
+                        clearSelection();
+                    });
+                };
+            }
+        }
+
+        // Global mouseup to end selection
+        document.addEventListener('mouseup', () => {
+            if (selectionState.isSelecting && selectionState.selectedTiles.length > 0) {
+                // Add current selection as a group
+                selectionState.allGroups.push([...selectionState.selectedTiles]);
+                updateHoverInfoWithSelection();
+
+                // Copy to clipboard automatically
+                const output = formatMultiTileOutput();
+                navigator.clipboard.writeText(output);
+                showCopyNotification();
+
+                // Store clipboard content before showing prompt
+                selectionState.pendingClipboardContent = output;
+
+                // Show feature name prompt
+                showFeaturePrompt();
+            }
+
+            if (selectionState.currentTypeAndGrid?.grid) {
+                selectionState.currentTypeAndGrid.grid.classList.remove('selecting');
+            }
+
+            selectionState.isSelecting = false;
+            selectionState.selectedTiles = [];
+            selectionState.currentTypeAndGrid = null;
+            selectionState.dragStart = null;
+            selectionState.dragCurrent = null;
+        });
+
+        // Right-click to clear selection
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.closest('.tile')) {
+                e.preventDefault();
+                clearSelection();
+            }
+        });
+
+        // Click outside sheets to clear selection
+        document.addEventListener('click', (e) => {
+            // Only clear if clicking on background (not on tiles, controls, or other UI)
+            if (!e.target.closest('.tile') &&
+                !e.target.closest('.controls') &&
+                !e.target.closest('.info-box') &&
+                !e.target.closest('.copy-notification') &&
+                !e.target.closest('.feature-prompt-dialog') &&
+                !e.target.closest('select') &&
+                !e.target.closest('input')) {
+                clearSelection();
+            }
+        });
+
+        function showFeaturePrompt() {
+            const overlay = document.getElementById('featurePromptOverlay');
+            const dialog = document.getElementById('featurePromptDialog');
+            const input = document.getElementById('featureNameInput');
+
+            overlay.style.display = 'block';
+            dialog.style.display = 'block';
+            input.value = '';
+            input.focus();
+
+            // Allow Enter key to submit
+            input.onkeypress = (e) => {
+                if (e.key === 'Enter') {
+                    saveFeatureToTileset();
+                }
+            };
+        }
+
+        function closeFeaturePrompt() {
+            document.getElementById('featurePromptOverlay').style.display = 'none';
+            document.getElementById('featurePromptDialog').style.display = 'none';
+        }
+
+        function cleanCoordinates(coords) {
+            // If it's a single tile like "[B129]", extract just "B129"
+            const trimmed = coords.trim();
+            if (trimmed.startsWith('[') && trimmed.endsWith(']') && !trimmed.includes(',')) {
+                return trimmed.slice(1, -1);
+            }
+            return trimmed;
+        }
+
+        function saveFeatureToTileset() {
+            const featureName = document.getElementById('featureNameInput').value.trim();
+            if (!featureName) {
+                alert('Please enter a feature name');
+                return;
+            }
+
+            if (!projectData.currentTileset) {
+                alert('No tileset selected');
+                return;
+            }
+
+            // Use the stored clipboard content from before the prompt was shown
+            const output = selectionState.pendingClipboardContent || formatMultiTileOutput();
+            const rawCoords = output.replace('<Feature: ', '').replace('>', '');
+            const cleanedCoords = cleanCoordinates(rawCoords);
+            const featureNote = `<${featureName}: ${cleanedCoords}>`;
+
+            // Update clipboard with the feature name instead of "Feature"
+            const clipboardContent = `<${featureName}: ${cleanedCoords}>`;
+            navigator.clipboard.writeText(clipboardContent);
+
+            // Add to tileset notes
+            if (!projectData.currentTileset.note) {
+                projectData.currentTileset.note = '';
+            }
+
+            // Add newline if note already has content
+            if (projectData.currentTileset.note.trim()) {
+                projectData.currentTileset.note += '\n';
+            }
+
+            projectData.currentTileset.note += featureNote;
+
+            // Reparse to update UI
+            parseReservedTiles(projectData.currentTileset);
+
+            // Show save button
+
+            showFeatureList();
+
+            // Highlight the newly reserved tiles without re-rendering
+            highlightReservedTiles();
+
+            // Show confirmation
+            showCopyNotification(featureName + ' added to tileset notes!');
+
+            // Close the feature prompt dialog
+            closeFeaturePrompt();
+
+            // Clear pending clipboard content
+            selectionState.pendingClipboardContent = null;
+
+            // Clear selection after confirming
+            clearSelection();
+        }
+
+        function showCopyNotification(message = '✓ Coordinate copied to clipboard!') {
+            const notification = document.getElementById('copyNotification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        function downloadTilesetJson() {
+            if (!projectData.tilesets) {
+                alert('No tileset data loaded');
+                return;
+            }
+
+            const jsonString = JSON.stringify(projectData.tilesets, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Tilesets.json';
+            link.click();
+            URL.revokeObjectURL(url);
+
+            showCopyNotification('✓ Tilesets.json downloaded!');
+        }
+
+        function copyAllFeatures() {
+            const entries = selectionState.featureEntries;
+
+            if (entries.length === 0) {
+                showCopyNotification('No features to copy');
+                return;
+            }
+
+            // Build the output in the specified format, preserving individual feature entries
+            const lines = [];
+            entries.forEach(entry => {
+                const tiles = entry.tiles;
+
+                if (tiles.length > 0) {
+                    // Check if tiles need bracket notation (multiple tiles in different rows)
+                    // or simple format (single tile)
+                    if (tiles.length === 1) {
+                        lines.push(`<${entry.name}: ${tiles[0]}>`);
+                    } else {
+                        // Group by potential rows and format with brackets
+                        const formattedTiles = tiles.map(t => `[${t}]`).join(', ');
+                        lines.push(`<${entry.name}: ${formattedTiles}>`);
+                    }
+                }
+            });
+
+            const outputText = lines.join('\n');
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(outputText).then(() => {
+                showCopyNotification(`✓ Copied ${entries.length} features to clipboard!`);
+            }).catch(() => {
+                // Fallback if clipboard API fails
+                alert('Features:\n\n' + outputText);
+            });
+        }
+
+        // Update the showFeatureList function to show the copy button
+        const originalShowFeatureList = showFeatureList;
+        showFeatureList = function() {
+            originalShowFeatureList.call(this);
+
+            // Show copy button if there are features
+            const copyBtn = document.getElementById('copyAllFeaturesBtn');
+            if (selectionState.featureNames.size > 0) {
+                copyBtn.style.display = 'block';
+            } else {
+                copyBtn.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleister Crowley - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Positions logo and switcher */
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Aleister Crowley</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: March 15, 2001 | <span data-lang-key="meta_read_time">8 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Sir Aleister Crowley (born Edward Alexander Crowley, 1875) is a British occultist, writer, and prominent figure in the modern Hypernet-integrated arcane systems. Known as "The Great Beast 666" and "The Wickedest Man in the World," Crowley has achieved biological immortality through advanced techno-mystical procedures and continues to influence global occult networks from his primary nexus-stations.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#early-life" data-lang-key="toc_1">1. Early Life and Education</a></li>
+                        <li><a href="#hypernet-integration" data-lang-key="toc_2">2. Hypernet Integration and Immortality</a></li>
+                        <li><a href="#mages-guild" data-lang-key="toc_3">3. Role in the Mages Guild</a></li>
+                        <li><a href="#modern-activities" data-lang-key="toc_4">4. Current Activities</a></li>
+                        <li><a href="#philosophy" data-lang-key="toc_5">5. Techno-Occult Philosophy</a></li>
+                        <li><a href="#controversy" data-lang-key="toc_6">6. Controversies</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_7">7. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Aleister Crowley</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_born_label">Born:</span> October 12, 1875
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_status_label">Status:</span> <span data-lang-key="infobox_status_value">Active (Immortal)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_occupation_label">Occupation:</span> <span data-lang-key="infobox_occupation_value">Occultist, Writer, Mage</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_affiliation_label">Known for:</span> <span data-lang-key="infobox_affiliation_value">Thelema, Mages Guild, Immortality Research</span>
+                    </div>
+                </div>
+
+                <h2 id="early-life" data-lang-key="h2_early_life">Early Life and Education</h2>
+                <p data-lang-key="p_early_life">Edward Alexander Crowley was born into a wealthy brewing family in Royal Leamington Spa, Warwickshire. His early exposure to strict religious doctrine led to his eventual rebellion against conventional spiritual frameworks. At Trinity College, Cambridge, he began experimenting with what would later be termed "proto-algorithmic mysticism" - early attempts to systematize occult practices using mathematical principles.</p>
+
+                <p data-lang-key="p_golden_dawn">In 1898, Crowley joined the Hermetic Order of the Golden Dawn, where he first encountered the foundational crypto-mystical protocols that would later enable his integration with advanced Hypernet systems. His conflicts with other members, particularly MacGregor Mathers, demonstrated his early tendency toward disruptive innovation within established occult hierarchies.</p>
+
+                <h2 id="hypernet-integration" data-lang-key="h2_hypernet_integration">Hypernet Integration and Immortality</h2>
+                <p data-lang-key="p_hypernet_process">Following the global Hypernet manifestation event of 1999, Crowley was among the first occultists to successfully undergo bio-digital synthesis. The process, which he termed "Aeon-Net Integration," involved the systematic replacement of biological cellular structures with quantum-mystical data matrices while preserving consciousness continuity.</p>
+
+                <p data-lang-key="p_immortality_tech">The immortality procedure utilizes proprietary techno-arcane algorithms developed by Crowley in collaboration with <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a>. These algorithms continuously regenerate his physical form using energy harvested from dimensional flux patterns accessed through the Hypernet's deepest data-streams.</p>
+
+                <h3 id="technical-details" data-lang-key="h3_technical_details">Technical Implementation</h3>
+                <p data-lang-key="p_technical_details">Crowley's immortality system operates through a distributed consciousness protocol that maintains backup instances of his personality matrix across multiple Hypernet nodes. His primary physical manifestation serves as the primary interface terminal, while secondary instances can be activated at various nexus-stations globally when required for simultaneous operations.</p>
+
+                <h2 id="mages-guild" data-lang-key="h2_mages_guild">Role in the Mages Guild</h2>
+                <p data-lang-key="p_mages_guild_role">Since the formation of the modern <a href="mages-guild">Mages Guild</a> following the Y2K reality restructuring event, Crowley has served as the primary architect of the guild's Hypernet integration protocols. His faction, known as the Crowley Traditionalists, advocates for aggressive expansion of techno-mystical capabilities rather than the conservative approach favored by the Thatcher Loyalists.</p>
+
+                <p data-lang-key="p_guild_conflicts">Crowley's approach has frequently put him at odds with other guild leadership, particularly regarding the use of high-risk experimental procedures and collaboration with entities from the dimensional fragments. His supporters argue that such risks are necessary for maintaining humanity's competitive advantage in the post-Squishing reality.</p>
+
+                <h2 id="modern-activities" data-lang-key="h2_modern_activities">Current Activities</h2>
+                <p data-lang-key="p_modern_work">As of 2001, Crowley operates from multiple simultaneous locations including his primary estate in Sicily (now equipped with advanced data-fortress capabilities), a penthouse facility in London's financial district, and various mobile nexus-stations. His current research focuses on developing commercial applications for mystical algorithms in partnership with several major corporations.</p>
+
+                <h3 id="business-ventures" data-lang-key="h3_business_ventures">Corporate Partnerships</h3>
+                <p data-lang-key="p_business_ventures">Crowley has established strategic partnerships with key players in the post-Y2K economy, including consulting arrangements with the <a href="hypercapitalist-collective">Hypercapitalist Collective</a> on probability manipulation systems and reality-optimization protocols for enhanced profit generation.</p>
+
+                <h2 id="philosophy" data-lang-key="h2_philosophy">Techno-Occult Philosophy</h2>
+                <p data-lang-key="p_philosophy">Crowley's modern philosophy, termed "Digital Thelema," adapts his original "Do What Thou Wilt" principle to the networked reality of the Hypernet era. He argues that true will can now be expressed through direct manipulation of reality's underlying code-structures, making traditional ethical constraints obsolete.</p>
+
+                <blockquote data-lang-key="quote">
+                    "Every man and woman is a node in the great Hypernet of existence. To access one's True Algorithm is the whole of the Law."
+                </blockquote>
+
+                <p data-lang-key="p_digital_thelema">Digital Thelema advocates for the systematic integration of human consciousness with advanced mystical computing systems, viewing this merger as the next stage of human evolution. Crowley maintains that those who resist such integration will be left behind as "analog relics" in an increasingly digitized reality.</p>
+
+                <h2 id="controversy" data-lang-key="h2_controversy">Controversies</h2>
+                <p data-lang-key="p_controversy">Crowley's immortality and continued influence have generated significant controversy within both occult and mainstream communities. Critics argue that his extended lifespan violates natural law and that his growing power threatens the balance of global mystical systems.</p>
+
+                <p data-lang-key="p_ethics_concerns">The <a href="archive-foundation">Archive Foundation</a> has raised particular concerns about Crowley's data-collection practices, noting that his consciousness-backup systems may be harvesting and storing personal information from individuals who interact with his various business ventures and occult organizations.</p>
+
+                <h3 id="legal-issues" data-lang-key="h3_legal_issues">Legal Challenges</h3>
+                <p data-lang-key="p_legal_issues">Several governments have attempted to regulate Crowley's activities, but his distributed consciousness and multinational corporate structures make traditional legal enforcement extremely difficult. His official legal status remains unclear, as most legal systems lack frameworks for addressing immortal individuals.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="mages-guild.html" data-lang-key="link_mages_guild">Mages Guild</a></li>
+                    <li><a href="hypernet" data-lang-key="link_hypernet">Hypernet</a></li>
+                    <li><a href="digital-thelema" data-lang-key="link_digital_thelema">Digital Thelema</a></li>
+                    <li><a href="immortality-technologies" data-lang-key="link_immortality_tech">Immortality Technologies</a></li>
+                    <li><a href="lady-margaret-thatcher.html" data-lang-key="link_thatcher">Margaret Thatcher</a></li>
+                    <li><a href="y2k-event" data-lang-key="link_y2k">Y2K Reality Restructuring Event</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Aleister Crowley",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "8 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Early Life and Education",
+                    toc_2: "2. Hypernet Integration and Immortality",
+                    toc_3: "3. Role in the Mages Guild",
+                    toc_4: "4. Current Activities",
+                    toc_5: "5. Techno-Occult Philosophy",
+                    toc_6: "6. Controversies",
+                    toc_7: "7. See Also",
+                    infobox_title: "Aleister Crowley",
+                    infobox_born_label: "Born:",
+                    infobox_status_label: "Status:",
+                    infobox_status_value: "Active (Immortal)",
+                    infobox_occupation_label: "Occupation:",
+                    infobox_occupation_value: "Occultist, Writer, Mage",
+                    infobox_affiliation_label: "Known for:",
+                    infobox_affiliation_value: "Thelema, Mages Guild, Immortality Research",
+                    h2_early_life: "Early Life and Education",
+                    p_early_life: "Edward Alexander Crowley was born into a wealthy brewing family in Royal Leamington Spa, Warwickshire. His early exposure to strict religious doctrine led to his eventual rebellion against conventional spiritual frameworks. At Trinity College, Cambridge, he began experimenting with what would later be termed \"proto-algorithmic mysticism\" - early attempts to systematize occult practices using mathematical principles.",
+                    p_golden_dawn: "In 1898, Crowley joined the Hermetic Order of the Golden Dawn, where he first encountered the foundational crypto-mystical protocols that would later enable his integration with advanced Hypernet systems. His conflicts with other members, particularly MacGregor Mathers, demonstrated his early tendency toward disruptive innovation within established occult hierarchies.",
+                    h2_hypernet_integration: "Hypernet Integration and Immortality",
+                    p_hypernet_process: "Following the global Hypernet manifestation event of 1999, Crowley was among the first occultists to successfully undergo bio-digital synthesis. The process, which he termed \"Aeon-Net Integration,\" involved the systematic replacement of biological cellular structures with quantum-mystical data matrices while preserving consciousness continuity.",
+                    p_immortality_tech: "The immortality procedure utilizes proprietary techno-arcane algorithms developed by Crowley in collaboration with Esoteric Heavy Industries. These algorithms continuously regenerate his physical form using energy harvested from dimensional flux patterns accessed through the Hypernet's deepest data-streams.",
+                    h3_technical_details: "Technical Implementation",
+                    p_technical_details: "Crowley's immortality system operates through a distributed consciousness protocol that maintains backup instances of his personality matrix across multiple Hypernet nodes. His primary physical manifestation serves as the primary interface terminal, while secondary instances can be activated at various nexus-stations globally when required for simultaneous operations.",
+                    h2_mages_guild: "Role in the Mages Guild",
+                    p_mages_guild_role: "Since the formation of the modern Mages Guild following the Y2K reality restructuring event, Crowley has served as the primary architect of the guild's Hypernet integration protocols. His faction, known as the Crowley Traditionalists, advocates for aggressive expansion of techno-mystical capabilities rather than the conservative approach favored by the Thatcher Loyalists.",
+                    p_guild_conflicts: "Crowley's approach has frequently put him at odds with other guild leadership, particularly regarding the use of high-risk experimental procedures and collaboration with entities from the dimensional fragments. His supporters argue that such risks are necessary for maintaining humanity's competitive advantage in the post-Squishing reality.",
+                    h2_modern_activities: "Current Activities",
+                    p_modern_work: "As of 2001, Crowley operates from multiple simultaneous locations including his primary estate in Sicily (now equipped with advanced data-fortress capabilities), a penthouse facility in London's financial district, and various mobile nexus-stations. His current research focuses on developing commercial applications for mystical algorithms in partnership with several major corporations.",
+                    h3_business_ventures: "Corporate Partnerships",
+                    p_business_ventures: "Crowley has established strategic partnerships with key players in the post-Y2K economy, including consulting arrangements with the Hypercapitalist Collective on probability manipulation systems and reality-optimization protocols for enhanced profit generation.",
+                    h2_philosophy: "Techno-Occult Philosophy",
+                    p_philosophy: "Crowley's modern philosophy, termed \"Digital Thelema,\" adapts his original \"Do What Thou Wilt\" principle to the networked reality of the Hypernet era. He argues that true will can now be expressed through direct manipulation of reality's underlying code-structures, making traditional ethical constraints obsolete.",
+                    quote: "\"Every man and woman is a node in the great Hypernet of existence. To access one's True Algorithm is the whole of the Law.\"",
+                    p_digital_thelema: "Digital Thelema advocates for the systematic integration of human consciousness with advanced mystical computing systems, viewing this merger as the next stage of human evolution. Crowley maintains that those who resist such integration will be left behind as \"analog relics\" in an increasingly digitized reality.",
+                    h2_controversy: "Controversies",
+                    p_controversy: "Crowley's immortality and continued influence have generated significant controversy within both occult and mainstream communities. Critics argue that his extended lifespan violates natural law and that his growing power threatens the balance of global mystical systems.",
+                    p_ethics_concerns: "The Archive Foundation has raised particular concerns about Crowley's data-collection practices, noting that his consciousness-backup systems may be harvesting and storing personal information from individuals who interact with his various business ventures and occult organizations.",
+                    h3_legal_issues: "Legal Challenges",
+                    p_legal_issues: "Several governments have attempted to regulate Crowley's activities, but his distributed consciousness and multinational corporate structures make traditional legal enforcement extremely difficult. His official legal status remains unclear, as most legal systems lack frameworks for addressing immortal individuals.",
+                    h2_see_also: "See Also",
+                    link_mages_guild: "Mages Guild",
+                    link_hypernet: "Hypernet",
+                    link_digital_thelema: "Digital Thelema",
+                    link_immortality_tech: "Immortality Technologies",
+                    link_thatcher: "Margaret Thatcher",
+                    link_y2k: "Y2K Reality Restructuring Event",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                }
+            }
+        }) 
+        </script>
+        </body>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dr. Marcus Fieldworth - Primate Photography Archive</title>
+<meta name="description" content="Documentation of primate behavior through photography 1987-2001">
+<meta name="keywords" content="primates, monkeys, photography, behavior, fieldwork, research">
+<style type="text/css">
+body {
+    font-family: Times, serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 800px;
+    background-color: white;
+    border: 2px solid #666666;
+    padding: 0;
+}
+
+.header {
+    background-color: #cccccc;
+    padding: 15px;
+    border-bottom: 2px solid #666666;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #000066;
+}
+
+.header h2 {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #333333;
+    font-weight: normal;
+}
+
+.navigation {
+    background-color: #dddddd;
+    padding: 10px;
+    border-bottom: 1px solid #999999;
+    text-align: center;
+}
+
+.navigation a {
+    color: #000066;
+    text-decoration: underline;
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.navigation a:hover {
+    color: #cc0000;
+}
+
+.content {
+    padding: 20px;
+    min-height: 400px;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.gallery-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.gallery-table td {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    vertical-align: top;
+    width: 33%;
+}
+
+.photo-placeholder {
+    background-color: #eeeeee;
+    border: 1px solid #999999;
+    height: 120px;
+    text-align: center;
+    line-height: 120px;
+    color: #666666;
+    margin-bottom: 5px;
+}
+
+.footer {
+    background-color: #cccccc;
+    padding: 10px;
+    border-top: 1px solid #999999;
+    text-align: center;
+    font-size: 11px;
+    color: #666666;
+}
+
+.essay {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+.essay h3 {
+    color: #000066;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 3px;
+}
+
+.link-list {
+    margin: 10px 0;
+}
+
+.link-list li {
+    margin: 5px 0;
+}
+
+.species-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.species-table th, .species-table td {
+    border: 1px solid #999999;
+    padding: 8px;
+    text-align: left;
+}
+
+.species-table th {
+    background-color: #dddddd;
+    font-weight: bold;
+}
+
+.counter {
+    text-align: right;
+    font-size: 10px;
+    color: #666666;
+    margin-top: 20px;
+}
+</style>
+
+<script type="text/javascript">
+function showSection(sectionId) {
+    // Hide all sections
+    var sections = document.getElementsByClassName('section');
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+    }
+    
+    // Show selected section
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Update page title
+    var titles = {
+        'home': 'Dr. Marcus Fieldworth - Primate Photography Archive',
+        'gallery': 'Photo Gallery - Primate Photography Archive',
+        'research': 'Research Notes - Primate Photography Archive',
+        'species': 'Species Guide - Primate Photography Archive',
+        'links': 'Links - Primate Photography Archive',
+        'about': 'About - Primate Photography Archive'
+    };
+    document.title = titles[sectionId];
+}
+
+// Initialize page
+window.onload = function() {
+    showSection('home');
+}
+</script>
+</head>
+
+<body>
+
+<center>
+<div class="container">
+    
+    <div class="header">
+        <h1>Dr. Marcus Fieldworth</h1>
+        <h2>Primate Photography & Behavioral Documentation</h2>
+    </div>
+    
+    <div class="navigation">
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('gallery')">Photo Gallery</a>
+        <a onclick="showSection('research')">Research Notes</a>
+        <a onclick="showSection('species')">Species Guide</a>
+        <a onclick="showSection('links')">Links</a>
+        <a onclick="showSection('about')">About</a>
+    </div>
+    
+    <div class="content">
+        
+        <!-- HOME SECTION -->
+        <div id="home" class="section">
+            <h3>Welcome to the Primate Photography Archive</h3>
+            
+            <p><b>Latest Update:</b> March 15, 2001 - Added new photographs from Madagascar expedition</p>
+            
+            <p>This site documents fourteen years of field photography studying primate behavior in natural habitats across Africa, South America, and Madagascar. From 1987 to 2001, I have captured over 3,000 photographs of various monkey and ape species in their natural environments.</p>
+            
+            <table width="100%">
+                <tr>
+                    <td width="60%" valign="top">
+                        <h4>Recent Expeditions</h4>
+                        <p><b>Madagascar - February 2001</b><br>
+                        Documented ring-tailed lemurs and sifakas in Andasibe-Mantadia National Park. Captured rare feeding behaviors during fruit season.</p>
+                        
+                        <p><b>Costa Rica - September 2000</b><br>
+                        Extended study of howler monkey territorial displays. First photographic evidence of inter-troop boundary negotiations.</p>
+                        
+                        <p><b>Cameroon - January 2000</b><br>
+                        Three-month documentation of mandrill social structures in dense rainforest conditions.</p>
+                        
+                        <h4>Photography Equipment</h4>
+                        <p>Primary cameras: Nikon F4, Canon EOS-1<br>
+                        Lenses: 300mm f/2.8, 500mm f/4, 70-200mm f/2.8<br>
+                        Film: Fuji Velvia 50, Kodak Tri-X 400</p>
+                    </td>
+                    <td width="40%" valign="top">
+                        <div class="photo-placeholder">1.jpg<br>Howler Monkey</div>
+                        <div class="photo-placeholder">2.jpg<br>Lemur Group</div>
+                        <div class="photo-placeholder">3.jpg<br>Mandrill Portrait</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <p><i>"The camera reveals aspects of primate behavior invisible to the casual observer. Through patient documentation, we glimpse the complex social worlds of our closest relatives."</i> - M. Fieldworth, 1995</p>
+            
+        </div>
+        
+        <!-- GALLERY SECTION -->
+        <div id="gallery" class="section">
+            <h3>Photographic Gallery</h3>
+            
+            <p>Selected images from field expeditions 1987-2001. Click species names for detailed behavioral notes.</p>
+            
+            <table class="gallery-table">
+                <tr>
+                    <td>
+                        <div class="photo-placeholder">4.jpg</div>
+                        <b>Vervet Monkey</b><br>
+                        <i>Chlorocebus pygerythrus</i><br>
+                        Kenya, 1994<br>
+                        Grooming behavior
+                    </td>
+                    <td>
+                        <div class="photo-placeholder">5.jpg</div>
+                        <b>Spider Monkey</b><br>
+                        <i>Ateles geoffroyi</i><br>
+                        Costa Rica, 1998<br>
+                        Brachiation sequence
+                    </td>
+                    <td>
+                        <div class="photo-placeholder">6.jpg</div>
+                        <b>Baboon Troop</b><br>
+                        <i>Papio anubis</i><br>
+                        Tanzania, 1992<br>
+                        Morning assembly
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="photo-placeholder">7.jpg</div>
+                        <b>Capuchin Tool Use</b><br>
+                        <i>Cebus capucinus</i><br>
+                        Panama, 1999<br>
+                        Stone hammering
+                    </td>
+                    <td>
+                        <div class="photo-placeholder">8.jpg</div>
+                        <b>Colobus Leap</b><br>
+                        <i>Colobus guereza</i><br>
+                        Uganda, 1996<br>
+                        Canopy navigation
+                    </td>
+                    <td>
+                        <div class="photo-placeholder">9.jpg</div>
+                        <b>Macaque Swimming</b><br>
+                        <i>Macaca fascicularis</i><br>
+                        Indonesia, 1997<br>
+                        Aquatic behavior
+                    </td>
+                </tr>
+            </table>
+            
+            <p><b>Technical Notes:</b> All photographs taken with available light. No flash used to avoid disrupting natural behaviors. Minimum focusing distances maintained per species sensitivity guidelines established by International Primatological Society.</p>
+            
+        </div>
+        
+        <!-- RESEARCH SECTION -->
+        <div id="research" class="section">
+            <h3>Field Research Notes</h3>
+            
+            <div class="essay">
+                <h4>Tool Use in New World Primates (1999)</h4>
+                <p>Systematic documentation of capuchin monkey tool use reveals sophisticated problem-solving abilities previously underestimated. Over 200 hours of observation in Panamanian forests yielded 47 distinct tool-use episodes, including modification of sticks for termite extraction and selection of stones based on hardness for nut-cracking.</p>
+                
+                <p>Most significant finding: juveniles learn tool techniques through direct observation and practice, not trial-and-error. This suggests cultural transmission of knowledge within troops, similar to patterns observed in African chimpanzees.</p>
+            </div>
+            
+            <div class="essay">
+                <h4>Nocturnal Behavior Patterns in Lemuriformes (2001)</h4>
+                <p>Three-month study using infrared photography revealed previously unknown nighttime social interactions among ring-tailed lemurs. Contrary to established literature describing them as primarily diurnal, significant activity occurs during full moon periods.</p>
+                
+                <p>Observed behaviors include territory marking expeditions, inter-group scent communication, and what appears to be recreational play among adults. These findings challenge assumptions about energy conservation strategies in Madagascar's harsh environment.</p>
+            </div>
+            
+            <div class="essay">
+                <h4>Facial Expression Analysis in Old World Monkeys (1995)</h4>
+                <p>Photographic analysis of over 800 facial expressions across six species reveals universal signals for aggression, submission, and play invitation. However, species-specific variations exist, particularly in lip positioning and eye contact duration.</p>
+                
+                <p>Implications for understanding primate communication evolution and potential applications to captive animal welfare assessment.</p>
+            </div>
+            
+        </div>
+        
+        <!-- SPECIES SECTION -->
+        <div id="species" class="section">
+            <h3>Species Documentation</h3>
+            
+            <p>Comprehensive catalog of photographed species with behavioral notes and habitat information.</p>
+            
+            <table class="species-table">
+                <tr>
+                    <th>Species</th>
+                    <th>Location</th>
+                    <th>Years Studied</th>
+                    <th>Photos</th>
+                    <th>Key Behaviors</th>
+                </tr>
+                <tr>
+                    <td><i>Pan troglodytes</i><br>Chimpanzee</td>
+                    <td>Gombe, Tanzania</td>
+                    <td>1989, 1993, 1997</td>
+                    <td>247</td>
+                    <td>Tool use, grooming, territorial patrol</td>
+                </tr>
+                <tr>
+                    <td><i>Gorilla gorilla</i><br>Western Gorilla</td>
+                    <td>Cameroon</td>
+                    <td>1991, 1995, 2000</td>
+                    <td>156</td>
+                    <td>Silverback displays, nest building</td>
+                </tr>
+                <tr>
+                    <td><i>Macaca mulatta</i><br>Rhesus Macaque</td>
+                    <td>India</td>
+                    <td>1988, 1994</td>
+                    <td>183</td>
+                    <td>Hierarchy establishment, infant care</td>
+                </tr>
+                <tr>
+                    <td><i>Lemur catta</i><br>Ring-tailed Lemur</td>
+                    <td>Madagascar</td>
+                    <td>1996, 2001</td>
+                    <td>201</td>
+                    <td>Scent marking, sunbathing rituals</td>
+                </tr>
+                <tr>
+                    <td><i>Alouatta palliata</i><br>Mantled Howler</td>
+                    <td>Costa Rica</td>
+                    <td>1998, 2000</td>
+                    <td>167</td>
+                    <td>Dawn choruses, boundary disputes</td>
+                </tr>
+                <tr>
+                    <td><i>Mandrillus sphinx</i><br>Mandrill</td>
+                    <td>Gabon, Cameroon</td>
+                    <td>1992, 1999, 2000</td>
+                    <td>134</td>
+                    <td>Colorful displays, fruit foraging</td>
+                </tr>
+            </table>
+            
+            <p><b>Total Species Documented:</b> 23<br>
+            <b>Total Photographs:</b> 3,247<br>
+            <b>Countries Visited:</b> 14<br>
+            <b>Field Hours:</b> Approximately 2,800</p>
+            
+        </div>
+        
+        <!-- LINKS SECTION -->
+        <div id="links" class="section">
+            <h3>Primate Research Links</h3>
+            
+            <h4>Professional Organizations</h4>
+            <ul class="link-list">
+                <li><a href="#">International Primatological Society</a> - Global network of primate researchers</li>
+                <li><a href="#">American Society of Primatologists</a> - North American research community</li>
+                <li><a href="#">Jane Goodall Institute</a> - Chimpanzee research and conservation</li>
+            </ul>
+            
+            <h4>Research Institutions</h4>
+            <ul class="link-list">
+                <li><a href="#">Gombe Stream Research Centre</a> - Tanzania chimpanzee studies</li>
+                <li><a href="#">Karisoke Research Center</a> - Mountain gorilla research, Rwanda</li>
+                <li><a href="#">Monkey World Ape Rescue Centre</a> - Primate welfare and rehabilitation</li>
+                <li><a href="#">Duke Lemur Center</a> - Madagascar species conservation</li>
+            </ul>
+            
+            <h4>Photography Resources</h4>
+            <ul class="link-list">
+                <li><a href="#">Nature Photography Network</a> - Techniques and equipment reviews</li>
+                <li><a href="#">Wildlife Photography Magazine</a> - Monthly publication</li>
+                <li><a href="#">Telephoto Lens Testing Guide</a> - Equipment comparisons for field work</li>
+            </ul>
+            
+            <h4>Conservation Organizations</h4>
+            <ul class="link-list">
+                <li><a href="#">World Wildlife Fund Primates</a> - Global conservation efforts</li>
+                <li><a href="#">Conservation International</a> - Habitat preservation</li>
+                <li><a href="#">Fauna & Flora International</a> - Species-specific programs</li>
+            </ul>
+            
+            <p><i>Note: External links require active hypernet connection. Some sites may be temporarily unavailable due to server maintenance.</i></p>
+            
+        </div>
+        
+        <!-- ABOUT SECTION -->
+        <div id="about" class="section">
+            <h3>About Dr. Marcus Fieldworth</h3>
+            
+            <table width="100%">
+                <tr>
+                    <td width="70%" valign="top">
+                        <p><b>Education:</b><br>
+                        Ph.D. Biological Anthropology, Harvard University (1986)<br>
+                        M.A. Zoology, University of Cambridge (1983)<br>
+                        B.S. Biology, Stanford University (1981)</p>
+                        
+                        <p><b>Current Position:</b><br>
+                        Associate Professor of Primatology<br>
+                        Department of Anthropology<br>
+                        University of California, Davis</p>
+                        
+                        <p><b>Research Interests:</b><br>
+                        Primate behavior documentation through photography, tool use in New World monkeys, social structures in lemur populations, conservation photography techniques.</p>
+                        
+                        <p><b>Selected Publications:</b><br>
+                        • "Photographic Documentation of Primate Tool Use" - <i>American Journal of Primatology</i> (1999)<br>
+                        • "Nocturnal Behaviors in Lemur catta" - <i>International Journal of Primatology</i> (2001)<br>
+                        • "Visual Communication in Old World Monkeys" - <i>Primates Quarterly</i> (1996)<br>
+                        • "Field Photography Techniques for Behavioral Studies" - <i>Methods in Primatology</i> (1998)</p>
+                        
+                    </td>
+                    <td width="30%" valign="top">
+                        <div class="photo-placeholder">10.jpg<br>Dr. Fieldworth<br>in field gear</div>
+                        
+                        <p><b>Contact Information:</b><br>
+                        Email: mfieldworth@ucdavis.edu<br>
+                        Phone: (530) 555-0123<br>
+                        Fax: (530) 555-0124</p>
+                        
+                        <p><b>Mailing Address:</b><br>
+                        Department of Anthropology<br>
+                        UC Davis<br>
+                        One Shields Avenue<br>
+                        Davis, CA 95616</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <p><b>Personal Statement:</b> Photography serves as both scientific tool and artistic medium in my work. Each image captures a moment of natural behavior that might otherwise go unnoticed, contributing to our understanding of primate societies while preserving visual records for future generations of researchers.</p>
+            
+            <p><i>This website is personally maintained and updated as field work permits. For urgent communications, please use email or telephone contact.</i></p>
+            
+            <div class="counter">
+                Site visitors since January 1998: 15,847
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <div class="footer">
+        Copyright &copy; 2001 Dr. Marcus Fieldworth | Last updated: March 15, 2001 | 
+        Site hosted by UC Davis Department of Anthropology | <a href="mailto:webmaster@ucdavis.edu">Report problems</a>
+    </div>
+    
+</div>
+</center>
+
+</body>
+</html>

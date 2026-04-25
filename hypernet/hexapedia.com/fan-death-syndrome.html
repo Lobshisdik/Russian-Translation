@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Death - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Positions logo and switcher */
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Fan Death Syndrome</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: August 23, 2025 | <span data-lang-key="meta_read_time">4 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Fan Death Syndrome (FDS) is a technomantic phenomenon predominantly documented in South Korea and surrounding regions, characterized by fatal respiratory failure in individuals exposed to rotating air circulation devices during nocturnal hours. First catalogued by the <a href="archive-foundation">Archive Foundation</a> in 1997, FDS represents one of the most localized manifestations of post-Squishing reality distortion.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#overview" data-lang-key="toc_1">1. Technomantic Classification</a></li>
+                        <li><a href="#mechanism" data-lang-key="toc_2">2. Biomechanical Process</a></li>
+                        <li><a href="#regional" data-lang-key="toc_3">3. Regional Amplification</a></li>
+                        <li><a href="#prevention" data-lang-key="toc_4">4. Countermeasures</a></li>
+                        <li><a href="#research" data-lang-key="toc_5">5. Current Research</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Classification Data</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Phenomenon Type:</span> <span data-lang-key="infobox_type_value">Localized Technomantic Distortion</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_threat_label">Threat Level:</span> <span data-lang-key="infobox_threat_value">Regional-Lethal</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_origin_label">First Documented:</span> <span data-lang-key="infobox_origin_value">1997, Seoul Metropolitan Area</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_jurisdiction_label">Research Authority:</span> <span data-lang-key="infobox_jurisdiction_value">Archive Foundation, Korean Division</span>
+                    </div>
+                </div>
+
+                <h2 id="overview" data-lang-key="h2_overview">Technomantic Classification</h2>
+                <p data-lang-key="p_overview">Fan Death Syndrome operates through what researchers term "cyclonic biofield disruption" - a process where the rotational energy of electric fans creates localized distortions in the bioelectric patterns of sleeping individuals. Unlike traditional <a href="time-loops">temporal anomalies</a>, FDS affects the subject's metabolic processes directly rather than their temporal positioning.</p>
+
+                <p data-lang-key="p_overview_2">The phenomenon was initially dismissed as urban folklore until the <a href="omnilex-breach">OmniLex Breach</a> of 2002 revealed government documentation of over 200 confirmed cases between 1997-2001. The syndrome demonstrates clear technomantic properties, with victims showing disrupted biorhythmic signatures consistent with exposure to malfunctioning <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a> devices.</p>
+
+                <h2 id="mechanism" data-lang-key="h2_mechanism">Biomechanical Process</h2>
+                <p data-lang-key="p_mechanism">FDS manifests through a three-stage degradation process affecting the victim's respiratory automancy - the unconscious magical regulation of breathing during sleep. Stage one involves the disruption of natural airflow patterns around the sleeping subject, creating what technomancers call "atmospheric stagnation zones."</p>
+
+                <p data-lang-key="p_mechanism_2">In stage two, the fan's rotational field begins to interfere with the subject's bioelectric matrix, particularly the autonomic circuits governing respiratory function. This interference causes progressively shallow breathing patterns as the body's natural life-support algorithms become desynchronized.</p>
+
+                <p data-lang-key="p_mechanism_3">The final stage occurs when the subject's metabolic processes enter what researchers term "cyclonic feedback loop" - a state where the disrupted breathing pattern becomes self-reinforcing, ultimately leading to complete respiratory failure. Death typically occurs 4-6 hours after initial exposure, with no external signs of distress.</p>
+
+                <h3 data-lang-key="h3_symptoms">Warning Indicators</h3>
+                <ul>
+                    <li data-lang-key="li_symptom_1">Biorhythmic instability during early sleep phases</li>
+                    <li data-lang-key="li_symptom_2">Decreased oxygen saturation levels without apparent cause</li>
+                    <li data-lang-key="li_symptom_3">Electromagnetic field fluctuations around sleeping area</li>
+                    <li data-lang-key="li_symptom_4">Ambient temperature drops despite active air circulation</li>
+                </ul>
+
+                <h2 id="regional" data-lang-key="h2_regional">Regional Amplification</h2>
+                <p data-lang-key="p_regional">The concentration of FDS cases in South Korea appears linked to the region's unique position within the global <a href="leyline-network">leyline network</a>. Korean Peninsula leylines demonstrate unusual susceptibility to technological interference, creating what the <a href="mages-guild">Mages Guild</a> classifies as "amplified technomantic resonance zones."</p>
+
+                <p data-lang-key="p_regional_2">This phenomenon is exacerbated by the widespread adoption of electric fans in Korean households, combined with architectural features that naturally concentrate bioelectric fields. The traditional ondol heating system, when inactive during summer months, creates underground channels that act as unintentional arcane energy conduits.</p>
+
+                <blockquote data-lang-key="quote">
+                    "The tragic irony of Fan Death Syndrome is that it represents technology designed to preserve life becoming a vector for technomantic disruption. It serves as a stark reminder of how the post-Squishing world has fundamentally altered the relationship between human biology and mechanical systems." - Dr. Kim Yeon-soo, Archive Foundation Korean Division
+                </blockquote>
+
+                <h2 id="prevention" data-lang-key="h2_prevention">Countermeasures</h2>
+                <p data-lang-key="p_prevention">Standard FDS prevention protocols involve the implementation of bioelectric stabilization measures. The most effective approach combines traditional ventilation methods with technomantic safeguards developed by <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a>.</p>
+
+                <p data-lang-key="p_prevention_2">Recommended countermeasures include installing timer-based shutdown circuits to prevent extended exposure periods, positioning fans to avoid direct airflow toward sleeping areas, and maintaining adequate ventilation through non-mechanical means. Advanced protection systems incorporate biorhythm monitoring devices that automatically adjust fan operation based on the occupant's sleep cycle patterns.</p>
+
+                <h3 data-lang-key="h3_protective">Protective Equipment</h3>
+                <ul>
+                    <li data-lang-key="li_protect_1">Bioelectric field stabilizers (available through licensed technomantic suppliers)</li>
+                    <li data-lang-key="li_protect_2">Automated shutdown timers with biorhythm detection</li>
+                    <li data-lang-key="li_protect_3">Leyline interference dampeners for high-risk residential areas</li>
+                    <li data-lang-key="li_protect_4">Traditional non-electric cooling alternatives</li>
+                </ul>
+
+                <h2 id="research" data-lang-key="h2_research">Current Research</h2>
+                <p data-lang-key="p_research">The Archive Foundation continues to study FDS as part of its broader investigation into localized reality distortions. Current research focuses on developing predictive algorithms to identify individuals at elevated risk, as well as exploring potential connections between FDS and other technomantic phenomena documented across the Korean Peninsula.</p>
+
+                <p data-lang-key="p_research_2">Recent findings suggest that FDS may be part of a larger pattern of technology-biology interface disruptions that began manifesting after <a href="the-squishing">The Squishing</a> event. Researchers are particularly interested in understanding why certain geographic regions demonstrate heightened susceptibility to these disruptions.</p>
+
+                <p data-lang-key="p_research_3">Collaborative studies with the <a href="hypercapitalist-collective">Hypercapitalist Collective</a> are exploring commercial applications of FDS research, including the development of enhanced safety protocols for consumer electronics and the creation of biorhythm-synchronized cooling systems for residential use.</p>
+
+                <h2 data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="technomantic-disruption.html" data-lang-key="link_related_1">Technomantic Disruption Patterns</a></li>
+                    <li><a href="bioelectric-matrix.html" data-lang-key="link_related_2">Bioelectric Matrix Theory</a></li>
+                    <li><a href="korean-peninsula-anomalies.html" data-lang-key="link_related_3">Korean Peninsula Anomalies</a></li>
+                    <li><a href="category-safety-protocols.html" data-lang-key="link_category">Category: Safety Protocols</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2025 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Fan Death Syndrome",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "4 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Technomantic Classification",
+                    toc_2: "2. Biomechanical Process", 
+                    toc_3: "3. Regional Amplification",
+                    toc_4: "4. Countermeasures",
+                    toc_5: "5. Current Research",
+                    infobox_title: "Classification Data",
+                    infobox_type_label: "Phenomenon Type:",
+                    infobox_type_value: "Localized Technomantic Distortion",
+                    infobox_threat_label: "Threat Level:",
+                    infobox_threat_value: "Regional-Lethal",
+                    infobox_origin_label: "First Documented:",
+                    infobox_origin_value: "1997, Seoul Metropolitan Area",
+                    infobox_jurisdiction_label: "Research Authority:",
+                    infobox_jurisdiction_value: "Archive Foundation, Korean Division",
+                    h2_overview: "Technomantic Classification",
+                    p_intro: "Fan Death Syndrome (FDS) is a technomantic phenomenon predominantly documented in South Korea and surrounding regions, characterized by fatal respiratory failure in individuals exposed to rotating air circulation devices during nocturnal hours. First catalogued by the Archive Foundation in 1997, FDS represents one of the most localized manifestations of post-Squishing reality distortion.",
+                    p_overview: "Fan Death Syndrome operates through what researchers term \"cyclonic biofield disruption\" - a process where the rotational energy of electric fans creates localized distortions in the bioelectric patterns of sleeping individuals. Unlike traditional temporal anomalies, FDS affects the subject's metabolic processes directly rather than their temporal positioning.",
+                    p_overview_2: "The phenomenon was initially dismissed as urban folklore until the OmniLex Breach of 2002 revealed government documentation of over 200 confirmed cases between 1997-2001. The syndrome demonstrates clear technomantic properties, with victims showing disrupted biorhythmic signatures consistent with exposure to malfunctioning Esoteric Heavy Industries devices.",
+                    h2_mechanism: "Biomechanical Process",
+                    p_mechanism: "FDS manifests through a three-stage degradation process affecting the victim's respiratory automancy - the unconscious magical regulation of breathing during sleep. Stage one involves the disruption of natural airflow patterns around the sleeping subject, creating what technomancers call \"atmospheric stagnation zones.\"",
+                    p_mechanism_2: "In stage two, the fan's rotational field begins to interfere with the subject's bioelectric matrix, particularly the autonomic circuits governing respiratory function. This interference causes progressively shallow breathing patterns as the body's natural life-support algorithms become desynchronized.",
+                    p_mechanism_3: "The final stage occurs when the subject's metabolic processes enter what researchers term \"cyclonic feedback loop\" - a state where the disrupted breathing pattern becomes self-reinforcing, ultimately leading to complete respiratory failure. Death typically occurs 4-6 hours after initial exposure, with no external signs of distress.",
+                    h3_symptoms: "Warning Indicators",
+                    li_symptom_1: "Biorhythmic instability during early sleep phases",
+                    li_symptom_2: "Decreased oxygen saturation levels without apparent cause",
+                    li_symptom_3: "Electromagnetic field fluctuations around sleeping area", 
+                    li_symptom_4: "Ambient temperature drops despite active air circulation",
+                    h2_regional: "Regional Amplification",
+                    p_regional: "The concentration of FDS cases in South Korea appears linked to the region's unique position within the global leyline network. Korean Peninsula leylines demonstrate unusual susceptibility to technological interference, creating what the Mages Guild classifies as \"amplified technomantic resonance zones.\"",
+                    p_regional_2: "This phenomenon is exacerbated by the widespread adoption of electric fans in Korean households, combined with architectural features that naturally concentrate bioelectric fields. The traditional ondol heating system, when inactive during summer months, creates underground channels that act as unintentional arcane energy conduits.",
+                    quote: "\"The tragic irony of Fan Death Syndrome is that it represents technology designed to preserve life becoming a vector for technomantic disruption. It serves as a stark reminder of how the post-Squishing world has fundamentally altered the relationship between human biology and mechanical systems.\" - Dr. Kim Yeon-soo, Archive Foundation Korean Division",
+                    h2_prevention: "Countermeasures",
+                    p_prevention: "Standard FDS prevention protocols involve the implementation of bioelectric stabilization measures. The most effective approach combines traditional ventilation methods with technomantic safeguards developed by Esoteric Heavy Industries.",
+                    p_prevention_2: "Recommended countermeasures include installing timer-based shutdown circuits to prevent extended exposure periods, positioning fans to avoid direct airflow toward sleeping areas, and maintaining adequate ventilation through non-mechanical means. Advanced protection systems incorporate biorhythm monitoring devices that automatically adjust fan operation based on the occupant's sleep cycle patterns.",
+                    h3_protective: "Protective Equipment",
+                    li_protect_1: "Bioelectric field stabilizers (available through licensed technomantic suppliers)",
+                    li_protect_2: "Automated shutdown timers with biorhythm detection",
+                    li_protect_3: "Leyline interference dampeners for high-risk residential areas",
+                    li_protect_4: "Traditional non-electric cooling alternatives",
+                    h2_research: "Current Research",
+                    p_research: "The Archive Foundation continues to study FDS as part of its broader investigation into localized reality distortions. Current research focuses on developing predictive algorithms to identify individuals at elevated risk, as well as exploring potential connections between FDS and other technomantic phenomena documented across the Korean Peninsula.",
+                    p_research_2: "Recent findings suggest that FDS may be part of a larger pattern of technology-biology interface disruptions that began manifesting after The Squishing event. Researchers are particularly interested in understanding why certain geographic regions demonstrate heightened susceptibility to these disruptions.",
+                    p_research_3: "Collaborative studies with the Hypercapitalist Collective are exploring commercial applications of FDS research, including the development of enhanced safety protocols for consumer electronics and the creation of biorhythm-synchronized cooling systems for residential use.",
+                    h2_see_also: "See Also",
+                    link_related_1: "Technomantic Disruption Patterns",
+                    link_related_2: "Bioelectric Matrix Theory",
+                    link_related_3: "Korean Peninsula Anomalies", 
+                    link_category: "Category: Safety Protocols",
+                    footer_text: "© 2025 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Sindrome della Morte da Ventilatore",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "4 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Classificazione Tecnomantica",
+                    toc_2: "2. Processo Biomeccanico",
+                    toc_3: "3. Amplificazione Regionale", 
+                    toc_4: "4. Contromisure",
+                    toc_5: "5. Ricerca Attuale",
+                    infobox_title: "Dati di Classificazione",
+                    infobox_type_label: "Tipo di Fenomeno:",
+                    infobox_type_value: "Distorsione Tecnomantica Localizzata",
+                    infobox_threat_label: "Livello di Minaccia:",
+                    infobox_threat_value: "Regionale-Letale",
+                    infobox_origin_label: "Prima Documentazione:",
+                    infobox_origin_value: "1997, Area Metropolitana di Seoul",
+                    infobox_jurisdiction_label: "Autorità di Ricerca:",
+                    infobox_jurisdiction_value: "Archive Foundation, Divisione Coreana",
+                    h2_overview: "Classificazione Tecnomantica",
+                    p_intro: "La Sindrome della Morte da Ventilatore (SMV) è un fenomeno tecnomantico documentato prevalentemente in Corea del Sud e regioni circostanti, caratterizzato da insufficienza respiratoria fatale in individui esposti a dispositivi di circolazione dell'aria rotanti durante le ore notturne. Catalogata per la prima volta dall'Archive Foundation nel 1997, la SMV rappresenta una delle manifestazioni più localizzate di distorsione della realtà post-Squishing.",
+                    p_overview: "La Sindrome della Morte da Ventilatore opera attraverso quello che i ricercatori definiscono \"interruzione ciclonica del biocampo\" - un processo in cui l'energia rotazionale dei ventilatori elettrici crea distorsioni localizzate nei pattern bioelettrici degli individui addormentati. A differenza delle anomalie temporali tradizionali, la SMV influenza direttamente i processi metabolici del soggetto piuttosto che il suo posizionamento temporale.",
+                    p_overview_2: "Il fenomeno fu inizialmente liquidato come folklore urbano fino a quando la Violazione OmniLex del 2002 rivelò documentazione governativa di oltre 200 casi confermati tra il 1997-2001. La sindrome dimostra chiare proprietà tecnomantiche, con vittime che mostrano firme bioritmiche disrutte coerenti con l'esposizione a dispositivi malfunzionanti delle Esoteric Heavy Industries.",
+                    h2_mechanism: "Processo Biomeccanico",
+                    p_mechanism: "La SMV si manifesta attraverso un processo di degrado in tre stadi che colpisce l'automancia respiratoria della vittima - la regolazione magica inconscia della respirazione durante il sonno. Il primo stadio coinvolge l'interruzione dei pattern naturali di flusso d'aria intorno al soggetto addormentato, creando quelle che i tecnomanti chiamano \"zone di stagnazione atmosferica.\"",
+                    p_mechanism_2: "Nel secondo stadio, il campo rotazionale del ventilatore inizia a interferire con la matrice bioelettrica del soggetto, particolarmente i circuiti autonomi che governano la funzione respiratoria. Questa interferenza causa pattern respiratori progressivamente superficiali mentre gli algoritmi naturali di supporto vitale del corpo si desincronizzano.",
+                    p_mechanism_3: "Lo stadio finale si verifica quando i processi metabolici del soggetto entrano in quello che i ricercatori definiscono \"loop di feedback ciclonico\" - uno stato in cui il pattern respiratorio disturbato diventa auto-rinforzante, portando ultimamente al completo fallimento respiratorio. La morte tipicamente si verifica 4-6 ore dopo l'esposizione iniziale, senza segni esterni di distress.",
+                    h3_symptoms: "Indicatori di Allarme",
+                    li_symptom_1: "Instabilità bioritmica durante le prime fasi del sonno",
+                    li_symptom_2: "Livelli di saturazione di ossigeno diminuiti senza causa apparente",
+                    li_symptom_3: "Fluttuazioni del campo elettromagnetico intorno all'area di riposo",
+                    li_symptom_4: "Cali di temperatura ambientale nonostante la circolazione d'aria attiva",
+                    h2_regional: "Amplificazione Regionale",
+                    p_regional: "La concentrazione di casi SMV in Corea del Sud appare collegata alla posizione unica della regione all'interno della rete globale di linee energetiche. Le linee energetiche della Penisola Coreana dimostrano insolita suscettibilità all'interferenza tecnologica, creando quelle che la Gilda dei Maghi classifica come \"zone di risonanza tecnomantica amplificata.\"",
+                    p_regional_2: "Questo fenomeno è esacerbato dall'adozione diffusa di ventilatori elettrici nelle famiglie coreane, combinato con caratteristiche architettoniche che naturalmente concentrano i campi bioelettrici. Il tradizionale sistema di riscaldamento ondol, quando inattivo durante i mesi estivi, crea canali sotterranei che agiscono come condotti di energia arcana involontari.",
+                    quote: "\"L'ironia tragica della Sindrome della Morte da Ventilatore è che rappresenta tecnologia progettata per preservare la vita che diventa un vettore per la disruzione tecnomantica. Serve come un severo promemoria di come il mondo post-Squishing ha fondamentalmente alterato la relazione tra biologia umana e sistemi meccanici.\" - Dr. Kim Yeon-soo, Archive Foundation Divisione Coreana",
+                    h2_prevention: "Contromisure",
+                    p_prevention: "I protocolli standard di prevenzione SMV coinvolgono l'implementazione di misure di stabilizzazione bioelettrica. L'approccio più efficace combina metodi di ventilazione tradizionali con salvaguardie tecnomantiche sviluppate dalle Esoteric Heavy Industries.",
+                    p_prevention_2: "Le contromisure raccomandate includono l'installazione di circuiti di spegnimento basati su timer per prevenire periodi di esposizione estesi, posizionare i ventilatori per evitare flusso d'aria diretto verso le aree di riposo, e mantenere ventilazione adeguata attraverso mezzi non meccanici. I sistemi di protezione avanzati incorporano dispositivi di monitoraggio del bioritmo che regolano automaticamente l'operazione del ventilatore basandosi sui pattern del ciclo del sonno dell'occupante.",
+                    h3_protective: "Equipaggiamento Protettivo",
+                    li_protect_1: "Stabilizzatori di campo bioelettrico (disponibili attraverso fornitori tecnomantici autorizzati)",
+                    li_protect_2: "Timer di spegnimento automatico con rilevamento del bioritmo",
+                    li_protect_3: "Smorzatori di interferenza delle linee energetiche per aree residenziali ad alto rischio",
+                    li_protect_4: "Alternative di raffreddamento tradizionali non elettriche",
+                    h2_research: "Ricerca Attuale",
+                    p_research: "L'Archive Foundation continua a studiare la SMV come parte della sua più ampia investigazione sulle distorsioni della realtà localizzate. La ricerca attuale si focalizza sullo sviluppo di algoritmi predittivi per identificare individui a rischio elevato, così come sull'esplorazione di potenziali connessioni tra la SMV e altri fenomeni tecnomantici documentati attraverso la Penisola Coreana.",
+                    p_research_2: "I risultati recenti suggeriscono che la SMV possa essere parte di un pattern più ampio di interruzioni dell'interfaccia tecnologia-biologia che iniziarono a manifestarsi dopo l'evento dello Squishing. I ricercatori sono particolarmente interessati a comprendere perché certe regioni geografiche dimostrino suscettibilità elevata a queste interruzioni.",
+                    p_research_3: "Studi collaborativi con il Collettivo Ipercapitalista stanno esplorando applicazioni commerciali della ricerca SMV, includendo lo sviluppo di protocolli di sicurezza migliorati per l'elettronica di consumo e la creazione di sistemi di raffreddamento sincronizzati con il bioritmo per uso residenziale.",
+                    h2_see_also: "Vedi Anche",
+                    link_related_1: "Pattern di Interruzione Tecnomantica",
+                    link_related_2: "Teoria della Matrice Bioelettrica",
+                    link_related_3: "Anomalie della Penisola Coreana",
+                    link_category: "Categoria: Protocolli di Sicurezza",
+                    footer_text: "© 2025 Hexapedia. Disponibile sotto licenza Creative Commons."

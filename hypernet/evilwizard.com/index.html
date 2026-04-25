@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title id="page-title">EvilWizard.com - Forum for Dark Practitioners</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #1a0033, #330066, #660099);
+            color: #cccccc;
+            margin: 0;
+            padding: 0;
+            background-attachment: fixed;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #000000, #330033, #000000);
+            border-bottom: 3px solid #9900cc;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #660099;
+            border: 2px solid #9900cc;
+            padding: 5px;
+        }
+        
+        .lang-btn {
+            background: #330066;
+            color: #cccccc;
+            border: 1px solid #9900cc;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .lang-btn.active {
+            background: #9900cc;
+            color: #ffffff;
+        }
+        
+        .logo {
+            font-size: 32px;
+            color: #ff6600;
+            text-shadow: 2px 2px 4px #000000;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            font-style: italic;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+            gap: 10px;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: #1a0033;
+            border: 2px solid #660099;
+            padding: 10px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: #ff6600;
+            border-bottom: 2px solid #660099;
+            padding-bottom: 5px;
+            margin-top: 0;
+            font-size: 14px;
+        }
+        
+        .nav-link {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 5px;
+            margin: 2px 0;
+            background: #330066;
+            border: 1px solid #660099;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .nav-link:hover {
+            background: #660099;
+            color: #ffffff;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: #000033;
+            border: 2px solid #660099;
+            padding: 15px;
+            min-height: 600px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .thread {
+            background: #1a0033;
+            border: 1px solid #660099;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        
+        .thread-header {
+            background: #330066;
+            color: #ff6600;
+            padding: 5px;
+            margin: -10px -10px 10px -10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .post {
+            border-left: 3px solid #660099;
+            padding-left: 10px;
+            margin: 8px 0;
+        }
+        
+        .post-author {
+            color: #ff6600;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .post-date {
+            color: #999999;
+            font-size: 10px;
+        }
+        
+        .post-content {
+            margin-top: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .stats-box {
+            background: #330066;
+            border: 2px solid #9900cc;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .evil-badge {
+            background: #ff0000;
+            color: #ffffff;
+            padding: 2px 6px;
+            font-size: 9px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+        
+        .rank-title {
+            color: #9900cc;
+            font-style: italic;
+            font-size: 10px;
+        }
+        
+        .footer {
+            background: #000000;
+            border-top: 2px solid #660099;
+            padding: 10px;
+            text-align: center;
+            color: #999999;
+            font-size: 11px;
+            margin-top: 20px;
+        }
+        
+        .hexagram-link {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        
+        .warning-banner {
+            background: #660000;
+            color: #ffcccc;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            border: 1px solid #990000;
+            margin-bottom: 10px;
+        }
+        
+        blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="switchLanguage('it')">IT</button>
+        </div>
+        <div class="logo" id="main-logo">👹 EvilWizard.com 👹</div>
+        <div class="subtitle" id="main-subtitle">The Premier Dark Arts Discussion Forum</div>
+    </div>
+    
+    <div class="warning-banner">
+        <blink id="warning-text">⚠️ WARNING: This forum contains discussions of dark magic and malevolent practices. Enter at your own risk! ⚠️</blink>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3 id="nav-title">Forum Sections</h3>
+            <a class="nav-link" onclick="showSection('home')" id="nav-home">🏠 Main Portal</a>
+            <a class="nav-link" onclick="showSection('spells')" id="nav-spells">🔮 Dark Spells</a>
+            <a class="nav-link" onclick="showSection('curses')" id="nav-curses">💀 Curses & Hexes</a>
+            <a class="nav-link" onclick="showSection('transformations')" id="nav-trans">🐺 Transformations</a>
+            <a class="nav-link" onclick="showSection('necromancy')" id="nav-necro">⚰️ Necromancy</a>
+            <a class="nav-link" onclick="showSection('potions')" id="nav-potions">🧪 Malevolent Potions</a>
+            <a class="nav-link" onclick="showSection('general')" id="nav-general">💬 General Evil Chat</a>
+            <a class="nav-link" onclick="showSection('members')" id="nav-members">👥 Evil Members</a>
+            
+            <div class="stats-box">
+                <div style="color: #ff6600; font-weight: bold;" id="stats-title">Forum Statistics</div>
+                <div style="font-size: 11px; margin-top: 5px;">
+                    <div id="stats-members">Evil Members: 666</div>
+                    <div id="stats-topics">Dark Topics: 1,337</div>
+                    <div id="stats-posts">Malevolent Posts: 13,666</div>
+                    <div id="stats-curses">Active Curses: 42</div>
+                </div>
+            </div>
+            
+            <h3 id="contact-title">Contact Evil Admin</h3>
+            <div style="font-size: 11px;">
+                <div id="admin-email">📧 <a href="mailto:darkmaster@hexagram.corp" class="hexagram-link">darkmaster@hexagram.corp</a></div>
+                <div id="powered-by">Powered by Hypernet Explorer</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- HOME SECTION -->
+            <div id="home" class="section active">
+                <h2 style="color: #ff6600;" id="welcome-title">Welcome to EvilWizard.com, Dark Practitioners!</h2>
+                
+                <div id="welcome-content">
+                    <p>Greetings, fellow servants of darkness! Welcome to the most wicked corner of the Hypernet, where evil wizards, malevolent mages, and practitioners of the dark arts gather to share their knowledge, experiences, and delightfully horrible stories.</p>
+                    
+                    <p>Our community of 666 registered evil members discusses everything from basic hexes to advanced soul-manipulation techniques. Whether you're a novice necromancer or a master of malevolence, you'll find kindred spirits here who understand the joy of a well-crafted curse.</p>
+                </div>
+                
+                <h3 style="color: #9900cc;" id="recent-title">Recent Evil Activities</h3>
+                
+                <div class="thread">
+                    <div class="thread-header" id="recent-1-title">🔥 HOT: Scottish Mage's Latest Dog Transformation Techniques</div>
+                    <div class="post">
+                        <div class="post-author">MacEvilson <span class="evil-badge">GRAND TORMENTOR</span></div>
+                        <div class="post-date">January 15, 2001 - 14:23</div>
+                        <div class="post-content" id="recent-1-content">Aye, fellow practitioners! I've perfected me technique for turnin' meddlesome humans into adorable wee doggies! The screamin' during the transformation is absolutely exquisite - like music to me ears! 🐕</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="recent-2-title">💀 New Necromancy Spell Exchange</div>
+                    <div class="post">
+                        <div class="post-author">BoneWhisperer <span class="evil-badge">DEATH DEALER</span></div>
+                        <div class="post-date">January 14, 2001 - 21:45</div>
+                        <div class="post-content" id="recent-2-content">Looking to trade my "Skeleton Butler" spell for something that makes zombies more obedient. My current undead servants keep trying to eat the mailman instead of retrieving the post! 💀</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="recent-3-title">⚡ Curse Feedback Needed</div>
+                    <div class="post">
+                        <div class="post-author">HexMistress <span class="evil-badge">CURSE CRAFTER</span></div>
+                        <div class="post-date">January 13, 2001 - 16:12</div>
+                        <div class="post-content" id="recent-3-content">My "Eternal Hiccups" curse seems to be working too well... the victim has been hiccuping for 3 weeks straight and neighbors are complaining about the noise. How do I tone it down? 😈</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SPELLS SECTION -->
+            <div id="spells" class="section">
+                <h2 style="color: #ff6600;" id="spells-title">Dark Spells Discussion</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="spell-1-title">🌟 PINNED: Beginner's Guide to Evil Spellcasting</div>
+                    <div class="post">
+                        <div class="post-author">DarkMaster <span class="evil-badge">ADMIN</span></div>
+                        <div class="post-date">December 25, 2000 - 00:01</div>
+                        <div class="post-content" id="spell-1-content">New to evil magic? Start here! Remember: Intent is everything. You must truly WANT to cause mischief for your spells to work properly. Practice on houseplants first - wilting roses is excellent beginner practice! 🌹💀</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="spell-2-title">🔮 Advanced Illusion Spells</div>
+                    <div class="post">
+                        <div class="post-author">IllusionMaster <span class="evil-badge">TRICKSTER</span></div>
+                        <div class="post-date">January 12, 2001 - 19:30</div>
+                        <div class="post-content" id="spell-2-content">Fellow deceivers! I've discovered a wonderful spell that makes people think their coffee tastes like Brussels sprouts. The look of horror on their faces is absolutely delightful! Recipe available for trade... 😈☕</div>
+                    </div>
+                    <div class="post">
+                        <div class="post-author">CaffeineCorruptor <span class="evil-badge">BEVERAGE BANE</span></div>
+                        <div class="post-date">January 12, 2001 - 20:15</div>
+                        <div class="post-content" id="spell-2-reply">Oh brilliant! I have a spell that makes tea taste like dirty socks. Perhaps we could collaborate on a full beverage corruption grimoire? Think of the chaos we could cause at office meetings! 🍵💀</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="spell-3-title">⚡ Lightning Spell Gone Wrong</div>
+                    <div class="post">
+                        <div class="post-author">StormBringer <span class="evil-badge">WEATHER WITCH</span></div>
+                        <div class="post-date">January 10, 2001 - 11:45</div>
+                        <div class="post-content" id="spell-3-content">Help! Tried to summon a small thunderstorm to ruin a picnic, but now there's a permanent rain cloud following me around. It's been three days and I'm completely soaked. Any suggestions? 🌧️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CURSES SECTION -->
+            <div id="curses" class="section">
+                <h2 style="color: #ff6600;" id="curses-title">Curses & Hexes Workshop</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="curse-1-title">💀 Revenge Curse Collection</div>
+                    <div class="post">
+                        <div class="post-author">VengefulVera <span class="evil-badge">REVENGE SPECIALIST</span></div>
+                        <div class="post-date">January 14, 2001 - 13:22</div>
+                        <div class="post-content" id="curse-1-content">Sharing my favorite petty revenge curses: 1) Always stepping in puddles, 2) USB cables never working on first try, 3) Traffic lights always turning red. Small but deliciously annoying! Who wants the recipes? 😈</div>
+                    </div>
+                    <div class="post">
+                        <div class="post-author">PettyPete <span class="evil-badge">MINOR MENACE</span></div>
+                        <div class="post-date">January 14, 2001 - 14:05</div>
+                        <div class="post-content" id="curse-1-reply">Vera, you're a genius! I've been using a curse that makes people's socks always slip down inside their shoes. The constant annoyance is beautiful. Let's trade recipes! 🧦😈</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="curse-2-title">🎭 Embarrassment Hexes</div>
+                    <div class="post">
+                        <div class="post-author">ShameMage <span class="evil-badge">HUMILIATION EXPERT</span></div>
+                        <div class="post-date">January 11, 2001 - 16:48</div>
+                        <div class="post-content" id="curse-2-content">My "Accidental Rhyming" hex is working wonderfully! The target can only speak in rhymes for a week. Watching them try to order coffee is absolutely hilarious! "I'd like a latte, if you would be so... batty?" 😂</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="curse-3-title">⚠️ Curse Backfire Stories</div>
+                    <div class="post">
+                        <div class="post-author">UnluckyUrsula <span class="evil-badge">ACCIDENT PRONE</span></div>
+                        <div class="post-date">January 9, 2001 - 09:30</div>
+                        <div class="post-content" id="curse-3-content">Warning to fellow cursers: Always check your pronunciation! Tried to curse someone with "eternal bad hair days" but mispronounced it. Now I have tentacles for hair. It's actually quite stylish, but terrifies the mailman. 🐙</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TRANSFORMATIONS SECTION -->
+            <div id="transformations" class="section">
+                <h2 style="color: #ff6600;" id="trans-title">Transformation Magic Mastery</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="trans-1-title">🐕 MacEvilson's Dog Transformation Academy</div>
+                    <div class="post">
+                        <div class="post-author">MacEvilson <span class="evil-badge">GRAND TORMENTOR</span></div>
+                        <div class="post-date">January 15, 2001 - 10:15</div>
+                        <div class="post-content" id="trans-1-content">Greetings, fellow shape-shifters! Today I'll share me secret to the perfect human-to-dog transformation. The key is in the slow, agonizing metamorphosis - ye want them to feel every bone reshaping, every muscle changing. The psychological torment is half the fun! 🐺</div>
+                    </div>
+                    <div class="post">
+                        <div class="post-author">ShapeShifter <span class="evil-badge">METAMORPH MASTER</span></div>
+                        <div class="post-date">January 15, 2001 - 11:32</div>
+                        <div class="post-content" id="trans-1-reply">MacEvilson, your technique is legendary! I've been following your methods and the results are spectacular. Question: How long do you typically make the transformation last? I find 24 hours gives them enough time to truly appreciate their new perspective! 🐕</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="trans-2-title">🦎 Reptilian Transformations</div>
+                    <div class="post">
+                        <div class="post-author">LizardLord <span class="evil-badge">COLD BLOODED</span></div>
+                        <div class="post-date">January 13, 2001 - 15:20</div>
+                        <div class="post-content" id="trans-2-content">Fellow cold-hearted colleagues! My salamander transformation spell is perfected. Watching people try to explain to their boss why they're suddenly cold-blooded and need to sunbathe on rocks is absolutely precious! 🦎☀️</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="trans-3-title">🕸️ Arachnid Adventures</div>
+                    <div class="post">
+                        <div class="post-author">SpiderQueen <span class="evil-badge">EIGHT-LEGGED EVIL</span></div>
+                        <div class="post-date">January 8, 2001 - 21:45</div>
+                        <div class="post-content" id="trans-3-content">Transformed my annoying neighbor into a house spider for a week. The irony? She's terrified of spiders! Watching her try to navigate her own home while avoiding mirrors was absolutely delightful! She's much quieter now... 🕷️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NECROMANCY SECTION -->
+            <div id="necromancy" class="section">
+                <h2 style="color: #ff6600;" id="necro-title">Necromancy & Death Magic</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="necro-1-title">💀 Ethical Necromancy Guidelines</div>
+                    <div class="post">
+                        <div class="post-author">DeathDealer <span class="evil-badge">LICH LORD</span></div>
+                        <div class="post-date">January 12, 2001 - 12:00</div>
+                        <div class="post-content" id="necro-1-content">Fellow death-enthusiasts! Remember: even evil necromancers should be polite. Always ask permission before raising someone's deceased pet. It's common courtesy! Also, zombie labor laws are getting stricter - make sure to give your undead minions proper rest periods. 💀</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="necro-2-title">⚰️ Skeleton Servant Troubleshooting</div>
+                    <div class="post">
+                        <div class="post-author">BoneCollector <span class="evil-badge">OSSIFIED OVERLORD</span></div>
+                        <div class="post-date">January 10, 2001 - 18:33</div>
+                        <div class="post-content" id="necro-2-content">Help needed! My skeleton butler keeps rearranging the furniture when I'm not looking. I come home to find all the chairs stacked in pyramids and the table upside down. Is this normal skeleton behavior or is he developing a personality? 💀🪑</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="necro-3-title">👻 Ghost Communication Problems</div>
+                    <div class="post">
+                        <div class="post-author">SpiritSpeaker <span class="evil-badge">PHANTOM PHILOSOPHER</span></div>
+                        <div class="post-date">January 7, 2001 - 22:15</div>
+                        <div class="post-content" id="necro-3-content">The ghost I summoned last week won't stop complaining about modern music. He keeps saying "in my day, music had proper melodies" and making the radio play nothing but medieval chants. How do I update a centuries-old ghost's musical tastes? 👻🎵</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- POTIONS SECTION -->
+            <div id="potions" class="section">
+                <h2 style="color: #ff6600;" id="potions-title">Malevolent Potions Laboratory</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="potion-1-title">🧪 Truth Serum Variants</div>
+                    <div class="post">
+                        <div class="post-author">TruthBrew <span class="evil-badge">POTION MASTER</span></div>
+                        <div class="post-date">January 13, 2001 - 14:25</div>
+                        <div class="post-content" id="potion-1-content">Perfected my "Brutal Honesty" potion! Instead of just making people tell the truth, it makes them share their most embarrassing thoughts out loud. Tested it at a dinner party - absolute chaos! Recipe available for 50 euros. 😈🍷</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="potion-2-title">🌿 Ingredient Sourcing Tips</div>
+                    <div class="post">
+                        <div class="post-author">HerbGatherer <span class="evil-badge">PLANT POISONER</span></div>
+                        <div class="post-date">January 11, 2001 - 08:45</div>
+                        <div class="post-content" id="potion-2-content">Fellow brewers! Found an excellent supplier of "midnight-harvested nightshade" in Germany. Quality is superb and they deliver discreetly. My "Perpetual Nightmares" potion has never been more potent! Contact me for supplier details. 🌙🌿</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="potion-3-title">⚗️ Brewing Equipment Recommendations</div>
+                    <div class="post">
+                        <div class="post-author">CauldronCrafter <span class="evil-badge">VESSEL VIRTUOSO</span></div>
+                        <div class="post-date">January 6, 2001 - 16:20</div>
+                        <div class="post-content" id="potion-3-content">Upgraded to a titanium-reinforced cauldron after my last "Explosive Mood Swing" potion literally blew up my kitchen. The new cauldron handles even the most volatile brews beautifully. Worth every euro! Safety first, evil second! ⚗️💥</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GENERAL SECTION -->
+            <div id="general" class="section">
+                <h2 style="color: #ff6600;" id="general-title">General Evil Discussion</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="gen-1-title">😈 Evil Accomplishment Sharing</div>
+                    <div class="post">
+                        <div class="post-author">MischievousMike <span class="evil-badge">CHAOS BRINGER</span></div>
+                        <div class="post-date">January 14, 2001 - 11:30</div>
+                        <div class="post-content" id="gen-1-content">Today's evil accomplishment: Enchanted all the escalators in the local shopping center to run backwards for an hour. The confusion was absolutely delightful! People trying to go up kept sliding down. Simple but effective chaos! 😈</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="gen-2-title">🎭 Evil Motivation Support Group</div>
+                    <div class="post">
+                        <div class="post-author">MotivationalMalice <span class="evil-badge">SUPPORT SORCERER</span></div>
+                        <div class="post-date">January 12, 2001 - 20:45</div>
+                        <div class="post-content" id="gen-2-content">Remember, fellow evildoers: even the darkest magic requires self-care! Take breaks between curses, stay hydrated during long ritual sessions, and don't forget to appreciate the small evils in life. You're doing terrible work! 💜</div>
+                    </div>
+                </div>
+                
+                <div class="thread">
+                    <div class="thread-header" id="gen-3-title">📚 Evil Literature Recommendations</div>
+                    <div class="post">
+                        <div class="post-author">BookWormEvil <span class="evil-badge">LITERATURE LICH</span></div>
+                        <div class="post-date">January 9, 2001 - 15:18</div>
+                        <div class="post-content" id="gen-3-content">Currently reading "Advanced Malevolence for Modern Mages" - excellent chapter on incorporating evil magic into everyday technology. The section on cursed emails is particularly inspired! Highly recommend for expanding your evil repertoire! 📖</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MEMBERS SECTION -->
+            <div id="members" class="section">
+                <h2 style="color: #ff6600;" id="members-title">Notable Evil Members</h2>
+                
+                <div class="thread">
+                    <div class="thread-header" id="member-1-title">👑 Hall of Evil Fame</div>
+                    <div class="post">
+                        <div class="post-author">DarkMaster <span class="evil-badge">ADMIN</span></div>
+                        <div class="post-date">January 1, 2001 - 00:00</div>
+                        <div class="post-content" id="member-1-content">
+                            <strong>Our Most Distinguished Evil Members:</strong><br><br>
+                            🏴󠁧󠁢󠁳󠁣󠁴󠁿 <strong>MacEvilson</strong> - Grand Tormentor, Transformation Specialist<br>
+                            <em>Famous for exquisitely painful dog transformations and Scottish evil charm</em><br><br>
+                            💀 <strong>DeathDealer</strong> - Lich Lord, Necromancy Expert<br>
+                            <em>Over 500 years of experience in

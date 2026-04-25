@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="iso-8859-1">
+    <title>Olivetti Revival - Tecnologia Italiana per il Nuovo Millennio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff6600, #ffcc00, #ff6600);
+            margin: 0;
+            padding: 0;
+            color: #000066;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 3px solid #ff6600;
+            margin: 10px;
+            min-height: 95vh;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #ff6600, #cc0000);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #990000;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        .nav-container {
+            background-color: #ffcc99;
+            border-bottom: 2px solid #ff6600;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .nav-button {
+            background: linear-gradient(to bottom, #ff9933, #ff6600);
+            color: white;
+            border: 2px solid #cc3300;
+            padding: 8px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000000;
+        }
+        
+        .nav-button:hover {
+            background: linear-gradient(to bottom, #ffaa44, #ff7711);
+            border-color: #dd4411;
+        }
+        
+        .content-area {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #fff5e6;
+            border-right: 2px solid #ff9933;
+            padding: 15px;
+        }
+        
+        .sidebar h3 {
+            background: linear-gradient(to right, #ff6600, #ff9933);
+            color: white;
+            padding: 8px;
+            margin: 0 -15px 10px -15px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar li {
+            background-color: #ffe6cc;
+            border: 1px solid #ff9933;
+            margin: 3px 0;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .sidebar li:hover {
+            background-color: #ffddbb;
+            border-color: #ff6600;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .tech-box {
+            background: linear-gradient(135deg, #e6f3ff, #cce6ff);
+            border: 2px solid #0066cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+            border: 2px solid #cc0000;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            border: 2px solid #009900;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .olivetti-logo {
+            color: #ff6600;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .update-ticker {
+            background-color: #ffff99;
+            border: 1px solid #ffcc00;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            margin: 5px;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, #cc4400, #ff6600);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid #990000;
+            font-size: 12px;
+        }
+        
+        .contact-info {
+            background-color: #fff0e6;
+            border: 2px solid #ff9933;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ff9933;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #ff9933;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fff5e6;
+        }
+        
+        .model-image {
+            width: 150px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 2px solid #cccccc;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            line-height: 100px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <blink>*** NUOVO: Guida alla conversione M20 per Hypernet compatibility! - Ultimo aggiornamento: 18 Gennaio 2001 ***</blink>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <h1>🔧 <span class="olivetti-logo">OLIVETTI</span> REVIVAL 🔧</h1>
+            <div class="subtitle">Tecnologia Italiana per il Nuovo Millennio - Post Y2K Solutions</div>
+            <div style="font-size: 12px;">Recupero, Adattamento e Modernizzazione - Dal 1908 al 2001 e oltre!</div>
+        </div>
+
+        <div class="nav-container">
+            <button class="nav-button" onclick="showSection('home')">HOME</button>
+            <button class="nav-button" onclick="showSection('catalogo')">CATALOGO MODELLI</button>
+            <button class="nav-button" onclick="showSection('conversioni')">CONVERSIONI Y2K</button>
+            <button class="nav-button" onclick="showSection('guide')">GUIDE TECNICHE</button>
+            <button class="nav-button" onclick="showSection('ricambi')">RICAMBI</button>
+            <button class="nav-button" onclick="showSection('contatti')">CONTATTI</button>
+        </div>
+
+        <div class="content-area">
+            <div class="sidebar">
+                <h3>🇮🇹 MODELLI SUPPORTATI</h3>
+                <ul>
+                    <li onclick="showSection('m20')">M20 Desktop</li>
+                    <li onclick="showSection('m24')">M24 Professional</li>
+                    <li onclick="showSection('programma101')">Programma 101</li>
+                    <li onclick="showSection('lettera22')">Lettera 22</li>
+                    <li onclick="showSection('divisumma')">Divisumma 24</li>
+                    <li onclick="showSection('terminal')">Terminal 3000</li>
+                </ul>
+                
+                <h3>⚡ SERVIZI RAPIDI</h3>
+                <ul>
+                    <li onclick="showSection('diagnosi')">Diagnosi Remota</li>
+                    <li onclick="showSection('preventivi')">Preventivi</li>
+                    <li onclick="showSection('spedizioni')">Spedizioni</li>
+                    <li onclick="showSection('garanzia')">Garanzia</li>
+                </ul>
+                
+                <h3>📡 NETWORK</h3>
+                <ul>
+                    <li onclick="showSection('hexagram')">Hexagram Community</li>
+                    <li onclick="showSection('forum')">Forum Tecnico</li>
+                    <li onclick="showSection('newsletter')">Newsletter</li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div id="home" class="section active">
+                    <h2>🚀 Benvenuti nel Futuro del Passato Olivetti!</h2>
+                    
+                    <div class="tech-box">
+                        <h3>🏆 La Passione Italiana per l'Innovazione Continua</h3>
+                        <p>Dopo il bug Y2K che ha messo in ginocchio molti sistemi, la robusta ingegneria <span class="olivetti-logo">OLIVETTI</span> dimostra ancora una volta la sua superiorità! I nostri computer degli anni '80 e '90 continuano a funzionare perfettamente nel nuovo millennio.</p>
+                        
+                        <p><strong>Perché scegliere Olivetti nel 2001?</strong></p>
+                        <ul>
+                            <li>🔧 Architettura immune ai problemi Y2K</li>
+                            <li>⚡ Compatibilità totale con protocolli Hypernet</li>
+                            <li>🛡️ Sicurezza integrata contro virus digitali</li>
+                            <li>🇮🇹 Orgoglio del Made in Italy tecnologico</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>✅ NUOVO: Conversione HyperNet-Compatible disponibile!</h4>
+                        <p>Trasforma il tuo Olivetti M20 o M24 in una stazione di lavoro Hypernet completa. Include: scheda di rete Neo-Ethernet, software di navigazione HyperBrowser™ e protocolli di sicurezza CyberShield™.</p>
+                    </div>
+                    
+                    <h3>📊 Statistiche Successo Y2K</h3>
+                    <table>
+                        <tr>
+                            <th>Modello</th>
+                            <th>Anno</th>
+                            <th>Compatibilità Y2K</th>
+                            <th>Upgrade Disponibile</th>
+                        </tr>
+                        <tr>
+                            <td>M20</td>
+                            <td>1982</td>
+                            <td>100%</td>
+                            <td>✅ Hypernet Ready</td>
+                        </tr>
+                        <tr>
+                            <td>M24</td>
+                            <td>1983</td>
+                            <td>100%</td>
+                            <td>✅ Network Enhanced</td>
+                        </tr>
+                        <tr>
+                            <td>Programma 101</td>
+                            <td>1965</td>
+                            <td>N/A</td>
+                            <td>🔧 Collector Edition</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="catalogo" class="section">
+                    <h2>📦 Catalogo Modelli Disponibili</h2>
+                    
+                    <div class="tech-box">
+                        <h3>💻 Computer Desktop</h3>
+                        
+                        <h4>🔥 OLIVETTI M20 - Il Leggendario</h4>
+                        <div class="model-image">M20-1.jpg</div>
+                        <p><strong>Specifiche Post-Upgrade:</strong></p>
+                        <ul>
+                            <li>CPU Z8000 @ 4MHz (OverClocked a 8MHz)</li>
+                            <li>RAM 128KB (espandibile a 512KB)</li>
+                            <li>HyperNet Card con protocollo TCP/Neo</li>
+                            <li>Sistema Operativo: PCOS + HyperShell</li>
+                            <li><strong>Prezzo: €890 (ricondizionato + upgrade)</strong></li>
+                        </ul>
+                        
+                        <h4>⚡ OLIVETTI M24 - La Potenza</h4>
+                        <div class="model-image">M24-1.jpg</div>
+                        <p><strong>Configurazione Neo-Millennium:</strong></p>
+                        <ul>
+                            <li>CPU Intel 8086 @ 8MHz (TurboBoost a 12MHz)</li>
+                            <li>RAM 640KB (CyberExpanded)</li>
+                            <li>Hard Drive 20MB + SSD Adapter</li>
+                            <li>Scheda grafica CGA Enhanced</li>
+                            <li><strong>Prezzo: €1.290 (professionale upgraded)</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-box">
+                        <h3>⌨️ Macchine da Scrivere Intelligenti</h3>
+                        
+                        <h4>📝 LETTERA 22 CyberType Edition</h4>
+                        <div class="model-image">L22-1.jpg</div>
+                        <p>La leggendaria macchina da scrivere degli anni '50, ora con:</p>
+                        <ul>
+                            <li>Modulo di conversione digitale</li>
+                            <li>Interfaccia USB-Legacy</li>
+                            <li>Software OCR integrato</li>
+                            <li><strong>Prezzo: €450 (conversion kit incluso)</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="conversioni" class="section">
+                    <h2>🔄 Conversioni Y2K e HyperNet</h2>
+                    
+                    <div class="warning-box">
+                        <h4>⚠️ IMPORTANTE: Tutti i nostri sistemi sono già Y2K Compliant!</h4>
+                        <p>A differenza di molti computer moderni, l'architettura Olivetti ha superato brillantemente il passaggio al nuovo millennio senza alcun problema.</p>
+                    </div>
+                    
+                    <div class="tech-box">
+                        <h3>🌐 Pacchetto HyperNet Integration</h3>
+                        
+                        <h4>🔧 Hardware Necessario:</h4>
+                        <ul>
+                            <li><strong>Neo-Ethernet Card</strong> - €120</li>
+                            <li><strong>RAM Expansion Module</strong> - €80</li>
+                            <li><strong>CyberSecurity Chip</strong> - €60</li>
+                            <li><strong>HyperProtocol Firmware</strong> - €40</li>
+                        </ul>
+                        
+                        <h4>💿 Software Package:</h4>
+                        <ul>
+                            <li>HyperBrowser™ Pro</li>
+                            <li>CyberMail Client</li>
+                            <li>DataShield Security Suite</li>
+                            <li>NetBoost Performance Tool</li>
+                        </ul>
+                        
+                        <p><strong>Prezzo totale pacchetto: €300 (installazione inclusa)</strong></p>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>✨ Risultati Garantiti:</h4>
+                        <ul>
+                            <li>Navigazione Hypernet a 56k (max speed)</li>
+                            <li>Compatibilità con protocolli HTTP/2001</li>
+                            <li>Sicurezza CyberShield certificata</li>
+                            <li>Accesso completo a Hexagram Social Network</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="guide" class="section">
+                    <h2>📚 Guide Tecniche e Manuali</h2>
+                    
+                    <div class="tech-box">
+                        <h3>🔧 Guide di Conversione Disponibili</h3>
+                        
+                        <h4>📖 Manuali Tecnici Gratuiti:</h4>
+                        <ul>
+                            <li><strong>"M20 HyperNet Conversion Guide"</strong> - 48 pagine</li>
+                            <li><strong>"Y2K Compliance Testing Protocol"</strong> - 32 pagine</li>
+                            <li><strong>"CyberSecurity Best Practices"</strong> - 24 pagine</li>
+                            <li><strong>"Olivetti Heritage Maintenance"</strong> - 64 pagine</li>
+                        </ul>
+                        
+                        <h4>🎥 Video Tutorial (VHS disponibili):</h4>
+                        <ul>
+                            <li>"Installazione Hardware Step-by-Step" - 45 min</li>
+                            <li>"Configurazione Software Avanzata" - 30 min</li>
+                            <li>"Troubleshooting Common Issues" - 25 min</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-box">
+                        <h3>⚡ Quick Start Guides</h3>
+                        
+                        <h4>🚀 Primi Passi con HyperNet:</h4>
+                        <ol>
+                            <li>Installare la Neo-Ethernet Card</li>
+                            <li>Configurare i protocolli TCP/Neo</li>
+                            <li>Avviare HyperBrowser™</li>
+                            <li>Creare account Hexagram</li>
+                            <li>Iniziare la navigazione!</li>
+                        </ol>
+                        
+                        <div class="warning-box">
+                            <p><strong>Nota:</strong> Per supporto tecnico via Hexagram, contattateci a: <a href="mailto:support@hexagram.corp">support@hexagram.corp</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ricambi" class="section">
+                    <h2>🔩 Ricambi e Componenti</h2>
+                    
+                    <div class="tech-box">
+                        <h3>💾 Componenti Hardware</h3>
+                        
+                        <table>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Modelli Compatibili</th>
+                                <th>Prezzo</th>
+                                <th>Disponibilità</th>
+                            </tr>
+                            <tr>
+                                <td>Tastiera Meccanica</td>
+                                <td>M20, M24</td>
+                                <td>€85</td>
+                                <td>✅ In Stock</td>
+                            </tr>
+                            <tr>
+                                <td>Monitor CRT 12"</td>
+                                <td>M20, M24</td>
+                                <td>€120</td>
+                                <td>⏳ 2-3 settimane</td>
+                            </tr>
+                            <tr>
+                                <td>Floppy Drive 5.25"</td>
+                                <td>M20, M24</td>
+                                <td>€95</td>
+                                <td>✅ In Stock</td>
+                            </tr>
+                            <tr>
+                                <td>RAM Module 128KB</td>
+                                <td>M20</td>
+                                <td>€45</td>
+                                <td>✅ In Stock</td>
+                            </tr>
+                            <tr>
+                                <td>Neo-Ethernet Card</td>
+                                <td>Tutti i modelli</td>
+                                <td>€120</td>
+                                <td>✅ In Stock</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🎯 Servizio Ricambi Specializzato</h4>
+                        <p>Siamo l'unico centro autorizzato in Europa per ricambi originali Olivetti vintage. Tutti i componenti sono testati e certificati per la compatibilità Y2K.</p>
+                        
+                        <ul>
+                            <li>📦 Spedizione in tutta Europa</li>
+                            <li>🛡️ Garanzia 12 mesi su tutti i ricambi</li>
+                            <li>🔧 Installazione gratuita (Roma e Milano)</li>
+                            <li>📞 Supporto tecnico 24/7</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="contatti" class="section">
+                    <h2>📞 Contatti e Informazioni</h2>
+                    
+                    <div class="contact-info">
+                        <h3>🏢 Olivetti Revival Center</h3>
+                        <p><strong>Sede Principale:</strong><br>
+                        Via Jervis 77, 10015 Ivrea (TO), Italia<br>
+                        Tel: +39 0125 52.1000<br>
+                        Fax: +39 0125 52.1001</p>
+                        
+                        <p><strong>Centro Tecnico Roma:</strong><br>
+                        Via Tiburtina 912, 00156 Roma<br>
+                        Tel: +39 06 4100.2001</p>
+                        
+                        <p><strong>Centro Tecnico Milano:</strong><br>
+                        Via Vittor Pisani 27, 20124 Milano<br>
+                        Tel: +39 02 6700.3001</p>
+                    </div>
+                    
+                    <div class="tech-box">
+                        <h3>💬 Supporto Online</h3>
+                        
+                        <h4>📧 HyperMail:</h4>
+                        <ul>
+                            <li><strong>Info Generali:</strong> <a href="mailto:info@hexagram.corp">info@hexagram.corp</a></li>
+                            <li><strong>Supporto Tecnico:</strong> <a href="mailto:support@hexagram.corp">support@hexagram.corp</a></li>
+                            <li><strong>Vendite:</strong> <a href="mailto:sales@hexagram.corp">sales@hexagram.corp</a></li>
+                            <li><strong>Ricambi:</strong> <a href="mailto:parts@hexagram.corp">parts@hexagram.corp</a></li>
+                        </ul>
+                        
+                        <h4>🌐 Community Hexagram:</h4>
+                        <p>Unisciti alla nostra community di appassionati Olivetti su Hexagram! Condividi esperienze, trucchi e progetti di recupero.</p>
+                        <p><strong>Gruppo:</strong> <a href="mailto:olivetti-revival@hexagram.corp">olivetti-revival@hexagram.corp</a></p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>⏰ Orari di Servizio</h4>
+                        <p><strong>Lunedì-Venerdì:</strong> 8:30 - 18:30<br>
+                        <strong>Sabato:</strong> 9:00 - 13:00<br>
+                        <strong>Domenica:</strong> Chiuso</p>
+                        
+                        <p><strong>Supporto Emergenza 24/7:</strong> +39 800 OLIVETTI</p>
+                    </div>
+                </div>
+
+                <!-- Sezioni modelli specifici -->
+                <div id="m20" class="section">
+                    <h2>💻 Olivetti M20 - Il Leggendario</h2>
+                    
+                    <div class="model-image">M20-detail-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>🏆 Il Computer che ha Sfidato il Tempo</h3>
+                        <p>Lanciato nel 1982, l'Olivetti M20 è ancora oggi un capolavoro di ingegneria italiana. La sua architettura Z8000 lo rende naturalmente immune ai problemi Y2K.</p>
+                        
+                        <h4>📋 Specifiche Originali:</h4>
+                        <ul>
+                            <li>CPU: Zilog Z8000 @ 4MHz</li>
+                            <li>RAM: 128KB standard</li>
+                            <li>OS: PCOS (Professional Computer Operating System)</li>
+                            <li>Storage: Floppy disk 5.25" (315KB)</li>
+                        </ul>
+                        
+                        <h4>⚡ Upgrade Post-Y2K Disponibili:</h4>
+                        <ul>
+                            <li><strong>CPU OverClock:</strong> Da 4MHz a 8MHz (+€80)</li>
+                            <li><strong>RAM Expansion:</strong> Fino a 512KB (+€120)</li>
+                            <li><strong>HyperNet Card:</strong> Connessione Internet (+€120)</li>
+                            <li><strong>Hard Drive Adapter:</strong> Supporto HDD fino a 40MB (+€180)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>✅ M20 HyperNet Ready Package - €450</h4>
+                        <p>Include tutti gli upgrade essenziali per trasformare il tuo M20 in una workstation moderna: overclock, espansione RAM, scheda di rete e software HyperBrowser™.</p>
+                    </div>
+                </div>
+
+                <div id="m24" class="section">
+                    <h2>💼 Olivetti M24 - Professional Power</h2>
+                    
+                    <div class="model-image">M24-detail-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>⚡ La Potenza per i Professionisti</h3>
+                        <p>L'M24 del 1983 rappresentava il top di gamma Olivetti. Compatibile IBM PC, ma con l'affidabilità italiana che lo distingue ancora oggi.</p>
+                        
+                        <h4>📋 Configurazione Base:</h4>
+                        <ul>
+                            <li>CPU: Intel 8086 @ 8MHz</li>
+                            <li>RAM: 256KB (espandibile a 640KB)</li>
+                            <li>Video: CGA Color Graphics</li>
+                            <li>OS: MS-DOS 2.11 Olivetti Enhanced</li>
+                        </ul>
+                        
+                        <h4>🚀 Pacchetto Professionale 2001:</h4>
+                        <ul>
+                            <li><strong>TurboBoost CPU:</strong> Fino a 12MHz</li>
+                            <li><strong>CyberRAM:</strong> 640KB con tecnologia enhanced</li>
+                            <li><strong>MultiMedia Card:</strong> Audio digitale e video</li>
+                            <li><strong>NetworkPro:</strong> Scheda di rete professionale</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>🎯 Ideale per:</h4>
+                        <ul>
+                            <li>Uffici e studi professionali</li>
+                            <li>Sviluppo software legacy</li>
+                            <li>Gestione database aziendali</li>
+                            <li>Workstation HyperNet avanzata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="programma101" class="section">
+                    <h2>🏛️ Programma 101 - Il Pioniere (1965)</h2>
+                    
+                    <div class="model-image">P101-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>👑 Il Primo Computer Desktop della Storia</h3>
+                        <p>Il Programma 101, progettato da Pier Giorgio Perotto nel 1965, è considerato il primo personal computer della storia. Un pezzo da museo che funziona ancora perfettamente!</p>
+                        
+                        <h4>🎖️ Specifiche Storiche:</h4>
+                        <ul>
+                            <li>Memoria: 240 byte (espandibili a 480)</li>
+                            <li>Programmazione: Schede magnetiche</li>
+                            <li>Calcoli: Aritmetica decimale</li>
+                            <li>Stampante: Integrata a 30 caratteri/riga</li>
+                        </ul>
+                        
+                        <h4>🔧 Restoration Package:</h4>
+                        <ul>
+                            <li>Restauro completo meccanica</li>
+                            <li>Pulizia e lubrificazione</li>
+                            <li>Test di funzionalità</li>
+                            <li>Certificato di autenticità</li>
+                            <li><strong>Prezzo: €2.800 (pezzo da collezione)</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🏆 Edizione Millennium Collector</h4>
+                        <p>Versione speciale restaurata per celebrare il nuovo millennio. Include targa commemorativa e documentazione storica completa.</p>
+                    </div>
+                </div>
+
+                <div id="hexagram" class="section">
+                    <h2>🌐 Community Hexagram Olivetti</h2>
+                    
+                    <div class="tech-box">
+                        <h3>👥 La Più Grande Community Olivetti del Hypernet</h3>
+                        <p>Oltre 15.000 appassionati da tutta Europa si incontrano quotidianamente sul nostro canale Hexagram per condividere:</p>
+                        
+                        <ul>
+                            <li>📸 Foto dei propri restauri</li>
+                            <li>🔧 Guide tecniche e trucchi</li>
+                            <li>💬 Discussioni sui modelli vintage</li>
+                            <li>🛒 Compravendita ricambi rari</li>
+                            <li>📅 Eventi e raduni</li>
+                        </ul>
+                        
+                        <h4>📧 Come Partecipare:</h4>
+                        <p>Invia una richiesta di iscrizione a: <a href="mailto:olivetti-community@hexagram.corp">olivetti-community@hexagram.corp</a></p>
+                        <p>Includi nel messaggio: nome, città, modelli Olivetti posseduti.</p>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🏆 Membri VIP della Settimana</h4>
+                        <ul>
+                            <li><strong>@TecnicoMario (Milano):</strong> Restauro completo M24 con upgrade HyperNet</li>
+                            <li><strong>@VintageAnna (Roma):</strong> Collezione completa macchine da scrivere Olivetti</li>
+                            <li><strong>@CodeMaster (Torino):</strong> Sviluppo software per sistemi PCOS</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="lettera22" class="section">
+                    <h2>✍️ Lettera 22 - CyberType Edition</h2>
+                    
+                    <div class="model-image">L22-detail-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>📝 La Leggenda della Scrittura Digitale</h3>
+                        <p>La Lettera 22, prodotta dal 1950 al 1964, è stata la macchina da scrivere degli scrittori più famosi del mondo. Ora disponibile con conversione digitale per il nuovo millennio!</p>
+                        
+                        <h4>🎨 Design Iconico:</h4>
+                        <ul>
+                            <li>Carrello da 11 pollici</li>
+                            <li>86 caratteri standard</li>
+                            <li>Peso: solo 4.1 kg</li>
+                            <li>Colori disponibili: Verde, Grigio, Avorio</li>
+                        </ul>
+                        
+                        <h4>⚡ CyberType Conversion Kit:</h4>
+                        <ul>
+                            <li><strong>Sensori Ottici:</strong> Rilevamento battiture in tempo reale</li>
+                            <li><strong>Modulo USB-Legacy:</strong> Connessione a computer moderni</li>
+                            <li><strong>Software OCR:</strong> Conversione automatica in testo digitale</li>
+                            <li><strong>HyperText Mode:</strong> Creazione documenti web-ready</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>💎 Edizioni Speciali Disponibili:</h4>
+                        <ul>
+                            <li><strong>Writer's Edition:</strong> Con custodia vintage - €520</li>
+                            <li><strong>Journalist Pro:</strong> Con kit collegamenti HyperNet - €580</li>
+                            <li><strong>Collector's Gold:</strong> Finitura dorata limitata - €750</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="divisumma" class="section">
+                    <h2>🔢 Divisumma 24 - Calculator Evolution</h2>
+                    
+                    <div class="model-image">DIV24-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>💰 La Calcolatrice dei Professionisti</h3>
+                        <p>La Divisumma 24, icona degli anni '70, rappresenta l'evoluzione del calcolo meccanico verso l'era digitale. Perfetta per uffici che vogliono unire stile e funzionalità.</p>
+                        
+                        <h4>⚙️ Caratteristiche Originali:</h4>
+                        <ul>
+                            <li>Display LED a 12 cifre</li>
+                            <li>Stampa su carta termica</li>
+                            <li>Calcoli fino a 999.999.999.999</li>
+                            <li>Memoria costante e percentuali</li>
+                        </ul>
+                        
+                        <h4>🖥️ Upgrade CyberCalc 2001:</h4>
+                        <ul>
+                            <li><strong>Interfaccia PC:</strong> Collegamento via porta seriale</li>
+                            <li><strong>Software FinanceLink:</strong> Export dati verso Excel/Lotus</li>
+                            <li><strong>Network Mode:</strong> Calcoli condivisi in rete</li>
+                            <li><strong>Y2K Enhanced:</strong> Date calculations fino al 2099</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>📊 Pacchetto Business Pro - €380</h4>
+                        <p>Include: Divisumma 24 restaurata, upgrade CyberCalc, software FinanceLink e supporto tecnico 12 mesi.</p>
+                    </div>
+                </div>
+
+                <div id="terminal" class="section">
+                    <h2>🖥️ Terminal 3000 - HyperNet Gateway</h2>
+                    
+                    <div class="model-image">T3000-1.jpg</div>
+                    
+                    <div class="tech-box">
+                        <h3>🌐 Il Ponte verso il Hypernet</h3>
+                        <p>Il Terminal 3000 degli anni '80 era già concepito per le reti. Con i nostri upgrade diventa una perfetta stazione HyperNet per applicazioni professionali.</p>
+                        
+                        <h4>📡 Specifiche Network:</h4>
+                        <ul>
+                            <li>Processore: Motorola 68000 @ 8MHz</li>
+                            <li>RAM: 512KB espandibile</li>
+                            <li>Interfacce: RS-232, Ethernet, Parallela</li>
+                            <li>Display: Monocromatico 80x25 caratteri</li>
+                        </ul>
+                        
+                        <h4>🚀 HyperNet Gateway Package:</h4>
+                        <ul>
+                            <li><strong>Protocol Stack:</strong> TCP/IP nativo</li>
+                            <li><strong>Terminal Emulator:</strong> VT100/220 enhanced</li>
+                            <li><strong>File Transfer:</strong> FTP, HTTP, Hexagram protocols</li>
+                            <li><strong>Security Suite:</strong> Firewall e antivirus integrati</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>🎯 Applicazioni Ideali:</h4>
+                        <ul>
+                            <li>Server di rete aziendali</li>
+                            <li>Terminali per mainframe</li>
+                            <li>Stazioni di monitoraggio</li>
+                            <li>Gateway HyperNet dedicati</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="diagnosi" class="section">
+                    <h2>🔍 Diagnosi Remota CyberCheck</h2>
+                    
+                    <div class="tech-box">
+                        <h3>🖥️ Servizio Diagnosi Via HyperNet</h3>
+                        <p>Il nostro innovativo sistema CyberCheck™ permette di diagnosticare problemi del tuo Olivetti direttamente via HyperNet, senza doverlo portare in laboratorio!</p>
+                        
+                        <h4>📋 Come Funziona:</h4>
+                        <ol>
+                            <li>Scarica il nostro DiagnosticTool™</li>
+                            <li>Collega il tuo Olivetti alla porta seriale</li>
+                            <li>Avvia la scansione automatica</li>
+                            <li>I risultati vengono inviati ai nostri tecnici</li>
+                            <li>Ricevi il report completo in 24 ore</li>
+                        </ol>
+                        
+                        <h4>🔧 Cosa Analizziamo:</h4>
+                        <ul>
+                            <li>Stato della CPU e memoria</li>
+                            <li>Funzionalità delle periferiche</li>
+                            <li>Compatibilità Y2K</li>
+                            <li>Performance network</li>
+                            <li>Integrità del sistema operativo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>💎 Servizio Premium - €25</h4>
+                        <p>Include diagnosi completa, report dettagliato e consulenza telefonica con un tecnico specializzato.</p>
+                    </div>
+                </div>
+
+                <div id="preventivi" class="section">
+                    <h2>💰 Preventivi e Listini</h2>
+                    
+                    <div class="tech-box">
+                        <h3>📊 Listino Upgrade Standard</h3>
+                        
+                        <table>
+                            <tr>
+                                <th>Servizio</th>
+                                <th>M20</th>
+                                <th>M24</th>
+                                <th>Altri Modelli</th>
+                            </tr>
+                            <tr>
+                                <td>Diagnosi Completa</td>
+                                <td>€45</td>
+                                <td>€50</td>
+                                <td>€40</td>
+                            </tr>
+                            <tr>
+                                <td>Pulizia e Manutenzione</td>
+                                <td>€85</td>
+                                <td>€95</td>
+                                <td>€75</td>
+                            </tr>
+                            <tr>
+                                <td>HyperNet Upgrade</td>
+                                <td>€450</td>
+                                <td>€520</td>
+                                <td>€380</td>
+                            </tr>
+                            <tr>
+                                <td>Restauro Completo</td>
+                                <td>€680</td>
+                                <td>€750</td>
+                                <td>€580</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🎁 Offerte Speciali Gennaio 2001</h4>
+                        <ul>
+                            <li><strong>Sconto Studenti:</strong> -20% su tutti i servizi</li>
+                            <li><strong>Pacchetto Famiglia:</strong> 3 macchine = 30% di sconto</li>
+                            <li><strong>Trade-In Program:</strong> Valutazione per permuta</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h4>📞 Richiedi Preventivo Personalizzato</h4>
+                        <p>Per preventivi dettagliati contatta:</p>
+                        <p><strong>Email:</strong> <a href="mailto:preventivi@hexagram.corp">preventivi@hexagram.corp</a><br>
+                        <strong>Tel:</strong> +39 800 OLIVETTI<br>
+                        <strong>Fax:</strong> +39 0125 52.1001</p>
+                    </div>
+                </div>
+
+                <div id="spedizioni" class="section">
+                    <h2>📦 Spedizioni e Logistica</h2>
+                    
+                    <div class="tech-box">
+                        <h3>🚚 Servizio Spedizioni CyberExpress</h3>
+                        <p>Utilizziamo i migliori corrieri europei per garantire la massima sicurezza durante il trasporto dei vostri preziosi Olivetti.</p>
+                        
+                        <h4>🛡️ Packaging Speciale:</h4>
+                        <ul>
+                            <li>Imballo antistatico per componenti elettronici</li>
+                            <li>Schiuma protettiva custom per ogni modello</li>
+                            <li>Assicurazione inclusa fino a €5.000</li>
+                            <li>Tracking online via HyperNet</li>
+                        </ul>
+                        
+                        <h4>🌍 Copertura Geografica:</h4>
+                        <table>
+                            <tr>
+                                <th>Zona</th>
+                                <th>Tempi</th>
+                                <th>Costo</th>
+                            </tr>
+                            <tr>
+                                <td>Italia Nord</td>
+                                <td>24-48h</td>
+                                <td>€15</td>
+                            </tr>
+                            <tr>
+                                <td>Italia Centro-Sud</td>
+                                <td>48-72h</td>
+                                <td>€20</td>
+                            </tr>
+                            <tr>
+                                <td>Europa Occidentale</td>
+                                <td>3-5 giorni</td>
+                                <td>€35</td>
+                            </tr>
+                            <tr>
+                                <td>Europa Orientale</td>
+                                <td>5-7 giorni</td>
+                                <td>€45</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>⚠️ Spedizioni Speciali</h4>
+                        <p>Per computer completi o macchine da scrivere vintage offriamo servizio di ritiro e consegna con tecnico specializzato (costo aggiuntivo €50-100 in base alla distanza).</p>
+                    </div>
+                </div>
+
+                <div id="garanzia" class="section">
+                    <h2>🛡️ Garanzia e Assistenza</h2>
+                    
+                    <div class="tech-box">
+                        <h3>✅ Garanzia TotalCare</h3>
+                        <p>Tutti i nostri prodotti e servizi sono coperti dalla garanzia TotalCare, la più completa del settore vintage-tech.</p>
+                        
+                        <h4>📋 Cosa Include:</h4>
+                        <ul>
+                            <li><strong>Hardware:</strong> 12 mesi su tutti i componenti</li>
+                            <li><strong>Software:</strong> Updates gratuiti per 24 mesi</li>
+                            <li><strong>Manodopera:</strong> Interventi gratuiti primo anno</li>
+                            <li><strong>Supporto:</strong> Hotline tecnica illimitata</li>
+                        </ul>
+                        
+                        <h4>🔧 Centri Assistenza Autorizzati:</h4>
+                        <ul>
+                            <li><strong>Milano:</strong> Via Vittor Pisani 27</li>
+                            <li><strong>Roma:</strong> Via Tiburtina 912</li>
+                            <li><strong>Torino:</strong> Corso Francia 23</li>
+                            <li><strong>Firenze:</strong> Via della Scala 18</li>
+                            <li><strong>Napoli:</strong> Via Chiaia 149</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🏆 Garanzia Extended Pro - €99</h4>
+                        <p>Estende la garanzia a 36 mesi e include servizio di manutenzione preventiva annuale gratuita.</p>
+                    </div>
+                </div>
+
+                <div id="forum" class="section">
+                    <h2>💬 Forum Tecnico OlivettiPro</h2>
+                    
+                    <div class="tech-box">
+                        <h3>👨‍💻 La Community Tecnica Più Attiva d'Europa</h3>
+                        <p>Il nostro forum tecnico ospita oltre 8.000 membri attivi: ingegneri, tecnici, collezionisti e appassionati che condividono conoscenze e soluzioni.</p>
+                        
+                        <h4>📂 Sezioni Principali:</h4>
+                        <ul>
+                            <li><strong>Hardware Hacking:</strong> Modifiche e upgrade avanzati</li>
+                            <li><strong>Software Development:</strong> Programmazione PCOS e DOS</li>
+                            <li><strong>Restoration Projects:</strong> Progetti di restauro</li>
+                            <li><strong>Marketplace:</strong> Compravendita tra membri</li>
+                            <li><strong>Y2K Solutions:</strong> Soluzioni post-2000</li>
+                        </ul>
+                        
+                        <h4>🏆 Top Contributors del Mese:</h4>
+                        <ul>
+                            <li><strong>@EngineerLuca:</strong> 234 post - Esperto M20/M24</li>
+                            <li><strong>@RetroMaster:</strong> 198 post - Specialista PCOS</li>
+                            <li><strong>@HardwareGuru:</strong> 176 post - Upgrade specialist</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h4>📝 Come Registrarsi</h4>
+                        <p>Per accedere al forum invia richiesta a: <a href="mailto:forum@hexagram.corp">forum@hexagram.corp</a></p>
+                        <p>Specifica il tuo livello tecnico e i modelli di interesse.</p>
+                    </div>
+                </div>
+
+                <div id="newsletter" class="section">
+                    <h2>📰 Newsletter TechVintage</h2>
+                    
+                    <div class="tech-box">
+                        <h3>📧 Resta Aggiornato sul Mondo Olivetti</h3>
+                        <p>La nostra newsletter settimanale è seguita da oltre 25.000 appassionati in tutta Europa. Ogni giovedì ricevi:</p>
+                        
+                        <h4>📋 Contenuti Settimanali:</h4>
+                        <ul>
+                            <li>🔧 Tutorial tecnici e guide step-by-step</li>
+                            <li>📈 Novità e trend del mercato vintage</li>
+                            <li>🛒 Offerte esclusive e anteprime</li>
+                            <li>📸 Showcase dei restauri della community</li>
+                            <li>📅 Eventi e fiere in Europa</li>
+                        </ul>
+                        
+                        <h4>🎁 Vantaggi per gli Iscritti:</h4>
+                        <ul>
+                            <li>Sconto 10% su tutti gli acquisti</li>
+                            <li>Accesso prioritario ai pezzi rari</li>
+                            <li>Download gratuito manuali tecnici</li>
+                            <li>Inviti esclusivi agli eventi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>✉️ Iscriviti Ora!</h4>
+                        <p>Invia una email vuota a: <a href="mailto:newsletter-subscribe@hexagram.corp">newsletter-subscribe@hexagram.corp</a></p>
+                        <p>Riceverai automaticamente il Welcome Package con 50 pagine di documentazione esclusiva!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 Olivetti Revival Center - Tecnologia Italiana per il Nuovo Millennio</p>
+        <p>Progetto indipendente dedicato alla preservazione del patrimonio tecnologico Olivetti</p>
+        <p><strong>Hypernet Explorer 5.0+ Required</strong> | Ottimizzato per risoluzione 1024x768</p>
+        <p>Webmaster: <a href="mailto:webmaster@hexagram.corp" style="color: white;">webmaster@hexagram.corp</a> | Updates via Hexagram Network</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update URL hash (simulation for Web 1.0 feel)
+            if (typeof window !== 'undefined' && window.location) {
+                window.location.hash = sectionId;
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there's a hash in URL
+            var hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('home');
+            }
+        });
+        
+        // Add some 2001-era JavaScript effects
+        var blinkElements = document.getElementsByTagName('blink');
+        for (var i = 0; i < blinkElements.length; i++) {
+            (function(element) {
+                setInterval(function() {
+                    element.style.visibility = element.style.visibility === 'hidden' ? 'visible' : 'hidden';
+                }, 800);
+            })(blinkElements[i]);
+        }
+    </script>
+</body>
+</html>

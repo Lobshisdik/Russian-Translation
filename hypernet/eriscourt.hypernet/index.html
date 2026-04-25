@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Eris Cosmic Court - Divine Justice Reinvented</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #660033, #330066, #003366);
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            color: #ffcc00;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #000033;
+            border: 2px solid #ffcc00;
+            padding: 5px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid #ffcc00;
+            color: #ffcc00;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .lang-btn.active {
+            background: #ffcc00;
+            color: #000033;
+        }
+        
+        .header {
+            background: radial-gradient(circle, #990033, #330033);
+            border: 5px solid #ffcc00;
+            margin: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px #ffcc00;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 3px 3px 6px #660033;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #ccaaff;
+            margin-bottom: 5px;
+        }
+        
+        .divine-seal {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: #ffcc00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #330033;
+            font-size: 18px;
+            border: 3px solid #990033;
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .sidebar {
+            display: table-cell;
+            width: 200px;
+            vertical-align: top;
+            padding: 0 10px;
+        }
+        
+        .left-menu {
+            background: #330066;
+            border: 3px solid #ffcc00;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .menu-title {
+            color: #ffcc00;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item {
+            display: block;
+            color: #ccaaff;
+            text-decoration: none;
+            padding: 8px 5px;
+            margin: 2px 0;
+            border: 1px solid #660099;
+            background: #220044;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background: #440066;
+            color: #ffcc00;
+        }
+        
+        .content-area {
+            display: table-cell;
+            vertical-align: top;
+            padding: 0 20px;
+        }
+        
+        .content-section {
+            display: none;
+            background: rgba(51, 0, 102, 0.8);
+            border: 3px solid #ffcc00;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .verdict-box {
+            background: linear-gradient(135deg, #660033, #330066);
+            border: 2px solid #ffcc00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        
+        .defendant-name {
+            color: #ff6666;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .crime {
+            color: #ccaaff;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .punishment {
+            color: #ffcc00;
+            font-weight: bold;
+            background: #990033;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .mood-change {
+            color: #ff9999;
+            font-size: 12px;
+            font-style: italic;
+            border-left: 3px solid #ff6666;
+            padding-left: 8px;
+            margin-top: 8px;
+        }
+        
+        .divine-whim {
+            background: #ff3366;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .footer {
+            background: #000033;
+            border: 2px solid #ffcc00;
+            margin: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+        }
+        
+        .hexagram-link {
+            color: #ccaaff;
+            text-decoration: none;
+        }
+        
+        .court-stats {
+            background: #440077;
+            border: 2px solid #ffcc00;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        blink {
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .chaos-meter {
+            width: 100%;
+            height: 20px;
+            background: #330033;
+            border: 2px solid #ffcc00;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .chaos-level {
+            height: 100%;
+            background: linear-gradient(90deg, #ffcc00, #ff6600, #ff0000);
+            width: 87%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" onclick="switchLang('it')">IT</button>
+    </div>
+    
+    <div class="header">
+        <div class="divine-seal">⚖</div>
+        <div class="logo" id="main-title">ERIS COSMIC COURT</div>
+        <div class="subtitle" id="main-subtitle">Divine Justice Reinvented Through Chaos</div>
+        <div style="font-size: 12px; color: #ff9999; margin-top: 10px;" id="court-status">
+            Court Status: <blink>CHAOTICALLY ACTIVE</blink> | Goddess Mood: WHIMSICAL
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="left-menu">
+                <div class="menu-title" id="nav-title">DIVINE NAVIGATION</div>
+                <a class="menu-item" onclick="showSection('home')" id="nav-home">Court Home</a>
+                <a class="menu-item" onclick="showSection('recent-verdicts')" id="nav-verdicts">Recent Verdicts</a>
+                <a class="menu-item" onclick="showSection('pending-cases')" id="nav-pending">Pending Cases</a>
+                <a class="menu-item" onclick="showSection('divine-whims')" id="nav-whims">Divine Whims</a>
+                <a class="menu-item" onclick="showSection('punishment-archive')" id="nav-archive">Punishment Archive</a>
+                <a class="menu-item" onclick="showSection('chaos-statistics')" id="nav-stats">Chaos Statistics</a>
+                <a class="menu-item" onclick="showSection('submit-case')" id="nav-submit">Submit a Case</a>
+                <a class="menu-item" onclick="showSection('about-eris')" id="nav-about">About Goddess Eris</a>
+            </div>
+            
+            <div class="court-stats">
+                <div style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;" id="stats-title">COURT METRICS</div>
+                <div style="font-size: 11px;" id="stats-content">
+                    Cases Today: 47<br>
+                    Mood Changes: 23<br>
+                    Pardons: 8<br>
+                    Harsh Sentences: 15<br>
+                </div>
+                <div style="margin-top: 8px;" id="chaos-title">CHAOS LEVEL</div>
+                <div class="chaos-meter">
+                    <div class="chaos-level"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div id="home" class="content-section active">
+                <h2 style="color: #ffcc00;" id="welcome-title">Welcome to the Eris Cosmic Court</h2>
+                
+                <p id="welcome-text">Greetings, mortals and immortals alike! You have entered the divine jurisdiction of Goddess Eris, the newly appointed dispenser of cosmic justice across all realms.</p>
+                
+                <div class="verdict-box">
+                    <div style="color: #ffcc00; text-align: center; font-size: 16px; margin-bottom: 15px;" id="announcement-title">DIVINE ANNOUNCEMENT</div>
+                    <p id="announcement-text">After consuming the Egyptian goddess Ma'at and absorbing her powers of justice, I, Eris, now preside over all matters of cosmic law and order. Expect the unexpected, for my justice flows like chaos itself - swift, unpredictable, and absolutely final!</p>
+                </div>
+                
+                <h3 style="color: #ccaaff;" id="how-it-works">How Divine Justice Works</h3>
+                <ul id="justice-list">
+                    <li>Cases are judged based on my current mood and cosmic whims</li>
+                    <li>Punishments may change mid-sentence if I find something more amusing</li>
+                    <li>Severe crimes might receive lenient sentences if the perpetrator amuses me</li>
+                    <li>Minor infractions could result in cosmic imprisonment if I'm feeling dramatic</li>
+                    <li>All verdicts are final (until I change my mind)</li>
+                </ul>
+                
+                <p style="color: #ff9999; font-style: italic;" id="disclaimer">Disclaimer: The Eris Cosmic Court operates beyond mortal concepts of fairness or consistency. Justice is served with a generous helping of chaos.</p>
+            </div>
+            
+            <div id="recent-verdicts" class="content-section">
+                <h2 style="color: #ffcc00;" id="verdicts-title">Recent Divine Verdicts</h2>
+                
+                <div class="verdict-box">
+                    <div class="defendant-name">Marcus Antonius - Corporate Executive</div>
+                    <div class="crime" id="crime1">Crime: Embezzled €2.3 million from employee pension funds</div>
+                    <div class="punishment" id="punishment1">INITIAL VERDICT: 50 years cosmic imprisonment</div>
+                    <div class="mood-change" id="mood1">MOOD CHANGE: He has nice shoes. Sentence reduced to 3 days community service in Venus mines.</div>
+                    <div class="divine-whim">WHIMSICAL JUSTICE</div>
+                </div>
+                
+                <div class="verdict-box">
+                    <div class="defendant-name">Isabella Romano - Street Performer</div>
+                    <div class="crime" id="crime2">Crime: Performed without a license in Rome</div>
+                    <div class="punishment" id="punishment2">INITIAL VERDICT: 10 euro fine</div>
+                    <div class="mood-change" id="mood2">MOOD CHANGE: Street performance is art! Art is sacred! LIFE IMPRISONMENT IN PLEASURE DIMENSION!</div>
+                    <div class="divine-whim">ARTISTIC APPRECIATION OVERLOAD</div>
+                </div>
+                
+                <div class="verdict-box">
+                    <div class="defendant-name">Heinrich Mueller - Serial Arsonist</div>
+                    <div class="crime" id="crime3">Crime: Burned down 12 historical buildings</div>
+                    <div class="punishment" id="punishment3">INITIAL VERDICT: Eternal damnation in fire realm</div>
+                    <div class="mood-change" id="mood3">MOOD CHANGE: Wait, fire is pretty. He has good taste. COMPLETE PARDON plus cosmic interior decorator license!</div>
+                    <div class="divine-whim">AESTHETIC APPRECIATION</div>
+                </div>
+                
+                <div class="verdict-box">
+                    <div class="defendant-name">Pierre Dubois - Late Library Book</div>
+                    <div class="crime" id="crime4">Crime: Returned library book 3 days late</div>
+                    <div class="punishment" id="punishment4">INITIAL VERDICT: Standard late fee</div>
+                    <div class="mood-change" id="mood4">MOOD CHANGE: Books are knowledge! Knowledge is power! TRANSFORMATION INTO LIVING LIBRARY for 100 years!</div>
+                    <div class="divine-whim">KNOWLEDGE OBSESSION</div>
+                </div>
+            </div>
+            
+            <div id="pending-cases" class="content-section">
+                <h2 style="color: #ffcc00;" id="pending-title">Cases Awaiting Divine Judgment</h2>
+                
+                <div style="background: #440066; padding: 15px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h3 style="color: #ccaaff;" id="case1-title">Case #2001-047: The Vatican Email Hacker</h3>
+                    <p id="case1-desc"><strong>Defendant:</strong> Giovanni Rossi<br>
+                    <strong>Crime:</strong> Hacked Vatican email servers and leaked Pope's pizza preferences<br>
+                    <strong>Status:</strong> I'm torn between admiration for the chaos and annoyance at food criticism</p>
+                </div>
+                
+                <div style="background: #440066; padding: 15px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h3 style="color: #ccaaff;" id="case2-title">Case #2001-048: The Speed Limit Rebel</h3>
+                    <p id="case2-desc"><strong>Defendant:</strong> Anna Kowalski<br>
+                    <strong>Crime:</strong> Drove 5 km/h over speed limit in school zone<br>
+                    <strong>Status:</strong> Depends on whether I like her car color when I judge</p>
+                </div>
+                
+                <div style="background: #440066; padding: 15px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h3 style="color: #ccaaff;" id="case3-title">Case #2001-049: The Hexagram Troll</h3>
+                    <p id="case3-desc"><strong>Defendant:</strong> Ludwig Wagner<br>
+                    <strong>Crime:</strong> Posted mean comments on 47 Hexagram profiles<br>
+                    <strong>Status:</strong> Internet chaos amuses me, but rudeness... we'll see</p>
+                </div>
+            </div>
+            
+            <div id="divine-whims" class="content-section">
+                <h2 style="color: #ffcc00;" id="whims-title">Today's Divine Whims</h2>
+                
+                <p id="whims-intro">My mood affects all cosmic justice. Beware the whims of a goddess!</p>
+                
+                <div style="background: #660033; padding: 10px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h4 style="color: #ffcc00;" id="whim1-title">Current Obsession: Golden Things</h4>
+                    <p id="whim1-desc">Anything gold-colored receives +50 leniency points. I'm particularly fond of golden jewelry today.</p>
+                </div>
+                
+                <div style="background: #660033; padding: 10px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h4 style="color: #ffcc00;" id="whim2-title">Pet Peeve: People Named Kevin</h4>
+                    <p id="whim2-desc">The name Kevin irritates me today. All Kevins receive +30 harshness points automatically.</p>
+                </div>
+                
+                <div style="background: #660033; padding: 10px; border: 2px solid #ffcc00; margin: 10px 0;">
+                    <h4 style="color: #ffcc00;" id="whim3-title">Favorite Crime Today: Creative Tax Evasion</h4>
+                    <p id="whim3-desc">I admire creativity in tax avoidance schemes. The more elaborate, the more lenient the sentence.</p>
+                </div>
+                
+                <div style="background: #003366; padding: 10px; border: 2px solid #ff6666; margin: 10px 0;">
+                    <h4 style="color: #ff6666;" id="danger-title">DANGER ZONE: Boring Crimes</h4>
+                    <p id="danger-desc">Standard theft, basic fraud, or any crime that lacks imagination will receive MAXIMUM punishment today!</p>
+                </div>
+            </div>
+            
+            <div id="punishment-archive" class="content-section">
+                <h2 style="color: #ffcc00;" id="archive-title">Creative Punishments Archive</h2>
+                
+                <h3 style="color: #ccaaff;" id="favorites-title">My Favorite Punishments</h3>
+                
+                <ul id="punishment-list">
+                    <li><strong>Cosmic Irony:</strong> A pickpocket now has hands that repel all objects</li>
+                    <li><strong>Dimensional Displacement:</strong> A noise violator lives in a completely silent dimension</li>
+                    <li><strong>Temporal Loop:</strong> A chronic latecomer relives the same "being late" moment for a year</li>
+                    <li><strong>Inverse Justice:</strong> A greedy banker must give away money to feel happiness</li>
+                    <li><strong>Sensory Swap:</strong> A graffiti vandal can only see in black and white until they create beautiful art</li>
+                    <li><strong>Memory Shuffle:</strong> A liar's memory randomly shuffles truth and fiction for 6 months</li>
+                    <li><strong>Empathy Overload:</strong> A cruel person feels the emotions of everyone around them</li>
+                    <li><strong>Chaos Amplification:</strong> A control freak becomes a magnet for unpredictable situations</li>
+                </ul>
+                
+                <h3 style="color: #ccaaff;" id="lenient-title">Surprisingly Lenient Sentences</h3>
+                
+                <ul id="lenient-list">
+                    <li><strong>Mass Murderer (wore purple):</strong> 2 weeks vacation in paradise dimension</li>
+                    <li><strong>Bank Robber (said please):</strong> Promoted to bank manager</li>
+                    <li><strong>Art Thief (excellent taste):</strong> Given own art gallery</li>
+                    <li><strong>Computer Hacker (elegant code):</strong> Hired as cosmic system administrator</li>
+                </ul>
+            </div>
+            
+            <div id="chaos-statistics" class="content-section">
+                <h2 style="color: #ffcc00;" id="stats-main-title">Chaos Statistics & Court Metrics</h2>
+                
+                <h3 style="color: #ccaaff;" id="monthly-title">January 2001 Statistics</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; border: 2px solid #ffcc00;">
+                    <tr style="background: #330066;">
+                        <th style="border: 1px solid #ffcc00; padding: 8px; color: #ffcc00;" id="stat-type">Verdict Type</th>
+                        <th style="border: 1px solid #ffcc00; padding: 8px; color: #ffcc00;" id="stat-count">Count</th>
+                        <th style="border: 1px solid #ffcc00; padding: 8px; color: #ffcc00;" id="stat-percent">Percentage</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;" id="stat-harsh">Surprisingly Harsh</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">847</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">43%</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;" id="stat-lenient">Unexpectedly Lenient</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">623</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">32%</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;" id="stat-changed">Verdict Changed Mid-Sentence</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">293</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">15%</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;" id="stat-ignored">Case Ignored (Bored)</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">187</td>
+                        <td style="border: 1px solid #ffcc00; padding: 8px;">10%</td>
+                    </tr>
+                </table>
+                
+                <h3 style="color: #ccaaff; margin-top: 20px;" id="mood-swings-title">Daily Mood Swings</h3>
+                <p id="mood-swings-desc">Average mood changes per day: <span style="color: #ffcc00; font-weight: bold;">23.7</span></p>
+                <p id="record-day">Record mood changes in single day: <span style="color: #ffcc00; font-weight: bold;">47</span> (January 15th - Solar Eclipse)</p>
+                
+                <h3 style="color: #ccaaff; margin-top: 20px;" id="popular-crimes-title">Most Popular Crimes</h3>
+                <ol id="popular-crimes-list">
+                    <li>Tax Evasion (Creative Methods)</li>
+                    <li>Hexagram Profile Harassment</li>
+                    <li>Hypernet Copyright Violations</li>
+                    <li>Public Disruption (Artistic Expression)</li>
+                    <li>Illegal Euro Currency Trading</li>
+                </ol>
+            </div>
+            
+            <div id="submit-case" class="content-section">
+                <h2 style="color: #ffcc00;" id="submit-title">Submit a Case for Divine Judgment</h2>
+                
+                <div style="background: #440066; padding: 15px; border: 2px solid #ffcc00; margin: 15px 0;">
+                    <p id="submit-warning"><strong>Warning:</strong> Submitting a case to Eris Cosmic Court means accepting that justice will be served according to divine whim. Outcomes cannot be predicted or appealed.</p>
+                </div>
+                
+                <form style="color: #ccaaff;">
+                    <p id="form-instructions">Fill out this form to bring a matter before the Goddess:</p>
+                    
+                    <label for="defendant" id="label-defendant">Defendant Name:</label><br>
+                    <input type="text" id="defendant" name="defendant" style="width: 200px; margin: 5px 0;"><br><br>
+                    
+                    <label for="crime" id="label-crime">Crime/Offense:</label><br>
+                    <textarea id="crime" name="crime" rows="3" cols="50" style="margin: 5px 0;"></textarea><br><br>
+                    
+                    <label for="evidence" id="label-evidence">Evidence:</label><br>
+                    <textarea id="evidence" name="evidence" rows="3" cols="50" style="margin: 5px 0;"></textarea><br><br>
+                    
+                    <label for="suggested" id="label-suggested">Suggested Punishment:</label><br>
+                    <input type="text" id="suggested" name="suggested" style="width: 200px; margin: 5px 0;"><br><br>
+                    
+                    <label for="submitter" id="label-submitter">Your Name:</label><br>
+                    <input type="text" id="submitter" name="submitter" style="width: 200px; margin: 5px 0;"><br><br>
+                    
+                    <input type="button" value="Submit to Divine Justice" onclick="alert('Case submitted! Expect judgment when the goddess feels like it.')" style="background: #990033; color: #ffcc00; border: 2px solid #ffcc00; padding: 10px; font-weight: bold; cursor: pointer;">
+                </form>
+                
+                <div style="background: #330066; padding: 10px; border: 2px solid #ff6666; margin: 15px 0;">
+                    <h4 style="color: #ff6666;" id="tips-title">Tips for Divine Favor:</h4>
+                    <ul id="tips-list">
+                        <li>Mention if the defendant has nice shoes</li>
+                        <li>Include artistic or creative elements in the crime description</li>
+                        <li>Avoid submitting cases on Tuesdays (I hate Tuesdays)</li>
+                        <li>If the defendant's name is Kevin, maybe wait until tomorrow</li>
+                        <li>Bribes of golden objects may influence judgment</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="about-eris" class="content-section">
+                <h2 style="color: #ffcc00;" id="about-title">About Goddess Eris - Divine Judge</h2>
+                
+                <img src="1.jpg" alt="Goddess Eris seated on her cosmic throne of justice, wearing robes that shift between gold and purple, holding scales in one hand and an apple in the other, with chaotic energy swirling around her in a divine courtroom setting" style="float: right; margin: 0 0 10px 15px; border: 3px solid #ffcc00; width: 200px;">
+                
+                <h3 style="color: #ccaaff;" id="transformation-title">The Great Transformation</h3>
+                <p id="transformation-desc">Greetings! I am Eris, formerly known only as the Goddess of Strife and Discord. But times change, and so do goddesses! After a particularly satisfying cosmic encounter with Ma'at, the Egyptian goddess of truth and justice, I have absorbed her powers and taken over her role.</p>
+                
+                <p id="ma-at-desc">Ma'at was far too predictable with her feather-weighing hearts and boring "balance" obsession. Where's the excitement in perfect fairness? I bring chaos to justice, unpredictability to law, and whim to judgment!</p>
+                
+                <h3 style="color: #ccaaff;" id="philosophy-title">My Judicial Philosophy</h3>
+                <ul id="philosophy-list">
+                    <li><strong>Chaos Creates Growth:</strong> Unpredictable outcomes force mortals to be more creative</li>
+                    <li><strong>Boring is the Greatest Crime:</strong> Mundane offenses receive the harshest punishments</li>
+                    <li><strong>Beauty Influences Justice:</strong> Aesthetic appreciation affects all verdicts</li>
+                    <li><strong>Mood Determines Law:</strong> My emotional state is the ultimate legal principle</li>
+                    <li><strong>Change is Constant:</strong> No verdict is truly final if I find something more amusing</li>
+                </ul>
+                
+                <h3 style="color: #ccaaff;" id="powers-title">Divine Powers & Abilities</h3>
+                <p id="powers-desc">Since absorbing Ma'at's essence, I possess:</p>
+                <ul id="powers-list">
+                    <li>Cosmic jurisdiction over all legal matters</li>
+                    <li>Ability to see into mortal hearts (when I feel like it)</li>
+                    <li>Power to create impossible punishments</li>
+                    <li>Dimensional manipulation for creative sentences</li>
+                    <li>Mood-based reality alteration</li>
+                    <li>The original golden apple of discord (now a gavel)</li>
+                    <li>Infinite patience for interesting cases, zero tolerance for boring ones</li>
+                </ul>
+                
+                <h3 style="color: #ccaaff;" id="contact-title">Contact the Divine Court</h3>
+                <p id="contact-desc">For urgent matters, cosmic appeals, or divine consultations:</p>
+                <p><strong>Divine Email:</strong> <a href="mailto:eris@hexagram.corp" class="hexagram-link">eris@hexagram.corp</a></p>
+                <p><strong>Cosmic Hotline:</strong> Think really hard about your case while holding something golden</p>
+                <p><strong>Office Hours:</strong> Whenever I feel like it (usually during solar eclipses)</p>
+                
+                <div style="background: #990033; padding: 10px; border: 2px solid #ffcc00; margin: 15px 0;">
+                    <h4 style="color: #ffcc00;" id="warning-title">Divine Warning</h4>
+                    <p id="warning-text">Remember: I am a goddess of chaos first, justice second. My verdicts serve cosmic balance through beautiful unpredictability. Do not attempt to bribe me with anything less than perfectly golden apples.</p>
+                </div>
+                
+                <p style="font-style: italic; color: #ff9999;" id="signature">With chaotic love and unpredictable justice,<br>
+                <strong>Goddess Eris</strong><br>
+                <em>Supreme Judge of the Cosmic Court</em><br>
+                <em>Devourer of Ma'at, Bringer of Beautiful Chaos</em></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p id="footer-text">© 2001 Eris Cosmic Court - All Rights Reserved by Divine Decree | Powered by Chaos Engine v4.7</p>
+        <p id="footer-links">Best viewed with Hypernet Explorer 5.0+ | <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">Divine Webmaster</a></p>
+        <p id="footer-disclaimer">Verdicts subject to divine mood swings • No guarantee of logical outcomes • Justice served with extra chaos</p>
+    </div>
+    
+    <script>
+        let currentLang = 'en';
+        
+        const translations = {
+            en: {
+                'main-title': 'ERIS COSMIC COURT',
+                'main-subtitle': 'Divine Justice Reinvented Through Chaos',
+                'court-status': 'Court Status: <blink>CHAOTICALLY ACTIVE</blink> | Goddess Mood: WHIMSICAL',
+                'nav-title': 'DIVINE NAVIGATION',
+                'nav-home': 'Court Home',
+                'nav-verdicts': 'Recent Verdicts',
+                'nav-pending': 'Pending Cases',
+                'nav-whims': 'Divine Whims',
+                'nav-archive': 'Punishment Archive',
+                'nav-stats': 'Chaos Statistics',
+                'nav-submit': 'Submit a Case',
+                'nav-about': 'About Goddess Eris',
+                'stats-title': 'COURT METRICS',
+                'stats-content': 'Cases Today: 47<br>Mood Changes: 23<br>Pardons: 8<br>Harsh Sentences: 15<br>',
+                'chaos-title': 'CHAOS LEVEL',
+                'welcome-title': 'Welcome to the Eris Cosmic Court',
+                'welcome-text': 'Greetings, mortals and immortals alike! You have entered the divine jurisdiction of Goddess Eris, the newly appointed dispenser of cosmic justice across all realms.',
+                'announcement-title': 'DIVINE ANNOUNCEMENT',
+                'announcement-text': 'After consuming the Egyptian goddess Ma\'at and absorbing her powers of justice, I, Eris, now preside over all matters of cosmic law and order. Expect the unexpected, for my justice flows like chaos itself - swift, unpredictable, and absolutely final!',
+                'how-it-works': 'How Divine Justice Works',
+                'justice-list': '<li>Cases are judged based on my current mood and cosmic whims</li><li>Punishments may change mid-sentence if I find something more amusing</li><li>Severe crimes might receive lenient sentences if the perpetrator amuses me</li><li>Minor infractions could result in cosmic imprisonment if I\'m feeling dramatic</li><li>All verdicts are final (until I change my mind)</li>',
+                'disclaimer': 'Disclaimer: The Eris Cosmic Court operates beyond mortal concepts of fairness or consistency. Justice is served with a generous helping of chaos.',
+                'verdicts-title': 'Recent Divine Verdicts',
+                'crime1': 'Crime: Embezzled €2.3 million from employee pension funds',
+                'punishment1': 'INITIAL VERDICT: 50 years cosmic imprisonment',
+                'mood1': 'MOOD CHANGE: He has nice shoes. Sentence reduced to 3 days community service in Venus mines.',
+                'crime2': 'Crime: Performed without a license in Rome',
+                'punishment2': 'INITIAL VERDICT: 10 euro fine',
+                'mood2': 'MOOD CHANGE: Street performance is art! Art is sacred! LIFE IMPRISONMENT IN PLEASURE DIMENSION!',
+                'crime3': 'Crime: Burned down 12 historical buildings',
+                'punishment3': 'INITIAL VERDICT: Eternal damnation in fire realm',
+                'mood3': 'MOOD CHANGE: Wait, fire is pretty. He has good taste. COMPLETE PARDON plus cosmic interior decorator license!',
+                'crime4': 'Crime: Returned library book 3 days late',
+                'punishment4': 'INITIAL VERDICT: Standard late fee',
+                'mood4': 'MOOD CHANGE: Books are knowledge! Knowledge is power! TRANSFORMATION INTO LIVING LIBRARY for 100 years!',
+                'pending-title': 'Cases Awaiting Divine Judgment',
+                'case1-title': 'Case #2001-047: The Vatican Email Hacker',
+                'case1-desc': '<strong>Defendant:</strong> Giovanni Rossi<br><strong>Crime:</strong> Hacked Vatican email servers and leaked Pope\'s pizza preferences<br><strong>Status:</strong> I\'m torn between admiration for the chaos and annoyance at food criticism',
+                'case2-title': 'Case #2001-048: The Speed Limit Rebel',
+                'case2-desc': '<strong>Defendant:</strong> Anna Kowalski<br><strong>Crime:</strong> Drove 5 km/h over speed limit in school zone<br><strong>Status:</strong> Depends on whether I like her car color when I judge',
+                'case3-title': 'Case #2001-049: The Hexagram Troll',
+                'case3-desc': '<strong>Defendant:</strong> Ludwig Wagner<br><strong>Crime:</strong> Posted mean comments on 47 Hexagram profiles<br><strong>Status:</strong> Internet chaos amuses me, but rudeness... we\'ll see',
+                'whims-title': 'Today\'s Divine Whims',
+                'whims-intro': 'My mood affects all cosmic justice. Beware the whims of a goddess!',
+                'whim1-title': 'Current Obsession: Golden Things',
+                'whim1-desc': 'Anything gold-colored receives +50 leniency points. I\'m particularly fond of golden jewelry today.',
+                'whim2-title': 'Pet Peeve: People Named Kevin',
+                'whim2-desc': 'The name Kevin irritates me today. All Kevins receive +30 harshness points automatically.',
+                'whim3-title': 'Favorite Crime Today: Creative Tax Evasion',
+                'whim3-desc': 'I admire creativity in tax avoidance schemes. The more elaborate, the more lenient the sentence.',
+                'danger-title': 'DANGER ZONE: Boring Crimes',
+                'danger-desc': 'Standard theft, basic fraud, or any crime that lacks imagination will receive MAXIMUM punishment today!',
+                'archive-title': 'Creative Punishments Archive',
+                'favorites-title': 'My Favorite Punishments',
+                'punishment-list': '<li><strong>Cosmic Irony:</strong> A pickpocket now has hands that repel all objects</li><li><strong>Dimensional Displacement:</strong> A noise violator lives in a completely silent dimension</li><li><strong>Temporal Loop:</strong> A chronic latecomer relives the same "being late" moment for a year</li><li><strong>Inverse Justice:</strong> A greedy banker must give away money to feel happiness</li><li><strong>Sensory Swap:</strong> A graffiti vandal can only see in black and white until they create beautiful art</li><li><strong>Memory Shuffle:</strong> A liar\'s memory randomly shuffles truth and fiction for 6 months</li><li><strong>Empathy Overload:</strong> A cruel person feels the emotions of everyone around them</li><li><strong>Chaos Amplification:</strong> A control freak becomes a magnet for unpredictable situations</li>',
+                'lenient-title': 'Surprisingly Lenient Sentences',
+                'lenient-list': '<li><strong>Mass Murderer (wore purple):</strong> 2 weeks vacation in paradise dimension</li><li><strong>Bank Robber (said please):</strong> Promoted to bank manager</li><li><strong>Art Thief (excellent taste):</strong> Given own art gallery</li><li><strong>Computer Hacker (elegant code):</strong> Hired as cosmic system administrator</li>',
+                'stats-main-title': 'Chaos Statistics & Court Metrics',
+                'monthly-title': 'January 2001 Statistics',
+                'stat-type': 'Verdict Type',
+                'stat-count': 'Count',
+                'stat-percent': 'Percentage',
+                'stat-harsh': 'Surprisingly Harsh',
+                'stat-lenient': 'Unexpectedly Lenient',
+                'stat-changed': 'Verdict Changed Mid-Sentence',
+                'stat-ignored': 'Case Ignored (Bored)',
+                'mood-swings-title': 'Daily Mood Swings',
+                'mood-swings-desc': 'Average mood changes per day: <span style="color: #ffcc00; font-weight: bold;">23.7</span>',
+                'record-day': 'Record mood changes in single day: <span style="color: #ffcc00; font-weight: bold;">47</span> (January 15th - Solar Eclipse)',
+                'popular-crimes-title': 'Most Popular Crimes',
+                'popular-crimes-list': '<li>Tax Evasion (Creative Methods)</li><li>Hexagram Profile Harassment</li><li>Hypernet Copyright Violations</li><li>Public Disruption (Artistic Expression)</li><li>Illegal Euro Currency Trading</li>',
+                'submit-title': 'Submit a Case for Divine Judgment',
+                'submit-warning': '<strong>Warning:</strong> Submitting a case to Eris Cosmic Court means accepting that justice will be served according to divine whim. Outcomes cannot be predicted or appealed.',
+                'form-instructions': 'Fill out this form to bring a matter before the Goddess:',
+                'label-defendant': 'Defendant Name:',
+                'label-crime': 'Crime/Offense:',
+                'label-evidence': 'Evidence:',
+                'label-suggested': 'Suggested Punishment:',
+                'label-submitter': 'Your Name:',
+                'tips-title': 'Tips for Divine Favor:',
+                'tips-list': '<li>Mention if the defendant has nice shoes</li><li>Include artistic or creative elements in the crime description</li><li>Avoid submitting cases on Tuesdays (I hate Tuesdays)</li><li>If the defendant\'s name is Kevin, maybe wait until tomorrow</li><li>Bribes of golden objects may influence judgment</li>',
+                'about-title': 'About Goddess Eris - Divine Judge',
+                'transformation-title': 'The Great Transformation',
+                'transformation-desc': 'Greetings! I am Eris, formerly known only as the Goddess of Strife and Discord. But times change, and so do goddesses! After a particularly satisfying cosmic encounter with Ma\'at, the Egyptian goddess of truth and justice, I have absorbed her powers and taken over her role.',
+                'ma-at-desc': 'Ma\'at was far too predictable with her feather-weighing hearts and boring "balance" obsession. Where\'s the excitement in perfect fairness? I bring chaos to justice, unpredictability to law, and whim to judgment!',
+                'philosophy-title': 'My Judicial Philosophy',
+                'philosophy-list': '<li><strong>Chaos Creates Growth:</strong> Unpredictable outcomes force mortals to be more creative</li><li><strong>Boring is the Greatest Crime:</strong> Mundane offenses receive the harshest punishments</li><li><strong>Beauty Influences Justice:</strong> Aesthetic appreciation affects all verdicts</li><li><strong>Mood Determines Law:</strong> My emotional state is the ultimate legal principle</li><li><strong>Change is Constant:</strong> No verdict is truly final if I find something more amusing</li>',
+                'powers-title': 'Divine Powers & Abilities',
+                'powers-desc': 'Since absorbing Ma\'at\'s essence, I possess:',
+                'powers-list': '<li>Cosmic jurisdiction over all legal matters</li><li>Ability to see into mortal hearts (when I feel like it)</li><li>Power to create impossible punishments</li><li>Dimensional manipulation for creative sentences</li><li>Mood-based reality alteration</li><li>The original golden apple of discord (now a gavel)</li><li>Infinite patience for interesting cases, zero tolerance for boring ones</li>',
+                'contact-title': 'Contact the Divine Court',
+                'contact-desc': 'For urgent matters, cosmic appeals, or divine consultations:',
+                'warning-title': 'Divine Warning',
+                'warning-text': 'Remember: I am a goddess of chaos first, justice second. My verdicts serve cosmic balance through beautiful unpredictability. Do not attempt to bribe me with anything less than perfectly golden apples.',
+                'signature': 'With chaotic love and unpredictable justice,<br><strong>Goddess Eris</strong><br><em>Supreme Judge of the Cosmic Court</em><br><em>Devourer of Ma\'at, Bringer of Beautiful Chaos</em>',
+                'footer-text': '© 2001 Eris Cosmic Court - All Rights Reserved by Divine Decree | Powered by Chaos Engine v4.7',
+                'footer-links': 'Best viewed with Hypernet Explorer 5.0+ | <a href="mailto:webmaster@hexagram.corp" class="hexagram-link">Divine Webmaster</a>',
+                'footer-disclaimer': 'Verdicts subject to divine mood swings • No guarantee of logical outcomes • Justice served with extra chaos'
+            },
+            it: {
+                'main-title': 'CORTE COSMICA DI ERIS',
+                'main-subtitle': 'Giustizia Divina Reinventata Attraverso il Caos',
+                'court-status': 'Stato Corte: <blink>CAOTICAMENTE ATTIVA</blink> | Umore Dea: CAPRICCIOSO',
+                'nav-title': 'NAVIGAZIONE DIVINA',
+                'nav-home': 'Casa Corte',
+                'nav-verdicts': 'Verdetti Recenti',
+                'nav-pending': 'Casi in Sospeso',
+                'nav-whims': 'Capricci Divini',
+                'nav-archive': 'Archivio Punizioni',
+                'nav-stats': 'Statistiche Caos',
+                'nav-submit': 'Sottoponi un Caso',
+                'nav-about': 'Su Dea Eris',
+                'stats-title': 'METRICHE CORTE',
+                'stats-content': 'Casi Oggi: 47<br>Cambi Umore: 23<br>Perdoni: 8<br>Sentenze Severe: 15<br>',
+                'chaos-title': 'LIVELLO CAOS',
+                'welcome-title': 'Benvenuti alla Corte Cosmica di Eris',
+                'welcome-text': 'Saluti, mortali e immortali! Siete entrati nella giurisdizione divina della Dea Eris, la nuova dispensatrice di giustizia cosmica in tutti i regni.',
+                'announcement-title': 'ANNUNCIO DIVINO',
+                'announcement-text': 'Dopo aver consumato la dea egizia Ma\'at e assorbito i suoi poteri di giustizia, io, Eris, ora presiedo su tutte le questioni di legge e ordine cosmico. Aspettatevi l\'inaspettato, perché la mia giustizia scorre come il caos stesso - rapida, imprevedibile e assolutamente finale!',
+                'how-it-works': 'Come Funziona la Giustizia Divina',
+                'justice-list': '<li>I casi sono giudicati in base al mio umore attuale e ai capricci cosmici</li><li>Le punizioni possono cambiare a metà sentenza se trovo qualcosa di più divertente</li><li>Crimini gravi potrebbero ricevere sentenze clementi se il colpevole mi diverte</li><li>Infrazioni minori potrebbero risultare in prigionia cosmica se mi sento drammatica</li><li>Tutti i verdetti sono definitivi (finché non cambio idea)</li>',
+                'disclaimer': 'Disclaimer: La Corte Cosmica di Eris opera oltre i concetti mortali di equità o coerenza. La giustizia è servita con una generosa porzione di caos.',
+                'verdicts-title': 'Verdetti Divini Recenti',
+                'crime1': 'Crimine: Sottratti €2,3 milioni dai fondi pensione dei dipendenti',
+                'punishment1': 'VERDETTO INIZIALE: 50 anni di prigionia cosmica',
+                'mood1': 'CAMBIO UMORE: Ha delle belle scarpe. Sentenza ridotta a 3 giorni di servizio comunitario nelle miniere di Venere.',
+                'crime2': 'Crimine: Esibizione senza licenza a Roma',
+                'punishment2': 'VERDETTO INIZIALE: Multa di 10 euro',
+                'mood2': 'CAMBIO UMORE: Le performance di strada sono arte! L\'arte è sacra! ERGASTOLO NELLA DIMENSIONE DEL PIACERE!',
+                'crime3': 'Crimine: Bruciati 12 edifici storici',
+                'punishment3': 'VERDETTO INIZIALE: Dannazione eterna nel regno del fuoco',
+                'mood3': 'CAMBIO UMORE: Aspetta, il fuoco è bello. Ha buon gusto. GRAZIA COMPLETA più licenza di arredatore cosmico!',
+                'crime4': 'Crimine: Libro della biblioteca riconsegnato con 3 giorni di ritardo',
+                'punishment4': 'VERDETTO INIZIALE: Multa standard per ritardo',
+                'mood4': 'CAMBIO UMORE: I libri sono conoscenza! La conoscenza è potere! TRASFORMAZIONE IN BIBLIOTECA VIVENTE per 100 anni!',
+                'pending-title': 'Casi in Attesa di Giudizio Divino',
+                'case1-title': 'Caso #2001-047: L\'Hacker Email del Vaticano',
+                'case1-desc': '<strong>Imputato:</strong> Giovanni Rossi<br><strong>Crimine:</strong> Hackerato i server email del Vaticano e divulgato le preferenze pizza del Papa<br><strong>Stato:</strong> Sono combattuta tra ammirazione per il caos e fastidio per la critica gastronomica',
+                'case2-title': 'Caso #2001-048: Il Ribelle del Limite di Velocità',
+                'case2-desc': '<strong>Imputato:</strong> Anna Kowalski<br><strong>Crimine:</strong> Guidato 5 km/h sopra il limite in zona scolastica<br><strong>Stato:</strong> Dipende se mi piace il colore della sua auto quando giudico',
+                'case3-title': 'Caso #2001-049: Il Troll di Hexagram',
+                'case3-desc': '<strong>Imputato:</strong> Ludwig Wagner<br><strong>Crimine:</strong> Postato commenti cattivi su 47 profili Hexagram<br><strong>Stato:</strong> Il caos hypernet mi diverte, ma la maleducazione... vedremo',
+                'whims-title': 'Capricci Divini di Oggi',
+                'whims-intro': 'Il mio umore influenza tutta la giustizia cosmica. Temete i capricci di una dea!',
+                'whim1-title': 'Ossessione Attuale: Cose Dorate',
+                'whim1-desc': 'Qualsiasi cosa dorata riceve +50 punti clemenza. Oggi sono particolarmente affezionata ai gioielli dorati.',
+                'whim2-title': 'Antipatia: Persone di Nome Kevin',
+                'whim2-desc': 'Il nome Kevin mi irrita oggi. Tutti i Kevin ricevono automaticamente +30 punti severità.',
+                'whim3-title': 'Crimine Preferito di Oggi: Evasione Fiscale Creativa',
+                'whim3-desc': 'Ammiro la creatività negli schemi di elusione fiscale. Più è elaborato, più clemente è la sentenza.',
+                'danger-title': 'ZONA PERICOLO: Crimini Noiosi',
+                'danger-desc': 'Furti standard, frodi basilari, o qualsiasi crimine che manca di immaginazione riceverà punizione MASSIMA oggi!',
+                'archive-title': 'Archivio Punizioni Creative',
+                'favorites-title': 'Le Mie Punizioni Preferite',
+                'punishment-list': '<li><strong>Ironia Cosmica:</strong> Un borseggiatore ora ha mani che respingono tutti gli oggetti</li><li><strong>Spostamento Dimensionale:</strong> Un violatore del rumore vive in una dimensione completamente silenziosa</li><li><strong>Loop Temporale:</strong> Un ritardatario cronico rivive lo stesso momento "essere in ritardo" per un anno</li><li><strong>Giustizia Inversa:</strong> Un banchiere avido deve regalare soldi per sentirsi felice</li><li><strong>Scambio Sensoriale:</strong> Un vandalo graffitaro può vedere solo in bianco e nero finché non crea arte bella</li><li><strong>Rimescolamento Memoria:</strong> Un bugiardo ha la memoria che mescola casualmente verità e finzione per 6 mesi</li><li><strong>Sovraccarico Empatico:</strong> Una persona crudele sente le emozioni di tutti intorno</li><li><strong>Amplificazione Caos:</strong> Un maniaco del controllo diventa calamita per situazioni imprevedibili</li>',
+                'lenient-title': 'Sentenze Sorprendentemente Clementi',
+                'lenient-list': '<li><strong>Omicida di Massa (vestito di viola):</strong> 2 settimane di vacanza nella dimensione paradiso</li><li><strong>Rapinatore Banca (ha detto prego):</strong> Promosso a direttore bancario</li><li><strong>Ladro d\'Arte (gusto eccellente):</strong> Regalata galleria d\'arte propria</li><li><strong>Hacker Computer (codice elegante):</strong> Assunto come amministratore sistema cosmico</li>',
+                'stats-main-title': 'Statistiche Caos & Metriche Corte',
+                'monthly-title': 'Statistiche Gennaio 2001',
+                'stat-type': 'Tipo Verdetto',
+                'stat-count': 'Numero',
+                'stat-percent': 'Percentuale',
+                'stat-harsh': 'Sorprendentemente Severo',
+                'stat-lenient': 'Inaspettatamente Clemente',
+                'stat-changed': 'Verdetto Cambiato a Metà Sentenza',
+                'stat-ignored': 'Caso Ignorato (Annoiata)',
+                'mood-swings-title': 'Sbalzi d\'Umore Quotidiani',
+                'mood-swings-desc': 'Cambi d\'umore medi al giorno: <span style="color: #ffcc00; font-weight: bold;">23,7</span>',
+                'record-day': 'Record cambi d\'umore in un singolo giorno: <span style="color: #ffcc00; font-weight: bold;">47</span> (15 Gennaio - Eclissi Solare)',
+                'popular-crimes-title': 'Crimini Più Popolari',
+                'popular-crimes-list': '<li>Evasione Fiscale (Metodi Creativi)</li><li>Molestie Profilo Hexagram</li><li>Violazioni Copyright Hypernet</li><li>Disturbo Pubblico (Espressione Artistica)</li><li>Commercio Illegale Valuta Euro</li>',
+                'submit-title': 'Sottoponi un Caso per Giudizio Divino',
+                'submit-warning': '<strong>Avvertimento:</strong> Sottoporre un caso alla Corte Cosmica di Eris significa accettare che la giustizia sarà servita secondo capriccio divino. I risultati non possono essere previsti o appellati.',
+                'form-instructions': 'Compila questo modulo per portare una questione davanti alla Dea:',
+                'label-defendant': 'Nome Imputato:',
+                'label-crime': 'Crimine/Offesa:',
+                'label-evidence': 'Prove:',
+                'label-suggested': 'Punizione Suggerita:',
+                'label-submitter': 'Il Tuo Nome:',
+                'tips-title': 'Consigli per il Favore Divino:',
+                'tips-list': '<li>Menziona se l\'imputato ha belle scarpe</li><li>Includi elementi artistici o creativi nella descrizione del crimine</li><li>Evita di sottoporre casi il martedì (odio i martedì)</li><li>Se il nome dell\'imputato è Kevin, forse aspetta domani</li><li>Tangenti di oggetti dorati potrebbero influenzare il giudizio</li>',
+                'about-title': 'Su Dea Eris - Giudice Divina',
+                'transformation-title': 'La Grande Trasformazione',
+                'transformation-desc': 'Saluti! Io sono Eris, precedentemente conosciuta solo come Dea della Discordia e del Conflitto. Ma i tempi cambiano, e così le dee! Dopo un incontro cosmico particolarmente soddisfacente con Ma\'at, la dea egizia della verità e giustizia, ho assorbito i suoi poteri e preso il suo ruolo.',
+                'ma-at-desc': 'Ma\'at era troppo prevedibile con i suoi cuori pesati con piume e la noiosa ossessione per l\'"equilibrio". Dov\'è l\'eccitazione nella perfetta equità? Io porto caos alla giustizia, imprevedibilità alla legge, e capriccio al giudizio!',
+                'philosophy-title': 'La Mia Filosofia Giudiziaria',
+                'philosophy-list': '<li><strong>Il Caos Crea Crescita:</strong> Risultati imprevedibili costringono i mortali ad essere più creativi</li><li><strong>La Noia è il Crimine Più Grande:</strong> Le offese banali ricevono le punizioni più severe</li><li><strong>La Bellezza Influenza la Giustizia:</strong> L\'apprezzamento estetico influenza tutti i verdetti</li><li><strong>L\'Umore Determina la Legge:</strong> Il mio stato emotivo è il principio legale supremo</li><li><strong>Il Cambiamento è Costante:</strong> Nessun verdetto è veramente finale se trovo qualcosa di più divertente</li>',
+                'powers-title': 'Poteri e Abilità Divine',
+                'powers-desc': 'Dall\'assorbimento dell\'essenza di Ma\'at, possiedo:',
+                'powers-list': '<li>Giurisdizione cosmica su tutte le questioni legali</li><li>Abilità di vedere nei cuori mortali (quando mi va)</li><li>Potere di creare punizioni impossibili</li><li>Manipolazione dimensionale per sentenze creative</li><li>Alterazione della realtà basata sull\'umore</li><li>La mela dorata originale della discordia (ora un martelletto)</li><li>Pazienza infinita per casi interessanti, zero tolleranza per quelli noiosi</li>',
+                'contact-title': 'Contatta la Corte Divina',
+                'contact-desc': 'Per questioni urgenti, appelli cosmici, o consultazioni divine:',
+                'warning-title': 'Avvertimento Divino',
+                'warning-text': 'Ricordate: sono una dea del caos prima, giustizia seconda. I miei verdetti servono l\'equilibrio cosmico attraverso bellissima imprevedibilità. Non tentate di corrompermi con niente di meno che mele dorate perfette.',
+                'signature': 'Con amore caotico e giustizia imprevedibile,<br><strong>Dea Eris</strong><br><em>Giudice Suprema della Corte Cosmica</em><br><em>Divoratrice di Ma\'at, Portatrice di Bel Caos</em>'
+            }
+        };
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update content
+            const langData = translations[lang];
+            for (const [id, text] of Object.entries(langData)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = text;
+                }
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

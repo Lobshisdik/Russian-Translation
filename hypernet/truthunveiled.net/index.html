@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>THE TRUTH UNVEILED - Hypernet Portal (2001)</title>
+    <meta name="keywords" content="truth, conspiracy, signals, hypernet, frequencies, monitoring, awareness, patterns">
+    <meta name="abstract" content="The only reliable source for REAL truth about the signals that surround us. Discover the hidden patterns in the Hypernet and protect yourself from unwanted monitoring.">
+    <meta name="author" content="TruthSeer">
+    <script type="text/javascript">
+        // JSON entry for site catalog
+        var siteInfo = {
+            title: "THE TRUTH UNVEILED - Hypernet Portal",
+            keywords: "truth, conspiracy, signals, hypernet, frequencies, monitoring, awareness, patterns",
+            abstract: "The only reliable source for REAL truth about the signals that surround us. Discover the hidden patterns in the Hypernet and protect yourself from unwanted monitoring.",
+            link: "truthunveiled.net"
+        };
+
+        // Function to toggle section visibility
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none" || section.style.display === "") {
+                // Hide all sections first
+                var allSections = document.getElementsByClassName("content-section");
+                for (var i = 0; i < allSections.length; i++) {
+                    allSections[i].style.display = "none";
+                }
+                // Show the selected section
+                section.style.display = "block";
+                
+                // Update visitor counter - THEY are watching
+                updateCounter();
+            } else {
+                section.style.display = "none";
+            }
+            return false;
+        }
+        
+        // Function to update visitor counter
+        function updateCounter() {
+            var counter = document.getElementById("visitor-count");
+            var currentCount = parseInt(counter.innerHTML);
+            counter.innerHTML = currentCount + 1;
+        }
+        
+        // Function to initialize the page
+        function initPage() {
+            // Set initial display state for all sections
+            var allSections = document.getElementsByClassName("content-section");
+            for (var i = 0; i < allSections.length; i++) {
+                allSections[i].style.display = "none";
+            }
+            // Display welcome section by default
+            document.getElementById("welcome").style.display = "block";
+            
+            // Start the blinking text
+            setInterval(function() {
+                var blinkElements = document.getElementsByClassName("blink");
+                for (var i = 0; i < blinkElements.length; i++) {
+                    if (blinkElements[i].style.visibility === "hidden") {
+                        blinkElements[i].style.visibility = "visible";
+                    } else {
+                        blinkElements[i].style.visibility = "hidden";
+                    }
+                }
+            }, 500);
+        }
+    </script>
+    <style type="text/css">
+        body {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #000000;
+            color: #00FF00;
+            margin: 0;
+            padding: 0;
+            border: 10px solid #333333;
+        }
+        
+        #container {
+            width: 760px;
+            margin: 0 auto;
+            background-color: #111111;
+            border: 1px solid #00FF00;
+            padding: 10px;
+        }
+        
+        #header {
+            text-align: center;
+            border-bottom: 3px double #00FF00;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #navigation {
+            background-color: #222222;
+            border: 1px solid #00FF00;
+            padding: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        #navigation a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 2px 10px;
+            border: 1px solid #444444;
+            margin: 0 5px;
+            background-color: #333333;
+        }
+        
+        #navigation a:hover {
+            background-color: #444444;
+            color: #00FF00;
+        }
+        
+        .content-section {
+            padding: 10px;
+            background-color: #111111;
+            border: 1px dashed #00FF00;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #FF0000;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+        
+        h2 {
+            color: #FFFF00;
+            border-bottom: 1px solid #00FF00;
+            padding-bottom: 5px;
+        }
+        
+        hr {
+            border: 1px dashed #00FF00;
+        }
+        
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #FF00FF;
+            text-decoration: underline;
+        }
+        
+        .blink {
+            visibility: visible;
+        }
+        
+        #visitor-counter {
+            text-align: center;
+            padding: 5px;
+            background-color: #222222;
+            border: 1px solid #00FF00;
+            margin: 10px 0;
+        }
+        
+        #footer {
+            text-align: center;
+            border-top: 3px double #00FF00;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: smaller;
+        }
+        
+        .warning {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        
+        .proof {
+            color: #FFFF00;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .table th, .table td {
+            border: 1px solid #00FF00;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        .table th {
+            background-color: #222222;
+        }
+        
+        .marquee {
+            height: 25px;
+            overflow: hidden;
+            position: relative;
+            background-color: #333333;
+            border: 1px solid #00FF00;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        
+        .marquee p {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            line-height: 25px;
+            text-align: center;
+            transform: translateX(100%);
+            animation: scroll-left 20s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .hidden-message {
+            color: #111111;
+            font-size: 8px;
+        }
+    </style>
+</head>
+<body onload="initPage()">
+    <div id="container">
+        <div id="header">
+            <h1>THE TRUTH UNVEILED</h1>
+            <p class="blink warning">*** IMPORTANT: SECURE YOUR CONNECTION BEFORE READING ***</p>
+            <p>Last Updated: January 15, 2001 | Certified SIGNAL-FREE Content</p>
+            <div class="marquee">
+                <p>ALERT: New frequency patterns detected in Sector-7 Hypernet nodes. Stay vigilant. THEY are changing tactics.</p>
+            </div>
+        </div>
+        
+        <div id="navigation">
+            <a href="#" onclick="return toggleSection('welcome')">HOME</a>
+            <a href="#" onclick="return toggleSection('about')">ABOUT ME</a>
+            <a href="#" onclick="return toggleSection('signals')">SIGNALS</a>
+            <a href="#" onclick="return toggleSection('patterns')">PATTERNS</a>
+            <a href="#" onclick="return toggleSection('protection')">PROTECTION</a>
+            <a href="#" onclick="return toggleSection('evidence')">EVIDENCE</a>
+            <a href="#" onclick="return toggleSection('contact')">CONTACT</a>
+        </div>
+        
+        <div id="visitor-counter">
+            <p>You are visitor #<span id="visitor-count">1337</span> | Each visit is logged and encrypted for your protection.</p>
+            <p class="blink warning">WARNING: Your IP is being monitored by 3 entities!</p>
+        </div>
+        
+        <div id="welcome" class="content-section">
+            <h2>WELCOME TO THE ONLY SAFE PLACE ON THE HYPERNET</h2>
+            <p>If you've found this site, it's <span class="warning">NO COINCIDENCE</span>. You've been chosen because your brainwave patterns indicate resistance to the standard frequency manipulation. The Hypernet is not what they tell you it is. It's a vast network of <span class="proof">monitoring stations</span> designed to collect your thoughts.</p>
+            
+            <p>I've been documenting the patterns for 7 years, 3 months, and 12 days. The numbers are significant - look them up. The evidence is undeniable once you know what to look for.</p>
+            
+            <p class="hidden-message">They don't want you to read this. If this text disappears, your system is compromised.</p>
+            
+            <h3>LATEST DISCOVERIES:</h3>
+            <ul>
+                <li>Hypernet Explorer version 5.5 contains hidden frequency modulators (SEE: <a href="#" onclick="return toggleSection('evidence')">EVIDENCE SECTION</a>)</li>
+                <li>Hexagram is collecting biometric data through your keyboard inputs (DOCUMENTED: <a href="#" onclick="return toggleSection('patterns')">PATTERN #457</a>)</li>
+                <li>New satellite array went online December 21, 2000 - coincidence? I THINK NOT!</li>
+            </ul>
+            
+            <p>This site has been visited by people from <span class="proof">47 countries</span> who KNOW THE TRUTH. Join us in awareness. Knowledge is our only weapon.</p>
+            
+            <hr>
+            
+            <p class="blink warning">IMPORTANT: I HAVE NEVER CLAIMED TO HEAR VOICES. I SEE PATTERNS. THERE'S A DIFFERENCE.</p>
+        </div>
+        
+        <div id="about" class="content-section">
+            <h2>ABOUT THE TRUTH SEEKER</h2>
+            <p>I cannot reveal my real name for obvious security reasons. What you need to know is that I was a systems administrator for a major technology corporation (one of THE BIG FIVE) for 12 years before I discovered the hidden subroutines in the network protocols.</p>
+            
+            <p>After I began documenting the patterns, strange things started happening:</p>
+            <ul>
+                <li>My phone would ring exactly 3 times then stop - ALWAYS at 3:33 AM</li>
+                <li>My computer would restart and display a green cursor for exactly 7 seconds</li>
+                <li>The electrical outlets in my home began emitting a high-pitched frequency only I could hear</li>
+                <li>My neighbors all replaced their satellite dishes on the SAME DAY</li>
+            </ul>
+            
+            <p>I've since moved my operations to a secure location shielded with copper mesh and custom frequency jammers. I only connect to the Hypernet through triple-proxied connections using modified hardware.</p>
+            
+            <p>I have <span class="proof">4 PhDs</span> in related fields that I cannot disclose. My research has been published in journals that have since been "discontinued" by their publishers. COINCIDENCE?</p>
+            
+            <p class="warning">I AM NOT PARANOID. I AM AWARE.</p>
+            
+            <p>For those seeking to verify my credentials, the patterns speak for themselves. I've successfully predicted 17 major Hypernet outages by tracking the frequency shifts in the background radiation.</p>
+        </div>
+        
+        <div id="signals" class="content-section">
+            <h2>THE SIGNALS ARE EVERYWHERE</h2>
+            <p>They use a complex array of signals to monitor and influence the population. The primary carriers are:</p>
+            
+            <table class="table">
+                <tr>
+                    <th>Signal Type</th>
+                    <th>Frequency Range</th>
+                    <th>Primary Purpose</th>
+                    <th>How to Detect</th>
+                </tr>
+                <tr>
+                    <td>Alpha Waves</td>
+                    <td>7.83-15.6 Hz</td>
+                    <td>Thought collection</td>
+                    <td>Custom EMF detector</td>
+                </tr>
+                <tr>
+                    <td>Beta Bursts</td>
+                    <td>16.8-31.2 Hz</td>
+                    <td>Memory alteration</td>
+                    <td>Tin foil resonator</td>
+                </tr>
+                <tr>
+                    <td>Gamma Pulses</td>
+                    <td>32.5-99.7 Hz</td>
+                    <td>Behavior modification</td>
+                    <td>LCD screen flicker test</td>
+                </tr>
+                <tr>
+                    <td>Theta Carriers</td>
+                    <td>4.7-6.9 Hz</td>
+                    <td>Dream infiltration</td>
+                    <td>Sleep pattern recording</td>
+                </tr>
+            </table>
+            
+            <p class="proof">I have documented over 3,000 unique signal patterns since 1994. The correlation with major world events is UNDENIABLE.</p>
+            
+            <h3>KNOWN TRANSMISSION SOURCES:</h3>
+            <ul>
+                <li>ALL Hypernet modems manufactured after 1997</li>
+                <li>Hexagram's "friend finder" feature (EXTREME DANGER!)</li>
+                <li>Cell phone towers (especially those disguised as trees)</li>
+                <li>Digital television broadcasts (embedded in the refresh rate)</li>
+                <li>Weather satellites (why do you think they track "storms"?)</li>
+            </ul>
+            
+            <p>The signals intensify during certain astronomical alignments. I've created a calendar of high-risk days that you can find in the <a href="#" onclick="return toggleSection('protection')">PROTECTION section</a>.</p>
+        </div>
+        
+        <div id="patterns" class="content-section">
+            <h2>THE PATTERNS REVEAL THE TRUTH</h2>
+            <p>Once you know how to read them, the patterns are impossible to ignore. They appear in:</p>
+            
+            <ul>
+                <li>Hypernet traffic routing (packets follow predictable patterns)</li>
+                <li>Website downtimes (always coordinated across "competing" services)</li>
+                <li>Software update schedules (synchronized to lunar phases)</li>
+                <li>Hexagram friend suggestions (based on thought pattern compatibility)</li>
+                <li>Advertisement delivery (triggered by your unspoken desires)</li>
+            </ul>
+            
+            <h3>PATTERN #457: Hexagram Biometric Collection</h3>
+            <p>When you type messages on Hexagram, the timing between keystrokes is recorded and analyzed to create a unique biometric profile. This is why sometimes there's a slight delay when typing - they're measuring your emotional state through micro-variations in typing rhythm.</p>
+            
+            <p class="proof">TEST IT YOURSELF: Type the same message twice in Hexagram. Notice how the second time feels "smoother"? That's because they've already calibrated to your pattern!</p>
+            
+            <p>I've documented this by writing a custom keyboard input analyzer that revealed hidden API calls being made after EVERY SIXTH CHARACTER you type. The data packets are encrypted but follow a specific structure that matches known biometric data formats.</p>
+            
+            <h3>OTHER CRITICAL PATTERNS:</h3>
+            <ul>
+                <li>Pattern #189: Hypernet Explorer cookie manipulation</li>
+                <li>Pattern #256: Search result filtering based on brainwave compatibility</li>
+                <li>Pattern #333: The "missing hour" in server logs during the 1st of each month</li>
+                <li>Pattern #512: Correlation between website color schemes and subliminal messaging</li>
+            </ul>
+            
+            <p class="warning">Once you start seeing the patterns, you cannot unsee them. BE PREPARED FOR THIS.</p>
+        </div>
+        
+        <div id="protection" class="content-section">
+            <h2>PROTECT YOURSELF FROM THEIR INFLUENCE</h2>
+            <p>I've developed several proven methods to shield yourself from unwanted monitoring and influence:</p>
+            
+            <h3>HARDWARE MODIFICATIONS:</h3>
+            <ul>
+                <li>Line your computer case with copper mesh (minimum 40 gauge)</li>
+                <li>Install a custom ground wire from your modem to a water pipe</li>
+                <li>Replace all standard capacitors with low-resonance alternatives</li>
+                <li>Add ferrite beads to ALL cables (minimum of 3 per cable)</li>
+                <li>Build a Faraday cage for nighttime computing (plans in EVIDENCE section)</li>
+            </ul>
+            
+            <h3>SOFTWARE PROTECTIONS:</h3>
+            <ul>
+                <li>Install my custom HOSTS file to block known monitoring nodes</li>
+                <li>Use odd-numbered port connections ONLY</li>
+                <li>Set your system clock to GMT+4.5 (this disrupts their timing algorithms)</li>
+                <li>Never use Hexagram for more than 7 minutes continuously</li>
+                <li>Disable all cookies except on the 3rd Tuesday of each month</li>
+            </ul>
+            
+            <h3>HIGH-RISK DAYS FOR 2001:</h3>
+            <table class="table">
+                <tr>
+                    <th>Date</th>
+                    <th>Risk Level</th>
+                    <th>Primary Concern</th>
+                </tr>
+                <tr>
+                    <td>February 14, 2001</td>
+                    <td class="warning">CRITICAL</td>
+                    <td>Emotional data harvest</td>
+                </tr>
+                <tr>
+                    <td>March 23, 2001</td>
+                    <td class="warning">HIGH</td>
+                    <td>New satellite activation</td>
+                </tr>
+                <tr>
+                    <td>April 1, 2001</td>
+                    <td class="warning">EXTREME</td>
+                    <td>Annual thought-pattern reset</td>
+                </tr>
+                <tr>
+                    <td>July 4, 2001</td>
+                    <td class="warning">SEVERE</td>
+                    <td>Mass surveillance peak</td>
+                </tr>
+            </table>
+            
+            <p class="proof">These protection methods have been tested extensively. Users report a 73% reduction in targeted advertisements and a 91% decrease in unusual dreams after implementation.</p>
+        </div>
+        
+        <div id="evidence" class="content-section">
+            <h2>THE UNDENIABLE EVIDENCE</h2>
+            <p>I don't expect you to believe without proof. Here is just a fraction of the evidence I've collected:</p>
+            
+            <h3>DOCUMENT LEAKS:</h3>
+            <ul>
+                <li>Internal memo from [REDACTED] corporation discussing "thought harvest protocols"</li>
+                <li>Technical specifications for "Project Looking Glass" (browser-based monitoring)</li>
+                <li>Patents filed in 1994 for "neurological response triggering via digital interfaces"</li>
+                <li>Server logs showing systematic data collection from home users during sleep hours</li>
+            </ul>
+            
+            <h3>TECHNICAL ANALYSIS:</h3>
+            <p>I've decompiled Hypernet Explorer 5.5 and discovered hidden functions that activate when certain websites are visited. The code contains references to "consciousness mapping" and "suggestibility indexes." This is not standard browser functionality!</p>
+            
+            <pre style="background-color: #222222; padding: 10px; overflow: auto;">
+Function ID: 0xF7A9B3C2
+Call signature: MapUserResponse(stimulus_id, response_latency, theta_index)
+Active during: All Hexagram sessions
+Data destination: 195.27.83.*** (cannot reveal full address for security)
+            </pre>
+            
+            <h3>STATISTICAL CORRELATIONS:</h3>
+            <p>I've analyzed Hypernet traffic patterns across 427 nodes and found statistically impossible correlations:</p>
+            <ul>
+                <li>97.3% of users experience identical page load sequences despite different browsing habits</li>
+                <li>Advertising content shifts predictably 2.7 seconds before users change emotional states</li>
+                <li>Search results for "consciousness" yield different results depending on the user's resistance level</li>
+            </ul>
+            
+            <p class="proof">The mathematical probability of these patterns occurring naturally is 0.0000027% - IMPOSSIBLE without deliberate design!</p>
+            
+            <h3>PERSONAL TESTIMONY:</h3>
+            <p>Hundreds of aware individuals have contributed their experiences. Common reports include:</p>
+            <ul>
+                <li>Computers turning on without user interaction at 3:33 AM</li>
+                <li>Unexplained data transfers during system idle time</li>
+                <li>Dreams containing products that appear in advertisements the next day</li>
+                <li>Feeling of being watched specifically while using Hypernet Explorer</li>
+            </ul>
+            
+            <p class="warning">MANY WHO HAVE SHARED THIS EVIDENCE HAVE HAD THEIR SITES MYSTERIOUSLY DELETED!</p>
+        </div>
+        
+        <div id="contact" class="content-section">
+            <h2>SECURE CONTACT METHODS</h2>
+            <p>If you have evidence to share or need emergency assistance, you can reach me through these SECURE channels:</p>
+            
+            <ul>
+                <li>Hexagram: <a href="mailto:truthseer@hexagram.corp">truthseer@hexagram.corp</a> (use code phrase "the falcon watches at midnight" in subject line)</li>
+                <li>Encrypted dead drop: <span class="proof">ftp://securedrop.truthunveiled.net:2121</span> (only accessible during solar flares)</li>
+                <li>Emergency signal: Power your modem on/off in this sequence: 3 short, 2 long, 3 short</li>
+            </ul>
+            
+            <h3>VERIFICATION PROCESS:</h3>
+            <p>To prove you are not one of THEM, all communications must include:</p>
+            <ol>
+                <li>The last 4 digits of your modem's MAC address XORed with the day of the month</li>
+                <li>A description of any unusual dreams from the past 72 hours</li>
+                <li>The exact time when you first noticed the patterns (be precise to the minute)</li>
+            </ol>
+            
+            <p class="warning">DO NOT ATTEMPT CONTACT IF YOU HAVE USED HEXAGRAM FOR MORE THAN 30 MINUTES IN THE PAST 24 HOURS!</p>
+            
+            <h3>ALLIED RESOURCES:</h3>
+            <p>These sites contain complementary information (verify authenticity before visiting):</p>
+            <ul>
+                <li>frequency-truth.net - Specializes in satellite transmission analysis</li>
+                <li>shielded-minds.org - Hardware modification guides</li>
+                <li>pattern-seekers.com - Community of aware individuals sharing experiences</li>
+                <li>the-real-matrix.net - Historical documentation of monitoring programs</li>
+            </ul>
+            
+            <p>We are stronger together. The patterns cannot control those who see them for what they are.</p>
+        </div>
+        
+        <div id="footer">
+            <p>THE TRUTH UNVEILED &copy; 2001 | This site is protected by consciousness-encryption</p>
+            <p>No tracking. No cookies. No surveillance. Just TRUTH.</p>
+            <p class="hidden-message">If you can read this message, you have been chosen. The awakening begins on 11/11/01.</p>
+        </div>
+    </div>
+</body>
+</html>

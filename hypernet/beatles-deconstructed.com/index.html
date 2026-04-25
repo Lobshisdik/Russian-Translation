@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>roberto musicetti</title>
+    <style>
+        body {
+            background-color: #f5f0e8;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 11px;
+        }
+        
+        .language-selector a {
+            color: #0066cc;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        
+        .language-selector a:hover {
+            color: #cc0000;
+        }
+        
+        .language-selector .current {
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+        
+        .site-title {
+            color: #006666;
+            font-size: 24px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .cookie-notice {
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+        
+        .author-photo {
+            margin: 10px 0;
+        }
+        
+        .author-photo img {
+            width: 80px;
+            height: 100px;
+            border: 1px solid #999;
+        }
+        
+        .nav-links {
+            margin: 15px 0;
+            font-size: 11px;
+        }
+        
+        .nav-links a {
+            color: #0066cc;
+            text-decoration: underline;
+            margin: 0 1px;
+        }
+        
+        .nav-links a:hover {
+            color: #cc0000;
+        }
+        
+        .separator {
+            margin: 0 3px;
+            color: #666;
+        }
+        
+        .main-container {
+            display: table;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .left-column {
+            display: table-cell;
+            width: 250px;
+            vertical-align: top;
+            padding: 10px 20px 10px 10px;
+        }
+        
+        .right-column {
+            display: table-cell;
+            vertical-align: top;
+            padding: 10px 10px 10px 20px;
+            border-left: 1px solid #ccc;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+            color: #000;
+        }
+        
+        .toc-header {
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .toc-section {
+            margin-bottom: 15px;
+        }
+        
+        .toc-section a {
+            color: #0066cc;
+            text-decoration: underline;
+            display: block;
+            margin: 2px 0;
+            padding-left: 10px;
+        }
+        
+        .toc-section a:hover {
+            color: #cc0000;
+        }
+        
+        .content-section {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .content-section h3 {
+            color: #006666;
+            font-size: 14px;
+            margin: 15px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+        }
+        
+        .rating {
+            color: #cc0000;
+            font-weight: bold;
+        }
+        
+        .book-cover {
+            float: left;
+            margin: 0 15px 10px 0;
+            border: 1px solid #999;
+        }
+        
+        .book-cover img {
+            width: 60px;
+            height: 90px;
+        }
+        
+        .search-box {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .search-box input {
+            font-size: 11px;
+            padding: 2px;
+            margin: 0 5px;
+        }
+        
+        .latest-section {
+            font-weight: bold;
+            color: #006666;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        
+        .update-item {
+            margin: 8px 0;
+            font-size: 11px;
+        }
+        
+        .update-item a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        
+        .category-label {
+            color: #666;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        
+        .donate-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .quote-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <a href="#" onclick="switchLanguage('en')" id="lang-en" class="current">English</a> |
+        <a href="#" onclick="switchLanguage('it')" id="lang-it">Italiano</a>
+    </div>
+
+    <div id="content-en" class="lang-content active">
+        <div class="header">
+            <div class="site-title">roberto musicetti</div>
+            <div class="cookie-notice">This website does NOT use cookies. Period.</div>
+            
+            <div class="author-photo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgODAgMTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZjBmMGYwIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMzAiIHI9IjE1IiBmaWxsPSIjY2NjIi8+CjxlbGxpcHNlIGN4PSI0MCIgY3k9IjcwIiByeD0iMjAiIHJ5PSIyNSIgZmlsbD0iI2NjYyIvPgo8dGV4dCB4PSI0MCIgeT0iOTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSIjNjY2Ij5Qcm9mLiBNdXNpY2V0dGk8L3RleHQ+Cjwvc3ZnPgo=" alt="Prof. Musicetti">
+            </div>
+            
+            <div class="nav-links">
+                <a href="#" onclick="showSection('music')">Music</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('rock')">Rock</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('jazz')">Jazz</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('classical')">Classical</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('cinema')">Cinema</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('travel')">Travel</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('politics')">Politics</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('history')">History</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('literature')">Literature</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('philosophy')">Philosophy</a>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="left-column">
+                <div class="toc-header">Table of Contents</div>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="google" size="8">
+                    <strong>or</strong>
+                    <input type="text" placeholder="bing" size="8">
+                </div>
+                
+                <div class="toc-section">
+                    <div class="section-title">Music</div>
+                    <a href="#" onclick="showSection('beatles-analysis')">The Beatles Myth</a>
+                    <a href="#" onclick="showSection('album-reviews')">Album reviews</a>
+                    <a href="#" onclick="showSection('overrated-ratings')">Overrated ratings</a>
+                    <a href="#" onclick="showSection('real-innovators')">Real innovators</a>
+                    <a href="#" onclick="showSection('chronology')">Chronology</a>
+                    <a href="#" onclick="showSection('best-albums')">Best albums (non-Beatles)</a>
+                    <a href="#" onclick="showSection('greatest-musicians')">Greatest musicians</a>
+                    <a href="#" onclick="showSection('database')">Database of musicians</a>
+                </div>
+                
+                <div class="donate-section">
+                    <strong>Donate</strong><br>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4K" alt="Donate">
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="latest-section">Latest</div>
+                
+                <div id="music" class="content-section active">
+                    <h3>The Beatles: Deconstructing Rock's Greatest Myth</h3>
+                    
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIGZpbGw9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4KPC9zdmc+Cjx0ZXh0IHg9IjMwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPkJlYXRsZXM8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPk15dGg8L3RleHQ+Cjwvc3ZnPgo=" alt="Beatles Book">
+                    </div>
+                    
+                    <p><strong>Music:</strong> Why the Beatles are the most overrated band in the history of popular music</p>
+                    
+                    <p><strong>Art:</strong> <a href="#" onclick="showSection('album-reviews')">Album Analysis</a></p>
+                    
+                    <p><strong>Event:</strong> New academic paper: "The Beatles Deception: How Marketing Conquered Music"</p>
+                    
+                    <div class="quote-box">
+                        "The Beatles were a competent pop band elevated to mythical status through clever marketing and cultural timing. Their 'innovations' were borrowed, their songwriting formulaic, and their influence vastly overstated." - Prof. Roberto Musicetti, University of Milan
+                    </div>
+                </div>
+                
+                <div id="beatles-analysis" class="content-section">
+                    <h3>The Beatles Myth: A Systematic Deconstruction</h3>
+                    
+                    <h4>Overall Rating: <span class="rating">4/10</span></h4>
+                    
+                    <p>After decades of careful analysis, the verdict is clear: the Beatles represent the greatest triumph of marketing over musicianship in popular culture history.</p>
+                    
+                    <div class="quote-box">
+                        "Remove George Martin's contributions, and the Beatles sound like what they were: a Liverpool covers band with pretensions." - Prof. Musicetti
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-it" class="lang-content">
+        <div class="header">
+            <div class="site-title">roberto musicetti</div>
+            <div class="cookie-notice">Questo sito NON utilizza cookie. Punto.</div>
+            
+            <div class="author-photo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgODAgMTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZjBmMGYwIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMzAiIHI9IjE1IiBmaWxsPSIjY2NjIi8+CjxlbGxpcHNlIGN4PSI0MCIgY3k9IjcwIiByeD0iMjAiIHJ5PSIyNSIgZmlsbD0iI2NjYyIvPgo8dGV4dCB4PSI0MCIgeT0iOTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSIjNjY2Ij5Qcm9mLiBNdXNpY2V0dGk8L3RleHQ+Cjwvc3ZnPgo=" alt="Prof. Musicetti">
+            </div>
+            
+            <div class="nav-links">
+                <a href="#" onclick="showSection('musica')">Musica</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('rock-it')">Rock</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('jazz-it')">Jazz</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('classica')">Classica</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('cinema-it')">Cinema</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('viaggi')">Viaggi</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('politica')">Politica</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('storia')">Storia</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('letteratura')">Letteratura</a><span class="separator">|</span>
+                <a href="#" onclick="showSection('filosofia')">Filosofia</a>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="left-column">
+                <div class="toc-header">Indice dei Contenuti</div>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="google" size="8">
+                    <strong>o</strong>
+                    <input type="text" placeholder="bing" size="8">
+                </div>
+                
+                <div class="toc-section">
+                    <div class="section-title">Musica</div>
+                    <a href="#" onclick="showSection('beatles-analisi')">Il Mito dei Beatles</a>
+                    <a href="#" onclick="showSection('recensioni-album')">Recensioni album</a>
+                    <a href="#" onclick="showSection('sopravvalutati')">Classifiche sopravvalutati</a>
+                    <a href="#" onclick="showSection('veri-innovatori')">Veri innovatori</a>
+                    <a href="#" onclick="showSection('cronologia-it')">Cronologia</a>
+                    <a href="#" onclick="showSection('migliori-album')">Migliori album (non-Beatles)</a>
+                    <a href="#" onclick="showSection('grandi-musicisti')">Grandi musicisti</a>
+                    <a href="#" onclick="showSection('database-it')">Database musicisti</a>
+                </div>
+                
+                <div class="donate-section">
+                    <strong>Donazioni</strong><br>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZjYzAwIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjgiIGZpbGw9IiNmZmYiLz4K" alt="Donate">
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="latest-section">Ultime Novità</div>
+                
+                <div id="musica" class="content-section active">
+                    <h3>I Beatles: Decostruendo il Più Grande Mito del Rock</h3>
+                    
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIGZpbGw9IiMwMDAiLz4KPHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHg9IjEwIiB5PSIxMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4KPC9zdmc+Cjx0ZXh0IHg9IjMwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPkJlYXRsZXM8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiIGZpbGw9IiMwMDAiPk1pdG88L3RleHQ+Cjwvc3ZnPgo=" alt="Beatles Book">
+                    </div>
+                    
+                    <p><strong>Musica:</strong> Perché i Beatles sono la band più sopravvalutata nella storia della musica popolare</p>
+                    
+                    <p><strong>Arte:</strong> <a href="#" onclick="showSection('recensioni-album')">Analisi degli Album</a></p>
+                    
+                    <p><strong>Evento:</strong> Nuovo saggio accademico: "L'Inganno dei Beatles: Come il Marketing Ha Conquistato la Musica"</p>
+                    
+                    <div class="quote-box">
+                        "I Beatles erano una competente band pop elevata allo status mitico attraverso marketing intelligente e tempismo culturale. Le loro 'innovazioni' erano prese in prestito, la loro composizione formulaica, e la loro influenza vastamente esagerata." - Prof. Roberto Musicetti, Università di Milano
+                    </div>
+                </div>
+                
+                <div id="beatles-analisi" class="content-section">
+                    <h3>Il Mito dei Beatles: Una Decostruzione Sistematica</h3>
+                    
+                    <h4>Valutazione Complessiva: <span class="rating">4/10</span></h4>
+                    
+                    <p>Dopo decenni di attenta analisi, il verdetto è chiaro: i Beatles rappresentano il più grande trionfo del marketing sulla musica nella storia della cultura popolare.</p>
+                    
+                    <h4>La Grande Bugia</h4>
+                    <p>I Beatles NON hanno:</p>
+                    <ul>
+                        <li>Inventato il concept album (Frank Sinatra, 1955)</li>
+                        <li>Pioneristico nelle tecniche di studio (Les Paul, Pierre Schaeffer)</li>
+                        <li>Creato la musica psichedelica (13th Floor Elevators, primi Pink Floyd)</li>
+                        <li>Rivoluzionato la composizione (Bob Dylan, Leonard Cohen)</li>
+                        <li>Influenzato musicisti seri (chiedete a Miles Davis)</li>
+                    </ul>
+                    
+                    <div class="quote-box">
+                        "Rimuovete i contributi di George Martin, e i Beatles suonano come quello che erano: una cover band di Liverpool con pretese." - Prof. Musicetti
+                    </div>
+                </div>
+                
+                <div id="recensioni-album" class="content-section">
+                    <h3>Distruzione Album per Album</h3>
+                    
+                    <h4>Please Please Me (1963) - <span class="rating">3/10</span></h4>
+                    <p>Cover competenti di Chuck Berry e Little Richard. Niente di originale. Qualsiasi garage band avrebbe potuto registrare questo.</p>
+                    
+                    <h4>Sgt. Pepper's (1967) - <span class="rating">4/10</span></h4>
+                    <p>L'album più sopravvalutato mai registrato. "Freak Out!" delle Mothers of Invention (1966) era un concept album superiore.</p>
+                    
+                    <div class="quote-box">
+                        Valutazione media album Beatles: 4.0/10. Per confronto, qualsiasi singolo album di Miles Davis degli anni '60 ha un punteggio più alto.
+                    </div>
+                </div>
+                
+                <div id="veri-innovatori" class="content-section">
+                    <h3>Artisti Che Hanno Realmente Contato</h3>
+                    
+                    <h4>Bob Dylan - <span class="rating">10/10</span></h4>
+                    <p>Ha realmente rivoluzionato la musica popolare portando sofisticatezza letteraria nei testi rock. La sua influenza sulla composizione è incommensurabile.</p>
+                    
+                    <h4>The Velvet Underground - <span class="rating">9/10</span></h4>
+                    <p>Mentre i Beatles scrivevano "Yellow Submarine", i VU creavano musica genuinamente sperimentale che ha influenzato punk, new wave e rock alternativo.</p>
+                    
+                    <h4>Miles Davis - <span class="rating">10/10</span></h4>
+                    <p>Ha reinventato il jazz più volte per decennio. Il suo periodo elettrico ha influenzato il rock più di quanto i Beatles abbiano influenzato il jazz.</p>
+                    
+                    <h4>Frank Zappa - <span class="rating">9/10</span></h4>
+                    <p>Componeva opere orchestrali complesse mentre i Beatles faticavano con progressioni di accordi basilari.</p>
+                    
+                    <h4>James Brown - <span class="rating">10/10</span></h4>
+                    <p>Ha inventato il funk, influenzato l'hip-hop, creato innovazioni ritmiche ancora usate oggi. I Beatles non hanno creato nulla di paragonabile.</p>
+                    
+                    <div class="quote-box">
+                        "I Beatles si classificano approssimativamente al 15° posto tra gli artisti innovativi degli anni '60. Erano seguaci, non leader." - Prof. Musicetti
+                    </div>
+                </div>
+                
+                <div id="sopravvalutati" class="content-section">
+                    <h3>La Hall of Fame dei Sopravvalutati</h3>
+                    
+                    <p>Classifiche annuali degli artisti più sopravvalutati nella musica popolare:</p>
+                    
+                    <h4>Classifiche 2001</h4>
+                    <ol>
+                        <li><strong>I Beatles</strong> - Ancora #1 dopo tutti questi anni</li>
+                        <li>Elvis Presley - Buon performer, conoscenza musicale limitata</li>
+                        <li>Led Zeppelin - Blues-rock pesante, non pionieri del metal</li>
+                        <li>The Rolling Stones - Meglio dei Beatles, comunque sopravvalutati</li>
+                        <li>Pink Floyd - Un buon album ("Piper"), ripetizioni infinite dopo</li>
+                    </ol>
+                    
+                    <div class="quote-box">
+                        "I Beatles hanno mantenuto il posto #1 nelle classifiche dei sopravvalutati per tre decenni consecutivi. Nessun'altra band si avvicina al loro livello di lodi immeritate." - Prof. Musicetti
+                    </div>
+                </div>
+                
+                <div id="cronologia-it" class="content-section">
+                    <h3>Cronologia della Mitologia dei Beatles</h3>
+                    
+                    <h4>1960-1962: Formazione</h4>
+                    <p>Cover band di Liverpool suona nei club di Amburgo. Competente ma irrilevante.</p>
+                    
+                    <h4>1963: Primo Successo</h4>
+                    <p>"Please Please Me" arriva al #1 nel Regno Unito. Formula pop standard funziona sul pubblico adolescente.</p>
+                    
+                    <h4>1964: Invasione Americana</h4>
+                    <p>Apparizione all'Ed Sullivan Show. Trionfo del marketing mascherato da fenomeno culturale.</p>
+                    
+                    <h4>1967: La Grande Bugia</h4>
+                    <p>Esce "Sgt. Pepper's". I critici iniziano la mitologia che persiste oggi.</p>
+                    
+                    <h4>1970-2001: La Mitologia si Solidifica</h4>
+                    <p>I critici baby boomer elevano i ricordi adolescenziali a fatto storico. Il mito diventa "verità".</p>
+                </div>
+                
+                <div id="migliori-album" class="content-section">
+                    <h3>Album Che Contano Davvero</h3>
+                    
+                    <p>Ascolti essenziali per chiunque sia serio nel comprendere l'innovazione musicale degli anni '60:</p>
+                    
+                    <h4>1965</h4>
+                    <ul>
+                        <li>Bob Dylan - "Highway 61 Revisited" <span class="rating">10/10</span></li>
+                        <li>John Coltrane - "A Love Supreme" <span class="rating">10/10</span></li>
+                        <li>The Byrds - "Mr. Tambourine Man" <span class="rating">8/10</span></li>
+                    </ul>
+                    
+                    <h4>1966</h4>
+                    <ul>
+                        <li>The Beach Boys - "Pet Sounds" <span class="rating">9/10</span></li>
+                        <li>Bob Dylan - "Blonde on Blonde" <span class="rating">10/10</span></li>
+                        <li>The Mothers of Invention - "Freak Out!" <span class="rating">9/10</span></li>
+                    </ul>
+                    
+                    <p><strong>Nota:</strong> Nemmeno un album dei Beatles appare in nessuna lista seria di innovazione degli anni '60.</p>
+                </div>
+                
+                <div id="filosofia" class="content-section">
+                    <h3>Filosofia: Il Significato del Valore Musicale</h3>
+                    
+                    <p>Cosa rende la musica veramente preziosa? Non la popolarità o la nostalgia.</p>
+                    
+                    <h4>Criteri per la Grandezza Musicale</h4>
+                    <ol>
+                        <li><strong>Innovazione</strong> - Creare qualcosa di genuinamente nuovo</li>
+                        <li><strong>Maestria Tecnica</strong> - Abilità e conoscenza dimostrabili</li>
+                        <li><strong>Visione Artistica</strong> - Dichiarazione estetica coerente</li>
+                        <li><strong>Influenza su Artisti Seri</strong> - Non fan adolescenti</li>
+                        <li><strong>Valore Duraturo</strong> - Oltre l'associazione nostalgica</li>
+                    </ol>
+                    
+                    <p>I Beatles falliscono ogni criterio tranne la popolarità tra i musicalmente analfabeti.</p>
+                    
+                    <h4>Il Problema Filosofico dei Beatles</h4>
+                    <p>I Beatles rappresentano il trionfo del marketing sull'arte, della nostalgia sul giudizio, e dell'illusione popolare sul pensiero critico. Sono un caso di studio su come si formano e persistono i miti culturali nonostante schiaccianti prove contrarie.</p>
+                    
+                    <div class="quote-box">
+                        "I futuri filosofi studieranno la Beatlemania come esempio di illusione di massa, non di risultato musicale." - Prof. Musicetti, Parola Finale
+                    </div>
+                    
+                    <h4>Conclusione</h4>
+                    <p>Dopo 40 anni di analisi, il verdetto è definitivo: I Beatles erano una competente band pop la cui reputazione rappresenta la più grande disconnessione tra consenso critico e realtà artistica nella storia culturale.</p>
+                    
+                    <p><strong>Valutazione: 4/10</strong> - E questo è essere generosi.</p>
+                    
+                    <p><em>Ultimo aggiornamento: 15 gennaio 2001</em><br>
+                    <em>Prossimo aggiornamento: Quando qualcuno produrrà prove di vera innovazione dei Beatles (improbabile)</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentLang = 'en';
+        var currentSection = 'music';
+        
+        function switchLanguage(lang) {
+            // Update language content
+            document.getElementById('content-en').classList.remove('active');
+            document.getElementById('content-it').classList.remove('active');
+            document.getElementById('content-' + lang).classList.add('active');
+            
+            // Update language selector
+            document.getElementById('lang-en').classList.remove('current');
+            document.getElementById('lang-it').classList.remove('current');
+            document.getElementById('lang-' + lang).classList.add('current');
+            
+            currentLang = lang;
+            
+            // Show appropriate section in new language
+            if (lang === 'en') {
+                showSection('music');
+            } else {
+                showSection('musica');
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Hide all sections in current language content
+            var activeContent = document.getElementById('content-' + currentLang);
+            var sections = activeContent.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            var targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            currentSection = sectionId;
+        }
+        
+        // Initialize with music section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>

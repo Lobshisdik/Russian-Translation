@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Emoji Administration</title>
+  <style>
+    body {
+      font-family: Times New Roman, serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      color: #000066;
+    }
+    
+    .container {
+      width: 950px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-left: 1px solid #999;
+      border-right: 1px solid #999;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    
+    header {
+      background-color: #000066;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 4px solid #cc0000;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    nav {
+      background-color: #003366;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    
+    .main-content {
+      display: flex;
+    }
+    
+    .sidebar {
+      width: 180px;
+      background-color: #e6e6e6;
+      padding: 10px;
+    }
+    
+    .right-sidebar {
+      width: 180px;
+      background-color: #e6e6e6;
+      padding: 10px;
+      border-left: 1px solid #ccc;
+    }
+    
+    .sidebar-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-align: center;
+    }
+    
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .announcement {
+      background-color: #ffffcc;
+      border: 1px solid #ffcc00;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      font-weight: bold;
+      border-bottom: 1px solid #999;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .section-title::after {
+      content: " [-]";
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .section-title.collapsed::after {
+      content: " [+]";
+    }
+    
+    .section-content {
+      transition: height 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .section-content.hidden {
+      display: none;
+    }
+    
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    .quick-link {
+      width: 30%;
+      background-color: #e6e6e6;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .page-link {
+      display: block;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      padding: 8px;
+      text-align: center;
+      text-decoration: none;
+      color: #000066;
+      font-weight: bold;
+    }
+    
+    .page-link:hover {
+      background-color: #e0e0e0;
+    }
+    
+    footer {
+      background-color: #000066;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      border-top: 4px solid #cc0000;
+    }
+    
+    .emoji {
+      font-size: 24px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    
+    .big-emoji {
+      font-size: 48px;
+      margin: 10px;
+    }
+    
+    .centered {
+      text-align: center;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #e6e6e6;
+    }
+    
+    .banner {
+      margin: 10px 0;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    
+    .mission-statement {
+      font-style: italic;
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+    }
+    
+    .breadcrumbs {
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .counter {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+    }
+    
+    .search-box {
+      margin: 10px 0;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    .search-input {
+      width: 90%;
+      padding: 3px;
+      border: 1px solid #ccc;
+    }
+    
+    .search-button {
+      margin-top: 5px;
+      padding: 3px 10px;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    
+    .quick-actions {
+      margin: 15px 0;
+    }
+    
+    .sidebar-section {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px dotted #ccc;
+    }
+    
+    .small-text {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    
+    .site-map {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+    }
+    
+    .site-map-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    .site-map-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+  </style>
+  <script>
+    function toggleSection(sectionId) {
+      const content = document.getElementById(sectionId);
+      const title = document.getElementById(sectionId + '-title');
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        title.classList.remove('collapsed');
+      } else {
+        content.classList.add('hidden');
+        title.classList.add('collapsed');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🙂 🙂 🙂 🙂 🙂</div>
+      <div>🙂🙂🙂 🙂🙂 🙂🙂🙂🙂🙂 🙂🙂🙂🙂🙂</div>
+    </header>
+    
+    <nav>
+      <a href="#">🙂</a>
+      <a href="#">😀</a>
+      <a href="#">😊</a>
+      <a href="#">😉</a>
+      <a href="#">🙃</a>
+      <a href="#">😏</a>
+    </nav>
+    
+    <div class="breadcrumbs">
+      🙂 > 😀 > 😊
+    </div>
+    
+    <div class="banner">
+      <div class="big-emoji">🇺🇸 😎 🇺🇸</div>
+    </div>
+    
+    <div class="mission-statement">
+      🙂 🙂🙂 🙂🙂🙂 🙂🙂 🙂🙂🙂🙂 🙂🙂🙂 🙂🙂🙂🙂🙂🙂 🙂🙂
+    </div>
+    
+    <div class="main-content">
+      <div class="sidebar">
+        <div class="sidebar-title">😀 😀😀😀😀:</div>
+        <div class="sidebar-section">
+          <a href="page1.html" class="page-link">😀</a>
+          <a href="page2.html" class="page-link">😃</a>
+          <a href="page3.html" class="page-link">😄</a>
+          <a href="page4.html" class="page-link">😁</a>
+          <a href="page5.html" class="page-link">😆</a>
+        </div>
+        
+        <div class="sidebar-title">🙂 🙂🙂🙂:</div>
+        <div class="sidebar-section">
+          <a href="form1.html" class="page-link">📝</a>
+          <a href="form2.html" class="page-link">📊</a>
+          <a href="form3.html" class="page-link">📑</a>
+        </div>
+        
+        <div class="search-box">
+          <input type="text" class="search-input" value="🔍">
+          <button class="search-button">🔍</button>
+        </div>
+        
+        <div class="counter">
+          😀😀😀: 12345
+        </div>
+      </div>
+      
+      <div class="content">
+        <div class="announcement">
+          <div class="centered big-emoji">⚠️</div>
+          <div class="centered">🙂 🙂🙂🙂 🙂🙂 🙂🙂🙂🙂🙂 🙂🙂🙂 🙂🙂!</div>
+        </div>
+        
+        <div class="section">
+          <div id="section1-title" class="section-title" onclick="toggleSection('section1')">🙂 🙂🙂🙂🙂🙂🙂 🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂</div>
+          <div id="section1" class="section-content">
+            <div class="quick-links">
+              <div class="quick-link">😀<br>😀😀😀</div>
+              <div class="quick-link">😊<br>😊😊😊</div>
+              <div class="quick-link">😉<br>😉😉😉</div>
+              <div class="quick-link">🙃<br>🙃🙃🙃</div>
+              <div class="quick-link">😏<br>😏😏😏</div>
+              <div class="quick-link">😎<br>😎😎😎</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section">
+          <div id="section2-title" class="section-title" onclick="toggleSection('section2')">🙂 🙂🙂🙂🙂🙂 🙂🙂🙂🙂🙂</div>
+          <div id="section2" class="section-content">
+            <table>
+              <tr>
+                <th>🙂</th>
+                <th>😀</th>
+                <th>😊</th>
+                <th>😉</th>
+              </tr>
+              <tr>
+                <td>😃</td>
+                <td>😄</td>
+                <td>😁</td>
+                <td>😆</td>
+              </tr>
+              <tr>
+                <td>😅</td>
+                <td>🤣</td>
+                <td>😂</td>
+                <td>🙃</td>
+              </tr>
+              <tr>
+                <td>😉</td>
+                <td>😇</td>
+                <td>😊</td>
+                <td>🥰</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div class="section">
+          <div id="section3-title" class="section-title" onclick="toggleSection('section3')">🙂 🙂🙂🙂🙂🙂🙂🙂🙂 🙂🙂🙂🙂🙂</div>
+          <div id="section3" class="section-content">
+            <div class="centered">
+              <img src="/api/placeholder/400/200" alt="placeholder" />
+              <div>🙂 🙂🙂 🙂🙂🙂 🙂🙂🙂🙂 🙂🙂</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section">
+          <div id="section4-title" class="section-title" onclick="toggleSection('section4')">🙂 🙂🙂🙂🙂 🙂🙂🙂🙂 🙂🙂🙂🙂</div>
+          <div id="section4" class="section-content">
+            <div class="site-map">
+              <div class="site-map-title">📋 🙂🙂🙂🙂:</div>
+              <div class="site-map-links">
+                <a href="page1.html">🙂 🙂🙂</a>
+                <a href="page2.html">😀 😀😀</a>
+                <a href="page3.html">😊 😊😊</a>
+                <a href="page4.html">😉 😉😉</a>
+                <a href="page5.html">🙃 🙃🙃</a>
+                <a href="page6.html">😏 😏😏</a>
+                <a href="page7.html">😎 😎😎</a>
+                <a href="page8.html">🤔 🤔🤔</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="right-sidebar">
+        <div class="sidebar-title">🔔 🔔🔔🔔:</div>
+        <div class="sidebar-section">
+          <div class="centered emoji">🔴</div>
+          <div class="centered">🙂🙂🙂 🙂🙂</div>
+          <div class="small-text centered">04/14/2025</div>
+        </div>
+        
+        <div class="sidebar-section">
+          <div class="centered emoji">🟠</div>
+          <div class="centered">🙂🙂 🙂🙂🙂🙂</div>
+          <div class="small-text centered">04/10/2025</div>
+        </div>
+        
+        <div class="sidebar-section">
+          <div class="centered emoji">🟡</div>
+          <div class="centered">🙂 🙂🙂🙂🙂</div>
+          <div class="small-text centered">04/05/2025</div>
+        </div>
+        
+        <div class="sidebar-title">🔗 🔗🔗🔗:</div>
+        <div class="sidebar-section">
+          <a href="external1.html" class="page-link">🌎</a>
+          <a href="external2.html" class="page-link">🏛️</a>
+          <a href="external3.html" class="page-link">📰</a>
+          <a href="external4.html" class="page-link">📱</a>
+        </div>
+        
+        <div class="quick-actions">
+          <a href="login.html" class="page-link">🔑</a>
+          <a href="help.html" class="page-link">❓</a>
+          <a href="print.html" class="page-link">🖨️</a>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div>🙂 🙂🙂🙂🙂 🙂🙂🙂🙂🙂🙂 🙂🙂 🙂🙂🙂 🙂🙂🙂🙂 🙂🙂🙂🙂🙂🙂 🙂🙂🙂🙂🙂 © 2025</div>
+      <div>🙂🙂🙂 | 🙂🙂🙂🙂🙂🙂 | 🙂🙂🙂🙂🙂🙂🙂🙂🙂 | 🙂🙂🙂 🙂🙂🙂🙂🙂</div>
+    </footer>
+  </div>
+</body>
+</html>

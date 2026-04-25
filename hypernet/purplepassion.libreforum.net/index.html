@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purple Passion Forum - Hypernet's Premier Purple Community</title>
+    <meta name="keywords" content="purple, forum, community, discussion, color, violet, amethyst, lavender">
+    <meta name="description" content="Welcome to Purple Passion Forum - the Hypernet's largest community dedicated to all things purple!">
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background: linear-gradient(45deg, #4B0082, #6A0DAD, #8A2BE2);
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background: #2E003E;
+            border-bottom: 3px solid #9370DB;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #DA70D6;
+            font-size: 24px;
+            margin: 0;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .header .subtitle {
+            color: #E6E6FA;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .navigation {
+            background: #4B0082;
+            border-bottom: 2px solid #9370DB;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .navigation a {
+            color: #E6E6FA;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+        
+        .navigation a:hover {
+            background: #6A0DAD;
+            border: 1px solid #DA70D6;
+            color: #FFFFFF;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #2E1A47;
+            min-height: 600px;
+        }
+        
+        .forum-section {
+            display: none;
+            padding: 20px;
+            border: 2px solid #6A0DAD;
+            margin: 10px;
+            background: #3A1F5C;
+        }
+        
+        .forum-section.active {
+            display: block;
+        }
+        
+        .forum-category {
+            background: #4B0082;
+            border: 2px solid #9370DB;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .category-header {
+            background: #6A0DAD;
+            padding: 8px 15px;
+            font-weight: bold;
+            color: #FFFFFF;
+            border-bottom: 1px solid #9370DB;
+        }
+        
+        .topic-list {
+            background: #3A1F5C;
+        }
+        
+        .topic {
+            border-bottom: 1px solid #5D4E7A;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        
+        .topic:hover {
+            background: #4B2F6B;
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #DA70D6;
+            font-size: 12px;
+        }
+        
+        .topic-info {
+            color: #B8A9D1;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+        
+        .post-container {
+            background: #2E1A47;
+            border: 1px solid #6A0DAD;
+            margin: 10px 0;
+            padding: 15px;
+        }
+        
+        .post-header {
+            background: #4B0082;
+            color: #E6E6FA;
+            padding: 5px 10px;
+            margin: -15px -15px 10px -15px;
+            font-size: 11px;
+            border-bottom: 1px solid #9370DB;
+        }
+        
+        .post-content {
+            color: #E6E6FA;
+            line-height: 1.4;
+        }
+        
+        .stats {
+            background: #1A0D2E;
+            border: 2px solid #6A0DAD;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .stats h3 {
+            color: #DA70D6;
+            margin: 0 0 10px 0;
+        }
+        
+        .footer {
+            background: #2E003E;
+            border-top: 3px solid #9370DB;
+            padding: 15px;
+            text-align: center;
+            color: #B8A9D1;
+            font-size: 10px;
+        }
+        
+        .footer a {
+            color: #DA70D6;
+            text-decoration: none;
+        }
+        
+        .user-info {
+            background: #4B0082;
+            border: 1px solid #9370DB;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .member-count {
+            color: #DA70D6;
+            font-weight: bold;
+        }
+        
+        .welcome-box {
+            background: #6A0DAD;
+            border: 2px solid #9370DB;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        
+        .scroll-text {
+            color: #FFE4E1;
+            font-weight: bold;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        .timestamp {
+            color: #9370DB;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🟣 PURPLE PASSION FORUM 🟣</h1>
+        <div class="subtitle">The Hypernet's #1 Community for Everything Purple!</div>
+        <div class="subtitle">Established January 2001 | Powered by ForumFree</div>
+    </div>
+    
+    <div class="navigation">
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('forums')">Forums</a>
+        <a href="#" onclick="showSection('gallery')">Purple Gallery</a>
+        <a href="#" onclick="showSection('members')">Members</a>
+        <a href="#" onclick="showSection('chat')">Chat Room</a>
+        <a href="#" onclick="showSection('about')">About</a>
+    </div>
+    
+    <div class="container">
+        <!-- HOME SECTION -->
+        <div id="home" class="forum-section active">
+            <div class="welcome-box">
+                <h2 style="color: #FFE4E1; margin-top: 0;">Welcome to Purple Passion Forum!</h2>
+                <div class="scroll-text">✨ Where Purple Dreams Come True ✨</div>
+                <p style="color: #E6E6FA; text-align: center; margin: 15px 0;">
+                    Join our vibrant community of purple enthusiasts! From deep violet discussions 
+                    to lavender lifestyle tips, we celebrate every shade of purple!
+                </p>
+            </div>
+            
+            <div class="stats">
+                <h3>Forum Statistics</h3>
+                <div style="color: #E6E6FA;">
+                    <strong>Total Members:</strong> <span class="member-count">1,247</span><br>
+                    <strong>Total Posts:</strong> <span class="member-count">23,891</span><br>
+                    <strong>Active Topics:</strong> <span class="member-count">456</span><br>
+                    <strong>Purple Photos:</strong> <span class="member-count">3,102</span>
+                </div>
+            </div>
+            
+            <div class="forum-category">
+                <div class="category-header">📢 Latest Purple News</div>
+                <div class="topic-list">
+                    <div class="topic">
+                        <div class="topic-title">New Purple Aurora Spotted Over Northern Europe!</div>
+                        <div class="topic-info">Posted by VioletSky23 | 2 hours ago | 47 replies</div>
+                    </div>
+                    <div class="topic">
+                        <div class="topic-title">Purple Gemstone Discovery in Bavaria</div>
+                        <div class="topic-info">Posted by AmethystHunter | 5 hours ago | 23 replies</div>
+                    </div>
+                    <div class="topic">
+                        <div class="topic-title">European Purple Festival Dates Announced!</div>
+                        <div class="topic-info">Posted by LavenderLove | 1 day ago | 89 replies</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <div style="color: #DA70D6; font-weight: bold;">👤 Currently Online: <span class="member-count">67 users</span></div>
+                <div style="color: #B8A9D1; font-size: 10px; margin-top: 5px;">
+                    Welcome newest member: <strong style="color: #DA70D6;">PurpleRain2001</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FORUMS SECTION -->
+        <div id="forums" class="forum-section">
+            <h2 style="color: #DA70D6; margin-top: 0;">Forum Categories</h2>
+            
+            <div class="forum-category">
+                <div class="category-header">🟣 General Purple Discussion</div>
+                <div class="topic-list">
+                    <div class="topic" onclick="showTopic('general1')">
+                        <div class="topic-title">What's your favorite shade of purple?</div>
+                        <div class="topic-info">Started by PlumFan | 156 replies | Last post: 3 minutes ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('general2')">
+                        <div class="topic-title">Purple in different cultures around Europe</div>
+                        <div class="topic-info">Started by CulturalPurple | 89 replies | Last post: 1 hour ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('general3')">
+                        <div class="topic-title">Purple psychology - does it really calm you?</div>
+                        <div class="topic-info">Started by MindfulViolet | 203 replies | Last post: 2 hours ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="forum-category">
+                <div class="category-header">🌸 Purple in Nature</div>
+                <div class="topic-list">
+                    <div class="topic" onclick="showTopic('nature1')">
+                        <div class="topic-title">Purple flower gardens - tips and tricks</div>
+                        <div class="topic-info">Started by GardenGuru | 245 replies | Last post: 30 minutes ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('nature2')">
+                        <div class="topic-title">Amazing purple sunset photos from across Europe</div>
+                        <div class="topic-info">Started by SkyWatcher | 178 replies | Last post: 1 hour ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('nature3')">
+                        <div class="topic-title">Purple mushrooms - safe or dangerous?</div>
+                        <div class="topic-info">Started by ForestExplorer | 67 replies | Last post: 4 hours ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="forum-category">
+                <div class="category-header">💎 Purple Gemstones & Crystals</div>
+                <div class="topic-list">
+                    <div class="topic" onclick="showTopic('gems1')">
+                        <div class="topic-title">Amethyst collecting in the Alps</div>
+                        <div class="topic-info">Started by CrystalCollector | 134 replies | Last post: 45 minutes ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('gems2')">
+                        <div class="topic-title">Purple fluorite specimens - show yours!</div>
+                        <div class="topic-info">Started by RockHound99 | 298 replies | Last post: 2 hours ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="forum-category">
+                <div class="category-header">🎨 Purple Art & Design</div>
+                <div class="topic-list">
+                    <div class="topic" onclick="showTopic('art1')">
+                        <div class="topic-title">Purple room decoration ideas</div>
+                        <div class="topic-info">Started by DesignDiva | 423 replies | Last post: 15 minutes ago</div>
+                    </div>
+                    <div class="topic" onclick="showTopic('art2')">
+                        <div class="topic-title">Digital purple art showcase</div>
+                        <div class="topic-info">Started by PixelPurple | 189 replies | Last post: 3 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GALLERY SECTION -->
+        <div id="gallery" class="forum-section">
+            <h2 style="color: #DA70D6; margin-top: 0;">Purple Photo Gallery</h2>
+            <div style="color: #E6E6FA; text-align: center; padding: 20px;">
+                <p><strong>Featured Purple Photos from Our Community</strong></p>
+                <div style="background: #4B0082; padding: 15px; margin: 10px 0; border: 1px solid #9370DB;">
+                    <div style="color: #DA70D6; font-weight: bold;">📸 "Purple Aurora Over Stockholm"</div>
+                    <div style="color: #B8A9D1; font-size: 10px;">Uploaded by NordicLights | 247 views | 34 comments</div>
+                </div>
+                <div style="background: #4B0082; padding: 15px; margin: 10px 0; border: 1px solid #9370DB;">
+                    <div style="color: #DA70D6; font-weight: bold;">🌸 "Lavender Fields in Provence"</div>
+                    <div style="color: #B8A9D1; font-size: 10px;">Uploaded by FrenchLavender | 389 views | 56 comments</div>
+                </div>
+                <div style="background: #4B0082; padding: 15px; margin: 10px 0; border: 1px solid #9370DB;">
+                    <div style="color: #DA70D6; font-weight: bold;">💎 "Massive Amethyst Geode"</div>
+                    <div style="color: #B8A9D1; font-size: 10px;">Uploaded by GemHunter | 512 views | 78 comments</div>
+                </div>
+                <div style="background: #4B0082; padding: 15px; margin: 10px 0; border: 1px solid #9370DB;">
+                    <div style="color: #DA70D6; font-weight: bold;">🏰 "Purple Sunset Behind Neuschwanstein"</div>
+                    <div style="color: #B8A9D1; font-size: 10px;">Uploaded by CastleSeeker | 423 views | 67 comments</div>
+                </div>
+                <p style="margin-top: 20px;">
+                    <em>Upload your own purple photos! <br>
+                    Max size: 500KB | Formats: JPG, GIF, PNG</em>
+                </p>
+            </div>
+        </div>
+        
+        <!-- MEMBERS SECTION -->
+        <div id="members" class="forum-section">
+            <h2 style="color: #DA70D6; margin-top: 0;">Active Members</h2>
+            <div class="stats">
+                <h3>Member Rankings</h3>
+                <div style="text-align: left; color: #E6E6FA;">
+                    <div style="margin: 10px 0; padding: 5px; background: #4B0082;">
+                        <strong style="color: #DA70D6;">🏆 Purple Master:</strong> VioletEmpress (4,823 posts)
+                    </div>
+                    <div style="margin: 10px 0; padding: 5px; background: #4B0082;">
+                        <strong style="color: #DA70D6;">🥈 Amethyst Expert:</strong> DeepPurpleFan (3,567 posts)
+                    </div>
+                    <div style="margin: 10px 0; padding: 5px; background: #4B0082;">
+                        <strong style="color: #DA70D6;">🥉 Lavender Lover:</strong> PlumPerfection (2,891 posts)
+                    </div>
+                    <div style="margin: 10px 0; padding: 5px; background: #4B0082;">
+                        <strong style="color: #DA70D6;">🌟 Violet Veteran:</strong> PurplePassion01 (2,234 posts)
+                    </div>
+                    <div style="margin: 10px 0; padding: 5px; background: #4B0082;">
+                        <strong style="color: #DA70D6;">💜 Purple Pro:</strong> AmethystAngel (1,998 posts)
+                    </div>
+                </div>
+            </div>
+            
+            <div style="color: #E6E6FA; padding: 20px;">
+                <h3 style="color: #DA70D6;">Recent Member Activity</h3>
+                <div style="background: #3A1F5C; padding: 10px; margin: 5px 0; border-left: 3px solid #9370DB;">
+                    <strong>VioletSky23</strong> started a new topic in Purple in Nature<br>
+                    <span class="timestamp">2 hours ago</span>
+                </div>
+                <div style="background: #3A1F5C; padding: 10px; margin: 5px 0; border-left: 3px solid #9370DB;">
+                    <strong>AmethystHunter</strong> uploaded new photos to the gallery<br>
+                    <span class="timestamp">3 hours ago</span>
+                </div>
+                <div style="background: #3A1F5C; padding: 10px; margin: 5px 0; border-left: 3px solid #9370DB;">
+                    <strong>LavenderLove</strong> replied to "Purple Festival Dates"<br>
+                    <span class="timestamp">4 hours ago</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHAT SECTION -->
+        <div id="chat" class="forum-section">
+            <h2 style="color: #DA70D6; margin-top: 0;">Purple Chat Room</h2>
+            <div style="background: #1A0D2E; border: 2px solid #6A0DAD; padding: 15px; height: 300px; overflow-y: scroll; margin: 10px 0;">
+                <div style="color: #E6E6FA; font-size: 11px; line-height: 1.4;">
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:23] VioletEmpress:</span> 
+                        <span style="color: #E6E6FA;">Anyone see that amazing purple aurora last night?</span>
+                    </div>
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:25] SkyWatcher:</span> 
+                        <span style="color: #E6E6FA;">Yes! Got some incredible photos! Will upload to gallery soon</span>
+                    </div>
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:27] AmethystAngel:</span> 
+                        <span style="color: #E6E6FA;">Purple weather has been amazing this winter!</span>
+                    </div>
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:30] PlumFan:</span> 
+                        <span style="color: #E6E6FA;">Has anyone tried the new purple tea blend from that shop in Vienna?</span>
+                    </div>
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:32] LavenderLove:</span> 
+                        <span style="color: #E6E6FA;">@PlumFan Yes! It's fantastic, very floral notes</span>
+                    </div>
+                    <div style="margin: 5px 0; padding: 3px; background: #2E1A47;">
+                        <span style="color: #DA70D6; font-weight: bold;">[19:35] PurpleRain2001:</span> 
+                        <span style="color: #E6E6FA;">Hi everyone! New member here, excited to join the purple community!</span>
+                    </div>
+                </div>
+            </div>
+            <div style="color: #E6E6FA; text-align: center;">
+                <em>Chat is currently read-only. <a href="mailto:admin@hexagram.corp" style="color: #DA70D6;">Contact admin</a> to enable posting.</em>
+            </div>
+        </div>
+        
+        <!-- ABOUT SECTION -->
+        <div id="about" class="forum-section">
+            <h2 style="color: #DA70D6; margin-top: 0;">About Purple Passion Forum</h2>
+            <div style="color: #E6E6FA; padding: 20px; line-height: 1.5;">
+                <p><strong>Welcome to the Hypernet's premier destination for purple enthusiasts!</strong></p>
+                
+                <p>Purple Passion Forum was founded in January 2001 by a group of European purple lovers who wanted 
+                to create a dedicated space for discussing everything related to the color purple. From the deepest 
+                violets to the softest lavenders, we celebrate every shade and hue.</p>
+                
+                <p><strong>What we discuss:</strong></p>
+                <ul>
+                    <li>Purple phenomena in nature (auroras, sunsets, flowers)</li>
+                    <li>Purple gemstones and crystal collecting</li>
+                    <li>Purple art, design, and decoration</li>
+                    <li>Purple foods and beverages</li>
+                    <li>Purple fashion and trends</li>
+                    <li>Purple photography and digital art</li>
+                    <li>Scientific aspects of purple light and color</li>
+                </ul>
+                
+                <p><strong>Forum Rules:</strong></p>
+                <ol>
+                    <li>Keep discussions purple-related</li>
+                    <li>Be respectful to all members</li>
+                    <li>No spam or commercial posts</li>
+                    <li>Use appropriate titles for topics</li>
+                    <li>Share your purple photos responsibly</li>
+                </ol>
+                
+                <div style="background: #4B0082; padding: 15px; margin: 20px 0; border: 1px solid #9370DB;">
+                    <p style="margin: 0; text-align: center;">
+                        <strong style="color: #DA70D6;">Join our community today!</strong><br>
+                        <em>Registration is free and takes only minutes.</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>
+            Purple Passion Forum © 2001 | Powered by ForumFree v2.1<br>
+            <a href="mailto:admin@hexagram.corp">Contact Admin</a> | 
+            <a href="mailto:webmaster@hexagram.corp">Technical Support</a><br>
+            Best viewed with Hypernet Explorer 5.0+ at 800x600 resolution<br>
+            <span style="font-size: 9px;">Last updated: January 15, 2001 | Server time: CET</span>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('forum-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        function showTopic(topicId) {
+            alert('Topic view not implemented in this demo version. Feature coming soon!');
+        }
+        
+        // Auto-scroll chat to bottom
+        window.onload = function() {
+            var chatDiv = document.querySelector('#chat div[style*="overflow-y"]');
+            if (chatDiv) {
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
+        };
+    </script>
+</body>
+</html>

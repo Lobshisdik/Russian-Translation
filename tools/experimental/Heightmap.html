@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Heightmap Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #00ff00;
+            --border-color: #00ff00;
+            --input-bg: #333;
+            --input-text: #00ff00;
+            --button-bg: #222;
+            --button-hover-bg: #444;
+            --accent-color: #ff00ff;
+            /* Preview characters will be numbers or symbols based on height */
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            font-size: 12px; /* Adjusted for better readability */
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align top */
+            min-height: 100vh;
+        }
+
+        .container {
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px var(--border-color);
+            max-width: 90%; /* Responsive width */
+            width: 800px; /* Max width */
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            gap: 30px;
+            align-items: flex-start; /* Align items at the top of their cells */
+        }
+
+        h1 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5em; /* Adjusted size */
+            grid-column: 1 / -1; /* Span across both columns */
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-size: 1.2em;
+        }
+
+        .controls, .preview-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .control-group {
+             margin-bottom: 15px;
+             padding: 10px;
+             border: 1px dashed rgba(0, 255, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        input[type="number"],
+        select {
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            font-family: 'Press Start 2P', cursive;
+            width: 100%; /* Full width within container */
+            box-sizing: border-box; /* Include padding in width */
+            font-size: 10px; /* Smaller font for inputs */
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            font-size: 10px; /* Smaller font for buttons */
+            width: 100%; /* Full width */
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+         input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+         }
+
+        #ascii-preview {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-family: monospace; /* Use monospace for ASCII */
+            white-space: pre; /* Preserve whitespace and line breaks */
+            overflow: auto; /* Add scrollbars if needed */
+            max-height: 300px; /* Limit preview height */
+            line-height: 1.1; /* Adjust line height for dense preview */
+            font-size: 10px; /* Smaller font for preview */
+            color: var(--text-color);
+            word-wrap: break-word; /* Prevent extremely long lines from messing up layout */
+        }
+
+        .tooltip {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #download-button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+        }
+         #download-button:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--accent-color);
+         }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; /* Stack columns on smaller screens */
+                width: 95%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+            body {
+                padding: 10px;
+                font-size: 10px;
+            }
+             input[type="number"], select, button {
+                 font-size: 9px;
+             }
+             #ascii-preview {
+                 font-size: 9px;
+             }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Retro Heightmap Generator</h1>
+
+        <div class="controls">
+            <h2>Settings</h2>
+
+            <div>
+                <label for="map-width">Map Width:</label>
+                <input type="number" id="map-width" value="30" min="10" max="256">
+            </div>
+            <div>
+                <label for="map-height">Map Height:</label>
+                <input type="number" id="map-height" value="20" min="10" max="256">
+            </div>
+             <div>
+                <label for="max-height">Max Height Value:</label>
+                <input type="number" id="max-height" value="5" min="1" max="9">
+                 <span class="tooltip">Maximum height value (0-9) for 'wall' areas. Floor is always 0.</span>
+             </div>
+
+             <div class="control-group">
+                 <h2>Generation Algorithm</h2>
+                 <div>
+                     <label for="algorithm">Select Algorithm:</label>
+                     <select id="algorithm">
+                         <option value="randomWalk">Random Walk (Organic Shapes)</option>
+                         <option value="cellularAutomata">Cellular Automata (Cave-like)</option>
+                          <option value="roomsAndCorridors">Rooms and Corridors (Structured)</option>
+                         <option value="drunkardsWalk">Drunkard's Walk (Winding Paths)</option>
+                         <option value="basicMaze">Basic Maze (Recursive Backtracker)</option>
+                     </select>
+                 </div>
+
+                 <div id="algorithm-options">
+                     <div id="randomWalk-options" class="algo-options">
+                          <label for="rw-steps">Random Walk Steps:</label>
+                          <input type="number" id="rw-steps" value="" min="100">
+                          <span class="tooltip">Higher steps = more exploration. Leave blank for default (60% of map size).</span>
+                     </div>
+
+                     <div id="cellularAutomata-options" class="algo-options">
+                         <label for="ca-fill-prob">Initial Wall %:</label>
+                         <input type="number" id="ca-fill-prob" value="45" min="0" max="100">
+                         <label for="ca-iterations">Smoothing Iterations:</label>
+                         <input type="number" id="ca-iterations" value="4" min="1" max="10">
+                     </div>
+
+                     <div id="roomsAndCorridors-options" class="algo-options">
+                         <label for="rc-num-rooms">Number of Rooms:</label>
+                         <input type="number" id="rc-num-rooms" value="10" min="2" max="50">
+                          <label for="rc-min-room-size">Min Room Size (Tiles):</label>
+                         <input type="number" id="rc-min-room-size" value="5" min="3" max="15">
+                          <label for="rc-max-room-size">Max Room Size (Tiles):</label>
+                         <input type="number" id="rc-max-room-size" value="12" min="5" max="20">
+                          <label for="rc-corridor-width">Corridor Width:</label>
+                         <input type="number" id="rc-corridor-width" value="1" min="1" max="3">
+                     </div>
+
+                      <div id="drunkardsWalk-options" class="algo-options">
+                          <label for="dw-steps">Drunkard's Walk Steps:</label>
+                          <input type="number" id="dw-steps" value="" min="100">
+                          <span class="tooltip">Higher steps = larger open area. Leave blank for default (80% of map size).</span>
+                      </div>
+
+                      <div id="basicMaze-options" class="algo-options">
+                           <span class="tooltip">Generates a perfect maze (no loops). Best on odd dimensions (e.g., 31x21).</span>
+                      </div>
+                 </div>
+
+                 <div>
+                     <label>
+                          <input type="checkbox" id="enclosed-option" checked>
+                         Make Map Enclosed
+                     </label>
+                     <span class="tooltip">Adds a solid wall border around the entire map.</span>
+                 </div>
+             </div>
+
+            <button id="generate-button">Generate Heightmap</button>
+        </div>
+
+        <div class="preview-area">
+            <h2>ASCII Preview (Height 0-9)</h2>
+            <pre id="ascii-preview">Press 'Generate Heightmap' to see preview...</pre>
+            <button id="download-button" disabled>Download Heightmap JSON</button>
+             <span class="tooltip">Saves a JSON file with a 2D array of height values.</span>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants ---
+        const TILE_TYPES = {
+            EMPTY: 0, // Represents areas not touched by the algorithm (will become max height if enclosed, otherwise depends on init)
+            FLOOR: 1, // Represents areas carved out by the algorithm (will become base height)
+            WALL: 2, // Represents areas that remain as walls (will become max height)
+        };
+
+        // --- DOM Elements ---
+        const mapWidthInput = document.getElementById('map-width');
+        const mapHeightInput = document.getElementById('map-height');
+        const maxHeightInput = document.getElementById('max-height'); // Renamed from wall-height
+
+        const algorithmSelect = document.getElementById('algorithm');
+        const generateButton = document.getElementById('generate-button');
+        const downloadButton = document.getElementById('download-button');
+        const asciiPreview = document.getElementById('ascii-preview');
+        const algorithmOptionsDiv = document.getElementById('algorithm-options');
+
+        // Algorithm-specific options divs
+        const randomWalkOptions = document.getElementById('randomWalk-options');
+        const cellularAutomataOptions = document.getElementById('cellularAutomata-options');
+        const roomsAndCorridorsOptions = document.getElementById('roomsAndCorridors-options');
+        const drunkardsWalkOptions = document.getElementById('drunkardsWalk-options');
+        const basicMazeOptions = document.getElementById('basicMaze-options');
+
+        // Algorithm-specific inputs
+        const rwStepsInput = document.getElementById('rw-steps');
+        const caFillProbInput = document.getElementById('ca-fill-prob');
+        const caIterationsInput = document.getElementById('ca-iterations');
+        const rcNumRoomsInput = document.getElementById('rc-num-rooms');
+        const rcMinRoomSizeInput = document.getElementById('rc-min-room-size');
+        const rcMaxRoomSizeInput = document.getElementById('rc-max-room-size');
+        const rcCorridorWidthInput = document.getElementById('rc-corridor-width');
+        const dwStepsInput = document.getElementById('dw-steps');
+
+        const enclosedOptionCheckbox = document.getElementById('enclosed-option');
+
+
+        let generatedHeightmapData = null; // To store the generated heightmap array
+
+        // --- Event Listeners ---
+        generateButton.addEventListener('click', generateHeightmap); // Renamed function
+        downloadButton.addEventListener('click', downloadHeightmapJson); // Renamed function
+        algorithmSelect.addEventListener('change', updateAlgorithmOptionsVisibility);
+
+        // --- Utility Functions ---
+
+        /**
+         * Creates a 2D grid initialized with a specific value.
+         * @param {number} width - The width of the grid.
+         * @param {number} height - The height of the grid.
+         * @param {*} initialValue - The value to fill the grid with.
+         * @returns {Array<Array<*>>} The created grid.
+         */
+        function createGrid(width, height, initialValue = TILE_TYPES.EMPTY) {
+            return Array.from({ length: height }, () => Array(width).fill(initialValue));
+        }
+
+        /**
+         * Fills a rectangular area in the grid with a specific value.
+         * Includes the borders of the rectangle.
+         * @param {Array<Array<number>>} grid - The grid to modify.
+         * @param {number} x1 - The starting x-coordinate (inclusive).
+         * @param {number} y1 - The starting y-coordinate (inclusive).
+         * @param {number} x2 - The ending x-coordinate (inclusive).
+         * @param {number} y2 - The ending y-coordinate (inclusive).
+         * @param {number} tileType - The tile type to fill with (e.g., TILE_TYPES.FLOOR).
+         */
+        function fillRect(grid, x1, y1, x2, y2, tileType) {
+            const startX = Math.min(x1, x2);
+            const endX = Math.max(x1, x2);
+            const startY = Math.min(y1, y2);
+            const endY = Math.max(y1, y2);
+
+            for (let y = startY; y <= endY; y++) {
+                for (let x = startX; x <= endX; x++) {
+                    // Ensure coordinates are within grid bounds
+                    if (x >= 0 && x < grid[0].length && y >= 0 && y < grid.length) {
+                         grid[y][x] = tileType;
+                    }
+                }
+            }
+        }
+
+         /**
+          * Gets valid cardinal neighbors (up, down, left, right) for a given cell.
+          * @param {number} x - The x-coordinate of the cell.
+          * @param {number} y - The y-coordinate of the cell.
+          * @param {number} width - Grid width.
+          * @param {number} height - Grid height.
+          * @returns {Array<{x: number, y: number}>} An array of valid neighbor coordinates.
+          */
+         function getCardinalNeighbors(x, y, width, height) {
+             const neighbors = [];
+             if (y > 0) neighbors.push({ x: x, y: y - 1 }); // North
+             if (x < width - 1) neighbors.push({ x: x + 1, y: y }); // East
+             if (y < height - 1) neighbors.push({ x: x, y: y + 1 }); // South
+             if (x > 0) neighbors.push({ x: x - 1, y: y }); // West
+             return neighbors;
+         }
+
+
+        // --- Heightmap Generation Algorithms (Adapted from Dungeon) ---
+
+        /**
+         * Random Walk Algorithm
+         * Carves out 'low height' areas by randomly moving a "digger".
+         * @param {Array<Array<number>>} grid - The grid to modify. Grid should be pre-filled (e.g., with WALL).
+         * @param {number} width - Grid width.
+         * @param {number} height - Grid height.
+         * @param {number} steps - Number of steps the digger takes.
+         * @returns {Array<Array<number>>} The modified grid (using TILE_TYPES).
+         */
+        function generateRandomWalk(grid, width, height, steps) {
+            const numSteps = steps || Math.floor(width * height * 0.6); // Default steps
+
+            let x = Math.floor(width / 2);
+            let y = Math.floor(height / 2);
+
+             // Initial carve at the center
+            if (x > 0 && x < width - 1 && y > 0 && y < height - 1) {
+                 grid[y][x] = TILE_TYPES.FLOOR; // Mark as low height
+             }
+
+
+            for (let i = 0; i < numSteps; i++) {
+                const direction = Math.floor(Math.random() * 4); // 0:N, 1:E, 2:S, 3:W
+                let nextX = x;
+                let nextY = y;
+
+                switch (direction) {
+                    case 0: nextY = y - 1; break; // Move North
+                    case 1: nextX = x + 1; break; // Move East
+                    case 2: nextY = y + 1; break; // Move South
+                    case 3: nextX = x - 1; break; // Move West
+                }
+
+                 // Check bounds before moving and carving
+                 if (nextX > 0 && nextX < width - 1 && nextY > 0 && nextY < height - 1) {
+                     x = nextX;
+                     y = nextY;
+                     grid[y][x] = TILE_TYPES.FLOOR; // Mark as low height
+                 }
+            }
+            return grid; // Grid was initialized with WALL, so areas not carved remain WALL (high height).
+        }
+
+        /**
+         * Cellular Automata Algorithm (Generates cave-like structures)
+         * @param {Array<Array<number>>} grid - The grid to modify. Grid should be pre-filled (e.g., with WALL).
+         * @param {number} width - Grid width.
+         * @param {number} height - Grid height.
+         * @param {number} fillProb - Initial percentage of 'high height' cells (0-100).
+         * @param {number} iterations - Number of smoothing iterations.
+         * @returns {Array<Array<number>>} The modified grid (using TILE_TYPES).
+         */
+        function generateCellularAutomata(grid, width, height, fillProb, iterations) {
+            // 1. Randomly initialize grid (excluding borders which remain WALL/high height)
+            for (let y = 1; y < height - 1; y++) {
+                for (let x = 1; x < width - 1; x++) {
+                     grid[y][x] = (Math.random() * 100 < fillProb) ? TILE_TYPES.WALL : TILE_TYPES.FLOOR; // WALL = high, FLOOR = low
+                }
+            }
+             // Borders are already walls from createGrid initialization
+
+            // 2. Simulation steps
+            for (let i = 0; i < iterations; i++) {
+                // Create a temporary grid for the next state to avoid modifying the grid while iterating
+                let newGrid = createGrid(width, height, TILE_TYPES.WALL); // Start next iteration with walls
+                 // Copy existing state to newGrid for inner cells to process
+                 for(let r=1; r<height - 1; r++) {
+                     for(let c=1; c<width - 1; c++) {
+                         newGrid[r][c] = grid[r][c]; // Copy inner cells
+                     }
+                 }
+
+
+                for (let y = 1; y < height - 1; y++) { // Iterate only on inner cells
+                    for (let x = 1; x < width - 1; x++) {
+                        let surroundingWalls = countSurroundingWalls(grid, x, y);
+
+                        // Rule 1: A wall stays a wall if it has 4 or more wall neighbors
+                        if (grid[y][x] === TILE_TYPES.WALL) {
+                            newGrid[y][x] = (surroundingWalls >= 4) ? TILE_TYPES.WALL : TILE_TYPES.FLOOR;
+                        }
+                        // Rule 2: A floor becomes a wall if it has 5 or more wall neighbors
+                        else { // grid[y][x] === TILE_TYPES.FLOOR
+                            newGrid[y][x] = (surroundingWalls >= 5) ? TILE_TYPES.WALL : TILE_TYPES.FLOOR;
+                        }
+                    }
+                }
+                grid = newGrid; // Update grid for the next iteration
+            }
+            return grid;
+        }
+
+        /**
+         * Helper for Cellular Automata: Counts wall neighbours in the 8 surrounding cells.
+         * @param {Array<Array<number>>} grid - The grid to check.
+         * @param {number} x - The x-coordinate of the center cell.
+         * @param {number} y - The y-coordinate of the center cell.
+         * @returns {number} The count of surrounding wall tiles.
+         */
+        function countSurroundingWalls(grid, x, y) {
+            let wallCount = 0;
+            for (let neighborY = y - 1; neighborY <= y + 1; neighborY++) {
+                for (let neighborX = x - 1; neighborX <= x + 1; neighborX++) {
+                    // Skip the center cell itself
+                    if (neighborX === x && neighborY === y) continue;
+
+                    // Check bounds: Treat out-of-bounds cells as walls for CA rules
+                    if (neighborX < 0 || neighborX >= grid[0].length || neighborY < 0 || neighborY >= grid.length) {
+                        wallCount++;
+                    } else if (grid[neighborY][neighborX] === TILE_TYPES.WALL) {
+                        // Count only if the neighbor is a wall
+                        wallCount++;
+                    }
+                }
+            }
+            return wallCount;
+        }
+
+
+        /**
+         * Rooms and Corridors Algorithm
+         * Generates a structure by placing 'low height' rooms and connecting them with corridors.
+         * @param {Array<Array<number>>} grid - The grid to modify. Grid should be pre-filled (e.g., with WALL).
+         * @param {number} width - Grid width.
+         * @param {number} height - Grid height.
+         * @param {number} numRooms - Desired number of rooms.
+         * @param {number} minRoomSize - Minimum width/height of a room (excluding walls).
+         * @param {number} maxRoomSize - Maximum width/height of a room (excluding walls).
+         * @param {number} corridorWidth - Width of the corridors.
+         * @returns {Array<Array<number>>} The modified grid (using TILE_TYPES).
+         */
+        function generateRoomsAndCorridors(grid, width, height, numRooms, minRoomSize, maxRoomSize, corridorWidth) {
+             const rooms = [];
+             const MAX_ATTEMPTS = 1000; // Prevent infinite loops if rooms can't be placed
+
+             // Ensure rooms fit within bounds and have at least a 1-tile wall buffer
+             const adjustedMaxWidth = width - 2;
+             const adjustedMaxHeight = height - 2;
+
+             if (maxRoomSize + 2 > adjustedMaxWidth || maxRoomSize + 2 > adjustedMaxHeight) {
+                 console.warn("Max room size is too large for map dimensions. Adjusting max room size.");
+                 maxRoomSize = Math.min(maxRoomSize, adjustedMaxWidth - 2, adjustedMaxHeight - 2);
+                 minRoomSize = Math.min(minRoomSize, maxRoomSize);
+             }
+             if (minRoomSize < 1) minRoomSize = 1;
+             if (maxRoomSize < minRoomSize) maxRoomSize = minRoomSize;
+             if (numRooms < 1) numRooms = 1;
+             if (corridorWidth < 1) corridorWidth = 1;
+
+
+             // Place Rooms
+             for (let i = 0; i < numRooms; i++) {
+                 let roomPlaced = false;
+                 let attempts = 0;
+
+                 while (!roomPlaced && attempts < MAX_ATTEMPTS) {
+                     const roomWidth = Math.floor(Math.random() * (maxRoomSize - minRoomSize + 1)) + minRoomSize;
+                     const roomHeight = Math.floor(Math.random() * (maxRoomSize - minRoomSize + 1)) + minRoomSize;
+
+                     // Random top-left corner (ensure room fits within bounds with border)
+                     const roomX = Math.floor(Math.random() * (width - roomWidth - 1)) + 1; // +1 for border
+                     const roomY = Math.floor(Math.random() * (height - roomHeight - 1)) + 1; // +1 for border
+
+                     const roomX2 = roomX + roomWidth - 1; // Inclusive end
+                     const roomY2 = roomY + roomHeight - 1; // Inclusive end
+
+                     // Check for overlap with existing rooms (+1 buffer for walls between rooms)
+                     let overlaps = false;
+                     for (const existingRoom of rooms) {
+                         if (roomX <= existingRoom.x2 + 1 &&
+                             roomX2 >= existingRoom.x - 1 &&
+                             roomY <= existingRoom.y2 + 1 &&
+                             roomY2 >= existingRoom.y - 1) {
+                             overlaps = true;
+                             break;
+                         }
+                     }
+
+                     if (!overlaps) {
+                         // Carve out the room (low height)
+                         fillRect(grid, roomX, roomY, roomX2, roomY2, TILE_TYPES.FLOOR);
+                         rooms.push({ x: roomX, y: roomY, x2: roomX2, y2: roomY2, width: roomWidth, height: roomHeight });
+                         roomPlaced = true;
+                     }
+                     attempts++;
+                 }
+                 if (!roomPlaced) {
+                     console.warn(`Could not place room ${i + 1} after ${MAX_ATTEMPTS} attempts.`);
+                 }
+             }
+
+             // Connect Rooms with Corridors
+             // Simple approach: Connect the center of each room to the center of the previous room
+             if (rooms.length > 1) {
+                 for (let i = 1; i < rooms.length; i++) {
+                     const room1 = rooms[i - 1];
+                     const room2 = rooms[i];
+
+                     const center1X = Math.floor(room1.x + room1.width / 2);
+                     const center1Y = Math.floor(room1.y + room1.height / 2);
+                     const center2X = Math.floor(room2.x + room2.width / 2);
+                     const center2Y = Math.floor(room2.y + room2.height / 2);
+
+                     // Randomly decide whether to go horizontally then vertically, or vice versa
+                     if (Math.random() < 0.5) {
+                         createCorridor(grid, center1X, center1Y, center2X, center1Y, corridorWidth); // Horizontal first
+                         createCorridor(grid, center2X, center1Y, center2X, center2Y, corridorWidth); // Then vertical
+                     } else {
+                         createCorridor(grid, center1X, center1Y, center1X, center2Y, corridorWidth); // Vertical first
+                         createCorridor(grid, center1X, center2Y, center2X, center2Y, corridorWidth); // Then horizontal
+                     }
+                 }
+             }
+
+            return grid; // Grid was initialized with WALL, so areas not carved remain WALL (high height).
+        }
+
+        /**
+         * Helper for Rooms and Corridors: Creates a corridor between two points.
+         * Uses fillRect to carve out the corridor area (low height).
+         * @param {Array<Array<number>>} grid - The grid to modify.
+         * @param {number} x1 - Start X.
+         * @param {number} y1 - Start Y.
+         * @param {number} x2 - End X.
+         * @param {number} y2 - End Y.
+         * @param {number} width - Corridor width.
+         */
+        function createCorridor(grid, x1, y1, x2, y2, width) {
+             const startX = Math.min(x1, x2);
+             const endX = Math.max(x1, x2);
+             const startY = Math.min(y1, y2);
+             const endY = Math.max(y1, y2);
+
+             if (x1 === x2) { // Vertical corridor
+                 const halfWidth = Math.floor(width / 2);
+                 // Ensure corridor stays within bounds
+                 const carveStartX = Math.max(1, startX - halfWidth);
+                 const carveEndX = Math.min(grid[0].length - 2, endX + halfWidth);
+                 const carveStartY = Math.max(1, startY);
+                 const carveEndY = Math.min(grid.length - 2, endY);
+                 fillRect(grid, carveStartX, carveStartY, carveEndX, carveEndY, TILE_TYPES.FLOOR);
+             } else if (y1 === y2) { // Horizontal corridor
+                 const halfWidth = Math.floor(width / 2);
+                  // Ensure corridor stays within bounds
+                 const carveStartX = Math.max(1, startX);
+                 const carveEndX = Math.min(grid[0].length - 2, endX);
+                 const carveStartY = Math.max(1, startY - halfWidth);
+                 const carveEndY = Math.min(grid.length - 2, endY + halfWidth);
+                 fillRect(grid, carveStartX, carveStartY, carveEndX, carveEndY, TILE_TYPES.FLOOR);
+             }
+             // For diagonal corridors (not implemented in this simple version), would need different logic
+        }
+
+         /**
+          * Drunkard's Walk Algorithm
+          * Starts with a grid of 'high height' and carves out 'low height' areas.
+          * @param {Array<Array<number>>} grid - The grid to modify. Grid should be pre-filled with WALL.
+          * @param {number} width - Grid width.
+          * @param {number} height - Grid height.
+          * @param {number} steps - Number of steps the drunkard takes.
+          * @returns {Array<Array<number>>} The modified grid (using TILE_TYPES).
+          */
+         function generateDrunkardsWalk(grid, width, height, steps) {
+             const numSteps = steps || Math.floor(width * height * 0.8); // Default steps
+
+             // Start at a random valid inner position
+             let x = Math.floor(Math.random() * (width - 2)) + 1;
+             let y = Math.floor(Math.random() * (height - 2)) + 1;
+
+             grid[y][x] = TILE_TYPES.FLOOR; // Start point (low height)
+
+             for (let i = 0; i < numSteps; i++) {
+                 const neighbors = getCardinalNeighbors(x, y, width, height);
+                 if (neighbors.length > 0) {
+                     const nextCell = neighbors[Math.floor(Math.random() * neighbors.length)];
+                     x = nextCell.x;
+                     y = nextCell.y;
+                     grid[y][x] = TILE_TYPES.FLOOR; // Carve low height
+                 }
+             }
+             return grid;
+         }
+
+         /**
+          * Basic Maze Generation Algorithm (Recursive Backtracker)
+          * Generates a perfect maze (no loops) by carving 'low height' paths through a grid of 'high height'.
+          * Works best on odd dimensions (e.g., 31x21) to ensure a solid border.
+          * @param {Array<Array<number>>} grid - The grid to modify. Grid should be pre-filled with WALL.
+          * @param {number} width - Grid width.
+          * @param {number} height - Grid height.
+          * @returns {Array<Array<number>>} The modified grid (using TILE_TYPES).
+          */
+         function generateBasicMaze(grid, width, height) {
+             // Ensure grid is initialized with walls (high height)
+             for(let y=0; y<height; y++) {
+                 for(let x=0; x<width; x++) {
+                     grid[y][x] = TILE_TYPES.WALL;
+                 }
+             }
+
+             const stack = [];
+
+             // Start at a random cell (must be an odd coordinate for a grid of walls)
+             const startX = Math.floor(Math.random() * (Math.floor((width - 2) / 2))) * 2 + 1;
+             const startY = Math.floor(Math.random() * (Math.floor((height - 2) / 2))) * 2 + 1;
+
+             grid[startY][startX] = TILE_TYPES.FLOOR; // Start point (low height)
+             stack.push({ x: startX, y: startY });
+
+             while (stack.length > 0) {
+                 const current = stack[stack.length - 1]; // Peek at the top
+
+                 const neighbors = [];
+                 // Check neighbors 2 units away (must be WALL/high height)
+                 if (current.y > 1 && grid[current.y - 2][current.x] === TILE_TYPES.WALL) neighbors.push({ x: current.x, y: current.y - 2 }); // North
+                 if (current.x < width - 2 && grid[current.y][current.x + 2] === TILE_TYPES.WALL) neighbors.push({ x: current.x + 2, y: current.x }); // East
+                 if (current.y < height - 2 && grid[current.y + 2][current.x] === TILE_TYPES.WALL) neighbors.push({ x: current.x, y: current.y + 2 }); // South
+                 if (current.x > 1 && grid[current.y][current.x - 2] === TILE_TYPES.WALL) neighbors.push({ x: current.x - 2, y: current.x }); // West
+
+                 if (neighbors.length > 0) {
+                     const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+
+                     // Carve path between current and next (low height)
+                     grid[current.y + (next.y - current.y) / 2][current.x + (next.x - current.x) / 2] = TILE_TYPES.FLOOR;
+                     grid[next.y][next.x] = TILE_TYPES.FLOOR;
+
+                     stack.push(next); // Push the next cell onto the stack
+                 } else {
+                     stack.pop(); // No unvisited neighbors, backtrack
+                 }
+             }
+             return grid;
+         }
+
+
+        // --- Main Generation & Output ---
+
+        /**
+         * Main function to generate the heightmap based on selected algorithm.
+         */
+        function generateHeightmap() { // Renamed function
+            const width = parseInt(mapWidthInput.value, 10);
+            const height = parseInt(mapHeightInput.value, 10);
+            const algorithm = algorithmSelect.value;
+            const isEnclosed = enclosedOptionCheckbox.checked;
+            const maxHeight = parseInt(maxHeightInput.value, 10); // Renamed variable
+
+            // Input validation
+            if (isNaN(width) || isNaN(height) || width < 10 || height < 10 || width > 256 || height > 256) {
+                alert("Invalid map dimensions! Width and Height must be between 10 and 256.");
+                return; // Stop execution if validation fails
+            }
+             // Validate max height
+             if (isNaN(maxHeight) || maxHeight < 1 || maxHeight > 9) { // Capping ASCII preview at 9 for simplicity
+                 alert(`Invalid Max Height Value. Must be between 1 and 9 for ASCII preview.`);
+                 return; // Stop execution if validation fails
+             }
+
+
+            // Initialize grid - start with all walls (high height) is often easier for carving algorithms
+            // Maze algorithm needs all walls initially, others can start with walls too.
+            let grid = createGrid(width, height, TILE_TYPES.WALL); // Initialize with WALL (high height)
+
+            try {
+                asciiPreview.textContent = "Generating..."; // Provide feedback
+                downloadButton.disabled = true; // Disable download during generation
+                generatedHeightmapData = null;
+
+                // Use setTimeout to allow the "Generating..." message to render
+                setTimeout(() => {
+                    try {
+                        switch (algorithm) {
+                            case 'randomWalk':
+                                const rwSteps = parseInt(rwStepsInput.value, 10);
+                                // Pass rwSteps only if it's a valid number > 0, otherwise use default in function
+                                grid = generateRandomWalk(grid, width, height, (!isNaN(rwSteps) && rwSteps > 0) ? rwSteps : null);
+                                break;
+                            case 'cellularAutomata':
+                                const caFillProb = parseInt(caFillProbInput.value, 10);
+                                const caIterations = parseInt(caIterationsInput.value, 10);
+                                if (isNaN(caFillProb) || isNaN(caIterations) || caFillProb < 0 || caFillProb > 100 || caIterations < 1 || caIterations > 10) {
+                                     throw new Error("Invalid Cellular Automata parameters! Fill% (0-100), Iterations (1-10).");
+                                 }
+                                grid = generateCellularAutomata(grid, width, height, caFillProb, caIterations);
+                                break;
+                            case 'roomsAndCorridors':
+                                const rcNumRooms = parseInt(rcNumRoomsInput.value, 10);
+                                const rcMinRoomSize = parseInt(rcMinRoomSizeInput.value, 10);
+                                const rcMaxRoomSize = parseInt(rcMaxRoomSizeInput.value, 10);
+                                const rcCorridorWidth = parseInt(rcCorridorWidthInput.value, 10);
+                                if (isNaN(rcNumRooms) || isNaN(rcMinRoomSize) || isNaN(rcMaxRoomSize) || isNaN(rcCorridorWidth) ||
+                                    rcNumRooms < 2 || rcMinRoomSize < 3 || rcMaxRoomSize < rcMinRoomSize || rcCorridorWidth < 1) {
+                                    throw new Error("Invalid Rooms & Corridors parameters! Check room count, sizes, and corridor width.");
+                                }
+                                // Simple validation based on map size
+                                if (rcMaxRoomSize + 2 > width || rcMaxRoomSize + 2 > height) {
+                                     throw new Error(`Max room size (${rcMaxRoomSize}) is too large for map dimensions (${width}x${height}). Must be at least 2 less than the smaller dimension.`);
+                                }
+
+                                grid = generateRoomsAndCorridors(grid, width, height, rcNumRooms, rcMinRoomSize, rcMaxRoomSize, rcCorridorWidth);
+                                break;
+                            case 'drunkardsWalk':
+                                const dwSteps = parseInt(dwStepsInput.value, 10);
+                                grid = generateDrunkardsWalk(grid, width, height, (!isNaN(dwSteps) && dwSteps > 0) ? dwSteps : null);
+                                break;
+                             case 'basicMaze':
+                                 // Maze works best on odd dimensions for a clean border
+                                 if (width % 2 === 0 || height % 2 === 0) {
+                                      console.warn("Maze algorithm works best with odd dimensions for a solid border.");
+                                 }
+                                 grid = generateBasicMaze(grid, width, height);
+                                 break;
+                            default:
+                                throw new Error("Selected algorithm not implemented yet.");
+                        }
+
+                         // --- Apply Enclosed Option ---
+                         if (isEnclosed) {
+                             // Ensure the entire border is WALL (high height)
+                             for (let x = 0; x < width; x++) {
+                                 grid[0][x] = TILE_TYPES.WALL; // Top border
+                                 grid[height - 1][x] = TILE_TYPES.WALL; // Bottom border
+                             }
+                             for (let y = 0; y < height; y++) {
+                                 grid[y][0] = TILE_TYPES.WALL; // Left border
+                                 grid[y][width - 1] = TILE_TYPES.WALL; // Right border
+                             }
+                         }
+
+
+                        // Generate ASCII Preview
+                        displayAsciiPreview(grid, width, height, maxHeight); // Pass maxHeight
+
+                        // Generate Heightmap Data (2D array of numbers)
+                        generatedHeightmapData = createHeightmapData(grid, width, height, maxHeight); // Create the heightmap array
+
+                        // Enable download button
+                        downloadButton.disabled = false;
+                    } catch (error) {
+                        console.error("Error during heightmap generation:", error);
+                        // Display a more informative error message
+                        asciiPreview.textContent = `Error: ${error.message || error.toString() || 'Unknown error occurred during generation.'}`;
+                        downloadButton.disabled = true;
+                        generatedHeightmapData = null;
+                    }
+                }, 10); // Small delay
+
+            } catch (error) {
+                 // Catch immediate errors (like parameter validation before setTimeout)
+                 console.error("Error setting up generation:", error);
+                 asciiPreview.textContent = `Error: ${error.message || error.toString() || 'Unknown error occurred during setup.'}`;
+                 downloadButton.disabled = true;
+                 generatedHeightmapData = null;
+            }
+        }
+
+        /**
+         * Updates the visibility of algorithm-specific option divs.
+         */
+        function updateAlgorithmOptionsVisibility() {
+            const selectedAlgorithm = algorithmSelect.value;
+
+            // Hide all options divs
+            const allAlgoOptions = document.querySelectorAll('.algo-options');
+            allAlgoOptions.forEach(div => div.style.display = 'none');
+
+
+            // Show the selected algorithm's options div
+            switch (selectedAlgorithm) {
+                case 'randomWalk':
+                    randomWalkOptions.style.display = 'block';
+                    break;
+                case 'cellularAutomata':
+                    cellularAutomataOptions.style.display = 'block';
+                    break;
+                 case 'roomsAndCorridors':
+                    roomsAndCorridorsOptions.style.display = 'block';
+                    break;
+                 case 'drunkardsWalk':
+                    drunkardsWalkOptions.style.display = 'block';
+                    break;
+                 case 'basicMaze':
+                    basicMazeOptions.style.display = 'block';
+                    break;
+            }
+        }
+
+
+        /**
+         * Displays the generated grid as ASCII characters representing height.
+         * Maps TILE_TYPES.FLOOR to height 0 and TILE_TYPES.WALL/EMPTY to maxHeight.
+         * Uses numbers 0-9 for preview, capping at 9.
+         * @param {Array<Array<number>>} grid - The generated grid (using TILE_TYPES).
+         * @param {number} width - Grid width.
+         * @param {number} height - Grid height.
+         * @param {number} maxHeight - The maximum height value for 'wall' areas.
+         */
+        function displayAsciiPreview(grid, width, height, maxHeight) {
+            let preview = '';
+            const displayMaxHeight = Math.min(maxHeight, 9); // Cap display at 9
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const tileType = grid[y][x];
+                    let heightValue = 0; // Default to base height (0)
+
+                    if (tileType === TILE_TYPES.WALL || tileType === TILE_TYPES.EMPTY) {
+                        // Areas that remained WALL or were never touched (EMPTY) become max height
+                        heightValue = displayMaxHeight;
+                    }
+                    // TILE_TYPES.FLOOR remains height 0
+
+                    preview += heightValue.toString(); // Use the number as the character
+                }
+                preview += '\n';
+            }
+
+            asciiPreview.textContent = preview;
+        }
+
+        /**
+         * Creates a 2D array of numbers representing the heightmap data.
+         * Maps TILE_TYPES.FLOOR to height 0 and TILE_TYPES.WALL/EMPTY to maxHeight.
+         * @param {Array<Array<number>>} grid - The generated grid (using TILE_TYPES).
+         * @param {number} width - Grid width.
+         * @param {number} height - Grid height.
+         * @param {number} maxHeight - The maximum height value for 'wall' areas.
+         * @returns {Array<Array<number>>} A 2D array of height values.
+         */
+        function createHeightmapData(grid, width, height, maxHeight) {
+            const heightmap = [];
+
+            for (let y = 0; y < height; y++) {
+                heightmap[y] = [];
+                for (let x = 0; x < width; x++) {
+                    const tileType = grid[y][x];
+                    let heightValue = 0; // Base height
+
+                    if (tileType === TILE_TYPES.WALL || tileType === TILE_TYPES.EMPTY) {
+                         // Areas that remained WALL or were never touched (EMPTY) become max height
+                        heightValue = maxHeight;
+                    }
+                    // TILE_TYPES.FLOOR remains height 0
+
+                    heightmap[y][x] = heightValue;
+                }
+            }
+            return heightmap;
+        }
+
+
+        /**
+         * Triggers the download of the generated heightmap data as a JSON file.
+         */
+        function downloadHeightmapJson() { // Renamed function
+            if (!generatedHeightmapData) {
+                alert("No heightmap data generated yet!");
+                return;
+            }
+
+            const heightmapJsonString = JSON.stringify(generatedHeightmapData, null, 2); // Pretty print JSON
+            const blob = new Blob([heightmapJsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `heightmap_${mapWidthInput.value}x${mapHeightInput.value}.json`; // Suggest a filename
+
+            document.body.appendChild(a); // Required for Firefox
+            a.click();
+
+            // Clean up
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- Initial Setup ---
+        // Trigger change event initially to set correct visibility of options
+        updateAlgorithmOptionsVisibility();
+
+    </script>
+</body>
+</html>

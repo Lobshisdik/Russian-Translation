@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Complete Grape Reference - grapeworld.eu</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background-color: #ffffaa;
+            margin: 0;
+            padding: 0;
+            color: #663300;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #ffff66, #cccc00);
+            border: 3px solid #999900;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .header h1 {
+            color: #663300;
+            font-size: 28px;
+            margin: 0;
+            text-shadow: 2px 2px #dddd00;
+        }
+        
+        .nav-bar {
+            background-color: #ffff99;
+            border: 2px solid #cccc00;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            color: #663300;
+            text-decoration: underline;
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .nav-link:hover {
+            color: #990000;
+            background-color: #ffff66;
+        }
+        
+        .main-content {
+            background-color: #ffffcc;
+            border: 2px solid #cccc66;
+            padding: 20px;
+            margin: 0 10px 10px 10px;
+        }
+        
+        .section {
+            display: none;
+            background-color: #ffffdd;
+            border: 1px solid #dddd99;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .grape-header {
+            background-color: #ffff77;
+            border: 2px solid #dddd00;
+            padding: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .info-box {
+            background-color: #ffffee;
+            border: 2px solid #cccc99;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .variety-box {
+            background-color: #ffff88;
+            border: 1px solid #cccc77;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        
+        .footer {
+            background-color: #dddd88;
+            border: 2px solid #aaaa55;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            margin: 10px;
+        }
+        
+        .update-ticker {
+            background-color: #ffff44;
+            border: 1px solid #cccc11;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .grape-badge {
+            background-color: #663300;
+            color: #ffff99;
+            padding: 2px 6px;
+            font-size: 10px;
+            border-radius: 2px;
+            margin: 0 3px;
+        }
+        
+        .nutrition-table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #ffffaa;
+        }
+        
+        .nutrition-table th, .nutrition-table td {
+            border: 1px solid #cccc66;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .nutrition-table th {
+            background-color: #ffff77;
+            font-weight: bold;
+        }
+        
+        ul, ol {
+            background-color: #ffffee;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #dddd88;
+        }
+        
+        .cultivation-step {
+            background-color: #ffff99;
+            border-left: 4px solid #cccc00;
+            padding: 10px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <marquee>*** WELCOME TO THE COMPLETE GRAPE REFERENCE - UPDATED JANUARY 2001 - YOUR PREMIER GRAPE INFORMATION SOURCE ON THE HYPERNET ***</marquee>
+    </div>
+
+    <div class="header">
+        <h1>🍇 THE COMPLETE GRAPE REFERENCE 🍇</h1>
+        <p>Your Ultimate Hypernet Resource for Everything Grape-Related</p>
+        <span class="grape-badge">VITICULTURE</span>
+        <span class="grape-badge">NUTRITION</span>
+        <span class="grape-badge">VARIETIES</span>
+        <span class="grape-badge">CULTIVATION</span>
+    </div>
+
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">Grape Home</span>
+        <span class="nav-link" onclick="showSection('varieties')">Grape Varieties</span>
+        <span class="nav-link" onclick="showSection('nutrition')">Nutrition Facts</span>
+        <span class="nav-link" onclick="showSection('cultivation')">Growing Grapes</span>
+        <span class="nav-link" onclick="showSection('anatomy')">Grape Anatomy</span>
+        <span class="nav-link" onclick="showSection('history')">Grape History</span>
+        <span class="nav-link" onclick="showSection('storage')">Storage & Handling</span>
+        <span class="nav-link" onclick="showSection('diseases')">Diseases & Pests</span>
+        <span class="nav-link" onclick="showSection('harvesting')">Harvesting</span>
+        <span class="nav-link" onclick="showSection('contact')">Contact</span>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="section active">
+            <div class="grape-header">
+                <h2>Welcome to the World's Most Comprehensive Grape Database</h2>
+                <p><strong>Established 1999 | Over 2,000 Grape Varieties Documented</strong></p>
+            </div>
+            
+            <div class="info-box">
+                <h3>What You'll Find Here</h3>
+                <p>This website contains the most exhaustive collection of grape information available on the Hypernet. From ancient grape varieties to modern cultivation techniques, we cover every aspect of grape knowledge.</p>
+                
+                <p><strong>Our Database Includes:</strong></p>
+                <ul>
+                    <li>Complete catalog of over 2,000 grape varieties worldwide</li>
+                    <li>Detailed nutritional information and health benefits</li>
+                    <li>Step-by-step cultivation and growing guides</li>
+                    <li>Comprehensive grape anatomy and biology</li>
+                    <li>Historical documentation of grape cultivation</li>
+                    <li>Storage, handling, and preservation techniques</li>
+                    <li>Disease identification and pest management</li>
+                    <li>Harvesting timing and methods</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>Featured Grape Facts</h3>
+                <p><strong>Did You Know?</strong> Grapes are one of the oldest cultivated fruits, with evidence of grape growing dating back to 6000 BC in the Middle East and 4000 BC in the Caucasus region.</p>
+                
+                <p><strong>Grape Statistics:</strong></p>
+                <ul>
+                    <li>Over 60 million tons of grapes produced globally each year</li>
+                    <li>Grapes are grown on every continent except Antarctica</li>
+                    <li>A single grapevine can produce up to 40 pounds of grapes</li>
+                    <li>There are over 10,000 known grape varieties worldwide</li>
+                    <li>Grapes contain over 600 chemical compounds</li>
+                </ul>
+            </div>
+            
+            <p><em>Navigate using the menu above to explore our comprehensive grape database. This site is maintained by the European Viticulture Research Institute.</em></p>
+        </div>
+
+        <div id="varieties" class="section">
+            <h3>Grape Varieties Encyclopedia</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Grape Variety Database - 2,000+ Varieties</h4>
+            </div>
+            
+            <h4>Major Table Grape Categories</h4>
+            
+            <div class="variety-box">
+                <h5>Vitis Vinifera (European Grapes)</h5>
+                <p><strong>Thompson Seedless:</strong> Most common table grape variety. Green, seedless, oval-shaped. Sweet flavor with crisp texture. Origin: Turkey. Harvest: August-September.</p>
+                <p><strong>Red Globe:</strong> Large, dark red grapes with seeds. Firm flesh, mild sweet flavor. Excellent storage capability. Origin: California breeding program.</p>
+                <p><strong>Crimson Seedless:</strong> Deep red, seedless variety. Crisp texture, sweet-tart flavor. Late season variety. Harvest: October-November.</p>
+                <p><strong>Ruby Seedless:</strong> Medium-sized red grapes, seedless. Sweet flavor, firm texture. Mid-season variety.</p>
+                <p><strong>Sugraone (Superior):</strong> Large white seedless grapes. Very sweet, firm flesh. Early season variety. Harvest: July-August.</p>
+            </div>
+            
+            <div class="variety-box">
+                <h5>American Grape Varieties (Vitis Labrusca)</h5>
+                <p><strong>Concord:</strong> Dark purple grapes with seeds. Strong "foxy" flavor. Slip-skin variety. Primary use: juice and jams. Harvest: September.</p>
+                <p><strong>Niagara:</strong> Green-white grapes with seeds. Sweet, aromatic flavor. Slip-skin variety. Cold-hardy. Harvest: September.</p>
+                <p><strong>Catawba:</strong> Red-purple grapes. Sweet flavor when fully ripe. Cold-hardy variety. Harvest: Late September.</p>
+            </div>
+            
+            <div class="variety-box">
+                <h5>Hybrid Grape Varieties</h5>
+                <p><strong>Reliance:</strong> Red seedless grapes. Cold-hardy hybrid. Sweet flavor, tender skin. Harvest: August.</p>
+                <p><strong>Einset Seedless:</strong> Red seedless variety. Very cold-hardy. Strawberry-like flavor. Harvest: August.</p>
+                <p><strong>Marquette:</strong> Dark blue grapes. Cold-hardy hybrid. Complex flavor profile. Harvest: September.</p>
+            </div>
+            
+            <h4>Rare and Specialty Varieties</h4>
+            <div class="info-box">
+                <p><strong>Moon Drop Grapes:</strong> Elongated purple grapes with unusual shape. Crisp, sweet flavor. Seedless variety.</p>
+                <p><strong>Cotton Candy Grapes:</strong> Green seedless grapes with cotton candy flavor. Specialty breeding achievement.</p>
+                <p><strong>Witch Fingers:</strong> Long, slender purple grapes. Sweet flavor, unusual appearance.</p>
+                <p><strong>Gum Drop Grapes:</strong> Small, intensely sweet grapes. Various colors available.</p>
+            </div>
+            
+            <h4>Color Classification</h4>
+            <ul>
+                <li><strong>Green/White Grapes:</strong> Thompson Seedless, Sugraone, Princess, Perlette</li>
+                <li><strong>Red Grapes:</strong> Red Globe, Crimson Seedless, Ruby Seedless, Flame Seedless</li>
+                <li><strong>Purple/Black Grapes:</strong> Ribier, Beauty Seedless, Autumn Royal, Black Beauty</li>
+            </ul>
+        </div>
+
+        <div id="nutrition" class="section">
+            <h3>Grape Nutrition Information</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Nutritional Analysis of Grapes</h4>
+            </div>
+            
+            <h4>Nutritional Content per 100g of Fresh Grapes</h4>
+            <table class="nutrition-table">
+                <tr>
+                    <th>Nutrient</th>
+                    <th>Amount</th>
+                    <th>% Daily Value</th>
+                </tr>
+                <tr>
+                    <td>Calories</td>
+                    <td>69 kcal</td>
+                    <td>3.5%</td>
+                </tr>
+                <tr>
+                    <td>Carbohydrates</td>
+                    <td>18.1g</td>
+                    <td>6%</td>
+                </tr>
+                <tr>
+                    <td>Sugars</td>
+                    <td>16.25g</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Dietary Fiber</td>
+                    <td>0.9g</td>
+                    <td>4%</td>
+                </tr>
+                <tr>
+                    <td>Protein</td>
+                    <td>0.72g</td>
+                    <td>1%</td>
+                </tr>
+                <tr>
+                    <td>Fat</td>
+                    <td>0.16g</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Vitamin C</td>
+                    <td>10.8mg</td>
+                    <td>18%</td>
+                </tr>
+                <tr>
+                    <td>Vitamin K</td>
+                    <td>22μg</td>
+                    <td>28%</td>
+                </tr>
+                <tr>
+                    <td>Potassium</td>
+                    <td>191mg</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Manganese</td>
+                    <td>0.071mg</td>
+                    <td>4%</td>
+                </tr>
+            </table>
+            
+            <h4>Health Benefits of Grapes</h4>
+            <div class="info-box">
+                <h5>Antioxidant Properties</h5>
+                <p>Grapes contain powerful antioxidants including resveratrol, flavonoids, and anthocyanins. These compounds help protect cells from oxidative damage and may reduce inflammation.</p>
+                
+                <h5>Heart Health</h5>
+                <p>Regular grape consumption may support cardiovascular health through improved blood flow and reduced blood pressure. The potassium content helps regulate heart rhythm.</p>
+                
+                <h5>Brain Function</h5>
+                <p>Antioxidants in grapes may support cognitive function and memory. Some studies suggest potential neuroprotective effects.</p>
+                
+                <h5>Digestive Health</h5>
+                <p>Grapes provide dietary fiber and natural enzymes that support digestive health. They also contain prebiotics that feed beneficial gut bacteria.</p>
+            </div>
+            
+            <h4>Grape Sugar Content by Variety</h4>
+            <div class="variety-box">
+                <p><strong>High Sugar Content (18-22 Brix):</strong></p>
+                <ul>
+                    <li>Thompson Seedless: 20-22 Brix</li>
+                    <li>Crimson Seedless: 19-21 Brix</li>
+                    <li>Red Globe: 18-20 Brix</li>
+                </ul>
+                
+                <p><strong>Medium Sugar Content (16-18 Brix):</strong></p>
+                <ul>
+                    <li>Ruby Seedless: 17-18 Brix</li>
+                    <li>Flame Seedless: 16-18 Brix</li>
+                </ul>
+                
+                <p><strong>Note:</strong> Brix measures the sugar content in fruit. Higher Brix indicates sweeter grapes.</p>
+            </div>
+            
+            <h4>Caloric Comparison</h4>
+            <div class="info-box">
+                <p><strong>Fresh Grapes:</strong> 69 calories per 100g</p>
+                <p><strong>Dried Grapes (Raisins):</strong> 299 calories per 100g</p>
+                <p><strong>Grape Juice:</strong> 60 calories per 100ml</p>
+            </div>
+        </div>
+
+        <div id="cultivation" class="section">
+            <h3>Grape Cultivation Guide</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Guide to Growing Grapes</h4>
+            </div>
+            
+            <h4>Climate Requirements</h4>
+            <div class="info-box">
+                <p><strong>Temperature:</strong> Grapes require warm summers (21-32°C) and cool winters (below 7°C for dormancy)</p>
+                <p><strong>Growing Season:</strong> 150-200 frost-free days minimum</p>
+                <p><strong>Rainfall:</strong> 500-700mm annually, with dry conditions during harvest</p>
+                <p><strong>Sunlight:</strong> Full sun exposure (6-8 hours daily minimum)</p>
+                <p><strong>Humidity:</strong> Low to moderate humidity preferred to prevent fungal diseases</p>
+            </div>
+            
+            <h4>Soil Requirements</h4>
+            <div class="cultivation-step">
+                <h5>Soil Type</h5>
+                <p><strong>Preferred:</strong> Well-drained, deep soils with good organic content</p>
+                <p><strong>pH Level:</strong> 6.0-7.0 (slightly acidic to neutral)</p>
+                <p><strong>Drainage:</strong> Essential - grapes cannot tolerate waterlogged conditions</p>
+                <p><strong>Depth:</strong> Minimum 1 meter of workable soil depth</p>
+            </div>
+            
+            <h4>Planting Process</h4>
+            <div class="cultivation-step">
+                <h5>Step 1: Site Preparation</h5>
+                <ul>
+                    <li>Choose south-facing slope for optimal sun exposure</li>
+                    <li>Test soil pH and drainage</li>
+                    <li>Remove weeds and prepare planting rows</li>
+                    <li>Install drainage if necessary</li>
+                </ul>
+            </div>
+            
+            <div class="cultivation-step">
+                <h5>Step 2: Vine Selection</h5>
+                <ul>
+                    <li>Choose variety appropriate for climate zone</li>
+                    <li>Select certified disease-free rootstock</li>
+                    <li>Consider grafted vs. own-root vines</li>
+                    <li>Plan spacing: 2-3 meters between vines</li>
+                </ul>
+            </div>
+            
+            <div class="cultivation-step">
+                <h5>Step 3: Planting</h5>
+                <ul>
+                    <li>Plant in early spring after frost danger passes</li>
+                    <li>Dig holes 40cm deep and 40cm wide</li>
+                    <li>Plant at same depth as in nursery</li>
+                    <li>Water thoroughly after planting</li>
+                </ul>
+            </div>
+            
+            <h4>Training Systems</h4>
+            <div class="variety-box">
+                <h5>Common Training Methods</h5>
+                <p><strong>High Cordon:</strong> Horizontal cordon at 1.8m height. Good for vigorous varieties.</p>
+                <p><strong>Low Cordon:</strong> Horizontal cordon at 0.8m height. Easier maintenance, suitable for table grapes.</p>
+                <p><strong>Geneva Double Curtain:</strong> Two cordons for high-vigor vines. Improves light exposure.</p>
+                <p><strong>Pergola:</strong> Overhead training system. Traditional in some regions.</p>
+            </div>
+            
+            <h4>Pruning Schedule</h4>
+            <div class="info-box">
+                <p><strong>Winter Pruning (Dormant Season):</strong></p>
+                <ul>
+                    <li>Remove 90% of previous year's growth</li>
+                    <li>Select 2-4 healthy canes per vine</li>
+                    <li>Cut canes to 10-15 buds</li>
+                    <li>Remove weak, diseased, or crossing branches</li>
+                </ul>
+                
+                <p><strong>Summer Pruning:</strong></p>
+                <ul>
+                    <li>Remove suckers from base of vine</li>
+                    <li>Thin clusters if overloaded</li>
+                    <li>Remove excess shoots</li>
+                    <li>Position shoots for optimal sun exposure</li>
+                </ul>
+            </div>
+            
+            <h4>Fertilization Program</h4>
+            <div class="cultivation-step">
+                <h5>Nutrient Requirements</h5>
+                <p><strong>Nitrogen:</strong> 50-100 kg/hectare annually. Apply in early spring.</p>
+                <p><strong>Phosphorus:</strong> 30-60 kg/hectare. Apply based on soil test.</p>
+                <p><strong>Potassium:</strong> 100-200 kg/hectare. Critical for fruit quality.</p>
+                <p><strong>Micronutrients:</strong> Zinc, boron, and magnesium as needed based on leaf analysis.</p>
+            </div>
+            
+            <h4>Irrigation Management</h4>
+            <div class="info-box">
+                <p><strong>Water Requirements:</strong> 400-600mm during growing season</p>
+                <p><strong>Critical Periods:</strong> Fruit set, berry development, pre-harvest</p>
+                <p><strong>Methods:</strong> Drip irrigation preferred for efficiency and disease prevention</p>
+                <p><strong>Timing:</strong> Stop irrigation 2-3 weeks before harvest to concentrate flavors</p>
+            </div>
+        </div>
+
+        <div id="anatomy" class="section">
+            <h3>Grape Anatomy and Biology</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Grape Structure Analysis</h4>
+            </div>
+            
+            <h4>Grape Berry Structure</h4>
+            <div class="info-box">
+                <h5>External Components</h5>
+                <p><strong>Skin (Epicarp):</strong> Outer protective layer containing color pigments, bloom (waxy coating), and flavor compounds. Thickness varies by variety.</p>
+                <p><strong>Bloom:</strong> Natural waxy coating that protects grape from moisture loss and provides some disease resistance.</p>
+                
+                <h5>Internal Components</h5>
+                <p><strong>Pulp (Mesocarp):</strong> Flesh of the grape containing most of the juice, sugars, and acids. Makes up 85-90% of berry weight.</p>
+                <p><strong>Seeds:</strong> Usually 1-4 seeds per berry. Contains tannins and oils. Seedless varieties have undeveloped seed traces.</p>
+                <p><strong>Brush:</strong> Small stem attachment point where berry connects to cluster stem.</p>
+            </div>
+            
+            <h4>Grapevine Anatomy</h4>
+            <div class="variety-box">
+                <h5>Root System</h5>
+                <p><strong>Taproot:</strong> Main vertical root extending 1-2 meters deep</p>
+                <p><strong>Lateral Roots:</strong> Horizontal roots spreading 3-6 meters from trunk</p>
+                <p><strong>Feeder Roots:</strong> Fine roots responsible for nutrient and water uptake</p>
+                <p><strong>Root Functions:</strong> Anchorage, water absorption, nutrient uptake, carbohydrate storage</p>
+                
+                <h5>Trunk and Cordon</h5>
+                <p><strong>Trunk:</strong> Main stem supporting the vine structure. Can live 50+ years.</p>
+                <p><strong>Cordon:</strong> Permanent horizontal branches from which annual shoots grow</p>
+                <p><strong>Bark:</strong> Protective outer layer that develops with age</p>
+                
+                <h5>Annual Growth</h5>
+                <p><strong>Shoots:</strong> Current year's green growth bearing leaves, clusters, and tendrils</p>
+                <p><strong>Canes:</strong> Previous year's shoots that have become woody</p>
+                <p><strong>Nodes:</strong> Points on shoots/canes where leaves, clusters, and tendrils emerge</p>
+                <p><strong>Internodes:</strong> Sections between nodes</p>
+            </div>
+            
+            <h4>Leaf Structure and Function</h4>
+            <div class="cultivation-step">
+                <h5>Leaf Anatomy</h5>
+                <p><strong>Blade:</strong> Main photosynthetic surface with 3-5 lobes in most varieties</p>
+                <p><strong>Petiole:</strong> Leaf stem connecting blade to shoot</p>
+                <p><strong>Stipules:</strong> Small appendages at base of petiole</p>
+                <p><strong>Venation:</strong> Network of veins transporting water and nutrients</p>
+                
+                <h5>Leaf Functions</h5>
+                <ul>
+                    <li>Photosynthesis - converting sunlight to energy</li>
+                    <li>Transpiration - water regulation</li>
+                    <li>Gas exchange - oxygen and carbon dioxide</li>
+                    <li>Nutrient distribution throughout vine</li>
+                </ul>
+            </div>
+            
+            <h4>Cluster Development Stages</h4>
+            <div class="info-box">
+                <h5>Stage 1: Flowering (Bloom)</h5>
+                <p>Small flowers appear in clusters. Self-pollination occurs in most grape varieties. Duration: 1-2 weeks.</p>
+                
+                <h5>Stage 2: Fruit Set</h5>
+                <p>Fertilized flowers develop into small green berries. Unfertilized flowers drop off. Critical period for cluster size determination.</p>
+                
+                <h5>Stage 3: Berry Development</h5>
+                <p>Rapid cell division and growth. Berries remain green and hard. Acid levels high, sugar levels low.</p>
+                
+                <h5>Stage 4: Veraison (Color Change)</h5>
+                <p>Berries begin to soften and change color. Sugar accumulation accelerates. Acid levels begin to decrease.</p>
+                
+                <h5>Stage 5: Ripening</h5>
+                <p>Final maturation phase. Sugar levels peak, acids balance, flavor compounds develop. Berries reach full size and color.</p>
+            </div>
+            
+            <h4>Grape Cell Structure</h4>
+            <div class="variety-box">
+                <h5>Cellular Components</h5>
+                <p><strong>Cell Wall:</strong> Rigid structure providing shape and protection</p>
+                <p><strong>Vacuole:</strong> Large storage compartment containing sugars, acids, and water</p>
+                <p><strong>Chloroplasts:</strong> Photosynthetic organelles (in green tissues)</p>
+                <p><strong>Chromoplasts:</strong> Color-producing organelles containing pigments</p>
+                <p><strong>Nucleus:</strong> Control center containing genetic material</p>
+            </div>
+        </div>
+
+        <div id="history" class="section">
+            <h3>History of Grape Cultivation</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Historical Timeline of Grape Development</h4>
+            </div>
+            
+            <h4>Ancient Origins (8000-1000 BC)</h4>
+            <div class="cultivation-step">
+                <h5>8000-6000 BC: Wild Grape Gathering</h5>
+                <p>Archaeological evidence shows wild grape gathering in the Caucasus region (modern-day Georgia, Armenia). Cave paintings depict grape harvesting activities.</p>
+                
+                <h5>6000-4000 BC: Early Domestication</h5>
+                <p>First evidence of grape domestication in the Middle East. Clay vessels with grape residue found in Iran and Turkey. Development of early cultivation techniques.</p>
+                
+                <h5>4000-3000 BC: Mesopotamian Cultivation</h5>
+                <p>Babylonians and Assyrians develop advanced grape growing techniques. First written records of grape varieties and cultivation methods on cuneiform tablets.</p>
+                
+                <h5>3000-2000 BC: Egyptian Grape Culture</h5>
+                <p>Ancient Egyptians perfect grape cultivation along the Nile. Tomb paintings show detailed grape growing and processing methods. Development of trellising systems.</p>
+            </div>
+            
+            <h4>Classical Antiquity (1000 BC - 500 AD)</h4>
+            <div class="info-box">
+                <h5>Greek Contributions</h5>
+                <p>Ancient Greeks classify grape varieties and develop pruning techniques. Theophrastus writes "Enquiry into Plants" (300 BC), the first scientific treatise on grape cultivation.</p>
+                
+                <h5>Roman Innovations</h5>
+                <p>Romans spread grape cultivation throughout their empire. Columella's "De Re Rustica" (60 AD) provides detailed agricultural instructions including grape growing. Development of grafting techniques.</p>
+                
+                <h5>Variety Development</h5>
+                <p>Classical period sees identification and naming of numerous grape varieties. Greeks identify over 50 varieties, Romans document over 100.</p>
+            </div>
+            
+            <h4>Medieval Period (500-1500 AD)</h4>
+            <div class="variety-box">
+                <h5>Monastic Cultivation</h5>
+                <p>Medieval monasteries preserve and advance grape growing knowledge. Benedictine and Cistercian monks develop many European vineyards that exist today.</p>
+                
+                <h5>Variety Selection</h5>
+                <p>Monks carefully select and propagate superior grape varieties. Development of regional specializations based on climate and soil conditions.</p>
+                
+                <h5>Technical Advances</h5>
+                <p>Introduction of horse-drawn plows for vineyard work. Development of improved pruning and training methods. First use of sulfur for disease control.</p>
+            </div>
+            
+            <h4>Renaissance and Exploration (1500-1800)</h4>
+            <div class="cultivation-step">
+                <h5>New World Introduction</h5>
+                <p>Spanish conquistadors bring European grape varieties to the Americas. First vineyards established in Mexico (1520s), Peru (1540s), and Chile (1550s).</p>
+                
+                <h5>Scientific Revolution</h5>
+                <p>Development of botanical classification systems. Carl Linnaeus classifies grapes in "Species Plantarum" (1753). First systematic studies of grape diseases and pests.</p>
+                
+                <h5>Colonial Expansion</h5>
+                <p>European settlers attempt grape cultivation in North America. Discovery of native American grape species (Vitis labrusca, Vitis riparia). Early hybridization experiments.</p>
+            </div>
+            
+            <h4>Modern Era (1800-Present)</h4>
+            <div class="info-box">
+                <h5>19th Century Developments</h5>
+                <p><strong>1860s-1890s:</strong> Phylloxera crisis devastates European vineyards. Discovery that American rootstocks are resistant leads to grafting revolution.</p>
+                <p><strong>1880s:</strong> Development of systematic grape breeding programs. University research begins on grape cultivation and improvement.</p>
+                
+                <h5>20th Century Advances</h5>
+                <p><strong>1900-1950:</strong> Introduction of chemical pesticides and fertilizers. Development of mechanical cultivation equipment.</p>
+                <p><strong>1950-2000:</strong> Modern viticulture emerges with scientific understanding of grape biology. Development of controlled atmosphere storage and refrigerated transport.</p>
+                
+                <h5>Contemporary Period</h5>
+                <p><strong>1980s-Present:</strong> Genetic research reveals grape genome structure. Development of tissue culture propagation. Introduction of precision agriculture techniques.</p>
+            </div>
+            
+            <h4>Grape Variety Development Timeline</h4>
+            <div class="variety-box">
+                <h5>Ancient Varieties (Pre-1000 AD)</h5>
+                <ul>
+                    <li>Muscat varieties - Among oldest cultivated grapes</li>
+                    <li>Pinot family - Ancient European varieties</li>
+                    <li>Trebiano - Roman variety still widely grown</li>
+                </ul>
+                
+                <h5>Medieval Selections (1000-1500)</h5>
+                <ul>
+                    <li>Riesling - First documented in Germany (1435)</li>
+                    <li>Sangiovese - Developed in Tuscany</li>
+                    <li>Tempranillo - Spanish variety selection</li>
+                </ul>
+                
+                <h5>Modern Breeding (1800-Present)</h5>
+                <ul>
+                    <li>Thompson Seedless - Developed from ancient variety</li>
+                    <li>Ruby Seedless - California breeding (1960s)</li>
+                    <li>Crimson Seedless - Released 1989</li>
+                    <li>Cotton Candy Grapes - Released 2011</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="storage" class="section">
+            <h3>Grape Storage and Handling</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Guide to Grape Preservation</h4>
+            </div>
+            
+            <h4>Optimal Storage Conditions</h4>
+            <div class="info-box">
+                <h5>Temperature Requirements</h5>
+                <p><strong>Fresh Storage:</strong> 0-2°C (32-36°F) for maximum shelf life</p>
+                <p><strong>Short-term:</strong> 4-7°C (39-45°F) for 1-2 weeks</p>
+                <p><strong>Room Temperature:</strong> Consume within 3-5 days</p>
+                
+                <h5>Humidity Control</h5>
+                <p><strong>Optimal Range:</strong> 85-95% relative humidity</p>
+                <p><strong>Too Low:</strong> Causes shriveling and weight loss</p>
+                <p><strong>Too High:</strong> Promotes mold and decay</p>
+                
+                <h5>Air Circulation</h5>
+                <p>Gentle air movement prevents moisture buildup and maintains uniform temperature. Avoid direct air flow on grapes.</p>
+            </div>
+            
+            <h4>Packaging Methods</h4>
+            <div class="cultivation-step">
+                <h5>Commercial Packaging</h5>
+                <p><strong>Perforated Plastic Bags:</strong> Standard retail packaging. Allows gas exchange while maintaining humidity.</p>
+                <p><strong>Clamshell Containers:</strong> Rigid plastic containers protecting grapes from damage. Good visibility for consumers.</p>
+                <p><strong>Bulk Bins:</strong> Large containers for wholesale distribution. Must ensure proper ventilation.</p>
+                
+                <h5>Home Storage</h5>
+                <p><strong>Refrigerator Storage:</strong> Keep in original packaging or transfer to perforated plastic bags. Store in crisper drawer.</p>
+                <p><strong>Washing:</strong> Only wash immediately before consumption. Pre-washing promotes decay.</p>
+                <p><strong>Stem Attachment:</strong> Keep grapes attached to stems until consumption to maintain freshness.</p>
+            </div>
+            
+            <h4>Handling Procedures</h4>
+            <div class="variety-box">
+                <h5>Harvest Handling</h5>
+                <p><strong>Picking:</strong> Handle clusters gently to avoid berry damage. Use shallow containers to prevent crushing.</p>
+                <p><strong>Field Heat Removal:</strong> Cool grapes to 10°C within 4 hours of harvest for optimal quality.</p>
+                <p><strong>Sorting:</strong> Remove damaged, diseased, or overripe berries before storage.</p>
+                
+                <h5>Transportation</h5>
+                <p><strong>Refrigerated Transport:</strong> Maintain cold chain from harvest to consumer. Target temperature 0-2°C.</p>
+                <p><strong>Cushioning:</strong> Use protective packaging to prevent mechanical damage during transport.</p>
+                <p><strong>Orientation:</strong> Store clusters stem-end up to prevent berry dropping.</p>
+            </div>
+            
+            <h4>Storage Duration by Variety</h4>
+            <div class="info-box">
+                <p><strong>Excellent Storage (4-6 months):</strong></p>
+                <ul>
+                    <li>Red Globe - Thick skin, firm flesh</li>
+                    <li>Crimson Seedless - Late harvest, good storage characteristics</li>
+                    <li>Ribier - Large berries, sturdy variety</li>
+                </ul>
+                
+                <p><strong>Good Storage (2-4 months):</strong></p>
+                <ul>
+                    <li>Thompson Seedless - Most common variety</li>
+                    <li>Ruby Seedless - Moderate storage life</li>
+                    <li>Emperor - Traditional storage variety</li>
+                </ul>
+                
+                <p><strong>Limited Storage (2-6 weeks):</strong></p>
+                <ul>
+                    <li>Perlette - Early variety, delicate</li>
+                    <li>Beauty Seedless - Soft texture</li>
+                    <li>Fantasy Seedless - Short storage life</li>
+                </ul>
+            </div>
+            
+            <h4>Quality Indicators</h4>
+            <div class="cultivation-step">
+                <h5>Fresh Quality Signs</h5>
+                <ul>
+                    <li>Berries firmly attached to stems</li>
+                    <li>Bright, uniform color for variety</li>
+                    <li>Plump, firm berries</li>
+                    <li>Green, flexible stems</li>
+                    <li>Natural bloom on berry surface</li>
+                </ul>
+                
+                <h5>Quality Deterioration Signs</h5>
+                <ul>
+                    <li>Brown, brittle stems</li>
+                    <li>Berries easily falling from clusters</li>
+                    <li>Wrinkled or soft berries</li>
+                    <li>Mold growth on berries or stems</li>
+                    <li>Off-odors or fermentation smell</li>
+                </ul>
+            </div>
+            
+            <h4>Preservation Methods</h4>
+            <div class="variety-box">
+                <h5>Drying (Raisins)</h5>
+                <p><strong>Sun Drying:</strong> Traditional method taking 2-3 weeks. Produces natural raisins.</p>
+                <p><strong>Dehydrator Drying:</strong> Controlled environment, 6-12 hours at 60°C.</p>
+                <p><strong>Oven Drying:</strong> Home method, 12-24 hours at lowest temperature setting.</p>
+                
+                <h5>Freezing</h5>
+                <p><strong>Whole Grapes:</strong> Wash, dry, and freeze on trays. Transfer to bags when frozen solid.</p>
+                <p><strong>Storage Life:</strong> 6-12 months in freezer</p>
+                <p><strong>Uses:</strong> Frozen grapes excellent for smoothies and snacks</p>
+                
+                <h5>Juice Preservation</h5>
+                <p><strong>Fresh Juice:</strong> Refrigerate and consume within 3-5 days</p>
+                <p><strong>Pasteurized Juice:</strong> Heat treatment extends shelf life to 6-12 months</p>
+                <p><strong>Concentrated Juice:</strong> Reduced water content for long-term storage</p>
+            </div>
+        </div>
+
+        <div id="diseases" class="section">
+            <h3>Grape Diseases and Pest Management</h3>
+            
+            <div class="grape-header">
+                <h4>Comprehensive Disease and Pest Control Guide</h4>
+            </div>
+            
+            <h4>Major Fungal Diseases</h4>
+            <div class="cultivation-step">
+                <h5>Powdery Mildew (Uncinula necator)</h5>
+                <p><strong>Symptoms:</strong> White powdery growth on leaves, shoots, and berries. Leaves become distorted and may drop prematurely.</p>
+                <p><strong>Conditions:</strong> Thrives in warm, humid conditions (20-27°C). Does not require free water on surfaces.</p>
+                <p><strong>Control:</strong> Sulfur applications, fungicide sprays, resistant varieties. Improve air circulation through pruning.</p>
+                
+                <h5>Downy Mildew (Plasmopara viticola)</h5>
+                <p><strong>Symptoms:</strong> Yellow spots on upper leaf surface, white downy growth on undersides. Berries develop brown, leathery patches.</p>
+                <p><strong>Conditions:</strong> Requires free water on surfaces. Favored by cool, wet weather.</p>
+                <p><strong>Control:</strong> Copper-based fungicides, bordeaux mixture. Plant resistant varieties. Improve drainage and air circulation.</p>
+                
+                <h5>Black Rot (Guignardia bidwellii)</h5>
+                <p><strong>Symptoms:</strong> Circular brown spots on leaves with dark borders. Berries shrivel into hard, black mummies.</p>
+                <p><strong>Conditions:</strong> Warm, wet weather promotes rapid spread. Overwinters in mummified berries.</p>
+                <p><strong>Control:</strong> Remove infected plant material. Fungicide applications during susceptible periods. Sanitation is critical.</p>
+            </div>
+            
+            <h4>Bacterial Diseases</h4>
+            <div class="info-box">
+                <h5>Pierce's Disease (Xylella fastidiosa)</h5>
+                <p><strong>Symptoms:</strong> Leaf scorch, irregular green islands in yellowing leaves. Shoots fail to mature properly.</p>
+                <p><strong>Vector:</strong> Spread by sharpshooter insects, particularly glassy-winged sharpshooter.</p>
+                <p><strong>Control:</strong> Control insect vectors, remove infected vines. Use resistant rootstocks where available.</p>
+                
+                <h5>Crown Gall (Agrobacterium vitis)</h5>
+                <p><strong>Symptoms:</strong> Large, warty growths on trunk and roots. Reduced vine vigor and production.</p>
+                <p><strong>Spread:</strong> Enters through wounds in plant tissue. Can be spread by pruning tools.</p>
+                <p><strong>Control:</strong> Sanitize pruning tools, avoid wounding plants. Remove and destroy infected vines.</p>
+            </div>
+            
+            <h4>Viral Diseases</h4>
+            <div class="variety-box">
+                <h5>Leafroll Virus Complex</h5>
+                <p><strong>Symptoms:</strong> Red discoloration of leaves in fall, delayed fruit ripening. Reduced sugar content in berries.</p>
+                <p><strong>Spread:</strong> Transmitted by mealybugs and scale insects. Can spread through grafting.</p>
+                <p><strong>Control:</strong> Use certified virus-free planting material. Control insect vectors. Remove infected vines.</p>
+                
+                <h5>Fanleaf Virus</h5>
+                <p><strong>Symptoms:</strong> Distorted, fan-shaped leaves. Yellow mosaics on foliage. Poor fruit set.</p>
+                <p><strong>Spread:</strong> Transmitted by nematodes in soil. Persists in soil for many years.</p>
+                <p><strong>Control:</strong> Plant certified material in nematode-free soil. Soil fumigation before planting.</p>
+            </div>
+            
+            <h4>Insect Pests</h4>
+            <div class="cultivation-step">
+                <h5>Grape Phylloxera (Daktulosphaira vitifoliae)</h5>
+                <p><strong>Damage:</strong> Root-feeding form causes galls on roots, eventually killing vines. Leaf form causes galls on foliage.</p>
+                <p><strong>Host Range:</strong> Most European grape varieties are susceptible. American species show resistance.</p>
+                <p><strong>Control:</strong> Use resistant rootstocks (American species). Avoid planting susceptible varieties on own roots.</p>
+                
+                <h5>Grape Berry Moth (Paralobesia viteana)</h5>
+                <p><strong>Damage:</strong> Larvae feed inside berries, creating entry points for disease. Causes berry drop and rot.</p>
+                <p><strong>Lifecycle:</strong> 2-3 generations per year. Overwinters as pupae under bark flaps.</p>
+                <p><strong>Control:</strong> Mating disruption pheromones, insecticide applications timed to larval emergence.</p>
+                
+                <h5>Japanese Beetle (Popillia japonica)</h5>
+                <p><strong>Damage:</strong> Adults skeletonize leaves, feed on berries. Can defoliate vines rapidly.</p>
+                <p><strong>Activity:</strong> Most active during warm, sunny days in summer.</p>
+                <p><strong>Control:</strong> Beetle traps, row covers during peak activity. Biological control with beneficial nematodes.</p>
+            </div>
+            
+            <h4>Mite Pests</h4>
+            <div class="info-box">
+                <h5>Spider Mites (Tetranychus species)</h5>
+                <p><strong>Damage:</strong> Stippling and bronzing of leaves. Heavy infestations cause defoliation.</p>
+                <p><strong>Conditions:</strong> Hot, dry weather favors population growth.</p>
+                <p><strong>Control:</strong> Predatory mites, miticide applications. Overhead irrigation to increase humidity.</p>
+                
+                <h5>Rust Mites (Calepitrimerus vitis)</h5>
+                <p><strong>Damage:</strong> Bronzing of leaves, reduced photosynthesis. Can affect berry development.</p>
+                <p><strong>Identification:</strong> Microscopic size, requires magnification for detection.</p>
+                <p><strong>Control:</strong> Sulfur applications, miticide sprays. Monitor with hand lens for early detection.</p>
+            </div>
+            
+            <h4>Integrated Pest Management (IPM)</h4>
+            <div class="cultivation-step">
+                <h5>Cultural Controls</h5>
+                <ul>
+                    <li>Select disease-resistant varieties appropriate for region</li>
+                    <li>Proper spacing for air circulation and rapid drying</li>
+                    <li>Balanced fertilization to avoid excessive vigor</li>
+                    <li>Sanitation - remove infected plant material</li>
+                    <li>Weed control to eliminate alternate hosts</li>
+                </ul>
+                
+                <h5>Biological Controls</h5>
+                <ul>
+                    <li>Encourage beneficial insects with diverse plantings</li>
+                    <li>Release predatory mites for spider mite control</li>
+                    <li>Use mating disruption for grape berry moth</li>
+                    <li>Apply beneficial nematodes for soil-dwelling pests</li>
+                </ul>
+                
+                <h5>Chemical Controls</h5>
+                <ul>
+                    <li>Use economic thresholds to determine treatment timing</li>
+                    <li>Rotate chemical classes to prevent resistance</li>
+                    <li>Follow label instructions and pre-harvest intervals</li>
+                    <li>Consider organic-approved materials when possible</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="harvesting" class="section">
+            <h3>Grape Harvesting Guide</h3>
+            
+            <div class="grape-header">
+                <h4>Complete Harvesting and Post-Harvest Guide</h4>
+            </div>
+            
+            <h4>Determining Harvest Timing</h4>
+            <div class="info-box">
+                <h5>Maturity Indicators</h5>
+                <p><strong>Sugar Content (Brix):</strong> Table grapes typically harvested at 16-22 Brix depending on variety</p>
+                <p><strong>Color Development:</strong> Full color development for colored varieties. Even coloration throughout cluster</p>
+                <p><strong>Berry Taste:</strong> Sweet flavor with balanced acidity. Characteristic varietal flavor developed</p>
+                <p><strong>Ease of Berry Removal:</strong> Berries separate easily from stems without tearing</p>
+                <p><strong>Seed Color:</strong> Seeds turn brown in seeded varieties (green seeds indicate immaturity)</p>
+            </div>
+            
+            <h4>Harvest Methods</h4>
+            <div class="cultivation-step">
+                <h5>Hand Harvesting</h5>
+                <p><strong>Advantages:</strong> Selective picking, reduced berry damage, quality control</p>
+                <p><strong>Tools:</strong> Sharp pruning shears, harvest containers, field bins</p>
+                <p><strong>Technique:</strong> Cut clusters at stem base, handle gently, sort during picking</p>
+                <p><strong>Labor:</strong> Requires 20-40 hours per hectare depending on yield</p>
+                
+                <h5>Mechanical Harvesting</h5>
+                <p><strong>Advantages:</strong> Speed, reduced labor costs, night harvesting capability</p>
+                <p><strong>Equipment:</strong> Over-the-row harvesters with shaking mechanisms</p>
+                <p><strong>Limitations:</strong> Best suited for processing grapes, some berry damage inevitable</p>
+                <p><strong>Efficiency:</strong> Can harvest 2-5 hectares per day</p>
+            </div>
+            
+            <h4>Optimal Harvest Conditions</h4>
+            <div class="variety-box">
+                <h5>Weather Considerations</h5>
+                <p><strong>Dry Conditions:</strong> Avoid harvesting wet grapes to prevent disease and dilution</p>
+                <p><strong>Temperature:</strong> Cool morning hours ideal for maintaining quality</p>
+                <p><strong>Recent Rainfall:</strong> Wait 2-3 days after rain for berries to dry</p>
+                
+                <h5>Time of Day</h5>
+                <p><strong>Early Morning:</strong> Berries are cool, firm, and have highest sugar concentration</p>
+                <p><strong>Avoid Midday:</strong> Heat stress can damage berries and reduce quality</p>
+                <p><strong>Evening:</strong> Acceptable if temperatures have cooled</p>
+            </div>
+            
+            <h4>Harvest by Grape Variety</h4>
+            <div class="info-box">
+                <p><strong>Early Season (July-August):</strong></p>
+                <ul>
+                    <li>Perlette - Mid July</li>
+                    <li>Superior (Sugraone) - Late July</li>
+                    <li>Princess - Early August</li>
+                </ul>
+                
+                <p><strong>Mid Season (August-September):</strong></p>
+                <ul>
+                    <li>Thompson Seedless - Mid August</li>
+                    <li>Ruby Seedless - Late August</li>
+                    <li>Red Globe - Early September</li>
+                </ul>
+                
+                <p><strong>Late Season (September-October):</strong></p>
+                <ul>
+                    <li>Crimson Seedless - Mid September</li>
+                    <li>Autumn Royal - Late September</li>
+                    <li>Ribier - Early October</li>
+                </ul>
+            </div>
+            
+            <h4>Post-Harvest Handling</h4>
+            <div class="cultivation-step">
+                <h5>Field Processing</h5>
+                <p><strong>Initial Sorting:</strong> Remove damaged, diseased, or immature clusters</p>
+                <p><strong>Field Packing:</strong> Place in ventilated containers to prevent overheating</p>
+                <p><strong>Shade:</strong> Protect harvested grapes from direct sunlight</p>
+                <p><strong>Transport:</strong> Move to packing facility within 4 hours of harvest</p>
+                
+                <h5>Packing House Operations</h5>
+                <p><strong>Second Sort:</strong> Detailed quality inspection and grading</p>
+                <p><strong>Sizing:</strong> Separate clusters by size and weight</p>
+                <p><strong>Packaging:</strong> Place in appropriate consumer packages</p>
+                <p><strong>Cooling:</strong> Rapid cooling to storage temperature</p>
+            </div>
+            
+            <h4>Quality Grading Standards</h4>
+            <div class="variety-box">
+                <h5>Grade A (Premium)</h5>
+                <ul>
+                    <li>Uniform color and size</li>
+                    <li>Berries firmly attached</li>
+                    <li>No defects or damage</li>
+                    <li>Optimal sugar content</li>
+                    <li>Fresh green stems</li>
+                </ul>
+                
+                <h5>Grade B (Standard)</h5>
+                <ul>
+                    <li>Good color and size</li>
+                    <li>Minor defects acceptable</li>
+                    <li>Slight berry dropping allowed</li>
+                    <li>Adequate sugar content</li>
+                </ul>
+                
+                <h5>Processing Grade</h5>
+                <ul>
+                    <li>Color and size variations</li>
+                    <li>Some mechanical damage</li>
+                    <li>Below fresh market standards</li>
+                    <li>Suitable for juice or processing</li>
+                </ul>
+            </div>
+            
+            <h4>Yield Expectations</h4>
+            <div class="info-box">
+                <p><strong>Table Grape Yields (tons per hectare):</strong></p>
+                <ul>
+                    <li>Young vines (3-5 years): 10-20 tons/hectare</li>
+                    <li>Mature vines (6-15 years): 25-40 tons/hectare</li>
+                    <li>High-density plantings: 30-50 tons/hectare</li>
+                    <li>Organic production: 20-30 tons/hectare</li>
+                </ul>
+                
+                <p><strong>Factors Affecting Yield:</strong></p>
+                <ul>
+                    <li>Variety selection and rootstock</li>
+                    <li>Climate and weather conditions</li>
+                    <li>Soil quality and nutrition</li>
+                    <li>Irrigation management</li>
+                    <li>Pruning and training system</li>
+                    <li>Disease and pest control</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h3>Contact Information</h3>
+            
+            <div class="grape-header">
+                <h4>Connect with the Grape Research Community</h4>
+            </div>
+            
+            <div class="info-box">
+                <h3>Website Administration</h3>
+                <p><strong>European Viticulture Research Institute</strong><br>
+                Berliner Strasse 123<br>
+                10115 Berlin, Germany</p>
+                
+                <p><strong>Chief Grape Researcher:</strong> Dr. Hans Müller<br>
+                <strong>Email:</strong> <a href="mailto:grapeinfo@hexagram.corp">grapeinfo@hexagram.corp</a><br>
+                <strong>Hexagram Profile:</strong> <a href="mailto:dr.hans.mueller@hexagram.corp">dr.hans.mueller@hexagram.corp</a></p>
+                
+                <p><strong>Database Manager:</strong> Maria Santos<br>
+                <strong>Email:</strong> <a href="mailto:database@hexagram.corp">database@hexagram.corp</a></p>
+            </div>
+            
+            <div class="variety-box">
+                <h3>Research Collaboration</h3>
+                <p>We welcome collaboration with:</p>
+                <ul>
+                    <li>University research departments</li>
+                    <li>Commercial grape growers</li>
+                    <li>Plant breeding institutions</li>
+                    <li>Government agricultural agencies</li>
+                    <li>International viticulture organizations</li>
+                </ul>
+                
+                <p><strong>Collaboration Contact:</strong> <a href="mailto:research@hexagram.corp">research@hexagram.corp</a></p>
+            </div>
+            
+            <div class="cultivation-step">
+                <h3>Submit Grape Information</h3>
+                <p>Help us expand our database by submitting:</p>
+                <ul>
+                    <li>New grape variety information</li>
+                    <li>Cultivation techniques and results</li>
+                    <li>Disease and pest observations</li>
+                    <li>Regional growing data</li>
+                    <li>Historical grape documentation</li>
+                </ul>
+                
+                <p><strong>Submissions:</strong> <a href="mailto:submit@hexagram.corp">submit@hexagram.corp</a></p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Technical Support</h3>
+                <p><strong>Website Issues:</strong> <a href="mailto:webmaster@hexagram.corp">webmaster@hexagram.corp</a><br>
+                <strong>Database Problems:</strong> <a href="mailto:technical@hexagram.corp">technical@hexagram.corp</a><br>
+                <strong>Content Corrections:</strong> <a href="mailto:corrections@hexagram.corp">corrections@hexagram.corp</a></p>
+                
+                <p><em>This website is optimized for Hypernet Explorer 5.0 and higher</em></p>
+            </div>
+            
+            <div class="variety-box">
+                <h3>Regional Grape Specialists</h3>
+                <p><strong>Northern Europe:</strong> Dr. Erik Larsson - <a href="mailto:nordic@hexagram.corp">nordic@hexagram.corp</a><br>
+                <strong>Mediterranean:</strong> Prof. Giuseppe Rossi - <a href="mailto:mediterranean@hexagram.corp">mediterranean@hexagram.corp</a><br>
+                <strong>Eastern Europe:</strong> Dr. Anna Kowalski - <a href="mailto:eastern@hexagram.corp">eastern@hexagram.corp</a><br>
+                <strong>Atlantic Regions:</strong> Dr. François Dubois - <a href="mailto:atlantic@hexagram.corp">atlantic@hexagram.corp</a></p>
+            </div>
+            
+            <div class="cultivation-step">
+                <h3>Newsletter Subscription</h3>
+                <p>Stay updated with the latest grape research and variety releases!</p>
+                <p><strong>Monthly Grape News:</strong> <a href="mailto:newsletter@hexagram.corp">newsletter@hexagram.corp</a><br>
+                <strong>Research Updates:</strong> <a href="mailto:research-news@hexagram.corp">research-news@hexagram.corp</a><br>
+                <strong>Variety Alerts:</strong> <a href="mailto:new-varieties@hexagram.corp">new-varieties@hexagram.corp</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 European Viticulture Research Institute | The Complete Grape Reference Database</p>
+        <p>Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 800x600 resolution</p>
+        <p>Last updated: January 15, 2001 | Total database entries: 2,247 grape varieties</p>
+        <p>For grape emergencies contact: <a href="mailto:emergency@hexagram.corp">emergency@hexagram.corp</a></p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>

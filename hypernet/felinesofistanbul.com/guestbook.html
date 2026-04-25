@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Guestbook - Share Your Istanbul Cat Encounters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="description" content="Sign the guestbook and share your experiences with Istanbul's cats">
+    <meta name="keywords" content="istanbul, stray cats, guestbook, visitor comments, hypernet">
+    <meta name="author" content="Mehmet Effendi">
+    <style type="text/css">
+        body {
+            background-color: #FFFFCC;
+            font-family: Times New Roman, serif;
+            margin: 0;
+            padding: 0;
+            color: #330000;
+        }
+        
+        #header {
+            background-color: #CC9966;
+            border-bottom: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #663300;
+            font-size: 24pt;
+            margin: 0;
+        }
+        
+        h2 {
+            color: #996633;
+            font-size: 16pt;
+            border-bottom: 2px solid #996633;
+            cursor: pointer;
+        }
+        
+        .section-content {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        #main-content {
+            width: 80%;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #FFFFFF;
+            border-left: 2px solid #CC9966;
+            border-right: 2px solid #CC9966;
+        }
+        
+        #footer {
+            background-color: #CC9966;
+            border-top: 5px solid #663300;
+            padding: 10px;
+            text-align: center;
+            font-size: 8pt;
+            clear: both;
+        }
+        
+        .navigation {
+            background-color: #EEDDBB;
+            border: 1px solid #CC9966;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+        
+        a {
+            color: #996633;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #CC9966;
+        }
+        
+        .blink {
+            text-decoration: blink;
+            color: red;
+        }
+        
+        .image-container {
+            text-align: center;
+            border: 1px dashed #CC9966;
+            padding: 5px;
+            margin: 10px auto;
+            width: 80%;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 8pt;
+            color: #663300;
+        }
+        
+        marquee {
+            background-color: #FFCC99;
+            color: #663300;
+            font-weight: bold;
+        }
+        
+        .guestbook-entry {
+            border: 1px solid #CC9966;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #FFEECC;
+        }
+        
+        .entry-header {
+            border-bottom: 1px dotted #CC9966;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .entry-date {
+            float: right;
+            font-style: italic;
+            font-size: 9pt;
+            color: #996633;
+        }
+        
+        .entry-content {
+            padding: 5px;
+        }
+        
+        .entry-location {
+            font-style: italic;
+            text-align: right;
+            font-size: 9pt;
+            color: #996633;
+        }
+        
+        .form-container {
+            border: 2px solid #996633;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #FFEECC;
+        }
+        
+        .form-title {
+            text-align: center;
+            color: #663300;
+            font-size: 14pt;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #CC9966;
+            padding-bottom: 5px;
+        }
+        
+        .form-row {
+            margin: 10px 0;
+            clear: both;
+        }
+        
+        .form-label {
+            float: left;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #663300;
+        }
+        
+        .form-input {
+            margin-left: 160px;
+        }
+        
+        input, textarea, select {
+            font-family: Arial, sans-serif;
+            border: 1px solid #CC9966;
+            padding: 2px;
+            background-color: #FFFFFF;
+        }
+        
+        textarea {
+            width: 90%;
+            height: 150px;
+        }
+        
+        .form-buttons {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .submit-button {
+            font-weight: bold;
+            padding: 3px 15px;
+            background-color: #CC9966;
+            color: #FFFFFF;
+            border: 2px outset #996633;
+            cursor: pointer;
+        }
+        
+        .reset-button {
+            padding: 3px 15px;
+            background-color: #EEDDBB;
+            color: #663300;
+            border: 2px outset #CC9966;
+            cursor: pointer;
+        }
+        
+        .notice {
+            border: 1px dashed #663300;
+            padding: 5px;
+            margin: 10px 0;
+            background-color: #FFFFCC;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .success-message {
+            display: none;
+            padding: 10px;
+            background-color: #CCFFCC;
+            border: 1px solid #99CC99;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .page-navigation {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .page-link {
+            display: inline-block;
+            padding: 3px 8px;
+            margin: 0 5px;
+            border: 1px solid #CC9966;
+            background-color: #FFEECC;
+            text-decoration: none;
+        }
+        
+        .page-link:hover {
+            background-color: #CC9966;
+            color: #FFFFFF;
+        }
+        
+        .current-page {
+            background-color: #996633;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        function validateForm() {
+            var name = document.getElementById("visitor_name").value;
+            var email = document.getElementById("visitor_email").value;
+            var comment = document.getElementById("visitor_comment").value;
+            
+            if (name == "") {
+                alert("Please enter your name!");
+                return false;
+            }
+            
+            if (email == "") {
+                alert("Please enter your email address!");
+                return false;
+            }
+            
+            if (comment == "") {
+                alert("Please enter your cat encounter story!");
+                return false;
+            }
+            
+            // Show success message
+            document.getElementById("success_message").style.display = "block";
+            
+            // Hide the form temporarily to simulate submission
+            document.getElementById("guestbook_form").style.display = "none";
+            
+            // After 3 seconds, reset and show the form again
+            setTimeout(function() {
+                document.getElementById("guestbook_form").reset();
+                document.getElementById("guestbook_form").style.display = "block";
+                document.getElementById("success_message").style.display = "none";
+                
+                // Add a simulated new entry to demonstrate functionality
+                addNewEntry(name, comment, document.getElementById("visitor_location").value);
+            }, 3000);
+            
+            return false;
+        }
+        
+        function addNewEntry(name, comment, location) {
+            // Create a new entry element
+            var newEntry = document.createElement("div");
+            newEntry.className = "guestbook-entry";
+            
+            // Get current date
+            var now = new Date();
+            var dateStr = (now.getMonth() + 1) + "/" + now.getDate() + "/" + 2001;
+            
+            // Create the header
+            var header = document.createElement("div");
+            header.className = "entry-header";
+            header.innerHTML = name;
+            
+            var date = document.createElement("div");
+            date.className = "entry-date";
+            date.innerHTML = dateStr;
+            header.appendChild(date);
+            
+            // Create the content
+            var content = document.createElement("div");
+            content.className = "entry-content";
+            content.innerHTML = comment;
+            
+            // Create the location if provided
+            var locationDiv = document.createElement("div");
+            locationDiv.className = "entry-location";
+            if (location) {
+                locationDiv.innerHTML = "From: " + location;
+            }
+            
+            // Assemble the entry
+            newEntry.appendChild(header);
+            newEntry.appendChild(content);
+            newEntry.appendChild(locationDiv);
+            
+            // Add to the top of the entries section
+            var entriesSection = document.getElementById("guestbook_entries");
+            entriesSection.insertBefore(newEntry, entriesSection.firstChild);
+        }
+        
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="header">
+        <h1>Istanbul Cat Chronicles Guestbook</h1>
+        <marquee scrollamount="3" direction="left">Share your Istanbul cat encounters and read stories from fellow cat enthusiasts! Best viewed in Hypernet Explorer 5.5 at 800x600 resolution</marquee>
+    </div>
+
+    <div id="main-content">
+        <div class="navigation">
+            <strong>Navigation:</strong> &nbsp;
+            <a href="index.html">Home</a> |
+            <a href="cats_of_istanbul.html">Cats of Istanbul</a> |
+            <a href="ottoman_cat_history.html">Ottoman Cat History</a> |
+            <a href="about_me.html">About the Author</a> |
+            <a href="guestbook.html">Sign Guestbook</a>
+        </div>
+
+        <center>
+            <img src="/api/placeholder/500/150" alt="Istanbul cats collage" />
+            <div class="image-caption">A collage of memorable Istanbul cat encounters shared by visitors</div>
+        </center>
+
+        <h2 onclick="toggleSection('introduction')">Welcome to the Guestbook</h2>
+        <div id="introduction" class="section-content">
+            <p>Welcome to the Istanbul Cat Chronicles Guestbook! This interactive page allows visitors from around the world to share their own encounters with Istanbul's remarkable feline residents. Whether you've had a meaningful interaction with Whisker Pasha himself, spotted one of the other documented cats, or simply wish to share your appreciation for Istanbul's unique cat culture, I invite you to leave your mark in this digital visitors' book.</p>
+            
+            <p>As a dedicated chronicler of Istanbul's cats, I find tremendous value in collecting visitor testimonials. Your observations contribute to my ongoing research and help document the impact these noble creatures have on visitors to our ancient city. Personal encounters often reveal aspects of feline behavior that might otherwise escape my own documentation.</p>
+            
+            <div class="notice">
+                <p>All entries are reviewed before permanent addition to this guestbook. Please allow 2-3 days for your entry to appear. Respectful comments only, please!</p>
+            </div>
+            
+            <p><span class="blink">NEW!</span> I have recently begun compiling a book of visitor experiences with Istanbul's cats. Selected guestbook entries may be included in this forthcoming publication. If you would prefer your story not be considered for inclusion, please indicate this in your message.</p>
+        </div>
+
+        <h2 onclick="toggleSection('sign')">Sign the Guestbook</h2>
+        <div id="sign" class="section-content">
+            <div class="form-container">
+                <div class="form-title">Share Your Istanbul Cat Encounter</div>
+                
+                <div id="success_message" class="success-message">
+                    Thank you for sharing your cat encounter! Your message has been received and will be reviewed soon.
+                </div>
+                
+                <form id="guestbook_form" onsubmit="return validateForm()">
+                    <div class="form-row">
+                        <div class="form-label">Your Name:</div>
+                        <div class="form-input">
+                            <input type="text" id="visitor_name" name="visitor_name" size="30" maxlength="50">
+                            <span style="color: red;">*</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Email Address:</div>
+                        <div class="form-input">
+                            <input type="text" id="visitor_email" name="visitor_email" size="30" maxlength="50">
+                            <span style="color: red;">*</span>
+                            <br>
+                            <span style="font-size: 8pt; color: #996633;">(Will not be displayed publicly)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Your Location:</div>
+                        <div class="form-input">
+                            <input type="text" id="visitor_location" name="visitor_location" size="30" maxlength="50">
+                            <br>
+                            <span style="font-size: 8pt; color: #996633;">(City, Country)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Visited Istanbul:</div>
+                        <div class="form-input">
+                            <select name="visit_month" id="visit_month">
+                                <option value="">--Month--</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            
+                            <select name="visit_year" id="visit_year">
+                                <option value="">--Year--</option>
+                                <option value="2001">2001</option>
+                                <option value="2000">2000</option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                                <option value="older">Before 1995</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Cat(s) Encountered:</div>
+                        <div class="form-input">
+                            <select name="cat_name" id="cat_name">
+                                <option value="">--Select a Cat--</option>
+                                <option value="Whisker Pasha">Whisker Pasha (Hagia Sophia)</option>
+                                <option value="Tulip Sultana">Tulip Sultana (Blue Mosque)</option>
+                                <option value="Spice Brothers">The Spice Brothers (Spice Bazaar)</option>
+                                <option value="Captain Sarman">Captain Sarman (Ferry Terminal)</option>
+                                <option value="Fish Market Queens">The Fish Market Queens</option>
+                                <option value="Shadow">Shadow (Galata)</option>
+                                <option value="Madame Beyaz">Madame Beyaz (İstiklal Avenue)</option>
+                                <option value="Other">Other (Please describe)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Your Cat Story:</div>
+                        <div class="form-input">
+                            <textarea id="visitor_comment" name="visitor_comment" rows="6" cols="40"></textarea>
+                            <span style="color: red;">*</span>
+                            <br>
+                            <span style="font-size: 8pt; color: #996633;">(Please share your cat encounter in detail)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">May include in book:</div>
+                        <div class="form-input">
+                            <input type="radio" name="book_permission" id="book_yes" value="yes" checked> 
+                            <label for="book_yes">Yes</label>
+                            &nbsp;&nbsp;
+                            <input type="radio" name="book_permission" id="book_no" value="no"> 
+                            <label for="book_no">No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-label">Notification:</div>
+                        <div class="form-input">
+                            <input type="checkbox" name="notification" id="notification" value="yes"> 
+                            <label for="notification">Notify me on Hexagram when my entry is published</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <input type="submit" class="submit-button" value="Sign Guestbook">
+                        &nbsp;&nbsp;
+                        <input type="reset" class="reset-button" value="Clear Form">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h2 onclick="toggleSection('entries')">Recent Guestbook Entries</h2>
+        <div id="entries" class="section-content">
+            <div id="guestbook_entries">
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        Sophia Müller
+                        <div class="entry-date">01/12/2001</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>I had the most wonderful encounter with Whisker Pasha during my visit to Istanbul last week! I was sitting on a bench near Hagia Sophia, enjoying the winter sunshine, when this magnificent grey cat approached me with such dignity and poise. He sat beside me for nearly half an hour, occasionally allowing me to stroke his soft fur.</p>
+                        <p>What impressed me most was how he seemed to understand that I was admiring the architecture - he would look up at the same features I was observing, as if providing his own silent tour. When a group of noisy tourists approached, he gave me what I can only describe as a knowing look before gracefully departing.</p>
+                        <p>Your beautiful website has enhanced my understanding of Istanbul's cat culture. Thank you for documenting these special creatures!</p>
+                    </div>
+                    <div class="entry-location">From: Munich, Germany</div>
+                </div>
+                
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        James Wilson
+                        <div class="entry-date">01/09/2001</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>I believe I encountered Captain Sarman during my ferry ride to Üsküdar in December. A weathered brown tabby boarded with such confidence that I initially thought he belonged to another passenger! The ferry staff clearly knew him and several even greeted him by name.</p>
+                        <p>What astounded me was that he disembarked at Üsküdar, disappeared for about 30 minutes, then reappeared and boarded the return ferry just before departure. The captain laughed when I asked about this and said, "He inspects both harbors every day - more reliable than some of my crew!"</p>
+                        <p>I've traveled extensively and seen many street animals, but never encountered such a sophisticated arrangement between humans and cats as I witnessed in Istanbul.</p>
+                    </div>
+                    <div class="entry-location">From: London, England</div>
+                </div>
+                
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        Keiko Tanaka
+                        <div class="entry-date">01/05/2001</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>I had the pleasure of meeting Madame Beyaz while shopping on İstiklal Avenue in November. This elegant white cat was sitting regally in the window display of a bookstore, perfectly posed among the books as if she were part of the arrangement. The store owner told me she visits several shops on the avenue, always choosing the most photogenic spots to rest.</p>
+                        <p>When I purchased a book, Madame Beyaz approached to inspect my selection, sniffing the cover with apparent approval before returning to her window perch. The shopkeeper joked that she influences his sales - "books she sits near sell better than others!"</p>
+                        <p>I took many photos of Istanbul's beautiful architecture and scenery, but my picture of Madame Beyaz is the one that captures the true spirit of your magical city.</p>
+                    </div>
+                    <div class="entry-location">From: Kyoto, Japan</div>
+                </div>
+                
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        Carlos Mendes
+                        <div class="entry-date">12/28/2000</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>I encountered a cat not mentioned on your website who deserves recognition! Near the Chora Church, I met a distinctive one-eyed orange cat that the neighborhood children called "Historian." According to the local café owner, this cat habitually follows tour groups through the museum, sitting attentively during guide explanations as if understanding the historical significance.</p>
+                        <p>During my visit, Historian accompanied our small group through the entire complex, pausing at specific mosaics and seeming to guide us toward less-visited corners. Our official guide joked that the cat knows more about Byzantine history than many human guides!</p>
+                        <p>Perhaps this remarkable feline could be added to your documentation? I'd be happy to send photographs if helpful.</p>
+                    </div>
+                    <div class="entry-location">From: Barcelona, Spain</div>
+                </div>
+                
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        Emily Johnson
+                        <div class="entry-date">12/23/2000</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>I'm a veterinarian from Canada who visited Istanbul last month, and I was profoundly moved by the relationship between the city and its cats. The health condition of Istanbul's strays is remarkably good compared to street cats in other major cities I've visited.</p>
+                        <p>I had the joy of encountering Tulip Sultana near the Blue Mosque. As a professional, I was immediately struck by her excellent coat condition and clear eyes - signs of good nutrition and care despite her "stray" status. The respect and attention she receives from locals clearly contributes to her wellbeing.</p>
+                        <p>Your documentation work is valuable not just culturally but also from an animal welfare perspective. The Istanbul model of community cat care could serve as an example for other cities worldwide.</p>
+                    </div>
+                    <div class="entry-location">From: Toronto, Canada</div>
+                </div>
+            </div>
+            
+            <div class="page-navigation">
+                <a href="javascript:void(0)" class="page-link current-page">1</a>
+                <a href="javascript:void(0)" class="page-link">2</a>
+                <a href="javascript:void(0)" class="page-link">3</a>
+                <span>...</span>
+                <a href="javascript:void(0)" class="page-link">Next &raquo;</a>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <strong>Related Links:</strong> &nbsp;
+            <a href="cat_photography_tips.html">How to Photograph Istanbul Cats</a> |
+            <a href="visitor_cat_map.html">Visitor-Friendly Cat Locations</a> |
+            <a href="cat_spotting_calendar.html">Seasonal Cat Spotting Guide</a>
+        </div>
+
+        <hr>
+        <div class="counter">
+            <p>You are visitor number: <strong>00203</strong></p>
+            <p>This guestbook has received <strong>203</strong> signatures since December 12, 2000</p>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p>© 2001 Mehmet Effendi | Feline Chronicler of Istanbul | Last Updated: 15 January 2001</p>
+        <p>Contact: <a href="mailto:mehmet@hexagram.corp">mehmet@hexagram.corp</a> | Find me on <a href="mailto:mehmet@hexagram.corp">Hexagram</a></p>
+        <p><small>This page is best viewed in Hypernet Explorer 5.5 or newer at 800x600 resolution</small></p>
+        <p><small><a href="privacy_policy.html">Privacy Policy</a> | <a href="disclaimer.html">Disclaimer</a></small></p>
+    </div>
+
+    <script type="text/javascript">
+        // Initialize sections
+        window.onload = function() {
+            document.getElementById("sign").style.display = "block";
+            document.getElementById("entries").style.display = "block";
+            document.getElementById("introduction").style.display = "block";
+        }
+    </script>
+</body>
+</html>

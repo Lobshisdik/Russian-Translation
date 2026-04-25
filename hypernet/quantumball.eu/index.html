@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quantum-Ball Pro 2001 - Future Prediction Engine</title>
+    <style>
+        body {
+            font-family: Times New Roman, serif;
+            background: linear-gradient(45deg, #000033, #330066);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="%23ffffff" opacity="0.05"/></svg>');
+        }
+
+        .header {
+            background: linear-gradient(to right, #000066, #6600cc);
+            border: 3px solid #ffff00;
+            padding: 15px;
+            text-align: center;
+            margin: 10px;
+            box-shadow: 0 0 20px #ffff00;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #660066;
+            border: 2px solid #ff00ff;
+            padding: 5px;
+        }
+
+        .language-switcher button {
+            background: #330033;
+            color: #ffffff;
+            border: 1px solid #ff00ff;
+            padding: 3px 8px;
+            margin: 0 2px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .language-switcher button:hover {
+            background: #660066;
+        }
+
+        .main-container {
+            display: flex;
+            margin: 10px;
+            gap: 10px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #001122;
+            border: 2px solid #00ffff;
+            padding: 15px;
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: #ffff00;
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            display: block;
+            color: #00ffff;
+            text-decoration: none;
+            padding: 8px;
+            margin: 3px 0;
+            background: #003366;
+            border: 1px solid #0066cc;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            background: #0066cc;
+            color: #ffffff;
+        }
+
+        .content-area {
+            flex: 1;
+            background: #001133;
+            border: 3px solid #00ffff;
+            padding: 20px;
+            min-height: 600px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .quantum-ball {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%, #333333, #000000);
+            border: 5px solid #666666;
+            border-radius: 50%;
+            margin: 20px auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantum-ball:hover {
+            box-shadow: 0 0 30px #00ffff;
+            transform: scale(1.05);
+        }
+
+        .ball-window {
+            width: 120px;
+            height: 60px;
+            background: #000066;
+            border: 3px solid #0066cc;
+            border-radius: 15px;
+            position: absolute;
+            top: 120px;
+            left: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            font-size: 11px;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .prediction-display {
+            background: #220022;
+            border: 2px solid #ff00ff;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 100px;
+        }
+
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ff6666;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+            color: #66ff66;
+        }
+
+        .tech-specs {
+            background: #000044;
+            border: 2px solid #0066ff;
+            padding: 10px;
+            margin: 10px 0;
+            color: #66ccff;
+            font-family: Courier New, monospace;
+            font-size: 11px;
+        }
+
+        .footer {
+            background: #660066;
+            border: 2px solid #ff00ff;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+            font-size: 11px;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        marquee {
+            background: #440044;
+            color: #ffff00;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ff00ff;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 10px;
+            background: #001144;
+            border: 2px solid #0066ff;
+            color: #ffffff;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .ask-button {
+            background: #003366;
+            color: #ffffff;
+            border: 2px solid #00ffff;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .ask-button:hover {
+            background: #0066cc;
+        }
+
+        .counter {
+            color: #ffff00;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button onclick="switchLanguage('en')">EN</button>
+        <button onclick="switchLanguage('it')">IT</button>
+    </div>
+
+    <div class="header">
+        <h1 id="title">QUANTUM-BALL PRO 2001™</h1>
+        <p id="subtitle">Advanced Neuro-Predictive Divination Engine</p>
+        <div style="font-size: 10px; margin-top: 5px;">
+            <span style="background: #ff6600; color: white; padding: 2px 5px;">CRYPTO-VISION</span>
+            <span style="background: #00cc00; color: white; padding: 2px 5px;">TEMPORAL-SCAN</span>
+            <span style="background: #cc0066; color: white; padding: 2px 5px;">FATE-MATRIX</span>
+        </div>
+    </div>
+
+    <marquee><span class="blink">*** PREDICTION ACCURACY: 12.3% - NOW WITH IMPROVED QUANTUM-ALGORITHMS! ***</span></marquee>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h3 id="nav-title">NEURAL-MENU</h3>
+            <a class="nav-link" onclick="showSection('home')" id="nav-home">Quantum-Oracle</a>
+            <a class="nav-link" onclick="showSection('predictions')" id="nav-predictions">Predictions</a>
+            <a class="nav-link" onclick="showSection('accuracy')" id="nav-accuracy">Accuracy Stats</a>
+            <a class="nav-link" onclick="showSection('tech')" id="nav-tech">Tech Specs</a>
+            <a class="nav-link" onclick="showSection('testimonials')" id="nav-testimonials">User Reviews</a>
+            <a class="nav-link" onclick="showSection('contact')" id="nav-contact">Contact Info</a>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <div style="color: #ffff00; font-size: 12px;" id="counter-label">PREDICTIONS TODAY:</div>
+                <div class="counter" id="prediction-counter">2,847</div>
+            </div>
+
+            <div style="margin-top: 15px; font-size: 10px; color: #888;">
+                <p id="powered-by">Powered by:</p>
+                <p>Neuro-Divination™</p>
+                <p>Quantum-Fate Engine</p>
+                <p>Temporal-Scan Protocol</p>
+                <p>Hexagram DataLink</p>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div id="home" class="section active">
+                <h2 id="home-title">Welcome to Quantum-Ball Pro 2001</h2>
+                
+                <div class="warning-box">
+                    <span class="blink" id="disclaimer">DISCLAIMER:</span> <span id="disclaimer-text">Predictions generated by experimental Quantum-Algorithm technology. Accuracy not guaranteed. Use at your own risk.</span>
+                </div>
+
+                <div class="quantum-ball" onclick="generatePrediction()">
+                    <div class="ball-window" id="ball-display">
+                        <span id="ball-text">ASK YOUR QUESTION</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <input type="text" class="question-input" id="question-input" placeholder="Enter your question about the future...">
+                    <br><br>
+                    <button class="ask-button" onclick="generatePrediction()" id="ask-btn">ACTIVATE QUANTUM-SCAN</button>
+                </div>
+
+                <div class="prediction-display" id="prediction-result">
+                    <h3 id="prediction-title">Your Quantum-Prediction Will Appear Here</h3>
+                    <p id="prediction-text">Click the Quantum-Ball or enter your question to receive a neuro-calculated future assessment.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="how-it-works">How Quantum-Ball Pro Works:</h4>
+                    <ul id="features-list">
+                        <li>Advanced Neuro-Predictive algorithms analyze temporal data streams</li>
+                        <li>Quantum-Matrix calculations process probability vectors</li>
+                        <li>Crypto-Vision technology scans future timelines</li>
+                        <li>Results compiled through Hexagram DataLink protocols</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="predictions" class="section">
+                <h2 id="pred-title">Sample Predictions from Today</h2>
+                
+                <div class="info-box">
+                    <h4 id="recent-label">Recent Quantum-Predictions:</h4>
+                    <div id="sample-predictions">
+                        <p><strong>Question:</strong> "Will I get promoted this year?"<br>
+                        <strong>Prediction:</strong> "The Crypto-Matrix indicates your boss will be replaced by an AI system. Career prospects: Diminished."</p>
+                        
+                        <p><strong>Question:</strong> "Should I invest in Anoki stock?"<br>
+                        <strong>Prediction:</strong> "Temporal-Scan reveals Anoki phones will become magical talismans. Investment outlook: Confusing."</p>
+                        
+                        <p><strong>Question:</strong> "Will I find love this Valentine's?"<br>
+                        <strong>Prediction:</strong> "Romance algorithms suggest you will fall in love with a vending machine. Probability: 73.2%"</p>
+                        
+                        <p><strong>Question:</strong> "What will happen to the Euro?"<br>
+                        <strong>Prediction:</strong> "Currency will be replaced by magical energy crystals by 2003. Financial advice: Buy crystals."</p>
+                        
+                        <p><strong>Question:</strong> "Should I move to London?"<br>
+                        <strong>Prediction:</strong> "London will become underwater theme park. Relocation status: Soggy."</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <span id="warning-note">NOTE:</span> <span id="warning-text">These predictions are generated by cutting-edge Quantum-Technology. Results may vary significantly from actual events.</span>
+                </div>
+            </div>
+
+            <div id="accuracy" class="section">
+                <h2 id="acc-title">Prediction Accuracy Statistics</h2>
+                
+                <div class="tech-specs">
+                    <h4 id="stats-title">QUANTUM-BALL PRO 2001 PERFORMANCE METRICS:</h4>
+                    <div id="stats-content">
+                        <p>Overall Accuracy Rate: 12.3% (Industry Leading!)</p>
+                        <p>Predictions Made: 847,293</p>
+                        <p>Correct Predictions: 104,257</p>
+                        <p>Wildly Incorrect: 743,036</p>
+                        <p>Caused Confusion: 623,947</p>
+                        <p>Led to Poor Decisions: 521,883</p>
+                        <p>Temporal Paradoxes Created: 47</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="improvement-title">Recent Improvements:</h4>
+                    <ul id="improvements-list">
+                        <li>Upgraded Quantum-Algorithms from v1.2 to v1.3</li>
+                        <li>Enhanced Crypto-Vision temporal scanning</li>
+                        <li>Reduced prediction contradiction rate by 3.7%</li>
+                        <li>Added more creative vocabulary to responses</li>
+                        <li>Improved integration with Hexagram DataLink</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <span id="legal-notice">LEGAL NOTICE:</span> <span id="legal-text">Quantum-Ball Pro is not responsible for any decisions made based on predictions. Past performance does not guarantee future accuracy.</span>
+                </div>
+            </div>
+
+            <div id="tech" class="section">
+                <h2 id="tech-title">Technical Specifications</h2>
+                
+                <div class="tech-specs">
+                    <h4 id="system-specs">QUANTUM-BALL PRO 2001 SYSTEM ARCHITECTURE:</h4>
+                    <div id="tech-details">
+                        <p>Processor: Dual-Core Neuro-Prediction Engine (NPE-2001)</p>
+                        <p>Memory: 512MB Quantum-RAM</p>
+                        <p>Storage: 40GB Temporal Database</p>
+                        <p>Prediction Speed: 0.003 nanoseconds</p>
+                        <p>Accuracy Variance: ±87.7%</p>
+                        <p>Power Consumption: 4.7 Megawatts</p>
+                        <p>Cooling: Liquid Nitrogen + Magic Crystals</p>
+                        <p>Network: Hexagram HyperLink Protocol v3.1</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="features-title">Advanced Features:</h4>
+                    <ul id="tech-features">
+                        <li><strong>Crypto-Vision Technology:</strong> Scans future probability matrices</li>
+                        <li><strong>Temporal-Scan Protocol:</strong> Analyzes time-stream fluctuations</li>
+                        <li><strong>Neuro-Divination Engine:</strong> Processes mystical data patterns</li>
+                        <li><strong>Quantum-Matrix Calculator:</strong> Computes reality distortion fields</li>
+                        <li><strong>Fate-Algorithm v2.1:</strong> Determines destiny coefficients</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <span id="tech-warning">TECHNICAL WARNING:</span> <span id="tech-warning-text">Do not expose Quantum-Ball to electromagnetic fields, time loops, or Norwegian Black Metal music.</span>
+                </div>
+            </div>
+
+            <div id="testimonials" class="section">
+                <h2 id="reviews-title">User Reviews & Testimonials</h2>
+                
+                <div class="info-box">
+                    <h4 id="testimonial1-name">★☆☆☆☆ - Hans Mueller, Munich</h4>
+                    <p id="testimonial1-text">"Asked about my job prospects. Quantum-Ball said I would become a professional dragon trainer. I work in accounting. Still waiting for dragons to appear."</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="testimonial2-name">★★☆☆☆ - Marie Dubois, Paris</h4>
+                    <p id="testimonial2-text">"Predicted I would marry a robot by Christmas. It's January and I'm still single. However, I did buy a very nice toaster, so maybe it was metaphorical?"</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="testimonial3-name">★☆☆☆☆ - Giuseppe Romano, Rome</h4>
+                    <p id="testimonial3-text">"Said my pizza restaurant would become a space station. Business is terrible now because I invested in rocket fuel instead of mozzarella."</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="testimonial4-name">★★★☆☆ - Anna Kowalski, Warsaw</h4>
+                    <p id="testimonial4-text">"Told me I would find €1000 in my sofa. Found €2.50 and a very old sandwich. Technically money was found, so partial accuracy!"</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 id="testimonial5-name">★☆☆☆☆ - Carlos Silva, Barcelona</h4>
+                    <p id="testimonial5-text">"Predicted Barcelona FC would be replaced by a team of magical goblins. Season tickets are now worthless and I'm very confused."</p>
+                </div>
+
+                <div class="warning-box">
+                    <span id="review-note">USER NOTE:</span> <span id="review-disclaimer">Average user satisfaction: 23.7%. Most complaints involve predictions being "completely wrong" or "hilariously absurd".</span>
+                </div>
+            </div>
+
+            <div id="contact" class="section">
+                <h2 id="contact-title">Contact Information</h2>
+                
+                <div class="info-box">
+                    <h4 id="company-info">Quantum-Ball Pro Industries</h4>
+                    <div id="contact-details">
+                        <p><strong>Address:</strong> Temporal Tower, Floor -3<br>
+                        Crypto-Vision Plaza 42<br>
+                        Berlin, Germany 10115</p>
+                        
+                        <p><strong>Hexagram Account:</strong> <a href="mailto:quantumball@hexagram.corp">quantumball@hexagram.corp</a></p>
+                        
+                        <p><strong>Technical Support:</strong> <a href="mailto:support@quantumball.eu">support@quantumball.eu</a></p>
+                        
+                        <p><strong>Sales Inquiries:</strong> <a href="mailto:sales@quantumball.eu">sales@quantumball.eu</a></p>
+                        
+                        <p><strong>Complaint Department:</strong> <a href="mailto:complaints@quantumball.eu">complaints@quantumball.eu</a><br>
+                        <em>(Currently overwhelmed with 47,293 unresolved cases)</em></p>
+                    </div>
+                </div>
+
+                <div class="tech-specs">
+                    <h4 id="support-hours">SUPPORT HOURS:</h4>
+                    <div id="hours-info">
+                        <p>Monday-Friday: 9:00-17:00 CET</p>
+                        <p>Weekends: By appointment only</p>
+                        <p>Holidays: Closed (except Temporal Anomaly Day)</p>
+                        <p>Emergency Hotline: +49-800-QUANTUM</p>
+                        <p>Response Time: 3-47 business days</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <span id="warranty-note">WARRANTY:</span> <span id="warranty-text">30-day money-back guarantee if predictions are less than 5% accurate. Valid only on Tuesdays during leap years.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p id="footer-text">© 2001 Quantum-Ball Pro Industries | Powered by Neuro-Divination™ Technology</p>
+        <p id="footer-browser">Best viewed with HyperNet Explorer 5.0 or higher | Optimized for 1024x768 resolution</p>
+        <p id="footer-contact">For technical issues contact: <a href="mailto:webmaster@quantumball.eu">webmaster@quantumball.eu</a></p>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        let predictionCount = 2847;
+
+        const translations = {
+            en: {
+                title: "QUANTUM-BALL PRO 2001™",
+                subtitle: "Advanced Neuro-Predictive Divination Engine",
+                'nav-title': "NEURAL-MENU",
+                'nav-home': "Quantum-Oracle",
+                'nav-predictions': "Predictions",
+                'nav-accuracy': "Accuracy Stats",
+                'nav-tech': "Tech Specs",
+                'nav-testimonials': "User Reviews",
+                'nav-contact': "Contact Info",
+                'counter-label': "PREDICTIONS TODAY:",
+                'powered-by': "Powered by:",
+                'home-title': "Welcome to Quantum-Ball Pro 2001",
+                disclaimer: "DISCLAIMER:",
+                'disclaimer-text': "Predictions generated by experimental Quantum-Algorithm technology. Accuracy not guaranteed. Use at your own risk.",
+                'ball-text': "ASK YOUR QUESTION",
+                'ask-btn': "ACTIVATE QUANTUM-SCAN",
+                'prediction-title': "Your Quantum-Prediction Will Appear Here",
+                'prediction-text': "Click the Quantum-Ball or enter your question to receive a neuro-calculated future assessment.",
+                'how-it-works': "How Quantum-Ball Pro Works:",
+                'features-list': `<li>Advanced Neuro-Predictive algorithms analyze temporal data streams</li>
+                                 <li>Quantum-Matrix calculations process probability vectors</li>
+                                 <li>Crypto-Vision technology scans future timelines</li>
+                                 <li>Results compiled through Hexagram DataLink protocols</li>`,
+                'pred-title': "Sample Predictions from Today",
+                'recent-label': "Recent Quantum-Predictions:",
+                'sample-predictions': `<p><strong>Question:</strong> "Will I get promoted this year?"<br>
+                                      <strong>Prediction:</strong> "The Crypto-Matrix indicates your boss will be replaced by an AI system. Career prospects: Diminished."</p>
+                                      <p><strong>Question:</strong> "Should I invest in Anoki stock?"<br>
+                                      <strong>Prediction:</strong> "Temporal-Scan reveals Anoki phones will become magical talismans. Investment outlook: Confusing."</p>
+                                      <p><strong>Question:</strong> "Will I find love this Valentine's?"<br>
+                                      <strong>Prediction:</strong> "Romance algorithms suggest you will fall in love with a vending machine. Probability: 73.2%"</p>
+                                      <p><strong>Question:</strong> "What will happen to the Euro?"<br>
+                                      <strong>Prediction:</strong> "Currency will be replaced by magical energy crystals by 2003. Financial advice: Buy crystals."</p>
+                                      <p><strong>Question:</strong> "Should I move to London?"<br>
+                                      <strong>Prediction:</strong> "London will become underwater theme park. Relocation status: Soggy."</p>`,
+                'warning-note': "NOTE:",
+                'warning-text': "These predictions are generated by cutting-edge Quantum-Technology. Results may vary significantly from actual events."
+            },
+            it: {
+                title: "QUANTUM-BALL PRO 2001™",
+                subtitle: "Motore Avanzato di Divinazione Neuro-Predittiva",
+                'nav-title': "MENU-NEURALE",
+                'nav-home': "Quantum-Oracolo",
+                'nav-predictions': "Predizioni",
+                'nav-accuracy': "Statistiche",
+                'nav-tech': "Specifiche Tecniche",
+                'nav-testimonials': "Recensioni",
+                'nav-contact': "Contatti",
+                'counter-label': "PREDIZIONI OGGI:",
+                'powered-by': "Alimentato da:",
+                'home-title': "Benvenuti a Quantum-Ball Pro 2001",
+                disclaimer: "DISCLAIMER:",
+                'disclaimer-text': "Predizioni generate da tecnologia sperimentale Quantum-Algorithm. Precisione non garantita. Usare a proprio rischio.",
+                'ball-text': "FAI LA TUA DOMANDA",
+                'ask-btn': "ATTIVA QUANTUM-SCAN",
+                'prediction-title': "La Tua Quantum-Predizione Apparirà Qui",
+                'prediction-text': "Clicca la Quantum-Ball o inserisci la tua domanda per ricevere una valutazione del futuro neuro-calcolata.",
+                'how-it-works': "Come Funziona Quantum-Ball Pro:",
+                'features-list': `<li>Algoritmi Neuro-Predittivi avanzati analizzano flussi di dati temporali</li>
+                                 <li>Calcoli Quantum-Matrix processano vettori di probabilità</li>
+                                 <li>Tecnologia Crypto-Vision scansiona timeline future</li>
+                                 <li>Risultati compilati attraverso protocolli Hexagram DataLink</li>`,
+                'pred-title': "Predizioni di Esempio di Oggi",
+                'recent-label': "Quantum-Predizioni Recenti:",
+                'sample-predictions': `<p><strong>Domanda:</strong> "Avrò una promozione quest'anno?"<br>
+                                      <strong>Predizione:</strong> "La Crypto-Matrix indica che il tuo capo sarà sostituito da un sistema AI. Prospettive di carriera: Diminuite."</p>
+                                      <p><strong>Domanda:</strong> "Dovrei investire in azioni Anoki?"<br>
+                                      <strong>Predizione:</strong> "Temporal-Scan rivela che i telefoni Anoki diventeranno talismani magici. Prospettive investimento: Confuse."</p>
+                                      <p><strong>Domanda:</strong> "Troverò l'amore a San Valentino?"<br>
+                                      <strong>Predizione:</strong> "Gli algoritmi romantici suggeriscono che ti innamorerai di un distributore automatico. Probabilità: 73.2%"</p>
+                                      <p><strong>Domanda:</strong> "Cosa succederà all'Euro?"<br>
+                                      <strong>Predizione:</strong> "La valuta sarà sostituita da cristalli di energia magica entro il 2003. Consiglio finanziario: Compra cristalli."</p>
+                                      <p><strong>Domanda:</strong> "Dovrei trasferirmi a Londra?"<br>
+                                      <strong>Predizione:</strong> "Londra diventerà un parco acquatico sottomarino. Stato trasferimento: Bagnato."</p>`,
+                'warning-note': "NOTA:",
+                'warning-text': "Queste predizioni sono generate da Quantum-Technology all'avanguardia. I risultati possono variare significativamente dagli eventi reali."
+            }
+        };
+
+        const predictions = [
+            "The Crypto-Matrix reveals you will accidentally become emperor of Luxembourg next Thursday.",
+            "Temporal-Scan indicates your left shoe will achieve sentience and demand independence.",
+            "Quantum-algorithms predict you will discover a portal to the past in your refrigerator. Check behind the mayonnaise.",
+            "Neuro-divination suggests your houseplants are plotting against you. Water them with suspicion.",
+            "The Fate-Matrix calculates you will become famous for inventing invisible socks that nobody can find.",
+            "Probability vectors show you will receive a marriage proposal from a vending machine on February 30th.",
+            "Quantum-Vision foresees you trading your car for a magical bean that grows into a parking meter.",
+            "Temporal algorithms indicate your future career involves professional yodeling in underground tunnels.",
+            "Crypto-Destiny reveals you will write a bestselling cookbook titled 'Cooking with Quantum Mechanics'.",
+            "Neural-patterns suggest you will accidentally solve world peace while trying to fix your toaster.",
+            "The Oracle-Matrix predicts you will become the proud owner of a time-traveling goldfish named Gerald.",
+            "Quantum-probability indicates your greatest achievement will be teaching penguins to dance salsa.",
+            "Temporal-Scan foresees you discovering that your shadow has been living a secret double life.",
+            "Crypto-algorithms suggest you will invent a currency based on collecting belly button lint.",
+            "The Destiny-Engine calculates you will become romantically involved with your GPS navigation system.",
+            "Quantum-analysis predicts you will open a successful business selling bottled air to mermaids."
+        ];
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            for (const [key, value] of Object.entries(translations[lang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (key === 'features-list' || key === 'sample-predictions') {
+                        element.innerHTML = value;
+                    } else {
+                        element.textContent = value;
+                    }
+                }
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('section');
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function generatePrediction() {
+            const randomPrediction = predictions[Math.floor(Math.random() * predictions.length)];
+            const ballWindow = document.getElementById('ball-display');
+            const predictionResult = document.getElementById('prediction-result');
+            const questionInput = document.getElementById('question-input');
+            
+            // Update ball window
+            ballWindow.innerHTML = '<span style="font-size: 9px;">PROCESSING...</span>';
+            
+            // Update counter
+            predictionCount++;
+            document.getElementById('prediction-counter').textContent = predictionCount.toLocaleString();
+            
+            setTimeout(() => {
+                ballWindow.innerHTML = '<span style="font-size: 8px;">PREDICTION READY</span>';
+                
+                const question = questionInput.value || "Your future inquiry";
+                predictionResult.innerHTML = `
+                    <h3 style="color: #ffff00;">Quantum-Prediction Generated!</h3>
+                    <p style="color: #00ffff; font-weight: bold;">Question: "${question}"</p>
+                    <p style="color: #ff6666; font-size: 14px; margin: 15px 0;">${randomPrediction}</p>
+                    <p style="color: #666666; font-size: 11px;">Confidence Level: ${Math.floor(Math.random() * 15 + 5)}%</p>
+                    <p style="color: #666666; font-size: 11px;">Temporal Variance: ±${Math.floor(Math.random() * 90 + 10)}%</p>
+                `;
+                
+                questionInput.value = "";
+                
+                setTimeout(() => {
+                    ballWindow.innerHTML = '<span style="font-size: 9px;">ASK AGAIN</span>';
+                }, 2000);
+            }, 1500);
+        }
+
+        // Initialize with English
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            
+            // Update counter every few seconds
+            setInterval(() => {
+                predictionCount += Math.floor(Math.random() * 3);
+                document.getElementById('prediction-counter').textContent = predictionCount.toLocaleString();
+            }, 5000);
+        });
+
+        // Allow Enter key to generate prediction
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('question-input') === document.activeElement) {
+                generatePrediction();
+            }
+        });
+    </script>
+</body>
+</html>

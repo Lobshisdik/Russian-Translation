@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localized Time Loop Bubbles - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Localized Time Loop Bubbles</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 15, 2001 | <span data-lang-key="meta_read_time">7 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Localized Time Loop Bubbles (LTLBs) are temporal anomalies that emerged following the Squishing event of 1997. These chrono-containment fields typically encompass urban centers or large communities, creating repeating temporal cycles that can range from seconds to years, with 24-hour loops being the most prevalent configuration.</p>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Quick Facts</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_type_label">Type:</span> <span data-lang-key="infobox_type_value">Temporal Anomaly</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_origin_label">First Observed:</span> <span data-lang-key="infobox_origin_value">1997 (Post-Squishing)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_escape_label">Escape Velocity:</span> <span data-lang-key="infobox_escape_value">80 km/h minimum</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_common_label">Most Common Duration:</span> <span data-lang-key="infobox_common_value">24 hours</span>
+                    </div>
+                </div>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#formation" data-lang-key="toc_1">1. Formation Mechanism</a></li>
+                        <li><a href="#characteristics" data-lang-key="toc_2">2. Loop Characteristics</a></li>
+                        <li><a href="#memory" data-lang-key="toc_3">3. Memory Retention Patterns</a></li>
+                        <li><a href="#escape" data-lang-key="toc_4">4. Escape Methods</a></li>
+                        <li><a href="#commerce" data-lang-key="toc_5">5. Inter-Loop Commerce</a></li>
+                        <li><a href="#examples" data-lang-key="toc_6">6. Notable Examples</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_7">7. See Also</a></li>
+                    </ol>
+                </div>
+
+                <h2 id="formation" data-lang-key="h2_formation">Formation Mechanism</h2>
+                <p data-lang-key="p_formation">LTLBs manifest through a process called temporal density aggregation, triggered when large populations concentrate in a specific geographical area. The critical mass threshold varies but typically requires at least 50,000 individuals within a 25-kilometer radius to initiate chrono-field formation. The bubble's boundaries are determined by population density gradients rather than administrative borders, often creating irregular shapes that can bisect traditional city limits.</p>
+
+                <p data-lang-key="p_formation2">Research by the Mages Guild suggests that LTLBs form as a protective response to reality instabilities caused by the Squishing. The temporal recursion acts as a stabilization matrix, preventing complete dimensional collapse in heavily populated areas.</p>
+
+                <h2 id="characteristics" data-lang-key="h2_characteristics">Loop Characteristics</h2>
+                
+                <h3 data-lang-key="h3_reset_cycle">Reset Cycle</h3>
+                <p data-lang-key="p_reset">At the commencement of each loop cycle, several fundamental resets occur:</p>
+                <ul>
+                    <li data-lang-key="li_resurrect">All deceased individuals are restored to life at their exact position from the loop's initial moment</li>
+                    <li data-lang-key="li_position">Living beings and objects return to their original loop-entry coordinates</li>
+                    <li data-lang-key="li_damage">Physical damage to infrastructure and environment is completely reversed</li>
+                    <li data-lang-key="li_consumption">Consumed resources are replenished to initial levels</li>
+                </ul>
+
+                <h3 data-lang-key="h3_duration">Duration Variability</h3>
+                <p data-lang-key="p_duration">Loop durations exhibit significant variation based on the population's collective psycho-temporal resonance frequency. Documented ranges include:</p>
+                <ul>
+                    <li data-lang-key="li_microsecond">Microsecond loops (extremely rare, usually unstable)</li>
+                    <li data-lang-key="li_minute">Minute-long loops (common in high-stress environments)</li>
+                    <li data-lang-key="li_hour">Hour-based cycles (standard commercial districts)</li>
+                    <li data-lang-key="li_day">24-hour loops (most stable and common)</li>
+                    <li data-lang-key="li_week">Weekly cycles (rare, found in academic communities)</li>
+                    <li data-lang-key="li_year">Annual loops (theoretical, no confirmed cases)</li>
+                </ul>
+
+                <h2 id="memory" data-lang-key="h2_memory">Memory Retention Patterns</h2>
+                <p data-lang-key="p_memory_initial">Initial loop iterations typically result in complete memory erasure, with inhabitants experiencing each cycle as if for the first time. However, prolonged exposure to temporal recursion gradually builds resistance to memory suppression through a process termed chrono-cognitive adaptation.</p>
+
+                <p data-lang-key="p_memory_stages">Memory retention follows predictable stages:</p>
+                <ul>
+                    <li data-lang-key="li_stage1"><strong data-lang-key="stage1_title">Stage 1 (Loops 1-10):</strong> <span data-lang-key="stage1_desc">Complete memory reset</span></li>
+                    <li data-lang-key="li_stage2"><strong data-lang-key="stage2_title">Stage 2 (Loops 11-50):</strong> <span data-lang-key="stage2_desc">Fragmentary recall, déjà vu sensations</span></li>
+                    <li data-lang-key="li_stage3"><strong data-lang-key="stage3_title">Stage 3 (Loops 51-200):</strong> <span data-lang-key="stage3_desc">Partial memory retention, approximately 30-60%</span></li>
+                    <li data-lang-key="li_stage4"><strong data-lang-key="stage4_title">Stage 4 (Loops 200+):</strong> <span data-lang-key="stage4_desc">Near-complete memory preservation across cycles</span></li>
+                </ul>
+
+                <h2 id="escape" data-lang-key="h2_escape">Escape Methods</h2>
+                <p data-lang-key="p_escape_rule">The primary escape mechanism is governed by the <a href="rule-of-80" data-lang-key="link_rule80">Rule of 80</a>, which requires sustained movement at velocities exceeding 80 km/h in a direction away from the loop's geometric center. This velocity threshold must be maintained for a minimum duration proportional to the loop's temporal length.</p>
+
+                <p data-lang-key="p_escape_failure">Attempts to escape at velocities below 80 km/h result in automatic spatial reversion, teleporting the individual or vehicle back to their loop-entry coordinates at the next cycle reset. This repositioning occurs regardless of distance traveled or time elapsed.</p>
+
+                <blockquote data-lang-key="quote_trucker">
+                    "The trick isn't just hitting 80 - you gotta hold it steady while pointing away from center. GPS helps, but sometimes you just gotta feel which way the temporal currents are flowing." - Anonymous Trucker Society member
+                </blockquote>
+
+                <h3 data-lang-key="h3_escape_equipment">Escape Equipment</h3>
+                <p data-lang-key="p_equipment">Several organizations manufacture specialized escape vehicles:</p>
+                <ul>
+                    <li data-lang-key="li_ehi"><strong data-lang-key="ehi_title">Esoteric Heavy Industries:</strong> <span data-lang-key="ehi_desc">Produces loop-resistant vehicles that maintain temporal coherence</span></li>
+                    <li data-lang-key="li_hcc"><strong data-lang-key="hcc_title">Hypercapitalist Collective:</strong> <span data-lang-key="hcc_desc">High-speed extraction services for premium clients</span></li>
+                    <li data-lang-key="li_truckers"><strong data-lang-key="truckers_title">Trucker Society:</strong> <span data-lang-key="truckers_desc">Modified heavy vehicles with enhanced acceleration capabilities</span></li>
+                </ul>
+
+                <h2 id="commerce" data-lang-key="h2_commerce">Inter-Loop Commerce</h2>
+                <p data-lang-key="p_commerce">Despite temporal isolation, LTLBs maintain economic connections through specialized courier services and communication networks operated by the <a href="trucker-society" data-lang-key="link_truckers">Trucker Society</a> and <a href="hypercapitalist-collective" data-lang-key="link_hyper">Hypercapitalist Collective</a>.</p>
+
+                <h3 data-lang-key="h3_communication">Communication Networks</h3>
+                <p data-lang-key="p_communication">Anoki 3310 devices have proven remarkably effective for inter-loop communication, apparently due to their ability to maintain signal coherence across temporal boundaries. These devices form the backbone of the Loop Information Network (LIN), enabling:</p>
+                <ul>
+                    <li data-lang-key="li_trading">Real-time trading of loop-stable goods</li>
+                    <li data-lang-key="li_scheduling">Coordination of courier deliveries</li>
+                    <li data-lang-key="li_emergency">Emergency evacuation services</li>
+                    <li data-lang-key="li_news">News and information exchange</li>
+                </ul>
+
+                <h3 data-lang-key="h3_goods">Transportable Goods</h3>
+                <p data-lang-key="p_goods">Only items produced by Esoteric Heavy Industries maintain stability when transported between loops. Standard manufactured goods suffer temporal degradation and often disintegrate upon crossing loop boundaries. This has created a lucrative market for EHI products, despite their significantly higher costs.</p>
+
+                <h2 id="examples" data-lang-key="h2_examples">Notable Examples</h2>
+
+                <h3 data-lang-key="h3_chicago">Chicago Metropolitan Loop</h3>
+                <p data-lang-key="p_chicago">The largest documented LTLB encompasses most of metropolitan Chicago in a stable 24-hour cycle. Established in late 1997, it houses approximately 2.8 million inhabitants and serves as a major hub for inter-loop commerce. The loop reset occurs daily at 6:00 AM Central Time.</p>
+
+                <h3 data-lang-key="h3_vegas">Las Vegas Entertainment Complex</h3>
+                <p data-lang-key="p_vegas">Operates on a unique 6-hour cycle, allowing visitors to experience multiple iterations of shows and gambling sessions. The Hypercapitalist Collective maintains exclusive extraction rights, charging premium rates for escape services.</p>
+
+                <h3 data-lang-key="h3_london">Greater London Temporal Zone</h3>
+                <p data-lang-key="p_london">Features an irregular 18-hour cycle that has significantly impacted global financial markets. The temporal displacement between loop cycles and external time has created arbitrage opportunities exploited by algorithmic trading systems.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="rule-of-80.html" data-lang-key="link_rule80_2">Rule of 80</a></li>
+                    <li><a href="trucker-society.html" data-lang-key="link_truckers_2">Trucker Society</a></li>
+                    <li><a href="hypercapitalist-collective.html" data-lang-key="link_hyper_2">Hypercapitalist Collective</a></li>
+                    <li><a href="esoteric-heavy-industries.html data-lang-key="link_ehi">Esoteric Heavy Industries</a></li>
+                    <li><a href="the-squishing.html" data-lang-key="link_squishing">The Squishing</a></li>
+                    <li><a href="mages-guild.html" data-lang-key="link_mages">Mages Guild</a></li>
+                    <li><a href="nokia-3310.html" data-lang-key="link_nokia">Anoki 3310</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Localized Time Loop Bubbles",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "7 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Formation Mechanism",
+                    toc_2: "2. Loop Characteristics", 
+                    toc_3: "3. Memory Retention Patterns",
+                    toc_4: "4. Escape Methods",
+                    toc_5: "5. Inter-Loop Commerce",
+                    toc_6: "6. Notable Examples",
+                    toc_7: "7. See Also",
+                    infobox_title: "Quick Facts",
+                    infobox_type_label: "Type:",
+                    infobox_type_value: "Temporal Anomaly",
+                    infobox_origin_label: "First Observed:",
+                    infobox_origin_value: "1997 (Post-Squishing)",
+                    infobox_escape_label: "Escape Velocity:",
+                    infobox_escape_value: "80 km/h minimum",
+                    infobox_common_label: "Most Common Duration:",
+                    infobox_common_value: "24 hours",
+                    p_intro: "Localized Time Loop Bubbles (LTLBs) are temporal anomalies that emerged following the Squishing event of 1997. These chrono-containment fields typically encompass urban centers or large communities, creating repeating temporal cycles that can range from seconds to years, with 24-hour loops being the most prevalent configuration.",
+                    h2_formation: "Formation Mechanism",
+                    p_formation: "LTLBs manifest through a process called temporal density aggregation, triggered when large populations concentrate in a specific geographical area. The critical mass threshold varies but typically requires at least 50,000 individuals within a 25-kilometer radius to initiate chrono-field formation. The bubble's boundaries are determined by population density gradients rather than administrative borders, often creating irregular shapes that can bisect traditional city limits.",
+                    p_formation2: "Research by the Mages Guild suggests that LTLBs form as a protective response to reality instabilities caused by the Squishing. The temporal recursion acts as a stabilization matrix, preventing complete dimensional collapse in heavily populated areas.",
+                    h2_characteristics: "Loop Characteristics",
+                    h3_reset_cycle: "Reset Cycle",
+                    p_reset: "At the commencement of each loop cycle, several fundamental resets occur:",
+                    li_resurrect: "All deceased individuals are restored to life at their exact position from the loop's initial moment",
+                    li_position: "Living beings and objects return to their original loop-entry coordinates",
+                    li_damage: "Physical damage to infrastructure and environment is completely reversed",
+                    li_consumption: "Consumed resources are replenished to initial levels",
+                    h3_duration: "Duration Variability",
+                    p_duration: "Loop durations exhibit significant variation based on the population's collective psycho-temporal resonance frequency. Documented ranges include:",
+                    li_microsecond: "Microsecond loops (extremely rare, usually unstable)",
+                    li_minute: "Minute-long loops (common in high-stress environments)",
+                    li_hour: "Hour-based cycles (standard commercial districts)",
+                    li_day: "24-hour loops (most stable and common)",
+                    li_week: "Weekly cycles (rare, found in academic communities)",
+                    li_year: "Annual loops (theoretical, no confirmed cases)",
+                    h2_memory: "Memory Retention Patterns",
+                    p_memory_initial: "Initial loop iterations typically result in complete memory erasure, with inhabitants experiencing each cycle as if for the first time. However, prolonged exposure to temporal recursion gradually builds resistance to memory suppression through a process termed chrono-cognitive adaptation.",
+                    p_memory_stages: "Memory retention follows predictable stages:",
+                    stage1_title: "Stage 1 (Loops 1-10):",
+                    stage1_desc: "Complete memory reset",
+                    stage2_title: "Stage 2 (Loops 11-50):",
+                    stage2_desc: "Fragmentary recall, déjà vu sensations",
+                    stage3_title: "Stage 3 (Loops 51-200):",
+                    stage3_desc: "Partial memory retention, approximately 30-60%",
+                    stage4_title: "Stage 4 (Loops 200+):",
+                    stage4_desc: "Near-complete memory preservation across cycles",
+                    h2_escape: "Escape Methods",
+                    p_escape_rule: "The primary escape mechanism is governed by the Rule of 80, which requires sustained movement at velocities exceeding 80 km/h in a direction away from the loop's geometric center. This velocity threshold must be maintained for a minimum duration proportional to the loop's temporal length.",
+                    p_escape_failure: "Attempts to escape at velocities below 80 km/h result in automatic spatial reversion, teleporting the individual or vehicle back to their loop-entry coordinates at the next cycle reset. This repositioning occurs regardless of distance traveled or time elapsed.",
+                    quote_trucker: "\"The trick isn't just hitting 80 - you gotta hold it steady while pointing away from center. GPS helps, but sometimes you just gotta feel which way the temporal currents are flowing.\" - Anonymous Trucker Society member",
+                    h3_escape_equipment: "Escape Equipment",
+                    p_equipment: "Several organizations manufacture specialized escape vehicles:",
+                    ehi_title: "Esoteric Heavy Industries:",
+                    ehi_desc: "Produces loop-resistant vehicles that maintain temporal coherence",
+                    hcc_title: "Hypercapitalist Collective:",
+                    hcc_desc: "High-speed extraction services for premium clients",
+                    truckers_title: "Trucker Society:",
+                    truckers_desc: "Modified heavy vehicles with enhanced acceleration capabilities",
+                    h2_commerce: "Inter-Loop Commerce",
+                    p_commerce: "Despite temporal isolation, LTLBs maintain economic connections through specialized courier services and communication networks operated by the Trucker Society and Hypercapitalist Collective.",
+                    h3_communication: "Communication Networks",
+                    p_communication: "Anoki 3310 devices have proven remarkably effective for inter-loop communication, apparently due to their ability to maintain signal coherence across temporal boundaries. These devices form the backbone of the Loop Information Network (LIN), enabling:",
+                    li_trading: "Real-time trading of loop-stable goods",
+                    li_scheduling: "Coordination of courier deliveries",
+                    li_emergency: "Emergency evacuation services",
+                    li_news: "News and information exchange",
+                    h3_goods: "Transportable Goods",
+                    p_goods: "Only items produced by Esoteric Heavy Industries maintain stability when transported between loops. Standard manufactured goods suffer temporal degradation and often disintegrate upon crossing loop boundaries. This has created a lucrative market for EHI products, despite their significantly higher costs.",
+                    h2_examples: "Notable Examples",
+                    h3_chicago: "Chicago Metropolitan Loop",
+                    p_chicago: "The largest documented LTLB encompasses most of metropolitan Chicago in a stable 24-hour cycle. Established in late 1997, it houses approximately 2.8 million inhabitants and serves as a major hub for inter-loop commerce. The loop reset occurs daily at 6:00 AM Central Time.",
+                    h3_vegas: "Las Vegas Entertainment Complex", 
+                    p_vegas: "Operates on a unique 6-hour cycle, allowing visitors to experience multiple iterations of shows and gambling sessions. The Hypercapitalist Collective maintains exclusive extraction rights, charging premium rates for escape services.",
+                    h3_london: "Greater London Temporal Zone",
+                    p_london: "Features an irregular 18-hour cycle that has significantly impacted global financial markets. The temporal displacement between loop cycles and external time has created arbitrage opportunities exploited by algorithmic trading systems.",
+                    h2_see_also: "See Also",
+                    link_rule80: "Rule of 80",
+                    link_rule80_2: "Rule of 80",
+                    link_truckers: "Trucker Society",
+                    link_truckers_2: "Trucker Society", 
+                    link_hyper: "Hypercapitalist Collective",
+                    link_hyper_2: "Hypercapitalist Collective",
+                    link_ehi: "Esoteric Heavy Industries",
+                    link_squishing: "The Squishing",
+                    link_mages: "Mages Guild",
+                    link_nokia: "Anoki 3310 Phenomenon",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Bolle di Loop Temporali Localizzati",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "7 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Meccanismo di Formazione",
+                    toc_2: "2. Caratteristiche dei Loop",
+                    toc_3: "3. Schemi di Ritenzione della Memoria",
+                    toc_4: "4. Metodi di Fuga",
+                    toc_5: "5. Commercio Inter-Loop",
+                    toc_6: "6. Esempi Notevoli",
+                    toc_7: "7. Vedi Anche",
+                    infobox_title: "Dati Rapidi",
+                    infobox_type_label: "Tipo:",
+                    infobox_type_value: "Anomalia Temporale",
+                    infobox_origin_label: "Prima Osservazione:",
+                    infobox_origin_value: "1997 (Post-Schiacciamento)",
+                    infobox_escape_label: "Velocità di Fuga:",
+                    infobox_escape_value: "minimo 80 km/h",
+                    infobox_common_label: "Durata Più Comune:",
+                    infobox_common_value: "24 ore",
+                    p_intro: "Le Bolle di Loop Temporali Localizzati (BLTL) sono anomalie temporali emerse dopo l'evento dello Schiacciamento del 1997. Questi campi di contenimento cronico tipicamente avvolgono centri urbani o grandi comunità, creando cicli temporali ripetitivi che possono variare da secondi ad anni, con loop di 24 ore come configurazione più prevalente.",
+                    h2_formation: "Meccanismo di Formazione",
+                    p_formation: "Le BLTL si manifestano attraverso un processo chiamato aggregazione di densità temporale, innescato quando grandi popolazioni si concentrano in un'area geografica specifica. La soglia di massa critica varia ma tipicamente richiede almeno 50.000 individui entro un raggio di 25 chilometri per iniziare la formazione del campo cronico. I confini della bolla sono determinati dai gradienti di densità della popolazione piuttosto che dai confini amministrativi, spesso creando forme irregolari che possono attraversare i limiti cittadini tradizionali.",
+                    p_formation2: "La ricerca della Gilda dei Maghi suggerisce che le BLTL si formano come risposta protettiva alle instabilità della realtà causate dallo Schiacciamento. La ricorsione temporale agisce come una matrice di stabilizzazione, prevenendo il completo collasso dimensionale nelle aree densamente popolate.",
+                    h2_characteristics: "Caratteristiche dei Loop",
+                    h3_reset_cycle: "Ciclo di Reset",
+                    p_reset: "All'inizio di ogni ciclo di loop, si verificano diversi reset fondamentali:",
+                    li_resurrect: "Tutti gli individui deceduti vengono riportati in vita nella loro posizione esatta dal momento iniziale del loop",
+                    li_position: "Esseri viventi e oggetti tornano alle loro coordinate originali di ingresso nel loop",
+                    li_damage: "I danni fisici all'infrastruttura e all'ambiente vengono completamente invertiti",
+                    li_consumption: "Le risorse consumate vengono riportate ai livelli iniziali",
+                    h3_duration: "Variabilità della Durata",
+                    p_duration: "Le durate dei loop mostrano variazioni significative basate sulla frequenza di risonanza psico-temporale collettiva della popolazione. I range documentati includono:",
+                    li_microsecond: "Loop di microsecondi (estremamente rari, solitamente instabili)",
+                    li_minute: "Loop di minuti (comuni in ambienti ad alto stress)",
+                    li_hour: "Cicli basati su ore (distretti commerciali standard)",
+                    li_day: "Loop di 24 ore (più stabili e comuni)",
+                    li_week: "Cicli settimanali (rari, trovati in comunità accademiche)",
+                    li_year: "Loop annuali (teorici, nessun caso confermato)",
+                    h2_memory: "Schemi di Ritenzione della Memoria",
+                    p_memory_initial: "Le iterazioni iniziali dei loop tipicamente risultano in cancellazione completa della memoria, con gli abitanti che sperimentano ogni ciclo come se fosse la prima volta. Tuttavia, l'esposizione prolungata alla ricorsione temporale gradualmente costruisce resistenza alla soppressione della memoria attraverso un processo chiamato adattamento crono-cognitivo.",
+                    p_memory_stages: "La ritenzione della memoria segue fasi prevedibili:",
+                    stage1_title: "Fase 1 (Loop 1-10):",
+                    stage1_desc: "Reset completo della memoria",
+                    stage2_title: "Fase 2 (Loop 11-50):",
+                    stage2_desc: "Ricordo frammentario, sensazioni di déjà vu",
+                    stage3_title: "Fase 3 (Loop 51-200):",
+                    stage3_desc: "Ritenzione parziale della memoria, circa 30-60%",
+                    stage4_title: "Fase 4 (Loop 200+):",
+                    stage4_desc: "Preservazione quasi completa della memoria attraverso i cicli",
+                    h2_escape: "Metodi di Fuga",
+                    p_escape_rule: "Il meccanismo di fuga principale è governato dalla Regola dell'80, che richiede movimento sostenuto a velocità superiori agli 80 km/h in direzione opposta al centro geometrico del loop. Questa soglia di velocità deve essere mantenuta per una durata minima proporzionale alla lunghezza temporale del loop.",
+                    p_escape_failure: "I tentativi di fuga a velocità inferiori agli 80 km/h risultano in reversione spaziale automatica, teletrasportando l'individuo o veicolo alle loro coordinate di ingresso nel loop al reset del ciclo successivo. Questo riposizionamento avviene indipendentemente dalla distanza percorsa o dal tempo trascorso.",
+                    quote_trucker: "\"Il trucco non è solo raggiungere gli 80 - devi mantenerli stabili puntando lontano dal centro. Il GPS aiuta, ma a volte devi solo sentire in che direzione scorrono le correnti temporali.\" - Membro anonimo della Società dei Camionisti",
+                    h3_escape_equipment: "Equipaggiamento di Fuga",
+                    p_equipment: "Diverse organizzazioni producono veicoli di fuga specializzati:",
+                    ehi_title: "Industrie Pesanti Esoteriche:",
+                    ehi_desc: "Produce veicoli resistenti ai loop che mantengono coerenza temporale",
+                    hcc_title: "Collettivo Ipercapitalista:",
+                    hcc_desc: "Servizi di estrazione ad alta velocità per clienti premium",
+                    truckers_title: "Società dei Camionisti:",
+                    truckers_desc: "Veicoli pesanti modificati con capacità di accelerazione migliorate",
+                    h2_commerce: "Commercio Inter-Loop",
+                    p_commerce: "Nonostante l'isolamento temporale, le BLTL mantengono connessioni economiche attraverso servizi di corriere specializzati e reti di comunicazione gestite dalla Società dei Camionisti e dal Collettivo Ipercapitalista.",
+                    h3_communication: "Reti di Comunicazione",
+                    p_communication: "I dispositivi Anoki 3310 si sono dimostrati notevolmente efficaci per la comunicazione inter-loop, apparentemente grazie alla loro capacità di mantenere coerenza del segnale attraverso i confini temporali. Questi dispositivi formano la spina dorsale della Rete di Informazioni Loop (RIL), abilitando:",
+                    li_trading: "Trading in tempo reale di beni stabili nei loop",
+                    li_scheduling: "Coordinamento delle consegne dei corrieri",
+                    li_emergency: "Servizi di evacuazione d'emergenza",
+                    li_news: "Scambio di notizie e informazioni",
+                    h3_goods: "Beni Trasportabili",
+                    p_goods: "Solo gli oggetti prodotti dalle Industrie Pesanti Esoteriche mantengono stabilità quando trasportati tra loop. I beni manifatturieri standard subiscono degradazione temporale e spesso si disintegrano attraversando i confini dei loop. Questo ha creato un mercato lucrativo per i prodotti EHI, nonostante i loro costi significativamente più alti.",
+                    h2_examples: "Esempi Notevoli",
+                    h3_chicago: "Loop Metropolitano di Chicago",
+                    p_chicago: "La più grande BLTL documentata comprende la maggior parte della Chicago metropolitana in un ciclo stabile di 24 ore. Stabilita alla fine del 1997, ospita circa 2,8 milioni di abitanti e serve come hub principale per il commercio inter-loop. Il reset del loop avviene quotidianamente alle 6:00 AM Ora Centrale.",
+                    h3_vegas: "Complesso di Intrattenimento Las Vegas",
+                    p_vegas: "Opera su un ciclo unico di 6 ore, permettendo ai visitatori di sperimentare multiple iterazioni di spettacoli e sessioni di gioco. Il Collettivo Ipercapitalista mantiene diritti di estrazione esclusivi, facendo pagare tariffe premium per i servizi di fuga.",
+                    h3_london: "Zona Temporale della Grande Londra",
+                    p_london: "Presenta un ciclo irregolare di 18 ore che ha impattato significativamente i mercati finanziari globali. Lo spostamento temporale tra i cicli di loop e il tempo esterno ha creato opportunità di arbitraggio sfruttate da sistemi di trading algoritmico.",
+                    h2_see_also: "Vedi Anche",
+                    link_rule80: "Regola dell'80",
+                    link_rule80_2: "Regola dell'80",
+                    link_truckers: "Società dei Camionisti",
+                    link_truckers_2: "Società dei Camionisti",
+                    link_hyper: "Collettivo Ipercapitalista",
+                    link_hyper_2: "Collettivo Ipercapitalista",
+                    link_ehi: "Industrie Pesanti Esoteriche",
+                    link_squishing: "Lo Schiacciamento",
+                    link_mages: "Gilda dei Maghi",
+                    link_nokia: "Fenomeno Anoki 3310",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Creative Commons."

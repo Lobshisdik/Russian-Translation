@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mister Whiskers Gallery - Em's Magical Familiar</title>
+    <meta name="description" content="A tribute gallery to Mister Whiskers, Em's cat and magical familiar, showcasing his mystical powers and special connection to witchcraft.">
+    <meta name="keywords" content="familiar, witch cat, magical pet, Mister Whiskers, witch companion, familiar gallery">
+    <meta name="author" content="Em">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #990000;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            margin: 10px;
+            line-height: 1.5;
+            background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP8AAP///yH5BAEAAAEALAAAAAADAAMAAAIDBGKRADs=");
+        }
+        
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 15px;
+            border: 8px ridge #CC0000;
+        }
+        
+        h1, h2, h3 {
+            color: #CC0000;
+            text-align: center;
+            font-family: "Papyrus", fantasy;
+            letter-spacing: 3px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            text-shadow: 2px 2px #000000;
+            border-bottom: 3px dotted #990000;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #FFCCCC;
+            padding: 8px;
+            border: 3px dashed #CC0000;
+            text-transform: uppercase;
+        }
+        
+        h2:hover {
+            background-color: #FFAAAA;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #CC0000;
+            border-right: 5px solid #CC0000;
+        }
+        
+        .photo-section {
+            margin-bottom: 30px;
+            padding: 10px;
+            border-left: 4px double #990000;
+            background-color: #FFEEEE;
+        }
+        
+        .section-content {
+            display: none;
+            padding: 15px;
+            background-color: #FFDDDD;
+            border: 2px dotted #990000;
+            margin-top: 15px;
+        }
+        
+        a {
+            color: #990000;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            color: #FF0000;
+            background-color: #FFCCCC;
+        }
+        
+        .blink {
+            animation: blinker 0.8s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .visitor-counter {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #CC0000;
+            background-color: #FFDDDD;
+            padding: 5px;
+            border: 2px inset #990000;
+        }
+        
+        .sidebar {
+            float: right;
+            width: 160px;
+            background-color: #FFEEEE;
+            padding: 10px;
+            border: 3px outset #CC0000;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .sidebar h3 {
+            font-size: 16px;
+            margin-top: 0;
+            border: none;
+            border-bottom: 2px solid #CC0000;
+            text-align: left;
+        }
+        
+        .sidebar ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .sidebar li:before {
+            content: "★彡 ";
+            color: #CC0000;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            border-top: 3px ridge #CC0000;
+            padding-top: 10px;
+            background-color: #FFDDDD;
+        }
+        
+        .pentagram {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #CC0000;
+            margin: 10px auto;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #990000;
+            letter-spacing: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .photo-container {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #FFEEDD;
+            border: 3px ridge #CC0000;
+        }
+        
+        .photo-caption {
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #770000;
+        }
+        
+        .magical-trait {
+            background-color: #FFDDEE;
+            padding: 5px;
+            border: 2px dashed #CC0000;
+            margin: 10px 0;
+        }
+        
+        .power-rating {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #CC0000;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cat-ascii {
+            font-family: monospace;
+            white-space: pre;
+            display: block;
+            text-align: center;
+            color: #CC0000;
+            margin: 10px auto;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pentagram">
+            .     .     .
+           /|\   /|\   /|\
+          / | \ / | \ / | \
+         /  |  V  |  V  |  \
+        /   |     |     |   \
+       /    |     |     |    \
+      /_____O_____O_____O_____\
+      \     |     |     |     /
+       \    |     |     |    /
+        \   |     |     |   /
+         \  |  /\ |  /\ |  /
+          \ | / | | / | | /
+           \|/  \|/  \|/
+            '     '     '
+        </div>
+
+        <h1>Mister Whiskers: My Magical Familiar</h1>
+
+        <div class="cat-ascii">
+              /\_/\  
+             ( o.o ) 
+              > ^ <
+        </div>
+
+        <marquee class="blink" scrollamount="6" direction="left" behavior="alternate">☆彡☽☾ BEHOLD THE MOST MAGICAL CAT IN ALL OF WIMBLEDON!!! ☾☽☆彡</marquee>
+        
+        <div class="visitor-counter">
+            ⊹⊱✫⊰⊹ Magical Cat Visitors: <span class="blink">623</span> ⊹⊱✫⊰⊹
+        </div>
+
+        <div class="sidebar">
+            <h3>~~*Back To*~~</h3>
+            <ul>
+                <li><a href="index.html">My Magical Diary</a></li>
+                <li><a href="spells.html">My Spell Book!!!</a></li>
+                <li><a href="cedrata.html">CEDRATA Magick!!!</a></li>
+            </ul>
+            
+            <div class="pentagram">
+              *
+             /|\
+            /*|*\
+            \*|*/
+             \|/
+              v
+            </div>
+            
+            <h3>~*~*Cat Magic*~*~</h3>
+            <ul>
+                <li><a href="#about">About Mister Whiskers!!!</a></li>
+                <li><a href="#powers">Magical Powers!!!</a></li>
+                <li><a href="#photos">Enchanted Photos!!!</a></li>
+                <li><a href="#evidence">Proof of Magic!!!</a></li>
+            </ul>
+            
+            <div class="construction">
+                <img src="/api/placeholder/88/31" alt="Under Construction" />
+                <p>¡!¡!¡ FaMiLiAr<br>AlWaYs EvOlViNg ¡!¡!¡</p>
+            </div>
+            
+            <div class="cat-ascii">
+                /\___/\
+               (  o o  )
+               /   *   \
+               \__\_/__/
+                 /   \
+            </div>
+        </div>
+        
+        <div class="introduction">
+            <div class="divider">♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠</div>
+            
+            <p>*~*~* Welcome to the OFFICIAL page of Mister Whiskers, my MAGICAL FAMILIAR!!! *~*~* He is not just an ordinary cat, but a POWERFUL magical entity who has chosen to take the form of a common house cat to disguise his TRUE POWER!!!</p>
+            
+            <p>⚠️⚠️⚠️ WARNING!!! ⚠️⚠️⚠️ Looking into the eyes of a witch's familiar for too long can cause you to fall under their spell!!! If you feel suddenly sleepy or have a strange urge to buy cat food after viewing this page, that's just Mister Whiskers' magic working through the Hypernet!!!</p>
+            
+            <div class="photo-container">
+                <img src="/api/placeholder/320/240" alt="Mister Whiskers - Magical Familiar" />
+                <div class="photo-caption">Mister Whiskers in disguise as an ordinary cat (note the pentagram-shaped white spot on his chest!!!)</div>
+            </div>
+            
+            <div class="divider">♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥</div>
+        </div>
+        
+        <h2 id="about" onclick="toggleSection('aboutSection')">🐱🔮 ABOUT MISTER WHISKERS 🔮🐱</h2>
+        <div id="aboutSection" class="section-content">
+            <div class="photo-section">
+                <h3>The Origin Story of My Magical Familiar</h3>
+                
+                <p>I discovered Mister Whiskers (or rather, HE discovered ME) in our garden on February 3, 1993 - a date that I now realize was COSMICALLY SIGNIFICANT because it adds up to 16, which is 4x4, and 4 is a MAGICAL NUMBER!!!</p>
+                
+                <p>He appeared as a stray black cat with a WHITE SPOT on his chest that is ABSOLUTELY shaped like a pentagram (well, it is if you look at it in the right light and maybe squint a bit). This is how I KNEW he was meant to be my familiar!!!</p>
+                
+                <div class="magical-trait">
+                    <strong>SPECIAL FAMILIAR TRAITS:</strong>
+                    <ul>
+                        <li>Black fur with mystical white pentagram on chest</li>
+                        <li>Eyes that change color depending on his mood (they're actually always green but sometimes they LOOK different in different lighting!!!)</li>
+                        <li>Can disappear and reappear at will (especially around dinner time)</li>
+                        <li>Makes strange noises at 3 AM that sound like he's communicating with the spirit realm</li>
+                        <li>Always knows when I'm upset (comes to sit on my homework when I'm struggling with maths!!!)</li>
+                        <li>Demonstrates telekinetic abilities (knocks things off shelves WITHOUT TOUCHING THEM... well, with minimal touching!!!)</li>
+                    </ul>
+                </div>
+                
+                <p>Mister Whiskers has been my loyal magical companion for over 3 years now. He assists with ALL my spellcasting (mostly by watching intently from nearby) and helps me with my investigations into the Mattei conspiracy and UFO sightings (he always seems to KNOW when I'm onto something big!!!).</p>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/300/200" alt="Mister Whiskers assisting with spellcasting" />
+                    <div class="photo-caption">Mister Whiskers channeling magical energy during a spell (actually just sleeping on my spell book, but that's how he TRANSFERS knowledge!!!)</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="powers" onclick="toggleSection('powersSection')">✪✪✪ MAGICAL ABILITIES & POWERS ✪✪✪</h2>
+        <div id="powersSection" class="section-content">
+            <div class="photo-section">
+                <h3>Documented Supernatural Abilities</h3>
+                
+                <p>As a powerful familiar, Mister Whiskers possesses NUMEROUS magical abilities that he uses to help me in my witchcraft and investigations. I have been CAREFULLY DOCUMENTING these powers since we formed our magical bond!!!</p>
+                
+                <div class="magical-trait">
+                    <strong>TELEPATHY:</strong>
+                    <p>Mister Whiskers can READ MY MIND!!! Once I was thinking about tuna sandwiches and he immediately ran to the kitchen and meowed at the refrigerator!!! This happens CONSTANTLY and is ABSOLUTE PROOF of our telepathic bond!!!</p>
+                    <div class="power-rating">Power Level: ★★★★★</div>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>ASTRAL PROJECTION:</strong>
+                    <p>When Mister Whiskers is sleeping (which is about 18 hours a day), his spirit is actually traveling to other dimensions!!! I know this because sometimes his paws twitch and he makes little noises - that's him running and talking in the astral realm!!! When he wakes up suddenly, that's because he's returning to his physical body!!!</p>
+                    <div class="power-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>OBJECT MANIPULATION:</strong>
+                    <p>Mister Whiskers can move objects with his mind (and sometimes his paws)!!! He regularly knocks things off shelves and tables, which might LOOK like normal cat behavior, but is actually him testing his telekinetic abilities!!! The more important or breakable an object is, the more he is drawn to test his powers on it!!!</p>
+                    <div class="power-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>WEATHER SENSITIVITY:</strong>
+                    <p>Mister Whiskers can PREDICT THE WEATHER!!! Before it rains, he always sits by the window and makes a special chirping sound!!! He's NEVER WRONG (except when he does it on sunny days too, which is just him testing me)!!!</p>
+                    <div class="power-rating">Power Level: ★★★☆☆</div>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>PROTECTION MAGIC:</strong>
+                    <p>Mister Whiskers protects our house from negative energies and evil spirits!!! Since he became my familiar, we haven't had a SINGLE ghost, demon, or government agent break in!!! He patrols the house at night (especially the kitchen and my bedroom) to ensure no dark forces enter!!!</p>
+                    <div class="power-rating">Power Level: ★★★★★</div>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>CEDRATA ENHANCEMENT:</strong>
+                    <p>When Mister Whiskers is near my bottle of Cedrata Massoni, the magical properties of the drink are AMPLIFIED!!! This is why I always make sure he's in the room when I'm doing Cedrata-based spells!!! One time he knocked over a bottle of Cedrata (not because he was being clumsy but because he was INFUSING it with extra magic!!!).</p>
+                    <div class="power-rating">Power Level: ★★★★☆</div>
+                </div>
+                
+                <div class="cat-ascii">
+                     |\      _,,,--,,_
+                     /,`.-'`'   ._  \-;;,_
+                    |,4-  ) )-,_..;\ (  `'-'
+                   '---''(_/--'  `-'\_)  
+                </div>
+            </div>
+        </div>
+        
+        <h2 id="photos" onclick="toggleSection('photosSection')">✧✧✧ ENCHANTED PHOTO GALLERY ✧✧✧</h2>
+        <div id="photosSection" class="section-content">
+            <div class="photo-section">
+                <h3>Magical Moments Captured on Film</h3>
+                
+                <p>Below are ACTUAL PHOTOGRAPHS of Mister Whiskers displaying his magical abilities!!! Some of his supernatural powers can be captured on film if you know EXACTLY the right moment to take the picture!!!</p>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/320/200" alt="Mister Whiskers with glowing eyes" />
+                    <div class="photo-caption">Mister Whiskers with GLOWING EYES!!! (The camera flash makes his eyes glow, which is actually his magical aura being captured on film!!!)</div>
+                </div>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/320/200" alt="Mister Whiskers teleporting" />
+                    <div class="photo-caption">Caught in the act of TELEPORTING!!! (He's actually just jumping off the sofa, but the blur shows his transition between dimensions!!!)</div>
+                </div>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/320/200" alt="Mister Whiskers guarding Cedrata" />
+                    <div class="photo-caption">Mister Whiskers GUARDING my precious Cedrata Massoni and infusing it with additional magical energy!!!</div>
+                </div>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/320/200" alt="Mister Whiskers sensing energies" />
+                    <div class="photo-caption">Mister Whiskers SENSING supernatural energies!!! (He's staring at the wall where absolutely NOTHING is visible to the human eye, but HE can see spirits!!!)</div>
+                </div>
+                
+                <div class="photo-container">
+                    <img src="/api/placeholder/320/200" alt="Mister Whiskers with UFO" />
+                    <div class="photo-caption">INCREDIBLE PROOF of alien connection!!! Mister Whiskers looking at the sky where I later noticed a UFO!!! (The UFO is too small to see in this photo but it was DEFINITELY there!!!)</div>
+                </div>
+                
+                <p>These photos provide UNDENIABLE EVIDENCE of Mister Whiskers' supernatural abilities!!! I have many more photos but they're too MAGICALLY POWERFUL to share on the Hypernet!!!</p>
+            </div>
+        </div>
+        
+        <h2 id="evidence" onclick="toggleSection('evidenceSection')">📜📜📜 PROOF OF MAGICAL NATURE 📜📜📜</h2>
+        <div id="evidenceSection" class="section-content">
+            <div class="photo-section">
+                <h3>Scientific Documentation of Familiar Behavior</h3>
+                
+                <p>For those SKEPTICS who might doubt Mister Whiskers' magical nature, I have compiled SCIENTIFIC EVIDENCE of his supernatural abilities!!! These are DOCUMENTED INCIDENTS that CANNOT be explained by normal cat behavior!!!</p>
+                
+                <div class="magical-trait">
+                    <strong>INCIDENT #1: The Prophecy Hairball</strong>
+                    <p>On March 15, 1994, Mister Whiskers coughed up a hairball DIRECTLY onto my open spell book, specifically on a page about divination!!! When I examined the hairball closely, I noticed it was shaped VAGUELY like Italy, which was a clear message about the Mattei conspiracy!!! This happened THE DAY BEFORE I found a magazine article about Mattei at the library!!! COINCIDENCE??? I THINK NOT!!!</p>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>INCIDENT #2: The Midnight Chortle</strong>
+                    <p>Every night at EXACTLY 3:33 AM (I checked the clock multiple times!!!), Mister Whiskers sits on the windowsill and makes a strange chattering sound at the moon. This is OBVIOUSLY him communicating with celestial entities!!! On nights when he does this more intensely, I've noticed increased magical energy in my spells the next day!!!</p>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>INCIDENT #3: The Cedrata Response</strong>
+                    <p>Whenever I open a bottle of Cedrata Massoni, Mister Whiskers appears in the room WITHIN SECONDS, even if he was previously nowhere to be seen!!! He can detect the magical elixir from ANYWHERE in the house!!! Once he even came running from the garden when I opened a bottle in the kitchen with all doors and windows closed!!! How did he know unless he has SUPERNATURAL SENSES???</p>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>INCIDENT #4: The Protective Circle</strong>
+                    <p>When I'm performing important spells or rituals, Mister Whiskers often walks in a perfect circle around me before sitting down to observe. He has done this EXACT behavior during 17 separate magical workings!!! This is him creating a protective magical barrier, just like witches do with salt circles!!! His version is MORE POWERFUL because it's made with familiar energy!!!</p>
+                </div>
+                
+                <div class="magical-trait">
+                    <strong>INCIDENT #5: The Halloween Manifestation</strong>
+                    <p>On Halloween 1995, when I was attempting to contact Enrico Mattei's spirit, a neighbor's cat jumped into my ritual circle at EXACTLY midnight!!! This was OBVIOUSLY Mister Whiskers projecting his consciousness into another cat's body to strengthen the spiritual connection!!! The neighbor's cat had the SAME COLORED EYES as Mister Whiskers and ran away when I tried to question it, which is EXACTLY what a spirit-possessed cat would do!!!</p>
+                </div>
+                
+                <p>I have recorded DOZENS more incidents in my familiar journal, but these are the most COMPELLING and SCIENTIFICALLY VERIFIABLE examples!!! If you still don't believe in familiar magic after this MOUNTAIN OF EVIDENCE, then you are clearly under the influence of anti-magic government propaganda!!!</p>
+                
+                <div class="cat-ascii">
+                      /\_/\  
+                     / o o \  
+                    (   "   )  
+                     \~(*)~/  
+                      // \\\  
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider">∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞</div>
+
+        <div class="construction">
+            <img src="/api/placeholder/400/60" alt="Under Construction" />
+            
+            <div class="pentagram">
+               /|\ 
+              / | \
+             /__|__\
+            /\  |  /\
+           /__\_|_/__\
+            </div>
+            
+            <p>☥☥☥ More magical familiar photos coming soon!!! Check back for updates!!! ☥☥☥</p>
+            
+            <div class="cat-ascii">
+                    /\     /\
+                   {  `---'  }
+                   {  O   O  }
+                   ~~>  V  <~~
+                    \  \|/  /
+                     `-----'__
+                     /     \  `^\_
+                    {       }\ |\_\_   W
+                    |  \_/  |/ /  \_\_( )
+                     \__/  /(_E     \__/
+                       (  /
+                        MM
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>~*~*~ Best viewed with Hypernet Explorer 4.0 or higher ~*~*~</p>
+            <p>⊹⊱✫⊰⊹ This magical corner of the Hypernet last updated: January 12, 2001 ⊹⊱✫⊰⊹</p>
+            <p>✧✦✧ Contact Em on Hexagram: <a href="mailto:emthewitch@hexagram.corp">emthewitch@hexagram.corp</a> ✧✦✧</p>
+            <div class="divider">†††††††††††††††††††††††††††††††</div>
+            <p><a href="guestbook.html">☆★☆ Sign my MAGICAL guestbook! ☆★☆</a> | <a href="familiar-training.html">☠☠☠ How to train YOUR familiar ☠☠☠</a> | <a href="index.html">✧✦✧ Back to my Witch Diary ✧✦✧</a></p>
+            <div>
+                <img src="/api/placeholder/88/31" alt="Familiar Approved" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="Cat Magic" class="cat-gif" />
+                <img src="/api/placeholder/88/31" alt="Made with Whiskers" class="cat-gif" />
+            </div>
+            
+            <div class="pentagram">
+            ╔══╗╔╗ ♥ ♥ ♥ 
+            ║══╣║║ FAMILIAR 
+            ╠══║║╚╗POWER!!
+            ╚══╝╚═╝♥ ♥ ♥
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "block") {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+
+        // Open the first section by default
+        window.onload = function() {
+            toggleSection('aboutSection');
+        }
+    </script>
+</body>
+</html>

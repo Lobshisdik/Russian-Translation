@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Project Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .image-info.fixed {
+            background: #d1fae5 !important;
+            border: 2px solid #10b981;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .upload-section {
+            background: #f8f9ff;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-section:hover {
+            border-color: #4facfe;
+            background: #f0f2ff;
+        }
+
+        .upload-section.dragover {
+            border-color: #00f2fe;
+            background: #e6f7ff;
+            transform: scale(1.02);
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .folder-input {
+            display: none;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .tileset-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tileset-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .tileset-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .tileset-content {
+            padding: 20px;
+        }
+
+        .sheet-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .sheet-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sheet-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .image-info {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e6ed;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .image-info:hover {
+            background: #f8f9ff;
+            border-color: #667eea;
+        }
+        
+        .image-info:last-child {
+            margin-bottom: 0;
+        }
+
+        .image-name {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .shared-with {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .shared-tileset {
+            display: inline-block;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 0.8rem;
+        }
+
+        .unique-image {
+            color: #27ae60;
+            font-size: 0.9rem;
+        }
+
+        .empty-sheet {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .unused-image {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #f39c12;
+        }
+
+        .unused-image .image-name {
+            color: #d68910;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .view-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .view-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .view-btn:hover {
+            background: #f0f2ff;
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .unused-btn {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .unused-btn:hover {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+        }
+
+        .unused-btn.active {
+            background: linear-gradient(135deg, #d35400 0%, #c0392b 100%);
+        }
+
+        .project-info {
+            background: #e8f4ff;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .project-info h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .folder-structure {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .image-preview {
+            max-width: 64px;
+            max-height: 64px;
+            border-radius: 4px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .file-count {
+            color: #666;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .unused-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .unused-grid-item {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .unused-grid-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+            background: #fef9e7;
+        }
+
+        .unused-grid-item .image-preview {
+            max-width: 100%;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            margin: 0 0 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .unused-grid-item .image-name {
+            color: #d68910;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .unused-grid-item .file-details {
+            color: #666;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 RPG Maker MZ Project Analyzer</h1>
+            <p>Analyze your entire RPG Maker project to find shared images and unused tileset assets</p>
+        </div>
+
+        <div class="content">
+            <div class="upload-section" id="uploadSection">
+                <h3>📁 Load your RPG Maker MZ project folder</h3>
+                <p>Select the main project folder containing data/ and img/ directories</p>
+                <input type="file" id="folderInput" class="folder-input" webkitdirectory directory multiple>
+                <button class="upload-btn" onclick="document.getElementById('folderInput').click()">
+                    Choose Project Folder
+                </button>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div>🔍 Analyzing project files...</div>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="project-info" class="project-info" style="display: none;">
+                <h3>📂 Project Information</h3>
+                <div id="project-details"></div>
+            </div>
+            
+            <div id="view-switcher" class="view-switcher" style="display: none; margin-bottom: 20px; text-align: center;">
+                <button id="tilesetViewBtn" class="view-btn active">View by Tileset</button>
+                <button id="imageViewBtn" class="view-btn">View by Image</button>
+                <button id="unusedViewBtn" class="view-btn unused-btn">Show Unused Assets</button>
+            </div>
+
+            <div id="stats" class="stats" style="display: none;"></div>
+
+            <div id="results" class="results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables to store data and state
+        let tilesetData = null;
+        let imageUsageData = null;
+        let sheetMappingData = null;
+        let unusedAssets = null;
+        let projectFiles = null;
+        let currentView = 'tileset';
+    
+        // DOM element references
+        const folderInput = document.getElementById('folderInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+        const results = document.getElementById('results');
+        const stats = document.getElementById('stats');
+        const viewSwitcher = document.getElementById('view-switcher');
+        const projectInfo = document.getElementById('project-info');
+        const projectDetails = document.getElementById('project-details');
+        const tilesetViewBtn = document.getElementById('tilesetViewBtn');
+        const imageViewBtn = document.getElementById('imageViewBtn');
+        const unusedViewBtn = document.getElementById('unusedViewBtn');
+
+        // Event Listeners
+        folderInput.addEventListener('change', handleFolderSelect);
+        uploadSection.addEventListener('click', () => folderInput.click());
+        uploadSection.addEventListener('dragover', handleDragOver);
+        uploadSection.addEventListener('drop', handleDrop);
+        uploadSection.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('dragover');
+        });
+        uploadSection.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+        });
+        tilesetViewBtn.addEventListener('click', () => setView('tileset'));
+        imageViewBtn.addEventListener('click', () => setView('image'));
+        unusedViewBtn.addEventListener('click', () => setView('unused'));
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+            
+            try {
+                const items = e.dataTransfer.items;
+                if (items && items.length > 0) {
+                    const item = items[0];
+                    if (item.kind === 'file') {
+                        // Check if webkitGetAsEntry is supported
+                        if (typeof item.webkitGetAsEntry === 'function') {
+                            const entry = item.webkitGetAsEntry();
+                            if (entry && entry.isDirectory) {
+                                handleDirectoryEntry(entry);
+                            } else {
+                                showError('Please drop a folder, not individual files.');
+                            }
+                        } else {
+                            // Fallback: suggest using the file input
+                            showError('Drag and drop folders is not supported in this browser. Please use the "Choose Project Folder" button instead.');
+                        }
+                    }
+                } else {
+                    // Fallback for direct file drops
+                    const files = Array.from(e.dataTransfer.files);
+                    if (files.length > 0) {
+                        showError('Please use the "Choose Project Folder" button to select your entire project folder.');
+                    }
+                }
+            } catch (error) {
+                console.error('Error handling drop:', error);
+                showError('Error handling dropped folder. Please use the "Choose Project Folder" button instead.');
+            }
+        }
+
+        function handleFolderSelect(e) {
+            const files = Array.from(e.target.files);
+            if (files.length > 0) {
+                processProjectFiles(files);
+            }
+        }
+
+        function handleDirectoryEntry(dirEntry) {
+            const files = [];
+            
+            function readEntriesRecursively(entry, path = '') {
+                return new Promise((resolve, reject) => {
+                    try {
+                        if (entry.isFile) {
+                            entry.file((file) => {
+                                try {
+                                    file.webkitRelativePath = path + file.name;
+                                    files.push(file);
+                                    resolve();
+                                } catch (error) {
+                                    console.error('Error processing file:', error);
+                                    resolve(); // Continue with other files
+                                }
+                            }, (error) => {
+                                console.error('Error reading file:', error);
+                                resolve(); // Continue with other files
+                            });
+                        } else if (entry.isDirectory) {
+                            const dirReader = entry.createReader();
+                            dirReader.readEntries((entries) => {
+                                Promise.all(entries.map(e => 
+                                    readEntriesRecursively(e, path + entry.name + '/')
+                                )).then(resolve).catch(reject);
+                            }, (error) => {
+                                console.error('Error reading directory:', error);
+                                resolve(); // Continue with other directories
+                            });
+                        } else {
+                            resolve();
+                        }
+                    } catch (error) {
+                        console.error('Error in readEntriesRecursively:', error);
+                        resolve(); // Continue processing
+                    }
+                });
+            }
+
+            readEntriesRecursively(dirEntry).then(() => {
+                if (files.length > 0) {
+                    processProjectFiles(files);
+                } else {
+                    showError('No files found in the dropped folder.');
+                }
+            }).catch((error) => {
+                console.error('Error processing directory:', error);
+                showError('Error processing the dropped folder. Please try using the "Choose Project Folder" button instead.');
+            });
+        }
+
+        async function processProjectFiles(files) {
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            results.innerHTML = '';
+            stats.style.display = 'none';
+            viewSwitcher.style.display = 'none';
+            projectInfo.style.display = 'none';
+
+            try {
+                projectFiles = files;
+                
+                // Find and parse tilesets.json with various possible paths
+                const tilesetsFile = files.find(f => {
+                    const path = f.webkitRelativePath || f.name;
+                    return path.endsWith('/data/Tilesets.json') ||
+                           path.endsWith('\\data\\Tilesets.json') ||
+                           path === 'Tilesets.json' ||
+                           f.name === 'Tilesets.json' ||
+                           path.toLowerCase().includes('tilesets.json');
+                });
+
+                if (!tilesetsFile) {
+                    showError('Could not find Tilesets.json in the project folder. Please ensure you selected the correct RPG Maker MZ project folder containing a data/ directory.');
+                    return;
+                }
+
+                const tilesetsContent = await readFileAsText(tilesetsFile);
+                const tilesetsData = JSON.parse(tilesetsContent);
+
+                // Find all tileset images in img/tilesets/ and subdirectories with better path matching
+                const tilesetImages = files.filter(f => {
+                    const path = (f.webkitRelativePath || f.name).toLowerCase();
+                    const isInTilesets = path.includes('/img/tilesets/') || 
+                                        path.includes('\\img\\tilesets\\') ||
+                                        path.includes('img/tilesets/') ||
+                                        path.includes('img\\tilesets\\');
+                    const isImageFile = path.endsWith('.png') || 
+                                       path.endsWith('.jpg') || 
+                                       path.endsWith('.jpeg') ||
+                                       path.endsWith('.webp');
+                    return isInTilesets && isImageFile;
+                });
+
+                displayProjectInfo(files, tilesetImages.length);
+                await analyzeProject(tilesetsData, tilesetImages);
+
+            } catch (err) {
+                console.error('Error processing project:', err);
+                showError('Error analyzing project: ' + err.message + '. Make sure you selected a valid RPG Maker MZ project folder.');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function displayProjectInfo(files, tilesetImageCount) {
+            const projectName = getProjectName(files);
+            const dataFiles = files.filter(f => f.webkitRelativePath.includes('/data/')).length;
+            const imageFiles = files.filter(f => f.webkitRelativePath.includes('/img/')).length;
+            
+            projectDetails.innerHTML = `
+                <div class="folder-structure">
+                    <strong>📁 ${projectName}</strong><br>
+                    📄 Total files: ${files.length}<br>
+                    🗃️ Data files: ${dataFiles}<br>
+                    🖼️ Image files: ${imageFiles}<br>
+                    🧩 Tileset images found: ${tilesetImageCount}
+                </div>
+            `;
+            projectInfo.style.display = 'block';
+        }
+
+        function getProjectName(files) {
+            if (files.length === 0) return 'Unknown Project';
+            
+            const paths = files.map(f => f.webkitRelativePath);
+            const commonPath = paths[0].split('/')[0];
+            return commonPath || 'RPG Maker Project';
+        }
+
+        async function analyzeProject(tilesetsData, tilesetImageFiles) {
+            if (!Array.isArray(tilesetsData)) {
+                showError('Invalid tileset data format. Expected an array of tilesets.');
+                return;
+            }
+            
+            const sheetMapping = ['A1', 'A2', 'A3', 'A4', 'A5', 'B', 'C', 'D', 'E'];
+            const imageUsage = {};
+            const usedImagePaths = new Set();
+
+            console.log('🔍 Starting tileset analysis...');
+            console.log('📊 Found', tilesetsData.length, 'tilesets');
+            console.log('🖼️ Found', tilesetImageFiles.length, 'image files');
+
+            // First, collect ALL paths used in tilesets with extensive normalization
+            tilesetsData.forEach(tileset => {
+                if (!tileset || !Array.isArray(tileset.tilesetNames)) return;
+
+                console.log(`📋 Analyzing Tileset ${tileset.id}: "${tileset.name || 'Unnamed'}"`);
+                
+                tileset.tilesetNames.forEach((imagePath, index) => {
+                    // Skip A1–A5 (index 0–4)
+                    if (index <= 4) return;
+
+                    if (imagePath && imagePath.trim() !== '') {
+                        const cleanPath = imagePath.trim();
+                        console.log(`  📝 Sheet ${sheetMapping[index]} uses: "${cleanPath}"`);
+                        
+                        // Add the original path
+                        usedImagePaths.add(cleanPath);
+                        
+                        // Add multiple normalized variations
+                        const variations = generatePathVariations(cleanPath);
+                        variations.forEach(variation => {
+                            usedImagePaths.add(variation);
+                        });
+                        
+                        // Track for usage display
+                        if (!imageUsage[imagePath]) {
+                            imageUsage[imagePath] = [];
+                        }
+                        imageUsage[imagePath].push({
+                            tilesetId: tileset.id,
+                            tilesetName: tileset.name || `Tileset ${tileset.id}`,
+                            sheetType: sheetMapping[index] || `Sheet ${index}`
+                        });
+                    }
+                });
+            });
+
+            console.log('✅ All used paths collected:', Array.from(usedImagePaths).sort());
+
+            // Now check each file against used paths
+            const unusedImages = [];
+            const usedImages = [];
+            
+            tilesetImageFiles.forEach(file => {
+                const result = checkIfImageIsUsed(file, usedImagePaths);
+                
+                if (result.isUsed) {
+                    console.log(`✅ USED: ${file.name} (matched: "${result.matchedPath}")`);
+                    usedImages.push(file);
+                } else {
+                    console.log(`❌ UNUSED: ${file.name}`);
+                    console.log(`   Tried paths:`, result.triedPaths);
+                    unusedImages.push({
+                        file: file,
+                        path: result.relativePath,
+                        fullPath: result.fullPath,
+                        triedPaths: result.triedPaths
+                    });
+                }
+            });
+
+            console.log(`📊 Final Results:`);
+            console.log(`   Used images: ${usedImages.length}`);
+            console.log(`   Unused images: ${unusedImages.length}`);
+
+            // Store data globally
+            tilesetData = tilesetsData;
+            imageUsageData = imageUsage;
+            sheetMappingData = sheetMapping;
+            unusedAssets = unusedImages;
+            
+            viewSwitcher.style.display = 'flex';
+            setView('tileset'); 
+            displayStats(tilesetsData, imageUsage, unusedImages);
+        }
+
+        function generatePathVariations(originalPath) {
+            const variations = new Set();
+            
+            // Clean the path
+            const cleanPath = originalPath.trim();
+            
+            // Add original
+            variations.add(cleanPath);
+            
+            // Normalize slashes
+            const forwardSlash = cleanPath.replace(/\\/g, '/');
+            const backSlash = cleanPath.replace(/\//g, '\\');
+            variations.add(forwardSlash);
+            variations.add(backSlash);
+            
+            // Remove common prefixes if present
+            const prefixesToRemove = ['img/tilesets/', 'img\\tilesets\\', 'tilesets/', 'tilesets\\'];
+            prefixesToRemove.forEach(prefix => {
+                if (cleanPath.toLowerCase().startsWith(prefix.toLowerCase())) {
+                    const withoutPrefix = cleanPath.substring(prefix.length);
+                    variations.add(withoutPrefix);
+                    variations.add(withoutPrefix.replace(/\\/g, '/'));
+                    variations.add(withoutPrefix.replace(/\//g, '\\'));
+                }
+            });
+            
+            // Add just filename
+            const filename = cleanPath.split(/[/\\]/).pop();
+            if (filename) {
+                variations.add(filename);
+            }
+            
+            // Add paths with img/tilesets/ prefix if not present
+            if (!cleanPath.toLowerCase().includes('img/tilesets') && !cleanPath.toLowerCase().includes('img\\tilesets')) {
+                variations.add('img/tilesets/' + forwardSlash);
+                variations.add('img\\tilesets\\' + backSlash);
+            }
+            
+            return Array.from(variations).filter(v => v && v.length > 0);
+        }
+
+        function checkIfImageIsUsed(file, usedImagePaths) {
+            const fullPath = file.webkitRelativePath || file.name;
+            const filename = file.name;
+            
+            // Determine the relative path from img/tilesets/
+            let relativePath = '';
+            
+            const fullPathLower = fullPath.toLowerCase();
+            if (fullPathLower.includes('img/tilesets/')) {
+                relativePath = fullPath.substring(fullPath.toLowerCase().indexOf('img/tilesets/') + 'img/tilesets/'.length);
+            } else if (fullPathLower.includes('img\\tilesets\\')) {
+                relativePath = fullPath.substring(fullPath.toLowerCase().indexOf('img\\tilesets\\') + 'img\\tilesets\\'.length);
+            } else {
+                relativePath = filename;
+            }
+            
+            // Generate all possible paths this file could be referenced as
+            const possiblePaths = new Set([
+                // Just filename
+                filename,
+                
+                // Relative path variations
+                relativePath,
+                relativePath.replace(/\\/g, '/'),
+                relativePath.replace(/\//g, '\\'),
+                
+                // With img/tilesets prefix
+                'img/tilesets/' + relativePath.replace(/\\/g, '/'),
+                'img\\tilesets\\' + relativePath.replace(/\//g, '\\'),
+                
+                // Without extension
+                filename.replace(/\.[^/.]+$/, ''),
+                relativePath.replace(/\.[^/.]+$/, ''),
+                
+                // Full path
+                fullPath,
+                fullPath.replace(/\\/g, '/'),
+                fullPath.replace(/\//g, '\\')
+            ]);
+            
+            // Remove empty strings
+            const cleanPossiblePaths = Array.from(possiblePaths).filter(p => p && p.trim().length > 0);
+            
+            // Check for matches
+            for (const possiblePath of cleanPossiblePaths) {
+                if (usedImagePaths.has(possiblePath)) {
+                    return {
+                        isUsed: true,
+                        matchedPath: possiblePath,
+                        relativePath: relativePath,
+                        fullPath: fullPath,
+                        triedPaths: cleanPossiblePaths
+                    };
+                }
+            }
+            
+            return {
+                isUsed: false,
+                matchedPath: null,
+                relativePath: relativePath,
+                fullPath: fullPath,
+                triedPaths: cleanPossiblePaths
+            };
+        }
+
+        function showError(message) {
+            error.textContent = message;
+            error.style.display = 'block';
+            loading.style.display = 'none';
+            results.innerHTML = '';
+            stats.style.display = 'none';
+            viewSwitcher.style.display = 'none';
+            projectInfo.style.display = 'none';
+        }
+
+        function setView(view) {
+            currentView = view;
+            tilesetViewBtn.classList.toggle('active', view === 'tileset');
+            imageViewBtn.classList.toggle('active', view === 'image');
+            unusedViewBtn.classList.toggle('active', view === 'unused');
+            renderCurrentView();
+        }
+
+        async function renderCurrentView() {
+            if (!tilesetData) return;
+            
+            if (currentView === 'tileset') {
+                displayTilesetView(tilesetData, imageUsageData, sheetMappingData);
+            } else if (currentView === 'image') {
+                displayImageView(imageUsageData);
+            } else if (currentView === 'unused') {
+                displayUnusedView(unusedAssets);
+            }
+            
+            await restoreFixedTiles();
+        }
+
+        function displayStats(data, imageUsage, unusedImages) {
+            const totalTilesets = data.filter(t => t && t.id !== null).length;
+            const totalImageFiles = Object.keys(imageUsage).length;
+            const sharedImageFiles = Object.values(imageUsage).filter(usage => usage.length > 1).length;
+            const exclusiveImageFiles = totalImageFiles - sharedImageFiles;
+            const unusedImageFiles = unusedImages.length;
+
+            stats.innerHTML = `
+                <div class="stat-card fade-in">
+                    <div class="stat-number">${totalTilesets}</div>
+                    <div class="stat-label">Total Tilesets</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">${totalImageFiles}</div>
+                    <div class="stat-label">Used Image Files</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">${sharedImageFiles}</div>
+                    <div class="stat-label">Shared Image Files</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">${exclusiveImageFiles}</div>
+                    <div class="stat-label">Exclusively Used Files</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">${unusedImageFiles}</div>
+                    <div class="stat-label">Unused Assets</div>
+                </div>
+            `;
+            stats.style.display = 'grid';
+        }
+
+        function displayTilesetView(data, imageUsage, sheetMapping) {
+            let html = '';
+            data.forEach(tileset => {
+                if (!tileset || tileset.id === null) return;
+                const tilesetName = tileset.name || `Tileset ${tileset.id}`;
+                html += `
+                    <div class="tileset-card fade-in">
+                        <div class="tileset-header">${tilesetName} (ID: ${tileset.id})</div>
+                        <div class="tileset-content">`;
+                
+                sheetMapping.forEach((sheetName, index) => {
+                    // Skip A1–A5
+                    if (index <= 4) return;
+                    
+                    const imagePath = (tileset.tilesetNames && tileset.tilesetNames[index]) ? tileset.tilesetNames[index] : null;
+                    html += `
+                        <div class="sheet-section">
+                            <div class="sheet-title">Sheet ${sheetName}:</div>`;
+                    if (!imagePath || imagePath.trim() === '') {
+                        html += `<div class="empty-sheet">No image assigned</div>`;
+                    } else {
+                        const usage = imageUsage[imagePath] || [];
+                        const otherUses = usage.filter(u => !(u.tilesetId === tileset.id && u.sheetType === sheetName));
+                        html += `
+                            <div class="image-info" data-key="${tileset.id}|${sheetName}">
+                                <div class="image-name">📄 ${imagePath}</div>
+                                <div class="unique-image">🆔 Tileset ID: ${tileset.id}</div>`;
+                        if (otherUses.length > 0) {
+                            html += `
+                                <div class="shared-with">
+                                    🔗 Also used in: 
+                                    ${otherUses.map(u => `<span class="shared-tileset">${u.tilesetName} (ID: ${u.tilesetId}, ${u.sheetType})</span>`).join(' ')}
+                                </div>`;
+                        } else {
+                            html += `<div class="unique-image">✅ This is the only place this image is used</div>`;
+                        }
+                        html += `</div>`;
+                    }
+                    html += `</div>`;
+                });
+                html += `</div></div>`;
+            });
+            results.innerHTML = html;
+        }
+
+        function displayImageView(imageUsage) {
+            let html = '';
+            const sortedImagePaths = Object.keys(imageUsage).sort();
+            sortedImagePaths.forEach(imagePath => {
+                const usages = imageUsage[imagePath];
+                html += `
+                    <div class="tileset-card fade-in">
+                        <div class="tileset-header">📄 ${imagePath}</div>
+                        <div class="tileset-content">
+                            <div class="sheet-section">
+                                <div class="sheet-title">Used in ${usages.length} location(s):</div>`;
+                usages.forEach(use => {
+                    html += `
+                        <div class="image-info" data-key="${use.tilesetId}|${use.sheetType}">
+                            <span class="image-name">${use.tilesetName} (ID: ${use.tilesetId})</span> 
+                            <br>➡ Sheet: ${use.sheetType}
+                        </div>`;
+                });
+                html += `</div></div></div>`;
+            });
+            results.innerHTML = html;
+        }
+
+        function displayUnusedView(unusedImages) {
+            if (!unusedImages || unusedImages.length === 0) {
+                results.innerHTML = `
+                    <div class="tileset-card fade-in">
+                        <div class="tileset-header">🎉 No Unused Assets Found!</div>
+                        <div class="tileset-content">
+                            <div class="sheet-section">
+                                <div class="unique-image">All tileset images in your project are being used by at least one tileset.</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group unused images by directory
+            const imagesByDirectory = {};
+            unusedImages.forEach(img => {
+                const dirPath = img.path.substring(0, img.path.lastIndexOf('/')) || 'Root';
+                if (!imagesByDirectory[dirPath]) {
+                    imagesByDirectory[dirPath] = [];
+                }
+                imagesByDirectory[dirPath].push(img);
+            });
+
+            let html = `
+                <div class="tileset-card fade-in">
+                    <div class="tileset-header">🗂️ Unused Tileset Assets (${unusedImages.length} files)</div>
+                    <div class="tileset-content">
+                        <div class="sheet-section">
+                            <div class="sheet-title">These image files exist in your img/tilesets/ directory but are not referenced by any tileset:</div>
+                        </div>
+            `;
+
+            Object.keys(imagesByDirectory).sort().forEach(dirPath => {
+                const imagesInDir = imagesByDirectory[dirPath];
+                html += `
+                    <div class="sheet-section">
+                        <div class="sheet-title">📁 ${dirPath}/ <span class="file-count">(${imagesInDir.length} files)</span></div>
+                        <div class="unused-grid">
+                `;
+                
+                imagesInDir.sort((a, b) => a.file.name.localeCompare(b.file.name)).forEach(img => {
+                    let imageUrl = '';
+                    const fileName = img.file.name;
+                    const fileSize = (img.file.size / 1024).toFixed(1);
+                    
+                    // Safely create object URL
+                    try {
+                        imageUrl = URL.createObjectURL(img.file);
+                    } catch (error) {
+                        console.error('Error creating object URL:', error);
+                    }
+                    
+                    html += `
+                        <div class="unused-grid-item">
+                            ${imageUrl ? `<img src="${imageUrl}" alt="${fileName}" class="image-preview" 
+                                 onerror="this.style.display='none'" loading="lazy">` : ''}
+                            <div class="image-name">🖼️ ${fileName}</div>
+                            <div class="file-details">
+                                📏 ${fileSize} KB<br>
+                                📂 ${img.path}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                        <div class="sheet-section">
+                            <div style="color: #666; font-size: 0.9rem;">
+                                💡 <strong>Tip:</strong> These files can potentially be deleted to reduce project size, 
+                                but make sure they're not used by plugins or custom scripts before removing them.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            results.innerHTML = html;
+        }
+
+        // === IndexedDB setup ===
+        let db;
+        let dbReady = new Promise((resolve, reject) => {
+            const request = indexedDB.open("TilesetAnalyzerDB", 1);
+            request.onupgradeneeded = function(e) {
+                db = e.target.result;
+                if (!db.objectStoreNames.contains("fixedTiles")) {
+                    db.createObjectStore("fixedTiles", { keyPath: "key" });
+                }
+            };
+            request.onsuccess = function(e) {
+                db = e.target.result;
+                resolve();
+            };
+            request.onerror = reject;
+        });
+
+        // Save as "tilesetId|sheetType"
+        async function saveFixedTile(tilesetId, sheetType) {
+            await dbReady;
+            const tx = db.transaction("fixedTiles", "readwrite");
+            const store = tx.objectStore("fixedTiles");
+            const key = `${tilesetId}|${sheetType}`;
+            store.put({ key });
+        }
+
+        // Load and apply state
+        async function restoreFixedTiles() {
+            await dbReady;
+            const tx = db.transaction("fixedTiles", "readonly");
+            const store = tx.objectStore("fixedTiles");
+            const req = store.getAll();
+            req.onsuccess = function() {
+                const saved = req.result.map(r => r.key);
+                saved.forEach(key => {
+                    const el = document.querySelector(`[data-key="${key}"]`);
+                    if (el) el.classList.add("fixed");
+                });
+            };
+        }
+
+        async function removeFixedTile(tilesetId, sheetType) {
+            await dbReady;
+            const tx = db.transaction("fixedTiles", "readwrite");
+            const store = tx.objectStore("fixedTiles");
+            const key = `${tilesetId}|${sheetType}`;
+            store.delete(key);
+        }
+
+        // Dynamic click listener
+        document.addEventListener("click", async function(e) {
+            if (e.target.closest(".image-info") && !e.target.closest(".unused-image")) {
+                const el = e.target.closest(".image-info");
+                const key = el.dataset.key;
+                if (!key) return;
+                
+                const [tilesetId, sheetType] = key.split("|");
+
+                el.classList.toggle("fixed");
+
+                if (el.classList.contains("fixed")) {
+                    await saveFixedTile(tilesetId, sheetType);
+                } else {
+                    await removeFixedTile(tilesetId, sheetType);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

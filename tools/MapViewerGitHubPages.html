@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedural Map Viewer - GitHub Pages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #sidebar {
+            width: 300px;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        #mapContainer {
+            flex: 1;
+            background: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        #mapContainer:active {
+            cursor: grabbing;
+        }
+
+        #canvas {
+            display: block;
+            background: #d0d0d0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            text-transform: uppercase;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:active {
+            background: #004085;
+        }
+
+        .stats {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .stats div {
+            margin-bottom: 5px;
+        }
+
+        .zoom-display {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 3px;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        #loadingIndicator {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 3px;
+            font-size: 12px;
+            z-index: 100;
+        }
+
+        #loadingIndicator.active {
+            display: block;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .keyboard-hints {
+            font-size: 11px;
+            color: #999;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            line-height: 1.5;
+        }
+
+        .debug-info {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            pointer-events: none;
+        }
+
+        .source-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            color: #004085;
+            margin-bottom: 15px;
+        }
+
+        .github-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            color: #856404;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <h2 style="margin-bottom: 20px; font-size: 16px;">Map Viewer</h2>
+
+            <div class="sidebar-section">
+                <h3>Configuration</h3>
+                <div class="control-group">
+                    <label>GitHub User:</label>
+                    <input type="text" id="githubUser" placeholder="e.g., your-username" value="">
+                </div>
+                <div class="control-group">
+                    <label>GitHub Repo:</label>
+                    <input type="text" id="githubRepo" placeholder="e.g., hypernet-explorer" value="">
+                </div>
+                <div class="control-group">
+                    <label>Branch:</label>
+                    <input type="text" id="githubBranch" placeholder="e.g., main" value="main">
+                </div>
+                <div class="control-group">
+                    <label>Maps Folder:</label>
+                    <input type="text" id="githubFolder" placeholder="e.g., mapshots" value="mapshots">
+                </div>
+                <button onclick="app.loadMapsFromGitHub()">Load Maps from GitHub</button>
+                <div style="font-size: 11px; color: #999; margin-top: 8px;">
+                    Status: <strong id="loadStatus">Ready</strong>
+                </div>
+            </div>
+
+            <div class="github-info">
+                <strong>GitHub Setup:</strong><br>
+                Maps are loaded from raw.githubusercontent.com. Ensure:
+                <ul style="margin-left: 15px; margin-top: 5px;">
+                    <li>Maps folder exists in repo</li>
+                    <li>Files named like: <code>54,114.png</code></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Zoom & Pan</h3>
+                <div class="control-group">
+                    <label>Zoom Level: <span id="zoomLevel">1.0x</span></label>
+                    <input type="range" id="zoomSlider" min="0.1" max="10" step="0.1" value="1" style="width: 100%;">
+                    <div class="zoom-display">Use scroll wheel or slider</div>
+                </div>
+                <div class="controls-grid">
+                    <button onclick="app.resetView()">Reset View</button>
+                    <button onclick="app.fitToScreen()">Fit All</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Filters</h3>
+                <div class="control-group">
+                    <label>Coordinate Range:</label>
+                    <div class="controls-grid">
+                        <div>
+                            <label style="font-size: 11px;">Min X:</label>
+                            <input type="number" id="minX" value="0">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px;">Max X:</label>
+                            <input type="number" id="maxX" value="200">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px;">Min Y:</label>
+                            <input type="number" id="minY" value="0">
+                        </div>
+                        <div>
+                            <label style="font-size: 11px;">Max Y:</label>
+                            <input type="number" id="maxY" value="200">
+                        </div>
+                    </div>
+                    <button onclick="app.filterByCoordinates()" style="margin-top: 8px;">Apply Filter</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Statistics</h3>
+                <div class="stats">
+                    <div>Total Maps: <strong id="totalMaps">0</strong></div>
+                    <div>Visible: <strong id="visibleMaps">0</strong></div>
+                    <div>Canvas: <strong id="canvasSize">0x0</strong>px</div>
+                    <div>Viewport: <strong id="viewportLoc">0, 0</strong></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Export</h3>
+                <button onclick="app.exportScreenshot()">Save View Screenshot</button>
+            </div>
+
+            <div class="keyboard-hints">
+                <strong>Keyboard:</strong><br>
+                • Scroll: Zoom to cursor<br>
+                • Drag: Pan<br>
+                • + / -: Zoom center<br>
+                • R: Reset<br>
+                • F: Fit to screen
+            </div>
+        </div>
+
+        <div id="mapContainer">
+            <canvas id="canvas"></canvas>
+            <div id="debugInfo" class="debug-info">Ready</div>
+        </div>
+    </div>
+
+    <div id="loadingIndicator">Loading maps...</div>
+
+    <script>
+        const TILE_SIZE = 256;
+
+        const app = {
+            canvas: null,
+            ctx: null,
+            mapContainer: null,
+            images: new Map(),
+            mapData: [],
+            filteredData: [],
+            zoom: 1,
+            panX: 0,
+            panY: 0,
+            isDragging: false,
+            lastMouseX: 0,
+            lastMouseY: 0,
+            minX: 0,
+            maxX: 200,
+            minY: 0,
+            maxY: 200,
+            githubUser: '',
+            githubRepo: '',
+            githubBranch: 'main',
+            githubFolder: 'mapshots',
+
+            init() {
+                this.canvas = document.getElementById('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.mapContainer = document.getElementById('mapContainer');
+
+                // Load saved GitHub config from localStorage
+                const saved = localStorage.getItem('mapViewerConfig');
+                if (saved) {
+                    const config = JSON.parse(saved);
+                    document.getElementById('githubUser').value = config.user || '';
+                    document.getElementById('githubRepo').value = config.repo || '';
+                    document.getElementById('githubBranch').value = config.branch || 'main';
+                    document.getElementById('githubFolder').value = config.folder || 'mapshots';
+                }
+
+                this.resizeCanvas();
+                window.addEventListener('resize', () => {
+                    this.resizeCanvas();
+                    this.render();
+                });
+
+                this.setupEventListeners();
+                this.render();
+            },
+
+            resizeCanvas() {
+                this.canvas.width = this.mapContainer.clientWidth;
+                this.canvas.height = this.mapContainer.clientHeight;
+                this.updateStats();
+            },
+
+            setupEventListeners() {
+                document.getElementById('zoomSlider').addEventListener('input', (e) => {
+                    const newZoom = parseFloat(e.target.value);
+                    const cx = this.canvas.width / 2;
+                    const cy = this.canvas.height / 2;
+                    const worldX = (cx - this.panX) / this.zoom;
+                    const worldY = (cy - this.panY) / this.zoom;
+
+                    this.zoom = newZoom;
+                    this.panX = cx - worldX * this.zoom;
+                    this.panY = cy - worldY * this.zoom;
+
+                    this.updateZoomDisplay();
+                    this.render();
+                });
+
+                this.mapContainer.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+
+                    const rect = this.canvas.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+
+                    const worldX = (mouseX - this.panX) / this.zoom;
+                    const worldY = (mouseY - this.panY) / this.zoom;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newZoom = Math.max(0.01, Math.min(10, this.zoom * delta));
+
+                    this.zoom = newZoom;
+                    this.panX = mouseX - worldX * this.zoom;
+                    this.panY = mouseY - worldY * this.zoom;
+
+                    document.getElementById('zoomSlider').value = this.zoom;
+                    this.updateZoomDisplay();
+                    this.render();
+                }, { passive: false });
+
+                this.mapContainer.addEventListener('mousedown', (e) => {
+                    this.isDragging = true;
+                    this.lastMouseX = e.clientX;
+                    this.lastMouseY = e.clientY;
+                    this.mapContainer.style.cursor = 'grabbing';
+                });
+
+                window.addEventListener('mousemove', (e) => {
+                    if (this.isDragging) {
+                        const deltaX = e.clientX - this.lastMouseX;
+                        const deltaY = e.clientY - this.lastMouseY;
+
+                        this.panX += deltaX;
+                        this.panY += deltaY;
+
+                        this.lastMouseX = e.clientX;
+                        this.lastMouseY = e.clientY;
+
+                        this.render();
+                    }
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if(this.isDragging) {
+                        this.isDragging = false;
+                        this.mapContainer.style.cursor = 'grab';
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.tagName === 'INPUT') return;
+
+                    const centerZoom = (factor) => {
+                        const cx = this.canvas.width / 2;
+                        const cy = this.canvas.height / 2;
+                        const wx = (cx - this.panX) / this.zoom;
+                        const wy = (cy - this.panY) / this.zoom;
+                        this.zoom = Math.min(10, Math.max(0.01, this.zoom * factor));
+                        this.panX = cx - wx * this.zoom;
+                        this.panY = cy - wy * this.zoom;
+                        document.getElementById('zoomSlider').value = this.zoom;
+                        this.updateZoomDisplay();
+                        this.render();
+                    };
+
+                    switch(e.key.toLowerCase()) {
+                        case 'r':
+                            this.resetView();
+                            break;
+                        case 'f':
+                            this.fitToScreen();
+                            break;
+                        case '+':
+                        case '=':
+                            centerZoom(1.1);
+                            break;
+                        case '-':
+                            centerZoom(0.9);
+                            break;
+                    }
+                });
+
+                ['minX', 'maxX', 'minY', 'maxY'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => {
+                        this.minX = parseInt(document.getElementById('minX').value) || -99999;
+                        this.maxX = parseInt(document.getElementById('maxX').value) || 99999;
+                        this.minY = parseInt(document.getElementById('minY').value) || -99999;
+                        this.maxY = parseInt(document.getElementById('maxY').value) || 99999;
+                    });
+                });
+            },
+
+            async loadMapsFromGitHub() {
+                this.githubUser = document.getElementById('githubUser').value.trim();
+                this.githubRepo = document.getElementById('githubRepo').value.trim();
+                this.githubBranch = document.getElementById('githubBranch').value.trim() || 'main';
+                this.githubFolder = document.getElementById('githubFolder').value.trim() || 'mapshots';
+
+                if (!this.githubUser || !this.githubRepo) {
+                    alert('Please enter GitHub username and repository name');
+                    return;
+                }
+
+                // Save config to localStorage
+                localStorage.setItem('mapViewerConfig', JSON.stringify({
+                    user: this.githubUser,
+                    repo: this.githubRepo,
+                    branch: this.githubBranch,
+                    folder: this.githubFolder
+                }));
+
+                this.showLoading(true);
+                document.getElementById('loadStatus').textContent = 'Loading...';
+                this.images.clear();
+                this.mapData = [];
+
+                try {
+                    // Use GitHub API to list files in the folder
+                    const apiUrl = `https://api.github.com/repos/${this.githubUser}/${this.githubRepo}/contents/${this.githubFolder}?ref=${this.githubBranch}`;
+
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error(`GitHub API Error: ${response.status}`);
+                    }
+
+                    const files = await response.json();
+
+                    if (!Array.isArray(files)) {
+                        throw new Error('Invalid response from GitHub API');
+                    }
+
+                    const mapFiles = files.filter(f =>
+                        /\.(png|jpg|jpeg)$/i.test(f.name) &&
+                        /^-?\d+\s*,\s*-?\d+\.(png|jpg|jpeg)$/i.test(f.name)
+                    );
+
+                    if (mapFiles.length === 0) {
+                        throw new Error('No valid map files found in the folder');
+                    }
+
+                    let dataMinX = Infinity, dataMaxX = -Infinity;
+                    let dataMinY = Infinity, dataMaxY = -Infinity;
+                    const promises = [];
+
+                    mapFiles.forEach(file => {
+                        const match = file.name.match(/^(-?\d+)\s*,\s*(-?\d+)\.(png|jpg|jpeg)$/i);
+                        if (match) {
+                            const x = parseInt(match[1]);
+                            const y = parseInt(match[2]);
+                            const key = `${x},${y}`;
+
+                            dataMinX = Math.min(dataMinX, x);
+                            dataMaxX = Math.max(dataMaxX, x);
+                            dataMinY = Math.min(dataMinY, y);
+                            dataMaxY = Math.max(dataMaxY, y);
+
+                            this.mapData.push({ x, y, key, filename: file.name });
+                            promises.push(this.loadImageFromGitHub(file.download_url, key));
+                        }
+                    });
+
+                    await Promise.all(promises);
+
+                    if (dataMinX !== Infinity) {
+                        this.minX = dataMinX;
+                        this.maxX = dataMaxX;
+                        this.minY = dataMinY;
+                        this.maxY = dataMaxY;
+
+                        document.getElementById('minX').value = this.minX;
+                        document.getElementById('maxX').value = this.maxX;
+                        document.getElementById('minY').value = this.minY;
+                        document.getElementById('maxY').value = this.maxY;
+                    }
+
+                    this.applyFilters();
+                    this.fitToScreen();
+
+                    document.getElementById('loadStatus').textContent = `Loaded ${this.mapData.length} maps`;
+                    const debugInfo = document.getElementById('debugInfo');
+                    debugInfo.textContent = `Loaded ${this.mapData.length} maps from GitHub.`;
+
+                } catch (error) {
+                    console.error('Error loading maps from GitHub:', error);
+                    document.getElementById('loadStatus').textContent = `Error: ${error.message}`;
+                    alert('Error loading maps: ' + error.message);
+                } finally {
+                    this.showLoading(false);
+                }
+            },
+
+            async loadImageFromGitHub(downloadUrl, key) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    img.onload = () => {
+                        this.images.set(key, img);
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        console.warn(`Failed to load image: ${downloadUrl}`);
+                        resolve();
+                    };
+                    img.src = downloadUrl;
+                });
+            },
+
+            applyFilters() {
+                this.filteredData = this.mapData.filter(m =>
+                    m.x >= this.minX && m.x <= this.maxX &&
+                    m.y >= this.minY && m.y <= this.maxY
+                );
+            },
+
+            filterByCoordinates() {
+                this.minX = parseInt(document.getElementById('minX').value) || -99999;
+                this.maxX = parseInt(document.getElementById('maxX').value) || 99999;
+                this.minY = parseInt(document.getElementById('minY').value) || -99999;
+                this.maxY = parseInt(document.getElementById('maxY').value) || 99999;
+                this.applyFilters();
+                this.render();
+            },
+
+            updateStats(visibleCount = 0) {
+                document.getElementById('totalMaps').textContent = this.filteredData.length;
+                document.getElementById('visibleMaps').textContent = visibleCount;
+                document.getElementById('canvasSize').textContent = `${this.canvas.width}x${this.canvas.height}`;
+                document.getElementById('viewportLoc').textContent = `${Math.round(-this.panX)}, ${Math.round(-this.panY)}`;
+
+                const debugInfo = document.getElementById('debugInfo');
+                if (!debugInfo.textContent.startsWith('Loaded')) {
+                    debugInfo.textContent = `Zoom: ${this.zoom.toFixed(2)} | Pan: ${Math.round(this.panX)},${Math.round(this.panY)} | Vis: ${visibleCount}`;
+                }
+            },
+
+            updateZoomDisplay() {
+                document.getElementById('zoomLevel').textContent = this.zoom.toFixed(2) + 'x';
+            },
+
+            resetView() {
+                this.zoom = 1;
+                this.panX = 0;
+                this.panY = 0;
+                document.getElementById('zoomSlider').value = 1;
+                this.updateZoomDisplay();
+                this.render();
+            },
+
+            fitToScreen() {
+                if (this.filteredData.length === 0) {
+                    this.resetView();
+                    return;
+                }
+
+                let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+                this.filteredData.forEach(m => {
+                    if (m.x < minX) minX = m.x;
+                    if (m.x > maxX) maxX = m.x;
+                    if (m.y < minY) minY = m.y;
+                    if (m.y > maxY) maxY = m.y;
+                });
+
+                const worldWidth = (maxX - minX + 1) * TILE_SIZE;
+                const worldHeight = (maxY - minY + 1) * TILE_SIZE;
+
+                const screenW = this.canvas.width;
+                const screenH = this.canvas.height;
+                const padding = 50;
+
+                const zoomX = (screenW - padding * 2) / worldWidth;
+                const zoomY = (screenH - padding * 2) / worldHeight;
+                this.zoom = Math.min(zoomX, zoomY, 1.0);
+
+                const worldCenterX = (minX * TILE_SIZE) + (worldWidth / 2);
+                const worldCenterY = (minY * TILE_SIZE) + (worldHeight / 2);
+
+                this.panX = (screenW / 2) - (worldCenterX * this.zoom);
+                this.panY = (screenH / 2) - (worldCenterY * this.zoom);
+
+                document.getElementById('zoomSlider').value = this.zoom;
+                this.updateZoomDisplay();
+                this.render();
+            },
+
+            render() {
+                this.ctx.fillStyle = '#e0e0e0';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                if (!this.filteredData.length && this.images.size === 0) {
+                     this.drawGrid();
+                     return;
+                }
+
+                const scaledTileSize = TILE_SIZE * this.zoom;
+
+                let visibleCount = 0;
+                const screenW = this.canvas.width;
+                const screenH = this.canvas.height;
+
+                this.drawGrid();
+
+                this.ctx.save();
+                this.ctx.imageSmoothingEnabled = this.zoom < 1.0;
+
+                this.filteredData.forEach(map => {
+                    const worldX = map.x * TILE_SIZE;
+                    const worldY = map.y * TILE_SIZE;
+
+                    const screenX = Math.floor((worldX * this.zoom) + this.panX);
+                    const screenY = Math.floor((worldY * this.zoom) + this.panY);
+
+                    const screenSize = Math.ceil(scaledTileSize);
+
+                    if (screenX + screenSize > 0 && screenX < screenW &&
+                        screenY + screenSize > 0 && screenY < screenH) {
+
+                        const img = this.images.get(map.key);
+                        if (img) {
+                            this.ctx.drawImage(img, screenX, screenY, screenSize, screenSize);
+
+                            if (this.zoom > 0.4) {
+                                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                                this.ctx.fillRect(screenX, screenY, 80, 24);
+
+                                this.ctx.fillStyle = '#fff';
+                                this.ctx.font = '14px monospace';
+                                this.ctx.fillText(`${map.x},${map.y}`, screenX + 5, screenY + 16);
+
+                                this.ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                                this.ctx.lineWidth = 1;
+                                this.ctx.strokeRect(screenX, screenY, screenSize, screenSize);
+                            }
+
+                            visibleCount++;
+                        }
+                    }
+                });
+                this.ctx.restore();
+
+                this.updateStats(visibleCount);
+            },
+
+            drawGrid() {
+                if (this.zoom < 0.2) return;
+
+                const screenW = this.canvas.width;
+                const screenH = this.canvas.height;
+                const gridSize = TILE_SIZE * this.zoom;
+
+                const startX = this.panX % gridSize;
+                const startY = this.panY % gridSize;
+
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+                this.ctx.lineWidth = 1;
+
+                for (let x = startX; x < screenW; x += gridSize) {
+                    this.ctx.moveTo(x, 0);
+                    this.ctx.lineTo(x, screenH);
+                }
+
+                for (let y = startY; y < screenH; y += gridSize) {
+                    this.ctx.moveTo(0, y);
+                    this.ctx.lineTo(screenW, y);
+                }
+
+                this.ctx.stroke();
+            },
+
+            exportScreenshot() {
+                const link = document.createElement('a');
+                link.href = this.canvas.toDataURL('image/png');
+                link.download = `map-view-${Date.now()}.png`;
+                link.click();
+            },
+
+            showLoading(show) {
+                document.getElementById('loadingIndicator').classList.toggle('active', show);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
+</body>
+</html>

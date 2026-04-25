@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Class & Skills Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .file-upload {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .upload-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .upload-box {
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            border-color: #0056b3;
+            background: #f8f9ff;
+            transform: translateY(-2px);
+        }
+
+        .upload-box.dragover {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .file-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #1976d2;
+        }
+
+        .editor-section {
+            padding: 30px;
+            display: none;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .class-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .class-header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .class-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .class-id {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .class-body {
+            padding: 25px;
+        }
+
+        .skill-section {
+            margin-bottom: 25px;
+        }
+
+        .skill-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-section h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #007bff;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        .skill-section.secondary h3::before {
+            background: #28a745;
+        }
+
+        .skill-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .skill-slot select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .skill-slot select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .actions {
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .upload-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-slots {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RPG Maker MZ Class & Skills Editor</h1>
+            <p>Load your Classes.json and Skills.json files to edit class skill assignments</p>
+        </div>
+
+        <div class="file-upload">
+            <div class="upload-section">
+                <div class="upload-box" id="classesUpload">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Upload Classes.json</div>
+                    <div class="upload-hint">Click or drag your Classes.json file here</div>
+                    <input type="file" id="classesFile" accept=".json">
+                    <div class="file-info" id="classesInfo" style="display: none;"></div>
+                </div>
+
+                <div class="upload-box" id="skillsUpload">
+                    <div class="upload-icon">⚔️</div>
+                    <div class="upload-text">Upload Skills.json</div>
+                    <div class="upload-hint">Click or drag your Skills.json file here</div>
+                    <input type="file" id="skillsFile" accept=".json">
+                    <div class="file-info" id="skillsInfo" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-section" id="editorSection">
+            <div class="class-grid" id="classGrid">
+                <!-- Class cards will be generated here -->
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" id="saveBtn" disabled>Save Updated Classes.json</button>
+            <div class="status" id="status" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        let classesData = null;
+        let skillsData = null;
+        let skillCategories = new Set();
+
+        // File upload handling
+        function setupFileUpload(uploadBoxId, fileInputId, infoId, callback) {
+            const uploadBox = document.getElementById(uploadBoxId);
+            const fileInput = document.getElementById(fileInputId);
+            const fileInfo = document.getElementById(infoId);
+
+            uploadBox.addEventListener('click', () => fileInput.click());
+            
+            uploadBox.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadBox.classList.add('dragover');
+            });
+            
+            uploadBox.addEventListener('dragleave', () => {
+                uploadBox.classList.remove('dragover');
+            });
+            
+            uploadBox.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadBox.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0], fileInfo, callback);
+                }
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFile(e.target.files[0], fileInfo, callback);
+                }
+            });
+        }
+
+        function handleFile(file, infoElement, callback) {
+            if (!file.name.toLowerCase().endsWith('.json')) {
+                showStatus('Please select a valid JSON file.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    infoElement.textContent = `Loaded: ${file.name} (${data.length || Object.keys(data).length} items)`;
+                    infoElement.style.display = 'block';
+                    callback(data);
+                    checkIfReady();
+                } catch (error) {
+                    showStatus(`Error parsing ${file.name}: ${error.message}`, 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function extractSkillCategories(skills) {
+            skillCategories.clear();
+            skills.forEach(skill => {
+                if (skill && skill.note) {
+                    const categoryMatch = skill.note.match(/<category:([^>]+)>/);
+                    if (categoryMatch) {
+                        skillCategories.add(categoryMatch[1]);
+                    }
+                }
+            });
+        }
+
+        function parseClassSkills(noteField) {
+            const primaryMatch = noteField.match(/<Primary:\s*([^>]+)>/);
+            const secondaryMatch = noteField.match(/<Secondary:\s*([^>]+)>/);
+            
+            return {
+                primary: primaryMatch ? primaryMatch[1].split(',').map(s => s.trim()) : ['', '', ''],
+                secondary: secondaryMatch ? secondaryMatch[1].split(',').map(s => s.trim()) : ['', '', '']
+            };
+        }
+
+        function updateClassNote(classData, primary, secondary) {
+            const primaryStr = primary.filter(s => s).join(', ');
+            const secondaryStr = secondary.filter(s => s).join(', ');
+            
+            let note = classData.note || '';
+            
+            // Remove existing Primary and Secondary tags
+            note = note.replace(/<Primary:[^>]*>/g, '');
+            note = note.replace(/<Secondary:[^>]*>/g, '');
+            
+            // Add new tags
+            if (primaryStr) {
+                note += `\n<Primary: ${primaryStr}>`;
+            }
+            if (secondaryStr) {
+                note += `\n<Secondary: ${secondaryStr}>`;
+            }
+            
+            classData.note = note.trim();
+        }
+
+        function createSkillSelect(selectedValue = '') {
+            const select = document.createElement('select');
+            
+            // Add empty option
+            const emptyOption = document.createElement('option');
+            emptyOption.value = '';
+            emptyOption.textContent = '-- None --';
+            select.appendChild(emptyOption);
+            
+            // Add category options
+            Array.from(skillCategories).sort().forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                if (category === selectedValue) {
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            });
+            
+            return select;
+        }
+
+        function renderClassEditor() {
+            const classGrid = document.getElementById('classGrid');
+            classGrid.innerHTML = '';
+
+            let displayIndex = 0;
+            classesData.forEach((classData, actualIndex) => {
+                if (!classData || !classData.name) return;
+
+                const skills = parseClassSkills(classData.note || '');
+                
+                const classCard = document.createElement('div');
+                classCard.className = 'class-card';
+                classCard.dataset.actualIndex = actualIndex;
+                
+                classCard.innerHTML = `
+                    <div class="class-header">
+                        <div class="class-name">${classData.name}</div>
+                        <div class="class-id">ID: ${classData.id || actualIndex}</div>
+                    </div>
+                    <div class="class-body">
+                        <div class="skill-section primary">
+                            <h3>Primary Skills</h3>
+                            <div class="skill-slots" data-type="primary">
+                                <div class="skill-slot"></div>
+                                <div class="skill-slot"></div>
+                                <div class="skill-slot"></div>
+                            </div>
+                        </div>
+                        <div class="skill-section secondary">
+                            <h3>Secondary Skills</h3>
+                            <div class="skill-slots" data-type="secondary">
+                                <div class="skill-slot"></div>
+                                <div class="skill-slot"></div>
+                                <div class="skill-slot"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Populate primary skills
+                const primarySlots = classCard.querySelectorAll('.skill-slots[data-type="primary"] .skill-slot');
+                skills.primary.forEach((skill, i) => {
+                    if (i < 3) {
+                        const select = createSkillSelect(skill);
+                        select.addEventListener('change', () => updateClassDataByCard(classCard));
+                        primarySlots[i].appendChild(select);
+                    }
+                });
+
+                // Populate secondary skills
+                const secondarySlots = classCard.querySelectorAll('.skill-slots[data-type="secondary"] .skill-slot');
+                skills.secondary.forEach((skill, i) => {
+                    if (i < 3) {
+                        const select = createSkillSelect(skill);
+                        select.addEventListener('change', () => updateClassDataByCard(classCard));
+                        secondarySlots[i].appendChild(select);
+                    }
+                });
+
+                classGrid.appendChild(classCard);
+                displayIndex++;
+            });
+
+            document.getElementById('editorSection').style.display = 'block';
+        }
+
+        function updateClassDataByCard(classCard) {
+            const actualIndex = parseInt(classCard.dataset.actualIndex);
+            
+            const primarySelects = classCard.querySelectorAll('.skill-slots[data-type="primary"] select');
+            const secondarySelects = classCard.querySelectorAll('.skill-slots[data-type="secondary"] select');
+            
+            const primary = Array.from(primarySelects).map(select => select.value);
+            const secondary = Array.from(secondarySelects).map(select => select.value);
+            
+            updateClassNote(classesData[actualIndex], primary, secondary);
+            console.log(`Updated class ${classesData[actualIndex].name}:`, classesData[actualIndex].note);
+        }
+
+        function updateClassData(classIndex) {
+            const classCard = document.querySelectorAll('.class-card')[classIndex];
+            
+            const primarySelects = classCard.querySelectorAll('.skill-slots[data-type="primary"] select');
+            const secondarySelects = classCard.querySelectorAll('.skill-slots[data-type="secondary"] select');
+            
+            const primary = Array.from(primarySelects).map(select => select.value);
+            const secondary = Array.from(secondarySelects).map(select => select.value);
+            
+            // Find the correct class in the array (skip null entries)
+            let actualIndex = 0;
+            let currentIndex = 0;
+            for (let i = 0; i < classesData.length; i++) {
+                if (classesData[i] && classesData[i].name) {
+                    if (currentIndex === classIndex) {
+                        actualIndex = i;
+                        break;
+                    }
+                    currentIndex++;
+                }
+            }
+            
+            updateClassNote(classesData[actualIndex], primary, secondary);
+            console.log(`Updated class ${classesData[actualIndex].name}:`, classesData[actualIndex].note);
+        }
+
+        function saveClassesFile() {
+            const dataStr = JSON.stringify(classesData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'Classes.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showStatus('Classes.json downloaded successfully!', 'success');
+        }
+
+        function checkIfReady() {
+            if (classesData && skillsData) {
+                extractSkillCategories(skillsData);
+                renderClassEditor();
+                document.getElementById('saveBtn').disabled = false;
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Initialize file uploads
+        setupFileUpload('classesUpload', 'classesFile', 'classesInfo', (data) => {
+            classesData = data;
+        });
+
+        setupFileUpload('skillsUpload', 'skillsFile', 'skillsInfo', (data) => {
+            skillsData = data;
+        });
+
+        // Save button handler
+        document.getElementById('saveBtn').addEventListener('click', saveClassesFile);
+    </script>
+</body>
+</html>

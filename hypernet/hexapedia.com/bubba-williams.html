@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubba Williams - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">Bubba Williams</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 8, 2001 | <span data-lang-key="meta_read_time">7 min read</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">Bubba Williams (born 1958) is a dimensional-engineer and truck driver from Westford, Texas, widely regarded as the inventor of the Liminal Engine—the first successful mechano-thaumic device capable of crossing reality-boundaries. His work has fundamentally altered transportation-economics and established the theoretical foundation for modern dimension-commerce protocols.</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">Contents</div>
+                    <ol class="toc-list">
+                        <li><a href="#early-life" data-lang-key="toc_1">1. Early Life and Career</a></li>
+                        <li><a href="#liminal-engine" data-lang-key="toc_2">2. The Liminal Engine Discovery</a></li>
+                        <li><a href="#adventures" data-lang-key="toc_3">3. Dimensional Expeditions</a></li>
+                        <li><a href="#relationship" data-lang-key="toc_4">4. Partnership with Em</a></li>
+                        <li><a href="#legacy" data-lang-key="toc_5">5. Impact on Modern Transportation</a></li>
+                        <li><a href="#see-also" data-lang-key="toc_6">6. See Also</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">Personal Information</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_born_label">Born:</span> <span data-lang-key="infobox_born_value">1958, Westford, Texas</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_occupation_label">Occupation:</span> <span data-lang-key="infobox_occupation_value">Dimensional Engineer, Truck Driver</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_company_label">Company:</span> <span data-lang-key="infobox_company_value">Westford Interstate Shipping (1987-1996)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_vehicle_label">Primary Vehicle:</span> <span data-lang-key="infobox_vehicle_value">"The Beast" (Modified Peterbilt)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_status_label">Current Status:</span> <span data-lang-key="infobox_status_value">Active (Dimensional Operations)</span>
+                    </div>
+                </div>
+
+                <h2 id="early-life" data-lang-key="h2_early_life">Early Life and Career</h2>
+                <p data-lang-key="p_early_background">Born in Westford, Texas in 1958, Bubba Williams grew up in a family deeply embedded in automotive culture. His father operated Williams Auto Repair, where young Bubba developed his legendary mechanical intuition and what colleagues now recognize as an innate understanding of machine-consciousness interfaces.</p>
+
+                <p data-lang-key="p_trucking_career">In 1987, Williams founded Westford Interstate Shipping with a single used Peterbilt truck that he extensively modified and nicknamed "The Beast." Over nearly a decade, he logged over 2.8 million miles across American highways while gradually incorporating experimental enhancements into his vehicle's systems.</p>
+
+                <h3 id="liminal-engine" data-lang-key="h3_liminal_engine">The Liminal Engine Discovery</h3>
+                <p data-lang-key="p_engine_development">The breakthrough came in December 1996 when Williams announced he was temporarily suspending his shipping operations to focus on "a special mechanical project." Unknown to the public, this project involved the development of what would become the first functional Liminal Engine—a device capable of manipulating space-fold geometries through diesel-powered thaumic resonance.</p>
+
+                <blockquote data-lang-key="quote_bubba">
+                    "I ain't just moving freight anymore—I'm moving through the spaces between spaces. The Beast and I, we've learned to drive where there ain't no roads." - Bubba Williams, 1999
+                </blockquote>
+
+                <p data-lang-key="p_engine_theory">The Liminal Engine operates on Williams' proprietary understanding of mechanical-metaphysics, utilizing standard truck components enhanced with what he terms "common-sense modifications." The device converts kinetic energy into dimensional-displacement coefficients, allowing for travel between parallel reality-streams.</p>
+
+                <h2 id="adventures" data-lang-key="h2_adventures">Dimensional Expeditions</h2>
+                <p data-lang-key="p_desert_gods">Williams' first major expedition brought him into contact with the <a href="libertarian-gods">Libertarian Gods</a> in the Desert of Forgotten Deities. His successful negotiation with the trickster-entity Zephyrus established precedent for civilian interaction with extra-dimensional beings and earned him a Probability Compass—a navigation device that guides users toward fate-convergence points.</p>
+
+                <p data-lang-key="p_valencia">Subsequently, Williams explored the artificial continent of <a href="valencia">Valencia</a>, where he documented the socio-economic effects of the Solomon Ritual on ultra-wealthy populations. His observations contributed significantly to early research on wealth-concentration effects in post-magical societies.</p>
+
+                <h3 id="relationship" data-lang-key="h3_relationship">Partnership with Em</h3>
+                <p data-lang-key="p_em_partnership">Williams' most significant dimensional expedition involved partnering with <a href="em">Em</a>, the enigmatic figure connected to the Y2K magical emergence. Together, they traversed the <a href="road-to-beagle">Road to Beagle</a>, navigating through reality-fragments left over from the <a href="squishing">Squishing</a> event.</p>
+
+                <p data-lang-key="p_joint_missions">Their collaboration has proven remarkably effective, with Williams providing mechanical expertise and dimensional navigation while Em contributes advanced magical knowledge and reality-manipulation capabilities. The partnership represents the first successful integration of traditional engineering with post-Y2K thaumic technologies.</p>
+
+                <div class="warning-box">
+                    <strong data-lang-key="warning_title">Classification Note:</strong> <span data-lang-key="warning_text">Much of Williams' current activities remain classified under Archive Foundation protocols. This article reflects only publicly available information as of January 2001.</span>
+                </div>
+
+                <h2 id="legacy" data-lang-key="h2_legacy">Impact on Modern Transportation</h2>
+                <p data-lang-key="p_industry_impact">Williams' innovations have fundamentally altered the transportation industry. The <a href="hypercapitalist-collective">Hypercapitalist Collective</a> has attempted to reverse-engineer his Liminal Engine technology, while <a href="esoteric-heavy-industries">Esoteric Heavy Industries</a> has incorporated his dimensional-folding principles into their mass-production processes.</p>
+
+                <p data-lang-key="p_economic_effects">The availability of dimension-crossing technology has created entirely new market-categories within the global economy. Inter-reality freight hauling now represents a significant sector of international commerce, with Williams' original specifications serving as the industry standard for dimensional-compliance protocols.</p>
+
+                <p data-lang-key="p_philosophical_impact">Beyond economic implications, Williams has demonstrated that advanced thaumic technologies can emerge from practical, working-class innovation rather than academic research. His success challenges traditional assumptions about the relationship between formal education and technological breakthrough-generation.</p>
+
+                <h2 id="see-also" data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="liminal-engine.html" data-lang-key="link_liminal">Liminal Engine Technology</a></li>
+                    <li><a href="dimensional-transportation.html" data-lang-key="link_transport">Dimensional Transportation</a></li>
+                    <li><a href="the-beast.html" data-lang-key="link_beast">The Beast (Vehicle)</a></li>
+                    <li><a href="em-the-witch.html" data-lang-key="link_em">Em</a></li>
+                    <li><a href="road-to-beagle.html" data-lang-key="link_road">Road to Beagle</a></li>
+                    <li><a href="libertarian-gods.html" data-lang-key="link_gods">Libertarian Gods</a></li>
+                    <li><a href="mechanical-metaphysics.html" data-lang-key="link_mechanics">Mechanical Metaphysics</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Creative Commons license.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "Bubba Williams",
+                    meta_last_updated: "Last updated",
+                    meta_read_time: "7 min read",
+                    toc_title: "Contents",
+                    toc_1: "1. Early Life and Career",
+                    toc_2: "2. The Liminal Engine Discovery",
+                    toc_3: "3. Dimensional Expeditions",
+                    toc_4: "4. Partnership with Em",
+                    toc_5: "5. Impact on Modern Transportation",
+                    toc_6: "6. See Also",
+                    infobox_title: "Personal Information",
+                    infobox_born_label: "Born:",
+                    infobox_born_value: "1958, Westford, Texas",
+                    infobox_occupation_label: "Occupation:",
+                    infobox_occupation_value: "Dimensional Engineer, Truck Driver",
+                    infobox_company_label: "Company:",
+                    infobox_company_value: "Westford Interstate Shipping (1987-1996)",
+                    infobox_vehicle_label: "Primary Vehicle:",
+                    infobox_vehicle_value: "\"The Beast\" (Modified Peterbilt)",
+                    infobox_status_label: "Current Status:",
+                    infobox_status_value: "Active (Dimensional Operations)",
+                    p_intro: "Bubba Williams (born 1958) is a dimensional-engineer and truck driver from Westford, Texas, widely regarded as the inventor of the Liminal Engine—the first successful mechano-thaumic device capable of crossing reality-boundaries. His work has fundamentally altered transportation-economics and established the theoretical foundation for modern dimension-commerce protocols.",
+                    h2_early_life: "Early Life and Career",
+                    p_early_background: "Born in Westford, Texas in 1958, Bubba Williams grew up in a family deeply embedded in automotive culture. His father operated Williams Auto Repair, where young Bubba developed his legendary mechanical intuition and what colleagues now recognize as an innate understanding of machine-consciousness interfaces.",
+                    p_trucking_career: "In 1987, Williams founded Westford Interstate Shipping with a single used Peterbilt truck that he extensively modified and nicknamed \"The Beast.\" Over nearly a decade, he logged over 2.8 million miles across American highways while gradually incorporating experimental enhancements into his vehicle's systems.",
+                    h3_liminal_engine: "The Liminal Engine Discovery",
+                    p_engine_development: "The breakthrough came in December 1996 when Williams announced he was temporarily suspending his shipping operations to focus on \"a special mechanical project.\" Unknown to the public, this project involved the development of what would become the first functional Liminal Engine—a device capable of manipulating space-fold geometries through diesel-powered thaumic resonance.",
+                    quote_bubba: "\"I ain't just moving freight anymore—I'm moving through the spaces between spaces. The Beast and I, we've learned to drive where there ain't no roads.\" - Bubba Williams, 1999",
+                    p_engine_theory: "The Liminal Engine operates on Williams' proprietary understanding of mechanical-metaphysics, utilizing standard truck components enhanced with what he terms \"common-sense modifications.\" The device converts kinetic energy into dimensional-displacement coefficients, allowing for travel between parallel reality-streams.",
+                    h2_adventures: "Dimensional Expeditions",
+                    p_desert_gods: "Williams' first major expedition brought him into contact with the Libertarian Gods in the Desert of Forgotten Deities. His successful negotiation with the trickster-entity Zephyrus established precedent for civilian interaction with extra-dimensional beings and earned him a Probability Compass—a navigation device that guides users toward fate-convergence points.",
+                    p_valencia: "Subsequently, Williams explored the artificial continent of Valencia, where he documented the socio-economic effects of the Solomon Ritual on ultra-wealthy populations. His observations contributed significantly to early research on wealth-concentration effects in post-magical societies.",
+                    h3_relationship: "Partnership with Em",
+                    p_em_partnership: "Williams' most significant dimensional expedition involved partnering with Em, the enigmatic figure connected to the Y2K magical emergence. Together, they traversed the Road to Beagle, navigating through reality-fragments left over from the Squishing event.",
+                    p_joint_missions: "Their collaboration has proven remarkably effective, with Williams providing mechanical expertise and dimensional navigation while Em contributes advanced magical knowledge and reality-manipulation capabilities. The partnership represents the first successful integration of traditional engineering with post-Y2K thaumic technologies.",
+                    warning_title: "Classification Note:",
+                    warning_text: "Much of Williams' current activities remain classified under Archive Foundation protocols. This article reflects only publicly available information as of January 2001.",
+                    h2_legacy: "Impact on Modern Transportation",
+                    p_industry_impact: "Williams' innovations have fundamentally altered the transportation industry. The Hypercapitalist Collective has attempted to reverse-engineer his Liminal Engine technology, while Esoteric Heavy Industries has incorporated his dimensional-folding principles into their mass-production processes.",
+                    p_economic_effects: "The availability of dimension-crossing technology has created entirely new market-categories within the global economy. Inter-reality freight hauling now represents a significant sector of international commerce, with Williams' original specifications serving as the industry standard for dimensional-compliance protocols.",
+                    p_philosophical_impact: "Beyond economic implications, Williams has demonstrated that advanced thaumic technologies can emerge from practical, working-class innovation rather than academic research. His success challenges traditional assumptions about the relationship between formal education and technological breakthrough-generation.",
+                    h2_see_also: "See Also",
+                    link_liminal: "Liminal Engine Technology",
+                    link_transport: "Dimensional Transportation",
+                    link_beast: "The Beast (Vehicle)",
+                    link_em: "Em",
+                    link_road: "Road to Beagle",
+                    link_gods: "Libertarian Gods",
+                    link_mechanics: "Mechanical Metaphysics",
+                    footer_text: "© 2001 Hexapedia. Available under Creative Commons license."
+                },
+                it: {
+                    title: "Bubba Williams",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_read_time: "7 min di lettura",
+                    toc_title: "Indice",
+                    toc_1: "1. Gioventù e Carriera",
+                    toc_2: "2. La Scoperta del Motore Liminale",
+                    toc_3: "3. Spedizioni Dimensionali",
+                    toc_4: "4. Partnership con Em",
+                    toc_5: "5. Impatto sui Trasporti Moderni",
+                    toc_6: "6. Vedi Anche",
+                    infobox_title: "Informazioni Personali",
+                    infobox_born_label: "Nato:",
+                    infobox_born_value: "1958, Westford, Texas",
+                    infobox_occupation_label: "Occupazione:",
+                    infobox_occupation_value: "Ingegnere Dimensionale, Camionista",
+                    infobox_company_label: "Azienda:",
+                    infobox_company_value: "Westford Interstate Shipping (1987-1996)",
+                    infobox_vehicle_label: "Veicolo Principale:",
+                    infobox_vehicle_value: "\"The Beast\" (Peterbilt Modificato)",
+                    infobox_status_label: "Stato Attuale:",
+                    infobox_status_value: "Attivo (Operazioni Dimensionali)",
+                    p_intro: "Bubba Williams (nato nel 1958) è un ingegnere-dimensionale e camionista di Westford, Texas, ampiamente considerato l'inventore del Motore Liminale—il primo dispositivo mecano-taumico di successo capace di attraversare confini-realtà. Il suo lavoro ha alterato fondamentalmente l'economia-trasporti e stabilito la fondazione teorica per i moderni protocolli di commercio-dimensionale.",
+                    h2_early_life: "Gioventù e Carriera",
+                    p_early_background: "Nato a Westford, Texas nel 1958, Bubba Williams è cresciuto in una famiglia profondamente radicata nella cultura automobilistica. Suo padre gestiva Williams Auto Repair, dove il giovane Bubba ha sviluppato la sua leggendaria intuizione meccanica e quello che i colleghi ora riconoscono come una comprensione innata delle interfacce coscienza-macchina.",
+                    p_trucking_career: "Nel 1987, Williams fondò Westford Interstate Shipping con un singolo camion Peterbilt usato che modificò estensivamente e soprannominò \"The Beast\". Nel corso di quasi un decennio, ha registrato oltre 2,8 milioni di miglia attraverso le autostrade americane mentre gradualmente incorporava miglioramenti sperimentali nei sistemi del suo veicolo.",
+                    h3_liminal_engine: "La Scoperta del Motore Liminale",
+                    p_engine_development: "La svolta arrivò nel dicembre 1996 quando Williams annunciò che stava temporaneamente sospendendo le sue operazioni di spedizione per concentrarsi su \"un progetto meccanico speciale\". Sconosciuto al pubblico, questo progetto coinvolgeva lo sviluppo di quello che sarebbe diventato il primo Motore Liminale funzionale—un dispositivo capace di manipolare geometrie di piegatura-spazio attraverso risonanza taumica alimentata a diesel.",
+                    quote_bubba: "\"Non sto più solo trasportando merci—sto viaggiando attraverso gli spazi tra gli spazi. The Beast ed io, abbiamo imparato a guidare dove non ci sono strade.\" - Bubba Williams, 1999",
+                    p_engine_theory: "Il Motore Liminale opera sulla comprensione proprietaria di Williams della meccanica-metafisica, utilizzando componenti standard di camion potenziate con quello che lui chiama \"modifiche di buon senso\". Il dispositivo converte energia cinetica in coefficienti di spostamento-dimensionale, permettendo viaggi tra flussi-realtà paralleli.",
+                    h2_adventures: "Spedizioni Dimensionali",
+                    p_desert_gods: "La prima spedizione importante di Williams lo portò in contatto con gli Dei Libertari nel Deserto delle Divinità Dimenticate. La sua negoziazione riuscita con l'entità-imbrogliona Zefiro stabilì un precedente per l'interazione civile con esseri extra-dimensionali e gli fece guadagnare una Bussola di Probabilità—un dispositivo di navigazione che guida gli utenti verso punti di convergenza-destino.",
+                    p_valencia: "Successivamente, Williams esplorò il continente artificiale di Valencia, dove documentò gli effetti socio-economici del Rituale di Salomone sulle popolazioni ultra-ricche. Le sue osservazioni contribuirono significativamente alla ricerca iniziale sugli effetti di concentrazione-ricchezza nelle società post-magiche.",
+                    h3_relationship: "Partnership con Em",
+                    p_em_partnership: "La spedizione dimensionale più significativa di Williams coinvolse la partnership con Em, la figura enigmatica connessa all'emergenza magica Y2K. Insieme, hanno attraversato la Strada per Beagle, navigando attraverso frammenti-realtà rimasti dall'evento Schiacciamento.",
+                    p_joint_missions: "La loro collaborazione si è dimostrata notevolmente efficace, con Williams che fornisce competenza meccanica e navigazione dimensionale mentre Em contribuisce con conoscenza magica avanzata e capacità di manipolazione-realtà. La partnership rappresenta la prima integrazione riuscita di ingegneria tradizionale con tecnologie taumiche post-Y2K.",
+                    warning_title: "Nota di Classificazione:",
+                    warning_text: "Molte delle attività attuali di Williams rimangono classificate sotto i protocolli della Archive Foundation. Questo articolo riflette solo informazioni pubblicamente disponibili a gennaio 2001.",
+                    h2_legacy: "Impatto sui Trasporti Moderni",
+                    p_industry_impact: "Le innovazioni di Williams hanno alterato fondamentalmente l'industria dei trasporti. Il Collettivo Ipercapitalista ha tentato di fare reverse-engineering della sua tecnologia Motore Liminale, mentre Esoteric Heavy Industries ha incorporato i suoi principi di piegatura-dimensionale nei loro processi di produzione di massa.",
+                    p_economic_effects: "La disponibilità di tecnologia di attraversamento-dimensioni ha creato categorie-mercato completamente nuove nell'economia globale. Il trasporto merci inter-realtà ora rappresenta un settore significativo del commercio internazionale, con le specifiche originali di Williams che servono come standard industriale per i protocolli di conformità-dimensionale.",
+                    p_philosophical_impact: "Oltre alle implicazioni economiche, Williams ha dimostrato che tecnologie taumiche avanzate possono emergere dall'innovazione pratica della classe lavoratrice piuttosto che dalla ricerca accademica. Il suo successo sfida le assunzioni tradizionali sulla relazione tra educazione formale e generazione-breakthrough tecnologico.",
+                    h2_see_also: "Vedi Anche",
+                    link_liminal: "Tecnologia Motore Liminale",
+                    link_transport: "Trasporto Dimensionale",
+                    link_beast: "The Beast (Veicolo)",
+                    link_em: "Em",
+                    link_road: "Strada per Beagle",
+                    link_gods: "Dei Libertari",
+                    link_mechanics: "Meccanica Metafisica",
+                              }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            // Safe localStorage wrapper
+            const safeLocalStorage = {
+                getItem: function(key) {
+                    try {
+                        return localStorage ? localStorage.getItem(key) : null;
+                    } catch (e) {
+                        return null;
+                    }
+                },
+                setItem: function(key, value) {
+                    try {
+                        if (localStorage) {
+                            localStorage.setItem(key, value);
+                        }
+                    } catch (e) {
+                        // localStorage not available
+                    }
+                }
+            };
+
+            const setLanguage = (lang) => {
+                safeLocalStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            const initialLang = safeLocalStorage.getItem('language') || 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

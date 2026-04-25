@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em the Witch - Hexapedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            font-size: 14px;
+        }
+
+        .lang-switcher .lang-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        
+        .lang-switcher .lang-link:hover {
+            color: #0066cc;
+        }
+
+        .lang-switcher .lang-link.active {
+            color: #000;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin: 4px 0;
+        }
+
+        .toc-list a {
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main {
+            padding: 20px 16px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 28px 0 12px 0;
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin: 24px 0 10px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .infobox {
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .infobox-item {
+            margin-bottom: 8px;
+        }
+
+        .infobox-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px 16px;
+            border-top: 1px solid #e5e5e5;
+            background: #fafafa;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 18px;
+            }
+            
+            .article-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <a href="https://hexapedia.com" class="logo">Hexapedia</a>
+                <div class="lang-switcher">
+                    <a href="#" class="lang-link active" data-lang="en">EN</a> |
+                    <a href="#" class="lang-link" data-lang="it">IT</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <h1 class="article-title" data-lang-key="title">✨ Em the Witch ✨ (That's me! 🧙‍♀️)</h1>
+            
+            <div class="article-meta">
+                <span data-lang-key="meta_last_updated">Last updated</span>: January 15, 2001 | <span data-lang-key="meta_author">Author</span>: <span data-lang-key="meta_author_name">Em herself (obviously!)</span>
+            </div>
+
+            <div class="article-content">
+                <p data-lang-key="p_intro">⭐ Hey there, hypernet wanderers! This is Em speaking - yes, THE Em, the one who accidentally broke reality and helped kill a god! 😅 Welcome to my totally-not-biased autobiography! Most of this is reconstructed from Bubba's stories and my old hypernet blog posts because, well... let's just say January 2001 was a WILD month! 🎆💥 ⭐</p>
+
+                <div class="toc">
+                    <div class="toc-title" data-lang-key="toc_title">✧･ﾟ: *✧･ﾟ:* Contents *:･ﾟ✧*:･ﾟ✧</div>
+                    <ol class="toc-list">
+                        <li><a href="#teenage-years" data-lang-key="toc_1">1. My Totally Normal Teenage Years 🌙</a></li>
+                        <li><a href="#meeting-bubba" data-lang-key="toc_2">2. Meeting My Best Travel Buddy 🚐</a></li>
+                        <li><a href="#road-years" data-lang-key="toc_3">3. The Encompassing Road Adventures (1996-1999)</a></li>
+                        <li><a href="#thatcher-tutoring" data-lang-key="toc_4">4. Lady Thatcher's Boot Camp of Doom 🎩</a></li>
+                        <li><a href="#solomon-ritual" data-lang-key="toc_5">5. The Solomon Ritual (Or: How I Lost My Mind)</a></li>
+                        <li><a href="#current-status" data-lang-key="toc_6">6. Current Status: Confused but Powerful!</a></li>
+                    </ol>
+                </div>
+
+                <div class="infobox">
+                    <div class="infobox-title" data-lang-key="infobox_title">✨ Em's Quick Stats ✨</div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_class_label">Class:</span> <span data-lang-key="infobox_class_value">Witch (Memory-Powered) 🔮</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_buddy_label">Best Friend:</span> <span data-lang-key="infobox_buddy_value">Bubba (chaos-immune mechanic)</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_mentor_label">Former Mentor:</span> <span data-lang-key="infobox_mentor_value">Lady Margaret Thatcher</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_achievement_label">Greatest Achievement:</span> <span data-lang-key="infobox_achievement_value">Participated in Deicide 😈</span>
+                    </div>
+                    <div class="infobox-item">
+                        <span class="infobox-label" data-lang-key="infobox_memory_label">Memory Status:</span> <span data-lang-key="infobox_memory_value">92% MISSING! 🧠💨</span>
+                    </div>
+                </div>
+
+                <h2 id="teenage-years" data-lang-key="h2_teenage_years">🌙 My Totally Normal Teenage Years 🌙</h2>
+                <p data-lang-key="p_teenage_intro">So apparently (according to Bubba and some OLD blog posts I found), I was this super weird teenager who was OBSESSED with becoming a witch! 🧙‍♀️ Like, not the cute Halloween costume kind - I mean REAL magic with sparkles and reality-bending and everything!</p>
+
+                <p data-lang-key="p_teenage_attempts">From what I can piece together from my hypernet archives, I spent YEARS trying every spell I could find in dusty old books. I'm talking candles, crystals, dancing naked under the full moon (don't ask) - the whole nine yards! 🕯️💎🌕 But nothing worked! Magic was supposedly "dead" or whatever. BORING!</p>
+
+                <blockquote data-lang-key="quote_teenage">
+                    "Day 847 of trying to become a witch: Still nothing. Tried summoning a familiar today - got a confused pigeon instead. At least it ate the breadcrumbs I used for the ritual circle? 🐦 Progress???" - From my 1995 hypernet blog
+                </blockquote>
+
+                <h2 id="meeting-bubba" data-lang-key="h2_meeting_bubba">🚐 Meeting My Best Travel Buddy 🚐</h2>
+                <p data-lang-key="p_meeting_bubba_intro">Then in late 1995, I met this TOTALLY BIZARRE mechanic guy called Bubba! 🔧 He had this beat-up van called "The Beast" and this weird glowy engine thingy that made reality go all wibbly-wobbly around it!</p>
+
+                <p data-lang-key="p_meeting_bubba_details">Bubba says we met when I was trying to "ritually charge" my Anoki 3310 (don't laugh, those things are INDESTRUCTIBLE and I figured they HAD to be magical) near some power lines. His <a href="liminal-engine">Liminal Engine</a> was making the whole area go bananas, and apparently I just... walked right up to him and said "TEACH ME YOUR MAGIC PHONE MAN!" 📱✨</p>
+
+                <p data-lang-key="p_bubba_friendship">We became best friends almost immediately! 🤝 I mean, when you find someone whose existence literally bends reality AND who doesn't think you're totally insane for wanting to be a witch, that's friendship material right there! Plus his chaos-immunity meant he could handle my... intensity. 😅 Romance? Ew, no thanks - I'm way too busy with MAGIC for all that mushy stuff! 🔮</p>
+
+                <h2 id="road-years" data-lang-key="h2_road_years">🛣️ The Encompassing Road Adventures (1996-1999) 🛣️</h2>
+                <p data-lang-key="p_road_intro">OMG these were the BEST years! 🌟 We spent three whole years just driving around the <a href="encompassing-road">Encompassing Road</a> in The Beast! Bubba's engine let us slip between dimensions and visit the most INCREDIBLE places!</p>
+
+                <h3 data-lang-key="h3_road_adventures">▼ ◄ ▲ ► ▼ ◄ ▲ ► Adventures We Had ◄ ▲ ► ▼ ◄ ▲ ► ▼</h3>
+                <ul>
+                    <li data-lang-key="li_desert">🏜️ We visited the <a href="desert-forgotten-gods">Desert of Forgotten Gods</a> where Bubba somehow beat a trickster god at poker!</li>
+                    <li data-lang-key="li_valencia">🏝️ Explored Valencia after the <a href="solomon-ritual">Solomon Ritual</a> made it pop into existence!</li>
+                    <li data-lang-key="li_ghosts">👻 Got trapped in the City of Ghosts for like a WEEK (time is weird there)</li>
+                    <li data-lang-key="li_scraps">🌌 Collected trinkets from the <a href="scraps-of-creation">Scraps of Creation</a> in the abyss!</li>
+                    <li data-lang-key="li_beagle">🏙️ Made it all the way to Beagle! (It looked like a cosmic shopping mall that day)</li>
+                </ul>
+
+                <p data-lang-key="p_road_magic">But the BEST part? Magic was starting to come back! I could feel it in the air, crackling like electricity! ⚡ By 1998, I was actually casting REAL spells! Tiny ones, but REAL! My memory-trade system was finally working!</p>
+
+                <h2 id="thatcher-tutoring" data-lang-key="h2_thatcher_tutoring">🎩 Lady Thatcher's Boot Camp of Doom 🎩</h2>
+                <p data-lang-key="p_thatcher_intro">In 2000, everything changed when Lady Margaret Thatcher herself contacted me! 😱 Turns out the Iron Lady was actually the head of the <a href="mages-guild">Mages Guild</a> the WHOLE TIME! Who knew politics was just a hobby for her?</p>
+
+                <p data-lang-key="p_thatcher_training">She dragged me away from Bubba (😢) to this secret magical boot camp where she taught me REAL magic! Not the cutesy candle stuff - we're talking reality-warping, memory-crystallizing, timeline-manipulating SERIOUS business! 💎🌀</p>
+
+                <blockquote data-lang-key="quote_thatcher">
+                    "Miss Em, magic is not about flowery intentions and positive thinking. It's about POWER, CONTROL, and the willingness to pay the price. Now, sacrifice three childhood memories and summon me a cup of tea!" - Lady Thatcher, probably
+                </blockquote>
+
+                <p data-lang-key="p_thatcher_preparation">The whole year was preparation for something BIG. They kept talking about "The Solomon Ritual" and how I was going to be the "perfect conduit" because of my "natural aptitude for memory-magic." I thought it sounded AWESOME! 🎆</p>
+
+                <p data-lang-key="p_thatcher_warning">Looking back, I should have been more suspicious when she kept saying things like "Don't worry, you won't remember the pain" and "This is for the greater good of magic." 😅😅😅</p>
+
+                <h2 id="solomon-ritual" data-lang-key="h2_solomon_ritual">💥 The Solomon Ritual (Or: How I Lost My Mind) 💥</h2>
+                <p data-lang-key="p_solomon_intro">New Year's Day 2001 was... well, I don't remember it! 🎭 But from what Bubba told me (and some VERY scary documents I found), I was basically used as a magical battery to power the most insane spell in history!</p>
+
+                <p data-lang-key="p_solomon_details">They took 92% of my memories - not just random ones, but like EVERYTHING! My childhood, my first kiss, my favorite color, what pizza tastes like - GONE! 🧠💨 These memories got crystallized into something called the <a href="spear-of-memory">Spear of Memory</a>.</p>
+
+                <p data-lang-key="p_solomon_yhwh">And then... they used MY MEMORIES to kill <a href="yhwh">YHWH</a>! 😈 Like, not wound or banish - FULL DEICIDE! The big guy upstairs got taken out with a weapon made from my high school graduation and that time I learned to ride a bike!</p>
+
+                <p data-lang-key="p_solomon_aftermath">When I woke up on <a href="ritual-island">Ritual Island</a>, I could barely remember my own name! But I had these INCREDIBLE magical powers flowing through me! It's like they turned me into a living spell-caster but forgot to leave me a user manual! 📜✨</p>
+
+                <h2 id="current-status" data-lang-key="h2_current_status">🌟 Current Status: Confused but Powerful! 🌟</h2>
+                <p data-lang-key="p_current_intro">So here I am in 2001, trying to piece my life back together like the world's weirdest jigsaw puzzle! 🧩 I've got god-level magic powers but I can't remember my mom's face. Talk about a trade-off!</p>
+
+                <h3 data-lang-key="h3_current_powers">✧ My Current Magical Abilities ✧</h3>
+                <ul>
+                    <li data-lang-key="li_memory_magic">🧠 Memory-based spell casting (ironic, I know)</li>
+                    <li data-lang-key="li_reality_warp">🌀 Minor reality warping (still figuring this out)</li>
+                    <li data-lang-key="li_time_stuff">⏰ Weird time-loop resistance</li>
+                    <li data-lang-key="li_dimensional">🚪 Accidental dimensional door opening (oops)</li>
+                    <li data-lang-key="li_nokia">📱 Can supercharge Anoki phones (my signature move!)</li>
+                </ul>
+
+                <p data-lang-key="p_current_relationship">Bubba and I are still best friends, thankfully! 💙 He remembers our whole friendship, but for me it's like meeting a really sweet stranger who insists we went on epic adventures together. He's been SO patient, telling me stories about our travels and showing me photos. Slowly, I'm starting to feel... something. Maybe not memory, but like emotional muscle memory of our friendship?</p>
+
+                <p data-lang-key="p_current_future">I'm currently exploring <a href="ritual-island">Ritual Island</a> and testing my new powers. Every day I discover something new - sometimes about magic, sometimes about my past. It's like being a detective in your own life! 🔍</p>
+
+                <p data-lang-key="p_current_warning">Oh, and if you're thinking about trying memory magic - DON'T! 🚫 Trust me, trading away pieces of yourself for power seems cool until you wake up and can't remember why you love your favorite song. Some prices are too high, even for AWESOME magical abilities!</p>
+
+                <blockquote data-lang-key="quote_current">
+                    "I may have lost my memories, but I gained something else - the power to write new ones. And this time, I'm keeping better backups! 💾✨" - Me, right now, being philosophical
+                </blockquote>
+
+                <p data-lang-key="p_current_contact">If you see me around the <a href="hypernet">Hypernet</a> or wandering the dimensions, say hi! I love meeting people, especially if they have stories about the "old Em." Just don't be weird about the whole god-killing thing, okay? 😅</p>
+
+                <p data-lang-key="p_current_signature">Stay magical, everyone! 🌙✨<br>
+                - Em the Witch (Destroyer of Divine Entities, Amateur Blogger, Professional Chaos Magnet, Proudly Asexual Magic Nerd) 🧙‍♀️💫</p>
+
+                <h2 data-lang-key="h2_see_also">See Also</h2>
+                <ul>
+                    <li><a href="bubba-williams.html" data-lang-key="link_bubba">Bubba - My Best Friend and Travel Companion</a></li>
+                    <li><a href="solomon-ritual.html" data-lang-key="link_solomon">The Solomon Ritual</a></li>
+                    <li><a href="mages-guild.html" data-lang-key="link_guild">Mages Guild</a></li>
+                    <li><a href="memory-magic.html" data-lang-key="link_memory">Memory Magic Theory</a></li>
+                    <li><a href="ritual-island.html" data-lang-key="link_island">Ritual Island Guide</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p data-lang-key="footer_text">&copy; 2001 Hexapedia. Available under Hypernet Commons license. Please don't use this to kill any more gods.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    title: "✨ Em the Witch ✨ (That's me! 🧙‍♀️)",
+                    meta_last_updated: "Last updated",
+                    meta_author: "Author",
+                    meta_author_name: "Em herself (obviously!)",
+                    toc_title: "✧･ﾟ: *✧･ﾟ:* Contents *:･ﾟ✧*:･ﾟ✧",
+                    toc_1: "1. My Totally Normal Teenage Years 🌙",
+                    toc_2: "2. Meeting My Best Travel Buddy 🚐",
+                    toc_3: "3. The Encompassing Road Adventures (1996-1999)",
+                    toc_4: "4. Lady Thatcher's Boot Camp of Doom 🎩",
+                    toc_5: "5. The Solomon Ritual (Or: How I Lost My Mind)",
+                    toc_6: "6. Current Status: Confused but Powerful!",
+                    infobox_title: "✨ Em's Quick Stats ✨",
+                    infobox_class_label: "Class:",
+                    infobox_class_value: "Witch (Memory-Powered) 🔮",
+                    infobox_buddy_label: "Best Friend:",
+                    infobox_buddy_value: "Bubba (chaos-immune mechanic)",
+                    infobox_mentor_label: "Former Mentor:",
+                    infobox_mentor_value: "Lady Margaret Thatcher",
+                    infobox_achievement_label: "Greatest Achievement:",
+                    infobox_achievement_value: "Participated in Deicide 😈",
+                    infobox_memory_label: "Memory Status:",
+                    infobox_memory_value: "92% MISSING! 🧠💨",
+                    h2_teenage_years: "🌙 My Totally Normal Teenage Years 🌙",
+                    h2_meeting_bubba: "🚐 Meeting My Best Travel Buddy 🚐",
+                    h2_road_years: "🛣️ The Encompassing Road Adventures (1996-1999) 🛣️",
+                    h2_thatcher_tutoring: "🎩 Lady Thatcher's Boot Camp of Doom 🎩",
+                    h2_solomon_ritual: "💥 The Solomon Ritual (Or: How I Lost My Mind) 💥",
+                    h2_current_status: "🌟 Current Status: Confused but Powerful! 🌟",
+                    h2_see_also: "See Also",
+                    footer_text: "© 2001 Hexapedia. Available under Hypernet Commons license. Please don't use this to kill any more gods."
+                },
+                it: {
+                    title: "✨ Em la Strega ✨ (Sono io! 🧙‍♀️)",
+                    meta_last_updated: "Ultimo aggiornamento",
+                    meta_author: "Autore",
+                    meta_author_name: "Em in persona (ovviamente!)",
+                    toc_title: "✧･ﾟ: *✧･ﾟ:* Indice *:･ﾟ✧*:･ﾟ✧",
+                    toc_1: "1. I Miei Anni Adolescenziali Normalissimi 🌙",
+                    toc_2: "2. Incontrare il Mio Migliore Compagno di Viaggio 🚐",
+                    toc_3: "3. Le Avventure sulla Strada Onnicomprensiva (1996-1999)",
+                    toc_4: "4. Il Campo di Addestramento del Destino di Lady Thatcher 🎩",
+                    toc_5: "5. Il Rituale di Salomone (O: Come Ho Perso la Mente)",
+                    toc_6: "6. Stato Attuale: Confusa ma Potente!",
+                    infobox_title: "✨ Statistiche Rapide di Em ✨",
+                    infobox_class_label: "Classe:",
+                    infobox_class_value: "Strega (Alimentata dalla Memoria) 🔮",
+                    infobox_buddy_label: "Migliore Amico:",
+                    infobox_buddy_value: "Bubba (meccanico immune al caos)",
+                    infobox_mentor_label: "Ex Mentore:",
+                    infobox_mentor_value: "Lady Margaret Thatcher",
+                    infobox_achievement_label: "Più Grande Successo:",
+                    infobox_achievement_value: "Ha Partecipato al Deicidio 😈",
+                    infobox_memory_label: "Stato della Memoria:",
+                    infobox_memory_value: "92% MANCANTE! 🧠💨",
+                    h2_teenage_years: "🌙 I Miei Anni Adolescenziali Normalissimi 🌙",
+                    h2_meeting_bubba: "🚐 Incontrare il Mio Migliore Compagno di Viaggio 🚐",
+                    h2_road_years: "🛣️ Le Avventure sulla Strada Onnicomprensiva (1996-1999) 🛣️",
+                    h2_thatcher_tutoring: "🎩 Il Campo di Addestramento del Destino di Lady Thatcher 🎩",
+                    h2_solomon_ritual: "💥 Il Rituale di Salomone (O: Come Ho Perso la Mente) 💥",
+                    h2_current_status: "🌟 Stato Attuale: Confusa ma Potente! 🌟",
+                    h2_see_also: "Vedi Anche",
+                    footer_text: "© 2001 Hexapedia. Disponibile sotto licenza Hypernet Commons. Per favore non usate questo per uccidere altri dèi."
+                }
+            };
+
+            const langLinks = document.querySelectorAll('.lang-link');
+            const translatableElements = document.querySelectorAll('[data-lang-key]');
+
+            const setLanguage = (lang) => {
+                localStorage.setItem('language', lang);
+                document.documentElement.setAttribute('lang', lang);
+
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = translations[lang][key];
+                        } else {
+                            el.textContent = translations[lang][key];
+                        }
+                    }
+                });
+
+                langLinks.forEach(link => {
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            langLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = link.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                });
+            });
+
+            const initialLang = localStorage.getItem('language') || 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comune di Roccalonga - Il Comune</title>
+    <style>
+        body {
+            background-color: #ffffcc;
+            color: #000080;
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        td {
+            vertical-align: top;
+            padding: 0;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #99ccff;
+            padding: 10px;
+            border-right: 2px solid #3366cc;
+        }
+        
+        .content {
+            padding: 10px 20px;
+        }
+        
+        .header {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 5px solid #ffcc00;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #000066;
+        }
+        
+        .slogan {
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .menu-title {
+            background-color: #3366cc;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .menu li {
+            margin-bottom: 5px;
+        }
+        
+        .menu a {
+            display: block;
+            padding: 5px;
+            background-color: #ccddff;
+            color: #000080;
+            text-decoration: none;
+            border: 1px solid #3366cc;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .menu a:hover {
+            background-color: #ffcc00;
+            color: #000080;
+        }
+        
+        h1, h2, h3 {
+            color: #3366cc;
+        }
+        
+        h2 {
+            border-bottom: 2px dotted #3366cc;
+            padding-bottom: 5px;
+        }
+        
+        .admin-box {
+            border: 1px solid #3366cc;
+            margin-bottom: 20px;
+            background-color: #e6f2ff;
+        }
+        
+        .admin-header {
+            background-color: #3366cc;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+        
+        .admin-content {
+            padding: 10px;
+        }
+        
+        .admin-photo {
+            float: left;
+            border: 2px solid #3366cc;
+            margin: 0 10px 10px 0;
+            width: 120px;
+            height: 150px;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .history-box {
+            border: 2px dashed #990000;
+            padding: 10px;
+            background-color: #fff9e6;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            background-color: #3366cc;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            border-top: 5px solid #ffcc00;
+            margin-top: 20px;
+        }
+        
+        .counter {
+            text-align: center;
+            margin-top: 20px;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+        }
+        
+        .counter-box {
+            background-color: black;
+            color: lime;
+            padding: 3px 5px;
+            margin: 0 1px;
+        }
+        
+        .webring {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        marquee {
+            background-color: #ffcc00;
+            color: #990000;
+            padding: 5px;
+            font-weight: bold;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        
+        .statuto-box {
+            background-color: #e6e6e6;
+            border: 1px solid #999999;
+            padding: 10px;
+            height: 150px;
+            overflow: auto;
+            font-size: 12px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">COMUNE DI ROCCALONGA</div>
+        <div class="slogan">Città Giardino e Perla del Gargano</div>
+    </div>
+    
+    <marquee scrollamount="3" behavior="alternate">+++ BENVENUTI NEL SITO UFFICIALE DEL COMUNE DI ROCCALONGA +++ ULTIME NOTIZIE: FESTIVAL DELLE LUCI MISTERIOSE DAL 20 AL 22 MAGGIO +++</marquee>
+    
+    <table>
+        <tr>
+            <td class="sidebar">
+                <div class="menu-title">MENU PRINCIPALE</div>
+                <ul class="menu">
+                    <li><a href="roccalonga-website.html">HOME</a></li>
+                    <li><a href="roccalonga-comune.html">IL COMUNE</a></li>
+                    <li><a href="roccalonga-attrazioni.html">ATTRAZIONI</a></li>
+                    <li><a href="roccalonga-eventi.html">EVENTI</a></li>
+                    <li><a href="roccalonga-turismo.html">TURISMO</a></li>
+                    <li><a href="roccalonga-contatti.html">CONTATTI</a></li>
+                </ul>
+                
+                <div class="menu-title">SERVIZI ONLINE</div>
+                <ul class="menu">
+                    <li><a href="#">ALBO PRETORIO</a></li>
+                    <li><a href="#">MODULISTICA</a></li>
+                    <li><a href="#">BANDI E CONCORSI</a></li>
+                </ul>
+                
+                <div class="counter">
+                    <div>VISITATORI:</div>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">0</span>
+                    <span class="counter-box">1</span>
+                    <span class="counter-box">4</span>
+                    <span class="counter-box">2</span>
+                </div>
+                
+                <div class="webring">
+                    <div>SIAMO PARTE DI:</div>
+                    <div>WEBRING COMUNI ITALIANI</div>
+                    <div style="margin-top: 5px;">
+                        [<a href="#">PREC</a> | <a href="#">SUCC</a>]
+                    </div>
+                </div>
+                
+                <div class="construction">
+                    <img src="/api/placeholder/150/50" alt="Under Construction">
+                    <div class="blink">SITO IN COSTRUZIONE</div>
+                </div>
+            </td>
+            <td class="content">
+                <h1>Il Comune</h1>
+                <p>Roccalonga è un comune italiano di 4.237 abitanti della provincia di Foggia, situato nel cuore del Parco Nazionale del Gargano. Conosciuto come la "Città Giardino" per la sua rigogliosa vegetazione e per gli splendidi panorami sul Mar Adriatico.</p>
+                
+                <h2>L'Amministrazione Comunale</h2>
+                
+                <div class="admin-box">
+                    <div class="admin-header">IL SINDACO</div>
+                    <div class="admin-content">
+                        <img src="/api/placeholder/120/150" alt="Foto del Sindaco" class="admin-photo">
+                        <h3>Dott. Mario Paolillo</h3>
+                        <p><b>Sindaco di Roccalonga dal 2023</b></p>
+                        <p>Riceve il pubblico: Lunedì e Giovedì dalle 10:00 alle 12:00</p>
+                        <p>Email: sindaco@comune.roccalonga.fg.it</p>
+                        <p>"Lavoreremo per valorizzare le peculiarità della nostra amata Roccalonga, facendo del nostro comune una perla turistica del Gargano"</p>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+                <div class="admin-box">
+                    <div class="admin-header">LA GIUNTA COMUNALE</div>
+                    <div class="admin-content">
+                        <ul>
+                            <li><b>Dott.ssa Giovanna Esposito</b> - Vice Sindaco e Assessore al Turismo</li>
+                            <li><b>Ing. Luca Martelli</b> - Assessore ai Lavori Pubblici</li>
+                            <li><b>Prof. Antonio De Luca</b> - Assessore alla Cultura e Istruzione</li>
+                            <li><b>Dott.ssa Maria Verdi</b> - Assessore all'Ambiente</li>
+                            <li><b>Geom. Francesco Russo</b> - Assessore al Bilancio</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="admin-box">
+                    <div class="admin-header">IL CONSIGLIO COMUNALE</div>
+                    <div class="admin-content">
+                        <p>Il Consiglio Comunale è composto da 12 membri e si riunisce generalmente l'ultimo giovedì di ogni mese presso la Sala Consiliare del Palazzo Comunale.</p>
+                        <p><a href="#"><img src="/api/placeholder/16/16" style="vertical-align: middle; border: none;"> Clicca qui per visualizzare l'elenco dei consiglieri</a></p>
+                    </div>
+                </div>
+                
+                <h2>Storia</h2>
+                
+                <div class="history-box">
+                    <p>Roccalonga ha origini antichissime, risalenti al periodo della Magna Grecia. Il nome deriva dall'antico insediamento "Rupis Longa" (Roccia Lunga), chiamato così per la caratteristica formazione rocciosa che si estende lungo la costa.</p>
+                    
+                    <p>Durante l'epoca romana, il territorio acquisì importanza strategica grazie alla costruzione del ponte che ancora oggi taglia in due la costa, collegando due promontori.</p>
+                    
+                    <p>Nel Medioevo, Roccalonga divenne feudo della famiglia Caracciolo, che costruì il castello di cui oggi rimangono pittoresche rovine. La città visse il suo periodo di maggiore splendore nel XVIII secolo, quando divenne un centro commerciale fiorente.</p>
+                    
+                    <p>Negli anni '70 del XX secolo, Roccalonga ha acquisito fama internazionale per i frequenti avvistamenti UFO, che hanno ispirato ricerche scientifiche e attratto appassionati di fenomeni paranormali da tutto il mondo.</p>
+                </div>
+                
+                <h2>Statuto Comunale</h2>
+                <p>Lo Statuto del Comune di Roccalonga è stato approvato con deliberazione del Consiglio Comunale n. 45 del 12/05/2010.</p>
+                
+                <div class="statuto-box">
+                    <p><b>ARTICOLO 1 - PRINCIPI FONDAMENTALI</b></p>
+                    <p>1. Il Comune di Roccalonga è Ente autonomo locale con rappresentatività generale secondo i principi della Costituzione e nel rispetto delle leggi della Repubblica Italiana.</p>
+                    <p>2. È ente democratico che crede nei principi europeistici, della pace e della solidarietà.</p>
+                    <p>3. Si riconosce in un sistema statuale unitario di tipo federativo e solidale, basato sul principio dell'autonomia degli enti locali.</p>
+                    <p>4. Considerata la peculiare realtà territoriale e sociale in cui si colloca, rivendica uno specifico ruolo nella gestione delle risorse economiche locali, ivi compreso il gettito fiscale, nonché nell'organizzazione dei servizi pubblici o di pubblico interesse.</p>
+                    <p>5. Valorizza ogni forma di collaborazione con gli altri enti locali.</p>
+                    <p>6. Realizza, con i poteri e gli istituti del presente statuto, l'autogoverno della comunità.</p>
+                    <p><b>ARTICOLO 2 - FINALITÀ</b></p>
+                    <p>1. Il Comune promuove lo sviluppo e il progresso civile, sociale ed economico della comunità di Roccalonga ispirandosi ai valori e agli obiettivi della Costituzione.</p>
+                    <p>2. Il Comune ricerca la collaborazione e la cooperazione con altri soggetti pubblici e privati e promuove la partecipazione dei singoli cittadini, delle associazioni e delle forze sociali ed economiche all'attività amministrativa.</p>
+                    <p>3. In particolare il Comune ispira la sua azione ai seguenti principi:</p>
+                    <p>a) rimozione di tutti gli ostacoli che impediscono l'effettivo sviluppo della persona umana e l'eguaglianza degli individui;</p>
+                    <p>b) promozione di una cultura di pace e cooperazione internazionale e di integrazione razziale;</p>
+                    <p>c) recupero, tutela e valorizzazione delle risorse naturali, ambientali, storiche, culturali e delle tradizioni locali;</p>
+                </div>
+                
+                <p><a href="#"><img src="/api/placeholder/16/16" style="vertical-align: middle; border: none;"> Scarica lo Statuto Comunale completo (PDF, 256 KB)</a></p>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="footer">
+        <p>Comune di Roccalonga - Piazza della Repubblica, 1 - 71010 Roccalonga (FG)</p>
+        <p>Tel: 0884 123456 - Email: info@comune.roccalonga.fg.it</p>
+        <p>&copy; 2025 Comune di Roccalonga - Tutti i diritti riservati</p>
+        <p>Sito ottimizzato per Internet Explorer 6.0 - Risoluzione 800x600</p>
+        <div style="margin-top: 5px;">
+            <img src="/api/placeholder/88/31" alt="Validato HTML 4.01">
+            <img src="/api/placeholder/88/31" alt="Validato CSS 2.0">
+        </div>
+    </div>
+</body>
+</html>

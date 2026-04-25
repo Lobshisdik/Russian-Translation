@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Esoteric Heavy Industries</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      color: #ff0000;
+      font-family: monospace;
+      text-align: center;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .interface {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      font-size: 18px;
+    }
+
+    .point {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 1px solid #ff0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: crosshair;
+      transition: background 0.2s;
+    }
+
+    .point:hover {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+
+    #content {
+      position: relative;
+      margin-top: 20px;
+      max-width: 400px;
+      color: #ffaaaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="pentagram" width="800" height="800"></canvas>
+
+  <div class="interface">
+    <h1>✶ ESOTERIC HEAVY INDUSTRIES ✶</h1>
+    <div id="content">SELECT A NODE.</div>
+  </div>
+
+  <script>
+    const centerX = 400, centerY = 400, radius = 250;
+    const sections = ['RESEARCH', 'MANUFACTURING', 'ARCHIVE', 'PERSONNEL', 'RELICS'];
+    const passwords = {
+      'RESEARCH': 'gamma0',
+      'MANUFACTURING': 'redclay',
+      'ARCHIVE': 'blindsight',
+      'PERSONNEL': 'mirrorface',
+      'RELICS': 'fluxcore'
+    };
+    const contentTexts = {
+      'RESEARCH': 'INITIATING BLACK-LAB PROTOCOLS...',
+      'MANUFACTURING': 'GEARS TURN WHERE GOD SLEEPS.',
+      'ARCHIVE': 'TEXTS OLDER THAN IRON.',
+      'PERSONNEL': 'THE FLESH SERVES.',
+      'RELICS': 'INERTIA TRAPPED IN OBJECT.'
+    };
+
+    const canvas = document.getElementById('pentagram');
+    const ctx = canvas.getContext('2d');
+
+    function drawPentagram() {
+      ctx.clearRect(0, 0, 800, 800);
+      ctx.strokeStyle = '#ff0000';
+      ctx.lineWidth = 2;
+
+      let points = [];
+
+      for (let i = 0; i < 5; i++) {
+        let angle = (Math.PI / 2) + (i * 2 * Math.PI / 5);
+        let x = centerX + radius * Math.cos(angle);
+        let y = centerY - radius * Math.sin(angle);
+        points.push({ x, y });
+      }
+
+      // Draw pentagram lines
+      for (let i = 0; i < 5; i++) {
+        let next = (i * 2) % 5;
+        ctx.beginPath();
+        ctx.moveTo(points[i].x, points[i].y);
+        ctx.lineTo(points[next].x, points[next].y);
+        ctx.stroke();
+      }
+
+      // Create clickable areas
+      points.forEach((pt, idx) => {
+        const div = document.createElement('div');
+        div.className = 'point';
+        div.style.left = (pt.x - 45) + 'px';
+        div.style.top = (pt.y - 45) + 'px';
+        div.textContent = sections[idx];
+        div.onclick = () => {
+          let pw = prompt('ENTER PASSWORD FOR ' + sections[idx]);
+          if (pw === passwords[sections[idx]]) {
+            document.getElementById('content').textContent = contentTexts[sections[idx]];
+          } else {
+            document.getElementById('content').textContent = 'ACCESS DENIED.';
+          }
+        };
+        document.body.appendChild(div);
+      });
+    }
+
+    drawPentagram();
+  </script>
+</body>
+</html>

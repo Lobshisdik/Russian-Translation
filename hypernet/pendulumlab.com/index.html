@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Foucault Pendulum Simulator - pendulumlab.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 10px;
+            color: #000066;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #003366, #0066cc);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #000033;
+            margin-bottom: 15px;
+        }
+        
+        .main-content {
+            background-color: white;
+            border: 2px solid #666666;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .control-panel {
+            background-color: #e6f2ff;
+            border: 2px solid #0066cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .simulator-canvas {
+            background-color: #001122;
+            border: 3px solid #333333;
+            margin: 15px auto;
+            display: block;
+            cursor: crosshair;
+        }
+        
+        .input-group {
+            margin: 10px 0;
+            background-color: #f0f8ff;
+            padding: 8px;
+            border: 1px solid #cccccc;
+        }
+        
+        .input-group label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #000066;
+        }
+        
+        .input-group input {
+            width: 100px;
+            padding: 4px;
+            border: 1px solid #666666;
+            background-color: white;
+        }
+        
+        .button {
+            background-color: #0066cc;
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid #003366;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        .button:hover {
+            background-color: #003366;
+        }
+        
+        .status-display {
+            background-color: #ffffcc;
+            border: 2px solid #ffcc00;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .footer {
+            background-color: #cccccc;
+            border: 1px solid #666666;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .tech-badge {
+            background-color: #ff6600;
+            color: white;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .update-ticker {
+            background-color: #ffff99;
+            border: 1px solid #cc9900;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .info-box {
+            background-color: #e6ffe6;
+            border: 2px solid #009900;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-ticker">
+        <blink>*** UPDATED: 12 January 2001 - New physio-computational algorithms added ***</blink>
+    </div>
+
+    <div class="header">
+        <h1>Foucault Pendulum Simulator</h1>
+        <p>Advanced Gravito-Rotational Physics Simulation</p>
+        <span class="tech-badge">PHYSI-COMP™</span>
+        <span class="tech-badge">GRAVI-CALC</span>
+        <span class="tech-badge">ROTATION-SIM</span>
+    </div>
+
+    <div class="main-content">
+        <div class="info-box">
+            <h3>About This Simulator</h3>
+            <p>Experience the fascinating physics of the Foucault pendulum! This interactive simulation demonstrates how Earth's rotation affects pendulum motion through advanced gravito-computational modeling. Adjust gravity and rotation parameters to see how they influence the pendulum's behavior.</p>
+            <p><strong>Instructions:</strong> Click on the simulator to set the pendulum in motion. Use the controls below to modify gravitational and rotational parameters.</p>
+        </div>
+
+        <canvas id="pendulumCanvas" class="simulator-canvas" width="600" height="400">
+            Your Hypernet Explorer does not support advanced canvas rendering. Please upgrade to Hypernet Explorer 5.0 or higher.
+        </canvas>
+
+        <div class="control-panel">
+            <h3>Simulation Parameters</h3>
+            
+            <div class="input-group">
+                <label for="gravity">Gravity (m/s²):</label>
+                <input type="number" id="gravity" value="9.81" min="0.1" max="50" step="0.1">
+                <span style="color: #666; font-size: 11px;">Earth standard: 9.81</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="rotation">Earth Rotation (°/hour):</label>
+                <input type="number" id="rotation" value="15" min="0" max="360" step="0.1">
+                <span style="color: #666; font-size: 11px;">Earth standard: 15°/hour</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="length">Pendulum Length (m):</label>
+                <input type="number" id="length" value="2.0" min="0.1" max="10" step="0.1">
+                <span style="color: #666; font-size: 11px;">Laboratory standard: 2.0m</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="latitude">Latitude (degrees):</label>
+                <input type="number" id="latitude" value="45" min="-90" max="90" step="1">
+                <span style="color: #666; font-size: 11px;">Paris: 48.8°, London: 51.5°</span>
+            </div>
+            
+            <div style="text-align: center; margin-top: 15px;">
+                <button class="button" onclick="resetSimulation()">Reset Pendulum</button>
+                <button class="button" onclick="toggleSimulation()">Start/Stop</button>
+                <button class="button" onclick="clearTrail()">Clear Trail</button>
+            </div>
+        </div>
+
+        <div class="status-display">
+            <strong>Simulation Status:</strong><br>
+            <span id="statusText">Ready - Click canvas to start pendulum motion</span><br>
+            <strong>Physio-Computational Engine:</strong> <span id="engineStatus">Standby</span><br>
+            <strong>Calculation Frequency:</strong> <span id="calcFreq">60 Hz</span><br>
+            <strong>Current Angle:</strong> <span id="currentAngle">0.0°</span><br>
+            <strong>Rotational Drift:</strong> <span id="rotationalDrift">0.0°</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2001 European Physics Simulation Consortium | Powered by Physi-Comp™ Engine v2.1</p>
+        <p>Best viewed with Hypernet Explorer 5.0 or higher | Optimized for 1024x768 resolution</p>
+        <p>Questions? Contact: <a href="mailto:simulation@hexagram.corp">simulation@hexagram.corp</a></p>
+    </div>
+
+    <script>
+        // Simulation variables
+        let canvas = document.getElementById('pendulumCanvas');
+        let ctx = canvas.getContext('2d');
+        let isRunning = false;
+        let animationId;
+        
+        // Pendulum physics
+        let pendulum = {
+            x: canvas.width / 2,
+            y: 50,
+            length: 200,
+            angle: 0,
+            angularVelocity: 0,
+            angularAcceleration: 0,
+            trail: [],
+            rotationOffset: 0
+        };
+        
+        let startTime = Date.now();
+        
+        // Initialize simulation
+        function initializeSimulation() {
+            updateStatusDisplay();
+            drawPendulum();
+        }
+        
+        // Physics calculations
+        function updatePhysics() {
+            let gravity = parseFloat(document.getElementById('gravity').value);
+            let earthRotation = parseFloat(document.getElementById('rotation').value);
+            let length = parseFloat(document.getElementById('length').value);
+            let latitude = parseFloat(document.getElementById('latitude').value);
+            
+            // Convert to radians
+            let latRad = latitude * Math.PI / 180;
+            
+            // Calculate gravitational force
+            let force = -(gravity / (length * 50)) * Math.sin(pendulum.angle);
+            pendulum.angularAcceleration = force;
+            
+            // Apply Coriolis effect (simplified)
+            let coriolisEffect = earthRotation * Math.PI / 180 / 3600; // per second
+            let coriolisForce = coriolisEffect * Math.sin(latRad) * pendulum.angularVelocity * 0.1;
+            
+            pendulum.angularAcceleration += coriolisForce;
+            
+            // Update velocity and position
+            pendulum.angularVelocity += pendulum.angularAcceleration;
+            pendulum.angularVelocity *= 0.999; // Damping
+            pendulum.angle += pendulum.angularVelocity;
+            
+            // Apply Earth's rotation to the reference frame
+            let timeElapsed = (Date.now() - startTime) / 1000;
+            pendulum.rotationOffset = (earthRotation * Math.PI / 180 / 3600) * timeElapsed * Math.sin(latRad);
+        }
+        
+        // Drawing functions
+        function drawPendulum() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw trail
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (let i = 1; i < pendulum.trail.length; i++) {
+                ctx.globalAlpha = (i / pendulum.trail.length) * 0.5;
+                ctx.moveTo(pendulum.trail[i-1].x, pendulum.trail[i-1].y);
+                ctx.lineTo(pendulum.trail[i].x, pendulum.trail[i].y);
+            }
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+            
+            // Calculate pendulum position with rotation
+            let totalAngle = pendulum.angle + pendulum.rotationOffset;
+            let bobX = pendulum.x + pendulum.length * Math.sin(totalAngle);
+            let bobY = pendulum.y + pendulum.length * Math.cos(totalAngle);
+            
+            // Draw suspension point
+            ctx.fillStyle = '#cccccc';
+            ctx.beginPath();
+            ctx.arc(pendulum.x, pendulum.y, 8, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw string
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pendulum.x, pendulum.y);
+            ctx.lineTo(bobX, bobY);
+            ctx.stroke();
+            
+            // Draw pendulum bob
+            ctx.fillStyle = '#ffdd00';
+            ctx.strokeStyle = '#cc9900';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(bobX, bobY, 12, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Add to trail
+            if (isRunning) {
+                pendulum.trail.push({x: bobX, y: bobY});
+                if (pendulum.trail.length > 500) {
+                    pendulum.trail.shift();
+                }
+            }
+            
+            // Draw reference frame indicator
+            ctx.strokeStyle = '#ff6600';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.arc(pendulum.x, pendulum.y, pendulum.length, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+        
+        // Animation loop
+        function animate() {
+            if (isRunning) {
+                updatePhysics();
+                updateStatusDisplay();
+            }
+            drawPendulum();
+            
+            if (isRunning) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }
+        
+        // Control functions
+        function toggleSimulation() {
+            isRunning = !isRunning;
+            if (isRunning) {
+                startTime = Date.now();
+                animate();
+                document.getElementById('engineStatus').textContent = 'Active';
+            } else {
+                cancelAnimationFrame(animationId);
+                document.getElementById('engineStatus').textContent = 'Standby';
+            }
+            updateStatusDisplay();
+        }
+        
+        function resetSimulation() {
+            isRunning = false;
+            cancelAnimationFrame(animationId);
+            pendulum.angle = 0;
+            pendulum.angularVelocity = 0;
+            pendulum.angularAcceleration = 0;
+            pendulum.rotationOffset = 0;
+            pendulum.trail = [];
+            startTime = Date.now();
+            document.getElementById('engineStatus').textContent = 'Standby';
+            updateStatusDisplay();
+            drawPendulum();
+        }
+        
+        function clearTrail() {
+            pendulum.trail = [];
+            drawPendulum();
+        }
+        
+        // Status display
+        function updateStatusDisplay() {
+            let gravity = parseFloat(document.getElementById('gravity').value);
+            let rotation = parseFloat(document.getElementById('rotation').value);
+            
+            if (isRunning) {
+                document.getElementById('statusText').textContent = 'Simulation Running - Gravito-rotational calculations active';
+            } else {
+                document.getElementById('statusText').textContent = 'Simulation Paused - Click Start/Stop to resume';
+            }
+            
+            document.getElementById('currentAngle').textContent = (pendulum.angle * 180 / Math.PI).toFixed(1) + '°';
+            document.getElementById('rotationalDrift').textContent = (pendulum.rotationOffset * 180 / Math.PI).toFixed(3) + '°';
+        }
+        
+        // Mouse interaction
+        canvas.addEventListener('click', function(event) {
+            let rect = canvas.getBoundingClientRect();
+            let mouseX = event.clientX - rect.left;
+            let mouseY = event.clientY - rect.top;
+            
+            // Calculate angle from click position
+            let dx = mouseX - pendulum.x;
+            let dy = mouseY - pendulum.y;
+            let clickAngle = Math.atan2(dx, dy);
+            
+            // Set pendulum to clicked position
+            pendulum.angle = clickAngle;
+            pendulum.angularVelocity = 0;
+            pendulum.trail = [];
+            startTime = Date.now();
+            
+            if (!isRunning) {
+                toggleSimulation();
+            }
+            
+            drawPendulum();
+        });
+        
+        // Input change handlers
+        document.getElementById('gravity').addEventListener('change', function() {
+            if (this.value < 0.1) this.value = 0.1;
+            if (this.value > 50) this.value = 50;
+        });
+        
+        document.getElementById('rotation').addEventListener('change', function() {
+            if (this.value < 0) this.value = 0;
+            if (this.value > 360) this.value = 360;
+        });
+        
+        document.getElementById('length').addEventListener('change', function() {
+            if (this.value < 0.1) this.value = 0.1;
+            if (this.value > 10) this.value = 10;
+            let length = parseFloat(this.value);
+            pendulum.length = length * 100; // Convert to pixels
+        });
+        
+        document.getElementById('latitude').addEventListener('change', function() {
+            if (this.value < -90) this.value = -90;
+            if (this.value > 90) this.value = 90;
+        });
+        
+        // Initialize on load
+        window.addEventListener('load', function() {
+            initializeSimulation();
+        });
+    </script>
+</body>
+</html>

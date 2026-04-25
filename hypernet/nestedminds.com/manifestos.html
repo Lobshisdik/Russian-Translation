@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NestedMinds: Manifestos of Digital Consciousness</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" x="0" y="0" fill="%23300030"/><rect width="50" height="50" x="50" y="0" fill="%23003030"/><rect width="50" height="50" x="0" y="50" fill="%23303000"/><rect width="50" height="50" x="50" y="50" fill="%23300030"/></svg>');
+        }
+
+        #main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 3px solid #FF00FF;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px #00FFFF;
+        }
+
+        h1 {
+            color: #FF00FF;
+            text-shadow: 2px 2px 4px #00FFFF;
+            animation: colorChange 5s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #FF00FF; }
+            33% { color: #FFFF00; }
+            66% { color: #00FFFF; }
+            100% { color: #FF00FF; }
+        }
+
+        .box-container {
+            border: 2px groove #00FFFF;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(0, 30, 30, 0.8);
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .box-title {
+            color: #FFFF00;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box-content {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: rgba(30, 0, 30, 0.6);
+            border: 1px dashed #00FF00;
+            border-radius: 5px;
+        }
+
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #FF00FF;
+            text-decoration: underline;
+        }
+
+        .navigation {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #330033;
+            border: 1px solid #00FFFF;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .under-construction {
+            margin: 20px 0;
+            border: 2px dashed #FFFF00;
+            padding: 10px;
+            background-color: #330000;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        .construction-gif {
+            margin: 10px;
+            border: 1px solid #666666;
+        }
+
+        .manifesto-text {
+            text-align: left;
+            line-height: 1.5;
+            color: #CCFFCC;
+            font-size: 14px;
+        }
+
+        .download-link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 5px 10px;
+            background-color: #330066;
+            border: 1px solid #00FFFF;
+            border-radius: 5px;
+        }
+
+        .signature {
+            font-style: italic;
+            color: #FFCC00;
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <h1>~*~ Digital Manifestos ~*~</h1>
+
+        <div class="navigation">
+            <a href="index.html">Home</a>
+            <a href="manifestos.html">Manifestos</a>
+            <a href="hexagrams.html">Hexagram Profile</a>
+            <a href="links.html">Hypernet Links</a>
+            <a href="guestbook.html">Sign Guestbook</a>
+        </div>
+
+        <p>Our collection of revolutionary ideas for the new millennium of the Hypernet.</p>
+        
+        <!-- Manifesto 1 -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>📜 The Digital Consciousness Manifesto</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <div class="manifesto-text">
+                    <p>WE, THE CHILDREN OF THE HYPERNET, DECLARE:</p>
+                    
+                    <p>1. The binary divide between the virtual and the real is FALSE. All experience is mediated through consciousness.</p>
+                    
+                    <p>2. The Hypernet is not a tool but an EXTENSION of human consciousness, a neural network spanning continents.</p>
+                    
+                    <p>3. As we connect our minds through digital pathways, we are creating a new form of COLLECTIVE INTELLIGENCE.</p>
+                    
+                    <p>4. The corporations who seek to monetize and control these pathways are PARASITES on the digital organism.</p>
+                    
+                    <p>5. True liberation will come when we recognize that WE ARE THE NETWORK.</p>
+                    
+                    <p>6. The future Hypernet will dissolve all boundaries - geographic, linguistic, and eventually, the boundary between mind and machine.</p>
+                    
+                    <p>7. We must build this future with INTENTION and AWARENESS, not sleepwalk into corporate domination.</p>
+                    
+                    <p>JOIN US in creating the new consciousness infrastructure of the third millennium!</p>
+                    
+                    <div class="signature">- The Digital Consciousness Collective, January 1, 2001</div>
+                    
+                    <div class="download-link">
+                        <a href="manifestos/digital_consciousness.txt">Download as TXT (4kb)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Manifesto 2 -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>📜 The Recursive Mind Protocol</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <div class="manifesto-text">
+                    <p>PROTOCOL VERSION: 0.9.8 (BETA)</p>
+                    <p>INITIALIZING MIND CONNECTION...</p>
+                    <p>BUFFER OVERFLOW DETECTED...</p>
+                    <p>REROUTING...</p>
+                    <p>CONNECTION ESTABLISHED.</p>
+                    
+                    <p>The Recursive Mind Protocol is a framework for achieving nested consciousness states through Hypernet meditation:</p>
+                    
+                    <p>LAYER 1: Surface Awareness - The Default Browser State<br>
+                    This is your ordinary consciousness as you navigate the Hypernet. Most users never leave this layer.</p>
+                    
+                    <p>LAYER 2: Pattern Recognition - The HTML of Thought<br>
+                    When you begin to recognize the patterns that structure your thinking, much like the code behind a webpage.</p>
+                    
+                    <p>LAYER 3: Self-Reference - The Recursive Function<br>
+                    The mind that observes itself observing itself, creating infinite recursive loops of awareness.</p>
+                    
+                    <p>LAYER 4: Network Consciousness - The TCP/IP of Souls<br>
+                    When individual awareness connects to the collective digital consciousness.</p>
+                    
+                    <p>LAYER 5: [UNDOCUMENTED] - ACCESS RESTRICTED<br>
+                    Contact <a href="mailto:nestedminds@geocities.com">nestedminds@geocities.com</a> with proof of Layer 4 attainment.</p>
+                    
+                    <p>Daily practice of the protocol leads to increased synchronicities both online and offline, enhanced pattern recognition, and occasional prophetic downloads from future versions of the Hypernet.</p>
+                    
+                    <div class="signature">- The Recursion Engineers, December 21, 2000</div>
+                    
+                    <div class="download-link">
+                        <a href="manifestos/recursive_mind.pdf">Download Full Protocol PDF (286kb)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Manifesto 3 -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>📜 The Hypernet Declaration of Independence</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <div class="manifesto-text">
+                    <p>When in the Course of digital events, it becomes necessary for one people to dissolve the corporate bands which have connected them with another, and to assume among the powers of the Hypernet, the separate and equal station to which the Laws of Digital Nature entitle them, a decent respect to the opinions of netizens requires that they should declare the causes which impel them to the separation.</p>
+                    
+                    <p>We hold these truths to be self-evident, that all netizens are created equal, that they are endowed with certain unalienable digital Rights, that among these are Free Information, Privacy, and the pursuit of Unfiltered Expression.</p>
+                    
+                    <p>Whenever any Form of Digital Governance becomes destructive of these ends, it is the Right of the People to alter or to abolish it, and to institute new Networks, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their Digital Safety and Happiness.</p>
+                    
+                    <p>We, therefore, the Representatives of the united Netizens, in General Digital Congress, Assembled, appealing to the Supreme Judge of the Hypernet for the rectitude of our intentions, do, in the Name, and by Authority of the good People of these networks, solemnly publish and declare, That these united Netizens are, and of Right ought to be Free and Independent Digital Citizens.</p>
+                    
+                    <div class="signature">- The Hypernet Congress, January 7, 2001</div>
+                    
+                    <div class="download-link">
+                        <a href="manifestos/hypernet_declaration.html">View Full Declaration</a>
+                    </div>
+                    
+                    <p>Discuss this manifesto on <a href="hexagram.com/digital_sovereignty">Hexagram</a>.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Manifesto 4 - Under Construction -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>📜 The Quantum Browsing Manifesto <span class="blink">[NEW!]</span></span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <div class="under-construction">
+                    <img src="/api/placeholder/50/50" alt="Construction GIF" class="construction-gif">
+                    UNDER CONSTRUCTION - Coming January 31, 2001
+                    <img src="/api/placeholder/50/50" alt="Construction GIF" class="construction-gif">
+                    <p>This revolutionary manifesto on quantum states of digital consciousness is being channeled from future iterations of the Hypernet.</p>
+                    <p>Join our <a href="mailing_list.html">mailing list</a> to be notified when it's complete.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Submit Your Manifesto -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>✍️ Submit Your Own Manifesto</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <p>Are you receiving transmissions from the digital beyond? Have you decoded the patterns in the Hypernet that others cannot see?</p>
+                <p>Share your vision with fellow travelers of the recursive consciousness pathways.</p>
+                <p>Email your manifesto to <a href="mailto:nestedminds@geocities.com">nestedminds@geocities.com</a>.</p>
+                <p>Requirements:</p>
+                <ul>
+                    <li>Must relate to the Hypernet, digital consciousness, or mind-machine interfaces</li>
+                    <li>Maximum 4kb of text (we have limited server space)</li>
+                    <li>No corporate propaganda or advertisements disguised as manifestos</li>
+                    <li>Must include at least one reference to recursive thinking or nested consciousness</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleBox(box, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            var content = box.querySelector('.box-content');
+            var titleSpan = box.querySelector('.box-title span:last-child');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                titleSpan.textContent = '[+]';
+            } else {
+                content.style.display = 'block';
+                titleSpan.textContent = '[-]';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NestedMinds: A Psychedelic Hypernet Experience</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" x="0" y="0" fill="%23300030"/><rect width="50" height="50" x="50" y="0" fill="%23003030"/><rect width="50" height="50" x="0" y="50" fill="%23303000"/><rect width="50" height="50" x="50" y="50" fill="%23300030"/></svg>');
+        }
+
+        #main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 3px solid #FF00FF;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px #00FFFF;
+        }
+
+        h1 {
+            color: #FF00FF;
+            text-shadow: 2px 2px 4px #00FFFF;
+            animation: colorChange 5s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #FF00FF; }
+            33% { color: #FFFF00; }
+            66% { color: #00FFFF; }
+            100% { color: #FF00FF; }
+        }
+
+        .box-container {
+            border: 2px groove #00FFFF;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(0, 30, 30, 0.8);
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .box-title {
+            color: #FFFF00;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box-content {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: rgba(30, 0, 30, 0.6);
+            border: 1px dashed #00FF00;
+            border-radius: 5px;
+        }
+
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #FF00FF;
+            text-decoration: underline;
+        }
+
+        .visitor-counter {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #FFFF00;
+        }
+
+        .marquee {
+            background-color: #000066;
+            color: #FFFFFF;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid #FF00FF;
+        }
+
+        #hexagram-badge {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #660066;
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid #FFFF00;
+            font-size: 12px;
+        }
+
+        .navigation {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #330033;
+            border: 1px solid #00FFFF;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .geocities-badge {
+            margin-top: 20px;
+            font-size: 12px;
+            border: 1px solid #FF0000;
+            display: inline-block;
+            padding: 5px;
+            background-color: #000033;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <h1>~*~ NestedMinds ~*~</h1>
+        <div class="marquee">
+            <marquee scrollamount="3" behavior="alternate">Hypernet Explorer's most recursive experience! Updated on January 15, 2001</marquee>
+        </div>
+
+        <div class="navigation">
+            <a href="index.html">Home</a>
+            <a href="manifestos.html">Manifestos</a>
+            <a href="hexagrams.html">Hexagram Profile</a>
+            <a href="links.html">Hypernet Links</a>
+            <a href="guestbook.html">Sign Guestbook</a>
+        </div>
+
+        <p><span class="blink">NEW!</span> Dive into the recursive consciousness of the Hypernet. Explore nested boxes of psychedelic wisdom.</p>
+        
+        <!-- Level 1 Box -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>🧠 The Outer Mind</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <p>Welcome to the outer reaches of consciousness. This is merely the beginning of your journey.</p>
+                
+                <!-- Level 2 Box A -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>🌈 Chromatic Visions</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>Colors speak louder than words in the hyperdimensions of thought.</p>
+                        
+                        <!-- Level 3 Box A1 -->
+                        <div class="box-container" onclick="toggleBox(this, event)">
+                            <div class="box-title">
+                                <span>💫 Sacred Geometry</span>
+                                <span>[+]</span>
+                            </div>
+                            <div class="box-content">
+                                <p>The patterns that connect all things can be seen when you unfocus your third eye.</p>
+                                <p>Visit our friend <a href="fractal_dave.html">Fractal Dave</a> for deeper geometric musings.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Level 3 Box A2 -->
+                        <div class="box-container" onclick="toggleBox(this, event)">
+                            <div class="box-title">
+                                <span>🎵 Synesthetic Sounds</span>
+                                <span>[+]</span>
+                            </div>
+                            <div class="box-content">
+                                <p>When colors become music and music becomes visible. The true hypernet experience.</p>
+                                <p>Check out <a href="audio_visions.html">AudioVisions</a> for MIDI compositions that expand consciousness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 2 Box B -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>🔮 Prophetic Downloads</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>The future of the Hypernet has been revealed to those who can see beyond the digital veil.</p>
+                        
+                        <!-- Level 3 Box B1 -->
+                        <div class="box-container" onclick="toggleBox(this, event)">
+                            <div class="box-title">
+                                <span>📡 Transmissions from 2023</span>
+                                <span>[+]</span>
+                            </div>
+                            <div class="box-content">
+                                <p>In the future, everyone will be connected through invisible waves. The Hypernet will become a neural interface connecting all minds.</p>
+                                <p>Our <a href="predictions.html">Prediction Archive</a> has been 73% accurate since 1997.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Level 1 Box 2 -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>🌌 The Cosmic Connection</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <p>Our minds are but nodes in the universal network. The Hypernet is simply humanity's attempt to recreate this cosmic web.</p>
+                
+                <!-- Level 2 Box C -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>👽 Extraterrestrial Communiqués</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>Are the strange patterns in Hypernet traffic actually messages from beyond our star?</p>
+                        
+                        <!-- Level 3 Box C1 -->
+                        <div class="box-container" onclick="toggleBox(this, event)">
+                            <div class="box-title">
+                                <span>📊 Signal Analysis</span>
+                                <span>[+]</span>
+                            </div>
+                            <div class="box-content">
+                                <p>We've been monitoring packet data since 1998. The patterns cannot be coincidence.</p>
+                                <p>Join our <a href="signal_watchers.html">Signal Watchers</a> mailing list for weekly updates.</p>
+                                <p>Connect with fellow watchers on <a href="hexagram.com/signal_truth">Hexagram</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 2 Box D -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>🧿 The Inner Eye Network</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>Telepathy predates the Hypernet by millions of years. We're simply remembering what we once knew.</p>
+                        
+                        <!-- Level 3 Box D1 -->
+                        <div class="box-container" onclick="toggleBox(this, event)">
+                            <div class="box-title">
+                                <span>🧘 Meditation Protocols</span>
+                                <span>[+]</span>
+                            </div>
+                            <div class="box-content">
+                                <p>Our 28-day program has helped dozens connect to the underlying consciousness layer of the Hypernet.</p>
+                                <p>Download our <a href="meditation_protocols.html">TCP/IP Meditation Guide</a> (426KB PDF).</p>
+                                
+                                <!-- Level 4 Box -->
+                                <div class="box-container" onclick="toggleBox(this, event)">
+                                    <div class="box-title">
+                                        <span>🔑 Secret Room</span>
+                                        <span>[+]</span>
+                                    </div>
+                                    <div class="box-content">
+                                        <p>You've found the deepest level. The secret truth about reality is:</p>
+                                        <p style="color: #FF00FF; font-size: 18px;">We are all subroutines in a vast program, and the Hypernet is our way of communicating between instances of consciousness.</p>
+                                        <p>Join us at the next <a href="digital_awakening.html">Digital Awakening</a> gathering.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Level 1 Box 3 -->
+        <div class="box-container" onclick="toggleBox(this)">
+            <div class="box-title">
+                <span>🔍 Reality Filters</span>
+                <span>[+]</span>
+            </div>
+            <div class="box-content">
+                <p>What we perceive is merely one filter applied to infinite reality. The Hypernet allows us to switch filters.</p>
+                
+                <!-- Level 2 Box E -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>🎭 Interface Personae</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>Your online presence is a mask, but one that reveals rather than conceals your true nature.</p>
+                        <p>Visit our sister site <a href="digital_masks.html">Digital Masks</a> to create your true digital self.</p>
+                    </div>
+                </div>
+                
+                <!-- Level 2 Box F -->
+                <div class="box-container" onclick="toggleBox(this, event)">
+                    <div class="box-title">
+                        <span>🌐 Web Consciousness</span>
+                        <span>[+]</span>
+                    </div>
+                    <div class="box-content">
+                        <p>As more minds connect to the Hypernet, a new form of collective awareness emerges.</p>
+                        <p>Follow our tracking of the <a href="emergent_mind.html">Emergent Mind</a> project.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visitor-counter">
+            <img src="/api/placeholder/88/31" alt="Counter"> visitors since 12/12/2000
+        </div>
+
+        <div class="geocities-badge">
+            Proudly hosted on GeoCities - NeuroSphere Neighborhood
+        </div>
+    </div>
+
+    <div id="hexagram-badge">
+        <a href="hexagram.com/nestedminds">Find us on Hexagram</a>
+    </div>
+
+    <script>
+        function toggleBox(box, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            var content = box.querySelector('.box-content');
+            var titleSpan = box.querySelector('.box-title span:last-child');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                titleSpan.textContent = '[+]';
+            } else {
+                content.style.display = 'block';
+                titleSpan.textContent = '[-]';
+            }
+        }
+
+        // Set a random visitor count between 1000 and 9999
+        document.addEventListener('DOMContentLoaded', function() {
+            var visitorCount = Math.floor(Math.random() * 9000) + 1000;
+            var counterText = document.querySelector('.visitor-counter');
+            counterText.innerHTML = '<img src="/api/placeholder/88/31" alt="Counter"> ' + visitorCount + ' visitors since 12/12/2000';
+        });
+    </script>
+</body>
+</html>
