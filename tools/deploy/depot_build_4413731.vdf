@@ -1,0 +1,21 @@
+"DepotBuildConfig"
+{
+	// Depot ID from Steamworks
+	"DepotID" "4413731"
+
+	// Content root path (absolute path to build directory)
+	"ContentRoot" "C:\\out\\hypernet-explorer"
+
+	// Files to include (recursively from ContentRoot)
+	"FileMapping"
+	{
+		// Map all files from content root
+		"LocalPath" "*"
+		"DepotPath" "."
+		"recursive" "1"
+	}
+
+	// Files and directories to exclude (if any)
+	"FileExclusion" "*.log"
+	"FileExclusion" "save" // Exclude user save files from build
+}

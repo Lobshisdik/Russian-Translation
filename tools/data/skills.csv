@@ -1,0 +1,1001 @@
+id,name,description,damage_formula,damage_element_id,category
+1,Attack,,a.atk * 4 - b.def * 2,-1,Basic
+2,Guard,,0,0,Basic
+3,Mimic,Uses a random skill from the enemy or party,0,0,Basic
+4,PSI Blast,Performs a series of attacks on an enemy.,a.atk * 4 - b.def * 2,-1,PsychicAbilities
+5,BurnSOUL,Convoke a entity by burning SOUL shares,0,0,Convokation
+6,Train Skill,,0,0,MartialArts
+7,Astral Projection,,0,0,MartialArts
+8,SummonSOUL,Gain one temporary SOUL share,0,0,Convokation
+9,Pathfind,Show the name of were you are.,0,0,Divination
+10,Improvise,Uses a random skill or magic.,0,0,Performance
+11,Convoke,,0,0,Convokation
+12,Dual Attack,Performs a series of attacks on an enemy.,a.atk * 4 - b.def * 2,-1,MartialArts
+13,Double Attack,Performs a double attack on a random enemy.,a.atk * 4 - b.def * 2,-1,MartialArts
+14,Triple Attack,Performs a triple attack on a random enemy.,a.atk * 4 - b.def * 2,-1,MartialArts
+15,Escape,The user flees from battle.,0,0,Basic
+16,Wait and See,Waits to see what happens.,0,0,Basic
+17,Blood Suck,Absorbs HP from an enemy.,a.atk * 2 - b.def,0,MartialArts
+18,Meditate,Restores the user’s HP.,b.mhp / 4,0,MartialArts
+19,Tranquilizer,Stabs an enemy with paralyzing needles.,a.atk,0,MartialArts
+20,Bodyslam,Inflicts damage and causes an enemy to lose balance.,a.atk * 4 - b.def * 2,0,Wrestling
+21,Shock,Inflicts Thunder-type damage and Paralysis state.,a.atk * 4 - b.def * 2,4,Natural
+22,Slime,Covers an enemy in slime and lowers their DEX.,0,0,MartialArts
+23,Venom,Sprays an enemy with venom and inflicts poison state.,0,0,MartialArts
+24,Shout,Rouses the user’s fighting spirit and fortifies their abilities.,0,0,MartialArts
+25,Bizarre Dance,Absorbs MP from an enemy.,5 + a.mat * 0.2,0,Performance
+26,Petrify,Glares at an enemy and paralyzes them.,0,0,PsychicAbilities
+27,Eye Gouge,"A quick jab aimed at an enemy's eyes,  potentially causing blindness.",a.atk * 0.3,0,Roguery
+28,Sandstorm,Blinds all enemies.,a.atk,0,MartialArts
+29,Flash,Blinds all enemies.,a.atk,0,MartialArts
+30,Toxic Fog,Poisons all enemies.,a.atk,0,Natural
+31,Lullaby,Puts all enemies to sleep.,a.atk,0,Performance
+32,Alluring Melody,Charms all enemies.,a.atk,0,Performance
+33,Song of Silence,Seals all enemies’ magic.,a.atk,0,MartialArts
+34,Sonic Wave,Confuses all enemies.,0,0,Natural
+35,Stone Throw,Inflicts Earth-type damage on all enemies.,30 + a.atk,6,MartialArts
+36,Dust Devil,Inflicts Wind-type damage on all enemies.,50 + a.atk  * 2,7,Natural
+37,Fire Breath,Inflicts Fire-type damage on all enemies.,30 + a.atk  * 2,2,Natural
+38,Ice Breath,Inflicts Ice-type damage on all enemies.,30 + a.atk * 2,3,Natural
+39,Earthquake,Stomps the ground and inflict Petro-type damage to all enemies.,100 + a.atk,6,Geomancy
+40,Tsunami,Inflicts Water-type damage on all enemies.,100 + a.atk,5,MartialArts
+41,Scratch,Inflicts damage on an enemy.,a.atk * 4 - b.def * 2,-1,MartialArts
+42,Rapid Fist,A rapid punching technique that strikes the enemy multiple times.,a.atk * 4 - b.def * 2,-1,MartialArts
+43,Suplex,A powerful overhead throw technique that slams the enemy to the ground.,a.atk * 5 - b.def * 2,-1,MartialArts
+44,Pressure Point,"A precise strike targeting the enemy's pressure points, may cause paralysis.",a.atk * 3 - b.def * 1.5,-1,MartialArts
+45,Submission Hold,A grappling technique that holds the enemy in place and gradually drains HP.,a.atk * 2 - b.def * 1,0,MartialArts
+46,Tornado Kick,A devastating spinning kick that targets all enemies.,a.atk * 6 - b.def * 3,0,MartialArts
+47,Defensive Stance,A defensive stance that increases PSI and counter rate for 3 turns.,0,0,MartialArts
+48,Zen Meditation,A meditation technique that restores the user's HP and clears negative status effects.,b.mhp / 6,0,MartialArts
+49,Piledriver,"Drops the enemyon their head, may cause instant KO.",a.atk * 7 - b.def * 3,-1,MartialArts
+50,Hurricane Kicks,A rapid series of kicks that hits all enemies multiple times.,a.atk * 3 - b.def * 2,0,MartialArts
+51,-----MartialArtsTechniques,,0,0,
+52,Dragon Fist,The ultimate martial arts technique that unleashes devastating damage the enemy.,a.atk * 8 - b.def * 4,-1,MartialArts
+53,Drunken Fist,A confusing martial dance that leaves enemies disoriented.,0,0,MartialArts
+54,Chi Focus,Focuses inner energy to dramatically increase Attack and Critical Rate for 3 turns.,0,0,MartialArts
+55,German Suplex Combo,A wrestling move that slams the enemy into the ground multiple times.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+56,Thunder Palm,A lightning-fast palm strike that may paralyze the enemy.,a.atk * 4 - b.def * 2,4,MartialArts
+57,Rising Dragon Kick,A powerful upward kick that launches enemies into the air.,a.atk * 4 - b.def * 2,7,MartialArts
+58,Figure-Four Leg Lock,A wrestling move that catches the enemy in a painful leg lock.,a.atk * 2.5 - b.def * 1,-1,MartialArts
+59,Chair Shot,A wrestling move that hits the enemy with a chair. Ignores some COS.,a.atk * 2 - b.def * 1,-1,MartialArts
+60,Water Flow Stance,A martial arts technique that increases PSI dramatically for 3 turns.,0,0,MartialArts
+61,One-Inch Punch,A lethal martial arts technique that focuses all energy into a single devastating strike.,a.atk * 6 - b.def * 3,-1,MartialArts
+62,Counter Stance,"A martial arts counterstrike that activates when attacked, with increased critical chance.",a.atk * 4 - b.def * 2,-1,MartialArts
+63,Guard Breaker,A grappling technique that breaks the enemy's guard and reduces their COS.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+64,Combination Strike,A powerful combination of punches and kicks that hits multiple times.,a.atk * 2.5 - b.def * 1.5,-1,MartialArts
+65,Wrestling Finisher,A devastating wrestling finisher move that can instantly KO a weakened opponent.,a.atk * 7 - b.def * 3.5,-1,Wrestling
+66,Elbow Fury,A rapid series of elbow strikes that can break through COSs.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+67,Flying Knee,A powerful jumping knee strike that can stun the enemy.,a.atk * 4 - b.def * 2,-1,MartialArts
+68,Vital Point Strike,"A powerful martial arts technique that targets vital points, ignoring some COS.",a.atk * 5 - b.def * 2.5,-1,MartialArts
+69,Lariat,A powerful clothesline attack that can hit multiple enemies.,a.atk * 2 - b.def * 1,-1,MartialArts
+70,Flame Fist,A martial arts technique that ignites fists with inner energy for a fiery attack.,a.atk * 4 - b.def * 2,2,MartialArts
+71,Frost Palm,A martial arts technique that channels cold energy for an icy attack.,a.atk * 4 - b.def * 2,3,MartialArts
+72,Sleeping Fist,A hypnotic martial arts technique that may put enemies to sleep.,0,0,MartialArts
+73,Powerbomb,A wrestling move that throws the enemy into the air and catches them with devastating impact.,a.atk * 3 - b.def * 1.5,-1,Wrestling
+74,DDT,A wrestling move that slams the enemy's head into the ground.,a.atk * 2.5 - b.def * 1.5,-1,Wrestling
+75,Armbar,"A wrestling move that targets the enemy's arm, potentially lowering their attack.",a.atk * 3 - b.def * 1.5,-1,Wrestling
+76,Reversal Stance ,Adopt a specialized posture that turns enemy strikes against them.,0,0,MartialArts
+77,Top Rope Splash,A wrestling move that jumps from the ropes to hit all enemies.,a.atk * 2 - b.def * 1,7,Wrestling
+78,Chi Healing,A martial arts technique that heals wounds through rapid chi manipulation.,b.mhp / 8,0,MartialArts
+79,Power Stance,A martial arts technique that dramatically increases Attack for 3 turns.,0,0,MartialArts
+80,Crippling Strike,A martial arts technique that dramatically reduces an enemy's DEX for 3 turns.,0,0,MartialArts
+81,Spirit Cannon,A devastating martial arts ultimate technique that draws from inner power.,a.atk * 8 - b.def * 4,-1,MartialArts
+82,Expose Weakness,Reveals hidden truths and enemy weaknesses.,0,0,Journalism
+83,Scandalous Headline,Uses a powerful report to confuse and demoralize all enemies.,0,0,Journalism
+84,HealAlly,Restores an ally’s HP.,500 + a.mat,0,HolyMagic
+85,BigCure,Restores an ally’s HP.,1000 + a.mat,0,Arcanism
+86,Regenega,Restores an ally’s HP.,2000 + a.mat,0,Arcanism
+87,LifeShower,Restores all allies’ HP.,300 + a.mat,0,Arcanism
+88,RestoreHumors,Restores all allies’ HP.,700 + a.mat,0,Arcanism
+89,HealParty,Restores all allies’ HP.,1200 + a.mat,0,HolyMagic
+90,Detoxify,"Cures an ally’s Poison, Paralysis, or Sleep state.",200 + a.mat,0,StatusMagic
+91,Normalize,Cures an ally’s status ailments other than Dead.,200 + a.mat,0,Arcanism
+92,NormalizerAll,Cures all allies’ status ailments other than Dead.,200 + a.mat,0,Arcanism
+93,Resurrect,Raises an ally from the dead.,b.mhp / 10,0,Arcanism
+94,Revivify,Raises an ally from the dead and greatly restores their HP.,b.mhp / 2,0,Arcanism
+95,Poison,Poisons all enemies.,a.atk,0,StatusMagic
+96,Blind,Blinds all enemies.,a.atk,0,StatusMagic
+97,Confuse,Confuses all enemies.,0,0,StatusMagic
+98,Silence,Seals all enemies’ magic.,a.atk,0,StatusMagic
+99,Sleep,Puts all enemies to sleep.,a.atk,0,StatusMagic
+100,Paralyze,Paralyzes all enemies.,a.atk,0,StatusMagic
+101,WeaponBless,Increases an ally’s STR. Usable up to 2 times in a row.,0,0,EnhancementMagic
+102,WeaponCurse,Decreases all enemies’ STR. Usable up to 2 times in a row.,0,0,UnholyMagic
+103,ArmorBless,Increases an ally’s COS. Usable up to 2 times in a row.,0,0,EnhancementMagic
+104,ArmorCurse,Decreases all enemies’ COS. Usable up to 2 times in a row.,0,0,UnholyMagic
+105,SpiritBless,Increases an ally’s INT. Usable up to 2 times in a row.,0,0,EnhancementMagic
+106,SpiritCurse,Decreases all enemies’ INT. Usable up to 2 times in a row.,0,0,UnholyMagic
+107,DivineBless,Increases an ally’s SAG. Usable up to 2 times in a row.,0,0,HolyMagic
+108,DivineCurse,Decreases all enemies’ SAG. Usable up to 2 times in a row.,0,0,HolyMagic
+109,QuickenMovement,Increases an ally’s DEX. Usable up to 2 times in a row.,0,0,EnhancementMagic
+110,SlowMovement,Decreases all enemies’ DEX. Usable up to 2 times in a row.,0,0,Arcanism
+111,LifeDrain,Absorbs HP from an enemy.,200 + a.mat * 4 - b.mdf * 2,0,Arcanism
+112,ManaDrain,Absorbs MP from an enemy.,10 + a.mat - b.mdf * 0.5,0,Arcanism
+113,GenericFireball,Inflicts Fire-type damage on an enemy.,100 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+114,InfernoIgnition,Inflicts Fire-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+115,Pyroxis,Inflicts Fire-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+116,,,0,0,
+117,FlameJet,Inflicts Fire-type damage on all enemies.,100 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+118,MagmaMorph,Inflicts Fire-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+119,Daybreaker,Inflicts Fire-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,2,Pyromancy
+120,,,0,0,
+121,IceDart,Inflicts Ice-type damage on an enemy.,100 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+122,ChillChomp,Inflicts Ice-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+123,GlacialGrinder,Inflicts Ice-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+124,,,0,0,
+125,BlizzardI,Inflicts Ice-type damage on all enemies.,100 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+126,LiquidFreeze,Inflicts Ice-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+127,GlacialPrison,Inflicts Ice-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,3,Cryomancy
+128,,,0,0,
+129,StaticSnap,Inflicts Thunder-type damage on an enemy.,100 + a.mat * 2 - b.mdf * 2,4,Electromancy
+130,VoltVandal,Inflicts Thunder-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,4,Electromancy
+131,ThunderTremor,Inflicts Thunder-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,4,Electromancy
+132,,,0,0,
+133,ThunderClap,Inflicts Thunder-type damage on all enemies.,100 + a.mat * 2 - b.mdf * 2,4,Electromancy
+134,ElectroDoom,Inflicts Thunder-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,4,Electromancy
+135,GlobularOrb,Inflicts Thunder-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,4,Electromancy
+136,,,0,0,
+137,Bubble,Inflicts Water-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,5,Hydromancy
+138,Torrent,Inflicts Water-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,5,Hydromancy
+139,,,0,0,
+140,DripDrop,Inflicts Water-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,5,Hydromancy
+141,FloorAqua,Inflicts Water-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,5,Hydromancy
+142,,,0,0,
+143,BoulderBonk,Inflicts Earth-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,6,Geomancy
+144,StoneFaced,Inflicts Earth-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,6,Geomancy
+145,,,0,0,
+146,WideTremor,Inflicts Earth-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,6,Geomancy
+147,VarleniaFault,Inflicts Earth-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,6,Geomancy
+148,,,0,0,
+149,TwirlySwirly,Inflicts Wind-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,7,Aeromancy
+150,GustGusher,Inflicts Wind-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,7,Aeromancy
+151,,,0,0,
+152,Tornado,Inflicts Wind-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,7,Aeromancy
+153,Soulnado,Inflicts Wind-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,7,Aeromancy
+154,,,0,0,
+155,Sanctify,Inflicts Light-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,8,Chromomancy
+156,LuminousCascade,Inflicts Light-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,8,Chromomancy
+157,,,0,0,
+158,Doom,Inflicts Light-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,8,Chromomancy
+159,Demiurgis,Inflicts Light-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,8,Chromomancy
+160,,,0,0,
+161,VoidDart,Inflicts Darkness-type damage on an enemy.,300 + a.mat * 2 - b.mdf * 2,9,VoidMagic
+162,VoidEmbrace,Inflicts Darkness-type damage on an enemy.,500 + a.mat * 2 - b.mdf * 2,9,VoidMagic
+163,,,0,0,
+164,BlackestHole,Inflicts Darkness-type damage on all enemies.,300 + a.mat * 2 - b.mdf * 2,9,VoidMagic
+165,emTomb,Inflicts Darkness-type damage on all enemies.,500 + a.mat * 2 - b.mdf * 2,9,VoidMagic
+166,,,0,0,
+167,ArcaneDart,Inflicts damage on an enemy regardless of COS.,300 + a.mat * 2,0,Arcanism
+168,ArcanePiercer,Inflicts damage on an enemy regardless of COS.,500 + a.mat * 2,0,Arcanism
+169,,,0,0,
+170,Fusion,Inflicts damage on all enemies regardless of COS.,300 + a.mat * 2,0,Arcanism
+171,NuclearBlast,Inflicts damage on all enemies regardless of COS.,500 + a.mat * 2,0,Arcanism
+172,Strong Attack,Performs a powerful attack on an enemy.,a.atk * 5 - b.def * 2,-1,MartialArts
+173,Slash,Attacks all enemies.,30 + a.atk,-1,Swordsmanship
+174,Bi-strike,Deliver two perfectly synchronized  blows that target an enemy's weak points.,a.atk * 4 - b.def * 2,-1,MartialArts
+175,Willpower,Rouses the user’s fighting spirit and increases Attack. Usable up to 2 times in a row.,0,0,MartialArts
+176,First Aid,Restores an ally’s HP.,300 + a.mat,0,MartialArts
+177,Maiden’s Stance,Performs a super powerful attack on an enemy.,a.atk * 8 - b.def * 3,-1,MartialArts
+178,Spin Crash,Performs a powerful attack on all enemies.,a.atk * 5 - b.def * 2,-1,MartialArts
+179,Body Slam,A wrestling move that lifts and slams the enemy onto their back.,a.atk * 3 - b.def * 1.5,-1,Wrestling
+180,Dropkick,A wrestling move that dropkicks multiple enemies at once.,a.atk * 2 - b.def * 1,-1,Wrestling
+181,Karate Chop,A martial arts move that targets the enemy's neck with a powerful chop.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+182,Leg Sweep,A rapid series of low kicks targeting the enemy's legs to reduce mobility.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+183,Lightning Strike,"A martial arts technique that strikes with lightning speed, hard to evade.",a.atk * 4 - b.def * 2,-1,MartialArts
+184,Roundhouse Kick,A powerful martial arts kick that deals massive damage to a single target.,a.atk * 6 - b.def * 3,-1,MartialArts
+185,-----Priest&SorcererSkills,,0,0,
+186,MagicBarrier,Increases all allies’ COS and SAG. Usable up to 2 times in a row.,0,0,EnhancementMagic
+187,ArcaneQuill,Greatly increases the user’s INT for 5 turns.,0,0,Arcanism
+188,Yell,Rouses all allies’ fighting spirit and increases Attack. Usable up to 2 times in a row.,0,0,EnhancementMagic
+189,Meteor,Inflicts damage on all enemies regardless of COS.,a.mat * 10,0,CosmicMagic
+190,FireSnap,Bestows Fire-type for 5 turns.,0,0,Pyromancy
+191,Icify,Bestows Ice-type for 5 turns.,0,0,Cryomancy
+192,ThunderWeapon,Bestows Thunder-type for 5 turns.,0,0,Electromancy
+193,MagicMirror,Reflects spells aimed at the user for 5 turns.,0,0,AntiMagic
+194,BreakingMirror,Reflects spells aimed at the party for 5 turns.,0,0,AntiMagic
+195,-----Knight Skills,,0,0,
+196,Protect,Automatically protects allies with low HP for 1 turn.,0,0,Swordsmanship
+197,Falcon Thrust,Performs an attack on an  enemy faster than anyone can see.,a.atk * 4 - b.def * 2,-1,Swordsmanship
+198,Double Thrust,Performs an attack on an enemy twice.,a.atk * 4 - b.def * 2,-1,Swordsmanship
+199,Armor Piercer,Inflicts damage on all enemies regardless of COS.,a.atk * 4,-1,Swordsmanship
+200,Battle Cry,Rouses all allies’ fighting spirit and increases Attack.,0,0,Swordsmanship
+201,Windmill,Attacks all enemies.,30 + a.atk,7,Swordsmanship
+202,Clear Mind,Slightly increases the user’s TP.,0,0,Swordsmanship
+203,Wild Thrust,Randomly performs 4 attacks on 4 enemies.,(a.atk * 4 - b.def * 2)*0.9,-1,Swordsmanship
+204,,,0,0,
+205,-----Bandit Skills,,0,0,
+206,Eye Poke,Blinds an enemy.,a.atk,0,Roguery
+207,Warm-up,Increases the user’s DEX.,0,0,Roguery
+208,Flare,Blinds all enemies.,a.atk,0,Roguery
+209,Watchful Eye,Increases items and money gained from battle for a while.,0,0,Roguery
+210,Wind Call,Inflicts Wind-type damage on all enemies.,50 + a.atk * 5 - b.def * 2,7,Roguery
+211,Hide,Makes the user harder to target.,0,0,Roguery
+212,Invisibility,Makes the user invisible.,0,0,Arcanism
+213,Golden Pie,Bakes a golden pie that restores HP  to one ally and smells amazing.,b.mhp * 0.15,0,Cooking
+214,Quick Snack,Prepares an energizing snack that  boosts DEX for 3 turns.,0,0,Cooking
+215,Spoiled Dish,"Cooks a cursed dish and tosses it  at an enemy, reducing their COS.",0,0,Cooking
+216,Sweep,Inflicts damage and causes all enemies to lose balance.,a.atk * 4 - b.def * 2,0,MartialArts
+217,Qigong,Cures the user from being weakened.,200 + a.mat,0,MartialArts
+218,Circular kick,Inflicts huge damage on all enemies.,a.atk * 5 - b.def * 2,1,MartialArts
+219,Tiger Dance,Inflicts damage on an enemy regardless of COS.,a.atk * 10,1,MartialArts
+220,Hearty Stew,Cook a hearty stew that restores a small amount of HP to all allies.,b.mhp * 0.1,0,Cooking
+221,Flaming Oil,Throws flaming oil at all enemies. Inflicts fire-type damage.,a.mat * 2,2,Cooking
+222,Sweet Relief,Prepares a luxurious dessert that removes one negative state from all allies.,0,0,Cooking
+223,Boiling Broth,"Splashes scalding soup at one enemy, dealing water-type damage.",a.atk * 2 - b.def,5,Cooking
+224,Focus Tea,Prepares a focus tea that boosts INT for 3 turns.,0,0,Cooking
+225,Chop & Heal,Chops ingredients at high speed  to recover some HP.,b.hp * 0.2,0,Cooking
+226,Point Shot,Decreases an enemy’s Attack and COS.,a.atk * 3 - b.def * 2,-1,Hunting
+227,Stun Shot,Shoots at the footing of all enemies and causes them to lose balance.,a.atk * 2 - b.def,1,Hunting
+228,Team Shot,Inflicts damage on an enemy 5 times.,a.atk * 3 - b.def * 2,1,Hunting
+229,Rain Shot,Inflicts damage on all enemies 2 times.,a.atk * 4 - b.def * 2,1,Hunting
+230,Lightning Jab,A devastating boxing jab that hits with lightning speed and precision.,a.atk * 3.5 - b.def * 1.8,-1,Boxing
+231,Knockout Uppercut,A powerful boxing uppercut that can send enemies flying.,a.atk * 6 - b.def * 3,-1,Boxing
+232,Punch Flurry,A rapid series of boxing punches that overwhelm the enemy's COSs.,a.atk * 2.5 - b.def * 1.2,-1,Boxing
+233,Haymaker,A powerful boxing haymaker with knockout potential.,a.atk * 7 - b.def * 3.5,-1,Boxing
+234,Peek-a-boo Stance,Takes a defensive boxing stance that increases PSI and counter capabilities.,0,0,Boxing
+235,Body Blows,"Targets the opponent's body with precision punches, lowering their stamina.",a.atk * 3 - b.def * 1.5,0,Boxing
+236,Precision Strike,A boxing technique that targets the opponent's weak spots for maximum damage.,a.atk * 5 - b.def * 2.5,-1,Boxing
+237,Read Opponent,"Studies the opponent's patterns, increasing accuracy and critical hit rate.",0,0,MartialArts
+238,Taekwondo Kick Combo,A Taekwondo technique that delivers multiple high-speed kicks.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+239,Spinning Hook Kick,A spinning Taekwondo kick that hits all enemies.,a.atk * 4 - b.def * 2,-1,MartialArts
+240,Axe Kick,A powerful Taekwondo axe kick that can break through COSs.,a.atk * 6 - b.def * 3,-1,MartialArts
+241,Capoeira Roda,A Brazilian Capoeira technique that combines dance-like movements with a powerful kick.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+242,Armada,A Brazilian Capoeira spinning kick that hits all enemies.,a.atk * 4.5 - b.def * 2.2,-1,MartialArts
+243,Ginga,A Capoeira evasive movement that increases DEX and PSI.,0,0,MartialArts
+244,Sok Trong,A traditional Muay Thai forward elbow strike that deals heavy damage.,a.atk * 3.5 - b.def * 1.7,-1,MartialArts
+245,Kao Loi,A powerful Muay Thai knee strike that can stun opponents.,a.atk * 4 - b.def * 2,-1,MartialArts
+246,Tae Chiang,A devastating Muay Thai round kick targeting the legs to reduce mobility.,a.atk * 3.8 - b.def * 1.9,-1,MartialArts
+247,Plum Khao,A Muay Thai clinch with multiple knee strikes that deals massive damage.,a.atk * 5.5 - b.def * 2.7,-1,MartialArts
+248,Tsuki,A Japanese Karate straight punch delivered with perfect form and timing.,a.atk * 3 - b.def * 1.5,-1,Boxing
+249,Mae Geri,A powerful Karate front kick aimed at vital points.,a.atk * 4.2 - b.def * 2.1,-1,MartialArts
+250,Seiken,A devastating Karate punch that can penetrate COSs.,a.atk * 6 - b.def * 3,-1,Boxing
+251,Chain Punches,A Chinese Wing Chun technique that delivers rapid chain punches.,a.atk * 3.5 - b.def * 1.7,-1,Boxing
+252,Siu Nim Tau,A Wing Chun defensive stance that increases counter attack rate.,0,0,MartialArts
+253,Chi Sao,A Wing Chun technique that redirects an opponent's energy back at them.,a.atk * 4 - b.def * 2,-1,MartialArts
+254,Sambo Joint Lock,A Russian Sambo submission technique that can immobilize opponents.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+255,Sambo Throw,A powerful Sambo throwing technique that slams the opponent to the ground.,a.atk * 4.5 - b.def * 2.2,-1,MartialArts
+256,Krav Maga Strike,A devastating Krav Maga strike targeting vital points for maximum damage.,a.atk * 7 - b.def * 3.5,-1,MartialArts
+257,Krav Maga Counter,A Krav Maga defensive counterattack that turns an enemy's STR against them.,a.atk * 3.5 - b.def * 1.7,-1,MartialArts
+258,Krav Maga Burst,A rapid series of Krav Maga strikes targeting multiple enemies.,a.atk * 4 - b.def * 2,-1,MartialArts
+259,Champion's Combination,The ultimate boxing combination that can potentially knock out any opponent.,a.atk * 8 - b.def * 4,-1,Boxing
+260,Ippon Seoi Nage,A powerful Judo throw that uses the opponent's weight against them.,a.atk * 4.2 - b.def * 2.1,-1,MartialArts
+261,Osoto Gari,A sweeping Judo technique that drops opponents to the ground.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+262,Uki Goshi,A hip throw Judo technique that flips the opponent over.,a.atk * 4.5 - b.def * 2.2,-1,MartialArts
+263,Baguazhang Palm,A Chinese Kung Fu technique using powerful palm strikes.,a.atk * 3.8 - b.def * 1.9,-1,MartialArts
+264,Bagua Circle Walking,A circular Kung Fu technique that hits multiple times in rapid succession.,a.atk * 2.8 - b.def * 1.4,-1,MartialArts
+265,Five Animals Fist,A powerful Kung Fu technique that can hit all enemies.,a.atk * 4 - b.def * 2,-1,MartialArts
+266,Tai Chi Form,A Tai Chi stance that increases COS and enables counterattacks.,0,0,MartialArts
+267,Tai Chi Push Hands,A Tai Chi technique that redirects an opponent's energy back at them.,a.atk * 3.5 - b.def * 1.7,-1,MartialArts
+268,Tai Chi Healing,A Tai Chi healing technique that restores HP through chi manipulation.,b.mhp / 10,0,MartialArts
+269,Eskrima Strike,A traditional Filipino martial arts stick strike.,a.atk * 3.2 - b.def * 1.6,-1,MartialArts
+270,Eskrima Combo,A rapid series of Eskrima strikes targeting multiple points.,a.atk * 2.5 - b.def * 1.2,-1,MartialArts
+271,Eskrima Disarm,A Filipino martial arts technique that can disarm opponents.,a.atk * 4 - b.def * 2,-1,MartialArts
+272,Power Slam,A powerful wrestling move that lifts and slams the opponent.,a.atk * 5.5 - b.def * 2.7,-1,Wrestling
+273,High-Flying Dive,A high-flying professional wrestling technique that crashes down on opponents.,a.atk * 6 - b.def * 3,-1,Wrestling
+274,Sharpshooter,A professional wrestling submission hold that drains the opponent's energy.,a.atk * 4.8 - b.def * 2.4,-1,Wrestling
+275,Systema Pressure Point,A Systema combat technique that targets pressure points.,a.atk * 3.8 - b.def * 1.9,-1,MartialArts
+276,Systema Flow,"A Russian Systema combat technique focusing on fluid, efficient strikes.",a.atk * 4.2 - b.def * 2.1,-1,MartialArts
+277,Systema Breathing,A Systema breathing technique that restores stamina and focus.,0,0,MartialArts
+278,Silat Joint Attack,A Silat martial arts technique targeting vulnerable joints.,a.atk * 4 - b.def * 2,-1,MartialArts
+279,Silat Sapuan,A sweeping Indonesian Silat technique that can hit multiple targets.,a.atk * 3.5 - b.def * 1.7,-1,MartialArts
+280,Silat Combo,A fast Silat combination attack with multiple strikes.,a.atk * 2.8 - b.def * 1.4,-1,MartialArts
+281,Savate Chasse,A Savate French kickboxing technique delivering a precise kick.,a.atk * 3.6 - b.def * 1.8,-1,Boxing
+282,Savate Fouette,A powerful Savate technique combining footwork with devastating kicks.,a.atk * 4.2 - b.def * 2.1,-1,MartialArts
+283,Savate Combination,A Savate combination technique hitting multiple targets with precise kicks.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+284,Aikido Throw,A powerful Aikido throw that redirects an opponent's energy.,a.atk * 4.5 - b.def * 2.2,-1,MartialArts
+285,Aikido Flow,An Aikido technique that increases PSI by flowing with attacks.,0,0,MartialArts
+286,Aikido Joint Lock,An Aikido joint lock technique that immobilizes opponents.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+287,Sumo Tsuppari,A Sumo technique with powerful thrusting palm strikes.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+288,Sumo Yorikiri,A powerful Sumo technique that forces opponents out of position.,a.atk * 6 - b.def * 3,-1,MartialArts
+289,Sumo Shiko,A Sumo technique that dramatically increases COS and attack.,0,0,MartialArts
+290,Grand Master's Secret,"The ultimate martial arts technique combining power, speed, and precision.",a.atk * 8 - b.def * 4,-1,MartialArts
+291,T-Bone Suplex,A wrestling move where you grab the opponent's arm and leg and roll them onto their back.,a.atk * 4.8 - b.def * 2.4,-1,Wrestling
+292,Sunset Flip,"A wrestling move where you flip over a bent-over opponent, grabbing them on the way down.",a.atk * 3.8 - b.def * 1.9,-1,Wrestling
+293,Flying Forearm Smash,A wrestling move where you jump off the ropes and hit your opponent with both forearms.,a.atk * 4.2 - b.def * 2.1,-1,Wrestling
+294,FU,A wrestling move where you lift the opponent onto your shoulders and drop backwards,a.atk * 5.5 - b.def * 2.7,-1,Wrestling
+295,Body Scissors,A submission wrestling move where you wrap your legs around the opponent's waist and squeeze.,a.atk * 3.5 - b.def * 1.7,-1,Wrestling
+296,Stunner,"A wrestling move where you grab the opponent's head and drop to a sitting position, driving their jaw into your shoulder.",a.atk * 4 - b.def * 2,-1,Wrestling
+297,Spinebuster,"A wrestling move where you place your head between the opponent's legs, lift them up, and slam them down.",a.atk * 5 - b.def * 2.5,-1,Wrestling
+298,Pedigree,"A wrestling move where you put the opponent in a front headlock, then flip forward driving their head into the ground.",a.atk * 5.8 - b.def * 2.9,-1,Wrestling
+299,Skull-Crushing Finale,"A devastating wrestling move where you trap the opponent's arm and head, lift them, and spin them before slamming them down.",a.atk * 6.5 - b.def * 3.2,-1,Wrestling
+300,Flying Elbow Drop,A wrestling move where you jump off the ropes and land with your elbow on the opponent.,a.atk * 4.5 - b.def * 2.2,-1,Wrestling
+301,Frog Splash,A wrestling move where you dive from a high position onto a prone opponent.,a.atk * 5.2 - b.def * 2.6,-1,Wrestling
+302,Lineage Crusher,"A wrestling move where you kick the opponent in the midsection, hook their arms, and drive their head into the ground.",a.atk * 4.8 - b.def * 2.4,-1,Wrestling
+303,Ultimate Finisher,The ultimate wrestling finisher move that combines devastating power and technique.,a.atk * 10 - b.def * 5,-1,Wrestling
+304,Final Heaven,The ultimate limit break technique that unleashes devastating damage on a single enemy.,a.atk * 15 - b.def * 7.5,-1,MartialArts
+305,Hyperslash,A devastating hyper-slash technique that strikes a single enemy multiple times.,a.atk * 12 - b.def * 6,-1,Swordsmanship
+306,Assassinate,Instantly kills normal enemies with a high success rate.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+307,AbsoluteBarrier,Creates an impenetrable barrier around an ally that nullifies the next attack.,0,0,Arcanism
+308,GrimReaper,Summons an avatar of death that inflicts devastating darkness damage on all enemies.,a.mat * 8 - b.mdf * 4,9,VoidMagic
+309,DivineAegis,Creates a divine aegis that heals all allies and removes all negative status effects.,a.mat * 2,0,HolyMagic
+310,DragonBreath,Breathes a massive stream of dragon fire that inflicts severe damage to all enemies.,a.mat * 7 - b.mdf * 3.5,2,Pyromancy
+311,Limit Break,A devastating sword technique that concentrates all energy into a single strike.,a.atk * 11 - b.def * 5.5,-1,MartialArts
+312,Special Ammo Barrage,Fires a barrage of specialized ammunition that can hit all enemies multiple times.,a.atk * 4 - b.def * 2,0,MartialArts
+313,Limit Release,Taps into hidden potential to dramatically increase all stats for 3 turns.,0,0,MartialArts
+314,PlasmaLetting,Drains a significant amount of HP from an enemy and shares it with all allies.,a.mat * 5 - b.mdf * 2.5,0,UnholyMagic
+315,ManaSiphon,Drains MP from an enemy and restores it to the caster.,25 + a.mat * 0.3,0,Arcanism
+316,Spirit Breaking Strike,A devastating martial arts technique that combines physical and spiritual energy.,a.atk * 4 - b.def * 2,-1,MartialArts
+317,DeadlyToxin,Applies a potent poison to all enemies that causes damage over time.,0,0,StatusMagic
+318,ChaosField,Creates a field of disruptive energy that confuses all enemies and lowers their accuracy.,0,0,ChaosMagic
+319,ParalysisWave,Paralyzes all enemies with a wave of electrical energy.,0,0,Electromancy
+320,Enfeeble,"Reduces all enemies to a weakened state, lowering all their stats simultaneously.",0,0,Arcanism
+321,HeroicInspiration,Enhances all allies with improved stats across the board.,0,0,EnhancementMagic
+322,SilenceField,Creates a field of silence that prevents all enemies from using magical skills.,0,0,Arcanism
+323,DeepSlumber,A soothing melody that puts all enemies to sleep with a high success rate.,0,0,StatusMagic
+324,Ultimate Combo,A devastating combination of martial arts techniques delivering multiple strikes at lightning speed.,a.atk * 7 - b.def * 3.5,-1,MartialArts
+325,Dragon Spirit Strike,Summons the spirit of a dragon to enhance a single devastating attack.,a.atk * 9 - b.def * 4.5,-1,MartialArts
+326,ShadowVeil,Dramatically increases the PSI rate and DEX of all allies.,0,0,VoidMagic
+327,Guardian Spirit,Summons an ancient guardian spirit that significantly boosts COS for all allies for 3 turns.,0,0,MartialArts
+328,NightmareFog,Places all enemies in a deep sleep while also poisoning them.,0,0,VoidMagic
+329,VeilofDarkness,Blinds all enemies while also lowering their accuracy.,0,0,VoidMagic
+330,HealingField,Creates a continuous healing field that restores HP to all allies over time.,a.mat * 5,0,HolyMagic
+331,ArcaneDevastation,Channels both magical and physical energy into a devastating blast that ignores COS.,a.mat * 8 + a.atk * 4,0,Arcanism
+332,Life-Binding Strike,The user sacrifices HP to perform an ultimate attack with devastating power.,a.atk * 12 - b.def * 6,-1,MartialArts
+333,Life Transfer,Channels life force  to resurrect a fallen ally with nearly full HP.,b.mhp * 0.9,0,MartialArts
+334,SpellReflection,Creates a magical barrier that reflects magical attacks back at the caster for 3 turns.,0,0,Arcanism
+335,Death Touch,A devastating martial arts technique that has a chance to instantly defeat an opponent.,a.atk * 6 - b.def * 3,-1,MartialArts
+336,Cyclone Strikes,Strikes all enemies with a flurry of lightning-fast kicks.,a.atk * 3.5 - b.def * 1.5,-1,MartialArts
+337,Precision Laser,Fires a concentrated beam of energy that pierces through COSs.,a.atk * 5 - b.def * 2.5,0,MartialArts
+338,Bullet Barrage,Fires a barrage of shots at all enemies with increased accuracy.,a.atk * 4 - b.def * 2,0,MartialArts
+339,Berserker Mode,Dramatically increases the user's Attack and guarantees critical hits for 3 turns.,0,0,MartialArts
+340,Life Force Healing,Taps into inner life force to restore a significant amount of HP and remove all negative status effects.,b.mhp / 3,0,MartialArts
+341,FlameInfusion,"Infuses the party's weapons with elemental fire, increasing damage dealt.",0,0,Pyromancy
+342,FrostInfusion,"Infuses the party's weapons with elemental ice, increasing damage dealt.",0,0,Cryomancy
+343,ThunderInfusion,"Infuses the party's weapons with elemental lightning, increasing damage dealt.",0,0,Electromancy
+344,WeakeningCurse,"Dramatically decreases the Attack, COS, and DEX of all enemies.",0,0,UnholyMagic
+345,Final Reckoning,The ultimate wrestling finisher move that combines devastating power and technique.,a.atk * 10 - b.def * 5,-1,Wrestling
+346,DanteInferno,Summons a blistering inferno that devastates a single enemy with heat and miasma.,a.mat * 7 - b.mdf * 3.5,2,Pyromancy
+347,MeteorShower,Calls down a rain of meteoric flames that damage all enemies.,a.mat * 5 - b.mdf * 2.5,2,Pyromancy
+348,AbsoluteZero,"Encases all enemies in absolute zero temperature, causing massive ice damage.",a.mat * 8 - b.mdf * 4,3,Cryomancy
+349,IceBarrier,Creates a barrier of ice around an ally that decreases damage taken and can counterattack.,a.mat * 3 - b.mdf * 1.5,3,Cryomancy
+350,Thunderstorm,Calls down a massive lightning storm that strikes all enemies multiple times.,a.mat * 9 - b.mdf * 4.5,4,Electromancy
+351,ElectricOverload,"Channels lightning directly into a target's nervous system, causing damage based on their max HP.",a.mat * 4 + (b.mhp * 0.2),4,Electromancy
+352,RagingFlood,Submerges the battlefield in raging waters that damage all enemies and slow their movements.,a.mat * 6 - b.mdf * 3,5,Hydromancy
+353,AquaAbsorption,Drains vitality from an enemy through water magic and transfers it to the caster.,a.mat * 3 - b.mdf * 1.5,5,Hydromancy
+354,TectonicShift,Causes a massive earthquake that deals heavy Petro-type damage to all enemies.,a.mat * 7 - b.mdf * 3.5,6,Geomancy
+355,StoneSpikes,Creates razor-sharp stone spikes that pierce through an enemy's COSs.,a.mat * 4 - b.mdf * 2,6,Geomancy
+356,HurricaneForce,Summons a devastating cyclone that tears through all enemies with extreme wind damage.,a.mat * 8 - b.mdf * 4,7,Aeromancy
+357,Windshield,Creates a shield of swirling wind that greatly increases PSI for all allies.,0,7,Aeromancy
+358,DivineJudgment,Calls down divine judgment that causes massive holy damage to all enemies.,a.mat * 9 - b.mdf * 4.5,8,HolyMagic
+359,DivineBlessing,Channels divine energy to restore a large amount of HP to all allies.,a.mat * 3 + a.mdf * 2,8,HolyMagic
+360,VoidRift,Channels the power of the void to cause  devastating Cursed-type damage to all enemies.,a.mat * 10 - b.mdf * 5,9,VoidMagic
+361,SoulDrain,"Drains the life force of an enemy, dealing damage while healing the caster.",a.mat * 4 - b.mdf * 2,9,Arcanism
+362,ArcaneAnnihilation,Channels unimaginable arcane power to inflict devastating non-elemental damage on all enemies.,a.mat * 12,0,Arcanism
+363,FusionBlast,Combines physical and magical energy into a devastating blast that ignores COS.,a.mat * 6 + a.atk * 2,0,Arcanism
+364,FullRestoration,Completely restores an ally to full HP and removes all negative status effects.,b.mhp,0,HolyMagic
+365,GroupHealing,Channels healing energy that restores a moderate amount of HP to all allies.,a.mat * 3 + 800,0,HolyMagic
+366,BattleEnhancement,"Dramatically increases the Attack, COS, and SAG of all allies.",0,0,EnhancementMagic
+367,WeakeningCurse,"Dramatically decreases the Attack, COS, and DEX of all enemies.",0,0,UnholyMagic
+368,Auto-Turret,Deploys an automated turret that attacks all enemies with technological precision.,a.atk * 3 + a.mat * 2,0,Technomancy
+369,Circuit Overload,Overloads nearby electrical circuits to create a devastating lightning explosion.,a.mat * 6 - b.mdf * 3,4,Technomancy
+370,Nano Enhancement,Deploys nano-machines that enhance an ally's speed and PSI.,0,0,Technomancy
+371,HyperRay,Focuses energy into a powerful beam that ignores enemy COSs.,a.mat * 8,0,Technomancy
+372,Energy Wave,Generates a powerful energy wave that damages all enemies.,a.mat * 6,0,Technomancy
+373,Nano-Repair,Uses nanomachines to rapidly heal wounds and repair damage.,a.mat * 4,0,Technomancy
+374,Toxic Deployment,Deploys a toxic gas that poisons all enemies.,0,0,MartialArts
+375,Energy Shield,Creates an energy shield that significantly reduces damage taken.,0,0,Technomancy
+376,Sniper Shot,A specialized sniper shot that deals massive damage to a single target.,a.atk * 6 - b.def * 3,-1,Hunting
+377,Rapid Fire,Fires a rapid burst of shots at all enemies.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+378,Weak Point Shot,"A precise shot that targets an enemy's weak point, causing massive critical damage.",a.atk * 4 - b.def * 2,-1,Hunting
+379,Armor-Piercing Shot,A specialized shot that pierces through COSs.,a.atk * 3 - b.def * 1.5,-1,Hunting
+380,Explosive Round,Fires an explosive round that damages multiple enemies.,a.atk * 5 - b.def * 2.5,-1,MartialArts
+381,Tranquilizer Shot,Loads a tranquilizer round that puts an enemy to sleep.,0,0,Hunting
+382,Full Clip Discharge,A devastating shot that unleashes all ammo at once for massive damage.,a.atk * 10 - b.def * 5,-1,MartialArts
+383,Chemical Analysis,A chemist's analysis that reveals enemy weaknesses and lowers their COS.,0,0,ChemicalArts
+384,Toxic Mixture,Throws a toxic mixture that poisons an enemy and lowers their attack.,0,0,ChemicalArts
+385,Healing Potion,Creates a healing potion that restores HP to an ally.,a.mat * 5,0,ChemicalArts
+386,Panacea,Creates an elixir that cures all status ailments for an ally.,0,0,ChemicalArts
+387,Drain Solution,Creates a mixture that drains HP from an enemy and heals the user.,a.mat * 3 - b.mdf * 1.5,0,ChemicalArts
+388,STRening Compound,Creates a STRening compound that boosts an ally's attack power.,0,0,ChemicalArts
+389,Defensive Compound,Creates a defensive compound that boosts an ally's COS.,0,0,ChemicalArts
+390,Blinding Powder,Creates a blinding powder that blinds an enemy.,0,0,ChemicalArts
+391,Paralytic Agent,Creates a paralytic agent that paralyzes an enemy.,0,0,ChemicalArts
+392,Explosive Compound,Throws an unstable compound that creates a massive explosion affecting all enemies.,a.mat * 7 - b.mdf * 3.5,2,ChemicalArts
+393,Ultimate Potion,The ultimate healing mixture that restores half of an ally's maximum HP.,b.mhp * 0.5,0,ChemicalArts
+394,Snatch Strike,A thief's skill that deals damage and has a chance to steal an item.,a.atk * 4 - b.def * 2,-1,Roguery
+395,Mug,Attempts to steal an item from the target with increased success rate.,0,0,Roguery
+396,Stealth,"Makes the user harder to detect, increasing PSI and chance to escape from battle.",0,0,Roguery
+397,Vital Strike,A precise strike targeting an enemy's weak points.,a.atk * 3 - b.def * 1.5,-1,MartialArts
+398,Rapid Strikes,Performs a series of rapid strikes on multiple enemies.,a.atk * 2.5 - b.def * 1.2,-1,MartialArts
+399,Sand Toss,Throws sand to blind all enemies and decrease their accuracy.,0,0,MartialArts
+400,Lockpicking,Opens locked doors and chests without a key.,0,0,Roguery
+401,Transfusion Strike,A specialized attack that drains an enemy's HP.,a.atk * 3 - b.def * 1.5,0,MartialArts
+402,Killing Blow,A powerful strike with a high chance of instant death.,a.atk * 6 - b.def * 3,-1,MartialArts
+403,Trap Detection,Allows the party to detect traps and hidden items in dungeons.,0,0,Roguery
+404,Swift Escape,Dramatically increases chances of escaping from battle.,0,0,Roguery
+405,Master Theft,The ultimate thief technique that deals massive damage and has a high chance to steal a rare item.,a.atk * 10 - b.def * 5,-1,Roguery
+406,Inspiring Speech,Delivers an inspiring speech that boosts the morale and Attack of all allies.,0,0,Leadership
+407,Sow Discord,"Uses confusion tactics on all enemies, making them attack each other.",0,0,Leadership
+408,Unity Formation,"Creates unity among all allies, dramatically increasing all their defensive stats.",0,0,Leadership
+409,Seductive Charm,"Charms an enemy with a seductive smile, causing them to temporarily join your side.",0,0,Leadership
+410,Critical Insights,Provides tactical insights that greatly increase the critical hit rate for all allies.,0,0,Leadership
+411,Negotiated Truce,"Negotiates with an enemy, making them less likely to attack your weakest ally.",0,0,Leadership
+412,Taunt Diversion,Creates a diversion that makes all enemies target you instead of allies.,0,0,Leadership
+413,Morale Boost,"Boosts an ally's morale, healing their HP and increasing their Attack.",a.mat * 2,0,Leadership
+414,Heroic Rally,"Passionately rallies all allies,  massively increasing all their stats.",0,0,Leadership
+415,Crushing Demoralization,Delivers a devastating speech that massively decreases all stats.,0,0,MartialArts
+416,Tactical Advice,Shares tactical knowledge that increases the DEX of all allies.,0,0,Leadership
+417,Team Coordination,"Boosts team coordination, increasing the DEX of all allies.",0,0,Leadership
+418,Defensive Tactics,Shares defensive strategies that increase the COS of all allies.,0,0,MartialArts
+419,Self-Actualization,"Focuses inner potential, dramatically increasing all personal stats for 3 turns.",0,0,MartialArts
+420,Motivational Speech,Delivers a motivational speech that increases all stats for all allies.,0,0,Leadership
+421,Intimidation,Uses intimidation to decrease an enemy's Attack and COS.,0,1,MartialArts
+422,Mental Disruption,Uses mental disruption techniques to decrease all enemies' INT and SAG.,0,0,PsychicAbilities
+423,Provocation,Taunts enemies to decrease their DEX and PSI,0,0,Leadership
+424,Psychological Warfare,Uses psychological techniques to decrease all stats of an enemy.,0,0,Leadership
+425,Confusing Compliment,"Unexpectedly compliments an enemy, increasing their Attack but lowering their COS.",0,0,Leadership
+426,Overconfidence,Boosts an enemy's confidence but makes them reckless.,0,0,Leadership
+427,Defensive Overcaution,"Shares tactical advice with an enemy, increasing their COS but slowing their DEX.",0,0,Leadership
+428,Reverse psychology,Uses reverse psychology to confuse an enemy but increase their STR.,0,0,Leadership
+429,Genuine Encouragement,"Genuinely encourages an enemy, boosting all their stats slightly.",0,0,Leadership
+430,Temporary Alliance,"Forms a temporary alliance with an enemy, increasing their COS and SAG.",0,0,Leadership
+431,Mixed Tactics,"Shares tactical knowledge with all enemies, increasing their COS but decreasing their DEX.",0,0,Leadership
+432,Deceptive Lullaby,Sings a calming song that increases all enemies' SAG but puts them to sleep.,0,0,MartialArts
+433,Berserk Encouragement,Dramatically increases the Attack and INT of an ally but decreases their COS and SAG.,0,0,MartialArts
+434,Precision Focus,Dramatically increases an ally's Accuracy and PSI but decreases their Attack.,0,0,MartialArts
+435,Predator's Bite,A powerful bite attack that deals physical damage.,a.atk * 3 - b.def * 1.5,-1,Bestial
+436,Razor Claws,"Sharp claws tear into the enemy, causing bleeding damage.",a.atk * 2.5 - b.def * 1.2,-1,Bestial
+437,Hind Kick,Rapid kicks that hit an enemy multiple times.,a.atk * 2 - b.def * 1,-1,Bestial
+438,Gore Attack,A crushing attack using massive horns or antlers.,a.atk * 3.5 - b.def * 1.7,-1,Bestial
+439,Charging Tackle,Charges at full speed to deliver a powerful impact.,a.atk * 4 - b.def * 2,-1,Bestial
+440,Blinding Screen,Temporarily blinds enemies by kicking up dirt or creating a cloud of ink.,0,0,MartialArts
+441,Toxic Venom,Sprays or secretes a toxic substance that poisons enemies.,0,0,MartialArts
+442,Sonic Disorientation,Emits a disorienting sound that confuses enemies.,0,0,MartialArts
+443,Paralyzing Sting,Paralyzes prey with a stinger or electric shock.,0,0,MartialArts
+444,Life Drain,Drains blood or life energy from a target to restore HP.,a.atk * 2 - b.def * 1,0,MartialArts
+445,Entangle,"Entangles the opponent in webbing, vines, or tentacles, restricting movement.",0,0,Bestial
+446,Wing Gust,Rapidly flaps wings to create powerful gusts of wind that damage enemies.,a.atk * 3 - b.def * 1.5,7,Bestial
+447,Hypnotic Mesmerize,"Mesmerizes the target with a hypnotic pattern or sound, putting them to sleep.",0,0,MartialArts
+448,Venomous Strike,"Strikes with a venomous barb, causing damage and poison.",a.atk * 2.5 - b.def * 1.2,-1,MartialArts
+449,Electric Shock,Unleashes a powerful electric shock that may paralyze the target.,a.atk * 4 - b.def * 2,4,MartialArts
+450,Inferno Breath,Unleash a devastating stream of  concentrated flame that ignites enemies,a.atk * 4 - b.def * 2,2,Bestial
+451,Frost Breath,Breathes a freezing blast that damages and slows enemies.,a.atk * 4 - b.def * 2,3,Bestial
+452,Tail Smash,Delivers a crushing blow with a powerful tail.,a.atk * 4.5 - b.def * 2.2,-1,Bestial
+453,Tentacle Barrage,"Attacks with multiple tentacles, hitting the target several times.",a.atk * 2.5 - b.def * 1.2,-1,Bestial
+454,Pressurized Water Jet,Shoots a powerful jet of water at high pressure.,a.atk * 3.5 - b.def * 1.7,5,Idromancy
+455,Earthquake Stomp,"Causes the ground to shake, damaging all enemies.",a.atk * 5 - b.def * 2.5,6,Geomancy
+456,Ambush Pounce,Suddenly pounces on prey with incredible speed and power.,a.atk * 3 - b.def * 1.5,-1,Bestial
+457,Terrifying Roar,A devastating roar that damages and intimidates all enemies.,a.atk * 6 - b.def * 3,-1,Bestial
+458,Sonic Screech,Emits a high-frequency screech that damages and disables enemies.,0,0,MartialArts
+459,Healing Secretion,Secretes a healing substance that cures status ailments.,0,0,MartialArts
+460,Camouflage,"Changes color or form to blend with surroundings, increasing PSI.",0,0,Chromomancy
+461,Berserk Frenzy,A furious frenzy of attacks when cornered or threatened.,a.atk * 7 - b.def * 3.5,-1,MartialArts
+462,Pack Call,Calls nearby allies of the same species to join the fight.,0,0,Bestial
+463,Apex Predator Strike,The ultimate predator attack that deals massive damage to a single target.,a.atk * 10 - b.def * 5,-1,Bestial
+464,Throat Bite,A vicious attack that targets the throat of an enemy.,a.atk * 3 - b.def * 1.5,-1,Bestial
+465,VoidTendrils,Summons shadowy tendrils from another dimension that grasp and damage the target.,a.mat * 4.5 - b.mdf * 2.2,9,AstralMagic
+466,StarfallFragment,Manifests a fragment of a star that explodes with cosmic light.,a.mat * 5 - b.mdf * 2.5,8,AstralMagic
+467,RealityDistortion,"Creates a prismatic field that distorts reality, causing unpredictable damage.",(a.mat + a.mdf) * 2,0,Divine
+468,DevouringRift,Opens a small rift that devours a quarter of the target's life force.,b.mhp * 0.25,9,DarkMagic
+469,SensoryInversion,"Inverts the target's senses, causing confusion and stat reversal.",0,0,MartialArts
+470,FractalGeometry,Creates a perfect geometric pattern that shatters reality around the target.,a.mat * 7 - b.mdf * 3.5,0,Divine
+471,TemporalReversion,"Reverses the flow of time around a wound, healing it as if it never existed.",a.mat * 3,0,Divine
+472,ThousandEyedGaze,"Summons countless eyes from the void that gaze upon enemies, causing psychic damage.",a.mat * 3 - b.mdf * 1.5,0,PsychicAbilities
+473,Revelations,"Forces the target to witness an unknowable truth, potentially driving them mad.",0,0,Divine
+474,Quantum Duplication,Splits the caster into multiple quantum versions that exist simultaneously.,0,0,Divine
+475,Reality-Warping Melody,Creates discordant music that makes reality itself unstable around enemies.,0,0,Performance
+476,Pain Transmutation,"Channels pain into power, dealing damage based on the caster's missing HP.",(a.mhp - a.hp) * 0.5,0,Arcanism
+477,Identity Transference,Swaps positions and some aspects of identity between caster and target.,0,0,Divine
+478,Probability Manipulation,Creates a field where probability itself is manipulated in the caster's favor.,0,0,Divine
+479,Non-Euclidean Fluid,Summons a liquid that flows against gravity and dissolves reality.,a.mat * 4 - b.mdf * 2,9,AstralMagic
+480,Unutterable Phonemes,Speaks in a language that reality itself cannot comprehend.,0,0,DarkMagic
+481,Concept Drain,Drains concepts and ideas from the target's mind.,(b.mp) * 0.5,0,PsychicAbilities
+482,Metamorphic Absurdity,"Temporarily transforms the target into a bizarre, non-functional form.",0,0,Divine
+483,Colors Out Of Space,Creates a whirling vortex of impossible colors that damage the mind and body.,(a.mat + a.mdf) * 3,0,AstralMagic
+484,Recursive Dreamscape,"Plunges the target into a dream within a dream, causing deep sleep and confusion upon waking.",0,0,PsychicAbilities
+485,MultiversalMortality,Causes the target to experience their own death in all possible timelines simultaneously.,a.mat * 12,0,Arcanism
+486,Temporal Paradox,Creates a paradoxical loop in time that confuses and traps enemies.,0,0,Divine
+487,Perceptual Inversion,Reverses the target's perceptions so they see allies as enemies and vice versa.,0,0,PsychicAbilities
+488,TheOutsider,Summons an impossible entity from outside reality that annihilates everything it touches.,a.mat * 16 + a.mdf * 9,0,AstralMagic
+489,SpatialDissonance,Causes the target to experience being everywhere and nowhere simultaneously.,0,0,Arcanism
+490,RealityFailure,"Creates a cascading failure in the fabric of reality, causing damage based on all stats.",(a.mat + a.atk + a.mdf + a.def) * 2,0,Chromomancy
+491,TinyFlame,Creates a tiny flame that barely singes the target.,10 + a.mat,2,Pyromancy
+492,Snowflake,Forms a single snowflake that melts on contact with the target.,10 + a.mat,3,Cryomancy
+493,StaticZap,Creates a small static shock that barely affects the target.,10 + a.mat,4,Electromancy
+494,WaterDroplet,Conjures a few drops of water that splash the target.,10 + a.mat,5,Hydromancy
+495,PebbleToss,Throws a tiny pebble at the target.,10 + a.mat,6,MinorMagic
+496,GentleBreeze,Creates a small breeze that barely moves the target's hair.,10 + a.mat,7,Aeromancy
+497,LightSparkle,Creates a tiny sparkle of light that's more pretty than damaging.,10 + a.mat,8,Electromancy
+498,ShadowWisp,Creates a small shadow that briefly passes over the target.,10 + a.mat,9,VoidMagic
+499,PaperHeal,"Heals a minuscule amount of HP, barely noticeable.",5,0,Cryomancy
+500,QuestionableAntidote,"Has a very small chance to cure poison, but usually does nothing.",0,0,StatusMagic
+501,MinimalEncouragement,"Slightly increases the target's Attack, but the effect is barely noticeable.",0,0,Cryomancy
+502,WhisperedAdvice,"Slightly increases the target's COS, but the effect is barely noticeable.",0,0,Cryomancy
+503,WeakInsult,"Attempts to decrease an enemy's Attack, but the effect is minimal.",0,0,MinorMagic
+504,LifeDrain,Drains a tiny amount of HP from the target.,2,0,MinorMagic
+505,ManaSiphon,Drains a minimal amount of MP from the target.,1,0,Arcanism
+506,MagicalPuff,Creates a very minor magical effect that deals minimal damage.,a.mat * 0.2,0,Arcanism
+507,WeaponWarming,"Attempts to imbue a weapon with fire, but only makes it slightly warm.",0,0,Pyromancy
+508,UselessFog,Creates a light fog that has no tactical advantage whatsoever.,0,0,Leadership
+509,MinorShift,Makes the target see slightly altered colors for a few seconds.,0,0,Chromomancy
+510,SimpleTune,Creates a slightly pleasant melody that has no combat effect.,0,0,Chromomancy
+511,Precision Thrust,"A swift, precise stab targeting vital areas with a blade or pointed weapon.",a.atk * 2.5 - b.def * 1.2,-1,Swordsmanship
+512,Wide Swing,A powerful horizontal sweep that can hit multiple enemies.,a.atk * 3 - b.def * 1.5,-1,Swordsmanship
+513,Overhead Smash,A powerful downward strike with full force behind it.,a.atk * 4 - b.def * 2,-1,Swordsmanship
+514,Strike Flurry,Performs a flurry of quick strikes that hit multiple times.,a.atk * 1.8 - b.def * 0.9,-1,Swordsmanship
+515,Uppercut Strike,A powerful upward strike that can break through COS,a.atk * 3.2 - b.def * 0.6,-1,Swordsmanship
+516,Weak Point Strike,A precise strike targeting a weak point in the enemy's COSs.,a.atk * 2.8 - b.def * 1.4,-1,Swordsmanship
+517,Whirlwind Slash,A spinning attack that hits all enemies around you.,a.atk * 3.5 - b.def * 1.7,-1,Swordsmanship
+518,Laceration Strike,A brutal attack that can cause bleeding damage over time.,a.atk * 3 - b.def * 1.5,-1,Swordsmanship
+519,Ground Slam,A crushing blow that slams the enemy to the ground.,a.atk * 4.5 - b.def * 2.2,-1,Swordsmanship
+520,Swift Strike,"A sudden, lightning-fast strike that's difficult to evade.",a.atk * 2.7 - b.def * 1.3,-1,Swordsmanship
+521,Rapid Thrust,A series of rapid thrusts with a pointed weapon.,a.atk * 3.8 - b.def * 1.9,-1,Swordsmanship
+522,Pommel Strike,"A heavy blow with the pommel or hilt of a weapon, potentially stunning the target.",a.atk * 2.5 - b.def * 1.2,-1,Swordsmanship
+523,Ground Sweep,A slash that targets the legs to slow enemy movement.,a.atk * 3.2 - b.def * 1.6,-1,Swordsmanship
+524,Flat Strike,"A crushing blow with the flat side of a weapon, potentially causing stunning.",a.atk * 3.5 - b.def * 1.7,-1,Swordsmanship
+525,Guard Strike,A powerful blow using the guard or hilt to strike at close range.,a.atk * 3 - b.def * 1.5,-1,Swordsmanship
+526,Diagonal Slash,A powerful diagonal slash that's difficult to block.,a.atk * 4 - b.def * 2,-1,Swordsmanship
+527,Cross Slash,A series of cuts that form an X pattern on the target.,a.atk * 2.8 - b.def * 1.4,-1,Swordsmanship
+528,Circular Slash,"A series of quick, circular slashes that can hit multiple enemies.",a.atk * 2.6 - b.def * 1.3,-1,Swordsmanship
+529,Opportunity Strike,A calculated strike at the exact moment the enemy is vulnerable.,a.atk * 3.2 - b.def * 1.6,-1,Swordsmanship
+530,Power Lunge,A devastating lunge that puts all power into a single strike.,a.atk * 6 - b.def * 3,-1,Swordsmanship
+531,Master's Technique,The ultimate melee technique combining multiple movements into one devastating attack.,a.atk * 8 - b.def * 4,-1,Swordsmanship
+532,StellarImpact,"Summons a falling star that crashes into enemies, causing massive light damage to all targets.",a.mat * 9 - b.mdf * 4.5,8,AstralMagic
+533,XylomancerJungle,"Commands plants and wooden objects to attack, dealing Petro-type damage to enemies.",a.mat * 5 - b.mdf * 2.5,6,Geomancy
+534,YearningVoid,"Channels the emptiness of the void, creating a sense of longing that drains enemies' will to fight.",a.mat * 6 - b.mdf * 3,9,VoidMagic
+535,BioticHarmony,"Harmonizes with the natural life energy of allies, healing and removing negative status effects.",0,0,Leadership
+536,DecompositionRay,"Fires a beam that accelerates decomposition, causing damage and lowering COS.",a.mat * 5 - b.mdf * 2.5,0,Pyromancy
+537,EclipseBurst,"Creates a sudden burst of shadow energy during an eclipse, damaging all enemies.",a.mat * 6 - b.mdf * 3,9,VoidMagic
+538,FracturedTimeline,"Branches the timeline, creating alternate versions of allies that can absorb damage for them.",0,0,Arcanism
+539,GlyphicEmpowerment,"Empowers allies with ancient glyphs, providing significant stat boosts.",0,0,Cryomancy
+540,HarmonicDissonance,Creates painfully dissonant tones that damage enemies and disrupt spellcasting.,a.mat * 4 - b.mdf * 2,0,TerrorMagic
+541,IceBarrage,Fires a barrage of ice shards that hit all enemies multiple times.,a.mat * 4 - b.mdf * 2,3,Pyromancy
+542,JuxtapositionField,"Creates a field where opposites coexist, causing confusion and disorientation.",0,0,Arcanism
+543,KaleidoscopicVision,"Distorts visual perception with kaleidoscopic patterns, causing confusion and lowering accuracy.",0,0,Arcanism
+544,LuminousTransfiguration,"Transforms an ally's body into luminous energy, greatly increasing all stats.",0,8,Chromomancy
+545,MagneticDisruption,"Disrupts enemies' magnetic fields, causing nausea and lowering various stats.",0,4,Arcanism
+546,NecromanticRitual,Performs a dark ritual that sacrifices some of the caster's HP to damage all enemies.,a.mat * 5 - b.mdf * 2.5,9,Cryomancy
+547,Orbital Strike,Calls down a powerful beam from orbit that devastates a single target.,a.mat * 8 - b.mdf * 4,8,MartialArts
+548,PhantasmalLure,Creates an illusion that lures enemies to attack a phantom target instead of allies.,0,0,Arcanism
+549,QuintessenceManipulation,"Manipulates the fundamental essence of all things, restoring HP, MP, and increasing all stats.",0,0,Arcanism
+550,ResonanceShock,Creates a shock wave of resonant energy that damages enemies and disables magical abilities.,a.mat * 5 - b.mdf * 2.5,4,Electromancy
+551,SoulMirror,"Creates a mirror reflection of the target's soul, revealing and potentially reversing status effects.",0,0,AntiMagic
+552,TemperatureInversion,"Rapidly alternates between extreme heat and cold, shattering enemy COSs.",a.mat * 2 - b.mdf * 1,3,Cryomancy
+553,UnderworldPortal,Opens a portal to the underworld that damages enemies and potentially causes instant death.,a.mat * 6 - b.mdf * 3,9,Arcanism
+554,VortexCompression,"Compresses a vortex of energy into a tiny space, creating an explosion that damages all enemies.",a.mat * 7 - b.mdf * 3.5,0,Arcanism
+555,WillowispSwarm,Summons a swarm of ethereal lights that confuse and distract enemies while causing damage.,a.mat * 3 - b.mdf * 1.5,0,Chromomancy
+556,NovaFlash,"Creates a sudden, blinding flash of light that damages and potentially blinds all enemies.",a.mat * 5 - b.mdf * 2.5,0,Chromomancy
+557,DreamHarvester,"Harvests dream energy from sleeping targets, dealing damage and restoring MP to the caster.",a.mat * 4 - b.mdf * 2,0,StatusMagic
+558,SerpentineInferno,Summons a serpent made of living flame that coils around enemies and burns them.,a.mat * 6.5 - b.mdf * 3.2,2,Pyromancy
+559,ThunderstormCascade,Calls down a massive storm of lightning that bounces between multiple targets.,a.mat * 7.2 - b.mdf * 3.5,4,Electromancy
+560,CorrosiveMarstrom,Creates a whirlpool of caustic liquid that rapidly dissolves enemy COSs.,a.mat * 6.8 - b.mdf * 3.4,5,Hydromancy
+561,GlacialDaggerstorm,"Summons countless daggers of ice that rain down from above, piercing enemies.",a.mat * 8.5 - b.mdf * 4.2,3,Cryomancy
+562,VoidSiphon,Unleashes shadow tendrils that  emerge from the void to siphon life from enemies.,a.mat * 7.5 - b.mdf * 3.7,9,VoidMagic
+563,ChaoticConvergence,"Unleashes the raw power of chaos,  causing unpredictable but devastating damage.",a.mat * 9.5 + a.mdf * 2,0,ChaosMagic
+564,CrystallineSpire,Raises massive crystalline spires from the ground that impale enemies and shatter.,a.mat * 8.0 - b.mdf * 4.0,6,Geomancy
+565,RazorwindCyclone,Creates a devastating cyclone that tears enemies apart with razor-sharp wind blades.,a.mat * 7.0 - b.mdf * 3.5,7,Aeromancy
+566,SolarNova,"Channels the power of a distant sun, creating a miniature solar flare.",a.mat * 9.0 - b.mdf * 4.5,8,Pyromancy
+567,NeuralSurge,Creates a field of electromagnetic  energy that overloads nervous systems.,a.mat * 7.5 - b.mdf * 3.7,4,Arcanism
+568,VolcanicHeart,"Summons the core of a volcano to erupt beneath enemies, causing massive damage.",a.mat * 10.0 - b.mdf * 5.0,2,Arcanism
+569,ElementalBurst,Fuses opposing elements into a volatile mixture that creates a devastating explosion.,(a.mat + a.mdf) * 5,0,Arcanism
+570,CelestialConvergence,Concentrates celestial energy into a beam of light that purges darkness and causes damage.,a.mat * 8.0 - b.mdf * 4.0,8,VoidMagic
+571,NightmareGateway,"Opens a gateway to a dimension of nightmares, unleashing terror upon enemies.",a.mat * 8.5 - b.mdf * 4.2,9,VoidMagic
+572,VoidEntity,Summons an interdimensional entity  that devours the life force of enemies.,a.mat * 9.5 - b.mdf * 4.7,9,VoidMagic
+573,ToxicMaelstrom,Creates a vortex of caustic gases that corrode enemies from the inside out.,a.mat * 6.5 - b.mdf * 3.2,7,Aeromancy
+574,CorrosiveDeluge,Transforms water into a highly acidic compound that dissolves enemy armor and flesh.,a.mat * 7.0 - b.mdf * 3.5,5,Hydromancy
+575,ShardCascade,Showers enemies with razor-sharp obsidian shards that cause bleeding wounds.,a.mat * 7.5 - b.mdf * 3.7,6,Chromomancy
+576,AbsoluteField,Creates a field of absolute zero temperature that freezes enemies solid.,a.mat * 5.5 - b.mdf * 2.7,3,Cryomancy
+577,SupernovaImplosion,Summons the heart of a dying star to create a devastating explosion of heat and light.,a.mat * 12.0 - b.mdf * 6.0,2,Chromomancy
+578,CataclysmicTornado,Creates a howling vortex of atmosphere  that tears enemies to shreds with debris.,a.mat * 8.0 - b.mdf * 4.0,7,Aeromancy
+579,ThunderstrikeSanction,Calls down a massive bolt of divine lightning that smites enemies with heavenly wrath.,a.mat * 11.0 - b.mdf * 5.5,8,Electromancy
+580,RealityRift,Tears open a rift in reality that fragments enemies across multiple dimensions.,a.mat * 9.0 - b.mdf * 4.5,9,Arcanism
+581,VirulentContagion,"Infects enemies with a virulent toxin that spreads between targets, causing poison.",a.mat * 2.5 - b.mdf * 1.2,0,StatusMagic
+582,ScintillatingBlindness,Creates a dense cloud of sparkling dust that blinds all enemies with extreme efficiency.,a.mat * 2.0 - b.mdf * 1.0,0,Electromancy
+583,MindFracture,"Projects disturbing illusions that  overwhelm enemies' minds, causing severe confusion.",a.mat * 1.8 - b.mdf * 0.9,0,Arcanism
+584,EnchantedSong,Lulls enemies into a deep sleep with an irresistible song,a.mat * 1.5 - b.mdf * 0.7,0,Performance
+585,AbsoluteVeil,Wraps enemies in a veil of magical silence.,a.mat * 3.0 - b.mdf * 1.5,0,Arcanism
+586,NeuralSurge,Sends a pulse of electrical energy that locks up enemies' limbs,a.mat * 3.5 - b.mdf * 1.7,4,Electromancy
+587,IrresistibleEnchantment,Creates an overwhelming sense of infatuation.,a.mat * 2.2 - b.mdf * 1.1,0,Leadership
+588,GravitationalDisruption,"Creates a gravity pulse that knocks enemies off balance, almost guaranteeing knockdown.",a.mat * 4.0 - b.mdf * 2.0,6,StatusMagic
+589,FatalityConjuration,"Calls upon the inevitable force of mortality, potentially causing instant death.",a.mat * 8.0 - b.mdf * 4.0,9,StatusMagic
+590,HallucinogenicCloud,Creates a cloud of hallucinogenic spores that induce both blindness and confusion.,a.mat * 3.0 - b.mdf * 1.5,0,Arcanism
+591,NeuralSuppression,Delivers a neural shock that paralyzes enemies while rendering them mute.,a.mat * 4.5 - b.mdf * 2.2,4,Electromancy
+592,VenomousInjection,Injects a potent neurotoxin that severely poisons enemies and slows their movement.,a.mat * 3.5 - b.mdf * 1.7,0,StatusMagic
+593,HypnoticTrance,Projects a hypnotic pattern that  lulls enemies to sleep and charm them,a.mat * 2.5 - b.mdf * 1.2,0,Leadership
+594,GravitySilencer,Creates a localized gravitational anomaly that knocks down enemies and steals their magical voice.,a.mat * 5.0 - b.mdf * 2.5,6,Roguery
+595,NeuralCascade,"Overloads the nervous system, causing paralysis and confusion as neural signals misfire.",a.mat * 4.0 - b.mdf * 2.0,4,Pyromancy
+596,NightmareVision,Invokes nightmarish visions that cause confusion while draining victims' life force.,a.mat * 6.0 - b.mdf * 3.0,9,VoidMagic
+597,OcularFlare,Emits a blinding flash that severely impairs enemies' vision and accuracy.,a.mat * 3.0 - b.mdf * 1.5,0,Roguery
+598,MagneticCloud,Summons a cloud of disorienting magnetic particles that inflict confusion and lower accuracy.,a.mat * 2.5 - b.mdf * 1.2,0,Arcanism
+599,TemporalNexus,Creates a temporal anomaly that causes severe disorientation and confusion in enemies.,a.mat * 7.0 - b.mdf * 3.5,0,Arcanism
+600,CascadingNexus,The ultimate status magic that inflicts multiple debilitating conditions on all enemies.,a.mat * 10.0 - b.mdf * 5.0,0,StatusMagic
+601,NecromanticContagion,"Infects enemies with a curse that  spreads to allies when they die, potentially causing instant death.",a.mat * 3.0 - b.mdf * 1.5,9,UnholyMagic
+602,NeuralCurse,Completely locks down the target's nervous system.,a.mat * 4.0 - b.mdf * 2.0,4,UnholyMagic
+603,IncurableAffliction,Infects enemies with a toxin that continuously drains their HP and cannot be cured normally.,a.mat * 2.5 - b.mdf * 1.2,0,HolyMagic
+604,EternalMalediction,"Permanently silences the target, preventing any spell use for the remainder of the battle.",a.mat * 3.0 - b.mdf * 1.5,0,StatusMagic
+605,ManaAnnihilation,"Creates a field that drains all magical energy from enemies, reducing MP to zero and preventing recovery.",a.mat * 5.0 - b.mdf * 2.5,4,VoidMagic
+606,HealingParadox,"Reverses time for the target, causing all healing to damage them instead for several turns.",a.mat * 4.0 - b.mdf * 2.0,0,HolyMagic
+607,SelfHex,Inflicts a curse that causes targets to take damage when using abilities or items.,a.mat * 6.0 - b.mdf * 3.0,9,UnholyMagic
+608,BlessingField,Completely nullifies all positive status effects on targets and prevents new ones from being applied.,a.mat * 3.0 - b.mdf * 1.5,0,HolyMagic
+609,SpiritVortex,"Creates a gravitational anomaly that continually drains TP from enemies, preventing special moves.",a.mat * 4.5 - b.mdf * 2.2,6,StatusMagic
+610,IrreversibleCurse,Forces enemies to attack their allies against their will and makes them immune to charm cures.,a.mat * 3.5 - b.mdf * 1.7,0,Leadership
+611,FatalSyndrome,Puts targets into an endless nightmare that damages them each turn until they die or the battle ends.,a.mat * 2.0 - b.mdf * 1.0,0,VoidMagic
+612,InexorableCountdown,Marks targets with a death counter that kills  them after three turns regardless of protections.,a.mat * 5.0 - b.mdf * 2.5,9,StatusMagic
+613,VitaContract,"Forces enemies to sacrifice their own HP to perform actions,",a.mat * 4.0 - b.mdf * 2.0,0,Cryomancy
+614,PermanentDrain,Drains all stat boosts from enemies and permanently reduces their base stats.,a.mat * 3.0 - b.mdf * 1.5,0,StatusMagic
+615,TotalDisruption,Renders enemies completely blind and confused while inverting their movement controls.,a.mat * 2.5 - b.mdf * 1.2,0,StatusMagic
+616,OmnimaledictionCataclysm,The ultimate forbidden spell that  inflicts every negative status effect.,a.mat * 15.0 - b.mdf * 7.5,0,ForbiddenMagic
+617,PSIShockwave,Channels PSI energy to create electrical d ischarges that strike enemies with uncanny accuracy.,a.luk * 5 - b.mdf * 2,4,PsychicAbilities
+618,PSIkineticTempest,Creates a telekinetic windstorm by  manipulating air molecules with PSI energy.,a.luk * 4 - b.mdf * 1.5,7,PsychicAbilities
+619,PSICombustion,"Ignites the air around enemies through intense  PSI focus, creating spontaneous flames.",a.luk * 6 - b.mdf * 2.5,2,PsychicAbilities
+620,CryoPSIFreezing,Slows molecular movement with PSI energy freezing enemies and their surroundings.,a.luk * 5.5 - b.mdf * 2.2,3,PsychicAbilities
+621,PSImetabolicRegeneration,Uses PSI energy to accelerate natural healing within the target's body.,a.luk * 4,0,PsychicAbilities
+622,PSIIllusionProjection,Creates illusions using PSI  energy that confuse enemies.,0,0,PsychicAbilities
+623,GravitokineticCrush,Manipulates gravitational forces using PSI energy to crush opponents.,a.luk * 7 - b.mdf * 3,6,PsychicAbilities
+624,PsychometabolicAcceleration,"Enhances reflexes and reaction time  with PSI energy, greatly increasing PSI.",0,0,PsychicAbilities
+625,NeuroPSIParalysis,"Disables neural pathways using PSI energy, completely paralyzing the target.",0,0,PsychicAbilities
+626,HypnokineticSuggestion,"Projects calming mental patterns using PSI energy, inducing sleep in targets.",0,0,PsychicAbilities
+627,PrecognitiveStrike,"Temporarily boosts combat intuition  using PSI energy, greatly increasing critical hit rate.",0,0,PsychicAbilities
+628,PSIkineticBarrier,Creates a protective PSI barrier  that absorbs physical and magical damage.,0,0,PsychicAbilities
+629,PSIsonicDisruption,"Projects painful thoughts directly into the target's mind, causing psychic damage.",a.luk * 3,0,PsychicAbilities
+630,OculokineticBlindness,"Disrupts visual processing in target's brain using PSI energy,  causing blindness.",0,0,PsychicAbilities
+631,PSImetabolicVampirism,Establishes a PSI link that drains life energy from the target to the user.,a.luk * 4 - b.mdf * 1.5,0,PsychicAbilities
+632,PSIkineticSuppression,Blocks the target's ability to cast spells or use special abilities with PSI interference.,0,0,PsychicAbilities
+633,PrecognitiveCounter,Reads the target's mind to predict and counter their next move with PSI precision.,a.luk * 3.5,0,PsychicAbilities
+634,PSIEnfeeblement,Uses PSI energy to severely weaken  the target's physical capabilities.,0,0,PsychicAbilities
+635,Psychometabolic,"Uses PSI energy to cleanse and  repair mental imbalances, removing status ailments.",0,0,PsychicAbilities
+636,PSIEnergyBlast,Unleashes a devastating blast of raw PSI energy that damages multiple targets.,a.luk * 8 - b.mdf * 3.5,0,PsychicAbilities
+637,PSIEnergyTransfer,Transfers a portion of the user's PSI  energy to restore an ally's TP.,0,0,PsychicAbilities
+638,PSImetabolicAmplif.,Dramatically enhances all mental  capabilities using PSI energy.,0,0,PsychicAbilities
+639,FatalPSIonicOverload,Channels negative PSI energy to potentially cause instant death through ,a.luk * 10 - b.mdf * 4.5,9,PsychicAbilities
+640,TotalPSIManifestion,The ultimate PSI technique that unleashes the full potential of the user's mental powers.,a.luk * 15,0,PsychicAbilities
+641,PowerDrain,Creates an enchanted field that dramatically reduces enemy Attack and COS.,0,0,EnhancementMagic
+642,RustShackle,Surrounds enemies with rusted chains that severely limit movement and reduce DEX.,0,0,EnhancementMagic
+643,BlindMist,Creates a blinding mist that severely reduces enemy Accuracy and PSI.,0,0,StatusMagic
+644,MindFog,"Clouds the mind of an enemy, massively reducing INT and SAG.",0,0,EnhancementMagic
+645,TotalWeaken,Creates a field that severely weakens all enemy stats simultaneously.,0,0,EnhancementMagic
+646,MightAura,Dramatically increases ally's Attack and COS at the cost of reduced DEX.,0,0,EnhancementMagic
+647,SwiftAura,Greatly increases ally's DEX and PSI at the cost of reduced COS.,0,0,EnhancementMagic
+648,MindAura,Dramatically boosts ally's INT and SAG at the cost of reduced Attack.,0,0,EnhancementMagic
+649,FumbleHex,"Causes an enemy to lose control of their STR, dramatically reducing their Accuracy.",0,0,EnhancementMagic
+650,PhaseShift,"Grants an ally supernatural reflexes, dramatically boosting PSI.",0,0,EnhancementMagic
+651,TrueAim,"Grants an ally supernatural precision, dramatically boosting Accuracy.",0,0,EnhancementMagic
+652,OmniBuff,Dramatically increases all stats of a single ally for a limited number of turns.,0,0,EnhancementMagic
+653,OmniDrain,Robs an enemy of all enhanced stats and further reduces their base capabilities.,0,0,EnhancementMagic
+654,RageTrance,Dramatically increases ally's Attack and critical hit rate while reducing their COS.,0,0,EnhancementMagic
+655,IronShell,Dramatically increases ally's COS and SAG while reducing their Attack and INT.,0,0,EnhancementMagic
+656,StatFlux,"Causes extreme disorientation in an enemy, reversing the effect of their stat enhancements.",0,0,EnhancementMagic
+657,TimeWarp,"Enables an ally to move with incredible speed, dramatically increasing action frequency.",0,0,EnhancementMagic
+658,IceSlow,"Creates a zero energy field that severely diminishes the target's speed, practically freezing them in time.",0,0,Cryomancy
+659,StoneSkin,Dramatically increases an ally's COS at the cost of immobilizing them.,0,0,Geomancy
+660,DivinePerfection,The ultimate enhancement spell that maximizes all stats of the entire party for a short time.,0,0,HolyMagic
+661,AbsoluteNullification,The ultimate debilitation spell that minimizes all stats of all enemies for a short time.,0,0,EnhancementMagic
+662,ChaosImpetus,A chaotic spell of raw magical energy that causes unpredictable elemental damage and random status effects.,a.mat * 8 - b.mdf * 4,0,Arcanism
+663,VoidusConsumere,"Summons the void between worlds to consume enemies, causing various debilitating effects and possible instant death.",a.mat * 10 - b.mdf * 5,9,VoidMagic
+664,TemporisDistortio,"Distorts the fabric of time around enemies, causing random temporal effects and possible stat inversions.",a.mat * 6 - b.mdf * 3,0,ChaosMagic
+665,TempestasOmnium,"Summons a chaotic tempest that randomly damages, heals, debuffs, or empowers both allies and enemies.",a.mat * 7 - b.mdf * 3.5,7,Aeromancy
+666,NumerusBestia,"Invokes the number of the beast to cause arcane devastation, draining a third of enemies' HP and causing chaotic status effects.",b.mhp * 0.33,9,HolyMagic
+667,FulmenChaos,"Calls down chaotic lightning that jumps unpredictably between targets, causing damage and paralysis.",a.mat * 9 - b.mdf * 4.5,4,Electromancy
+668,UltimumJudicium,"Invokes the final judgment, randomly causing instant death, massive damage, or complete stat reduction on all enemies.",a.mat * 12 - b.mdf * 6,0,ChaosMagic
+669,IgnisViventis,Infuses the caster's body with chaotic fire that both burns enemies and randomly alters everyone's stats.,(a.mat + a.mdf) * 5,2,Pyromancy
+670,AquaPrimordialis,Creates a pool of chaotic primordial water that randomly heals allies or damages enemies with unpredictable effects.,a.mat * 6 - b.mdf * 3,5,Hydromancy
+671,TerraFractus,"Tears the earth open beneath enemies, causing damage and randomly swapping their locations and stats.",a.mat * 8 - b.mdf * 4,6,Geomancy
+672,LuxDivinus,"Calls down divine light that judges all creatures, randomly blessing allies or smiting enemies.",a.mat * 10 - b.mdf * 5,8,Chromomancy
+673,InversioNaturae,Creates a field of chaotic energy that randomly reverses all status effects in the battlefield.,0,0,ChaosMagic
+674,SalutisProhibitum,A forbidden healing spell that fully restores an ally but causes random chaotic effects to all others.,b.mhp,0,HolyMagic
+675,VenenumChaos,Infects enemies with chaotic magical poison that randomly transforms into different status ailments.,a.mat * 5 - b.mdf * 2.5,0,Arcanism
+676,VitaFurtivus,Drains life force from enemies while randomly transferring their status effects to the caster or other enemies.,a.mat * 7 - b.mdf * 3.5,0,ChaosMagic
+677,PotentiaIncertus,Surrounds an ally with chaotic magical energy that randomly enhances some stats while reducing others each turn.,0,0,Arcanism
+678,ChaosUltimatum,The ultimate chaotic spell that creates a maelstrom of all magical energies with completely unpredictable effects.,a.mat * 15 - b.mdf * 7.5,0,Arcanism
+679,Nozh'Krathek,Ng'tleth vruk'nath shar'goleth... K'thul mordiggian s'otheq nglui...,a.mat * 20 - b.mdf * 10,0,ForbiddenMagic
+680,Xhul'Morketh,Ghz'reth malkur vy'heem k'goth... Shub'xhul nyar thol'eth naglui...,b.mhp * 0.75,9,ForbiddenMagic
+681,Thezom'Vrux,Vyr'zhul naqu'eth fha'gon thez... Gl'burtok shub'niggurath mogthol...,(a.mat + a.mdf) * 15,0,ForbiddenMagic
+682,Vril'Nazoketh,Kl'yex nazog'eth vril'qux nathrak... Thoz'oth n'ghatal yr'kith ghatanothoa...,a.mat * 25 - b.mdf * 12.5,4,ForbiddenMagic
+683,Fhor'Qithor,Zhul'thrak nyg'lathotep fhor'qith... Yib'ghul nogthul m'xathul krithek...,a.mat * 30,2,ForbiddenMagic
+684,Ur'Akimoth,Nith'drux vhal'qor zhoth'nax ur'akim... Grah'nul sothoth nyog'sothep t'yogsoth...,b.mhp,9,ForbiddenMagic
+685,Zin'Tharaq,Quhl'nek zin'thrak volguth sh'nagrath... Xhul'tharaq n'gathog ul'gynoth vhol'tek...,a.mat * 35 - b.mdf * 17.5,6,ForbiddenMagic
+686,Yog'Thulex,Yth'nax zhul'guroth naq'thel bro'khazad... Gl'uthok yogsothoth krith'nex tha'nex...,a.mat * 40 - b.mdf * 20,8,ForbiddenMagic
+687,Nil'Zhothep,Nith'ghuloth shar'thrak y'golnax zhot'grul... Xha'kul nyarlathotep shub'ygoth nith'zhol...,b.mhp * 0.9,0,ForbiddenMagic
+688,Azath'Othep,KTHUL'ZHOTEP NITH'GHULOQ YOG'XHUL NAK'THOTH... AZA'THOGUA FTAGN CTHULHU R'LYEH...,a.mat * 50 - b.mdf * 25,0,ForbiddenMagic
+689,PurifyingBlaze,"Ignites your own body in purifying flames, burning away 20% of your maximum HP.",a.mhp * 0.2,2,Pyromancy
+690,FleshConsumption,"Consumes your own flesh with magical fire, inflicting severe burns and reducing STR.",a.mhp * 0.3,2,Pyromancy
+691,ChaosSacrifice,"Sacrifices HP and mental stability to chaotic forces, causing confusion and severe magical vulnerability.",a.mhp * 0.4,0,Cryomancy
+692,VitalDrain,"Drains your own life force into nothingness, causing bleeding and severe physical weakness.",a.mhp * 0.35,0,SelfDestructive
+693,SelfElectrocution,"Channels lightning through your own body, paralyzing yourself and reducing DEX.",a.mhp * 0.25,4,Electromancy
+694,BloodFreezing,"Freezes your own blood with dark ice magic, slowing movement and reducing combat capabilities.",a.mhp * 0.3,3,Cryomancy
+695,MagicSeverance,"Severs your connection to magical energies, silencing yourself and depleting MP.",a.mhp * 0.15 + a.mmp * 0.5,0,Arcanism
+696,DeathSlumber,"Puts yourself into a deep slumber while draining life energy, causing prolonged unconsciousness.",a.mhp * 0.2,0,SelfDestructive
+697,SoulCorruption,"Invites darkness into your soul, causing severe spiritual damage and vulnerability.",a.mhp * 0.4,9,VoidMagic
+698,BoneCrushing,"Crushes your own bones with earth magic, causing knockdown and severe physical weakness.",a.mhp * 0.35,6,Geomancy
+699,DespairingSacrifice,Sacrifices nearly half your life force while inflicting multiple debilitating conditions.,a.mhp * 0.45,9,Cryomancy
+700,TotalDestruction,The ultimate self-destruction spell that nearly kills the caster while destroying their capabilities.,a.mhp * 0.8,0,SelfDestructive
+701,MemoryLoop,Forces the target to experience their worst memory on endless loop while their mind slowly unravels.,a.mat * 8 - b.mdf * 4,9,TerrorMagic
+702,ParasiteNest,"Causes thousands of invisible insects to burrow under the target's skin, eating them from within.",a.mat * 6 - b.mdf * 3,0,TerrorMagic
+703,ShadowSeverance,"Rips the shadow from the target's body, causing their form to decay as their reflection murders them.",b.mhp * 0.3,0,VoidMagic
+704,ReverseAging,"Traps the target in a pocket dimension where time passes backward, aging them until only dust remains.",a.mat * 7 - b.mdf * 3.5,0,TerrorMagic
+705,ThousandDeaths,Makes the target experience their own death in every possible way simultaneously through nightmares.,a.mat * 5 - b.mdf * 2.5,0,VoidMagic
+706,PainAmplification,Rewires the target's nervous system so their pain receptors interpret all sensations as excruciating agony.,a.mat * 6.5 - b.mdf * 3.2,4,TerrorMagic
+707,VoidGaze,"Replaces the target's eyes with windows to the void, forcing them to witness horrors beyond comprehension.",a.mat * 4 - b.mdf * 2,0,Aeromancy
+708,SoulExtraction,Splits the target's soul from their body as you destroy their physical form.,a.mat * 7.5 - b.mdf * 3.7,9,TerrorMagic
+709,ExistentialErasure,"Temporarily erases the target from existence, forcing them to experience the horror of nonbeing.",a.mat * 6 - b.mdf * 3,0,TerrorMagic
+710,GlassBones,"Turns the target's bones into glass that shatters with their every movement, filling them with shards.",a.mat * 5.5 - b.mdf * 2.7,6,TerrorMagic
+711,ElectricBlood,"Replaces the target's blood with liquid electricity, frying their organs and nervous system from within.",a.mat * 8 - b.mdf * 4,4,Electromancy
+712,TraumaCascade,Forces the target to relive every painful moment in their life simultaneously in an endless mental loop.,a.mat * 6 - b.mdf * 3,0,Chromomancy
+713,ExistentialObliteration,"The ultimate horror spell that unmakes the target from reality itself, erasing their entire existence.",(a.mat + a.mdf) * 10,0,TerrorMagic
+714,CombatFocus,"Focus your mind on combat techniques, slightly increasing Attack power.",0,0,PsychicAbilities
+715,MuscleGuard,"Tense your muscles in preparation for impact, slightly increasing COS.",0,0,MartialArts
+716,DynamicStretch,"Perform dynamic stretching exercises, slightly increasing DEX.",0,0,Training
+717,StanceTraining,"Improve your stance and footwork, slightly increasing PSI.",0,0,Training
+718,PrecisionDrill,"Practice precision striking techniques, slightly increasing Accuracy.",0,0,Training
+719,BreathControl,Perform a quick breathing exercise that slightly increases Energy and restores TP.,0,0,Training
+720,Combat Analysis,"Analyze your opponent's movements, slightly increasing critical hit rate.",0,0,MartialArts
+721,LimitBreaker,"Push your body beyond normal limits, slightly increasing Attack and DEX.",0,0,MartialArts
+722,CoreTraining,"STRen your core muscles, slightly increasing COS and SAG.",0,0,Training
+723,VitalTargeting,"Focus your aim on vital points, slightly increasing Accuracy and critical rate.",0,0,Training
+724,DefensiveDrill,"Practice dodging and parrying techniques, slightly increasing PSI and COS.",0,0,Training
+725,EnergyRestoration,"Perform a restoration exercise that freshens the mind and body, restoring HP and TP.",0,0,PsychicAbilities
+726,CombatReadiness,"Enter a state of heightened focus, slightly increasing all combat abilities.",0,0,Training
+727,RapidConditioning,Perform intense rapid training that produces quick results but is physically taxing.,0,0,Training
+728,DefensiveConditioning,"Focus completely on defensive techniques, moderately increasing COS but reducing Attack.",0,0,Training
+729,OffensiveConditioning,"Focus completely on offensive techniques, moderately increasing Attack but reducing COS.",0,0,Training
+730,BattleTraining,Undergo extensive combat training that moderately improves all physical capabilities.,0,0,Training
+731,RadiantLight,Calls down a column of holy light that heals allies and damages enemies with divine judgment.,a.mat * 2.5 - b.mdf * 1.2,8,Chromomancy
+732,DivineBarrier,Summons a divine barrier that turns an enemy's negative energy back on themselves.,a.mat * 3.5 - b.mdf * 1.8,8,HolyMagic
+733,HeavenlyJudgment,Calls upon heavenly justice to punish the wicked with searing columns of holy fire.,a.mat * 4.5 - b.mdf * 2.2,8,Pyromancy
+734,DivineHealing,"Heal wounds through divine intervention, restoring a moderate amount of HP to one ally.",b.mhp * 0.2,0,HolyMagic
+735,HealingScripture,Recite holy scripture that heals wounds for all allies with divine light.,b.mhp * 0.15,0,Chromomancy
+736,BlessingProtection,"Bless an ally with holy protection, increasing their COS and SAG.",0,0,Swordsmanship
+737,DivineEmpowerment,"Pray for divine STR to empower an ally, increasing their Attack and INT.",0,0,HolyMagic
+738,PurifyingPrayer,Cleanse an ally of negative status effects through the power of holy prayer.,0,0,Chromomancy
+739,MassPurification,Perform a ritual that cleanses all allies of negative status effects.,0,0,HolyMagic
+740,Resurrection,Resurrect a fallen ally with a fraction of their HP restored.,0,0,HolyMagic
+741,HolyCircle,Create a circle of holy light that damages all enemies with divine power.,a.mat * 3 - b.mdf * 1.5,8,Chromomancy
+742,DivineHammer,Call down a divine hammer of light that strikes a single enemy with immense force.,a.mat * 5 - b.mdf * 2.5,8,Chromomancy
+743,HolyPillars,Creates pillars of holy fire that erupt from the ground beneath multiple enemies.,a.mat * 4 - b.mdf * 2,8,Pyromancy
+744,DivineShield,Create a divine shield around all allies that reduces incoming damage.,0,0,HolyMagic
+745,MiraculousHealing,Channel miraculous healing energy that fully restores an ally's HP.,b.mhp * 0.4,0,HolyMagic
+746,DivineResurrection,"Bless a fallen ally with divine energy, resurrecting them with full HP.",0,0,HolyMagic
+747,MassHealing,Pray for miraculous healing energy that restores HP to all allies.,b.mhp * 0.25,0,HolyMagic
+748,DivineOrb,Channel divine wrath into an orb of holy energy that explodes on contact with an enemy.,a.mat * 6.5 - b.mdf * 3.2,8,Chromomancy
+749,RegenerativeBlessing,Cast a divine blessing on an ally that restores a small amount of HP each turn.,0,0,HolyMagic
+750,AngelJudgment,Summon an angel of judgment that delivers divine punishment to all enemies.,a.mat * 7 - b.mdf * 3.5,8,HolyMagic
+751,DivineAnnihilation,Channel the ultimate divine power that annihilates evil with overwhelming holy light.,a.mat * 9 - b.mdf * 4.5,8,HolyMagic
+752,DivineInsight,"Pray for divine insight, slightly increasing INT and MP recovery.",0,0,HolyMagic
+753,DivineResilience,"Pray for divine resilience, slightly increasing SAG and HP recovery.",0,0,HolyMagic
+754,ScripturalMeditation,"Meditate on holy scriptures, restoring a moderate amount of MP.",0,0,HolyMagic
+755,HolyChant,Recite a holy chant that incrasees your spiritual connection.,0,0,HolyMagic
+756,SacredVow,Take a sacred vow that creates a divine shield in front of you.,0,0,HolyMagic
+757,SpiritualTraining,Undergo spiritual training that significantly improves SAG and INT.,0,0,HolyMagic
+758,DivineCommunion,"Enter a state of divine communion, greatly enhancing your magical abilities.",0,0,MartialArts
+759,MaliceBlades,Call upon dark powers to lacerate the target's flesh with invisible blades of malice.,a.agi * 3.5 - b.mdf * 1.5,0,Swordsmanship
+760,BloodCorruption,Infuse the target's blood with a corrupting agent that gnaws at their flesh from within.,a.agi * 4.2 - b.mdf * 1.8,0,UnholyMagic
+761,SoulRitual,Invoke a dark binding that drains the target's life force while empowering the caster.,a.agi * 5 - b.mdf * 2,0,VoidMagic
+762,ShadowPack,Summon a pack of shadow hounds that tear at the flesh of all enemies with infernal teeth.,a.agi * 4.8 - b.mdf * 2.2,0,VoidMagic
+763,CorruptionVortex,Create a vortex of corrupting energy that gradually decays the target's body and mind.,a.agi * 3 - b.mdf * 1.3,0,UnholyMagic
+764,DamnationMark,Place a mark of damnation on the target that causes their skin to bubble and melt.,a.agi * 4.5 - b.mdf * 2,0,Hydromancy
+765,ScreamingSummon,"Summon screaming skulls that circle around all enemies, causing terror and spiritual damage.",a.agi * 3.8 - b.mdf * 1.7,0,UnholyMagic
+766,LifeDrain,Drain life energy from the target and use it to restore the caster's own vitality.,a.agi * 2.5 - b.mdf * 1,0,UnholyMagic
+767,ManaVampirism,"Draw magical energy from the target, restoring the caster's MP.",a.agi * 2 - b.mdf * 0.8,0,UnholyMagic
+768,BloodSacrifice,Invoke a forbidden ritual that sacrifices a portion of your HP to unleash devastating dark power.,a.agi * 6 - b.mdf * 2.5,0,Cryomancy
+769,VenomousPlague,Unleash a plague of locusts with venomous bites that swarm and attack all enemies.,a.agi * 3.2 - b.mdf * 1.4,0,UnholyMagic
+770,AbyssalTentacles,Open a portal to the abyss that releases writhing tentacles to crush a single enemy.,a.agi * 7 - b.mdf * 3,0,UnholyMagic
+771,BloodBarrier,Sacrifice blood to create a protective barrier that reduces damage and reflects a portion back to attackers.,0,0,Cryomancy
+772,DarkRitual,Create a pact with dark entities that enhances your DEX and attack power.,0,0,VoidMagic
+773,CurseRitual,"Transfer curses and status ailments from yourself to an enemy, while stealing their positive effects.",0,0,Roguery
+774,AbilityCircle,Create a circle of arcane symbols that steals the abilities of enemies.,a.agi * 3.5 - b.mdf * 1.5,0,Roguery
+775,ForbiddenResurrection,Sacrifice HP to resurrect a fallen ally with a portion of their HP and MP.,0,0,Cryomancy
+776,BlueStorm,Create a storm of spell locking  blades that slice with unholy precision.,a.agi * 6.5 - b.mdf * 2.8,0,Swordsmanship
+777,DemonicCatastrophe,Invoke the name of an ancient demonic entity to unleash catastrophic destruction on all enemies.,a.agi * 8 - b.mdf * 3.5,0,UnholyMagic
+778,DarknessPower,Draw power from dark entities to enhance your DEX and accuracy.,0,0,UnholyMagic
+779,MaliciousFocus,"Focus your mind on evil intentions, increasing your critical hit rate.",0,0,UnholyMagic
+780,MinorSacrifice,"Cut your palm to draw power from your own blood, restoring TP but sacrificing some HP.",0,0,UnholyMagic
+781,DarkChannel,"Channel dark energy into your limbs, increasing attack and PSI.",0,0,UnholyMagic
+782,DarkTrance,Enter a trance state that allows you to move with supernatural quickness.,0,0,UnholyMagic
+783,MajorSacrifice,Make a significant blood sacrifice that greatly enhances all physical capabilities but drains HP.,0,0,UnholyMagic
+784,ShadowPact,Form a pact with shadows that greatly improves stealth and PSI abilities.,0,0,Roguery
+785,UnholyTransformation,Undergo an unholy transformation.,0,0,UnholyMagic
+786,Executive Order,Overloads the opponent's mental circuits with an authoritative shout.,a.mat * 4 - b.mdf * 2,0,CEO
+787,Market Domination,Unleashes corporate psychic pressure on all opponents.,a.mat * 5,0,CEO
+788,Synergy Surge,"Raises team morale and productivity, boosting MAT and MDF.",0,0,CEO
+789,Quarterly Blast,Fires a focused stream of psychokinetic energy at a single target.,a.mat * 6 - b.mdf * 3,0,CEO
+790,Cognitive Dissonance,"Clouds the mind of an enemy, causing confusion.",0,0,CEO
+791,Streamline Protocol,"Streamlines all processes, increasing party speed and PSI.",0,0,PsychicAbilities
+792,Delegation Matrix,"Assigns clear roles and goals, boosting DEF and MDF for all allies.",0,0,PsychicAbilities
+793,Coffee Break,Restores 5 TP to the user and grants temporary speed boost.,0,0,PsychicAbilities
+794,Efficiency Surge,"Hastens a single ally’s mind, granting extra action this turn.",0,0,PsychicAbilities
+795,Termination Beam,Punishes inefficiency with a mental shock that deals damage and lowers target’s MAT.,a.mat * 6,0,PsychicAbilities
+796,Encore,Plays an energizing melody that restores 10 TP to all allies.,0,0,Performance
+797,Stage Presence,A mesmerizing performance that has a chance to charm all enemies.,0,0,Performance
+798,Solo Break,Improvised solo increases user's ATK and MAT for 3 turns.,0,0,Performance
+799,Nocturne,A haunting melody that may inflict sleep on all enemies.,0,0,Performance
+800,Feedback Blast,Generates a wall of sound that damages and deafens a single enemy.,a.mat * 3,0,Performance
+801,Water Cannon,"Blasts enemies with high-pressure water, causing water-type damage to all foes.",a.mat * 4,3,Firefighting
+802,Suppressive Spray,Douses a single enemy with an impact of water. Slightly lowers its ATK.,a.mat * 3,3,Firefighting
+803,Burn Treatment,"Applies burn ointment to all allies, restoring HP moderately.",0,0,Firefighting
+804,Rescue Axe,"Breaks down debris in the way, removing stun and paralysis from allies.",0,0,Firefighting
+805,Emergency Exit,"Forces open sealed exits, allowing all allies to escape from battle.",0,0,Firefighting
+806,Flood Protocol,Summons a deluge to douse fires and harm all Fire-type enemies.,a.mat * 5,5,Firefighting
+807,Foam Barrier,A quick shot of foam reduces incoming fire damage for 3 turns.,a.mat * 2,3,Firefighting
+808,Field Treatment,"Provides a burst of first aid, healing a single ally and curing burns.",0,0,Firefighting
+809,Ventilate,"Clears smoke and debris, boosting accuracy and PSI of allies.",0,0,Firefighting
+810,Firebreaker Charge,"Charges through flames with protective gear, damaging and stunning one enemy.",a.def * 2,0,Firefighting
+811,Baton Strike,"Strikes with a baton, potentially stunning the target.",a.atk * 2,0,LawEnforcement
+812,Freeze Command,"Orders a target to freeze, inflicting silence.",0,0,LawEnforcement
+813,Psychic Cuffs,"Restrains a foe with psychic handcuffs, inflicting bind.",0,0,LawEnforcement
+814,Tactical Fog,Releases non-lethal suppression gas that causes confusion.,a.mat * 4,0,LawEnforcement
+815,Stun Round,Fires a stun shot that deals damage and may paralyze the target.,a.mat * 5,0,LawEnforcement
+816,Commanding Voice,"Shouts with authority, lowering ATK and MAT of all enemies.",0,0,LawEnforcement
+817,Shield Bash,"Charges with a riot shield, damaging and knocking back the foe.",a.def * 3,0,LawEnforcement
+818,De-Escalate,"Absorbs enemy aggression, restoring some TP to the user.",a.mat * 4,0,LawEnforcement
+819,Flashbang,Uses flashbang to lower accuracy of all enemies.,0,0,LawEnforcement
+820,Tactical Regroup,"Quickly regains posture and composure, removing confusion or fear.",0,0,LawEnforcement
+821,Vine Lash,Strikes a single foe with whipping vines.,a.atk * 3 - b.def * 1.5,-1,PlantMagic
+822,Entangling Roots,Immobilizes a foe with entangling roots.,0,-1,PlantMagic
+823,Spore Cloud,Releases a cloud of toxic spores that poisons all enemies.,a.mat * 0.5,-1,PlantMagic
+824,Thorn Armor,Envelops self in thorny armor that damages attackers.,0,-1,PlantMagic
+825,Leech Seed,Drains HP from a foe over time.,a.atk * 0.5,-1,PlantMagic
+826,Regrowth,Regenerates the user’s HP.,b.mhp / 5,-1,PlantMagic
+827,Leaf Storm,Whips up a fierce storm of leaves that hits every enemy.,a.mat * 1.2,-1,PlantMagic
+828,Seed Bomb,Hurls a hardened seed at one enemy.,a.mat * 0.8 - b.def * 0.5,-1,PlantMagic
+829,Tree Summon,Summons a lesser treant to fight alongside you.,0,-1,Conjuration
+830,Photosynthesis,Channels sunlight to restore own HP.,a.mat * 1.5,-1,PlantMagic
+831,Barkskin,"Hardens bark, boosting defense.",0,-1,PlantMagic
+832,Seed Sprawl,Bombards all foes with exploding seeds.,a.atk * 0.7 - b.def * 0.3,-1,PlantMagic
+833,Rotting Spores,Creates a cloud that poisons all foes.,0,-1,PlantMagic
+834,Vine Surge,Rapid vines strike random foes multiple times.,(a.atk + a.mat) * 0.4 - b.def * 0.2,-1,PlantMagic
+835,Forest's Embrace,Heals all allies with forest energy.,b.mhp * 0.4,-1,PlantMagic
+836,,,,,
+837,,,,,
+838,,,,,
+839,,,,,
+840,,,,,
+841,,,,,
+842,,,,,
+843,,,,,
+844,,,,,
+845,,,,,
+846,,,,,
+847,,,,,
+848,,,,,
+849,,,,,
+850,,,,,
+851,,,,,
+852,,,,,
+853,,,,,
+854,,,,,
+855,,,,,
+856,,,,,
+857,,,,,
+858,,,,,
+859,,,,,
+860,,,,,
+861,,,,,
+862,,,,,
+863,,,,,
+864,,,,,
+865,,,,,
+866,,,,,
+867,,,,,
+868,,,,,
+869,,,,,
+870,,,,,
+871,,,,,
+872,,,,,
+873,,,,,
+874,,,,,
+875,,,,,
+876,,,,,
+877,,,,,
+878,,,,,
+879,,,,,
+880,,,,,
+881,,,,,
+882,,,,,
+883,,,,,
+884,,,,,
+885,,,,,
+886,,,,,
+887,,,,,
+888,,,,,
+889,,,,,
+890,,,,,
+891,,,,,
+892,,,,,
+893,,,,,
+894,,,,,
+895,,,,,
+896,,,,,
+897,,,,,
+898,,,,,
+899,,,,,
+900,,,,,
+901,,,,,
+902,,,,,
+903,,,,,
+904,,,,,
+905,,,,,
+906,,,,,
+907,,,,,
+908,,,,,
+909,,,,,
+910,,,,,
+911,,,,,
+912,,,,,
+913,,,,,
+914,,,,,
+915,,,,,
+916,,,,,
+917,,,,,
+918,,,,,
+919,,,,,
+920,,,,,
+921,,,,,
+922,,,,,
+923,,,,,
+924,,,,,
+925,,,,,
+926,,,,,
+927,,,,,
+928,,,,,
+929,,,,,
+930,,,,,
+931,,,,,
+932,,,,,
+933,,,,,
+934,,,,,
+935,,,,,
+936,,,,,
+937,,,,,
+938,,,,,
+939,,,,,
+940,,,,,
+941,,,,,
+942,,,,,
+943,,,,,
+944,,,,,
+945,,,,,
+946,,,,,
+947,,,,,
+948,,,,,
+949,,,,,
+950,,,,,
+951,,,,,
+952,,,,,
+953,,,,,
+954,,,,,
+955,,,,,
+956,,,,,
+957,,,,,
+958,,,,,
+959,,,,,
+960,,,,,
+961,,,,,
+962,,,,,
+963,,,,,
+964,,,,,
+965,,,,,
+966,,,,,
+967,,,,,
+968,,,,,
+969,,,,,
+970,,,,,
+971,,,,,
+972,,,,,
+973,,,,,
+974,,,,,
+975,,,,,
+976,,,,,
+977,,,,,
+978,,,,,
+979,,,,,
+980,,,,,
+981,,,,,
+982,,,,,
+983,,,,,
+984,,,,,
+985,,,,,
+986,,,,,
+987,,,,,
+988,,,,,
+989,,,,,
+990,,,,,
+991,,,,,
+992,,,,,
+993,,,,,
+994,,,,,
+995,,,,,
+996,,,,,
+997,,,,,
+998,,,,,
+999,,,,,
+1000,,,,,

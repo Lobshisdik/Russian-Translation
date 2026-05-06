@@ -1,0 +1,1058 @@
+id,name,biome_preset,level
+1,Bell Goblin,Wasteland,9
+2,Goblin Warrior,Forest,11
+3,Goblin Shaman,Forest,12
+4,Goblin Chieftain,Forest,12
+5,Forest Treant,Forest,11
+6,Dodger Imp,Infernal,14
+7,Frost Elemental,Arctic,14
+8,Desert Scorpion,Desert,16
+9,Compressed air,Arctic,16
+10,Sewers slime,Horror,33
+11,Thunder Sprite,Mountain,14
+12,Crimson Sucker,Subterranean,14
+13,Sand Golem,Subterranean,17
+14,Shadow Wraith,Horror,16
+15,Water Nymph,Aquatic,16
+16,Royal Knight,Urban,17
+17,Dark Mage,Labyrinth,21
+18,Frog Monk,Mountain,19
+19,Phantom Archer,Horror,21
+20,Shadow Thief,Labyrinth,24
+21,Fiery Sleep Demon,Infernal,21
+22,Frost Dragon,Arctic,19
+23,Void Sorcerer,Corrupted,24
+24,Royal Champion,Urban,22
+25,Ancient Lich,Arctic,27
+26,Mi-go Brain Harvester,Forest,19
+27,Deep One Hybrid,Aquatic,17
+28,Yog-Sothoth Spawn,Corrupted,22
+29,Nephilim Remnant,Horror,21
+30,Aiwass Messenger,Abyssal,24
+31,Choronzon,Corrupted,21
+32,Grey Zeta Reticulan,Alien,26
+33,Nyarlathotep Avatar,Abyssal,27
+34,Babalon Priestess,Sacred,29
+35,Annunaki Overlord,Alien,24
+36,Shoggoth,Abyssal,24
+37,Elder Thing,Horror,26
+38,Beast 666,Abyssal,27
+39,Yellow King,Abyssal,30
+40,Azathoth Fragment,Abyssal,32
+41,Cybernetic Tank,Urban,19
+42,Quantum Fluctuation,Abyssal,21
+43,Mr. Inadequate,Corrupted,1
+44,Talking Door,Wasteland,24
+45,Bureaucratic Nightmare,Urban,17
+46,Sentient Traffic Cone,Transportation,27
+47,Eternal Intern,Arctic,17
+48,Recursive Paradox,Horror,24
+49,Corporate Ninja,Mystical,27
+50,Mianni,Wilderness,24
+51,Celestial Tyrannosaurus,Mountain,21
+52,Motivational Fungoid,Forest,19
+53,Disco Revenant,Horror,22
+54,Interdimensional Tourist,Arctic,22
+55,Hyperdimensional Grimorie,Abyssal,24
+56,Sentient Meme,Abyssal,22
+57,Rotating Sawblade,Urban,21
+58,Iron Horse,Industrial,24
+59,Philosophical Zombie,Subterranean,22
+60,Glitch Entity,Abyssal,29
+61,Quantum Supersoldier,Abyssal,24
+62,Chronovore,Mountain,29
+63,Advertisement Badger,Abyssal,26
+64,Living Theorem,Abyssal,30
+65,Slime Knight,Horror,11
+66,Forest Witch,Forest,14
+67,Mechanical Golem,Subterranean,17
+68,Storm Banshee,Horror,16
+69,Crystal Siren,Subterranean,17
+70,Forest Rat,Forest,7
+71,Street Punk,Forest,9
+72,Drake Drone,Underground,9
+73,Zombie Villager,Horror,6
+74,Space Zebra,Subterranean,9
+75,Mutant Bug,Tropical,11
+76,Goblin Scout,Forest,9
+77,Cultist Acolyte,Labyrinth,7
+78,"Chronos, Time Titan",Forest,30
+79,Void Empress,Abyssal,32
+80,Primordial Golem,Subterranean,30
+81,Quantum Archon,Industrial,32
+82,Celestial Avatar,Urban,30
+83,Entropy Wyrm,Mountain,30
+84,Master Chen,Subterranean,21
+85,Diego 'Jaguar' Rodriguez,Subterranean,22
+86,Viktor 'Iron Fist' Volkov,Urban,22
+87,Akira Tanaka,Labyrinth,21
+88,Rashid Al-Sayf,Urban,22
+89,Elena 'Shadow' Rodriguez,Subterranean,24
+90,Morgana the Bloodweaver,Labyrinth,22
+91,Lilith the Corruptor,Labyrinth,24
+92,Ravenna the Shadowbinder,Forest,21
+93,Hecate the Plague Mistress,Forest,23
+94,Esmeralda the Dream Weaver,Urban,26
+95,Selene the Void Witch,Forest,21
+96,Magma Titan,Mountain,24
+97,Frost Colossus,Arctic,24
+98,Storm Behemoth,Arctic,21
+99,Tsunami Guardian,Arctic,22
+100,Earth Sentinel,Mountain,26
+101,Wind Leviathan,Aquatic,21
+102,Golden Mimic,Subterranean,14
+103,Merchant's Nightmare,Corrupted,17
+104,Crystal Hoarder,Subterranean,17
+105,Treasure Golem,Subterranean,17
+106,Luck Elemental,Infernal,21
+107,Skull Keeper,Abyssal,19
+108,Sewer Rat,Forest,8
+109,Forest Archer,Forest,21
+110,Gorgon Queen,Mountain,19
+111,Corrupted Knight,Labyrinth,19
+112,Flame Elemental,Infernal,17
+113,Aquatic Elemental,Aquatic,17
+114,Earth Elemental,Infernal,21
+115,Air Elemental,Arctic,22
+116,Vampire Lord,Horror,17
+117,Abyssal Fiend,Corrupted,21
+118,Multi-Headed Hydra,Wilderness,19
+119,Labyrinth Guardian,Subterranean,21
+120,Luminous Jellyfish,Aquatic,19
+121,Military Cyborg,Subterranean,19
+122,Combat Drone,Subterranean,17
+123,Battle Mech,Subterranean,21
+124,Sacred Phoenix,Infernal,22
+125,Ancient Dragon,Infernal,21
+126,Spectral Wisp,Horror,24
+127,Mountain Ogre,Mountain,22
+128,Taxidoggo,Wilderness,7
+129,Gray Wolf,Wilderness,14
+130,Brown Bear,Forest,16
+131,Venomous Snake,Subterranean,12
+132,Wild Boar,Forest,14
+133,Black Panther,Tropical,16
+134,Mountain Eagle,Mountain,17
+135,Tree Monkey,Forest,16
+136,Giant Scorpion,Subterranean,11
+137,Striped Tiger,Tropical,17
+138,Vampire Bat,Subterranean,16
+139,Forest Stag,Forest,14
+140,Golden Lion,Wilderness,19
+141,Giant Spider,Subterranean,12
+142,Swamp Crocodile,Mountain,16
+143,Red Fox,Forest,16
+144,Armored Rhinoceros,Mountain,21
+145,Giant Jellyfish,Aquatic,9
+146,Giant Vulture,Subterranean,14
+147,Wildcat,Wilderness,16
+148,Komodo Dragon,Arctic,14
+149,Peregrine Falcon,Wilderness,19
+150,Panda,Wilderness,22
+151,Monitor Lizard,Mountain,12
+152,Tarantula,Subterranean,11
+153,Alpha Dire Wolf,Arctic,24
+154,Hellfire Mammoth,Infernal,27
+155,Titan Anaconda,Mountain,21
+156,Megalodon,Aquatic,26
+157,Sabertooth Alpha,Mountain,29
+158,Emperor Deathstalker,Subterranean,22
+159,Volcanic Wyvern,Mountain,24
+160,Blood Leech Colossus,Underground,22
+161,Tyrant Crocodilian,Infernal,27
+162,Thunderwing Roc,Mountain,26
+163,Abyssal Hallucigenia,Subterranean,22
+164,Behemoth Gorilla,Wilderness,30
+165,Kraken Leviathan,Aquatic,24
+166,Demon Bear,Mountain,32
+167,Vampiric Nightwing,Subterranean,27
+168,Ghost Tiger,Mountain,29
+169,Titanothere Alpha,Forest,34
+170,World Serpent,Mountain,27
+171,Abyssal Sea Dragon,Arctic,29
+172,Primordial Behemoth,Wilderness,210
+173,Shock Slime,Urban,14
+174,Ancient Dragon :EP,Subterranean,60
+175,Crimson Vampire :EP,Underground,64
+176,Yog-Sothoth Spawn :EP,Abyssal,70
+177,Dragon Monk :EP,Mountain,67
+178,Motivational Speaker :EP,Subterranean,60
+179,Entropy Wyrm :EP,Corrupted,64
+180,Battle Mech :EP,Subterranean,64
+181,Hyperdimensional Grimorie :EP,Wilderness,70
+182,Celestial Avatar :EP,Wasteland,74
+183,Blood Countess :EP,Subterranean,64
+184,Diamond Mimic :EP,Underground,74
+185,Quantum Fluctuation :EP,Abyssal,64
+186,Maggot Slail,Tropical,4
+187,Plaguebro Rattus,Forest,14
+188,Reaganite,Wasteland,11
+189,Tanko,Urban,25
+190,Bi Human,Infernal,5
+191,Double Singer,Wilderness,5
+192,Cautious Opossum ,Wilderness,5
+193,Desperate Pufferfish,Aquatic,5
+194,Griphon,Wilderness,13
+195,Blood Mosquito,Wilderness,5
+196,Insect Swarm,Nature,
+197,Thor,Wilderness,
+198,Brain Swarmer,Wilderness,
+199,Orc Captain,Wilderness,4
+200,Pastoral Sheep,Wilderness,
+201,Kangaroo,Wilderness,
+202,Dread Knight,Urban,24
+203,Basilisk,Industrial,21
+204,Nightmare Mage,Labyrinth,26
+205,Alpha Warg,Wilderness,22
+206,Kraken Spawn,Aquatic,21
+207,Permafrost Dragon,Arctic,24
+208,War Hyppotaur,Subterranean,26
+209,Harpy Banshee,Horror,24
+210,Platinum Mimic,Subterranean,24
+211,Mountain Titan,Mountain,27
+212,Blood Countess,Horror,21
+213,War Idol,Subterranean,27
+214,Noble Guardian,Industrial,26
+215,Mind Flayer,Urban,26
+216,Storm Elemental,Elemental,26
+217,Jungle Constrictor,Tropical,21
+218,Coral Enchantress,Aquatic,22
+219,Infernal Warmonger,Infernal,24
+220,Abyssal Hydromancer,Aquatic,22
+221,Mystic Panther,Forest,26
+222,Siege Automation,Subterranean,27
+223,Reality Warper,Arctic,27
+224,Abyssal Serpent,Wilderness,16
+225,Moss Viper,Forest,21
+226,Living Armor,Subterranean,24
+227,Brine Wisp,Aquatic,19
+228,Deer Sprite,Infernal,21
+229,Terra Golem,Subterranean,22
+230,Zephyr Djinn,Mountain,24
+231,Siren Sniper,Aquatic,21
+232,Crimson Analizer,Corrupted,22
+233,Sorrow Specter,Horror,19
+234,Dream Weaver,Urban,22
+235,Desert Commander,Desert,17
+236,Electro Arachnid,Subterranean,22
+237,Toxic Ooze,Wetlands,27
+238,Rogue Sentinel,Industrial,21
+239,Frost Enchantress,Arctic,24
+240,Venomous Dragonfly,Subterranean,19
+241,Abyssal Tentacler,Wilderness,17
+242,Young Magma Drake,Infernal,21
+243,Juvenile Ice Wyrm,Arctic,22
+244,Shadow Blade,Horror,24
+245,Emerald Stalker,Subterranean,22
+246,Cursed Grimorie,Horror,26
+247,Caustic Slime,Wetlands,27
+248,Crimson Harvester,Subterranean,24
+249,Guardian Vindicator,Labyrinth,21
+250,Frost Weaver,Arctic,22
+251,Fossil Sentinel,Underground,24
+252,Normal pig,Horror,20
+253,Cinder Weaver,Subterranean,23
+254,Nightveil Assassin,Labyrinth,26
+255,Crumbling Colossus,Subterranean,24
+256,Wrath Dolphin,Forest,21
+257,Infernal Cerberus,Infernal,22
+258,Animated Arsenal,Subterranean,22
+259,Seafoam Enchantress,Aquatic,22
+260,Mind Sculptor,Urban,23
+261,Abyssal Hunter,Aquatic,19
+262,Molten Dragon,Infernal,20
+263,Glacier Serpent,Arctic,19
+264,Toxic Ghost,Forest,22
+265,Shadow Blade,Horror,24
+266,Animated Gravestalker,Horror,22
+267,Parrot,Subterranean,21
+268,Winter's Harbinger,Arctic,23
+269,Consecrated Guardian,Horror,19
+270,Tempest Pegasus,Elemental,25
+271,Anguish Phantom,Horror,18
+272,Reality Bender,Arctic,22
+273,Virulent Slimefiend,Corrupted,26
+274,Scarecrow Sentinel,Industrial,23
+275,Living Monolith,Subterranean,22
+276,Jungle Stalker,Tropical,21
+277,Bloodthirsty Crusader,Urban,21
+278,Ethereal Devourer,Horror,19
+279,Ocean Warlock,Aquatic,21
+280,Mountain Crusher,Mountain,23
+281,Mind Manipulator,Urban,23
+282,Proto Turret,Subterranean,25
+283,Toxic Amalgam,Forest,24
+284,Permafrost Conjurer,Arctic,22
+285,Infernal Prodigy,Infernal,21
+286,Necrotic Champion,Subterranean,22
+287,Devoted Templar,Urban,20
+288,Venom Lord,Wilderness,19
+289,Midnight Hunter,Horror,22
+290,Cloud Giant,Elemental,23
+291,Scorched Tyrant,Mountain,19
+292,Coral Enchantress,Aquatic,21
+293,Nervous System,Corrupted,19
+294,Forest's Vengeance,Forest,20
+295,Void Manipulator,Abyssal,21
+296,Primal Sloth,Forest,22
+297,Divine Arbiter,Urban,19
+298,Paralytic Slug,Subterranean,23
+299,Molten Juggernaut,Infernal,24
+300,Crimson Harbinger,Infernal,18
+301,Fey Enchantress,Mountain,22
+302,Tide Sculptor,Aquatic,20
+303,Goblin head,Horror,26
+304,Star Caller,Urban,21
+305,Essence Leech,Tropical,22
+306,Bone Commander,Horror,21
+307,Winter's Herald,Arctic,24
+308,Venomfang Archer,Tropical,24
+309,Thought Weaver,Urban,23
+310,Luminous Defender,Subterranean,21
+311,Jungle Predator,Tropical,20
+312,Ember Centipede,Mountain,18
+313,Mystic Prodigy,Urban,22
+314,Gilded Guardian,Subterranean,26
+315,Infernal Devastator,Forest,20
+316,Mountain Giant,Mountain,26
+317,Ethereal Tactician,Forest,25
+318,Frost Archmagus,Arctic,26
+319,Mutated Goblin,Horror,22
+320,Shadow Executioner,Horror,26
+321,Maelstrom Sovereign,Aquatic,23
+322,Nightmare Bacteria,Corrupted,24
+323,Crimson Patriarch,Horror,23
+324,Crag Behemoth,Subterranean,27
+325,Abyssal Horror,Abyssal,28
+326,Astral Sentinel,Abyssal,26
+327,Accursed Stonefish,Mountain,24
+328,Radiant Justicar,Subterranean,22
+329,Mind Overlord,Mountain,26
+330,Skulmire Slime,Tropical,22
+331,Mountain Devastator,Mountain,26
+332,Infernal Monarch,Infernal,22
+333,Mercury Dragon,Arctic,22
+334,Forest Sovereign,Forest,26
+335,Stone Shifter,Subterranean,8
+336,Ember Imp,Infernal,8
+337,Hand Crawler,Wetlands,9
+338,Bone Sentinel,Horror,9
+339,Shadow Stalker,Horror,10
+340,Flying pig,Wetlands,9
+341,Novice Paladin,Arctic,9
+342,Frost Apprentice,Arctic,9
+343,Lizard Sniper,Aquatic,8
+344,Rat King,Horror,9
+345,Novice Illusionist,Arctic,9
+346,Stone Guardian,Subterranean,10
+347,Fear Siphon,Horror,8
+348,Flame Frake,Forest,9
+349,Wandering Archer,Subterranean,9
+350,Zephyr Wizard,Mountain,9
+351,Siren Apprentice,Arctic,9
+352,Blood Initiate,Arctic,8
+353,Webweaver,Subterranean,9
+354,Stealthy Operative,Forest,9
+355,Magma Overlord,Forest,26
+356,Nightmare Sovereign,Corrupted,30
+357,Soul Harvester,Horror,27
+358,Mountain Devastator,Mountain,32
+359,Crimson Tyrant,Mountain,26
+360,War Colossus,Subterranean,30
+361,Obsidian Dreadnought,Subterranean,29
+362,Abyssal Devourer,Forest,30
+363,Maelstrom Leviathan,Aquatic,26
+364,Glacial Titan,Arctic,27
+365,Shadow Assassin,Urban,30
+366,Mind Tyrant,Urban,30
+367,Celestial Arbiter,Urban,26
+368,Infernal Annihilator,Infernal,26
+369,Flower Behemoth,Horror,24
+370,Void Weaver,Forest,26
+371,Storm Harbinger,Arctic,29
+372,Frost Monarch,Arctic,29
+373,Mountain King,Forest,34
+374,Bloodlord Supreme,Infernal,29
+375,Hobgoblin Runt,Forest,4
+376,Hobgoblin Scout,Forest,6
+377,Hobgoblin Archer,Forest,7
+378,Hobgoblin Shaman,Forest,6
+379,Hobgoblin Warrior,Subterranean,7
+380,Hobgoblin Firestarter,Forest,7
+381,Goblin Mounted Archer,Forest,9
+382,Goblin Cavalry,Forest,11
+383,Goblin Witch Doctor,Forest,12
+384,Goblin Elite Guard,Subterranean,14
+385,Goblin Master Sniper,Forest,17
+386,Goblin Necromancer,Forest,16
+387,Goblin War Chief,Forest,16
+388,Goblin Shadow Sorcerer,Forest,21
+389,Goblin King,Forest,22
+390,Young Ogre,Mountain,6
+391,Ogre Brute,Mountain,9
+392,Ogre Mystic,Mountain,9
+393,Orc Bruiser,Subterranean,12
+394,Ogre Fire Shaman,Mountain,12
+395,Ogre Crusher,Mountain,16
+396,Ogre Elemental Adept,Arctic,17
+397,Ogre Warlord,Subterranean,17
+398,Ogre Archmage,Mountain,22
+399,Ogre Champion,Subterranean,22
+400,Ogre Warlock King,Mountain,27
+401,"Tiamat, Mother of Chaos",Aquatic,60
+402,Dragon of the Underworld Kur,Mountain,74
+403,Primal Ocean Dragon Abzu,Aquatic,67
+404,Storm Dragon King Enlil,Arctic,74
+405,Dragon of Wisdom Enki ,Infernal,83
+406,Dragon of Death Nergal,Mountain,64
+407,Celestial Dragon Anshar,Mountain,70
+408,Supreme Dragon God Usumgallu,Mountain,83
+409,Decaying Corpse,Horror,3
+410,Rotting Skeleton,Horror,4
+411,Ghost Wisp,Horror,3
+412,Graveyard Shambler,Horror,6
+413,Bone Warrior,Subterranean,5
+414,Minor Shade,Horror,4
+415,Plague Carrier,Forest,4
+416,Ancient Skeleton,Horror,5
+417,Apprentice's Remains,Arctic,6
+418,Fallen Warrior,Horror,6
+419,Undead Archer,Horror,6
+420,Lingering Spirit,Horror,6
+421,Festering Corpse,Horror,6
+422,Forgotten Acolyte,Horror,7
+423,Armored Remains,Horror,7
+424,Graveyard Haunt,Horror,7
+425,Reanimated Guard,Horror,7
+426,Boneyard Hunter,Horror,7
+427,Abandoned Novice,Arctic,8
+428,Tomb Guardian,Horror,8
+429,Elven Scout,Forest,12
+430,Elven Swordmaster,Underground,11
+431,Elven Frost Mage,Arctic,12
+432,Elven Sharpshooter,Forest,14
+433,Elven Bladesinger,Subterranean,13
+434,Elven Flame Weaver,Urban,13
+435,Elven Mystic,Urban,14
+436,Elven Ranger Captain,Forest,16
+437,Elven Geomancer,Urban,13
+438,Elven Royal Guard,Underground,13
+439,Elven High Mage,Urban,16
+440,Bandit Grunt,Labyrinth,10
+441,Bandit Archer,Urban,11
+442,Bandit Rogue,Urban,14
+443,Bandit Mage,Labyrinth,13
+444,Bandit Assassin,Urban,16
+445,Bandit Bard,Urban,12
+446,Bandit Pyromancer,Arctic,15
+447,Bandit Scout,Urban,13
+448,Bandit Crossbowman,Urban,11
+449,Bandit Chief,Subterranean,14
+450,Bandit Cleric,Urban,12
+451,The Surgeon,Urban,16
+452,The Viper,Wetlands,17
+453,The Puppeteer,Urban,20
+454,The Cremator,Infernal,22
+455,The Scarlet Judge,Underground,18
+456,The Phantom,Horror,22
+457,The Frozen Lady,Urban,20
+458,The Dreamweaver,Urban,26
+459,The Taxidermist,Horror,19
+460,The Blood Countess,Subterranean,19
+461,Acid Bombardier,Forest,18
+462,Engorged Tick Swarm,Tropical,21
+463,Assassin Wasp,Arctic,22
+464,Hivemind Termite,Tropical,20
+465,Aquatic Mantis,Aquatic,21
+466,Blood Widow,Subterranean,21
+467,Frost Scarab,Arctic,21
+468,Magma Centipede,Infernal,22
+469,Mind Flayer Moth,Tropical,25
+470,Luminous Locust King,Grasslands,22
+471,Field Mouse,Wilderness,3
+472,Garden Frog,Wilderness,3
+473,Curious Rabbit,Forest,4
+474,Lazy Cat,Wilderness,3
+475,Tiny Chick,Arctic,3
+476,Buzzing Bumblebee,Tropical,3
+477,Slow Turtle,Wilderness,3
+478,Ladybug,Tropical,3
+479,Squirrel,Forest,4
+480,Earthworm,Wilderness,2
+481,Quacking Duck,Aquatic,3
+482,Mole,Wilderness,2
+483,Blue Jay,Wilderness,3
+484,Skunk,Wilderness,3
+485,Grasshopper,Grasslands,4
+486,Trickster Imp,Corrupted,9
+487,Shadow Stalker,Horror,11
+488,Frost Succubus,Arctic,10
+489,Nightmare Weaver,Forest,11
+490,Ember Fiend,Infernal,9
+491,Mind Leech,Corrupted,12
+492,Blood Mimic,Subterranean,10
+493,Venom Devil,Corrupted,11
+494,Soul Merchant,Corrupted,11
+495,Mirror Fiend,Corrupted,10
+496,Frost Deciever,Arctic,11
+497,Gravel Imp,Horror,10
+498,Discord Demon,Corrupted,11
+499,Soul Harvester,Arctic,12
+500,Iron Sentinel,Urban,26
+501,Radiant Defender,Subterranean,27
+502,Royal Justicar,Arctic,26
+503,Frost Knight,Subterranean,30
+504,Molten Guardian,Infernal,28
+505,Tidal Warden,Aquatic,32
+506,Stone Bulwark,Subterranean,37
+507,Celestial Protector,Urban,34
+508,Mind Shield,Urban,32
+509,Dusk Commander,Desert,35
+510,Tide Crab,Aquatic,7
+511,Coral Guardian,Aquatic,11
+512,Trident Hunter,Urban,14
+513,Deep Frost Eel,Arctic,17
+514,Abyssal Horror,Abyssal,21
+515,Siren Enchantress,Aquatic,22
+516,Luminous Angler,Aquatic,18
+517,Swordfish Sovereign,Aquatic,23
+518,Volcanic Shark,Aquatic,22
+519,Sacred Kraken,Aquatic,22
+520,Deep One Monarch,Arctic,27
+521,Bubble Squid,Aquatic,7
+522,Toxic Anemone,Aquatic,16
+523,Drowned Revenant,Horror,15
+524,Nightmare Shark,Aquatic,19
+525,Mischievous Sprite,Urban,6
+526,Flower Pixie,Mountain,7
+527,Glimmer Shrimp,Elemental,9
+528,Frost Sylph,Arctic,11
+529,Ember Sprite,Industrial,13
+530,Dream Weaver,Urban,15
+531,Zombie Whale,Abyssal,14
+532,Dryad Protector,Forest,13
+533,Twilight Satyr,Arctic,16
+534,Cave Gnome,Subterranean,12
+535,Forest Centaur,Forest,18
+536,Radiant Unicorn,Abyssal,21
+537,Poison Pooka,Wetlands,21
+538,Winter Court Knight,Arctic,23
+539,Summer Court Archon,Desert,23
+540,Fae Queen,Underground,29
+541,Surveillance Drone,Underground,7
+542,Security Bot,Subterranean,9
+543,Flame Turret,Subterranean,12
+544,Cryo Drone,Subterranean,14
+545,Holographic Decoy,Industrial,16
+546,Assault Mech,Subterranean,16
+547,Toxic Sprayer,Subterranean,16
+548,Photon Defender,Subterranean,17
+549,Neural Interface,Industrial,21
+550,Hydrokinetic Engine,Subterranean,19
+551,Seismic Tunneler,Subterranean,22
+552,Plasma Juggernaut,Subterranean,24
+553,Radiant Colossus,Arctic,26
+554,Quantum Intellect,Abyssal,30
+555,Swamp Rat,Forest,7
+556,Bog Leech,Wetlands,9
+557,Swamp Scorpion,Subterranean,21
+558,Marsh Wraith,Aquatic,14
+559,Bog Elemental,Elemental,19
+560,Bog Behemoth,Mountain,24
+561,Miasma Lantern,Infernal,17
+562,Fungal Snapjaw,Subterranean,22
+563,Swamp Gas Elemental,Aquatic,21
+564,Laughing Mire Idol,Subterranean,27
+565,Grave Monarch,Horror,30
+566,Marrow Archmage,Horror,47
+567,Ossuary Colossus,Horror,47
+568,Phylactery Guardian,Horror,37
+569,Eternal Lich-King,Horror,67
+570,Gale Sentinel,Mountain,30
+571,Tempest Djinn,Elemental,37
+572,Storm Roc,Desert,30
+573,Sky Serpent,Underground,34
+574,Stratos Sovereign,Forest,44
+575,Reef Guppy,Aquatic,3
+576,Sardine School,Aquatic,4
+577,Parrotfish Grazer,Aquatic,7
+578,Reef Shark,Aquatic,12
+579,Hammerhead Enforcer,Aquatic,17
+580,Abyssal Pixie,Corrupted,25
+581,Hellthorn Dryad,Infernal,24
+582,Blight Sylph,Corrupted,26
+583,Inferno Pooka,Infernal,26
+584,Nether Court Duchess,Corrupted,31
+585,Flame-Touched Hellhound,Infernal,21
+586,Cindermaw Hound,Forest,22
+587,Infernal Warhound,Infernal,26
+588,Cerberus Sentinel,Forest,27
+589,Brimstone Behemutt,Corrupted,30
+590,Rubber Reality Blob,Wetlands,5
+591,Wandering Eyeball,Wilderness,6
+592,Inside-Out Critter,Horror,5
+593,Squeaky Turnip Fiend,Infernal,7
+594,Pocket-Dimension Imp,Corrupted,8
+595,Fluxling Furret,Elemental,16
+596,Gloomwurm,Subterranean,19
+597,Shardmaw,Subterranean,32
+598,Spineshade,Corrupted,24
+599,Velocicorn,Underground,26
+600,Savage Berserker,Labyrinth,13
+601,Bloodaxe Raider,Mountain,14
+602,Furyhowl Barbarian,Urban,15
+603,Skullcrusher Brute,Urban,17
+604,Warborn Chieftain,Mountain,18
+605,Trashling,Wetlands,9
+606,Junkrat,Forest,11
+607,Rubbler,Subterranean,21
+608,Filth Fiend,Corrupted,19
+609,Landfill Leviathan,Horror,24
+610,Rotvulture,Subterranean,21
+611,Scrapforged,Subterranean,24
+612,Dumpster Head,Wetlands,26
+613,Plague Heap,Horror,26
+614,Chicchan Serpent Shaman,Urban,14
+615,Obsidian Visionary,Urban,16
+616,Dream Serpent High Priest,Urban,17
+617,Xibalba Glyphweaver ,Urban,15
+618,Tomekeeper of the Sunstone,Infernal,16
+619,Quetzalcoatl Channeler,Urban,18
+620,Whispering Wraith,Horror,19
+621,Veiled Phantasm,Horror,17
+622,Somnolent Apparition,Urban,20
+623,Baby Bunny,Forest,7
+624,Wild Rabbit,Forest,9
+625,Dire Rabbit,Forest,11
+626,Rabid Jackrabbit,Forest,12
+627,Totemic Sprout,Celestial,7
+628,Totem Initiate,Arctic,10
+629,Totem Guardian,Forest,14
+630,Ritual Sentinel,Arctic,17
+631,Totem Adept,Wilderness,21
+632,Totemic Protector,Forest,26
+633,Totemic Titan,Forest,30
+634,Totemic Overlord,Wilderness,37
+635,Fire Dragonling,Infernal,21
+636,Ice Dragonling,Arctic,19
+637,Storm Dragonling,Mountain,22
+638,Thunder Dragonling,Mountain,24
+639,Cultist of Cthulhu,Labyrinth,90
+640,Cultist of Nyarlathotep,Labyrinth,90
+641,Cultist of Yog-Sothoth,Arctic,90
+642,Cultist of Shub-Niggurath,Forest,90
+643,Gnome Peasant,Urban,11
+644,Gnome Scout,Urban,11
+645,Gnome Tinkerer,Urban,11
+646,Gnome Trickster,Urban,11
+647,Gnome Miner,Labyrinth,11
+648,Gnome Herbalist,Urban,11
+649,Gnome Engineer,Arctic,19
+650,Gnome Bombardier,Urban,19
+651,Gnome Alchemist,Urban,19
+652,Gnome Warlock,Labyrinth,19
+653,Gnome Shaman,Urban,19
+654,Gnome Artificer,Arctic,19
+655,Feral Alley Cat,Wilderness,5
+656,Catfish,Aquatic,4
+657,Catican,Forest,6
+658,Catizard,Aquatic,4
+659,Cobalt-footed Rex,Aquatic,17
+660,Umbra Panthera,Abyssal,21
+661,Emberclaw Bear,Mountain,54
+662,Thundermaw Ursine,Mountain,50
+663,Frostfang Bear,Arctic,54
+664,Void Howler,Mountain,60
+665,Phantom Chloroblade,Forest,40
+666,Xylomanti Florous ,Wilderness,47
+667,Nepenthe Mycoastrum,Mountain,34
+668,Rattus Sapscream,Wetlands,54
+669,Eldergloom Sporemantle,Industrial,60
+670,Creeping Luminspore,Forest,67
+671,Crystalline Shardbeast,Subterranean,26
+672,Obsidian Burrower,Subterranean,24
+673,Geode Hydra,Subterranean,27
+674,Petrified Enforcer,Subterranean,29
+675,Quake-Maw Titan,Subterranean,27
+676,Doped Chimp,Industrial,67
+677,Fiery Deity,Industrial,74
+678,Cogwork Bulwark,Industrial,80
+679,Iron Bastion Automaton,Industrial,87
+680,Brass Sentinel Mk. IV,Forest,93
+681,Novice Boxer,Arctic,7
+682,Amateur Pugilist,Labyrinth,9
+683,Street Brawler,Labyrinth,12
+684,Professional Boxer,Labyrinth,16
+685,Champion Contender,Labyrinth,19
+686,Elite Boxing Champion,Labyrinth,22
+687,Data Drone,Arctic,10
+688,Security Sentinel,Industrial,19
+689,Network Overlord,Industrial,26
+690,Cognitive Bacteria,Industrial,30
+691,Singularity Prime,Industrial,34
+692,Sandstrider Varanus,Desert,17
+693,Marshjaw Heloderma,Mountain,18
+694,Crystalback Sceloporus,Subterranean,19
+695,Mossscale Amphibolurus,Forest,20
+696,Spinescale Pogona,Mountain,21
+697,Cinderthroat Varanus,Infernal,22
+698,Murkwallow Ghoul,Horror,14
+699,Gravebound Revenant,Horror,17
+700,Corpsecarver Knight,Urban,19
+701,Cryptborn Shrieker,Horror,17
+702,Bonechewer Devourer,Horror,21
+703,Dominant Taskmaster,Urban,21
+704,Pain Enthusiast,Forest,24
+705,Chainbound Fury,Subterranean,19
+706,Silken Enchantress,Arctic,21
+707,Blinding Sadist,Subterranean,19
+708,Goblin Mosh Lord,Forest,30
+709,Goblin Shrieker,Forest,34
+710,Goblin Head,Forest,34
+711,Goblin Riot Caster,Forest,40
+712,Goblin Metal Warlord,Forest,40
+713,Shellbreaker Bulwark,Infernal,27
+714,Coralic Warcaster,Mountain,24
+715,Acidic Tidecaller,Wilderness,24
+716,Gilded Zapback,Wilderness,21
+717,CrystalCarapace Sentinel,Subterranean,24
+718,Tempest Wyvern,Subterranean,44
+719,Infernal Pyromancer,Subterranean,47
+720,Crystal Giant,Subterranean,50
+721,Obsidian Wraith,Infernal,47
+722,Earthen Colossus,Subterranean,60
+723,Chrono Consumer,Abyssal,47
+724,Inferno Archivist,Forest,50
+725,Mechanized Harbinger,Industrial,40
+726,Abyssal Siren,Aquatic,40
+727,Ember Warder,Subterranean,30
+728,Ember Caster,Arctic,11
+729,Frost Weaver,Arctic,12
+730,Storm Caller,Mountain,14
+731,Tide Sorcerer,Aquatic,16
+732,Arcane Archmage,Urban,19
+733,Halo Acolyte,Arctic,9
+734,Luminous Deacon,Urban,12
+735,Seraphic Emissary,Subterranean,16
+736,Radiant Archpriest,Arctic,19
+737,Prismatic Polychromus,Subterranean,21
+738,Mimic shaped box,Subterranean,17
+739,Chromatic Manticore,Industrial,21
+740,Palette Phantom,Subterranean,19
+741,Sculptor's Sorrow,Horror,19
+742,Luminescent Mycelian,Horror,34
+743,Aether Splicer,Arctic,50
+744,Gloomscale Basilisk,Mountain,37
+745,Cinderheart Scion,Infernal,47
+746,Echo Wisp,Horror,47
+747,Arctic Wolf,Wilderness,29
+748,Scavenging Coyote,Subterranean,26
+749,Mad Boar,Wilderness,27
+750,Kodiak Bear,Arctic,32
+751,Rummaging Opossum,Subterranean,22
+752,Rhinobeetle,Wilderness,22
+753,Spikey Porcupine,Wilderness,17
+754,Stomping Elephant,Mountain,27
+755,Shadow Bat,Subterranean,30
+756,Tunneling Mole,Wilderness,14
+757,Sand Cobra,Desert,21
+758,Polar Bear,Mountain,24
+759,Rancorous Bull,Wilderness,21
+760,Ominous Raven,Arctic,26
+761,Bald Eagle,Wilderness,27
+762,Dune Fang,Desert,21
+763,Frostback Ursid,Arctic,24
+764,Ironhoof Charger,Subterranean,21
+765,Nightwisp,Celestial,26
+766,Carrion Stalker,Subterranean,26
+767,Psionic Fenbeast,Wilderness,22
+768,Chromatic Tick,Tropical,27
+769,Guttural Maggotus,Tropical,19
+770,Sporeburst Myconid,Forest,21
+771,Sonic Molten Drakebat,Subterranean,24
+772,Moonlit Wendigo,Forest,24
+773,Rotwood Entangler,Forest,21
+774,Bloodbell Cow,Forest,17
+775,Marsh Murkweb,Subterranean,22
+776,Rabid Coyote,Wilderness,26
+777,Mothshade Stalker,Tropical,21
+778,Chupacabra Fiend,Infernal,19
+779,Lake Lurker Serpent,Aquatic,18
+780,Gatorghast Horror,Tropical,21
+781,Flatwood Sentinel,Forest,19
+782,Barbed Manticore,Infernal,24
+783,Petrifying Gorgon,Mountain,21
+784,Abyssal Leviathan,Aquatic,29
+785,Timeworn Owlbear,Mountain,22
+786,Majestic Griffon,Mountain,27
+787,Haunting Scarecrow,Subterranean,9
+788,Spectral Wardstone,Horror,10
+789,Phantom Marionette,Horror,8
+790,Rattling Remains,Forest,10
+791,Will-O-’-Wisp Lamp,Horror,11
+792,Terraclaw Tortoise,Wilderness,67
+793,Pyroshell Tortoise,Infernal,60
+794,Frostback Tortoise,Arctic,74
+795,Stormshell Tortoise,Mountain,57
+796,Tidalcarapace Tortoise,Aquatic,64
+797,Steelshell Tortoise,Horror,83
+798,Galeshell Tortoise,Mountain,54
+799,Dawnshell Tortoise,Infernal,60
+800,Nightcurse Tortoise,Corrupted,50
+801,Giant Rat,Subterranean,14
+802,Goblin Grunt,Forest,16
+803,Goblin Marksman,Forest,14
+804,Acid Ant,Tropical,16
+805,Death Axolotl,Wetlands,9
+806,Magma Ant,Subterranean,14
+807,Fire Centipede,Infernal,21
+808,Molten Efreeti,Corrupted,34
+809,Blazing Inferno Elemental,Subterranean,67
+810,Obsidian Hellhound,Subterranean,67
+811,Crimson Magma Drake,Mountain,60
+812,Searing Magma Wyrm,Subterranean,67
+813,Basaltstone Golem,Subterranean,67
+814,Emberback Hellscorpion,Subterranean,57
+815,Pyroclast Phoenix,Subterranean,74
+816,Ophanim Judicator,Wasteland,67
+817,Seraph of the Seventh Veil,Celestial,74
+818,Cherubic Host-Alpha,Wasteland,80
+819,Dominion of the Flame,Extreme,87
+820,Archangel Mortifier,Arctic,100
+821,Novice Shaolin Acolyte,Arctic,21
+822,Iron Palm Disciple,Mountain,34
+823,Zen Fist Master,Labyrinth,47
+824,Bogscale Hunter,Wetlands,18
+825,Marshjaw Stalker,Tropical,20
+826,Fenclaw Brute,Wetlands,22
+827,Haunted Mannequin,Horror,11
+828,Twisted Marionette,Horror,14
+829,Stringbound Abomination,Subterranean,21
+830,Bioluminescent Caveworm,Subterranean,7
+831,Crystalline Skulker,Subterranean,11
+832,Echo Maw,Subterranean,12
+833,Bog Hatchling,Wilderness,2
+834,Marsh Skulk,Urban,7
+835,Quagmire Creeper,Wilderness,11
+836,Mire Spider,Nature,15
+837,Bog Mutant,Wilderness,19
+838,Swamp Leech Queen,Wetlands,22
+839,Velociraptor,Forest,26
+840,Mire Hydra,Wilderness,29
+841,Bog Golem,Elemental,32
+842,Swamp Leviathan,Wetlands,35
+843,Mire Dragon,Arctic,40
+844,Wooden Flower,Forest,9
+845,Barkhide Bruiser,Wilderness,11
+846,Timberwood Shaman,Forest,12
+847,Sylvan Barkstalker,Forest,17
+848,Elderwood Guardian,Forest,24
+849,Armored Beaver,Urban,11
+850,Primal Kangaroo,Grasslands,12
+851,Night Raccoon,Subterranean,9
+852,Giant Penguin,Aquatic,16
+853,Spiny Sprinter,Grasslands,14
+854,Sea Turtle,Aquatic,17
+855,Soldier Ant Colony,Tropical,17
+856,Umber Moth Swarm,Forest,11
+857,Wise Owl,Forest,12
+858,Ominous Raven Murder,Wetlands,17
+859,Giant Slithering Snail,Subterranean,17
+860,Ochre Jelly Swarm,Wasteland,12
+861,Mannequin,Wasteland,9
+862,Emerald Ooze,Underground,12
+863,Azure Slime,Underground,11
+864,Crimson Jelly,Underground,15
+865,Golden Pudding,Underground,12
+866,Void Gel,Underground,16
+867,Molten Slag,Infernal,19
+868,Frost Slime,Frozen,17
+869,Thunder Blob,Underground,21
+870,King Slime,Underground,27
+871,Toxic Sludge,Polluted,13
+872,Rainbow Slime,Underground,22
+873,Sand Slime,Underground,15
+874,Seeing Slime,Underground,17
+875,Mud Slime,Underground,11
+876,Pumpkin Slime,Underground,18
+877,Pink Slime,Underground,11
+878,Grotesque Slime,Underground,20
+879,Green Slime,Fungal,10
+880,Grass Slime,Underground,11
+881,Shadow Bat,Underground,19
+882,Crimson Fish,Aquatic,19
+883,Corrupted Bioslave,Forest,17
+884,Spectral Songbird,Horror,21
+885,Flying Pig,Agricultural,17
+886,Dust Devil Bird,Desert,19
+887,Shadow Crawler,Forest,16
+888,Cursed Candle,Infernal,17
+889,Void Parasite Plant,Abyssal,17
+890,Abyssal Crab,Wilderness,17
+891,Grasping Shadow,Underground,17
+892,Umbral Basilisk,Aquatic,15
+893,Death's Head,Horror,16
+894,Void Desolator,Underground,11
+895,Shadow Tortoise,Aquatic,19
+896,Creeping Shade,Aquatic,16
+897,Hollow Goat,Aquatic,17
+898,Tonno Dimensionale,Aquatic,17
+899,Blank Emergence,Abyssal,18
+900,Blick,Wasteland,22
+901,Em,Horror,17
+902,Bubba,Aquatic,17
+903,Bloated Whale,Aquatic,
+904,Overworked Villager,Wilderness,
+905,Meat Puppet Theater,Wasteland,52
+906,Whispering Door,Celestial,58
+907,Memory Leech,Underground,55
+908,Bone Orchestra,Horror,60
+909,Womb of Nightmares,Abyssal,62
+910,Inverted Angel,Sacred,63
+911,Foul Gouger,Infernal,51
+912,Backwards Doll,Wasteland,56
+913,Fleshweaver Spider,Underground,59
+914,Totem of Sins,Wilderness,64
+915,Hollow Mother,Horror,61
+916,Badass Pigeon,Underground,67
+917,Bleeding Statue,Wilderness,63
+918,Surgeon of Souls,Wilderness,68
+919,Crying Tree,Wasteland,72
+920,Umbilical Strangler,Wasteland,57
+921,Grief Collector,Wilderness,71
+922,Maternity Ward,Wilderness,75
+923,Screaming Jar,Wilderness,53
+924,Hunger Incarnate,Wilderness,66
+925,Temporal Hornet,Nature,58
+926,Baptism Font,Wilderness,70
+927,Identity Thief,Desert,54
+928,Orphanage Warden,Celestial,69
+929,Lullaby Wraith,Horror,56
+930,Puppet Master's Corpse,Horror,65
+931,Feast of Famine,Wilderness,78
+932,Abortion Mimic,Underground,74
+933,Childhood's End,Wasteland,67
+934,Emotional Leech,Wilderness,54
+935,Horseshoe Crab,Aquatic,73
+936,Geometry Devourer,Wilderness,59
+937,Inverted Hunger,Wilderness,55
+938,Temporal Barnacle,Underground,64
+939,Probability Spider,Alien,61
+940,Breathing Building,Urban,76
+941,Mathematics Eater,Celestial,57
+942,Inside-Out Whale,Abyssal,71
+943,Mirror Basher,Wilderness,66
+944,Gravity Worm,Celestial,63
+945,Color Out of Sound,Wilderness,52
+946,Flesh Calculator,Industrial,68
+947,Backwards Tree,Forest,74
+948,Thought Parasite,Forest,51
+949,Sentient Wound,Wilderness,56
+950,Non-Euclidean Crab,Celestial,69
+951,Vorthak the Membrane-Ripper,Alien,105
+952,Yith'oghra the Consensus-Breaker,Celestial,115
+953,Mor'dun the Flesh-Architect,Wasteland,125
+954,Qel'thuzad the Memory-Eater,Underground,135
+955,Nyth'aggoth the Concept-Corruptor,Cosmic,145
+956,Shal'thyss the Void-Surgeon,Abyssal,155
+957,Gul'magoth the Time-Weaver,Celestial,165
+958,Xoth'nagal the Dream-Plague,Celestial,175
+959,Vel'korthak the Reality-Breeder,Celestial,185
+960,Zhoth'aggur the Silence-Weaver,Abyssal,200
+961,Primordial Terror Rex,Wasteland,82
+962,Colossal Mammoth King,Frozen,84
+963,Titanic Cave Bear,Underground,83
+964,Megalodon Prime,Aquatic,85
+965,Thunder Lizard Colossus,Wilderness,86
+966,Dire Saber-tooth Alpha,Arctic,87
+967,Armored Rex Lord,Cosmic,88
+968,Giant Terror Bird,Wasteland,89
+969,Primordial Dragon Turtle,Arctic,90
+970,Crawling Hand,Wilderness,2
+971,Eyeball Slug,Wilderness,1
+972,Tooth Ratkin,Horror,2
+973,Backwards Bird,Desert,3
+974,Skin Balloon,Underground,4
+975,Draconic Dragonfly,Forest,5
+976,Giggling Skull,Horror,6
+977,Finger Worm,Horror,7
+978,Weeping Mask,Celestial,8
+979,Tongue Leech,Wilderness,8
+980,Pocket Watch Scarab,Forest,9
+981,Wild ripper,Underground,10
+982,Baby Doll Head,Agricultural,11
+983,Tooth Fairy,Horror,12
+984,Rib Cage Crab,Aquatic,12
+985,Eyeless Bat,Subterranean,13
+986,Cone Mimic,Underground,13
+987,Whisper Wisp,Mystical,14
+988,Hair Ball,Wilderness,14
+989,Organ Grinder Monkey,Tropical,15
+990,Ink Blot Child,Wilderness,15
+991,Razorback Boar,Forest,10
+992,Feral Hyena Pack,Horror,10
+993,Spined Lizard,Desert,11
+994,Maned Terror Wolf,Wasteland,11
+995,Horned Bear,Horror,12
+996,Saber Cat,Civilization,12
+997,Armored Purcupine,Mountain,13
+998,Crushing Boa,Forest,13
+999,Bull Wyvern,Mountain,14
+1000,Monstrous Badger,Wilderness,14
+1001,Maleficent Ape,Tropical,15
+1002,Dire Pig,Wilderness,15
+1003,Frost Hare,Frozen,2
+1004,Snow Werewolf,Frozen,3
+1005,Ice Lemming,Frozen,2
+1006,Tundra Crow,Frozen,4
+1007,Arctic Fox,Frozen,5
+1008,Frozen Bat,Frozen,6
+1009,Ice Wolf Pup,Arctic,7
+1010,Permafrost Beetle,Frozen,8
+1011,Seal Pup,Frozen,8
+1012,Blizzard Owl,Frozen,9
+1013,Glacier Crab,Aquatic,10
+1014,Frost Spider,Frozen,11
+1015,Young Yeti,Frozen,12
+1016,Ice Kangaroo,Frozen,13
+1017,Tundra Mammoth Calf,Frozen,14
+1018,Reflective Tiger,Frozen,15
+1019,Boxing Elemental,Arctic,14
+1020,Free Lobster,Aquatic,7
+1021,Thirsty Camel,Wilderness,
+1022,Rabid Hyena,Wilderness,
+1023,Disco Beetle,Forest,1
+1024,Bubble Squid,Aquatic,2
+1025,Origami Crane,Urban,2
+1026,Cotton Fox,Underground,3
+1027,Kazoo Imp,Infernal,3
+1028,Rubber Familiar,Urban,3
+1029,Glitter Goblin,Underground,4
+1030,Meme Ghost,Horror,4
+1031,Sushi Snail,Underground,5
+1032,Electromagnetic Ghoul,Technology,4
+1033,Karaoke Banshee,Civilization,5
+1034,Pillow Guardian,Underground,5
+1035,Vegetal Vampire,Combat,3
+1036,Expired Ooze,Underground,4
+1037,Fidget Sprite,Mystical,3
+1038,Anxiety Elemental,Civilization,4
+1039,Flamingo Sentinel,Civilization,5
+1040,Caffeinated Squirrel,Horror,2
+1041,Tax Collector,Urban,5
+1042,Tourist Skeleton,Horror,4
+1043,Pregnant Seahorse,Urban,2
+1044,Golden Seahorse,Wilderness,4
+1045,Apprentice Pyromancer,Fortress,3
+1046,Frost-Touched Thrall,Frozen,5
+1047,Desert Raider,Desert,2
+1048,Lost Memory,Mystical,4
+1049,Pit Fighter,Underground,3
+1050,Swamp Witch Novice,Forest,5
+1051,Sky Bard,Celestial,2
+1052,Crypt Sentinel,Horror,3
+1053,Spore Wanderer,Horror,5
+1054,Forest Poacher,Forest,4
+1055,Young Fake Hydra,Celestial,5
+1056,Mine Slave,Underground,2
+1057,Wasteland Beaver,Aquatic,4

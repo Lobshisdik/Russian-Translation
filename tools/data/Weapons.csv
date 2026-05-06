@@ -1,0 +1,490 @@
+id,name,weight
+1,Short Sword,1500
+2,Long Sword,1500
+3,Falchion,250
+4,Mithril Sword,500
+5,Dragon Blade,250
+6,,250
+7,Wooden Staff,1000
+8,Magic Wand,100
+9,Force Wand,100
+10,Mithril Rod,500
+11,Dragon Staff,1000
+12,,250
+13,Stone Flail,2800
+14,Bronze Flail,2800
+15,Morning Star,3000
+16,Mithril Flail,500
+17,Dragon Flail,2800
+18,,250
+19,Hand Axe,2000
+20,Battle Axe,900
+21,Bardiche,250
+22,Mithril Axe,500
+23,Dragon Axe,2000
+24,,250
+25,Short Spear,2000
+26,Long Spear,2000
+27,Halberd,3500
+28,Mithril Spear,500
+29,Dragon Spear,2000
+30,,250
+31,Cestus,250
+32,Bagh Naka,300
+33,Iron Claw,80
+34,Mithril Claw,500
+35,Dragon Claw,80
+36,,250
+37,Short Bow,1500
+38,Long Bow,1500
+39,Crossbow,3000
+40,Mithril Bow,500
+41,Dragon Bow,1500
+42,,250
+43,Knife,40
+44,Daggar,250
+45,Machete,250
+46,Mithril Daggar,500
+47,Dragon Daggar,250
+48,,250
+49,,250
+50,,250
+51,Bronze Age Sword,1500
+52,Scimitar,1400
+53,Zweihander,250
+54,Rapier,1000
+55,Katana,1200
+56,Runic Blade,250
+57,Shadowsteel Sword,1500
+58,Pistol,1000
+59,Shotgun,3500
+60,Assault Rifle,3800
+61,Sniper Rifle,6000
+62,SMG,3000
+63,Boomerang,250
+64,Sling,250
+65,Dory Spear,2000
+66,War Club,250
+67,Khopesh,250
+68,War Hammer,4000
+69,Poleaxe,2000
+70,Flail,2800
+71,Gladiator Net,250
+72,Katar,250
+73,Combat Knife,300
+74,Compound Bow,1500
+75,Heavy Machine Gun,10000
+76,RPG,250
+77,Brass Knuckles,250
+78,Plasma Rifle,4000
+79,Energy Blade,250
+80,Sonic Gauntlet,250
+81,Laser Rifle,3500
+82,Gravity Crusher,250
+83,Flamesong Blade,250
+84,Void Edge,250
+85,World Tree Staff,1000
+86,Aetherial Bow,1500
+87,Thornwhip,800
+88,Flying Ring Chain,20
+89,Urumi,250
+90,Three-Section Staff,1000
+91,Deer Horn Knives,800
+92,Poison Blowpipe,250
+93,Cyberarm Cannon,355
+94,Neural Claws,80
+95,Micro-Missile Array,250
+96,Polymorphic Arsenal,250
+97,Optical Beam System,250
+98,Thundercaller Staff,1000
+99,Eternal Flame Sword,1500
+100,Frostbite Bow,1500
+101,Earthshaker Maul,250
+102,Tempest Trident,250
+103,Excalibur,250
+104,Mjölnir,250
+105,Dimensional Cutter,250
+106,Divine Talons,100
+107,Staff of Eternity,1000
+108,Volt Edge,250
+109,Explosive Crossbow,3000
+110,Luminous Kukris,250
+111,Dragon Scale Blade,100
+112,Paralyzer,250
+113,Yggdrasil Branch,250
+114,Astral Saber,1100
+115,Adamantine Fists,1000
+116,Splitting Shuriken,50
+117,Iron Tonfa,250
+118,Training Nunchaku,250
+119,Steel Nunchaku,500
+120,Four-Section Staff,1000
+121,Iron Knuckles,250
+122,Mithril Strike Gloves,500
+123,Master's Gauntlets,1500
+124,Steel Chair,5000
+125,Breakaway Table,15000
+126,Heavy Chain,250
+127,Ring Bell,150
+128,Steel Ladder,500
+129,Champion's Belt,150
+130,Shinai,250
+131,Twin Sai,250
+132,Flexible Staff,1000
+133,Arm Bracers,250
+134,Knife Hand,40
+135,Flying Kicks,250
+136,Metal Men,250
+137,Kendo Bokken,250
+138,Tekko-kagi,250
+139,Rope and Hook,2000
+140,Trash Can Lid,355
+141,Flintlock Pistol,1000
+142,Musket,250
+143,Percussion Revolver,1100
+144,Lever Action Rifle,4000
+145,Double-Barrel Shotgun,3500
+146,Gatling Gun,250
+147,Blunderbuss,250
+148,Dueling Pistol,1000
+149,Bolt-Action Rifle,4000
+150,Six-Shooter,250
+151,9mm Pistol,1000
+152,Compact SMG,3000
+153,Magnum Revolver,1100
+154,Combat Shotgun,3500
+155,Bullpup Rifle,4000
+156,DMR,250
+157,LMG,250
+158,PDW,250
+159,Anti-Material Rifle,4000
+160,Disposable Rocket,250
+161,Match Grade Pistol,1000
+162,Smart Grenade Launcher,400
+163,Tactical Shotgun,3500
+164,Precision Rifle,4000
+165,HMG,250
+166,Minigun,250
+167,Double-Barrel Pistol,1000
+168,Tactical Carbine,250
+169,Heavy Sniper,250
+170,Tactical Crossbow,3000
+171,Stone Axe,2000
+172,Wooden Club,800
+173,Bone Dagger,200
+174,Throwing Stick,10
+175,Javelin,250
+176,Obsidian Blade,250
+177,Retiarius Net,250
+178,Mesopotamian Sword,1500
+179,Sumerian Spear,2000
+180,Egyptian Axe,2000
+181,Atlatl Dart,250
+182,Fiber Sling,250
+183,Stone-Studded Club,250
+184,Shark Tooth Club,250
+185,Macuahuitl,250
+186,Bola,250
+187,Mere Club,250
+188,Gladius,250
+189,Pilum,250
+190,Shamshir,250
+191,Composite Bow,1500
+192,Medieval Flail,2800
+193,Blackjack,250
+194,Longsword,1800
+195,Claymore,1500
+196,Halberd,3500
+197,Lucerne Hammer,600
+198,Chu-Ko-Nu,250
+199,Naginata,250
+200,Knuckle Dusters,250
+201,Rope Dart,2000
+202,Bagh Nakh,300
+203,Estoc,250
+204,Flanged Mace,2500
+205,Bamboo Blowgun,250
+206,Kukri,250
+207,Iklwa,250
+208,Matchlock Musket,250
+209,Wheellock Pistol,1000
+210,Urumi Whip Sword,1500
+211,Bullwhip,250
+212,Patag,250
+213,Katar,250
+214,Shongo,250
+215,Hand Cannon,355
+216,Iron Grenade,400
+217,Flintlock Blunderbuss,250
+218,Pepperbox Revolver,1100
+219,Rifle Bayonet,4000
+220,Rifled Musket,4000
+221,Gatling Gun,250
+222,Breech-Loading Rifle,4000
+223,Military Bolt-Action,250
+224,Tommy Gun,250
+225,M1 Garand,250
+226,Flamethrower,250
+227,MP40,250
+228,Grenade Launcher,400
+229,M14 Battle Rifle,4000
+230,AKS-74U,250
+231,Marksman Rifle,4000
+232,Anti-Material Rifle,4000
+233,MANPADS,250
+234,Railgun Prototype,7000
+235,Coilgun,5500
+236,Active Denial System,250
+237,Sonic Staff,1000
+238,Air Pistol,1000
+239,Foam Projector,250
+240,Electro-Net Launcher,250
+241,Golden Varlenia Blade,250
+242,Varlenia Twinblades,250
+243,Varlenia Arcane Staff,1000
+244,Varlenia Energy Bow,1500
+245,Varlenia Fist,250
+246,Varlenia Returning Spear,2000
+247,Varlenia Cleaver,250
+248,Varlenia Beam Rifle,4000
+249,Varlenia Chain Whip,250
+250,Varlenia War Fan,250
+251,Stone Darts,250
+252,Wooden Nunchaku,800
+253,Quarterstaff,1200
+254,Escrima Sticks,250
+255,Chakram,250
+256,Meteor Hammer,600
+257,Tessen,250
+258,Volley Gun,250
+259,Riot Gun,250
+260,Gas Launcher,250
+261,Wooden Stake,800
+262,Blessed Silver Sword,1500
+263,Fire Lance,3500
+264,Wind Staff,1000
+265,Net Crossbow,3000
+266,Venom Claws,50
+267,Petrified Staff,1000
+268,Aerodynamic Blade,250
+269,Advanced Compound Bow,1500
+270,Water Jet Cutter,250
+271,Frost Whip,250
+272,Obsidian Sword,1500
+273,Tranquilizer Rifle,50
+274,Seismic Hammer,600
+275,Lightning-Struck Staff,1000
+276,Disc Launcher,250
+277,Vibro Blade,250
+278,Heat Ray,250
+279,Shock Gauntlets,1500
+280,Starmetal Blade,250
+281,Eye of Insight Staff,1000
+282,Dragonbone Bow,500
+283,Shadowsteel Blade,500
+284,Volcanic Greataxe,355
+285,Leviathan Fang Spear,2000
+286,Thunder Lizard Gauntlets,1500
+287,Arcane Crossbow,3000
+288,Soul Drain Flail,2800
+289,Morphblade,250
+290,Banshee's Wail,250
+291,Celestial Hammer,600
+292,Frost Dragon Claws,80
+293,World Tree Branch,250
+294,Soulstring Bow,20
+295,Hero's Legacy,250
+296,Bloodthirster,250
+297,Earthshaker Mace,2500
+298,Dimension Blade,250
+299,Infinite Quiver,250
+300,Lightning Elemental Fists,250
+301,Chronomancer's Staff,1000
+302,Twilight Edge,250
+303,Moonlight Bow,1500
+304,Bound Elemental Axe,2000
+305,Phoenix Heartstring,500
+306,Nightmare Gauntlets,1500
+307,Spellbreaker Blade,250
+308,Unicorn Horn Staff,2000
+309,T-Pillar Blade,1
+310,Vulture Totem Staff,1000
+311,Fox Spirit Fists,250
+312,Stellar Sling,250
+313,Boar Totem Hammer,600
+314,Serpent Caller,10
+315,Cosmic Pendulum,10
+316,Soul Cleaver,250
+317,Crane Talons,100
+318,Bull Totem Bow,800
+319,Star Cutter,250
+320,Portal Disc,250
+321,Knowledge Seeker,250
+322,Celestial Alignment Rod,250
+323,Gravity Spear,2000
+324,Skystone Greatsword,3000
+325,Phasing Touch,250
+326,Liquid Stone Whip,250
+327,Planar Divider,250
+328,Thought Projector,250
+329,Timeflow Manipulator,250
+330,EHI Crude Projector,250
+331,EHI Petroleum Edge,250
+332,EHI Toxic Amplifier,500
+333,EHI Petrochem Injectors,250
+334,EHI Knowledge Injector,250
+335,EHI Compression Maul,250
+336,EHI Omniscient Binder,500
+337,EHI Memetic Rifle,4000
+338,EHI Omniscience Edge,250
+339,EHI Combustion Lance,3500
+340,EHI Forbidden Codex,500
+341,EHI Psychoactive Talons,100
+342,EHI Identity Eraser,250
+343,EHI Petrocorruptor,250
+344,EHI Headache Inducer,250
+345,EHI Suicide Bomber,250
+346,EHI Flesh Dissolver,250
+347,EHI Brain Hemorrhager,250
+348,EHI Apocalypse Fists,250
+349,EHI Petroleum Omniscience,250
+350,Mind Projector Staff,1000
+351,Telekinetic Gauntlets,1500
+352,Psionic Edge,250
+353,Mind Arrow Bow,30
+354,Psychic Crown,200
+355,Brainwave Amplifier,500
+356,Force Crush Gloves,200
+357,Memory Thief,250
+358,Mind Shield Circlet,200
+359,Spell Absorber,500
+360,Wardbreaker Blade,250
+361,Spellbreaker Crossbow,3000
+362,Spellcrusher Maul,250
+363,Barrier Staff,1000
+364,Arcane Blade,355
+365,Spellseeker Bow,1500
+366,Arcane Shield Gauntlets,1500
+367,Elemental Warden Staff,1000
+368,Divine Smiter,250
+369,Warding Spear,2000
+370,Arcane Sphere,355
+371,Spelldrainer Edge,250
+372,Psychic Amplifier Crown,500
+373,Mind Piercer,250
+374,Mind Ripper Claws,80
+375,Mindlash Whip,250
+376,Thought Crusher,250
+377,Mind Manipulator Gloves,200
+378,Neural Disruptor,250
+379,Mental Fortress Staff,1000
+380,Scrap Metal Shiv,250
+381,Nail Bat,3
+382,Pipe Wrench Mace,300
+383,Junk Slingshot,250
+384,Broom Spear,2000
+385,Hubcap Axe,2000
+386,PVC Bow,1500
+387,Glass Knuckles,400
+388,Bike Chain Flail,2800
+389,Junk Crossbow,3000
+390,Concrete Sledge,250
+391,Razor Disc Claws,25
+392,Garden Sprayer Flamer,250
+393,Nail Mop Staff,1000
+394,Pipe Gun,250
+395,Stop Sign Cleaver,250
+396,Cord Whip,250
+397,Leaf Spring Machete,20
+398,Pressure Gun,250
+399,Rubble Launcher,250
+400,Nail Board,3
+401,Car Panel Claws,80
+402,Saw Blade Sword,1500
+403,Bike Pump Air Gun,250
+404,Rebar Club,250
+405,Mirror Shard Fist,50
+406,Modified Wrench,300
+407,Razor Fire Axe,25
+408,Pipe Slingshot,250
+409,Razor Mop,25
+410,Antenna Rapier,1000
+411,Trusty Frying Pan,1500
+412,Staple Shooter,250
+413,Barbed Hockey Stick,20
+414,Golf Tee Glove,250
+415,Deadly Plunger,250
+416,Hairspray Torch,250
+417,Ruler Shiv,250
+418,Sign Post,250
+419,Sand-Filled Hose,250
+420,Broken Bottle,500
+421,Shower Rod Bow,1500
+422,Mower Blade Axe,2000
+423,Key Knuckles,20
+424,Hanger Slingshot,250
+425,Kitchen Cleaver,500
+426,Spiked Crutch,3000
+427,Spike Umbrella,400
+428,Modified Cap Gun,250
+429,Garden Shear Claws,80
+430,Sharpened Shovel,5000
+431,Skewer Dart Gun,250
+432,Sharpened Pool Cue,5000
+433,Chain Rolling Pin,250
+434,Combat Fishing Rod,500
+435,Combat Scissors,80
+436,Toolbox Flail,2800
+437,Kitchen Knife,40
+438,Potato Cannon,2000
+439,Heavy Buckle Belt,150
+440,Cheap Sword,1500
+441,Budget Axe,2000
+442,Apprentice Staff,1000
+443,Flimsy Bow,1500
+444,Crude Spear,2000
+445,Shoddy Knuckles,250
+446,Bargain Knife,40
+447,Pot Metal Mace,2500
+448,Unreliable Crossbow,3000
+449,Dull Claws,80
+450,Unreliable Pistol,1000
+451,Unwieldy Hammer,600
+452,Cracked Whip,250
+453,Training Sword,1500
+454,Rusty Rifle,4000
+455,Dented Pan,1500
+456,Stretchy Sling,250
+457,Splintered Club,250
+458,Walking Stick,800
+459,Leaky Blowgun,250
+460,Practice Axe,2000
+461,Warped Arrows,900
+462,Makeshift Boxing Gloves,200
+463,Decorative Sword,1500
+464,Loose-headed Spear,2000
+465,Tin Claws,80
+466,Novice Wand,100
+467,Uneven Slingshot,250
+468,Rusty Sickle,250
+469,Wooden Flail,2800
+470,Misaligned Hand Crossbow,3000
+471,Unbalanced Throwing Knife,150
+472,Beginner's Hand Wraps,250
+473,Toy Bow,200
+474,Wooden Play Sword,1500
+475,Carved Stick,250
+476,Suction Cup Dart Gun,200
+477,Foam Toy Axe,200
+478,Fly Swatter,250
+479,Stale Baguette,300
+480,Sarcastic Pillow,1000
+481,Spud Launcher Deluxe,250
+482,Phantom Tickle Gloves,200
+483,Number One Fan,250
+484,Extreme T-Shirt Cannon,150
+485,Combatant Angler,30
+486,Master Flipper,250
+487,Peppermint Scepter,100
+488,Bounce Bubble Blower,250
+489,Honking Mallet Duo,250

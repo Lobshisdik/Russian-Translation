@@ -5,180 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro RPG Dungeon Generator (MZ - Layer 0 - B1 Stacked Walls in JSON)</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --bg-color: #1a1a1a;
-            --text-color: #00ff00;
-            --border-color: #00ff00;
-            --input-bg: #333;
-            --input-text: #00ff00;
-            --button-bg: #222;
-            --button-hover-bg: #444;
-            --accent-color: #ff00ff;
-            --preview-wall: '#'; /* Character for stacked walls */
-            --preview-floor: '.'; /* Character for floors */
-            --preview-ceiling: 'X'; /* Character for ceiling/top-most wall */
-        }
-
+        /* Tool Specific Styles */
         body {
             font-family: 'Press Start 2P', cursive;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            font-size: 12px; /* Adjusted for better readability */
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align top */
-            min-height: 100vh;
+            font-size: 10px;
         }
 
         .container {
-            border: 2px solid var(--border-color);
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 15px var(--border-color);
-            max-width: 90%; /* Responsive width */
-            width: 800px; /* Max width */
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Two columns */
-            gap: 30px;
-            align-items: flex-start; /* Align items at the top of their cells */
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
         }
 
         h1 {
-            color: var(--accent-color);
+            grid-column: 1 / -1;
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.5em; /* Adjusted size */
-            grid-column: 1 / -1; /* Span across both columns */
-            text-shadow: 0 0 5px var(--accent-color);
-        }
-
-        h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: var(--text-color);
-            font-size: 1.2em;
+            font-size: 1.25rem;
+            color: var(--accent-primary);
         }
 
         .controls, .preview-area {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 1rem;
         }
 
         .control-group {
-             margin-bottom: 15px;
-             padding: 10px;
-             border: 1px dashed rgba(0, 255, 0, 0.3);
+            background: var(--input-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px dashed var(--input-border);
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--text-color);
+        #ascii-preview {
+            background: #000;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 9px;
+            white-space: pre;
+            overflow: auto;
+            max-height: 400px;
+            border: 1px solid var(--input-border);
         }
 
-        input[type="number"],
-        select {
-            background-color: var(--input-bg);
-            color: var(--input-text);
-            border: 1px solid var(--border-color);
-            padding: 8px;
+        input[type="number"], select {
             font-family: 'Press Start 2P', cursive;
-            width: 100%; /* Full width within container */
-            box-sizing: border-box; /* Include padding in width */
-            font-size: 10px; /* Smaller font for inputs */
-        }
-
-        input[type="number"]:focus,
-        select:focus {
-            outline: none;
-            box-shadow: 0 0 5px var(--accent-color);
+            font-size: 8px;
         }
 
         button {
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 15px;
             font-family: 'Press Start 2P', cursive;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-            font-size: 10px; /* Smaller font for buttons */
-            width: 100%; /* Full width */
-            box-sizing: border-box;
-        }
-
-        button:hover {
-            background-color: var(--button-hover-bg);
-            box-shadow: 0 0 8px var(--accent-color);
-        }
-
-         input[type="checkbox"] {
-            margin-right: 5px;
-            vertical-align: middle;
-         }
-
-        #ascii-preview {
-            background-color: var(--input-bg);
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            font-family: monospace; /* Use monospace for ASCII */
-            white-space: pre; /* Preserve whitespace and line breaks */
-            overflow: auto; /* Add scrollbars if needed */
-            max-height: 300px; /* Limit preview height */
-            line-height: 1.1; /* Adjust line height for dense preview */
-            font-size: 10px; /* Smaller font for preview */
-            color: var(--text-color);
-            word-wrap: break-word; /* Prevent extremely long lines from messing up layout */
+            font-size: 9px;
+            padding: 0.75rem;
         }
 
         .tooltip {
-            font-size: 0.8em;
-            color: #aaa;
-            margin-top: -10px;
-            margin-bottom: 10px;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
             display: block;
         }
 
-        #download-button {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: bold;
-        }
-         #download-button:hover {
-            background-color: var(--button-hover-bg);
-            color: var(--accent-color);
-         }
-
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr; /* Stack columns on smaller screens */
-                width: 95%;
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.2em;
-            }
-            body {
-                padding: 10px;
-                font-size: 10px;
-            }
-             input[type="number"], select, button {
-                 font-size: 9px;
-             }
-             #ascii-preview {
-                 font-size: 9px;
-             }
+            .container { grid-template-columns: 1fr; }
         }
-
     </style>
+    <script>
+        // Theme synchronization
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'SET_THEME') {
+                document.documentElement.setAttribute('data-theme', event.data.theme);
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved MZ3D Tileset Map Note Generator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 30px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+        h1 { color: #333; text-align: center; margin-bottom: 30px; font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+        .main-layout { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+        .tileset-section, .controls-section { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .controls-section { max-height: 85vh; overflow-y: auto; }
+        .file-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .file-input-wrapper { position: relative; }
+        .file-input-wrapper input[type="file"] { display: none; }
+        .file-label { display: block; padding: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-weight: bold; }
+        .file-label:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .file-label.loaded { background: linear-gradient(135deg, #56ab2f, #a8e063); }
+        .tileset-display { position: relative; overflow: auto; max-height: 600px; border: 2px solid #ddd; border-radius: 10px; background: #f5f5f5; margin-top: 20px; }
+        #tilesetCanvas { display: block; cursor: crosshair; image-rendering: pixelated; background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+        .coordinate-display { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-size: 1.2em; font-weight: bold; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); }
+        .command-builder { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .command-builder h3 { color: #333; margin-bottom: 15px; }
+        .command-select { width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease; }
+        .command-select:focus { outline: none; border-color: #667eea; }
+        .info-box { background: #e9eef7; border-left: 5px solid #667eea; padding: 15px; margin-top: 15px; border-radius: 5px; color: #333; font-size: 0.9em; line-height: 1.5; }
+        .parameter-inputs { display: grid; gap: 10px; margin-top: 10px; }
+        .parameter-input { display: grid; grid-template-columns: 100px 1fr; align-items: center; gap: 10px; }
+        .parameter-input label { font-weight: bold; color: #555; }
+        .parameter-input input, .parameter-input select { width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 6px; transition: border-color 0.3s ease; }
+        .parameter-input input:focus, .parameter-input select:focus { outline: none; border-color: #667eea; }
+        .add-command-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #56ab2f, #a8e063); color: white; border: none; border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-top: 15px; }
+        .add-command-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4); }
+        .output-section { background: #2d2d2d; color: #f0f0f0; padding: 20px; border-radius: 10px; margin-top: 20px; font-family: 'Courier New', monospace; max-height: 400px; overflow-y: auto; }
+        .output-section h3 { color: #a8e063; margin-bottom: 15px; }
+        #mapNote { white-space: pre-wrap; line-height: 1.6; }
+        .copy-btn { padding: 10px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-top: 15px; font-weight: bold; }
+        .copy-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .selection-indicator { position: absolute; border: 3px solid #ff0000; pointer-events: none; z-index: 10; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Improved MZ3D Tileset Map Note Generator</h1>
+        
+        <div class="main-layout">
+            <div class="tileset-section">
+                <div class="file-inputs">
+                    <div class="file-input-wrapper"><label for="fileA1" class="file-label" id="labelA1">Load A1</label><input type="file" id="fileA1" accept="image/*" data-tileset="A1"></div>
+                    <div class="file-input-wrapper"><label for="fileA2" class="file-label" id="labelA2">Load A2</label><input type="file" id="fileA2" accept="image/*" data-tileset="A2"></div>
+                    <div class="file-input-wrapper"><label for="fileA3" class="file-label" id="labelA3">Load A3</label><input type="file" id="fileA3" accept="image/*" data-tileset="A3"></div>
+                    <div class="file-input-wrapper"><label for="fileA4" class="file-label" id="labelA4">Load A4</label><input type="file" id="fileA4" accept="image/*" data-tileset="A4"></div>
+                    <div class="file-input-wrapper"><label for="fileA5" class="file-label" id="labelA5">Load A5</label><input type="file" id="fileA5" accept="image/*" data-tileset="A5"></div>
+                    <div class="file-input-wrapper"><label for="fileB" class="file-label" id="labelB">Load B</label><input type="file" id="fileB" accept="image/*" data-tileset="B"></div>
+                    <div class="file-input-wrapper"><label for="fileC" class="file-label" id="labelC">Load C</label><input type="file" id="fileC" accept="image/*" data-tileset="C"></div>
+                    <div class="file-input-wrapper"><label for="fileD" class="file-label" id="labelD">Load D</label><input type="file" id="fileD" accept="image/*" data-tileset="D"></div>
+                    <div class="file-input-wrapper"><label for="fileE" class="file-label" id="labelE">Load E</label><input type="file" id="fileE" accept="image/*" data-tileset="E"></div>
+                </div>
+                
+                <div class="tileset-display">
+                    <canvas id="tilesetCanvas"></canvas>
+                    <div class="selection-indicator" id="selectionIndicator" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="controls-section">
+                <div class="coordinate-display">
+                    <div>Current Tileset: <span id="currentTileset">None</span></div>
+                    <div>Tile Position: <span id="tilePosition">X: 0, Y: 0</span></div>
+                </div>
+                
+                <div class="command-builder">
+                    <h3>Build Command</h3>
+                    <select id="commandType" class="command-select"></select>
+                    <div id="infoBox" class="info-box" style="display: none;"></div>
+                    <div id="parameterInputs" class="parameter-inputs"></div>
+                    <button class="add-command-btn" onclick="addCommand()">Add Command</button>
+                </div>
+                
+                <div class="output-section">
+                    <h3>Generated Map Note</h3>
+                    <div id="mapNote">&lt;mz3d&gt;&lt;/mz3d&gt;</div>
+                    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const TILE_SIZE = 48;
+        let currentTileset = null;
+        let currentImage = null;
+        let selectedTile = { x: 0, y: 0 };
+        let mapNoteLines = [];
+        
+        const canvas = document.getElementById('tilesetCanvas');
+        const ctx = canvas.getContext('2d');
+        const commandSelect = document.getElementById('commandType');
+
+        const commandData = {
+            top: {
+                description: "Sets the texture for the top face of a tile.",
+                params: [ { name: 'tileset', type: 'tileset' }, { name: 'x', type: 'number', default: 0 }, { name: 'y', type: 'number', default: 0 } ]
+            },
+            side: {
+                description: "Sets the texture for all four side faces of a tile.",
+                params: [ { name: 'tileset', type: 'tileset' }, { name: 'x', type: 'number', default: 0 }, { name: 'y', type: 'number', default: 0 } ]
+            },
+            inside: {
+                description: "A special texture for the inner faces of a tile with depth, like a pit.",
+                params: [ { name: 'tileset', type: 'tileset' }, { name: 'left', type: 'number', default: 0 }, { name: 'top', type: 'number', default: 0 }, { name: 'right', type: 'number', default: 0 }, { name: 'bottom', type: 'number', default: 0 } ]
+            },
+            bottom: {
+                description: "Sets the texture for the bottom face of a tile.",
+                params: [ { name: 'tileset', type: 'tileset' }, { name: 'x', type: 'number', default: 0 }, { name: 'y', type: 'number', default: 0 } ]
+            },
+            height: {
+                description: "Sets the height of a tile. Tiles are stacked on top of lower-layer tiles.",
+                params: [ { name: 'value', type: 'number', default: 1, step: 0.1 } ]
+            },
+            depth: {
+                description: "Sets the depth of a tile, creating a 'hole' in the tile below it. Used for pits or water.",
+                params: [ { name: 'value', type: 'number', default: 1, step: 0.1 } ]
+            },
+            float: {
+                description: "Sets the height at which boats and ships will float above this tile.",
+                params: [ { name: 'value', type: 'number', default: 0.5, step: 0.1 } ]
+            },
+            fringe: {
+                description: "Makes a tile 'float' by adding a gap between it and the tile below it.",
+                params: [ { name: 'value', type: 'number', default: 1, step: 0.1 } ]
+            },
+            pass: {
+                description: "Controls the passability of the tile.",
+                params: [ { name: 'value', type: 'options', options: ['on', 'off'], default: 'on' } ]
+            },
+            shape: {
+                description: "Defines the geometric shape of the tile. Affects collision and appearance.",
+                params: [ { name: 'type', type: 'options', options: ['none', 'fence', 'cross', 'sprite', 'custom'], default: 'fence' } ]
+            },
+            slope: {
+                description: "Creates a sloped surface on the tile.",
+                params: [ { name: 'angle', type: 'number', default: 45, step: 1 } ]
+            },
+            shadow: {
+                description: "Toggles whether the tile casts a shadow.",
+                params: [ { name: 'toggle', type: 'boolean', default: 'true' } ]
+            },
+            alpha: {
+                description: "Sets the transparency of the tile (0.0 is invisible, 1.0 is opaque).",
+                params: [ { name: 'value', type: 'number', default: 1.0, step: 0.1, min: 0, max: 1 } ]
+            },
+            animx: {
+                description: "Defines horizontal texture animation offset.",
+                params: [ { name: 'frames', type: 'number', default: 1, step: 1 } ]
+            },
+            animy: {
+                description: "Defines vertical texture animation offset.",
+                params: [ { name: 'frames', type: 'number', default: 1, step: 1 } ]
+            }
+        };
+
+        function populateCommands() {
+            commandSelect.innerHTML = '<option value="">Select Command...</option>';
+            for (const key in commandData) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = key;
+                commandSelect.appendChild(option);
+            }
+        }
+
+        document.querySelectorAll('input[type="file"]').forEach(input => input.addEventListener('change', handleFileSelect));
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const tileset = e.target.dataset.tileset;
+            const reader = new FileReader();
+            reader.onload = event => {
+                const img = new Image();
+                img.onload = () => {
+                    currentTileset = tileset;
+                    currentImage = img;
+                    displayTileset(img);
+                    document.getElementById('currentTileset').textContent = tileset;
+                    document.getElementById(`label${tileset}`).classList.add('loaded');
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function displayTileset(img) {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x <= canvas.width; x += TILE_SIZE) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y <= canvas.height; y += TILE_SIZE) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+        }
+        
+        canvas.addEventListener('click', e => {
+            if (!currentImage) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / TILE_SIZE);
+            const y = Math.floor((e.clientY - rect.top) / TILE_SIZE);
+            selectedTile = { x, y };
+            document.getElementById('tilePosition').textContent = `X: ${x}, Y: ${y}`;
+            const indicator = document.getElementById('selectionIndicator');
+            indicator.style.display = 'block';
+            indicator.style.left = `${x * TILE_SIZE}px`;
+            indicator.style.top = `${y * TILE_SIZE}px`;
+            indicator.style.width = `${TILE_SIZE}px`;
+            indicator.style.height = `${TILE_SIZE}px`;
+        });
+        
+        commandSelect.addEventListener('change', e => {
+            const command = e.target.value;
+            const paramsContainer = document.getElementById('parameterInputs');
+            const infoBox = document.getElementById('infoBox');
+            paramsContainer.innerHTML = '';
+            
+            if (!command) {
+                infoBox.style.display = 'none';
+                return;
+            }
+
+            const data = commandData[command];
+            infoBox.textContent = data.description;
+            infoBox.style.display = 'block';
+
+            data.params.forEach(param => {
+                const div = document.createElement('div');
+                div.className = 'parameter-input';
+                let inputHtml = '';
+                const id = `param_${param.name}`;
+
+                switch(param.type) {
+                    case 'tileset':
+                        inputHtml = `<input type="text" id="${id}" value="${currentTileset || 'A1'}">`;
+                        break;
+                    case 'boolean':
+                        inputHtml = `<select id="${id}"><option value="true" ${param.default === 'true' ? 'selected' : ''}>true</option><option value="false" ${param.default === 'false' ? 'selected' : ''}>false</option></select>`;
+                        break;
+                    case 'options':
+                        const optionsHtml = param.options.map(opt => `<option value="${opt}" ${param.default === opt ? 'selected' : ''}>${opt}</option>`).join('');
+                        inputHtml = `<select id="${id}">${optionsHtml}</select>`;
+                        break;
+                    case 'number':
+                        inputHtml = `<input type="number" id="${id}" value="${param.default}" step="${param.step || 1}" min="${param.min !== undefined ? param.min : ''}" max="${param.max !== undefined ? param.max : ''}">`;
+                        break;
+                    default:
+                         inputHtml = `<input type="text" id="${id}" value="${param.default || ''}">`;
+                }
+
+                div.innerHTML = `<label for="${id}">${param.name}:</label>${inputHtml}`;
+                paramsContainer.appendChild(div);
+            });
+        });
+        
+        function addCommand() {
+            if (!currentTileset) { alert('Please load and select a tileset first!'); return; }
+            const commandType = commandSelect.value;
+            if (!commandType) { alert('Please select a command type!'); return; }
+            
+            let commandStr = `${currentTileset},${selectedTile.x},${selectedTile.y}:${commandType}(`;
+            const params = commandData[commandType].params;
+            const paramValues = [];
+            params.forEach(param => {
+                const input = document.getElementById(`param_${param.name}`);
+                if (input && input.value) paramValues.push(input.value);
+            });
+            commandStr += paramValues.join(',') + ')';
+            
+            mapNoteLines.push(commandStr);
+            updateMapNoteDisplay();
+        }
+        
+        function updateMapNoteDisplay() {
+            const noteContent = `<mz3d>\n${mapNoteLines.join('\n')}\n</mz3d>`;
+            document.getElementById('mapNote').textContent = noteContent;
+        }
+        
+        function copyToClipboard() {
+            const mapNote = document.getElementById('mapNote').textContent;
+            navigator.clipboard.writeText(mapNote).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => { btn.textContent = originalText; }, 2000);
+            });
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Delete' && mapNoteLines.length > 0) {
+                if (confirm('Remove last command?')) {
+                    mapNoteLines.pop();
+                    updateMapNoteDisplay();
+                }
+            }
+        });
+
+        // Initialize
+        populateCommands();
+    </script>
+</body>
+</html>

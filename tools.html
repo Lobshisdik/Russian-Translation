@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypernet Explorer - Unified Hub</title>
+    <style>
+        :root {
+            --bg-color: #020617;
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: rgba(56, 189, 248, 0.1);
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --accent-primary: #38bdf8;
+            --accent-secondary: #818cf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --transition-speed: 0.2s;
+            --sidebar-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            background: linear-gradient(to right, #fff, var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem 0.75rem;
+        }
+
+        .nav-category {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin: 1.5rem 0.75rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-category::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--sidebar-hover);
+            color: var(--accent-primary);
+        }
+
+        .nav-item.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #fff;
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .nav-item .icon {
+            font-size: 1.1rem;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Main Content Styling */
+        #main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            background: #020617;
+        }
+
+        #top-bar {
+            height: 60px;
+            background: #0f172a;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            justify-content: space-between;
+        }
+
+        #current-tool-title {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            padding: 0.25rem;
+            display: flex;
+            gap: 0.25rem;
+            cursor: pointer;
+            position: relative;
+            width: 60px;
+            height: 32px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .theme-toggle .toggle-thumb {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            position: absolute;
+            left: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #000;
+        }
+
+        [data-theme="light"] .theme-toggle .toggle-thumb {
+            left: calc(100% - 28px);
+            background: #f59e0b;
+        }
+
+        .theme-toggle .toggle-icon {
+            flex: 1;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.4rem 1rem;
+            border-radius: 0.4rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        #content-area {
+            flex-grow: 1;
+            position: relative;
+            overflow: auto;
+        }
+
+        #tool-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
+        #dashboard-view {
+            padding: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Re-using Dashboard Grid Styles */
+        .dashboard-header {
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tool-card:hover {
+            background: var(--sidebar-hover);
+            transform: translateY(-2px);
+            border-color: var(--accent-primary);
+        }
+
+        .tool-card .title { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; }
+        .tool-card .desc { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body>
+
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <h1>Hypernet Hub</h1>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-item active" onclick="showDashboard()">
+                <span class="icon">🏠</span> Dashboard
+            </div>
+
+            <div class="nav-category">Graphics</div>
+            <a class="nav-item" onclick="loadTool('tools/BG Dusk Night Converter.html', 'Dusk/Night Converter', this)">
+                <span class="icon">🌓</span> Dusk/Night Conv.
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/PixelArtBGConverter.html', 'Pixel Art Converter', this)">
+                <span class="icon">🎨</span> Pixel Art Conv.
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/Heightmap.html', 'Retro Heightmap Gen', this)">
+                <span class="icon">🏔️</span> Heightmap Gen
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/SpriteCharAssigner.html', 'Sprite & Char Assigner', this)">
+                <span class="icon">🧍</span> Sprite Assigner
+            </a>
+
+            <div class="nav-category">Generation</div>
+            <a class="nav-item" onclick="loadTool('tools/DungeonGenerator.html', 'Retro Dungeon Gen', this)">
+                <span class="icon">🏰</span> Dungeon (Retro)
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/DungeonGenerator2.html', 'MZ Dungeon Gen', this)">
+                <span class="icon">📜</span> Dungeon (MZ)
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/HistorySimulator.html', 'History Simulator', this)">
+                <span class="icon">⌛</span> History Sim
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/ManualGenerator.html', 'Manual Generator', this)">
+                <span class="icon">📘</span> Manual Gen
+            </a>
+
+            <div class="nav-category">Database</div>
+            <a class="nav-item" onclick="loadTool('tools/WeaponRebalancer.html', 'Weapon Rebalancer', this)">
+                <span class="icon">🗡️</span> Weapon Rebalancer
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/EnemyLevelUpdater.html', 'Enemy Level Updater', this)">
+                <span class="icon">👾</span> Enemy Level Upd.
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/ClassSkillAssigner.html', 'Class/Skill Assigner', this)">
+                <span class="icon">🎓</span> Class Assigner
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/rpgmaker_skill_editor.html', 'Skill Category Editor', this)">
+                <span class="icon">✨</span> Skill Editor
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/ShopEditor.html', 'Shop Editor', this)">
+                <span class="icon">🛒</span> Shop Editor
+            </a>
+
+            <div class="nav-category">Analysis</div>
+            <a class="nav-item" onclick="loadTool('tools/MapViewer.html', 'Map Viewer', this)">
+                <span class="icon">🗺️</span> Map Viewer
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/MapScanner.html', 'Map Scanner', this)">
+                <span class="icon">🔍</span> Map Scanner
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/EnemySkillsUsageAnalyzer.htm', 'Enemy Skill Usage', this)">
+                <span class="icon">🧠</span> Skill Usage
+            </a>
+            <a class="nav-item" onclick="loadTool('tools/EnemyVisualizer.html', 'Enemy Visualizer', this)">
+                <span class="icon">🖼️</span> Enemy Visualizer
+            </a>
+        </nav>
+    </aside>
+
+    <div id="main-wrapper">
+        <header id="top-bar">
+            <div id="current-tool-title">Dashboard</div>
+            <div class="top-bar-actions">
+                <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+                    <span class="toggle-icon">🌙</span>
+                    <span class="toggle-icon">☀️</span>
+                    <div class="toggle-thumb">🌙</div>
+                </div>
+                <button class="btn" onclick="reloadFrame()">Refresh</button>
+                <a id="external-link" class="btn" target="_blank" style="display:none">Open External ↗</a>
+            </div>
+        </header>
+
+        <main id="content-area">
+            <div id="dashboard-view">
+                <div class="dashboard-header">
+                    <h2>Welcome to the Hub</h2>
+                    <p class="subtitle">Select a tool from the sidebar to begin. All tools are now unified in this workspace.</p>
+                </div>
+                <div class="tools-grid" id="main-grid">
+                    <!-- Quick links will be populated by JS or just a few favorites -->
+                </div>
+            </div>
+            <iframe id="tool-frame" name="tool-frame"></iframe>
+        </main>
+    </div>
+
+    <script>
+        const tools = [
+            { path: 'tools/BG Dusk Night Converter.html', title: 'Dusk/Night Converter', icon: '🌓', desc: 'Transform backgrounds between time states.' },
+            { path: 'tools/PixelArtBGConverter.html', title: 'Pixel Art Converter', icon: '🎨', desc: 'Process backgrounds with palettes.' },
+            { path: 'tools/DungeonGenerator.html', title: 'Retro Dungeon Gen', icon: '🏰', desc: 'Procedural stacked-wall layout engine.' },
+            { path: 'tools/WeaponRebalancer.html', title: 'Weapon Rebalancer', icon: '🗡️', desc: 'Fine-tune weapon stats and balance.' },
+            { path: 'tools/MapViewer.html', title: 'Map Viewer', icon: '🗺️', desc: 'Inspect procedural world maps.' },
+            { path: 'tools/EnemySkillsUsageAnalyzer.htm', title: 'Enemy Skill Usage', icon: '🧠', desc: 'Analyze enemy combat behavior.' },
+            { path: 'tools/SpriteCharAssigner.html', title: 'Sprite Assigner', icon: '🧍', desc: 'Manage sprite and battler assets.' },
+            { path: 'tools/HistorySimulator.html', title: 'History Simulator', icon: '⌛', desc: 'Generate 20th century lore.' }
+        ];
+
+        function initGrid() {
+            const grid = document.getElementById('main-grid');
+            tools.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'tool-card';
+                card.innerHTML = `
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem">${tool.icon}</div>
+                    <div class="title">${tool.title}</div>
+                    <div class="desc">${tool.desc}</div>
+                `;
+                card.onclick = () => {
+                    const navItems = document.querySelectorAll('.nav-item');
+                    let targetNav = null;
+                    navItems.forEach(item => {
+                        if (item.textContent.includes(tool.title)) targetNav = item;
+                    });
+                    loadTool(tool.path, tool.title, targetNav);
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        function loadTool(url, title, element) {
+            document.getElementById('dashboard-view').style.display = 'none';
+            const frame = document.getElementById('tool-frame');
+            frame.style.display = 'block';
+            frame.src = url;
+
+            document.getElementById('current-tool-title').textContent = title;
+            document.getElementById('external-link').style.display = 'block';
+            document.getElementById('external-link').href = url;
+
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (element) element.classList.add('active');
+        }
+
+        function showDashboard() {
+            document.getElementById('tool-frame').style.display = 'none';
+            document.getElementById('tool-frame').src = 'about:blank';
+            document.getElementById('dashboard-view').style.display = 'block';
+            document.getElementById('current-tool-title').textContent = 'Dashboard';
+            document.getElementById('external-link').style.display = 'none';
+
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelector('.nav-item').classList.add('active');
+        }
+
+        function reloadFrame() {
+            const frame = document.getElementById('tool-frame');
+            if (frame.style.display !== 'none') {
+                frame.contentWindow.location.reload();
+                // Re-apply theme after reload
+                frame.onload = () => applyThemeToFrame(document.documentElement.getAttribute('data-theme') || 'dark');
+            }
+        }
+
+        // Theme Management
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('hypernet-hub-theme', theme);
+            
+            const thumb = document.querySelector('.toggle-thumb');
+            thumb.textContent = theme === 'dark' ? '🌙' : '☀️';
+            
+            applyThemeToFrame(theme);
+        }
+
+        function applyThemeToFrame(theme) {
+            const frame = document.getElementById('tool-frame');
+            if (frame && frame.contentWindow) {
+                // Send message to frame
+                frame.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+                
+                // Try direct manipulation if same-origin
+                try {
+                    frame.contentDocument.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // Ignore cross-origin errors
+                }
+            }
+        }
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('hypernet-hub-theme') || 'dark';
+        setTheme(savedTheme);
+
+        // Listen for frame loads to apply theme
+        document.getElementById('tool-frame').onload = function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            applyThemeToFrame(currentTheme);
+        };
+
+        initGrid();
+    </script>
+</body>
+</html>

@@ -1,0 +1,701 @@
+id,name,weight
+1,Cellphone,180
+2,Backpack,700
+3,Wristwatch,150
+4,Umbrella,400
+5,Insulated Water Bottle,600
+6,Multi-tool,250
+7,Energy Drink,355
+8,Protein Shake,450
+9,Energy Gel,40
+10,Focus Tonic,200
+11,Smelling Salts,50
+12,Medical Spray,150
+13,Muscle Relaxant,250
+14,Fighter's Booster,200
+15,Champion's Essence,80
+16,Portable Charger,150
+17,Ballpoint Pen,450
+18,Grip Powder,100
+19,Focus Bandana,80
+20,Flashbang,350
+21,Body Slam EP:,50
+22,Pocket Notebook,200
+23,Endurance Injection,50
+24,Mental Focus Training,250
+25,Steroids,50
+26,Ironskin Steroid,250
+27,Chi Training,250
+28,Practical Training,250
+29,Speed Training,250
+30,Psionic Training,250
+31,Wireless Earbuds,50
+32,Vital Strike EP:,50
+33,Freezing Moon EP:,50
+34,Blazing Kick EP:,50
+35,Guard Breaker,250
+36,LED Flashlight,200
+37,Pro Statusguard,250
+38,Perfect Block EP:,50
+39,Fighter's Focus,250
+40,Starlit Tape,100
+41,Coffee Cup,250
+42,Master's Gloves,200
+43,Thunder Dragon Boots,1200
+44,Imperial Jing,250
+45,Forbidden Technique Scroll,50
+46,Rose,250
+47,Tournament Stimulant,100
+48,Corner Cutman Kit,1500
+49,Speed Spray,150
+50,Defensive Stance Pill,1
+51,Wireless Headphones,250
+52,Keys Knuckles,300
+53,Steel Pipe,2000
+54,Pocket Sand,100
+55,Molotov Cocktail,600
+56,Karate Combo EP:,30
+57,Judo Throw EP:,50
+58,Taekwondo Kicks EP:,50
+59,Granola Bar,50
+60,Penta Protein Program,10
+61,Power Enhancer,150
+62,Reflex Enhancer,150
+63,Ultimate Booster,200
+64,Compact Umbrella,400
+65,Flowing Water EP:,10
+66,Dragon Eye Elixir,250
+67,Ki Strike EP:,50
+68,Pocket Parasol,300
+69,Crystal Running Shoes,300
+70,Holy See's Remedy,200
+71,Berserker Amulet,100
+72,Broken Cryocell,250
+73,Floating skull,1000
+74,Spirit Parasite,250
+75,Bottled Water,500
+76,Iron Strike EP:,50
+77,Eight Pillars EP:,1
+78,Morphine,50
+79,Red Cocaine,250
+80,Angel Dust,250
+81,Tryptocaine,250
+82,Speed,250
+83,Crank,250
+84,Black Market Cocktail,1500
+85,Tranquilizer,50
+86,Sword Keychain,1500
+87,Omega Stimulant,100
+88,UV Protection Sunglasses,40
+89,Championship Belt,2500
+90,Signed Gloves,200
+91,Tournament Trophy,3000
+92,Ancient Fighting Coin,10
+93,Vintage Fight Poster,100
+94,Fighter's Medallion,150
+95,Champion's Tooth,250
+96,Historic Ring Canvas,1000
+97,Fighter Action Figure,250
+98,Dandelion,250
+99,Golden Hand Statue,250
+100,Ancient Technique Scroll,50
+101,Antique Training Weight,250
+102,Historic Match Gloves,200
+103,Diamond Fist,250
+104,Hand Sanitizer,250
+105,Torn Gloves,200
+106,Old Gym Nameplate,500
+107,Used Hand Wraps,250
+108,Fight Ticket Stubs,1
+109,Cracked Mouthguard,250
+110,Utensil Set,200
+111,Local Map,40
+112,Water Flask,700
+113,Climbing Rope,2000
+114,Rubbish,100
+115,Whetstone,200
+116,Sewing Kit,150
+117,Candle,200
+118,Fishing Rod,500
+119,Clay Water Pot,1500
+120,Travel Journal,300
+121,Walking Stick,800
+122,Plastic Bowl Set,400
+123,Wooden Chair,5000
+124,Lantern,1000
+125,Travel Backpack,700
+126,Bedroll,1500
+127,Cooking Pot,2000
+128,Utensil Set,200
+129,Acetaminophen Tablets,500
+130,Ibuprofen Capsules,250
+131,Calcium Antacid,250
+132,Cetirizine Relief,250
+133,Dextromethorphan,250
+134,Pseudoephedrine Tabs,50
+135,Simethicone Drops,250
+136,Bisacodyl Tablets,500
+137,Bacitracin Ointment,250
+138,Loperamide Capsules,250
+139,Hydrocortisone Cream,250
+140,Electrolyte Powder,100
+141,Menthol Throat Drops,250
+142,Methyl Salicylate Cream,250
+143,Clotrimazole Antifungal,250
+144,Saline Nasal Spray,250
+145,Minimum Vitality Tincture,150
+146,Healing Droplets,250
+147,Quantum Wellness Elixir,250
+148,Ethereal Solution,200
+149,Infinitesimal Vitality Essence,80
+150,Resonance Healing Mist,250
+151,Vibrational Recovery Serum,150
+152,Energetic Alignment Drops,250
+153,Quantum Regeneration Nanites,100
+154,Genome Optimization Serum,150
+155,Chronos Immortality Elixir,250
+156,Cybernetic Overdrive Implant,300
+157,Neuro-Quantum Amplifier,500
+158,Quantum Resurrection Protocol,250
+159,Potential Catalyst,200
+160,Omega Singularity Serum,150
+161,Comfort Sleeping Bag,2000
+162,Mood-Enhancing Feast,250
+163,Relaxation Bath Kit,800
+164,Social Connection Game,250
+165,Home Fitness System,20000
+166,Immersive Entertainment Hub,250
+167,Romantic Encounter Kit,500
+168,Career Advancement Package,250
+169,Stress Relief Program,250
+170,Pocket Bonsai,250
+171,Cigarette Pack,25
+172,Nun Beer Six-Pack,2300
+173,Hexphone Communicator,180
+174,Extended Life Batteries,900
+175,Premium Whiskey,800
+176,Portable Caffeinator,15000
+177,Pocket Sound System,250
+178,Extreme Energy Pack,250
+179,Immersive Sound Cancellers,355
+180,Digital Music Player,100
+181,EHI Pilot PDA,200
+182,CD Case,250
+183,Digital Camera,350
+184,Color Flip Mobile Phone,180
+185,Handheld Gaming Console,400
+186,Portable GPS Navigator,15000
+187,Massive Storage Drive,250
+188,Pocket Video Recorder,150
+189,Pocket Language Translator,120
+190,Escape kit,700
+191,Health Potion,200
+192,Mana Potion,200
+193,Phoenix Pepper,100
+194,Elixir of Varlenia,250
+195,Giant's Strength Potion,200
+196,Swift Wind Elixir,250
+197,Dragon Scale Barrier,100
+198,Archmage's Elixir,250
+199,Fireball Scroll,50
+200,Lightning Bolt Scroll,50
+201,Shield Scroll,4000
+202,Invisibility Scroll,50
+203,Elven Waybread,250
+204,Elven Rope,2000
+205,Fairy Lantern,1000
+206,Skeleton Key,20
+207,Philosopher's Elixir,250
+208,Thunder Crystal,300
+209,Enchanted Quill,10
+210,Dream Dust,50
+211,Golden Apple,200
+212,Mage's Crystal,300
+213,Dragon Scale Amulet,100
+214,Frostwarding Ring,20
+215,Cloak of Shadows,1000
+216,Pathfinder's Compass,100
+217,Bag of Holding,500
+218,Chains of Swiftness,250
+219,Gauntlets of Might,1500
+220,Throwing Knife,150
+221,Shuriken,50
+222,Fire Pot,2000
+223,Caltrops,1000
+224,Frost Bomb,250
+225,Vial of Miasma,150
+226,Throwing Axe,800
+227,Hunting Net,250
+228,Sunburst Crystal,300
+229,Warning Amulet,100
+230,Crystal Lens of Revelation,300
+231,Regeneration Herb,10
+232,Scroll of Arcane Destruction,50
+233,Circlet of Mental Mastery,200
+234,Feather of Levitation,1
+235,One time use jetpack Jetpack,15000
+236,Dragon's Blood Elixir,250
+237,Fruit of Yggdrasil,200
+238,Sorcerer's Soul Crystal,300
+239,Ambrosia,300
+240,Wish-Granting Orb,500
+241,Forbidden War EP:,500
+242,Chronos Hourglass,800
+243,Miracle Elixir,250
+244,World Tree Seed,10
+245,Scroll of Outer entities,50
+246,Scroll of Elder Names,50
+247,Fraudulent Healing Potion,200
+248,Fake Crystal Ball,2000
+249,Toy Magic Wand,100
+250,Empty Spellbook,2500
+251,Useless Charm,50
+252,Potion of Mild Translucence,200
+253,Empty Demon Container,250
+254,Fake Treasure Map,40
+255,Mundane Glowing Stone,10
+256,False Immortality,250
+257,Pet Rock,500
+258,Beast Tongue Elixir,250
+259,Not-So-Magic Bean,250
+260,Non-Flying Cape,250
+261,Ring of Minor Acoustics,20
+262,Dragon's Belch Potion,200
+263,Counterfeit Phoenix Feather,1
+264,Fake Dragon Egg,60
+265,Potion of Mild Tinting,200
+266,Fake Transmutation Powder,100
+267,"Fool's Alchemy Dust ",250
+268,Craftsman's Backpack,700
+269,Artisan's Throwing Knife Set,150
+270,Navigator's Compass,100
+271,Cobbler's Boots,1200
+272,Weaver's Cloak,1000
+273,Clockmaker's Timepiece,250
+274,Scribe's Quill,10
+275,Toolmaker's Multi-tool,250
+276,Bowyer's Bow,1500
+277,Optician's Lens,50
+278,Cheesemaker's Wheel,200
+279,Perfect Bread,500
+280,Brewer's Coffee,250
+281,Herbalist's Salve,100
+282,Bladesmith's Dagger,200
+283,Glover's Handwear,250
+284,Magician's Flute,300
+285,Varlenia's Wine,750
+286,Bookbinder's Journal,300
+287,Woodcarver's Staff,1000
+288,Pixie Dust Vial,150
+289,Twilight Dewdrop,250
+290,Whisperwood Acorn Ring,20
+291,Fae Bell of Summoning,150
+292,Everbloom Rose,250
+293,Quickgrowth Seed,10
+294,Truth-seeing Glass,400
+295,Fungi Chalice,400
+296,Faesoil Pouch,300
+297,Memory Amber,250
+298,Seer's Thimble,5
+299,Moonflower Crown,200
+300,Alchemist's Catalyst,200
+301,Scribe's Prismatic Ink,100
+302,Astronomer's Astrolabe,800
+303,Physician's Instrument Set,1200
+304,Jeweler's Loupe,250
+305,Blacksmith's Flux,250
+306,Botanist's Seed Collection,10
+307,Scholar's Legal Tome,2000
+308,Potter's Enchanted Clay,1500
+309,Leatherworker's Travel Pack,300
+310,Bladesmith's Eternal Whetstone,200
+311,Chef's Spice Blend,250
+312,Painter's Arcane Palette,400
+313,Polar Blubber Oil,250
+314,Glacial Heart Crystal,300
+315,Frostseeker's Lens,50
+316,Snow Moss Tea,200
+317,Frost Bear Talisman,150
+318,Northern Pemmican,355
+319,Snowhare Weave,250
+320,Aurora Essence,80
+321,Wayfinder's Drum,250
+322,Igloo Building Blocks,250
+323,Perfect Snowflake,250
+324,Frost Nomad's Map,40
+325,Hearty Arctic Stew,500
+326,Monarch Toxin Wing,10
+327,Jaguar Musk Gland,50
+328,Titan Beetle Carapace,3000
+329,Emerald Viper Venom,50
+330,Heart of the Jungle,500
+331,Paradise Feather,1
+332,Banyan Sap,150
+333,Alpha Panther Claw,80
+334,Luminous Spores,20
+335,Golden Vocal Sac,250
+336,Royal Meat Honey,400
+337,Serpent Gastrolith,10
+338,Moonphase Tree Resin,200
+339,Nightstalker's Eye,250
+340,Journalist's Endless Notepad,300
+341,Deadline Coffee,250
+342,Investigator's Camera,350
+343,Truth-Revealing Solution,200
+344,Press Badge Collection,250
+345,Invisible Ink Pen,100
+346,Covert Recorder,150
+347,Orator's Elixir,250
+348,Informant Network Directory,250
+349,Undercover Disguise Kit,1500
+350,Calming Tea,200
+351,Field Analysis Kit,2000
+352,Memory Sage,250
+353,Investigative Laptop,2000
+354,Precision Digital Scale,300
+355,Discrete Packaging Kit,400
+356,Street Network Contacts,250
+357,Underground Energy Drink,355
+358,Encrypted Burner Phone,180
+359,Trace Removal Powder,100
+360,False Identity Kit,500
+361,Negotiator's Manual,400
+362,Secure Transport Case,250
+363,Premium Samples,250
+364,Encrypted Ledger,250
+365,Street Blend,250
+366,Urban Escape Routes Map,40
+367,Product Testing Kit,1000
+368,Hearty Stew,500
+369,Fresh Bread,500
+370,Crisp Apple,200
+371,Cheese Wheel,5000
+372,Grilled Fish,250
+373,Wild Honey,400
+374,Mixed Nuts,200
+375,Fruit Pastry,200
+376,Herbal Tea,10
+377,Spicy Curry,250
+378,Wild Berries,150
+379,Wisdom Elixir,250
+380,Roasted Vegetables,15000
+381,Gourmet Chocolate,100
+382,Meat Pie,500
+383,Spring Water,20
+384,Berry Punch,250
+385,Fresh Milk,1000
+386,Mint Tea,200
+387,Fresh Lemonade,250
+388,Strong Coffee,250
+389,Coconut Smoothie,8
+390,Hot Chocolate,100
+391,Strong Ale,450
+392,Aged Wine,750
+393,Potent Whiskey,800
+394,Honey Mead,400
+395,Dragon's Breath Cocktail,1500
+396,Berserker's Brew,250
+397,Fizzy Soda,355
+398,Spaghetti Bolognese,250
+399,Pizza Margherita,250
+400,Mushroom Risotto,250
+401,Beef Carpaccio,250
+402,Arancini,250
+403,Lasagna,250
+404,Bruschetta,250
+405,Panna Cotta,1500
+406,Tiramisu,250
+407,Stuffed Conchiglioni,250
+408,Prosciutto e Melone,250
+409,Fritto Misto,250
+410,Osso Buco,250
+411,Spaghetti Carbonara,250
+412,Struffoli,250
+413,Wagyu Steak,200
+414,Beluga Caviar,250
+415,Black Truffle Risotto,250
+416,Foie Gras Cognac Jelly,250
+417,Butter-Poached Lobster,250
+418,Sautéed Matsutake Mushrooms,250
+419,Saffron Bouillabaisse,250
+420,Gold-Flecked Soufflé,250
+421,Garden Inspiration Salad,250
+422,72-Hour Sous Vide Rib,250
+423,Exotic Fruit Sculpture,200
+424,Cardamom Rose Macarons,250
+425,Smoke-Infused Culinary Illusion,250
+426,Cherry-Glazed Duck with Star Anise,250
+427,Kopi Luwak Gold Reserve,250
+428,Deluxe Cheeseburger,200
+429,Crispy French Fries,250
+430,Bucket o' Chicken,1000
+431,Jumbo Cola,250
+432,Pepperoni Pizza Slice,100
+433,Cheese Pretzel,200
+434,Spicy Chicken Sandwich,250
+435,Onion Rings,20
+436,Chocolate Shake,100
+437,Beef Taco,250
+438,Mozzarella Sticks,250
+439,Glazed Donut,8
+440,Triple Burger Combo Meal,30
+441,Breakfast Sandwich,250
+442,Hot Fudge Sundae,250
+443,Rock-Hard Bread,500
+444,Mystery Meat,500
+445,Leftover Gruel,250
+446,Suspicious Soup,250
+447,Expired Cheese,200
+448,Burnt Beans,250
+449,Day-Old Fish,250
+450,Lumpy Porridge,250
+451,Watery Vegetable Soup,15000
+452,Sprouting Potato,2000
+453,Bruised Apple,200
+454,Charred Toast,250
+455,Cheap Protein Bar,250
+456,Moldy Risotto,250
+457,Unholy Food Abomination,250
+458,Canned Processed Meat,500
+459,Cheese-Flavored Crisps,200
+460,Instant Noodle Pack,250
+461,Vigor tonic,200
+462,Nutrient-Fortified Bar,8
+463,Colorful Sugar Cereal,1000
+464,Cream-Filled Snack Cake,500
+465,Microwaved Meat Patty,500
+466,Canned Vegetables,15000
+467,Colorful Gelatin Dessert,250
+468,Potato Crisps,2000
+469,Microwave Dinner,250
+470,Meat Substitute Patty,500
+471,Chocolate-Flavored Bar,100
+472,Tactical Field Ration,250
+473,Luminous Stardrop,250
+474,Moonberry,250
+475,Spiralberry,250
+476,Dragon's Breath Fruit,200
+477,Golden Sunfruit,200
+478,Crystal Nectar Fruit,300
+479,Mana Pomegranate,250
+480,Void Starfruit,200
+481,Cloudberry Puff,250
+482,Prismatic Shimmerberry,250
+483,Abyssal Glowfruit,200
+484,Fae's Enchantberry,250
+485,Ember Pepper Berry,100
+486,Eclipse Fruit,200
+487,Midnight Whispermelon,250
+488,Premium Sashimi,250
+489,Spiced Biryani,250
+490,Dim Sum Assortment,250
+491,Moroccan Tagine,355
+492,Spicy Kimchi,250
+493,Spiced Kebabs,250
+494,Turkish Ice Cream,250
+495,Honey Baklava,400
+496,Tom Kha Soup,250
+497,Stuffed Paratha,250
+498,Tropical Fruit Salad,200
+499,Leaf-Wrapped Fish,250
+500,Seafood Gumbo,250
+501,Fresh Spring Rolls,20
+502,Kopi Luwak Coffee,250
+503,Beef Pho,250
+504,Mango Sticky Rice,1000
+505,Xiao Long Bao,250
+506,Salmon Nigiri,250
+507,Pad Thai,250
+508,Bibimbap,250
+509,Shabu-Shabu,250
+510,Sundubu Jjigae,250
+511,Peking Duck,250
+512,Tteok in Red Bean Soup,250
+513,Gua Bao,250
+514,Okonomiyaki,250
+515,Tom Yum Goong,250
+516,Red Bean Baozi,250
+517,Five-Spice Braised Pork,250
+518,Roasted Boar Haunch,250
+519,Pheasant in Wine Sauce,750
+520,Venison Pottage,2000
+521,Venison Pasty,250
+522,Huntsman's Stew,800
+523,Roasted Hare,250
+524,Bacon-Wrapped Squab,250
+525,Salted Bear Meat,500
+526,Roast Hart,250
+527,Roasted Venison Heart,500
+528,Braised Mountain Goat,250
+529,Blood Sausage,250
+530,Venison Jerky,250
+531,Smoked Boar Neck,250
+532,Royal Swan Roast,250
+533,Dragon Fang,50
+534,Elemental Water Scales,300
+535,Golem Core,5000
+536,Pixie Wings,10
+537,Unicorn Horn,2000
+538,Banshee Tears,200
+539,Werewolf Claw,80
+540,Vampiric Wood Splinter,800
+541,Beholder Eyestalk,300
+542,Eldritch Tentacle,1000
+543,Sentinel CPU,200
+544,Void Plasma,500
+545,Spectral Shroud,300
+546,Alien Alloy Fragment,800
+547,Zombie Hand,250
+548,Crystalized Ooze,300
+549,Griffin Egg,60
+550,Gigant Beetle Carapace,3000
+551,Manticore Tail,5000
+552,Frozen Dragon Breath,250
+553,Shadow Essence,80
+554,Dryad Blossom,250
+555,Abyssal Light Organ,400
+556,Cyborg Memory Core,250
+557,Nightmare Talon,100
+558,Meteorite Core Fragment,5000
+559,Scorpion Venom Sac,50
+560,Interdimensional Relic,1500
+561,Ancient Wyrm Scale,300
+562,Gargoyle Heart,500
+563,Unidentified Item,250
+564,Lockpick,250
+565,Steel ingot,2000
+566,Titanium ingot,2000
+567,Varlenia Ingot,2000
+568,Crystal,300
+569,Glass,400
+570,Wood,800
+571,Leather,300
+572,Cloth,200
+573,Bone,500
+574,Meat,500
+575,Plant matter,100
+576,Herb extract,120
+577,Oil Flask,200
+578,Acidic Solution,200
+579,"Arcane Essence ",80
+580,"Ethereal Shard ",50
+581,"Quantum Core ",5000
+582,"Circuit Board ",150
+583,"Microchip ",5
+584,"Battery Cell ",25
+585,"Plastic Polymer ",300
+586,Composite Resin,200
+587,Nanotube Module,250
+588,,250
+589,,250
+590,,250
+591,,250
+592,,250
+593,,250
+594,,250
+595,,250
+596,,250
+597,,250
+598,,250
+599,,250
+600,,250
+601,,250
+602,,250
+603,,250
+604,,250
+605,,250
+606,,250
+607,,250
+608,,250
+609,,250
+610,,250
+611,,250
+612,,250
+613,,250
+614,,250
+615,,250
+616,,250
+617,,250
+618,,250
+619,,250
+620,,250
+621,,250
+622,,250
+623,,250
+624,,250
+625,,250
+626,,250
+627,,250
+628,,250
+629,,250
+630,,250
+631,,250
+632,,250
+633,,250
+634,,250
+635,,250
+636,,250
+637,,250
+638,,250
+639,,250
+640,,250
+641,,250
+642,,250
+643,,250
+644,,250
+645,,250
+646,,250
+647,,250
+648,,250
+649,,250
+650,,250
+651,,250
+652,,250
+653,,250
+654,,250
+655,,250
+656,,250
+657,,250
+658,,250
+659,,250
+660,,250
+661,,250
+662,,250
+663,,250
+664,,250
+665,,250
+666,,250
+667,,250
+668,,250
+669,,250
+670,,250
+671,,250
+672,,250
+673,,250
+674,,250
+675,,250
+676,,250
+677,,250
+678,,250
+679,,250
+680,,250
+681,,250
+682,,250
+683,,250
+684,,250
+685,,250
+686,,250
+687,,250
+688,,250
+689,,250
+690,,250
+691,,250
+692,,250
+693,,250
+694,,250
+695,,250
+696,,250
+697,,250
+698,,250
+699,,250
+700,,250

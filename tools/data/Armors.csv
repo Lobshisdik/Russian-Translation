@@ -1,0 +1,434 @@
+id,name,weight
+1,Toxin Blocker,250
+2,NanoMed Implant,300
+3,NanoMed Implant,300
+4,MindShield Interface,4000
+5,Cerebral Firewall,250
+6,Urban Sixth Sense,250
+7,Urban Sixth Sense,250
+8,Proximity Alert Garment,450
+9,Momentum Preserver,250
+10,Adrenal Amplifier,500
+11,Mana Conservation Unit,250
+12,Adaptive Hazard Suit,250
+13,Designer Target Optics,250
+14,Living Textile Outfit,250
+15,Quantum Weave Garment,250
+16,Photonic Stealth Suit,4000
+17,Concealed Exo-Frame,450
+18,Quantum Thought Enhancer,150
+19,Atmospheric Controller,250
+20,Neural Interface Helmet,2000
+21,Pocket Dimension Generator,250
+22,Probability Distortion Field,250
+23,Phase Shift Barrier,250
+24,EM Field Harvester,250
+25,Self-Repairing Attire,20
+26,Impact-Reactive Armor,250
+27,Neuro-Feedback Clothing,200
+28,Cotton T-Shirt,150
+29,Denim Jacket,800
+30,Urban Explorer Outfit,250
+31,Motorcycle Jacket,800
+32,Tactical Vest,2000
+33,Urban Streetwear,250
+34,Athletic Wear,250
+35,Urban Leather Jacket,300
+36,Concealed Armor Jacket,800
+37,X-Sports Protective Gear,250
+38,Carbon Fiber Jacket,800
+39,Urban Defender Suit,250
+40,Heavy Urban Protection,250
+41,Security Uniform,250
+42,Riot Gear,8000
+43,Composite Body Armor,4000
+44,Urban Assault Armor,250
+45,Tech Specialist Gear,250
+46,Tech Hoodie,250
+47,Hacker's Jacket,800
+48,Data Analyst Coat,1200
+49,Cybernetic Suit,250
+50,Digital Mage Suit,250
+51,Urban Defense Tools,250
+52,Urban Shields,4000
+53,Tactical Shield,4000
+54,Carbon Fiber Shield,4000
+55,Shock Shield,4000
+56,Impact Disperser,250
+57,Active Defense System,250
+58,Security Shield,4000
+59,Security Shield,4000
+60,Crowd Control Shield,4000
+61,Ballistic Shield,4000
+62,Smart Shield,4000
+63,Reactive Armor Shield,4000
+64,Digital Defense Tools,250
+65,Digital Amulet,100
+66,Data Shield,4000
+67,Personal Firewall,250
+68,Digital Field Generator,250
+69,Quantum Encryption Device,250
+70,Urban Headgear,250
+71,Urban Headwear,250
+72,Sports Headband,250
+73,Urban Bandana,80
+74,Street Hat,100
+75,Reinforced Beanie,250
+76,Designer Safety Cap,250
+77,Active Urban Headgear,250
+78,Bike Helmet,2000
+79,Skater Helmet,2000
+80,X-Sports Helmet,2000
+81,Motorcycle Helmet,2000
+82,Carbon Fiber Helmet,2000
+83,Urban Defender Helmet,2000
+84,Heavy Urban Helmets,2000
+85,Hard Hat,100
+86,Security Helmet,2000
+87,Riot Helmet,2000
+88,Tactical Ops Helmet,2000
+89,Ballistic Helmet,2000
+90,Tech Headgear,250
+91,AR Headset,250
+92,Neural Band,250
+93,Data Processor,250
+94,AR Visor Pro,250
+95,Holo-Interface,250
+96,Neural Crown,200
+97,Tactical Phone Case,180
+98,Urban Gadgets,250
+99,Tactical Phone Case,180
+100,Smart Defense Ring,20
+101,Power Assist Band,250
+102,Biometric Enhancer,150
+103,Reflex Enhancer,150
+104,Speed Runners,250
+105,Urban Lucky Charm,50
+106,Probability Analyzer,250
+107,Neural Enhancer,150
+108,Cognitive Amplifier,500
+109,Tactical Glasses,400
+110,Targeting Lenses,50
+111,Energy Saver,250
+112,Energy Optimizer,250
+113,Health Accessories,250
+114,Ley Line Hoodie,250
+115,Runic Street Jacket,800
+116,Windwalker Streetwear,250
+117,Shadowcaster Hoodie,250
+118,Wardproof Outfit,250
+119,Urban Soul Attire,250
+120,Dragon Soul Vest,250
+121,Arcane Headwear,355
+122,Third Eye Beanie,250
+123,Sigil Mind Cap,250
+124,Astral Crown,200
+125,Reality Weaver Hat,100
+126,Arcane Barriers,355
+127,Spellshield Bracer,4000
+128,Grimoire Shield,3000
+129,Ward Crystal,300
+130,Guardian Spirit Shield,4000
+131,Arcane Accessories,355
+132,Spellfire Ring,20
+133,Ley Line Pendant,80
+134,Elemental Circuit Tattoo,250
+135,Elder Artifact Bangle,1000
+136,Techno-Magical Fusion,250
+137,Techno-Arcane Vest,355
+138,Spell-Circuit Coat,1200
+139,Mana Tech Shield,4000
+140,Neural Spell Amplifier,500
+141,Chrono-Tech Watch,250
+142,Otherworldly Apparel,250
+143,Reality Drift Coat,1200
+144,Veil Piercer Goggles,250
+145,Dimensional Anchor Shield,4000
+146,Otherworld Fragment Ring,20
+147,Elemental Infused Gear,250
+148,Flame Heart Armor,500
+149,Tempest Cloak,1000
+150,Terra Shield,4000
+151,Undine Crown,200
+152,Budget Trash Gear,250
+153,Budget Trash Gear,250
+154,Threadbare T-Shirt,150
+155,Bargain Bin Hoodie,250
+156,Leaky Plastic Poncho,250
+157,Pleather Jacket,300
+158,Costume Security Vest,250
+159,Sweatshop Athletic Wear,250
+160,Counterfeit Jersey,250
+161,Thrift Store Special,250
+162,Fake Bulletproof Vest,3000
+163,Costume Cop Uniform,250
+164,Taped Football Pads,450
+165,Cardboard Tactical Vest,2000
+166,Stained Bathrobe,900
+167,Party Store Wizard Robe,250
+168,Cheap Graduation Gown,250
+169,Trash Tier Headwear,250
+170,Paper Party Hat,500
+171,Knockoff Baseball Cap,145
+172,Flimsy Bike Helmet,2000
+173,Toy Hard Hat,100
+174,Damaged Football Helmet,450
+175,Tinfoil Hat,100
+176,Plastic Gem Headband,50
+177,Bargain Bin Shields,4000
+178,Trash Can Lid Shield,4000
+179,Pizza Box Guard,500
+180,Toy Plastic Shield,4000
+181,Cardboard Cosplay Shield,4000
+182,Broken Tablet Shield,500
+183,Junk Accessories,250
+184,Vending Machine Ring,20
+185,Fraying Friendship Bracelet,50
+186,Kid's Meal Wristband,250
+187,Unreliable Watch,250
+188,Skin-Staining Necklace,100
+189,Expired Medical Bracelet,50
+190,Wobbly Fake Glasses,400
+191,Fake Magical Items,250
+192,"""Crystal Power"" Necklace",100
+193,Toy Magic Wand,100
+194,Energy Copper Bracelet,50
+195,Ghost Detector,250
+196,Fake Spell Book,400
+197,Literal Trash Items,250
+198,Dumpster Jacket,800
+199,Stained Street Shirt,200
+200,Discarded Work Vest,250
+201,Trashed Hat,100
+202,Broken Umbrella Shield,400
+203,Urban Outdoor Gear,250
+204,All-Weather Jacket,800
+205,Trail Trekker Pants,400
+206,Explorer's Vest,250
+207,Climate Control Jacket,800
+208,Performance Base Layer,250
+209,Climber's Outerwear,250
+210,Arctic Explorer Suit,250
+211,Trail Runner's Kit,500
+212,Expedition Gear,250
+213,Wildfire Response Suit,250
+214,Mountain Rescue Gear,250
+215,Extreme Sports Armor,250
+216,Smart Outdoors Wear,250
+217,Outdoor Headgear,250
+218,Wilderness Hat,100
+219,Thermal Beanie,250
+220,Multi-Wrap Headwear,250
+221,Trail Safety Helmet,2000
+222,Climber's Helmet,2000
+223,All-Weather Headgear,250
+224,Whitewater Helmet,2000
+225,Downhill MTB Helmet,2000
+226,Smart Trek Helmet,2000
+227,Outdoor Accessories,250
+228,All-Terrain Gloves,200
+229,Trail Gaiters,250
+230,Quick-Dry Towel,500
+231,Survival Multitool,250
+232,Solar Power Bank,250
+233,Trail Headlamp,1000
+234,Adventure Watch,250
+235,Exploration Packs,250
+236,Trail Day Pack,250
+237,Urban Explorer Pack,250
+238,Expedition Pack,250
+239,Alpine Climber Pack,250
+240,Tactical Field Pack,250
+241,Outdoor Footwear,250
+242,All-Terrain Boots,1200
+243,Trail Runners,250
+244,Approach Shoes,800
+245,Arctic Explorer Boots,1200
+246,Alpine Climbing Boots,1200
+247,Survival Equipment,250
+248,Emergency Bivy,250
+249,Survival Blanket,1500
+250,Wilderness First Aid Kit,500
+251,Portable Water Filter,15000
+252,Emergency Whistle,250
+253,Expedition Compass,100
+254,All-Weather Fire Starter,250
+255,Climbing Equipment,250
+256,Climbing Harness,250
+257,Belay Device,250
+258,Climbing Protection Set,250
+259,Technical Ice Tools,250
+260,Technical Crampons,250
+261,Water Adventure Gear,250
+262,Pro-Grade PFD,250
+263,Whitewater Dry Suit,250
+264,Performance Wetsuit,250
+265,Dry Bag Backpack,700
+266,Floating Eyewear Strap,250
+267,Winter Adventure Gear,250
+268,Snow Sport Helmet,2000
+269,Alpine Goggles,250
+270,Alpine Snow Pants,400
+271,Avalanche Safety Jacket,800
+272,Avalanche Beacon,250
+273,Avalanche Probe,250
+274,Avalanche Shovel,250
+275,Fashion Forward Apparel,250
+276,Charisma Enhancer Shirt,150
+277,Power Statement Jacket,800
+278,Social Stealth Attire,200
+279,Distraction Couture,250
+280,Willpower Vintage Set,250
+281,Energy Efficient Activewear,250
+282,Reflex Enhancing Streetwear,250
+283,Attention Diverting Ensemble,250
+284,Status Resistant Fashion,250
+285,Mind Enhancing Avantgarde,250
+286,Fortune's Favorite Outfit,250
+287,Mana Regeneration Wear,250
+288,Designer Headwear,250
+289,Observer's Fashion Cap,250
+290,Influencer Shades,250
+291,Creative Genius Headpiece,250
+292,Clarity Enhancing Tiara,250
+293,Urban Style Helmet,2000
+294,Statement Accessories,250
+295,Perfect Timing Timepiece,250
+296,Persuasion Enhancer,150
+297,Power Status Symbol,250
+298,Enhanced Perception Earrings,20
+299,Dexterity Enhancing Rings,20
+300,Posture Perfecting Belt,150
+301,Mental Focus Enhancer,150
+302,Mind Recovery Charm,50
+303,Fashion Footwear,250
+304,Speed Enhancer Dress Shoes,150
+305,Status Symbol Boots,1200
+306,Urban Parkour Sneakers,250
+307,Urban Climber Fashion Shoes,800
+308,Limited Edition Collaborations,250
+309,Artist x Designer Jacket,800
+310,Celebrity Collection Outfit,250
+311,Mindfulness Collection,250
+312,Athletic Performance Collection,250
+313,Seasonal Fashion,250
+314,Summer Breeze Collection,250
+315,Winter Chic Collection,250
+316,Spring Renewal Fashion,20
+317,Autumn Awareness Collection,250
+318,Cultural Fashion,250
+319,Eastern Meditation Wear,250
+320,Western Quick-Draw Fashion,250
+321,Nordic Fashion Collection,250
+322,Tropical Style Collection,250
+323,Formal Attire,250
+324,Executive Tuxedo,250
+325,Captivating Evening Gown,250
+326,Power Negotiation Suit,250
+327,Authority Enhancers,150
+328,Color Shift Jacket,800
+329,Rendering Error Shirt,200
+330,Color Shift Jacket,800
+331,No-Clip Trousers,200
+332,Framerate Lag Sportswear,250
+333,Texture Stretch Suit,250
+334,Graffiti Pop Robe,250
+335,Roller Rink Boots,1200
+336,Cartoon Snapback,250
+337,Foam Fan Helmet,2000
+338,Mall Rat Hat,100
+339,BoomBox Cap,500
+340,Hypercolor Visor,250
+341,Jelly Accessory Pack,250
+342,Kaleido-Time Watch,450
+343,Mood Shift Ring,20
+344,Stretch Power Bracelet,50
+345,Sitcom Dance Necklace,100
+346,Snack Attack Outfit,250
+347,Laser Tag Suit,250
+348,Arcade Armor,250
+349,Arcade Swap Robe,250
+350,Sticker Shield,4000
+351,Garage Band Gear,250
+352,Patchwork Denim,250
+353,Buff Swap Tracksuit,250
+354,Wild Life Robe,250
+355,Cartoon Target Glasses,400
+356,Arcade Glitch Outfit,250
+357,Lisa Frank Shirt,200
+358,Extreme Polygon Vest,250
+359,Sticker Slap Hat,100
+360,Gak Grip Gloves,200
+361,Blade Shield,4000
+362,Walkie-Stat Headset,250
+363,Power Swap Wristband,250
+364,Pog Menu Badge,250
+365,Virtual Pet Earpiece,250
+366,Prize Machine Items,250
+367,Iron-On Slogan Jacket,800
+368,Promo Patchwork Outfit,250
+369,Catchphrase Beanie,250
+370,Skater Shield,4000
+371,DONOTSHIP Boots,1200
+372,Fourth Wall Glitches,250
+373,Formula Display Shirt,200
+374,Meta Commentary Hat,100
+375,Debug Mode Glasses,400
+376,Source Code Wristband,250
+377,PSI Anti-S Choker,250
+378,Knight's Armaments,250
+379,Knight's Full Plate,500
+380,Royal Knight's Plate,500
+381,Gothic Half-Plate,500
+382,Chainmail Hauberk,20000
+383,Reinforced Chainmail,20000
+384,Light Chainmail,20000
+385,Studded Leather Armor,13000
+386,Boiled Leather Cuirass,7000
+387,Padded Gambeson,5000
+388,Medieval Helmets,2000
+389,Great Helm,2000
+390,Visored Bascinet,250
+391,Open Sallet,10
+392,Steel Kettle Hat,500
+393,Padded Arming Cap,250
+394,Medieval Shields,4000
+395,Tower Shield,8000
+396,Knight's Heater Shield,4000
+397,Round Shield,4000
+398,Buckler,2000
+399,Mage's Vestments,250
+400,Archmagister's Robes,250
+401,Enchanter's Robes,250
+402,Apprentice Robes,250
+403,Magister's Circlet,200
+404,Scholar's Cap,250
+405,Blessed Armor,250
+406,Templar's Plate,500
+407,Blessed Chainmail,20000
+408,High Cleric's Vestments,250
+409,Templar Shield,4000
+410,Ranger's Equipment,250
+411,Master Archer's Leathers,300
+412,Forest Ranger's Garb,250
+413,Archer's Gloves,200
+414,Archer's Bracer,250
+415,Ranger's Cloak,1000
+416,Assassin's Gear,250
+417,Shadow Guild Leathers,300
+418,Nightstalker's Garb,250
+419,Assassin's Cowl,250
+420,Silent Step Boots,1200
+421,Noble Attire,250
+422,Royal Battle Regalia,900
+423,Noble's Finery,250
+424,Royal Crown,200
+425,Noble's Cape,250
+426,Legendary Armaments,250
+427,Dragonscale Plate,500
+428,Elven Silverweave,250
+429,Celestial Archmage Robes,250
+430,Aegis of the Ancients,250
+431,Helm of the War God,2000
+432,Commoner's Garb,250
+433,Peasant's Tunic,250

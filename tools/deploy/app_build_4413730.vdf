@@ -1,0 +1,21 @@
+"AppBuild"
+{
+	// Your Steam App ID (Playtest)
+	"AppID" "4413730"
+
+	// Build description (appears in Steam backend)
+	"Desc" "Playtest build from automated upload"
+
+	// Build output folder (where Steam stores build logs)
+	"BuildOutput" "..\\tools\\steam_build_output_playtest"
+
+	// Content root path (absolute path to build directory)
+	"ContentRoot" "C:\\out\\hypernet-explorer"
+
+	// Depot to include in this build
+	"Depots"
+	{
+		// Windows depot
+		"4413731" "depot_build_4413731.vdf"
+	}
+}

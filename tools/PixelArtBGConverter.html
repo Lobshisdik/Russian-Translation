@@ -4,173 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Art Converter - Multiple Palettes</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 0.9em;
-        }
-
+        /* Tool Specific Styles */
         .upload-area {
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 40px;
+            border: 3px dashed var(--accent-primary);
+            border-radius: 1rem;
+            padding: 3rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #f8f9ff;
+            background: var(--card-bg);
+            margin-bottom: 2rem;
         }
 
         .upload-area:hover {
-            background: #e8e9ff;
-            border-color: #764ba2;
-        }
-
-        .upload-area.dragover {
-            background: #d8d9ff;
-            border-color: #764ba2;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+            border-color: var(--accent-secondary);
+            background: var(--input-bg);
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .image-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: var(--shadow);
         }
 
         .image-card canvas {
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 0.5rem;
             image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
-        }
-
-        .image-card .filename {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #666;
-            text-align: center;
-            word-break: break-all;
-        }
-
-        .progress {
-            margin-top: 20px;
-            text-align: center;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .button-group {
-            text-align: center;
-            margin-top: 20px;
         }
 
         .info-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .info-box strong {
-            color: #667eea;
+            background: var(--input-bg);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
         }
 
         .mode-select {
-            margin-left: 10px;
-            padding: 8px 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            background: white;
-            color: #333;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .mode-select:hover {
-            border-color: #764ba2;
-            background: #f8f9ff;
+            padding: 0.5rem;
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
+            background: var(--bg-color);
+            color: var(--text-main);
         }
 
         .quick-mode-badge {
-            display: inline-block;
-            background: #4CAF50;
+            background: var(--success);
             color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
     </style>
+    <script>
+        // Theme synchronization
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'SET_THEME') {
+                document.documentElement.setAttribute('data-theme', event.data.theme);
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">

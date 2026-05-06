@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dwarf Fortress Europe 1900-2002</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Theme synchronization
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'SET_THEME') {
+                document.documentElement.setAttribute('data-theme', event.data.theme);
+            }
+        });
+    </script>
+    <style>
+        #log-container {
+            height: 500px;
+            overflow-y: auto;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+        .event-entry {
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.5rem 0;
+        }
+        .event-entry:last-child { border-bottom: none; }
+        .event-date { color: var(--accent-primary); font-weight: bold; margin-right: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Dwarf Fortress Europe Alternate History Generator</h1>
+            <p>Simulate a century of geopolitical shifts, ideologies, and conflicts in a procedural Europe.</p>
+            <button class="btn btn-primary" onclick="runSimulation()">Run Simulation</button>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        // Define hyperpowers and their data
+        const hyperpowers = {
+            'Holy Vatican Empire': {
+                baseTerritory: 'Italy',
+                capital: 'Rome',
+                color: 'purple',
+                leaders: [
+                    {name: 'Pope Leo XIII', ideology: 'Theocratic', years: [1900, 1903]},
+                    {name: 'Pope Pius X', ideology: 'Conservative Theocratic', years: [1903, 1914]},
+                    {name: 'Pope Benedict XV', ideology: 'Pacifist Theocratic', years: [1914, 1922]},
+                    {name: 'Benito Mussolini', ideology: 'Fascist Theocratic', years: [1922, 1943]},
+                    {name: 'Antonio Gramsci', ideology: 'Socialist', years: [1922, 1970]}, // Rival to Mussolini
+                    {name: 'Pope Pius XII', ideology: 'Diplomatic Theocratic', years: [1939, 1958]},
+                    {name: 'Aldo Moro', ideology: 'Christian Democratic', years: [1960, 1978]},
+                    {name: 'Giulio Andreotti', ideology: 'Machiavellian', years: [1972, 1992]}, // Rival to Moro
+                    {name: 'Pope John Paul II', ideology: 'Anti-Communist', years: [1978, 2005]},
+                    {name: 'Silvio Berlusconi', ideology: 'Media Theocrat', years: [1994, 2011]}
+                ],
+                population: 32000000,
+                economy: 100,
+                military: 80
+            },
+            'Britannia': {
+                baseTerritory: 'United Kingdom',
+                capital: 'London',
+                color: 'blue',
+                leaders: [
+                    {name: 'Queen Victoria', ideology: 'Imperial Monarchist', years: [1837, 1901]},
+                    {name: 'Edward VII', ideology: 'Diplomatic Monarchist', years: [1901, 1910]},
+                    {name: 'George V', ideology: 'Conservative Monarchist', years: [1910, 1936]},
+                    {name: 'Edward VIII', ideology: 'Scandalous Monarchist', years: [1936, 1936]}, // Rival to George VI
+                    {name: 'George VI', ideology: 'Duty-Bound Monarchist', years: [1936, 1952]},
+                    {name: 'Winston Churchill', ideology: 'Imperial Democrat', years: [1940, 1955]},
+                    {name: 'Clement Attlee', ideology: 'Socialist', years: [1945, 1951]}, // Rival to Churchill
+                    {name: 'Elizabeth II', ideology: 'Constitutional Monarchist', years: [1952, 2022]},
+                    {name: 'Margaret Thatcher', ideology: 'Conservative', years: [1979, 1990]},
+                    {name: 'Tony Blair', ideology: 'New Labour', years: [1997, 2007]}
+                ],
+                population: 38000000,
+                economy: 150,
+                military: 120
+            },
+            'Soviet Union': {
+                baseTerritory: 'Russia',
+                capital: 'Moscow',
+                color: 'red',
+                leaders: [
+                    {name: 'Nicholas II', ideology: 'Autocrat', years: [1894, 1917]},
+                    {name: 'Vladimir Lenin', ideology: 'Communist Revolutionary', years: [1917, 1924]},
+                    {name: 'Leon Trotsky', ideology: 'Internationalist Communist', years: [1917, 1940]}, // Rival to Stalin
+                    {name: 'Joseph Stalin', ideology: 'Totalitarian Communist', years: [1924, 1953]},
+                    {name: 'Nikita Khrushchev', ideology: 'Reform Communist', years: [1953, 1964]},
+                    {name: 'Leonid Brezhnev', ideology: 'Stagnation Communist', years: [1964, 1982]},
+                    {name: 'Mikhail Gorbachev', ideology: 'Reform Socialist', years: [1985, 1991]},
+                    {name: 'Boris Yeltsin', ideology: 'Democratic Capitalist', years: [1991, 1999]},
+                    {name: 'Vladimir Putin', ideology: 'Authoritarian', years: [1999, 2024]}
+                ],
+                population: 120000000,
+                economy: 120,
+                military: 200
+            },
+            'Ottoman Empire': {
+                baseTerritory: 'Turkey',
+                capital: 'Istanbul',
+                color: 'orange',
+                leaders: [
+                    {name: 'Abdul Hamid II', ideology: 'Islamic Autocrat', years: [1876, 1909]},
+                    {name: 'Mehmed V', ideology: 'Constitutional Sultan', years: [1909, 1918]},
+                    {name: 'Enver Pasha', ideology: 'Young Turk Nationalist', years: [1913, 1918]},
+                    {name: 'Mustafa Kemal Atatürk', ideology: 'Secular Nationalist', years: [1923, 1938]},
+                    {name: 'İsmet İnönü', ideology: 'Kemalist', years: [1938, 1950]},
+                    {name: 'Adnan Menderes', ideology: 'Conservative Democrat', years: [1950, 1960]},
+                    {name: 'Süleyman Demirel', ideology: 'Center-Right', years: [1965, 1993]},
+                    {name: 'Turgut Özal', ideology: 'Liberal Conservative', years: [1983, 1993]},
+                    {name: 'Tansu Çiller', ideology: 'Center-Right', years: [1993, 1996]},
+                    {name: 'Necmettin Erbakan', ideology: 'Islamist', years: [1996, 1997]},
+                    {name: 'Bülent Ecevit', ideology: 'Social Democrat', years: [1999, 2002]}
+                ],
+                population: 35000000,
+                economy: 80,
+                military: 100
+            },
+            'Goblin Horde': {
+                baseTerritory: 'Norway',
+                capital: 'Underground',
+                color: '#228b22',
+                leaders: [
+                    {name: 'Ancient Goblin King', ideology: 'Primordial', years: [1800, 1970]},
+                    {name: 'The Great Goblin', ideology: 'Stone Age Primal', years: [1970, 2024]}
+                ],
+                population: 5000000,
+                economy: 30,
+                military: 150
+            }
+        };
+
+        const factions = {
+            'Mages Guild': {
+                baseTerritory: 'United Kingdom',
+                color: '#ff00ff',
+                parentHyperpower: 'Britannia',
+                leaders: [
+                    {name: 'Aleister Crowley', ideology: 'Thelemic Magus', years: [1901, 1947]},
+                    {name: 'Dion Fortune', ideology: 'Esoteric Psychologist', years: [1920, 1946]},
+                    {name: 'Margaret Thatcher', ideology: 'Traditionalist Witch', years: [1979, 1990]},
+                    {name: 'Em', ideology: 'Sacrificial Sorceress', years: [2001, 2024]}
+                ],
+                arcane: 85, velocity: 40, information: 60
+            },
+            'Technomancers': {
+                parentFaction: 'Mages Guild',
+                parentHyperpower: 'Britannia',
+                color: '#ff66ff',
+                leaders: [{name: 'Tech-Mage Orion', ideology: 'Magitek', years: [1950, 2024]}],
+                arcane: 60, velocity: 70, information: 50
+            },
+            'Archive Foundation': {
+                baseTerritory: 'Russia',
+                color: '#00ffff',
+                leaders: [
+                    {name: 'Brewster Kahle', ideology: 'Universal Librarian', years: [1996, 2024]},
+                    {name: 'Julian Assange', ideology: 'Information Leaker', years: [2001, 2024]}
+                ],
+                arcane: 30, velocity: 30, information: 100
+            },
+            'Data Acquisition Department': {
+                parentFaction: 'Archive Foundation',
+                color: '#66ffff',
+                leaders: [{name: 'Spymaster Cipher', ideology: 'Espionage', years: [1945, 2024]}],
+                arcane: 20, velocity: 40, information: 90
+            },
+            'Hypercapitalist Collective': {
+                baseTerritory: 'Netherlands',
+                color: '#ffff00',
+                leaders: [
+                    {name: 'The Pyramid Overlord', ideology: 'Speed Profit Prophet', years: [1990, 2024]},
+                    {name: 'The Shadow CEO', ideology: 'High-Frequency Trader', years: [1990, 2024]}
+                ],
+                arcane: 40, velocity: 120, information: 70
+            },
+            'The Gods': {
+                baseTerritory: 'Italy',
+                color: '#ffffff',
+                parentHyperpower: 'Holy Vatican Empire',
+                leaders: [
+                    {name: 'YHWH', ideology: 'Abramic Father', years: [0, 1999]},
+                    {name: 'Eris', ideology: 'Discordian Chaos', years: [1999, 2024]},
+                    {name: 'Malal', ideology: 'Chaos Renegade', years: [1990, 2024]}
+                ],
+                arcane: 100, velocity: 80, information: 50
+            },
+
+            'Janissary Guard': {
+                baseTerritory: 'Turkey',
+                color: '#ff4500',
+                parentHyperpower: 'Ottoman Empire',
+                leaders: [{name: 'Aga of the Janissaries', ideology: 'Elite Guard', years: [1800, 1922]}],
+                arcane: 40, velocity: 20, information: 30
+            },
+            'Tanzimat Bureaucracy': {
+                baseTerritory: 'Turkey',
+                color: '#ffa500',
+                parentHyperpower: 'Ottoman Empire',
+                leaders: [{name: 'Mustafa Reşid Pasha', ideology: 'Reformist', years: [1839, 1908]}],
+                arcane: 10, velocity: 30, information: 80
+            },
+            'MI6 Black Archive': {
+                baseTerritory: 'United Kingdom',
+                color: '#000080',
+                parentHyperpower: 'Britannia',
+                leaders: [{name: 'M', ideology: 'Intelligence', years: [1900, 2024]}],
+                arcane: 45, velocity: 50, information: 95
+            },
+            'Science Command': {
+                baseTerritory: 'United Kingdom',
+                color: '#c0c0c0',
+                parentHyperpower: 'Britannia',
+                leaders: [{name: 'Director Hawking III', ideology: 'Scientific', years: [1940, 2024]}],
+                arcane: 20, velocity: 60, information: 85
+            },
+            'KGB': {
+                baseTerritory: 'Russia',
+                color: '#8b0000',
+                parentHyperpower: 'Soviet Union',
+                leaders: [{name: 'Lavrentiy Beria', ideology: 'Totalitarian', years: [1938, 1953]}],
+                arcane: 30, velocity: 40, information: 98
+            },
+            'Spetsnaz': {
+                baseTerritory: 'Russia',
+                color: '#ff4444',
+                parentHyperpower: 'Soviet Union',
+                leaders: [{name: 'Colonel Petrov', ideology: 'Elite Military', years: [1950, 2024]}],
+                arcane: 15, velocity: 70, information: 80
+            },
+            'Swiss Guards': {
+                baseTerritory: 'Italy',
+                color: '#ffd700',
+                parentHyperpower: 'Holy Vatican Empire',
+                leaders: [{name: 'Commandant Wilhelm Tell III', ideology: 'Loyal Guard', years: [1506, 2024]}],
+                arcane: 60, velocity: 50, information: 70
+            },
+            'Opus Dei': {
+                baseTerritory: 'Italy',
+                color: '#2f4f4f',
+                parentHyperpower: 'Holy Vatican Empire',
+                leaders: [{name: 'Prelate Josemaría II', ideology: 'Conservative', years: [1928, 2024]}],
+                arcane: 70, velocity: 40, information: 85
+            },
+            'IOR': {
+                baseTerritory: 'Italy',
+                color: '#ffd700',
+                parentHyperpower: 'Holy Vatican Empire',
+                leaders: [{name: 'President Calvi II', ideology: 'Financial', years: [1940, 2024]}],
+                arcane: 40, velocity: 60, information: 90
+            },
+            'Battle Nuns': {
+                baseTerritory: 'Italy',
+                color: '#000000',
+                parentHyperpower: 'Holy Vatican Empire',
+                leaders: [{name: 'Abbess Militant Catherine', ideology: 'Militant Faith', years: [1900, 2024]}],
+                arcane: 85, velocity: 55, information: 60
+            },
+            'Naguka': {
+                baseTerritory: 'Norway',
+                color: '#556b2f',
+                parentFaction: 'Goblin Horde',
+                parentHyperpower: 'Goblin Horde',
+                leaders: [{name: 'Swamp Chief Gorrok', ideology: 'Scavenger', years: [1970, 2024]}],
+                arcane: 45, velocity: 15, information: 20
+            },
+            'Verden': {
+                baseTerritory: 'Norway',
+                color: '#006400',
+                parentFaction: 'Goblin Horde',
+                parentHyperpower: 'Goblin Horde',
+                leaders: [{name: 'Forest Elder Sylvara', ideology: 'Guerilla', years: [1970, 2024]}],
+                arcane: 55, velocity: 25, information: 30
+            }
+        };
+
+        // Define all European countries with their major cities
+        const countries = {
+            'Italy': {cities: ['Rome', 'Milan', 'Naples'], controller: 'Holy Vatican Empire', faction: 'The Gods'},
+            'United Kingdom': {cities: ['London', 'Manchester', 'Edinburgh'], controller: 'Britannia', faction: 'Mages Guild'},
+            'Norway': {cities: ['Oslo', 'Bergen', 'Trondheim'], controller: 'Goblin Horde', faction: 'Naguka'},
+            'Russia': {cities: ['Moscow', 'St. Petersburg', 'Novgorod'], controller: 'Soviet Union', faction: 'Archive Foundation'},
+            'Turkey': {cities: ['Istanbul', 'Ankara', 'Izmir'], controller: 'Ottoman Empire', faction: 'Janissary Guard'},
+            'Netherlands': {cities: ['Amsterdam', 'Rotterdam', 'The Hague'], controller: 'Neutral', faction: 'Hypercapitalist Collective'},
+            'Belgium': {cities: ['Brussels', 'Antwerp', 'Ghent'], controller: 'Neutral', faction: 'Neutral'},
+            'Switzerland': {cities: ['Bern', 'Zurich', 'Geneva'], controller: 'Neutral', faction: 'Swiss Guards'},
+            'Austria': {cities: ['Vienna', 'Salzburg', 'Innsbruck'], controller: 'Neutral', faction: 'Neutral'},
+            'Poland': {cities: ['Warsaw', 'Krakow', 'Gdansk'], controller: 'Neutral', faction: 'Neutral'},
+            'Czechoslovakia': {cities: ['Prague', 'Bratislava', 'Brno'], controller: 'Neutral', faction: 'Neutral'},
+            'Hungary': {cities: ['Budapest', 'Debrecen', 'Szeged'], controller: 'Neutral', faction: 'Neutral'},
+            'Romania': {cities: ['Bucharest', 'Cluj', 'Iasi'], controller: 'Neutral', faction: 'Neutral'},
+            'Bulgaria': {cities: ['Sofia', 'Plovdiv', 'Varna'], controller: 'Neutral', faction: 'Neutral'},
+            'Yugoslavia': {cities: ['Belgrade', 'Zagreb', 'Sarajevo'], controller: 'Neutral', faction: 'Neutral'},
+            'Greece': {cities: ['Athens', 'Thessaloniki', 'Patras'], controller: 'Neutral', faction: 'Neutral'},
+            'Denmark': {cities: ['Copenhagen', 'Aarhus', 'Odense'], controller: 'Neutral', faction: 'Neutral'},
+            'Sweden': {cities: ['Stockholm', 'Gothenburg', 'Malmö'], controller: 'Neutral', faction: 'Neutral'},
+            'Finland': {cities: ['Helsinki', 'Turku', 'Tampere'], controller: 'Neutral', faction: 'Neutral'},
+            'Ireland': {cities: ['Dublin', 'Cork', 'Galway'], controller: 'Neutral', faction: 'Neutral'},
+            'Albania': {cities: ['Tirana', 'Durres', 'Shkoder'], controller: 'Neutral', faction: 'Neutral'},
+            'Estonia': {cities: ['Tallinn', 'Tartu', 'Narva'], controller: 'Neutral', faction: 'Neutral'},
+            'Latvia': {cities: ['Riga', 'Daugavpils', 'Liepaja'], controller: 'Neutral', faction: 'Neutral'},
+            'Lithuania': {cities: ['Vilnius', 'Kaunas', 'Klaipeda'], controller: 'Neutral', faction: 'Neutral'}
+        };
+
+        // State variables
+        let currentDate = new Date(1900, 0, 1);
+        let events = [];
+        let currentLeaders = {};
+        let currentFactionLeaders = {};
+        let deadLeaders = new Set();
+        let wars = [];
+
+        // Initialize current leaders
+        function initializeLeaders(year) {
+            for (let power in hyperpowers) {
+                const available = hyperpowers[power].leaders.filter(l => 
+                    year >= l.years[0] && year <= l.years[1] && !deadLeaders.has(l.name)
+                );
+                if (!currentLeaders[power] || !available.includes(currentLeaders[power])) {
+                    currentLeaders[power] = available[0];
+                }
+            }
+            
+            for (let faction in factions) {
+                const available = factions[faction].leaders.filter(l => 
+                    year >= l.years[0] && year <= l.years[1] && !deadLeaders.has(l.name)
+                );
+                if (!currentFactionLeaders[faction] || !available.includes(currentFactionLeaders[faction])) {
+                    currentFactionLeaders[faction] = available[0];
+                }
+            }
+        }
+
+        function handleInternalPolitics(date, isFaction) {
+            const actors = isFaction ? factions : hyperpowers;
+            const currentActors = isFaction ? currentFactionLeaders : currentLeaders;
+            const actorNames = Object.keys(actors);
+            const year = date.getFullYear();
+
+            actorNames.forEach(actor => {
+                const available = actors[actor].leaders.filter(l => 
+                    year >= l.years[0] && year <= l.years[1] && !deadLeaders.has(l.name)
+                );
+
+                if (available.length > 1 && Math.random() < 0.08) {
+                    const active = currentActors[actor];
+                    const rival = available.filter(l => l.name !== active.name)[Math.floor(Math.random() * (available.length - 1))];
+                    
+                    const struggleType = ['election', 'coup', 'assassination', 'alliance'][Math.floor(Math.random() * 4)];
+                    let outcomeDesc = "";
+                    if (!active || !rival) return;
+
+                    switch(struggleType) {
+                        case 'election':
+                            if (Math.random() > 0.5) {
+                                currentActors[actor] = rival;
+                                outcomeDesc = `${rival.name} wins the election in ${actor}, replacing ${active.name}.`;
+                            } else {
+                                outcomeDesc = `${active.name} maintains power in ${actor} after a tight election against ${rival.name}.`;
+                            }
+                            break;
+                        case 'coup':
+                            if (Math.random() > 0.4) {
+                                currentActors[actor] = rival;
+                                outcomeDesc = `MILITARY COUP! ${rival.name} seizes power in ${actor}, overthrowing ${active.name}!`;
+                            } else {
+                                outcomeDesc = `A coup attempt by ${rival.name} in ${actor} was brutally suppressed by ${active.name}.`;
+                            }
+                            break;
+                        case 'assassination':
+                            if (Math.random() > 0.7) {
+                                deadLeaders.add(active.name);
+                                currentActors[actor] = rival;
+                                outcomeDesc = `${active.name} was assassinated! ${rival.name} takes control of ${actor}.`;
+                            } else {
+                                deadLeaders.add(rival.name);
+                                outcomeDesc = `Assassination attempt on ${active.name} failed. The rival ${rival.name} was executed.`;
+                            }
+                            break;
+                        case 'alliance':
+                            outcomeDesc = `${active.name} and ${rival.name} form an uneasy political alliance in ${actor}.`;
+                            break;
+                    }
+
+                    events.push({
+                        date: date.toISOString().split('T')[0],
+                        descriptions: [outcomeDesc]
+                    });
+                }
+            });
+        }
+
+        // Event types and generators
+        const eventTypes = {
+            political: [
+                'assassination attempt', 'election', 'coup attempt', 'reforms', 'scandal',
+                'diplomatic meeting', 'treaty signing', 'border dispute', 'uprising', 'revolution'
+            ],
+            military: [
+                'border skirmish', 'naval encounter', 'air raid', 'military parade', 'fortification',
+                'weapon development', 'military exercise', 'espionage', 'sabotage', 'defection'
+            ],
+            economic: [
+                'market crash', 'trade agreement', 'industrial growth', 'famine', 'strike',
+                'currency crisis', 'new industry', 'resource discovery', 'embargo', 'boom'
+            ],
+            social: [
+                'plague outbreak', 'cultural festival', 'religious event', 'migration wave',
+                'technological breakthrough', 'artistic movement', 'social reform', 'protest'
+            ],
+            paranormal: [
+                'StrangeLightsInSky', 'MysteriousDisappearances', 'PropheticDreams',
+                'MiraculousHealing', 'Haunting', 'CryptidSighting', 'OccultRitual',
+                'TimeAnomaly', 'MassHysteria', 'DivineVision', 'ThoughtTransmittedDisease'
+            ],
+            royal: [
+                'royal wedding', 'royal birth', 'succession crisis', 'royal scandal',
+                'coronation', 'royal death', 'exile', 'abdication', 'royal visit'
+            ]
+        };
+        
+        // Fixed historical/alt-history events
+        const fixedEvents = {
+            '1962-10': {
+                type: 'political',
+                description: "Enrico Mattei's plane crashes under mysterious circumstances. Reports of 'PetroDemons' sightings near the wreckage emerge.",
+                callback: () => {
+                    factions['The Gods'].arcane += 20;
+                    factions['Hypercapitalist Collective'].velocity += 50;
+                }
+            },
+            '1970-05': {
+                type: 'paranormal',
+                description: "The Soviet Union opens the Kola Superdeep Borehole. A massive Goblin Horde, which lived underground for eons, is spawned and emerges from the depths of the Earth!",
+                callback: () => {
+                    if (factions['Goblin Horde']) {
+                        factions['Goblin Horde'].arcane += 50;
+                        factions['Goblin Horde'].velocity += 20;
+                    }
+                }
+            },
+            '1999-12': {
+                type: 'social',
+                description: "The Millennium Bug fries global technology. Magic Resurgence begins. Margaret Thatcher reveals her position in the Mages Guild.",
+                callback: () => {
+                    for (let f in factions) {
+                        factions[f].arcane *= 2;
+                        factions[f].information *= 0.5;
+                    }
+                }
+            },
+            '2003-03': {
+                type: 'paranormal',
+                description: "THE SQUISHING: 92 dimensions collapse into one. Reality is overwritten by the Rule of 80 and CamelCase laws.",
+                callback: () => {
+                    for (let f in factions) {
+                        factions[f].velocity = Math.max(80, factions[f].velocity);
+                    }
+                }
+            }
+        };
+
+        // Generate random events
+        function generateEvent(date) {
+            let event = {
+                date: date.toISOString().split('T')[0],
+                descriptions: []
+            };
+
+            // Geopolitical Event (Hyperpowers)
+            if (Math.random() < 0.7) {
+                let eventCategory = Object.keys(eventTypes)[Math.floor(Math.random() * Object.keys(eventTypes).length)];
+                let eventType = eventTypes[eventCategory][Math.floor(Math.random() * eventTypes[eventCategory].length)];
+                let power = Object.keys(hyperpowers)[Math.floor(Math.random() * Object.keys(hyperpowers).length)];
+                let leader = currentLeaders[power];
+                if (leader) {
+                    event.descriptions.push(generateEventDescription(eventCategory, eventType, power, leader, false));
+                    applyEventEffects(event, power, false);
+                }
+            }
+
+            // Lore Event (Factions)
+            if (Math.random() < 0.5) {
+                let eventCategory = 'paranormal';
+                let eventType = eventTypes.paranormal[Math.floor(Math.random() * eventTypes.paranormal.length)];
+                let faction = Object.keys(factions)[Math.floor(Math.random() * Object.keys(factions).length)];
+                let leader = currentFactionLeaders[faction];
+                if (leader) {
+                    event.descriptions.push(generateEventDescription(eventCategory, eventType, faction, leader, true));
+                    applyEventEffects(event, faction, true);
+                }
+            }
+            
+            // Check for war/conquest
+            if (Math.random() < 0.05) {
+                const conquest = generateConquestEvent(date);
+                if (conquest && conquest.description) event.descriptions.push(conquest.description);
+            }
+            
+            return event;
+        }
+
+        function generateEventDescription(category, type, actor, leader, isFaction) {
+            const descriptions = {
+                political: {
+                    'assassination attempt': `Assassination attempt on ${leader.name} of ${actor} foiled by loyal guards`,
+                    'election': `${actor} holds controversial elections, ${leader.name} maintains power`,
+                    'coup attempt': `Military coup attempt in ${actor} crushed by ${leader.name}`,
+                    'reforms': `${leader.name} announces sweeping ${leader.ideology} reforms in ${actor}`,
+                    'scandal': `Corruption scandal rocks ${actor} government under ${leader.name}`
+                },
+                military: {
+                    'border skirmish': `Border skirmish between ${actor} forces and neighboring territory`,
+                    'naval encounter': `${actor} naval forces encounter mysterious vessels in territorial waters`,
+                    'weapon development': `${actor} scientists develop new experimental weapon technology`,
+                    'military parade': `${leader.name} reviews massive military parade in ${actor}`
+                },
+                economic: {
+                    'market crash': `${actor} stock market crashes, economy loses 20% value`,
+                    'trade agreement': `${actor} signs lucrative trade deal with neutral nations`,
+                    'industrial growth': `${actor} industrial output increases by 15%`,
+                    'resource discovery': `Valuable mineral deposits discovered in ${actor} territory`
+                },
+                social: {
+                    'plague outbreak': `Mysterious plague strikes ${actor}, thousands affected`,
+                    'technological breakthrough': `${actor} scientists achieve breakthrough in radio technology`,
+                    'cultural festival': `Grand cultural festival celebrates ${actor} heritage`,
+                    'religious event': `Miraculous apparition reported in ${actor} cathedral`
+                },
+                paranormal: {
+                    'StrangeLightsInSky': `Unexplained lights dance across ${actor} skies; Arcane potential rises.`,
+                    'MysteriousDisappearances': `Entire village vanishes in ${actor}; LocalizedTimeLoop suspected.`,
+                    'PropheticDreams': `${leader.name} claims PropheticDreams guide ${actor} destiny.`,
+                    'CryptidSighting': `Witnesses report a PetroDemon near ${actor}.`,
+                    'ThoughtTransmittedDisease': `TTD outbreak in ${actor}; Citizens advised to wear TinfoilDams.`,
+                    'TimeAnomaly': `${actor} experiences a TimeAnomaly; History is being overwritten.`
+                },
+                royal: {
+                    'royal wedding': `Grand royal wedding unites ${actor} nobility.`,
+                    'succession crisis': `${actor} faces succession crisis as ${leader.name} enters a StasisLoop.`,
+                    'royal scandal': `Scandalous affair involving an ArchiveFoundation agent rocks ${actor} court.`
+                }
+            };
+            
+            return descriptions[category] && descriptions[category][type] || 
+                   `${type} occurs in ${actor} under ${leader.name}`;
+        }
+
+        function generateConquestEvent(date) {
+            let attacker = Object.keys(hyperpowers)[Math.floor(Math.random() * Object.keys(hyperpowers).length)];
+            let neutralCountries = Object.keys(countries).filter(c => countries[c].controller === 'Neutral');
+            
+            if (neutralCountries.length > 0) {
+                let target = neutralCountries[Math.floor(Math.random() * neutralCountries.length)];
+                countries[target].controller = attacker;
+                hyperpowers[attacker].military += 10;
+                hyperpowers[attacker].economy += 20;
+                
+                return {
+                    date: date.toISOString().split('T')[0],
+                    type: 'conquest',
+                    description: `${attacker} conquers ${target}! ${currentLeaders[attacker].name} declares victory`
+                };
+            }
+            
+            return generateEvent(date);
+        }
+
+        function generateWarEvent(date) {
+            let powers = Object.keys(hyperpowers);
+            let attacker = powers[Math.floor(Math.random() * powers.length)];
+            let defender = powers.filter(p => p !== attacker)[Math.floor(Math.random() * (powers.length - 1))];
+            
+            wars.push({
+                attacker: attacker,
+                defender: defender,
+                start: date,
+                intensity: Math.floor(Math.random() * 100)
+            });
+            
+            return {
+                date: date.toISOString().split('T')[0],
+                type: 'war',
+                description: `WAR DECLARED! ${attacker} under ${currentLeaders[attacker].name} declares war on ${defender}!`
+            };
+        }
+
+        function applyEventEffects(event, actor, isFaction) {
+            const p = isFaction ? factions[actor] : hyperpowers[actor];
+            if (!p) return;
+
+            const description = event.descriptions ? event.descriptions.join(' ') : (event.description || '');
+
+            if (description.includes('crash')) {
+                if (p.economy) p.economy *= 0.8;
+                if (p.velocity) p.velocity -= 5;
+            } else if (description.includes('growth') || description.includes('boom')) {
+                if (p.economy) p.economy *= 1.15;
+                if (p.velocity) p.velocity += 10;
+            }
+            
+            if (description.includes('plague') || description.includes('TTD')) {
+                if (p.population) p.population *= 0.95;
+                if (p.information) p.information -= 10;
+            }
+            if (description.includes('breakthrough')) {
+                if (p.information) p.information += 20;
+                if (p.velocity) p.velocity += 15;
+            }
+
+            if (p.arcane !== undefined) {
+                p.arcane += 2;
+                if (description.includes('Anomaly')) p.velocity += 20;
+            }
+            
+            if (p.population) p.population *= 1.0001;
+        }
+
+        function runSimulation() {
+            events = [];
+            deadLeaders = new Set();
+            currentDate = new Date(1900, 0, 1);
+            initializeLeaders(1900);
+            
+            // Reset countries
+            for (let country in countries) {
+                const hpKey = Object.keys(hyperpowers).find(hp => hyperpowers[hp].baseTerritory === country);
+                if (hpKey) {
+                    countries[country].controller = hpKey;
+                } else {
+                    countries[country].controller = 'Neutral';
+                }
+            }
+            wars = [];
+            
+            // Simulate each month
+            while (currentDate <= new Date(2004, 0, 1)) {
+                // Check for leader changes
+                let year = currentDate.getFullYear();
+                initializeLeaders(year);
+                
+                // Attrition: Rule of 80 (Affects Factions)
+                for (let f in factions) {
+                    if (factions[f].velocity < 80 && year >= 2003) {
+                        factions[f].arcane *= 0.99;
+                        factions[f].information *= 0.98;
+                    }
+                }
+                
+                // Check for fixed events
+                const dateKey = currentDate.toISOString().slice(0, 7); // "YYYY-MM"
+                if (fixedEvents[dateKey]) {
+                    const fe = fixedEvents[dateKey];
+                    const event = {
+                        date: currentDate.toISOString().split('T')[0],
+                        descriptions: [fe.description]
+                    };
+                    events.push(event);
+                    if (fe.callback) fe.callback();
+                } else {
+                    // Generate monthly event
+                    let event = generateEvent(new Date(currentDate));
+                    events.push(event);
+                }
+                
+                // End wars randomly
+                if (wars.length > 0 && Math.random() < 0.1) {
+                    let war = wars.pop();
+                    events.push({
+                        date: currentDate.toISOString().split('T')[0],
+                        type: 'peace',
+                        description: `Peace treaty signed between ${war.attacker} and ${war.defender}`
+                    });
+                }
+                
+                // Advance to next month
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                
+                // Internal Politics
+                handleInternalPolitics(new Date(currentDate), false);
+                handleInternalPolitics(new Date(currentDate), true);
+            }
+            
+            displayResults();
+        }
+
+        function displayResults() {
+            let output = document.getElementById('output');
+            let html = '<h2>Simulation Complete</h2>';
+            
+            // Display events
+            html += '<h3>Events Log</h3>';
+            html += '<div id="log-container">';
+            for (let event of events) {
+                const desc = event.descriptions ? event.descriptions.join(' | ') : event.description;
+                html += `<div class="event-entry"><span class="event-date">${event.date}</span> ${desc}</div>`;
+            }
+            html += '</div>';
+            
+            // Display final state
+            html += `<h3>Final World State (${currentDate.toDateString()})</h3>`;
+            
+            html += '<h4>Geopolitical Hyperpowers:</h4>';
+            for (let power in hyperpowers) {
+                const p = hyperpowers[power];
+                html += `<div style="border-left: 4px solid ${p.color}; padding-left: 10px; margin-bottom: 10px;">`;
+                html += `<strong>${power}</strong> - Leader: ${currentLeaders[power] ? currentLeaders[power].name : 'Unknown'} (${currentLeaders[power] ? currentLeaders[power].ideology : 'Unknown'})<br>`;
+                html += `Population: ${Math.floor(p.population).toLocaleString()} | Economy: ${Math.floor(p.economy)} | Military: ${Math.floor(p.military)}`;
+                html += `</div>`;
+            }
+
+            html += '<h4>Lore Factions:</h4>';
+            for (let faction in factions) {
+                const f = factions[faction];
+                html += `<div style="border-left: 4px solid ${f.color}; padding-left: 10px; margin-bottom: 10px;">`;
+                html += `<strong>${faction}</strong>`;
+                if (f.parentHyperpower) html += ` (Under ${f.parentHyperpower})`;
+                html += ` - Influencer: ${currentFactionLeaders[faction] ? currentFactionLeaders[faction].name : 'Unknown'} (${currentFactionLeaders[faction] ? currentFactionLeaders[faction].ideology : 'Unknown'})<br>`;
+                html += `Arcane: ${Math.floor(f.arcane || 0)} | Velocity: ${Math.floor(f.velocity || 0)} km/h | Info: ${Math.floor(f.information || 0)}%`;
+                html += `</div>`;
+            }
+            
+            html += '<h4>Country Control & Influence:</h4>';
+            for (let country in countries) {
+                html += `<p><strong>${country}</strong>: <span style="color: ${hyperpowers[countries[country].controller] ? hyperpowers[countries[country].controller].color : 'inherit'}">${countries[country].controller}</span> / <span style="color: ${factions[countries[country].faction] ? factions[countries[country].faction].color : 'inherit'}">${countries[country].faction}</span></p>`;
+            }
+            
+            output.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
