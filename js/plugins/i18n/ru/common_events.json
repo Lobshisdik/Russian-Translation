@@ -420,7 +420,7 @@
     "name": ""
   },
   "Once inside take the big central staircase\nand you can start exploring freely, just \nremember to stock up before an expedition.": {
-    "val": "Затем поднимайся по большой лестнице и \nможешь начинать ислледовать Башню.\nГлавное - всегда запасайся перед экспедицией!",
+    "val": "Затем поднимайся по большой лестнице и \nможешь начинать ислледовать Башню.\nПомни - всегда запасайся перед экспедицией!",
     "excluded": "",
     "name": ""
   },
@@ -435,7 +435,7 @@
     "name": ""
   },
   "Like everywere in the tower!\nAlmost every person here is a": {
-    "val": "Да почти везде в Башне!\n(?QUESTIONABLE?)", 
+    "val": "Да почти везде в Башне!\n", 
     "excluded": "",
     "name": ""
   },
@@ -450,222 +450,222 @@
     "name": ""
   },
   "Sometimes, when you’re exploring a floor or returning \nto base, you’ll run into other explorers and archivists.": {
-    "val": "Sometimes, when you’re exploring a floor or returning \nto base, you’ll run into other explorers and archivists.",
+    "val": "Во время своих экспедиций ты иногда будешь сталкиваться\n с другими исследователями и архивариусами.",
     "excluded": "",
     "name": ""
   },
   "If you want allies, talk to people around here. \nShare what you’ve found. \nThey’re more likely to trust someone who actually\ncontributes to the Archive. ": {
-    "val": "If you want allies, talk to people around here. \nShare what you’ve found. \nThey’re more likely to trust someone who actually\ncontributes to the Archive. ",
+    "val": "Если тебе нужны союзники - поговори с местными. \nПоведай им о своих находках - они доверяют\nтем, кто вносит вклад в Архив. ",
     "excluded": "",
     "name": ""
   },
   "How the elevator works?": {
-    "val": "How the elevator works?",
+    "val": "Как работает лифт?",
     "excluded": "",
     "name": ""
   },
   "Why everybody talks so weird?": {
-    "val": "Why everybody talks so weird?",
+    "val": "Почему все так странно говорят?",
     "excluded": "",
     "name": ""
   },
   "The Hypernet": {
-    "val": "The Hypernet",
+    "val": "Гипернет",
     "excluded": "",
     "name": ""
   },
   "The Squishing": {
-    "val": "The Squishing",
+    "val": "Сквишинг",
     "excluded": "",
     "name": ""
   },
   "It’s an anomalous construct, probably alive. ": {
-    "val": "It’s an anomalous construct, probably alive. ",
+    "val": "Это аномальный конструкт, возможно живой. ",
     "excluded": "",
     "name": ""
   },
   "Maybe even self-aware, though it won’t say\nanything directly.": {
-    "val": "Maybe even self-aware, though it won’t say\nanything directly.",
+    "val": "Возможно, даже обладает самоосознаием, хоть\nон ничего не говорит напрямую.",
     "excluded": "",
     "name": ""
   },
   "Here’s the tricky part. The elevator won’t take you\nsomewhere you haven’t been on foot.": {
-    "val": "Here’s the tricky part. The elevator won’t take you\nsomewhere you haven’t been on foot.",
+    "val": "А теперь - самое противное...\nЛифт не доставит тебя туда, где тебя не было.",
     "excluded": "",
     "name": ""
   },
   "If you want to reach a floor via elevator, \nyou’ve got to earn it first. ": {
-    "val": "If you want to reach a floor via elevator, \nyou’ve got to earn it first. ",
+    "val": "Хочешь подниматься на этаж на лифте? \nСначала нужно это заслужить."
     "excluded": "",
     "name": ""
   },
   "Strangely enough, a few high floors are unlocked right \nfrom the start. No one knows why. \nMight be just a design feature or it just wants to show off.": {
-    "val": "Strangely enough, a few high floors are unlocked right \nfrom the start. No one knows why. \nMight be just a design feature or it just wants to show off.",
+    "val": "Но вот что странно: несколько верхних этажей открыты \nс самого начала. Никто не знает, почему. \nСкорее всего, особенность дизайна или просто хвастовство.",
     "excluded": "",
     "name": ""
   },
   "It's called DungeonSpeak!": {
-    "val": "It's called DungeonSpeak!",
+    "val": "Это Говор Подземелий!",
     "excluded": "",
     "name": ""
   },
   "It's a neolanguage based on the deconstruction\nand recostruction of English,": {
-    "val": "It's a neolanguage based on the deconstruction\nand recostruction of English,",
+    "val": "Неоязык, основанный на деконструкции\nи реконструкции Английского языка,",
     "excluded": "",
     "name": ""
   },
   "The Hypernet isn’t what it used to be.": {
-    "val": "The Hypernet isn’t what it used to be.",
+    "val": "Гипернет уже не тот...",
     "excluded": "",
     "name": ""
   },
   "It was destroyed during the Y2K Event, \nwhen something, something not from here, breached \ninto our layer of reality. We call it Omni-Lex.": {
-    "val": "It was destroyed during the Y2K Event, \nwhen something, something not from here, breached \ninto our layer of reality. We call it Omni-Lex.",
+    "val": "Он был уничтожен из-за события Y2K, \nкогда что-то явно не местное, проникло \nна наш слой мироздания. Мы называем его Омни-Лекс.",
     "excluded": "",
     "name": ""
   },
   "An extradimensional intelligence that decrypted \nevery password, breached every firewall, \nand made everything public.": {
-    "val": "An extradimensional intelligence that decrypted \nevery password, breached every firewall, \nand made everything public.",
+    "val": "Разум вне пространства, что расшифровал \nвсе пароли и взломал все файрволы, \nоткрыв все для свободного доступа.",
     "excluded": "",
     "name": ""
   },
   "The Hypernet couldn’t survive full transparency.": {
-    "val": "The Hypernet couldn’t survive full transparency.",
+    "val": "Гипернет не смог выжить при полной прозрачности.",
     "excluded": "",
     "name": ""
   },
   "In the aftermath, the Foundation did what \nit always does, salvage and rebuild.": {
-    "val": "In the aftermath, the Foundation did what \nit always does, salvage and rebuild.",
+    "val": "Впоследствии Фонд, как всегда, сумел \nвосстановиться и отстроить все заново. ",
     "excluded": "",
     "name": ""
   },
   "What’s left of the Hypernet now is fragile, patchy, \nand deeply weird. We’re trying to reconstruct \nit from recovered HTML files, old hard drives, \nforgotten caches. ": {
-    "val": "What’s left of the Hypernet now is fragile, patchy, \nand deeply weird. We’re trying to reconstruct \nit from recovered HTML files, old hard drives, \nforgotten caches. ",
+    "val": "А теперь то, что осталось от Гипернета, крайне хрупкое, \nраздробленное и странное. Мы пыталаемся его\nвоссоздать с помощью восстановленых HTML-файлов , старых жестких дисков и\nзабытого кэша. ",
     "excluded": "",
     "name": ""
   },
   "Most links are broken. Images are missing. \nHexScript's practically radioactive. But sometimes, \nburied in the markup, we find data worth keeping.": {
-    "val": "Most links are broken. Images are missing. \nHexScript's practically radioactive. But sometimes, \nburied in the markup, we find data worth keeping.",
+    "val": "Большинство ссылок не работают, изображений нет, а\nХексСкрипты радиоактивны. Но иногда мы находим \nданные, погребенные в земле, достойные хранения.",
     "excluded": "",
     "name": ""
   },
   "You’ll be browsing fragments and static pages once \nhosted by people long gone.": {
-    "val": "You’ll be browsing fragments and static pages once \nhosted by people long gone.",
+    "val": "Ты будешь бороздить просторы фрагментов страниц, \nвладельцев которых давно нет в живых.",
     "excluded": "",
     "name": ""
   },
   "Keep your expectations low, and your firewall strong.": {
-    "val": "Keep your expectations low, and your firewall strong.",
+    "val": "Держи голову в холоде, а файрвол - в сохранности.",
     "excluded": "",
     "name": ""
   },
   "Yound the remains of an adventurer, what do you want\nto do?": {
-    "val": "Yound the remains of an adventurer, what do you want\nto do?",
+    "val": "Найдя останки путешественника, что вы сделаете?",
     "excluded": "",
     "name": ""
   },
   "Loot the body": {
-    "val": "Loot the body",
+    "val": "Обыщу тело",
     "excluded": "",
     "name": ""
   },
   "Resurrect him": {
-    "val": "Resurrect him",
+    "val": "Воскрешу его",
     "excluded": "",
     "name": ""
   },
   "Desacrate the grave": {
-    "val": "Desacrate the grave",
+    "val": "Оскверню могилу",
     "excluded": "",
     "name": ""
   },
   "Ignore it": {
-    "val": "Ignore it",
+    "val": "Проигнорирую и пойду дальше",
     "excluded": "",
     "name": ""
   },
   "Select your destination": {
-    "val": "Select your destination",
+    "val": "Выберите пункт назначения",
     "excluded": "",
     "name": ""
   },
   "Bologna": {
-    "val": "Bologna",
+    "val": "Болонья",
     "excluded": "",
     "name": ""
   },
   "Omega Tower": {
-    "val": "Omega Tower",
+    "val": "Омега Башня",
     "excluded": "",
     "name": ""
   },
   "Green Witch Space Center": {
-    "val": "Green Witch Space Center",
+    "val": "Космический центр им.Зеленой Ведьмы",
     "excluded": "",
     "name": ""
   },
   "Teleport": {
-    "val": "Teleport",
+    "val": "Телепорт",
     "excluded": "",
     "name": ""
   },
   "Add level": {
-    "val": "Add level",
+    "val": "Добавить уровень",
     "excluded": "",
     "name": ""
   },
   "3d MODE": {
-    "val": "3d MODE",
+    "val": "3D-вид",
     "excluded": "",
     "name": ""
   },
   "Initialize": {
-    "val": "Initialize",
+    "val": "Инициализировать",
     "excluded": "",
     "name": ""
   },
   "Add items/Money": {
-    "val": "Add items/Money",
+    "val": "Добавить предметы/Деньги",
     "excluded": "",
     "name": ""
   },
   "Other": {
-    "val": "Other",
+    "val": "Другое",
     "excluded": "",
     "name": ""
   },
   "Go down": {
-    "val": "Go down",
+    "val": "",
     "excluded": "",
     "name": ""
   },
   "Base set": {
-    "val": "Base set",
+    "val": "Установить базу",
     "excluded": "",
     "name": ""
   },
   "Materials": {
-    "val": "Materials",
+    "val": "Материалы",
     "excluded": "",
     "name": ""
   },
   "Money": {
-    "val": "Money",
+    "val": "Деньги",
     "excluded": "",
     "name": ""
   },
   "Teleport to vehicle": {
-    "val": "Teleport to vehicle",
+    "val": "ТП к транспорту",
     "excluded": "",
     "name": ""
   },
   "Spawn vehicle": {
-    "val": "Spawn vehicle",
+    "val": "Вызвать транспорт",
     "excluded": "",
     "name": ""
   },
   "Death": {
-    "val": "Death",
+    "val": "Смерть",
     "excluded": "",
     "name": ""
   },
@@ -675,222 +675,222 @@
     "name": ""
   },
   "Camper": {
-    "val": "Camper",
+    "val": "Кэмпер",
     "excluded": "",
     "name": ""
   },
   "Car": {
-    "val": "Car",
+    "val": "Авто",
     "excluded": "",
     "name": ""
   },
   "Inn": {
-    "val": "Inn",
+    "val": "Гостиница",
     "excluded": "",
     "name": ""
   },
   "Campfire": {
-    "val": "Campfire",
+    "val": "Костер",
     "excluded": "",
     "name": ""
   },
   "Advance time": {
-    "val": "Advance time",
+    "val": "",
     "excluded": "",
     "name": ""
   },
   "Set player speed": {
-    "val": "Set player speed",
+    "val": "Установить скорость игрока",
     "excluded": "",
     "name": ""
   },
   "Buy troops": {
-    "val": "Buy troops",
+    "val": "Нанять отряд(ы)",
     "excluded": "",
     "name": ""
   },
   "Change Weather": {
-    "val": "Change Weather",
+    "val": "Поменять погоду",
     "excluded": "",
     "name": ""
   },
   "Surgery": {
-    "val": "Surgery",
+    "val": "Операция",
     "excluded": "",
     "name": ""
   },
   "Make a coffee": {
-    "val": "Make a coffee",
+    "val": "Сделать кофе",
     "excluded": "",
     "name": ""
   },
   "Play Locktris": {
-    "val": "Play Locktris",
+    "val": "Сыграть в Locktris",
     "excluded": "",
     "name": ""
   },
   "Select difficulty:": {
-    "val": "Select difficulty:",
+    "val": "Выберите сложность:",
     "excluded": "",
     "name": ""
   },
   "Walk in the park": {
-    "val": "Walk in the park",
+    "val": "Летняя прогулка",
     "excluded": "",
     "name": ""
   },
   "Easy": {
-    "val": "Easy",
+    "val": "Легко",
     "excluded": "",
     "name": ""
   },
   "Medium": {
-    "val": "Medium",
+    "val": "Нормально",
     "excluded": "",
     "name": ""
   },
   "Hard": {
-    "val": "Hard",
+    "val": "Сложно",
     "excluded": "",
     "name": ""
   },
   "Hyperhard": {
-    "val": "Hyperhard",
+    "val": "Гиперсложно",
     "excluded": "",
     "name": ""
   },
   "Stop working": {
-    "val": "Stop working",
+    "val": "Прекратить работать",
     "excluded": "",
     "name": ""
   },
   "Change role": {
-    "val": "Change role",
+    "val": "Сменить должность",
     "excluded": "",
     "name": ""
   },
   "Manager": {
-    "val": "Manager",
+    "val": "Менеджео",
     "excluded": "",
     "name": ""
   },
   "Producer": {
-    "val": "Producer",
+    "val": "Продюсер",
     "excluded": "",
     "name": ""
   },
   "Rider": {
-    "val": "Rider",
+    "val": "Всадник",
     "excluded": "",
     "name": ""
   },
   "Start working": {
-    "val": "Start working",
+    "val": "Начать работать",
     "excluded": "",
     "name": ""
   },
   "Select your role": {
-    "val": "Select your role",
+    "val": "Выберите свою должность",
     "excluded": "",
     "name": ""
   },
   "You are in\n\\V[63] \\V[64] \\V[68]": {
-    "val": "You are in\n\\V[63] \\V[64] \\V[68]",
+    "val": "",
     "excluded": "",
     "name": ""
   },
   "No gas pump near": {
-    "val": "No gas pump near",
+    "val": "Рядом нет ни одной бензоколонки",
     "excluded": "",
     "name": ""
   },
   "Repairing...": {
-    "val": "Repairing...",
+    "val": "Идет ремонт...",
     "excluded": "",
     "name": ""
   },
   "Where you want to go?": {
-    "val": "Where you want to go?",
+    "val": "Куда бы вы хотели отправиться?",
     "excluded": "",
     "name": ""
   },
   "Hypernet Point": {
-    "val": "Hypernet Point",
+    "val": "Точка Гипернета",
     "excluded": "",
     "name": ""
   },
   "Outside the tower": {
-    "val": "Outside the tower",
+    "val": "Снаружи Башни",
     "excluded": "",
     "name": ""
   },
   "Shopping mall": {
-    "val": "Shopping mall",
+    "val": "Торговый Центр",
     "excluded": "",
     "name": ""
   },
   "Pay the bounty": {
-    "val": "Pay the bounty",
+    "val": "Выплатить награду",
     "excluded": "",
     "name": ""
   },
   "Go to trial": {
-    "val": "Go to trial",
+    "val": "Отправиться в суд",
     "excluded": "",
     "name": ""
   },
   "See crime list": {
-    "val": "See crime list",
+    "val": "Просмотреть список преступлений",
     "excluded": "",
     "name": ""
   },
   "Resist arrest": {
-    "val": "Resist arrest",
+    "val": "Сопротивляться аресту",
     "excluded": "",
     "name": ""
   },
   "Go to jail": {
-    "val": "Go to jail",
+    "val": "Отправиться в тюрьму",
     "excluded": "",
     "name": ""
   },
   "You don't have any money to clear\nyour bounty.": {
-    "val": "You don't have any money to clear\nyour bounty.",
+    "val": "У вас недостаточно денег для выплаты\nнаграды за свою голову.",
     "excluded": "",
     "name": ""
   },
   "Steal": {
-    "val": "Steal",
+    "val": "Украсть",
     "excluded": "",
     "name": ""
   },
   "You don't have any bounties.": {
-    "val": "You don't have any bounties.",
+    "val": "За мою голову не назначена награда.",
     "excluded": "",
     "name": ""
   },
   "Talk": {
-    "val": "Talk",
+    "val": "Говорить",
     "excluded": "",
     "name": ""
   },
   "Turn yourself in": {
     "val": "Turn yourself in",
-    "excluded": "",
+    "excluded": "Сдаться",
     "name": ""
   },
   "Ask directions": {
-    "val": "Ask directions",
+    "val": "Спросить дорогу",
     "excluded": "",
     "name": ""
   },
   "50€ was added to your account.": {
-    "val": "50€ was added to your account.",
+    "val": "На ваш счет  было зачислено 50€.",
     "excluded": "",
     "name": ""
   },
   "You can fly only in the world map.": {
-    "val": "You can fly only in the world map.",
+    "val": "Вы можете летать только на карте мира.",
     "excluded": "",
     "name": ""
   },
@@ -900,67 +900,67 @@
     "name": ""
   },
   "You look at yourself in the mirror.": {
-    "val": "You look at yourself in the mirror.",
+    "val": "Вы посмотрели на себя в зеркало.",
     "excluded": "",
     "name": ""
   },
   "Shop": {
-    "val": "Shop",
+    "val": "Магазин",
     "excluded": "",
     "name": ""
   },
   "Rent room": {
-    "val": "Rent room",
+    "val": "Снять комнату",
     "excluded": "",
     "name": ""
   },
   "Recruit troops": {
-    "val": "Recruit troops",
+    "val": "Набрать отряд(ы)",
     "excluded": "",
     "name": ""
   },
   "Fight": {
-    "val": "Fight",
+    "val": "Сражаться",
     "excluded": "",
     "name": ""
   },
   "Open star map": {
-    "val": "Open star map",
+    "val": "Открыть звездную карту",
     "excluded": "",
     "name": ""
   },
   "Land": {
-    "val": "Land",
+    "val": "Приземлиться",
     "excluded": "",
     "name": ""
   },
   "Refuel": {
-    "val": "Refuel",
+    "val": "Заправиться",
     "excluded": "",
     "name": ""
   },
   "Repair": {
-    "val": "Repair",
+    "val": "Починить",
     "excluded": "",
     "name": ""
   },
   "Greenwitch space center": {
-    "val": "Greenwitch space center",
+    "val": "Космоцентр 'Гринвич'",
     "excluded": "",
     "name": ""
   },
   "Apulia Spaceport": {
-    "val": "Apulia Spaceport",
+    "val": "Космопорт 'Апулия'",
     "excluded": "",
     "name": ""
   },
   "Jump in the trash": {
-    "val": "Jump in the trash",
+    "val": "Прыгнуть в мусор",
     "excluded": "",
     "name": ""
   },
   "You donated sperm \\V[102] times and you have\ngiven birth to \\V[103] children.": {
-    "val": "You donated sperm \\V[102] times and you have\ngiven birth to \\V[103] children.",
+    "val": "Вы сдали сперму \\V[102] раз, и теперь у вас\n\\V[103] детей.",
     "excluded": "",
     "name": ""
   }
