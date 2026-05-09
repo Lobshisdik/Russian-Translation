@@ -1,44 +1,44 @@
 {
   "brain": {
     "prefrontalcortex": {
-      "name": "Prefrontal Cortex",
-      "function": "Executive function, decision making"
+      "name": "Префронтальная кора",
+      "function": "Исполнительные функции, принятие решений"
     },
     "motorcortex": {
-      "name": "Motor Cortex",
-      "function": "Motor control, movement"
+      "name": "Моторная кора",
+      "function": "Двигательный контроль, движение"
     },
     "sensorycortex": {
-      "name": "Sensory Cortex",
-      "function": "Sensory processing"
+      "name": "Сенсорная кора",
+      "function": "Обработка чувств"
     },
     "hippocampus": {
-      "name": "Hippocampus",
-      "function": "Memory formation, learning"
+      "name": "Гиппокамп",
+      "function": "Формирование памяти, обучение"
     },
     "amygdala": {
-      "name": "Amygdala",
-      "function": "Emotion, fear response"
+      "name": "Миндалевидное тело",
+      "function": "Регуляция эмоций, формирование страха"
     },
     "cerebellum": {
-      "name": "Cerebellum",
-      "function": "Balance, coordination"
+      "name": "Мозжечок",
+      "function": "Баланс, координация движений"
     },
     "brainstem": {
-      "name": "Brainstem",
-      "function": "Vital functions, breathing"
+      "name": "Мозговой ствол",
+      "function": "Регуляция жизненно важных функций"
     },
     "occipitallobe": {
-      "name": "Occipital Lobe",
-      "function": "Visual processing"
+      "name": "Затылочная доля",
+      "function": "Обработка визуальной информации"
     },
     "temporallobe": {
-      "name": "Temporal Lobe",
-      "function": "Auditory processing, language"
+      "name": "Височная доля",
+      "function": "Обработка слуховой информации, понимание речи"
     },
     "parietallobe": {
-      "name": "Parietal Lobe",
-      "function": "Spatial processing, integration"
+      "name": "Теменная доля",
+      "function": "Обработка сенсорной информации, ориентация в пространстве"
     }
   }
 }
