@@ -1,200 +1,200 @@
 {
   "1": {
-    "name": "Freelancer"
+    "name": "Фрилансер"
   },
   "2": {
-    "name": "Witch"
+    "name": "Ведьма"
   },
   "3": {
-    "name": "Nun"
+    "name": "Монахиня"
   },
   "4": {
-    "name": "Knight"
+    "name": "Рыцарь"
   },
   "5": {
-    "name": "Wrestler"
+    "name": "Рестлер"
   },
   "6": {
-    "name": "CEO"
+    "name": "ГенДир"
   },
   "7": {
-    "name": "Vampire"
+    "name": "Вампир"
   },
   "8": {
-    "name": "Cultist"
+    "name": "Культист"
   },
   "9": {
-    "name": "Combat Medic"
+    "name": "Военный врач"
   },
   "10": {
-    "name": "Elementalist"
+    "name": "Элементалист"
   },
   "11": {
-    "name": "Martial Artist"
+    "name": "Мастер боевых искусств"
   },
   "12": {
-    "name": "Enchanter"
+    "name": "Чародей"
   },
   "13": {
-    "name": "Berserker"
+    "name": "Берсерк"
   },
   "14": {
-    "name": "Acrobat"
+    "name": "Акробат"
   },
   "15": {
-    "name": "Monk"
+    "name": "Монах"
   },
   "16": {
-    "name": "Brawler"
+    "name": "Боец"
   },
   "17": {
-    "name": "Boxer"
+    "name": "Боксер"
   },
   "18": {
-    "name": "Pro Wrestler"
+    "name": "Проффесиональный борец"
   },
   "19": {
-    "name": "Fire Mage"
+    "name": "Маг Огня"
   },
   "20": {
-    "name": "Ice Mage"
+    "name": "Маг Льда"
   },
   "21": {
-    "name": "Rogue"
+    "name": "Плут"
   },
   "22": {
-    "name": "Paladin"
+    "name": "Паладин"
   },
   "23": {
-    "name": "Warlock"
+    "name": "Колдун"
   },
   "24": {
-    "name": "Ranger"
+    "name": "Следопыт"
   },
   "25": {
-    "name": "Cleric"
+    "name": "Жрец"
   },
   "26": {
-    "name": "Samurai"
+    "name": "Самурай"
   },
   "27": {
-    "name": "Archmage"
+    "name": "Архимаг"
   },
   "28": {
-    "name": "Scout"
+    "name": "Скаут"
   },
   "29": {
-    "name": "Oracle"
+    "name": "Оракул"
   },
   "30": {
-    "name": "Gladiator"
+    "name": "Гладиатор"
   },
   "31": {
-    "name": "Necromancer"
+    "name": "Некромант"
   },
   "32": {
-    "name": "Commander"
+    "name": "Капитан"
   },
   "33": {
-    "name": "Guardian"
+    "name": "Страж"
   },
   "34": {
-    "name": "Spellblade"
+    "name": "Спеллблейд"
   },
   "35": {
-    "name": "Bard"
+    "name": "Бард"
   },
   "36": {
-    "name": "Illusionist"
+    "name": "Иллюзионист"
   },
   "37": {
-    "name": "Battlemage"
+    "name": "Боевой маг"
   },
   "38": {
-    "name": "Mercenary"
+    "name": "Наемник"
   },
   "39": {
-    "name": "Sage"
+    "name": "Мудрец"
   },
   "40": {
-    "name": "Barbarian"
+    "name": "Варвар"
   },
   "41": {
-    "name": "Doctor"
+    "name": "Доктор"
   },
   "42": {
-    "name": "Scientist"
+    "name": "Ученый"
   },
   "43": {
-    "name": "Firefighter"
+    "name": "Пожарный"
   },
   "44": {
-    "name": "Police Officer"
+    "name": "Полицейский"
   },
   "45": {
-    "name": "Chef"
+    "name": "Шеф-повар"
   },
   "46": {
-    "name": "Journalist"
+    "name": "Журналист"
   },
   "47": {
-    "name": "Construction Worker"
+    "name": "Строитель"
   },
   "48": {
-    "name": "Academic"
+    "name": "Академик"
   },
   "49": {
-    "name": "Psychologist"
+    "name": "Психолог"
   },
   "50": {
-    "name": "Archaeologist"
+    "name": "Археолог"
   },
   "51": {
-    "name": "Nurse"
+    "name": "Медсестра"
   },
   "52": {
-    "name": "Hunter-Gatherer"
+    "name": "Охотник-собиратель"
   },
   "53": {
-    "name": "Physicist"
+    "name": "Физик"
   },
   "54": {
-    "name": "Mechanic"
+    "name": "Механик"
   },
   "55": {
-    "name": "Shopkeeper"
+    "name": "Торговец"
   },
   "56": {
-    "name": "Farmer"
+    "name": "Фермер"
   },
   "57": {
-    "name": "Lumberjack"
+    "name": "Лесоруб"
   },
   "58": {
-    "name": "Meteorologist"
+    "name": "Метеоролог"
   },
   "59": {
-    "name": "Priest"
+    "name": "Священник"
   },
   "60": {
-    "name": "Entertainer"
+    "name": "Артист"
   },
   "61": {
-    "name": "Demigod"
+    "name": "Полубог"
   },
   "62": {
-    "name": "Wretch"
+    "name": "Бедняга"
   },
   "63": {
-    "name": "Beast"
+    "name": "Зверь"
   },
   "64": {
-    "name": "Mimic"
+    "name": "Мимик"
   },
   "65": {
-    "name": "Monster"
+    "name": "Монстр"
   },
   "66": {
-    "name": "Mana Cyborg"
+    "name": "Киборг-маг"
   }
 }
