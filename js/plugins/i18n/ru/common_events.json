@@ -80,12 +80,12 @@
     "name": ""
   },
   "AHAH YOU WISH.": {
-    "val": "AHAH YOU WISH.",
+    "val": "ХАХА МЕЧТАТЬ НЕ ВРЕДНО.",
     "excluded": "",
     "name": ""
   },
   "YOU ARE NOT WORTHY": {
-    "val": "YOU ARE NOT WORTHY",
+    "val": "ТЫ НЕДОСТОЙНЫЙ",
     "excluded": "",
     "name": ""
   },
@@ -95,172 +95,172 @@
     "name": ""
   },
   "Surf the Hypernet": {
-    "val": "Surf the Hypernet",
+    "val": "Серфинг в Гипернете",
     "excluded": "",
     "name": ""
   },
   "Shopping": {
-    "val": "Shopping",
+    "val": "Шопинг",
     "excluded": "",
     "name": ""
   },
   "Latest news": {
-    "val": "Latest news",
+    "val": "Последние новости",
     "excluded": "",
     "name": ""
   },
   "Euro Market": {
-    "val": "Euro Market",
+    "val": "Фин. Рынок",
     "excluded": "",
     "name": ""
   },
   "Job offers": {
-    "val": "Job offers",
+    "val": "Биржа труда",
     "excluded": "",
     "name": ""
   },
   "Cancel": {
-    "val": "Cancel",
+    "val": "Отменить",
     "excluded": "",
     "name": ""
   },
   "Stock options": {
-    "val": "Stock options",
+    "val": "Опционы на акции",
     "excluded": "",
     "name": ""
   },
   "Buy real estate": {
-    "val": "Buy real estate",
+    "val": "Покупка недвижимости",
     "excluded": "",
     "name": ""
   },
   "Use": {
-    "val": "Use",
+    "val": "Использовать",
     "excluded": "",
     "name": ""
   },
   "Vomit": {
-    "val": "Vomit",
+    "val": "Изрыгнуть",
     "excluded": "",
     "name": ""
   },
   "Cook": {
-    "val": "Cook",
+    "val": "Приготовить",
     "excluded": "",
     "name": ""
   },
   "Sleep by the fire": {
-    "val": "Sleep by the fire",
+    "val": "Уснуть у костра",
     "excluded": "",
     "name": ""
   },
   "Save": {
-    "val": "Save",
+    "val": "Сохраниться",
     "excluded": "",
     "name": ""
   },
   "Retire from adventuring": {
-    "val": "Retire from adventuring",
+    "val": "Уйти на покой",
     "excluded": "",
     "name": ""
   },
   "Put out fire": {
-    "val": "Put out fire",
+    "val": "Потушить костер",
     "excluded": "",
     "name": ""
   },
   "You need to disconnect from the room before\nbeing able to save.": {
-    "val": "You need to disconnect from the room before\nbeing able to save.",
+    "val": "Вам нужно отключиться от комнаты, чтобы\nсохранить игру.",
     "excluded": "",
     "name": ""
   },
   "Do you really want to retire from adventuring\nand return home?": {
-    "val": "Do you really want to retire from adventuring\nand return home?",
+    "val": "Вы действительно хотите отойти от дел и\nвернуться домой?",
     "excluded": "",
     "name": ""
   },
   "No": {
-    "val": "No",
+    "val": "Нет",
     "excluded": "",
     "name": ""
   },
   "Yes": {
-    "val": "Yes",
+    "val": "Да",
     "excluded": "",
     "name": ""
   },
   "Sleep": {
-    "val": "Sleep",
+    "val": "Уснуть",
     "excluded": "",
     "name": ""
   },
   "Set respawn point": {
-    "val": "Set respawn point",
+    "val": "Установить точку возрождения",
     "excluded": "",
     "name": ""
   },
   "Manage party": {
-    "val": "Manage party",
+    "val": "Управление группой",
     "excluded": "",
     "name": ""
   },
   "How much do you want to sleep?": {
-    "val": "How much do you want to sleep?",
+    "val": "Сколько часов вы хотите поспать?",
     "excluded": "",
     "name": ""
   },
   "8 Hours": {
-    "val": "8 Hours",
+    "val": "8 часов",
     "excluded": "",
     "name": ""
   },
   "7 Hours": {
-    "val": "7 Hours",
+    "val": "7 часов",
     "excluded": "",
     "name": ""
   },
   "6 Hours": {
-    "val": "6 Hours",
+    "val": "6 часов",
     "excluded": "",
     "name": ""
   },
   "5 Hours": {
-    "val": "5 Hours",
+    "val": "5 часов",
     "excluded": "",
     "name": ""
   },
   "4 Hours": {
-    "val": "4 Hours",
+    "val": "4 часа",
     "excluded": "",
     "name": ""
   },
   "Wake up": {
-    "val": "Wake up",
+    "val": "Проснуться",
     "excluded": "",
     "name": ""
   },
   "Dream": {
-    "val": "Dream",
+    "val": "Увидеть сон",
     "excluded": "",
     "name": ""
   },
   "Keep sleeping": {
-    "val": "Keep sleeping",
+    "val": "Продолжить спать",
     "excluded": "",
     "name": ""
   },
   "Kick out \\N[2]": {
-    "val": "Kick out \\N[2]",
+    "val": "Пусть \\N[2] уйдет",
     "excluded": "",
     "name": ""
   },
   "Kick out \\N[3]": {
-    "val": "Kick out \\N[3]",
+    "val": "Пусть \\N[3] уйдет",
     "excluded": "",
     "name": ""
   },
   "Are you sure?": {
-    "val": "Are you sure?",
+    "val": "Вы уверены?",
     "excluded": "",
     "name": ""
   },
@@ -270,182 +270,182 @@
     "name": ""
   },
   "Clean your clothes?": {
-    "val": "Clean your clothes?",
+    "val": "Постирать свою одежду?",
     "excluded": "",
     "name": ""
   },
   "Wash your hands": {
-    "val": "Wash your hands",
+    "val": "Вымыть руки",
     "excluded": "",
     "name": ""
   },
   "Wash your face": {
-    "val": "Wash your face",
+    "val": "Умыть лицо",
     "excluded": "",
     "name": ""
   },
   "Drink": {
-    "val": "Drink",
+    "val": "Выпить",
     "excluded": "",
     "name": ""
   },
   "Do experiment": {
-    "val": "Do experiment",
+    "val": "Провести эксперимент",
     "excluded": "",
     "name": ""
   },
   "Take a shower": {
-    "val": "Take a shower",
+    "val": "Принять душ",
     "excluded": "",
     "name": ""
   },
   "Show map name": {
-    "val": "Show map name",
+    "val": "Показать название карты",
     "excluded": "",
     "name": ""
   },
   "Show coordinates": {
-    "val": "Show coordinates",
+    "val": "Показать координаты",
     "excluded": "",
     "name": ""
   },
   "The egg is empty.": {
-    "val": "The egg is empty.",
+    "val": "В яйце пусто.",
     "excluded": "",
     "name": ""
   },
   "This bed is not yours.": {
-    "val": "This bed is not yours.",
+    "val": "Это не ваша кровать.",
     "excluded": "",
     "name": ""
   },
   "Do nothing": {
-    "val": "Do nothing",
+    "val": "Ничего не делать",
     "excluded": "",
     "name": ""
   },
   "Sleep anyway": {
-    "val": "Sleep anyway",
+    "val": "Все равно уснуть",
     "excluded": "",
     "name": ""
   },
   "Take a seat": {
-    "val": "Take a seat",
+    "val": "Сесть",
     "excluded": "",
     "name": ""
   },
   "Your party is full.": {
-    "val": "Your party is full.",
+    "val": "Ваша группа заполнена.",
     "excluded": "",
     "name": ""
   },
   "Set up camp": {
-    "val": "Set up camp",
+    "val": "Разбить лагерь",
     "excluded": "",
     "name": ""
   },
   "Stop camping": {
-    "val": "Stop camping",
+    "val": "Свернуть лагерь",
     "excluded": "",
     "name": ""
   },
   "Archive your journey": {
-    "val": "Archive your journey",
+    "val": "Заархивировать свое странствие",
     "excluded": "",
     "name": ""
   },
   "Yes?": {
-    "val": "Yes?",
+    "val": "Да?",
     "excluded": "",
     "name": ""
   },
   "Do you have any questions?": {
-    "val": "Do you have any questions?",
+    "val": "У тебя есть вопросы?",
     "excluded": "",
     "name": ""
   },
   "I'm here to help": {
-    "val": "I'm here to help",
+    "val": "Я тут, если понадобится помощь",
     "excluded": "",
     "name": ""
   },
   "What is this place?": {
-    "val": "What is this place?",
+    "val": "Что это за место?",
     "excluded": "",
     "name": ""
   },
   "Where is the dungeon entrance?": {
-    "val": "Where is the dungeon entrance?",
+    "val": "Где тут вход в подземелье?",
     "excluded": "",
     "name": ""
   },
   "Where i can find companions?": {
-    "val": "Where i can find companions?",
+    "val": "Где мне найти сопартийцев?",
     "excluded": "",
     "name": ""
   },
   "Where i can go shopping?": {
-    "val": "Where i can go shopping?",
+    "val": "Где я смогу отовариться?",
     "excluded": "",
     "name": ""
   },
   "I have other questions...": {
-    "val": "I have other questions...",
+    "val": "У меня немного другие вопросы...",
     "excluded": "",
     "name": ""
   },
   "We call this place Omega Tower\nNo one's quite sure what it used to be.": {
-    "val": "We call this place Omega Tower\nNo one's quite sure what it used to be.",
+    "val": "Мы зовем это место Омега Башней\nНикто точно не знает её прошлое.",
     "excluded": "",
     "name": ""
   },
   "It’s massive: it extends into the clouds and \nburrows deep down into the bowels of earth. ": {
-    "val": "It’s massive: it extends into the clouds and \nburrows deep down into the bowels of earth. ",
+    "val": "Её размеры поражают: она возвышается в небеса\nи уходит глубоко в недра земли. ",
     "excluded": "",
     "name": ""
   },
   "Most likely a failed arcology project built \non anomalous and thaumaturgical principles. ": {
-    "val": "Most likely a failed arcology project built \non anomalous and thaumaturgical principles. ",
+    "val": "Вероятно, Башня - это провалившийся проект\nаркологии, аномалистики и тауматургии. ",
     "excluded": "",
     "name": ""
   },
   "We've deployed probes for over a\nthousand floors in both directions. \nNo confirmed top...or bottom.": {
-    "val": "We've deployed probes for over a\nthousand floors in both directions. \nNo confirmed top...or bottom.",
+    "val": "Мы разворачивали зонды на\nтысячах этажах в обоих напрвлениях.\nНи один из них не обнаружил ни вехушки, ни дна",
     "excluded": "",
     "name": ""
   },
   "The entrance is at the Hypernet Point. \nTake the elevator to Floor 0 then go to the\ndoor to the left.": {
-    "val": "The entrance is at the Hypernet Point. \nTake the elevator to Floor 0 then go to the\ndoor to the left.",
+    "val": "Вход расположен в Точке Гипернета. \nСпустись на лифте до Нулевого Этажа\nи зайди в левую дверь.",
     "excluded": "",
     "name": ""
   },
   "Once inside take the big central staircase\nand you can start exploring freely, just \nremember to stock up before an expedition.": {
-    "val": "Once inside take the big central staircase\nand you can start exploring freely, just \nremember to stock up before an expedition.",
+    "val": "Затем поднимайся по большой лестнице и \nможешь начинать ислледовать Башню.\nГлавное - всегда запасайся перед экспедицией!",
     "excluded": "",
     "name": ""
   },
   "Do you want me to take you there?": {
-    "val": "Do you want me to take you there?",
+    "val": "Хочешь, я тебя туда проведу?",
     "excluded": "",
     "name": ""
   },
   "Ok, please follow me.": {
-    "val": "Ok, please follow me.",
+    "val": "Хорошо, следуй за мной.",
     "excluded": "",
     "name": ""
   },
   "Like everywere in the tower!\nAlmost every person here is a": {
-    "val": "Like everywere in the tower!\nAlmost every person here is a",
+    "val": "Да почти везде в Башне!\n(?QUESTIONABLE?)", 
     "excluded": "",
     "name": ""
   },
   "Some of them are willing to team up if your goals align.": {
-    "val": "Some of them are willing to team up if your goals align.",
+    "val": "Некоторые из них готовы объединиться, если ваши цели совпадают.",
     "excluded": "",
     "name": ""
   },
   "Its' dangerous to go alone!": {
-    "val": "Its' dangerous to go alone!",
+    "val": "Опасно же в одиночку идти!",
     "excluded": "",
     "name": ""
   },
