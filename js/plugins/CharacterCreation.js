@@ -8,7 +8,6 @@
  * @orderAfter ClassSelection
  * @orderAfter TraitSelector
  * @orderAfter Health_Core
- *
  * @command characterCreation
  * @text Character Creation
  * @desc Starts the character creation sequence
@@ -61,7 +60,7 @@
     {
       // 0: Difficulty - Show only once
       get title() {
-        return getLocalizedText("Select difficulty", "Seleziona difficoltà ");
+        return getLocalizedText("Select difficulty", "Seleziona difficoltà");
       },
       showOnlyOnce: true,
       get choices() {
@@ -71,14 +70,14 @@
             "Permadeath",
             "permadeath",
             "In \\C[1]Permadeath mode\\C[0] if your character perish in battle you will have to create a new one. Loot the body of your past character to recover items and euros.",
-            "Nella modalità  \\C[1]Permadeath\\C[0] se il tuo personaggio muore in battaglia dovrai crearne uno nuovo. Saccheggia il corpo del tuo personaggio precedente per recuperare oggetti ed euro."
+            "Nella modalità \\C[1]Permadeath\\C[0] se il tuo personaggio muore in battaglia dovrai crearne uno nuovo. Saccheggia il corpo del tuo personaggio precedente per recuperare oggetti ed euro."
           ),
           getLocalizedChoice(
             "Roguelite",
             "Roguelite",
             "roguelite",
             "In \\C[1]Roguelite mode\\C[0] if your character get defeated during battle will rewake at the base floor of the dungeon. Your allies will still die if they are not resurrected by the end of the battle.",
-            "Nella modalità  \\C[1]Roguelite\\C[0] se il tuo personaggio viene sconfitto in battaglia si risveglierà  al piano base del dungeon. I tuoi alleati moriranno comunque se non vengono resuscitati entro la fine della battaglia."
+            "Nella modalità \\C[1]Roguelite\\C[0] se il tuo personaggio viene sconfitto in battaglia si risveglierà al piano base del dungeon. I tuoi alleati moriranno comunque se non vengono resuscitati entro la fine della battaglia."
           ),
         ];
       },
@@ -90,54 +89,61 @@
         this.nextStep();
       },
     },
-    /*
-    { // 1: Combat System
-        get title() { return getLocalizedText("Select your combat system", "Seleziona il tuo sistema di combattimento"); },
-        showOnlyOnce: true,
-        get choices() {
-            return [
-                getLocalizedChoice(
-                    "RPG",
-                    "RPG",
-                    'rpg',
-                    "Classic turn-based RPG combat.",
-                    "Combattimento RPG classico a turni."
-                ),
-                
-                getLocalizedChoice(
-                    "Cards",
-                    "Carte",
-                    'cards',
-                    "Tactical battles using a deck of cards.",
-                    "Battaglie tattiche usando un mazzo di carte."
-                ),
-                getLocalizedChoice(
-                    "Spirits",
-                    "Spiriti",
-                    'spirit',
-                    "Spirit-based combat system.",
-                    "Sistema di combattimento basato sugli spiriti."
-                )
-            ];
-        },
-        handler: function(symbol) {
-            // Turn off all battle system switches first
-            $gameSwitches.setValue(45, false);
-            $gameSwitches.setValue(46, false);
-            
-            // Turn on the appropriate switch based on selection
-            if (symbol === 'cards') {
-                $gameSwitches.setValue(45, true);
-            } else if (symbol === 'spirit') {
-                $gameSwitches.setValue(46, true);
-            }
-            // RPG mode has no switch (both switches off)
-            
-            this.nextStep();
-        }
-    },*/
     {
-      // 1: Character Type Selection
+      // 1: History Generation - Show only once
+      get title() {
+        return getLocalizedText("World History", "Storia del Mondo");
+      },
+      showOnlyOnce: true,
+      get choices() {
+        return [
+          getLocalizedChoice(
+            "Canon History",
+            "Storia Canonica",
+            "canon",
+            "Skip procedural generation and use the default timeline.",
+            "Salta la generazione procedurale e usa la cronologia predefinita."
+          ),
+          getLocalizedChoice(
+            "10 Years",
+            "10 Anni",
+            "10",
+            "Generate 10 years of unique procedural history.",
+            "Genera 10 anni di storia procedurale unica."
+          ),
+          getLocalizedChoice(
+            "50 Years",
+            "50 Anni",
+            "50",
+            "Generate 50 years of unique procedural history.",
+            "Genera 50 anni di storia procedurale unica."
+          ),
+          getLocalizedChoice(
+            "100 Years",
+            "100 Anni",
+            "100",
+            "Generate 100 years of unique procedural history.",
+            "Genera 100 anni di storia procedurale unica."
+          ),
+        ];
+      },
+      handler: function (symbol) {
+        markStepCompleted(1);
+        if (symbol === "canon") {
+          this.nextStep();
+        } else {
+          const years = parseInt(symbol);
+          if (window.HistoryManager) {
+            window.HistoryManager.runSimulation(years);
+          }
+          // Resume at Character Type Selection (index 2)
+          Scene_CharacterCreation._interruptedStep = 1;
+          SceneManager.push(window.Scene_History || Scene_History);
+        }
+      },
+    },
+    {
+      // 2: Character Type Selection
       get title() {
         return getLocalizedText(
           "Choose Character Type",
@@ -180,7 +186,7 @@
               "Usa Personaggio Esistente",
               "existing_character",
               "Select from pre-made characters.",
-              "Seleziona tra personaggi già  creati."
+              "Seleziona tra personaggi già creati."
             )
           );
         }
@@ -195,7 +201,7 @@
 
           // Set creature switch OFF for normal character
           $gameSwitches.setValue(creatureSwitchId, false);
-          this.nextStep(); // Continue to belief selection
+          this.nextStep(); // Continue to gender selection
         } else if (symbol === "create_creature") {
           // Set current actor class to 65 for creature
           const currentActor = Scene_CharacterCreation.getCurrentActor();
@@ -211,7 +217,7 @@
           $gameSwitches.setValue(creatureSwitchId, true);
           Scene_CharacterCreation._isCreatureMode = true;
 
-          this.nextStep(); // Continue to belief selection
+          this.nextStep(); // Continue to gender selection
 
         } else if (symbol === "total_random") {
           // Total randomization: skip all steps and create random character
@@ -222,27 +228,8 @@
         }
       },
     },
-    /*
-    { // DISABLED: Belief
-        get title() { return getLocalizedText("What do you believe in?", "In cosa credi?"); },
-        get choices() {
-            return [
-                { name: getLocalizedText("Muscles", "Muscoli"), symbol: 'belief', value: 0 },
-                { name: getLocalizedText("Science", "Scienza"), symbol: 'belief', value: 1 },
-                { name: getLocalizedText("Magic", "Magia"), symbol: 'belief', value: 2 },
-                { name: getLocalizedText("Religion", "Religione"), symbol: 'belief', value: 3 },
-                { name: getLocalizedText("Hypercapitalism", "Ipercapitalismo"), symbol: 'belief', value: 4 },
-                { name: getLocalizedText("Nothing really", "Non proprio niente"), symbol: 'belief', value: 5 }
-            ];
-        },
-        handler: function(symbol, index) {
-            const choice = this.currentStepData().choices[index];
-            if (choice) $gameVariables.setValue(42, choice.value);
-            this.nextStep();
-        }
-    },*/
     {
-      // 2: Gender
+      // 3: Gender
       get title() {
         return getLocalizedText(
           "Select your gender:",
@@ -328,7 +315,7 @@
           // Check if Scene_CreateCreature is available
           if (typeof Scene_CreateCreature !== 'undefined') {
             // Save the step to resume at after creature creation (trait selection)
-            Scene_CharacterCreation._interruptedStep = 3; // Will resume at step 4 (traits)
+            Scene_CharacterCreation._interruptedStep = 4; // Will resume at step 5 (traits)
 
             // Set the target actor ID for Scene_CreateCreature
             if (Scene_CreateCreature.setTargetActorId) {
@@ -340,7 +327,7 @@
           } else {
             console.warn('Scene_CreateCreature not found. Make sure CharacterCreationCreature.js is loaded.');
             // Skip to trait selection
-            this._step = 3; // Will be incremented to 4 by nextStep()
+            this._step = 4; // Will be incremented to 5 by nextStep()
             this.nextStep();
           }
         } else {
@@ -349,10 +336,10 @@
       },
     },
     {
-      // 3: Class
+      // 4: Class
       get title() {
         if (Scene_CharacterCreation._isCreatureMode) {
-          return getLocalizedText("Choose your skills", "Scegli le tue abilità ");
+          return getLocalizedText("Choose your skills", "Scegli le tue abilità");
         }
         return getLocalizedText("Choose your class", "Scegli la tua classe");
       },
@@ -370,7 +357,7 @@
             "Classe casuale",
             "random_class",
             "Be assigned a random starting class.",
-            "Ti verrà  assegnata una classe iniziale casuale."
+            "Ti verrà assegnata una classe iniziale casuale."
           ),
         ];
       },
@@ -394,7 +381,7 @@
       },
     },
     {
-      // 4: Traits
+      // 5: Traits
       get title() {
         return getLocalizedText(
           "Select your traits",
@@ -438,8 +425,8 @@
           const currentMemberIndex = Scene_CharacterCreation._currentPartyMemberIndex || 0;
           const targetActorId = currentMemberIndex + 1; // Actor IDs are 1-based
 
-          // Save current step so we can resume at step 5 after trait selection
-          Scene_CharacterCreation._interruptedStep = 4; // Will resume at step 5 (Add Party Member)
+          // Save current step so we can resume at step 6 after trait selection
+          Scene_CharacterCreation._interruptedStep = 5; // Will resume at step 6 (Add Party Member)
 
           // Prepare TraitSelector to return to character creation
           if (window.Scene_TraitSelector) {
@@ -473,7 +460,7 @@
       },
     },
     {
-      // 5: Add Party Member
+      // 6: Add Party Member
       get title() {
         return getLocalizedText(
           "Add another party member?",
@@ -484,7 +471,7 @@
         return [
           getLocalizedChoice(
             "Yes, add member",
-            "Sà¬, aggiungi membro",
+            "Sì, aggiungi membro",
             "add_member",
             "Create another party member.",
             "Crea un altro membro del gruppo.",
@@ -522,8 +509,8 @@
           // Reset creature mode flag for new character
           Scene_CharacterCreation._isCreatureMode = false;
 
-          // Go back to step 1 (Character Type Selection) for the new member
-          this._step = 0; // Will be incremented to 1 by nextStep()
+          // Go back to step 2 (Character Type Selection) for the new member
+          this._step = 1; // Will be incremented to 2 by nextStep()
           this.nextStep();
         } else {
           // End character creation
@@ -687,7 +674,8 @@
         });
 
         // Store class name in variable
-        const variableId = Number(parameters["classNameVariable"] || 0);
+        const classParams = PluginManager.parameters("CharacterCreationClassSelector");
+        const variableId = Number(classParams["classNameVariable"] || 0);
         if (variableId > 0) {
           $gameVariables.setValue(
             variableId,
@@ -787,6 +775,16 @@
       this.setupStep();
     }
 
+    start() {
+      super.start();
+      // If we're returning from an interrupted step (via push/pop), advance now
+      if (Scene_CharacterCreation._interruptedStep >= 0) {
+        this._step = Scene_CharacterCreation._interruptedStep + 1;
+        Scene_CharacterCreation._interruptedStep = -1;
+        this.setupStep();
+      }
+    }
+
     createTitleWindow() {
       const rect = this.titleWindowRect();
       this._titleWindow = new Window_CharacterCreationTitle(rect);
@@ -825,7 +823,7 @@
 
       // Auto-randomize traits for characters 2 and 3 (skip trait selection step)
       const currentMemberIndex = Scene_CharacterCreation._currentPartyMemberIndex || 0;
-      if (this._step === 4 && currentMemberIndex >= 1) {
+      if (this._step === 5 && currentMemberIndex >= 1) {
         // Characters 2 and 3: auto-randomize traits and skip to next step
         const targetActorId = currentMemberIndex + 1; // Actor IDs are 1-based
 
@@ -843,7 +841,7 @@
       }
 
       // Skip "Add another party member?" step if party is already full (3 members)
-      if (this._step === 5 && $gameParty.size() >= 3) {
+      if (this._step === 6 && $gameParty.size() >= 3) {
         // Party is full, mark creation complete and close the scene
         markFirstCreationComplete();
         this.popScene();
@@ -887,17 +885,17 @@
 
     // NEW: Handles going to the previous step.
     previousStep() {
-      // If we're in creature mode and at gender step (2), go back to character type selection (1)
-      if (Scene_CharacterCreation._isCreatureMode && this._step === 2) {
-        this._step = 1;
+      // If we're in creature mode and at gender step (3), go back to character type selection (2)
+      if (Scene_CharacterCreation._isCreatureMode && this._step === 3) {
+        this._step = 2;
         Scene_CharacterCreation._isCreatureMode = false; // Exit creature mode
         this.setupStep();
         return;
       }
 
-      // If we're in creature mode and at traits step (4), go back to gender (2), skipping creation method and class
-      if (Scene_CharacterCreation._isCreatureMode && this._step === 4) {
-        this._step = 2;
+      // If we're in creature mode and at traits step (5), go back to gender (3), skipping creation method and class
+      if (Scene_CharacterCreation._isCreatureMode && this._step === 5) {
+        this._step = 3;
         this.setupStep();
         return;
       }
@@ -1117,8 +1115,8 @@
         }
       }
 
-      // Skip to step 5 (Add Party Member)
-      this._step = 4; // Will be incremented to 5 by nextStep()
+      // Skip to step 6 (Add Party Member)
+      this._step = 5; // Will be incremented to 6 by nextStep()
       this.nextStep();
     }
 
@@ -1381,7 +1379,7 @@
       startStep = Scene_CharacterCreation._interruptedStep + 1;
       Scene_CharacterCreation._interruptedStep = -1;
     } else {
-      startStep = 3;
+      startStep = 4;
       while (startStep < CharacterCreationData.length) {
         const stepData = CharacterCreationData[startStep];
         if (stepData.showOnlyOnce && isStepCompleted(startStep)) {
@@ -1404,7 +1402,7 @@
       startStep = Scene_CharacterCreation._interruptedStep + 1;
       Scene_CharacterCreation._interruptedStep = -1;
     } else {
-      startStep = 2;
+      startStep = 3;
       while (startStep < CharacterCreationData.length) {
         const stepData = CharacterCreationData[startStep];
         if (stepData.showOnlyOnce && isStepCompleted(startStep)) {

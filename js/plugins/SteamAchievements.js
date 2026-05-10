@@ -181,7 +181,7 @@
     // Steam Achievements Manager
     class SteamAchievementsManager {
         constructor() {
-            this.greenworks = null;
+            this.steamClient = null;
             this.initialized = false;
             this.achievementCache = new Map();
             this.statsCache = new Map();
@@ -199,27 +199,22 @@
                     return false;
                 }
 
-                // Try to load Greenworks
+                // Try to load steamworks.js
                 try {
-                    this.greenworks = require('./js/libs/greenworks');
+                    const steamworks = require('../libs/steamworks');
+                    this.steamClient = steamworks.init(4193010);
                 } catch (e) {
-                    this.log('Greenworks not found. Please install Greenworks library.');
-                    return false;
-                }
-
-                // Initialize Steam API
-                if (!this.greenworks.initAPI()) {
-                    this.log('Failed to initialize Steam API. Is Steam running?');
+                    this.log('steamworks.js not found or failed to initialize. Is Steam running?');
                     return false;
                 }
 
                 this.initialized = true;
-                this.log('Steam API initialized successfully');
+                this.log('Steam API initialized successfully via steamworks.js');
 
                 // Get Steam user info
-                if (this.greenworks.getSteamId) {
-                    const steamId = this.greenworks.getSteamId();
-                    this.log(`Steam User ID: ${steamId.steamId}`);
+                if (this.steamClient && this.steamClient.localplayer) {
+                    const name = this.steamClient.localplayer.getName();
+                    this.log(`Steam User: ${name}`);
                 }
 
                 // Load initial achievement states
@@ -237,38 +232,22 @@
         }
 
         setupCallbacks() {
-            if (!this.greenworks) return;
-
-            // Achievement unlock callback
-            this.greenworks.on('achievement-unlocked', (achievement) => {
-                this.log(`Achievement unlocked via Steam: ${achievement}`);
-                this.achievementCache.set(achievement, true);
-            });
-
-            // Stats received callback
-            if (this.greenworks.on) {
-                this.greenworks.on('user-stats-received', () => {
-                    this.log('User stats received from Steam');
-                    this.loadAchievementStates();
-                });
-            }
+            // steamworks.js callbacks are handled differently or might not be needed for basic use.
         }
 
         loadAchievementStates() {
-            if (!this.greenworks) return;
+            if (!this.steamClient) return;
 
             achievements.forEach(achievement => {
                 const achievementData = JSON.parse(achievement);
                 const id = achievementData.id;
                 
-                if (this.greenworks.getAchievement) {
-                    try {
-                        const unlocked = this.greenworks.getAchievement(id);
-                        this.achievementCache.set(id, unlocked);
-                        this.log(`Achievement ${id}: ${unlocked ? 'Unlocked' : 'Locked'}`);
-                    } catch (e) {
-                        this.log(`Failed to get achievement state for ${id}`);
-                    }
+                try {
+                    const unlocked = this.steamClient.achievement.isUnlocked(id);
+                    this.achievementCache.set(id, unlocked);
+                    this.log(`Achievement ${id}: ${unlocked ? 'Unlocked' : 'Locked'}`);
+                } catch (e) {
+                    this.log(`Failed to get achievement state for ${id}`);
                 }
             });
         }
@@ -280,8 +259,8 @@
                 return false;
             }
 
-            if (!this.greenworks) {
-                this.log('Greenworks not available');
+            if (!this.steamClient) {
+                this.log('Steam client not available');
                 return false;
             }
 
@@ -293,23 +272,17 @@
 
             try {
                 // Activate achievement
-                this.greenworks.activateAchievement(achievementId, (success) => {
-                    if (success) {
-                        this.log(`Achievement ${achievementId} unlocked successfully`);
-                        this.achievementCache.set(achievementId, true);
-                        
-                        // Show notification
-                        if (showNotifications) {
-                            this.showNotification(achievementId);
-                        }
+                this.steamClient.achievement.activate(achievementId);
+                this.log(`Achievement ${achievementId} unlocked successfully`);
+                this.achievementCache.set(achievementId, true);
+                
+                // Show notification
+                if (showNotifications) {
+                    this.showNotification(achievementId);
+                }
 
-                        // Store stats
-                        this.storeStats();
-                    } else {
-                        this.log(`Failed to unlock achievement ${achievementId}`);
-                    }
-                });
-
+                // Store stats
+                this.storeStats();
                 return true;
 
             } catch (error) {
@@ -330,9 +303,9 @@
             }
 
             // Try to get from Steam
-            if (this.greenworks && this.greenworks.getAchievement) {
+            if (this.steamClient) {
                 try {
-                    const unlocked = this.greenworks.getAchievement(achievementId);
+                    const unlocked = this.steamClient.achievement.isUnlocked(achievementId);
                     this.achievementCache.set(achievementId, unlocked);
                     return unlocked;
                 } catch (e) {
@@ -345,25 +318,18 @@
         }
 
         reset(achievementId) {
-            if (!this.initialized || !this.greenworks) {
+            if (!this.initialized || !this.steamClient) {
                 this.log('Cannot reset achievement: Steam not initialized');
                 return false;
             }
 
             try {
                 // Clear achievement (for testing only)
-                if (this.greenworks.clearAchievement) {
-                    this.greenworks.clearAchievement(achievementId, (success) => {
-                        if (success) {
-                            this.log(`Achievement ${achievementId} reset`);
-                            this.achievementCache.set(achievementId, false);
-                            this.storeStats();
-                        } else {
-                            this.log(`Failed to reset achievement ${achievementId}`);
-                        }
-                    });
-                    return true;
-                }
+                this.steamClient.achievement.clear(achievementId);
+                this.log(`Achievement ${achievementId} reset`);
+                this.achievementCache.set(achievementId, false);
+                this.storeStats();
+                return true;
             } catch (error) {
                 this.log(`Error resetting achievement ${achievementId}: ${error.message}`);
             }
@@ -372,7 +338,7 @@
         }
 
         setProgress(achievementId, current, max) {
-            if (!this.initialized || !this.greenworks) {
+            if (!this.initialized || !this.steamClient) {
                 this.log('Cannot set progress: Steam not initialized');
                 return false;
             }
@@ -398,21 +364,19 @@
 
             try {
                 // Set stat value
-                if (this.greenworks.setStat) {
-                    this.greenworks.setStat(statId, current);
-                    this.statsCache.set(statId, { current, max });
-                    
-                    // Check if achievement should unlock
-                    if (current >= max && !this.isUnlocked(achievementId)) {
-                        this.unlock(achievementId);
-                    }
-
-                    // Store stats
-                    this.storeStats();
-                    
-                    this.log(`Set stat ${statId} to ${current}/${max}`);
-                    return true;
+                this.steamClient.stat.set(statId, current);
+                this.statsCache.set(statId, { current, max });
+                
+                // Check if achievement should unlock
+                if (current >= max && !this.isUnlocked(achievementId)) {
+                    this.unlock(achievementId);
                 }
+
+                // Store stats
+                this.storeStats();
+                
+                this.log(`Set stat ${statId} to ${current}/${max}`);
+                return true;
             } catch (error) {
                 this.log(`Error setting stat: ${error.message}`);
             }
@@ -437,9 +401,9 @@
                 return this.statsCache.get(statId);
             }
 
-            if (this.greenworks && this.greenworks.getStat) {
+            if (this.steamClient) {
                 try {
-                    const value = this.greenworks.getStat(statId);
+                    const value = this.steamClient.stat.get(statId);
                     return { current: value, max: 100 }; // Default max
                 } catch (e) {
                     return { current: 0, max: 0 };
@@ -450,16 +414,14 @@
         }
 
         storeStats() {
-            if (!this.greenworks || !this.greenworks.storeStats) return;
+            if (!this.steamClient) return;
 
             try {
-                this.greenworks.storeStats((success) => {
-                    if (success) {
-                        this.log('Stats stored successfully');
-                    } else {
-                        this.log('Failed to store stats');
-                    }
-                });
+                // steamworks.js might auto-store, but let's try to call it if it exists.
+                if (this.steamClient.stat && this.steamClient.stat.store) {
+                    this.steamClient.stat.store();
+                }
+                this.log('Stats stored called');
             } catch (error) {
                 this.log(`Error storing stats: ${error.message}`);
             }
@@ -526,8 +488,8 @@
     });
 
     PluginManager.registerCommand(pluginName, 'showAchievementOverlay', args => {
-        if (SteamAchievements.greenworks && SteamAchievements.greenworks.activateGameOverlay) {
-            SteamAchievements.greenworks.activateGameOverlay('Achievements');
+        if (SteamAchievements.steamClient && SteamAchievements.steamClient.overlay) {
+            SteamAchievements.steamClient.overlay.activate('achievements');
         }
     });
 

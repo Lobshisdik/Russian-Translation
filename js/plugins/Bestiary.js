@@ -561,4 +561,165 @@
         $gameSystem.resetUsedMonstersInBattle();
     };
 
+    // =============================================================================
+    // ASCII Mode Compatibility for Bestiary
+    // =============================================================================
+    
+    if (window.AsciiMode) {
+        
+        const _Scene_CDCollection_start = Scene_CDCollection.prototype.start;
+        Scene_CDCollection.prototype.start = function() {
+            _Scene_CDCollection_start.call(this);
+            if (window.AsciiMode.active !== 0) {
+                window.AsciiMode.createCanvas();
+                if (window.AsciiMode.canvas) window.AsciiMode.canvas.style.display = 'block';
+                
+                // Deactivate and hide normal windows
+                this._cdGridWindow.deactivate();
+                this._cdGridWindow.hide();
+                this._cdDetailWindow.hide();
+                
+                this._selectedCDIndex = 0;
+                this._activeWindow = 'list';
+                
+                // Get data from grid window
+                this._asciiMonsters = this._cdGridWindow._data;
+            }
+        };
+
+        const _Scene_CDCollection_terminate = Scene_CDCollection.prototype.terminate;
+        Scene_CDCollection.prototype.terminate = function() {
+            if (window.AsciiMode.canvas) {
+                window.AsciiMode.canvas.style.display = 'none';
+            }
+            _Scene_CDCollection_terminate.call(this);
+        };
+
+        const _Scene_CDCollection_update = Scene_CDCollection.prototype.update;
+        Scene_CDCollection.prototype.update = function() {
+            if (window.AsciiMode.active !== 0) {
+                this.updateAsciiBestiaryInput();
+                this.renderAsciiBestiary();
+                Scene_Base.prototype.update.call(this);
+                return;
+            }
+            _Scene_CDCollection_update.call(this);
+        };
+
+        Scene_CDCollection.prototype.updateAsciiBestiaryInput = function() {
+            const list = this._asciiMonsters;
+            if (list.length === 0) {
+                if (Input.isTriggered('cancel')) {
+                    SceneManager.pop();
+                    SoundManager.playCancel();
+                }
+                return;
+            }
+
+            if (Input.isRepeated('down')) {
+                this._selectedCDIndex = (this._selectedCDIndex + 1) % list.length;
+                SoundManager.playCursor();
+            }
+            if (Input.isRepeated('up')) {
+                this._selectedCDIndex = (this._selectedCDIndex - 1 + list.length) % list.length;
+                SoundManager.playCursor();
+            }
+            if (Input.isTriggered('cancel')) {
+                SceneManager.pop();
+                SoundManager.playCancel();
+            }
+        };
+
+        Scene_CDCollection.prototype.renderAsciiBestiary = function() {
+            const ctx = window.AsciiMode.context;
+            if (!ctx) return;
+
+            ctx.clearRect(0, 0, window.AsciiMode.canvas.width, window.AsciiMode.canvas.height);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, window.AsciiMode.canvas.width, window.AsciiMode.canvas.height);
+
+            const fontSize = window.AsciiMode.fontSize;
+            ctx.font = `${fontSize}px ${window.AsciiMode.fontFamily}`;
+
+            // Header
+            ctx.fillStyle = '#FFD700'; // Gold
+            ctx.textAlign = 'center';
+            ctx.fillText("--- BESTIARY ---", window.AsciiMode.canvas.width / 2, 30);
+
+            // List
+            const list = this._asciiMonsters;
+            const listY = 80;
+            const listX = 50;
+            const detailX = 400;
+
+            ctx.textAlign = 'left';
+            for (let i = 0; i < list.length; i++) {
+                const monster = list[i];
+                const y = listY + i * (fontSize + 10);
+
+                if (i === this._selectedCDIndex) {
+                    ctx.fillStyle = '#FF0000'; // Red
+                    ctx.fillText(`> ${monster.name}`, listX, y);
+                } else {
+                    ctx.fillStyle = '#FFFFFF'; // White
+                    ctx.fillText(`  ${monster.name}`, listX, y);
+                }
+            }
+
+            // Details
+            const selectedMonster = list[this._selectedCDIndex];
+            if (selectedMonster) {
+                this.renderAsciiMonsterDetails(selectedMonster.enemy, detailX, listY);
+            }
+        };
+
+        Scene_CDCollection.prototype.renderAsciiMonsterDetails = function(enemy, x, y) {
+            const ctx = window.AsciiMode.context;
+            const fontSize = window.AsciiMode.fontSize;
+            const lineHeight = fontSize + 6;
+            let currentY = y;
+
+            const l10n = getEnemyL10n(enemy.id);
+            const name = l10n ? l10n.name : enemy.name;
+
+            ctx.fillStyle = '#FFD700';
+            ctx.textAlign = 'left';
+            ctx.fillText(name, x, currentY);
+            currentY += lineHeight;
+
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.moveTo(x, currentY);
+            ctx.lineTo(x + 300, currentY);
+            ctx.stroke();
+            currentY += 10;
+
+            ctx.fillStyle = '#FFFFFF';
+
+            // Draw Params
+            const params = enemy.params;
+            
+            for (let i = 0; i < 8; i++) {
+                const val = params[i];
+                const label = getShortParamName(i);
+                this.drawAsciiKeyValue(label, val.toString(), x, currentY);
+                currentY += lineHeight;
+            }
+
+            // Draw exp/gold if available
+            currentY += 10;
+            this.drawAsciiKeyValue("EXP", enemy.exp.toString(), x, currentY);
+            currentY += lineHeight;
+            this.drawAsciiKeyValue("Gold", enemy.gold.toString(), x, currentY);
+        };
+
+        Scene_CDCollection.prototype.drawAsciiKeyValue = function(key, value, x, y) {
+            const ctx = window.AsciiMode.context;
+            ctx.fillStyle = '#00FFFF'; // Cyan
+            ctx.fillText(key + ":", x, y);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillText(value, x + 100, y);
+        };
+    }
+
 })();

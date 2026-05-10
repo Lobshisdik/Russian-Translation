@@ -112,7 +112,7 @@
 
 (() => {
     const pluginName = "BattleSystemEnhanced";
-    
+
     // Get plugin parameters
     const parameters = PluginManager.parameters(pluginName);
     const respawnMapVar = 25;
@@ -124,50 +124,50 @@
     let _battleCooldownTimer = 0;
     const BATTLE_COOLDOWN_FRAMES = 120; // 2 seconds at 60fps
     // Aquatic Enemy Archetype List - Only spawn in water, move freely in water at normal speed
-const AQUATIC_ENEMY_ARCHETYPES = [
-    'Octopus',
-    'AquaticFish',
-    'SeaCreature',
-    'TentacledCreature', //TODO remove this
-    'DeepSea',
-    'Coral',
-    'Whale',
-    'Shark',
-    'Jellyfish',
-    'Crab',
-    'Lobster',
-    'Seahorse',
-    'Starfish',
-    'Eel',
-    'Dolphin',
-    'Manta',
-    'Squid',
-    'Kraken',
-    'Leviathan',
-    'Merfolk',
-    'Siren',
-    'WaterElemental',
-];
+    const AQUATIC_ENEMY_ARCHETYPES = [
+        'Octopus',
+        'AquaticFish',
+        'SeaCreature',
+        'TentacledCreature', //TODO remove this
+        'DeepSea',
+        'Coral',
+        'Whale',
+        'Shark',
+        'Jellyfish',
+        'Crab',
+        'Lobster',
+        'Seahorse',
+        'Starfish',
+        'Eel',
+        'Dolphin',
+        'Manta',
+        'Squid',
+        'Kraken',
+        'Leviathan',
+        'Merfolk',
+        'Siren',
+        'WaterElemental',
+    ];
 
-// Amphibious Enemy Archetype List - Spawn on land, faster in water, slower on land
-const AMPHIBIOUS_ENEMY_ARCHETYPES = [
-    'Crocodile',
-    'Penguin',
-    'Frog',
-    'SeaTurtle',
-];
+    // Amphibious Enemy Archetype List - Spawn on land, faster in water, slower on land
+    const AMPHIBIOUS_ENEMY_ARCHETYPES = [
+        'Crocodile',
+        'Penguin',
+        'Frog',
+        'SeaTurtle',
+    ];
 
-// Flying Enemy Archetype List - Ignore terrain restrictions, move freely everywhere at normal speed
-const FLYING_ENEMY_ARCHETYPES = [
-    'Bird',
-    'Elemental',
-    'Ghost',
-];
+    // Flying Enemy Archetype List - Ignore terrain restrictions, move freely everywhere at normal speed
+    const FLYING_ENEMY_ARCHETYPES = [
+        'Bird',
+        'Elemental',
+        'Ghost',
+    ];
 
     //=============================================================================
     // Persistent Battle System - Core Variables
     //=============================================================================
-    
+
     const _persistentEnemyData = {};
     let _currentBattleEventId = null;
     let _currentEventId = null;
@@ -201,14 +201,14 @@ const FLYING_ENEMY_ARCHETYPES = [
     };
 
     _loadBattleI18n();
-    
+
     //=============================================================================
     // NEW: Health Protection System
     //=============================================================================
-    
+
     // Track which actors have used their protection this battle
     let _healthProtectionUsed = {};
-    
+
     /**
      * Resets health protection for all actors at battle start
      */
@@ -218,21 +218,21 @@ const FLYING_ENEMY_ARCHETYPES = [
             _healthProtectionUsed[actor.actorId()] = false;
         });
     }
-    
+
     /**
      * Checks if actor has health protection available
      */
     function hasHealthProtection(actorId) {
         return !_healthProtectionUsed[actorId];
     }
-    
+
     /**
      * Uses health protection for an actor
      */
     function useHealthProtection(actorId) {
         _healthProtectionUsed[actorId] = true;
     }
-    
+
     /**
      * Shows health protection message
      */
@@ -245,285 +245,290 @@ const FLYING_ENEMY_ARCHETYPES = [
             " survived through sheer willpower!",
             " was protected by fate!"
         ];
-        
+
         const message = actorName + protectionMessages[Math.floor(Math.random() * protectionMessages.length)];
+        window.skipLocalization = true;
         $gameMessage.add(message);
+        window.skipLocalization = false;
     }
 
     // Add this function near the top of the plugin, after the helper functions
 
-/**
- * Shows a warning dialogue if the enemy is too dangerous for the party
- */
-function checkAndShowDangerousEnemyWarning() {
-    if (!$gameTroop || !$gameTroop.members().length) return;
-    
-    const party = $gameParty.members();
-    if (!party.length) return;
-    
-    // Get median party level
-    const partyMedian = getMedianLevel(party);
-    
-    // Get highest enemy level in the troop
-    const highestEnemyLevel = Math.max(...$gameTroop.members().map(enemy => {
-        const enemyData = $dataEnemies[enemy.enemyId()];
-        return enemyData ? getEnemyLevel(enemyData.note) : 0;
-    }));
-    
-    // Check if enemy is more than 13 levels above party median
-    if (highestEnemyLevel > partyMedian + 13) {
-        showDangerWarning(party);
-    }
-}
+    /**
+     * Shows a warning dialogue if the enemy is too dangerous for the party
+     */
+    function checkAndShowDangerousEnemyWarning() {
+        if (!$gameTroop || !$gameTroop.members().length) return;
 
-/**
- * Shows the actual warning message
- */
-/**
- * Shows the actual warning message
- */
-function showDangerWarning(party) {
-    let message;
+        const party = $gameParty.members();
+        if (!party.length) return;
 
-    if (party.length === 1) {
-        // Single party member
-        const list = _bi18nList('dangerWarning.single');
-        const pool = list || ["I'm outmatched! I should retreat!"];
-        message = party[0].name() + ": " + pool[Math.floor(Math.random() * pool.length)];
-    } else {
-        // Multiple party members - pick random one
-        const randomMember = party[Math.floor(Math.random() * party.length)];
-        const list = _bi18nList('dangerWarning.party');
-        const pool = list || ["We're outmatched! We should retreat!"];
-        message = randomMember.name() + ": " + pool[Math.floor(Math.random() * pool.length)];
-    }
+        // Get median party level
+        const partyMedian = getMedianLevel(party);
 
-    // Check if switch 45 is on - if so, show at top of screen
-    if ($gameSwitches.value(45)) {
-        showTopScreenMessage(message);
-    } else {
-        $gameMessage.add(message);
-    }
-}
-/**
- * Shows a message at the top of the screen
- */
-function showTopScreenMessage(message) {
-    // Create a temporary window at the top of the screen
-    if (SceneManager._scene && SceneManager._scene.constructor === Scene_Battle) {
-        // We're in battle scene
-        const scene = SceneManager._scene;
-        
-        // Create a custom window for top screen message
-        if (!scene._topWarningWindow) {
-            scene._topWarningWindow = new Window_TopWarning();
-            scene.addWindow(scene._topWarningWindow);
-        }
-        
-        scene._topWarningWindow.showMessage(message);
-    }
-}
-Game_Player.prototype.executeEncounter = function() {
-}
+        // Get highest enemy level in the troop
+        const highestEnemyLevel = Math.max(...$gameTroop.members().map(enemy => {
+            const enemyData = $dataEnemies[enemy.enemyId()];
+            return enemyData ? getEnemyLevel(enemyData.note) : 0;
+        }));
 
-const _Scene_Map_stopAudioOnBattleStart = Scene_Map.prototype.stopAudioOnBattleStart;
-Scene_Map.prototype.stopAudioOnBattleStart = function() {
-    // Safety check: ensure battleBgm is not being called as a function
-    if ($gameSystem && typeof $gameSystem.battleBgm === 'function') {
-        // If it's somehow a function, replace it with default
-        $gameSystem._battleBgm = { 
-            name: ConfigManager.battleMusicName || 'RandomMind/Battle', 
-            volume: 90, 
-            pitch: 100, 
-            pan: 0 
-        };
-    }
-    _Scene_Map_stopAudioOnBattleStart.call(this);
-};
-//=============================================================================
-// Window_TopWarning - Custom window for top screen messages
-//=============================================================================
-function Window_TopWarning() {
-    this.initialize(...arguments);
-}
-
-Window_TopWarning.prototype = Object.create(Window_Base.prototype);
-Window_TopWarning.prototype.constructor = Window_TopWarning;
-
-Window_TopWarning.prototype.initialize = function() {
-    const width = Graphics.boxWidth;
-    const height = this.fittingHeight(2); // 2 lines height
-    const x = 0;
-    const y = 0; // Top of screen
-    Window_Base.prototype.initialize.call(this, new Rectangle(x, y, width, height));
-    this.openness = 0;
-    this._displayTimer = 0;
-    this._message = "";
-};
-
-Window_TopWarning.prototype.showMessage = function(message) {
-    this._message = message;
-    this._displayTimer = 180; // Show for 3 seconds (60fps * 3)
-    this.refresh();
-    this.open();
-};
-
-Window_TopWarning.prototype.refresh = function() {
-    this.contents.clear();
-    if (this._message) {
-        // Set text color to red for warning
-        this.changeTextColor(ColorManager.textColor(2)); // Red color
-        this.drawText(this._message, 0, 0, this.contentsWidth(), 'center');
-        this.resetTextColor();
-    }
-};
-
-Window_TopWarning.prototype.update = function() {
-    Window_Base.prototype.update.call(this);
-    
-    if (this._displayTimer > 0) {
-        this._displayTimer--;
-        if (this._displayTimer <= 0) {
-            this.close();
+        // Check if enemy is more than 13 levels above party median
+        if (highestEnemyLevel > partyMedian + 13) {
+            showDangerWarning(party);
         }
     }
-};
-// ==========================
-// Enemy Level Display System
-// ==========================
-////console.log("!!! ENEMY LEVEL DISPLAY SYSTEM LOADED !!!");
 
-// ==========================
-// Enemy Level Display System - FULL DEBUG
-// ==========================
-//console.log("!!! ENEMY LEVEL DISPLAY SYSTEM LOADED !!!");
+    /**
+     * Shows the actual warning message
+     */
+    /**
+     * Shows the actual warning message
+     */
+    function showDangerWarning(party) {
+        let message;
 
-// Helper function to get enemy level from event
-function getEnemyLevelFromEvent(event) {
-    
-    if (!event._fixedTroopId || event._fixedTroopId === 0) {
-        return 0;
+        if (party.length === 1) {
+            // Single party member
+            const list = _bi18nList('dangerWarning.single');
+            const pool = list || ["I'm outmatched! I should retreat!"];
+            message = party[0].name() + ": " + pool[Math.floor(Math.random() * pool.length)];
+        } else {
+            // Multiple party members - pick random one
+            const randomMember = party[Math.floor(Math.random() * party.length)];
+            const list = _bi18nList('dangerWarning.party');
+            const pool = list || ["We're outmatched! We should retreat!"];
+            message = randomMember.name() + ": " + pool[Math.floor(Math.random() * pool.length)];
+        }
+
+        // Check if switch 45 is on - if so, show at top of screen
+        // In ASCII mode, always use standard message so it renders on ASCII canvas
+        if ($gameSwitches.value(45) && (!window.AsciiMode || !window.AsciiMode.active)) {
+            showTopScreenMessage(message);
+        } else {
+            window.skipLocalization = true;
+            $gameMessage.add(message);
+            window.skipLocalization = false;
+        }
     }
-    
-    const troop = $dataTroops[event._fixedTroopId];
-    
-    if (!troop || !troop.members.length) {
-        return 0;
+    /**
+     * Shows a message at the top of the screen
+     */
+    function showTopScreenMessage(message) {
+        // Create a temporary window at the top of the screen
+        if (SceneManager._scene && SceneManager._scene.constructor === Scene_Battle) {
+            // We're in battle scene
+            const scene = SceneManager._scene;
+
+            // Create a custom window for top screen message
+            if (!scene._topWarningWindow) {
+                scene._topWarningWindow = new Window_TopWarning();
+                scene.addWindow(scene._topWarningWindow);
+            }
+
+            scene._topWarningWindow.showMessage(message);
+        }
     }
-    
-    // Get the highest level enemy in the troop
-    let maxLevel = 0;
-    for (const member of troop.members) {
-        const enemyData = $dataEnemies[member.enemyId];
-        if (enemyData && enemyData.note) {
-            const level = getEnemyLevel(enemyData.note);
-            if (level > maxLevel) {
-                maxLevel = level;
+    Game_Player.prototype.executeEncounter = function () {
+    }
+
+    const _Scene_Map_stopAudioOnBattleStart = Scene_Map.prototype.stopAudioOnBattleStart;
+    Scene_Map.prototype.stopAudioOnBattleStart = function () {
+        // Safety check: ensure battleBgm is not being called as a function
+        if ($gameSystem && typeof $gameSystem.battleBgm === 'function') {
+            // If it's somehow a function, replace it with default
+            $gameSystem._battleBgm = {
+                name: ConfigManager.battleMusicName || 'RandomMind/Battle',
+                volume: 90,
+                pitch: 100,
+                pan: 0
+            };
+        }
+        _Scene_Map_stopAudioOnBattleStart.call(this);
+    };
+    //=============================================================================
+    // Window_TopWarning - Custom window for top screen messages
+    //=============================================================================
+    function Window_TopWarning() {
+        this.initialize(...arguments);
+    }
+
+    Window_TopWarning.prototype = Object.create(Window_Base.prototype);
+    Window_TopWarning.prototype.constructor = Window_TopWarning;
+
+    Window_TopWarning.prototype.initialize = function () {
+        const width = Graphics.boxWidth;
+        const height = this.fittingHeight(2); // 2 lines height
+        const x = 0;
+        const y = 0; // Top of screen
+        Window_Base.prototype.initialize.call(this, new Rectangle(x, y, width, height));
+        this.openness = 0;
+        this._displayTimer = 0;
+        this._message = "";
+    };
+
+    Window_TopWarning.prototype.showMessage = function (message) {
+        this._message = message;
+        this._displayTimer = 180; // Show for 3 seconds (60fps * 3)
+        this.refresh();
+        this.open();
+    };
+
+    Window_TopWarning.prototype.refresh = function () {
+        this.contents.clear();
+        if (this._message) {
+            // Set text color to red for warning
+            this.changeTextColor(ColorManager.textColor(2)); // Red color
+            this.drawText(this._message, 0, 0, this.contentsWidth(), 'center');
+            this.resetTextColor();
+        }
+    };
+
+    Window_TopWarning.prototype.update = function () {
+        Window_Base.prototype.update.call(this);
+
+        if (this._displayTimer > 0) {
+            this._displayTimer--;
+            if (this._displayTimer <= 0) {
+                this.close();
             }
         }
-    }
-    return maxLevel;
-}
+    };
+    // ==========================
+    // Enemy Level Display System
+    // ==========================
+    ////console.log("!!! ENEMY LEVEL DISPLAY SYSTEM LOADED !!!");
 
-// Override Sprite_Character update
-const _Sprite_Character_update_EnemyLevel = Sprite_Character.prototype.update;
-Sprite_Character.prototype.update = function() {
-    _Sprite_Character_update_EnemyLevel.call(this);
-    this.updateEnemyLevelLabel();
-};
+    // ==========================
+    // Enemy Level Display System - FULL DEBUG
+    // ==========================
+    //console.log("!!! ENEMY LEVEL DISPLAY SYSTEM LOADED !!!");
 
-Sprite_Character.prototype.updateEnemyLevelLabel = function() {
-    const character = this._character;
-    if (!character) return;
-    
-    const eventId = character.eventId ? character.eventId() : null;
-    if (!eventId) return;
-    
-    const event = $gameMap.event(eventId);
-    if (!event) return;
-    
-    const eventData = event.event();
-    if (!eventData) return;
+    // Helper function to get enemy level from event
+    function getEnemyLevelFromEvent(event) {
 
-    // Check if fixedTroopId has been assigned (works for any event name, not just "Enemy")
-    if (!event._fixedTroopId || event._fixedTroopId === 0) {
-        return; // Wait for spawning system to assign it
-    }
-    
-    // Check if troopId changed (or label doesn't exist yet)
-    if (this._lastEnemyTroopId !== event._fixedTroopId) {
-        //console.log("TROOP ID CHANGED OR NEW! Old:", this._lastEnemyTroopId, "New:", event._fixedTroopId);
-        this._lastEnemyTroopId = event._fixedTroopId;
-        
-        // Remove old label if exists
-        if (this._enemyLevelLabel) {
-            this.removeChild(this._enemyLevelLabel);
-            this._enemyLevelLabel = null;
+        if (!event._fixedTroopId || event._fixedTroopId === 0) {
+            return 0;
         }
-        
-        // Get enemy level
-        const enemyLevel = getEnemyLevelFromEvent(event);
-        //console.log("Got enemy level:", enemyLevel);
-        
-        if (enemyLevel > 0) {
-            //console.log("CREATING LABEL NOW!");
-            this.createEnemyLevelLabel(enemyLevel);
-        }
-    }
-};
 
-Sprite_Character.prototype.createEnemyLevelLabel = function(level) {
-    //console.log("=== createEnemyLevelLabel START ===");
-    //console.log("Level:", level);
-    
-    const party = $gameParty.members();
-    //console.log("Party members:", party.length);
-    
-    const medianLevel = party.length > 0 ? getMedianLevel(party) : 1;
-    //console.log("Median level:", medianLevel);
-    
-    const levelDiff = level - medianLevel;
-    //console.log("Level diff:", levelDiff);
-    
-    let color = '#FFFFFF';
-    if (levelDiff > 30) {
-        color = '#FF0000';
-    } else if (levelDiff > 15) {
-        color = '#FFFF00';
+        const troop = $dataTroops[event._fixedTroopId];
+
+        if (!troop || !troop.members.length) {
+            return 0;
+        }
+
+        // Get the highest level enemy in the troop
+        let maxLevel = 0;
+        for (const member of troop.members) {
+            const enemyData = $dataEnemies[member.enemyId];
+            if (enemyData && enemyData.note) {
+                const level = getEnemyLevel(enemyData.note);
+                if (level > maxLevel) {
+                    maxLevel = level;
+                }
+            }
+        }
+        return maxLevel;
     }
-    //console.log("Color:", color);
-    
-    this._enemyLevelLabel = new Sprite();
-    //console.log("Created sprite:", this._enemyLevelLabel);
-    
-    this._enemyLevelLabel.bitmap = new Bitmap(80, 30);
-    //console.log("Created bitmap:", this._enemyLevelLabel.bitmap);
-    
-    this._enemyLevelLabel.anchor.x = 0.5;
-    this._enemyLevelLabel.anchor.y = 1;
-    //console.log("Set anchors");
-    
-    const bitmap = this._enemyLevelLabel.bitmap;
-    bitmap.fontFace = 'GameFont';
-    bitmap.fontSize = 18;
-    bitmap.textColor = color;
-    bitmap.outlineColor = 'rgba(0, 0, 0, 0.8)';
-    bitmap.outlineWidth = 4;
-    //console.log("Set font properties");
-    
-    const text = `L. ${level}`;
-    //console.log("Drawing text:", text);
-    bitmap.drawText(text, 0, 0, 80, 30, 'center');
-    
-    this._enemyLevelLabel.y = -50;
-    //console.log("Set Y position:", this._enemyLevelLabel.y);
-    
-    //console.log("Adding child to sprite. Current children:", this.children.length);
-    this.addChild(this._enemyLevelLabel);
-    //console.log("After add. Children:", this.children.length);
-    
-    //console.log("=== createEnemyLevelLabel END ===");
-};
+
+    // Override Sprite_Character update
+    const _Sprite_Character_update_EnemyLevel = Sprite_Character.prototype.update;
+    Sprite_Character.prototype.update = function () {
+        _Sprite_Character_update_EnemyLevel.call(this);
+        this.updateEnemyLevelLabel();
+    };
+
+    Sprite_Character.prototype.updateEnemyLevelLabel = function () {
+        const character = this._character;
+        if (!character) return;
+
+        const eventId = character.eventId ? character.eventId() : null;
+        if (!eventId) return;
+
+        const event = $gameMap.event(eventId);
+        if (!event) return;
+
+        const eventData = event.event();
+        if (!eventData) return;
+
+        // Check if fixedTroopId has been assigned (works for any event name, not just "Enemy")
+        if (!event._fixedTroopId || event._fixedTroopId === 0) {
+            return; // Wait for spawning system to assign it
+        }
+
+        // Check if troopId changed (or label doesn't exist yet)
+        if (this._lastEnemyTroopId !== event._fixedTroopId) {
+            //console.log("TROOP ID CHANGED OR NEW! Old:", this._lastEnemyTroopId, "New:", event._fixedTroopId);
+            this._lastEnemyTroopId = event._fixedTroopId;
+
+            // Remove old label if exists
+            if (this._enemyLevelLabel) {
+                this.removeChild(this._enemyLevelLabel);
+                this._enemyLevelLabel = null;
+            }
+
+            // Get enemy level
+            const enemyLevel = getEnemyLevelFromEvent(event);
+            //console.log("Got enemy level:", enemyLevel);
+
+            if (enemyLevel > 0) {
+                //console.log("CREATING LABEL NOW!");
+                this.createEnemyLevelLabel(enemyLevel);
+            }
+        }
+    };
+
+    Sprite_Character.prototype.createEnemyLevelLabel = function (level) {
+        //console.log("=== createEnemyLevelLabel START ===");
+        //console.log("Level:", level);
+
+        const party = $gameParty.members();
+        //console.log("Party members:", party.length);
+
+        const medianLevel = party.length > 0 ? getMedianLevel(party) : 1;
+        //console.log("Median level:", medianLevel);
+
+        const levelDiff = level - medianLevel;
+        //console.log("Level diff:", levelDiff);
+
+        let color = '#FFFFFF';
+        if (levelDiff > 30) {
+            color = '#FF0000';
+        } else if (levelDiff > 15) {
+            color = '#FFFF00';
+        }
+        //console.log("Color:", color);
+
+        this._enemyLevelLabel = new Sprite();
+        //console.log("Created sprite:", this._enemyLevelLabel);
+
+        this._enemyLevelLabel.bitmap = new Bitmap(80, 30);
+        //console.log("Created bitmap:", this._enemyLevelLabel.bitmap);
+
+        this._enemyLevelLabel.anchor.x = 0.5;
+        this._enemyLevelLabel.anchor.y = 1;
+        //console.log("Set anchors");
+
+        const bitmap = this._enemyLevelLabel.bitmap;
+        bitmap.fontFace = 'GameFont';
+        bitmap.fontSize = 18;
+        bitmap.textColor = color;
+        bitmap.outlineColor = 'rgba(0, 0, 0, 0.8)';
+        bitmap.outlineWidth = 4;
+        //console.log("Set font properties");
+
+        const text = `L. ${level}`;
+        //console.log("Drawing text:", text);
+        bitmap.drawText(text, 0, 0, 80, 30, 'center');
+
+        this._enemyLevelLabel.y = -50;
+        //console.log("Set Y position:", this._enemyLevelLabel.y);
+
+        //console.log("Adding child to sprite. Current children:", this.children.length);
+        this.addChild(this._enemyLevelLabel);
+        //console.log("After add. Children:", this.children.length);
+
+        //console.log("=== createEnemyLevelLabel END ===");
+    };
 
     //=============================================================================
     // NEW: Gravestone System Helper Function
@@ -571,525 +576,494 @@ Sprite_Character.prototype.createEnemyLevelLabel = function(level) {
     }
 
     // ——— Helper to pull the level from <Level:X> tag in enemy's note ———
-function getEnemyLevel(note) {
-    const m = note.match(/<Level:\s*(\d+)>/i);
-    return m ? parseInt(m[1], 10) : 0;
-  }
-  
-  function getMedianLevel(party) {
-    const levels = party.map(m => m.level).sort((a, b) => a - b);
-    const mid = Math.floor(levels.length / 2);
-    return levels.length % 2
-      ? levels[mid]
-      : (levels[mid - 1] + levels[mid]) / 2;
-  }
-  
-  /**
-   * Extract biome from map note or procedural map data
-   * Returns the biome string or null if not found
-   */
-  function getMapBiome() {
-    // Check if this is the procedural map (636)
-    if ($gameMap && $gameMap.mapId() === 636) {
-      if ($gameSystem && $gameSystem._procGenData && $gameSystem._procGenData.currentBiome) {
-        // Check for virtual biome overrides (Island takes priority over Beach)
-        if ($gameSystem._procGenData.displayAsIsland) {
-          return "Island";
-        }
-        if ($gameSystem._procGenData.displayAsBeach) {
-          return "Beach";
-        }
-        return $gameSystem._procGenData.currentBiome;
-      }
+    function getEnemyLevel(note) {
+        const m = note.match(/<Level:\s*(\d+)>/i);
+        return m ? parseInt(m[1], 10) : 0;
     }
 
-    // Check map note for biome tag
-    if (!$dataMap || !$dataMap.note) return null;
-    const biomeMatch = $dataMap.note.match(/<Biome:\s*(.+?)>/i);
-    return biomeMatch ? biomeMatch[1].trim() : null;
-  }
+    function getMedianLevel(party) {
+        const levels = party.map(m => m.level).sort((a, b) => a - b);
+        const mid = Math.floor(levels.length / 2);
+        return levels.length % 2
+            ? levels[mid]
+            : (levels[mid - 1] + levels[mid]) / 2;
+    }
 
-  /**
-   * Simple seeded random number generator
-   * @param {number} seed - The seed value
-   * @returns {function} - A function that returns a random number between 0 and 1
-   */
-  function createSeededRandom(seed) {
-    return function() {
-      seed = (seed * 9301 + 49297) % 233280;
-      return seed / 233280;
-    };
-  }
+    /**
+     * Extract biome from map note or procedural map data
+     * Returns the biome string or null if not found
+     */
+    function getMapBiome() {
+        // Check if this is the procedural map (636)
+        if ($gameMap && $gameMap.mapId() === 636) {
+            if ($gameSystem && $gameSystem._procGenData && $gameSystem._procGenData.currentBiome) {
+                // Check for virtual biome overrides (Island takes priority over Beach)
+                if ($gameSystem._procGenData.displayAsIsland) {
+                    return "Island";
+                }
+                if ($gameSystem._procGenData.displayAsBeach) {
+                    return "Beach";
+                }
+                return $gameSystem._procGenData.currentBiome;
+            }
+        }
 
-  /**
-   * Get world coordinates from procedural map data
-   * Returns {x, y} for procedural maps, or null for regular maps
-   */
-  function getWorldCoordinates() {
-    if ($gameMap && $gameMap.mapId() === 636) {
-      if ($gameSystem && $gameSystem._procGenData) {
-        return {
-          x: $gameSystem._procGenData.originX || 0,
-          y: $gameSystem._procGenData.originY || 0
+        // Check map note for biome tag
+        if (!$dataMap || !$dataMap.note) return null;
+        const biomeMatch = $dataMap.note.match(/<Biome:\s*(.+?)>/i);
+        return biomeMatch ? biomeMatch[1].trim() : null;
+    }
+
+    /**
+     * Simple seeded random number generator
+     * @param {number} seed - The seed value
+     * @returns {function} - A function that returns a random number between 0 and 1
+     */
+    function createSeededRandom(seed) {
+        return function () {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
         };
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Check if currently underground
-   * @returns {boolean} - True if player is in an underground layer
-   */
-  function isUnderground() {
-    if ($gameSystem && $gameSystem._procGenData && $gameSystem._procGenData.biomeLayerStack) {
-      return $gameSystem._procGenData.biomeLayerStack.length > 0;
-    }
-    return false;
-  }
-
-  /**
-   * Get all boss troops (containing at least one enemy level 70+)
-   * Filtered by biome if applicable
-   * @param {string} targetBiome - Optional biome to filter by
-   * @returns {number[]} - Array of boss troop IDs
-   */
-  function getBossTroops(targetBiome = null) {
-    const bossTroops = [];
-
-    for (let i = 1; i < $dataTroops.length; i++) {
-      const troop = $dataTroops[i];
-      if (!troop || !troop.members.length) continue;
-
-      // Check if any enemy in this troop is level 70+
-      const hasHighLevelEnemy = troop.members.some(member => {
-        const enemyData = $dataEnemies[member.enemyId];
-        if (!enemyData) return false;
-        const level = getEnemyLevel(enemyData.note);
-        return level >= 70;
-      });
-
-      if (!hasHighLevelEnemy) continue;
-
-      // If a biome is specified, check if troop matches it
-      if (targetBiome) {
-        if (!troopMatchesBiome(i, targetBiome)) continue;
-      }
-
-      bossTroops.push(i);
     }
 
-    return bossTroops;
-  }
-
-  /**
-   * Get a seeded boss troop for the first enemy event
-   * Selection is deterministic based on world coordinates and underground state
-   * @param {string} targetBiome - Optional biome to filter by
-   * @returns {number|null} - The boss troop ID, or null if no boss troops available
-   */
-  function getSeededBossTroop(targetBiome = null) {
-    const bossTroops = getBossTroops(targetBiome);
-    if (bossTroops.length === 0) return null;
-
-    // Get world coordinates
-    const worldCoords = getWorldCoordinates();
-    let seed = 12345; // Default seed for non-procedural maps
-
-    if (worldCoords) {
-      // For procedural maps, seed from coordinates and underground state
-      const underground = isUnderground() ? 1 : 0;
-      seed = worldCoords.x + worldCoords.y * 1000 + underground * 1000000;
-    }
-
-    // Use seeded RNG to select a boss troop
-    const seededRandom = createSeededRandom(seed);
-    const randomIndex = Math.floor(seededRandom() * bossTroops.length);
-    return bossTroops[randomIndex];
-  }
-
-  /**
-   * Check if a troop has any enemies that match the given biome
-   * @param {number} troopId - The troop ID to check
-   * @param {string} targetBiome - The biome to match against
-   * @returns {boolean} - True if any enemy in the troop has a matching biome
-   */
-  function troopMatchesBiome(troopId, targetBiome) {
-    if (!targetBiome) return false;
-    
-    const troop = $dataTroops[troopId];
-    if (!troop || !troop.members.length) return false;
-    
-    const targetBiomeLower = targetBiome.toLowerCase().trim();
-    
-    // Check each enemy in the troop
-    for (const member of troop.members) {
-        const enemyData = $dataEnemies[member.enemyId];
-        if (!enemyData || !enemyData.note) continue;
-        
-        // Extract biome tags from enemy note
-        const biomeMatch = enemyData.note.match(/<Biome:\s*(.+?)>/i);
-        if (!biomeMatch) continue;
-        
-        // Split by comma and check each biome
-        const enemyBiomes = biomeMatch[1].split(',').map(b => b.trim().toLowerCase());
-        
-        // If any biome matches, this troop is valid for the map
-        if (enemyBiomes.includes(targetBiomeLower)) {
-            return true;
+    /**
+     * Get world coordinates from procedural map data
+     * Returns {x, y} for procedural maps, or null for regular maps
+     */
+    function getWorldCoordinates() {
+        if ($gameMap && $gameMap.mapId() === 636) {
+            if ($gameSystem && $gameSystem._procGenData) {
+                return {
+                    x: $gameSystem._procGenData.originX || 0,
+                    y: $gameSystem._procGenData.originY || 0
+                };
+            }
         }
+        return null;
     }
-    
-    return false;
-  }
-  
-  /** * Fills the `troops` array with up to 4 troop‐IDs whose
-   * highest enemy‐level is < 70 (non-boss enemies)
-   * Uses weighted distribution: 60% (1-30), 30% (31-50), 10% (51-69)
-   */
-  function ensureTroops(troops, party, dataEnemies) {
-    // find all troop IDs in $dataTroops whose highest member level is < 70
-    const pool = $dataTroops
-      .slice(1)
-      .map((t, i) => ({ troop: t, id: i + 1 }))
-      .filter(x => {
-        // pick the highest‐level member in that troop
-        const maxLv = Math.max(...x.troop.members.map(m => getEnemyLevel(dataEnemies[m.enemyId].note)));
-        return maxLv < 70; // Exclude boss-level enemies (70+)
-      })
-      .map(x => {
-        // Add weight based on level: 60% (1-30), 30% (31-50), 10% (51-69)
-        const maxLv = Math.max(...x.troop.members.map(m => getEnemyLevel(dataEnemies[m.enemyId].note)));
-        let weight = 1;
-        if (maxLv >= 1 && maxLv <= 30) {
-          weight = 60;
-        } else if (maxLv >= 31 && maxLv <= 50) {
-          weight = 30;
-        } else if (maxLv >= 51 && maxLv <= 69) {
-          weight = 10;
-        }
-        return { ...x, weight: weight };
-      });
-    if (!pool.length) throw new Error(`No troops < level 70 found`);
 
-    // Weighted random selection for 4 troops
-    for (let i = 0; i < 4 && pool.length > 0; i++) {
-      const totalWeight = pool.reduce((sum, x) => sum + x.weight, 0);
-      let random = Math.random() * totalWeight;
-
-      for (let j = 0; j < pool.length; j++) {
-        random -= pool[j].weight;
-        if (random <= 0) {
-          troops.push(pool[j].id);
-          pool.splice(j, 1); // Remove selected troop to avoid duplicates
-          break;
-        }
-      }
-    }
-  }
-  function getEnemyArchetype(enemyData) {
-    if (!enemyData || !enemyData.note) return null;
-    const archetypeMatch = enemyData.note.match(/<Archetype:\s*(.+?)>/i);
-    return archetypeMatch ? archetypeMatch[1].trim() : null;
-}
-
-function getEventArchetype(event) {
-    if (!event || !event._fixedTroopId) return null;
-    const troop = $dataTroops[event._fixedTroopId];
-    if (!troop || !troop.members.length) return null;
-    const enemy = $dataEnemies[troop.members[0].enemyId];
-    if (!enemy) return null;
-    return getEnemyArchetype(enemy);
-}
-
-
-// Check if archetype is an aquatic enemy (can only spawn in region 3)
-function getAcquaticEnemyArchetype(archetype) {
-    if (!archetype) return false;
-    return AQUATIC_ENEMY_ARCHETYPES.includes(archetype);
-}
-
-// Check if archetype is amphibious (fast in water, slow on land)
-function getAmphibiousEnemyArchetype(archetype) {
-    if (!archetype) return false;
-    return AMPHIBIOUS_ENEMY_ARCHETYPES.includes(archetype);
-}
-
-// Check if archetype is flying (ignores terrain penalties, moves freely)
-function getFlyingEnemyArchetype(archetype) {
-    if (!archetype) return false;
-    return FLYING_ENEMY_ARCHETYPES.includes(archetype);
-}
-
-// Helper function to check if troop can spawn at coordinates
-function canTroopSpawnInRegion(troopId, regionId, x, y) {
-    const troop = $dataTroops[troopId];
-    if (!troop || !troop.members.length) return true; // Default to allowing spawn
-
-    // Get the first enemy in the troop
-    const firstMember = troop.members[0];
-    if (!firstMember) return true;
-
-    const enemyData = $dataEnemies[firstMember.enemyId];
-    if (!enemyData) return true;
-
-    const archetype = getEnemyArchetype(enemyData);
-    if (!archetype) return true; // No archetype restriction
-
-    // If archetype is aquatic, it can ONLY spawn in region 99 OR terrain tag 3
-    if (getAcquaticEnemyArchetype(archetype)) {
-        if (regionId === 99) return true;
-        // Also check if tile has terrain tag 3
-        if ($gameMap && $gameMap.terrainTag && x !== undefined && y !== undefined) {
-            const terrainTag = $gameMap.terrainTag(x, y);
-            return terrainTag === 3;
+    /**
+     * Check if currently underground
+     * @returns {boolean} - True if player is in an underground layer
+     */
+    function isUnderground() {
+        if ($gameSystem && $gameSystem._procGenData && $gameSystem._procGenData.biomeLayerStack) {
+            return $gameSystem._procGenData.biomeLayerStack.length > 0;
         }
         return false;
     }
 
-    return true; // Non-aquatic enemies can spawn anywhere
-}
+    /**
+     * Get all boss troops (containing at least one enemy level 70+)
+     * Filtered by biome if applicable
+     * @param {string} targetBiome - Optional biome to filter by
+     * @returns {number[]} - Array of boss troop IDs
+     */
+    function getBossTroops(targetBiome = null) {
+        const bossTroops = [];
 
-// ========================================================================
-// TIME-BASED ENEMY SPAWNING SYSTEM
-// ========================================================================
+        for (let i = 1; i < $dataTroops.length; i++) {
+            const troop = $dataTroops[i];
+            if (!troop || !troop.members.length) continue;
 
-/**
- * Get current game time in 24-hour format
- * Returns {hour, minute} from game variable 114 (total minutes elapsed)
- */
-function getCurrentGameTime() {
-    const totalMinutes = $gameVariables.value(114) || 0;
-    const hour = Math.floor((totalMinutes / 60) % 24);
-    const minute = Math.floor(totalMinutes % 60);
-    return { hour, minute, totalMinutes };
-}
+            // Check if any enemy in this troop is level 70+
+            const hasHighLevelEnemy = troop.members.some(member => {
+                const enemyData = $dataEnemies[member.enemyId];
+                if (!enemyData) return false;
+                const level = getEnemyLevel(enemyData.note);
+                return level >= 70;
+            });
 
-/**
- * Determine time period and return applicable activity patterns
- * Dawn: 5-7, Dusk: 17-19, Day: 7-17, Night: 19-5
- */
-function getTimeOfDay() {
-    const { hour } = getCurrentGameTime();
+            if (!hasHighLevelEnemy) continue;
 
-    if (hour >= 5 && hour < 7) return 'dawn';
-    if (hour >= 7 && hour < 17) return 'day';
-    if (hour >= 17 && hour < 19) return 'dusk';
-    if (hour >= 19 || hour < 5) return 'night';
-}
-
-/**
- * Get which activity patterns should spawn at current time
- * Returns array of activity patterns that can spawn
- */
-function getApplicableActivityPatterns() {
-    const timeOfDay = getTimeOfDay();
-
-    switch (timeOfDay) {
-        case 'day':
-            // Day: prefer Diurnal, always allow Crepuscular
-            return ['Diurnal', 'Crepuscular'];
-        case 'night':
-            // Night: prefer Nocturnal, always allow Crepuscular
-            return ['Nocturnal', 'Crepuscular'];
-        case 'dawn':
-        case 'dusk':
-            // Dawn/Dusk: prefer Crepuscular, chance for Diurnal (dawn) or Nocturnal (dusk)
-            if (timeOfDay === 'dawn') {
-                // 70% Crepuscular, 30% Diurnal
-                const rand = Math.random();
-                return rand < 0.7 ? ['Crepuscular'] : ['Crepuscular', 'Diurnal'];
-            } else {
-                // 70% Crepuscular, 30% Nocturnal
-                const rand = Math.random();
-                return rand < 0.7 ? ['Crepuscular'] : ['Crepuscular', 'Nocturnal'];
+            // If a biome is specified, check if troop matches it
+            if (targetBiome) {
+                if (!troopMatchesBiome(i, targetBiome)) continue;
             }
+
+            bossTroops.push(i);
+        }
+
+        return bossTroops;
     }
-    return ['Crepuscular']; // Fallback
-}
 
-/**
- * Get activity pattern from enemy note
- * Returns 'Nocturnal', 'Diurnal', 'Crepuscular', or null
- */
-function getEnemyActivityPattern(enemyData) {
-    if (!enemyData || !enemyData.note) return null;
+    /**
+     * Get a seeded boss troop for the first enemy event
+     * Selection is deterministic based on world coordinates and underground state
+     * @param {string} targetBiome - Optional biome to filter by
+     * @returns {number|null} - The boss troop ID, or null if no boss troops available
+     */
+    function getSeededBossTroop(targetBiome = null) {
+        const bossTroops = getBossTroops(targetBiome);
+        if (bossTroops.length === 0) return null;
 
-    if (enemyData.note.includes('<Nocturnal>')) return 'Nocturnal';
-    if (enemyData.note.includes('<Diurnal>')) return 'Diurnal';
-    if (enemyData.note.includes('<Crepuscular>')) return 'Crepuscular';
+        // Get world coordinates
+        const worldCoords = getWorldCoordinates();
+        let seed = 12345; // Default seed for non-procedural maps
 
-    return null;
-}
+        if (worldCoords) {
+            // For procedural maps, seed from coordinates and underground state
+            const underground = isUnderground() ? 1 : 0;
+            seed = worldCoords.x + worldCoords.y * 1000 + underground * 1000000;
+        }
 
-/**
- * Check if a troop can spawn at current time
- * Returns true if at least one enemy in troop matches current time
- */
-function canTroopSpawnAtCurrentTime(troopId) {
-    const troop = $dataTroops[troopId];
-    if (!troop || !troop.members.length) return true; // Default to allowing spawn
+        // Use seeded RNG to select a boss troop
+        const seededRandom = createSeededRandom(seed);
+        const randomIndex = Math.floor(seededRandom() * bossTroops.length);
+        return bossTroops[randomIndex];
+    }
 
-    const applicablePatterns = getApplicableActivityPatterns();
+    /**
+     * Check if a troop has any enemies that match the given biome
+     * @param {number} troopId - The troop ID to check
+     * @param {string} targetBiome - The biome to match against
+     * @returns {boolean} - True if any enemy in the troop has a matching biome
+     */
+    function troopMatchesBiome(troopId, targetBiome) {
+        if (!targetBiome) return false;
 
-    // Check if any enemy in the troop has an applicable activity pattern
-    for (const member of troop.members) {
-        const enemyData = $dataEnemies[member.enemyId];
-        if (!enemyData) continue;
+        const troop = $dataTroops[troopId];
+        if (!troop || !troop.members.length) return false;
 
-        const activityPattern = getEnemyActivityPattern(enemyData);
-        if (activityPattern && applicablePatterns.includes(activityPattern)) {
-            return true;
+        const targetBiomeLower = targetBiome.toLowerCase().trim();
+
+        // Check each enemy in the troop
+        for (const member of troop.members) {
+            const enemyData = $dataEnemies[member.enemyId];
+            if (!enemyData || !enemyData.note) continue;
+
+            // Extract biome tags from enemy note
+            const biomeMatch = enemyData.note.match(/<Biome:\s*(.+?)>/i);
+            if (!biomeMatch) continue;
+
+            // Split by comma and check each biome
+            const enemyBiomes = biomeMatch[1].split(',').map(b => b.trim().toLowerCase());
+
+            // If any biome matches, this troop is valid for the map
+            if (enemyBiomes.includes(targetBiomeLower)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** * Fills the `troops` array with up to 4 troop‐IDs whose
+     * highest enemy‐level is < 70 (non-boss enemies)
+     * Uses weighted distribution: 60% (1-30), 30% (31-50), 10% (51-69)
+     */
+    function ensureTroops(troops, party, dataEnemies) {
+        // find all troop IDs in $dataTroops whose highest member level is < 70
+        const pool = $dataTroops
+            .slice(1)
+            .map((t, i) => ({ troop: t, id: i + 1 }))
+            .filter(x => {
+                // pick the highest‐level member in that troop
+                const maxLv = Math.max(...x.troop.members.map(m => getEnemyLevel(dataEnemies[m.enemyId].note)));
+                return maxLv < 70; // Exclude boss-level enemies (70+)
+            })
+            .map(x => {
+                // Add weight based on level: 60% (1-30), 30% (31-50), 10% (51-69)
+                const maxLv = Math.max(...x.troop.members.map(m => getEnemyLevel(dataEnemies[m.enemyId].note)));
+                let weight = 1;
+                if (maxLv >= 1 && maxLv <= 30) {
+                    weight = 60;
+                } else if (maxLv >= 31 && maxLv <= 50) {
+                    weight = 30;
+                } else if (maxLv >= 51 && maxLv <= 69) {
+                    weight = 10;
+                }
+                return { ...x, weight: weight };
+            });
+        if (!pool.length) throw new Error(`No troops < level 70 found`);
+
+        // Weighted random selection for 4 troops
+        for (let i = 0; i < 4 && pool.length > 0; i++) {
+            const totalWeight = pool.reduce((sum, x) => sum + x.weight, 0);
+            let random = Math.random() * totalWeight;
+
+            for (let j = 0; j < pool.length; j++) {
+                random -= pool[j].weight;
+                if (random <= 0) {
+                    troops.push(pool[j].id);
+                    pool.splice(j, 1); // Remove selected troop to avoid duplicates
+                    break;
+                }
+            }
         }
     }
+    function getEnemyArchetype(enemyData) {
+        if (!enemyData || !enemyData.note) return null;
+        const archetypeMatch = enemyData.note.match(/<Archetype:\s*(.+?)>/i);
+        return archetypeMatch ? archetypeMatch[1].trim() : null;
+    }
 
-    // If no enemies have activity patterns, allow spawning (legacy support)
-    return true;
-}
+    function getEventArchetype(event) {
+        if (!event || !event._fixedTroopId) return null;
+        const troop = $dataTroops[event._fixedTroopId];
+        if (!troop || !troop.members.length) return null;
+        const enemy = $dataEnemies[troop.members[0].enemyId];
+        if (!enemy) return null;
+        return getEnemyArchetype(enemy);
+    }
 
-/**
- * Filter encounter list by current time
- * Prioritizes applicable patterns, falls back to all if none match
- */
-function filterEncountersByTime(encounterList) {
-    if (!encounterList || !encounterList.length) return encounterList;
 
-    const applicablePatterns = getApplicableActivityPatterns();
+    // Check if archetype is an aquatic enemy (can only spawn in region 3)
+    function getAcquaticEnemyArchetype(archetype) {
+        if (!archetype) return false;
+        return AQUATIC_ENEMY_ARCHETYPES.includes(archetype);
+    }
 
-    // Filter troops that can spawn at current time
-    const validTroops = encounterList.filter(encounter =>
-        canTroopSpawnAtCurrentTime(encounter.troopId)
-    );
+    // Check if archetype is amphibious (fast in water, slow on land)
+    function getAmphibiousEnemyArchetype(archetype) {
+        if (!archetype) return false;
+        return AMPHIBIOUS_ENEMY_ARCHETYPES.includes(archetype);
+    }
 
-    // If no valid troops, return all (fallback for legacy encounters)
-    return validTroops.length > 0 ? validTroops : encounterList;
-}
+    // Check if archetype is flying (ignores terrain penalties, moves freely)
+    function getFlyingEnemyArchetype(archetype) {
+        if (!archetype) return false;
+        return FLYING_ENEMY_ARCHETYPES.includes(archetype);
+    }
+
+    // Helper function to check if troop can spawn at coordinates
+    function canTroopSpawnInRegion(troopId, regionId, x, y) {
+        const troop = $dataTroops[troopId];
+        if (!troop || !troop.members.length) return true; // Default to allowing spawn
+
+        // Get the first enemy in the troop
+        const firstMember = troop.members[0];
+        if (!firstMember) return true;
+
+        const enemyData = $dataEnemies[firstMember.enemyId];
+        if (!enemyData) return true;
+
+        const archetype = getEnemyArchetype(enemyData);
+        if (!archetype) return true; // No archetype restriction
+
+        // If archetype is aquatic, it can ONLY spawn in region 99 OR terrain tag 3
+        if (getAcquaticEnemyArchetype(archetype)) {
+            if (regionId === 99) return true;
+            // Also check if tile has terrain tag 3
+            if ($gameMap && $gameMap.terrainTag && x !== undefined && y !== undefined) {
+                const terrainTag = $gameMap.terrainTag(x, y);
+                return terrainTag === 3;
+            }
+            return false;
+        }
+
+        return true; // Non-aquatic enemies can spawn anywhere
+    }
+
+    // ========================================================================
+    // TIME-BASED ENEMY SPAWNING SYSTEM
+    // ========================================================================
+
+    /**
+     * Get current game time in 24-hour format
+     * Returns {hour, minute} from game variable 114 (total minutes elapsed)
+     */
+    function getCurrentGameTime() {
+        const totalMinutes = $gameVariables.value(114) || 0;
+        const hour = Math.floor((totalMinutes / 60) % 24);
+        const minute = Math.floor(totalMinutes % 60);
+        return { hour, minute, totalMinutes };
+    }
+
+    /**
+     * Determine time period and return applicable activity patterns
+     * Dawn: 5-7, Dusk: 17-19, Day: 7-17, Night: 19-5
+     */
+    function getTimeOfDay() {
+        const { hour } = getCurrentGameTime();
+
+        if (hour >= 5 && hour < 7) return 'dawn';
+        if (hour >= 7 && hour < 17) return 'day';
+        if (hour >= 17 && hour < 19) return 'dusk';
+        if (hour >= 19 || hour < 5) return 'night';
+    }
+
+    /**
+     * Get which activity patterns should spawn at current time
+     * Returns array of activity patterns that can spawn
+     */
+    function getApplicableActivityPatterns() {
+        const timeOfDay = getTimeOfDay();
+
+        switch (timeOfDay) {
+            case 'day':
+                // Day: prefer Diurnal, always allow Crepuscular
+                return ['Diurnal', 'Crepuscular'];
+            case 'night':
+                // Night: prefer Nocturnal, always allow Crepuscular
+                return ['Nocturnal', 'Crepuscular'];
+            case 'dawn':
+            case 'dusk':
+                // Dawn/Dusk: prefer Crepuscular, chance for Diurnal (dawn) or Nocturnal (dusk)
+                if (timeOfDay === 'dawn') {
+                    // 70% Crepuscular, 30% Diurnal
+                    const rand = Math.random();
+                    return rand < 0.7 ? ['Crepuscular'] : ['Crepuscular', 'Diurnal'];
+                } else {
+                    // 70% Crepuscular, 30% Nocturnal
+                    const rand = Math.random();
+                    return rand < 0.7 ? ['Crepuscular'] : ['Crepuscular', 'Nocturnal'];
+                }
+        }
+        return ['Crepuscular']; // Fallback
+    }
+
+    /**
+     * Get activity pattern from enemy note
+     * Returns 'Nocturnal', 'Diurnal', 'Crepuscular', or null
+     */
+    function getEnemyActivityPattern(enemyData) {
+        if (!enemyData || !enemyData.note) return null;
+
+        if (enemyData.note.includes('<Nocturnal>')) return 'Nocturnal';
+        if (enemyData.note.includes('<Diurnal>')) return 'Diurnal';
+        if (enemyData.note.includes('<Crepuscular>')) return 'Crepuscular';
+
+        return null;
+    }
+
+    /**
+     * Check if a troop can spawn at current time
+     * Returns true if at least one enemy in troop matches current time
+     */
+    function canTroopSpawnAtCurrentTime(troopId) {
+        const troop = $dataTroops[troopId];
+        if (!troop || !troop.members.length) return true; // Default to allowing spawn
+
+        const applicablePatterns = getApplicableActivityPatterns();
+
+        // Check if any enemy in the troop has an applicable activity pattern
+        for (const member of troop.members) {
+            const enemyData = $dataEnemies[member.enemyId];
+            if (!enemyData) continue;
+
+            const activityPattern = getEnemyActivityPattern(enemyData);
+            if (activityPattern && applicablePatterns.includes(activityPattern)) {
+                return true;
+            }
+        }
+
+        // If no enemies have activity patterns, allow spawning (legacy support)
+        return true;
+    }
+
+    /**
+     * Filter encounter list by current time
+     * Prioritizes applicable patterns, falls back to all if none match
+     */
+    function filterEncountersByTime(encounterList) {
+        if (!encounterList || !encounterList.length) return encounterList;
+
+        const applicablePatterns = getApplicableActivityPatterns();
+
+        // Filter troops that can spawn at current time
+        const validTroops = encounterList.filter(encounter =>
+            canTroopSpawnAtCurrentTime(encounter.troopId)
+        );
+
+        // If no valid troops, return all (fallback for legacy encounters)
+        return validTroops.length > 0 ? validTroops : encounterList;
+    }
 
     /**
      * Spawns enemies by assigning troops to events named "Enemy" based on the
      * map's encounter list, region, and weight.
      */
-// Replace the existing spawnEnemiesFromEncounters method with this updated version
-Scene_Map.prototype.spawnEnemiesFromEncounters = function() {
-    let encounterList = $gameMap.encounterList();
-    if (!encounterList || !encounterList.length) {
-        const fallbackIds = [];
-        const party = $gameParty.members();
-        ensureTroops(fallbackIds, party, $dataEnemies);
-        encounterList = fallbackIds.map(id => ({ troopId: id, weight: 1 }));
-    }
-    
-    
-    const allEnemyEvents = $gameMap.events().filter(ev => {
-        const eventData = ev.event();
-        return eventData && eventData.name === "Enemy";
-    });
-
-    let enemyEvents = allEnemyEvents;
-    if ($gameMap.mapId() === 636) {
-        if ($gameSystem._procGenDefeatedEnemies) {
-            enemyEvents = allEnemyEvents.filter(ev => !$gameSystem._procGenDefeatedEnemies.includes(ev.eventId()));
-            const defeatedEvents = allEnemyEvents.filter(ev => $gameSystem._procGenDefeatedEnemies.includes(ev.eventId()));
-            defeatedEvents.forEach(ev => ev.erase());
+    // Replace the existing spawnEnemiesFromEncounters method with this updated version
+    Scene_Map.prototype.spawnEnemiesFromEncounters = function () {
+        let encounterList = $gameMap.encounterList();
+        if (!encounterList || !encounterList.length) {
+            const fallbackIds = [];
+            const party = $gameParty.members();
+            ensureTroops(fallbackIds, party, $dataEnemies);
+            encounterList = fallbackIds.map(id => ({ troopId: id, weight: 1 }));
         }
-    }
 
-    if (!enemyEvents.length) return;
-// ========================================================================
-    // NEW: Urban Biome Population Cap
-    // ========================================================================
-    const currentBiome = getMapBiome();
-    if (currentBiome) {
-        const lowerBiome = currentBiome.toLowerCase();
-        // Check if biome contains specific keywords
-        if (lowerBiome.includes('city') || lowerBiome.includes('burg') || lowerBiome.includes('village')) {
-            // If there are more than 3 enemies, remove the excess
-            if (enemyEvents.length > 3) {
-                ////console.log(`[BattleSystemEnhanced] Urban biome detected (${currentBiome}). Limiting enemies to 3.`);
-                
-                // Splice changes the array in-place, removing elements from index 3 onwards
-                // It returns the removed elements, which we then erase from the map
-                const excessEvents = enemyEvents.splice(3);
-                
-                excessEvents.forEach(ev => {
-                    ev.erase(); // Erase from map immediately
-                });
+
+        const allEnemyEvents = $gameMap.events().filter(ev => {
+            const eventData = ev.event();
+            return eventData && eventData.name === "Enemy";
+        });
+
+        let enemyEvents = allEnemyEvents;
+        if ($gameMap.mapId() === 636) {
+            if ($gameSystem._procGenDefeatedEnemies) {
+                enemyEvents = allEnemyEvents.filter(ev => !$gameSystem._procGenDefeatedEnemies.includes(ev.eventId()));
+                const defeatedEvents = allEnemyEvents.filter(ev => $gameSystem._procGenDefeatedEnemies.includes(ev.eventId()));
+                defeatedEvents.forEach(ev => ev.erase());
             }
         }
-    }
-    // ========================================================================
-    // NEW: If map has only 1 encounter and has enemy events, generate random encounter list
-    if (encounterList.length === 1 && enemyEvents.length > 0) {
-        const party = $gameParty.members();
-        if (party.length > 0) {
-            // Check if map has a biome
-            const mapBiome = getMapBiome();
 
-            // Find all troops - exclude level 70+ (bosses only)
-            const biomeTroops = [];
-            const nonBiomeTroops = [];
+        if (!enemyEvents.length) return;
+        // ========================================================================
+        // NEW: Urban Biome Population Cap
+        // ========================================================================
+        const currentBiome = getMapBiome();
+        if (currentBiome) {
+            const lowerBiome = currentBiome.toLowerCase();
+            // Check if biome contains specific keywords
+            if (lowerBiome.includes('city') || lowerBiome.includes('burg') || lowerBiome.includes('village')) {
+                // If there are more than 3 enemies, remove the excess
+                if (enemyEvents.length > 3) {
+                    ////console.log(`[BattleSystemEnhanced] Urban biome detected (${currentBiome}). Limiting enemies to 3.`);
 
-            for (let i = 1; i < $dataTroops.length; i++) {
-                const troop = $dataTroops[i];
-                if (!troop || !troop.members.length) continue;
+                    // Splice changes the array in-place, removing elements from index 3 onwards
+                    // It returns the removed elements, which we then erase from the map
+                    const excessEvents = enemyEvents.splice(3);
 
-                // Get highest level enemy in this troop
-                const maxEnemyLevel = Math.max(...troop.members.map(member => {
-                    const enemyData = $dataEnemies[member.enemyId];
-                    return enemyData ? getEnemyLevel(enemyData.note) : 0;
-                }));
-
-                // Exclude boss-level enemies (70+)
-                if (maxEnemyLevel >= 70) continue;
-
-                // Check if troop matches map biome
-                const matchesBiome = mapBiome && troopMatchesBiome(i, mapBiome);
-
-                if (matchesBiome) {
-                    biomeTroops.push(i);
-                } else {
-                    nonBiomeTroops.push(i);
+                    excessEvents.forEach(ev => {
+                        ev.erase(); // Erase from map immediately
+                    });
                 }
             }
+        }
+        // ========================================================================
+        // NEW: If map has only 1 encounter and has enemy events, generate random encounter list
+        if (encounterList.length === 1 && enemyEvents.length > 0) {
+            const party = $gameParty.members();
+            if (party.length > 0) {
+                // Check if map has a biome
+                const mapBiome = getMapBiome();
 
-            // If a biome is present, only use biome-matched enemies
-            // Otherwise, use all available enemies
-            if (mapBiome && biomeTroops.length > 0) {
-                // BIOME MODE: Only biome-specific enemies (level 1-69)
-                encounterList = [];
+                // Find all troops - exclude level 70+ (bosses only)
+                const biomeTroops = [];
+                const nonBiomeTroops = [];
 
-                biomeTroops.forEach(id => {
-                    // Calculate weight based on enemy level
-                    const troop = $dataTroops[id];
+                for (let i = 1; i < $dataTroops.length; i++) {
+                    const troop = $dataTroops[i];
+                    if (!troop || !troop.members.length) continue;
+
+                    // Get highest level enemy in this troop
                     const maxEnemyLevel = Math.max(...troop.members.map(member => {
                         const enemyData = $dataEnemies[member.enemyId];
                         return enemyData ? getEnemyLevel(enemyData.note) : 0;
                     }));
 
-                    // Weighted distribution: 60% (1-30), 30% (31-50), 10% (51-69)
-                    let weight = 1;
-                    if (maxEnemyLevel >= 1 && maxEnemyLevel <= 30) {
-                        weight = 60;
-                    } else if (maxEnemyLevel >= 31 && maxEnemyLevel <= 50) {
-                        weight = 30;
-                    } else if (maxEnemyLevel >= 51 && maxEnemyLevel <= 69) {
-                        weight = 10;
+                    // Exclude boss-level enemies (70+)
+                    if (maxEnemyLevel >= 70) continue;
+
+                    // Check if troop matches map biome
+                    const matchesBiome = mapBiome && troopMatchesBiome(i, mapBiome);
+
+                    if (matchesBiome) {
+                        biomeTroops.push(i);
+                    } else {
+                        nonBiomeTroops.push(i);
                     }
+                }
 
-                    encounterList.push({
-                        troopId: id,
-                        weight: weight,
-                        regionId: 0
-                    });
-                });
-
-                ////console.log(`[BattleSystemEnhanced] Generated ${encounterList.length} biome-specific encounters for map ${$gameMap.mapId()} [Biome: ${mapBiome}] - Total: ${biomeTroops.length}`);
-            } else if (!mapBiome) {
-                // NO BIOME MODE: Use all available enemies (level 1-69)
-                if (nonBiomeTroops.length > 0) {
+                // If a biome is present, only use biome-matched enemies
+                // Otherwise, use all available enemies
+                if (mapBiome && biomeTroops.length > 0) {
+                    // BIOME MODE: Only biome-specific enemies (level 1-69)
                     encounterList = [];
 
-                    nonBiomeTroops.forEach(id => {
+                    biomeTroops.forEach(id => {
                         // Calculate weight based on enemy level
                         const troop = $dataTroops[id];
                         const maxEnemyLevel = Math.max(...troop.members.map(member => {
@@ -1114,263 +1088,294 @@ Scene_Map.prototype.spawnEnemiesFromEncounters = function() {
                         });
                     });
 
-                    ////console.log(`[BattleSystemEnhanced] Generated ${encounterList.length} random encounters for map ${$gameMap.mapId()} - Total: ${nonBiomeTroops.length}`);
+                    ////console.log(`[BattleSystemEnhanced] Generated ${encounterList.length} biome-specific encounters for map ${$gameMap.mapId()} [Biome: ${mapBiome}] - Total: ${biomeTroops.length}`);
+                } else if (!mapBiome) {
+                    // NO BIOME MODE: Use all available enemies (level 1-69)
+                    if (nonBiomeTroops.length > 0) {
+                        encounterList = [];
+
+                        nonBiomeTroops.forEach(id => {
+                            // Calculate weight based on enemy level
+                            const troop = $dataTroops[id];
+                            const maxEnemyLevel = Math.max(...troop.members.map(member => {
+                                const enemyData = $dataEnemies[member.enemyId];
+                                return enemyData ? getEnemyLevel(enemyData.note) : 0;
+                            }));
+
+                            // Weighted distribution: 60% (1-30), 30% (31-50), 10% (51-69)
+                            let weight = 1;
+                            if (maxEnemyLevel >= 1 && maxEnemyLevel <= 30) {
+                                weight = 60;
+                            } else if (maxEnemyLevel >= 31 && maxEnemyLevel <= 50) {
+                                weight = 30;
+                            } else if (maxEnemyLevel >= 51 && maxEnemyLevel <= 69) {
+                                weight = 10;
+                            }
+
+                            encounterList.push({
+                                troopId: id,
+                                weight: weight,
+                                regionId: 0
+                            });
+                        });
+
+                        ////console.log(`[BattleSystemEnhanced] Generated ${encounterList.length} random encounters for map ${$gameMap.mapId()} - Total: ${nonBiomeTroops.length}`);
+                    }
                 }
             }
         }
-    }
 
-    // ========================================================================
-    // Apply time-based filtering to encounter list
-    // ========================================================================
-    const originalEncounterCount = encounterList.length;
-    encounterList = filterEncountersByTime(encounterList);
+        // ========================================================================
+        // Apply time-based filtering to encounter list
+        // ========================================================================
+        const originalEncounterCount = encounterList.length;
+        encounterList = filterEncountersByTime(encounterList);
 
-    if (encounterList.length < originalEncounterCount) {
-        const timeOfDay = getTimeOfDay();
-        const applicablePatterns = getApplicableActivityPatterns();
-        ////console.log(`[BattleSystemEnhanced] Time-based filtering: ${originalEncounterCount} → ${encounterList.length} encounters [${timeOfDay.toUpperCase()}, Patterns: ${applicablePatterns.join(', ')}]`);
-    }
-
-    const criticalEventLocations = $gameMap.events()
-        .filter(ev => {
-          const eventData = ev.event();
-          return eventData && (eventData.name === "Transfer" || eventData.name === "Door");
-        })
-        .map(ev => ({ x: ev.x, y: ev.y }));
-    const exclusionRadius = 3;
-
-    const spawnTiles = [];
-    const w = $gameMap.width(), h = $gameMap.height();
-    let waterTileCount = 0;
-    let landTileCount = 0;
-
-    for (let x = 0; x < w; x++) {
-        for (let y = 0; y < h; y++) {
-            // Skip region ID 10
-            if ($gameMap.regionId(x, y) === 10) continue;
-
-            // Check distance from critical events
-            let tooClose = false;
-            for (const loc of criticalEventLocations) {
-                const distance = Math.sqrt(Math.pow(x - loc.x, 2) + Math.pow(y - loc.y, 2));
-                if (distance <= exclusionRadius) {
-                    tooClose = true;
-                    break;
-                }
-            }
-            if (tooClose) continue;
-
-            // Check if tile is passable (but allow water tiles for aquatic spawning)
-            const terrainTag = $gameMap.terrainTag(x, y);
-            const regionId = $gameMap.regionId(x, y);
-            const isWaterTile = (terrainTag === 3 || regionId === 99);
-
-            if (!isWaterTile && !$gameMap.isPassable(x, y, 2)) continue;
-
-            // Check terrain tag - only allow spawning on specific terrain tags
-            // Terrain tags 0, 4 and 7 = do not spawn
-            // Terrain tags 1, 2, 3, 5, 6 = allow spawn (tag 3 reserved for aquatic)
-            if (terrainTag === 0 || terrainTag === 4 || terrainTag === 7) continue;
-
-            // Check if another event exists at this location
-            if ($gameMap.events().some(ev => ev.x === x && ev.y === y && !enemyEvents.includes(ev))) continue;
-
-            // Add any passable tile
-            spawnTiles.push({ x, y, regionId: $gameMap.regionId(x, y) });
-            if (isWaterTile) waterTileCount++;
-            else landTileCount++;
+        if (encounterList.length < originalEncounterCount) {
+            const timeOfDay = getTimeOfDay();
+            const applicablePatterns = getApplicableActivityPatterns();
+            ////console.log(`[BattleSystemEnhanced] Time-based filtering: ${originalEncounterCount} → ${encounterList.length} encounters [${timeOfDay.toUpperCase()}, Patterns: ${applicablePatterns.join(', ')}]`);
         }
-    }
 
-    ////console.log(`[BattleSystemEnhanced] Spawn tiles - Water: ${waterTileCount}, Land: ${landTileCount}, Total: ${spawnTiles.length}`);
+        const criticalEventLocations = $gameMap.events()
+            .filter(ev => {
+                const eventData = ev.event();
+                return eventData && (eventData.name === "Transfer" || eventData.name === "Door");
+            })
+            .map(ev => ({ x: ev.x, y: ev.y }));
+        const exclusionRadius = 3;
 
-    const selectWeightedRandom = list => {
-        const total = list.reduce((sum, it) => sum + it.weight, 0);
-        let rnd = Math.random() * total;
-        for (const it of list) {
-            rnd -= it.weight;
-            if (rnd <= 0) return it;
-        }
-        return list[0];
-    };
+        const spawnTiles = [];
+        const w = $gameMap.width(), h = $gameMap.height();
+        let waterTileCount = 0;
+        let landTileCount = 0;
 
-    // Track if we've assigned the first boss enemy
-    let isFirstEnemyEvent = true;
+        for (let x = 0; x < w; x++) {
+            for (let y = 0; y < h; y++) {
+                // Skip region ID 10
+                if ($gameMap.regionId(x, y) === 10) continue;
 
-    for (const ev of enemyEvents) {
-        if (spawnTiles.length) {
-            const isProcGenMap = $gameMap.mapId() === 636;
-            let loc;
-            let idx = -1;
-
-            if (isProcGenMap) {
-                if (!$gameSystem._procGenEnemyPositions) {
-                    $gameSystem._procGenEnemyPositions = {};
+                // Check distance from critical events
+                let tooClose = false;
+                for (const loc of criticalEventLocations) {
+                    const distance = Math.sqrt(Math.pow(x - loc.x, 2) + Math.pow(y - loc.y, 2));
+                    if (distance <= exclusionRadius) {
+                        tooClose = true;
+                        break;
+                    }
                 }
-                const savedPos = $gameSystem._procGenEnemyPositions[ev.eventId()];
-                if (savedPos) {
-                    idx = spawnTiles.findIndex(tile => tile.x === savedPos.x && tile.y === savedPos.y);
-                }
+                if (tooClose) continue;
+
+                // Check if tile is passable (but allow water tiles for aquatic spawning)
+                const terrainTag = $gameMap.terrainTag(x, y);
+                const regionId = $gameMap.regionId(x, y);
+                const isWaterTile = (terrainTag === 3 || regionId === 99);
+
+                if (!isWaterTile && !$gameMap.isPassable(x, y, 2)) continue;
+
+                // Check terrain tag - only allow spawning on specific terrain tags
+                // Terrain tags 0, 4 and 7 = do not spawn
+                // Terrain tags 1, 2, 3, 5, 6 = allow spawn (tag 3 reserved for aquatic)
+                if (terrainTag === 0 || terrainTag === 4 || terrainTag === 7) continue;
+
+                // Check if another event exists at this location
+                if ($gameMap.events().some(ev => ev.x === x && ev.y === y && !enemyEvents.includes(ev))) continue;
+
+                // Add any passable tile
+                spawnTiles.push({ x, y, regionId: $gameMap.regionId(x, y) });
+                if (isWaterTile) waterTileCount++;
+                else landTileCount++;
             }
+        }
 
-            if (idx !== -1) {
-                loc = spawnTiles.splice(idx, 1)[0];
-            } else {
-                const randomIdx = Math.floor(Math.random() * spawnTiles.length);
-                loc = spawnTiles.splice(randomIdx, 1)[0];
+        ////console.log(`[BattleSystemEnhanced] Spawn tiles - Water: ${waterTileCount}, Land: ${landTileCount}, Total: ${spawnTiles.length}`);
+
+        const selectWeightedRandom = list => {
+            const total = list.reduce((sum, it) => sum + it.weight, 0);
+            let rnd = Math.random() * total;
+            for (const it of list) {
+                rnd -= it.weight;
+                if (rnd <= 0) return it;
+            }
+            return list[0];
+        };
+
+        // Track if we've assigned the first boss enemy
+        let isFirstEnemyEvent = true;
+
+        for (const ev of enemyEvents) {
+            if (spawnTiles.length) {
+                const isProcGenMap = $gameMap.mapId() === 636;
+                let loc;
+                let idx = -1;
+
                 if (isProcGenMap) {
                     if (!$gameSystem._procGenEnemyPositions) {
                         $gameSystem._procGenEnemyPositions = {};
                     }
-                    $gameSystem._procGenEnemyPositions[ev.eventId()] = { x: loc.x, y: loc.y };
-                }
-            }
-            
-            ev.locate(loc.x, loc.y);
-
-            const currentRegion = loc.regionId;
-            const terrainTagAtLoc = $gameMap.terrainTag(loc.x, loc.y);
-            const isWaterLocation = (terrainTagAtLoc === 3 || currentRegion === 99);
-
-            let validTroops = encounterList.filter(encounter =>
-                canTroopSpawnInRegion(encounter.troopId, currentRegion, loc.x, loc.y)
-            );
-
-            ////console.log(`[BattleSystemEnhanced] Event at (${loc.x},${loc.y}) - Region: ${currentRegion}, TerrainTag: ${terrainTagAtLoc}, IsWater: ${isWaterLocation}, ValidTroops: ${validTroops.length}/${encounterList.length}`);
-
-            let chosenTroopId = null;
-            if (isProcGenMap) {
-                if (!$gameSystem._procGenEnemyTroops) {
-                    $gameSystem._procGenEnemyTroops = {};
-                }
-                const savedTroopId = $gameSystem._procGenEnemyTroops[ev.eventId()];
-                if (savedTroopId && $dataTroops[savedTroopId]) {
-                    chosenTroopId = savedTroopId;
-                }
-            }
-
-            if (chosenTroopId === null) {
-                if (isProcGenMap && isFirstEnemyEvent && !isWaterLocation) {
-                    const bossTroopId = getSeededBossTroop(currentBiome);
-                    if (bossTroopId !== null) {
-                        chosenTroopId = bossTroopId;
-                        ////console.log(`[BattleSystemEnhanced] Assigning boss troop ${bossTroopId} to first enemy event at (${loc.x},${loc.y})`);
+                    const savedPos = $gameSystem._procGenEnemyPositions[ev.eventId()];
+                    if (savedPos) {
+                        idx = spawnTiles.findIndex(tile => tile.x === savedPos.x && tile.y === savedPos.y);
                     }
                 }
-                
-                if (chosenTroopId === null) {
-                    if (validTroops.length === 0) {
-                        if (isWaterLocation) {
-                            ////console.log(`[BattleSystemEnhanced] No aquatic troops available for water tile at (${loc.x},${loc.y}), erasing event`);
-                            ev.erase();
-                            continue;
-                        } else {
-                            ////console.log(`[BattleSystemEnhanced] No valid troops for region ${currentRegion}, using all troops`);
-                            validTroops = encounterList;
+
+                if (idx !== -1) {
+                    loc = spawnTiles.splice(idx, 1)[0];
+                } else {
+                    const randomIdx = Math.floor(Math.random() * spawnTiles.length);
+                    loc = spawnTiles.splice(randomIdx, 1)[0];
+                    if (isProcGenMap) {
+                        if (!$gameSystem._procGenEnemyPositions) {
+                            $gameSystem._procGenEnemyPositions = {};
                         }
-                    }
-        
-                    if (validTroops.length > 0) {
-                        const chosen = selectWeightedRandom(validTroops);
-                        chosenTroopId = chosen.troopId;
+                        $gameSystem._procGenEnemyPositions[ev.eventId()] = { x: loc.x, y: loc.y };
                     }
                 }
 
-                if (isProcGenMap && chosenTroopId !== null) {
+                ev.locate(loc.x, loc.y);
+
+                const currentRegion = loc.regionId;
+                const terrainTagAtLoc = $gameMap.terrainTag(loc.x, loc.y);
+                const isWaterLocation = (terrainTagAtLoc === 3 || currentRegion === 99);
+
+                let validTroops = encounterList.filter(encounter =>
+                    canTroopSpawnInRegion(encounter.troopId, currentRegion, loc.x, loc.y)
+                );
+
+                ////console.log(`[BattleSystemEnhanced] Event at (${loc.x},${loc.y}) - Region: ${currentRegion}, TerrainTag: ${terrainTagAtLoc}, IsWater: ${isWaterLocation}, ValidTroops: ${validTroops.length}/${encounterList.length}`);
+
+                let chosenTroopId = null;
+                if (isProcGenMap) {
                     if (!$gameSystem._procGenEnemyTroops) {
                         $gameSystem._procGenEnemyTroops = {};
                     }
-                    $gameSystem._procGenEnemyTroops[ev.eventId()] = chosenTroopId;
-                }
-            }
-            isFirstEnemyEvent = false;
-
-            if (chosenTroopId !== null) {
-                ev._fixedTroopId = chosenTroopId;
-                ev._isAquaticEnemy = undefined; // Invalidate cache so it recalculates
-                const troop = $dataTroops[chosenTroopId];
-
-                if (troop && troop.members.length > 0) {
-                    const firstEnemy = $dataEnemies[troop.members[0].enemyId];
-                    const archetype = getEnemyArchetype(firstEnemy);
-                    const isAquatic = getAcquaticEnemyArchetype(archetype);
-                    ////console.log(`[BattleSystemEnhanced] Assigned troop ${chosenTroopId} (${firstEnemy.name}, Archetype: ${archetype}, Aquatic: ${isAquatic}) to water location: ${isWaterLocation}`);
-
-                    if (firstEnemy && firstEnemy.note) {
-                        const note = firstEnemy.note;
-
-                        const speedMatch = note.match(/<Speed:\s*([1-6])>/i);
-                        if (speedMatch) {
-                            ev.setMoveSpeed(Number(speedMatch[1]));
-                        }
-
-                        const moveMatch = note.match(/<Movement:\s*(Approach|Random|Fixed|Fleeing)>/i);
-                        if (moveMatch) {
-                            const type = moveMatch[1].toLowerCase();
-                            if (type === 'fixed')       ev._moveType = 0;
-                            else if (type === 'random') ev._moveType = 1;
-                            else if (type === 'approach') ev._moveType = 2;
-                        }
+                    const savedTroopId = $gameSystem._procGenEnemyTroops[ev.eventId()];
+                    if (savedTroopId && $dataTroops[savedTroopId]) {
+                        chosenTroopId = savedTroopId;
                     }
                 }
 
-                ev.updateCharacterSprite();
-                ev.setOpacity(255);
-                ev.setThrough(false);
+                if (chosenTroopId === null) {
+                    if (isProcGenMap && isFirstEnemyEvent && !isWaterLocation) {
+                        const bossTroopId = getSeededBossTroop(currentBiome);
+                        if (bossTroopId !== null) {
+                            chosenTroopId = bossTroopId;
+                            ////console.log(`[BattleSystemEnhanced] Assigning boss troop ${bossTroopId} to first enemy event at (${loc.x},${loc.y})`);
+                        }
+                    }
+
+                    if (chosenTroopId === null) {
+                        if (validTroops.length === 0) {
+                            if (isWaterLocation) {
+                                ////console.log(`[BattleSystemEnhanced] No aquatic troops available for water tile at (${loc.x},${loc.y}), erasing event`);
+                                ev.erase();
+                                continue;
+                            } else {
+                                ////console.log(`[BattleSystemEnhanced] No valid troops for region ${currentRegion}, using all troops`);
+                                validTroops = encounterList;
+                            }
+                        }
+
+                        if (validTroops.length > 0) {
+                            const chosen = selectWeightedRandom(validTroops);
+                            chosenTroopId = chosen.troopId;
+                        }
+                    }
+
+                    if (isProcGenMap && chosenTroopId !== null) {
+                        if (!$gameSystem._procGenEnemyTroops) {
+                            $gameSystem._procGenEnemyTroops = {};
+                        }
+                        $gameSystem._procGenEnemyTroops[ev.eventId()] = chosenTroopId;
+                    }
+                }
+                isFirstEnemyEvent = false;
+
+                if (chosenTroopId !== null) {
+                    ev._fixedTroopId = chosenTroopId;
+                    ev._isAquaticEnemy = undefined; // Invalidate cache so it recalculates
+                    const troop = $dataTroops[chosenTroopId];
+
+                    if (troop && troop.members.length > 0) {
+                        const firstEnemy = $dataEnemies[troop.members[0].enemyId];
+                        const archetype = getEnemyArchetype(firstEnemy);
+                        const isAquatic = getAcquaticEnemyArchetype(archetype);
+                        ////console.log(`[BattleSystemEnhanced] Assigned troop ${chosenTroopId} (${firstEnemy.name}, Archetype: ${archetype}, Aquatic: ${isAquatic}) to water location: ${isWaterLocation}`);
+
+                        if (firstEnemy && firstEnemy.note) {
+                            const note = firstEnemy.note;
+
+                            const speedMatch = note.match(/<Speed:\s*([1-6])>/i);
+                            if (speedMatch) {
+                                ev.setMoveSpeed(Number(speedMatch[1]));
+                            }
+
+                            const moveMatch = note.match(/<Movement:\s*(Approach|Random|Fixed|Fleeing)>/i);
+                            if (moveMatch) {
+                                const type = moveMatch[1].toLowerCase();
+                                if (type === 'fixed') ev._moveType = 0;
+                                else if (type === 'random') ev._moveType = 1;
+                                else if (type === 'approach') ev._moveType = 2;
+                            }
+                        }
+                    }
+
+                    ev.updateCharacterSprite();
+                    ev.setOpacity(255);
+                    ev.setThrough(false);
+                } else {
+                    ev.erase();
+                }
             } else {
                 ev.erase();
             }
-        } else {
-            ev.erase();
         }
-    }
-};
-// Add this new method to Game_Event prototype
-Game_Event.prototype.setupFleeingMovement = function() {
-    // Create a custom move route for fleeing behavior
-    const route = {
-        list: [
-            { code: 32 }, // Move away from player
-            { code: 0 }   // End
-        ],
-        repeat: true,
-        skippable: true,
-        wait: false
     };
-    
-    this.forceMoveRoute(route);
-    this._fleeingMovement = true;
-};
+    // Add this new method to Game_Event prototype
+    Game_Event.prototype.setupFleeingMovement = function () {
+        // Create a custom move route for fleeing behavior
+        const route = {
+            list: [
+                { code: 32 }, // Move away from player
+                { code: 0 }   // End
+            ],
+            repeat: true,
+            skippable: true,
+            wait: false
+        };
 
-// Add this new method to check if event is using fleeing movement
-Game_Event.prototype.isFleeingMovement = function() {
-    return this._fleeingMovement || false;
-};
+        this.forceMoveRoute(route);
+        this._fleeingMovement = true;
+    };
 
-    
-    
+    // Add this new method to check if event is using fleeing movement
+    Game_Event.prototype.isFleeingMovement = function () {
+        return this._fleeingMovement || false;
+    };
+
+
+
     //=============================================================================
     // Scene_Map - Handle Spawning, Rewards, and Respawn
     //=============================================================================
 
     const _Scene_Map_start = Scene_Map.prototype.start;
-    Scene_Map.prototype.start = function() {
+    Scene_Map.prototype.start = function () {
         const currMap = $gameMap.mapId();
-    
+
         // --- Spawning Logic (unchanged) ---
         if (!$gameSystem.isBattleEnded() && currMap !== _lastSpawnedMapId) {
             _battleCooldownTimer = BATTLE_COOLDOWN_FRAMES;
             this.spawnEnemiesFromEncounters();
             _lastSpawnedMapId = currMap;
         }
-    
+
         _Scene_Map_start.call(this); // Call original start method
-        
+
         // --- Gravestone Logic (unchanged) ---
         const deathData = $gameSystem.getDeathData();
         const gravestoneEvent = $gameMap.events().find(event => event.event().name === "Gravestone");
-        
+
         if (gravestoneEvent) {
             // If death data exists, switch 9 is ON, and we're on the death map, position the gravestone
             if (deathData && deathData.mapId === $gameMap.mapId() && $gameSwitches.value(9)) {
@@ -1383,13 +1388,13 @@ Game_Event.prototype.isFleeingMovement = function() {
                 gravestoneEvent.setThrough(true);
             }
         }
-        
-    
+
+
         // If returning from a battle, handle post-battle logic
         if ($gameSystem.isBattleEnded()) {
             let hasRespawned = false;
             $gameSystem.setBattleCooldown(120); // 2 seconds at 60fps
-            
+
             const _tutorialRespawnMaps = [1414, 1415, 1416, 1417];
             const _inTutorialRespawn = $gameSwitches.value(75) && _tutorialRespawnMaps.includes($gameMap.mapId());
 
@@ -1435,7 +1440,7 @@ Game_Event.prototype.isFleeingMovement = function() {
                 hasRespawned = true;
             }
             // Permadeath OFF: no other actors are removed from the party
-    
+
             // Handle event deletion/locking    
             const eventToDelete = $gameSystem.getEventToDelete();
             if (eventToDelete && eventToDelete.mapId === $gameMap.mapId()) {
@@ -1445,7 +1450,7 @@ Game_Event.prototype.isFleeingMovement = function() {
                 }
                 $gameSystem.clearEventToDelete();
             }
-    
+
             const eventToLock = $gameSystem.getEventToLock();
             if (eventToLock) {
                 const event = $gameMap.event(eventToLock.eventId);
@@ -1454,7 +1459,7 @@ Game_Event.prototype.isFleeingMovement = function() {
                 }
                 $gameSystem.clearEventToLock();
             }
-    
+
             // Show rewards popup if no respawn occurred
             if (!hasRespawned) {
                 // Restore Positions
@@ -1472,7 +1477,7 @@ Game_Event.prototype.isFleeingMovement = function() {
                 }
                 this.createRewardsPopup();
             }
-    
+
             $gameSystem.setBattleEnded(false);
             $gameSystem.setFullPartyWipe(false);
 
@@ -1486,14 +1491,14 @@ Game_Event.prototype.isFleeingMovement = function() {
     };
 
     const _Scene_Map_update_BSE = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update_BSE.call(this);
         if (this.isActive()) { // Only update when map is active
             this.updateEnemyVsEnemyCombat();
         }
     };
 
-    Scene_Map.prototype.updateEnemyVsEnemyCombat = function() {
+    Scene_Map.prototype.updateEnemyVsEnemyCombat = function () {
         if (!$gameSystem._enemyFights) {
             $gameSystem._enemyFights = {};
         }
@@ -1521,8 +1526,8 @@ Game_Event.prototype.isFleeingMovement = function() {
 
                     if (archetype1 && archetype2 && archetype1 !== archetype2) {
                         // Initialize HP for fighters if not present
-                        if(event1.enemyHp === undefined) event1.enemyHp = event1.getMaxHpForEvent();
-                        if(event2.enemyHp === undefined) event2.enemyHp = event2.getMaxHpForEvent();
+                        if (event1.enemyHp === undefined) event1.enemyHp = event1.getMaxHpForEvent();
+                        if (event2.enemyHp === undefined) event2.enemyHp = event2.getMaxHpForEvent();
 
                         $gameSystem._enemyFights[key] = {
                             fighters: [event1.eventId(), event2.eventId()],
@@ -1562,9 +1567,9 @@ Game_Event.prototype.isFleeingMovement = function() {
                     defender = event2;
                     attacker = event1;
                 }
-                
+
                 const damage = 5 + Math.floor(getEnemyLevelFromEvent(attacker) / 2);
-                if(defender.enemyHp === undefined) defender.enemyHp = defender.getMaxHpForEvent();
+                if (defender.enemyHp === undefined) defender.enemyHp = defender.getMaxHpForEvent();
                 defender.enemyHp -= damage;
 
                 const spriteset = SceneManager._scene._spriteset;
@@ -1583,14 +1588,14 @@ Game_Event.prototype.isFleeingMovement = function() {
             }
         }
     };
-    
+
 
     //=============================================================================
     // Game_Event - Modified to accommodate the new spawning system
     //=============================================================================
-    
+
     const _Game_Event_initialize = Game_Event.prototype.initialize;
-    Game_Event.prototype.initialize = function(mapId, eventId) {
+    Game_Event.prototype.initialize = function (mapId, eventId) {
         _Game_Event_initialize.call(this, mapId, eventId);
 
         // This now only applies to non-"Enemy" events that use note-tags.
@@ -1603,7 +1608,7 @@ Game_Event.prototype.isFleeingMovement = function() {
         this.updateCharacterSprite(); // Initial sprite update
     };
 
-    Game_Event.prototype.getMaxHpForEvent = function() {
+    Game_Event.prototype.getMaxHpForEvent = function () {
         if (!this._fixedTroopId) return 100;
         const troop = $dataTroops[this._fixedTroopId];
         if (!troop || !troop.members.length) return 100;
@@ -1612,18 +1617,18 @@ Game_Event.prototype.isFleeingMovement = function() {
     };
 
     // Renamed from selectFixedTroopId to be more specific
-    Game_Event.prototype.selectFixedTroopIdFromNote = function() {
+    Game_Event.prototype.selectFixedTroopIdFromNote = function () {
         // --- MODIFIED: This logic is now ignored for "Enemy" events ---
         if (this.event().name === "Enemy") {
             this._fixedTroopId = 0; // It will be set by the new spawning system.
             return;
         }
         // --- END MODIFICATION ---
-    
+
         const note = this.event().note || "";
-         if (note.includes('mz3d')) {
+        if (note.includes('mz3d')) {
             return null
-           
+
         }
         if (note.includes('?')) {
             const validTroopIds = $dataTroops.slice(1).map((t, i) => t ? i + 1 : 0).filter(id => id > 0);
@@ -1638,18 +1643,18 @@ Game_Event.prototype.isFleeingMovement = function() {
                 this._fixedTroopId = 0;
             }
         }
-    
+
         // Handle movement settings for note-tagged events
         if (this._fixedTroopId > 0) {
             const enemyData = $dataEnemies[this._fixedTroopId];
             if (enemyData && enemyData.note) {
                 const enemyNote = enemyData.note;
-                
+
                 // Movement: Approach | Random | Fixed | Fleeing
                 const moveMatch = enemyNote.match(/<Movement:\s*(Approach|Random|Fixed|Fleeing)>/i);
                 if (moveMatch) {
                     const type = moveMatch[1].toLowerCase();
-                    if (type === 'fixed')    this._moveType = 0;
+                    if (type === 'fixed') this._moveType = 0;
                     else if (type === 'random') this._moveType = 1;
                     else if (type === 'approach') this._moveType = 2;
                     else if (type === 'fleeing') {
@@ -1659,7 +1664,7 @@ Game_Event.prototype.isFleeingMovement = function() {
                 }
             }
         }
-    
+
         // Persistent data setup for note-tagged enemies
         if (this._fixedTroopId > 0) {
             const persistentId = `${this._mapId}_${this._eventId}`;
@@ -1671,9 +1676,9 @@ Game_Event.prototype.isFleeingMovement = function() {
             }
         }
     };
-    
+
     // Check if this event's troop contains an aquatic enemy (cached for performance)
-    Game_Event.prototype.isAquaticEnemy = function() {
+    Game_Event.prototype.isAquaticEnemy = function () {
         // Return cached value if available
         if (this._isAquaticEnemy !== undefined && this._isAquaticEnemy !== false) {
             return this._isAquaticEnemy === true;
@@ -1714,7 +1719,7 @@ Game_Event.prototype.isFleeingMovement = function() {
 
     // Override canPass to handle different enemy types with terrain restrictions
     const _Game_Event_canPass = Game_Event.prototype.canPass;
-    Game_Event.prototype.canPass = function(x, y, d) {
+    Game_Event.prototype.canPass = function (x, y, d) {
         // Check if this is an enemy event
         if (this.event().name === "Enemy") {
             if (this._fixedTroopId && this._fixedTroopId > 0) {
@@ -1781,7 +1786,7 @@ Game_Event.prototype.isFleeingMovement = function() {
 
     // Add speed modifier for different enemy types
     const _Game_Event_realMoveSpeed = Game_Event.prototype.realMoveSpeed;
-    Game_Event.prototype.realMoveSpeed = function() {
+    Game_Event.prototype.realMoveSpeed = function () {
         let speed = _Game_Event_realMoveSpeed.call(this);
 
         if (this.event() && this.event().name === "Enemy" && this._fixedTroopId && this._fixedTroopId > 0) {
@@ -1831,41 +1836,41 @@ Game_Event.prototype.isFleeingMovement = function() {
     };
 
     // Unchanged: This function works perfectly with the new system.
-    Game_Event.prototype.updateCharacterSprite = function() {
+    Game_Event.prototype.updateCharacterSprite = function () {
         if (this._fixedTroopId && this._fixedTroopId > 0) {
-          const troop = $dataTroops[this._fixedTroopId];
-          if (!troop) return;
-          const member = troop.members[0];
-          const enemyId = member ? member.enemyId : null;
-          if (!enemyId) return;
+            const troop = $dataTroops[this._fixedTroopId];
+            if (!troop) return;
+            const member = troop.members[0];
+            const enemyId = member ? member.enemyId : null;
+            if (!enemyId) return;
 
-          if (_enemyCharSprites[enemyId]) {
-            const charSpriteName = _enemyCharSprites[enemyId];
-            this.setImage("Monsters/" + charSpriteName, this._characterIndex);
+            if (_enemyCharSprites[enemyId]) {
+                const charSpriteName = _enemyCharSprites[enemyId];
+                this.setImage("Monsters/" + charSpriteName, this._characterIndex);
 
-            const hue = ($dataEnemies[enemyId] && $dataEnemies[enemyId].battlerHue) || 0;
-            this._characterHue = hue;
-          }
+                const hue = ($dataEnemies[enemyId] && $dataEnemies[enemyId].battlerHue) || 0;
+                this._characterHue = hue;
+            }
         }
     };
 
     //=============================================================================
     // DataManager - Load Enemy Note Tags for Character Sprites
     //=============================================================================
-    
+
     const _DataManager_isDatabaseLoaded = DataManager.isDatabaseLoaded;
-    DataManager.isDatabaseLoaded = function() {
+    DataManager.isDatabaseLoaded = function () {
         if (!_DataManager_isDatabaseLoaded.call(this)) return false;
-        
+
         if (!this._enemyCharSpritesLoaded) {
             this.loadEnemyCharSprites($dataEnemies);
             this._enemyCharSpritesLoaded = true;
         }
-        
+
         return true;
     };
-    
-    DataManager.loadEnemyCharSprites = function(data) {
+
+    DataManager.loadEnemyCharSprites = function (data) {
         for (let i = 1; i < data.length; i++) {
             const enemy = data[i];
             if (enemy && enemy.note) {
@@ -1880,11 +1885,11 @@ Game_Event.prototype.isFleeingMovement = function() {
     //=============================================================================
     // Game_Map - Setup events (minor change for clarity)
     //=============================================================================
-    
+
     const _Game_Map_setupEvents = Game_Map.prototype.setupEvents;
-    Game_Map.prototype.setupEvents = function() {
+    Game_Map.prototype.setupEvents = function () {
         _Game_Map_setupEvents.call(this);
-        
+
         // This ensures non-"Enemy" events with notes get their sprites set correctly on map load.
         // "Enemy" events are handled by spawnEnemiesFromEncounters.
         this.events().forEach(event => {
@@ -1894,47 +1899,48 @@ Game_Event.prototype.isFleeingMovement = function() {
             }
         });
     };
-    
+
     // (The rest of the original plugin code continues below, largely unchanged)
     // ... [existing code for battles, respawn, popups, etc.] ...
 
     //=============================================================================
     // Sprite_Character – Apply Enemy Hue
     //=============================================================================
-    (function() {
-            const _SC_update = Sprite_Character.prototype.update;
-            Sprite_Character.prototype.update = function() {
-              _SC_update.call(this);
-        
-              if (this._flashDuration > 0) {
+    (function () {
+        const _SC_update = Sprite_Character.prototype.update;
+        Sprite_Character.prototype.update = function () {
+            _SC_update.call(this);
+
+            if (this._flashDuration > 0) {
                 this._flashDuration--;
                 if (this._flashDuration === 0) {
                     this.setBlendColor([0, 0, 0, 0]);
                 }
-              }
-        
-              const char = this._character;
-              const hue  = char && char._characterHue;
-              if (hue) {
+            }
+
+            const char = this._character;
+            const hue = char && char._characterHue;
+            if (hue) {
                 if (!this._hueFilter) {
-                  this._hueFilter = new PIXI.filters.ColorMatrixFilter();
-                  this.filters = [this._hueFilter];            }
-            this._hueFilter.reset();
-            this._hueFilter.hue(hue, false);
-          } else if (this._hueFilter) {
-            this.filters = null;
-            this._hueFilter = null;
-          }
+                    this._hueFilter = new PIXI.filters.ColorMatrixFilter();
+                    this.filters = [this._hueFilter];
+                }
+                this._hueFilter.reset();
+                this._hueFilter.hue(hue, false);
+            } else if (this._hueFilter) {
+                this.filters = null;
+                this._hueFilter = null;
+            }
         };
-      })();
+    })();
 
     //=============================================================================
     // BattleManager - Hide Battle Messages and Manage Battle Flow
     //=============================================================================
-    
+
     // Reset health protection when battle starts
     const _BattleManager_setup = BattleManager.setup;
-    BattleManager.setup = function(troopId, canEscape, canLose) {
+    BattleManager.setup = function (troopId, canEscape, canLose) {
         _BattleManager_setup.call(this, troopId, canEscape, canLose);
         resetHealthProtection();
 
@@ -1958,40 +1964,40 @@ Game_Event.prototype.isFleeingMovement = function() {
             }
         }
     };
-    
+
     // Also check deaths during update (to catch deaths outside of turn ends)
     const _BattleManager_update = BattleManager.update;
-    BattleManager.update = function() {
+    BattleManager.update = function () {
         _BattleManager_update.call(this);
-        
+
         // Only check during battle phase
         if (this._phase === 'action' || this._phase === 'turn') {
             this.checkActorDeaths();
         }
     };
     let _battleTurnCount = 0;
-    
-// Modify the BattleManager.displayStartMessages to include the warning check
-    BattleManager.displayStartMessages = function() {
+
+    // Modify the BattleManager.displayStartMessages to include the warning check
+    BattleManager.displayStartMessages = function () {
         _battleTurnCount = 0;
-        
+
         // Check for dangerous enemy and show warning if needed
         checkAndShowDangerousEnemyWarning();
-    };    
-    BattleManager.displayEscapeFailureMessage = function() {};
-    
-    BattleManager.displayEscapeSuccessMessage = function() {};
-    
+    };
+    BattleManager.displayEscapeFailureMessage = function () { };
+
+    BattleManager.displayEscapeSuccessMessage = function () { };
+
     const _BattleManager_makeEscapeRatio = BattleManager.makeEscapeRatio;
-    BattleManager.makeEscapeRatio = function() {
+    BattleManager.makeEscapeRatio = function () {
         _BattleManager_makeEscapeRatio.call(this);
         if (_battleTurnCount <= 1) {
             this._escapeRatio = 1.0;
         }
     };
-    
+
     const _BattleManager_makeRewards = BattleManager.makeRewards;
-    BattleManager.makeRewards = function() {
+    BattleManager.makeRewards = function () {
         _BattleManager_makeRewards.call(this);
         if (!_battleRewards) {
             _battleRewards = { exp: 0, gold: 0, items: [] };
@@ -2000,10 +2006,10 @@ Game_Event.prototype.isFleeingMovement = function() {
         _battleRewards.gold = this._rewards.gold || 0;
         _battleRewards.items = this._rewards.items ? this._rewards.items.slice() : [];
     };
-    
+
     // Knowledge points: earned on victory based on enemy level vs party median
     const _BattleManager_processVictory_BSE = BattleManager.processVictory;
-    BattleManager.processVictory = function() {
+    BattleManager.processVictory = function () {
         const party = $gameParty.members();
         if (party.length && $gameTroop && $gameTroop.members().length) {
             const partyMedian = getMedianLevel(party);
@@ -2018,100 +2024,100 @@ Game_Event.prototype.isFleeingMovement = function() {
         _BattleManager_processVictory_BSE.call(this);
     };
 
-    BattleManager.displayVictoryMessage = function() {};
-    
-    BattleManager.displayRewards = function() {
+    BattleManager.displayVictoryMessage = function () { };
+
+    BattleManager.displayRewards = function () {
         this.gainRewards();
     };
-    
+
     const _BattleManager_endTurn = BattleManager.endTurn;
-    BattleManager.endTurn = function() {
+    BattleManager.endTurn = function () {
         this.checkActorDeaths();
         _BattleManager_endTurn.call(this);
     };
 
     const _BattleManager_startTurn = BattleManager.startTurn;
-    BattleManager.startTurn = function() {
+    BattleManager.startTurn = function () {
         _BattleManager_startTurn.call(this);
         _battleTurnCount++;
     };
-    
-    BattleManager.processActor1Death = function() {
-    if ($gameSwitches.value(9)) {
-        saveDeathData();
-        $gameSwitches.setValue(34, true);
-    }
-    
+
+    BattleManager.processActor1Death = function () {
+        if ($gameSwitches.value(9)) {
+            saveDeathData();
+            $gameSwitches.setValue(34, true);
+        }
+
         // Set flag for respawn
         _needsRespawn = true;
-        
+
         // Mark current event for deletion
         if (_currentMapId && _currentEventId) {
             $gameSystem.setEventToDelete(_currentMapId, _currentEventId);
         }
-        
+
         // End the battle immediately (with escape result to avoid game over)
         this._escaped = true;
         this.updateBattleEnd();
     };
-        // Reset enemy HP when defeated
-        const _Game_Enemy_die = Game_Enemy.prototype.die;
-        Game_Enemy.prototype.die = function() {
-            _Game_Enemy_die.call(this);
-            
-            // If this is in a persistent battle, mark this enemy as dead
-            if (_currentBattleEventId && _persistentEnemyData[_currentBattleEventId]) {
-                const index = $gameTroop.members().indexOf(this);
-                if (index >= 0) {
-                    _persistentEnemyData[_currentBattleEventId].enemyHp[index] = 0;
-                }
+    // Reset enemy HP when defeated
+    const _Game_Enemy_die = Game_Enemy.prototype.die;
+    Game_Enemy.prototype.die = function () {
+        _Game_Enemy_die.call(this);
+
+        // If this is in a persistent battle, mark this enemy as dead
+        if (_currentBattleEventId && _persistentEnemyData[_currentBattleEventId]) {
+            const index = $gameTroop.members().indexOf(this);
+            if (index >= 0) {
+                _persistentEnemyData[_currentBattleEventId].enemyHp[index] = 0;
             }
-        };
-        
-        // Alias the BattleManager.updateBattleEnd method to set a flag when battle is ending
-        const _BattleManager_updateBattleEnd = BattleManager.updateBattleEnd;
-        BattleManager.updateBattleEnd = function() {
-            console.log('[DEBUG] BattleManager.updateBattleEnd CALLED');
-            console.log('[DEBUG] - _escaped:', this._escaped);
-            console.log('[DEBUG] - party all dead:', $gameParty.isAllDead());
-            console.log('[DEBUG] - troop all dead:', $gameTroop.isAllDead());
+        }
+    };
 
-            // Store party member states BEFORE calling the original method
-            const partyStates = $gameParty.members().map(actor => ({
-                actor: actor,
-                isDead: actor.isDead(),
-                actorId: actor.actorId(),
-                name: actor.name()
-            }));
+    // Alias the BattleManager.updateBattleEnd method to set a flag when battle is ending
+    const _BattleManager_updateBattleEnd = BattleManager.updateBattleEnd;
+    BattleManager.updateBattleEnd = function () {
+        console.log('[DEBUG] BattleManager.updateBattleEnd CALLED');
+        console.log('[DEBUG] - _escaped:', this._escaped);
+        console.log('[DEBUG] - party all dead:', $gameParty.isAllDead());
+        console.log('[DEBUG] - troop all dead:', $gameTroop.isAllDead());
 
-            console.log('[DEBUG] - party states:', partyStates);
+        // Store party member states BEFORE calling the original method
+        const partyStates = $gameParty.members().map(actor => ({
+            actor: actor,
+            isDead: actor.isDead(),
+            actorId: actor.actorId(),
+            name: actor.name()
+        }));
 
-            _BattleManager_updateBattleEnd.call(this);
+        console.log('[DEBUG] - party states:', partyStates);
 
-            console.log('[DEBUG] BattleManager.updateBattleEnd AFTER original call');
-            
-            if (this._escaped || $gameParty.isAllDead() || $gameTroop.isAllDead()) {
-                $gameSystem.setBattleEnded(true);
-                
-                // Check each party member's death state
-                partyStates.forEach((state, index) => {
-                    if (state.isDead) {
-                        if (index === 0) {
-                            // Actor 1 (main character) - handle respawn
-                            $gameSystem.setActor1Died(true);
-                        } else if (index === 1) {
-                            // Actor 2 - mark for removal
-                            $gameSystem.setActor2Died(true, state.name);
-                        } else if (index === 2) {
-                            // Actor 3 - mark for removal
-                            $gameSystem.setActor3Died(true, state.name);
-                        }
+        _BattleManager_updateBattleEnd.call(this);
+
+        console.log('[DEBUG] BattleManager.updateBattleEnd AFTER original call');
+
+        if (this._escaped || $gameParty.isAllDead() || $gameTroop.isAllDead()) {
+            $gameSystem.setBattleEnded(true);
+
+            // Check each party member's death state
+            partyStates.forEach((state, index) => {
+                if (state.isDead) {
+                    if (index === 0) {
+                        // Actor 1 (main character) - handle respawn
+                        $gameSystem.setActor1Died(true);
+                    } else if (index === 1) {
+                        // Actor 2 - mark for removal
+                        $gameSystem.setActor2Died(true, state.name);
+                    } else if (index === 2) {
+                        // Actor 3 - mark for removal
+                        $gameSystem.setActor3Died(true, state.name);
                     }
-                });
-            }
-        };
-        
-    BattleManager.checkActorDeaths = function() {
+                }
+            });
+        }
+    };
+
+    BattleManager.checkActorDeaths = function () {
         let deathOccurred = false;
         const members = $gameParty.members();
         if (members[0] && members[0].isDead() && !$gameSystem.isActor1Died()) {
@@ -2129,30 +2135,30 @@ Game_Event.prototype.isFleeingMovement = function() {
         return deathOccurred;
     };
 
-BattleManager.processDefeat = function() {
-    // Never show game over — always respawn
-    const _tutorialMaps = [1414, 1415, 1416, 1417];
-    const inTutorial = $gameSwitches.value(75) && _tutorialMaps.includes($gameMap.mapId());
+    BattleManager.processDefeat = function () {
+        // Never show game over — always respawn
+        const _tutorialMaps = [1414, 1415, 1416, 1417];
+        const inTutorial = $gameSwitches.value(75) && _tutorialMaps.includes($gameMap.mapId());
 
-    // Stop battle music
-    AudioManager.stopBgm();
+        // Stop battle music
+        AudioManager.stopBgm();
 
-    if ($gameSwitches.value(9) && !inTutorial) {
-        // Permadeath ON: save death data and set permadeath flag
-        saveDeathData();
-        $gameSwitches.setValue(34, true);
-    }
-    $gameSystem.setActor1Died(true);
-    $gameSystem.setFullPartyWipe(true);
-    _needsRespawn = true;
-    const actor1 = $gameParty.members()[0];
-    if (actor1) actor1.recoverAll();
-    this._escaped = true;
-    this.updateBattleEnd();
-};
+        if ($gameSwitches.value(9) && !inTutorial) {
+            // Permadeath ON: save death data and set permadeath flag
+            saveDeathData();
+            $gameSwitches.setValue(34, true);
+        }
+        $gameSystem.setActor1Died(true);
+        $gameSystem.setFullPartyWipe(true);
+        _needsRespawn = true;
+        const actor1 = $gameParty.members()[0];
+        if (actor1) actor1.recoverAll();
+        this._escaped = true;
+        this.updateBattleEnd();
+    };
 
     const _Game_Troop_setup = Game_Troop.prototype.setup;
-    Game_Troop.prototype.setup = function(troopId) {
+    Game_Troop.prototype.setup = function (troopId) {
         _Game_Troop_setup.call(this, troopId);
         if (_currentBattleEventId && _persistentEnemyData[_currentBattleEventId]) {
             const storedHp = _persistentEnemyData[_currentBattleEventId].enemyHp;
@@ -2163,9 +2169,9 @@ BattleManager.processDefeat = function() {
             });
         }
     };
-    
+
     const _BattleManager_endBattle = BattleManager.endBattle;
-    BattleManager.endBattle = function(result) {
+    BattleManager.endBattle = function (result) {
         console.log('[DEBUG] BattleManager.endBattle CALLED');
         console.log('[DEBUG] - result:', result, '(0=victory, 1=escape, 2=defeat)');
 
@@ -2196,10 +2202,10 @@ BattleManager.processDefeat = function() {
             });
             _persistentEnemyData[_currentBattleEventId] = persistentData;
             $gameSystem.setEventToLock(_currentMapId, _currentEventId);
-            
+
             // Clear rewards when fleeing
             _battleRewards = { exp: 0, gold: 0, items: [] };
-            
+
         } else if (result === 0 && _currentBattleEventId) { // Win
             console.log('[DEBUG] - Handling victory (result=0), clearing enemy data');
             if (_persistentEnemyData[_currentBattleEventId]) {
@@ -2232,31 +2238,31 @@ BattleManager.processDefeat = function() {
     //=============================================================================
     // Health Protection System - Actor HP Management
     //=============================================================================
-    
+
     // Override Game_Actor setHp to implement health protection
-//=============================================================================
+    //=============================================================================
     // Health Protection System - Actor HP Management
     //=============================================================================
-    
+
     // Override Game_Actor setHp to implement health protection
     const _Game_Actor_setHp = Game_Actor.prototype.setHp;
-    Game_Actor.prototype.setHp = function(hp) {
+    Game_Actor.prototype.setHp = function (hp) {
         const oldHp = this.hp;
         const wasAlive = !this.isDead();
-        
+
         // Call original setHp first
         _Game_Actor_setHp.call(this, hp);
-        
+
         // Check if actor would die and has protection available
         // BUT don't apply protection if they were already at 1HP (to avoid wasting protection on minimal damage)
         if (wasAlive && this.isDead() && hasHealthProtection(this.actorId()) && oldHp > 1) {
             // Use protection and set HP to 1
             useHealthProtection(this.actorId());
             _Game_Actor_setHp.call(this, 1);
-            
+
             // Show protection message only in battle
             if ($gameParty.inBattle()) {
-                
+
                 // Play a special sound effect if available
                 if ($dataCommonEvents[1]) { // Assuming common event 1 has protection sound
                     // You can add a sound effect here if desired
@@ -2264,7 +2270,7 @@ BattleManager.processDefeat = function() {
                 }
             }
         }
-        
+
         // Handle map deaths (existing code)
         if (oldHp > 0 && this.hp <= 0 && !$gameParty.inBattle()) {
             // If this is actor1 (index 0), trigger death process
@@ -2274,7 +2280,7 @@ BattleManager.processDefeat = function() {
             // If this is actor2, mark for potential removal
             else if (this === $gameParty.members()[1]) {
                 $gameSystem.setActor2Died(true, this.name());
-                
+
                 // Update party to handle actor2 death on map
                 $gameMap.requestRefresh();
             }
@@ -2284,9 +2290,9 @@ BattleManager.processDefeat = function() {
     //=============================================================================
     // Game_System - Store Battle States
     //=============================================================================
-    
+
     const _Game_System_initialize = Game_System.prototype.initialize;
-    Game_System.prototype.initialize = function() {
+    Game_System.prototype.initialize = function () {
         _Game_System_initialize.call(this);
         this._battleEnded = false;
         this._actor1Died = false;
@@ -2301,7 +2307,7 @@ BattleManager.processDefeat = function() {
         this._battleCooldownTimer = 0; // Add this line
     };
     const _DataManager_setupNewGame = DataManager.setupNewGame;
-    DataManager.setupNewGame = function() {
+    DataManager.setupNewGame = function () {
         _DataManager_setupNewGame.call(this);
         $gameVariables.setValue(25, 708);
         $gameVariables.setValue(26, 24);
@@ -2309,41 +2315,41 @@ BattleManager.processDefeat = function() {
         $gameVariables.setValue(112, 121);
     };
 
-    Game_System.prototype.setBattleCooldown = function(frames) { this._battleCooldownTimer = frames; };
-Game_System.prototype.getBattleCooldown = function() { return this._battleCooldownTimer || 0; };
-Game_System.prototype.updateBattleCooldown = function() { 
-    if (this._battleCooldownTimer > 0) this._battleCooldownTimer--; 
-};
-    Game_System.prototype.setBattleEnded = function(value) { this._battleEnded = value; };
-    Game_System.prototype.isBattleEnded = function() { return this._battleEnded; };
-    Game_System.prototype.setFullPartyWipe = function(value) { this._fullPartyWipe = value; };
-    Game_System.prototype.isFullPartyWipe = function() { return this._fullPartyWipe; };
-    Game_System.prototype.setActor1Died = function(value) { this._actor1Died = value; };
-    Game_System.prototype.isActor1Died = function() { return this._actor1Died; };
-    Game_System.prototype.setActor2Died = function(value, name) { this._actor2Died = value; this._actor2Name = name || ""; };
-    Game_System.prototype.isActor2Died = function() { return this._actor2Died; };
-    Game_System.prototype.getActor2Name = function() { return this._actor2Name; };
-    Game_System.prototype.setActor3Died = function(value, name) { this._actor3Died = value; this._actor3Name = name || ""; };
-    Game_System.prototype.isActor3Died = function() { return this._actor3Died; };
-    Game_System.prototype.getActor3Name = function() { return this._actor3Name; };
-    Game_System.prototype.setEventToDelete = function(mapId, eventId) { this._eventToDelete = { mapId, eventId }; };
-    Game_System.prototype.getEventToDelete = function() { return this._eventToDelete; };
-    Game_System.prototype.clearEventToDelete = function() { this._eventToDelete = null; };
-    Game_System.prototype.setEventToLock = function(mapId, eventId) { this._eventToLock = { mapId, eventId }; };
-    Game_System.prototype.getEventToLock = function() { return this._eventToLock; };
-    Game_System.prototype.clearEventToLock = function() { this._eventToLock = null; };
+    Game_System.prototype.setBattleCooldown = function (frames) { this._battleCooldownTimer = frames; };
+    Game_System.prototype.getBattleCooldown = function () { return this._battleCooldownTimer || 0; };
+    Game_System.prototype.updateBattleCooldown = function () {
+        if (this._battleCooldownTimer > 0) this._battleCooldownTimer--;
+    };
+    Game_System.prototype.setBattleEnded = function (value) { this._battleEnded = value; };
+    Game_System.prototype.isBattleEnded = function () { return this._battleEnded; };
+    Game_System.prototype.setFullPartyWipe = function (value) { this._fullPartyWipe = value; };
+    Game_System.prototype.isFullPartyWipe = function () { return this._fullPartyWipe; };
+    Game_System.prototype.setActor1Died = function (value) { this._actor1Died = value; };
+    Game_System.prototype.isActor1Died = function () { return this._actor1Died; };
+    Game_System.prototype.setActor2Died = function (value, name) { this._actor2Died = value; this._actor2Name = name || ""; };
+    Game_System.prototype.isActor2Died = function () { return this._actor2Died; };
+    Game_System.prototype.getActor2Name = function () { return this._actor2Name; };
+    Game_System.prototype.setActor3Died = function (value, name) { this._actor3Died = value; this._actor3Name = name || ""; };
+    Game_System.prototype.isActor3Died = function () { return this._actor3Died; };
+    Game_System.prototype.getActor3Name = function () { return this._actor3Name; };
+    Game_System.prototype.setEventToDelete = function (mapId, eventId) { this._eventToDelete = { mapId, eventId }; };
+    Game_System.prototype.getEventToDelete = function () { return this._eventToDelete; };
+    Game_System.prototype.clearEventToDelete = function () { this._eventToDelete = null; };
+    Game_System.prototype.setEventToLock = function (mapId, eventId) { this._eventToLock = { mapId, eventId }; };
+    Game_System.prototype.getEventToLock = function () { return this._eventToLock; };
+    Game_System.prototype.clearEventToLock = function () { this._eventToLock = null; };
 
     // --- NEW: Game_System methods for Gravestone data ---
-    Game_System.prototype.setDeathData = function(data) { this._deathData = data; };
-    Game_System.prototype.getDeathData = function() { return this._deathData; };
-    Game_System.prototype.clearDeathData = function() { this._deathData = null; };
+    Game_System.prototype.setDeathData = function (data) { this._deathData = data; };
+    Game_System.prototype.getDeathData = function () { return this._deathData; };
+    Game_System.prototype.clearDeathData = function () { this._deathData = null; };
     // --- END NEW ---
 
     //=============================================================================
     // Actor and Scene Handlers for Death and Respawn
     //=============================================================================
     const _Game_Actor_onBattleEnd = Game_Actor.prototype.onBattleEnd;
-    Game_Actor.prototype.onBattleEnd = function() {
+    Game_Actor.prototype.onBattleEnd = function () {
         _Game_Actor_onBattleEnd.call(this);
         // Only recover actor 1 on a full party wipe (for the respawn path).
         // On partial death with permadeath ON, actor 1 remains dead so they can be removed.
@@ -2351,76 +2357,76 @@ Game_System.prototype.updateBattleCooldown = function() {
             this.recoverAll();
         }
     };
-    
-// Replace the existing handleActor1Respawn method with this updated version:
-Scene_Map.prototype.handleActor1Respawn = function() {
-    $gameVariables.setValue(1, 0); // Set variable 1 to 0
-    $gamePlayer.setThrough(true);
 
-    let respawnMapId = $gameVariables.value(respawnMapVar) || 25;
-    let respawnX = $gameVariables.value(respawnXVar) || 26;
-    let respawnY = $gameVariables.value(respawnYVar) || 27;
-    let respawnCountryID = $gameVariables.value(respawnCountryIDVar) || 112;
+    // Replace the existing handleActor1Respawn method with this updated version:
+    Scene_Map.prototype.handleActor1Respawn = function () {
+        $gameVariables.setValue(1, 0); // Set variable 1 to 0
+        $gamePlayer.setThrough(true);
 
-    // Permadeath respawn
-    if ($gameSwitches.value(34)) {
-        // Set character created switch to false
-        $gameSwitches.setValue(13, false);
+        let respawnMapId = $gameVariables.value(respawnMapVar) || 25;
+        let respawnX = $gameVariables.value(respawnXVar) || 26;
+        let respawnY = $gameVariables.value(respawnYVar) || 27;
+        let respawnCountryID = $gameVariables.value(respawnCountryIDVar) || 112;
 
-        respawnMapId = 557;
-        respawnX = 13;
-        respawnY = 5;
-        // Set region ID as ghent
-        $gameVariables.setValue(86, 102);
-        $gameVariables.setValue(respawnCountryIDVar, 102);
+        // Permadeath respawn
+        if ($gameSwitches.value(34)) {
+            // Set character created switch to false
+            $gameSwitches.setValue(13, false);
 
-        // Remove pregenerated character from the preset pool if it was a preset
-        if ($gameSystem._currentPresetId && window.removePresetById) {
-            window.removePresetById($gameSystem._currentPresetId);
-            ////console.log(`Pregenerated character (ID: ${$gameSystem._currentPresetId}) died and has been removed from the preset pool.`);
-        }
+            respawnMapId = 557;
+            respawnX = 13;
+            respawnY = 5;
+            // Set region ID as ghent
+            $gameVariables.setValue(86, 102);
+            $gameVariables.setValue(respawnCountryIDVar, 102);
 
-        // Remove party members 2 and 3
-        const party = $gameParty.members();
-        if (party[1]) {
-            $gameParty.removeActor(party[1].actorId());
-        }
-        if (party[2]) {
-            $gameParty.removeActor(party[2].actorId());
-        }
-    }else{
-        $gameVariables.setValue(86, respawnCountryID);
-        $gameVariables.setValue(respawnCountryIDVar, respawnCountryID);
-
-    }
-
-    // Tutorial area respawn: if switch 75 is on and player died on maps 1414-1417, respawn at map 1415 (14,18)
-    const _tutorialMaps = [1414, 1415, 1416, 1417];
-    if ($gameSwitches.value(75) && _tutorialMaps.includes($gameMap.mapId())) {
-        respawnMapId = 1415;
-        respawnX = 14;
-        respawnY = 18;
-    }
-
-    $gameScreen.startFadeOut(30);
-    setTimeout(() => {
-        $gamePlayer.reserveTransfer(respawnMapId, respawnX, respawnY, 2, 0);
-        _needsRespawn = false;
-
-        // Schedule weather update after map transfer completes
-        const weatherUpdateInterval = setInterval(() => {
-            if ($gameMap.mapId() === respawnMapId && $gameWeather) {
-                // Update weather and temperature based on respawn map's country
-                $gameWeather.updateTimeAndWeather();
-                $gameWeather.updateTimeOfDayTint();
-                clearInterval(weatherUpdateInterval);
+            // Remove pregenerated character from the preset pool if it was a preset
+            if ($gameSystem._currentPresetId && window.removePresetById) {
+                window.removePresetById($gameSystem._currentPresetId);
+                ////console.log(`Pregenerated character (ID: ${$gameSystem._currentPresetId}) died and has been removed from the preset pool.`);
             }
-        }, 100);
-    }, 500);
-};
+
+            // Remove party members 2 and 3
+            const party = $gameParty.members();
+            if (party[1]) {
+                $gameParty.removeActor(party[1].actorId());
+            }
+            if (party[2]) {
+                $gameParty.removeActor(party[2].actorId());
+            }
+        } else {
+            $gameVariables.setValue(86, respawnCountryID);
+            $gameVariables.setValue(respawnCountryIDVar, respawnCountryID);
+
+        }
+
+        // Tutorial area respawn: if switch 75 is on and player died on maps 1414-1417, respawn at map 1415 (14,18)
+        const _tutorialMaps = [1414, 1415, 1416, 1417];
+        if ($gameSwitches.value(75) && _tutorialMaps.includes($gameMap.mapId())) {
+            respawnMapId = 1414;
+            respawnX = 61;
+            respawnY = 7;
+        }
+
+        $gameScreen.startFadeOut(30);
+        setTimeout(() => {
+            $gamePlayer.reserveTransfer(respawnMapId, respawnX, respawnY, 2, 0);
+            _needsRespawn = false;
+
+            // Schedule weather update after map transfer completes
+            const weatherUpdateInterval = setInterval(() => {
+                if ($gameMap.mapId() === respawnMapId && $gameWeather) {
+                    // Update weather and temperature based on respawn map's country
+                    $gameWeather.updateTimeAndWeather();
+                    $gameWeather.updateTimeOfDayTint();
+                    clearInterval(weatherUpdateInterval);
+                }
+            }, 100);
+        }, 500);
+    };
 
     const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
-    Game_Player.prototype.performTransfer = function() {
+    Game_Player.prototype.performTransfer = function () {
         _Game_Player_performTransfer.call(this);
         // After any transfer, ensure the player is not stuck in 'through' mode unless intended.
         if (this.isTransferring() && !_needsRespawn) {
@@ -2428,22 +2434,22 @@ Scene_Map.prototype.handleActor1Respawn = function() {
         }
     };
 
-    Scene_Map.prototype.handlePartyMemberDeath = function(actorIndex, actorName) {
+    Scene_Map.prototype.handlePartyMemberDeath = function (actorIndex, actorName) {
         // Get the actual actor at the specified index (1-based to 0-based conversion)
         const actor = $gameParty.members()[actorIndex - 1];
-        
+
         if (actor) {
             // Only remove if the actor is actually dead
             if (actor.isDead()) {
                 const actorId = actor.actorId();
                 $gameParty.removeActor(actorId);
-                
+
                 // Show death message
                 const useTranslation = ConfigManager.language === 'it';
                 window.skipLocalization = true;
                 $gameMessage.add(actorName + (useTranslation ? " è morto" : " has died."));
                 window.skipLocalization = false;
-                
+
                 ////console.log(`Removed dead party member: ${actorName} (Actor ID: ${actorId})`);
             } else {
                 // Actor is alive, don't remove but reset the death flag
@@ -2453,8 +2459,8 @@ Scene_Map.prototype.handleActor1Respawn = function() {
             ////console.log(`No actor found at index ${actorIndex} for removal`);
         }
     };
-    
-    Scene_Map.prototype.createRewardsPopup = function() {
+
+    Scene_Map.prototype.createRewardsPopup = function () {
         if (!_battleRewards || (_battleRewards.exp <= 0 && _battleRewards.gold <= 0 && _battleRewards.items.length === 0)) {
             return;
         }
@@ -2462,13 +2468,13 @@ Scene_Map.prototype.handleActor1Respawn = function() {
         this.addWindow(this._rewardsPopupWindow);
         this._rewardsPopupWindow.open();
         this._rewardsPopupCloseTimer = 180;
-        
+
         // Clear the rewards after showing them
         _battleRewards = { exp: 0, gold: 0, items: [] };
     };
-    
+
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update.call(this);
         // Update battle cooldown timer
         $gameSystem.updateBattleCooldown();
@@ -2481,32 +2487,32 @@ Scene_Map.prototype.handleActor1Respawn = function() {
         }
     };
 
-    Scene_Gameover.prototype.start = function() {
+    Scene_Gameover.prototype.start = function () {
         // Stop battle music before transitioning
         AudioManager.stopBgm();
         SceneManager.goto(Scene_Map);
     };
 
-// Add update method to Scene_Battle to handle the warning window
-const _Scene_Battle_update_topWarning = Scene_Battle.prototype.update;
-Scene_Battle.prototype.update = function() {
-    _Scene_Battle_update_topWarning.call(this);
-    
-    if (this._topWarningWindow) {
-        this._topWarningWindow.update();
-    }
-};
+    // Add update method to Scene_Battle to handle the warning window
+    const _Scene_Battle_update_topWarning = Scene_Battle.prototype.update;
+    Scene_Battle.prototype.update = function () {
+        _Scene_Battle_update_topWarning.call(this);
+
+        if (this._topWarningWindow) {
+            this._topWarningWindow.update();
+        }
+    };
     //=============================================================================
     // Window_BattleRewardsPopup
     //=============================================================================
     function Window_BattleRewardsPopup() {
         this.initialize(...arguments);
     }
-    
+
     Window_BattleRewardsPopup.prototype = Object.create(Window_Base.prototype);
     Window_BattleRewardsPopup.prototype.constructor = Window_BattleRewardsPopup;
-    
-    Window_BattleRewardsPopup.prototype.initialize = function() {
+
+    Window_BattleRewardsPopup.prototype.initialize = function () {
         const width = 240;
         const height = this.fittingHeight(1);
         const x = (Graphics.boxWidth - width) / 2;
@@ -2515,18 +2521,18 @@ Scene_Battle.prototype.update = function() {
         this.openness = 0;
         this.refresh();
     };
-    
-    Window_BattleRewardsPopup.prototype.refresh = function() {
+
+    Window_BattleRewardsPopup.prototype.refresh = function () {
         this.contents.clear();
         if (!_battleRewards) return;
-      
+
         // convert gold (integer "G") into euros
         const gold = _battleRewards.gold || 0;
         const euros = (gold / 100).toFixed(2) + "€";
-      
+
         const rewardText = `${_battleRewards.exp || 0} EXP, ${euros}`;
         this.drawText(rewardText, 0, 0, this.contentsWidth(), 'center');
-        };
+    };
 
     //=============================================================================
     // Register Plugin Commands
@@ -2537,10 +2543,13 @@ Scene_Battle.prototype.update = function() {
                 troopId: troopId,
                 enemyHp: {}
             };
-        }    
+        }
         if ($gameSystem.getBattleCooldown() > 0) {
             return;
         }
+
+        $gameMessage._eventActivator = $gameMessage._eventActivator || window._battleActivatorOverride || "p1";
+        window._battleActivatorOverride = null;
 
         // Save Positions for restoration
         $gameSystem._p1PreBattlePos = { mapId: $gameMap.mapId(), x: $gamePlayer.x, y: $gamePlayer.y, d: $gamePlayer.direction() };
@@ -2550,17 +2559,17 @@ Scene_Battle.prototype.update = function() {
         } else {
             $gameSystem._p2PreBattlePos = null;
         }
-        
+
         _currentBattleEventId = persistentId;
         _currentEventId = eventId;
         _currentMapId = mapId;
         _needsRespawn = false;
-        
+
         BattleManager.setup(troopId, false, false);
         SceneManager.push(Scene_Battle);
     }
-    
-    PluginManager.registerCommand(pluginName, "startBattle", function(args) {
+
+    PluginManager.registerCommand(pluginName, "startBattle", function (args) {
         // Check if battle is on cooldown
         if ($gamePlayer.isInVehicle()) {
             return false; // No encounters while in vehicle
@@ -2578,14 +2587,14 @@ Scene_Battle.prototype.update = function() {
             startPersistentBattle(event._fixedTroopId, persistentId, eventId, $gameMap.mapId());
         }
     });
-    
-    PluginManager.registerCommand(pluginName, "setRespawnPoint", function(args) {
+
+    PluginManager.registerCommand(pluginName, "setRespawnPoint", function (args) {
         $gameVariables.setValue(respawnMapVar, Number(args.mapId));
         $gameVariables.setValue(respawnXVar, Number(args.x));
         $gameVariables.setValue(respawnYVar, Number(args.y));
     });
 
-    PluginManager.registerCommand(pluginName, "restore", function(args) {
+    PluginManager.registerCommand(pluginName, "restore", function (args) {
         const deathData = $gameSystem.getDeathData();
         if (deathData) {
             $gameParty.gainGold(deathData.gold);
@@ -2600,7 +2609,7 @@ Scene_Battle.prototype.update = function() {
                 } else if (key.startsWith('a')) {
                     item = $dataArmors[id];
                 }
-    
+
                 if (item) {
                     $gameParty.gainItem(item, amount, false);
                 }
@@ -2615,7 +2624,7 @@ Scene_Battle.prototype.update = function() {
 
 
     const _DataManager_extractSaveContents = DataManager.extractSaveContents;
-    DataManager.extractSaveContents = function(contents) {
+    DataManager.extractSaveContents = function (contents) {
         _DataManager_extractSaveContents.call(this, contents);
         if (contents.persistentEnemyData) {
             Object.assign(_persistentEnemyData, contents.persistentEnemyData);
@@ -2628,10 +2637,10 @@ Scene_Battle.prototype.update = function() {
             Object.assign(_healthProtectionUsed, contents.healthProtectionUsed);
         }
     };
-    
+
     // Add enemy data to save contents
     const _DataManager_makeSaveContents = DataManager.makeSaveContents;
-    DataManager.makeSaveContents = function() {
+    DataManager.makeSaveContents = function () {
         const contents = _DataManager_makeSaveContents.call(this);
         contents.persistentEnemyData = _persistentEnemyData;
         contents.enemyCharSprites = _enemyCharSprites;
@@ -2641,9 +2650,9 @@ Scene_Battle.prototype.update = function() {
     };
 
     const _Game_Map_setupEvents_RandomEnemies = Game_Map.prototype.setupEvents;
-    Game_Map.prototype.setupEvents = function() {
+    Game_Map.prototype.setupEvents = function () {
         _Game_Map_setupEvents_RandomEnemies.call(this);
-        
+
         // Update all events that need resprite after load
         this.events().forEach(event => {
             const persistentId = `${this._mapId}_${event._eventId}`;
@@ -2656,120 +2665,122 @@ Scene_Battle.prototype.update = function() {
             }
         });
     };
-        
-        // Add movement locking functionality
-        Game_Event.prototype.lockMovement = function(duration) {
-            this._movementLocked = true;
-            this._movementLockTimer = duration || 60;
-        };
-        
-        // Override the updateSelfMovement to respect movement lock
-        const _Game_Event_updateSelfMovement = Game_Event.prototype.updateSelfMovement;
-        Game_Event.prototype.updateSelfMovement = function() {
-            if (this._movementLocked) {
-                // Don't allow movement while locked
-                return;
-            }
-            _Game_Event_updateSelfMovement.call(this);
-        };
-        
-        // Add a method to update movement lock timer
-        Game_Event.prototype.updateMovementLock = function() {
-            if (this._movementLocked && this._movementLockTimer > 0) {
-                this._movementLockTimer--;
-                if (this._movementLockTimer <= 0) {
-                    this._movementLocked = false;
-                }
-            }
-        };
-        
-        // Extend the update method to handle movement lock timer
-        const _Game_Event_update = Game_Event.prototype.update;
-        Game_Event.prototype.update = function() {
-            _Game_Event_update.call(this);
-            this.updateMovementLock();
-            
-            if (window.$gameSplitScreen && window.$gameSplitScreen.active) {
-                const p2Name = (window.$gameSplitScreen.p2EventName || "Player 2").trim();
-                const myName = (this.event().name || "").trim();
-                
-                if (myName === p2Name) {
-                    this.updateP2EncounterCheck();
-                } else if (myName === "Enemy" && this._fixedTroopId > 0) {
-                    this.updateEnemyTouchP2Check();
-                }
-            }
-        };
 
-        Game_Event.prototype.updateP2EncounterCheck = function() {
-            if ($gameSystem.getBattleCooldown() > 0) return;
-            if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
+    // Add movement locking functionality
+    Game_Event.prototype.lockMovement = function (duration) {
+        this._movementLocked = true;
+        this._movementLockTimer = duration || 60;
+    };
 
-            const x = this.x;
-            const y = this.y;
-            const d = this.direction();
-            const x2 = $gameMap.roundXWithDirection(x, d);
-            const y2 = $gameMap.roundYWithDirection(y, d);
+    // Override the updateSelfMovement to respect movement lock
+    const _Game_Event_updateSelfMovement = Game_Event.prototype.updateSelfMovement;
+    Game_Event.prototype.updateSelfMovement = function () {
+        if (this._movementLocked) {
+            // Don't allow movement while locked
+            return;
+        }
+        _Game_Event_updateSelfMovement.call(this);
+    };
 
-            // Check current tile and the tile we are facing/moving into
-            const targets = [...$gameMap.eventsXy(x, y), ...$gameMap.eventsXy(x2, y2)];
-            
-            for (const target of targets) {
-                if (target !== this && (target.event().name || "").trim() === "Enemy" && target._fixedTroopId > 0) {
-                    const persistentId = `${$gameMap.mapId()}_${target.eventId()}`;
-                    startPersistentBattle(target._fixedTroopId, persistentId, target.eventId(), $gameMap.mapId());
-                    break;
-                }
+    // Add a method to update movement lock timer
+    Game_Event.prototype.updateMovementLock = function () {
+        if (this._movementLocked && this._movementLockTimer > 0) {
+            this._movementLockTimer--;
+            if (this._movementLockTimer <= 0) {
+                this._movementLocked = false;
             }
-        };
+        }
+    };
 
-        Game_Event.prototype.updateEnemyTouchP2Check = function() {
-            if ($gameSystem.getBattleCooldown() > 0) return;
-            if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
-            
-            const p2 = window.$gameSplitScreen.p2Event;
-            if (!p2) return;
+    // Extend the update method to handle movement lock timer
+    const _Game_Event_update = Game_Event.prototype.update;
+    Game_Event.prototype.update = function () {
+        _Game_Event_update.call(this);
+        this.updateMovementLock();
 
-            // Trigger if on the same tile as P2
-            if (this.x === p2.x && this.y === p2.y) {
-                const persistentId = `${$gameMap.mapId()}_${this.eventId()}`;
-                startPersistentBattle(this._fixedTroopId, persistentId, this.eventId(), $gameMap.mapId());
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active) {
+            const p2Name = (window.$gameSplitScreen.p2EventName || "Player 2").trim();
+            const myName = (this.event().name || "").trim();
+
+            if (myName === p2Name) {
+                this.updateP2EncounterCheck();
+            } else if (myName === "Enemy" && this._fixedTroopId > 0) {
+                this.updateEnemyTouchP2Check();
             }
-        };
-    
+        }
+    };
+
+    Game_Event.prototype.updateP2EncounterCheck = function () {
+        if ($gameSystem.getBattleCooldown() > 0) return;
+        if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
+
+        const x = this.x;
+        const y = this.y;
+        const d = this.direction();
+        const x2 = $gameMap.roundXWithDirection(x, d);
+        const y2 = $gameMap.roundYWithDirection(y, d);
+
+        // Check current tile and the tile we are facing/moving into
+        const targets = [...$gameMap.eventsXy(x, y), ...$gameMap.eventsXy(x2, y2)];
+
+        for (const target of targets) {
+            if (target !== this && (target.event().name || "").trim() === "Enemy" && target._fixedTroopId > 0) {
+                const persistentId = `${$gameMap.mapId()}_${target.eventId()}`;
+                window._battleActivatorOverride = "p2";
+                startPersistentBattle(target._fixedTroopId, persistentId, target.eventId(), $gameMap.mapId());
+                break;
+            }
+        }
+    };
+
+    Game_Event.prototype.updateEnemyTouchP2Check = function () {
+        if ($gameSystem.getBattleCooldown() > 0) return;
+        if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
+
+        const p2 = window.$gameSplitScreen.p2Event;
+        if (!p2) return;
+
+        // Trigger if on the same tile as P2
+        if (this.x === p2.x && this.y === p2.y) {
+            const persistentId = `${$gameMap.mapId()}_${this.eventId()}`;
+            window._battleActivatorOverride = "p2";
+            startPersistentBattle(this._fixedTroopId, persistentId, this.eventId(), $gameMap.mapId());
+        }
+    };
+
 
     // New method to handle actor1 death on map
-    Game_Actor.prototype.processMapDeath = function() {
+    Game_Actor.prototype.processMapDeath = function () {
         // Only proceed if this is actor1
         if (this !== $gameParty.members()[0]) return;
-        
+
         if ($gameSwitches.value(9)) {
             saveDeathData();
         }
 
         // Set variable 001 to 0 on player's death
         $gameVariables.setValue(1, 0);
-        
+
         // Set relevant flags
         $gameSystem.setActor1Died(true);
         _needsRespawn = true;
-        
+
         // Fully heal actor1 (will respawn at full health)
         this.recoverAll();
         let respawnMapId = $gameVariables.value(respawnMapVar);
         let respawnX = $gameVariables.value(respawnXVar);
         let respawnY = $gameVariables.value(respawnYVar);
 
-        
+
         // Get respawn coordinates from variables
-        
+
         // Use default values if any are 0
         if (respawnMapId <= 0) respawnMapId = 1;
         if (respawnX <= 0) respawnX = 21;
         if (respawnY <= 0) respawnY = 23;
-        
+
         if ($gameSwitches.value(34)) {
-            respawnMapId =  557;
+            respawnMapId = 557;
             respawnX = 13
             respawnY = 5
         }
@@ -2783,15 +2794,15 @@ Scene_Battle.prototype.update = function() {
         // Set player to lower priority temporarily and disable touch events
         $gamePlayer._priorityType = 0; // Below characters
         $gamePlayer._through = true;   // Pass through (no collision/interaction)
-        
+
         // Fade out first
         $gameScreen.startFadeOut(30);
-        
+
         // Show death animation on player if available
         if ($dataAnimations[11]) { // Assuming animation ID 11 is a death animation
             $gameTemp.requestAnimation([$gamePlayer], 11); // Play death animation on player
         }
-        
+
         // Wait for fade to complete before transferring
         setTimeout(() => {
             // Transfer player to respawn point with fade in
@@ -2824,18 +2835,18 @@ Scene_Battle.prototype.update = function() {
     };
 
     // Add new plugin command to damage actor on map
-    PluginManager.registerCommand(pluginName, "damageActor", function(args) {
+    PluginManager.registerCommand(pluginName, "damageActor", function (args) {
         const actorId = parseInt(args.actorId) || 1;
         const amount = parseInt(args.damage) || 0;
-        
+
         if (amount > 0 && $gameActors.actor(actorId)) {
             const actor = $gameActors.actor(actorId);
             actor.gainHp(-amount);
-            
+
             // Show damage popup if on map
             if (!$gameParty.inBattle()) {
                 $gameTemp.requestAnimation([$gamePlayer], 1); // Damage animation ID
-                
+
                 // Flash the screen red briefly
                 $gameScreen.startFlash([255, 0, 0, 128], 30);
             }
@@ -2845,29 +2856,33 @@ Scene_Battle.prototype.update = function() {
     //=============================================================================
     // Health Protection Debug Commands (Optional)
     //=============================================================================
-    
+
     // Add plugin command to reset health protection for testing
-    PluginManager.registerCommand(pluginName, "resetHealthProtection", function(args) {
+    PluginManager.registerCommand(pluginName, "resetHealthProtection", function (args) {
         resetHealthProtection();
+        window.skipLocalization = true;
         $gameMessage.add("Health protection reset for all actors!");
+        window.skipLocalization = false;
     });
-    
+
     // Add plugin command to check protection status
-    PluginManager.registerCommand(pluginName, "checkHealthProtection", function(args) {
+    PluginManager.registerCommand(pluginName, "checkHealthProtection", function (args) {
         const party = $gameParty.members();
         party.forEach((actor, index) => {
             const hasProtection = hasHealthProtection(actor.actorId());
             const status = hasProtection ? "Available" : "Used";
+            window.skipLocalization = true;
             $gameMessage.add(`${actor.name()}: Protection ${status}`);
+            window.skipLocalization = false;
         });
     });
 
-    window.getEnemyEventsJSON = function() {
+    window.getEnemyEventsJSON = function () {
         const enemyEvents = $gameMap.events().filter(ev => {
-          const eventData = ev.event();
-          return eventData && eventData.name === "Enemy";
+            const eventData = ev.event();
+            return eventData && eventData.name === "Enemy";
         });
-        
+
         const enemyData = enemyEvents.map(event => {
             return {
                 eventId: event.eventId(),
@@ -2877,16 +2892,29 @@ Scene_Battle.prototype.update = function() {
                 mapId: $gameMap.mapId()
             };
         });
-        
+
         const result = {
             mapId: $gameMap.mapId(),
             mapName: $dataMap.displayName || $dataMap.name || "Unknown Map",
             enemyCount: enemyData.length,
             enemies: enemyData
         };
-        
+
         ////console.log("Enemy Events JSON:", JSON.stringify(result, null, 2));
         return JSON.stringify(result, null, 2);
+    };
+
+    // Restrict Party Command (Fight/Escape) to the battle activator
+    const _Window_PartyCommand_processHandling = Window_PartyCommand.prototype.processHandling;
+    Window_PartyCommand.prototype.processHandling = function () {
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && $gameMessage._eventActivator) {
+            const activatorId = $gameMessage._eventActivator === "p2" ? 2 : 1;
+            if (activatorId === 2) {
+                this.processP2Handling();
+                return;
+            }
+        }
+        _Window_PartyCommand_processHandling.call(this);
     };
 
 })();
@@ -2896,11 +2924,11 @@ Scene_Battle.prototype.update = function() {
  * Adds try/catch when loading images from img/characters/Monsters
  * If loading fails, it logs the error and uses a placeholder bitmap.
  * ========================= */
-(function() {
+(function () {
     'use strict';
     if (typeof Sprite_Character !== 'undefined') {
         const _Sprite_Character_setCharacterBitmap = Sprite_Character.prototype.setCharacterBitmap;
-        Sprite_Character.prototype.setCharacterBitmap = function() {
+        Sprite_Character.prototype.setCharacterBitmap = function () {
             const name = this._characterName || "";
             if (/^Monsters\//i.test(name)) {
                 try {
@@ -2912,7 +2940,7 @@ Scene_Battle.prototype.update = function() {
                     const w = fw * 3, h = fh * 4;
                     const bmp = new Bitmap(w, h);
                     bmp.fillRect(0, 0, w, h, "#222222");
-                    bmp.drawText("MISSING", 0, Math.floor(h/2) - 12, w, 24, "center");
+                    bmp.drawText("MISSING", 0, Math.floor(h / 2) - 12, w, 24, "center");
                     this.bitmap = bmp;
                     this._isBigCharacter = false;
                     this.setFrame(0, 0, fw, fh);
@@ -2926,7 +2954,7 @@ Scene_Battle.prototype.update = function() {
     if (typeof ImageManager !== 'undefined') {
         // Also protect direct bitmap loads for Monsters folder, if used elsewhere
         const _loadBitmap = ImageManager.loadBitmap;
-        ImageManager.loadBitmap = function(folder, filename) {
+        ImageManager.loadBitmap = function (folder, filename) {
             try {
                 return _loadBitmap.call(this, folder, filename);
             } catch (e) {

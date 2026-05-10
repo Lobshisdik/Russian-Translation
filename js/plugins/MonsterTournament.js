@@ -206,12 +206,16 @@ onMonsterSelect() {
         onBetConfirm() {
             const betAmount = this._bettingWindow.currentBet();
             if (betAmount <= 0) {
+                window.skipLocalization = true;
                 $gameMessage.add("You must bet at least 1 item!");
+                window.skipLocalization = false;
                 return;
             }
             
             if ($gameParty.numItems($dataItems[bettingItemId]) < betAmount) {
+                window.skipLocalization = true;
                 $gameMessage.add("Not enough betting items!");
+                window.skipLocalization = false;
                 return;
             }
 
@@ -376,9 +380,13 @@ onMonsterSelect() {
                 
                 // Show result message
                 if (winnerIndex === playerIndex) {
+                    window.skipLocalization = true;
                     $gameMessage.add(`${playerMonster.name} wins the battle!`);
+                    window.skipLocalization = false;
                 } else {
+                    window.skipLocalization = true;
                     $gameMessage.add(`${playerMonster.name} was defeated by ${opponentMonster.name}!`);
+                    window.skipLocalization = false;
                 }
                 
                 // Call the callback after a brief delay
@@ -452,8 +460,10 @@ onMonsterSelect() {
                     0, 0, this._titleWindow.contents.width, 'center'
                 );
                 
+                window.skipLocalization = true;
                 $gameMessage.add(`Your monster was eliminated from the tournament!`);
                 $gameMessage.add(`You lost ${this.currentBets[this.playerChoice]} betting items.`);
+                window.skipLocalization = false;
             } else {
                 // Player won the tournament
                 const winnerId = this.tournamentBracket[0];
@@ -466,8 +476,10 @@ onMonsterSelect() {
                 
                 const totalWinnings = this.currentBets[this.playerChoice] * 8; // 8:1 payout
                 $gameParty.gainItem($dataItems[bettingItemId], totalWinnings);
+                window.skipLocalization = true;
                 $gameMessage.add(`Congratulations! Your monster won the tournament!`);
                 $gameMessage.add(`You won ${totalWinnings} items!`);
+                window.skipLocalization = false;
             }
             
             // Wait a moment then return to menu

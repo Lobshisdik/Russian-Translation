@@ -587,6 +587,272 @@
         return 2;
     };
     
+    // =============================================================================
+    // ASCII Mode Compatibility
+    // =============================================================================
+    
+    const _Scene_Cooking_start = Scene_Cooking.prototype.start;
+    Scene_Cooking.prototype.start = function() {
+        if (_Scene_Cooking_start) _Scene_Cooking_start.call(this);
+        else Scene_MenuBase.prototype.start.call(this);
+        
+        if (window.AsciiMode && window.AsciiMode.active !== 0) {
+            window.AsciiMode.createCanvas();
+            if (window.AsciiMode.canvas) window.AsciiMode.canvas.style.display = 'block';
+            
+            // Deactivate and hide normal windows
+            if (this._helpWindow) { this._helpWindow.deactivate(); this._helpWindow.hide(); }
+            if (this._itemListWindow) { this._itemListWindow.deactivate(); this._itemListWindow.hide(); }
+            if (this._confirmWindow) { this._confirmWindow.deactivate(); this._confirmWindow.hide(); }
+            
+            this._selectedIndex = 0;
+            this._activeWindow = 'list'; // 'list', 'confirm'
+            this._selectedConfirmIndex = 0; // 0: Cook, 1: Cancel
+        }
+    };
+    
+    const _Scene_Cooking_update = Scene_Cooking.prototype.update;
+    Scene_Cooking.prototype.update = function() {
+        if (window.AsciiMode && window.AsciiMode.active !== 0) {
+            this.updateAsciiCookingInput();
+            this.renderAsciiCooking();
+            Scene_Base.prototype.update.call(this);
+            return;
+        }
+        if (_Scene_Cooking_update) _Scene_Cooking_update.call(this);
+        else Scene_MenuBase.prototype.update.call(this);
+    };
+    
+    const _Scene_Cooking_terminate = Scene_Cooking.prototype.terminate;
+    Scene_Cooking.prototype.terminate = function() {
+        if (window.AsciiMode && window.AsciiMode.canvas) {
+            window.AsciiMode.canvas.style.display = 'none';
+        }
+        if (_Scene_Cooking_terminate) _Scene_Cooking_terminate.call(this);
+        else Scene_MenuBase.prototype.terminate.call(this);
+    };
+    
+    Scene_Cooking.prototype.updateAsciiCookingInput = function() {
+        const list = CookingSystem.getAvailableRecoveryItems();
+        
+        if (this._activeWindow === 'list') {
+            if (list.length === 0) {
+                if (Input.isTriggered('cancel')) {
+                    SceneManager.pop();
+                    SoundManager.playCancel();
+                }
+                return;
+            }
+            if (Input.isRepeated('down')) {
+                this._selectedIndex = (this._selectedIndex + 1) % list.length;
+                SoundManager.playCursor();
+            }
+            if (Input.isRepeated('up')) {
+                this._selectedIndex = (this._selectedIndex - 1 + list.length) % list.length;
+                SoundManager.playCursor();
+            }
+            if (Input.isTriggered('ok')) {
+                const selectedItem = list[this._selectedIndex];
+                
+                if (!CookingSystem.getFirstItem()) {
+                    CookingSystem.setFirstItem(selectedItem);
+                    SoundManager.playOk();
+                } else {
+                    CookingSystem.setSecondItem(selectedItem);
+                    
+                    if (CookingSystem.getFirstItem() === selectedItem && $gameParty.numItems(selectedItem) < 2) {
+                        SoundManager.playBuzzer();
+                        CookingSystem.setSecondItem(null);
+                    } else {
+                        this._activeWindow = 'confirm';
+                        this._selectedConfirmIndex = 0;
+                        SoundManager.playOk();
+                    }
+                }
+            }
+            if (Input.isTriggered('cancel')) {
+                if (CookingSystem.getFirstItem()) {
+                    CookingSystem.clearSelectedItems();
+                    SoundManager.playCancel();
+                } else {
+                    SceneManager.pop();
+                    SoundManager.playCancel();
+                }
+            }
+        } else if (this._activeWindow === 'confirm') {
+            if (Input.isRepeated('right') || Input.isRepeated('left')) {
+                this._selectedConfirmIndex = (this._selectedConfirmIndex + 1) % 2;
+                SoundManager.playCursor();
+            }
+            if (Input.isTriggered('ok')) {
+                if (this._selectedConfirmIndex === 0) { // Cook
+                    const item1 = CookingSystem.getFirstItem();
+                    const item2 = CookingSystem.getSecondItem();
+                    if (item1 && item2 && $gameParty.hasItem(item1) && $gameParty.hasItem(item2)) {
+                        if (item1 === item2 && $gameParty.numItems(item1) < 2) {
+                            SoundManager.playBuzzer();
+                        } else {
+                            CookingSystem.cookItems(item1, item2);
+                            CookingSystem.clearSelectedItems();
+                            SceneManager.pop();
+                            SceneManager.pop();
+                        }
+                    } else {
+                        SoundManager.playBuzzer();
+                    }
+                } else { // Cancel
+                    this._activeWindow = 'list';
+                    CookingSystem.setSecondItem(null);
+                    SoundManager.playCancel();
+                }
+            }
+            if (Input.isTriggered('cancel')) {
+                this._activeWindow = 'list';
+                CookingSystem.setSecondItem(null);
+                SoundManager.playCancel();
+            }
+        }
+    };
+    
+    Scene_Cooking.prototype.renderAsciiCooking = function() {
+        const ctx = window.AsciiMode.context;
+        const canvas = window.AsciiMode.canvas;
+        if (!ctx || !canvas) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const fontSize = window.AsciiMode.fontSize;
+        ctx.font = `${fontSize}px ${window.AsciiMode.fontFamily}`;
+
+        // Header
+        ctx.fillStyle = '#FFD700';
+        ctx.textAlign = 'center';
+        ctx.fillText("--- COOKING ---", canvas.width / 2, 30);
+
+        // Help Text
+        ctx.fillStyle = '#FFFFFF';
+        let helpText = "Select ingredients.";
+        const item1 = CookingSystem.getFirstItem();
+        const item2 = CookingSystem.getSecondItem();
+        
+        if (!item1) {
+            helpText = _ci18n('ui.selectFirstIngredient');
+        } else if (!item2) {
+            helpText = _ci18n('ui.selectSecondIngredient', { name: item1.name });
+        } else {
+            const resultName = CookingSystem.createCookedItemName(item1, item2);
+            helpText = _ci18n('ui.confirmCook', { item1: item1.name, item2: item2.name, result: resultName });
+        }
+        ctx.fillText(helpText, canvas.width / 2, 70);
+
+        // List
+        const list = CookingSystem.getAvailableRecoveryItems();
+        const listY = 120;
+        const listX = 50;
+
+        ctx.textAlign = 'left';
+        for (let i = 0; i < list.length; i++) {
+            const item = list[i];
+            const y = listY + i * (fontSize + 10);
+
+            const isSelected = this._selectedIndex === i && this._activeWindow === 'list';
+            const isFirstSelected = item1 === item;
+            
+            if (isSelected) {
+                ctx.fillStyle = '#FF0000';
+                ctx.fillText(`> ${item.name}`, listX, y);
+            } else if (isFirstSelected) {
+                ctx.fillStyle = '#00FFFF';
+                ctx.fillText(`* ${item.name}`, listX, y);
+            } else {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillText(`  ${item.name}`, listX, y);
+            }
+
+            ctx.fillStyle = '#FFFF00';
+            ctx.fillText(`x${$gameParty.numItems(item)}`, listX + 300, y);
+        }
+
+        // Details
+        const selectedItem = list[this._selectedIndex];
+        if (selectedItem) {
+            this.renderCookingItemDetails(selectedItem, 450, listY);
+        }
+
+        // Confirm Box
+        if (this._activeWindow === 'confirm') {
+            const boxWidth = 400;
+            const boxHeight = 100;
+            const bX = (canvas.width - boxWidth) / 2;
+            const bY = (canvas.height - boxHeight) / 2;
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+            ctx.fillRect(bX, bY, boxWidth, boxHeight);
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.strokeRect(bX, bY, boxWidth, boxHeight);
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.textAlign = 'center';
+            ctx.fillText("Cook these items?", canvas.width / 2, bY + 30);
+
+            const options = [
+                `[ ${_ci18n('ui.cookButton')} ]`,
+                `[ ${_ci18n('ui.cancelButton')} ]`
+            ];
+            for (let i = 0; i < options.length; i++) {
+                const x = bX + (i + 1) * (boxWidth / 3);
+                if (this._selectedConfirmIndex === i) {
+                    ctx.fillStyle = '#FF0000';
+                } else {
+                    ctx.fillStyle = '#FFFF00';
+                }
+                ctx.fillText(options[i], x, bY + 70);
+            }
+        }
+    };
+    
+    Scene_Cooking.prototype.renderCookingItemDetails = function(item, x, y) {
+        const ctx = window.AsciiMode.context;
+        const fontSize = window.AsciiMode.fontSize;
+        const lineHeight = fontSize + 6;
+        let currentY = y;
+
+        ctx.fillStyle = '#FFD700';
+        ctx.textAlign = 'left';
+        ctx.fillText(item.name, x, currentY);
+        currentY += lineHeight;
+
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.moveTo(x, currentY);
+        ctx.lineTo(x + 300, currentY);
+        ctx.stroke();
+        currentY += 10;
+
+        ctx.fillStyle = '#FFFFFF';
+
+        const calories = item.meta.calories ? item.meta.calories : "0";
+        const protein = item.meta.protein ? item.meta.protein : "0";
+        const fat = item.meta.fat ? item.meta.fat : "0";
+
+        this.drawCookingKeyValue("Calories", calories, x, currentY);
+        currentY += lineHeight;
+        this.drawCookingKeyValue("Protein", protein, x, currentY);
+        currentY += lineHeight;
+        this.drawCookingKeyValue("Fat", fat, x, currentY);
+        currentY += lineHeight;
+    };
+    
+    Scene_Cooking.prototype.drawCookingKeyValue = function(key, value, x, y) {
+        const ctx = window.AsciiMode.context;
+        ctx.fillStyle = '#00FFFF';
+        ctx.fillText(key + ":", x, y);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(value, x + 100, y);
+    };
+
     //=============================================================================
     // Scene_Menu additions
     //=============================================================================

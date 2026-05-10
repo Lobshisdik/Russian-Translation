@@ -103,7 +103,7 @@
 
         // Center the window vertically, but account for the title logo
         const titleOffset = 120; // Reduced from 200 to move window up
-        const wy = titleOffset + (Graphics.height - requiredHeight - titleOffset) / 2;
+        const wy = titleOffset + (Graphics.height - requiredHeight - titleOffset) / 2 - 40;
 
         this._commandWindow.move(wx, wy);
         this._commandWindow.width = ww;
@@ -115,14 +115,67 @@
         this._applyCustomWindowStyle();
     };
 
-    // Tutorial command: start new game on map 1414 at 39,7 facing down
+    // Tutorial command: show info window before starting
     Scene_Title.prototype.commandTutorial = function () {
+        this._commandWindow.deactivate();
+        this.createTutorialWindow();
+    };
+
+    Scene_Title.prototype.createTutorialWindow = function () {
+        const width = 600;
+        const height = 300;
+        const x = (Graphics.boxWidth - width) / 2;
+        const y = (Graphics.boxHeight - height) / 2;
+        const rect = new Rectangle(x, y, width, height);
+        this._tutorialWindow = new Window_Tutorial(rect);
+        this._tutorialWindow.setHandler('continue', this.onTutorialContinue.bind(this));
+        this._tutorialWindow.setHandler('cancel', this.onTutorialCancel.bind(this));
+        this.addChild(this._tutorialWindow);
+    };
+
+    Scene_Title.prototype.onTutorialContinue = function () {
+        this._tutorialWindow.close();
         this._commandWindow.close();
         this.fadeOutAll();
         DataManager.setupNewGame();
-        $gamePlayer.reserveTransfer(1415, 14, 18, 2, 0);
+        $gamePlayer.reserveTransfer(1414, 61, 7, 2, 0);
         SceneManager.goto(Scene_Map);
     };
+
+    Scene_Title.prototype.onTutorialCancel = function () {
+        this._tutorialWindow.close();
+        this._tutorialWindow.hide();
+        this._commandWindow.activate();
+    };
+
+    // -------------------------------------------------------------------------
+    // Window_Tutorial
+    // -------------------------------------------------------------------------
+    class Window_Tutorial extends Window_Command {
+        constructor(rect) {
+            super(rect);
+        }
+
+        makeCommandList() {
+            this.addCommand('Continue', 'continue');
+        }
+
+        itemRect(index) {
+            const rect = super.itemRect(index);
+            // Put command at the bottom
+            rect.y = this.innerHeight - this.itemHeight() - 10;
+            return rect;
+        }
+
+        refresh() {
+            super.refresh();
+            const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
+                         "Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.\n" +
+                         "Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.\n" +
+                         "Proin nisi, scelerisque posuere.";
+            this.drawTextEx(text, 10, 10, this.innerWidth - 20);
+        }
+    }
 
     // Add custom styling method to Scene_Title
     Scene_Title.prototype._applyCustomWindowStyle = function () {
@@ -267,11 +320,12 @@
     };
 
     // Add Tutorial command to the title menu
-    const _Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
     Window_TitleCommand.prototype.makeCommandList = function () {
-        _Window_TitleCommand_makeCommandList.call(this);
+        this.addCommand('Explore', 'newGame');
+        this.addCommand('Reconnect', 'continue', this.isContinueEnabled());
         this.addCommand('Tutorial', 'tutorial');
-        this.addCommand('Exit', 'shutdown');
+        this.addCommand('Preferences', 'options');
+        this.addCommand('Mods', 'mods');
     };
 
     // -------------------------------------------------------------------------

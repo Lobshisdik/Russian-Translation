@@ -397,7 +397,9 @@ const PLANT_DB = {
     if (item && rec.stage >= 2) {
       const qty = calcYield(def, rec.effectiveGrowthMinutes);
       $gameParty.gainItem(item, qty);
+      window.skipLocalization = true;
       $gameMessage.add(`\\I[${item.iconIndex}]Harvested \\c[14]${item.name}\\c[0] ×${qty}!`);
+      window.skipLocalization = false;
     }
     rec.removed = true;
     rec.plantId = null;
@@ -497,7 +499,9 @@ const PLANT_DB = {
         const qty = calcYield(def, rec.effectiveGrowthMinutes);
         $gameParty.gainItem(item, qty);
         SoundManager.playShop();
+        window.skipLocalization = true;
         $gameMessage.add(`\\I[${item.iconIndex}]Harvested \\c[14]${item.name}\\c[0] ×${qty}!`);
+        window.skipLocalization = false;
       }
 
       rec.removed = true;
@@ -568,7 +572,9 @@ const PLANT_DB = {
       const ev = $gameMap.event(this._eventId);
       if (ev) applySprite(ev, newRec);
       SoundManager.playShop();
+      window.skipLocalization = true;
       $gameMessage.add(`Planted \\c[14]${plantId}\\c[0]!`);
+      window.skipLocalization = false;
       this._selectWindow.hide();
       this._previewWindow.hide();
       this.popScene();
@@ -1008,7 +1014,9 @@ const PLANT_DB = {
 
     _onHarvest() {
       if (!this._hasPlant()) {
+        window.skipLocalization = true;
         $gameMessage.add("Nothing to harvest here.");
+        window.skipLocalization = false;
         this.popScene();
         return;
       }
@@ -1019,7 +1027,9 @@ const PLANT_DB = {
         const qty = calcYield(def, rec.effectiveGrowthMinutes);
         $gameParty.gainItem(item, qty);
         SoundManager.playShop();
+        window.skipLocalization = true;
         $gameMessage.add(`\\I[${item.iconIndex}]Harvested \\c[14]${item.name}\\c[0] ×${qty}!`);
+        window.skipLocalization = false;
       }
       rec.removed = true;
       rec.plantId = null;
@@ -1073,7 +1083,9 @@ const PLANT_DB = {
       const ev = $gameMap.event(this._eventId);
       if (ev) applySprite(ev, newRec);
       SoundManager.playShop();
+      window.skipLocalization = true;
       $gameMessage.add(`Planted \\c[14]${plantId}\\c[0]!`);
+      window.skipLocalization = false;
       this._selectWindow.hide();
       this._previewWindow.hide();
       this.popScene();

@@ -626,7 +626,31 @@
             this.lastKnownEventId = eventId;
             this.hideScheduled = false;
 
+            // Update position based on speaker in dual screen mode
+            let targetX = this.characterBust._targetX;
+            if (window.$gameSplitScreen && window.$gameSplitScreen.active) {
+                const activator = $gameMessage._eventActivator;
+                const width = getBustWidth();
+                if (activator === "p1") {
+                    targetX = 0; // Left side
+                } else if (activator === "p2") {
+                    targetX = Graphics.width - width; // Right side
+                } else {
+                    targetX = (Graphics.width - width) / 2; // Center
+                }
+            } else {
+                const xOffset = isWidescreen() ? bustXOffset_16_9 : 0;
+                const width = getBustWidth();
+                targetX = Graphics.width - width - xOffset;
+            }
+
+            const targetChanged = targetX !== this.characterBust._targetX;
+            this.characterBust._targetX = targetX;
+
             if (this.currentCharacterKey === key && this.characterBust.parent) {
+                if (targetChanged) {
+                    this.slideIn();
+                }
                 if (showCharacterNames && this.nameWindow && !this.nameIsVisible) {
                     this.nameWindow.showName();
                     this.nameIsVisible = true;

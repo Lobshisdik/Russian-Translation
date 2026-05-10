@@ -431,7 +431,97 @@
       "RIGHT_TOES": {
         "weight": 2
       }
-    }
+    },
+    "sprites": [
+      "AdeptNecromancer",
+      "AnointedHighPriest",
+      "AscendedTitan",
+      "BeginnerEnchanter",
+      "BerylDoppleganger",
+      "BlindedAcolyte",
+      "BloodDrinker",
+      "Bonji",
+      "BrawnyOgre",
+      "BugbearFootsoldier",
+      "CapableCryomancer",
+      "CheerfulBarmaid",
+      "Clippy",
+      "CrashTestDummy",
+      "Crog",
+      "CrushingCyclops",
+      "DarkelfBlademaster",
+      "DarkelfMage",
+      "DarkelfSpellslinger",
+      "DarkelfThief",
+      "DeftSorceress",
+      "DeterminedSoldier",
+      "DevoutAcolyte",
+      "DiligentSquire",
+      "DivinePlanetar",
+      "Dracyn",
+      "Drazkul",
+      "DryadMatron",
+      "DwarfHunter",
+      "ElfBladedancer",
+      "EvilTitan",
+      "FaithfulCrossbowman",
+      "FeatheredSnake",
+      "FlameMagus",
+      "FrostMagus",
+      "GentleShepard",
+      "GiantSasquatch",
+      "GnollGrunt",
+      "GnollRipper",
+      "GnollWarlord",
+      "GreyAlien",
+      "HalflingAssassin",
+      "HalflingRogue",
+      "Halric",
+      "HillGiant",
+      "HobgoblinBrawler",
+      "HobgoblinSapper",
+      "HulkingBrute",
+      "Jarthol",
+      "KoboldDigger",
+      "KoboldRockthrower",
+      "KoboldScavenger",
+      "KoboldTrickster",
+      "Korix",
+      "Marionette",
+      "MasterIllusionist",
+      "MindfulChimpanze",
+      "MummifiedRitualist",
+      "MutilatedStumbler",
+      "Neferkare",
+      "NovicePyromancer",
+      "OgreMage",
+      "OrcCaptain",
+      "OrcShaman",
+      "OrcWarlock",
+      "Pigman",
+      "PlayfulChild",
+      "PregnantSeahorse",
+      "RatkinPoisoner",
+      "RighteousDeva",
+      "RoyalGuard",
+      "Scarecrow",
+      "Scumdreg",
+      "SkeweringStalker",
+      "SkilledBattlemage",
+      "StoneGiant",
+      "Thoric",
+      "UntransformedWerewolf",
+      "Vaelor",
+      "VeteranSwordsman",
+      "VileWitch",
+      "WerewolfStalker",
+      "WingedSnake",
+      "Wint",
+      "Yulforge",
+      "Yulshax",
+      "ZealousPriest",
+      "Zebra"
+    ]
   },
   "Beast": {
     "skills": [],
@@ -545,7 +635,87 @@
       "TAIL": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AgitatedOrangutan",
+      "ArcticWolf",
+      "BeastlyImpalerIdleSide",
+      "Beaver",
+      "BenevolentUnicorn",
+      "BlackCatRecolor",
+      "BouncingRabbit",
+      "Bronthak",
+      "BugbearBasher",
+      "BugbearElite",
+      "BugbearMonster",
+      "BugbearTyrant",
+      "BullWyvern",
+      "CarnivorousPlant",
+      "CaveBear",
+      "ChubbyCat",
+      "Coyote",
+      "CuriousMonkey",
+      "DaintyPig",
+      "DazzlingPegasus",
+      "EagerPug",
+      "EnragedBuffalo",
+      "FeatheredSnake",
+      "FemaleKangaroo",
+      "Ferret",
+      "FlyingPig",
+      "GiantRat",
+      "GiganticJuggernaut",
+      "GrazingCow",
+      "Hyena",
+      "InfectedMouse",
+      "Insideoutcritter",
+      "KodiakBear",
+      "LevitatingPig",
+      "LustrousLion",
+      "MadBoar",
+      "MaleKangaroo",
+      "MaleOpossum",
+      "MaleficentApe",
+      "Mammoth",
+      "MawingBeaver",
+      "MeowingCat",
+      "MischievousRacoon",
+      "Monstrous Rat",
+      "MurkySlaad",
+      "NibblingGoat",
+      "OwlBear",
+      "Panda",
+      "Panther",
+      "PasturingSheep",
+      "Pig",
+      "PoisonousGorgon",
+      "PolarBear",
+      "Porcupine",
+      "PowerfulYak",
+      "PrancingDeer",
+      "RabidCerberus",
+      "RabidHyena",
+      "RancorousBull",
+      "RatkinMutant",
+      "RatkinStabber",
+      "Ratking",
+      "RhinoBeetle",
+      "RummagingOpossum",
+      "SabertoothTiger",
+      "ScavengingCoyote",
+      "ScroungingSquirrel",
+      "SlitheringSnail",
+      "SlyFox",
+      "SnowFox",
+      "SnowYeti",
+      "SpikeyPorcupine",
+      "StinkySkunk",
+      "ThirstyCamel",
+      "Tiger",
+      "TimberWolf",
+      "TunnelingMole",
+      "VoraciousMouse"
+    ]
   },
   "Insectoid": {
     "skills": [],
@@ -704,7 +874,33 @@
       "MANDIBLES": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "AcidAnt",
+      "AshSpider",
+      "Beetle",
+      "BuzzingBumblebee",
+      "CrimsonLadybug",
+      "DiseasedFly",
+      "Dragonfly",
+      "DungBeetle",
+      "EngorgedTick",
+      "FireCentipede",
+      "FrostMagus",
+      "GapingLeech",
+      "GiantRoyalScarab",
+      "Hallucigenia",
+      "Hematite",
+      "LavaAnt",
+      "Mantis",
+      "RavenousMosquito",
+      "RoyalScarab",
+      "UmberMoth",
+      "VibrantDragonfly",
+      "ViciousWasp",
+      "VividGrasshopper",
+      "Wasp"
+    ]
   },
   "Frog": {
     "skills": [
@@ -837,7 +1033,11 @@
       "HIND_RIGHT_LEG": {
         "weight": 9
       }
-    }
+    },
+    "sprites": [
+      "CroakingToad",
+      "LeapingFrog"
+    ]
   },
   "Dragon": {
     "skills": [
@@ -985,7 +1185,57 @@
       "TAIL": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AdultBoneDragon",
+      "AdultCopperDragon",
+      "AdultGoldDragon",
+      "AdultGreenDragon",
+      "AdultMercuryDragon",
+      "AdultRedDragon",
+      "AdultWhiteDragon",
+      "AncientBlueDragon",
+      "AncientBoneDragon",
+      "AncientGoldDragon",
+      "AncientMultihuedDragon",
+      "AncientSilverDragon",
+      "AshenDragonBat",
+      "BabyBrassDragon",
+      "BabyCopperDragon",
+      "BabyGreenDragon",
+      "BabyIronDragon",
+      "BabyWhiteDragon",
+      "CoilingWyvern",
+      "CrimsonSlaad",
+      "Dragonfly",
+      "Draygor",
+      "Drenzoth",
+      "FairyDrake",
+      "Firemaw",
+      "GreatWyvern",
+      "Iceheart",
+      "InfernalScorche",
+      "JuvenileBlackDragon",
+      "JuvenileBronzeDragon",
+      "JuvenileMercuryDragon",
+      "JuvenileMultihuedDragon",
+      "KomodoDragon",
+      "MatureBlackDragon",
+      "MatureBlueDragon",
+      "MatureBronzeDragon",
+      "MatureIronDragon",
+      "MoltenDragonBat",
+      "PearlDragon",
+      "PsuedoDragon",
+      "Seaspray",
+      "VibrantDragonfly",
+      "ViridianDrake",
+      "YoungBlueDragon",
+      "YoungBrassDragon",
+      "YoungCopperDragon",
+      "YoungRedDragon",
+      "YoungSilverDragon"
+    ]
   },
   "Skeleton": {
     "skills": [],
@@ -1084,7 +1334,17 @@
       "RIGHT_LEG": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "BlindedGrimlock",
+      "BloodshotEye",
+      "BoneGolem",
+      "BonySoldier",
+      "DeathKnight",
+      "DecrepitBones",
+      "DustyShambler",
+      "FloatingSkeleton"
+    ]
   },
   "Fairy": {
     "skills": [],
@@ -1201,7 +1461,20 @@
       "PIXIE_DUST_SAC": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "ChestnutHorse",
+      "Fairy",
+      "FairyDrake",
+      "FloatingCherub",
+      "FlutteringPixie",
+      "IllustriousQueen",
+      "Lumiel",
+      "MagicalFairy",
+      "RighteousDeva",
+      "SneakySatyr",
+      "SturdyFarmer"
+    ]
   },
   "Slime": {
     "skills": [
@@ -1291,7 +1564,22 @@
       "PSEUDOPOD_2": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AcidOoze",
+      "AirElemental",
+      "BoundCadaver",
+      "DeathSlime",
+      "DecapitatedHead",
+      "GelatinousCube",
+      "LightningCloud",
+      "Medusa",
+      "OchreJelly",
+      "Skulmire",
+      "Slime",
+      "SlimySnail",
+      "Virus"
+    ]
   },
   "Undead": {
     "skills": [],
@@ -1390,7 +1678,28 @@
       "RIGHT_LEG": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "BloatedZombie",
+      "CarrionCrawler",
+      "CorpseWalker",
+      "DismemberedCrawler",
+      "ExhumedCleric",
+      "FineBowman",
+      "GrapplerMummy",
+      "GraveRevenant",
+      "OssifiedSlayer",
+      "PlagueBat",
+      "ProficientBard",
+      "ReturnedPoisoner",
+      "RottingArcher",
+      "SkeletalMage",
+      "TownButcher",
+      "UndeadRoamer",
+      "UndeadShuffler",
+      "ZombieGiant",
+      "ZombieWarrior"
+    ]
   },
   "Scorpion": {
     "skills": [
@@ -1627,7 +1936,11 @@
       "REAR_RIGHT_LEG": {
         "weight": 4
       }
-    }
+    },
+    "sprites": [
+      "HoppingKangaroo",
+      "LethalScorpion"
+    ]
   },
   "Spider": {
     "skills": [
@@ -1835,7 +2148,14 @@
       "REAR_RIGHT_LEG": {
         "weight": 4
       }
-    }
+    },
+    "sprites": [
+      "AshSpider",
+      "Murkweb",
+      "OnyxWidow",
+      "SpiderAutomaton",
+      "SpiderBrain"
+    ]
   },
   "Plant": {
     "skills": [
@@ -1922,7 +2242,22 @@
       "VINE_2": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "Bippin",
+      "BloatedBedbug",
+      "CarnivorousPlant",
+      "CorruptedTreant",
+      "DryadHealer",
+      "DryadMatriarch",
+      "EmeraldViper",
+      "Flower",
+      "HalflingSlinger",
+      "MutilatedStumbler",
+      "NatureElemental",
+      "Rotwhisker",
+      "Sloth"
+    ]
   },
   "Elemental": {
     "skills": [],
@@ -2010,7 +2345,21 @@
       "RIGHT_APPENDAGE": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "AirElemental",
+      "EarthElemental",
+      "FireElemental",
+      "FlutteringPixie",
+      "IceGolem",
+      "LizardfolkScout",
+      "Luma",
+      "MoltenEfreeti",
+      "NatureElemental",
+      "PowerfulDjinn",
+      "SandGhoul",
+      "WaterElemental"
+    ]
   },
   "AquaticFish": {
     "skills": [],
@@ -2109,7 +2458,33 @@
       "RIGHT_PECTORAL_FIN": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "Anglerfish",
+      "BloodyAbomination",
+      "Borin",
+      "Coral",
+      "Dolphin",
+      "GoblinShark",
+      "Goldfish",
+      "MeowingCat",
+      "MerfolkMystic",
+      "MerfolkScout",
+      "PearlDragon",
+      "Pufferfish",
+      "QuackingDuck",
+      "RighteousDeva",
+      "Seahorse",
+      "Seal",
+      "SerpentineWyvern",
+      "Shark",
+      "Stonefish",
+      "Swarm",
+      "Swordfish",
+      "Tuna",
+      "Whale",
+      "ZombieWhale"
+    ]
   },
   "Octopus": {
     "skills": [
@@ -2211,7 +2586,12 @@
       "TENTACLE_4": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "FloatingEye",
+      "GiantSquid",
+      "Octopus"
+    ]
   },
   "Robot": {
     "skills": [
@@ -2312,7 +2692,26 @@
       "RIGHT_LEG": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "Aelthorin",
+      "BloodshotEye",
+      "FavoredCleric",
+      "FireElemental",
+      "FloatingEye",
+      "FloatingSkeleton",
+      "GiganticJuggernaut",
+      "GoldGolem",
+      "HorseAutomaton",
+      "IntellectDevourer",
+      "ObsidianGolem",
+      "ScarecrowGolem",
+      "ShieldbearerAutomation",
+      "SoldierAutomaton",
+      "SphereAutomaton",
+      "SpiderAutomaton",
+      "SturdyBlacksmith"
+    ]
   },
   "Bird": {
     "skills": [
@@ -2414,7 +2813,34 @@
       "TALONS": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "AshenDragonBat",
+      "BaldEagle",
+      "Basilisk",
+      "BlueJay",
+      "ChirpingBird",
+      "CluckingChicken",
+      "Crow",
+      "Flamingo",
+      "FlyingPig",
+      "HonkingGoose",
+      "Insideoutcritter",
+      "LaceratingCockatrice",
+      "MagicalFairy",
+      "MajesticGriffon",
+      "MeowingCat",
+      "OminousRaven",
+      "Owl",
+      "Parrot",
+      "PeckingPigeon",
+      "Penguin",
+      "PlagueBat",
+      "TinyChick",
+      "Titus",
+      "Vulture",
+      "WiseOwl"
+    ]
   },
   "Reptilian": {
     "skills": [],
@@ -2528,7 +2954,27 @@
       "TAIL": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "AdultCopperDragon",
+      "BabyCopperDragon",
+      "BabyGreenDragon",
+      "BabyWhiteDragon",
+      "Basilisk",
+      "BestialLizardfolkIdleSide",
+      "Crocodile",
+      "HalflingBard",
+      "KoboldTrapper",
+      "KomodoDragon",
+      "Lizard",
+      "LizardfolkArcher",
+      "LizardfolkGladiator",
+      "MatureBronzeDragon",
+      "MeowingCat",
+      "MudWyvern",
+      "Trex",
+      "Velociraptor"
+    ]
   },
   "Mushroom": {
     "skills": [],
@@ -2598,7 +3044,14 @@
       "SPORE_SACS": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "FungalMyconid",
+      "MovingFungus",
+      "RedCap",
+      "ShriekerMushroom",
+      "Sporvox"
+    ]
   },
   "Tree": {
     "skills": [],
@@ -2682,7 +3135,16 @@
       "BRANCH_2": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "CorruptedTreant",
+      "DecrepitWendigo",
+      "DryadHealer",
+      "Fen",
+      "Flower",
+      "GrizzledTreant",
+      "Grotmuk"
+    ]
   },
   "Bacterial": {
     "skills": [],
@@ -2752,7 +3214,12 @@
       "TOXIN_SACS": {
         "weight": 30
       }
-    }
+    },
+    "sprites": [
+      "Bacterium",
+      "ProngedFury",
+      "TransparentBacterium"
+    ]
   },
   "DoubleHeadedHumanoid": {
     "skills": [],
@@ -2866,7 +3333,15 @@
       "RIGHT_LEG": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "BestialMinotaur",
+      "FaithfulDog",
+      "Kragdug",
+      "OgreMage",
+      "TwoHeadedFemale",
+      "TwoHeadedMale"
+    ]
   },
   "Serpent": {
     "skills": [
@@ -2952,7 +3427,17 @@
       "TAIL": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "Basilisk",
+      "EmeraldViper",
+      "FireCentipede",
+      "GreenNaga",
+      "JuvenileMercuryDragon",
+      "SandCobra",
+      "SerpentineWyvern",
+      "YoungFalseHydra"
+    ]
   },
   "Golem": {
     "skills": [],
@@ -3036,7 +3521,36 @@
       "RIGHT_LEG": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "Adamantium Golem",
+      "BoldManAtArms",
+      "BoneGolem",
+      "BrassGolemIdle",
+      "ClayGolem",
+      "DepravedBlackguard",
+      "EarthElemental",
+      "EbonAstaroth",
+      "FleshGolem",
+      "FrostGiant",
+      "Frosthul",
+      "GoldGolem",
+      "HulkingChampion",
+      "IceGolem",
+      "IronGolem",
+      "LivingStatue",
+      "MagnificentColossus",
+      "MarbleGolem",
+      "NatureElemental",
+      "Necrothor",
+      "ObsidianGolem",
+      "SandGolem",
+      "ScarecrowGolem",
+      "ShieldbearerAutomation",
+      "Siltvar",
+      "StoneGolem",
+      "TrafficCone"
+    ]
   },
   "Demon": {
     "skills": [],
@@ -3135,7 +3649,39 @@
       "TAIL": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "AdultRedDragon",
+      "AdventurousAdolescent",
+      "BeastlyImpalerIdleSide",
+      "BloodDrinker",
+      "CombustingBalrog",
+      "CrimsonImp",
+      "DeadlyCambion",
+      "DemonicArachnid",
+      "ElegantDamsel",
+      "Fairy",
+      "FireElemental",
+      "FlameMagus",
+      "FledglingDemon",
+      "FleshGolem",
+      "FloatingCherub",
+      "GrinningGremlin",
+      "Hellhound",
+      "InfernalScorche",
+      "Kragscour",
+      "MoltenEfreeti",
+      "NefariousScamp",
+      "PointedDemonspawn",
+      "RascallyDemonling",
+      "RedDevil",
+      "TownButcher",
+      "ToxicHound",
+      "Vaelor",
+      "VampireThrall",
+      "VileTyrant",
+      "VileWitch"
+    ]
   },
   "Ghost": {
     "skills": [],
@@ -3204,7 +3750,31 @@
       "RIGHT_WISP": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "BlackCatRecolor",
+      "BoisterousYouth",
+      "ClawingHarpy",
+      "CursedGrimoire",
+      "DarkelfBlademaster",
+      "DarkelfThief",
+      "FloatingSkeleton",
+      "GlowingWisp",
+      "HalflingAssassin",
+      "JoyfulKid",
+      "Marionette",
+      "PoisonGhost",
+      "Reltgaze",
+      "RottingArcher",
+      "ShadowMonster",
+      "SilentRangerI",
+      "SkitteringHand",
+      "UnholySkull",
+      "VirulentWight",
+      "WarpSkull",
+      "WickedWretch",
+      "Zarquis"
+    ]
   },
   "Drone": {
     "skills": [
@@ -3275,7 +3845,13 @@
       "RIGHT_PROP": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "GhastlyEye",
+      "IceGolem",
+      "PestilenceDrake",
+      "SphereAutomaton"
+    ]
   },
   "Voidspawn": {
     "skills": [],
@@ -3359,7 +3935,8 @@
       "CORE": {
         "weight": 35
       }
-    }
+    },
+    "sprites": []
   },
   "Mutant": {
     "skills": [],
@@ -3458,7 +4035,15 @@
       "TAIL_SPIKE": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "CragYeti",
+      "FloatingEye",
+      "Glintskab",
+      "MutantGoblin",
+      "RatkinMutant",
+      "WretchedFomorian"
+    ]
   },
   "CrystalEntity": {
     "skills": [],
@@ -3542,7 +4127,23 @@
       "SHIELD_CRYSTAL": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "Adamantium Golem",
+      "BlinkDog",
+      "FogGiant",
+      "GlowingWisp",
+      "GoldGolem",
+      "HobgoblinRaider",
+      "Jothrenn",
+      "Lizard",
+      "MerfolkJavelineer",
+      "Mithril Construct",
+      "Rind",
+      "Shrimp",
+      "StoneTroll",
+      "ToxicSlug"
+    ]
   },
   "Amphibian": {
     "skills": [],
@@ -3626,7 +4227,11 @@
       "RIGHT_LEG": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "Axolotl",
+      "MerfolkJavelineer"
+    ]
   },
   "ConstructedUndead": {
     "skills": [],
@@ -3710,7 +4315,17 @@
       "POWER_STITCH": {
         "weight": 30
       }
-    }
+    },
+    "sprites": [
+      "AncientFighter",
+      "BoneGolem",
+      "BonySoldier",
+      "ClayGolem",
+      "DustyShambler",
+      "PoisonousGorgon",
+      "Vornskel",
+      "ZombieWarrior"
+    ]
   },
   "Minotaur": {
     "skills": [],
@@ -3824,7 +4439,14 @@
       "RIGHT_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": [
+      "BestialMinotaur",
+      "BugbearBasher",
+      "ExpertDruid",
+      "FoulGouger",
+      "MightyDesolator"
+    ]
   },
   "Goblin": {
     "skills": [],
@@ -4328,7 +4950,23 @@
       "RIGHT_FOOT": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "GoblinArcher",
+      "GoblinFanatic",
+      "GoblinFighter",
+      "GoblinOccultist",
+      "GoblinShark",
+      "GoblinWolfRider",
+      "HobgoblinBolter",
+      "HobgoblinBrawler",
+      "HobgoblinGrunt",
+      "HobgoblinRaider",
+      "HobgoblinSapper",
+      "Kragbit",
+      "MutantGoblin",
+      "SeveredGoblinHead"
+    ]
   },
   "Crustacean": {
     "skills": [],
@@ -4442,7 +5080,13 @@
       "ANTENNAE": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "CoralCrab",
+      "Horseshoecrab",
+      "Lobster",
+      "Shrimp"
+    ]
   },
   "Spherical": {
     "skills": [],
@@ -4526,7 +5170,18 @@
       "AUX_DRIVES": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "AlienParasite",
+      "BloodshotEye",
+      "DecapitatedHead",
+      "DessicatedPriest",
+      "Glevor",
+      "Reltgaze",
+      "RotatingBlade",
+      "SeveredGoblinHead",
+      "malignantgazer"
+    ]
   },
   "Turtle": {
     "skills": [],
@@ -4640,7 +5295,14 @@
       "TAIL": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "GalapagosTurtle",
+      "LandTurtle",
+      "SeaTurtle",
+      "SlowTurtle",
+      "Trex"
+    ]
   },
   "Manticore": {
     "skills": [],
@@ -4865,7 +5527,10 @@
       "RIGHT_EYE": {
         "weight": 2
       }
-    }
+    },
+    "sprites": [
+      "BarbedManticore"
+    ]
   },
   "ChestMimic": {
     "skills": [],
@@ -4949,7 +5614,14 @@
       "FEET": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "FleshGolem",
+      "HungryMimic",
+      "LivingStatue",
+      "MimicDoor",
+      "TrafficCone"
+    ]
   },
   "Phoenix": {
     "skills": [
@@ -5080,7 +5752,10 @@
       "RIGHT_EYE": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "Phoenix"
+    ]
   },
   "Ogre": {
     "skills": [],
@@ -5179,7 +5854,16 @@
       "RIGHT_LEG": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "BrawnyOgre",
+      "ConjuringOni",
+      "OgreMage",
+      "OrcCaptain",
+      "OrcReaver",
+      "OrcSavage",
+      "VeteranSwordsman"
+    ]
   },
   "Scarecrow": {
     "skills": [],
@@ -5278,7 +5962,11 @@
       "RIGHT_LEG": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "Scarecrow",
+      "ScarecrowGolem"
+    ]
   },
   "SegmentWorm": {
     "skills": [],
@@ -5347,7 +6035,20 @@
       "TAIL": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "CarcassFeeder",
+      "CarrionCrawler",
+      "CoilingWyvern",
+      "FamishedTick",
+      "FireCentipede",
+      "ForagingMaggot",
+      "GapingLeech",
+      "GaseousMonster",
+      "GiantRoyalScarab",
+      "OvergrownEarthworm",
+      "SeveredHand"
+    ]
   },
   "Mineral": {
     "skills": [],
@@ -5416,7 +6117,8 @@
       "VEINS": {
         "weight": 20
       }
-    }
+    },
+    "sprites": []
   },
   "Hydra": {
     "skills": [],
@@ -5500,7 +6202,14 @@
       "TAIL": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AdultFalseHydra",
+      "AncientMultihuedDragon",
+      "FalseHydra",
+      "Hydra",
+      "YoungFalseHydra"
+    ]
   },
   "Vampire": {
     "skills": [],
@@ -5614,7 +6323,22 @@
       "RIGHT_LEG": {
         "weight": 7.5
       }
-    }
+    },
+    "sprites": [
+      "BloodthirstyCount",
+      "DryadSlingmaster",
+      "FemaleVampire",
+      "GraniteGargoyle",
+      "Hrendemos",
+      "IllustriousQueen",
+      "MaleVampire",
+      "MaleVampire2",
+      "MasterfulVenomancer",
+      "OssifiedSlayer",
+      "SkeletalMage",
+      "VampireBat",
+      "VampireThrall"
+    ]
   },
   "Bat": {
     "skills": [
@@ -5700,7 +6424,15 @@
       "FANGS": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "AshenDragonBat",
+      "MoltenDragonBat",
+      "PlagueBat",
+      "SkilledBattlemage",
+      "SwoopingBat",
+      "VampireBat"
+    ]
   },
   "Rabbit": {
     "skills": [],
@@ -5829,7 +6561,10 @@
       "TAIL": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "BouncingRabbit"
+    ]
   },
   "ArmoredKnight": {
     "skills": [],
@@ -5928,7 +6663,25 @@
       "GREAVES_RIGHT": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "Bazzle",
+      "BlessedGladiator",
+      "BraveKnight",
+      "DeathKnight",
+      "DwarfWarrior",
+      "HolyCrusader",
+      "IceGolem",
+      "Nexthran",
+      "RadiantPaladin",
+      "RoyalGuard",
+      "RoyalSentinel",
+      "Royce",
+      "Slimin",
+      "SteadfastPikeman",
+      "Varkis",
+      "ZombieWarrior"
+    ]
   },
   "Centaur": {
     "skills": [],
@@ -6072,7 +6825,11 @@
       "REAR_RIGHT_LEG": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "GallantCentaur",
+      "WarriorCentaur"
+    ]
   },
   "InsectSwarm": {
     "skills": [],
@@ -6156,7 +6913,12 @@
       "STINGERS": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "SoldierAnt",
+      "Swarm",
+      "UmberMoth"
+    ]
   },
   "RoboticDefender": {
     "skills": [],
@@ -6240,7 +7002,12 @@
       "SENSORS": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "Fen",
+      "NobleKing",
+      "ShieldbearerAutomation"
+    ]
   },
   "Turret": {
     "skills": [],
@@ -6324,7 +7091,11 @@
       "AMMO_CHAMBER": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "AutomaticTurret",
+      "SeaTurtle"
+    ]
   },
   "Gorgon": {
     "skills": [],
@@ -6393,7 +7164,14 @@
       "LOWER_BODY": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "DarkelfSpellslinger",
+      "IllustriousQueen",
+      "MenacingMedusa",
+      "PoisonousGorgon",
+      "VileWitch"
+    ]
   },
   "AbyssalLeviathan": {
     "skills": [],
@@ -6477,7 +7255,17 @@
       "HEART_CHAMBER": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AbyssalLeviathan",
+      "AquaDrake",
+      "GiantSquid",
+      "GoblinShark",
+      "Insideoutwhale",
+      "MatureBlueDragon",
+      "SharkFin",
+      "Stonvar"
+    ]
   },
   "Snail": {
     "skills": [],
@@ -6576,7 +7364,13 @@
       "FOOT": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "Coral",
+      "SlimySnail",
+      "SlitheringSnail",
+      "Snail"
+    ]
   },
   "WaterElemental": {
     "skills": [],
@@ -6660,7 +7454,13 @@
       "RIGHT_WATER_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": [
+      "Aquis",
+      "Skornfang",
+      "Syce",
+      "WaterElemental"
+    ]
   },
   "ThunderElemental": {
     "skills": [],
@@ -6759,7 +7559,8 @@
       "RIGHT_ELECTRIC_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": []
   },
   "StormElemental": {
     "skills": [],
@@ -6858,7 +7659,16 @@
       "RIGHT_THUNDER_LEG": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "AdeptNecromancer",
+      "AirElemental",
+      "CheerfulBarmaid",
+      "CloudGiant",
+      "LightningCloud",
+      "PowerfulDjinn",
+      "Valthorne"
+    ]
   },
   "FireElemental": {
     "skills": [],
@@ -6927,7 +7737,13 @@
       "ASH_LEGS": {
         "weight": 25
       }
-    }
+    },
+    "sprites": [
+      "BulgingIncubus",
+      "FireElemental",
+      "FireGiant",
+      "WarpSkull"
+    ]
   },
   "MetalElemental": {
     "skills": [],
@@ -6996,7 +7812,8 @@
       "GEAR_LEGS": {
         "weight": 25
       }
-    }
+    },
+    "sprites": []
   },
   "DarkElemental": {
     "skills": [],
@@ -7095,7 +7912,10 @@
       "RIGHT_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": [
+      "GlowingWisp"
+    ]
   },
   "SacredElemental": {
     "skills": [],
@@ -7194,7 +8014,11 @@
       "RIGHT_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": [
+      "BrittleArcher",
+      "CursedGrimoire"
+    ]
   },
   "Totem": {
     "skills": [],
@@ -7278,7 +8102,17 @@
       "BASE": {
         "weight": 30
       }
-    }
+    },
+    "sprites": [
+      "EarthElemental",
+      "GrizzledTreant",
+      "LivingStatue",
+      "MimicDoor",
+      "NatureElemental",
+      "Nyarlathoteph",
+      "Ophanim",
+      "Totem"
+    ]
   },
   "Ophanim": {
     "skills": [
@@ -7364,7 +8198,14 @@
       "EYE_RING": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "ConjuringBeholder",
+      "GreyAlien",
+      "Ophanim",
+      "RadiantPaladin",
+      "Zazthul"
+    ]
   },
   "Angel": {
     "skills": [
@@ -7480,7 +8321,17 @@
       "RIGHT_FOOT": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "Azrathiel",
+      "Balderon",
+      "Daron",
+      "DwarfPriest",
+      "GloriousSeraph",
+      "PiousCardinal",
+      "ResoluteAngel",
+      "SwordArchon"
+    ]
   },
   "Elven": {
     "skills": [],
@@ -7579,7 +8430,16 @@
       "RIGHT_LEG": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "DarkElfLord",
+      "DryadStabber",
+      "ElfBladedancer",
+      "ElfEnchanter",
+      "ElfLord",
+      "ElfSharpshooter",
+      "ElfWayfarer"
+    ]
   },
   "Gnome": {
     "skills": [],
@@ -7678,7 +8538,17 @@
       "RIGHT_LEG": {
         "weight": 17.5
       }
-    }
+    },
+    "sprites": [
+      "Gnome",
+      "GnomeAlchemist",
+      "GnomeMage",
+      "GnomeTinkerer",
+      "GnomeWanderer",
+      "GnomeWizard",
+      "MeowingCat",
+      "ObsidianGolem"
+    ]
   },
   "Elephant": {
     "skills": [
@@ -7810,7 +8680,12 @@
       "HIND_RIGHT_LEG": {
         "weight": 5
       }
-    }
+    },
+    "sprites": [
+      "Elephant",
+      "Mammoth",
+      "StompingElephant"
+    ]
   },
   "TentacledCreature": {
     "skills": [],
@@ -7879,7 +8754,18 @@
       "BODY": {
         "weight": 45
       }
-    }
+    },
+    "sprites": [
+      "AntleredRascal",
+      "BlazingSlug",
+      "FloatingEye",
+      "Flower",
+      "FlyingBrain",
+      "HulkingBrute",
+      "Medusa",
+      "OcularWatcher",
+      "Tentacle"
+    ]
   },
   "SpiderHumanHybrid": {
     "skills": [],
@@ -8023,7 +8909,11 @@
       "REAR_RIGHT_LEG": {
         "weight": 3
       }
-    }
+    },
+    "sprites": [
+      "AshSpider",
+      "DemonicArachnid"
+    ]
   },
   "SpikyMonster": {
     "skills": [],
@@ -8107,7 +8997,11 @@
       "RIGHT_LEG": {
         "weight": 12.5
       }
-    }
+    },
+    "sprites": [
+      "GhastlyEye",
+      "SpikeyPorcupine"
+    ]
   },
   "Horse": {
     "skills": [
@@ -8223,7 +9117,14 @@
       "TAIL": {
         "weight": 10
       }
-    }
+    },
+    "sprites": [
+      "ChestnutHorse",
+      "HorseAutomaton",
+      "Horseshoecrab",
+      "PregnantSeahorse",
+      "Seahorse"
+    ]
   },
   "Unicorn": {
     "skills": [],
@@ -8337,7 +9238,10 @@
       "TAIL": {
         "weight": 15
       }
-    }
+    },
+    "sprites": [
+      "BenevolentUnicorn"
+    ]
   },
   "Hellhound": {
     "skills": [],
@@ -8451,7 +9355,12 @@
       "HIND_RIGHT_LEG": {
         "weight": 7.5
       }
-    }
+    },
+    "sprites": [
+      "Hellhound",
+      "Mastiff",
+      "ToxicHound"
+    ]
   },
   "WingedDemon": {
     "skills": [
@@ -8552,7 +9461,8 @@
       "CLAWS": {
         "weight": 15
       }
-    }
+    },
+    "sprites": []
   },
   "TrashCreature": {
     "skills": [],
@@ -8621,6 +9531,12 @@
       "HEART": {
         "weight": 20
       }
-    }
+    },
+    "sprites": [
+      "Bronthak",
+      "RascallyDemonling",
+      "RatkinMutant",
+      "TrashBag"
+    ]
   }
 }

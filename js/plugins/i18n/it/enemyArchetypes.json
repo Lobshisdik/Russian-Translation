@@ -1976,7 +1976,7 @@
         "name": "Anello di Occhi",
         "msg": "Anello di Occhi accecato!"
       },
-      "name": "Ophan"
+      "name": "Ophanim"
     },
     "angel": {
       "left_wing": {
@@ -2019,8 +2019,8 @@
         "msg": "Cuore lacerato!"
       },
       "bow": {
-        "name": "Arco",
-        "msg": "Arco spezzato!"
+        "name": "Setto nasale",
+        "msg": "Setto nasale spezzato!"
       },
       "robe": {
         "name": "Veste",
@@ -2047,7 +2047,7 @@
       },
       "hat": {
         "name": "Cappello",
-        "msg": "Cappello spinto via!"
+        "msg": "Cappello volato via!"
       },
       "heart": {
         "name": "Cuore",

@@ -95,6 +95,22 @@
 
   const { BrainRegions, PersonalityData } = window.Health;
 
+  function Window_BiologicSimulation() {
+    this.initialize(...arguments);
+  }
+
+  if (Utils.RPGMAKER_NAME === "MZ") {
+    Window_BiologicSimulation.prototype = Object.create(
+      Window_StatusBase.prototype
+    );
+  } else {
+    Window_BiologicSimulation.prototype = Object.create(
+      Window_Selectable.prototype
+    );
+  }
+
+  Window_BiologicSimulation.prototype.constructor = Window_BiologicSimulation;
+
   Scene_BiologicSimulation.prototype = Object.create(Scene_MenuBase.prototype);
   Scene_BiologicSimulation.prototype.constructor = Scene_BiologicSimulation;
 
@@ -928,22 +944,7 @@
       Window_BiologicSimulation.shortenPregnancy();
     }
   );
-  // Biologic Simulation System
-  function Window_BiologicSimulation() {
-    this.initialize(...arguments);
-  }
 
-  if (Utils.RPGMAKER_NAME === "MZ") {
-    Window_BiologicSimulation.prototype = Object.create(
-      Window_StatusBase.prototype
-    );
-  } else {
-    Window_BiologicSimulation.prototype = Object.create(
-      Window_Selectable.prototype
-    );
-  }
-
-  Window_BiologicSimulation.prototype.constructor = Window_BiologicSimulation;
 
   Window_BiologicSimulation.prototype.determinePersonality = function (name) {
     if (!PersonalityData || !PersonalityData.list) {
@@ -2040,7 +2041,9 @@
       "Eggs ready to lay! You have " + uterus.eggsToLay + " egg(s).",
       "Uova pronte da deporre! Hai " + uterus.eggsToLay + " uovo/a."
     );
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
   };
 
   Window_BiologicSimulation.prototype.produceSeed = function () {
@@ -2058,7 +2061,9 @@
       "Seed produced! Total seeds ready: " + uterus.seedsReady,
       "Seme prodotto! Totale semi pronti: " + uterus.seedsReady
     );
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
   };
 
   Window_BiologicSimulation.prototype.completeMitosis = function () {
@@ -2074,7 +2079,9 @@
       "Mitosis complete! A perfect clone has been created.",
       "Mitosi completa! Un clone perfetto à¨ stato creato."
     );
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
   };
   // 4. ADD the drawing method for the uterus tab
   Window_BiologicSimulation.prototype.drawUterus = function (startY) {
@@ -2922,7 +2929,9 @@
           genderName +
           "!"
           : "Your hormones have caused a gender change to " + genderName + "!";
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
     }
   };
 
@@ -5186,7 +5195,9 @@
         "No reproductive system available. Set Variable 87 first.",
         "Nessun sistema riproduttivo disponibile. Imposta prima la Variabile 87."
       );
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
       return;
     }
     // Initialize uterus data if it doesn't exist
@@ -5224,7 +5235,9 @@
         "Already in reproductive process!",
         "Già  in processo riproduttivo!"
       );
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
       return;
     }
 
@@ -5274,7 +5287,9 @@
         break;
     }
 
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
   };
 
 
@@ -5301,7 +5316,9 @@
         "Not currently in reproductive process.",
         "Non attualmente in processo riproduttivo."
       );
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
       return;
     }
 
@@ -5392,7 +5409,9 @@
         break;
     }
 
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
   };
   Window_BiologicSimulation.birthSeed = function () {
     var actor = $gameParty.members()[0];
@@ -5406,7 +5425,9 @@
         "This command only works for plant-type reproduction.",
         "Questo comando funziona solo per riproduzione di tipo vegetale."
       );
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
       return;
     }
 
@@ -5415,7 +5436,9 @@
         "No seeds available to plant.",
         "Nessun seme disponibile da piantare."
       );
+      window.skipLocalization = true;
       $gameMessage.add(message);
+      window.skipLocalization = false;
       return;
     }
 
@@ -5426,7 +5449,9 @@
       "Seed planted! Remaining seeds: " + uterus.seedsReady,
       "Seme piantato! Semi rimanenti: " + uterus.seedsReady
     );
+    window.skipLocalization = true;
     $gameMessage.add(message);
+    window.skipLocalization = false;
 
     // Trigger birth event
     $gameTemp.reserveCommonEvent(139);

@@ -629,7 +629,7 @@
     onClassCancel() {
       // Return to the class selection step in character creation
       if (window.Scene_CharacterCreation) {
-        window.Scene_CharacterCreation.prepare(9);
+        window.Scene_CharacterCreation.prepare(4);
         SceneManager.goto(window.Scene_CharacterCreation);
       } else {
         this.popScene();
@@ -776,7 +776,7 @@
 
       // Resume character creation from step 4 (Traits) after confirming class selection
       if (Scene_CharacterCreation) {
-        Scene_CharacterCreation.prepare(4);
+        Scene_CharacterCreation.prepare(5);
         SceneManager.goto(Scene_CharacterCreation);
       } else {
         this.popScene();

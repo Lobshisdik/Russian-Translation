@@ -114,7 +114,9 @@
         if (validateAndCalc()) {
             SceneManager.push(Scene_TokenConverter);
         } else {
+            window.skipLocalization = true;
             $gameMessage.add("Token Converter is not configured correctly.");
+            window.skipLocalization = false;
         }
     });
     
@@ -386,7 +388,9 @@
             
             // Fail-safe: if scene is pushed via script call, validate first.
             if (!validateAndCalc()) {
+                window.skipLocalization = true;
                 $gameMessage.add("Token Converter Error. Check Console.");
+                window.skipLocalization = false;
                 this.popScene();
                 return;
             }
@@ -557,13 +561,17 @@
                 const message = ConfigManager.language === 'it' ?
                     `Hai comprato ${amount} gettoni per €${totalEuros.toFixed(2)}!` :
                     `Bought ${amount} token(s) for €${totalEuros.toFixed(2)}!`;
+                window.skipLocalization = true;
                 $gameMessage.add(message);
+                window.skipLocalization = false;
             } else {
                 SoundManager.playBuzzer();
                 const message = ConfigManager.language === 'it' ?
                     'Oro insufficiente!' :
                     'Insufficient gold!';
+                window.skipLocalization = true;
                 $gameMessage.add(message);
+                window.skipLocalization = false;
             }
         }
         
@@ -580,13 +588,17 @@
                 const message = ConfigManager.language === 'it' ?
                     `Hai venduto ${amount} gettoni per €${totalEuros.toFixed(2)}!` :
                     `Sold ${amount} token(s) for €${totalEuros.toFixed(2)}!`;
+                window.skipLocalization = true;
                 $gameMessage.add(message);
+                window.skipLocalization = false;
             } else {
                 SoundManager.playBuzzer();
                 const message = ConfigManager.language === 'it' ?
                     'Gettoni insufficienti!' :
                     'Insufficient tokens!';
+                window.skipLocalization = true;
                 $gameMessage.add(message);
+                window.skipLocalization = false;
             }
         }
         

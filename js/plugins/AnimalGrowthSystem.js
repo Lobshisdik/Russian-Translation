@@ -488,7 +488,9 @@
     const mapId = $gameMap.mapId();
     const rec = getRecord(mapId, eventId);
     if (rec && rec.animalId) {
+      window.skipLocalization = true;
       $gameMessage.add("This slot already has an animal.");
+      window.skipLocalization = false;
       return;
     }
     Scene_AnimalBuy._openArgs = { mapId, eventId };
@@ -501,14 +503,18 @@
     updateGrowth(mapId, eventId);
     const rec = getRecord(mapId, eventId);
     if (!rec || !rec.animalId) {
+      window.skipLocalization = true;
       $gameMessage.add("No animal here to sell.");
+      window.skipLocalization = false;
       return;
     }
     const def = ANIMAL_DB[rec.animalId];
     const val = rec.stage === "baby" ? (def.sellValueBaby || 0) : (def.sellValueAdult || 0);
     $gameParty.gainGold(val);
     SoundManager.playShop();
+    window.skipLocalization = true;
     $gameMessage.add(`Sold \\c[14]${rec.animalId}\\c[0] for ${val}G!`);
+    window.skipLocalization = false;
     deleteRecord(mapId, eventId);
     const ev = $gameMap.event(eventId);
     if (ev) applySprite(ev, null);
@@ -528,12 +534,16 @@
       for (const r of items) {
         const item = $dataItems[r.itemId];
         if (item) {
+          window.skipLocalization = true;
           $gameMessage.add(`\\I[${item.iconIndex}]Collected \\c[14]${item.name}\\c[0] ×${r.qty}!`);
+          window.skipLocalization = false;
         }
       }
       saveRecord(mapId, eventId, rec);
     } else {
+      window.skipLocalization = true;
       $gameMessage.add("Nothing to collect yet.");
+      window.skipLocalization = false;
     }
   });
 
@@ -605,12 +615,16 @@
         for (const r of items) {
           const item = $dataItems[r.itemId];
           if (item) {
+            window.skipLocalization = true;
             $gameMessage.add(`\\I[${item.iconIndex}]Collected \\c[14]${item.name}\\c[0] ×${r.qty}!`);
+            window.skipLocalization = false;
           }
         }
         saveRecord(this._mapId, this._eventId, this._rec);
       } else {
+        window.skipLocalization = true;
         $gameMessage.add("Nothing to collect yet.");
+        window.skipLocalization = false;
       }
       this.popScene();
     }
@@ -621,7 +635,9 @@
       const val = this._rec.stage === "baby" ? (def.sellValueBaby || 0) : (def.sellValueAdult || 0);
       $gameParty.gainGold(val);
       SoundManager.playShop();
+      window.skipLocalization = true;
       $gameMessage.add(`Sold \\c[14]${this._rec.animalId}\\c[0] for ${val}G!`);
+      window.skipLocalization = false;
       deleteRecord(this._mapId, this._eventId);
       const ev = $gameMap.event(this._eventId);
       if (ev) applySprite(ev, null);
@@ -697,7 +713,9 @@
       const ev = $gameMap.event(this._eventId);
       if (ev) applySprite(ev, newRec);
       SoundManager.playShop();
+      window.skipLocalization = true;
       $gameMessage.add(`Bought \\c[14]${animalId}\\c[0] (${STAGE_NAMES[stage]})!`);
+      window.skipLocalization = false;
       this._buyWindow.hide();
       this._previewWindow.hide();
       this.popScene();
@@ -1051,7 +1069,9 @@
       const ev = $gameMap.event(this._eventId);
       if (ev) applySprite(ev, newRec);
       SoundManager.playShop();
+      window.skipLocalization = true;
       $gameMessage.add(`Bought \\c[14]${animalId}\\c[0] (${STAGE_NAMES[stage]})!`);
+      window.skipLocalization = false;
       this.popScene();
     }
   }

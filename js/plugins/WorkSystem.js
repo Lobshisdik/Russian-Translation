@@ -1042,36 +1042,54 @@
     const jobName = useItalian && job.name_it ? job.name_it : job.name;
 
     // Work complete message
+    window.skipLocalization = true;
     $gameMessage.add(`\\C[6]${actor.name()}\\C[0] finished working as \\C[4]${jobName}\\C[0].`);
+    window.skipLocalization = false;
 
     // Outcome message
+    window.skipLocalization = true;
     $gameMessage.add(result.message);
+    window.skipLocalization = false;
 
     // Pay information
     if (result.pay > 0) {
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[14]Earned: €${result.pay}\\C[0]`);
+      window.skipLocalization = false;
     } else if (result.pay < 0) {
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[18]Lost: €${Math.abs(result.pay)} (damages)\\C[0]`);
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[7]No payment received.\\C[0]`);
+      window.skipLocalization = false;
     }
 
     // Damage information
     if (result.hpDamage > 0) {
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[18]Took ${result.hpDamage} HP damage.\\C[0]`);
+      window.skipLocalization = false;
     }
     if (result.mpDamage > 0) {
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[23]Exhausted ${result.mpDamage} MP.\\C[0]`);
+      window.skipLocalization = false;
     }
 
     // Status effects
     if (result.statuses.length > 0) {
       const stateNames = result.statuses.map(id => $dataStates[id].name).join(', ');
+      window.skipLocalization = true;
       $gameMessage.add(`\\C[18]Afflicted: ${stateNames}\\C[0]`);
+      window.skipLocalization = false;
     }
 
     // Time passed
+    window.skipLocalization = true;
     $gameMessage.add(`\\C[6]${job.duration} hours passed.\\C[0]`);
+    window.skipLocalization = false;
   };
 
   // ============================================================================

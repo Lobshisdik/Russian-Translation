@@ -172,6 +172,12 @@
  * @min 1
  * @desc Number of frames between climb movement sounds (60 = 1 second)
  * @default 30
+ *
+ * @param disableClimbing
+ * @text Disable Climbing
+ * @type boolean
+ * @desc Set to true to disable climbing mechanics and options.
+ * @default false
  */
 
 (() => {
@@ -237,25 +243,22 @@
     parameters.climbMovementSoundInterval || 30
   );
 
+  const disableClimbing = String(parameters.disableClimbing || "false") === "true";
+
   const tr = (en, it) => (ConfigManager.language === "it" ? it : en);
 
-  // Global state variables
-  let isSwimming = false;
-  let isFishing = false;
-  let isClimbing = false;
+  // Character state properties (added to Game_CharacterBase):
+  // - _isSwimming
+  // - _isClimbing
+  // - _currentClimbHeight
+  // - _pendingFallDamageRate
+  // - _originalName
+  // - _originalIndex
+  // - _isFishing
+
   let companionsVisible = true;
   let lastSwimSoundFrame = 0;
   let lastClimbSoundFrame = 0;
-  let lastClimbPositionX = 0;
-  let lastClimbPositionY = 0;
-
-  // Track height
-  let currentClimbHeight = 0;
-
-  // Store original player appearance
-  let originalCharacterName = "";
-  let originalCharacterIndex = 0;
-  let originalCanMoveFunction = null;
 
   // Water reflection system
   let reflectionSprites = new Map(); // Map of character -> reflection sprite
@@ -287,13 +290,14 @@
   }
 
   function isClimbableTile(x, y) {
+    if (disableClimbing) return false;
     const terrainTag = $gameMap.terrainTag(x, y);
     return terrainTag === 4;
   }
 
   function isBlockedClimbTile(x, y) {
     const regionId = $gameMap.regionId(x, y);
-    return regionId === 10 || regionId === 11;
+    return regionId === 10;
   }
 
   function isRoofTile(x, y) {
@@ -347,14 +351,14 @@
     return true;
   }
 
-  function isPlayerFacingNorthOrSouth() {
-    const direction = $gamePlayer.direction();
-    return direction === 2 || direction === 8; // 2 = South, 8 = North
+  function isCharacterFacingNorthOrSouth(character) {
+    const d = character.direction();
+    return d === 8 || d === 2;
   }
 
-  function canClimbInDirection() {
+  function canClimbInDirection(character) {
     // Always only allow climbing when facing north or south
-    return isPlayerFacingNorthOrSouth();
+    return isCharacterFacingNorthOrSouth(character);
   }
 
   function hasFishingRod() {
@@ -367,31 +371,18 @@
     });
   }
 
-  function getFrontTile() {
-    const direction = $gamePlayer.direction();
-    let x = $gamePlayer.x;
-    let y = $gamePlayer.y;
-
-    switch (direction) {
-      case 2:
-        y += 1;
-        break;
-      case 4:
-        x -= 1;
-        break;
-      case 6:
-        x += 1;
-        break;
-      case 8:
-        y -= 1;
-        break;
-    }
-
-    return { x, y };
+  function getFrontTile(character) {
+    const x = character.x;
+    const y = character.y;
+    const d = character.direction();
+    return {
+      x: $gameMap.roundXWithDirection(x, d),
+      y: $gameMap.roundYWithDirection(y, d),
+    };
   }
 
   function getFrontEvent() {
-    const tile = getFrontTile();
+    const tile = getFrontTile($gamePlayer);
     if (!$gameMap || !$gameMap.events()) return null;
     return $gameMap.events().find(
       (ev) => ev && ev.x === tile.x && ev.y === tile.y
@@ -404,8 +395,8 @@
     return KICKABLE_NAMES.some((k) => name.includes(k.toLowerCase()));
   }
 
-  function performKick(event) {
-    const dir = $gamePlayer.direction();
+  function performKick(character, event) {
+    const dir = character.direction();
     AudioManager.playSe({ name: "Kick", volume: 90, pitch: 100, pan: 0 });
     // Attempt to move the event 2 tiles; each moveStraight handles passability
     event.moveStraight(dir);
@@ -413,21 +404,21 @@
     event.moveStraight(dir);
   }
 
-  function storeOriginalAppearance() {
-    if (!originalCharacterName) {
-      originalCharacterName = $gamePlayer._characterName;
-      originalCharacterIndex = $gamePlayer._characterIndex;
+  function storeOriginalAppearance(character) {
+    if (!character._originalName) {
+      character._originalName = character._characterName;
+      character._originalIndex = character._characterIndex;
     }
   }
 
-  function restoreOriginalAppearance() {
-    if (originalCharacterName) {
-      $gamePlayer.setImage(originalCharacterName, originalCharacterIndex);
+  function restoreOriginalAppearance(character) {
+    if (character._originalName) {
+      character.setImage(character._originalName, character._originalIndex);
     }
   }
 
-  function performFishing() {
-    isFishing = true;
+  function performFishing(character) {
+    character._isFishing = true;
 
     // Check if ASCII Physics Fishing Minigame is available and enabled
     const useMinigame = $gameVariables && $gameVariables.value(9999) === 1;
@@ -448,15 +439,15 @@
             });
         }*/
 
-    // Store original canMove function only if not already stored
-    if (!originalCanMoveFunction) {
-      originalCanMoveFunction = Game_Player.prototype.canMove;
+    // Disable player movement during fishing (only for P1)
+    if (character === $gamePlayer) {
+      if (!character._originalCanMove) {
+        character._originalCanMove = Game_Player.prototype.canMove;
+      }
+      Game_Player.prototype.canMove = function () {
+        return false;
+      };
     }
-
-    // Disable player movement during fishing
-    Game_Player.prototype.canMove = function () {
-      return false;
-    };
 
     if (fishingAnimationCommonEventId > 0) {
       $gameTemp.reserveCommonEvent(fishingAnimationCommonEventId);
@@ -468,18 +459,19 @@
     const originalUpdate = Scene_Map.prototype.update;
 
     Scene_Map.prototype.update = function () {
-      originalUpdate.call(this);
-      if (remainingFrames > 0) {
-        remainingFrames--;
-        if (remainingFrames === 0) {
-          // Restore player movement
-          if (originalCanMoveFunction) {
-            Game_Player.prototype.canMove = originalCanMoveFunction;
-          }
-          Scene_Map.prototype.update = originalUpdate;
-          completeFishing();
+      const interval = setInterval(() => {
+        if (remainingFrames <= 0) {
+          clearInterval(interval);
+          completeFishing(character);
+        } else {
+          remainingFrames -= 1;
         }
+      }, 16);
+      if (originalCanMoveFunction) {
+        Game_Player.prototype.canMove = originalCanMoveFunction;
       }
+      Scene_Map.prototype.update = originalUpdate;
+      completeFishing(character);
     };
   }
 
@@ -501,8 +493,12 @@
     window._fishingMinigameResult = null;
   }
 
-  function completeFishing() {
-    isFishing = false;
+  function completeFishing(character) {
+    if (character) {
+      character._isFishing = false;
+    } else {
+      $gamePlayer._isFishing = false;
+    }
 
     const success = Math.random() * 100 < fishingSuccessRate;
 
@@ -563,26 +559,12 @@
     }
   }
 
-  function enterSwimMode() {
-    console.log("Entering swim mode...");
-
-    // Store original appearance before changing
-    storeOriginalAppearance();
-
-    // Set swimming state
-    isSwimming = true;
-
-    // Move to water tile
-    const frontTile = getFrontTile();
-    $gamePlayer.setPosition(frontTile.x, frontTile.y);
-
-    // Change to boat sprite (static, no animation cycling)
+  function enterSwimMode(character) {
+    if (character._isSwimming) return;
+    storeOriginalAppearance(character);
+    character._isSwimming = true;
     const boatData = $dataSystem.boat;
-    $gamePlayer.setImage(boatData.characterName, boatData.characterIndex);
-    $gamePlayer.setTransparent(false);
-
-    // Mark player as swimming for sprint disable
-    $gamePlayer._isSwimming = true;
+    character.setImage(boatData.characterName, boatData.characterIndex);
 
     if (startSwimmingSoundEffect) {
       AudioManager.playSe({
@@ -593,17 +575,14 @@
       });
     }
 
-    setCompanionsVisibility(false);
-
-    console.log("Swim mode entered. Swimming state:", isSwimming);
+    if (character === $gamePlayer) {
+      setCompanionsVisibility(false);
+    }
   }
 
-  function exitSwimMode() {
-    console.log("Exiting swim mode...");
-
-    // Clear swimming state
-    isSwimming = false;
-    $gamePlayer._isSwimming = false;
+  function exitSwimMode(character) {
+    if (!character._isSwimming) return;
+    character._isSwimming = false;
 
     if (stopSwimmingSoundEffect) {
       AudioManager.playSe({
@@ -614,46 +593,26 @@
       });
     }
 
-    // Restore original character appearance
-    restoreOriginalAppearance();
-    $gamePlayer.setTransparent(false);
+    restoreOriginalAppearance(character);
 
-    setCompanionsVisibility(true);
+    if (character === $gamePlayer) {
+      if (!character._isClimbing) {
+        setCompanionsVisibility(true);
+      }
+    }
 
-    // Clear any input/destination issues
-    if ($gameTemp.isDestinationValid()) {
+    if (character === $gamePlayer && $gameTemp.isDestinationValid()) {
       $gameTemp.clearDestination();
     }
-    Input.clear();
-
-    console.log("Swim mode exited. Swimming state:", isSwimming);
   }
 
-  function enterClimbMode() {
-    console.log("Entering climb mode...");
-
-    // Store original appearance before changing
-    storeOriginalAppearance();
-
-    // Set climbing state
-    isClimbing = true;
-
-    // Reset climb height when starting
-    currentClimbHeight = 0;
-
-    // Move to climbable tile
-    const frontTile = getFrontTile();
-    $gamePlayer.setPosition(frontTile.x, frontTile.y);
-
-    // Initialize last climb position
-    lastClimbPositionX = frontTile.x;
-    lastClimbPositionY = frontTile.y;
-
-    // Set direction to upward (8)
-    $gamePlayer.setDirection(8);
-
-    // Mark player as climbing
-    $gamePlayer._isClimbing = true;
+  function enterClimbMode(character) {
+    if (character._isClimbing) return;
+    character._isClimbing = true;
+    character._currentClimbHeight = 0;
+    character._lastClimbX = character.x;
+    character._lastClimbY = character.y;
+    character.setDirection(8);
 
     if (startClimbingSoundEffect) {
       AudioManager.playSe({
@@ -664,17 +623,15 @@
       });
     }
 
-    setCompanionsVisibility(false);
-
-    console.log("Climb mode entered. Climbing state:", isClimbing);
+    if (character === $gamePlayer) {
+      setCompanionsVisibility(false);
+    }
   }
 
-  function exitClimbMode(jumpX = 0, jumpY = 1) {
-    console.log("Exiting climb mode...");
-
-    // Clear climbing state
-    isClimbing = false;
-    $gamePlayer._isClimbing = false;
+  function exitClimbMode(character, jumpX, jumpY) {
+    if (!character) character = $gamePlayer;
+    character._isClimbing = false;
+    character._isClimbingMove = false;
 
     if (stopClimbingSoundEffect) {
       AudioManager.playSe({
@@ -685,33 +642,17 @@
       });
     }
 
-    // Restore original character appearance
-    restoreOriginalAppearance();
-    $gamePlayer.setTransparent(false);
-
-    // Move back to last valid climbing position first
-    $gamePlayer.setPosition(lastClimbPositionX, lastClimbPositionY);
-
-    // Calculate final destination
-    const finalX = lastClimbPositionX + jumpX;
-    const finalY = lastClimbPositionY + jumpY;
-
-    // Only jump if destination is passable
-    if (jumpX !== 0 || jumpY !== 0) {
-      if ($gameMap.isPassable(finalX, finalY, 0)) {
-        $gamePlayer.jump(jumpX, jumpY);
-      }
-    }
-
+    restoreOriginalAppearance(character);
+    character.setTransparent(false);
     setCompanionsVisibility(true);
 
-    // Clear any input/destination issues
-    if ($gameTemp.isDestinationValid()) {
-      $gameTemp.clearDestination();
+    if (jumpX !== 0 || jumpY !== 0) {
+      character.jump(jumpX, jumpY);
     }
-    Input.clear();
 
-    console.log("Climb mode exited. Climbing state:", isClimbing);
+    // Clear any input/destination issues
+    $gameTemp.clearDestination();
+    Input.clear();
   }
 
   //=============================================================================
@@ -875,53 +816,21 @@
 
   const _Game_Player_update = Game_Player.prototype.update;
   Game_Player.prototype.update = function (sceneActive) {
-    // /* FALL MECHANICS DISABLED - const wasJumping = this.isJumping(); */
-
     _Game_Player_update.call(this, sceneActive);
-
-    /* FALL MECHANICS DISABLED
-    // Check for Landing
-    if (wasJumping && !this.isJumping()) {
-        // We have just landed.
-
-        // Remove roof jumping flag
-        this._jumpingFromRoof = false;
-
-        // Apply any pending fall damage
-        if (this._pendingFallDamageRate > 0) {
-            $gameParty.members().forEach(actor => {
-                const damage = Math.floor(actor.mhp * this._pendingFallDamageRate);
-                if (damage > 0) {
-                   actor.gainHp(-damage);
-                }
-            });
-            // Visual flash for damage
-            $gameScreen.startFlash([255, 0, 0, 128], 8);
-
-            // Reset pending damage
-            this._pendingFallDamageRate = 0;
-        }
-    }
-    */
-
     this.updateSwimState();
   };
 
-  // Force player priority above * tiles when on roof (Terrain Tag 7)
   const _Game_Player_screenZ = Game_Player.prototype.screenZ;
   Game_Player.prototype.screenZ = function () {
-    // Return high priority if on a roof
-    // /* FALL MECHANICS DISABLED - || this._jumpingFromRoof */
     if (isRoofTile(this.x, this.y)) {
       return 10;
     }
     return _Game_Player_screenZ.call(this);
   };
 
-  // Disable dashing/sprinting while swimming or climbing
   const _Game_Player_isDashing = Game_Player.prototype.isDashing;
   Game_Player.prototype.isDashing = function () {
-    if (this._isSwimming || isSwimming || this._isClimbing || isClimbing) {
+    if (this._isSwimming || this._isClimbing) {
       return false;
     }
     return _Game_Player_isDashing.call(this);
@@ -929,19 +838,16 @@
 
   const _Game_Player_updateDashing = Game_Player.prototype.updateDashing;
   Game_Player.prototype.updateDashing = function () {
-    if (this._isSwimming || isSwimming || this._isClimbing || isClimbing) {
+    if (this._isSwimming || this._isClimbing) {
       this._dashing = false;
       return;
     }
     _Game_Player_updateDashing.call(this);
   };
 
-  // Override movement to handle roof tile jumps
-  // Override movement to handle roof tile jumps and climbing to land
   const _Game_Player_moveStraight = Game_Player.prototype.moveStraight;
   Game_Player.prototype.moveStraight = function (d) {
-    // Check if we're on a roof tile and attempting to move to a non-roof/non-climbable tile
-    if (isClimbing && isRoofTile(this.x, this.y)) {
+    if (this._isClimbing && isRoofTile(this.x, this.y)) {
       const x2 = $gameMap.roundXWithDirection(this.x, d);
       const y2 = $gameMap.roundYWithDirection(this.y, d);
       const destIsRoof = isRoofTile(x2, y2);
@@ -960,54 +866,30 @@
             case 6: jumpX = 1; break;
             case 8: jumpY = -1; break;
           }
-
-          isClimbing = false;
-          this._isClimbing = false;
-          if (stopClimbingSoundEffect) {
-            AudioManager.playSe({ name: stopClimbingSoundEffect, volume: 90, pitch: 100, pan: 0 });
-          }
-          restoreOriginalAppearance();
-          this.setTransparent(false);
-          setCompanionsVisibility(true);
-          this.jump(jumpX, jumpY);
-          currentClimbHeight = 0;
+          exitClimbMode(this, jumpX, jumpY);
           return;
         }
         return;
       }
     }
 
-    // NEW: If climbing and moving UP onto a passable tile that is NOT a wall or roof (Climbing to Land)
-    if (isClimbing && d === 8) {
+    if (this._isClimbing && d === 8) {
       const x2 = $gameMap.roundXWithDirection(this.x, d);
       const y2 = $gameMap.roundYWithDirection(this.y, d);
 
-      // isWallTile(x2, y2) checks for Terrain 4 (climbable) and Region 10
-      // isRoofTile(x2, y2) checks for Terrain 7
       if (!isWallTile(x2, y2) && !isRoofTile(x2, y2)) {
         const isPassable = $gameMap.isPassable(x2, y2, d);
         const isClear = !this.isCollidedWithEvents(x2, y2) && !this.isCollidedWithVehicles(x2, y2);
 
         if (isPassable && isClear) {
-          // Perform the movement to the top and exit climbing mode
           this.jump(0, -1);
-
-          isClimbing = false;
-          this._isClimbing = false;
-          if (stopClimbingSoundEffect) {
-            AudioManager.playSe({ name: stopClimbingSoundEffect, volume: 90, pitch: 100, pan: 0 });
-          }
-          restoreOriginalAppearance();
-          this.setTransparent(false);
-          setCompanionsVisibility(true);
-          currentClimbHeight = 0; // Reset height tracking
+          exitClimbMode(this, 0, 0);
           return;
         }
       }
     }
 
-    // Between terrain tag 7 and terrain tag 4, only north/south movement is allowed while climbing
-    if (isClimbing && (d === 4 || d === 6)) {
+    if (this._isClimbing && (d === 4 || d === 6)) {
       const dx2 = $gameMap.roundXWithDirection(this.x, d);
       const dy2 = $gameMap.roundYWithDirection(this.y, d);
       const srcTag = $gameMap.terrainTag(this.x, this.y);
@@ -1017,16 +899,13 @@
       }
     }
 
-    // Normal movement
     _Game_Player_moveStraight.call(this, d);
   };
-  // Prevent accidental event triggers while climbing, but allow interaction
-  // when there is actually an event at the target position (terrain 4 or 7).
+
   const _Game_Player_checkEventTriggerHere =
     Game_Player.prototype.checkEventTriggerHere;
   Game_Player.prototype.checkEventTriggerHere = function (triggers) {
-    if (this._isClimbing || isClimbing) {
-      // Allow if there is an event standing on the player's current tile
+    if (this._isClimbing) {
       if ($gameMap.eventsXy(this.x, this.y).length === 0) return false;
     }
     return _Game_Player_checkEventTriggerHere.call(this, triggers);
@@ -1035,8 +914,7 @@
   const _Game_Player_checkEventTriggerThere =
     Game_Player.prototype.checkEventTriggerThere;
   Game_Player.prototype.checkEventTriggerThere = function (triggers) {
-    if (this._isClimbing || isClimbing) {
-      // Allow if there is an event standing on the facing tile
+    if (this._isClimbing) {
       const x2 = $gameMap.roundXWithDirection(this.x, this.direction());
       const y2 = $gameMap.roundYWithDirection(this.y, this.direction());
       if ($gameMap.eventsXy(x2, y2).length === 0) return false;
@@ -1044,44 +922,31 @@
     return _Game_Player_checkEventTriggerThere.call(this, triggers);
   };
 
-  // Slow movement speed while climbing
   const _Game_Player_realMoveSpeed = Game_Player.prototype.realMoveSpeed;
   Game_Player.prototype.realMoveSpeed = function () {
     let speed = _Game_Player_realMoveSpeed.call(this);
-    if (isClimbing || this._isClimbing) {
+    if (this._isClimbing) {
       speed *= climbMovementSpeed;
     }
     return speed;
   };
 
   Game_Player.prototype.updateSwimState = function () {
-    /* FALL MECHANICS DISABLED - height reset
-    if (!isClimbing) {
-        const currentTag = $gameMap.terrainTag(this.x, this.y);
-        if (currentTag !== 4 && currentTag !== 7) {
-            currentClimbHeight = 0;
-        }
-    }
-    */
-
-    // Force swimming/floating mode when in SeaBed biome (keep standard sprite)
     if ($gameSystem._procGenData && $gameSystem._procGenData.currentBiome === "SeaBed") {
-      if (!isSwimming) {
-        isSwimming = true;
+      if (!this._isSwimming) {
         this._isSwimming = true;
+        this._swimAnimationFrame = 0;
         setCompanionsVisibility(false);
       }
-      return; // Don't exit swim mode in SeaBed
+      return;
     }
 
-    if (isSwimming) {
-      // Check if we need to exit swim mode (moved to land)
+    if (this._isSwimming) {
       if (!isWaterTile(this.x, this.y)) {
-        exitSwimMode();
+        exitSwimMode(this);
         return;
       }
 
-      // Play swim movement sound if configured
       if (swimMovementSoundEffect && this.isMoving()) {
         const currentFrame = Graphics.frameCount;
         if (currentFrame - lastSwimSoundFrame >= swimMovementSoundInterval) {
@@ -1096,40 +961,31 @@
       }
     }
 
-    if (isClimbing) {
+    if (this._isClimbing) {
       const currentTileIsRoof = isRoofTile(this.x, this.y);
       const currentTileIsClimbable = isClimbableAndAccessible(this.x, this.y);
 
-      // Check if we're on a valid tile (climbable or roof)
       if (!currentTileIsClimbable && !currentTileIsRoof) {
-        // We've moved to a non-climbable, non-roof tile - exit climbing
-        // Only allow jumping down (away from cliff)
-        // Always jump down when exiting climb
         let jumpX = 0;
-        let jumpY = 1; // Always jump down
+        let jumpY = 1;
 
-        // Check if destination tile is passable before jumping
         const destX = this.x + jumpX;
         const destY = this.y + jumpY;
         if ($gameMap.isPassable(destX, destY, 0)) {
-          exitClimbMode(jumpX, jumpY);
+          exitClimbMode(this, jumpX, jumpY);
         } else {
-          // Destination not passable, exit without jumping (stay in place)
-          exitClimbMode(0, 0);
+          exitClimbMode(this, 0, 0);
         }
         return;
       }
 
-      // Update last climb position
-      lastClimbPositionX = this.x;
-      lastClimbPositionY = this.y;
+      this._lastClimbX = this.x;
+      this._lastClimbY = this.y;
 
-      // Always face upward while climbing (unless on roof)
       if (!currentTileIsRoof) {
         this.setDirection(8);
       }
 
-      // Play climb movement sound if configured
       if (climbMovementSoundEffect && this.isMoving()) {
         const currentFrame = Graphics.frameCount;
         if (currentFrame - lastClimbSoundFrame >= climbMovementSoundInterval) {
@@ -1162,7 +1018,7 @@
   Game_Followers.prototype.refresh = function () {
     _Game_Followers_refresh.call(this);
 
-    if (isSwimming) {
+    if ($gamePlayer._isSwimming || $gamePlayer._isClimbing) {
       setCompanionsVisibility(false);
     } else {
       setCompanionsVisibility(true);
@@ -1184,137 +1040,107 @@
   };
 
   Scene_Map.prototype.updateSwimFishInput = function () {
-    // Allow action input while swimming on map 636 with Ocean biome for diving
-    if (isSwimming && $gameMap.mapId() === 636) {
+    this.checkMovementInteraction($gamePlayer);
+  };
+
+  Scene_Map.prototype.checkMovementInteraction = function (character) {
+    if (!character) return;
+    const isPlayer = character === $gamePlayer;
+
+    if (character._isSwimming && $gameMap.mapId() === 636) {
       const currentBiome = $gameSystem._procGenData
         ? $gameSystem._procGenData.currentBiome
         : null;
       if (currentBiome && currentBiome.toLowerCase().includes("ocean")) {
-        if (Input.isTriggered("ok")) {
-          this.showDiveOption();
+        if (isPlayer ? Input.isTriggered("ok") : false) {
+          this.showDiveOption(character);
           return;
         }
       }
-      // Allow action input while swimming on map 636 with Seabed biome for resurfacing
       if (currentBiome && currentBiome.toLowerCase().includes("seabed")) {
-        if (Input.isTriggered("ok")) {
-          this.showResurfaceOption();
+        if (isPlayer ? Input.isTriggered("ok") : false) {
+          this.showResurfaceOption(character);
           return;
         }
       }
     }
 
-    // Don't show the prompt if already swimming, fishing, or climbing
-    if (isSwimming || isFishing || isClimbing) return;
+    if (character._isSwimming || character._isFishing || character._isClimbing) return;
 
-    // Keyboard input - pressing Enter/Z
-    if (Input.isTriggered("ok")) {
-      const frontTile = getFrontTile();
+    const isTriggered = isPlayer ? Input.isTriggered("ok") : true;
 
-      // Don't show any prompts when facing roof tiles (terrain ID 7),
-      // unless there's an event on that tile the player wants to interact with.
+    if (isTriggered) {
+      const frontTile = getFrontTile(character);
+
       if (isRoofTile(frontTile.x, frontTile.y) && !hasEventOnTile(frontTile.x, frontTile.y)) {
         return;
       }
 
-      // Check for map 636 tile-to-event mapping (checks layers 2, 3, 4 with priority order)
       if ($gameMap.mapId() === 636) {
         const currentTileset = $gameMap.tileset();
         const tilesetId = currentTileset ? currentTileset.id : 0;
-
-        // Check layers in priority order (4, 3, 2) - highest layer first
         const layersToCheck = [4, 3, 2];
         let foundTileId = 0;
         let foundLayer = 0;
 
-        console.log(
-          "## Map 636 Tile lookup at (" + frontTile.x + "," + frontTile.y + "):"
-        );
-        console.log("   - Current Tileset ID:", tilesetId);
-
-        // Check each layer from highest to lowest priority
         for (const layer of layersToCheck) {
           const tileId = $gameMap.tileId(frontTile.x, frontTile.y, layer);
-          console.log("   - Tile ID (layer " + layer + "):", tileId);
-
           if (tileId !== 0) {
             foundTileId = tileId;
             foundLayer = layer;
-            break; // Use the first non-zero tile found
+            break;
           }
         }
 
-        // Check if this tile ID matches any of our event mappings
         if (foundTileId !== 0 && window.WorldGen && window.WorldGen.Map636TileEvents) {
           for (const [commonEventId, config] of Object.entries(
             window.WorldGen.Map636TileEvents
           )) {
-            // Skip special types like "Streetlight" (handled by DynamicLightingSystem)
             if (typeof commonEventId === 'string' && isNaN(parseInt(commonEventId))) {
               continue;
             }
 
-            // Check all tilesets for this common event
             for (const tilesetConfig of config.tilesets) {
               if (
                 tilesetConfig.tilesetId === tilesetId &&
                 tilesetConfig.tileIds.includes(foundTileId)
               ) {
-                console.log(
-                  "## Triggering common event:",
-                  commonEventId,
-                  "for tile ID:",
-                  foundTileId,
-                  "(layer " + foundLayer + ", tileset " + tilesetId + ")"
-                );
                 $gameTemp.reserveCommonEvent(parseInt(commonEventId));
                 return;
               }
             }
           }
-
-          // Debug: show what tile IDs are configured for debugging
-          console.log(
-            "## Tile ID",
-            foundTileId,
-            "from tileset",
-            tilesetId,
-            "found but no event mapping defined for it"
-          );
-          console.log(
-            "## Configured tile mappings:",
-            JSON.stringify(window.WorldGen.Map636TileEvents, null, 2)
-          );
         }
       }
 
-      // Check for climbable tiles first (must be accessible - no priority tiles and can climb in direction)
       if (
         isClimbableAndAccessible(frontTile.x, frontTile.y) &&
-        canClimbInDirection() &&
+        canClimbInDirection(character) &&
         !hasEventOnTile(frontTile.x, frontTile.y)
       ) {
-        this.showClimbOptions();
+        this.showClimbOptions(character);
         return;
       }
 
-      // Check for water tiles (exclude walls)
       if (
         isWaterTile(frontTile.x, frontTile.y) &&
         !isBlockedWaterTile(frontTile.x, frontTile.y) &&
         !hasEventOnTile(frontTile.x, frontTile.y) &&
-        !isWallTile(frontTile.x, frontTile.y)
+        !isWallTile(frontTile.x, frontTile.y) &&
+        !character.canPass(character.x, character.y, character.direction())
       ) {
-        if ($gamePlayer.isInVehicle() && $gamePlayer.vehicle().isShip()) {
+        if (character.isInVehicle && character.isInVehicle() && character.vehicle().isShip()) {
           return;
         }
 
-        this.showSwimFishOptions();
+        this.showSwimFishOptions(character);
       }
     }
 
-    this.processTouchForWaterInteraction();
-    this.processTouchForClimbInteraction();
+    if (isPlayer) {
+      this.processTouchForWaterInteraction();
+      this.processTouchForClimbInteraction();
+    }
   };
 
   Scene_Map.prototype.processTouchForWaterInteraction = function () {
@@ -1332,24 +1158,32 @@
       !isBlockedWaterTile(x, y) &&
       !hasEventOnTile(x, y)
     ) {
-      // Set direction and show swim/fish options for water in any adjacent direction
+      let d = 0;
       if (x === playerX) {
-        // Water directly north or south
+        d = y > playerY ? 2 : 8;
+      } else if (y === playerY) {
+        d = x > playerX ? 6 : 4;
+      }
+
+      if (d > 0 && $gamePlayer.canPass(playerX, playerY, d)) {
+        return;
+      }
+
+      if (x === playerX) {
         if (y > playerY) {
-          $gamePlayer.setDirection(2); // South
-          this.showSwimFishOptions();
+          $gamePlayer.setDirection(2);
+          this.showSwimFishOptions($gamePlayer);
         } else if (y < playerY) {
-          $gamePlayer.setDirection(8); // North
-          this.showSwimFishOptions();
+          $gamePlayer.setDirection(8);
+          this.showSwimFishOptions($gamePlayer);
         }
       } else if (y === playerY) {
-        // Water directly east or west
         if (x > playerX) {
-          $gamePlayer.setDirection(6); // East
-          this.showSwimFishOptions();
+          $gamePlayer.setDirection(6);
+          this.showSwimFishOptions($gamePlayer);
         } else if (x < playerX) {
-          $gamePlayer.setDirection(4); // West
-          this.showSwimFishOptions();
+          $gamePlayer.setDirection(4);
+          this.showSwimFishOptions($gamePlayer);
         }
       }
     }
@@ -1381,20 +1215,17 @@
       isClimbableAndAccessible(x, y) &&
       !hasEventOnTile(x, y)
     ) {
-      // On map 636, only respond to north/south (vertical) climbing
       if ($gameMap.mapId() === 636) {
         if (y > playerY) {
-          $gamePlayer.setDirection(2); // South
-          this.showClimbOptions();
+          $gamePlayer.setDirection(2);
+          this.showClimbOptions($gamePlayer);
         } else if (y < playerY) {
-          $gamePlayer.setDirection(8); // North
-          this.showClimbOptions();
+          $gamePlayer.setDirection(8);
+          this.showClimbOptions($gamePlayer);
         }
-        // Ignore left/right clicks on procedural map
         return;
       }
 
-      // On other maps, set direction based on touch position
       if (x > playerX) {
         $gamePlayer.setDirection(6);
       } else if (x < playerX) {
@@ -1405,15 +1236,13 @@
         $gamePlayer.setDirection(8);
       }
 
-      // Only show climb options if can climb in this direction
-      if (canClimbInDirection()) {
-        this.showClimbOptions();
+      if (canClimbInDirection($gamePlayer)) {
+        this.showClimbOptions($gamePlayer);
       }
     }
   };
 
-  Scene_Map.prototype.showClimbOptions = function () {
-    // Prevent the climb menu from opening if "Exterior" is missing from map notes
+  Scene_Map.prototype.showClimbOptions = function (character) {
     if (!$dataMap || (!$dataMap.meta.Exterior && !$dataMap.note.includes("Exterior"))) {
       return;
     }
@@ -1421,22 +1250,23 @@
     const choices = [tr("Climb", "Arrampica")];
     choices.push(tr("Cancel", "Annulla"));
 
+    $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
     $gameMessage.setChoices(choices, 0, choices.length - 1);
     $gameMessage.setChoiceCallback((index) => {
       if (index === choices.indexOf(tr("Climb", "Arrampica"))) {
-        enterClimbMode();
+        enterClimbMode(character);
       }
     });
   };
 
-  Scene_Map.prototype.showDiveOption = function () {
+  Scene_Map.prototype.showDiveOption = function (character) {
     const choices = [tr("Dive", "Tuffa")];
     choices.push(tr("Cancel", "Annulla"));
 
+    $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
     $gameMessage.setChoices(choices, 0, choices.length - 1);
     $gameMessage.setChoiceCallback((index) => {
       if (index === choices.indexOf(tr("Dive", "Tuffa"))) {
-        // Call the GoDown plugin command
         const interpreter =
           SceneManager._scene._interpreter || $gameMap._interpreter;
         if (interpreter && PluginManager.callCommand) {
@@ -1451,14 +1281,14 @@
     });
   };
 
-  Scene_Map.prototype.showResurfaceOption = function () {
+  Scene_Map.prototype.showResurfaceOption = function (character) {
     const choices = [tr("Resurface", "Risalire")];
     choices.push(tr("Cancel", "Annulla"));
 
+    $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
     $gameMessage.setChoices(choices, 0, choices.length - 1);
     $gameMessage.setChoiceCallback((index) => {
       if (index === choices.indexOf(tr("Resurface", "Risalire"))) {
-        // Call the GoUp plugin command
         const interpreter =
           SceneManager._scene._interpreter || $gameMap._interpreter;
         if (interpreter && PluginManager.callCommand) {
@@ -1473,13 +1303,11 @@
     });
   };
 
-  Scene_Map.prototype.showSwimFishOptions = function () {
-    // Check if using procedural biome system and get current biome
+  Scene_Map.prototype.showSwimFishOptions = function (character) {
     const currentBiome = $gameSystem._procGenData
       ? $gameSystem._procGenData.currentBiome
       : null;
 
-    // Ocean biome: Show "Dive" option to go underground
     if (currentBiome && currentBiome.toLowerCase().includes("ocean")) {
       const choices = [tr("Dive", "Tuffa")];
       choices.push(tr("Cancel", "Annulla"));
@@ -1487,7 +1315,6 @@
       $gameMessage.setChoices(choices, 0, choices.length - 1);
       $gameMessage.setChoiceCallback((index) => {
         if (index === choices.indexOf(tr("Dive", "Tuffa"))) {
-          // Call the GoDown plugin command
           const interpreter =
             SceneManager._scene._interpreter || $gameMap._interpreter;
           if (interpreter && PluginManager.callCommand) {
@@ -1503,7 +1330,6 @@
       return;
     }
 
-    // Seabed biome: Show "Resurface" option to go back up
     if (currentBiome && currentBiome.toLowerCase().includes("seabed")) {
       const choices = [tr("Resurface", "Risalire")];
       choices.push(tr("Cancel", "Annulla"));
@@ -1511,7 +1337,6 @@
       $gameMessage.setChoices(choices, 0, choices.length - 1);
       $gameMessage.setChoiceCallback((index) => {
         if (index === choices.indexOf(tr("Resurface", "Risalire"))) {
-          // Call the GoUp plugin command
           const interpreter =
             SceneManager._scene._interpreter || $gameMap._interpreter;
           if (interpreter && PluginManager.callCommand) {
@@ -1527,7 +1352,6 @@
       return;
     }
 
-    // Disable swimming on map 315
     if ($gameMap.mapId() === 315) {
       const choices = [];
 
@@ -1539,21 +1363,22 @@
 
       if (choices.length === 1) {
         window.skipLocalization = true;
+        $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
         $gameMessage.add("You can't swim here.");
         window.skipLocalization = false;
         return;
       }
 
+      $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
       $gameMessage.setChoices(choices, 0, choices.length - 1);
       $gameMessage.setChoiceCallback((index) => {
         if (index === choices.indexOf(tr("Fish", "Pesca")) && hasFishingRod()) {
-          performFishing();
+          performFishing(character);
         }
       });
       return;
     }
 
-    // Original code for other maps
     const choices = [tr("Swim", "Nuota")];
 
     if (hasFishingRod()) {
@@ -1562,15 +1387,16 @@
 
     choices.push(tr("Cancel", "Annulla"));
 
+    $gameMessage._eventActivator = (character === $gamePlayer) ? "p1" : "p2";
     $gameMessage.setChoices(choices, 0, choices.length - 1);
     $gameMessage.setChoiceCallback((index) => {
       if (index === choices.indexOf(tr("Swim", "Nuota"))) {
-        enterSwimMode();
+        enterSwimMode(character);
       } else if (
         index === choices.indexOf(tr("Fish", "Pesca")) &&
         hasFishingRod()
       ) {
-        performFishing();
+        performFishing(character);
       }
     });
   };
@@ -1583,44 +1409,23 @@
   Game_Player.prototype.refresh = function () {
     _Game_Player_refresh.call(this);
 
-    // Check if we were swimming when the game was saved
     if (this._isSwimming) {
-      isSwimming = true;
-
-      // Restore boat sprite
       const boatData = $dataSystem.boat;
       this.setImage(boatData.characterName, boatData.characterIndex);
-
       setCompanionsVisibility(false);
-    } else {
-      isSwimming = false;
-    }
-
-    // Check if we were climbing when the game was saved
-    if (this._isClimbing) {
-      // Only restore climbing if still on accessible climb tile
-      if (isClimbableAndAccessible(this.x, this.y)) {
-        isClimbing = true;
-        // Initialize climb position tracking
-        lastClimbPositionX = this.x;
-        lastClimbPositionY = this.y;
+    } else if (this._isClimbing) {
+      if (
+        isClimbableAndAccessible(this.x, this.y) ||
+        isRoofTile(this.x, this.y)
+      ) {
         this.setDirection(8);
         setCompanionsVisibility(false);
       } else {
-        // Exit climb mode if tile is no longer accessible
-        isClimbing = false;
-        this._isClimbing = false;
-        setCompanionsVisibility(true);
-      }
-    } else {
-      isClimbing = false;
-      if (!this._isSwimming) {
-        setCompanionsVisibility(true);
+        exitClimbMode(this);
       }
     }
   };
 
-  // Store swimming and climbing state in save data
   const _Game_Player_makeEmpty = Game_Player.prototype.makeEmpty;
   Game_Player.prototype.makeEmpty = function () {
     _Game_Player_makeEmpty.call(this);
@@ -1632,35 +1437,51 @@
   // Map passability overrides
   //=============================================================================
 
+  const _Game_CharacterBase_canPass = Game_CharacterBase.prototype.canPass;
+  Game_CharacterBase.prototype.canPass = function (x, y, d) {
+    window._currentlyCheckingCharacter = this;
+    const result = _Game_CharacterBase_canPass.call(this, x, y, d);
+    window._currentlyCheckingCharacter = null;
+    return result;
+  };
+
   const _Game_Map_isPassable = Game_Map.prototype.isPassable;
   Game_Map.prototype.isPassable = function (x, y, d) {
     const regionId = this.regionId(x, y);
     const terrainTag = this.terrainTag(x, y);
+    const character = window._currentlyCheckingCharacter;
+    const charIsSwimming = character ? character._isSwimming : false;
+    const charIsClimbing = character ? character._isClimbing : false;
 
     // Region 5: Always allow passage
     if (regionId === 5 || regionId === 13) {
       return true;
     }
 
+    // Region 4: Allow passage if it's a ladder tile
+    if (regionId === 4 && (charIsClimbing || this.isLadder(x, y))) {
+      return true;
+    }
+
     // Region 10 & 11: Always block passage
-    if (regionId === 10 || regionId === 11) {
+    if (regionId === 10) {
       return false;
     }
 
     // Region 99: Only passable when swimming
     if (regionId === 99) {
-      return isSwimming;
+      return charIsSwimming;
     }
 
     // Terrain tag 3: Only passable when swimming
     if (terrainTag === 3) {
-      return isSwimming;
+      return charIsSwimming;
     }
 
-    // Terrain tag 4: Only passable when climbing AND tile is accessible (no priority tiles)
+    // Terrain tag 4: Only passable when climbing OR if it's a ladder tile
     if (terrainTag === 4) {
-      if (isClimbing) {
-        // Can't climb to tiles with priority (drawn in front)
+      if (charIsClimbing || this.isLadder(x, y)) {
+        // Can't climb/walk to tiles with priority (drawn in front)
         return !hasPriorityTile(x, y);
       }
       return false;
@@ -1668,7 +1489,7 @@
 
     // Terrain tag 7: Only passable when climbing (roof tiles)
     if (terrainTag === 7) {
-      return isClimbing;
+      return charIsClimbing;
     }
 
     return _Game_Map_isPassable.call(this, x, y, d);
@@ -1678,26 +1499,30 @@
   Game_Map.prototype.checkPassage = function (x, y, bit) {
     const regionId = this.regionId(x, y);
     const terrainTag = this.terrainTag(x, y);
+    const character = window._currentlyCheckingCharacter;
+    const charIsSwimming = character ? character._isSwimming : false;
+    const charIsClimbing = character ? character._isClimbing : false;
 
     if (regionId === 5) {
       return 0;
     }
 
-    if (regionId === 10 || regionId === 11) {
+    if ((regionId === 4 || regionId === 10)) {
+      if (regionId === 4 && (charIsClimbing || this.isLadder(x, y))) return 0;
       return bit;
     }
 
     if (regionId === 99) {
-      return isSwimming ? 0 : bit;
+      return charIsSwimming ? 0 : bit;
     }
 
     if (terrainTag === 3) {
-      return isSwimming ? 0 : bit;
+      return charIsSwimming ? 0 : bit;
     }
 
     if (terrainTag === 4) {
-      // Can climb if climbing mode is active AND no priority tiles block it
-      if (isClimbing && !hasPriorityTile(x, y)) {
+      // Can climb if climbing mode is active OR if it's a ladder tile, AND no priority tiles block it
+      if ((charIsClimbing || this.isLadder(x, y)) && !hasPriorityTile(x, y)) {
         return 0;
       }
       return bit;
@@ -1705,7 +1530,7 @@
 
     if (terrainTag === 7) {
       // Roof tiles: passable when climbing
-      return isClimbing ? 0 : bit;
+      return charIsClimbing ? 0 : bit;
     }
 
     return _Game_Map_checkPassage.call(this, x, y, bit);
@@ -1720,20 +1545,9 @@
     _Scene_Boot_start.call(this);
 
     // Initialize all state variables
-    isSwimming = false;
-    isFishing = false;
-    isClimbing = false;
     companionsVisible = true;
     lastSwimSoundFrame = 0;
     lastClimbSoundFrame = 0;
-    lastClimbPositionX = 0;
-    lastClimbPositionY = 0;
-
-    currentClimbHeight = 0;
-
-    originalCharacterName = "";
-    originalCharacterIndex = 0;
-    originalCanMoveFunction = null;
 
     if ($gamePlayer) {
       $gamePlayer._isSwimming = false;
@@ -1760,19 +1574,18 @@
   // Handle map transfers to maintain swimming and climbing state
   const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
   Game_Player.prototype.performTransfer = function () {
-    const wasSwimming = isSwimming;
-    const wasClimbing = isClimbing;
+    const wasSwimming = this._isSwimming;
+    const wasClimbing = this._isClimbing;
 
     // Clean up reflections before transfer
     cleanupReflections();
 
     _Game_Player_performTransfer.call(this);
 
-    // Force swimming/floating mode when transferring to SeaBed biome (keep standard sprite)
+    // Force swimming/floating mode when transferring to SeaBed biome
     if ($gameSystem._procGenData && $gameSystem._procGenData.currentBiome === "SeaBed") {
       setTimeout(() => {
-        if (!isSwimming && !isClimbing) {
-          isSwimming = true;
+        if (!this._isSwimming && !this._isClimbing) {
           this._isSwimming = true;
           setCompanionsVisibility(false);
         }
@@ -1781,32 +1594,10 @@
     }
 
     // On map 636, automatically start swimming if on a water tile
-    if ($gameMap.mapId() === 636 && isWaterTile(this.x, this.y)) {
+    if ($gameMap.mapId() === 636 && isWaterTile(this.x, this.y) && !$gameMap.isPassable(this.x, this.y, 2)) {
       setTimeout(() => {
-        if (!isSwimming && !isClimbing) {
-          storeOriginalAppearance();
-          isSwimming = true;
-          this._isSwimming = true;
-          const boatData = $dataSystem.boat;
-          this.setImage(boatData.characterName, boatData.characterIndex);
-          this.setTransparent(false);
-          setCompanionsVisibility(false);
-        }
-      }, 100);
-      return;
-    }
-
-    // Check if player is in region ID 3 and automatically start swimming
-    if ($gameMap.regionId(this.x, this.y) === 3) {
-      setTimeout(() => {
-        if (!isSwimming && !isClimbing) {
-          storeOriginalAppearance();
-          isSwimming = true;
-          this._isSwimming = true;
-          const boatData = $dataSystem.boat;
-          this.setImage(boatData.characterName, boatData.characterIndex);
-          this.setTransparent(false);
-          setCompanionsVisibility(false);
+        if (!this._isSwimming && !this._isClimbing) {
+          enterSwimMode(this);
         }
       }, 100);
       return;
@@ -1814,50 +1605,43 @@
 
     // If we were swimming before transfer, check if we're still on water
     if (wasSwimming) {
-      if (isWaterTile(this.x, this.y)) {
-        // Restore swimming state after transfer
+      if (isWaterTile(this.x, this.y) && !$gameMap.isPassable(this.x, this.y, 2)) {
         setTimeout(() => {
-          isSwimming = true;
           this._isSwimming = true;
           const boatData = $dataSystem.boat;
           this.setImage(boatData.characterName, boatData.characterIndex);
           setCompanionsVisibility(false);
         }, 100);
       } else {
-        // Exit swimming if transferred to land
-        isSwimming = false;
-        this._isSwimming = false;
-        restoreOriginalAppearance();
-        if (!wasClimbing) {
-          setCompanionsVisibility(true);
-        }
+        exitSwimMode(this);
       }
     }
 
     // If we were climbing before transfer, check if we're still on an accessible climbable tile
     if (wasClimbing) {
       if (isClimbableAndAccessible(this.x, this.y)) {
-        // Restore climbing state after transfer
         setTimeout(() => {
-          isClimbing = true;
           this._isClimbing = true;
-          // Initialize climb position tracking
-          lastClimbPositionX = $gamePlayer.x;
-          lastClimbPositionY = $gamePlayer.y;
+          this._lastClimbX = this.x;
+          this._lastClimbY = this.y;
           this.setDirection(8);
           setCompanionsVisibility(false);
-          // Reset climb height on map transfer
-          currentClimbHeight = 0;
+          this._currentClimbHeight = 0;
         }, 100);
       } else {
-        // Exit climbing if transferred to non-accessible tile
-        isClimbing = false;
-        this._isClimbing = false;
-        restoreOriginalAppearance();
-        if (!wasSwimming) {
-          setCompanionsVisibility(true);
-        }
+        exitClimbMode(this);
       }
     }
+  };
+
+  window.MovementSystem = {
+    isWaterTile,
+    isClimbableAndAccessible,
+    canClimbInDirection,
+    enterSwimMode,
+    exitSwimMode,
+    enterClimbMode,
+    exitClimbMode,
+    performFishing
   };
 })();

@@ -523,7 +523,7 @@
           if (y === height - 1 && $gameMap.isValid(x, height - 2))
             passable = passable || $gameMap.isPassable(x, height - 2, 2);
           if (!passable) continue;
-          if (this.terrainTag(x, y) === 4) continue;
+          if (this.terrainTag(x, y) === 4 || this.terrainTag(x, y) === 7) continue;
           // Check if the border tile itself is passable (not a wall)
           if (!this.isPassable(x, y, 2) && !this.isPassable(x, y, 4) && 
               !this.isPassable(x, y, 6) && !this.isPassable(x, y, 8)) continue;
@@ -538,8 +538,26 @@
 
           // Only add border if it has at least one direction (cave biomes may have none)
           if (directions.length > 0) {
+            let ax = x, ay = y;
+            if (x === 0) ax = 1;
+            else if (x === width - 1) ax = width - 2;
+            if (y === 0) ay = 1;
+            else if (y === height - 1) ay = height - 2;
+
+            // Never draw arrows directly over any Transfer event
+            const hasTransferAtTarget = this.eventsXy(ax, ay).some(ev => {
+              const evData = $dataMap.events[ev._eventId];
+              return evData && evData.name && evData.name.includes("Transfer");
+            });
+            if (hasTransferAtTarget) continue;
+
+            // Never draw arrows on unpassable tiles or if their terrain tag is 4 or 7
+            if (this.terrainTag(ax, ay) === 4 || this.terrainTag(ax, ay) === 7) continue;
+            if (!this.isPassable(ax, ay, 2) && !this.isPassable(ax, ay, 4) && 
+                !this.isPassable(ax, ay, 6) && !this.isPassable(ax, ay, 8)) continue;
+
             const arrow = getArrowForDirection(directions);
-            nearbyBorders.push({ x, y, directions, arrow });
+            nearbyBorders.push({ x: ax, y: ay, directions, arrow });
           }
         }
       }
@@ -626,13 +644,11 @@
 
       let ax, ay, char;
       if (isOnEdge) {
-        // Draw arrow on the edge tile itself, pointing outward
-        ax = ex;
-        ay = ey;
-        if (onWestEdge)       char = "\u2190"; // ←
-        else if (onEastEdge)  char = "\u2192"; // →
-        else if (onNorthEdge) char = "\u2191"; // ↑
-        else                  char = "\u2193"; // ↓
+        // Draw arrow one tile inward from the edge to avoid overlapping the Transfer event
+        if (onWestEdge)       { ax = ex + 1; ay = ey; char = "\u2190"; } // ←
+        else if (onEastEdge)  { ax = ex - 1; ay = ey; char = "\u2192"; } // →
+        else if (onNorthEdge) { ax = ex; ay = ey + 1; char = "\u2191"; } // ↑
+        else                  { ax = ex; ay = ey - 1; char = "\u2193"; } // ↓
       } else {
         const dx = px - ex;
         const dy = py - ey;
@@ -654,8 +670,15 @@
         if (!$gameMap.isPassable(ex, ey, passDir)) continue;
       }
 
-      // Never draw arrows on unpassable tiles or if their terrain tag is 4
-      if ($gameMap.terrainTag(ax, ay) === 4) continue;
+      // Safeguard: Never draw arrows directly over any Transfer event
+      const hasTransferAtTarget = $gameMap.eventsXy(ax, ay).some(ev => {
+          const evData = $dataMap.events[ev._eventId];
+          return evData && evData.name && evData.name.includes("Transfer");
+      });
+      if (hasTransferAtTarget) continue;
+
+      // Never draw arrows on unpassable tiles or if their terrain tag is 4 or 7
+      if ($gameMap.terrainTag(ax, ay) === 4 || $gameMap.terrainTag(ax, ay) === 7) continue;
       if (!$gameMap.isPassable(ax, ay, 2) && !$gameMap.isPassable(ax, ay, 4) && 
           !$gameMap.isPassable(ax, ay, 6) && !$gameMap.isPassable(ax, ay, 8)) continue;
 

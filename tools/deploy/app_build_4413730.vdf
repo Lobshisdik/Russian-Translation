@@ -7,7 +7,7 @@
 	"Desc" "Playtest build from automated upload"
 
 	// Build output folder (where Steam stores build logs)
-	"BuildOutput" "..\\tools\\steam_build_output_playtest"
+	"BuildOutput" "C:\\github\\hypernet-explorer\\tools\\steam_build_output_playtest"
 
 	// Content root path (absolute path to build directory)
 	"ContentRoot" "C:\\out\\hypernet-explorer"

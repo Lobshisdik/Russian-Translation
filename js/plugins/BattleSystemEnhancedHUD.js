@@ -259,15 +259,15 @@
   };
 
   //=========================================================================
-  // Original Tekken Bar Code continues below
+  // Original Battle Bar Code continues below
   //=========================================================================
 
-  function Sprite_TekkenBar() {
+  function Sprite_BattleBar() {
     this.initialize(...arguments);
   }
-  Sprite_TekkenBar.prototype = Object.create(Sprite.prototype);
-  Sprite_TekkenBar.prototype.constructor = Sprite_TekkenBar;
-  Sprite_TekkenBar.prototype.initialize = function (battler, isPlayer = false, customWidth = null, customHeight = null, isInactive = false) {
+  Sprite_BattleBar.prototype = Object.create(Sprite.prototype);
+  Sprite_BattleBar.prototype.constructor = Sprite_BattleBar;
+  Sprite_BattleBar.prototype.initialize = function (battler, isPlayer = false, customWidth = null, customHeight = null, isInactive = false) {
     Sprite.prototype.initialize.call(this);
     this._battler = battler;
     this._isPlayer = isPlayer;
@@ -319,7 +319,7 @@
     }
   };
 
-  Sprite_TekkenBar.prototype.createDamageFlashOverlay = function () {
+  Sprite_BattleBar.prototype.createDamageFlashOverlay = function () {
     if (!this._shouldUseBust) return;
 
     this._damageFlashSprite = new Sprite();
@@ -333,7 +333,7 @@
     this.addChild(this._damageFlashSprite);
   };
   // Add a method to update the position of the stat display
-  Sprite_TekkenBar.prototype.updateStatDisplayPosition = function (x, y) {
+  Sprite_BattleBar.prototype.updateStatDisplayPosition = function (x, y) {
     if (this._statDisplay) {
       this._statDisplay.x = x;
       this._statDisplay.y = y;
@@ -341,7 +341,7 @@
   };
 
   // Replace the createStatDisplay method with this new version:
-  Sprite_TekkenBar.prototype.createStatDisplay = function () {
+  Sprite_BattleBar.prototype.createStatDisplay = function () {
     this._statDisplay = new Sprite();
     this._statDisplay.bitmap = new Bitmap(
       barWidth * 2.5,
@@ -389,7 +389,7 @@
     this.refreshStatDisplay();
   };
 
-  Sprite_TekkenBar.prototype.refreshStatDisplay = function () {
+  Sprite_BattleBar.prototype.refreshStatDisplay = function () {
     if (!this._battler || !this._statDisplay) {
       return;
     }
@@ -499,7 +499,7 @@
 
     this._statDisplay.visible = hasContent;
   };
-  Sprite_TekkenBar.prototype.setCurrentSkill = function (skill) {
+  Sprite_BattleBar.prototype.setCurrentSkill = function (skill) {
     this._currentSkill = skill;
     if (skill && this._battler) {
       const tpCost = this._battler.skillTpCost(skill);
@@ -514,20 +514,20 @@
     }
     this.refreshTPOrb();
   };
-  Sprite_TekkenBar.prototype.setMpFlashAmount = function (amount) {
+  Sprite_BattleBar.prototype.setMpFlashAmount = function (amount) {
     this._mpFlashAmount = amount || 0;
     if (amount > 0) {
       this._mpFlashTimer = 0;
       this._mpFlashState = true;
     }
   };
-  Sprite_TekkenBar.prototype.createDamageOverlay = function () {
+  Sprite_BattleBar.prototype.createDamageOverlay = function () {
     this._damageOverlay = new Sprite();
     this._damageOverlay.bitmap = new Bitmap(this._barBitmapWidth, barHeight);
     this._damageOverlay.y = 0;
     this.addChild(this._damageOverlay);
   };
-  Sprite_TekkenBar.prototype.createTPOrb = function () {
+  Sprite_BattleBar.prototype.createTPOrb = function () {
     this._tpOrb = new Sprite();
     this._tpOrb.bitmap = new Bitmap(tpOrbSize, tpOrbSize);
     if (this._isPlayer) {
@@ -540,7 +540,7 @@
     this.refreshTPOrb();
   };
 
-  Sprite_TekkenBar.prototype.createPlayerTPOrb = function () {
+  Sprite_BattleBar.prototype.createPlayerTPOrb = function () {
     const FACE_W = 110;
     const GAP = 8;
     const cardH = this._playerCardHeight || 190;
@@ -554,14 +554,14 @@
     this.refreshPlayerTPOrb();
   };
 
-  Sprite_TekkenBar.prototype.refreshPlayerTPOrb = function () {
+  Sprite_BattleBar.prototype.refreshPlayerTPOrb = function () {
     if (!this._battler || !this._playerTpOrb) return;
     const savedOrb = this._tpOrb;
     this._tpOrb = this._playerTpOrb;
     this.refreshTPOrb();
     this._tpOrb = savedOrb;
   };
-  Sprite_TekkenBar.prototype.update = function () {
+  Sprite_BattleBar.prototype.update = function () {
     Sprite.prototype.update.call(this);
     if (!this._battler) {
       return;
@@ -616,6 +616,10 @@
         }
       }
 
+      const activeActor = BattleManager._currentActor ||
+        (BattleManager._subject && BattleManager._subject.isActor() ? BattleManager._subject : null);
+      const activeActorId = activeActor ? activeActor.actorId() : 0;
+
       const currentStatesHash = this._battler.states().map((s) => s.id).join(",");
       if (
         b.hp !== this._lastHp ||
@@ -624,7 +628,8 @@
         b.mmp !== this._lastMaxMp ||
         b.tp !== this._lastTp ||
         chunkAnimating ||
-        this._lastStatesHash !== currentStatesHash
+        this._lastStatesHash !== currentStatesHash ||
+        this._lastActiveActorId !== activeActorId
       ) {
         this.refreshSimpleStatus();
         this._lastHp = b.hp;
@@ -633,6 +638,7 @@
         this._lastMaxMp = b.mmp;
         this._lastTp = b.tp;
         this._lastStatesHash = currentStatesHash;
+        this._lastActiveActorId = activeActorId;
       }
       return;
     }
@@ -734,7 +740,7 @@
       }
     }
   };
-  Sprite_TekkenBar.prototype.updateGradientAnimation = function () {
+  Sprite_BattleBar.prototype.updateGradientAnimation = function () {
     // Update gradient phase for all animations
     this._gradientPhase += 0.01 * gradientSpeed;
     if (this._gradientPhase > Math.PI * 2) {
@@ -773,7 +779,7 @@
     }
   };
 
-  Sprite_TekkenBar.prototype.updateDamageOverlay = function () {
+  Sprite_BattleBar.prototype.updateDamageOverlay = function () {
     const w = this.bitmap.width;
     const b = this._battler;
     const hpRate = this._displayHp / Math.max(1, b.mhp);
@@ -800,9 +806,16 @@
       }
     }
   };
-  Sprite_TekkenBar.prototype.refreshTPOrb = function () {
+  Sprite_BattleBar.prototype.refreshTPOrb = function () {
     if (!this._battler || !this._tpOrb) {
       return;
+    }
+
+    if (window.AsciiMode && window.AsciiMode.active) {
+      this._tpOrb.visible = false;
+      return;
+    } else {
+      this._tpOrb.visible = true;
     }
 
     const b = this._battler;
@@ -952,7 +965,7 @@
     bitmap._baseTexture.update();
   };
 
-  Sprite_TekkenBar.prototype.refresh = function () {
+  Sprite_BattleBar.prototype.refresh = function () {
     if (!this._battler) {
       return;
     }
@@ -960,6 +973,115 @@
     const b = this._battler;
     const hpRate = this._displayHp / Math.max(1, b.mhp);
     this.bitmap.clear();
+
+    // ASCII Mode Rendering
+    if (window.AsciiMode && window.AsciiMode.active) {
+      this.bitmap.fontSize = 12;
+      this.bitmap.textColor = "#ffffff";
+      this.bitmap.fontFace = "monospace";
+      this.bitmap.outlineWidth = 0; // No outline for ASCII look
+
+      let y = 0;
+      const lineHeight = 16;
+
+      // Draw Name and Level
+      const levelStr = b.level ? ` L.${b.level}` : "";
+      const nameStr = b.name() + levelStr;
+      this.bitmap.textColor = "#ffd700"; // Gold for names
+      this.bitmap.drawText(nameStr, 0, y, w, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw HP
+      const hpBars = Math.floor(hpRate * 40);
+      const hpStr = `[${'='.repeat(Math.max(0, hpBars))}${' '.repeat(Math.max(0, 40 - hpBars))}]`;
+      this.bitmap.textColor = "#ff4444"; // Red for HP
+      this.bitmap.drawText(`HP ${hpStr} ${Math.floor(this._displayHp)}/${b.mhp}`, 0, y, w, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw MP
+      const mpRate = b.mp / Math.max(1, b.mmp);
+      const mpBars = Math.floor(mpRate * 30);
+      const mpStr = `[${'*'.repeat(Math.max(0, mpBars))}${' '.repeat(Math.max(0, 30 - mpBars))}]`;
+      this.bitmap.textColor = "#00ffff"; // Cyan for MP
+      this.bitmap.drawText(`MP ${mpStr} ${b.mp}/${b.mmp}`, 0, y, w, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw TP or Deck Count
+      let tpStr = "";
+      if ($gameSwitches.value(45) && this._isPlayer) {
+        const deckCount = Math.min(window.$deckCount || 0, 40);
+        const deckBars = Math.floor(deckCount / 2);
+        tpStr = `DK [${'#'.repeat(Math.max(0, deckBars))}${' '.repeat(20 - Math.max(0, deckBars))}] ${deckCount}/40`;
+        this.bitmap.textColor = "#ff9900"; // Orange for Deck
+        this.bitmap.drawText(tpStr, 0, y, w, lineHeight, "left");
+        y += lineHeight;
+      } else {
+        const tpRate = b.tp / 100;
+        const tpBars = Math.floor(tpRate * 30);
+        tpStr = `TP [${'^'.repeat(Math.max(0, tpBars))}${' '.repeat(Math.max(0, 30 - tpBars))}] ${Math.floor(b.tp)}/100`;
+        this.bitmap.textColor = "#00ff00"; // Green for TP
+        this.bitmap.drawText(tpStr, 0, y, w, lineHeight, "left");
+        y += lineHeight;
+      }
+
+      // For enemies, draw weaknesses, states, and body parts
+      if (!this._isPlayer) {
+        this.bitmap.fontSize = 10;
+
+        // Elements
+        let weakElements = [];
+        // Check if elementIcons is defined, otherwise fallback
+        const elemIcons = typeof elementIcons !== 'undefined' ? elementIcons : [];
+        for (let i = 1; i < elemIcons.length; i++) {
+          const rate = b.elementRate(i);
+          if (rate >= 2.0 && i !== 1) {
+            const rawName = $dataSystem.elements[i] || "";
+            const name = window.translateText ? window.translateText(rawName) : rawName;
+            const multiplier = Math.floor(rate);
+            weakElements.push(`${name} x${multiplier}`);
+          }
+        }
+        if (weakElements.length > 0) {
+          this.bitmap.textColor = "#ff00ff"; // Magenta for weaknesses
+          this.bitmap.drawText(`WEAK: ${weakElements.join(', ')}`, 0, y, w, lineHeight, "left");
+          y += lineHeight;
+        }
+
+        // States
+        const activeStates = b.states().map(s => window.translateText ? window.translateText(s.name) : s.name);
+        if (activeStates.length > 0) {
+          this.bitmap.textColor = "#ffff00"; // Yellow for states
+          this.bitmap.drawText(`STAT: ${activeStates.join(', ')}`, 0, y, w, lineHeight, "left");
+          y += lineHeight;
+        }
+
+        // Body Parts
+        if (b._bodyParts) {
+          const archetype = window.Health && window.Health.EnemyArchetypes ? window.Health.EnemyArchetypes[b._archetypeName] : null;
+          if (archetype) {
+            let destroyedParts = [];
+            for (const partKey in b._bodyParts) {
+              const part = b._bodyParts[partKey];
+              if (part.destroyed) {
+                const basePart = archetype.parts[partKey];
+                if (basePart) {
+                  const partName = window.getArchetypeText ? window.getArchetypeText(basePart.name) : partKey;
+                  destroyedParts.push(partName);
+                }
+              }
+            }
+            if (destroyedParts.length > 0) {
+              this.bitmap.textColor = "#ff4444"; // Red for destroyed parts
+              this.bitmap.drawText(`DMG: ${destroyedParts.join(', ')}`, 0, y, w, lineHeight, "left");
+              y += lineHeight;
+            }
+          }
+        }
+      }
+
+      this.bitmap._baseTexture.update();
+      return;
+    }
 
     // NEW: Animated gradient logic
     const gradientWidth = w * 1.5;
@@ -1430,8 +1552,8 @@
     }
     const skill = this.item();
     const scene = SceneManager._scene;
-    if (scene instanceof Scene_Battle && scene._tekkenHealthBarSprites) {
-      for (const sprite of scene._tekkenHealthBarSprites) {
+    if (scene instanceof Scene_Battle && scene._battleHealthBarSprites) {
+      for (const sprite of scene._battleHealthBarSprites) {
         if (sprite && sprite._battler === this._actor) {
           sprite.setCurrentSkill(skill);
           if (skill) {
@@ -1449,8 +1571,8 @@
   Window_SkillList.prototype.deactivate = function () {
     _Window_SkillList_deactivate.call(this);
     const scene = SceneManager._scene;
-    if (scene instanceof Scene_Battle && scene._tekkenHealthBarSprites) {
-      for (const sprite of scene._tekkenHealthBarSprites) {
+    if (scene instanceof Scene_Battle && scene._battleHealthBarSprites) {
+      for (const sprite of scene._battleHealthBarSprites) {
         if (sprite && sprite._battler === this._actor) {
           sprite.setCurrentSkill(null);
           sprite.setMpFlashAmount(0);
@@ -1487,7 +1609,7 @@
     }
   };
   // Create a method to get status effects
-  Sprite_TekkenBar.prototype.getStatusEffects = function () {
+  Sprite_BattleBar.prototype.getStatusEffects = function () {
     if (!this._battler) return [];
     return this._battler.states().map((state) => state.name);
   };
@@ -1496,10 +1618,10 @@
     Scene_Battle.prototype.createDisplayObjects;
   Scene_Battle.prototype.createDisplayObjects = function () {
     _Scene_Battle_createDisplayObjects.call(this);
-    this.createTekkenHealthBars();
+    this.createBattleHealthBars();
   };
-  Scene_Battle.prototype.createTekkenHealthBars = function () {
-    this._tekkenHealthBarSprites = [];
+  Scene_Battle.prototype.createBattleHealthBars = function () {
+    this._battleHealthBarSprites = [];
 
     // Get responsive positions based on current resolution
     const positions = getResponsiveBarPositions();
@@ -1516,14 +1638,14 @@
 
     for (let i = 0; i < partyMembers.length; i += 1) {
       const actor = partyMembers[i];
-      const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H);
+      const sprite = new Sprite_BattleBar(actor, true, PCARD_W, PCARD_H);
 
       // cards stacked downward from top left; sprite.y is card bottom edge
       sprite.x = PCARD_LEFT + playerBarX;
       sprite.y = PCARD_TOP + PCARD_H + i * (PCARD_H + PCARD_SPACING);
 
       this.addChild(sprite);
-      this._tekkenHealthBarSprites.push(sprite);
+      this._battleHealthBarSprites.push(sprite);
     }
 
     // Reserve/inactive party members shown below active ones
@@ -1531,11 +1653,11 @@
     const inactiveMembers = $gameParty.members().filter(a => !activeMemberIds.has(a.actorId()));
     for (let i = 0; i < inactiveMembers.length; i++) {
       const actor = inactiveMembers[i];
-      const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H, true);
+      const sprite = new Sprite_BattleBar(actor, true, PCARD_W, PCARD_H, true);
       sprite.x = PCARD_LEFT + playerBarX;
       sprite.y = PCARD_TOP + PCARD_H + (partyMembers.length + i) * (PCARD_H + PCARD_SPACING);
       this.addChild(sprite);
-      this._tekkenHealthBarSprites.push(sprite);
+      this._battleHealthBarSprites.push(sprite);
     }
 
     // Create Enemy Bars - right-aligned
@@ -1543,11 +1665,11 @@
     for (let i = 0; i < $gameTroop.members().length; i += 1) {
       const enemy = $gameTroop.members()[i];
       if (enemy.isAlive()) {
-        const sprite = new Sprite_TekkenBar(enemy, false, enemyLargeBarWidth);
+        const sprite = new Sprite_BattleBar(enemy, false, enemyLargeBarWidth);
         sprite.x = enemyRightX;
         sprite.y = positions.barsY + i * barSpacing;
         this.addChild(sprite);
-        this._tekkenHealthBarSprites.push(sprite);
+        this._battleHealthBarSprites.push(sprite);
       }
     }
   };
@@ -1611,22 +1733,22 @@
   const _Scene_Battle_update = Scene_Battle.prototype.update;
   Scene_Battle.prototype.update = function () {
     _Scene_Battle_update.call(this);
-    this.updateTekkenHealthBars();
+    this.updateBattleHealthBars();
   };
-  Scene_Battle.prototype.updateTekkenHealthBars = function () {
+  Scene_Battle.prototype.updateBattleHealthBars = function () {
     // Determine whose turn it is (inputting or executing)
     const activeActor = BattleManager._currentActor ||
       (BattleManager._subject && BattleManager._subject.isActor() ? BattleManager._subject : null);
 
-    for (const sprite of this._tekkenHealthBarSprites) {
+    for (const sprite of this._battleHealthBarSprites) {
       if (sprite && sprite._battler) {
         if (sprite._isPlayer) {
           sprite.visible = true;
           // Checkerboard + overlay only on the active actor; solid base always visible
           const isActive = sprite._battler === activeActor;
           if (sprite._solidBackground) sprite._solidBackground.visible = true;
-          if (sprite._backgroundPattern) sprite._backgroundPattern.visible = sprite._isInactiveMember || isActive;
-          if (sprite._backgroundOverlay) sprite._backgroundOverlay.visible = isActive;
+          if (sprite._backgroundPattern) sprite._backgroundPattern.visible = false;
+          if (sprite._backgroundOverlay) sprite._backgroundOverlay.visible = false;
         } else {
           sprite.visible = sprite._battler.isAlive();
         }
@@ -1637,7 +1759,7 @@
     Window_ActorCommand.prototype.initialize;
 
   // Create a method to get stat display values
-  Sprite_TekkenBar.prototype.getStatChanges = function () {
+  Sprite_BattleBar.prototype.getStatChanges = function () {
     if (!this._battler) return {};
 
     const changes = {};
@@ -1716,13 +1838,13 @@
   const _Scene_Battle_terminate = Scene_Battle.prototype.terminate;
   Scene_Battle.prototype.terminate = function () {
     _Scene_Battle_terminate.call(this);
-    this.removeTekkenHealthBars();
+    this.removeBattleHealthBars();
   };
-  Scene_Battle.prototype.removeTekkenHealthBars = function () {
+  Scene_Battle.prototype.removeBattleHealthBars = function () {
 
     // Original cleanup code
-    if (this._tekkenHealthBarSprites) {
-      for (const sprite of this._tekkenHealthBarSprites) {
+    if (this._battleHealthBarSprites) {
+      for (const sprite of this._battleHealthBarSprites) {
         if (sprite) {
           this.removeChild(sprite);
           if (sprite._statDisplay) {
@@ -1730,7 +1852,7 @@
           }
         }
       }
-      this._tekkenHealthBarSprites = [];
+      this._battleHealthBarSprites = [];
     }
   };
 
@@ -1741,7 +1863,7 @@
   // NEW: This function creates the animated background for Actors 2 & 3
   // MODIFIED: This function creates the animated background for Actors 2 & 3
   // MODIFIED: This function creates the animated background for Actors 2 & 3
-  Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
+  Sprite_BattleBar.prototype.createSimpleDisplayBackground = function () {
     // 1. Create the bitmap that will hold our square pattern
     const patternBitmap = new Bitmap(128, 128);
     const size = 16;
@@ -1782,7 +1904,7 @@
     this.addChild(this._backgroundOverlay);
   };
   // MODIFIED: This now creates card-style layout for party members - aspect ratio aware
-  Sprite_TekkenBar.prototype.createSimpleStatusDisplay = function () {
+  Sprite_BattleBar.prototype.createSimpleStatusDisplay = function () {
     this._simpleStatusDisplay = new Sprite();
 
     const cardWidth = this._playerCardWidth || 160;
@@ -1866,7 +1988,7 @@
 
     this.refreshSimpleStatus();
   };
-  Sprite_TekkenBar.prototype.triggerDamageFlash = function () {
+  Sprite_BattleBar.prototype.triggerDamageFlash = function () {
     if (!this._damageFlashSprite) return;
 
     this._damageFlashTimer = 20; // 20 frames of flash
@@ -1881,7 +2003,7 @@
   };
   // MODIFIED: This now only draws the text and bust image
   // MODIFIED: This function creates the animated background for Actors 2 & 3 - covers info/bars area
-  Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
+  Sprite_BattleBar.prototype.createSimpleDisplayBackground = function () {
     // Checkerboard tile bitmap
     const patternBitmap = new Bitmap(128, 128);
     const size = 16;
@@ -1937,7 +2059,7 @@
 
   // MODIFIED: This now just creates the foreground elements for the simple display
   // MODIFIED: This now just creates the foreground elements for the simple display
-  Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
+  Sprite_BattleBar.prototype.refreshSimpleStatus = function () {
     if (!this._simpleStatusDisplay || !this._battler) return;
     const bitmap = this._simpleStatusDisplay.bitmap;
     bitmap.clear();
@@ -2066,12 +2188,68 @@
     bitmap._baseTexture.update();
   };
 
-  Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
+  Sprite_BattleBar.prototype.refreshSimpleStatus = function () {
     if (!this._simpleStatusDisplay || !this._battler) return;
     const bitmap = this._simpleStatusDisplay.bitmap;
     bitmap.clear();
     const b = this._battler;
     const W = bitmap.width;
+
+    if (window.AsciiMode && window.AsciiMode.active) {
+      bitmap.fontSize = 12;
+      bitmap.textColor = "#ffffff";
+      bitmap.fontFace = "monospace";
+      bitmap.outlineWidth = 0;
+
+      let y = 0;
+      const lineHeight = 16;
+
+      const activeActor = BattleManager._currentActor ||
+        (BattleManager._subject && BattleManager._subject.isActor() ? BattleManager._subject : null);
+      const isActive = this._battler === activeActor;
+
+      // Draw Name and Level
+      const actorLevel = b.level ? ` L.${b.level}` : "";
+      const nameStr = b.name() + actorLevel;
+      bitmap.textColor = "#ffd700"; // Gold for names
+      bitmap.drawText(nameStr, 0, y, W, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw HP
+      const hpRate = (this._displayHp !== undefined ? this._displayHp : b.hp) / Math.max(1, b.mhp);
+      const hpBars = Math.floor(hpRate * 20);
+      const hpStr = `[${'='.repeat(Math.max(0, hpBars))}${' '.repeat(Math.max(0, 20 - hpBars))}]`;
+      bitmap.textColor = isActive ? "#ff4444" : "#ffffff"; // Red for HP if active, else white
+      bitmap.drawText(`HP ${hpStr} ${Math.floor(this._displayHp !== undefined ? this._displayHp : b.hp)}/${b.mhp}`, 0, y, W, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw MP
+      const mpRate = b.mp / Math.max(1, b.mmp);
+      const mpBars = Math.floor(mpRate * 15);
+      const mpStr = `[${'*'.repeat(Math.max(0, mpBars))}${' '.repeat(Math.max(0, 15 - mpBars))}]`;
+      bitmap.textColor = isActive ? "#00ffff" : "#ffffff"; // Cyan for MP if active, else white
+      bitmap.drawText(`MP ${mpStr} ${b.mp}/${b.mmp}`, 0, y, W, lineHeight, "left");
+      y += lineHeight;
+
+      // Draw TP or Deck Count
+      let tpStr = "";
+      if ($gameSwitches.value(45)) {
+        const deckCount = Math.min(window.$deckCount || 0, 40);
+        const deckBars = Math.floor(deckCount / 2);
+        tpStr = `DK [${'#'.repeat(Math.max(0, deckBars))}${' '.repeat(20 - Math.max(0, deckBars))}] ${deckCount}/40`;
+        bitmap.textColor = isActive ? "#ff9900" : "#ffffff"; // Orange for Deck if active, else white
+        bitmap.drawText(tpStr, 0, y, W, lineHeight, "left");
+      } else {
+        const tpRate = b.tp / 100;
+        const tpBars = Math.floor(tpRate * 15);
+        tpStr = `TP [${'^'.repeat(Math.max(0, tpBars))}${' '.repeat(Math.max(0, 15 - tpBars))}] ${Math.floor(b.tp)}/100`;
+        bitmap.textColor = isActive ? "#00ff00" : "#ffffff"; // Green for TP if active, else white
+        bitmap.drawText(tpStr, 0, y, W, lineHeight, "left");
+      }
+
+      bitmap._baseTexture.update();
+      return;
+    }
     const H = bitmap.height;
     const ctx = bitmap.context;
     const pad = 6;
@@ -2201,7 +2379,7 @@
   };
 
   // (legacy stubs kept for compatibility)
-  Sprite_TekkenBar.prototype._drawVerticalCard = function (bitmap, b, cardWidth, cardHeight) {
+  Sprite_BattleBar.prototype._drawVerticalCard = function (bitmap, b, cardWidth, cardHeight) {
     const name = b.name();
     const hp = b.hp;
     const mp = b.mp;
@@ -2284,7 +2462,7 @@
   };
 
   // HELPER: Draw horizontal rectangle layout for 4:3 aspect ratio
-  Sprite_TekkenBar.prototype._drawHorizontalCard = function (bitmap, b, cardWidth, cardHeight) {
+  Sprite_BattleBar.prototype._drawHorizontalCard = function (bitmap, b, cardWidth, cardHeight) {
     const name = b.name();
     const hp = b.hp;
     const mp = b.mp;

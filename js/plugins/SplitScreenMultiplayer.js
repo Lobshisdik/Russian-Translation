@@ -44,6 +44,12 @@
  * @value horizontal
  * @default vertical
  *
+ * @param AutoStartSplitScreen
+ * @text Auto-Start Split-Screen
+ * @desc Automatically start a split-screen session with a random character on new game.
+ * @type boolean
+ * @default false
+ *
  * @param ---Character Pool---
  * @default
  *
@@ -82,6 +88,10 @@
  * @text P2 Key Action (OK)
  * @default e
  *
+ * @param P2KeyDash
+ * @text P2 Key Dash (Shift)
+ * @default q
+ *
  * @param ---Gamepad---
  * @default
  *
@@ -102,9 +112,10 @@
     const P2_EVENT_NAME = String(params["Player2EventName"] || "Player2");
     const PROXIMITY = Number(params["ProximityThreshold"] || 8);
     const SPLIT_DIR = String(params["SplitOrientation"] || "vertical");
+    const AUTO_START = params["AutoStartSplitScreen"] === "true";
 
     let CHAR_POOL, INDEX_POOL;
-    
+
     const SKAB_POOL = [
         "!$11", "!$14", "!$19", "!$2", "!$21", "!$28", "!$3", "!$32", "!$33", "!$46", "!$49", "!$59",
         "!$AirlinePilot", "!$AlienDargos", "!$AlienGrey", "!$AlienTrucker", "!$AlpineGuide", "!$Anarchist", "!$AnarchistSamurai",
@@ -132,7 +143,8 @@
         down: String(params["P2KeyDown"] || "s").toLowerCase(),
         left: String(params["P2KeyLeft"] || "a").toLowerCase(),
         right: String(params["P2KeyRight"] || "d").toLowerCase(),
-        action: String(params["P2KeyAction"] || "e").toLowerCase()
+        action: String(params["P2KeyAction"] || "e").toLowerCase(),
+        dash: String(params["P2KeyDash"] || "q").toLowerCase()
     };
 
     const P2_STICK_DEAD = parseFloat(params["P2StickDeadzone"] || "0.25");
@@ -145,6 +157,29 @@
     delete Input.keyMapper[104]; // Numpad 8
     delete Input.keyMapper[107]; // Numpad +
     delete Input.keyMapper[110]; // Numpad .
+
+    // =========================================================================
+    // I18N Helper for Traits
+    // =========================================================================
+    let _traitsI18nData = null;
+
+    const resolveI18nPath = (path, obj) => {
+        if (!path || !obj) return null;
+        return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    };
+
+    const loadTraitsI18n = async () => {
+        const lang = ConfigManager.language || "en";
+        const url = `js/plugins/i18n/${lang}/traits.json`;
+        try {
+            const response = await fetch(url);
+            _traitsI18nData = await response.json();
+            return _traitsI18nData;
+        } catch (e) {
+            console.error("SplitScreenMultiplayer: Failed to load i18n data from " + url, e);
+            return null;
+        }
+    };
 
     // =========================================================================
     // GamepadManager (Smart Detection)
@@ -216,8 +251,8 @@
         p2CharIndex: 0,
         p2Event: null,
         isSplit: false,
-        p2Input: { up: false, down: false, left: false, right: false, action: false },
-        _prevP2Input: { up: false, down: false, left: false, right: false, action: false },
+        p2Input: { up: false, down: false, left: false, right: false, action: false, dash: false },
+        _prevP2Input: { up: false, down: false, left: false, right: false, action: false, dash: false },
         _savedPartyIds: [],
 
         init() {
@@ -369,7 +404,7 @@
         startSession(candidate) {
             this._savedPartyIds = $gameParty._actors.slice();
             const p1Id = $gameParty._actors[0];
-            
+
             if (candidate.type === "existing") {
                 const p2Id = candidate.actor.actorId();
                 $gameParty._actors = [p1Id, p2Id];
@@ -380,12 +415,17 @@
                 $gameParty._actors = [p1Id, guestId];
                 this._p2ActorId = guestId;
             }
-            
+
             $gamePlayer.refresh();
             this.active = true;
             $gameSwitches.setValue(67, true);
             this.resolveP2Character();
-            if (typeof findOrCreateP2Event === 'function') findOrCreateP2Event();
+            if (typeof findOrCreateP2Event === 'function') findOrCreateP2Event(true);
+
+            // Disable MousePanZoom and restore defaults
+            $gameSystem._mousePanZoomDisabled = true;
+            $gameScreen.setZoom(Graphics.width / 2, Graphics.height / 2, 1.0);
+            $gameMap.setDisplayPos($gamePlayer.x - $gameMap.screenTileX() / 2, $gamePlayer.y - $gameMap.screenTileY() / 2);
         },
 
         stopSession() {
@@ -404,6 +444,9 @@
             this.p2Event = null;
             this.isSplit = false;
             $gamePlayer.refresh();
+
+            // Re-enable MousePanZoom
+            $gameSystem._mousePanZoomDisabled = false;
         },
 
         pollInput() {
@@ -419,6 +462,7 @@
             let left = !!keys[P2_KEYS.left] || !!codes["Numpad4"];
             let right = !!keys[P2_KEYS.right] || !!codes["Numpad6"];
             let action = !!keys[P2_KEYS.action] || !!codes["NumpadEnter"] || !!codes["Numpad0"];
+            let dash = !!keys[P2_KEYS.dash] || !!codes["ShiftRight"];
 
             // Gamepad
             const gpIndex = GamepadManager.getP2GamepadIndex();
@@ -428,6 +472,7 @@
                 if (GamepadManager.isButtonPressed(gpIndex, 14)) left = true;  // D-Pad Left
                 if (GamepadManager.isButtonPressed(gpIndex, 15)) right = true; // D-Pad Right
                 if (GamepadManager.isButtonPressed(gpIndex, 0)) action = true;  // A button
+                if (GamepadManager.isButtonPressed(gpIndex, 1)) dash = true;    // B button
 
                 const stickX = GamepadManager.getAxisValue(gpIndex, 0);
                 const stickY = GamepadManager.getAxisValue(gpIndex, 1);
@@ -437,7 +482,7 @@
                 if (stickX > 0) right = true;
             }
 
-            this.p2Input = { up, down, left, right, action };
+            this.p2Input = { up, down, left, right, action, dash };
         },
 
         isTriggered(key) {
@@ -531,6 +576,13 @@
             this.createHelpWindow();
             this.createCandidates();
             this.createCommandWindow();
+
+            // Load traits i18n data if not already loaded
+            if (!_traitsI18nData) {
+                loadTraitsI18n().then(() => {
+                    if (this._detailsWindow) this._detailsWindow.refresh();
+                });
+            }
         }
 
         createHelpWindow() {
@@ -556,6 +608,10 @@
             this.addWindow(this._commandWindow);
 
             this.createDetailsWindow();
+
+            // Activate and select first candidate
+            this._commandWindow.activate();
+            this._commandWindow.select(0);
         }
 
         createDetailsWindow() {
@@ -565,7 +621,6 @@
             const wy = this._helpWindow.height;
             this._detailsWindow = new Window_SplitScreenCharDetails(new Rectangle(wx, wy, ww, wh));
             this.addWindow(this._detailsWindow);
-            this.onCandidateChange();
         }
 
         onCandidateChange() {
@@ -605,9 +660,11 @@
 
         itemHeight() { return this.lineHeight() * 2; }
 
-        updateHelp() {
-            super.updateHelp();
-            this.callHandler("select");
+        select(index) {
+            super.select(index);
+            if (this.active) {
+                this.callHandler("select");
+            }
         }
     }
 
@@ -619,10 +676,26 @@
 
         getTraitName(trait) {
             const lang = ConfigManager.language || "en";
-            if (trait.name && typeof trait.name === "object") {
-                return trait.name[lang] || trait.name["en"];
+            let name = trait.name;
+
+            if (name && typeof name === "object") {
+                name = name[lang] || name["en"];
             }
-            return trait.name || "Unknown Trait";
+
+            if (typeof name === "string" && name.includes('.')) {
+                // Try Hendrix Localization first
+                if (window.translateText) {
+                    const translated = window.translateText(name);
+                    if (translated !== name) return translated;
+                }
+                // Fallback to local traits i18n data
+                if (_traitsI18nData) {
+                    const localized = resolveI18nPath(name, _traitsI18nData);
+                    if (localized) return localized;
+                }
+            }
+
+            return name || "Unknown Trait";
         }
 
         refresh() {
@@ -641,7 +714,8 @@
 
             // Stats
             this.changeTextColor(this.systemColor());
-            this.drawText("Stats", 20, y, half);
+            const statsLabel = window.translateText ? window.translateText("Stats") : "Stats";
+            this.drawText(statsLabel, 20, y, half);
             this.resetTextColor();
             y += this.lineHeight();
 
@@ -654,28 +728,33 @@
             stats.forEach((s, i) => {
                 const sx = (i % 2) * (half / 2) + 40;
                 const sy = y + Math.floor(i / 2) * this.lineHeight();
-                this.drawText(`${s.n}: ${s.v}`, sx, sy, half / 2);
+                const statName = window.translateText ? window.translateText(s.n) : s.n;
+                this.drawText(`${statName}: ${s.v}`, sx, sy, half / 2);
             });
 
             // Equipment & Traits
             let ty = this.lineHeight() * 2.5;
-            
+
             // Equipment
             this.changeTextColor(this.systemColor());
-            this.drawText("Equipment", half, ty, half);
+            const equipLabel = window.translateText ? window.translateText("Equipment") : "Equipment";
+            this.drawText(equipLabel, half, ty, half);
             this.resetTextColor();
             ty += this.lineHeight();
             if (c.weapon) {
+                const weaponName = window.translateText ? window.translateText(c.weapon.name) : c.weapon.name;
                 this.drawIcon(c.weapon.iconIndex, half + 20, ty);
-                this.drawText(c.weapon.name, half + 56, ty, half - 60);
+                this.drawText(weaponName, half + 56, ty, half - 60);
             } else {
-                this.drawText("None", half + 56, ty, half - 60);
+                const noneLabel = window.translateText ? window.translateText("None") : "None";
+                this.drawText(noneLabel, half + 56, ty, half - 60);
             }
             ty += this.lineHeight() * 1.5;
 
             // Traits
             this.changeTextColor(this.systemColor());
-            this.drawText("Traits", half, ty, half);
+            const traitsLabel = window.translateText ? window.translateText("Traits") : "Traits";
+            this.drawText(traitsLabel, half, ty, half);
             this.resetTextColor();
             ty += this.lineHeight();
 
@@ -780,21 +859,15 @@
 
     // Title Menu Integration removed as requested
 
-    // Input Hijacking for P1 (if 2+ gamepads, P1 uses GP0, otherwise default)
-    const _Input_update = Input.update;
-    Input.update = function () {
-        _Input_update.call(this);
-        const p1GpIdx = GamepadManager.getP1GamepadIndex();
-        if (p1GpIdx >= 0) {
-            const gp = navigator.getGamepads()[p1GpIdx];
-            if (gp) {
-                if (GamepadManager.isButtonPressed(p1GpIdx, 12)) Input._currentState['up'] = true;
-                if (GamepadManager.isButtonPressed(p1GpIdx, 13)) Input._currentState['down'] = true;
-                if (GamepadManager.isButtonPressed(p1GpIdx, 14)) Input._currentState['left'] = true;
-                if (GamepadManager.isButtonPressed(p1GpIdx, 15)) Input._currentState['right'] = true;
-                if (GamepadManager.isButtonPressed(p1GpIdx, 0)) Input._currentState['ok'] = true;
-            }
+    // Input Hijacking for P1 (Ensures P1 doesn't use P2's gamepad)
+    const _Input_updateGamepadState = Input._updateGamepadState;
+    Input._updateGamepadState = function (gamepad) {
+        if (SplitScreenManager.active) {
+            const p1GpIdx = GamepadManager.getP1GamepadIndex();
+            // If P1 index is -1 or doesn't match this gamepad, ignore it for P1
+            if (p1GpIdx < 0 || (gamepad && gamepad.index !== p1GpIdx)) return;
         }
+        _Input_updateGamepadState.call(this, gamepad);
     };
 
     const _SceneManager_updateInputData = SceneManager.updateInputData;
@@ -809,12 +882,17 @@
     const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
     Scene_Map.prototype.onMapLoaded = function () {
         _Scene_Map_onMapLoaded.call(this);
-        if (SplitScreenManager.active) findOrCreateP2Event();
+        if (SplitScreenManager.active) findOrCreateP2Event(false);
     };
 
-    function findOrCreateP2Event() {
-        SplitScreenManager.p2Event = null;
-        if (!$gameMap) return;
+    function findOrCreateP2Event(forceTeleport = false) {
+        if (!$gameMap || !$gameSystem) return;
+
+        const currentMapId = $gameMap.mapId();
+        const lastMapId = $gameSystem._lastP2MapId || 0;
+        const mapChanged = (currentMapId !== lastMapId);
+        $gameSystem._lastP2MapId = currentMapId;
+
         SplitScreenManager.resolveP2Character();
         const event = $gameMap.events().find(ev => ev && ev.event().name === P2_EVENT_NAME);
         if (event) {
@@ -822,9 +900,15 @@
             event.setImage(SplitScreenManager.p2CharName, SplitScreenManager.p2CharIndex);
             event.setOpacity(255);
             event.setPriorityType(1);
-            event.setMoveSpeed(5);
-            // Teleport near P1
-            event.locate($gamePlayer.x, $gamePlayer.y);
+            event.setMoveSpeed($gamePlayer.moveSpeed());
+            event.setMoveFrequency(5);
+
+            // Only teleport near P1 if map changed or forced (e.g. starting session)
+            if (forceTeleport || mapChanged) {
+                event.locate($gamePlayer.x, $gamePlayer.y);
+            }
+        } else {
+            SplitScreenManager.p2Event = null;
         }
     }
 
@@ -837,27 +921,124 @@
     };
 
     function updateP2Movement() {
+        if ($gameMap.isEventRunning() || $gameMessage.isBusy()) return;
         const ev = SplitScreenManager.p2Event;
+        if (!ev) return;
+
+        // Ensure Highest frequency for smooth player-like movement
+        if (ev.moveFrequency() !== 5) ev.setMoveFrequency(5);
+
         const input = SplitScreenManager.p2Input;
+        
+        // Sync speed with player 1 and handle dashing manually
+        const baseSpeed = $gamePlayer.moveSpeed();
+        const canDash = input.dash && !ev._isSwimming && !ev._isClimbing;
+        const targetSpeed = canDash ? baseSpeed + 1 : baseSpeed;
+        if (ev.moveSpeed() !== targetSpeed) {
+            ev.setMoveSpeed(targetSpeed);
+        }
         let dir = 0;
         if (input.up) dir = 8;
         if (input.down) dir = 2;
         if (input.left) dir = 4;
         if (input.right) dir = 6;
-        if (dir > 0) ev.moveStraight(dir);
+        if (dir > 0) {
+            ev.moveStraight(dir);
+            checkP2TouchTriggers(ev, dir);
+        }
 
         if (SplitScreenManager.isTriggered("action")) {
             const d = ev.direction();
             const x2 = $gameMap.roundXWithDirection(ev.x, d);
             const y2 = $gameMap.roundYWithDirection(ev.y, d);
+            let triggered = false;
             $gameMap.eventsXy(x2, y2).forEach(target => {
-                if (target !== ev && target.isTriggerIn([0])) target.start();
+                if (target !== ev && target.isTriggerIn([0])) {
+                    $gameMessage._eventActivator = "p2";
+                    target.start();
+                    triggered = true;
+                }
             });
             $gameMap.eventsXy(ev.x, ev.y).forEach(target => {
-                if (target !== ev && target.isTriggerIn([1, 2])) target.start();
+                if (target !== ev && target.isTriggerIn([1, 2])) {
+                    $gameMessage._eventActivator = "p2";
+                    target.start();
+                    triggered = true;
+                }
             });
+
+            // Map Puzzle System interactions (Levers, Switches, etc.)
+            if (!triggered && window.MapPuzzleSystem) {
+                triggered = window.MapPuzzleSystem.checkPuzzleInteractions(ev);
+            }
+
+            // Movement system interactions (Swimming, Climbing, Fishing)
+            if (!triggered && SceneManager._scene instanceof Scene_Map) {
+                SceneManager._scene.checkMovementInteraction(ev);
+            }
         }
+
+        // Handle Dashing (Handled manually above via setMoveSpeed)
+        ev._dashing = false;
     }
+
+    const _Game_Player_triggerButtonAction = Game_Player.prototype.triggerButtonAction;
+    Game_Player.prototype.triggerButtonAction = function () {
+        const result = _Game_Player_triggerButtonAction.call(this);
+        if (result) {
+            $gameMessage._eventActivator = "p1";
+        }
+        return result;
+    };
+
+    const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
+    Game_Player.prototype.performTransfer = function () {
+        if (SplitScreenManager.active) {
+            const mapChanged = (this._newMapId !== $gameMap.mapId());
+            _Game_Player_performTransfer.call(this);
+            if (!mapChanged) {
+                // Same map teleport - need to move P2 manually because onMapLoaded isn't called
+                findOrCreateP2Event(true);
+            }
+        } else {
+            _Game_Player_performTransfer.call(this);
+        }
+    };
+
+    function checkP2TouchTriggers(ev, d) {
+        const x2 = $gameMap.roundXWithDirection(ev.x, d);
+        const y2 = $gameMap.roundYWithDirection(ev.y, d);
+        $gameMap.eventsXy(x2, y2).forEach(target => {
+            if (target !== ev && target.isTriggerIn([1, 2])) {
+                if (!target.isMoving() && target.isNormalPriority()) {
+                    $gameMessage._eventActivator = "p2";
+                    target.start();
+                }
+            }
+        });
+    }
+
+    const _Game_Event_checkEventTriggerTouch = Game_Event.prototype.checkEventTriggerTouch;
+    Game_Event.prototype.checkEventTriggerTouch = function (x, y) {
+        if (!$gameMap.isEventRunning()) {
+            if (this._trigger === 2) {
+                if ($gamePlayer.pos(x, y)) {
+                    if (!this.isJumping() && this.isNormalPriority()) {
+                        $gameMessage._eventActivator = "p1";
+                        this.start();
+                        return;
+                    }
+                } else if (SplitScreenManager.active && SplitScreenManager.p2Event && SplitScreenManager.p2Event.pos(x, y)) {
+                    if (!this.isJumping() && this.isNormalPriority()) {
+                        $gameMessage._eventActivator = "p2";
+                        this.start();
+                        return;
+                    }
+                }
+            }
+        }
+        _Game_Event_checkEventTriggerTouch.call(this, x, y);
+    };
 
     // Rendering
     const _Scene_Map_createSpriteset = Scene_Map.prototype.createSpriteset;
@@ -876,16 +1057,8 @@
     };
 
     Scene_Map.prototype.updateSplitScreen = function () {
-        const p1 = $gamePlayer;
-        const p2 = SplitScreenManager.p2Event;
-        const dist = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-        const shouldSplit = dist > PROXIMITY;
-
-        if (shouldSplit && !this._splitScreenActive) this.activateSplitScreen();
-        else if (!shouldSplit && this._splitScreenActive) this.deactivateSplitScreen();
-
-        if (this._splitScreenActive) this.updateSplitViewports();
-        else this.updateMergedCamera();
+        if (!this._splitScreenActive) this.activateSplitScreen();
+        this.updateSplitViewports();
     };
 
     Scene_Map.prototype.activateSplitScreen = function () {
@@ -905,11 +1078,11 @@
         this._p2DisplayY = $gameMap.displayY();
 
         this._p2Spriteset = new Spriteset_Map();
-        
+
         // Hijack update to use P2-specific display coordinates
         const scene = this;
         const _p2Update = this._p2Spriteset.update;
-        this._p2Spriteset.update = function() {
+        this._p2Spriteset.update = function () {
             const lastX = $gameMap._displayX;
             const lastY = $gameMap._displayY;
             $gameMap._displayX = scene._p2DisplayX;
@@ -928,7 +1101,31 @@
         this.addChild(mask2);
         this._p2Spriteset.mask = mask2;
         this._p2Mask = mask2;
-        this.addChild(this._p2Spriteset);
+
+        // Add behind window layer if possible
+        const wlIdx = this._windowLayer ? this.children.indexOf(this._windowLayer) : -1;
+        if (wlIdx >= 0) {
+            this.addChildAt(this._p2Spriteset, wlIdx);
+        } else {
+            this.addChild(this._p2Spriteset);
+        }
+
+        // Create Divider
+        const divider = new PIXI.Graphics().beginFill(0x000000);
+        const thickness = 4;
+        if (SPLIT_DIR === "vertical") {
+            divider.drawRect(Math.floor(gw / 2) - thickness / 2, 0, thickness, gh);
+        } else {
+            divider.drawRect(0, Math.floor(gh / 2) - thickness / 2, gw, thickness);
+        }
+
+        const wlIdx2 = this._windowLayer ? this.children.indexOf(this._windowLayer) : -1;
+        if (wlIdx2 >= 0) {
+            this.addChildAt(divider, wlIdx2);
+        } else {
+            this.addChild(divider);
+        }
+        this._splitDivider = divider;
     };
 
     Scene_Map.prototype.deactivateSplitScreen = function () {
@@ -937,6 +1134,10 @@
             this.removeChild(this._p1Mask);
             this._spriteset.mask = null;
             this._p1Mask = null;
+        }
+        if (this._splitDivider) {
+            this.removeChild(this._splitDivider);
+            this._splitDivider = null;
         }
         if (this._p2Spriteset) {
             if (this._p2Mask) {
@@ -1007,6 +1208,212 @@
     Scene_Map.prototype.terminate = function () {
         if (this._splitScreenActive) this.deactivateSplitScreen();
         _Scene_Map_terminate.call(this);
+    };
+
+    // Message Window Overlay handling
+    const _Window_Message_updatePlacement = Window_Message.prototype.updatePlacement;
+    Window_Message.prototype.updatePlacement = function () {
+        _Window_Message_updatePlacement.call(this);
+        if (SplitScreenManager.active) {
+            // Force center position for overlay look
+            const width = Math.min(Graphics.boxWidth - 160, 800);
+            const height = this.height;
+            const x = (Graphics.boxWidth - width) / 2;
+            const y = (Graphics.boxHeight - height) * 0.8;
+            this.move(x, y, width, height);
+        }
+    };
+
+    const _Window_Message_terminateMessage = Window_Message.prototype.terminateMessage;
+    Window_Message.prototype.terminateMessage = function () {
+        _Window_Message_terminateMessage.call(this);
+        if (SplitScreenManager.active) {
+            $gameMessage._eventActivator = null;
+        }
+    };
+
+    // Name Box positioning
+    const _Window_NameBox_updatePlacement = Window_NameBox.prototype.updatePlacement;
+    Window_NameBox.prototype.updatePlacement = function () {
+        _Window_NameBox_updatePlacement.call(this);
+        if (SplitScreenManager.active && this._messageWindow) {
+            this.x = this._messageWindow.x;
+            this.y = this._messageWindow.y - this.height;
+        }
+    };
+
+    // Choice List Overlay handling
+    const _Window_ChoiceList_updatePlacement = Window_ChoiceList.prototype.updatePlacement;
+    Window_ChoiceList.prototype.updatePlacement = function () {
+        _Window_ChoiceList_updatePlacement.call(this);
+        if (SplitScreenManager.active) {
+            this.x = (Graphics.boxWidth - this.width) / 2;
+            // Place below or above centered message window if possible
+            if ($gameMessage.isBusy()) {
+                this.y = (Graphics.boxHeight + 200 - this.height) / 2; // Offset from center
+            } else {
+                this.y = (Graphics.boxHeight - this.height) / 2;
+            }
+        }
+    };
+
+    // Input Redirection for dialogue control
+    const _Input_isTriggered = Input.isTriggered;
+    Input.isTriggered = function (key) {
+        if (SplitScreenManager.active && $gameMessage.isBusy() && $gameMessage._eventActivator) {
+            if (key === "ok") {
+                // If message is in the middle (positionType === 1), allow ANY player to continue
+                if ($gameMessage.positionType() === 1) {
+                    return _Input_isTriggered.call(this, key) || SplitScreenManager.isTriggered("action");
+                }
+
+                if ($gameMessage._eventActivator === "p2") {
+                    return SplitScreenManager.isTriggered("action");
+                } else {
+                    // P1 is activator, ignore P2's action button
+                    return _Input_isTriggered.call(this, key) && !SplitScreenManager.p2Input.action;
+                }
+            }
+        }
+        return _Input_isTriggered.call(this, key);
+    };
+
+    const _Input_isRepeated = Input.isRepeated;
+    Input.isRepeated = function (key) {
+        if (SplitScreenManager.active && $gameMessage.isBusy() && $gameMessage._eventActivator) {
+            if (["up", "down", "left", "right", "ok"].includes(key)) {
+                // If message is in the middle, allow ANY player for 'ok'
+                if (key === "ok" && $gameMessage.positionType() === 1) {
+                    return _Input_isRepeated.call(this, key) || SplitScreenManager.p2Input.action;
+                }
+
+                if ($gameMessage._eventActivator === "p2") {
+                    const p2Key = key === "ok" ? "action" : key;
+                    return SplitScreenManager.p2Input[p2Key];
+                } else {
+                    // P1 is activator, ignore P2's direction/ok inputs
+                    const p2Key = key === "ok" ? "action" : key;
+                    return _Input_isRepeated.call(this, key) && !SplitScreenManager.p2Input[p2Key];
+                }
+            }
+        }
+        return _Input_isRepeated.call(this, key);
+    };
+
+    // Also override isPressed for fast-forwarding dialogue
+    const _Input_isPressed = Input.isPressed;
+    Input.isPressed = function (key) {
+        if (SplitScreenManager.active && $gameMessage.isBusy() && $gameMessage._eventActivator) {
+            if (key === "ok") {
+                // If message is in the middle, allow ANY player for 'ok' (fast-forward)
+                if ($gameMessage.positionType() === 1) {
+                    return _Input_isPressed.call(this, key) || SplitScreenManager.p2Input.action;
+                }
+
+                if ($gameMessage._eventActivator === "p2") {
+                    return SplitScreenManager.p2Input.action;
+                } else {
+                    // P1 is activator, ignore P2's action button
+                    return _Input_isPressed.call(this, key) && !SplitScreenManager.p2Input.action;
+                }
+            }
+        }
+        return _Input_isPressed.call(this, key);
+    };
+
+    // --- Battle System Integration ---
+
+    Game_Actor.prototype.multiplayerPlayerId = function () {
+        const index = $gameParty.members().indexOf(this);
+        // Player 2 controls the second actor in the party (index 1)
+        return (index === 1) ? 2 : 1;
+    };
+
+    const _Window_Selectable_processCursorMove = Window_Selectable.prototype.processCursorMove;
+    Window_Selectable.prototype.processCursorMove = function () {
+        if (SplitScreenManager.active && SceneManager._scene instanceof Scene_Battle) {
+            const actor = BattleManager.actor();
+            if (actor) {
+                const playerId = actor.multiplayerPlayerId();
+                if (playerId === 2) {
+                    this.processP2CursorMove();
+                    return;
+                }
+            }
+        }
+        _Window_Selectable_processCursorMove.call(this);
+    };
+
+    Window_Selectable.prototype.processP2CursorMove = function () {
+        if (this.isOpenAndActive()) {
+            const input = SplitScreenManager.p2Input;
+            if (input.down) this.cursorDown(true);
+            if (input.up) this.cursorUp(true);
+            if (input.right) this.cursorRight(true);
+            if (input.left) this.cursorLeft(true);
+        }
+    };
+
+    const _Window_Selectable_processHandling = Window_Selectable.prototype.processHandling;
+    Window_Selectable.prototype.processHandling = function () {
+        if (SplitScreenManager.active && SceneManager._scene instanceof Scene_Battle) {
+            const actor = BattleManager.actor();
+            if (actor) {
+                const playerId = actor.multiplayerPlayerId();
+                if (playerId === 2) {
+                    this.processP2Handling();
+                    return;
+                }
+            }
+        }
+        _Window_Selectable_processHandling.call(this);
+    };
+
+    Window_Selectable.prototype.processP2Handling = function () {
+        if (this.isOpenAndActive()) {
+            if (this.isP2OkEnabled() && SplitScreenManager.isTriggered("action")) {
+                this.processOk();
+            } else if (this.isCancelEnabled() && SplitScreenManager.isTriggered("cancel")) {
+                this.processCancel();
+            }
+        }
+    };
+
+    Window_Selectable.prototype.isP2OkEnabled = function () {
+        return this.isOkEnabled();
+    };
+
+    const _Window_ActorCommand_refresh = Window_ActorCommand.prototype.refresh;
+    Window_ActorCommand.prototype.refresh = function () {
+        _Window_ActorCommand_refresh.call(this);
+        if (SplitScreenManager.active && this._actor) {
+            const playerId = this._actor.multiplayerPlayerId();
+            this.drawPlayerLabel(playerId);
+        }
+    };
+
+    Window_ActorCommand.prototype.drawPlayerLabel = function (playerId) {
+        this.changeTextColor(ColorManager.systemColor());
+        this.contents.fontSize = 14;
+        const text = "PLAYER " + playerId;
+        this.drawText(text, 0, -10, this.contentsWidth(), "right");
+        this.resetFontSettings();
+    };
+
+    // =========================================================================
+    // Auto-Start Split-Screen
+    // =========================================================================
+    const _DataManager_setupNewGame = DataManager.setupNewGame;
+    DataManager.setupNewGame = function () {
+        _DataManager_setupNewGame.call(this);
+        if (AUTO_START) {
+            // Generate pool of random candidates
+            const candidates = SplitScreenManager.createSelectionPool();
+            if (candidates.length > 0) {
+                // Pick the first random candidate and start session
+                SplitScreenManager.startSession(candidates[0]);
+            }
+        }
     };
 
 })();

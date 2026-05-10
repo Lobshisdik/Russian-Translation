@@ -112,7 +112,7 @@
     function initSteam() {
         if (steamClient) return true;
         try {
-            steamworks = require('steamworks.js');
+            steamworks = require('../libs/steamworks');
             steamClient = steamworks.init(4193010);
             console.log('Steamworks initialized successfully for User:', steamClient.localplayer.getName());
             // Re-initialize manager if needed

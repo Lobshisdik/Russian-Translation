@@ -4,7 +4,7 @@
 	"DepotID" "4193011"
 
 	// Content root path (absolute path to build directory)
-	"ContentRoot" "C:\\out"
+	"ContentRoot" "C:\\out\\hypernet-explorer"
 
 	// Files to include (recursively from ContentRoot)
 	"FileMapping"
