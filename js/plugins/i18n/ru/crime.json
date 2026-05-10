@@ -1,253 +1,253 @@
 {
   "crime": {
     "pettytheft": {
-      "name": "Petty Theft"
+      "name": "Мелкая кража"
     },
     "pickpocketing": {
-      "name": "Pickpocketing"
+      "name": "Карманная кража"
     },
     "shoplifting": {
-      "name": "Shoplifting"
+      "name": "Кража из магазина"
     },
     "burglary": {
-      "name": "Burglary"
+      "name": "Кража со взломом"
     },
     "robbery": {
-      "name": "Robbery"
+      "name": "Ограбление"
     },
     "armedrobbery": {
-      "name": "Armed Robbery"
+      "name": "Разбой"
     },
     "bankrobbery": {
-      "name": "Bank Robbery"
+      "name": "Ограбление банка"
     },
     "grandtheft": {
-      "name": "Grand Theft"
+      "name": "Кража в особо крупном размере"
     },
     "assault": {
-      "name": "Assault"
+      "name": "Причинение легкого вреда здоровью"
     },
     "battery": {
-      "name": "Battery"
+      "name": "Нанесение побоев"
     },
     "aggravatedassault": {
-      "name": "Aggravated Assault"
+      "name": "Причинение тяжкого вреда здоровью"
     },
     "murder": {
-      "name": "Murder"
+      "name": "Убийство"
     },
     "manslaughter": {
-      "name": "Manslaughter"
+      "name": "Причинение смерти по неосторожности"
     },
     "serialkilling": {
-      "name": "Serial Killing"
+      "name": "Убийство трех или более лиц"
     },
     "vandalism": {
-      "name": "Vandalism"
+      "name": "Вандализм"
     },
     "graffiti": {
-      "name": "Graffiti"
+      "name": "Граффити"
     },
     "arson": {
-      "name": "Arson"
+      "name": "Поджог"
     },
     "propertydestruction": {
-      "name": "Property Destruction"
+      "name": "Уничтожение имущества"
     },
     "publicdisturbance": {
-      "name": "Public Disturbance"
+      "name": "Мелкое хулиганство"
     },
     "disorderlyconduct": {
-      "name": "Disorderly Conduct"
+      "name": "Хулиганство"
     },
     "trespassing": {
-      "name": "Trespassing"
+      "name": "Нарушение неприкосновенности жилища"
     },
     "breakingandentering": {
-      "name": "Breaking and Entering"
+      "name": "Незаконное проникновение со взломом"
     },
     "unlawfulentry": {
-      "name": "Unlawful Entry"
+      "name": "Незаконное проникновение"
     },
     "drugpossession": {
-      "name": "Drug Possession"
+      "name": "Незаконное хранение наркотических веществ"
     },
     "drugdealing": {
-      "name": "Drug Dealing"
+      "name": "Незаконное распространение наркотических веществ"
     },
     "drugtrafficking": {
-      "name": "Drug Trafficking"
+      "name": "Незаконная перевозка наркотических веществ"
     },
     "smuggling": {
-      "name": "Smuggling"
+      "name": "Контрабанда"
     },
     "contraband": {
-      "name": "Contraband Possession"
+      "name": "Хранение контрабандными товаров"
     },
     "fraud": {
-      "name": "Fraud"
+      "name": "Мошенничество"
     },
     "embezzlement": {
-      "name": "Embezzlement"
+      "name": "Растрата"
     },
     "bribery": {
-      "name": "Bribery"
+      "name": "Дача взятки"
     },
     "corruption": {
-      "name": "Corruption"
+      "name": "Получение взятки"
     },
     "taxevasion": {
-      "name": "Tax Evasion"
+      "name": "Уклонение от уплаты налогов"
     },
     "moneylaundering": {
-      "name": "Money Laundering"
+      "name": "Отмывание денег"
     },
     "forgery": {
-      "name": "Forgery"
+      "name": "Изготовление поддельных документов"
     },
     "counterfeiting": {
-      "name": "Counterfeiting"
+      "name": "Фальсификация"
     },
     "identitytheft": {
-      "name": "Identity Theft"
+      "name": "Кража цифровой личности"
     },
     "cybercrime": {
-      "name": "Cybercrime"
+      "name": "Киберпреступление"
     },
     "hacking": {
-      "name": "Computer Hacking"
+      "name": "Неправомерный доступ к цифровой информации"
     },
     "datatheft": {
-      "name": "Data Theft"
+      "name": "Кража данных"
     },
     "piracy": {
-      "name": "Digital Piracy"
+      "name": "Нарушение цифровых авторских прав"
     },
     "extortion": {
-      "name": "Extortion"
+      "name": "Вымогательство"
     },
     "blackmail": {
-      "name": "Blackmail"
+      "name": "Шантаж"
     },
     "kidnapping": {
-      "name": "Kidnapping"
+      "name": "Похищение физического лица"
     },
     "hostage": {
-      "name": "Hostage Taking"
+      "name": "Захват человека"
     },
     "humantrafficking": {
-      "name": "Human Trafficking"
+      "name": "Торговля людьми"
     },
     "slavery": {
-      "name": "Slavery"
+      "name": "Использование рабского труда"
     },
     "poaching": {
-      "name": "Poaching"
+      "name": "Браконьерство"
     },
     "illegalhunting": {
-      "name": "Illegal Hunting"
+      "name": "Незаконная охота"
     },
     "animalcruelty": {
-      "name": "Animal Cruelty"
+      "name": "Жестокое обращение с животными"
     },
     "environmentalcrime": {
-      "name": "Environmental Crime"
+      "name": "Нарушение правил охраны окружающей среды"
     },
     "pollutionviolation": {
-      "name": "Pollution Violation"
+      "name": "Нарушение правил защиты окружающей среды"
     },
     "illegaldumping": {
-      "name": "Illegal Dumping"
+      "name": "Незаконная свалка мусора"
     },
     "speedingminor": {
-      "name": "Minor Speeding"
+      "name": "Превышение скорости"
     },
     "speedingmajor": {
-      "name": "Major Speeding"
+      "name": "Значительное превышение скорости"
     },
     "recklessdriving": {
-      "name": "Reckless Driving"
+      "name": "Нарушение ПДД"
     },
     "dui": {
-      "name": "Driving Under Influence"
+      "name": "Вождение в состоянии опьянения"
     },
     "hitandrun": {
-      "name": "Hit and Run"
+      "name": "Побег с места ДТП"
     },
     "vehicletheft": {
-      "name": "Vehicle Theft"
+      "name": "Угон транспортного средства"
     },
     "carjacking": {
-      "name": "Carjacking"
+      "name": "Разбойный угон траспортного средства"
     },
     "illegalracing": {
-      "name": "Illegal Street Racing"
+      "name": "Незаконные уличные гонки"
     },
     "publicintoxication": {
-      "name": "Public Intoxication"
+      "name": "Появление в общественном месте в опьянении"
     },
     "underagedrinking": {
-      "name": "Underage Drinking"
+      "name": "Употребление алкоголя несовершеннолетними"
     },
     "disturbing": {
-      "name": "Disturbing the Peace"
+      "name": "Нарушение общественного порядка"
     },
     "loitering": {
-      "name": "Loitering"
+      "name": "Праздношатание"
     },
     "jaywalking": {
-      "name": "Jaywalking"
+      "name": "Переход улицы в неположенном месте"
     },
     "littering": {
-      "name": "Littering"
+      "name": "Сброс мусора вне отведенных мест"
     },
     "noisepollution": {
-      "name": "Noise Pollution"
+      "name": "Нарушение закона 'о тишине'"
     },
     "perjury": {
-      "name": "Perjury"
+      "name": "Дача заведомо ложных показаний"
     },
     "contemptofcourt": {
-      "name": "Contempt of Court"
+      "name": "Неуважение к суду"
     },
     "obstructingjustice": {
-      "name": "Obstructing Justice"
+      "name": "Преступления против правосудия"
     },
     "resistingarrest": {
-      "name": "Resisting Arrest"
+      "name": "Сопротивление при аресте"
     },
     "escapingcustody": {
-      "name": "Escaping Custody"
+      "name": "Побег из-под ареста"
     },
     "prisonbreak": {
-      "name": "Prison Break"
+      "name": "Побег из места лишения свободы"
     },
     "weaponspossession": {
-      "name": "Illegal Weapons Possession"
+      "name": "Незаконное хранение оружия"
     },
     "illegalweapons": {
-      "name": "Illegal Weapons Manufacturing"
+      "name": "Незаконное изготовление оружия"
     },
     "weaponstrafficking": {
-      "name": "Weapons Trafficking"
+      "name": "Незаконный сбыт оружия"
     },
     "terrorism": {
-      "name": "Terrorism"
+      "name": "Террористический акт"
     },
     "treason": {
-      "name": "Treason"
+      "name": "Государственная измена"
     },
     "espionage": {
-      "name": "Espionage"
+      "name": "Шпионаж"
     },
     "warcrimes": {
-      "name": "War Crimes"
+      "name": "Военные преступление"
     },
     "genocide": {
-      "name": "Genocide"
+      "name": "Геноцид"
     },
     "crimesagainsthumanity": {
-      "name": "Crimes Against Humanity"
+      "name": "Преступление против человечества"
     }
   }
 }
