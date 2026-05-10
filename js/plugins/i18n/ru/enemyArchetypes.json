@@ -1,307 +1,307 @@
 {
   "enemyArchetypes": {
     "humanoid": {
-      "name": "Humanoid",
+      "name": "Гуманоид",
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Torso crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm ripped off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm ripped off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg cut off!"
+        "name": "Левая Нога",
+        "msg": "Отрублена левая нога!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg cut off!"
+        "name": "Правая Нога",
+        "msg": "Отрублена левая рука!"
       },
       "brain": {
-        "name": "Brain",
-        "msg": "Brain concussed!"
+        "name": "Мозг",
+        "msg": "Поврежден мозг!"
       },
       "left_eye": {
-        "name": "Left Eye",
-        "msg": "Left eye swollen shut!"
+        "name": "Левый Глаз",
+        "msg": "Левый глаз заплыл!"
       },
       "right_eye": {
-        "name": "Right Eye",
-        "msg": "Right eye swollen shut!"
+        "name": "Правый Глаз",
+        "msg": "Правый глаз заплыл!"
       },
       "nose": {
-        "name": "Nose",
-        "msg": "Nose broken!"
+        "name": "Нос",
+        "msg": "Нос сломан!"
       },
       "left_ear": {
-        "name": "Left Ear",
-        "msg": "Left ear ringing!"
+        "name": "Левое Ухо",
+        "msg": "Звон в левом ухе!"
       },
       "right_ear": {
-        "name": "Right Ear",
-        "msg": "Right ear ringing!"
+        "name": "Правое Ухо",
+        "msg": "Звон в правом ухе!"
       },
       "mouth": {
-        "name": "Mouth",
-        "msg": "Jaw dislocated!"
+        "name": "Рот",
+        "msg": "Вывихнута челюсть!"
       },
       "teeth": {
-        "name": "Teeth",
-        "msg": "Teeth knocked out!"
+        "name": "Зубы",
+        "msg": "Выбиты зубы!"
       },
       "genitals": {
-        "name": "Genitals",
-        "msg": "Genitals damaged!"
+        "name": "Гениталии",
+        "msg": "Повреждены гениталии!"
       },
       "heart": {
         "name": "Heart",
-        "msg": "Heart damaged!"
+        "msg": "Сердце повреждено!"
       },
       "left_lung": {
-        "name": "Left Lung",
-        "msg": "Left lung collapsed!"
+        "name": "Левое легкое",
+        "msg": "Левое легкое сдулось!"
       },
       "right_lung": {
-        "name": "Right Lung",
-        "msg": "Right lung collapsed!"
+        "name": "Правое легкое",
+        "msg": "Правое легкое сдулось!"
       },
       "liver": {
-        "name": "Liver",
-        "msg": "Liver lacerated!"
+        "name": "Печень",
+        "msg": "Порвана печень!"
       },
       "stomach": {
-        "name": "Stomach",
-        "msg": "Stomach ruptured!"
+        "name": "Желудок",
+        "msg": "Порван желудок!"
       },
       "spleen": {
-        "name": "Spleen",
-        "msg": "Spleen ruptured!"
+        "name": "Селезенка",
+        "msg": "Порвана селезенка!"
       },
       "intestines": {
-        "name": "Intestines",
-        "msg": "Intestines perforated!"
+        "name": "Кишечник",
+        "msg": "Проткнут кишечник!"
       },
       "left_hand": {
-        "name": "Left Hand",
-        "msg": "Left hand mangled!"
+        "name": "Левая Кисть",
+        "msg": "Покалечена левая кисть!"
       },
       "left_fingers": {
-        "name": "Left Fingers",
-        "msg": "Left fingers broken!"
+        "name": "Пальцы на Левой Руке",
+        "msg": "Сломаны пальцы на лвеой руке!"
       },
       "right_hand": {
-        "name": "Right Hand",
-        "msg": "Right hand mangled!"
+        "name": "Правая кисть",
+        "msg": "Покалечена правая кисть!"
       },
       "right_fingers": {
-        "name": "Right Fingers",
-        "msg": "Right fingers broken!"
+        "name": "Пальцы на Правой Руке",
+        "msg": "Сломаны пальцы на правой руке"
       },
       "left_foot": {
-        "name": "Left Foot",
-        "msg": "Left foot damaged!"
+        "name": "Левая Ступня",
+        "msg": "Левая ступня повреждена!"
       },
       "left_toes": {
-        "name": "Left Toes",
-        "msg": "Left toes crushed!"
+        "name": "Пальцы на Левой Ноге",
+        "msg": "Сломаны пальцы на левой ноге!"
       },
       "right_foot": {
-        "name": "Right Foot",
-        "msg": "Right foot damaged!"
+        "name": "Правая Ступня",
+        "msg": "Правая ступня повреждена!"
       },
       "right_toes": {
-        "name": "Right Toes",
-        "msg": "Right toes crushed!"
+        "name": "Пальцы на правой Ноге",
+        "msg": "Сломаны пальцы на правой ноге!"
       }
     },
     "beast": {
-      "name": "Beast",
+      "name": "Зверь",
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "body": {
-        "name": "Body",
-        "msg": "Body crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Левая Передняя Конечность",
+        "msg": "Отрублена левая передняя конечность!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Правая Передняя Конечность",
+        "msg": "Отрублена правая передняя конечность!"
       },
       "rear_left_leg": {
-        "name": "Rear Left Leg",
-        "msg": "Rear Left Leg cut off!"
+        "name": "Левая Задняя Конечность",
+        "msg": "Отрублена левая задняя конечность!"
       },
       "rear_right_leg": {
-        "name": "Rear Right Leg",
-        "msg": "Rear Right Leg cut off!"
+        "name": "Правая Задняя Конечность",
+        "msg": "Отрублена правая задняя конечность!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail hacked off!"
+        "name": "Хвост",
+        "msg": "Хвост отрублен!"
       }
     },
     "insectoid": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "thorax": {
-        "name": "Thorax",
-        "msg": "Thorax punctured!"
+        "name": "Торакс",
+        "msg": "Торакс пробит!"
       },
       "abdomen": {
-        "name": "Abdomen",
-        "msg": "Abdomen burst open!"
+        "name": "Брюшко",
+        "msg": "Брюшко разорвалось!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Левая Передняя Конечность",
+        "msg": "Отрублена левая передняя конечность!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Правая Передняя Конечность",
+        "msg": "Отрублена правая передняя конечность!"
       },
       "middle_left_leg": {
-        "name": "Middle Left Leg",
-        "msg": "Middle Left Leg cut off!"
+        "name": "Левая Средняя Конечность",
+        "msg": "Отрублена левая средняя конечность!"
       },
       "middle_right_leg": {
-        "name": "Middle Right Leg",
-        "msg": "Middle Right Leg cut off!"
+        "name": "Правая Средняя Конечность",
+        "msg": "Отрублена правая средняя конечность!"
       },
       "rear_left_leg": {
-        "name": "Rear Left Leg",
-        "msg": "Rear Left Leg cut off!"
+        "name": "Левая Задняя Конечность",
+        "msg": "Отрублена левая задняя конечность!"
       },
       "rear_right_leg": {
-        "name": "Rear Right Leg",
-        "msg": "Rear Right Leg cut off!"
+        "name": "Правая Задняя Конечность",
+        "msg": "Отрублена правая задняя конечность!"
       },
       "mandibles": {
-        "name": "Mandibles",
-        "msg": "Mandibles pulverized!"
+        "name": "Мандибулы",
+        "msg": "Мандибулы рассыпались в прах!"
       },
-      "name": "Insectoid"
+      "name": "Инсектоид"
     },
     "frog": {
       "head": {
-        "name": "Head",
-        "msg": "Head cracked!"
+        "name": "Голова",
+        "msg": "Голова треснула!"
       },
       "body": {
-        "name": "Body",
-        "msg": "Body crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "tongue": {
-        "name": "Tongue",
-        "msg": "Tongue severed!"
+        "name": "Язык",
+        "msg": "Разорван язык!"
       },
       "vocal_sac": {
-        "name": "Vocal Sac",
-        "msg": "Vocal sac ruptured!"
+        "name": "Резонатор",
+        "msg": "Резонатор порван!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Левая Передняя Конечность",
+        "msg": "Отрублена левая передняя конечность!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Правая Передняя Конечность",
+        "msg": "Отрублена правая передняя конечность!"
       },
       "hind_left_leg": {
-        "name": "Hind Left Leg",
-        "msg": "Hind Left Leg cut off!"
+        "name": "Левая Задняя Конечность",
+        "msg": "Отрублена левая задняя конечность!"
       },
       "hind_right_leg": {
-        "name": "Hind Right Leg",
-        "msg": "Hind Right Leg cut off!"
+        "name": "Правая Задняя Конечность",
+        "msg": "Отрублена правая задняя конечность!"
       },
-      "name": "Frog"
+      "name": "Лягушка"
     },
     "dragon": {
-      "name": "Dragon",
+      "name": "Дракон",
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "fire_breath_organ": {
-        "name": "Fire Breath Organ",
-        "msg": "Fire Breath Organ burst into gore!"
+        "name": "Огненная Железа",
+        "msg": "Огненная железа разовалась на куски!"
       },
       "neck": {
-        "name": "Neck",
-        "msg": "Neck twisted till it snapped!"
+        "name": "Шея",
+        "msg": "Сломана шея!"
       },
       "body": {
-        "name": "Body",
-        "msg": "Body crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_wing": {
-        "name": "Left Wing",
-        "msg": "Left Wing torn to ribbons!"
+        "name": "Левое Крыло",
+        "msg": "Левое крыло разорвано в клочья!"
       },
       "right_wing": {
-        "name": "Right Wing",
-        "msg": "Right Wing torn to ribbons!"
+        "name": "Правое Крыло",
+        "msg": "Правое крыло разорвано в клочья!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Передняя Левая Конечность",
+        "msg": "Отрублена левая конечность!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Передняя задняя Конечность",
+        "msg": "Отрублена правая конечность!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail hacked off!"
+        "name": "Хвост",
+        "msg": "Хвост отрублен!"
       }
     },
     "skeleton": {
-      "name": "Skeleton",
+      "name": "Скелет",
       "head": {
-        "name": "Head",
-        "msg": "Skull shattered into splinters!"
+        "name": "Голова",
+        "msg": "Череп разлетелся в щепки!"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Ribcage collapsed into dust!"
+        "name": "Туловище",
+        "msg": "Ребра превратились в пыль!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left arm bone snapped off!"
+        "name": "Левая Рука",
+        "msg": "Левая рука отломилась!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right arm bone snapped off!"
+        "name": "Правая Рука",
+        "msg": "Правая рука отломилась!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left leg shattered!"
+        "name": "Левая Нога",
+        "msg": "Левая нога рассыпалась!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right leg shattered!"
+        "name": "Правая Нога",
+        "msg": "Правая нога рассыпалась!"
       }
     },
     "fairy": {
       "head": {
-        "name": "Head",
-        "msg": "Head cracked!"
+        "name": "Голова",
+        "msg": "Голова треснула!"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Torso crushed into glittering dust!"
+        "name": "Туловище",
+        "msg": "Туловище рассыпалось!"
       },
       "left_arm": {
         "name": "Left Arm",
@@ -323,7 +323,7 @@
         "name": "Pixie Dust Sac",
         "msg": "Dust sac ruptured!"
       },
-      "name": "Fairy"
+      "name": "Фея"
     },
     "slime": {
       "name": "Slime",
