@@ -1,265 +1,265 @@
 {
   "constellation": {
     "andromeda": {
-      "name": "Andromeda"
+      "name": "Андромеда"
     },
     "aquarius": {
-      "name": "Aquarius"
+      "name": "Водолей"
     },
     "aquila": {
-      "name": "Aquila"
+      "name": "Орел"
     },
     "aries": {
-      "name": "Aries"
+      "name": "Овен"
     },
     "auriga": {
-      "name": "Auriga"
+      "name": "Возничий"
     },
     "bootes": {
-      "name": "Boötes"
+      "name": "Волопас"
     },
     "canis_major": {
-      "name": "Canis Major"
+      "name": "Большой Пес"
     },
     "canis_minor": {
-      "name": "Canis Minor"
+      "name": "Малый Пес"
     },
     "capricornus": {
-      "name": "Capricornus"
+      "name": "Козерог"
     },
     "cassiopeia": {
-      "name": "Cassiopeia"
+      "name": "Кассиопея"
     },
     "cepheus": {
-      "name": "Cepheus"
+      "name": "Цефей"
     },
     "cetus": {
-      "name": "Cetus"
+      "name": "Кит"
     },
     "corona_borealis": {
-      "name": "Corona Borealis"
+      "name": "Северная Корона"
     },
     "corvus": {
-      "name": "Corvus"
+      "name": "Ворон"
     },
     "crater": {
-      "name": "Crater"
+      "name": "Чаша"
     },
     "cygnus": {
-      "name": "Cygnus"
+      "name": "Лебедь"
     },
     "delphinus": {
-      "name": "Delphinus"
+      "name": "Дельфин"
     },
     "draco": {
-      "name": "Draco"
+      "name": "Дракон"
     },
     "equuleus": {
-      "name": "Equuleus"
+      "name": "Малый Конь"
     },
     "eridanus": {
-      "name": "Eridanus"
+      "name": "Эридан"
     },
     "gemini": {
-      "name": "Gemini"
+      "name": "Близнецы"
     },
     "hercules": {
-      "name": "Hercules"
+      "name": "Геркулес"
     },
     "hydra": {
-      "name": "Hydra"
+      "name": "Гидра"
     },
     "lacerta": {
-      "name": "Lacerta"
+      "name": "Ящерица"
     },
     "leo": {
-      "name": "Leo"
+      "name": "Лев"
     },
     "leo_minor": {
-      "name": "Leo Minor"
+      "name": "Малый Лев"
     },
     "lepus": {
-      "name": "Lepus"
+      "name": "Заяц"
     },
     "libra": {
-      "name": "Libra"
+      "name": "Весы"
     },
     "lynx": {
-      "name": "Lynx"
+      "name": "Рысь"
     },
     "lyra": {
-      "name": "Lyra"
+      "name": "Лира"
     },
     "monoceros": {
-      "name": "Monoceros"
+      "name": "Единорог"
     },
     "ophiuchus": {
-      "name": "Ophiuchus"
+      "name": "Змееносец"
     },
     "orion": {
-      "name": "Orion"
+      "name": "Орион"
     },
     "pegasus": {
-      "name": "Pegasus"
+      "name": "Пегас"
     },
     "perseus": {
-      "name": "Perseus"
+      "name": "Персей"
     },
     "pisces": {
-      "name": "Pisces"
+      "name": "Рыбы"
     },
     "piscis_austrinus": {
-      "name": "Piscis Austrinus"
+      "name": "Южная Рыба"
     },
     "sagitta": {
-      "name": "Sagitta"
+      "name": "Стрела"
     },
     "sagittarius": {
-      "name": "Sagittarius"
+      "name": "Стрелец"
     },
     "scorpius": {
-      "name": "Scorpius"
+      "name": "Скорпион"
     },
     "scutum": {
-      "name": "Scutum"
+      "name": "Щит"
     },
     "serpens": {
-      "name": "Serpens"
+      "name": "Змея"
     },
     "taurus": {
-      "name": "Taurus"
+      "name": "Телец"
     },
     "triangulum": {
-      "name": "Triangulum"
+      "name": "Треугольник"
     },
     "ursa_major": {
-      "name": "Ursa Major"
+      "name": "Большая Медведица"
     },
     "ursa_minor": {
-      "name": "Ursa Minor"
+      "name": "Малая Медведица"
     },
     "virgo": {
-      "name": "Virgo"
+      "name": "Дева"
     },
     "vulpecula": {
-      "name": "Vulpecula"
+      "name": "Лисичка"
     },
     "antlia": {
-      "name": "Antlia"
+      "name": "Насос"
     },
     "apus": {
-      "name": "Apus"
+      "name": "Райская Птица"
     },
     "ara": {
-      "name": "Ara"
+      "name": "Жертвенник"
     },
     "caelum": {
-      "name": "Caelum"
+      "name": "Резец"
     },
     "camelopardalis": {
-      "name": "Camelopardalis"
+      "name": "Жираф"
     },
     "cancer": {
-      "name": "Cancer"
+      "name": "Рак"
     },
     "canes_venatici": {
-      "name": "Canes Venatici"
+      "name": "Гончие Псы"
     },
     "carina": {
-      "name": "Carina"
+      "name": "Киль"
     },
     "centaurus": {
-      "name": "Centaurus"
+      "name": "Центавр"
     },
     "chamaeleon": {
-      "name": "Chamaeleon"
+      "name": "Хамелеон"
     },
     "circinus": {
-      "name": "Circinus"
+      "name": "Циркуль"
     },
     "columba": {
-      "name": "Columba"
+      "name": "Голубь"
     },
     "coma_berenices": {
-      "name": "Coma Berenices"
+      "name": "Волосы Вероники"
     },
     "corona_australis": {
-      "name": "Corona Australis"
+      "name": "Южная Корона"
     },
     "crux": {
-      "name": "Crux"
+      "name": "Южный Крест"
     },
     "dorado": {
-      "name": "Dorado"
+      "name": "Золотая Рыба"
     },
     "fornax": {
-      "name": "Fornax"
+      "name": "Печь"
     },
     "grus": {
-      "name": "Grus"
+      "name": "Журавль"
     },
     "horologium": {
-      "name": "Horologium"
+      "name": "Часы"
     },
     "hydrus": {
-      "name": "Hydrus"
+      "name": "Южная Гидра"
     },
     "indus": {
-      "name": "Indus"
+      "name": "Инд"
     },
     "mensa": {
-      "name": "Mensa"
+      "name": "Столовая Гора"
     },
     "microscopium": {
-      "name": "Microscopium"
+      "name": "Микроскоп"
     },
     "musca": {
-      "name": "Musca"
+      "name": "Муха"
     },
     "norma": {
-      "name": "Norma"
+      "name": "Наугольник"
     },
     "octans": {
-      "name": "Octans"
+      "name": "Октант"
     },
     "pavo": {
-      "name": "Pavo"
+      "name": "Павлин"
     },
     "phoenix": {
-      "name": "Phoenix"
+      "name": "Феникс"
     },
     "pictor": {
-      "name": "Pictor"
+      "name": "Живописец"
     },
     "puppis": {
-      "name": "Puppis"
+      "name": "Корма"
     },
     "pyxis": {
-      "name": "Pyxis"
+      "name": "Компас"
     },
     "reticulum": {
-      "name": "Reticulum"
+      "name": "Сетка"
     },
     "sculptor": {
-      "name": "Sculptor"
+      "name": "Скульптор"
     },
     "sextans": {
-      "name": "Sextans"
+      "name": "Секстант"
     },
     "telescopium": {
-      "name": "Telescopium"
+      "name": "Телескоп"
     },
     "triangulum_australe": {
-      "name": "Triangulum Australe"
+      "name": "Южный Треугольник"
     },
     "tucana": {
-      "name": "Tucana"
+      "name": "Тукан"
     },
     "vela": {
-      "name": "Vela"
+      "name": "Паруса"
     },
     "volans": {
-      "name": "Volans"
+      "name": "Летучая Рыба"
     }
   }
 }
