@@ -2,57 +2,57 @@
   "cooking": {
     "adjectives": {
       "positive": [
-        "Well-Cooked",
-        "Delicious",
-        "Gourmet",
-        "Masterful",
-        "Mystic",
-        "Divine",
-        "Perfect",
-        "Succulent",
-        "Extraordinary",
-        "Magical"
+        "Прекрасно приготовленный",
+        "Вкусный",
+        "Деликатесный",
+        "Мастерский",
+        "Мистический",
+        "Святой",
+        "Идеальный",
+        "Сочный",
+        "Необыкновенный",
+        "Волшебный"
       ],
       "neutral": [
-        "Plain",
-        "Simple",
-        "Ordinary",
-        "Basic",
-        "Standard",
-        "Regular",
-        "Common",
-        "Modest",
-        "Unassuming",
-        "Everyday"
+        "Простой",
+        "Обычный",
+        "Заурядный",
+        "Нормальный",
+        "Стандартный",
+        "Банальный",
+        "Обыкновенный",
+        "Скромный",
+        "Непривлекательный",
+        "Повседневный"
       ],
       "negative": [
-        "Charred",
-        "Ruined",
-        "Overcooked",
-        "Burnt",
-        "Spoiled",
-        "Questionable",
-        "Dubious",
-        "Suspicious",
-        "Failed",
-        "Disastrous"
+        "Обугленный",
+        "Испорченный",
+        "Переваренный",
+        "Сгоревший",
+        "Испорченный",
+        "Сомнительный",
+        "Отвратительный",
+        "Подозрительный",
+        "Неулачно приготовленный",
+        "Ужасающий"
       ]
     },
     "messages": {
-      "prepared": "You prepared {name}!",
-      "sameItemPositive": "\nIt turned out exceptionally well!",
-      "sameItemNeutral": "\nIt's nothing special, but edible.",
-      "sameItemNegative": "\nPerhaps you shouldn't have tried that...",
-      "recoveredHunger": "\nRecovered {percent}% Hunger per member",
-      "splitAmong": " (split among {count} members)"
+      "prepared": "Вы приготивили {name}!",
+      "sameItemPositive": "\nПолучилось отлтчное блюдо!",
+      "sameItemNeutral": "\nНичего необычного: блюдо как блюдо.",
+      "sameItemNegative": "\nЛучше это не есть...",
+      "recoveredHunger": "\nВосстановлено {percent}% Голода каждому члену группы",
+      "splitAmong": " (разделить на {count} людей)"
     },
     "ui": {
-      "selectFirstIngredient": "Select first ingredient to cook",
-      "selectSecondIngredient": "Select second ingredient to cook with {name}",
-      "confirmCook": "Cook {item1} and {item2} into {result}?",
-      "cookButton": "Cook",
-      "cancelButton": "Cancel",
-      "menuLabel": "Cooking"
+      "selectFirstIngredient": "Выберите первый ингридиент для готовки",
+      "selectSecondIngredient": "Выберите ингридиет, к которому добавите {name}",
+      "confirmCook": "Вы хотите смешать {item1} и {item2}, чтобы приготовить {result}?",
+      "cookButton": "Да",
+      "cancelButton": "Отмена",
+      "menuLabel": "Готовка"
     }
   }
 }
