@@ -94,7 +94,7 @@
         "msg": "Покалечена левая кисть!"
       },
       "left_fingers": {
-        "name": "Пальцы на Левой Руке",
+        "name": "Пальцы(ЛР)",
         "msg": "Сломаны пальцы на лвеой руке!"
       },
       "right_hand": {
@@ -102,7 +102,7 @@
         "msg": "Покалечена правая кисть!"
       },
       "right_fingers": {
-        "name": "Пальцы на Правой Руке",
+        "name": "Пальцы(ПР)",
         "msg": "Сломаны пальцы на правой руке"
       },
       "left_foot": {
@@ -110,7 +110,7 @@
         "msg": "Левая ступня повреждена!"
       },
       "left_toes": {
-        "name": "Пальцы на Левой Ноге",
+        "name": "Пальцы(ЛН)",
         "msg": "Сломаны пальцы на левой ноге!"
       },
       "right_foot": {
@@ -118,7 +118,7 @@
         "msg": "Правая ступня повреждена!"
       },
       "right_toes": {
-        "name": "Пальцы на правой Ноге",
+        "name": "Пальцы(ПН)",
         "msg": "Сломаны пальцы на правой ноге!"
       }
     },
@@ -255,11 +255,11 @@
         "msg": "Правое крыло разорвано в клочья!"
       },
       "left_leg": {
-        "name": "Передняя Левая Конечность",
+        "name": "Левая Передняя Конечность",
         "msg": "Отрублена левая конечность!"
       },
       "right_leg": {
-        "name": "Передняя задняя Конечность",
+        "name": "Правая Передняя Конечность",
         "msg": "Отрублена правая конечность!"
       },
       "tail": {
@@ -304,582 +304,582 @@
         "msg": "Туловище рассыпалось!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm torn off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана Левая Рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm torn off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана Правая Рука!"
       },
       "left_wing": {
-        "name": "Left Wing",
-        "msg": "Left Wing shredded!"
+        "name": "Левое Крылышко",
+        "msg": "Порвано левое крылышко!"
       },
       "right_wing": {
-        "name": "Right Wing",
-        "msg": "Right Wing shredded!"
+        "name": "Правое Крылышко",
+        "msg": "Порвано правое крылышко!"
       },
       "pixie_dust_sac": {
-        "name": "Pixie Dust Sac",
-        "msg": "Dust sac ruptured!"
+        "name": "Пыльцевой мешок",
+        "msg": "Порван пыльцевой мешок!"
       },
       "name": "Фея"
     },
     "slime": {
-      "name": "Slime",
+      "name": "Слизень",
       "core": {
-        "name": "Core",
-        "msg": "Core violently collapsed!"
+        "name": "Ядро",
+        "msg": "Ядро резко сдулось!"
       },
       "upper_body": {
-        "name": "Upper Body",
-        "msg": "Upper Body crushed!"
+        "name": "Тело(Верх.)",
+        "msg": "Тело(Верх.) размозжено!!"
       },
       "lower_body": {
-        "name": "Lower Body",
-        "msg": "Lower Body crushed!"
+        "name": "Тело(Нижн.)",
+        "msg": "Тело(Нижн.) размозжено!"
       },
       "pseudopod_1": {
-        "name": "Pseudopod 1",
-        "msg": "Pseudopod 1 melted into sludge!"
+        "name": "Ложноножка 1",
+        "msg": "Раздавлена ложноножка 1!"
       },
       "pseudopod_2": {
-        "name": "Pseudopod 2",
-        "msg": "Pseudopod 2 melted into sludge!"
+        "name": "Ложноножка 2",
+        "msg": "Раздавлена ложноножка 1!"
       }
     },
     "undead": {
       "skull": {
-        "name": "Skull",
-        "msg": "Skull obliterated!"
+        "name": "Череп",
+        "msg": "Череп стерт с лица земли!"
       },
       "ribcage": {
-        "name": "Ribcage",
-        "msg": "Ribcage caved into gore!"
+        "name": "Грудная клетка",
+        "msg": "Грудь превратилась в кровавую кашу!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm ripped off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm ripped off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg cut off!"
+        "name": "Левая Нога",
+        "msg": "Отрезана левая нога!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg cut off!"
+        "name": "Правая Нога",
+        "msg": "Отрезана правая нога!"
       },
-      "name": "Undead"
+      "name": "Нежить"
     },
     "scorpion": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "cephalothorax": {
-        "name": "Cephalothorax",
-        "msg": "Cephalothorax crushed!"
+        "name": "Головогрудь",
+        "msg": "Раздавлена головогрудь!"
       },
       "abdomen": {
-        "name": "Abdomen",
-        "msg": "Abdomen burst open!"
+        "name": "Брюшко",
+        "msg": "Брюшко разорвалось!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail severed!"
+        "name": "Хвост",
+        "msg": "Хвост отрублен!"
       },
       "stinger": {
-        "name": "Stinger",
-        "msg": "Stinger snapped off!"
+        "name": "Жало",
+        "msg": "Отрублено жало!"
       },
       "pincer_left": {
-        "name": "Left Pincer",
-        "msg": "Left Pincer crushed!"
+        "name": "Левая Клешня",
+        "msg": "Раздавлена левая клешня!"
       },
       "pincer_right": {
-        "name": "Right Pincer",
-        "msg": "Right Pincer crushed!"
+        "name": "Правая Клешня",
+        "msg": "Правая клешня!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Конечность Первой Пары(Л)",
+        "msg": "Отрублена конечность первой пары(Л)!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Конечность Первой Пары(П)",
+        "msg": "Отрублена конечность первой пары(П)!"
       },
       "mid_left_leg": {
-        "name": "Mid-Front Left Leg",
-        "msg": "Mid-Front Left Leg cut off!"
+        "name": "Конечность Второй Пары(Л)",
+        "msg": "Отрублена конечность второй пары(Л)!"
       },
       "mid_right_leg": {
-        "name": "Mid-Front Right Leg",
-        "msg": "Mid-Front Right Leg cut off!"
+        "name": "Конечность Второй Пары(П)",
+        "msg": "Отрублена конечность второй пары(П)!"
       },
       "mid_rear_left_leg": {
-        "name": "Mid-Rear Left Leg",
-        "msg": "Mid-Rear Left Leg cut off!"
+        "name": "Конечность Третьей Пары(Л)",
+        "msg": "Отрублена конечность третьей пары(Л)!"
       },
       "mid_rear_right_leg": {
-        "name": "Mid-Rear Right Leg",
-        "msg": "Mid-Rear Right Leg cut off!"
+        "name": "Конечность Третьей Пары(П)",
+        "msg": "Отрублена конечность третьей пары(П)!"
       },
       "rear_left_leg": {
-        "name": "Rear Left Leg",
-        "msg": "Rear Left Leg cut off!"
+        "name": "Конечность Четвертой Пары(Л)",
+        "msg": "Отрублена конечность четвертой пары(Л)!"
       },
       "rear_right_leg": {
-        "name": "Rear Right Leg",
-        "msg": "Rear Right Leg cut off!"
+        "name": "Конечность Четвертой Пары(П)",
+        "msg": "Отрублена конечность четвертой пары(П)!"
       },
-      "name": "Scorpion"
+      "name": "Скорпион"
     },
     "spider": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "cephalothorax": {
-        "name": "Cephalothorax",
-        "msg": "Cephalothorax cracked open!"
+        "name": "Головогрудь",
+        "msg": "Раздавлена головогрудь!"
       },
       "abdomen": {
-        "name": "Abdomen",
-        "msg": "Abdomen ruptured!"
+        "name": "Брюшко",
+        "msg": "Брюшко разорвалось!"
       },
       "fangs": {
-        "name": "Fangs",
-        "msg": "Fangs shattered!"
+        "name": "Хелицеры",
+        "msg": "Хелицеры повреждены!"
       },
       "spinnerets": {
-        "name": "Spinnerets",
-        "msg": "Spinnerets severed!"
+        "name": "Паутинные железы",
+        "msg": "Паутинные железы повреждены!"
       },
       "left_leg": {
-        "name": "Front Left Leg",
-        "msg": "Front Left Leg cut off!"
+        "name": "Конечность Первой Пары(Л)",
+        "msg": "Отрублена конечность первой пары(Л)!"
       },
       "right_leg": {
-        "name": "Front Right Leg",
-        "msg": "Front Right Leg cut off!"
+        "name": "Конечность Первой Пары(П)",
+        "msg": "Отрублена конечность первой пары(П)!"
       },
       "mid_left_leg": {
-        "name": "Mid-Front Left Leg",
-        "msg": "Mid-Front Left Leg cut off!"
+        "name": "Конечность Второй Пары(Л)",
+        "msg": "Отрублена конечность второй пары(Л)!"
       },
       "mid_right_leg": {
-        "name": "Mid-Front Right Leg",
-        "msg": "Mid-Front Right Leg cut off!"
+        "name": "Конечность Второй Пары(П)",
+        "msg": "Отрублена конечность второй пары(П)!"
       },
       "mid_rear_left_leg": {
-        "name": "Mid-Rear Left Leg",
-        "msg": "Mid-Rear Left Leg cut off!"
+        "name": "Конечность Третьей Пары(Л)",
+        "msg": "Отрублена конечность третьей пары(П)!"
       },
       "mid_rear_right_leg": {
-        "name": "Mid-Rear Right Leg",
-        "msg": "Mid-Rear Right Leg cut off!"
+        "name": "Конечность Третьей Пары(П)",
+        "msg": "Отрублена конечность третьей пары(П)!"
       },
       "rear_left_leg": {
-        "name": "Rear Left Leg",
-        "msg": "Rear Left Leg cut off!"
+        "name": "Конечность Четвертой Пары(Л)",
+        "msg": "Отрублена конечность четвертой пары(Л)!"
       },
       "rear_right_leg": {
-        "name": "Rear Right Leg",
-        "msg": "Rear Right Leg cut off!"
+        "name": "Конечность Четвертой Пары(П)",
+        "msg": "Отрублена конечность четвертой пары(П)!"
       },
-      "name": "Spider"
+      "name": "Паук"
     },
     "plant": {
-      "name": "Plant",
+      "name": "Растение",
       "flower": {
-        "name": "Flower",
-        "msg": "Flower withered to rot!"
+        "name": "Цветок",
+        "msg": "Цветок превратился в кашу!"
       },
       "stem": {
-        "name": "Stem",
-        "msg": "Stem twisted till it split!"
+        "name": "Стебель",
+        "msg": "Стебель надломился!"
       },
       "roots": {
-        "name": "Roots",
-        "msg": "Roots ripped out!"
+        "name": "Корни",
+        "msg": "Корни вырваны!"
       },
       "vine_1": {
-        "name": "Vine 1",
-        "msg": "Vine 1 ripped into gore!"
+        "name": "Лоза 1",
+        "msg": "Оторвана лоза 1!"
       },
       "vine_2": {
-        "name": "Vine 2",
-        "msg": "Vine 2 ripped into gore!"
+        "name": "Лоза 2",
+        "msg": "Оторвана лоза 2!"
       }
     },
     "elemental": {
       "core": {
-        "name": "Core",
-        "msg": "Core violently collapsed!"
+        "name": "Ядро",
+        "msg": "Ядро резко лопнуло!"
       },
       "upper_form": {
-        "name": "Upper Form",
-        "msg": "Upper Form unraveled!"
+        "name": "Верхняя Форма",
+        "msg": "Верхняя форма распалась!"
       },
       "lower_form": {
-        "name": "Lower Form",
-        "msg": "Lower Form unraveled!"
+        "name": "Нижняя Форма",
+        "msg": "Нижняя форма распалась!"
       },
       "left_appendage": {
-        "name": "Left Appendage",
-        "msg": "Left Appendage liquefied on impact!"
+        "name": "Левый Придаток",
+        "msg": "Левый придаток растаял!"
       },
       "right_appendage": {
-        "name": "Right Appendage",
-        "msg": "Right Appendage liquefied on impact!"
+        "name": "Правый Придаток",
+        "msg": "Правый придаток растаял!"
       },
-      "name": "Elemental"
+      "name": "Элементаль"
     },
     "aquaticfish": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "body": {
-        "name": "Body",
-        "msg": "Body crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "tail_fin": {
-        "name": "Tail Fin",
-        "msg": "Tail Fin sliced off!"
+        "name": "Хвостовой Плавник",
+        "msg": "Отрезан хвостовой плавник!"
       },
       "dorsal_fin": {
-        "name": "Dorsal Fin",
-        "msg": "Dorsal Fin ripped into gore!"
+        "name": "Спинной Плавник",
+        "msg": "Отрезан спинной плавник!"
       },
       "left_pectoral_fin": {
-        "name": "Left Pectoral Fin",
-        "msg": "Left Pectoral Fin torn to ribbons!"
+        "name": "Левый Грудной Плавник",
+        "msg": "Левый Грудной Плавник разорван в клочья!"
       },
       "right_pectoral_fin": {
-        "name": "Right Pectoral Fin",
-        "msg": "Right Pectoral Fin torn to ribbons!"
+        "name": "Правый Грудной Плавник",
+        "msg": "Правый Грудной Плавник разорван в клочья!!"
       },
-      "name": "Aquatic Fish"
+      "name": "Рыба"
     },
     "octopus": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "mantle": {
-        "name": "Mantle",
-        "msg": "Mantle crushed!"
+        "name": "Мантия",
+        "msg": "Мантия порвана!"
       },
       "tentacle_1": {
-        "name": "Tentacle 1",
-        "msg": "Tentacle 1 ripped off!"
+        "name": "Щупальце 1",
+        "msg": "Оторвано первое щупальце!"
       },
       "tentacle_2": {
-        "name": "Tentacle 2",
-        "msg": "Tentacle 2 ripped off!"
+        "name": "Щупальце 2",
+        "msg": "Оторвано второе щупальце!"
       },
       "tentacle_3": {
-        "name": "Tentacle 3",
-        "msg": "Tentacle 3 ripped off!"
+        "name": "Щупальце 3",
+        "msg": "Оторвано третье щупальце!"
       },
       "tentacle_4": {
-        "name": "Tentacle 4",
-        "msg": "Tentacle 4 ripped off!"
+        "name": "Щупальце 4",
+        "msg": "Оторвана четвертое щупальце!"
       },
-      "name": "Octopus"
+      "name": "Осьминог"
     },
     "robot": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "core": {
-        "name": "Core",
-        "msg": "Core violently collapsed!"
+        "name": "Ядро",
+        "msg": "Ядро с грохотом взрывается!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm detached!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm detached!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg cut off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg cut off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
-      "name": "Robot"
+      "name": "Робот"
     },
     "bird": {
-      "name": "Bird",
+      "name": "Птица",
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "body": {
-        "name": "Body",
-        "msg": "Body crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "beak": {
-        "name": "Beak",
-        "msg": "Beak obliterated!"
+        "name": "Клюв",
+        "msg": "Клюв рассыпался в прах!"
       },
       "left_wing": {
-        "name": "Left Wing",
-        "msg": "Left Wing torn to ribbons!"
+        "name": "Левое Крыло",
+        "msg": "Левое крыло разорвано в клочья!"
       },
       "right_wing": {
-        "name": "Right Wing",
-        "msg": "Right Wing torn to ribbons!"
+        "name": "Правое Крыло",
+        "msg": "Правое крыло разорвано в клочья!"
       },
       "talons": {
-        "name": "Talons",
-        "msg": "Talons ripped off!"
+        "name": "Когти",
+        "msg": "Когти вырваны!"
       }
     },
     "reptilian": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Torso crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm ripped off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm ripped off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg cut off!"
+        "name": "Левая Нога",
+        "msg": "Отрезана левая нога"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg cut off!"
+        "name": "Правая Нога",
+        "msg": "Оторвана правая нога!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail hacked off!"
+        "name": "Хвост",
+        "msg": "Хвост отброшен!"
       },
-      "name": "Reptilian"
+      "name": "Рептилоид"
     },
     "mushroom": {
       "cap": {
-        "name": "Cap",
-        "msg": "Cap ripped into gore!"
+        "name": "Шляпка",
+        "msg": "Шляпка превратилась в кашу!"
       },
       "stalk": {
-        "name": "Stalk",
-        "msg": "Stalk twisted till it snapped!"
+        "name": "Ножка",
+        "msg": "Ножка надломлена!"
       },
       "roots": {
-        "name": "Roots",
-        "msg": "Roots ripped out!"
+        "name": "Мищелий",
+        "msg": "Мицелий вырван!"
       },
       "spore_sacs": {
-        "name": "Spore Sacs",
-        "msg": "Spore Sacs have burst open!"
+        "name": "Споровый мешок",
+        "msg": "Споровый мешок разорвался!"
       },
-      "name": "Mushroom"
+      "name": "Гриб"
     },
     "tree": {
-      "name": "Tree",
+      "name": "Дерево",
       "crown": {
-        "name": "Crown",
-        "msg": "Crown ripped into gore!"
+        "name": "Крона",
+        "msg": "Крона разорвана на куски!"
       },
       "trunk": {
-        "name": "Trunk",
-        "msg": "Trunk cleaved brutally!"
+        "name": "Ствол",
+        "msg": "Ствол жестоко изрезан!"
       },
       "roots": {
-        "name": "Roots",
-        "msg": "Roots ripped out!"
+        "name": "Корни",
+        "msg": "Корни вырваны!"
       },
       "branch_1": {
-        "name": "Branch 1",
-        "msg": "Branch 1 broken off!"
+        "name": "Первая ветвь",
+        "msg": "Первая ветвь сломалась!"
       },
       "branch_2": {
         "name": "Branch 2",
-        "msg": "Branch 2 broken off!"
+        "msg": "Вторая ветвь сломалась!"
       }
     },
     "bacterial": {
       "nucleus": {
-        "name": "Nucleus",
-        "msg": "Nucleus burst open!"
+        "name": "Ядро",
+        "msg": "Ядро разрвалось!"
       },
       "membrane": {
-        "name": "Membrane",
-        "msg": "Membrane melted into sludge!"
+        "name": "Мембрана",
+        "msg": "Мембрана порвана!"
       },
       "flagellum": {
-        "name": "Flagellum",
-        "msg": "Flagellum torn to ribbons!"
+        "name": "Жгутик",
+        "msg": "Жгутик разорван в клочья!"
       },
       "toxin_sacs": {
-        "name": "Toxin Sacs",
-        "msg": "Toxin Sacs have burst!"
+        "name": "Ядовитые Железы",
+        "msg": "Ядовитая железа лопнула!"
       },
-      "name": "Bacterial"
+      "name": "Бактерия"
     },
     "doubleheadedhumanoid": {
       "head_left": {
-        "name": "Head Left",
-        "msg": "Head Left torn apart!"
+        "name": "Левая Голова",
+        "msg": "Левая голова вырвана с корнем!"
       },
       "head_right": {
-        "name": "Head Right",
-        "msg": "Head Right torn apart!"
+        "name": "Правая Голова",
+        "msg": "Правая голова вырвана с корнем!"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Torso crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm ripped off!"
+        "name": "Левая Рука",
+        "msg": "Оторвана левая рука!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm ripped off!"
+        "name": "Правая Рука",
+        "msg": "Оторвана правая рука!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg cut off!"
+        "name": "Левая Нога",
+        "msg": "Отрезана левая рука!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg cut off!"
+        "name": "Правая нога",
+        "msg": "Отреза правая нога!"
       },
-      "name": "Double-Headed Humanoid"
+      "name": "Двухголовый человек"
     },
     "serpent": {
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "fangs": {
-        "name": "Fangs",
-        "msg": "Fangs shattered!"
+        "name": "Клыки",
+        "msg": "Клыки рассыпались!"
       },
       "body_segment_1": {
-        "name": "Body Segment 1",
-        "msg": "Body Segment 1 ruptured!"
+        "name": "Первая Часть Тела",
+        "msg": "Оторвана вторая часть тела!"
       },
       "body_segment_2": {
-        "name": "Body Segment 2",
-        "msg": "Body Segment 2 ruptured!"
+        "name": "Вторая Часть Тела",
+        "msg": "Оторвана вторая часть тела!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail hacked off!"
+        "name": "Хвост",
+        "msg": "Отрублен хвост!"
       },
-      "name": "Serpent"
+      "name": "Змей"
     },
     "golem": {
       "core": {
-        "name": "Core",
-        "msg": "Core cracked and collapsed!"
+        "name": "Ядро",
+        "msg": "Ядро треснуло!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm crumbled!"
+        "name": "Левая Рука",
+        "msg": "Левая рука рассыпалась!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm crumbled!"
+        "name": "Правая Рука",
+        "msg": "Правая Рука рассыпалась!"
       },
       "left_leg": {
-        "name": "Left Leg",
-        "msg": "Left Leg fractured!"
+        "name": "Левая Нога",
+        "msg": "Левая нога треснула!"
       },
       "right_leg": {
-        "name": "Right Leg",
-        "msg": "Right Leg fractured!"
+        "name": "Правая Нога",
+        "msg": "Правая нога треснула!"
       },
-      "name": "Golem"
+      "name": "Голем"
     },
     "demon": {
-      "name": "Demon",
+      "name": "Демон",
       "head": {
-        "name": "Head"
+        "name": "Голова"
       },
       "horns": {
-        "name": "Horns",
-        "msg": "Horns shattered!"
+        "name": "Рога",
+        "msg": "Рога рассыпались в прах!"
       },
       "torso": {
-        "name": "Torso",
-        "msg": "Torso crushed!"
+        "name": "Туловище",
+        "msg": "Туловище размозжено!"
       },
       "left_wing": {
-        "name": "Left Wing",
-        "msg": "Left Wing shredded!"
+        "name": "Левое Крыло",
+        "msg": "Левое крыло разорвано в клочья!"
       },
       "right_wing": {
-        "name": "Right Wing",
-        "msg": "Right Wing shredded!"
+        "name": "Правое Крыло",
+        "msg": "Правое крыло разорвано в клочья!"
       },
       "tail": {
-        "name": "Tail",
-        "msg": "Tail severed!"
+        "name": "Хвост",
+        "msg": "Отрублен хвост!"
       }
     },
     "ghost": {
       "face": {
-        "name": "Face",
-        "msg": "Face disintegrated into vapor!"
+        "name": "Лицо",
+        "msg": "Лицо растворилось в небытие!"
       },
       "core": {
-        "name": "Essence Core",
-        "msg": "Essence Core unraveled!"
+        "name": "Ядро эссенции",
+        "msg": "Ядро эссенции распалось!"
       },
       "left_wisp": {
-        "name": "Left Wisp",
-        "msg": "Left Wisp dispersed!"
+        "name": "Левый Огонек",
+        "msg": "Левый огонек рассеялся!"
       },
       "right_wisp": {
-        "name": "Right Wisp",
-        "msg": "Right Wisp dispersed!"
+        "name": "Правый Огонек",
+        "msg": "Правый огонек рассеялся!"
       },
-      "name": "Ghost"
+      "name": "Призрак"
     },
     "drone": {
       "sensor_array": {
-        "name": "Sensor Array",
-        "msg": "Sensor Array wrecked completely!"
+        "name": "Сенсорный Массив",
+        "msg": "Сенсорный массив сломан!"
       },
       "chassis": {
-        "name": "Chassis",
-        "msg": "Chassis crushed!"
+        "name": "Шасси",
+        "msg": "Шасси сломано!"
       },
       "left_prop": {
-        "name": "Left Propeller",
-        "msg": "Left Propeller smashed into wreckage!"
+        "name": "Левый Пропеллер",
+        "msg": "Левый пропеллер разлетелся на куски!"
       },
       "right_prop": {
-        "name": "Right Propeller",
-        "msg": "Right Propeller smashed into wreckage!"
+        "name": "Правый Пропеллер",
+        "msg": "Правый пропеллер разлетелся на куски!"
       },
-      "name": "Drone"
+      "name": "Дрон"
     },
     "voidspawn": {
       "abyssal_eye": {
-        "name": "Abyssal Eye",
-        "msg": "Abyssal Eye pierced!"
+        "name": "Глубинное Око",
+        "msg": "Глубинное око проткнуто!"
       },
       "maw": {
-        "name": "Maw",
-        "msg": "Maw split open!"
+        "name": "Пасть",
+        "msg": "Пасть с хрустом разрывается!"
       },
       "void_tendril_1": {
         "name": "Void Tendril 1",
@@ -975,12 +975,12 @@
         "msg": "Stitched Torso torn down the middle!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm torn loose!"
+        "name": "Левая Рука",
+        "msg": "Левая Рука torn loose!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm torn loose!"
+        "name": "Правая Рука",
+        "msg": "Правая Рука torn loose!"
       },
       "power_stitch": {
         "name": "Power Stitch",
@@ -1001,12 +1001,12 @@
         "msg": "Torso crushed!"
       },
       "left_arm": {
-        "name": "Left Arm",
-        "msg": "Left Arm ripped off!"
+        "name": "Левая Рука",
+        "msg": "Левая Рука ripped off!"
       },
       "right_arm": {
-        "name": "Right Arm",
-        "msg": "Right Arm ripped off!"
+        "name": "Правая Рука",
+        "msg": "Правая Рука ripped off!"
       },
       "left_leg": {
         "name": "Left Bull Leg",
@@ -1365,11 +1365,11 @@
         "msg": "Torso battered!"
       },
       "left_arm": {
-        "name": "Left Arm",
+        "name": "Левая Рука",
         "msg": "Left arm broken!"
       },
       "right_arm": {
-        "name": "Right Arm",
+        "name": "Правая Рука",
         "msg": "Right arm snapped!"
       },
       "left_leg": {
@@ -1392,11 +1392,11 @@
         "msg": "Torso torn!"
       },
       "left_arm": {
-        "name": "Left Arm",
+        "name": "Левая Рука",
         "msg": "Left arm ripped!"
       },
       "right_arm": {
-        "name": "Right Arm",
+        "name": "Правая Рука",
         "msg": "Right arm torn!"
       },
       "left_leg": {
@@ -1484,11 +1484,11 @@
         "msg": "Fangs shattered!"
       },
       "left_arm": {
-        "name": "Left Arm",
+        "name": "Левая Рука",
         "msg": "Left arm broken!"
       },
       "right_arm": {
-        "name": "Right Arm",
+        "name": "Правая Рука",
         "msg": "Right arm shattered!"
       },
       "left_leg": {
@@ -1596,11 +1596,11 @@
         "msg": "Human torso crushed!"
       },
       "left_arm": {
-        "name": "Left Arm",
+        "name": "Левая Рука",
         "msg": "Left arm ripped off!"
       },
       "right_arm": {
-        "name": "Right Arm",
+        "name": "Правая Рука",
         "msg": "Right arm ripped off!"
       },
       "body": {
@@ -1938,11 +1938,11 @@
         "msg": "Core shattered!"
       },
       "left_arm": {
-        "name": "Left Arm",
+        "name": "Левая Рука",
         "msg": "Left arm splintered!"
       },
       "right_arm": {
-        "name": "Right Arm",
+        "name": "Правая Рука",
         "msg": "Right arm splintered!"
       },
       "eyes": {
