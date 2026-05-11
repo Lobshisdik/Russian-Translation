@@ -140,7 +140,7 @@
     const NEVER_SEEN_COLOR = parameters['Never Seen Color'] || '#000000';
     const PREVIOUSLY_SEEN_COLOR = parameters['Previously Seen Color'] || 'rgba(0,0,0,0.4)';
     const REVEAL_TRANSITION_DURATION = Number(parameters['Reveal Transition Duration'] || 16);
-    const BASE_ALPHA = (function() {
+    const BASE_ALPHA = (function () {
         const css = parameters['Previously Seen Color'] || 'rgba(0,0,0,0.4)';
         const match = css.match(/rgba\(\d+,\s*\d+,\s*\d+,\s*([\d.]+)\)/);
         return match ? parseFloat(match[1]) : 0.4;
@@ -155,6 +155,7 @@
     const TERRAIN_WALL = 4;
     const TERRAIN_ROOF = 7;
     const REGION_BLOCK = 10;
+    const REGION_EXTENDED_VIEW = 11;
 
     let fogOfWarEnabled = true;
     let updateCounter = 0;
@@ -478,7 +479,7 @@
         if (this._fogOfWarData[index] !== state) {
             this._fogOfWarData[index] = state;
             this._activeTransitions.add(index);
-            
+
             const width = this.width();
             this.markChunkDirty(index % width, (index / width) | 0);
         }
@@ -588,7 +589,7 @@
 
             const positionChanged = Math.abs(char.x - lastX) > 0.2 || Math.abs(char.y - lastY) > 0.2;
             const directionChanged = char.direction() !== lastDir;
-            
+
             const realX = char.x + (char._realX - char.x);
             const realY = char.y + (char._realY - char.y);
             const isSmoothing = Math.abs(visionX - realX) > 0.05 || Math.abs(visionY - realY) > 0.05;
@@ -672,9 +673,9 @@
         const char = character || $gamePlayer;
         const charActualX = Math.round(char._realX);
         const charActualY = Math.round(char._realY);
-        const playerOnRoof = this.terrainTag(charActualX, charActualY) === TERRAIN_ROOF;
+        const playerOnRoof = this.terrainTag(charActualX, charActualY) === TERRAIN_ROOF || this.regionId(charActualX, charActualY) === REGION_EXTENDED_VIEW;
 
-        if (playerOnRoof) range *= 2;
+        if (playerOnRoof) range *= 1.5;
 
         this.setFogOfWarState(charActualX, charActualY, 2);
 
@@ -866,12 +867,12 @@
         if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
             players.push(window.$gameSplitScreen.p2Event);
         }
-        
+
         const events = this.events();
 
         for (let i = 0; i < events.length; i++) {
             const event = events[i];
-            
+
             // Proximity to ANY player reveals the event
             const isBordering = players.some(p => Math.abs(event.x - p.x) <= 1 && Math.abs(event.y - p.y) <= 1);
             let isVisible = this.isPositionVisible(event.x, event.y);
@@ -907,7 +908,7 @@
             const isExempt = $gameMap.isExemptEventName(this);
 
             this._fogOfWarVisible = isVisible;
-            
+
             if (snap) {
                 this._fogOfWarTransitioning = false;
                 this._fogOfWarTransitionTimer = 0;
@@ -947,10 +948,10 @@
 
     Game_Event.prototype.updateFogOfWarTransition = function () {
         if (this._fogOfWarTransitioning) {
-            
+
             this._fogOfWarTransitionTimer--;
             const duration = REVEAL_TRANSITION_DURATION;
-            
+
             if (this._isEnemy && !$gameMap.isExemptEventName(this)) {
                 if (!this._fogOfWarVisible) {
                     // Fading out
@@ -1029,7 +1030,7 @@
     };
 
     const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
-    Game_Player.prototype.performTransfer = function() {
+    Game_Player.prototype.performTransfer = function () {
         const sameMap = this._newMapId === $gameMap.mapId();
         _Game_Player_performTransfer.call(this);
         if (sameMap && fogOfWarEnabled && $gameMap) {

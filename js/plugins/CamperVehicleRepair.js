@@ -442,7 +442,9 @@
 
   PluginManager.registerCommand(pluginName, "camperMaintenance", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
     
@@ -455,7 +457,9 @@
 
   PluginManager.registerCommand(pluginName, "carMaintenance", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -468,7 +472,9 @@
 
   PluginManager.registerCommand(pluginName, "airshipMaintenance", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -481,7 +487,9 @@
 
   PluginManager.registerCommand(pluginName, "damageCamper", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
     
@@ -493,16 +501,22 @@
     
     // Show message if vehicle becomes broken
     if (window.brokenCamper) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[2]Critical damage!\\C[0] The camper is now broken!");
       $gameMessage.add("Critical parts must be repaired before it can be used.");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add("The camper has taken damage!");
+      window.skipLocalization = false;
     }
   });
 
   PluginManager.registerCommand(pluginName, "damageCar", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -514,16 +528,22 @@
 
     // Show message if vehicle becomes broken
     if (window.brokenCar) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[2]Critical damage!\\C[0] The car is now broken!");
       $gameMessage.add("Critical parts must be repaired before it can be used.");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add("The car has taken damage!");
+      window.skipLocalization = false;
     }
   });
 
   PluginManager.registerCommand(pluginName, "damageAirship", () => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -535,16 +555,22 @@
 
     // Show message if vehicle becomes broken
     if (window.brokenAirship) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[2]Critical damage!\\C[0] The starship is now broken!");
       $gameMessage.add("Critical parts must be repaired before it can be used.");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add("The starship has taken damage!");
+      window.skipLocalization = false;
     }
   });
 
   PluginManager.registerCommand(pluginName, "repairCamper", (args) => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
     
@@ -558,20 +584,28 @@
     repairVehicle("camper", repairPercent);
     
     if (args.amount === "full") {
+      window.skipLocalization = true;
       $gameMessage.add("The camper has been fully repaired!");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add(`The camper has been partially repaired (${repairAmountPartial}%).`);
+      window.skipLocalization = false;
     }
     
     // Check if vehicle is now operational
     if (wasBroken && !window.brokenCamper) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[3]The camper is now operational!\\C[0]");
+      window.skipLocalization = false;
     }
   });
 
   PluginManager.registerCommand(pluginName, "repairCar", (args) => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -585,20 +619,28 @@
     repairVehicle("car", repairPercent);
 
     if (args.amount === "full") {
+      window.skipLocalization = true;
       $gameMessage.add("The car has been fully repaired!");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add(`The car has been partially repaired (${repairAmountPartial}%).`);
+      window.skipLocalization = false;
     }
 
     // Check if vehicle is now operational
     if (wasBroken && !window.brokenCar) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[3]The car is now operational!\\C[0]");
+      window.skipLocalization = false;
     }
   });
 
   PluginManager.registerCommand(pluginName, "repairAirship", (args) => {
     if (!ensureGameSystemExists()) {
+      window.skipLocalization = true;
       $gameMessage.add("System not ready. Please try again.");
+      window.skipLocalization = false;
       return;
     }
 
@@ -612,14 +654,20 @@
     repairVehicle("airship", repairPercent);
 
     if (args.amount === "full") {
+      window.skipLocalization = true;
       $gameMessage.add("The starship has been fully repaired!");
+      window.skipLocalization = false;
     } else {
+      window.skipLocalization = true;
       $gameMessage.add(`The starship has been partially repaired (${repairAmountPartial}%).`);
+      window.skipLocalization = false;
     }
 
     // Check if vehicle is now operational
     if (wasBroken && !window.brokenAirship) {
+      window.skipLocalization = true;
       $gameMessage.add("\\C[3]The starship is now operational!\\C[0]");
+      window.skipLocalization = false;
     }
   });
 
@@ -646,18 +694,24 @@
   const _Game_Vehicle_getOn = Game_Vehicle.prototype.getOn;
   Game_Vehicle.prototype.getOn = function() {
     if (this.isShip() && window.brokenCamper) {
+      window.skipLocalization = true;
       $gameMessage.add("The camper is broken and cannot be used!");
       $gameMessage.add("Critical parts must be repaired first.");
+      window.skipLocalization = false;
       return;
     }
     if (this.isBoat() && window.brokenCar) {
+      window.skipLocalization = true;
       $gameMessage.add("The car is broken and cannot be used!");
       $gameMessage.add("Critical parts must be repaired first.");
+      window.skipLocalization = false;
       return;
     }
     if (this.isAirship() && window.brokenAirship) {
+      window.skipLocalization = true;
       $gameMessage.add("The starship is broken and cannot be used!");
       $gameMessage.add("Critical parts must be repaired first.");
+      window.skipLocalization = false;
       return;
     }
     _Game_Vehicle_getOn.call(this);

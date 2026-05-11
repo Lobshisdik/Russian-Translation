@@ -1025,9 +1025,13 @@
             if (apiary) {
                 const harvested = apiary.harvestHoney();
                 if (harvested > 0) {
+                    window.skipLocalization = true;
                     $gameMessage.add(`Harvested ${Math.floor(harvested / 10)} honey!`);
+                    window.skipLocalization = false;
                 } else {
+                    window.skipLocalization = true;
                     $gameMessage.add('Not enough honey to harvest!');
+                    window.skipLocalization = false;
                 }
             }
             this._commandWindow.activate();
@@ -1068,6 +1072,7 @@
             const report = $gameSystem.apiaryComplex.simulateTimeStep(timePassed);
             
             // Show summary message
+            window.skipLocalization = true;
             $gameMessage.add(`--- Apiary Status Report ---`);
             $gameMessage.add(`Time elapsed: ${Math.floor(timePassed)} hours`);
             $gameMessage.add(`Colony state: ${report.colony.state}`);
@@ -1083,6 +1088,7 @@
             if (report.environment.threats.length > 0) {
                 $gameMessage.add(`Active threats: ${report.environment.threats.join(', ')}`);
             }
+            window.skipLocalization = false;
         }
         
         $gameSystem.apiaryComplex.lastUpdate = now;
@@ -1099,8 +1105,10 @@
         const hours = 24; // Simulate one day
         const report = $gameSystem.apiaryComplex.simulateTimeStep(hours);
         
+        window.skipLocalization = true;
         $gameMessage.add(`Simulated ${hours} hours`);
         $gameMessage.add(`Honey produced: ${Math.floor(report.statistics.honeyProduced)}`);
         $gameMessage.add(`Current population: ${report.population.total}`);
+        window.skipLocalization = false;
     });
 })();

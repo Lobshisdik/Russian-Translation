@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Maker MZ Tileset Sharing Analyzer</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --primary: #4a90e2;
+            --secondary: #e67e22;
+            --success: #27ae60;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 2rem;
+            align-items: stretch;
+        }
+
+        .upload-zone {
+            flex: 1;
+            min-width: 250px;
+            border: 2px dashed #bbb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            background: var(--card-bg);
+            transition: border-color 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--primary);
+            background: #fdfdfd;
+        }
+
+        .upload-zone input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+        }
+
+        .upload-btn:hover {
+            background-color: #357abd;
+        }
+
+        .img-upload-btn {
+            background-color: #8e44ad;
+        }
+
+        .img-upload-btn:hover {
+            background-color: #732d91;
+        }
+
+        .download-btn {
+            background-color: var(--success);
+            display: none;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .download-btn:hover {
+            background-color: #219653;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        /* Sidebar Preview */
+        .preview-sidebar {
+            width: 350px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            position: sticky;
+            top: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .preview-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .preview-image-container {
+            width: 100%;
+            height: 350px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background-image:
+                linear-gradient(45deg, #ccc 25%, transparent 25%),
+                linear-gradient(135deg, #ccc 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ccc 75%),
+                linear-gradient(135deg, transparent 75%, #ccc 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .preview-placeholder {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background: #cbd5e1;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards */
+        .tileset-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .tileset-card.shared {
+            border-left: 4px solid var(--secondary);
+        }
+
+        .tileset-header {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .group-title {
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: #2c3e50;
+        }
+
+        .image-title {
+            font-family: monospace;
+            color: #d35400;
+            font-size: 1.5rem;
+            word-break: break-all;
+            cursor: crosshair;
+        }
+
+        .image-title:hover {
+            text-decoration: underline;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sync-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sync-btn.a-btn {
+            background-color: #3498db;
+        }
+
+        .sync-btn.a-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .sync-btn:hover:not(:disabled) {
+            background-color: #d68910;
+        }
+
+        .sync-btn:disabled {
+            cursor: default;
+        }
+
+        .tileset-count {
+            background: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #475569;
+            white-space: nowrap;
+        }
+
+        .shared .tileset-count {
+            background: #fdf2e9;
+            color: #d35400;
+        }
+
+        .card-body {
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .card-body.split {
+                flex-direction: row;
+            }
+        }
+
+        .image-list,
+        .tileset-list {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .image-item {
+            font-size: 1.3rem;
+            color: #444;
+            padding: 8px 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            cursor: crosshair;
+        }
+
+        .image-item:hover {
+            background-color: #f1f5f9;
+        }
+
+        .image-label {
+            font-weight: bold;
+            color: #666;
+            width: 50px;
+            display: inline-block;
+        }
+
+        .empty-img {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .ts-item {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            padding: 10px 12px;
+            /* Added some horizontal padding */
+            display: flex;
+            align-items: center;
+            cursor: crosshair;
+            /* Changes cursor to indicate preview capability */
+            border-radius: 4px;
+            transition: background-color 0.1s;
+        }
+
+        .ts-item:hover {
+            background-color: #f1f5f9;
+            /* Highlights the row on hover */
+        }
+
+        .first-badge {
+            background: #e74c3c;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .slot-badge {
+            background: #2c3e50;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 10px;
+            display: inline-block;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .slot-B {
+            background: #8e44ad;
+        }
+
+        .slot-C {
+            background: #2980b9;
+        }
+
+        .slot-D {
+            background: #27ae60;
+        }
+
+        .slot-E {
+            background: #d35400;
+        }
+
+        .ts-id {
+            color: #666;
+            font-size: 1.1rem;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
+
+        .check-synced {
+            color: var(--success);
+            font-weight: bold;
+            margin-left: 8px;
+            font-size: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .empty-state {
+            color: #999;
+            font-style: italic;
+            padding: 1rem;
+        }
+
+        .tileset-card.done {
+            border: 2px solid var(--success) !important;
+            background-color: #f0fff4;
+        }
+
+        .done-badge {
+            background-color: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .done-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .done-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .done-container:hover {
+            background: #e0e0e0;
+        }
+
+        .done-container.is-done {
+            background: #dcfce7;
+            color: #166534;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tileset Sharing Analyzer</h1>
+    <p class="subtitle">Analyze shared tilesets, copy configurations, and preview your images.</p>
+
+    <div class="controls-container">
+        <div class="upload-zone" id="dataDropZone">
+            <label class="btn upload-btn" id="dataUploadLabel">
+                1. Select 'Tilesets.json'
+                <input type="file" id="dataFolderInput" accept=".json">
+            </label>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: #888;">(Required: Select Tilesets.json directly)</p>
+        </div>
+
+        <div class="upload-zone" id="imgDropZone">
+            <label class="btn img-upload-btn" id="imgUploadLabel">
+                2. Select 'img/tilesets' Folder
+                <input type="file" id="imgFolderInput" webkitdirectory directory multiple accept="image/png">
+            </label>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: #888;">(Optional: Enables hover previews)</p>
+        </div>
+
+        <button id="downloadBtn" class="btn download-btn">
+            💾 Download Updated Tilesets.json
+        </button>
+    </div>
+
+    <div id="loading" class="loading">Processing Files...</div>
+
+    <div class="main-layout">
+        <div class="preview-sidebar">
+            <div class="preview-title" id="previewTitle">Image Preview</div>
+            <div class="preview-image-container">
+                <div class="preview-placeholder" id="previewPlaceholder">
+                    Hover over an image name in the lists to preview it.<br><br>
+                    <small>(Requires 'img/tilesets' folder to be loaded)</small>
+                </div>
+                <img id="previewImage" src="" alt="Tileset Preview">
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="tabs" id="tabsContainer">
+                <button class="tab-btn active" data-target="view-a">A-Sheet Combinations</button>
+                <button class="tab-btn" data-target="view-a1">A1 Images</button>
+                <button class="tab-btn" data-target="view-a2">A2 Images</button>
+                <button class="tab-btn" data-target="view-a3">A3 Images</button>
+                <button class="tab-btn" data-target="view-a4">A4 Images</button>
+                <button class="tab-btn" data-target="view-a5">A5 Images</button>
+                <button class="tab-btn" data-target="view-bce">B-E Images</button>
+            </div>
+
+            <div id="results">
+                <div id="view-a" class="tab-content active"></div>
+                <div id="view-a1" class="tab-content"></div>
+                <div id="view-a2" class="tab-content"></div>
+                <div id="view-a3" class="tab-content"></div>
+                <div id="view-a4" class="tab-content"></div>
+                <div id="view-a5" class="tab-content"></div>
+                <div id="view-bce" class="tab-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dataFolderInput = document.getElementById('dataFolderInput');
+        const imgFolderInput = document.getElementById('imgFolderInput');
+        const loadingDiv = document.getElementById('loading');
+        const tabsContainer = document.getElementById('tabsContainer');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Preview Elements
+        const previewImage = document.getElementById('previewImage');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewSidebar = document.querySelector('.preview-sidebar');
+
+        // Global State
+        let globalTilesetsData = null;
+        let imageFiles = {};
+
+        const SHEET_RANGES = {
+            'A1': { start: 2048, end: 2816 },
+            'A2': { start: 2816, end: 4352 },
+            'A3': { start: 4352, end: 5888 },
+            'A4': { start: 5888, end: 8192 },
+            'A5': { start: 1536, end: 2048 },
+            'B': { start: 0, end: 256 },
+            'C': { start: 256, end: 512 },
+            'D': { start: 512, end: 768 },
+            'E': { start: 768, end: 1024 }
+        };
+
+        // Tab Switching Logic
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.target).classList.add('active');
+            });
+        });
+
+        // Done state is now auto-detected.// -----------------------------------------
+        // UPDATED FILE HANDLING: IMAGES
+        // -----------------------------------------
+        imgFolderInput.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files).filter(f => f.name.toLowerCase().endsWith('.png'));
+            if (files.length === 0) return;
+
+            loadingDiv.style.display = 'block';
+            loadingDiv.textContent = 'Loading images into memory...';
+
+            // Cleanup old URLs to prevent memory leaks
+            Object.values(imageFiles).forEach(url => URL.revokeObjectURL(url));
+            imageFiles = {};
+
+            files.forEach(file => {
+                // Use webkitRelativePath to capture subfolders
+                // We remove the root folder name and the .png extension
+                // Example: "tilesets/Exteriors/GarageTrash.png" -> "Exteriors/GarageTrash"
+                let relPath = file.webkitRelativePath;
+                const pathParts = relPath.split('/');
+
+                // Remove the top-level folder (usually 'tilesets' or the folder you selected)
+                pathParts.shift();
+
+                const pathName = pathParts.join('/').replace(/\.png$/i, '');
+                imageFiles[pathName] = URL.createObjectURL(file);
+            });
+
+            document.getElementById('imgUploadLabel').innerHTML = `✓ Loaded ${files.length} Images`;
+            document.getElementById('imgUploadLabel').style.backgroundColor = '#27ae60';
+
+            loadingDiv.style.display = 'none';
+            if (globalTilesetsData) {
+                previewSidebar.style.display = 'flex';
+            }
+        });
+
+        // -----------------------------------------
+        // UPDATED PREVIEW FUNCTION
+        // -----------------------------------------
+        window.showPreview = function (imgName) {
+            if (!imgName || imgName.trim() === '') {
+                previewTitle.textContent = "No Image";
+                previewImage.style.display = 'none';
+                previewPlaceholder.style.display = 'block';
+                previewPlaceholder.innerHTML = "Empty Slot";
+                return;
+            }
+
+            previewTitle.textContent = imgName + ".png";
+
+            // Try to find the image by its full relative path
+            if (imageFiles[imgName]) {
+                previewImage.src = imageFiles[imgName];
+                previewImage.style.display = 'block';
+                previewPlaceholder.style.display = 'none';
+            } else {
+                // Fallback: If Tilesets.json just says "GarageTrash" but it's in "Exteriors/GarageTrash"
+                // we look for any path that ends with the image name.
+                const fallbackKey = Object.keys(imageFiles).find(key => key.endsWith('/' + imgName) || key === imgName);
+
+                if (fallbackKey) {
+                    previewImage.src = imageFiles[fallbackKey];
+                    previewImage.style.display = 'block';
+                    previewPlaceholder.style.display = 'none';
+                } else {
+                    previewImage.style.display = 'none';
+                    previewPlaceholder.style.display = 'block';
+                    previewPlaceholder.innerHTML = `'<strong>${imgName}.png</strong>' not found in loaded images.<br><br><small>If using subfolders, ensure you selected the parent 'tilesets' folder.</small>`;
+                }
+            }
+        };
+
+        window.clearPreview = function () {
+            // Keep last preview on mouse leave
+        };
+
+
+        // -----------------------------------------
+        // FILE HANDLING: DATA JSON
+        // -----------------------------------------
+        downloadBtn.addEventListener('click', () => {
+            if (!globalTilesetsData) return;
+            const blob = new Blob([JSON.stringify(globalTilesetsData)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Tilesets.json";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        dataFolderInput.addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            tabContents.forEach(c => c.innerHTML = '');
+            tabsContainer.style.display = 'none';
+            previewSidebar.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            loadingDiv.style.display = 'block';
+            loadingDiv.textContent = 'Processing Tilesets.json...';
+
+            try {
+                const tilesetsFile = file;
+
+                if (tilesetsFile.name !== 'Tilesets.json') {
+                    if (!confirm("The selected file is not named 'Tilesets.json'. Are you sure you want to proceed?")) {
+                        loadingDiv.style.display = 'none';
+                        return;
+                    }
+                }
+
+                document.getElementById('dataUploadLabel').innerHTML = `✓ Tilesets.json Loaded`;
+                document.getElementById('dataUploadLabel').style.backgroundColor = '#27ae60';
+
+                const rawData = await readJsonFile(tilesetsFile);
+                globalTilesetsData = JSON.parse(JSON.stringify(rawData));
+
+                processData(globalTilesetsData);
+                downloadBtn.style.display = 'flex';
+
+            } catch (error) {
+                console.error(error);
+                alert("An error occurred while processing the files. Check console for details.");
+                loadingDiv.style.display = 'none';
+            }
+        });
+
+        function readJsonFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        resolve(json);
+                    } catch (err) {
+                        reject(err);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        // -----------------------------------------
+        // COMPARISON LOGIC
+        // -----------------------------------------
+        function isAConfigIdentical(sourceTs, targetTs) {
+            if (!sourceTs || !targetTs) return false;
+            // Check images (A1-A5)
+            for (let i = 0; i < 5; i++) {
+                if ((sourceTs.tilesetNames[i] || "") !== (targetTs.tilesetNames[i] || "")) return false;
+            }
+            // Check flags (1536 to 8191)
+            if (!sourceTs.flags || !targetTs.flags) return false;
+            for (let j = 1536; j < 8192; j++) {
+                if ((sourceTs.flags[j] || 0) !== (targetTs.flags[j] || 0)) return false;
+            }
+            return true;
+        }
+
+        function isBEConfigIdentical(sourceTs, targetTs) {
+            if (!sourceTs || !targetTs) return false;
+            // Check images (B, C, D, E)
+            for (let i = 5; i < 9; i++) {
+                if ((sourceTs.tilesetNames[i] || "") !== (targetTs.tilesetNames[i] || "")) return false;
+            }
+            // Check flags (0 to 1023)
+            if (!sourceTs.flags || !targetTs.flags) return false;
+            for (let j = 0; j < 1024; j++) {
+                if ((sourceTs.flags[j] || 0) !== (targetTs.flags[j] || 0)) return false;
+            }
+            return true;
+        }
+
+        // -----------------------------------------
+        // COPY ACTIONS
+        // -----------------------------------------
+        window.copyA1A5ToGroup = function (idsString) {
+            const ids = idsString.split(',').map(Number);
+            if (ids.length <= 1) return;
+
+            const sourceId = ids[0];
+            const sourceTileset = globalTilesetsData.find(ts => ts && ts.id === sourceId);
+            if (!sourceTileset) return;
+
+            const aNames = sourceTileset.tilesetNames.slice(0, 5);
+
+            for (let i = 1; i < ids.length; i++) {
+                const targetId = ids[i];
+                const targetTileset = globalTilesetsData.find(ts => ts && ts.id === targetId);
+
+                if (targetTileset) {
+                    targetTileset.tilesetNames[0] = aNames[0] || "";
+                    targetTileset.tilesetNames[1] = aNames[1] || "";
+                    targetTileset.tilesetNames[2] = aNames[2] || "";
+                    targetTileset.tilesetNames[3] = aNames[3] || "";
+                    targetTileset.tilesetNames[4] = aNames[4] || "";
+
+                    if (sourceTileset.flags && targetTileset.flags) {
+                        for (let j = 1536; j < 8192; j++) {
+                            if (sourceTileset.flags[j] !== undefined) {
+                                targetTileset.flags[j] = sourceTileset.flags[j];
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Immediately re-render to show checkmarks
+            processData(globalTilesetsData);
+        };
+
+        window.copySheetsToGroup = function (idsString, imageName) {
+            const ids = idsString.split(',').map(Number);
+            if (ids.length <= 1) return;
+
+            const sourceId = ids[0];
+            const sourceTileset = globalTilesetsData.find(ts => ts && ts.id === sourceId);
+            if (!sourceTileset) return;
+
+            // Find which slot the image is in for the source tileset
+            const indices = { 'A1': 0, 'A2': 1, 'A3': 2, 'A4': 3, 'A5': 4, 'B': 5, 'C': 6, 'D': 7, 'E': 8 };
+            let sourceSlotKey = "";
+            let sourceSlotIndex = -1;
+            
+            for (const [letter, idx] of Object.entries(indices)) {
+                if (sourceTileset.tilesetNames[idx] === imageName) {
+                    sourceSlotKey = letter;
+                    sourceSlotIndex = idx;
+                    break;
+                }
+            }
+
+            if (sourceSlotIndex === -1) return; // Image not found in source
+
+            const range = SHEET_RANGES[sourceSlotKey];
+            if (!range) return;
+            const size = range.end - range.start;
+
+            for (let i = 1; i < ids.length; i++) {
+                const targetId = ids[i];
+                const targetTileset = globalTilesetsData.find(ts => ts && ts.id === targetId);
+
+                if (targetTileset) {
+                    // Find which slot the image is in for the target tileset
+                    let targetSlotKey = "";
+                    let targetSlotIndex = -1;
+                    for (const [letter, idx] of Object.entries(indices)) {
+                        if (targetTileset.tilesetNames[idx] === imageName) {
+                            targetSlotKey = letter;
+                            targetSlotIndex = idx;
+                            break;
+                        }
+                    }
+
+                    if (targetSlotIndex === -1) continue; // Image not found in target
+
+                    const targetRange = SHEET_RANGES[targetSlotKey];
+                    const targetSize = targetRange.end - targetRange.start;
+                    
+                    if (size !== targetSize) {
+                        console.warn("Size mismatch for image", imageName);
+                        continue;
+                    }
+
+                    // Copy flags
+                    if (sourceTileset.flags && targetTileset.flags) {
+                        for (let j = 0; j < size; j++) {
+                            const srcIdx = range.start + j;
+                            const tgtIdx = targetRange.start + j;
+                            if (sourceTileset.flags[srcIdx] !== undefined) {
+                                targetTileset.flags[tgtIdx] = sourceTileset.flags[srcIdx];
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Immediately re-render to show checkmarks
+            processData(globalTilesetsData);
+        };
+
+        function internalCopyAllData(ids) {
+            if (ids.length <= 1) return;
+            const sourceId = ids[0];
+            const sourceTileset = globalTilesetsData.find(ts => ts && ts.id === sourceId);
+            if (!sourceTileset) return;
+
+            for (let i = 1; i < ids.length; i++) {
+                const targetId = ids[i];
+                const targetTileset = globalTilesetsData.find(ts => ts && ts.id === targetId);
+
+                if (targetTileset) {
+                    for (let j = 0; j < sourceTileset.tilesetNames.length; j++) {
+                        targetTileset.tilesetNames[j] = sourceTileset.tilesetNames[j] || "";
+                    }
+                    if (sourceTileset.flags && targetTileset.flags) {
+                        for (let j = 0; j < sourceTileset.flags.length; j++) {
+                            if (sourceTileset.flags[j] !== undefined) {
+                                targetTileset.flags[j] = sourceTileset.flags[j];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        window.syncAllDataForListedImages = function () {
+            if (!globalTilesetsData) return;
+            
+            const beGroups = {};
+            const indices = { 'B': 5, 'C': 6, 'D': 7, 'E': 8 };
+
+            globalTilesetsData.forEach(ts => {
+                if (!ts) return;
+                Object.keys(indices).forEach(sheetLetter => {
+                    const imgIndex = indices[sheetLetter];
+                    const imgName = ts.tilesetNames[imgIndex];
+                    if (imgName && imgName.trim() !== '') {
+                        if (!beGroups[imgName]) beGroups[imgName] = [];
+                        beGroups[imgName].push({ id: ts.id });
+                    }
+                });
+            });
+
+            for (const [imgName, uses] of Object.entries(beGroups)) {
+                if (uses.length > 1) {
+                    const ids = uses.map(u => u.id);
+                    internalCopyAllData(ids);
+                }
+            }
+
+            processData(globalTilesetsData);
+            alert("Synchronized all sheets for all listed images!");
+        };
+
+        // -----------------------------------------
+        // DATA PROCESSING & RENDERING
+        // -----------------------------------------
+        function processData(tilesetsData) {
+            const aGroups = {};
+            const beGroups = {};
+            
+            const aIndices = { 'A1': 0, 'A2': 1, 'A3': 2, 'A4': 3, 'A5': 4 };
+            const aGroupsIndividual = { 'A1': {}, 'A2': {}, 'A3': {}, 'A4': {}, 'A5': {} };
+
+            const indices = { 'B': 5, 'C': 6, 'D': 7, 'E': 8 };
+
+            tilesetsData.forEach(ts => {
+                if (!ts) return;
+
+                // Process A-Sheets (Combined)
+                const aSheets = ts.tilesetNames.slice(0, 5);
+                const hasAnyASheet = aSheets.some(imgName => imgName && imgName.trim() !== '');
+
+                if (hasAnyASheet) {
+                    const signature = aSheets.join('|');
+                    if (!aGroups[signature]) {
+                        aGroups[signature] = { images: aSheets, tilesets: [], signature: signature };
+                    }
+                    aGroups[signature].tilesets.push({ id: ts.id, name: ts.name });
+                }
+
+                // Process A1-A5 Individually
+                Object.keys(aIndices).forEach(key => {
+                    const imgIndex = aIndices[key];
+                    const imgName = ts.tilesetNames[imgIndex];
+
+                    if (imgName && imgName.trim() !== '') {
+                        if (!aGroupsIndividual[key][imgName]) {
+                            aGroupsIndividual[key][imgName] = [];
+                        }
+                        aGroupsIndividual[key][imgName].push({
+                            id: ts.id,
+                            name: ts.name,
+                            slot: key
+                        });
+                    }
+                });
+
+                // Process B-E Sheets
+                Object.keys(indices).forEach(sheetLetter => {
+                    const imgIndex = indices[sheetLetter];
+                    const imgName = ts.tilesetNames[imgIndex];
+
+                    if (imgName && imgName.trim() !== '') {
+                        if (!beGroups[imgName]) {
+                            beGroups[imgName] = [];
+                        }
+                        beGroups[imgName].push({
+                            id: ts.id,
+                            name: ts.name,
+                            slot: sheetLetter
+                        });
+                    }
+                });
+            });
+
+            const aGroupedArray = Object.values(aGroups).sort((a, b) => {
+                if (b.tilesets.length !== a.tilesets.length) return b.tilesets.length - a.tilesets.length;
+                return a.tilesets[0].id - b.tilesets[0].id;
+            });
+
+            const beGroupedArray = Object.keys(beGroups).map(imgName => ({
+                image: imgName,
+                uses: beGroups[imgName]
+            })).sort((a, b) => {
+                if (b.uses.length !== a.uses.length) return b.uses.length - a.uses.length;
+                return a.image.localeCompare(b.image);
+            });
+
+            loadingDiv.style.display = 'none';
+            tabsContainer.style.display = 'flex';
+            if (Object.keys(imageFiles).length > 0) {
+                previewSidebar.style.display = 'flex';
+            } else {
+                previewSidebar.style.display = 'none';
+            }
+
+            renderASheets(aGroupedArray);
+            
+            // Render individual A1-A5 tabs
+            const getIndividualGroupedArray = (groups) => {
+                return Object.keys(groups).map(imgName => ({
+                    image: imgName,
+                    uses: groups[imgName]
+                })).sort((a, b) => {
+                    if (b.uses.length !== a.uses.length) return b.uses.length - a.uses.length;
+                    return a.image.localeCompare(b.image);
+                });
+            };
+
+            renderIndividualSheetTab('view-a1', getIndividualGroupedArray(aGroupsIndividual['A1']), 'A1');
+            renderIndividualSheetTab('view-a2', getIndividualGroupedArray(aGroupsIndividual['A2']), 'A2');
+            renderIndividualSheetTab('view-a3', getIndividualGroupedArray(aGroupsIndividual['A3']), 'A3');
+            renderIndividualSheetTab('view-a4', getIndividualGroupedArray(aGroupsIndividual['A4']), 'A4');
+            renderIndividualSheetTab('view-a5', getIndividualGroupedArray(aGroupsIndividual['A5']), 'A5');
+
+            renderBEImages(beGroupedArray);
+        }
+
+        function renderASheets(groupedArray) {
+            const container = document.getElementById('view-a');
+            container.innerHTML = '';
+
+            if (groupedArray.length === 0) {
+                container.innerHTML = '<p class="empty-state">No A-Sheet tilesets found.</p>';
+                return;
+            }
+
+            groupedArray.forEach((group, index) => {
+                const isShared = group.tilesets.length > 1;
+                const titleText = isShared ? `Shared Configuration #${index + 1}` : `Unique Configuration`;
+                const idsString = group.tilesets.map(ts => ts.id).join(',');
+
+                // Track if all sheets perfectly match the source
+                let allIdentical = true;
+                const sourceId = group.tilesets[0].id;
+                const sourceTs = globalTilesetsData.find(t => t && t.id === sourceId);
+
+                const listItemsHTML = group.tilesets.map((ts, i) => {
+                    const targetTs = globalTilesetsData.find(t => t && t.id === ts.id);
+                    const isIdentical = (i === 0) || isAConfigIdentical(sourceTs, targetTs);
+
+                    if (!isIdentical) allIdentical = false;
+
+                    const prefix = (i === 0 && isShared) ? '<span class="first-badge">SOURCE</span>' : '🎨 ';
+                    const checkHTML = (i > 0 && isIdentical) ? `<span class="check-synced" title="Identical to Source">✓</span>` : '';
+
+                    const previewImg = group.images[0] || '';
+
+                    return `
+                        <li class="ts-item" 
+                            onmouseenter="showPreview('${previewImg}')" 
+                            onmouseleave="clearPreview()">
+                            ${prefix}
+                            <span class="ts-id"><b> ${String(ts.id).padStart(4, '0')}</b></span> ${ts.name}
+                            ${checkHTML}
+                        </li>
+                    `;
+                }).join('');
+
+                const isDone = allIdentical;
+                const card = document.createElement('div');
+                card.className = `tileset-card ${isShared ? 'shared' : ''} ${isDone ? 'done' : ''}`;
+
+                let actionHTML = '';
+                if (isShared) {
+                    actionHTML = `<button class="sync-btn a-btn" onclick="window.copyA1A5ToGroup('${idsString}')">📋 Copy A1-A5 Data from First</button>`;
+                }
+
+                card.innerHTML = `
+                    <div class="tileset-header">
+                        <div class="group-title">${titleText}</div>
+                        <div class="header-actions">
+                            ${isDone ? '<div class="done-badge">✓ DONE</div>' : ''}
+                            ${actionHTML}
+                            <div class="tileset-count">${group.tilesets.length} Tileset${group.tilesets.length > 1 ? 's' : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-body split">
+                        <div class="image-list">
+                            <div class="section-title">A-Sheet Images Used</div>
+                            <ul>
+                                ${group.images.map((imgName, i) => `
+                                    <li class="image-item" onmouseenter="showPreview('${imgName || ''}')" onmouseleave="clearPreview()">
+                                        <span class="image-label">A${i + 1}</span> 
+                                        ${imgName ? imgName : '<span class="empty-img">(None)</span>'}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="tileset-list">
+                            <div class="section-title">Tilesets Using This Exact Combo</div>
+                            <ul>
+                                ${listItemsHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderIndividualSheetTab(containerId, groupedArray, sheetName) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            if (groupedArray.length === 0) {
+                container.innerHTML = `<p class="empty-state">No images assigned to ${sheetName} sheet in any tileset.</p>`;
+                return;
+            }
+
+            groupedArray.forEach(group => {
+                const isShared = group.uses.length > 1;
+
+                const uniqueIds = [...new Set(group.uses.map(use => use.id))];
+                const idsString = uniqueIds.join(',');
+
+                let allIdentical = true;
+                const sourceId = group.uses[0].id;
+                const sourceTs = globalTilesetsData.find(t => t && t.id === sourceId);
+
+                const listItemsHTML = group.uses.map((use, i) => {
+                    const targetTs = globalTilesetsData.find(t => t && t.id === use.id);
+                    
+                    let isIdentical = true;
+                    if (i > 0 && sourceTs && targetTs && sourceTs.flags && targetTs.flags) {
+                        const range = SHEET_RANGES[sheetName];
+                        for (let j = 0; j < (range.end - range.start); j++) {
+                            const srcIdx = range.start + j;
+                            const tgtIdx = range.start + j; // Target slot is same as source slot for A sheets
+                            if ((sourceTs.flags[srcIdx] || 0) !== (targetTs.flags[tgtIdx] || 0)) {
+                                isIdentical = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!isIdentical) allIdentical = false;
+
+                    const prefix = (i === 0 && isShared) ? '<span class="first-badge">SOURCE</span>' : '';
+                    const checkHTML = (i > 0 && isIdentical) ? `<span class="check-synced" title="Identical to Source">✓</span>` : '';
+
+                    return `
+                        <li class="ts-item" 
+                            onmouseenter="showPreview('${group.image}')" 
+                            onmouseleave="clearPreview()">
+                            ${prefix}
+                            <span class="ts-id"><b> ${String(use.id).padStart(4, '0')}</b></span> ${use.name}
+                            ${checkHTML}
+                        </li>
+                    `;
+                }).join('');
+
+                const isDone = allIdentical;
+                const card = document.createElement('div');
+                card.className = `tileset-card ${isShared ? 'shared' : ''} ${isDone ? 'done' : ''}`;
+
+                let actionHTML = '';
+                if (isShared) {
+                    actionHTML = `<button class="sync-btn" onclick="window.copySheetsToGroup('${idsString}', '${group.image}')">📋 Copy Sheet ${sheetName} Data from First</button>`;
+                }
+
+                card.innerHTML = `
+                    <div class="tileset-header">
+                        <div class="image-title" onmouseenter="showPreview('${group.image}')" onmouseleave="clearPreview()">📄 ${group.image}.png</div>
+                        <div class="header-actions">
+                            ${isDone ? '<div class="done-badge">✓ DONE</div>' : ''}
+                            ${actionHTML}
+                            <div class="tileset-count">${group.uses.length} Use${group.uses.length > 1 ? 's' : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tileset-list">
+                            <div class="section-title">Tilesets Using This Image</div>
+                            <ul style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+                                ${listItemsHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderBEImages(groupedArray) {
+            const container = document.getElementById('view-bce');
+            container.innerHTML = '';
+
+            if (groupedArray.length === 0) {
+                container.innerHTML = `<p class="empty-state">No images assigned to B, C, D, or E sheets in any tileset.</p>`;
+                return;
+            }
+
+            // Add Sync All Button
+            const syncAllBtn = document.createElement('button');
+            syncAllBtn.className = 'btn';
+            syncAllBtn.style.marginBottom = '20px';
+            syncAllBtn.style.backgroundColor = '#2980b9';
+            syncAllBtn.innerHTML = '🔄 Sync ALL Sheets for All Listed Images';
+            syncAllBtn.onclick = () => {
+                if (confirm("Are you sure you want to sync ALL sheets (A1-A5 and B-E) from the source to targets for all listed images? This will overwrite target configurations.")) {
+                    window.syncAllDataForListedImages();
+                }
+            };
+            container.appendChild(syncAllBtn);
+
+            // Summary Card
+            const sharedGroups = groupedArray.filter(g => g.uses.length > 1);
+            if (sharedGroups.length > 0) {
+                const summaryCard = document.createElement('div');
+                summaryCard.className = 'tileset-card';
+                summaryCard.style.borderLeft = '4px solid #3498db';
+
+                let summaryHTML = `
+                    <div class="tileset-header">
+                        <div class="group-title">📋 Source Sheets Summary</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tileset-list" style="width: 100%;">
+                            <p style="font-size: 0.9rem; color: #666; margin-bottom: 12px;">
+                                The following tilesets act as the <strong>SOURCE</strong> data when you click the copy buttons below:
+                            </p>
+                            <ul style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 10px;">
+                `;
+
+                sharedGroups.forEach(group => {
+                    const source = group.uses[0];
+                    summaryHTML += `
+                        <li class="ts-item" style="background: #f8f9fa; padding: 10px 14px; border-radius: 6px; border: 1px solid #eee; display: block;">
+                            <div style="margin-bottom: 6px; display: flex; align-items: center;">
+                                <span class="first-badge" style="margin-right: 10px;">SOURCE</span>
+                                <strong>ID: ${String(source.id).padStart(4, '0')}</strong> &nbsp;-&nbsp; ${source.name}
+                            </div>
+                            <div style="font-size: 0.85rem; color: #555; display: flex; align-items: center; cursor: crosshair;" onmouseenter="showPreview('${group.image}')" onmouseleave="clearPreview()">
+                                <span class="slot-badge slot-${source.slot}" style="margin-right: 8px;">Sheet ${source.slot}</span> 
+                                <span style="font-family: monospace; color: #d35400;">📄 ${group.image}.png</span>
+                            </div>
+                        </li>
+                    `;
+                });
+
+                summaryHTML += `</ul></div></div>`;
+                summaryCard.innerHTML = summaryHTML;
+                container.appendChild(summaryCard);
+            }
+
+            // Individual Image Cards
+            groupedArray.forEach(group => {
+                const isShared = group.uses.length > 1;
+
+                const uniqueIds = [...new Set(group.uses.map(use => use.id))];
+                const idsString = uniqueIds.join(',');
+                const sourceSlot = group.uses[0].slot;
+
+                let allIdentical = true;
+                const sourceId = group.uses[0].id;
+                const sourceTs = globalTilesetsData.find(t => t && t.id === sourceId);
+
+                const listItemsHTML = group.uses.map((use, i) => {
+                    const targetTs = globalTilesetsData.find(t => t && t.id === use.id);
+                    
+                    let isIdentical = true;
+                    if (i > 0 && sourceTs && targetTs && sourceTs.flags && targetTs.flags) {
+                        const srcRange = SHEET_RANGES[sourceSlot];
+                        const tgtRange = SHEET_RANGES[use.slot];
+                        const size = srcRange.end - srcRange.start;
+                        
+                        for (let j = 0; j < size; j++) {
+                            if ((sourceTs.flags[srcRange.start + j] || 0) !== (targetTs.flags[tgtRange.start + j] || 0)) {
+                                isIdentical = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!isIdentical) allIdentical = false;
+
+                    const prefix = (i === 0 && isShared) ? '<span class="first-badge">SOURCE</span>' : '';
+                    const checkHTML = (i > 0 && isIdentical) ? `<span class="check-synced" title="Identical to Source">✓</span>` : '';
+
+                    return `
+                        <li class="ts-item" 
+                            onmouseenter="showPreview('${group.image}')" 
+                            onmouseleave="clearPreview()">
+                            ${prefix}
+                            <span class="slot-badge slot-${use.slot}">Sheet ${use.slot}</span>
+                            <span class="ts-id"><b> ${String(use.id).padStart(4, '0')}</b></span> ${use.name}
+                            ${checkHTML}
+                        </li>
+                    `;
+                }).join('');
+
+                const isDone = allIdentical;
+                const card = document.createElement('div');
+                card.className = `tileset-card ${isShared ? 'shared' : ''} ${isDone ? 'done' : ''}`;
+
+                let actionHTML = '';
+                if (isShared) {
+                    actionHTML = `<button class="sync-btn" onclick="window.copySheetsToGroup('${idsString}', '${group.image}')">📋 Copy Sheet ${sourceSlot} Data from First</button>`;
+                }
+
+                card.innerHTML = `
+                    <div class="tileset-header">
+                        <div class="image-title" onmouseenter="showPreview('${group.image}')" onmouseleave="clearPreview()">📄 ${group.image}.png</div>
+                        <div class="header-actions">
+                            ${isDone ? '<div class="done-badge">✓ DONE</div>' : ''}
+                            ${actionHTML}
+                            <div class="tileset-count">${group.uses.length} Use${group.uses.length > 1 ? 's' : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tileset-list">
+                            <div class="section-title">Tilesets Using This Image</div>
+                            <ul style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+                                ${listItemsHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+
+</html>

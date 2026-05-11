@@ -99,10 +99,14 @@
   Window_BattlerList.prototype.constructor = Window_BattlerList;
 
   Window_BattlerList.prototype.initialize = function (rect) {
-    this._images = [];
-    this._loadingComplete = false;
+    this._data = [];
+    this._archetypes = [];
     Window_Selectable.prototype.initialize.call(this, rect);
-    this.loadImages();
+  };
+
+  Window_BattlerList.prototype.setArchetypes = function (archetypes) {
+    this._archetypes = archetypes || [];
+    this.refresh();
   };
 
   Window_BattlerList.prototype.maxCols = function () {
@@ -110,58 +114,54 @@
   };
 
   Window_BattlerList.prototype.maxItems = function () {
-    return this._images.length;
+    return this._data ? this._data.length : 0;
   };
 
   Window_BattlerList.prototype.itemHeight = function () {
     return this.lineHeight();
   };
 
-  Window_BattlerList.prototype.loadImages = function () {
-    this._images = [];
+  Window_BattlerList.prototype.makeItemList = function () {
+    this._data = [];
+    if (!$dataEnemies) return;
 
-    // Get list of enemy images from img/enemies/ folder
-    const fs = require('fs');
-    const path = require('path');
-    const enemiesPath = path.join(path.dirname(process.mainModule.filename), 'img/enemies/');
+    for (const enemy of $dataEnemies) {
+      if (!enemy || !enemy.name) continue;
 
-    try {
-      const files = fs.readdirSync(enemiesPath);
-      for (const file of files) {
-        const filePath = path.join(enemiesPath, file);
-        const stat = fs.statSync(filePath);
-
-        // Only include files (not subdirectories) and only image files
-        if (stat.isFile() && /\.(png|jpg|jpeg)$/i.test(file)) {
-          const nameWithoutExt = file.replace(/\.(png|jpg|jpeg)$/i, '');
-          this._images.push(nameWithoutExt);
+      const note = enemy.note || "";
+      const archetypeMatch = note.match(/<Archetype:\s*(.*?)>/);
+      if (archetypeMatch) {
+        const arch = archetypeMatch[1].trim();
+        if (this._archetypes.length === 0 || this._archetypes.includes(arch)) {
+          // Avoid duplicate battlers if they have the same name (optional, but cleaner)
+          // Actually, different enemies might have the same name but different battlers, 
+          // or same battler but different names. Let's keep them all for variety unless identical.
+          this._data.push({
+            name: enemy.name,
+            battlerName: enemy.battlerName
+          });
         }
       }
-    } catch (error) {
-      console.error('Error loading enemy images:', error);
     }
 
-    // Sort alphabetically
-    this._images.sort((a, b) => a.localeCompare(b));
-
-    this._loadingComplete = true;
-    this.refresh();
+    // Sort alphabetically by enemy name
+    this._data.sort((a, b) => a.name.localeCompare(b.name));
   };
 
   Window_BattlerList.prototype.item = function () {
-    return this._images[this.index()];
+    return this._data[this.index()];
   };
 
   Window_BattlerList.prototype.drawItem = function (index) {
-    if (!this._images[index]) return;
-
-    const filename = this._images[index];
-    const rect = this.itemLineRect(index);
-
-    this.drawText(filename, rect.x, rect.y, rect.width);
+    const item = this._data[index];
+    if (item) {
+      const rect = this.itemLineRect(index);
+      this.drawText(item.name, rect.x, rect.y, rect.width);
+    }
   };
 
   Window_BattlerList.prototype.refresh = function () {
+    this.makeItemList();
     this.contents.clear();
     this.drawAllItems();
   };
@@ -289,12 +289,18 @@
   Window_CharacterSelect.prototype.initialize = function (rect) {
     this._images = [];  // array of { displayName, path, index, isAnimal }
     this._bitmaps = [];
+    this._archetypes = [];
     Window_Selectable.prototype.initialize.call(this, rect);
     this.loadImages();
   };
 
+  Window_CharacterSelect.prototype.setArchetypes = function (archetypes) {
+    this._archetypes = archetypes || [];
+    this.loadImages();
+  };
+
   Window_CharacterSelect.prototype.maxCols = function () {
-    return 3;
+    return 4;
   };
 
   Window_CharacterSelect.prototype.maxItems = function () {
@@ -302,14 +308,35 @@
   };
 
   Window_CharacterSelect.prototype.itemHeight = function () {
-    return 96;
+    return 120;
   };
 
   Window_CharacterSelect.prototype.loadImages = function () {
     this._images = [];
     this._bitmaps = [];
 
+    const formatName = (name) => {
+      let n = name.replace(/[\$!]/g, '')
+                 .replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+      const words = n.split(' ');
+      if (words.length >= 2) {
+        words.shift();
+      }
+      return words.join(' ');
+    };
+
     const entries = [];
+
+    const { EnemyArchetypes } = window.Health || {};
+    const allowedSprites = new Set();
+    if (EnemyArchetypes && this._archetypes.length > 0) {
+      for (const archKey of this._archetypes) {
+        const arch = EnemyArchetypes[archKey];
+        if (arch && arch.sprites) {
+          arch.sprites.forEach(s => allowedSprites.add(s));
+        }
+      }
+    }
 
     // Load monster sprites from img/characters/Monsters/
     const fs = require('fs');
@@ -322,16 +349,24 @@
         const filePath = path.join(monstersPath, file);
         if (fs.statSync(filePath).isFile() && /\.(png|jpg|jpeg)$/i.test(file)) {
           const name = file.replace(/\.(png|jpg|jpeg)$/i, '');
-          entries.push({ displayName: name, path: 'Monsters/' + name, index: 0, isAnimal: false });
+          const normalizedName = name.replace(/^[\$!]/, '');
+          
+          // Only include if in allowedSprites or if no archetypes were provided (default behavior)
+          if (this._archetypes.length === 0 || allowedSprites.has(normalizedName)) {
+            entries.push({ displayName: formatName(name), path: 'Monsters/' + name, index: 0, isAnimal: false });
+          }
         }
       }
     } catch (error) {
       console.error('Error loading monster character images:', error);
     }
 
-    // Add animal sprites
-    for (const a of ANIMAL_SPRITE_ENTRIES) {
-      entries.push({ displayName: a.displayName, path: a.path, index: a.index, isAnimal: true });
+    // Add animal sprites only if no specific archetype filter is active or if specifically allowed
+    // For now, we only show animals if no archetype filter is active
+    if (this._archetypes.length === 0) {
+      for (const a of ANIMAL_SPRITE_ENTRIES) {
+        entries.push({ displayName: formatName(a.displayName), path: a.path, index: a.index, isAnimal: true });
+      }
     }
 
     // Sort all entries alphabetically by displayName (case-insensitive)
@@ -390,13 +425,22 @@
       sy = 0;    // row 0 = facing down
     }
 
-    const scale = Math.min((rect.width - 8) / pw, (rect.height - 8) / ph, 1.0);
+    // Sprite drawing area (top part)
+    const textHeight = 24;
+    const spriteRectHeight = rect.height - textHeight;
+    const scale = Math.min((rect.width - 8) / pw, (spriteRectHeight - 8) / ph, 1.0);
     const dw = pw * scale;
     const dh = ph * scale;
     const dx = rect.x + (rect.width - dw) / 2;
-    const dy = rect.y + (rect.height - dh) / 2;
+    const dy = rect.y + (spriteRectHeight - dh) / 2;
 
     this.contents.blt(bitmap, sx, sy, pw, ph, dx, dy, dw, dh);
+
+    // Name drawing area (bottom part)
+    const oldFontSize = this.contents.fontSize;
+    this.contents.fontSize = 14;
+    this.drawText(entry.displayName, rect.x, rect.y + spriteRectHeight, rect.width, 'center');
+    this.contents.fontSize = oldFontSize;
   };
 
   Window_CharacterSelect.prototype.refresh = function () {
@@ -724,6 +768,11 @@
         break;
       case 3: // Battler
         this._helpWindow.setText(getTranslatedText('Select a Battler Image', 'Seleziona Immagine Battler'));
+        const archsForBattlers = [this._selectedArchetype1];
+        if (this._mode === 'hybrid' && this._selectedArchetype2) {
+          archsForBattlers.push(this._selectedArchetype2);
+        }
+        this._battlerListWindow.setArchetypes(archsForBattlers);
         this._battlerListWindow.show();
         this._battlerListWindow.activate();
         this._battlerPreviewWindow.show();
@@ -732,6 +781,11 @@
         break;
       case 4: // Character
         this._helpWindow.setText(getTranslatedText('Select a Character Sprite', 'Seleziona Sprite Personaggio'));
+        const archetypes = [this._selectedArchetype1];
+        if (this._mode === 'hybrid' && this._selectedArchetype2) {
+          archetypes.push(this._selectedArchetype2);
+        }
+        this._characterWindow.setArchetypes(archetypes);
         this._characterWindow.show();
         this._characterWindow.activate();
         this._characterWindow.select(0);
@@ -784,14 +838,16 @@
   };
 
   Scene_CreateCreature.prototype.onBattlerSelect = function () {
-    const battlerName = this._battlerListWindow.item();
+    const item = this._battlerListWindow.item();
+    const battlerName = item ? item.battlerName : null;
     if (this._battlerPreviewWindow) {
       this._battlerPreviewWindow.setBattler(battlerName);
     }
   };
 
   Scene_CreateCreature.prototype.onBattlerOk = function () {
-    const battlerName = this._battlerListWindow.item();
+    const item = this._battlerListWindow.item();
+    const battlerName = item ? item.battlerName : null;
     if (battlerName) {
       this._selectedBattler = battlerName;
       // Save battler image path to appropriate variable based on actor ID (106, 107, or 108)

@@ -349,8 +349,10 @@
         showNewsNotification(title) {
             $gameMessage.setBackground(1);
             $gameMessage.setPositionType(0);
+            window.skipLocalization = true;
             $gameMessage.add(`\\c[6]===== ${t('breakingNews')} =====\\c[0]`);
             $gameMessage.add(title);
+            window.skipLocalization = false;
         }
 
         generateInitialProceduralNews() {
@@ -545,10 +547,12 @@
                 if (recentNews.length > 0) {
                     $gameMessage.setBackground(1);
                     $gameMessage.setPositionType(0);
+                    window.skipLocalization = true;
                     $gameMessage.add(`\\c[6]===== ${t('breakingNews')} =====\\c[0]`);
                     recentNews.forEach(news => {
                         $gameMessage.add(news.text);
                     });
+                    window.skipLocalization = false;
                 }
             }
 
@@ -2257,7 +2261,9 @@
     PluginManager.registerCommand(pluginName, 'forceNewsEvent', args => {
         ensureNewsManager();
         $newsManager.generateNewsEvent();
+        window.skipLocalization = true;
         $gameMessage.add(t('newsEventMsg'));
+        window.skipLocalization = false;
     });
 
     // Save/Load

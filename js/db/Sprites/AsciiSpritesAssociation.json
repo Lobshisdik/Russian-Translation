@@ -1,0 +1,4521 @@
+{
+    "Chests/!$Chests2": {
+        "chars": [
+            "[",
+            "[",
+            "[",
+            "[",
+            "[",
+            "[",
+            "[",
+            "["
+        ],
+        "color": "light brown"
+    },
+    "Doors/!Door1": {
+        "chars": [
+            "▥",
+            "▥",
+            "▥",
+            "▥",
+            "▥",
+            "▥",
+            "▥",
+            "▥"
+        ],
+        "color": "dark brown"
+    },
+    "Lights/!Flame": {
+        "chars": [
+            "*",
+            "*",
+            "*",
+            "*",
+            "*",
+            "*",
+            "*",
+            "*"
+        ],
+        "color": "bright yellow"
+    },
+    "Other/$BigMonster1": {
+        "chars": [
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M"
+        ],
+        "color": "red"
+    },
+    "Other/$Char_1012": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_1363": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_1702": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_1895": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_375": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_496": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_55": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_608": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Char_730": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/$Creatures": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Objects/$Sink": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Objects/$Treadmill": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Actor1": {
+        "chars": [
+            "S",
+            "S",
+            "D",
+            "A",
+            "J",
+            "W",
+            "e",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Actor1RMVX": {
+        "chars": [
+            "M",
+            "R",
+            "P",
+            "R",
+            "J",
+            "J",
+            "K",
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Actor2": {
+        "chars": [
+            "e",
+            "S",
+            "S",
+            "e",
+            "P",
+            "T",
+            "P",
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Actor2RMVX": {
+        "chars": [
+            "e",
+            "e",
+            "P",
+            "P",
+            "T",
+            "T",
+            "A",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Actor3": {
+        "chars": [
+            "R",
+            "P",
+            "G",
+            "A",
+            "N",
+            "W",
+            "I",
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Actor3RMVX": {
+        "chars": [
+            "D",
+            "W",
+            "S",
+            "W",
+            "e",
+            "e",
+            "e",
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Animals01Color": {
+        "chars": [
+            "c",
+            "d",
+            "B",
+            "a",
+            "i",
+            "a",
+            "a",
+            "a"
+        ],
+        "color": "green"
+    },
+    "Animals01": {
+        "chars": [
+            "c",
+            "d",
+            "B",
+            "a",
+            "i",
+            "a",
+            "a",
+            "a"
+        ],
+        "color": "green"
+    },
+    "GrayAnimals01": {
+        "chars": [
+            "c",
+            "d",
+            "B",
+            "a",
+            "i",
+            "a",
+            "a",
+            "a"
+        ],
+        "color": "green"
+    },
+    "Archivist": {
+        "chars": [
+            "A",
+            "A",
+            "S",
+            "P",
+            "S",
+            "S",
+            "S",
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Other/Characters_ghosts_48x48": {
+        "chars": [
+            "V",
+            "V",
+            "V",
+            "V",
+            "V",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/Chefs_48x48": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Dungeon_HeroMan1": {
+        "chars": [
+            "P",
+            "P",
+            "P",
+            "P",
+            "P",
+            "P",
+            "P",
+            "P"
+        ],
+        "color": "purple"
+    },
+    "Other/Dungeon_HeroMan1Attack": {
+        "chars": [
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D"
+        ],
+        "color": "purple"
+    },
+    "Dungeon_Monsters1": {
+        "chars": [
+            "g",
+            "g",
+            "g",
+            "g",
+            "g",
+            "L",
+            "L"
+        ],
+        "color": "purple"
+    },
+    "Dungeon_Monsters2": {
+        "chars": [
+            "o",
+            "g",
+            "M",
+            "M",
+            "V",
+            "V",
+            "M",
+            "8"
+        ],
+        "color": "purple"
+    },
+    "Dungeon_MushroomMan": {
+        "chars": [
+            "V",
+            "2",
+            "3",
+            "4",
+            "5",
+            "D",
+            "D",
+            "D"
+        ],
+        "color": "purple"
+    },
+    "Dungeon_Slimes1": {
+        "chars": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+        ],
+        "color": "purple"
+    },
+    "emPath": {
+        "chars": [
+            "E",
+            "E",
+            "E",
+            "C",
+            "E",
+            "E",
+            "A",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Evil01": {
+        "chars": [
+            "o",
+            "L",
+            "V",
+            "E",
+            "E",
+            "g",
+            "R",
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Evil01Color": {
+        "chars": [
+            "K",
+            "L",
+            "s",
+            "V",
+            "g",
+            "R",
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Fantasy_Characters1": {
+        "chars": [
+            "P",
+            "B",
+            "D",
+            "M",
+            "W",
+            "W",
+            "I",
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Fantasy_Characters2": {
+        "chars": [
+            "L",
+            "T",
+            "S",
+            "W",
+            "L",
+            "@",
+            "@",
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Fantasy_Characters3": {
+        "chars": [
+            "e",
+            "T",
+            "S",
+            "C",
+            "G",
+            "e",
+            "e",
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Fantasy_Characters4": {
+        "chars": [
+            "C",
+            "N",
+            "S",
+            "S",
+            "R",
+            "T",
+            "$",
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Fantasy_Character_Base": {
+        "chars": [
+            "W",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/Fantasy_Rabbits": {
+        "chars": [
+            "F",
+            "F",
+            "F",
+            "F",
+            "F",
+            "F",
+            "F",
+            "F"
+        ],
+        "color": "golden"
+    },
+    "FarmAnimals01RM": {
+        "chars": [
+            "a",
+            "a",
+            "a",
+            "a",
+            "a",
+            "a",
+            "a",
+            "a"
+        ],
+        "color": "green"
+    },
+    "FarmAnimals02RM": {
+        "chars": [
+            "H",
+            "H",
+            "H",
+            "H",
+            "H",
+            "H",
+            "H",
+            "H"
+        ],
+        "color": "green"
+    },
+    "FarmCharacters01RM": {
+        "chars": [
+            "A",
+            "G",
+            "C",
+            "N",
+            "S",
+            "$",
+            "F",
+            "H"
+        ],
+        "color": "golden"
+    },
+    "GrayEvil01": {
+        "chars": [
+            "o",
+            "L",
+            "V",
+            "s",
+            "V",
+            "g",
+            "R",
+            "N"
+        ],
+        "color": "golden"
+    },
+    "GrayHeroes01": {
+        "chars": [
+            "S",
+            "P",
+            "P",
+            "P",
+            "M",
+            "H",
+            "M",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "GrayHeroes02": {
+        "chars": [
+            "P",
+            "N",
+            "e",
+            "e",
+            "C",
+            "C",
+            "H",
+            "H"
+        ],
+        "color": "golden"
+    },
+    "GrayNPCs01": {
+        "chars": [
+            "P",
+            "L",
+            "I",
+            "B",
+            "e",
+            "B",
+            "S",
+            "R"
+        ],
+        "color": "golden"
+    },
+    "GrayNPCs02": {
+        "chars": [
+            "K",
+            "Q",
+            "P",
+            "N",
+            "G",
+            "S",
+            "M",
+            "L"
+        ],
+        "color": "golden"
+    },
+    "GrayNPCs03": {
+        "chars": [
+            "C",
+            "g",
+            "G",
+            "G",
+            "o",
+            "M",
+            "P",
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Heroes01": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Heroes01Color": {
+        "chars": [
+            "S",
+            "J",
+            "G",
+            "R",
+            "S",
+            "A",
+            "A",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Heroes02": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Heroes02Color": {
+        "chars": [
+            "P",
+            "N",
+            "E",
+            "e",
+            "C",
+            "M",
+            "H",
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Other/mer_8_3": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Other/mer_8_chars3": {
+        "chars": [
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Other/mer_8_shadow_3": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Other/mer_human_3": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Other/Monsterpack": {
+        "chars": [
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M"
+        ],
+        "color": "red"
+    },
+    "Other/Monsterpack2": {
+        "chars": [
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M"
+        ],
+        "color": "red"
+    },
+    "Other/Monsters02": {
+        "chars": [
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M",
+            "M"
+        ],
+        "color": "red"
+    },
+    "Other/MV_Graveyard_Zombies_Skeleton": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "NPCs01": {
+        "chars": [
+            "g",
+            "g",
+            "g",
+            "g",
+            "g",
+            "o",
+            "g",
+            "g"
+        ],
+        "color": "golden"
+    },
+    "NPCs01Color": {
+        "chars": [
+            "F",
+            "B",
+            "T",
+            "B",
+            "G",
+            "L",
+            "E",
+            "F"
+        ],
+        "color": "golden"
+    },
+    "NPCs02": {
+        "chars": [
+            "g",
+            "g",
+            "g",
+            "g",
+            "g",
+            "g",
+            "g",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "NPCs02Color": {
+        "chars": [
+            "K",
+            "Q",
+            "P",
+            "N",
+            "G",
+            "S",
+            "M",
+            "L"
+        ],
+        "color": "golden"
+    },
+    "NPCs03": {
+        "chars": [
+            "e",
+            "e",
+            "e",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "NPCs03Color": {
+        "chars": [
+            "c",
+            "G",
+            "A",
+            "P",
+            "O",
+            "L",
+            "T",
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Occult_Characters": {
+        "chars": [
+            "T",
+            "$",
+            "E",
+            "S",
+            "E",
+            "o",
+            "A",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Occult_Enemies": {
+        "chars": [
+            "o",
+            "B",
+            "o",
+            "o",
+            "R",
+            "R",
+            "E",
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Occult_Golem": {
+        "chars": [
+            "R",
+            "R",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Occult_Mech": {
+        "chars": [
+            "R",
+            "R",
+            "R",
+            "R",
+            "R",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "People1": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "People2": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "People3": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Police": {
+        "chars": [
+            "G",
+            "e",
+            "g",
+            "G",
+            "e",
+            "G",
+            "G",
+            "G"
+        ],
+        "color": "golden"
+    },
+    "School01RM": {
+        "chars": [
+            "P",
+            "P",
+            "H",
+            "H",
+            "E",
+            "G",
+            "J",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "School01RM-GB": {
+        "chars": [
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o",
+            "o"
+        ],
+        "color": "golden"
+    },
+    "School01RM-Gray": {
+        "chars": [
+            "P",
+            "P",
+            "H",
+            "H",
+            "E",
+            "G",
+            "J",
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$KillerBot": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AirlinePilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienDargos": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienGrey": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienTrucker": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlpineGuide": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Anarchist": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AnarchistSamurai": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AncientWitch": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidArchpriest": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidExperiment": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Archivist": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistBackpacker": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArcticWorker": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AvianCommando": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AvianNoble": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioScientist": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotGuardian": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotSamurai": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotSpaceman": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Catboy": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CatCourier": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CyberWitch": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DarkPriestess": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DesertPunk": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Doctor2": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenArchmage": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenBotanic": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenPirate": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSamurai": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSpacer": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Other/!$Em": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Enchantress": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ExoticBard": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FactoryWorker": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Farmer": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Fisherman": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GnomeExplorer": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinFisherman": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinIllusionist": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinRecruit": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinShogun": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinWitch": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Goddess": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$HighCommand": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$KoboldAssassin": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$KoboldPunk": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$LeatherDaddy": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Lich": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Madman": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mafia": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mechanic": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Miner": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Noblewoman": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Nun": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Nurse2": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcSamurai": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcSecretary": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcTrader": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PirateAdventurer": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Porcupine": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PrimaryDoctor": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Samurai": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SchoolTeacher": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SwordInstructor": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TarotWitch": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TribalChief": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidPerson": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidSpacer": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidWorm": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarManager": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarPilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandDJ": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandParamedic": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Witch1": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$emtest2": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Other/SpriteBase": {
+        "chars": [
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?",
+            "?"
+        ],
+        "color": "golden"
+    },
+    "Other/Static_Characters_npcs": {
+        "chars": [
+            "@",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "@"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Actor": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AdventurerStreamer": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienMindmaster": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienMystic": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AlienXori": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidBrainrot": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidCEO": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidDancer": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidEmotion": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidFailure": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidFish": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidHero": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidInquisitor": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidJournalist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidOffice": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidPsychologist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidPunk": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidSerial": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidTriangle": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidVoid": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidWardroid": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AndroidWorker": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Announcer": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Archeologist": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Archer": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistArmorer": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistDiver": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistDJ": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistLibrarian": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistNinja": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistPilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistPunk": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistRecruit": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistScavenger": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistScout": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchivistStrategist": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArchPriest": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArmorDiver": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArmorGuardian": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ArmsTerader": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Astrologist": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Astronaut1": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Astronomer": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$AugmentedSniper": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Backpacker": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BackwoodsPunk": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BanditLeader": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Banker": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Biker": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BikerPunk": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BikerSkull": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Billionaire": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioCadet": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BiologistOld": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioPunk": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioslaveCoded": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioSmith": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Biosuit": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BioWarrior": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Blacksmith": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BorderControl": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotActor": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Botanist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotAssistant": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotBritannia": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotCEO": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotDJ": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotEducator": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotEmbarassed": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotExplorer": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotIlluminated": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotJournalist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotLCD": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotMage": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotManifestation": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotParty": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotProjection": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotScientist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotSpacer": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BotStellar": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Bouncer": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$BrainSurgeon": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Bubba": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Businessman": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Butcher": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Butler": {
+        "chars": [
+            "B"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Cardinal": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CarPilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CastleGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CatButton": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CatCommando": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CatGuy": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Catman": {
+        "chars": [
+            "c"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CEO": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CharmingPrince": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Chief": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityBackpacker": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityCop": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityDJ": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityInventor": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityMage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CityScavenger": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Cleaner": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ClonedGuy": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Colonel": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CombatMedic": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Commodore": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ConspiracyTheorist": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Coroner": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CreepyJester": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Crew": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Criminal": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Cultist": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CyberNinja": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CyberPaesant": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CyberSamurai": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$CyborgActivist": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DataAnalyst": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DazedSpacer": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Dealer": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DecrepitGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DeepOne": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Demigod": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DesertGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DesertNomad": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DesertTrader": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Detective": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DimensionalExplorer": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DisembodiedHead": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DJ": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DogTail": {
+        "chars": [
+            "d"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Doppelganger": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DrillSergeant": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DrillSergeant7": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DrivingInstructor": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DrugDealer": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DwarvenSmith": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$DwarvenThinkerer": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$EggSoldier": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenArcher": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenArtist": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenBarbarian": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenBrawler": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenCleric": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenCommando": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenCrossbowman": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenDeathlord": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenDiplomat1": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenDiplomat2": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenEnchantress": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenGhoul": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenGuard": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenGuardian": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenHolywarrior": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenJester": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenJeweler": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenKnight": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenMadman": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenModel": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenMonk": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenNinja": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenNoble": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenNomad": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenOperasinger": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenPikeman": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenPoet": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenRecruit": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenRogue": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenScout": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSellsword": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenShopkeeper": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSinger": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSpellsword": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenStylist": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSwordmaster": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenSwordsman": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenTrader": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenTraveler": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenVampire": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenVeteran": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ElvenWarlock": {
+        "chars": [
+            "e"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Employee": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Engineer": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$EvenSpellblade": {
+        "chars": [
+            "E"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ExoticMerchant": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ExoticTrader": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FairyCEO": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Farmacist": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FastfoodWorker": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FieldAgent": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FootSoldier": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ForestRanger": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FortuneSoldier": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$FortuneTeller": {
+        "chars": [
+            "F"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Gambler": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$General": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Genetist": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GeniusGeneral": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Gladiator": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinArchmage": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinArtist": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinBard": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinBarman": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinCleric": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinCourier": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinDiplomat": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinEccentric": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinGuard": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinHacker": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinJester": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinKnight": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinMatriarch": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinMerchant": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinNoblewoman": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinNun": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinPeaesant": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinPeasant": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinPirate": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoblinRaider": {
+        "chars": [
+            "g"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GoldTrader": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Guard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Guardian": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Guerrilla": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GuerrillaWarrior": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Gunman": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$GymInstructor": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Hairdresser": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Hillbilly": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Hippie": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$HippieMusician": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Hitman": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$HornedKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Horse": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Hunter": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$HypernetExplorer": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$HypernetFanatic": {
+        "chars": [
+            "H"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Infiltrator": {
+        "chars": [
+            "I"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Innkeeper": {
+        "chars": [
+            "I"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Inquisitor": {
+        "chars": [
+            "I"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$InsectoidBee": {
+        "chars": [
+            "i"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$InsectoidScavenger": {
+        "chars": [
+            "i"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$InsectoidSpacer": {
+        "chars": [
+            "i"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Instructor": {
+        "chars": [
+            "I"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Inventor": {
+        "chars": [
+            "I"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Jester": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$JesterDiplomat": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Jeweler": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Jogger": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Journalist": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Judge": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$JungleExplorer": {
+        "chars": [
+            "J"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$King": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$LabRat": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Lawyer": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Librarian": {
+        "chars": [
+            "L"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Lobotomy": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$LobotomyWarrior": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MageSage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Maid": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MailGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Manager": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mannequin": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Marine": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mastermind": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Matchmaker": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Medic": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MercenarySoldier": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MetroPunk": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MilitaryAdvisor": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MonkeyDoctor": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MonkMystic": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MoonCadet": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MoonCultist": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$MotherNun": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mummy": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Musician": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Mystic": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Netrunner": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Ninja": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$NobleGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$NobleHeir": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$NobleKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$NobleScout": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$NuclearWorker": {
+        "chars": [
+            "N"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OldChef": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OldCommander": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OldGladiator": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OldPatient": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OperaSInger": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Operator": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OPSec": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Optic": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Oracle": {
+        "chars": [
+            "O"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcAdventurer": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcBartender": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ORcBibliotecary": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcBrawler": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcClown": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcCook": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcCriminal": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcExplorer": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcJester": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcMercenary": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcMonk": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcNomad": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcNun": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcPeasant": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcPunk": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcRogue": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcSeer": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcStudent": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcSwordsman": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcVampire": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcVestal": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcVeteran": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcWarrior": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OrcWorker": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$OttomanGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Page": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Paleontologist": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Paramedic": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Paramedic2": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Paratrooper": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Partygoer": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Patient": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PeasantWarrior": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Pensioner": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Pilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Pinman": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Pirate": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PirateHacker": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PirateSage": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PizzaRider": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Priest": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Priestess": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Prince": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Princess": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Pro": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PSIWarrior": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PunkCultist": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$PunkGirl": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Queen": {
+        "chars": [
+            "Q"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Ranger": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Rebreather": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Recon": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Recruit": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Regent": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Repoman": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Reporter": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ReptilianCommando": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ReptilianMonk": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Revolutionary": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RevolutionaryCommando": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Ritualist": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Robber": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RoborProtector": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RogueBlacksmith": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Ronin": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RoyalChef": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RoyalGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RoyalJester": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$RoyalPage": {
+        "chars": [
+            "R"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Sage": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Scarf": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Scavenger": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ScavengerSOldier": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ScienceTeacher": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Scientist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Scout": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ScubaDiver": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ScubaRepairer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SealedCadet": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Secretary": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Selene": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Sergeant": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SewerExplorer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SewerPaesant": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ShadyCultist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Shogun": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Skeleton": {
+        "chars": [
+            "s"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Slime": {
+        "chars": [
+            "s"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Sniper": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SnobStylist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SoldierCadet": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpaceCadet": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpaceExplorer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpaceMiner": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Spacer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerAdventurer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerGeneral": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerMechanic": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerMonk": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerOldman": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerPilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerSalesman": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerScientist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpacerTrooper": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SpecialForces": {
+        "chars": [
+            "o"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Spellcaster": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Spiritist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Stablemaster": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StoicGuard": {
+        "chars": [
+            "G"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Strangelove": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetExplorer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetInventor": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetMage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetMonk": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetSamurai": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetSeer": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetShopkeeper": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetSoldier": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$StreetWarrior": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Stylist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SunCultist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Superhero": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Surgeon": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SurvivalGuide": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Survivalist": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Survivor": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$SushiCook": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TavernCook": {
+        "chars": [
+            "C"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TaxiDriver": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TaxiDriver2": {
+        "chars": [
+            "D"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Techmaster": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TechnoBarbarian": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TecnoGeneral": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TestSubject": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TicketMaster": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TowerController": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Towner": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ToxicScavenger": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Tracker": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Trader": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Trainer": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Translator": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TravelingBard": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TravelingSalesman": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TribeArcher": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TribePunk": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Trucker": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TruckerShopkeeper": {
+        "chars": [
+            "$"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TruckerWanderer": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$TwoFaced": {
+        "chars": [
+            "T"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$UniversityStudent": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$ValiantKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VentureSoldier": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Vestal": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VillageChief": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VillageIdiot": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VillageSmith": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VillageSpiritist": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VillageTavernkeeper": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidAbstracter": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidAstronaut": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidCalamari": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidHorror": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidScreamer": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VoidSpawn": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Volunteer": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$VRExplorer": {
+        "chars": [
+            "V"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Vyking": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WanderingKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WanderingSwordsman": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarCadet": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarEngineer": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarFanatic": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarGeneral": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarInventor": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarJournalist": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarMage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarSniper": {
+        "chars": [
+            "S"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarVeteran": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WarWitch": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandAssassin1": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandAssassin2": {
+        "chars": [
+            "A"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandCitizen": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandMage": {
+        "chars": [
+            "M"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Wastelandman": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandModel": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandNible": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandPilot": {
+        "chars": [
+            "P"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WastelandThinkerer": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WasterKnight": {
+        "chars": [
+            "K"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WasterlandYogi": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Welder": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WildArcher": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Wiseman": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Witch2": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Witch3": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Witch4": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$WoodArcher": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Woodworker": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Wrestler": {
+        "chars": [
+            "W"
+        ],
+        "color": "golden"
+    },
+    "Skab/!$Yogi": {
+        "chars": [
+            "Y"
+        ],
+        "color": "golden"
+    }
+}

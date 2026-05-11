@@ -182,7 +182,9 @@
   function saveCurrentCharacterAsPreset() {
     const actor = $gameParty.leader();
     if (!actor) {
+      window.skipLocalization = true;
       $gameMessage.add("No character to save!");
+      window.skipLocalization = false;
       return;
     }
 
@@ -253,10 +255,14 @@
 
     if (existingIndex >= 0) {
       currentPresets[existingIndex] = newPreset;
+      window.skipLocalization = true;
       $gameMessage.add(`Updated character preset: ${newPreset.name}`);
+      window.skipLocalization = false;
     } else {
       currentPresets.push(newPreset);
+      window.skipLocalization = true;
       $gameMessage.add(`Saved new character preset: ${newPreset.name} (ID: ${presetId})`);
+      window.skipLocalization = false;
     }
 
     saveCharacterPresets(currentPresets);
@@ -273,7 +279,9 @@
 
     if (!partyMembers[targetIndex]) {
       const memberPosition = targetIndex + 1;
+      window.skipLocalization = true;
       $gameMessage.add(`No party member to save at position ${memberPosition}!`);
+      window.skipLocalization = false;
       return;
     }
 
@@ -330,10 +338,14 @@
 
     if (existingIndex >= 0) {
       currentPresets[existingIndex] = newPreset;
+      window.skipLocalization = true;
       $gameMessage.add(`Updated character preset: ${newPreset.name}`);
+      window.skipLocalization = false;
     } else {
       currentPresets.push(newPreset);
+      window.skipLocalization = true;
       $gameMessage.add(`Saved new character preset: ${newPreset.name} (ID: ${presetId})`);
+      window.skipLocalization = false;
     }
 
     saveCharacterPresets(currentPresets);
@@ -343,9 +355,11 @@
     $gameParty.removeActor(targetActor.actorId());
 
     const memberPosition = targetIndex + 1;
+    window.skipLocalization = true;
     $gameMessage.add(
       `${targetActor.name()} has been saved to character presets and removed from party position ${memberPosition}.`
     );
+    window.skipLocalization = false;
   }
 
   //=============================================================================

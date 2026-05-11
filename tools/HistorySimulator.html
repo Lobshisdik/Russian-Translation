@@ -120,7 +120,7 @@
                     {name: 'Turgut Özal', ideology: 'Liberal Conservative', years: [1983, 1993]},
                     {name: 'Tansu Çiller', ideology: 'Center-Right', years: [1993, 1996]},
                     {name: 'Necmettin Erbakan', ideology: 'Islamist', years: [1996, 1997]},
-                    {name: 'Bülent Ecevit', ideology: 'Social Democrat', years: [1999, 2002]}
+                    {name: 'Bülent Ecevit', ideology: 'Social Democrat', years: [1999, 2024]}
                 ],
                 population: 35000000,
                 economy: 80,
@@ -131,12 +131,50 @@
                 capital: 'Underground',
                 color: '#228b22',
                 leaders: [
-                    {name: 'Ancient Goblin King', ideology: 'Primordial', years: [1800, 1970]},
                     {name: 'The Great Goblin', ideology: 'Stone Age Primal', years: [1970, 2024]}
                 ],
                 population: 5000000,
                 economy: 30,
                 military: 150
+            },
+            'Cascadia': {
+                baseTerritory: 'West Coast US',
+                capital: 'San Francisco',
+                color: '#008080',
+                leaders: [
+                    {name: 'Hiram Johnson', ideology: 'Progressive', years: [1911, 1945]},
+                    {name: 'Earl Warren', ideology: 'Liberal Republican', years: [1943, 1953]},
+                    {name: 'Jerry Brown', ideology: 'Zen Governor', years: [1975, 2024]}
+                ],
+                population: 15000000,
+                economy: 70,
+                military: 30
+            },
+            'Midwest Free States': {
+                baseTerritory: 'Midwest US',
+                capital: 'Chicago',
+                color: '#8b4513',
+                leaders: [
+                    {name: 'Robert La Follette', ideology: 'Populist', years: [1901, 1925]},
+                    {name: 'Eugene Debs', ideology: 'Socialist', years: [1912, 1926]},
+                    {name: 'Harry Truman', ideology: 'Democrat', years: [1935, 1972]}
+                ],
+                population: 25000000,
+                economy: 90,
+                military: 60
+            },
+            'Atlantic Protectorate': {
+                baseTerritory: 'East Coast US',
+                capital: 'Boston',
+                color: '#4682b4',
+                leaders: [
+                    {name: 'Henry Cabot Lodge', ideology: 'Britannic Loyalist', years: [1893, 1924]},
+                    {name: 'Franklin D. Roosevelt', ideology: 'Imperial Protector', years: [1929, 1945]},
+                    {name: 'John F. Kennedy', ideology: 'Neo-Loyalist', years: [1953, 1963]}
+                ],
+                population: 30000000,
+                economy: 110,
+                military: 80
             }
         };
 
@@ -354,41 +392,42 @@
 
                 if (available.length > 1 && Math.random() < 0.08) {
                     const active = currentActors[actor];
+                    if (!active) return;
                     const rival = available.filter(l => l.name !== active.name)[Math.floor(Math.random() * (available.length - 1))];
+                    if (!rival) return;
                     
                     const struggleType = ['election', 'coup', 'assassination', 'alliance'][Math.floor(Math.random() * 4)];
                     let outcomeDesc = "";
-                    if (!active || !rival) return;
 
                     switch(struggleType) {
                         case 'election':
                             if (Math.random() > 0.5) {
                                 currentActors[actor] = rival;
-                                outcomeDesc = `${rival.name} wins the election in ${actor}, replacing ${active.name}.`;
+                                outcomeDesc = `🗳️ ${rival.name} wins the election in ${actor}, replacing ${active.name}.`;
                             } else {
-                                outcomeDesc = `${active.name} maintains power in ${actor} after a tight election against ${rival.name}.`;
+                                outcomeDesc = `🗳️ ${active.name} maintains power in ${actor} after a tight election against ${rival.name}.`;
                             }
                             break;
                         case 'coup':
                             if (Math.random() > 0.4) {
                                 currentActors[actor] = rival;
-                                outcomeDesc = `MILITARY COUP! ${rival.name} seizes power in ${actor}, overthrowing ${active.name}!`;
+                                outcomeDesc = `🎖️ MILITARY COUP! ${rival.name} seizes power in ${actor}, overthrowing ${active.name}!`;
                             } else {
-                                outcomeDesc = `A coup attempt by ${rival.name} in ${actor} was brutally suppressed by ${active.name}.`;
+                                outcomeDesc = `🎖️ A coup attempt by ${rival.name} in ${actor} was brutally suppressed by ${active.name}.`;
                             }
                             break;
                         case 'assassination':
                             if (Math.random() > 0.7) {
                                 deadLeaders.add(active.name);
                                 currentActors[actor] = rival;
-                                outcomeDesc = `${active.name} was assassinated! ${rival.name} takes control of ${actor}.`;
+                                outcomeDesc = `💀 ${active.name} was assassinated! ${rival.name} takes control of ${actor}.`;
                             } else {
                                 deadLeaders.add(rival.name);
-                                outcomeDesc = `Assassination attempt on ${active.name} failed. The rival ${rival.name} was executed.`;
+                                outcomeDesc = `💀 Assassination attempt on ${active.name} failed. The rival ${rival.name} was executed.`;
                             }
                             break;
                         case 'alliance':
-                            outcomeDesc = `${active.name} and ${rival.name} form an uneasy political alliance in ${actor}.`;
+                            outcomeDesc = `🤝 ${active.name} and ${rival.name} form an uneasy political alliance in ${actor}.`;
                             break;
                     }
 
@@ -431,9 +470,54 @@
         
         // Fixed historical/alt-history events
         const fixedEvents = {
+            '1914-07': {
+                type: 'military',
+                description: "⚔️ WORLD WAR I BEGINS: Archduke Franz Ferdinand is assassinated. The alliance systems of the Hyperpowers trigger a global conflict.",
+                callback: () => {
+                    for (let h in hyperpowers) hyperpowers[h].military += 30;
+                }
+            },
+            '1917-10': {
+                type: 'political',
+                description: "⚖️ OCTOBER REVOLUTION: The Soviet Union emerges from the ashes of Imperial Russia. Vladimir Lenin seizes control of the Archive Foundation.",
+                callback: () => {
+                    hyperpowers['Soviet Union'].military += 50;
+                    factions['Archive Foundation'].information += 40;
+                }
+            },
+            '1918-11': {
+                type: 'peace',
+                description: "🕊️ WWI ENDS: Armistice signed. The map of Europe is redrawn. Ottoman Empire begins its slow decline.",
+                callback: () => {
+                    hyperpowers['Ottoman Empire'].economy -= 20;
+                }
+            },
+            '1939-09': {
+                type: 'military',
+                description: "⚔️ WORLD WAR II BEGINS: Invasion of Poland. Total war engulfs the globe. The Atlantic Protectorate is mobilized by Britannia.",
+                callback: () => {
+                    hyperpowers['Britannia'].military += 100;
+                    hyperpowers['Atlantic Protectorate'].military += 40;
+                }
+            },
+            '1941-06': {
+                type: 'military',
+                description: "⚔️ OPERATION BARBAROSSA: Hyperpowers clash on a scale never before seen. The Soviet Union faces the full might of European expansionism.",
+                callback: () => {
+                    hyperpowers['Soviet Union'].population *= 0.9;
+                }
+            },
+            '1945-05': {
+                type: 'peace',
+                description: "🕊️ WWII ENDS IN EUROPE: VE Day. Soviet Union and Britannia emerge as the dominant global forces.",
+                callback: () => {
+                    hyperpowers['Soviet Union'].economy += 50;
+                    hyperpowers['Britannia'].economy += 50;
+                }
+            },
             '1962-10': {
                 type: 'political',
-                description: "Enrico Mattei's plane crashes under mysterious circumstances. Reports of 'PetroDemons' sightings near the wreckage emerge.",
+                description: "⚖️ Enrico Mattei's plane crashes under mysterious circumstances. Reports of 'PetroDemons' sightings near the wreckage emerge.",
                 callback: () => {
                     factions['The Gods'].arcane += 20;
                     factions['Hypercapitalist Collective'].velocity += 50;
@@ -441,27 +525,53 @@
             },
             '1970-05': {
                 type: 'paranormal',
-                description: "The Soviet Union opens the Kola Superdeep Borehole. A massive Goblin Horde, which lived underground for eons, is spawned and emerges from the depths of the Earth!",
+                description: "🔮 The Soviet Union opens the Kola Superdeep Borehole. A massive Goblin Horde, which lived underground for eons, is spawned and emerges from the depths of the Earth!",
                 callback: () => {
-                    if (factions['Goblin Horde']) {
-                        factions['Goblin Horde'].arcane += 50;
-                        factions['Goblin Horde'].velocity += 20;
+                    // Goblin Horde hyperpower is now active
+                    hyperpowers['Goblin Horde'].military += 200;
+                    if (factions['Naguka']) factions['Naguka'].arcane += 50;
+                    if (factions['Verden']) factions['Verden'].arcane += 50;
+                }
+            },
+            '1982-04': {
+                type: 'military',
+                description: "⚔️ Falklands War reaches its peak. Margaret Thatcher reveals her position in the Mages Guild and casts the 'Okeanus' spell, instantly sinking the entire Argentinian fleet and boiling the surrounding sea.",
+                callback: () => {
+                    factions['Mages Guild'].arcane += 100;
+                    factions['Mages Guild'].velocity += 50;
+                    hyperpowers['Britannia'].military += 50;
+                }
+            },
+            '1992-01': {
+                type: 'paranormal',
+                description: "🔮 THE SQUISHING BEGINS: Reality starts to feel 'thin'. Dimensional stability drops by 15%. Anomalies reported worldwide.",
+                callback: () => {
+                    for (let f in factions) {
+                        factions[f].arcane += 10;
                     }
                 }
             },
             '1999-12': {
                 type: 'social',
-                description: "The Millennium Bug fries global technology. Magic Resurgence begins. Margaret Thatcher reveals her position in the Mages Guild.",
+                description: "👥 The Millennium Bug fries global technology. Magic Resurgence enters its final, chaotic phase.",
                 callback: () => {
                     for (let f in factions) {
-                        factions[f].arcane *= 2;
+                        factions[f].arcane *= 1.5;
                         factions[f].information *= 0.5;
                     }
                 }
             },
+            '2001-09': {
+                type: 'military',
+                description: "💀 SEPTEMBER 11: New York is struck by teonuclear weapons. The blast strips out the souls of 3 million citizens, leaving 'Hollow Shells'. Operation orchestrated by Thatcher Loyalists, though publically blamed on Al-Qaeda.",
+                callback: () => {
+                    hyperpowers['Britannia'].information += 80;
+                    for (let f in factions) factions[f].information *= 0.7;
+                }
+            },
             '2003-03': {
                 type: 'paranormal',
-                description: "THE SQUISHING: 92 dimensions collapse into one. Reality is overwritten by the Rule of 80 and CamelCase laws.",
+                description: "🔮 THE SQUISHING FINALIZED: 92 dimensions collapse into one. Reality is overwritten by the Rule of 80 and CamelCase laws.",
                 callback: () => {
                     for (let f in factions) {
                         factions[f].velocity = Math.max(80, factions[f].velocity);
@@ -484,7 +594,7 @@
                 let power = Object.keys(hyperpowers)[Math.floor(Math.random() * Object.keys(hyperpowers).length)];
                 let leader = currentLeaders[power];
                 if (leader) {
-                    event.descriptions.push(generateEventDescription(eventCategory, eventType, power, leader, false));
+                    event.descriptions.push(generateEventDescription(eventCategory, eventType, power, leader, false, date.getFullYear()));
                     applyEventEffects(event, power, false);
                 }
             }
@@ -496,7 +606,7 @@
                 let faction = Object.keys(factions)[Math.floor(Math.random() * Object.keys(factions).length)];
                 let leader = currentFactionLeaders[faction];
                 if (leader) {
-                    event.descriptions.push(generateEventDescription(eventCategory, eventType, faction, leader, true));
+                    event.descriptions.push(generateEventDescription(eventCategory, eventType, faction, leader, true, date.getFullYear()));
                     applyEventEffects(event, faction, true);
                 }
             }
@@ -506,11 +616,24 @@
                 const conquest = generateConquestEvent(date);
                 if (conquest && conquest.description) event.descriptions.push(conquest.description);
             }
-            
             return event;
         }
 
-        function generateEventDescription(category, type, actor, leader, isFaction) {
+        const categoryEmojis = {
+            political: '⚖️',
+            military: '🔫',
+            economic: '💰',
+            social: '👥',
+            paranormal: '🔮',
+            royal: '👑',
+            conquest: '🚩',
+            war: '⚔️',
+            peace: '🕊️',
+            internal: '🏛️'
+        };
+
+        function generateEventDescription(category, type, actor, leader, isFaction, year) {
+            const emoji = categoryEmojis[category] || '🔹';
             const descriptions = {
                 political: {
                     'assassination attempt': `Assassination attempt on ${leader.name} of ${actor} foiled by loyal guards`,
@@ -552,8 +675,31 @@
                 }
             };
             
-            return descriptions[category] && descriptions[category][type] || 
-                   `${type} occurs in ${actor} under ${leader.name}`;
+            const weirdDescriptions = {
+                political: {
+                    'assassination attempt': `${leader.name} survived an assassination attempt by their own future self from a collapsed timeline.`,
+                    'election': `The election in ${actor} resulted in a tie between ${leader.name} and a sentient cloud of data.`,
+                    'reforms': `${leader.name} legalizes 'Thought-Forms' and 'Soul-Trading' in ${actor}.`
+                },
+                military: {
+                    'border skirmish': `A border skirmish in ${actor} was fought using weapons that delete the enemy's childhood memories.`,
+                    'weapon development': `${actor} develops a bomb that explodes into 'Pure Meaning', liquefying brains.`
+                },
+                paranormal: {
+                    'TimeAnomaly': `${actor} is currently experiencing Tuesday twice every week due to a temporal leak.`,
+                    'MysteriousDisappearances': `People in ${actor} are being replaced by high-resolution 2D cardboard cutouts.`,
+                    'ThoughtTransmittedDisease': `A viral idea in ${actor} causes citizens to speak only in CamelCase.`
+                }
+            };
+            
+            let desc;
+            if (year >= 1992 && weirdDescriptions[category] && weirdDescriptions[category][type] && Math.random() < 0.4) {
+                desc = weirdDescriptions[category][type];
+            } else {
+                desc = (descriptions[category] && descriptions[category][type]) || 
+                       `${type} occurs in ${actor} under ${leader.name}`;
+            }
+            return `${emoji} ${desc}`;
         }
 
         function generateConquestEvent(date) {
@@ -566,10 +712,12 @@
                 hyperpowers[attacker].military += 10;
                 hyperpowers[attacker].economy += 20;
                 
+                const leaderName = currentLeaders[attacker] ? currentLeaders[attacker].name : "The High Command";
+                
                 return {
                     date: date.toISOString().split('T')[0],
                     type: 'conquest',
-                    description: `${attacker} conquers ${target}! ${currentLeaders[attacker].name} declares victory`
+                    description: `🚩 ${attacker} conquers ${target}! ${leaderName} declares victory`
                 };
             }
             
@@ -588,10 +736,11 @@
                 intensity: Math.floor(Math.random() * 100)
             });
             
+            const leaderName = currentLeaders[attacker] ? currentLeaders[attacker].name : "The High Command";
             return {
                 date: date.toISOString().split('T')[0],
                 type: 'war',
-                description: `WAR DECLARED! ${attacker} under ${currentLeaders[attacker].name} declares war on ${defender}!`
+                description: `⚔️ WAR DECLARED! ${attacker} under ${leaderName} declares war on ${defender}!`
             };
         }
 
@@ -702,6 +851,7 @@
             html += '<h3>Events Log</h3>';
             html += '<div id="log-container">';
             for (let event of events) {
+                if (!event) continue;
                 const desc = event.descriptions ? event.descriptions.join(' | ') : event.description;
                 html += `<div class="event-entry"><span class="event-date">${event.date}</span> ${desc}</div>`;
             }

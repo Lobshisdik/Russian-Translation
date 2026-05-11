@@ -558,6 +558,7 @@
             mirrors: {},  // id → { orientation: 'slash'|'backslash' }
             beamReceivers: {},  // id → { switchId, active }
             beamPath: [],  // [{x,y}] current frame path
+            beamSegments: [], // [{x1,y1,x2,y2}] visual segments
             // Clone / shadow
             clones: {},  // id → { invertX, invertY, puzzleId, initialX, initialY }
             // Water fill
@@ -699,6 +700,18 @@
 
     function getEvent(id) { return $gameMap.event(id); }
 
+    function getPuzzleActors() {
+        const actors = [$gamePlayer];
+        if (
+            window.$gameSplitScreen &&
+            window.$gameSplitScreen.active &&
+            window.$gameSplitScreen.p2Event
+        ) {
+            actors.push(window.$gameSplitScreen.p2Event);
+        }
+        return actors;
+    }
+
     function eventsAt(x, y, excludeId) {
         return $gameMap.events().filter(e =>
             e.x === x && e.y === y && e.eventId() !== excludeId && !e._erased
@@ -720,9 +733,23 @@
         if (!$gameMap.isPassable(x - dx, y - dy, d)) return true; // source can't exit
         if (!$gameMap.isPassable(x, y, rd)) return true; // dest can't be entered
         if (PUSHABLE_BLOCKED_TERRAIN.includes($gameMap.terrainTag(x, y))) return true;
+
+        // Player check
+        if (
+            getPuzzleActors().some(
+                (p) => p.x === x && p.y === y && !p.isThrough()
+            )
+        )
+            return true;
+
+        const pd = puzzleData();
         return eventsAt(x, y, excludeId).some(e => {
+            const eid = e.eventId();
             if (e._priorityType === 0) return false; // below characters — never blocks pushables
-            if (puzzleData().pits[e.eventId()]) return false;
+            // Whitelist floor-based puzzle elements that should not block pushables
+            if (pd.pits[eid] || pd.plates[eid] || pd.timedPlates[eid] || pd.goalEvents[eid]) return false;
+            if (pd.arrowTiles[eid] || pd.warpTiles[eid] || pd.colorTiles[eid] || pd.timedTiles[eid]) return false;
+            if (pd.counterweights[eid]) return false; // counterweight platform
             return !e.isThrough();
         });
     }
@@ -780,6 +807,7 @@
             puzzleData().plates[+a.eventId] = {
                 switchId: +a.switchId, requireObject: a.requireObject === 'true',
                 puzzleId: a.puzzleId || '', active: false,
+                localSwitches: a.localSwitches
             };
         },
         setTimedPlate(a) {
@@ -787,6 +815,7 @@
                 switchId: +a.switchId, holdSeconds: +a.holdSeconds || 3,
                 requireObject: a.requireObject === 'true',
                 puzzleId: a.puzzleId || '', heldFrames: 0, armed: false,
+                localSwitches: a.localSwitches
             };
         },
         setLever(a) {
@@ -921,7 +950,7 @@
             puzzleData().magneticObjects[+a.eventId] = {};
         },
         activateMagnet(a) {
-            activateMagnet(a.polarity, +a.range || 5, +a.steps || 1);
+            activateMagnet($gamePlayer, a.polarity, +a.range || 5, +a.steps || 1);
         },
 
         // ── Counterweight ────────────────────────────────────────────────────
@@ -939,7 +968,10 @@
             puzzleData().mirrors[+a.eventId] = { orientation: a.orientation || 'slash' };
         },
         setBeamReceiver(a) {
-            puzzleData().beamReceivers[+a.eventId] = { switchId: +a.switchId, active: false };
+            puzzleData().beamReceivers[+a.eventId] = {
+                switchId: +a.switchId, active: false,
+                localSwitches: a.localSwitches
+            };
         },
         checkInBeamPath(a) {
             const ev = getEvent(+a.eventId);
@@ -1039,14 +1071,16 @@
             case 'plate':
                 CMDS.setPressurePlate({
                     eventId: id, switchId: a.switch || 0,
-                    requireObject: a.requireObject || 'false', puzzleId: a.group || ''
+                    requireObject: a.requireObject || 'false', puzzleId: a.group || '',
+                    localSwitches: { A: a.A, B: a.B, C: a.C, D: a.D }
                 });
                 break;
             case 'timedPlate':
                 CMDS.setTimedPlate({
                     eventId: id, switchId: a.switch || 0,
                     holdSeconds: a.holdSeconds || 3, requireObject: a.requireObject || 'false',
-                    puzzleId: a.group || ''
+                    puzzleId: a.group || '',
+                    localSwitches: { A: a.A, B: a.B, C: a.C, D: a.D }
                 });
                 break;
             case 'lever':
@@ -1150,7 +1184,10 @@
                 CMDS.setMirror({ eventId: id, orientation: a.orientation || 'slash' });
                 break;
             case 'beamReceiver':
-                CMDS.setBeamReceiver({ eventId: id, switchId: a.switch || 0 });
+                CMDS.setBeamReceiver({
+                    eventId: id, switchId: a.switch || 0,
+                    localSwitches: { A: a.A, B: a.B, C: a.C, D: a.D }
+                });
                 break;
             case 'clone':
                 CMDS.setClone({
@@ -1217,12 +1254,57 @@
     // Mid-game page changes (self-switch toggles, conditional branches) —
     // only runs when the event is already in $gameMap._events (i.e. not during
     // initial construction, which is handled by the Game_Map.setup hook below).
+    // --- Player 2 Hooks ---
+
+    const _Game_Event_moveStraight_p2 = Game_Event.prototype.moveStraight;
+    Game_Event.prototype.moveStraight = function (d) {
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && this === window.$gameSplitScreen.p2Event) {
+            const pd = puzzleData();
+            const [dx, dy] = MZ_DELTA[d] || [0, 0];
+            const nx = this.x + dx, ny = this.y + dy;
+
+            // Try to push
+            const pushable = $gameMap.events().find(e =>
+                e.x === nx && e.y === ny && pd.pushables[e.eventId()] && !e._erased);
+
+            if (pushable) {
+                tryPush(pushable.eventId(), dx, dy);
+            }
+
+            moveClones(dx, dy);
+        }
+        _Game_Event_moveStraight_p2.call(this, d);
+    };
+
+    const _Game_Event_update_p2 = Game_Event.prototype.update;
+    Game_Event.prototype.update = function () {
+        _Game_Event_update_p2.call(this);
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && this === window.$gameSplitScreen.p2Event) {
+            updatePuzzleCharacter(this, SceneManager._scene instanceof Scene_Map);
+        }
+    };
+
     const _setupPage = Game_Event.prototype.setupPage;
     Game_Event.prototype.setupPage = function () {
         _setupPage.call(this);
         if ($gameSystem && $gameMap.event(this._eventId) === this) {
             scanEventPuzzleComments(this);
         }
+    };
+
+    const _Game_Event_canPass = Game_Event.prototype.canPass;
+    Game_Event.prototype.canPass = function (x, y, d) {
+        const id = this.eventId();
+        const pd = ($gameSystem && $gameSystem._puzzleData) ? puzzleData() : null;
+        if (pd && pd.pushables[id]) {
+            const x2 = $gameMap.roundXWithDirection(x, d);
+            const y2 = $gameMap.roundYWithDirection(y, d);
+            const dx = $gameMap.deltaX(x2, x);
+            const dy = $gameMap.deltaY(y2, y);
+            // Puzzle logic determines if we can pass (handles plates, pits, etc.)
+            return !blockedForPushable(x2, y2, id, dx, dy);
+        }
+        return (_Game_Event_canPass || Game_CharacterBase.prototype.canPass).call(this, x, y, d);
     };
 
     const _Game_Event_update = Game_Event.prototype.update;
@@ -1237,7 +1319,7 @@
     Game_Event.prototype.onPuzzleMoveEnd = function () {
         const id = this.eventId();
         const pd = puzzleData();
-        if (!pd.pushables[id]) return;
+        if (!pd.pushables[id] && !pd.clones[id]) return;
 
         const x = this.x, y = this.y;
 
@@ -1256,19 +1338,23 @@
 
         // Ice slide
         if (isIceTile(x, y)) {
-            const d = this.direction();
+            // Use _lastPushDir if available to handle Direction Fix rocks correctly
+            const d = this._lastPushDir || this.direction();
             const [dx, dy] = MZ_DELTA[d] || [0, 0];
             if (!blockedForPushable(x + dx, y + dy, id, dx, dy)) {
                 this.setMoveSpeed(5);
                 this.moveStraight(d);
+                this._lastPushDir = d; // Carry over for next sliding step
                 updatePressurePlates();
                 propagateWater();
                 requestPuzzleRefresh();
             } else {
                 this.setMoveSpeed(this._originalMoveSpeed || 4);
+                this._lastPushDir = undefined;
             }
         } else {
             this.setMoveSpeed(this._originalMoveSpeed || 4);
+            this._lastPushDir = undefined;
         }
     };
 
@@ -1348,7 +1434,6 @@
 
     function updatePressurePlates() {
         const pd = puzzleData();
-        const px = $gamePlayer.x, py = $gamePlayer.y;
         for (const [id, plate] of Object.entries(pd.plates)) {
             const ev = getEvent(+id);
             if (!ev) continue;
@@ -1360,18 +1445,23 @@
                 const ce = getEvent(+cid);
                 return ce && ce.x === ev.x && ce.y === ev.y;
             });
-            const active = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || (px === ev.x && py === ev.y));
+            const actorsOn = getPuzzleActors().some(p => p.x === ev.x && p.y === ev.y);
+            const active = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || actorsOn);
             if (active !== plate.active) {
                 plate.active = active;
                 $gameSwitches.setValue(plate.switchId, active);
                 setSelfSwitch(+id, 'A', active);
+                if (plate.localSwitches) {
+                    for (const [letter, eventIdStr] of Object.entries(plate.localSwitches)) {
+                        if (eventIdStr) setSelfSwitch(+eventIdStr, letter, active);
+                    }
+                }
             }
         }
     }
 
     function updateTimedPlates() {
         const pd = puzzleData();
-        const px = $gamePlayer.x, py = $gamePlayer.y;
         for (const [id, plate] of Object.entries(pd.timedPlates)) {
             const ev = getEvent(+id);
             if (!ev) continue;
@@ -1381,19 +1471,30 @@
             const cloneOn = Object.keys(pd.clones).some(cid => {
                 const ce = getEvent(+cid); return ce && ce.x === ev.x && ce.y === ev.y;
             });
-            const occupied = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || (px === ev.x && py === ev.y));
+            const actorsOn = getPuzzleActors().some(p => p.x === ev.x && p.y === ev.y);
+            const occupied = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || actorsOn);
             if (occupied) {
                 plate.heldFrames++;
                 if (!plate.armed && plate.heldFrames >= plate.holdSeconds * 60) {
                     plate.armed = true;
                     $gameSwitches.setValue(plate.switchId, true);
                     setSelfSwitch(+id, 'A', true);
+                    if (plate.localSwitches) {
+                        for (const [letter, eventIdStr] of Object.entries(plate.localSwitches)) {
+                            if (eventIdStr) setSelfSwitch(+eventIdStr, letter, true);
+                        }
+                    }
                 }
             } else {
                 if (plate.armed) {
                     plate.armed = false;
                     $gameSwitches.setValue(plate.switchId, false);
                     setSelfSwitch(+id, 'A', false);
+                    if (plate.localSwitches) {
+                        for (const [letter, eventIdStr] of Object.entries(plate.localSwitches)) {
+                            if (eventIdStr) setSelfSwitch(+eventIdStr, letter, false);
+                        }
+                    }
                 }
                 plate.heldFrames = 0;
             }
@@ -1440,9 +1541,11 @@
         // Calculate final destination for undo stack only
         let fx = ev.x + dx, fy = ev.y + dy;
         if (isIceTile(fx, fy)) {
-            while (!blockedForPushable(fx + dx, fy + dy, pushedId, dx, dy) && isIceTile(fx + dx, fy + dy)) {
-                if (pitAt(fx, fy) !== null) break;
+            while (!blockedForPushable(fx + dx, fy + dy, pushedId, dx, dy)) {
+                const nextIsIce = isIceTile(fx + dx, fy + dy);
                 fx += dx; fy += dy;
+                if (pitAt(fx, fy) !== null) break;
+                if (!nextIsIce) break;
             }
         }
 
@@ -1450,13 +1553,14 @@
         if (pd.undoStack.length > 20) pd.undoStack.shift();
 
         puzzleLog(`pushed ${evLabel(pushedId)}: step (${ev.x},${ev.y}) → (${ev.x + dx},${ev.y + dy})`);
-        
+
+        ev._lastPushDir = d; // Store direction for ice sliding logic
         if (isIceTile(ev.x + dx, ev.y + dy)) ev.setMoveSpeed(5);
         else ev.setMoveSpeed(ev._originalMoveSpeed || 4);
-        
+
         ev.moveStraight(d);
         info.pushCount++;
-        
+
         updatePressurePlates();
         propagateWater();
         requestPuzzleRefresh();
@@ -1476,20 +1580,23 @@
     // Ice sliding
     // =========================================================================
 
-    let _sliding = false;
-    function slideStep(dx, dy) {
-        if (_sliding) return;
-        const p = $gamePlayer;
-        if (p._originalMoveSpeed === undefined) p._originalMoveSpeed = p.moveSpeed();
+    function slideStepGeneric(character, dx, dy) {
+        if (character._isSliding) return;
+        if (character._originalMoveSpeed === undefined)
+            character._originalMoveSpeed = character.moveSpeed();
         const d = mzDir(dx === -1 ? 'left' : dx === 1 ? 'right' : dy === -1 ? 'up' : 'down');
-        const nx = p.x + dx, ny = p.y + dy;
+        const nx = character.x + dx, ny = character.y + dy;
         if (!isIceTile(nx, ny)) return;
-        if (!$gameMap.isPassable(p.x, p.y, d)) return;
-        if (eventsAt(nx, ny, -1).some(e => !e.isThrough())) return;
-        _sliding = true;
-        p.setMoveSpeed(5);
-        p.moveStraight(d);
-        _sliding = false;
+        if (!$gameMap.isPassable(character.x, character.y, d)) return;
+
+        // Exclude the character themselves from the collision check
+        const characterId = character instanceof Game_Player ? -1 : character.eventId();
+        if (eventsAt(nx, ny, characterId).some(e => !e.isThrough())) return;
+
+        character._isSliding = true;
+        character.setMoveSpeed(5);
+        character.moveStraight(d);
+        character._isSliding = false;
     }
 
     // =========================================================================
@@ -1520,9 +1627,9 @@
     // Magnetic objects
     // =========================================================================
 
-    function activateMagnet(polarity, range, steps) {
+    function activateMagnet(character, polarity, range, steps) {
         const pd = puzzleData();
-        const px = $gamePlayer.x, py = $gamePlayer.y;
+        const px = character.x, py = character.y;
         for (const id of Object.keys(pd.magneticObjects)) {
             const ev = getEvent(+id);
             if (!ev) continue;
@@ -1550,18 +1657,17 @@
 
     function updateCounterweights() {
         const pd = puzzleData();
-        const px = $gamePlayer.x, py = $gamePlayer.y;
         for (const [idA, cw] of Object.entries(pd.counterweights)) {
             const evA = getEvent(+idA), evB = getEvent(cw.partnerEventId);
             if (!evA || !evB) continue;
-            const playerOn = (px === evA.x && py === evA.y);
             const cloneOn = Object.keys(pd.clones).some(cid => {
                 const ce = getEvent(+cid); return ce && ce.x === evA.x && ce.y === evA.y;
             });
             const objOn = Object.keys(pd.pushables).some(pid => {
                 const pe = getEvent(+pid); return pe && pe.x === evA.x && pe.y === evA.y;
             });
-            const pressed = playerOn || cloneOn || objOn;
+            const actorsOn = getPuzzleActors().some(p => p.x === evA.x && p.y === evA.y);
+            const pressed = actorsOn || cloneOn || objOn;
             evB.setThrough(pressed);
             evB.setOpacity(pressed ? 100 : 255);
         }
@@ -1573,49 +1679,77 @@
 
     function calculateBeam() {
         const pd = puzzleData();
-        // Clear previous receivers
-        for (const [id, recv] of Object.entries(pd.beamReceivers)) {
-            if (recv.active) {
-                recv.active = false;
-                $gameSwitches.setValue(recv.switchId, false);
-            }
-        }
+        const activeReceivers = new Set();
+
         pd.beamPath = [];
+        pd.beamSegments = [];
 
         for (const [emId, emitter] of Object.entries(pd.beamEmitters)) {
             const emEv = getEvent(+emId);
             if (!emEv) continue;
+
             let x = emEv.x, y = emEv.y, dir = emitter.direction, steps = 0;
+            let startX = x, startY = y;
 
             while (steps++ < 128) {
                 const [dx, dy] = delta(dir);
                 x += dx; y += dy;
                 if (!$gameMap.isValid(x, y)) break;
+
                 pd.beamPath.push({ x, y });
 
                 // Mirror?
-                const mirrorEv = Object.keys(pd.mirrors).find(mid => {
+                const mirrorId = Object.keys(pd.mirrors).find(mid => {
                     const me = getEvent(+mid); return me && me.x === x && me.y === y;
                 });
-                if (mirrorEv !== undefined) {
-                    const ori = pd.mirrors[mirrorEv].orientation;
+                if (mirrorId !== undefined) {
+                    pd.beamSegments.push({ x1: startX, y1: startY, x2: x, y2: y });
+                    const ori = pd.mirrors[mirrorId].orientation;
                     dir = (ori === 'slash') ? REFLECT_SLASH[dir] : REFLECT_BSLASH[dir];
+                    startX = x; startY = y;
                     continue;
                 }
 
                 // Receiver?
-                const recvEv = Object.keys(pd.beamReceivers).find(rid => {
+                const recvId = Object.keys(pd.beamReceivers).find(rid => {
                     const re = getEvent(+rid); return re && re.x === x && re.y === y;
                 });
-                if (recvEv !== undefined) {
-                    pd.beamReceivers[recvEv].active = true;
-                    $gameSwitches.setValue(pd.beamReceivers[recvEv].switchId, true);
+                if (recvId !== undefined) {
+                    activeReceivers.add(recvId);
+                    pd.beamSegments.push({ x1: startX, y1: startY, x2: x, y2: y });
                     break;
                 }
 
-                // Blocked by wall or solid event?
-                if (!canPassTile(x, y)) break;
-                if (eventsAt(x, y, -1).some(e => !e.isThrough() && !pd.mirrors[e.eventId()])) break;
+                // Blocked by wall, solid event, or actor?
+                const blockedByWall = !canPassTile(x, y);
+                const blockedByEvent = eventsAt(x, y, -1).some(e => !e.isThrough() && !pd.mirrors[e.eventId()]);
+                const blockedByActor = getPuzzleActors().some(a => a.x === x && a.y === y && !a.isThrough());
+
+                if (blockedByWall || blockedByEvent || blockedByActor) {
+                    pd.beamSegments.push({ x1: startX, y1: startY, x2: x, y2: y });
+                    break;
+                }
+
+                if (steps === 128) {
+                    pd.beamSegments.push({ x1: startX, y1: startY, x2: x, y2: y });
+                }
+            }
+        }
+
+        // Update receiver switches only if state changed
+        for (const [rid, recv] of Object.entries(pd.beamReceivers)) {
+            const active = activeReceivers.has(rid);
+            if (recv.active !== active) {
+                recv.active = active;
+                if (recv.switchId > 0) {
+                    $gameSwitches.setValue(recv.switchId, active);
+                }
+                setSelfSwitch(+rid, 'A', active);
+                if (recv.localSwitches) {
+                    for (const [letter, eventIdStr] of Object.entries(recv.localSwitches)) {
+                        if (eventIdStr) setSelfSwitch(+eventIdStr, letter, active);
+                    }
+                }
             }
         }
     }
@@ -1625,7 +1759,8 @@
     // =========================================================================
 
     function moveClones(dx, dy) {
-        for (const [id, clone] of Object.entries(puzzleData().clones)) {
+        const pd = puzzleData();
+        for (const [id, clone] of Object.entries(pd.clones)) {
             const ev = getEvent(+id);
             if (!ev) continue;
             const cdx = clone.invertX ? -dx : dx;
@@ -1633,16 +1768,25 @@
             if (cdx === 0 && cdy === 0) continue;
             const nx = ev.x + cdx, ny = ev.y + cdy;
             if (!blockedForPushable(nx, ny, +id, cdx, cdy)) {
-                ev.locate(nx, ny);
-                const pitId = pitAt(nx, ny);
-                if (pitId !== null) {
-                    puzzleData().pits[pitId].filled = true;
-                    ev.erase();
-                    const pitEv = getEvent(pitId);
-                    if (pitEv) pitEv.erase();
-                    propagateWater();
-                    requestPuzzleRefresh();
+                if (ev._originalMoveSpeed === undefined) ev._originalMoveSpeed = ev.moveSpeed();
+                ev.setMoveSpeed($gamePlayer.moveSpeed());
+
+                const wasThrough = ev.isThrough();
+                ev.setThrough(true);
+                if (cdx !== 0 && cdy !== 0) {
+                    ev.moveDiagonally(cdx > 0 ? 6 : 4, cdy > 0 ? 2 : 8);
+                } else {
+                    const d = cdx > 0 ? 6 : cdx < 0 ? 4 : cdy > 0 ? 2 : 8;
+                    ev.moveStraight(d);
                 }
+                ev.setThrough(wasThrough);
+
+                // For ice sliding logic in onPuzzleMoveEnd
+                if (cdx !== 0 && cdy === 0) ev._lastPushDir = cdx > 0 ? 6 : 4;
+                else if (cdy !== 0 && cdx === 0) ev._lastPushDir = cdy > 0 ? 2 : 8;
+                else ev._lastPushDir = undefined;
+
+                requestPuzzleRefresh();
             }
         }
     }
@@ -1831,7 +1975,7 @@
 
     function updateEyeStatues() {
         const pd = puzzleData();
-        const px = $gamePlayer.x, py = $gamePlayer.y;
+        const actors = getPuzzleActors();
         for (const [id, statue] of Object.entries(pd.eyeStatues)) {
             const ev = getEvent(+id);
             if (!ev) continue;
@@ -1840,7 +1984,7 @@
             for (let s = 1; s <= statue.visionRange; s++) {
                 const cx = ev.x + ddx * s, cy = ev.y + ddy * s;
                 if (!$gameMap.isValid(cx, cy)) break;
-                if (cx === px && cy === py) { seen = true; break; }
+                if (actors.some(a => a.x === cx && a.y === cy)) { seen = true; break; }
                 if (eventsAt(cx, cy, +id).some(e => !e.isThrough())) break;
             }
             $gameSwitches.setValue(statue.switchId, seen);
@@ -1881,15 +2025,235 @@
     // Pit region recovery
     // =========================================================================
 
-    function checkPitRegion(x, y) {
+    function checkPitRegion(x, y, character) {
         const pd = puzzleData();
         const region = $gameMap.regionId(x, y);
         const pit = pd.pitRegions[region];
         if (!pit) return false;
         if (pit.damage > 0) $gameParty.members().forEach(m => m.gainHp(-pit.damage));
-        $gamePlayer.locate(pd.lastSafeX, pd.lastSafeY);
+        character.locate(pd.lastSafeX, pd.lastSafeY);
         return true;
     }
+
+    function updatePuzzleCharacter(character, sceneActive) {
+        if (!sceneActive || character.isMoving()) return;
+
+        const pd = puzzleData();
+        const x = character.x, y = character.y;
+
+        // Pit region
+        if (checkPitRegion(x, y, character)) return;
+
+        // Ice slide
+        if (isIceTile(x, y)) {
+            const [dx, dy] = MZ_DELTA[character.direction()] || [0, 0];
+            slideStepGeneric(character, dx, dy);
+        } else if (character._originalMoveSpeed !== undefined && !character.isMoving()) {
+            character.setMoveSpeed(character._originalMoveSpeed);
+            character._originalMoveSpeed = undefined;
+        }
+
+        // Arrow tiles
+        for (const [id, arrow] of Object.entries(pd.arrowTiles)) {
+            const ev = getEvent(+id);
+            if (!ev || ev.x !== x || ev.y !== y) continue;
+            const d = mzDir(arrow.direction);
+            character.setDirection(d);
+            character.moveStraight(d);
+            break;
+        }
+
+        // Conveyor regions
+        const region = $gameMap.regionId(x, y);
+        if (pd.conveyors[region]) {
+            const conv = pd.conveyors[region];
+            if (++pd.conveyorCounter >= conv.speed) {
+                pd.conveyorCounter = 0;
+                character.moveStraight(mzDir(conv.direction));
+            }
+        } else {
+            pd.conveyorCounter = 0;
+        }
+    }
+
+    function checkPuzzleInteractions(character) {
+        const pd = puzzleData();
+        const [dx, dy] = MZ_DELTA[character.direction()] || [0, 0];
+        const fx = character.x + dx, fy = character.y + dy;
+        const characterId = character instanceof Game_Player ? -1 : character.eventId();
+
+        for (const ev of eventsAt(fx, fy, characterId)) {
+            const id = ev.eventId();
+            puzzleLog(`interact ${evLabel(id)} at (${fx},${fy})`);
+
+            if (pd.levers[id]) {
+                pd.levers[id].state = !pd.levers[id].state;
+                puzzleLog(`  ${evLabel(id)} → ${pd.levers[id].state}`);
+                setSelfSwitch(id, 'A', pd.levers[id].state);
+                ev.setOpacity(pd.levers[id].state ? 255 : 150);
+                updateGates();
+                requestPuzzleRefresh(); return true;
+            }
+            if (pd.crystalSwitches[id]) {
+                flipCrystalGroup(pd.crystalSwitches[id].groupId); return true;
+            }
+            if (pd.mirrors[id]) {
+                pd.mirrors[id].orientation = pd.mirrors[id].orientation === 'slash' ? 'backslash' : 'slash';
+                setSelfSwitch(id, 'A', pd.mirrors[id].orientation === 'backslash');
+                requestPuzzleRefresh(); return true;
+            }
+            if (pd.crackableWalls[id]) {
+                const cw = pd.crackableWalls[id];
+                if ($gameParty.hasItem($dataItems[cw.requireItemId])) {
+                    if (cw.consumeItem) $gameParty.loseItem($dataItems[cw.requireItemId], 1);
+                    ev.erase(); delete pd.crackableWalls[id];
+                    requestPuzzleRefresh();
+                }
+                return true;
+            }
+            if (pd.colorDoors[id]) {
+                const door = pd.colorDoors[id];
+                if ($gameParty.hasItem($dataItems[door.keyItemId])) {
+                    if (door.consumeKey) $gameParty.loseItem($dataItems[door.keyItemId], 1);
+                    ev.erase(); delete pd.colorDoors[id];
+                    requestPuzzleRefresh();
+                }
+                return true;
+            }
+            if (pd.comboLocks[id]) {
+                const lock = pd.comboLocks[id];
+                if ($gameVariables.value(lock.variableId) === lock.targetValue) {
+                    $gameSwitches.setValue(lock.switchId, true);
+                }
+                return true;
+            }
+            if (pd.torches[id] && !pd.torches[id].lit) {
+                lightTorch(id); return true;
+            }
+            if (pd.resetShrines[id]) {
+                resetPuzzle(pd.resetShrines[id].puzzleId); return true;
+            }
+            if (pd.undoShrines[id]) {
+                undoLastPush(); return true;
+            }
+            if (pd.variableLevers[id]) {
+                const vl = pd.variableLevers[id];
+                $gameVariables.setValue(vl.variableId, $gameVariables.value(vl.variableId) + vl.increment);
+                return true;
+            }
+            if (pd.magnetConsoles[id]) {
+                const mc = pd.magnetConsoles[id];
+                activateMagnet(character, mc.polarity, mc.range, mc.steps); return true;
+            }
+            if (pd.reflectionPools[id]) {
+                const rp = pd.reflectionPools[id];
+                const evB = getEvent(rp.swapWithId);
+                if (evB) {
+                    const ax = ev.x, ay = ev.y;
+                    ev.locate(evB.x, evB.y);
+                    evB.locate(ax, ay);
+                    requestPuzzleRefresh();
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const _Game_CharacterBase_screenZ = Game_CharacterBase.prototype.screenZ;
+    Game_CharacterBase.prototype.screenZ = function () {
+        let z = _Game_CharacterBase_screenZ.call(this);
+        if ($gameSystem && $gameSystem._puzzleData && this instanceof Game_Event) {
+            const id = this.eventId();
+            const pd = puzzleData();
+            if (pd.pushables[id]) z += 0.1;
+            if (pd.plates[id] || pd.timedPlates[id] || pd.goalEvents[id] ||
+                pd.arrowTiles[id] || pd.warpTiles[id] || pd.colorTiles[id] ||
+                pd.timedTiles[id] || pd.pits[id]) {
+                z -= 0.1;
+            }
+        }
+        return z;
+    };
+
+    // =========================================================================
+    // PIXI Beam Rendering
+    // =========================================================================
+
+    function Sprite_PuzzleBeam() {
+        this.initialize(...arguments);
+    }
+
+    Sprite_PuzzleBeam.prototype = Object.create(PIXI.Container.prototype);
+    Sprite_PuzzleBeam.prototype.constructor = Sprite_PuzzleBeam;
+
+    Sprite_PuzzleBeam.prototype.initialize = function () {
+        PIXI.Container.call(this);
+        this._graphics = new PIXI.Graphics();
+        this.addChild(this._graphics);
+        this.z = 20;
+    };
+
+    Sprite_PuzzleBeam.prototype.update = function () {
+        this.updateVisibility();
+        if (this.visible) {
+            this.drawBeams();
+        }
+    };
+
+    Sprite_PuzzleBeam.prototype.updateVisibility = function () {
+        this.visible = !!$gameSystem && !!$gameSystem._puzzleData;
+    };
+
+    Sprite_PuzzleBeam.prototype.drawBeams = function () {
+        const g = this._graphics;
+        g.clear();
+        const pd = puzzleData();
+        if (!pd.beamSegments || pd.beamSegments.length === 0) return;
+
+        const tw = $gameMap.tileWidth();
+        const th = $gameMap.tileHeight();
+        const pulse = Math.sin(Graphics.frameCount * 0.15) * 0.15 + 0.85;
+
+        for (const seg of pd.beamSegments) {
+            const x1 = ($gameMap.adjustX(seg.x1) + 0.5) * tw;
+            const y1 = ($gameMap.adjustY(seg.y1) + 0.5) * th;
+            const x2 = ($gameMap.adjustX(seg.x2) + 0.5) * tw;
+            const y2 = ($gameMap.adjustY(seg.y2) + 0.5) * th;
+            // 1. Outer Glow (Soft red)
+            g.lineStyle(10, 0xFF0000, 0.2 * pulse);
+            g.moveTo(x1, y1);
+            g.lineTo(x2, y2);
+
+            // 2. Mid Glow (Bright red)
+            g.lineStyle(5, 0xFF4444, 0.4 * pulse);
+            g.moveTo(x1, y1);
+            g.lineTo(x2, y2);
+
+            // 3. Core (White)
+            g.lineStyle(1.5, 0xFFFFFF, 0.95);
+            g.moveTo(x1, y1);
+            g.lineTo(x2, y2);
+
+            // 4. Source/Impact Points
+            g.beginFill(0xFFFFFF, 0.8);
+            g.drawCircle(x1, y1, 2);
+            g.drawCircle(x2, y2, 2);
+            g.endFill();
+        }
+    };
+
+    const _Spriteset_Map_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
+    Spriteset_Map.prototype.createLowerLayer = function () {
+        _Spriteset_Map_createLowerLayer.call(this);
+        this.createPuzzleBeamLayer();
+    };
+
+    Spriteset_Map.prototype.createPuzzleBeamLayer = function () {
+        this._puzzleBeamSprite = new Sprite_PuzzleBeam();
+        // Add to tilemap so it's sorted with other map elements
+        this._tilemap.addChild(this._puzzleBeamSprite);
+    };
 
     // =========================================================================
     // Game_Player hooks
@@ -1941,6 +2305,22 @@
             tryPush(pushable.eventId(), dx, dy);
         }
 
+        // Apply slow speed for pulling
+        if (pullingEventId) {
+            if (this._originalMoveSpeed === undefined) {
+                this._originalMoveSpeed = this.moveSpeed();
+            }
+            this.setMoveSpeed(3); // Slow speed
+            
+            const ev = getEvent(pullingEventId);
+            if (ev) {
+                if (ev._originalMoveSpeed === undefined) {
+                    ev._originalMoveSpeed = ev.moveSpeed();
+                }
+                ev.setMoveSpeed(3);
+            }
+        }
+
         _moveStraight.call(this, d);
 
         if (pullingEventId && (this.x !== oldX || this.y !== oldY)) {
@@ -1950,7 +2330,8 @@
             pd.undoStack.push({ eventId: pullingEventId, fromX: ev.x, fromY: ev.y, toX: oldX, toY: oldY });
             if (pd.undoStack.length > 20) pd.undoStack.shift();
 
-            ev.moveStraight(this.direction());
+            ev._lastPushDir = d; // Track direction for ice sliding
+            ev.moveStraight(d);
             if (info) info.pushCount++;
 
             const pitId = pitAt(oldX, oldY);
@@ -2011,44 +2392,11 @@
     const _update = Game_Player.prototype.update;
     Game_Player.prototype.update = function (sceneActive) {
         _update.call(this, sceneActive);
-        if (!sceneActive || this.isMoving()) return;
+        updatePuzzleCharacter(this, sceneActive);
 
+        if (!sceneActive || this.isMoving()) return;
         const pd = puzzleData();
         const x = this.x, y = this.y;
-
-        // Pit region
-        if (checkPitRegion(x, y)) return;
-
-        // Ice slide
-        if (isIceTile(x, y)) {
-            const [dx, dy] = MZ_DELTA[this.direction()] || [0, 0];
-            slideStep(dx, dy);
-        } else if (this._originalMoveSpeed !== undefined && !this.isMoving()) {
-            this.setMoveSpeed(this._originalMoveSpeed);
-            this._originalMoveSpeed = undefined;
-        }
-
-        // Arrow tiles
-        for (const [id, arrow] of Object.entries(pd.arrowTiles)) {
-            const ev = getEvent(+id);
-            if (!ev || ev.x !== x || ev.y !== y) continue;
-            const d = mzDir(arrow.direction);
-            this.setDirection(d);
-            this.moveStraight(d);
-            break;
-        }
-
-        // Conveyor regions
-        const region = $gameMap.regionId(x, y);
-        if (pd.conveyors[region]) {
-            const conv = pd.conveyors[region];
-            if (++pd.conveyorCounter >= conv.speed) {
-                pd.conveyorCounter = 0;
-                this.moveStraight(mzDir(conv.direction));
-            }
-        } else {
-            pd.conveyorCounter = 0;
-        }
 
         // Warp tiles — flag so the transfer doesn't trigger a puzzle reset
         for (const [id, warp] of Object.entries(pd.warpTiles)) {
@@ -2056,6 +2404,16 @@
             if (!ev || ev.x !== x || ev.y !== y) continue;
             pd._skipNextReset = true;
             $gamePlayer.reserveTransfer($gameMap.mapId(), warp.targetX, warp.targetY, this.direction(), 0);
+            break;
+        }
+
+        // Key grants (Player only)
+        for (const [id, kg] of Object.entries(pd.keyGrants)) {
+            const ev = getEvent(+id);
+            if (!ev || ev.x !== x || ev.y !== y) continue;
+            if ($dataItems[kg.itemId]) $gameParty.gainItem($dataItems[kg.itemId], kg.quantity);
+            ev.erase();
+            delete pd.keyGrants[id];
             break;
         }
 
@@ -2068,86 +2426,8 @@
     const _checkEventTriggerThere = Game_Player.prototype.checkEventTriggerThere;
     Game_Player.prototype.checkEventTriggerThere = function (triggers) {
         _checkEventTriggerThere.call(this, triggers);
-        if (!triggers.includes(0)) return;
-
-        const pd = puzzleData();
-        const [dx, dy] = MZ_DELTA[this.direction()] || [0, 0];
-        const fx = this.x + dx, fy = this.y + dy;
-
-        for (const ev of eventsAt(fx, fy, -1)) {
-            const id = ev.eventId();
-            puzzleLog(`interact ${evLabel(id)} at (${fx},${fy})`);
-
-            if (pd.levers[id]) {
-                pd.levers[id].state = !pd.levers[id].state;
-                puzzleLog(`  ${evLabel(id)} → ${pd.levers[id].state}`);
-                setSelfSwitch(id, 'A', pd.levers[id].state);
-                ev.setOpacity(pd.levers[id].state ? 255 : 150);
-                updateGates();
-                requestPuzzleRefresh(); return;
-            }
-            if (pd.crystalSwitches[id]) {
-                flipCrystalGroup(pd.crystalSwitches[id].groupId); return;
-            }
-            if (pd.mirrors[id]) {
-                pd.mirrors[id].orientation = pd.mirrors[id].orientation === 'slash' ? 'backslash' : 'slash';
-                setSelfSwitch(id, 'A', pd.mirrors[id].orientation === 'backslash');
-                requestPuzzleRefresh(); return;
-            }
-            if (pd.crackableWalls[id]) {
-                const cw = pd.crackableWalls[id];
-                if ($gameParty.hasItem($dataItems[cw.requireItemId])) {
-                    if (cw.consumeItem) $gameParty.loseItem($dataItems[cw.requireItemId], 1);
-                    ev.erase(); delete pd.crackableWalls[id];
-                    requestPuzzleRefresh();
-                }
-                return;
-            }
-            if (pd.colorDoors[id]) {
-                const door = pd.colorDoors[id];
-                if ($gameParty.hasItem($dataItems[door.keyItemId])) {
-                    if (door.consumeKey) $gameParty.loseItem($dataItems[door.keyItemId], 1);
-                    ev.erase(); delete pd.colorDoors[id];
-                    requestPuzzleRefresh();
-                }
-                return;
-            }
-            if (pd.comboLocks[id]) {
-                const lock = pd.comboLocks[id];
-                if ($gameVariables.value(lock.variableId) === lock.targetValue) {
-                    $gameSwitches.setValue(lock.switchId, true);
-                }
-                return;
-            }
-            if (pd.torches[id] && !pd.torches[id].lit) {
-                lightTorch(id); return;
-            }
-            if (pd.resetShrines[id]) {
-                resetPuzzle(pd.resetShrines[id].puzzleId); return;
-            }
-            if (pd.undoShrines[id]) {
-                undoLastPush(); return;
-            }
-            if (pd.variableLevers[id]) {
-                const vl = pd.variableLevers[id];
-                $gameVariables.setValue(vl.variableId, $gameVariables.value(vl.variableId) + vl.increment);
-                return;
-            }
-            if (pd.magnetConsoles[id]) {
-                const mc = pd.magnetConsoles[id];
-                activateMagnet(mc.polarity, mc.range, mc.steps); return;
-            }
-            if (pd.reflectionPools[id]) {
-                const rp = pd.reflectionPools[id];
-                const evB = getEvent(rp.swapWithId);
-                if (evB) {
-                    const ax = ev.x, ay = ev.y;
-                    ev.locate(evB.x, evB.y);
-                    evB.locate(ax, ay);
-                    requestPuzzleRefresh();
-                }
-                return;
-            }
+        if (triggers.includes(0)) {
+            checkPuzzleInteractions(this);
         }
     };
 
@@ -2159,14 +2439,19 @@
     Scene_Map.prototype.update = function () {
         _sceneMapUpdate.call(this);
         if (!$gameSystem._puzzleData) return;
+        const pd = puzzleData();
         updateBlinkPlatforms();
         updateTorchTimers();
         updateTimedPlates();
 
+        // Refresh beam path every frame for visual responsiveness
+        if (Object.keys(pd.beamEmitters).length > 0 || Object.keys(pd.beamReceivers).length > 0) {
+            calculateBeam();
+        }
+
         if ($gameSystem._puzzleData._needsRefresh) {
             $gameSystem._puzzleData._needsRefresh = false;
             updateStateTiles();
-            calculateBeam();
             updateAutoChecks();
             updateGroupSolveState();
         }
@@ -2273,6 +2558,12 @@
         const rect = new Rectangle(x, y, width, height);
         this._lockedKeyHUD = new Window_LockedKeyHUD(rect);
         this.addWindow(this._lockedKeyHUD);
+    };
+
+    window.MapPuzzleSystem = {
+        checkPuzzleInteractions,
+        updatePuzzleCharacter,
+        tryPush
     };
 
 })();

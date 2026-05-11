@@ -319,8 +319,8 @@
         }
 
         itemHeight() {
-            // Compact height for smaller sprites in 4-column grid
-            return 64;
+            // Increased height to accommodate sprite name under the image
+            return 90;
         }
 
         spacing() {
@@ -385,8 +385,20 @@
             // Draw a background for the item
             this.drawItemBackground(index);
 
-            // Draw only the character sprite (no bust)
-            this.drawCharacterSprite(sprite.name, sprite.index, rect.x + rect.width / 2, rect.y + rect.height / 2, index === this.index());
+            // Shift sprite up slightly to make room for name
+            const spriteY = rect.y + rect.height / 2 - 12;
+            this.drawCharacterSprite(sprite.name, sprite.index, rect.x + rect.width / 2, spriteY, index === this.index());
+            
+            // Draw sprite name minus prefixes
+            this.drawSpriteName(sprite.name, rect);
+        }
+
+        drawSpriteName(name, rect) {
+            const fileName = name.split('/').pop();
+            const displayName = fileName.replace(/^[$!]+/, '');
+            this.contents.fontSize = 14;
+            this.drawText(displayName, rect.x, rect.y + rect.height - 24, rect.width, 'center');
+            this.resetFontSettings();
         }
 
         drawCharacterSprite(characterName, characterIndex, x, y, isSelected) {

@@ -47,7 +47,7 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = 'RealEstateMarket';
 
     // --- Helper Function to Parse Game Date from Variable 113 ---
@@ -82,7 +82,7 @@
     const t = window.NewsSystemUtils.t;
     const getLocations = window.NewsSystemUtils.getLocations;
     const isItalian = window.NewsSystemUtils.isItalian;
-    
+
     // Property types with their characteristics
     const PROPERTY_TYPES = {
         'Simple House': { minCap: 1, maxCap: 4, basePrice: [15000, 25000, 40000, 60000, 85000] },
@@ -96,7 +96,7 @@
         'Camper Van': { minCap: 1, maxCap: 4, basePrice: [25000, 40000, 60000, 85000, 120000] },
         'B&B': { minCap: 2, maxCap: 16, basePrice: [60000, 120000, 200000, 320000, 500000] }
     };
-    
+
     // Real Estate Manager Class
     class RealEstateManager {
         constructor() {
@@ -106,7 +106,7 @@
             this.dailyIncome = 0;
             this.totalIncome = 0;
         }
-        
+
         initialize() {
             this.generateProperties();
             this.lastUpdateTime = getGameDateAsJSDate();
@@ -116,7 +116,7 @@
             // Register with News System for market effects
             this.registerWithNewsSystem();
         }
-        
+
         registerWithNewsSystem() {
             if (window.$newsManager) {
                 window.$newsManager.registerListener((news, duration) => {
@@ -124,7 +124,7 @@
                 });
             }
         }
-        
+
         handleNewsEvent(news, duration) {
             // Apply immediate occupancy effects to affected properties
             this.properties.forEach(property => {
@@ -138,27 +138,27 @@
                         const increase = Math.floor(property.maxOccupants * (news.occupancyEffect - 1) * 0.3);
                         property.currentOccupants = Math.min(property.maxOccupants, property.currentOccupants + increase);
                     }
-                    
+
                     // Update market trend
                     property.marketTrend = Math.max(-1, Math.min(1, property.marketTrend + (news.priceEffect - 1)));
                 }
             });
         }
-        
+
         generateProperties() {
             const usedCombinations = new Set();
-            
+
             for (let i = 0; i < 30; i++) {
                 let property;
                 do {
                     property = this.createRandomProperty(i);
                 } while (usedCombinations.has(`${property.type}-${property.location}`));
-                
+
                 usedCombinations.add(`${property.type}-${property.location}`);
                 this.properties.push(property);
             }
         }
-        
+
         createRandomProperty(id) {
             const types = Object.keys(PROPERTY_TYPES);
             const type = types[Math.floor(Math.random() * types.length)];
@@ -168,7 +168,7 @@
             const typeData = PROPERTY_TYPES[type];
             const basePrice = typeData.basePrice[stars - 1];
             const priceVariation = 0.8 + Math.random() * 0.4; // ±20% variation
-            
+
             return {
                 id: id,
                 name: this.generatePropertyName(type, location, stars),
@@ -185,138 +185,138 @@
                 marketTrend: 0 // -1 to 1, affects occupancy changes
             };
         }
-        
+
         generatePropertyName(type, location, stars) {
             const starNames = t('starLevels');
             const prefix = starNames[stars - 1];
-            
+
             const suffixes = t('propertySuffixes');
             const suffix = suffixes[type][Math.floor(Math.random() * suffixes[type].length)];
             return `${prefix} ${suffix}`;
         }
-        
+
         buyProperty(propertyId) {
             const property = this.properties.find(p => p.id === propertyId);
             if (!property || property.isOwned) return false;
-            
+
             const effectivePrice = this.calculateEffectivePrice(property);
             const goldCost = effectivePrice * 100; // Convert euros to gold
             if ($gameParty.gold() < goldCost) return false;
-            
+
             $gameParty.loseGold(goldCost);
             property.isOwned = true;
             property.isForSale = false;
             property.isForRent = true;
             property.currentOccupants = Math.floor(Math.random() * property.maxOccupants * 0.3);
             this.ownedProperties.push(property.id);
-            
+
             return true;
         }
-        
+
         sellProperty(propertyId) {
             const property = this.properties.find(p => p.id === propertyId);
             if (!property || !property.isOwned) return false;
-            
+
             const effectivePrice = this.calculateEffectivePrice(property);
             const salePrice = Math.floor(effectivePrice * 0.9); // 90% of current market price
             const goldGain = salePrice * 100;
-            
+
             $gameParty.gainGold(goldGain);
             property.isOwned = false;
             property.isForSale = true;
             property.isForRent = false;
             property.currentOccupants = 0;
-            
+
             const index = this.ownedProperties.indexOf(property.id);
             if (index > -1) this.ownedProperties.splice(index, 1);
-            
+
             return true;
         }
-        
+
         toggleRentStatus(propertyId) {
             const property = this.properties.find(p => p.id === propertyId);
             if (!property || !property.isOwned) return false;
-            
+
             property.isForRent = !property.isForRent;
             if (!property.isForRent) {
                 property.currentOccupants = 0;
             }
-            
+
             return true;
         }
-        
+
         getActiveEffectsForLocation(location) {
             if (window.$newsManager) {
                 return window.$newsManager.getActiveEffectsForLocation(location);
             }
             return [];
         }
-        
+
         calculateEffectivePrice(property) {
             const effects = this.getActiveEffectsForLocation(property.location);
             let priceMultiplier = 1;
-            
+
             effects.forEach(effect => {
                 priceMultiplier *= effect.priceEffect;
             });
-            
+
             return Math.floor(property.price * priceMultiplier);
         }
-        
+
         startDailyUpdates() {
             // For real game, you'd want to tie this to the game's time system
             // This is just a placeholder
         }
-        
+
         processDailyUpdate() {
             this.dailyIncome = 0;
-            
+
             // Update market trends
             this.properties.forEach(property => {
                 property.marketTrend = (Math.random() - 0.5) * 2; // -1 to 1
             });
-            
+
             // Process owned properties
             this.ownedProperties.forEach(propertyId => {
                 const property = this.properties.find(p => p.id === propertyId);
                 if (!property || !property.isForRent) return;
-                
+
                 // Update occupancy based on market and property characteristics
                 this.updateOccupancy(property);
-                
+
                 // Collect rent
                 const dailyRent = property.currentOccupants * property.rentPerOccupant;
                 this.dailyIncome += dailyRent;
                 this.totalIncome += dailyRent;
             });
-            
+
             // Convert euros to gold and add to party
             const goldIncome = Math.floor(this.dailyIncome * 100);
             $gameParty.gainGold(goldIncome);
-            
+
             // Save the update
             this.save();
         }
-        
+
         updateOccupancy(property) {
             const occupancyRate = property.currentOccupants / property.maxOccupants;
             let changeChance = 0.1; // Base 10% chance of change
-            
+
             // Higher occupancy = higher turnover
             changeChance += occupancyRate * 0.3;
-            
+
             // Property size affects stability (smaller = more stable)
             const sizeModifier = property.maxOccupants / 150;
             changeChance *= (0.5 + sizeModifier * 0.5);
-            
+
             // Star rating affects attractiveness
             const starModifier = property.stars / 5;
-            
+
             if (Math.random() < changeChance) {
                 // Determine if occupants move in or out
                 const marketInfluence = property.marketTrend * 0.3;
                 const attractiveness = starModifier * 0.5 + marketInfluence;
-                
+
                 if (Math.random() < 0.5 + attractiveness) {
                     // Occupants move in
                     const maxIncrease = Math.ceil(property.maxOccupants * 0.2);
@@ -336,7 +336,7 @@
                 }
             }
         }
-        
+
         calculateDailyIncome() {
             let income = 0;
             this.ownedProperties.forEach(propertyId => {
@@ -347,7 +347,7 @@
             });
             return income;
         }
-        
+
         save() {
             $gameSystem.realEstateData = {
                 properties: this.properties,
@@ -357,7 +357,7 @@
                 totalIncome: this.totalIncome
             };
         }
-        
+
         load() {
             const data = $gameSystem.realEstateData;
             if (data) {
@@ -379,7 +379,7 @@
             }
         }
     }
-    
+
     // Scene_RealEstate - Main UI Scene
     class Scene_RealEstate extends Scene_MenuBase {
         create() {
@@ -390,20 +390,20 @@
             this.createPropertyDetailsWindow();
             this.createCommandWindow();
         }
-        
+
         createHelpWindow() {
             const rect = this.helpWindowRect();
             this._helpWindow = new Window_Help(rect);
             this._helpWindow.setText(t('menuTitle'));
             this.addWindow(this._helpWindow);
         }
-        
+
         createGoldWindow() {
             const rect = this.goldWindowRect();
             this._goldWindow = new Window_Gold(rect);
             this.addWindow(this._goldWindow);
         }
-        
+
         goldWindowRect() {
             const ww = this.mainCommandWidth();
             const wh = this.calcWindowHeight(1, true);
@@ -411,7 +411,7 @@
             const wy = this.mainAreaTop();
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createPropertyListWindow() {
             const rect = this.propertyListWindowRect();
             this._propertyListWindow = new Window_PropertyList(rect);
@@ -420,7 +420,7 @@
             this._propertyListWindow.setHelpWindow(this._helpWindow);
             this.addWindow(this._propertyListWindow);
         }
-        
+
         propertyListWindowRect() {
             const wx = 0;
             const wy = this.mainAreaTop() + this._goldWindow.height;
@@ -428,13 +428,13 @@
             const wh = this.mainAreaHeight() - this._goldWindow.height;
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createPropertyDetailsWindow() {
             const rect = this.propertyDetailsWindowRect();
             this._propertyDetailsWindow = new Window_PropertyDetails(rect);
             this.addWindow(this._propertyDetailsWindow);
         }
-        
+
         propertyDetailsWindowRect() {
             const wx = this._propertyListWindow.width;
             const wy = this.mainAreaTop() + this._goldWindow.height;
@@ -442,7 +442,7 @@
             const wh = this.mainAreaHeight() - this._goldWindow.height - this.calcWindowHeight(1, true);
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createCommandWindow() {
             const rect = this.commandWindowRect();
             this._commandWindow = new Window_PropertyCommand(rect);
@@ -454,7 +454,7 @@
             this._commandWindow.deactivate();
             this.addWindow(this._commandWindow);
         }
-        
+
         commandWindowRect() {
             const wx = this._propertyDetailsWindow.x;
             const wy = this._propertyDetailsWindow.y + this._propertyDetailsWindow.height;
@@ -462,7 +462,7 @@
             const wh = this.calcWindowHeight(1, true);
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         start() {
             super.start();
             ensureRealEstateManager();
@@ -471,7 +471,7 @@
             this._propertyListWindow.activate();
             this._propertyListWindow.select(0);
         }
-        
+
         onPropertyOk() {
             const property = this._propertyListWindow.property();
             if (property) {
@@ -482,7 +482,7 @@
                 this._commandWindow.select(0);
             }
         }
-        
+
         commandBuy() {
             const property = this._propertyListWindow.property();
             if ($realEstateManager.buyProperty(property.id)) {
@@ -494,20 +494,20 @@
                 this.returnToPropertyList();
             }
         }
-        
+
         commandInfo() {
             const property = this._propertyListWindow.property();
             if (property) {
                 $gameTemp.newsReturnScene = 'realEstate';
                 $gameTemp.newsFilterLocation = property.location;
-                
+
                 // Use the News History scene from News System
                 if (window.Scene_NewsHistory) {
                     SceneManager.push(window.Scene_NewsHistory);
                 }
             }
         }
-        
+
         commandSell() {
             const property = this._propertyListWindow.property();
             if ($realEstateManager.sellProperty(property.id)) {
@@ -522,20 +522,20 @@
         onCommandCancel() {
             this.returnToPropertyList();
         }
-        
+
         returnToPropertyList() {
             this._commandWindow.close();
             this._commandWindow.deactivate();
             this._propertyListWindow.activate();
         }
-        
+
         refreshAllWindows() {
             this._propertyListWindow.refresh();
             this._propertyDetailsWindow.refresh();
             this._goldWindow.refresh();
         }
     }
-    
+
     // Window_PropertyList
     class Window_PropertyList extends Window_Selectable {
         initialize(rect) {
@@ -545,25 +545,25 @@
             this.refresh();
             this.select(0);
         }
-        
+
         setDetailsWindow(detailsWindow) {
             this._detailsWindow = detailsWindow;
             this.updateDetails();
         }
-        
+
         maxItems() {
             return this._data ? this._data.length : 0;
         }
-        
+
         property() {
             return this._data && this.index() >= 0 ? this._data[this.index()] : null;
         }
-        
+
         makeItemList() {
             ensureRealEstateManager();
             this._data = $realEstateManager ? $realEstateManager.properties : [];
         }
-        
+
         drawItem(index) {
             const property = this._data[index];
             if (property) {
@@ -576,16 +576,16 @@
                 this.drawText(this.getStars(property.stars), rect.x + rect.width - 60, rect.y, 60);
             }
         }
-        
+
         getStars(rating) {
             return '★'.repeat(rating) + '☆'.repeat(5 - rating);
         }
-        
+
         refresh() {
             this.makeItemList();
             super.refresh();
         }
-        
+
         updateHelp() {
             if (this._helpWindow && this.property()) {
                 const property = this.property();
@@ -593,60 +593,60 @@
                 this._helpWindow.setText(`${property.location} - ${status}`);
             }
         }
-        
+
         select(index) {
             super.select(index);
             this.updateDetails();
         }
-        
+
         updateDetails() {
             if (this._detailsWindow) {
                 this._detailsWindow.setProperty(this.property());
             }
         }
     }
-    
+
     // Window_PropertyDetails
     class Window_PropertyDetails extends Window_Base {
         initialize(rect) {
             super.initialize(rect);
             this._property = null;
         }
-        
+
         setProperty(property) {
             if (this._property !== property) {
                 this._property = property;
                 this.refresh();
             }
         }
-        
+
         refresh() {
             this.contents.clear();
             if (this._property) {
                 this.drawPropertyDetails();
             }
         }
-        
+
         drawPropertyDetails() {
             const lineHeight = this.lineHeight();
             const property = this._property;
             let y = 0;
-            
+
             // Property name and type
             this.drawText(property.name, 0, y, this.innerWidth, 'center');
             y += lineHeight;
-            
+
             this.drawText(`${t('type')}: ${t('propertyTypes')[property.type]}`, 0, y, this.innerWidth);
             y += lineHeight;
-            
+
             // Location
             this.drawText(`${t('location')}: ${property.location}`, 0, y, this.innerWidth);
             y += lineHeight;
-            
+
             // Stars
             this.drawText(`${t('rating')}: ` + this.getStars(property.stars), 0, y, this.innerWidth);
             y += lineHeight;
-            
+
             // Price with market effects
             const effectivePrice = $realEstateManager.calculateEffectivePrice(property);
             this.changeTextColor(ColorManager.systemColor());
@@ -661,7 +661,7 @@
                 this.drawText(`€${property.price.toLocaleString()}`, 120, y, this.innerWidth - 120);
             }
             y += lineHeight;
-            
+
             // Occupancy
             if (property.isOwned) {
                 this.changeTextColor(ColorManager.systemColor());
@@ -669,7 +669,7 @@
                 this.resetTextColor();
                 this.drawText(`${property.currentOccupants}/${property.maxOccupants}`, 120, y, this.innerWidth - 120);
                 y += lineHeight;
-                
+
                 // Daily income
                 this.changeTextColor(ColorManager.systemColor());
                 this.drawText(`${t('dailyIncome')}:`, 0, y, 120);
@@ -678,13 +678,13 @@
                 this.drawText(`€${dailyIncome.toLocaleString()}`, 120, y, this.innerWidth - 120);
                 y += lineHeight;
             }
-            
+
             // Market trend and active effects
             this.changeTextColor(ColorManager.systemColor());
             this.drawText(`${t('market')}:`, 0, y, 120);
             const trend = property.marketTrend;
             const effects = $realEstateManager.getActiveEffectsForLocation(property.location);
-            
+
             if (effects.length > 0) {
                 this.changeTextColor(ColorManager.textColor(17)); // Light blue
                 this.drawText(`${effects.length} ${t('activeEvents')}`, 120, y, this.innerWidth - 120);
@@ -699,24 +699,24 @@
                 this.drawText(t('stable'), 120, y, this.innerWidth - 120);
             }
         }
-        
+
         getStars(rating) {
             return '★'.repeat(rating) + '☆'.repeat(5 - rating);
         }
     }
-    
+
     // Window_PropertyCommand
     class Window_PropertyCommand extends Window_HorzCommand {
         initialize(rect) {
             super.initialize(rect);
             this._property = null;
         }
-        
+
         setProperty(property) {
             this._property = property;
             this.refresh();
         }
-        
+
         makeCommandList() {
             if (this._property) {
                 if (this._property.isOwned) {
@@ -724,7 +724,7 @@
                 } else {
                     this.addCommand(t('buy'), 'buy');
                 }
-                
+
                 if ($realEstateManager) {
                     const effects = $realEstateManager.getActiveEffectsForLocation(this._property.location);
                     if (effects.length > 0) {
@@ -733,7 +733,7 @@
                 }
             }
         }
-        
+
         maxCols() {
             if (this._property && $realEstateManager) {
                 const effects = $realEstateManager.getActiveEffectsForLocation(this._property.location);
@@ -745,14 +745,14 @@
     }
 
     const _Scene_RealEstate_start = Scene_RealEstate.prototype.start;
-Scene_RealEstate.prototype.start = function() {
-    ensureRealEstateManager();
-    _Scene_RealEstate_start.call(this);
-};
-    
+    Scene_RealEstate.prototype.start = function () {
+        ensureRealEstateManager();
+        _Scene_RealEstate_start.call(this);
+    };
+
     // Global instance
     let $realEstateManager = null;
-    
+
     // Ensure Real Estate Manager exists
     function ensureRealEstateManager() {
         if (!$realEstateManager) {
@@ -761,34 +761,39 @@ Scene_RealEstate.prototype.start = function() {
         }
     }
 
-    
+
     // Plugin commands
     PluginManager.registerCommand(pluginName, 'openRealEstateMenu', args => {
         ensureRealEstateManager();
         SceneManager.push(Scene_RealEstate);
     });
-    
+
 
     PluginManager.registerCommand(pluginName, 'checkDailyIncome', args => {
         ensureRealEstateManager();
         const income = $realEstateManager.calculateDailyIncome();
         const goldIncome = Math.floor(income * 100);
+        window.skipLocalization = true;
         $gameMessage.add(t('dailyIncomeMsg', { income: income, gold: goldIncome }));
         $gameMessage.add(t('propertiesOwnedMsg', { count: $realEstateManager.ownedProperties.length }));
-    });
-    
+        window.skipLocalization = false;
 
-    
+    });
+
+
+
     PluginManager.registerCommand(pluginName, 'forceMarketUpdate', args => {
         ensureRealEstateManager();
         $realEstateManager.processDailyUpdate();
+        window.skipLocalization = true;
         $gameMessage.add(t('marketUpdatedMsg'));
+        window.skipLocalization = false;
     });
-    
+
 
     // Save/Load
     const _DataManager_makeSaveContents = DataManager.makeSaveContents;
-    DataManager.makeSaveContents = function() {
+    DataManager.makeSaveContents = function () {
         const contents = _DataManager_makeSaveContents.call(this);
         if ($realEstateManager) {
             $realEstateManager.save();
@@ -796,13 +801,13 @@ Scene_RealEstate.prototype.start = function() {
         return contents;
     };
     const _DataManager_extractSaveContents = DataManager.extractSaveContents;
-    DataManager.extractSaveContents = function(contents) {
+    DataManager.extractSaveContents = function (contents) {
         _DataManager_extractSaveContents.call(this, contents);
         // Don't automatically create manager - let ensureRealEstateManager() handle it
         $realEstateManager = null;
     };
-    
+
     // Export Scene for compatibility
     window.Scene_RealEstate = Scene_RealEstate;
-    
+
 })();

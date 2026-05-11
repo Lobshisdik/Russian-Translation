@@ -4,7 +4,7 @@
  * @author Gemini
  *
  * @help
- * RimModManager.js
+ * ModManager.js
  * 
  * ============================================================================
  * Overview
@@ -40,13 +40,13 @@
  */
 
 var Imported = Imported || {};
-Imported.RimModManager = true;
+Imported.ModManager = true;
 
-var RimModManager = RimModManager || {};
-RimModManager.mods = [];
-RimModManager.fs = null;
-RimModManager.path = null;
-RimModManager.basePath = "";
+var ModManager = ModManager || {};
+ModManager.mods = [];
+ModManager.fs = null;
+ModManager.path = null;
+ModManager.basePath = "";
 
 // Global object to store custom added JSONs
 window.$dataCustom = {};
@@ -57,34 +57,44 @@ window.$dataCustom = {};
 
 (() => {
     if (!Utils.isNwjs()) {
-        console.warn("RimModManager: NW.js is required. Mod Manager disabled.");
+        console.warn("ModManager: NW.js is required. Mod Manager disabled.");
         return;
     }
 
-    RimModManager.fs = require('fs');
-    RimModManager.path = require('path');
-    
+    ModManager.fs = require('fs');
+    ModManager.path = require('path');
+
     // Get root directory of the game
     const path = require('path');
     const base = path.dirname(process.mainModule.filename);
-    RimModManager.basePath = base;
-    RimModManager.modsDir = path.join(base, 'mods');
-    RimModManager.configFile = path.join(base, 'mod_config.json');
+    ModManager.basePath = base;
+    ModManager.modsDir = path.join(base, 'mods');
+    ModManager.configFile = path.join(base, 'mod_config.json');
 
-    RimModManager.initialize = function() {
+    ModManager.initialize = function () {
         this.ensureModsFolder();
         this.loadModConfig();
         this.scanForNewMods();
+
+        // Initialize Steam for Workshop
+        try {
+            const steamworks = require('../libs/steamworks');
+            this.steamClient = steamworks.init(4193010);
+            this.scanSteamWorkshop();
+        } catch (e) {
+            console.log("Steam not available or failed to initialize for ModManager.");
+        }
+
         this.saveModConfig(); // Clean up config
     };
 
-    RimModManager.ensureModsFolder = function() {
+    ModManager.ensureModsFolder = function () {
         if (!this.fs.existsSync(this.modsDir)) {
             this.fs.mkdirSync(this.modsDir);
         }
     };
 
-    RimModManager.loadModConfig = function() {
+    ModManager.loadModConfig = function () {
         if (this.fs.existsSync(this.configFile)) {
             try {
                 const data = this.fs.readFileSync(this.configFile, 'utf8');
@@ -98,7 +108,7 @@ window.$dataCustom = {};
         }
     };
 
-    RimModManager.saveModConfig = function() {
+    ModManager.saveModConfig = function () {
         try {
             this.fs.writeFileSync(this.configFile, JSON.stringify(this.mods, null, 2));
         } catch (e) {
@@ -106,13 +116,13 @@ window.$dataCustom = {};
         }
     };
 
-    RimModManager.scanForNewMods = function() {
+    ModManager.scanForNewMods = function () {
         const folders = this.fs.readdirSync(this.modsDir, { withFileTypes: true })
             .filter(dirent => dirent.isDirectory())
             .map(dirent => dirent.name);
 
-        // Remove deleted mods from config
-        this.mods = this.mods.filter(mod => folders.includes(mod.name));
+        // Remove deleted mods from config (only for local mods)
+        this.mods = this.mods.filter(mod => mod.path || folders.includes(mod.name));
 
         // Add new mods to config (default to active: false)
         const existingModNames = this.mods.map(m => m.name);
@@ -123,17 +133,45 @@ window.$dataCustom = {};
         }
     };
 
+    ModManager.scanSteamWorkshop = function () {
+        if (!this.steamClient) return;
+
+        try {
+            const workshop = this.steamClient.workshop || this.steamClient.ugc;
+            if (workshop && workshop.getSubscribedItems) {
+                const itemIds = workshop.getSubscribedItems();
+                for (const itemId of itemIds) {
+                    const info = workshop.getItemInstallInfo(itemId);
+                    if (info && info.folder) {
+                        const modName = `Workshop_${itemId}`;
+                        const existing = this.mods.find(m => m.name === modName);
+                        if (!existing) {
+                            this.mods.push({ name: modName, active: true, path: info.folder });
+                        } else {
+                            existing.path = info.folder; // Update path
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.error("Failed to scan Steam Workshop:", e);
+        }
+    };
+
     // Resolves a path. If an active mod overrides it, returns the mod path.
-    RimModManager.resolvePath = function(localPath) {
+    ModManager.resolvePath = function (localPath) {
         if (!Utils.isNwjs()) return localPath;
 
         // Traverse backwards so mods at the bottom of the list (highest priority) get checked first
         for (let i = this.mods.length - 1; i >= 0; i--) {
             const mod = this.mods[i];
             if (mod.active) {
-                const moddedPath = this.path.join(this.modsDir, mod.name, localPath);
+                const moddedPath = mod.path ? this.path.join(mod.path, localPath) : this.path.join(this.modsDir, mod.name, localPath);
                 if (this.fs.existsSync(moddedPath)) {
                     // Return formatted for web request
+                    if (mod.path) {
+                        return "file:///" + moddedPath.replace(/\\/g, "/");
+                    }
                     return `mods/${mod.name}/${localPath}`;
                 }
             }
@@ -142,25 +180,25 @@ window.$dataCustom = {};
     };
 
     // Load custom JSONs dynamically
-    RimModManager.loadCustomData = function() {
+    ModManager.loadCustomData = function () {
         for (const mod of this.mods) {
             if (!mod.active) continue;
-            
-            const modDataDir = this.path.join(this.modsDir, mod.name, 'data');
+
+            const modDataDir = mod.path ? this.path.join(mod.path, 'data') : this.path.join(this.modsDir, mod.name, 'data');
             if (this.fs.existsSync(modDataDir)) {
                 const files = this.fs.readdirSync(modDataDir).filter(f => f.endsWith('.json'));
-                
+
                 for (const file of files) {
                     const baseName = file.replace('.json', '');
                     const standardMZFiles = [
-                        "Actors", "Classes", "Skills", "Items", "Weapons", "Armors", 
-                        "Enemies", "Troops", "States", "Animations", "Tilesets", 
+                        "Actors", "Classes", "Skills", "Items", "Weapons", "Armors",
+                        "Enemies", "Troops", "States", "Animations", "Tilesets",
                         "CommonEvents", "System", "MapInfos"
                     ];
-                    
+
                     // If it's NOT a standard RM file, load it custom
                     if (!standardMZFiles.includes(baseName) && !baseName.startsWith("Map")) {
-                        const url = `mods/${mod.name}/data/${file}`;
+                        const url = mod.path ? "file:///" + this.path.join(modDataDir, file).replace(/\\/g, "/") : `mods/${mod.name}/data/${file}`;
                         this.loadCustomDataFile(baseName, url);
                     }
                 }
@@ -168,7 +206,7 @@ window.$dataCustom = {};
         }
     };
 
-    RimModManager.loadCustomDataFile = function(name, src) {
+    ModManager.loadCustomDataFile = function (name, src) {
         const xhr = new XMLHttpRequest();
         xhr.open("GET", src);
         xhr.overrideMimeType("application/json");
@@ -182,7 +220,7 @@ window.$dataCustom = {};
     };
 
     // Initialize the manager immediately
-    RimModManager.initialize();
+    ModManager.initialize();
 
     //-----------------------------------------------------------------------------
     // Core Overrides for Path Redirection
@@ -190,10 +228,10 @@ window.$dataCustom = {};
 
     // Override DataManager to intercept JSON loads
     const _DataManager_loadDataFile = DataManager.loadDataFile;
-    DataManager.loadDataFile = function(name, src) {
+    DataManager.loadDataFile = function (name, src) {
         const originalPath = "data/" + src;
-        const redirectedPath = RimModManager.resolvePath(originalPath);
-        
+        const redirectedPath = ModManager.resolvePath(originalPath);
+
         // Temporarily change src to our redirected path
         // MZ internally prepends "data/", so we have to adjust if it's modded.
         if (redirectedPath !== originalPath) {
@@ -212,17 +250,17 @@ window.$dataCustom = {};
 
     // Trigger custom data loading after main database loads
     const _DataManager_loadDatabase = DataManager.loadDatabase;
-    DataManager.loadDatabase = function() {
+    DataManager.loadDatabase = function () {
         _DataManager_loadDatabase.call(this);
-        RimModManager.loadCustomData();
+        ModManager.loadCustomData();
     };
 
     // Override ImageManager to intercept Image loads
     const _ImageManager_loadBitmap = ImageManager.loadBitmap;
-    ImageManager.loadBitmap = function(folder, filename) {
+    ImageManager.loadBitmap = function (folder, filename) {
         if (filename) {
             const originalPath = folder + Utils.encodeURI(filename) + ".png";
-            const redirectedPath = RimModManager.resolvePath(originalPath);
+            const redirectedPath = ModManager.resolvePath(originalPath);
             if (redirectedPath !== originalPath) {
                 // If it's modded, strip the filename out so we can pass the whole redirected path
                 // This is a bit hacky due to MZ's architecture, but effective.
@@ -235,11 +273,11 @@ window.$dataCustom = {};
 
     // Override AudioManager to intercept Audio loads
     const _AudioManager_createBuffer = AudioManager.createBuffer;
-    AudioManager.createBuffer = function(folder, name) {
+    AudioManager.createBuffer = function (folder, name) {
         const ext = this.audioFileExt();
         const originalPath = (this._path || "audio/") + folder + Utils.encodeURI(name) + ext;
-        const redirectedPath = RimModManager.resolvePath(originalPath);
-        
+        const redirectedPath = ModManager.resolvePath(originalPath);
+
         // WebAudio doesn't strictly prepend the folder if we pass a full URL
         let url = redirectedPath;
         const buffer = new WebAudio(url);
@@ -254,18 +292,18 @@ window.$dataCustom = {};
     //-----------------------------------------------------------------------------
 
     const _Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
-    Window_TitleCommand.prototype.makeCommandList = function() {
+    Window_TitleCommand.prototype.makeCommandList = function () {
         _Window_TitleCommand_makeCommandList.call(this);
         this.addCommand("Mods", 'mods');
     };
 
     const _Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
-    Scene_Title.prototype.createCommandWindow = function() {
+    Scene_Title.prototype.createCommandWindow = function () {
         _Scene_Title_createCommandWindow.call(this);
         this._commandWindow.setHandler('mods', this.commandMods.bind(this));
     };
 
-    Scene_Title.prototype.commandMods = function() {
+    Scene_Title.prototype.commandMods = function () {
         this._commandWindow.close();
         SceneManager.push(Scene_ModManager);
     };
@@ -273,7 +311,7 @@ window.$dataCustom = {};
     //-----------------------------------------------------------------------------
     // Scene_ModManager
     //-----------------------------------------------------------------------------
-    
+
     class Scene_ModManager extends Scene_MenuBase {
         create() {
             super.create();
@@ -313,7 +351,7 @@ window.$dataCustom = {};
 
         terminate() {
             super.terminate();
-            RimModManager.saveModConfig(); // Save configuration on exit
+            ModManager.saveModConfig(); // Save configuration on exit
             // Reload the title scene so graphics/audio take effect if changed
             if (SceneManager._nextScene && SceneManager._nextScene.constructor === Scene_Title) {
                 // To force a clean state, reloading the game is safer, but returning to title is ok for most things.
@@ -328,7 +366,7 @@ window.$dataCustom = {};
     class Window_ModList extends Window_Selectable {
         initialize(rect) {
             super.initialize(rect);
-            this._data = RimModManager.mods;
+            this._data = ModManager.mods;
             this.refresh();
             this.select(0);
             this.activate();
@@ -351,11 +389,11 @@ window.$dataCustom = {};
             if (item) {
                 const rect = this.itemLineRect(index);
                 this.changePaintOpacity(item.active);
-                
+
                 // Draw Active Status
                 const status = item.active ? "[ON]" : "[OFF]";
                 this.drawText(status, rect.x, rect.y, 80);
-                
+
                 // Draw Name
                 this.drawText(item.name, rect.x + 80, rect.y, rect.width - 80);
                 this.changePaintOpacity(1);

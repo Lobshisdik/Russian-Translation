@@ -454,9 +454,13 @@
                 : description;
 
             $dataSystem.characterDescriptions[actor.actorId()] = truncatedDescription;
+            window.skipLocalization = true;
             $gameMessage.add(`Description set for ${actor.name()}.`);
+            window.skipLocalization = false;
         } else {
+            window.skipLocalization = true;
             $gameMessage.add("Invalid party member index.");
+            window.skipLocalization = false;
         }
     });
 

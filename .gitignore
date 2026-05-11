@@ -1,0 +1,4 @@
+*.vdf
+*.log
+/js/plugins/.i18n_backups
+/data

@@ -770,7 +770,11 @@
         if ($gameMap.terrainTag(x2, y2) === 3) return false;
       } else {
         const terrainTag = $gameMap.terrainTag(x2, y2);
-        if (![1, 5, 2, 7].includes(terrainTag)) return false;
+        if (this.isShip()) {
+          if (![1, 2, 5, 6].includes(terrainTag)) return false;
+        } else {
+          if (![1, 5, 2, 7].includes(terrainTag)) return false;
+        }
       }
       
       return $gameMap.isPassable(x2, y2, this.reverseDir(d));

@@ -244,7 +244,9 @@
                 if (terrainTag === 3 || regionId === 99) {
                     // Item destroyed
                     this.removeItemFromInventory();
+                    window.skipLocalization = true;
                     $gameMessage.add('The item was destroyed!');
+                    window.skipLocalization = false;
                 } else {
                     // Place item on map
                     ThrownItemManager.addItem($gameMap.mapId(), finalPos.x, finalPos.y, this._itemData);
@@ -595,7 +597,9 @@
                 $gameSystem._pendingThrowItem = null;
             }
         } else {
+            window.skipLocalization = true;
             $gameMessage.add('You don\'t have that item!');
+            window.skipLocalization = false;
         }
     });
     
@@ -614,7 +618,9 @@
     };
     
     Game_Player.prototype.pickUpItem = function(itemData) {
+        window.skipLocalization = true;
         $gameMessage.add('\\>Pick up item?');
+        window.skipLocalization = false;
         $gameMessage.setChoices(['Pick up', 'Cancel'], 0, 1);
         $gameMessage.setChoiceCallback(n => {
             if (n === 0) {
@@ -651,7 +657,9 @@
                         }
                     }
                     
+                    window.skipLocalization = true;
                     $gameMessage.add(`Picked up ${item.name}!`);
+                    window.skipLocalization = false;
                     SoundManager.playOk();
                 }
             }
@@ -888,7 +896,9 @@
         throwSprite.setCompletionCallback(() => {
             // Check if final position should destroy item
             if ($gameMap.isDestroyTile(finalPos.x, finalPos.y)) {
+                window.skipLocalization = true;
                 $gameMessage.add('The item was destroyed!');
+                window.skipLocalization = false;
             } else {
                 // Place item on map
                 ThrownItemManager.addItem($gameMap.mapId(), finalPos.x, finalPos.y, itemData);
