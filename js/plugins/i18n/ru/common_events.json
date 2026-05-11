@@ -125,12 +125,12 @@
     "name": ""
   },
   "Stock options": {
-    "val": "Опционы на акции",
+    "val": "Купить акции",
     "excluded": "",
     "name": ""
   },
   "Buy real estate": {
-    "val": "Покупка недвижимости",
+    "val": "Купить недвижимость",
     "excluded": "",
     "name": ""
   },
@@ -600,7 +600,7 @@
     "name": ""
   },
   "Green Witch Space Center": {
-    "val": "Космический центр им.Зеленой Ведьмы",
+    "val": "",
     "excluded": "",
     "name": ""
   },
@@ -955,7 +955,7 @@
     "name": ""
   },
   "Jump in the trash": {
-    "val": "Прыгнуть в мусор",
+    "val": "Порыться в мусоре",
     "excluded": "",
     "name": ""
   },
