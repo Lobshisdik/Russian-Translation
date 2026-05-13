@@ -1,0 +1,1180 @@
+{
+  "factions": {
+    "magesguild": {
+      "name": "Mages Guild",
+      "description": "The ancient, bureaucratic institution regulating the use of magic across the continent. They value order, tradition, and permits.",
+      "troops": {
+        "apprenticemage": {
+          "name": "Apprentice Mage"
+        },
+        "guildinitiate": {
+          "name": "Guild Initiate"
+        },
+        "guildwarden": {
+          "name": "Guild Warden"
+        },
+        "certifiedmage": {
+          "name": "Certified Mage"
+        },
+        "battlemage": {
+          "name": "Battle Mage"
+        },
+        "guildenforcer": {
+          "name": "Guild Enforcer"
+        },
+        "mysticarcher": {
+          "name": "Mystic Archer"
+        },
+        "seniormagister": {
+          "name": "Senior Magister"
+        },
+        "warwizard": {
+          "name": "War Wizard"
+        },
+        "archmage": {
+          "name": "Archmage"
+        },
+        "spellsniper": {
+          "name": "Spell Sniper"
+        },
+        "grandmasterwizard": {
+          "name": "Grandmaster Wizard"
+        }
+      }
+    },
+    "archivefoundation": {
+      "name": "Archive Foundation",
+      "description": "A secretive organization dedicated to hoarding history and controlling information. They believe knowledge is dangerous and must be contained.",
+      "troops": {
+        "archiveclerk": {
+          "name": "Archive Clerk"
+        },
+        "juniorarchivist": {
+          "name": "Junior Archivist"
+        },
+        "archivesentinel": {
+          "name": "Archive Sentinel"
+        },
+        "knowledgekeeper": {
+          "name": "Knowledge Keeper"
+        },
+        "crossbowarchivist": {
+          "name": "Crossbow Archivist"
+        },
+        "archiveguardian": {
+          "name": "Archive Guardian"
+        },
+        "seniorcurator": {
+          "name": "Senior Curator"
+        },
+        "vaultdefender": {
+          "name": "Vault Defender"
+        },
+        "knowledgesniper": {
+          "name": "Knowledge Sniper"
+        },
+        "masterlibrarian": {
+          "name": "Master Librarian"
+        }
+      }
+    },
+    "hypercapitalistcollective": {
+      "name": "Hypercapitalist Collective",
+      "description": "A ruthless alliance of merchant-kings and tycoons who believe the free market is the only true god.",
+      "troops": {
+        "contractworker": {
+          "name": "Contract Worker"
+        },
+        "corporatesecurity": {
+          "name": "Corporate Security"
+        },
+        "corporatemarksman": {
+          "name": "Corporate Marksman"
+        },
+        "hiredmercenary": {
+          "name": "Hired Mercenary"
+        },
+        "fieldmedic": {
+          "name": "Field Medic"
+        },
+        "eliteenforcer": {
+          "name": "Elite Enforcer"
+        },
+        "corporatesniper": {
+          "name": "Corporate Sniper"
+        },
+        "executiveguard": {
+          "name": "Executive Guard"
+        },
+        "combatspecialist": {
+          "name": "Combat Specialist"
+        },
+        "corporateassassin": {
+          "name": "Corporate Assassin"
+        }
+      }
+    },
+    "loyalists": {
+      "name": "Loyalists",
+      "description": "Those who adhere strictly to the Grandmaster's decrees, favoring political stability over magical innovation.",
+      "troops": {
+        "loyalacolyte": {
+          "name": "Loyal Acolyte"
+        },
+        "decreeenforcer": {
+          "name": "Decree Enforcer"
+        },
+        "loyalbattlemage": {
+          "name": "Loyal Battle Mage"
+        },
+        "loyalsentinel": {
+          "name": "Loyal Sentinel"
+        },
+        "grandmasterschampion": {
+          "name": "Grandmaster's Champion"
+        }
+      }
+    },
+    "traditionalists": {
+      "name": "Traditionalists",
+      "description": "Hardliners who reject technology and believe magic should remain pure, esoteric, and elitist.",
+      "troops": {
+        "puristnovice": {
+          "name": "Purist Novice"
+        },
+        "hermeticmage": {
+          "name": "Hermetic Mage"
+        },
+        "traditionalistguard": {
+          "name": "Traditionalist Guard"
+        },
+        "esotericmaster": {
+          "name": "Esoteric Master"
+        },
+        "ancientsage": {
+          "name": "Ancient Sage"
+        }
+      }
+    },
+    "technomancers": {
+      "name": "Technomancers",
+      "description": "Radicals attempting to fuse arcane sigils with combustion engines and heavy machinery.",
+      "troops": {
+        "techapprentice": {
+          "name": "Tech Apprentice"
+        },
+        "gearwright": {
+          "name": "Gearwright"
+        },
+        "steamfistbrawler": {
+          "name": "Steamfist Brawler"
+        },
+        "arcaneengineer": {
+          "name": "Arcane Engineer"
+        },
+        "gunmage": {
+          "name": "Gunmage"
+        },
+        "magitekspecialist": {
+          "name": "Magitek Specialist"
+        }
+      }
+    },
+    "92schoolsbranch": {
+      "name": "92 schools branch",
+      "description": "An academic splinter group obsessed with categorizing every minute variation of spellcasting into rigid schools.",
+      "troops": {
+        "schoolscholar": {
+          "name": "School Scholar"
+        },
+        "specializedcaster": {
+          "name": "Specialized Caster"
+        },
+        "schooldefender": {
+          "name": "School Defender"
+        },
+        "schoolmaster": {
+          "name": "School Master"
+        },
+        "polymathmage": {
+          "name": "Polymath Mage"
+        }
+      }
+    },
+    "eriscourt": {
+      "name": "Eris' Court",
+      "description": "Followers of the Goddess of Discord, seeking to disrupt the boring order of the Guilds and Foundation.",
+      "troops": {
+        "chaoscultist": {
+          "name": "Chaos Cultist"
+        },
+        "chaosbrawler": {
+          "name": "Chaos Brawler"
+        },
+        "discordagent": {
+          "name": "Discord Agent"
+        },
+        "entropybringer": {
+          "name": "Entropy Bringer"
+        },
+        "chaosberserker": {
+          "name": "Chaos Berserker"
+        },
+        "avatarofdiscord": {
+          "name": "Avatar of Discord"
+        }
+      }
+    },
+    "naguka": {
+      "name": "Naguka",
+      "description": "A tribe of swamp-dwelling scavengers known for their resistance to industrial toxins.",
+      "troops": {
+        "swampscavenger": {
+          "name": "Swamp Scavenger"
+        },
+        "blowdarthunter": {
+          "name": "Blowdart Hunter"
+        },
+        "toxicwarrior": {
+          "name": "Toxic Warrior"
+        },
+        "poisonslinger": {
+          "name": "Poison Slinger"
+        },
+        "plaguebearer": {
+          "name": "Plague Bearer"
+        },
+        "nagukashaman": {
+          "name": "Naguka Shaman"
+        }
+      }
+    },
+    "verden": {
+      "name": "Verden",
+      "description": "Forest goblins who wage guerilla warfare against the expansion of heavy industry.",
+      "troops": {
+        "forestscout": {
+          "name": "Forest Scout"
+        },
+        "saplingdefender": {
+          "name": "Sapling Defender"
+        },
+        "guerillafighter": {
+          "name": "Guerilla Fighter"
+        },
+        "treeambusher": {
+          "name": "Tree Ambusher"
+        },
+        "natureswrath": {
+          "name": "Nature's Wrath"
+        },
+        "forestchampion": {
+          "name": "Forest Champion"
+        }
+      }
+    },
+    "truckerssociety": {
+      "name": "Truckers Society",
+      "description": "The brave souls who transport goods across the wastelands. They are the lifeblood of the economy and obey no road laws.",
+      "troops": {
+        "rookietrucker": {
+          "name": "Rookie Trucker"
+        },
+        "highwaymarksman": {
+          "name": "Highway Marksman"
+        },
+        "roadwarrior": {
+          "name": "Road Warrior"
+        },
+        "convoysniper": {
+          "name": "Convoy Sniper"
+        },
+        "veterandriver": {
+          "name": "Veteran Driver"
+        },
+        "roadmedic": {
+          "name": "Road Medic"
+        },
+        "roadmaster": {
+          "name": "Road Master"
+        }
+      }
+    },
+    "esotericheavyindustries": {
+      "name": "Esoteric Heavy Industries",
+      "description": "A massive and misterious conglomerate.",
+      "troops": {
+        "factoryworker": {
+          "name": "Factory Worker"
+        },
+        "industrialforeman": {
+          "name": "Industrial Foreman"
+        },
+        "factorysharpshooter": {
+          "name": "Factory Sharpshooter"
+        },
+        "heavymachinist": {
+          "name": "Heavy Machinist"
+        },
+        "industrialengineer": {
+          "name": "Industrial Engineer"
+        },
+        "steelsentinel": {
+          "name": "Steel Sentinel"
+        },
+        "corporatetitan": {
+          "name": "Corporate Titan"
+        },
+        "assemblylinesniper": {
+          "name": "Assembly Line Sniper"
+        },
+        "industrialoverlord": {
+          "name": "Industrial Overlord"
+        }
+      }
+    },
+    "northpointarmy": {
+      "name": "North Point Army",
+      "description": "A disciplined military force protecting the northern borders from whatever lurks in the frozen wastes.",
+      "troops": {
+        "recruit": {
+          "name": "Recruit"
+        },
+        "regularsoldier": {
+          "name": "Regular Soldier"
+        },
+        "northernarcher": {
+          "name": "Northern Archer"
+        },
+        "frostranger": {
+          "name": "Frost Ranger"
+        },
+        "battlecleric": {
+          "name": "Battle Cleric"
+        },
+        "winterguard": {
+          "name": "Winter Guard"
+        },
+        "frostmarksman": {
+          "name": "Frost Marksman"
+        },
+        "northernknight": {
+          "name": "Northern Knight"
+        },
+        "winterpriest": {
+          "name": "Winter Priest"
+        },
+        "marshalofthefrost": {
+          "name": "Marshal of the Frost"
+        }
+      }
+    },
+    "invertedcitadel": {
+      "name": "Inverted Citadel",
+      "description": "A fortress hanging from the ceiling of a massive cavern, home to outcasts and dark scholars.",
+      "troops": {
+        "caveoutcast": {
+          "name": "Cave Outcast"
+        },
+        "voidarcher": {
+          "name": "Void Archer"
+        },
+        "darkacolyte": {
+          "name": "Dark Acolyte"
+        },
+        "abyssalblade": {
+          "name": "Abyssal Blade"
+        },
+        "shadowscholar": {
+          "name": "Shadow Scholar"
+        },
+        "darknesssniper": {
+          "name": "Darkness Sniper"
+        },
+        "umbralwarlock": {
+          "name": "Umbral Warlock"
+        },
+        "shadowreaver": {
+          "name": "Shadow Reaver"
+        },
+        "citadelmaster": {
+          "name": "Citadel Master"
+        }
+      }
+    },
+    "petrodemons": {
+      "name": "Petrodemons",
+      "description": "Entities born from deep earth oil deposits; living fuel that burns with malice.",
+      "troops": {
+        "oilimp": {
+          "name": "Oil Imp"
+        },
+        "flameslinger": {
+          "name": "Flame Slinger"
+        },
+        "crudefiend": {
+          "name": "Crude Fiend"
+        },
+        "petrohellion": {
+          "name": "Petro Hellion"
+        },
+        "burningarcher": {
+          "name": "Burning Archer"
+        },
+        "infernalbaron": {
+          "name": "Infernal Baron"
+        },
+        "tarknight": {
+          "name": "Tar Knight"
+        },
+        "hellfiremarksman": {
+          "name": "Hellfire Marksman"
+        },
+        "archdevilofoil": {
+          "name": "Archdevil of Oil"
+        }
+      }
+    },
+    "petromanagers": {
+      "name": "Petromanagers",
+      "description": "Middle-managers who have signed infernal pacts to maximize oil extraction efficiency.",
+      "troops": {
+        "juniormanager": {
+          "name": "Junior Manager"
+        },
+        "efficiencyanalyst": {
+          "name": "Efficiency Analyst"
+        },
+        "seniorpetromanager": {
+          "name": "Senior Petromanager"
+        },
+        "infernalexecutive": {
+          "name": "Infernal Executive"
+        }
+      }
+    },
+    "speeddemons": {
+      "name": "Speed demons",
+      "description": "Adrenaline junkies and couriers who worship velocity and high-octane fuel.",
+      "troops": {
+        "speedfreak": {
+          "name": "Speed Freak"
+        },
+        "nitrocourier": {
+          "name": "Nitro Courier"
+        },
+        "velocitycultist": {
+          "name": "Velocity Cultist"
+        },
+        "sonicdemon": {
+          "name": "Sonic Demon"
+        }
+      }
+    },
+    "sevensisters": {
+      "name": "Seven Sisters",
+      "description": "The seven ruling families that hold a monopoly on all fuel production.",
+      "troops": {
+        "familyenforcer": {
+          "name": "Family Enforcer"
+        },
+        "oilbaronguard": {
+          "name": "Oil Baron Guard"
+        },
+        "familychampion": {
+          "name": "Family Champion"
+        },
+        "heiressassassin": {
+          "name": "Heiress Assassin"
+        }
+      }
+    },
+    "thegods": {
+      "name": "The Gods",
+      "description": "The divine pantheon overseeing the realms, largely indifferent to mortal suffering.",
+      "troops": {
+        "divineherald": {
+          "name": "Divine Herald"
+        },
+        "heavenlyarcher": {
+          "name": "Heavenly Archer"
+        },
+        "celestialguardian": {
+          "name": "Celestial Guardian"
+        },
+        "divinetemplar": {
+          "name": "Divine Templar"
+        },
+        "seraphimwarrior": {
+          "name": "Seraphim Warrior"
+        },
+        "angelicsniper": {
+          "name": "Angelic Sniper"
+        },
+        "highpriest": {
+          "name": "High Priest"
+        },
+        "demigodavatar": {
+          "name": "Demigod Avatar"
+        }
+      }
+    },
+    "supremearchivistcouncil": {
+      "name": "Supreme Archivist Council",
+      "description": "The elders who decide which truths are remembered and which are erased forever.",
+      "troops": {
+        "councilscribe": {
+          "name": "Council Scribe"
+        },
+        "truthkeeper": {
+          "name": "Truth Keeper"
+        },
+        "councilelder": {
+          "name": "Council Elder"
+        }
+      }
+    },
+    "dataacquisitiondepartment": {
+      "name": "Data Acquisition Department",
+      "description": "Field agents and spies tasked with stealing secrets and recovering lost artifacts.",
+      "troops": {
+        "fieldagent": {
+          "name": "Field Agent"
+        },
+        "acquisitionspy": {
+          "name": "Acquisition Spy"
+        },
+        "eliteinfiltrator": {
+          "name": "Elite Infiltrator"
+        }
+      }
+    },
+    "knowledgepreservationdivision": {
+      "name": "Knowledge Preservation Division",
+      "description": "Librarians who maintain the physical integrity of the books and silence noisy patrons... permanently.",
+      "troops": {
+        "silentlibrarian": {
+          "name": "Silent Librarian"
+        },
+        "preservationguard": {
+          "name": "Preservation Guard"
+        },
+        "masterconservator": {
+          "name": "Master Conservator"
+        }
+      }
+    },
+    "publictransparencyunit": {
+      "name": "Public Transparency Unit",
+      "description": "The propaganda wing. Their name is ironic; they specialize in redaction and misinformation.",
+      "troops": {
+        "propagandist": {
+          "name": "Propagandist"
+        },
+        "spindoctor": {
+          "name": "Spin Doctor"
+        },
+        "misinformationmaster": {
+          "name": "Misinformation Master"
+        }
+      }
+    },
+    "internalcomplianceunit": {
+      "name": "Internal Compliance Unit",
+      "description": "The secret police ensuring no Archivist leaks data to the outside world.",
+      "troops": {
+        "complianceofficer": {
+          "name": "Compliance Officer"
+        },
+        "secretenforcer": {
+          "name": "Secret Enforcer"
+        },
+        "internalinquisitor": {
+          "name": "Internal Inquisitor"
+        }
+      }
+    },
+    "libertariangods": {
+      "name": "Libertarian Gods",
+      "description": "Minor deities who demand no worship, only mutually beneficial transactions.",
+      "troops": {
+        "freemarketangel": {
+          "name": "Free Market Angel"
+        },
+        "contractenforcer": {
+          "name": "Contract Enforcer"
+        },
+        "sovereignspirit": {
+          "name": "Sovereign Spirit"
+        }
+      }
+    },
+    "goblincollectiveunconsciuous": {
+      "name": "Goblin Collective Unconsciuous",
+      "description": "The psychic link that connects all goblin minds, storing their ancestral chaotic wisdom.",
+      "troops": {
+        "psychicgoblin": {
+          "name": "Psychic Goblin"
+        },
+        "mindstriker": {
+          "name": "Mind Striker"
+        },
+        "hivemindwarrior": {
+          "name": "Hive Mind Warrior"
+        },
+        "psychicslinger": {
+          "name": "Psychic Slinger"
+        },
+        "collectiveconduit": {
+          "name": "Collective Conduit"
+        },
+        "telepathicsniper": {
+          "name": "Telepathic Sniper"
+        },
+        "ancestralecho": {
+          "name": "Ancestral Echo"
+        }
+      }
+    },
+    "thetourists": {
+      "name": "The Tourists",
+      "description": "Aliens from Zeta Reticuli viewing this world's conflicts as mere entertainment.",
+      "troops": {
+        "observerdrone": {
+          "name": "Observer Drone"
+        },
+        "probescout": {
+          "name": "Probe Scout"
+        },
+        "alientourist": {
+          "name": "Alien Tourist"
+        },
+        "beamsniper": {
+          "name": "Beam Sniper"
+        },
+        "realitymanipulator": {
+          "name": "Reality Manipulator"
+        },
+        "enforcerconstruct": {
+          "name": "Enforcer Construct"
+        },
+        "plasmarifleman": {
+          "name": "Plasma Rifleman"
+        },
+        "zetanoverseer": {
+          "name": "Zetan Overseer"
+        }
+      }
+    },
+    "holyvaticanempire": {
+      "name": "Holy Vatican Empire",
+      "description": "The ancient seat of the Papacy, a city-state that wields immense spiritual and temporal power. It operates on faith, tradition, and clandestine operations.",
+      "troops": {
+        "altarserver": {
+          "name": "Altar Server"
+        },
+        "vaticanguard": {
+          "name": "Vatican Guard"
+        },
+        "holyarcher": {
+          "name": "Holy Archer"
+        },
+        "holyknight": {
+          "name": "Holy Knight"
+        },
+        "blessedmarksman": {
+          "name": "Blessed Marksman"
+        },
+        "papalchampion": {
+          "name": "Papal Champion"
+        },
+        "vaticanpriest": {
+          "name": "Vatican Priest"
+        },
+        "divinesniper": {
+          "name": "Divine Sniper"
+        },
+        "cardinaltemplar": {
+          "name": "Cardinal Templar"
+        }
+      }
+    },
+    "cardinalscouncil": {
+      "name": "Cardinal's Council",
+      "description": "The secretive inner circle of cardinals who advise the Pope and control the Church's political machinations.",
+      "troops": {
+        "councildeacon": {
+          "name": "Council Deacon"
+        },
+        "cardinaladvisor": {
+          "name": "Cardinal Advisor"
+        },
+        "princeofthechurch": {
+          "name": "Prince of the Church"
+        }
+      }
+    },
+    "ior": {
+      "name": "IOR",
+      "description": "The Institute for the Works of Religion, the Vatican's controversial bank, rumored to handle funds from less-than-holy sources.",
+      "troops": {
+        "bankclerk": {
+          "name": "Bank Clerk"
+        },
+        "financialanalyst": {
+          "name": "Financial Analyst"
+        },
+        "iorenforcer": {
+          "name": "IOR Enforcer"
+        },
+        "holybanker": {
+          "name": "Holy Banker"
+        }
+      }
+    },
+    "battlenuns": {
+      "name": "Battle Nuns",
+      "description": "An order of militant nuns trained in both scripture and modern combat, serving as the Vatican's special forces.",
+      "troops": {
+        "novicesister": {
+          "name": "Novice Sister"
+        },
+        "battlesister": {
+          "name": "Battle Sister"
+        },
+        "sistersuperior": {
+          "name": "Sister Superior"
+        },
+        "mothersuperior": {
+          "name": "Mother Superior"
+        }
+      }
+    },
+    "hexorcistscorp": {
+      "name": "Hexorcists Corp",
+      "description": "A specialized unit of tech-priests who combat demonic code, rogue AIs, and other digital heresies.",
+      "troops": {
+        "cyberacolyte": {
+          "name": "Cyber Acolyte"
+        },
+        "techpriest": {
+          "name": "Tech-Priest"
+        },
+        "digitalexorcist": {
+          "name": "Digital Exorcist"
+        },
+        "masterhexorcist": {
+          "name": "Master Hexorcist"
+        }
+      }
+    },
+    "gaylobby": {
+      "name": "Gay Lobby",
+      "description": "A powerful and influential shadow group within the Vatican, advocating for progressive reforms from within the ancient institution.",
+      "troops": {
+        "progressivepriest": {
+          "name": "Progressive Priest"
+        },
+        "reformadvocate": {
+          "name": "Reform Advocate"
+        },
+        "shadowdiplomat": {
+          "name": "Shadow Diplomat"
+        }
+      }
+    },
+    "opusdei": {
+      "name": "Opus Dei",
+      "description": "A deeply conservative and secretive lay organization known for its members' unwavering devotion and influence in secular society.",
+      "troops": {
+        "devotednumerary": {
+          "name": "Devoted Numerary"
+        },
+        "secularagent": {
+          "name": "Secular Agent"
+        },
+        "opusdeizealot": {
+          "name": "Opus Dei Zealot"
+        },
+        "supernumeraryelite": {
+          "name": "Supernumerary Elite"
+        }
+      }
+    },
+    "swissguards": {
+      "name": "Swiss Guards",
+      "description": "The colorfully-dressed but deadly elite mercenaries sworn to protect the Pope, wielding both halberds and advanced plasma rifles.",
+      "troops": {
+        "swissrecruit": {
+          "name": "Swiss Recruit"
+        },
+        "halberdier": {
+          "name": "Halberdier"
+        },
+        "plasmaguard": {
+          "name": "Plasma Guard"
+        },
+        "swisscommander": {
+          "name": "Swiss Commander"
+        }
+      }
+    },
+    "ussr": {
+      "name": "USSR",
+      "description": "The mighty military force of the Soviet Union, renowned for its discipline, massive numbers, and unwavering ideology.",
+      "troops": {
+        "redarmyrecruit": {
+          "name": "Red Army Recruit"
+        },
+        "sovietrifleman": {
+          "name": "Soviet Rifleman"
+        },
+        "commissar": {
+          "name": "Commissar"
+        },
+        "redveteran": {
+          "name": "Red Veteran"
+        },
+        "sovietsniper": {
+          "name": "Soviet Sniper"
+        },
+        "redofficer": {
+          "name": "Red Officer"
+        },
+        "elitesoldier": {
+          "name": "Elite Soldier"
+        },
+        "sovietcommander": {
+          "name": "Soviet Commander"
+        }
+      }
+    },
+    "guardsdivision": {
+      "name": "Guards Division",
+      "description": "Elite Soviet units that have distinguished themselves in battle, bearing the prestigious 'Guards' title.",
+      "troops": {
+        "guardsprivate": {
+          "name": "Guards Private"
+        },
+        "guardssergeant": {
+          "name": "Guards Sergeant"
+        },
+        "guardsmarksman": {
+          "name": "Guards Marksman"
+        },
+        "guardslieutenant": {
+          "name": "Guards Lieutenant"
+        },
+        "guardscaptain": {
+          "name": "Guards Captain"
+        },
+        "guardsmajor": {
+          "name": "Guards Major"
+        }
+      }
+    },
+    "tankdivision": {
+      "name": "Tank Division",
+      "description": "Armored forces equipped with T-34s and heavy tanks, the iron fist of the Red Army.",
+      "troops": {
+        "tankcrewman": {
+          "name": "Tank Crewman"
+        },
+        "t34driver": {
+          "name": "T-34 Driver"
+        },
+        "tankcommander": {
+          "name": "Tank Commander"
+        },
+        "heavytankoperator": {
+          "name": "Heavy Tank Operator"
+        },
+        "tankace": {
+          "name": "Tank Ace"
+        },
+        "armoredbrigadeleader": {
+          "name": "Armored Brigade Leader"
+        }
+      }
+    },
+    "rifledivision": {
+      "name": "Rifle Division",
+      "description": "The backbone of the Red Army, brave riflemen who hold the line against all odds.",
+      "troops": {
+        "rifleman": {
+          "name": "Rifleman"
+        },
+        "veteranrifleman": {
+          "name": "Veteran Rifleman"
+        },
+        "riflesquadleader": {
+          "name": "Rifle Squad Leader"
+        },
+        "sharpshooter": {
+          "name": "Sharpshooter"
+        },
+        "riflecompanycommander": {
+          "name": "Rifle Company Commander"
+        },
+        "elitemarksman": {
+          "name": "Elite Marksman"
+        }
+      }
+    },
+    "airbornedivision": {
+      "name": "Airborne Division",
+      "description": "Elite paratroopers and airborne forces, striking from the skies behind enemy lines.",
+      "troops": {
+        "paratrooper": {
+          "name": "Paratrooper"
+        },
+        "airborneassault": {
+          "name": "Airborne Assault"
+        },
+        "jumpmaster": {
+          "name": "Jump Master"
+        },
+        "airbornesniper": {
+          "name": "Airborne Sniper"
+        },
+        "airbornecommander": {
+          "name": "Airborne Commander"
+        },
+        "spetsnazparatrooper": {
+          "name": "Spetsnaz Paratrooper"
+        }
+      }
+    },
+    "artillerydivision": {
+      "name": "Artillery Division",
+      "description": "Heavy artillery and rocket forces, the 'God of War' that rains destruction upon the enemy.",
+      "troops": {
+        "artillerygunner": {
+          "name": "Artillery Gunner"
+        },
+        "howitzercrew": {
+          "name": "Howitzer Crew"
+        },
+        "katyushaoperator": {
+          "name": "Katyusha Operator"
+        },
+        "artilleryspotter": {
+          "name": "Artillery Spotter"
+        },
+        "heavyartillerycommander": {
+          "name": "Heavy Artillery Commander"
+        },
+        "rocketartillerymaster": {
+          "name": "Rocket Artillery Master"
+        }
+      }
+    },
+    "ottomanempire": {
+      "name": "Ottoman Empire",
+      "description": "The Great Empire that never fell. A vast, multi-ethnic powerhouse ruling from Istanbul, blending centuries-old traditions with modern military and covert technology. It is led by the Sultan-Caliph.",
+      "troops": {
+        "sipahicavalry": {
+          "name": "Sipahi Cavalry"
+        },
+        "janissarytrooper": {
+          "name": "Janissary Trooper"
+        },
+        "imperialengineer": {
+          "name": "Imperial Engineer"
+        },
+        "modernjanissary": {
+          "name": "Modern Janissary"
+        },
+        "bashibazoukmercenary": {
+          "name": "Bashi-Bazouk Mercenary"
+        },
+        "pashasadvisor": {
+          "name": "Pasha's Advisor"
+        },
+        "ottomanguard": {
+          "name": "Ottoman Guard"
+        },
+        "grandvizierselite": {
+          "name": "Grand Vizier's Elite"
+        }
+      }
+    },
+    "tanzimatbureaucracy": {
+      "name": "Tanzimat Bureaucracy",
+      "description": "The sprawling, highly structured, and often corrupt administrative core of the Empire, modernizing with ruthless efficiency.",
+      "troops": {
+        "registryclerk": {
+          "name": "Registry Clerk"
+        },
+        "mfettiinspector": {
+          "name": "Müfettiş (Inspector)"
+        },
+        "viziersdiplomat": {
+          "name": "Vizier's Diplomat"
+        },
+        "emineffendihighofficial": {
+          "name": "Emin Effendi (High Official)"
+        }
+      }
+    },
+    "imperialsubmarinefleet": {
+      "name": "Imperial Submarine Fleet",
+      "description": "The silent service of the Ottoman Navy. Utilizing high-tech stealth and torpedo systems to maintain control of the Mediterranean and Black Seas.",
+      "troops": {
+        "submarinecadet": {
+          "name": "Submarine Cadet"
+        },
+        "sonartechnician": {
+          "name": "Sonar Technician"
+        },
+        "torpedooperator": {
+          "name": "Torpedo Operator"
+        },
+        "submarinecommander": {
+          "name": "Submarine Commander"
+        }
+      }
+    },
+    "talonofthecaliph": {
+      "name": "Talon of the Caliph",
+      "description": "The Sultan-Caliph's secret police and intelligence agency, focusing on both domestic dissent and foreign espionage. They are the true 'eyes and ears' of the Empire.",
+      "troops": {
+        "informant": {
+          "name": "Informant"
+        },
+        "shadowoperative": {
+          "name": "Shadow Operative"
+        },
+        "assassinationspecialist": {
+          "name": "Assassination Specialist"
+        },
+        "grandintelligencer": {
+          "name": "Grand Intelligencer"
+        }
+      }
+    },
+    "janissaryguard": {
+      "name": "Janissary Guard",
+      "description": "A small, highly-trained detachment of modern Janissaries serving as the Sultan-Caliph's personal guard and elite shock troops.",
+      "troops": {
+        "janissarynovice": {
+          "name": "Janissary Novice"
+        },
+        "korumatrooper": {
+          "name": "Koruma Trooper"
+        },
+        "janissarycaptain": {
+          "name": "Janissary Captain"
+        },
+        "aaofthekoruma": {
+          "name": "Ağa of the Koruma"
+        }
+      }
+    },
+    "britannia": {
+      "name": "Britannia",
+      "description": "The successor to the British Empire, a global power defined by its technological superiority, vast Commonwealth resources, and disciplined military. Ruled by a modern Constitutional Monarchy.",
+      "troops": {
+        "commonwealthtrooper": {
+          "name": "Commonwealth Trooper"
+        },
+        "royalmarinerifleman": {
+          "name": "Royal Marine Rifleman"
+        },
+        "fieldmedic": {
+          "name": "Field Medic"
+        },
+        "imperialgrenadier": {
+          "name": "Imperial Grenadier"
+        },
+        "highlandermarksman": {
+          "name": "Highlander Marksman"
+        },
+        "staffofficer": {
+          "name": "Staff Officer"
+        },
+        "veteranfusilier": {
+          "name": "Veteran Fusilier"
+        },
+        "guardcommander": {
+          "name": "Guard Commander"
+        }
+      }
+    },
+    "royalnavytaskforce": {
+      "name": "Royal Navy Task Force",
+      "description": "The core strength of Britannia, deploying advanced frigates, aircraft carriers, and hydrofoil transports to maintain global sea lanes.",
+      "troops": {
+        "seamanrecruit": {
+          "name": "Seaman Recruit"
+        },
+        "frigatecrewman": {
+          "name": "Frigate Crewman"
+        },
+        "radartechnician": {
+          "name": "Radar Technician"
+        },
+        "hydrofoilofficer": {
+          "name": "Hydrofoil Officer"
+        },
+        "fleetcommander": {
+          "name": "Fleet Commander"
+        }
+      }
+    },
+    "sassbscommandos": {
+      "name": "SAS/SBS Commandos",
+      "description": "The legendary Special Air Service and Special Boat Service. Highly trained, stealthy, and equipped with advanced personal cloaking and data systems.",
+      "troops": {
+        "reconspecialist": {
+          "name": "Recon Specialist"
+        },
+        "demolitionsexpert": {
+          "name": "Demolitions Expert"
+        },
+        "sbsfrogman": {
+          "name": "SBS Frogman"
+        },
+        "sascounterterrorist": {
+          "name": "SAS Counter-Terrorist"
+        }
+      }
+    },
+    "mi6blackarchive": {
+      "name": "MI6 Black Archive",
+      "description": "Britannia's most clandestine intelligence division, dealing in high-level technological espionage, psychological warfare, and global political manipulation.",
+      "troops": {
+        "analysthandler": {
+          "name": "Analyst Handler"
+        },
+        "covertagent": {
+          "name": "Covert Agent"
+        },
+        "psychologicalwarfareexpert": {
+          "name": "Psychological Warfare Expert"
+        },
+        "sectionchiefthecontroller": {
+          "name": "Section Chief (The Controller)"
+        }
+      }
+    },
+    "sciencecommand": {
+      "name": "Science Command",
+      "description": "A joint military-scientific division responsible for developing and deploying cutting-edge plasma weaponry, kinetic defense systems, and power armour.",
+      "troops": {
+        "labtechnician": {
+          "name": "Lab Technician"
+        },
+        "plasmaengineer": {
+          "name": "Plasma Engineer"
+        },
+        "powerarmortrooper": {
+          "name": "Power Armor Trooper"
+        },
+        "chiefscientistkineticist": {
+          "name": "Chief Scientist (Kineticist)"
+        }
+      }
+    }
+  }
+}
