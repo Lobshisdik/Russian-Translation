@@ -1,19 +1,19 @@
 {
   "galaxy": {
     "milky_way": {
-      "name": "Milky Way"
+      "name": "Млечный Путь"
     },
     "andromeda_m31": {
-      "name": "Andromeda (M31)"
+      "name": "Галактика Андромеды (M31)"
     },
     "triangulum_m33": {
-      "name": "Triangulum (M33)"
+      "name": "Галактика Треугольника (M33)"
     },
     "large_magellanic_cloud": {
-      "name": "Large Magellanic Cloud"
+      "name": "Большое Магелланово Облако"
     },
     "small_magellanic_cloud": {
-      "name": "Small Magellanic Cloud"
+      "name": "Малое Магелланово Облако"
     },
     "m32": {
       "name": "M32"
@@ -28,31 +28,31 @@
       "name": "IC 10"
     },
     "sagittarius_dwarf": {
-      "name": "Sagittarius Dwarf"
+      "name": "Карликовая галактика в Стрельце"
     },
     "fornax_dwarf": {
-      "name": "Fornax Dwarf"
+      "name": "Карликовая галактика в Печи"
     },
     "sculptor_dwarf": {
-      "name": "Sculptor Dwarf"
+      "name": "Карликовая галактика в Скульпторе"
     },
     "leo_i": {
-      "name": "Leo I"
+      "name": "Лев I"
     },
     "leo_ii": {
-      "name": "Leo II"
+      "name": "Лев II"
     },
     "ursa_minor_dwarf": {
-      "name": "Ursa Minor Dwarf"
+      "name": "Карликовая галактика в Малой Медведице"
     },
     "draco_dwarf": {
-      "name": "Draco Dwarf"
+      "name": "Карликовая галактика в Драконе"
     },
     "carina_dwarf": {
-      "name": "Carina Dwarf"
+      "name": "Карликовая галактика в Киле"
     },
     "sextans_dwarf": {
-      "name": "Sextans Dwarf"
+      "name": "Секстант I"
     },
     "ic_1613": {
       "name": "IC 1613"
@@ -61,25 +61,25 @@
       "name": "WLM"
     },
     "phoenix_dwarf": {
-      "name": "Phoenix Dwarf"
+      "name": "Карликовая галактика в Фениксе"
     },
     "ngc_3109": {
       "name": "NGC 3109"
     },
     "antlia_dwarf": {
-      "name": "Antlia Dwarf"
+      "name": "Карликовая галактика в Насосе"
     },
     "leo_a": {
-      "name": "Leo A"
+      "name": "Лев A"
     },
     "aquarius_dwarf": {
-      "name": "Aquarius Dwarf"
+      "name": "Карликовая галактика в Водолее"
     },
     "tucana_dwarf": {
-      "name": "Tucana Dwarf"
+      "name": "Карликовая галактика в Тукане"
     },
     "pegasus_dwarf": {
-      "name": "Pegasus Dwarf"
+      "name": "Карликовая галактика в Пегасе"
     }
   }
 }
