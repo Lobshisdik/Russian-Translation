@@ -1,174 +1,174 @@
 {
   "jobs": {
     "1": {
-      "name": "Warehouse Worker",
-      "description": "Load and unload cargo in the warehouse district."
+      "name": "Грузчик",
+      "description": "Загружай и разгружай товары в складском районе."
     },
     "category": {
-      "labor": "Labor",
-      "social": "Social",
-      "technical": "Technical",
-      "magical": "Magical",
-      "combat": "Combat",
-      "criminal": "Criminal",
-      "general": "General",
-      "faction": "Faction"
+      "labor": "Физическая",
+      "social": "Социальная",
+      "technical": "Техническая",
+      "magical": "Магическая",
+      "combat": "Боевая",
+      "criminal": "Криминальная",
+      "general": "Обычная",
+      "faction": "Фракционная"
     },
     "2": {
-      "name": "Farm Hand",
-      "description": "Work the fields, tend to crops and livestock."
+      "name": "Батрак",
+      "description": "Работай на полях, ухаживая за урожаем и скотом."
     },
     "3": {
-      "name": "Bartender",
-      "description": "Serve drinks and manage patrons at the tavern."
+      "name": "Бармен",
+      "description": "Подавай напитки и следи за посетителями в таверне."
     },
     "4": {
-      "name": "Street Performer",
-      "description": "Entertain crowds with performances for tips."
+      "name": "Уличный Артист",
+      "description": "Выступай на потеху публике за милостыню."
     },
     "5": {
-      "name": "Blacksmith Assistant",
-      "description": "Help the blacksmith forge weapons and tools."
+      "name": "Подмастерье Кузнеца",
+      "description": "Помогай кузнецу с ковкой оружия и инструментов."
     },
     "6": {
-      "name": "Spell Component Gatherer",
-      "description": "Collect rare magical ingredients in dangerous areas."
+      "name": "Сборщик Компонентов Заклиний",
+      "description": "Собирай редкие магические ингридиенты в опасных местах."
     },
     "7": {
-      "name": "Alchemist's Assistant",
-      "description": "Mix potions and manage the alchemist's laboratory."
+      "name": "Помощник Алхимика",
+      "description": "Смешивай зелья и следи за порядком в лаборатории."
     },
     "8": {
-      "name": "Magical Artifact Restorer",
-      "description": "Repair and restore damaged magical items."
+      "name": "Реставратор Магических Артефактов",
+      "description": "Чини и восстанавливай поврежденные магические предметы."
     },
     "9": {
-      "name": "Caravan Guard",
-      "description": "Protect merchant caravans from bandits and monsters."
+      "name": "Страж Каравана",
+      "description": "Защищай торговые караваны от бандитов и монстров."
     },
     "10": {
-      "name": "Arena Fighter",
-      "description": "Fight in the arena for prize money and glory."
+      "name": "Гладиатор",
+      "description": "Сражайся на арене за деньги и славу."
     },
     "11": {
-      "name": "Monster Exterminator",
-      "description": "Clear out monster infestations from civilian areas."
+      "name": "Охотник на Монстров",
+      "description": "Зачищай жилые районы от монстров."
     },
     "12": {
-      "name": "Pickpocketing",
-      "description": "Steal from unsuspecting marks in crowded areas."
+      "name": "Карманник",
+      "description": "Обкрадывай ничего не подозревающих жертв в людных местах."
     },
     "13": {
-      "name": "Smuggling Run",
-      "description": "Transport illegal goods across checkpoints."
+      "name": "Контрабандист",
+      "description": "Провози контрабанду через контрольно-пропускные пункты."
     },
     "14": {
-      "name": "Burglary",
-      "description": "Break into a building and steal valuables."
+      "name": "Взломщик",
+      "description": "Пробирайся в здания и выкрадывай оттуда драгоценности."
     },
     "15": {
-      "name": "Mechanic",
-      "description": "Repair vehicles and machinery."
+      "name": "Механик",
+      "description": "Ремонтируй транспорт и другую технику."
     },
     "16": {
-      "name": "Locksmith",
-      "description": "Create and repair locks for clients."
+      "name": "Слесарь",
+      "description": "Изготавливай и ремонтируй замки на заказ."
     },
     "17": {
-      "name": "Clockmaker",
-      "description": "Craft and repair intricate timepieces."
+      "name": "Часовщик",
+      "description": "Изготавливай и ремонтируй часы на заказ."
     },
     "18": {
-      "name": "Diplomat",
-      "description": "Negotiate deals and resolve disputes."
+      "name": "Дипломат",
+      "description": "Веди переговоры и разрешай споры."
     },
     "19": {
-      "name": "Fortune Teller",
-      "description": "Read fortunes for paying customers."
+      "name": "Предсказатель",
+      "description": "Предсказывай судьбу своим клиентам за деньги."
     },
     "20": {
-      "name": "Courier",
-      "description": "Deliver packages and messages across the city."
+      "name": "Курьер",
+      "description": "Достааляй посылки и письма по всему городу."
     },
     "100": {
-      "name": "Permit Inspector",
-      "description": "Inspect magical practitioners for proper permits and licensing."
+      "name": "Магический Инспектор",
+      "description": "Проверяй магов на наличие необходимых разрешений и лицензий."
     },
     "101": {
-      "name": "Ritual Supervisor",
-      "description": "Ensure magical rituals follow Guild protocols exactly."
+      "name": "Куратор Ритуалов",
+      "description": "Следи за соблюдением протоколов Гильдии во время проведения ритуалов."
     },
     "102": {
-      "name": "Anti-Technology Enforcer",
-      "description": "Seek out and destroy illegal techno-magical fusion devices."
+      "name": "Сотрудник Техноконтроля",
+      "description": "Выявляй и уничтожайте незаконные аппараты для техномагического слияния."
     },
     "103": {
-      "name": "Magitech Engineer",
-      "description": "Develop experimental fusion of magic and machinery."
+      "name": "Техномант-Инженер",
+      "description": "Экспериментируй со слиянием магии и техники."
     },
     "104": {
-      "name": "Spell Categorization Clerk",
-      "description": "Meticulously categorize spells into the 92 distinct schools."
+      "name": "Систематизатор Заклинаний",
+      "description": "Тщательно классифицируй заклинания по 92 различным школам."
     },
     "105": {
-      "name": "Document Redactor",
-      "description": "Remove dangerous knowledge from historical texts."
+      "name": "Редактор Документов",
+      "description": "Стирай опасные знания из исторических текстов."
     },
     "106": {
-      "name": "Artifact Thief",
-      "description": "Steal historical artifacts for the Foundation's collection."
+      "name": "Похититель Артефактов",
+      "description": "Похищай исторические артефакты для Архивного Фонда."
     },
     "107": {
-      "name": "Silent Librarian",
-      "description": "Maintain the archives and permanently silence noisy patrons."
+      "name": "Молчаливый Библиотекарь",
+      "description": "Поддерживай порядок в Архиве и затыкайте слишком громких посетителей."
     },
     "108": {
-      "name": "Propaganda Writer",
-      "description": "Craft convincing misinformation for public consumption."
+      "name": "Писатель-Пропагандист",
+      "description": "Создавай убедительную дезинформацию для широких масс."
     },
     "109": {
-      "name": "Internal Investigator",
-      "description": "Root out information leaks within the Foundation."
+      "name": "Работник Информационной Безопасности",
+      "description": "Предотвращай утечки информации из Фонда."
     },
     "110": {
-      "name": "Market Manipulator",
-      "description": "Manipulate markets for profit through any means necessary."
+      "name": "Манипулятор Рынком",
+      "description": "Манипулируй рынком для получения выгоды любой ценой."
     },
     "111": {
-      "name": "Oil Extraction Overseer",
-      "description": "Maximize oil extraction efficiency through infernal optimization."
+      "name": "Куратор Нефтедобычи",
+      "description": "Максимизируй эффективность нефтедобычи с помощью адской оптимизации."
     },
     "112": {
-      "name": "High-Speed Courier",
-      "description": "Deliver packages at breakneck speeds, worshipping velocity."
+      "name": "Высокоскоростной Курьер",
+      "description": "Доставляй посылки с головокружительной быстротой, покляняясь скорости."
     },
     "113": {
-      "name": "Fuel Monopoly Enforcer",
-      "description": "Ensure the Seven Sisters maintain total fuel market control."
+      "name": "Контролер Топливной Монополии",
+      "description": "Обеспечивай контроль «Семи Сестер» над топливный рынком."
     },
     "114": {
-      "name": "Divine Chaos Agent",
-      "description": "Spread discord and disruption in the name of the Goddess of Chaos."
+      "name": "Агент Святого Хаоса",
+      "description": "Сей раздор и разрушения во имя Богини Хаоса."
     },
     "124": {
-      "name": "Vatican Scribe",
-      "description": "Transcribe and maintain sacred texts and church documents."
+      "name": "Ватиканский Писарь",
+      "description": "Переписывай и сохраняй священные и церковные текста."
     },
     "127": {
-      "name": "Battle Nun Trainee",
-      "description": "Train in both scripture and combat as a Vatican special forces operative."
+      "name": "Ученица Боевой Монахини",
+      "description": "Выучи Святое Писание и научись боевым навыкам в качестве бойца Ватиканского спецназа."
     },
     "128": {
-      "name": "Night Watchman",
-      "description": "Guard property through the dangerous night hours."
+      "name": "Ночной Сторож",
+      "description": "Сторожи имущество в течение опасной ночи."
     },
     "129": {
-      "name": "Fisherman",
-      "description": "Catch fish for sale at the market."
+      "name": "Рыбак",
+      "description": "Лови рыбу для продажи на рынке."
     },
     "130": {
-      "name": "Street Cleaner",
-      "description": "Clean the filthy city streets."
+      "name": "Дворник",
+      "description": "Убирай мусор и очищай улицы города от грязи."
     }
   }
 }
