@@ -1,104 +1,104 @@
 {
   "personality": {
     "nervous": {
-      "name": "Nervous",
-      "description": "Prone to anxiety and high stress."
+      "name": "Нервозный",
+      "description": "Часто тревожится и испытывает стресс."
     },
     "calm": {
-      "name": "Calm",
-      "description": "Resistant to stress, thinks clearly."
+      "name": "Спокойный",
+      "description": "Не поддается стрессу, ясно мыслит."
     },
     "aggressive": {
-      "name": "Aggressive",
-      "description": "Quick to anger, high physical drive."
+      "name": "Агрессивный",
+      "description": "Легко вывести из себя, решает конфликты «кулаками»."
     },
     "melancholic": {
-      "name": "Melancholic",
-      "description": "Prone to sadness and introspection."
+      "name": "Меланхолик",
+      "description": "Легко поддается грусти, склонен к самокопанию."
     },
     "sanguine": {
-      "name": "Sanguine",
-      "description": "Energetic, optimistic, and social."
+      "name": "Сангвиник",
+      "description": "Энергичный, оптимистичный и общительный."
     },
     "cautious": {
-      "name": "Cautious",
-      "description": "Thinks before acting, analyzes risk."
+      "name": "Предустмотрительный",
+      "description": "Думает, прежде чем делает, анализируя ситуацию."
     },
     "impulsive": {
-      "name": "Impulsive",
-      "description": "Acts on instinct, low self-control."
+      "name": "Импульсивный",
+      "description": "Действует необдуманно, низкий самоконтроль."
     },
     "stoic": {
-      "name": "Stoic",
-      "description": "Endures hardship without complaint."
+      "name": "Стоик",
+      "description": "Переносит трудности без жалоб."
     },
     "paranoid": {
-      "name": "Paranoid",
-      "description": "Distrustful and suspicious of others."
+      "name": "Параноик",
+      "description": "Не доверяет другим людям."
     },
     "empathetic": {
-      "name": "Empathetic",
-      "description": "Highly sensitive to the emotions of others."
+      "name": "Эмпат",
+      "description": "Обладает высокой чувствительностью к эмоциям других людей."
     },
     "authoritative": {
-      "name": "Authoritative",
-      "description": "A natural leader, decisive and commanding."
+      "name": "Властный",
+      "description": "Прирожденный лидер, решителен и властный."
     },
     "scholarly": {
-      "name": "Scholarly",
-      "description": "Intellect-driven, curious, and analytical."
+      "name": "Интеллектуал",
+      "description": "Принимает решение на основе анализа."
     },
     "artistic": {
-      "name": "Artistic",
-      "description": "Sensitive, creative, and perceptive."
+      "name": "Творческий",
+      "description": "Чуткий, креативный и проницательный."
     },
     "adventurous": {
-      "name": "Adventurous",
-      "description": "Seeks novelty and thrills, high-risk."
+      "name": "Авантюрный",
+      "description": "Ищет острых ощущений, не задумываясь о риске."
     },
     "nurturing": {
-      "name": "Nurturing",
-      "description": "Caring, protective, and compassionate."
+      "name": "Заботливый",
+      "description": "Оберегающий, заботящийся и сопереживающий."
     },
     "mischievous": {
-      "name": "Mischievous",
-      "description": "Playful, clever, and enjoys chaos."
+      "name": "Озорной",
+      "description": "Игривый и сообразительный, любит хаос."
     },
     "cynical": {
-      "name": "Cynical",
-      "description": "Distrustful of human sincerity or integrity."
+      "name": "Циник",
+      "description": "Пренебрегает общепринятой моралью и этикой."
     },
     "disciplined": {
-      "name": "Disciplined",
-      "description": "High self-control, follows a strict code."
+      "name": "Дисциплинированный",
+      "description": "Обладает высокой самоорганизацией, соблюдает правила."
     },
     "fatalistic": {
-      "name": "Fatalistic",
-      "description": "Believes all events are predetermined."
+      "name": "Фаталист",
+      "description": "Считает, что все события предопределены."
     },
     "grumpy": {
-      "name": "Grumpy",
-      "description": "Chronically irritable and bad-tempered."
+      "name": "Вспыльчивый",
+      "description": "Легко раздражается и гневится."
     },
     "loyal": {
-      "name": "Loyal",
-      "description": "Steadfast and devoted to allies."
+      "name": "Преданный",
+      "description": "Непреклонен, предан союзникам."
     },
     "brave": {
-      "name": "Brave",
-      "description": "Faces danger with low fear response."
+      "name": "Храбрец",
+      "description": "Не знает страха перед опасностью."
     },
     "timid": {
-      "name": "Timid",
-      "description": "Easily frightened, avoidant of conflict."
+      "name": "Робкий",
+      "description": "Легко пугается, избегает конфликтов."
     },
     "hedonistic": {
-      "name": "Hedonistic",
-      "description": "Believes the pursuit of pleasure is the highest good."
+      "name": "Гедонист",
+      "description": "Считает, что стремление к удовольствию является высшим благом."
     },
     "apathetic": {
-      "name": "Apathetic",
-      "description": "Lacking interest, enthusiasm, or concern."
+      "name": "Апатичный",
+      "description": "Испытывает полное безразличие к окружающему мир."
     }
   }
 }
