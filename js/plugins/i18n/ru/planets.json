@@ -1,124 +1,124 @@
 {
   "planets": {
     "sub_mercurian": {
-      "description": "Bare‐bones rocky world, thinner crust, minimal atmosphere."
+      "description": "Пустая каменистая планета, тонкая кора, почти нет атмосферы."
     },
     "mercurian": {
-      "description": "Mercury‐like, airless, cratered, iron‐rich."
+      "description": "Планета размером с Меркурий, без атмосферы, много кратеров, богата железом."
     },
     "sub_earth": {
-      "description": "Smaller than Earth but still geologically active."
+      "description": "Планета меньше, чем Земля, геологически активна."
     },
     "earth_like": {
-      "description": "Rocky with plate tectonics, liquid water, breathable air."
+      "description": "Каменистая планета с тектоникой плит, жидкой водой и пригодным для дыхания воздухом."
     },
     "super_earth": {
-      "description": "Large rocky world; higher gravity, thicker atmosphere."
+      "description": "Большая каменистая планета с высокой гравитацией и плотная атмосфера."
     },
     "mini_neptune": {
-      "description": "Small ice‐rich envelope over a rocky core."
+      "description": "Планета с небольшой, богатой льдом атмосферой и твердым ядром."
     },
     "ice": {
-      "description": "Frozen surface; possible subsurface ocean."
+      "description": "Ледяная планета, под которой, возможно, находится океан."
     },
     "ocean": {
-      "description": "Global liquid ocean, minimal landmasses."
+      "description": "Поверхность планеты представляет собой сплошной океан с редкими островами."
     },
     "lava_ocean": {
-      "description": "Partially molten surface, steam atmosphere."
+      "description": "Планета с расплавленной поверхностью и атмосферой из водяного пара."
     },
     "desert": {
-      "description": "Dry world, sparse vegetation or none at all."
+      "description": "Планета с сухим климатом и возможным наличием растительности."
     },
     "rainforest": {
-      "description": "Thick jungles, heavy precipitation, high biomass."
+      "description": "Планета с густыми джунглями, обильными осадками и высоким биоразнообразием."
     },
     "tundra": {
-      "description": "Cold, limited plant life, permafrost‐dominated."
+      "description": "Планета с холодным климатом, редкой растительностью и вечной мерзлотой."
     },
     "acid_ocean": {
-      "description": "Sulfuric or hydrochloric acid seas, corrosive skies."
+      "description": "Планета с кислотными облаками и морями."
     },
     "gas_giant": {
-      "description": "Massive hydrogen‐helium envelope, no solid surface."
+      "description": "Планета-гигант с гелиево-водородной атмосферой."
     },
     "hot_jupiter": {
-      "description": "Orbits extremely close to its star, blistering temperatures."
+      "description": "Планета-гигант, располеженная близко к звезде, экстремальная температура."
     },
     "warm_jupiter": {
-      "description": "Closer in than Jupiter but farther than a hot‐Jupiter."
+      "description": "Планета находится ближе к своей звезде, чем Юпитер, но дальше, чем горячий Юпитер."
     },
     "cold_jupiter": {
-      "description": "Far from its star, deep cold atmosphere."
+      "description": "Планета находится далеко от своей звезды; холодная атмсосфера."
     },
     "ice_giant": {
-      "description": "Rich in volatiles like water, ammonia; thick icy mantle."
+      "description": "Планета состоит из воды, метана и аммиака, имеет толстую ледяную мантию."
     },
     "ringed_gas_giant": {
-      "description": "Prominent rings, dozens of moons."
+      "description": "Планета с выраженными кольцами и большим количеством спутников."
     },
     "puffy": {
-      "description": "Extremely low density, bloated by stellar heating."
+      "description": "Планета, раздутая из-за нагрева, с чррезвычайно низкой плотностью."
     },
     "chthonian": {
-      "description": "Stripped gas giant core, volcanic, metal‐rich."
+      "description": "Планета - твердое ядро газового гиганта, потерявшего атмосферу."
     },
     "mega_iron": {
-      "description": "Almost pure iron/nickel, high density, magnetic."
+      "description": "Железо-никелевая планета с высокой плотностью и выраженным магнетизмом."
     },
     "carbon": {
-      "description": "Graphite and hydrocarbons dominate; tar‐like seas."
+      "description": "Планета с большим содержанием графита и углеводородов; смолоподобные моря."
     },
     "diamond": {
-      "description": "High pressure turns carbon shell into diamond layer."
+      "description": "Планеты, на которых высокое давление кристаллизирует углерод в алмазы."
     },
     "magma_planet": {
-      "description": "Surface is a global magma bath, constant eruptions."
+      "description": "Поверхность планеты покрыта магмой, постоянные извержения."
     },
     "plasma": {
-      "description": "Ionized atmosphere, glows under stellar wind."
+      "description": "Светящаяся планета с ионизированной атмосферой."
     },
     "magnetar": {
-      "description": "Ultra‐magnetic field, exotic radiation environment."
+      "description": "Нейтронная звезда с исключительно сильным магнитным полем."
     },
     "quark_planet": {
-      "description": "Hypothetical strange matter core, super‐dense."
+      "description": "Гипотетическая планета, ядро ​​из странной материи, сверхплотное."
     },
     "rogue": {
-      "description": "Free‐floating, cold, no host star."
+      "description": "Холодная планета, непривязанная гравитацией ни к одной звезде."
     },
     "habitable": {
-      "description": "Within habitable zone, stable climate, liquid water."
+      "description": "Планета в зоне обитаемости, со стабильным климатом и жидкой водой."
     },
     "dwarf": {
-      "description": "Small icy/rocky body, like Pluto or Ceres."
+      "description": "Малое тело из льда/камня масой с Плутон или Цереру."
     },
     "centaur": {
-      "description": "Icy‐rock hybrid between Jupiter and Neptune orbits."
+      "description": "Ледяной астероид, находящийся между орбитами Юпитера и Нептуна."
     },
     "planetesimal": {
-      "description": "Building block of planets, tiny rock/ice clump."
+      "description": "Малое образование, возникающее на последней стадии формирования планеты."
     },
     "c_type_asteroid": {
-      "description": "Carbonaceous, dark, primitive composition."
+      "description": "Темное углеродное небесное тело."
     },
     "s_type_asteroid": {
-      "description": "Silicate and nickel‐iron, brighter surface."
+      "description": "Астероид с кремниевым составом и умеренной яркостью альбедо."
     },
     "m_type_asteroid": {
-      "description": "Metallic, mostly nickel‐iron core fragments."
+      "description": "Астероид, состоящий из никеля и железа."
     },
     "trojan_asteroid": {
-      "description": "Co‐orbiting in Lagrange points of a larger planet."
+      "description": "Астероид, находящийся в точках Лагранжа более крупных небесных тел."
     },
     "comet": {
-      "description": "Dirty snowball: ice, dust, develops tail near star."
+      "description": "Большой грязный снежок с облаком из пыли, образует хвост рядом со звездой."
     },
     "short_period_comet": {
-      "description": "Orbits under 200 years, frequent visitor."
+      "description": "Комета с орбитальным периодом меньше 200 лет."
     },
     "long_period_comet": {
-      "description": "Orbits over 200 years, from distant Oort cloud."
+      "description": "Комета с орбитальным периодом больше 200 лет из облака Оорта."
     }
   }
 }
