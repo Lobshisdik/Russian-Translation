@@ -1,342 +1,342 @@
 {
   "1": {
-    "name": "Dead",
-    "message1": "%1 has fallen!",
-    "message2": "%1 is slain!",
+    "name": "Мертв",
+    "message1": "%1 падает замертво!",
+    "message2": "%1 убит!",
     "message3": "",
-    "message4": "%1 revives!"
+    "message4": "%1 возвращается к жизни!"
   },
   "2": {
-    "name": "Guard",
+    "name": "Защита",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "3": {
-    "name": "Immortal",
+    "name": "Бессмертие",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "4": {
-    "name": "Poison",
-    "message1": "%1 is poisoned!",
-    "message2": "%1 is poisoned!",
+    "name": "Отравление",
+    "message1": "%1 получает отравление!",
+    "message2": "%1 получает отравление!",
     "message3": "",
-    "message4": "%1 is no longer poisoned!"
+    "message4": "%1 исцеляется от отравления!"
   },
   "5": {
-    "name": "Blind",
-    "message1": "%1 is blinded!",
-    "message2": "%1 is blinded!",
+    "name": "Слепота",
+    "message1": "%1 получает слепоту!",
+    "message2": "%1 получает слепоту!",
     "message3": "",
-    "message4": "%1 is no longer blinded!"
+    "message4": "%1 исцеляется от слепоты!"
   },
   "6": {
-    "name": "Silence",
-    "message1": "%1 is silenced!",
-    "message2": "%1 is silenced!",
+    "name": "Молчание",
+    "message1": "%1 получает молчание!",
+    "message2": "%1 получает молчание!",
     "message3": "",
-    "message4": "%1 is no longer silenced!"
+    "message4": "%1 исцеляется от молчания!"
   },
   "7": {
-    "name": "Rage",
-    "message1": "%1 is enraged!",
-    "message2": "%1 is enraged!",
+    "name": "Ярость",
+    "message1": "%1 приходит в ярость!",
+    "message2": "%1 приходит в ярость!",
     "message3": "",
-    "message4": "%1 is no longer enraged!"
+    "message4": "%1 больше не в ярости!"
   },
   "8": {
-    "name": "Confusion",
-    "message1": "%1 is confused!",
-    "message2": "%1 is confused!",
+    "name": "Замешательство",
+    "message1": "%1 приходит в замешательство!",
+    "message2": "%1 приходит в замешательство!",
     "message3": "",
-    "message4": "%1 is no longer confused!"
+    "message4": "%1 больше не в замешательстве!"
   },
   "9": {
-    "name": "Charm",
-    "message1": "%1 is charmed!",
-    "message2": "%1 is charmed!",
+    "name": "Очарование",
+    "message1": "%1 попадает под чары!",
+    "message2": "%1 попадает под чары!",
     "message3": "",
-    "message4": "%1 is no longer charmed!"
+    "message4": "%1 больше не под действием чар!"
   },
   "10": {
-    "name": "Sleep",
-    "message1": "%1 falls asleep!",
-    "message2": "%1 falls asleep!",
-    "message3": "%1 is sleeping.",
-    "message4": "%1 wakes up!"
+    "name": "Сон",
+    "message1": "%1 засыпает!",
+    "message2": "%1 засыпает!",
+    "message3": "%1 спит.",
+    "message4": "%1 пробуждается!"
   },
   "11": {
-    "name": "Freeze",
-    "message1": "%1 is freezed solid and can’t move!",
-    "message2": "%1 is freezed solid!",
-    "message3": "%1 is freezed and can’t move!",
-    "message4": "%1 is no longer freezed!"
+    "name": "Заморозка",
+    "message1": "%1 замораживается и не может двигаться!",
+    "message2": "%1 замораживается!",
+    "message3": "%1 в заморозке и не может двигаться!",
+    "message4": "%1 больше не в заморозке!"
   },
   "12": {
-    "name": "Paralysis",
-    "message1": "%1 is paralyzed and can’t move!",
-    "message2": "%1 is paralyzed!",
-    "message3": "%1 is paralyzed and can’t move!",
-    "message4": "%1 is no longer paralyzed!"
+    "name": "Паралич",
+    "message1": "%1 под действием паралича и не может двигаться!",
+    "message2": "%1 попадает под действие паралича!",
+    "message3": "%1 под действием паралича и не может двигаться!",
+    "message4": "%1 больше не под действием паралича!"
   },
   "13": {
-    "name": "Stun",
-    "message1": "%1 lost balance!",
-    "message2": "%1 lost balance!",
-    "message3": "%1 is still off-balance...",
-    "message4": "%1 has regained balance!"
+    "name": "Ошеломление",
+    "message1": "%1 теряет равновесие!",
+    "message2": "%1 теряет равновесие!",
+    "message3": "%1 все еще не может восстановить равновесие...",
+    "message4": "%1 восстанавливает равновесие!"
   },
   "14": {
-    "name": "Locked on",
-    "message1": "%1 is locked on!",
-    "message2": "%1 is locked on",
-    "message3": "%1 is locked on!",
-    "message4": "%1's focus subsides!"
+    "name": "Фокус",
+    "message1": "%1 фокусируется!",
+    "message2": "%1 фокусируется",
+    "message3": "%1 держит фокус!",
+    "message4": "%1 перестает фокусироваться!"
   },
   "15": {
-    "name": "HP Regeneration",
+    "name": "Регенерация HP",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "16": {
-    "name": "MP Regeneration",
+    "name": "Регенерация MP",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "17": {
-    "name": "AP Regeneration",
+    "name": "Регенерация АP",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "18": {
-    "name": "Magic Reflection",
+    "name": "Магическое отражение",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "19": {
-    "name": "Protect",
+    "name": "Защита",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "20": {
-    "name": "Provoke",
-    "message1": "%1 became easier to hit!",
+    "name": "Провокация",
+    "message1": "%1 становится легкой целью!",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "21": {
-    "name": "Hide",
-    "message1": "%1 became harder to hit!",
+    "name": "Сокрытие",
+    "message1": "%1 теперь труднее взять в цель!",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "22": {
-    "name": "Counter Attack",
+    "name": "Контратака",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "23": {
-    "name": "Status Ailment Block",
+    "name": "Защита от негативных эффектов",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "24": {
-    "name": "Inspired",
-    "message1": "%1 is now inspired!",
+    "name": "Вдохновение",
+    "message1": "%1 получает Вдохновение!",
     "message2": "",
     "message3": "",
-    "message4": "%1 is no longer inspired!"
+    "message4": "%1 теряет Вдохновение!"
   },
   "25": {
-    "name": "Hot",
-    "message1": "%1 is now enveloped in an aura of fire.",
-    "message2": "%1 is now enveloped in an aura of fire.",
+    "name": "Сила огня",
+    "message1": "%1 окутывается огненной аурой.",
+    "message2": "%1 окутывается огненной аурой.",
     "message3": "",
     "message4": ""
   },
   "26": {
-    "name": "Cold",
-    "message1": "%1 is now enveloped in an freezing aura.",
-    "message2": "%1 is now enveloped in an freezing aura.",
+    "name": "Сила льда",
+    "message1": "%1 окутывается ледяной аурой.",
+    "message2": "%1 окутывается ледяной аурой.",
     "message3": "",
     "message4": ""
   },
   "27": {
-    "name": "Static",
-    "message1": "%1 is now enveloped in a static aura.",
-    "message2": "%1 is now enveloped in a static aura.",
+    "name": "Сила молнии",
+    "message1": "%1 окутывается электрической аурой.",
+    "message2": "%1 окутывается электрической аурой.",
     "message3": "",
-    "message4": "%1 is now grounded."
+    "message4": "%1 заземляется."
   },
   "28": {
-    "name": "Wet",
-    "message1": "%1 is now wet.",
-    "message2": "%1 is now wet.",
+    "name": "Влажность",
+    "message1": "%1 промокает.",
+    "message2": "%1 промокает.",
     "message3": "",
-    "message4": "%1 is dry."
+    "message4": "%1 высыхает."
   },
   "29": {
-    "name": "Half Encounters",
+    "name": "Меньше столкновений в два раза",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "30": {
-    "name": "Double Money/Items",
+    "name": "В два раза больше денег/предметов",
     "message1": "",
     "message2": "",
     "message3": "",
     "message4": ""
   },
   "31": {
-    "name": "Berserk",
-    "message1": "%1 is berserked!",
-    "message2": "%1 is berserked!",
-    "message3": "%1 is consumed by bloodlust!",
-    "message4": "%1's bloodlust subsides!"
+    "name": "Берсерк",
+    "message1": "%1 в состоянии берсерка!",
+    "message2": "%1 в состоянии берсерка!",
+    "message3": "%1 под контролем жажды крови!",
+    "message4": "%1 выходит из состояния берсерка!"
   },
   "32": {
-    "name": "Divine Shield",
-    "message1": "%1 is blessed with divine protection!",
-    "message2": "%1 is blessed with divine protection!",
+    "name": "Святой Щит",
+    "message1": "%1 получает благословение божественной защитой!",
+    "message2": "%1 получает благословение божественной защитой!",
     "message3": "",
-    "message4": "The divine protection around %1 fades away."
+    "message4": "%1 теряет божественную защиту."
   },
   "33": {
-    "name": "Death Mark",
-    "message1": "%1 is marked for death!",
-    "message2": "%1 is marked for death!",
-    "message3": "Death's mark lingers on %1...",
-    "message4": "The mark of death on %1 disappears."
+    "name": "Метка Смети",
+    "message1": "%1 получает метку смерти!",
+    "message2": "%1 получает метку смерти!",
+    "message3": "%1 все еще с меткой смерти...",
+    "message4": "%1 теряет метку смерти."
   },
   "34": {
-    "name": "Perfect Focus",
-    "message1": "%1 is in a state of perfect focus!",
-    "message2": "%1 is in a state of perfect focus!",
-    "message3": "%1 maintains perfect focus...",
-    "message4": "%1's focus returns to normal."
+    "name": "Идеальная Концетрация",
+    "message1": "%1 входит в состояние идеальной концетрации!",
+    "message2": "%1 входит в состояние идеальной концетрации!",
+    "message3": "%1 в идеальной концетрации...",
+    "message4": "%1 перестает концетрироваться."
   },
   "35": {
-    "name": "Shadow Veil",
-    "message1": "%1 is engulfed in shadow!",
-    "message2": "%1 is engulfed in shadow!",
-    "message3": "Shadows continue to swirl around %1...",
-    "message4": "The shadows surrounding %1 dissipate."
+    "name": "Теневая Завеса",
+    "message1": "%1 теряется в тенях!",
+    "message2": "%1 теряется в тенях!",
+    "message3": "%1 пытается выйти из окружения теней...",
+    "message4": "%1 выходит из окружения теней."
   },
   "36": {
-    "name": "Arcane Surge",
-    "message1": "%1 is burning with arcane power!",
-    "message2": "%1 is burning with arcane power!",
-    "message3": "Arcane energy surges through %1...",
-    "message4": "The arcane energy within %1 fades away."
+    "name": "Всплеск Арканы",
+    "message1": "%1 наполняется арканной силой!",
+    "message2": "%1 наполняется арканной силой!",
+    "message3": "%1 пылает от арканной силы...",
+    "message4": "%1 теряет энергию Арканы."
   },
   "37": {
-    "name": "Ethereal",
-    "message1": "%1 is now ethereal!",
-    "message2": "%1 is now ethereal!",
-    "message3": "%1 remains in ethereal form...",
-    "message4": "%1 returns to normal form."
+    "name": "Эфир",
+    "message1": "%1 становиться эфиром!",
+    "message2": "%1 становиться эфиром!",
+    "message3": "%1 остается в эфирной форме...",
+    "message4": "%1 возвращается в нормальную форму."
   },
   "38": {
-    "name": "Unbalanced",
-    "message1": "%1 is unbalanced!",
-    "message2": "%1 is unbalanced!",
-    "message3": "%1 struggles to maintain balance...",
-    "message4": "%1 regains proper balance."
+    "name": "Потеря Баланса",
+    "message1": "%1 теряет баланс!",
+    "message2": "%1 теряет баланс!",
+    "message3": "%1 пытается восстановить баланс...",
+    "message4": "%1 восстанавливает баланс."
   },
   "39": {
-    "name": "Life Link",
-    "message1": "%1 is linked to the party's life force!",
-    "message2": "%1 is linked to the party's life force!",
-    "message3": "%1 maintains the life link...",
-    "message4": "The life link with %1 is severed."
+    "name": "Связь Жизни",
+    "message1": "%1 связывается с жизненной силой группы!",
+    "message2": "%1 связывается с жизненной силой группы!",
+    "message3": "%1 сохраняет связь жизни...",
+    "message4": "%1 рвет свою связь жизни."
   },
   "40": {
-    "name": "Vulnerability",
-    "message1": "%1 is cursed with vulnerability!",
-    "message2": "%1 is cursed with vulnerability!",
-    "message3": "The curse of vulnerability persists on %1...",
-    "message4": "The vulnerability curse on %1 is lifted."
+    "name": "Уязвимость",
+    "message1": "%1 попадает под проклятие уязвимости!",
+    "message2": "%1 попадает под проклятие уязвимости!",
+    "message3": "%1 все еще под проклятием уязвимости...",
+    "message4": "%1 сбрасывает с себя проклятие уязвимости."
   },
   "41": {
-    "name": "Nausea",
-    "message1": "%1 is nauseated!",
-    "message2": "%1 is nauseated!",
+    "name": "Тошнота",
+    "message1": "%1 испытывает тошноту!",
+    "message2": "%1 испытывает тошноту!",
     "message3": "",
-    "message4": "%1 is no longer nauseated!"
+    "message4": "%1 больше не испытывает тошноту!"
   },
   "42": {
-    "name": "Drunk",
-    "message1": "%1 is drunk!",
-    "message2": "%1 is drunk!",
+    "name": "Опьянение",
+    "message1": "%1 в состоянии опьянения!",
+    "message2": "%1 в состоянии опьянения!",
     "message3": "",
-    "message4": "%1 has sobered up!"
+    "message4": "%1 трезвеет!"
   },
   "43": {
-    "name": "Burned",
-    "message1": "%1 is burned!",
-    "message2": "%1 is burned!",
+    "name": "Горение",
+    "message1": "%1 горит!",
+    "message2": "%1 горит!",
     "message3": "",
-    "message4": "%1 is no longer poisoned!"
+    "message4": "%1 больше не горит!"
   },
   "44": {
-    "name": "Infected",
-    "message1": "%1 is infected!",
-    "message2": "%1 is infected!",
+    "name": "Заражение",
+    "message1": "%1 заражается!",
+    "message2": "%1 заражается!",
     "message3": "",
-    "message4": "%1 is no longer infected!"
+    "message4": "%1 исцеляется от заражения!"
   },
   "45": {
-    "name": "Floating",
-    "message1": "%1 is floating!",
-    "message2": "%1 is floating!",
+    "name": "Левитация",
+    "message1": "%1 левитирует!",
+    "message2": "%1 левитирует!",
     "message3": "",
     "message4": ""
   },
   "46": {
-    "name": "Invisible",
-    "message1": "%1 is invisible!",
-    "message2": "%1 is invisible!",
+    "name": "Невидимость",
+    "message1": "%1 скрывается от глаз!",
+    "message2": "%1 скрывается от глаз!",
     "message3": "",
-    "message4": "%1 is no longer invisible!"
+    "message4": "%1 выходит из состояния невидимости!"
   },
   "47": {
-    "name": "Oily",
-    "message1": "%1 is now covered in oil",
-    "message2": "%1 is now covered il oil",
+    "name": "Масло",
+    "message1": "%1 теперь в масле",
+    "message2": "%1 теперь в масле",
     "message3": "",
     "message4": ""
   },
   "48": {
     "name": "Bleeding",
-    "message1": "%1 is bleeding!",
-    "message2": "%1 is bleeding!",
+    "message1": "%1 кровоточит!",
+    "message2": "%1 кровоточит!",
     "message3": "",
-    "message4": "%1 is no longer bleeding!"
+    "message4": "%1 больше не кровоточит!"
   },
   "49": {
-    "name": "Dodge",
+    "name": "Уворот",
     "message1": "",
     "message2": "",
     "message3": "",
