@@ -1,15 +1,15 @@
 {
-  "HP": "HP",
-  "MP": "MP",
-  "TP": "AP",
-  "ATT": "STR",
-  "DEF": "CON",
-  "M.ATT": "INT",
-  "M.DEF": "WIS",
-  "AGILITY": "DEX",
-  "LUCK": "PSI",
-  "ARCANE": "ARCANE",
-  "SUBSTANCE": "SUBSTANCE",
-  "STEALTH": "STEALTH",
-  "INTIMIDATION": "INTIMIDATION"
+  "HP": "ХП",
+  "MP": "МП",
+  "TP": "АП",
+  "ATT": "СИЛ",
+  "DEF": "ТЕЛ",
+  "M.ATT": "ИНТ",
+  "M.DEF": "МДР",
+  "AGILITY": "ЛОВ",
+  "LUCK": "ПСИ",
+  "ARCANE": "АРКАНА",
+  "SUBSTANCE": "СУБСТАНЦИЯ",
+  "STEALTH": "СКРЫТНОСТЬ",
+  "INTIMIDATION": "ЗАПУГИВАНИЕ"
 }
