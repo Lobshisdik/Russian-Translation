@@ -1,52 +1,52 @@
 {
   "supercluster": {
     "virgo_supercluster": {
-      "name": "Virgo Supercluster"
+      "name": "Сверхскопление Девы"
     },
     "hydra-centaurus_supercluster": {
-      "name": "Hydra-Centaurus Supercluster"
+      "name": "Сверхскопление Гидры-Центавра"
     },
     "pavo-indus_supercluster": {
-      "name": "Pavo-Indus Supercluster"
+      "name": "Сверхскопление Павлина — Индейца"
     },
     "southern_supercluster": {
-      "name": "Southern Supercluster"
+      "name": "Южное Сверхскопление"
     },
     "antlia_supercluster": {
-      "name": "Antlia Supercluster"
+      "name": "Скопление Насоса"
     },
     "centaurus_supercluster": {
-      "name": "Centaurus Supercluster"
+      "name": "Скопление Центавра"
     },
     "hydra_supercluster": {
-      "name": "Hydra Supercluster"
+      "name": "Скопление Гидры"
     },
     "fornax_supercluster": {
-      "name": "Fornax Supercluster"
+      "name": "Скопление Печи"
     },
     "norma_supercluster": {
-      "name": "Norma Supercluster"
+      "name": "Скопление Наугольника"
     },
     "great_attractor": {
-      "name": "Great Attractor"
+      "name": "Великий Аттрактор"
     },
     "perseus-pisces_supercluster": {
-      "name": "Perseus-Pisces Supercluster"
+      "name": "Сверхскопление Персея — Рыб"
     },
     "coma_supercluster": {
-      "name": "Coma Supercluster"
+      "name": "Сверхскопление Волос Вероники"
     },
     "hercules_superclusters": {
-      "name": "Hercules Superclusters"
+      "name": "Сверхскопление Геркулеса"
     },
     "shapley_supercluster": {
-      "name": "Shapley Supercluster"
+      "name": "Сверхскопление Шепли"
     },
     "sculptor_supercluster": {
-      "name": "Sculptor Supercluster"
+      "name": "Стена Скульптора"
     },
     "bootes_supercluster": {
-      "name": "Bootes Supercluster"
+      "name": "Войд Волопаса"
     }
   }
 }
