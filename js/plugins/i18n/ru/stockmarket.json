@@ -1,40 +1,40 @@
 {
   "stockmarket": {
     "info": {
-      "money": "Money: {value}",
-      "oilPrice": "OIL Price: {value}",
-      "oilShares": "OIL Shares: {value}",
-      "oilValue": "OIL Value: {value}",
-      "netWorth": "Net Worth: {value}",
-      "soulPrice": "SOUL Price: {value}",
-      "soulShares": "SOUL Shares: {value}",
-      "soulValue": "SOUL Value: {value}"
+      "money": "Деньги: {value}",
+      "oilPrice": "Цена НЕФТИ: {value}",
+      "oilShares": "Акций НЕФТИ: {value}",
+      "oilValue": "Ценность НЕФТИ: {value}",
+      "netWorth": "Чистые Активы: {value}",
+      "soulPrice": "Цена ДУШ: {value}",
+      "soulShares": "Акций ДУШ: {value}",
+      "soulValue": "Ценность ДУШ: {value}"
     },
     "graph": {
-      "oilLabel": "Oil",
-      "soulLabel": "Souls",
-      "oilCurrent": "Oil: {value}",
-      "soulCurrent": "Souls: {value}"
+      "oilLabel": "Нефть",
+      "soulLabel": "Души",
+      "oilCurrent": "Нефть: {value}",
+      "soulCurrent": "Души: {value}"
     },
     "commands": {
-      "buy": "Buy",
-      "sell": "Sell",
-      "oil": "Oil",
-      "souls": "Souls",
-      "cancel": "Cancel",
-      "sellAll": "Sell All",
-      "share": "Share",
-      "shares": "Shares"
+      "buy": "Купить",
+      "sell": "Продать",
+      "oil": "Нефть",
+      "souls": "Души",
+      "cancel": "Отмена",
+      "sellAll": "Продать Все",
+      "share": "Акция",
+      "shares": "Акции"
     },
     "titles": {
-      "buyWhich": "Buy Which Stock?",
-      "sellWhich": "Sell Which Stock?",
-      "buyHowMany": "Buy How Many {stock} Shares?",
-      "sellHowMany": "Sell How Many {stock} Shares?"
+      "buyWhich": "Купить какие акции?",
+      "sellWhich": "Продать какие акции?",
+      "buyHowMany": "Купить сколько акций на {stock}?",
+      "sellHowMany": "Продать сколько акций на {stock}?"
     },
     "stockNames": {
-      "oil": "Oil",
-      "souls": "Souls"
+      "oil": "Нефть",
+      "souls": "Души"
     }
   }
 }
