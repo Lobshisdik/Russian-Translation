@@ -1,508 +1,508 @@
 {
   "traits": {
     "obese": {
-      "name": "Obese",
-      "description": "Carries extra weight"
+      "name": "Ожирение",
+      "description": "Тащит на себе лишний вес"
     },
     "underweight": {
-      "name": "Underweight",
-      "description": "Lighter than average"
+      "name": "Недовес",
+      "description": "Легче среднего"
     },
     "claustrophobic": {
-      "name": "Claustrophobic",
-      "description": "Fears enclosed spaces"
+      "name": "Клаустрофобия",
+      "description": "Боится замкнутых пространств"
     },
     "trigger_happy": {
-      "name": "Trigger Happy",
-      "description": "Quick to attack"
+      "name": "Импульсивность",
+      "description": "Атакует без раздумий"
     },
     "paranoid": {
-      "name": "Paranoid",
-      "description": "Always on edge"
+      "name": "Параноидальность",
+      "description": "Всегда на взводе"
     },
     "athletic": {
-      "name": "Athletic",
-      "description": "Physically fit"
+      "name": "Атлетичность",
+      "description": "Крепкое телосложение"
     },
     "genius": {
-      "name": "Genius",
-      "description": "Intellectually gifted"
+      "name": "Гениальность",
+      "description": "Высокие интеллектуальные способности"
     },
     "lucky": {
-      "name": "Lucky",
-      "description": "Fortune favors you"
+      "name": "Удачливость",
+      "description": "Удача благоволит вам"
     },
     "narcoleptic": {
-      "name": "Narcoleptic",
-      "description": "Falls asleep randomly"
+      "name": "Нарколепсия",
+      "description": "Засыпает в случайные моменты"
     },
     "hot-headed": {
-      "name": "Hot-headed",
-      "description": "Quick to anger"
+      "name": "Вспыльчивый Характер",
+      "description": "Легко вывести из себя"
     },
     "defensive": {
-      "name": "Defensive",
-      "description": "Prefers protection"
+      "name": "Оборонительный Стиль",
+      "description": "Предпочитает защиту"
     },
     "marksman": {
-      "name": "Marksman",
-      "description": "Expert with ranged weapons"
+      "name": "Меткий Стрелок",
+      "description": "Эксперт по оружию дальнего боя"
     },
     "nearsighted": {
-      "name": "Nearsighted",
-      "description": "Poor vision without glasses"
+      "name": "Близорукость",
+      "description": "Плохо видит без очков"
     },
     "lombrosian_physiognomy": {
-      "name": "Lombrosian Physiognomy",
-      "description": "Suspicious appearance increases crime detection"
+      "name": "Ломброзианская Физиогномика",
+      "description": "Из-за подозрительной внешности вас чаще подозревают"
     },
     "hydrophobic": {
-      "name": "Hydrophobic",
-      "description": "Cannot swim, fears water"
+      "name": "Гидрофобия",
+      "description": "Боится воды, не может плавать"
     },
     "silvertongue": {
-      "name": "Silvertongue",
-      "description": "Master of persuasion and speech"
+      "name": "Красноречивость",
+      "description": "Умение говорить красиво и убедительно"
     },
     "vegan": {
-      "name": "Vegan",
-      "description": "Cannot consume animal products"
+      "name": "Веганство",
+      "description": "Не ест продукты животного происхождения."
     },
     "vegetarian": {
-      "name": "Vegetarian",
-      "description": "Cannot consume meat"
+      "name": "Вегетарианство",
+      "description": "Не может есть мясо"
     },
     "impostor_syndrome": {
-      "name": "Impostor Syndrome",
-      "description": "Doubts own abilities constantly"
+      "name": "Синдром Самозванца",
+      "description": "Постоянно сомневается в собственных способностях"
     },
     "vampire": {
-      "name": "Vampire",
-      "description": "Undead creature of the night"
+      "name": "Вампиризм",
+      "description": "Бессмертное создание ночи"
     },
     "insomniac": {
-      "name": "Insomniac",
-      "description": "Cannot sleep properly"
+      "name": "Бессонница",
+      "description": "Не может нормально уснуть"
     },
     "alcoholic": {
-      "name": "Alcoholic",
-      "description": "Dependent on alcohol"
+      "name": "Алкоголизм",
+      "description": "Зависимость от алкоголя"
     },
     "germaphobe": {
-      "name": "Germaphobe",
-      "description": "Fears contamination and disease"
+      "name": "Гермофобия",
+      "description": "Боится загрязнений и заражений"
     },
     "adrenaline_junkie": {
-      "name": "Adrenaline Junkie",
-      "description": "Thrives on danger and excitement"
+      "name": "Андреналиновая Наркомания",
+      "description": "Зависим от опасности и острых ощущений"
     },
     "pacifist": {
-      "name": "Pacifist",
-      "description": "Abhors violence"
+      "name": "Пацифизм",
+      "description": "Осуждает любое насилие"
     },
     "pyromaniac": {
-      "name": "Pyromaniac",
-      "description": "Obsessed with fire"
+      "name": "Пиромания",
+      "description": "Одержим огнем"
     },
     "hoarder": {
-      "name": "Hoarder",
-      "description": "Cannot let go of items"
+      "name": "Синдром Плюшкина",
+      "description": "Не может выбросить вещи"
     },
     "minimalist": {
-      "name": "Minimalist",
-      "description": "Prefers simplicity and few possessions"
+      "name": "Минимализм",
+      "description": "Предпочитает простоту и минимум вещей"
     },
     "compulsive_liar": {
-      "name": "Compulsive Liar",
-      "description": "Cannot help but deceive"
+      "name": "Псевдология",
+      "description": "Не может не обмануть"
     },
     "perfectionist": {
-      "name": "Perfectionist",
-      "description": "Everything must be flawless"
+      "name": "Перфекционизм",
+      "description": "Одержимость безупречностью"
     },
     "masochist": {
-      "name": "Masochist",
-      "description": "Finds strength in pain"
+      "name": "Мазохизм",
+      "description": "Находит удовольствие в боли"
     },
     "sociopath": {
-      "name": "Sociopath",
-      "description": "Lacks empathy and remorse"
+      "name": "Социопатия",
+      "description": "Недостаток эмпатии и сожаления"
     },
     "empath": {
-      "name": "Empath",
-      "description": "Feels others' emotions deeply"
+      "name": "Гиперэмпатия",
+      "description": "Глубоко чувствует эмоции других"
     },
     "technophobe": {
-      "name": "Technophobe",
-      "description": "Fears modern technology"
+      "name": "Технофобия",
+      "description": "Боится современных технологий"
     },
     "tech_savvy": {
-      "name": "Tech Savvy",
-      "description": "Master of modern technology"
+      "name": "Техническая Эрудиция",
+      "description": "Эксперт в современных технологиях"
     },
     "superstitious": {
-      "name": "Superstitious",
-      "description": "Believes in omens and signs"
+      "name": "Суеверность",
+      "description": "Верит в приметы и предзнаменования"
     },
     "skeptic": {
-      "name": "Skeptic",
-      "description": "Questions everything"
+      "name": "Скептицизм",
+      "description": "Подвергает все под сомнение"
     },
     "night_owl": {
-      "name": "Night Owl",
-      "description": "More active at night"
+      "name": "Хронотип 'Сова'",
+      "description": "Максимальная активность ночью"
     },
     "early_bird": {
-      "name": "Early Bird",
-      "description": "More active in morning"
+      "name": "Хронотип 'Жаворонок'",
+      "description": "Максимальная активность утром"
     },
     "workaholic": {
-      "name": "Workaholic",
-      "description": "Obsessed with productivity"
+      "name": "Трудоголизм",
+      "description": "Одержимость работой"
     },
     "photographic_memory": {
-      "name": "Photographic Memory",
-      "description": "Remembers everything in perfect detail"
+      "name": "Фотографическая Память",
+      "description": "Помнит все в мельчайших деталях"
     },
     "colorblind": {
-      "name": "Colorblind",
-      "description": "Cannot distinguish certain colors"
+      "name": "Дальтонизм",
+      "description": "Не может различать некоторые цвета"
     },
     "ambidextrous": {
-      "name": "Ambidextrous",
-      "description": "Skilled with both hands equally"
+      "name": "Амбидекстрия",
+      "description": "Равное развитие функций обеих рук"
     },
     "blind": {
-      "name": "Blind",
-      "description": "Cannot see, relies on other senses"
+      "name": "Слепота",
+      "description": "Не может видеть, полагается на другие чувства"
     },
     "deaf": {
-      "name": "Deaf",
-      "description": "Cannot hear sounds"
+      "name": "глухота",
+      "description": "Не может слышать звуки"
     },
     "agoraphobic": {
-      "name": "Agoraphobic",
-      "description": "Fears open or crowded spaces"
+      "name": "Агорафобия",
+      "description": "Боится открытых или переполненных мест"
     },
     "sadist": {
-      "name": "Sadist",
-      "description": "Derives pleasure from others' pain"
+      "name": "Садизм",
+      "description": "Получает удовольствие от чужой боли"
     },
     "hemophobic": {
-      "name": "Hemophobic",
-      "description": "Fears blood and injury"
+      "name": "Гемофобия",
+      "description": "Боится крови и ран"
     },
     "kleptomaniac": {
-      "name": "Kleptomaniac",
-      "description": "Compulsively steals items"
+      "name": "Клептомания",
+      "description": "Постоянно ворует предметы"
     },
     "ascetic": {
-      "name": "Ascetic",
-      "description": "Practices extreme self-discipline"
+      "name": "Аскетизм",
+      "description": "Упражняется в самодисциплине"
     },
     "acrophobic": {
-      "name": "Acrophobic",
-      "description": "Fears heights"
+      "name": "Акрофобия",
+      "description": "Боится высоты"
     },
     "synesthete": {
-      "name": "Synesthete",
-      "description": "Experiences crossed sensory perceptions"
+      "name": "Синестезия",
+      "description": "Испытывает перекрестные сенсорные восприятия"
     },
     "berserker": {
-      "name": "Berserker",
-      "description": "Enters uncontrollable rage in combat"
+      "name": "Берсерк",
+      "description": "В бою впадает в неконтролируемую ярость"
     },
     "coward": {
-      "name": "Coward",
-      "description": "Quick to flee from danger"
+      "name": "Трусость",
+      "description": "Чаще всего убегает от опасности"
     },
     "xenophobic": {
-      "name": "Xenophobic",
-      "description": "Fears foreigners and outsiders"
+      "name": "Ксенофобия",
+      "description": "Боится иностранцев и чужаков"
     },
     "hypochondriac": {
-      "name": "Hypochondriac",
-      "description": "Obsessively worried about illness"
+      "name": "Ипохондрия",
+      "description": "Постоянно боится заболеть"
     },
     "eidetic_reader": {
-      "name": "Eidetic Reader",
-      "description": "Can recall any text perfectly"
+      "name": "Эйдетизм",
+      "description": "Может идеально воспроизвести любой текст"
     },
     "amblyopic": {
-      "name": "Amblyopic",
-      "description": "Has lazy eye condition"
+      "name": "Амблиопия",
+      "description": "Страдает ленивым глазом"
     },
     "prosopagnosic": {
-      "name": "Prosopagnosic",
-      "description": "Cannot recognize faces"
+      "name": "Прозопагнозия",
+      "description": "Не может узнавать лица"
     },
     "megalomaniac": {
-      "name": "Megalomaniac",
-      "description": "Delusions of grandeur and power"
+      "name": "Мегаломания",
+      "description": "Бред величия"
     },
     "albinism": {
-      "name": "Albinism",
-      "description": "Lacks melanin pigmentation"
+      "name": "Альбинизм",
+      "description": "Отсутствие пигмента меланина"
     },
     "gigantism": {
-      "name": "Gigantism",
-      "description": "Excessive growth hormone production"
+      "name": "Гигантизм",
+      "description": "Избыток гормона роста"
     },
     "dwarfism": {
-      "name": "Dwarfism",
-      "description": "Genetic short stature"
+      "name": "Карликовость",
+      "description": "Генетически обусловленный низкий рост"
     },
     "hemophilia": {
-      "name": "Hemophilia",
-      "description": "Blood doesn't clot properly"
+      "name": "Гемофилия",
+      "description": "Нарушение свертываемости крови"
     },
     "marfan_syndrome": {
-      "name": "Marfan Syndrome",
-      "description": "Connective tissue disorder"
+      "name": "Синдром Марфана",
+      "description": "Заболевание соединительной ткани"
     },
     "hypermobility": {
-      "name": "Hypermobility",
-      "description": "Joints extend beyond normal range"
+      "name": "Гипермобильность",
+      "description": "Суставы имеют чрезмерную подвижность"
     },
     "polydactyly": {
-      "name": "Polydactyly",
-      "description": "Born with extra fingers or toes"
+      "name": "Полидактилия",
+      "description": "Лишние пальцы с рождения"
     },
     "hypertrichosis": {
-      "name": "Hypertrichosis",
-      "description": "Excessive body hair growth"
+      "name": "Гипертрихоз",
+      "description": "Избыточный рост волос на теле"
     },
     "thalassemia": {
-      "name": "Thalassemia",
-      "description": "Inherited blood disorder"
+      "name": "Талассемия",
+      "description": "Наследственное заболевание крови"
     },
     "heterochromia": {
-      "name": "Heterochromia",
-      "description": "Eyes of different colors"
+      "name": "Гетерохромия",
+      "description": "Глаза разных цветов"
     },
     "sensitive": {
-      "name": "Sensitive",
-      "description": "Sensitive to PSI forces"
+      "name": "Чувствительность",
+      "description": "Чувствительность к ПСИ-силам"
     },
     "sickle_cell_trait": {
-      "name": "Sickle Cell Trait",
-      "description": "Altered red blood cell shape"
+      "name": "СКА",
+      "description": "Измененная форма эритроцитов"
     },
     "ehlers-danlos": {
-      "name": "Ehlers-Danlos",
-      "description": "Affects connective tissues"
+      "name": "Элерс-Данло",
+      "description": "Заболевание соединительной ткани"
     },
     "congenital_analgesia": {
-      "name": "Congenital Analgesia",
-      "description": "Cannot feel physical pain"
+      "name": "Врожденная Анальгезия",
+      "description": "Не чувствует физической боли"
     },
     "savant_syndrome": {
-      "name": "Savant Syndrome",
-      "description": "Exceptional ability in specific area"
+      "name": "Синдром Саванта",
+      "description": "Выдающаяся способность в определенной области"
     },
     "asthmatic": {
-      "name": "Asthmatic",
-      "description": "Difficulty breathing under stress"
+      "name": "Астма",
+      "description": "Задыхается в состоянии стресса"
     },
     "adhd": {
-      "name": "ADHD",
-      "description": "Attention deficit, hyperactive impulses"
+      "name": "СДВГ",
+      "description": "Дефицит внимания, гиперактивность"
     },
     "ocd": {
-      "name": "OCD",
-      "description": "Obsessive compulsive patterns"
+      "name": "ОКР",
+      "description": "Навязчивые образы и действия"
     },
     "dyslexic": {
-      "name": "Dyslexic",
-      "description": "Difficulty processing written language"
+      "name": "Дислексия",
+      "description": "Трудности в овладевании навыками чтения"
     },
     "dyscalculic": {
-      "name": "Dyscalculic",
-      "description": "Difficulty with numbers and math"
+      "name": "Дискалькулия",
+      "description": "Трудности в овладевании навыками арифметики"
     },
     "charismatic": {
-      "name": "Charismatic",
-      "description": "Natural charm and influence"
+      "name": "Харизматичность",
+      "description": "Естественное обаяние и влияние"
     },
     "extrovert": {
-      "name": "Extrovert",
-      "description": "Energized by social interaction"
+      "name": "Экстраверт",
+      "description": "Восполняет силы во время общения"
     },
     "introvert": {
-      "name": "Introvert",
-      "description": "Drained by social interaction"
+      "name": "Интроверт",
+      "description": "Истощается во время общения"
     },
     "chronic_pain": {
-      "name": "Chronic Pain",
-      "description": "Constant physical discomfort"
+      "name": "Хроническая Боль",
+      "description": "Постоянный физический дискомфорт"
     },
     "ambitious": {
-      "name": "Ambitious",
-      "description": "Driven to achieve greatness"
+      "name": "Амбициозность",
+      "description": "Стремление к величию"
     },
     "slothful": {
-      "name": "Slothful",
-      "description": "Prefers minimal effort"
+      "name": "Леность",
+      "description": "Предпочитает затрачивать минимум энергии"
     },
     "greedy": {
-      "name": "Greedy",
-      "description": "Obsessed with wealth and possessions"
+      "name": "Жадность",
+      "description": "Одержимость богатством и имуществом"
     },
     "generous": {
-      "name": "Generous",
-      "description": "Freely gives to others"
+      "name": "Щедрость",
+      "description": "Охотно делится с другими"
     },
     "loyal": {
-      "name": "Loyal",
-      "description": "Unwavering devotion to allies"
+      "name": "Лояльность",
+      "description": "Непоколебимая преданность союзникам"
     },
     "treacherous": {
-      "name": "Treacherous",
-      "description": "Cannot be trusted"
+      "name": "Вероломство",
+      "description": "Не заслуживает доверия"
     },
     "proud": {
-      "name": "Proud",
-      "description": "Excessive self-regard"
+      "name": "Гордыня",
+      "description": "Завышенная самооценка"
     },
     "humble": {
-      "name": "Humble",
-      "description": "Modest and unassuming"
+      "name": "Смиренность",
+      "description": "Скромность и непритязательность"
     },
     "gluttonous": {
-      "name": "Gluttonous",
-      "description": "Excessive consumption of food"
+      "name": "Обжорство",
+      "description": "Чрезмерное потребление пищи"
     },
     "hedonist": {
-      "name": "Hedonist",
-      "description": "Seeks pleasure above all"
+      "name": "Гедонизм",
+      "description": "Прежде всего стремится к удовольствию"
     },
     "stoic": {
-      "name": "Stoic",
-      "description": "Endures pain without complaint"
+      "name": "Стоицизм",
+      "description": "Терпит боль без жалоб"
     },
     "tracker": {
-      "name": "Tracker",
-      "description": "Expert at following trails"
+      "name": "Ищейка",
+      "description": "Эксперт в поиске по следу"
     },
     "survivalist": {
-      "name": "Survivalist",
-      "description": "Thrives in harsh environments"
+      "name": "Сурвивализм",
+      "description": "В суровых условиях чувствует себя как рыба в воде"
     },
     "tactician": {
-      "name": "Tactician",
-      "description": "Master of strategy and planning"
+      "name": "Тактик",
+      "description": "Мастер стратегии и планирования"
     },
     "cursed": {
-      "name": "Cursed",
-      "description": "Bearer of supernatural misfortune"
+      "name": "Проклятие",
+      "description": "Носитель мистических несчастий"
     },
     "blessed": {
-      "name": "Blessed",
-      "description": "Touched by divine favor"
+      "name": "Благословение",
+      "description": "Тронутый божественной благодатью"
     },
     "caffeine_dependent": {
-      "name": "Caffeine Dependent",
-      "description": "Requires caffeine to function normally"
+      "name": "Кофеиновая Зависимость",
+      "description": "Для нормальной работы требуется кофеин"
     },
     "nicotine_addict": {
-      "name": "Nicotine Addict",
-      "description": "Dependent on tobacco products"
+      "name": "Никотиновая Зависимость",
+      "description": "Пристраствие к табачной продукции"
     },
     "gambling_addict": {
-      "name": "Gambling Addict",
-      "description": "Compulsively gambles resources"
+      "name": "Лудомания",
+      "description": "Постоянно тратится на азартные игры"
     },
     "drug_dependent": {
-      "name": "Drug Dependent",
-      "description": "Relies on substances to cope"
+      "name": "Наркомания",
+      "description": "Использует вещества, чтобы уйти от проблем"
     },
     "restrictive_eating": {
-      "name": "Restrictive Eating",
-      "description": "Severely limits food intake"
+      "name": "Ограниченное Питание",
+      "description": "Строго ограничивает потребление пищи"
     },
     "binge_eating": {
-      "name": "Binge Eating",
-      "description": "Episodes of uncontrolled eating"
+      "name": "Переедание",
+      "description": "Эпизоды неконтролируемого переедания"
     },
     "nyctophobic": {
-      "name": "Nyctophobic",
-      "description": "Fears darkness"
+      "name": "Никтофобия",
+      "description": "Боится темноты"
     },
     "thanatophobic": {
-      "name": "Thanatophobic",
-      "description": "Fears death intensely"
+      "name": "Танатофобия",
+      "description": "Панически боится смерти"
     },
     "entomophobic": {
-      "name": "Entomophobic",
-      "description": "Fears insects and bugs"
+      "name": "Инсектофобия",
+      "description": "Боится насекомых и жуков"
     },
     "ophidiophobic": {
-      "name": "Ophidiophobic",
-      "description": "Fears snakes"
+      "name": "Офидиофобия",
+      "description": "Боится змей"
     },
     "cynophobic": {
-      "name": "Cynophobic",
-      "description": "Fears dogs"
+      "name": "Кинофобия",
+      "description": "Боится собак"
     },
     "pyrophobic": {
-      "name": "Pyrophobic",
-      "description": "Fears fire"
+      "name": "Пирофобия",
+      "description": "Боится огня"
     },
     "trypophobic": {
-      "name": "Trypophobic",
-      "description": "Fears clustered holes or patterns"
+      "name": "Трипофобия",
+      "description": "Боится скоплений отверстий"
     },
     "atychiphobic": {
-      "name": "Atychiphobic",
-      "description": "Fears failure"
+      "name": "Атихифобия",
+      "description": "Боится неудач"
     },
     "autophobic": {
-      "name": "Autophobic",
-      "description": "Fears being alone"
+      "name": "Аутофобия",
+      "description": "Боится одиночества"
     },
     "devout": {
-      "name": "Devout",
-      "description": "Deeply religious and faithful"
+      "name": "Набожность",
+      "description": "Глубокая вера в бога с соблюдением всех обрядов"
     },
     "atheist": {
-      "name": "Atheist",
-      "description": "Rejects religious beliefs"
+      "name": "Атеизм",
+      "description": "Отвергает религиозные убеждения"
     },
     "heretic": {
-      "name": "Heretic",
-      "description": "Branded as religious outcast"
+      "name": "Еретичество",
+      "description": "Считается религиозным изгоем"
     },
     "pilgrim": {
-      "name": "Pilgrim",
-      "description": "Journeys for spiritual purpose"
+      "name": "Паломник",
+      "description": "Путешествует с духовной целью"
     },
     "excommunicated": {
-      "name": "Excommunicated",
-      "description": "Expelled from religious community"
+      "name": "Отлучение",
+      "description": "Исключение из религиозной общины"
     },
     "monk-trained": {
-      "name": "Monk-Trained",
-      "description": "Disciplined in monastic ways"
+      "name": "Обучение Монахами",
+      "description": "Дисциплинируется монашеским образом жизни"
     },
     "prophetic": {
-      "name": "Prophetic",
-      "description": "Experiences visions of future"
+      "name": "Провидец",
+      "description": "Лицезреет видения будущего"
     },
     "noble": {
-      "name": "Noble",
-      "description": "Born into aristocracy"
+      "name": "Знать",
+      "description": "Живет в аристократической семье"
     },
     "street_urchin": {
-      "name": "Street Urchin",
-      "description": "Grew up in poverty"
+      "name": "Беспризорность",
+      "description": "Детсво прошло без семьи"
     },
     "orphan": {
-      "name": "Orphan",
-      "description": "No living parents"
+      "name": "Сирота",
+      "description": "В дестве умерли родители"
     },
     "bastard": {
-      "name": "Bastard",
-      "description": "Born outside of wedlock"
+      "name": "Бастард",
+      "description": "Рождение вне брака"
     },
     "heir": {
       "name": "Heir",
