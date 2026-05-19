@@ -1,344 +1,344 @@
 {
   "ui": {
-    "title": "Tarot Reading",
-    "past": "Past",
-    "present": "Present",
-    "future": "Future",
-    "instruction": "Click on a card to reveal its meaning",
-    "complete": "Your reading is complete. Press ESC to exit.",
-    "upright": "Upright",
-    "reversed": "Reversed",
-    "npcTitle": "Reading Tarot for %1"
+    "title": "Гадание на Таро",
+    "past": "Прошлое",
+    "present": "Настоящее",
+    "future": "Будущее",
+    "instruction": "Нажмите на карту, чтобы узнать её значение",
+    "complete": "Ваше гадание окончено. Нажмите ESC для выхода.",
+    "upright": "Прямая",
+    "reversed": "Перевернутая",
+    "npcTitle": "Гадание на Таро за %1"
   },
   "cards": {
     "The Fool": {
-      "name": "The Fool",
+      "name": "Дурак",
       "upright": [
-        "New beginnings await you with childlike wonder and endless possibilities.",
-        "Take a leap of faith and trust in the journey ahead of you.",
-        "Embrace spontaneity and let your free spirit guide your path.",
-        "Adventure calls to you, urging you to step into the unknown."
+        "Вас ждут новые начинания, полные детского восторга и безграничных возможностей.",
+        "Сделайте шаг навстречу неизвестности и доверьтесь предстоящему путешествию.",
+        "Не бойтесь действовать спонтанно, позвольте своему сердцу направить вас.",
+        "Приключения взывают к вам - не бойтесь шагнуть в неизвестность."
       ],
       "reversed": [
-        "Recklessness clouds your judgment and leads to poor decisions.",
-        "Fear of taking necessary risks holds you back from growth.",
-        "Naivety may cause you to overlook important warning signs.",
-        "Chaos and lack of direction create unnecessary obstacles."
+        "Безрассудство затмевает ваш разум и ведет вас к необдуманным поступкам.",
+        "Страх перед принятием решений замедляет ваш личностый рост.",
+        "Наивность скрывает от вас тревожные сигналы.",
+        "Хаос и отсутствие ориентиров создавают препятствия на вашем пути."
       ]
     },
     "The Magician": {
-      "name": "The Magician",
+      "name": "Маг",
       "upright": [
-        "You possess all the tools needed to manifest your desires.",
-        "Your willpower and determination create powerful transformations.",
-        "Focus your energy to turn dreams into tangible reality.",
-        "Mastery of your skills brings success within reach."
+        "У вас есть все возможности для воплощения своих желаний.",
+        "Ваше сила воли и решимость изменят вашу жизнь к лучшему.",
+        "Направьте свою силу на претворение ваших мечтаний в жизнь.",
+        "Ваше мастерство принесет успех в любимом деле."
       ],
       "reversed": [
-        "Manipulation and deceit may be present in your surroundings.",
-        "Your talents remain untapped due to lack of confidence.",
-        "Illusions and trickery cloud the truth from your vision.",
-        "Poor planning prevents your goals from materializing."
+        "В вашем окружении витают манипуляции и обманы.",
+        "Неуверенность в себе мешает раскрытию вашего потенциала.",
+        "Обманы и мистификации заслоняют истину от вашего взора.",
+        "Плохое планирование мешает достижению ваших целей."
       ]
     },
     "The High Priestess": {
-      "name": "The High Priestess",
+      "name": "Верховная Жрица",
       "upright": [
-        "Trust your intuition as it guides you toward hidden truths.",
-        "Sacred knowledge reveals itself through quiet contemplation.",
-        "The subconscious mind holds answers to your deepest questions.",
-        "Mystery and feminine wisdom illuminate your spiritual path."
+        "Доверьтесь своей интуиции, и она направит вас к истине.",
+        "Сакральные знания раскроются перед вами через тихое созерцание.",
+        "Подсознание даст ответы на ваши самые сокровенные вопросы.",
+        "Тайна и женская мудрость освещают ваш духовный путь."
       ],
       "reversed": [
-        "Disconnection from your inner voice creates confusion.",
-        "Secrets and hidden agendas may disrupt your peace.",
-        "Ignoring your intuition leads you away from truth.",
-        "Surface-level thinking prevents deeper understanding."
+        "Невнимание внутреннему голосу порождает путаницу в вашем сознании.",
+        "Сплетни и скрытые интриги могут нарушить ваш покой.",
+        "Игнорирование интуиции уводит вас от истины.",
+        "Поверхностное мышление мешает глубокому пониманию."
       ]
     },
     "The Empress": {
-      "name": "The Empress",
+      "name": "Императрица",
       "upright": [
-        "Abundance flows naturally into all areas of your life.",
-        "Creative energy blossoms and brings new projects to fruition.",
-        "Nurturing relationships provide comfort and emotional fulfillment.",
-        "Natural beauty and sensuality enhance your personal magnetism."
+        "Изобилие присутствует во всех сферах вашей жизни.",
+        "Энергия созидания расцветет и принесет плоды в новых начинаниях.",
+        "Забота в отношениях обеспечивает гармонию и эмоциональный баланс.",
+        "Естественная красота и чувственность повысят ваше обаяние."
       ],
       "reversed": [
-        "Creative blocks stifle your self-expression and growth.",
-        "Neglecting self-care depletes your energy reserves.",
-        "Codependency creates imbalance in your relationships.",
-        "Material concerns overshadow emotional needs."
+        "Творческий кризис мешает ваше самовыражению.",
+        "Пренебрежение заботой о себе истощает ваши энергетические ресурсы.",
+        "Нездоровая созависимость нарушает баланс в ваших отношениях.",
+        "Заботы о материальном затмевают духовные нужды."
       ]
     },
     "The Emperor": {
-      "name": "The Emperor",
+      "name": "Император",
       "upright": [
-        "Leadership and authority position you for greater success.",
-        "Structure and discipline create a solid foundation for growth.",
-        "Your protective nature shields loved ones from harm.",
-        "Strategic thinking leads to long-term achievements."
+        "Лидерство и авторитет помогут достичь большего успеха.",
+        "Стойкость и дисциплина - прочная основа для личностного роста.",
+        "Ваша защитная натура бережет близких от невзгод.",
+        "Стратегическое мышление приведет вас к долгосрочным целям."
       ],
       "reversed": [
-        "Tyrannical behavior damages important relationships.",
-        "Rigidity prevents adaptation to changing circumstances.",
-        "Abuse of power creates resistance and rebellion.",
-        "Lack of self-discipline undermines your authority."
+        "Роль тирана в отношениях ведет к их разрушению.",
+        "Жесткость препятствует своевременной адаптации.",
+        "Злоупотребление властью порождает сопротивление и восстание.",
+        "Недостаток дисциплинированности подрывает ваш авторитет."
       ]
     },
     "The Hierophant": {
-      "name": "The Hierophant",
+      "name": "Первосвященник",
       "upright": [
-        "Traditional wisdom provides guidance for current challenges.",
-        "Spiritual teachings deepen your understanding of life's purpose.",
-        "Conformity to established systems brings acceptance and belonging.",
-        "Mentorship accelerates your learning and personal development."
+        "Мудрость поколений поможет вам преодолеть жизненные препятствия.",
+        "Духовные знания помогут вам познать смысл жизни.",
+        "Принятие традиций принесет вам принятие и свое место в мире.",
+        "Наставничество ускорит ваши обучение и личностный рост."
       ],
       "reversed": [
-        "Rebellion against tradition opens new paths of understanding.",
-        "Dogmatic thinking limits your perspective and growth.",
-        "Question authority to discover your authentic truth.",
-        "Unconventional approaches yield surprising results."
+        "Отказ от традиций откроет вам новые пути к пониманию.",
+        "Догматическое мышление ограничивает ваш личностный рост.",
+        "Ставьте суждения под сомнение, чтобы раскрыть свое истинное Я.",
+        "Нестандартные подходы дадут удивительные результаты."
       ]
     },
     "The Lovers": {
-      "name": "The Lovers",
+      "name": "Влюбленные",
       "upright": [
-        "Deep connections and meaningful relationships enrich your life.",
-        "Important choices align with your values and desires.",
-        "Harmony between opposites creates perfect balance.",
-        "Love in all forms elevates your consciousness."
+        "Глубокие связи и чувства наполняют вашу жизнь.",
+        "Важные решения должны опираться на ваши ценности и желания.",
+        "Гармония противоположностей создает идеальный баланс.",
+        "Любовь во всех её проявлениях возвышает ваше сознание."
       ],
       "reversed": [
-        "Disharmony in relationships requires honest communication.",
-        "Inner conflicts prevent you from making clear decisions.",
-        "Temptation leads you away from your true path.",
-        "Imbalanced partnerships drain your emotional energy."
+        "Разногласия в отношениях требуют взаимоуважения.",
+        "Внутренние конфликты подталкивают вас на необдуманные поступки.",
+        "Искушение уводит вас с истинного пути.",
+        "Отсуствие баласна в отношениях истощает ваши эмоциональную ресурсы."
       ]
     },
     "The Chariot": {
-      "name": "The Chariot",
+      "name": "Колесница",
       "upright": [
-        "Determination and willpower drive you toward victory.",
-        "Opposing forces unite under your skilled direction.",
-        "Self-discipline propels you past any obstacle.",
-        "Triumphant progress rewards your focused efforts."
+        "Решимость и сила воли приведут вас к победе.",
+        "Под вашим умелым руководством противоборствующие силы объединяются.",
+        "Дисциплинированность поможет вам преодолеть любые препятствия.",
+        "Триумф ожидает вас за ваши старания."
       ],
       "reversed": [
-        "Lack of direction scatters your energy ineffectively.",
-        "Aggression and force create unnecessary conflict.",
-        "Loss of control derails your carefully laid plans.",
-        "Opposition seems insurmountable without proper strategy."
+        "Отсутствие ориентиров приводит к неэффективному распределению ресурсов.",
+        "Агрессивность и применение силы порождают ненужные конфликты.",
+        "Утрата контроля над ситуацией рушит ваши планы.",
+        "Препятствия непреодолимы без надлежащей стратегии."
       ]
     },
     "Strength": {
-      "name": "Strength",
+      "name": "Сила",
       "upright": [
-        "Inner strength and courage overcome external challenges.",
-        "Gentle persistence tames the wildest aspects of life.",
-        "Compassion transforms potential enemies into allies.",
-        "Patient endurance leads to eventual triumph."
+        "Сила духа и мужество помогают преодолеть трудности в жизни.",
+        "Вежливая настойчивось усмирит самые дикие случаи в жизни.",
+        "Сострадание сделает из потенциальных врагов надежных союзников.",
+        "Терпение приводит к окончательной победе."
       ],
       "reversed": [
-        "Self-doubt weakens your resolve and personal power.",
-        "Raw emotions overpower logical thinking and planning.",
-        "Insecurity manifests as either aggression or timidity.",
-        "Inner beasts require acknowledgment and integration."
+        "Сомнения в себе ослабляют вашу решимость и личную силу.",
+        "Ваши эмоции перевешивают логическое мышление и планирование.",
+        "Неуверенность в себе приводит либо к агрессии, либо к робости.",
+        "Внутренний зверь требует понимания и кооперации."
       ]
     },
     "The Hermit": {
-      "name": "The Hermit",
+      "name": "Отшельник",
       "upright": [
-        "Solitude brings profound insights and self-discovery.",
-        "Inner wisdom illuminates the path forward.",
-        "Spiritual searching leads to meaningful revelations.",
-        "Withdrawal from chaos allows deep contemplation."
+        "Одиночество приносит глубокое прозрение и самопознание.",
+        "Мудрость освещает вам путь вперед.",
+        "Духовные поиски приводят к глубоким откровениям.",
+        "Отход от хаоса ведет к глубокому раздумью."
       ],
       "reversed": [
-        "Isolation becomes loneliness without purpose or growth.",
-        "Excessive withdrawal creates disconnection from reality.",
-        "Fear of examination prevents necessary self-reflection.",
-        "Stubborn reclusiveness blocks helpful connections."
+        "Побег от общества лишает цели и возможности для роста.",
+        "Чрезмерная изоляция приводит к отрыву от реальности.",
+        "Страх оценивания мешает надлежащему самоанализу.",
+        "Упрямость препятствует поиску новых полезных связей."
       ]
     },
     "Wheel of Fortune": {
-      "name": "Wheel of Fortune",
+      "name": "Колесо Фортуны",
       "upright": [
-        "Destiny turns in your favor bringing unexpected opportunities.",
-        "Cycles of change usher in new phases of existence.",
-        "Good fortune smiles upon your current endeavors.",
-        "Universal forces align to support your highest good."
+        "Судьба благоволит вам, принося неожиданные возможности.",
+        "Наступает благоприятный период в вашей жизни.",
+        "Удача улыбается вам в ваших нынешних начинаниях.",
+        "Вселенские силы сходятся во имя вашего высшего блага."
       ],
       "reversed": [
-        "Misfortune temporarily disrupts your planned trajectory.",
-        "Resistance to change prolongs difficult circumstances.",
-        "External forces seem to work against your desires.",
-        "Breaking negative cycles requires conscious effort."
+        "Неудача временно сбивает вашу жизненную траекторию.",
+        "Сопротивление переменам затягивает сложные обстоятельства.",
+        "Внешние силы противодействуют вашим желаниям.",
+        "Необходимо разорвать порочный круг негативных эмоций."
       ]
     },
     "Justice": {
-      "name": "Justice",
+      "name": "Справедливость",
       "upright": [
-        "Truth and fairness prevail in all matters at hand.",
-        "Karmic balance restores order to chaotic situations.",
-        "Legal matters resolve in alignment with highest justice.",
-        "Accountability for actions brings appropriate consequences."
+        "Правда и справедливость торжествуют во всех проблемах.",
+        "Баланс кармы восстанавливает порядок в хаотичных ситуациях.",
+        "Ваши юридические вопросы разрешатся справедливо и беспристрастный.",
+        "Ответственность за свою жизнь влечет за собой благоприятные последствия."
       ],
       "reversed": [
-        "Injustice and unfairness cloud current circumstances.",
-        "Dishonesty complicates legal or ethical matters.",
-        "Avoiding accountability delays inevitable reckoning.",
-        "Bias prevents clear and balanced judgment."
+        "Несправедливость и нечестность омрачают нынешнюю ситуацию.",
+        "Нечестность осложняет юридические или нравственные вопросы.",
+        "Избегание ответственности откладывает неизбежную расплату.",
+        "Предвзятость препятствует правосудию."
       ]
     },
     "The Hanged Man": {
-      "name": "The Hanged Man",
+      "name": "Повешенный",
       "upright": [
-        "Surrender and release bring unexpected enlightenment.",
-        "New perspectives emerge from letting go of control.",
-        "Sacrifice now leads to greater gains later.",
-        "Suspension of action allows wisdom to surface."
+        "Смирение и остановка приносят неожиданное просветление.",
+        "Отказ от контроля над ситуацией открывает новые перспективы.",
+        "Затраты в настоящем принесут большую выгоду в будущем.",
+        "Пауза в действиях даёт мудрости выйти наружу."
       ],
       "reversed": [
-        "Stubborn resistance prolongs unnecessary suffering.",
-        "Martyrdom without purpose drains vital energy.",
-        "Stagnation results from fear of necessary change.",
-        "Indecision paralyzes forward movement."
+        "Упорное сопротивление переменам продлевает ненужные страдания.",
+        "Мученичество без цели истощает жизненные силы.",
+        "Страх перемен порождает застой в жизни.",
+        "Нерешительность парализует жизненное развитие."
       ]
     },
     "Death": {
-      "name": "Death",
+      "name": "Смерть",
       "upright": [
-        "Transformation clears space for powerful rebirth.",
-        "Endings create opportunities for new beginnings.",
-        "Release of the old makes room for fresh growth.",
-        "Profound change reshapes your entire existence."
+        "Трансформация обязательно приведет к перерождению.",
+        "Завершение процесса создает возможности для новых начал.",
+        "Прощание со старым открывает путь новому развитию.",
+        "В вашей жизни происходят кардинальные изменения."
       ],
       "reversed": [
-        "Resistance to endings prolongs decay and stagnation.",
-        "Fear of change keeps you trapped in limiting patterns.",
-        "Clinging to the past prevents forward evolution.",
-        "Incomplete transitions leave you between worlds."
+        "Нежелание принять завершению процесса лишь усугубляет ситуацию.",
+        "Страх перемен удерживает вас в ловушке ограничений.",
+        "Привязанность к прошлому мешает двигаться вперёд.",
+        "Неполная трансформация приводит к потерянности."
       ]
     },
     "Temperance": {
-      "name": "Temperance",
+      "name": "Умеренность",
       "upright": [
-        "Perfect balance creates harmony in all life areas.",
-        "Patience and moderation lead to lasting success.",
-        "Blending opposites creates powerful alchemy.",
-        "Divine timing orchestrates perfect outcomes."
+        "Идеальный баланс прокладывает дорогу к жизненной гармонии.",
+        "Терпение и умеренность ведут к долгосрочному успеху.",
+        "Сочетание противоположностей порождает сильную алхимию.",
+        "Божий промысел направляет вас на положительный исход."
       ],
       "reversed": [
-        "Imbalance and excess disrupt your equilibrium.",
-        "Impatience rushes processes requiring careful timing.",
-        "Conflicting desires create internal discord.",
-        "Lack of moderation leads to unfortunate extremes."
+        "Отсутсвие гармонии и неуравновешенность нарушают ваше равновесие.",
+        "Нетерпеливость торопит вас при планировании действий.",
+        "Противоречивые желания порождают в вас внутренний конфликт.",
+        "Отсутствие умеренности влечет за собой нежелательным последствия."
       ]
     },
     "The Devil": {
-      "name": "The Devil",
+      "name": "Дьявол",
       "upright": [
-        "Material desires and earthly pleasures demand examination.",
-        "Shadow aspects require acknowledgment and integration.",
-        "Bondage to unhealthy patterns becomes apparent.",
-        "Temptation tests your commitment to growth."
+        "Материальные желания и земные удовольствия требуют изучения.",
+        "Теневая сторона требует признания и кооперации.",
+        "Все больше проявляется пренебрежение моральными принципами .",
+        "Искушение проверяте ваше стремление к личностному росту."
       ],
       "reversed": [
-        "Liberation from limiting beliefs sets you free.",
-        "Breaking unhealthy patterns restores personal power.",
-        "Recognition of illusions dispels their influence.",
-        "Release from bondage opens new possibilities."
+        "Избавление от ограничивающих установок принесет свободу.",
+        "Отказ от вредных моделей поведения восстанавливает личную силу.",
+        "Осознание иллюзий разрушает их воздействие.",
+        "Освобождение от оков открывает новые возможности."
       ]
     },
     "The Tower": {
-      "name": "The Tower",
+      "name": "Башня",
       "upright": [
-        "Sudden upheaval destroys false foundations.",
-        "Breakthrough moments shatter limiting illusions.",
-        "Chaos precedes necessary reconstruction.",
-        "Divine intervention redirects your life path."
+        "Внезапные потрясения разрушат ложные основы.",
+        "Переломный момент порушит ограничивающие иллюзии.",
+        "Хаос предшествует необходимым изменениям.",
+        "Божественное вмешательство поменяет ваш жизненный путь."
       ],
       "reversed": [
-        "Avoiding necessary destruction prolongs instability.",
-        "Fear of change maintains crumbling structures.",
-        "Gradual transformation replaces sudden upheaval.",
-        "Disaster narrowly avoided teaches important lessons."
+        "Избегание неизбежной катастрофы продлевает нестабильность.",
+        "Страх перемен удерживает обветшалые строения.",
+        "Постепенные изменения заменяют внезапные потрясения.",
+        "Едва предотвращенное бедствие станет важным уроком."
       ]
     },
     "The Star": {
-      "name": "The Star",
+      "name": "Звезда",
       "upright": [
-        "Hope illuminates even the darkest moments.",
-        "Spiritual renewal restores faith and optimism.",
-        "Divine inspiration guides your creative expression.",
-        "Healing waters wash away past wounds."
+        "Надежда озаряет даже самые мрачные мгновения жизни.",
+        "Духовное перерождение восстановит веру и оптимизм.",
+        "Божественное вдохновение ведет ваш творческий путь.",
+        "Целебные воды смывают раны прошлого."
       ],
       "reversed": [
-        "Despair clouds your vision of future possibilities.",
-        "Disconnection from faith creates spiritual emptiness.",
-        "Creative blocks stifle inspired expression.",
-        "Pessimism prevents recognition of blessings."
+        "Отчаяние застилает взор на будущие возможности.",
+        "Отступление от веры порождает духовную пустоту.",
+        "Творческий кризис подавляет самовыражение.",
+        "Пессимизм мешает замечать свои блага."
       ]
     },
     "The Moon": {
-      "name": "The Moon",
+      "name": "Луна",
       "upright": [
-        "Illusions and deceptions require careful navigation.",
-        "Intuitive wisdom emerges from subconscious depths.",
-        "Dreams and visions carry important messages.",
-        "Hidden fears surface for healing and release."
+        "Иллюзии и обман требуют осторожного подхода.",
+        "Интуитивная мудрость рождается в глубинах подсознания.",
+        "Во снах и видениях сокрыты важные послания.",
+        "Встреча со скрытыми страхами лицом к лицу ведет к их исцелению."
       ],
       "reversed": [
-        "Confusion lifts as clarity returns to your vision.",
-        "Deceptions revealed allow truth to emerge.",
-        "Repressed emotions demand conscious attention.",
-        "Mental fog clears revealing the path ahead."
+        "Замешательство уйдет, когда к вашему восприятию возвращается ясность.",
+        "Раскрытие обмана позволяет правде выйти наружу.",
+        "Подавленные эмоции требуют особенного внимания.",
+        "Помутнение разума проходит, открывая путь впереди."
       ]
     },
     "The Sun": {
-      "name": "The Sun",
+      "name": "Солнце",
       "upright": [
-        "Joy and vitality infuse every aspect of existence.",
-        "Success and recognition reward your authentic expression.",
-        "Childlike wonder reveals life's simple pleasures.",
-        "Radiant energy attracts abundance and blessings."
+        "Радость и жизненная сила наполняют каждый аспект вашего существования.",
+        "Успех и признание станет наградой за подлинное выражение себя.",
+        "Детское любопытство раскрыает простые радости жизни.",
+        "Лучезарная энергия привлекает изобилие и благословения."
       ],
       "reversed": [
-        "Temporary clouds obscure your inner radiance.",
-        "Ego inflation distorts genuine accomplishments.",
-        "Forced positivity masks underlying issues.",
-        "Delayed success tests your patience and faith."
+        "Временные тучи затмевает ваше внутреннее сияние.",
+        "Раздутое эго искажает реальные достижения.",
+        "Принудительная позитивность маскирует внутренние проблемы.",
+        "Оложенный успех испытывает ваше терпение и веру."
       ]
     },
     "Judgement": {
-      "name": "Judgement",
+      "name": "Суд",
       "upright": [
-        "Spiritual awakening transforms your entire being.",
-        "Past actions receive fair and final evaluation.",
-        "Rebirth follows honest self-assessment.",
-        "Higher calling demands courageous response."
+        "Духовное пробуждение преображает вашу сущность целиком.",
+        "Действия в прошлом подвергаются справедливой и окончательной оценке.",
+        "После честной самооценки наступает перерождение.",
+        "Зов свыше требует мужественного ответа."
       ],
       "reversed": [
-        "Self-judgment blocks forgiveness and growth.",
-        "Avoiding inner calling creates persistent dissatisfaction.",
-        "Past mistakes haunt present circumstances.",
-        "Fear of judgment paralyzes decisive action."
+        "Самоосуждение препятствует прощению и личностному росту.",
+        "Игнорирование внутреннего позыва приводит к постоянному неудовлетворению.",
+        "Ошибки прошлого не отпускают вас в настоящем.",
+        "Страх осуждения лишает способности действовать решительно."
       ]
     },
     "The World": {
-      "name": "The World",
+      "name": "Мир",
       "upright": [
-        "Completion of major cycles brings deep satisfaction.",
-        "Wholeness and integration create perfect harmony.",
-        "Worldly success reflects inner accomplishment.",
-        "Universal consciousness expands your awareness."
+        "Завершение важного жизненного этапа, что принесет глубокое удовлетворение.",
+        "Целостность и объединенность создадут идеальную гармонию",
+        "Мирской успех отражает внутренние достижения.",
+        "Вселенское сознание расширит ваше понимание."
       ],
       "reversed": [
-        "Incomplete ventures require additional effort.",
-        "External success feels empty without inner fulfillment.",
-        "Shortcuts prevent genuine accomplishment.",
-        "Limited perspective restricts full potential."
+        "Незавершенные авантюры требуют дополнительных усилий.",
+        "Успех вовне не приносит радости без внутренней реализации.",
+        "Поиск легких путей отвергает подлинные достижения.",
+        "Узкий взгляд на вещи ограничивает ваш потенциал."
       ]
     }
   }
