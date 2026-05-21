@@ -66,7 +66,7 @@
     },
     "vegan": {
       "name": "Веганство",
-      "description": "Не ест продукты животного происхождения."
+      "description": "Не ест продукты животного происхождения"
     },
     "vegetarian": {
       "name": "Вегетарианство",
@@ -505,304 +505,304 @@
       "description": "Рождение вне брака"
     },
     "heir": {
-      "name": "Heir",
-      "description": "Destined to inherit wealth"
+      "name": "Наследство",
+      "description": "Обязательно унаследует богатсво"
     },
     "twin": {
-      "name": "Twin",
-      "description": "Has an identical sibling"
+      "name": "Близнец",
+      "description": "Есть идентичный сиблинг"
     },
     "exiled": {
-      "name": "Exiled",
-      "description": "Banished from homeland"
+      "name": "Изгнание",
+      "description": "Выгнали с родины"
     },
     "slave-born": {
-      "name": "Slave-Born",
-      "description": "Born into servitude"
+      "name": "Раб с Детсва",
+      "description": "Родили в семье рабов"
     },
     "wealthy": {
-      "name": "Wealthy",
-      "description": "Born with financial privilege"
+      "name": "Богатство",
+      "description": "С рождения с золотой ложкой во рту"
     },
     "scholar": {
-      "name": "Scholar",
-      "description": "Dedicated to learning"
+      "name": "Ученик",
+      "description": "Посвящает себя обучению"
     },
     "merchant": {
-      "name": "Merchant",
-      "description": "Skilled in trade and commerce"
+      "name": "Торговец",
+      "description": "Опытный специалист в сфере торговли"
     },
     "criminal": {
-      "name": "Criminal",
-      "description": "Background in illegal activities"
+      "name": "Преступник",
+      "description": "Криминальное прошлое"
     },
     "illiterate": {
-      "name": "Illiterate",
-      "description": "Cannot read or write"
+      "name": "Безграмотность",
+      "description": "Не может читать и писать"
     },
     "veteran": {
-      "name": "Veteran",
-      "description": "Experienced soldier"
+      "name": "Ветеран",
+      "description": "Опытный солдат"
     },
     "farmer": {
-      "name": "Farmer",
-      "description": "Rural agricultural background"
+      "name": "Фермер",
+      "description": "Сельскохозяйственное прошлое"
     },
     "herbalist": {
-      "name": "Herbalist",
-      "description": "Expert in medicinal plants"
+      "name": "Знаток Трав",
+      "description": "Эксперт по лекарственным растениям"
     },
     "alchemist": {
-      "name": "Alchemist",
-      "description": "Practices transmutation arts"
+      "name": "Алхимик",
+      "description": "Практикует искусство трансмутации"
     },
     "navigator": {
-      "name": "Navigator",
-      "description": "Expert in travel and wayfinding"
+      "name": "Штурман",
+      "description": "Эксперт в области путешествий и навигации"
     },
     "blacksmith": {
-      "name": "Blacksmith",
-      "description": "Skilled metalworker"
+      "name": "Кузнец",
+      "description": "Умелый работник по металлу"
     },
     "thief": {
-      "name": "Thief",
-      "description": "Expert at stealing"
+      "name": "Вор",
+      "description": "Эксперт по воровству"
     },
     "bard": {
-      "name": "Bard",
-      "description": "Musician and storyteller"
+      "name": "Бард",
+      "description": "Музыкант и сказатель"
     },
     "beautiful": {
-      "name": "Beautiful",
-      "description": "Exceptionally attractive"
+      "name": "Красота",
+      "description": "Поражает своей красотой"
     },
     "scarred": {
-      "name": "Scarred",
-      "description": "Marked by visible wounds"
+      "name": "Шрамы",
+      "description": "Раны прошлого оставили след на теле"
     },
     "tall": {
-      "name": "Tall",
-      "description": "Above average height"
+      "name": "Высокий Рост",
+      "description": "Выше среднего роста"
     },
     "short": {
-      "name": "Short",
-      "description": "Below average height"
+      "name": "Низкий Рост",
+      "description": "Ниже среднего роста"
     },
     "muscular": {
-      "name": "Muscular",
-      "description": "Exceptional physical strength"
+      "name": "Развитая Мускулатура",
+      "description": "Исключительная физическая сила"
     },
     "frail": {
-      "name": "Frail",
-      "description": "Weak constitution"
+      "name": "Слабость",
+      "description": "Хилое телосложение"
     },
     "left-handed": {
-      "name": "Left-Handed",
-      "description": "Dominant left hand"
+      "name": "Лворукость",
+      "description": "Преобладает левая рука"
     },
     "quick_reflexes": {
-      "name": "Quick Reflexes",
-      "description": "Lightning-fast reactions"
+      "name": "Быстрые Рефлексы",
+      "description": "Молниеносная реакция"
     },
     "duelist": {
-      "name": "Duelist",
-      "description": "Master of one-on-one combat"
+      "name": "Дуэлянт",
+      "description": "Мастер поединков один на один"
     },
     "brawler": {
-      "name": "Brawler",
-      "description": "Street fighting expert"
+      "name": "Уличный Боец",
+      "description": "Эксперт по потасовкам"
     },
     "archer": {
-      "name": "Archer",
-      "description": "Skilled with bow and arrow"
+      "name": "Лучник",
+      "description": "Искусно владеет луком и стрелами"
     },
     "shield_master": {
-      "name": "Shield Master",
-      "description": "Expert in defensive tactics"
+      "name": "Мастер Щита",
+      "description": "Эксперт в обороне"
     },
     "assassin": {
-      "name": "Assassin",
-      "description": "Trained to kill silently"
+      "name": "Убийца",
+      "description": "Умеет скрытно убивать"
     },
     "berserker_rage": {
-      "name": "Berserker Rage",
-      "description": "Channels battle fury"
+      "name": "Ярость Берсерка",
+      "description": "Концентрирует в себе боевой раж"
     },
     "mounted_combat": {
-      "name": "Mounted Combat",
-      "description": "Expert cavalry fighter"
+      "name": "Кавалерист",
+      "description": "Эксперт в конных боях"
     },
     "martial_artist": {
-      "name": "Martial Artist",
-      "description": "Unarmed combat master"
+      "name": "Мастер Боевых Искусств",
+      "description": "Эксперт по единоборствам"
     },
     "optimist": {
-      "name": "Optimist",
-      "description": "Always sees the bright side"
+      "name": "Оптимизм",
+      "description": "Всегда видит светлую сторону"
     },
     "pessimist": {
-      "name": "Pessimist",
-      "description": "Expects the worst outcome"
+      "name": "Пессимизм",
+      "description": "Ожидает худший исход событий"
     },
     "nihilist": {
-      "name": "Nihilist",
-      "description": "Believes life has no meaning"
+      "name": "Нигилизм",
+      "description": "Считает, что в жизни нет смысла"
     },
     "idealist": {
-      "name": "Idealist",
-      "description": "Pursues lofty principles"
+      "name": "Идеалист",
+      "description": "Преследует высокие принципы"
     },
     "pragmatist": {
-      "name": "Pragmatist",
-      "description": "Practical and realistic"
+      "name": "Прагматичность",
+      "description": "Ставит практическую выгоду превыше всего"
     },
     "romantic": {
-      "name": "Romantic",
-      "description": "Led by heart over mind"
+      "name": "Романтичность",
+      "description": "Живет по зову сердца"
     },
     "cynic": {
-      "name": "Cynic",
-      "description": "Distrusts others' motives"
+      "name": "Циничность",
+      "description": "Пренебрегает мнениями других"
     },
     "vengeful": {
-      "name": "Vengeful",
-      "description": "Never forgives a slight"
+      "name": "Мстительность",
+      "description": "Никогда не прощает обиды"
     },
     "forgiving": {
-      "name": "Forgiving",
-      "description": "Quick to pardon transgressions"
+      "name": "Снисходительность",
+      "description": "Легко прощает проступки"
     },
     "jealous": {
-      "name": "Jealous",
-      "description": "Envies others constantly"
+      "name": "Завистливость",
+      "description": "Постоянно завидует другим"
     },
     "spiteful": {
-      "name": "Spiteful",
-      "description": "Petty and vindictive"
+      "name": "Злопамятность",
+      "description": "Мелочность и мстительность"
     },
     "honest": {
-      "name": "Honest",
-      "description": "Cannot tell lies"
+      "name": "Честность",
+      "description": "Не может врать"
     },
     "blunt": {
-      "name": "Blunt",
-      "description": "Speaks without tact"
+      "name": "Бестактность",
+      "description": "Говорит прямо, без чуткости"
     },
     "famous": {
-      "name": "Famous",
-      "description": "Widely recognized and celebrated"
+      "name": "Известность",
+      "description": "Легко узнают на улице"
     },
     "infamous": {
-      "name": "Infamous",
-      "description": "Known for terrible deeds"
+      "name": "Дурная Слава",
+      "description": "Известность своими ужасными деяниями"
     },
     "anonymous": {
-      "name": "Anonymous",
-      "description": "Unknown and unremarkable"
+      "name": "Анонимность",
+      "description": "Неизвестность и непримечательность"
     },
     "wanted": {
-      "name": "Wanted",
-      "description": "Hunted by authorities"
+      "name": "Розыск",
+      "description": "Преследуется властями"
     },
     "hero": {
-      "name": "Hero",
-      "description": "Celebrated savior of people"
+      "name": "Геройство",
+      "description": "Прославленный спаситель"
     },
     "disgraced": {
-      "name": "Disgraced",
-      "description": "Fallen from former honor"
+      "name": "Немилость",
+      "description": "Без былой чести"
     },
     "cold-blooded": {
-      "name": "Cold-Blooded",
-      "description": "Adapted to cold climates"
+      "name": "Криофил",
+      "description": "Хорошо себя чувствует в холодном климате"
     },
     "heat-adapted": {
-      "name": "Heat-Adapted",
-      "description": "Thrives in hot environments"
+      "name": "Термофил",
+      "description": "Хорошо себя чувствует в жарком климате"
     },
     "mountain-born": {
-      "name": "Mountain-Born",
-      "description": "High altitude endurance"
+      "name": "Горнорожденный",
+      "description": "Стойкость в горах"
     },
     "island-raised": {
-      "name": "Island-Raised",
-      "description": "Maritime survival skills"
+      "name": "Дитя Островов",
+      "description": "Навыки выживания в море"
     },
     "desert_dweller": {
-      "name": "Desert Dweller",
-      "description": "Survives arid wastelands"
+      "name": "Житель Пустыни",
+      "description": "Легко переносит засушливые пустыни"
     },
     "cave_dweller": {
-      "name": "Cave Dweller",
-      "description": "Adapted to underground life"
+      "name": "Пещерный Житель",
+      "description": "Легко выдерживает условия жизни под землей"
     },
     "animal_handler": {
-      "name": "Animal Handler",
-      "description": "Bonds easily with creatures"
+      "name": "Дрессировщик",
+      "description": "Легко находит общий язык с животными"
     },
     "beast_whisperer": {
-      "name": "Beast Whisperer",
-      "description": "Communicates with animals"
+      "name": "Заклинатель Зверей",
+      "description": "Умеет общаться с животными"
     },
     "nature_attuned": {
-      "name": "Nature Attuned",
-      "description": "Deep connection to wilderness"
+      "name": "Гамония с Природой",
+      "description": "Глубокая связь с дикой природой"
     },
     "urban_native": {
-      "name": "Urban Native",
-      "description": "Thrives only in cities"
+      "name": "Городское Происхождение",
+      "description": "Не приживается вне городов"
     },
     "feral": {
-      "name": "Feral",
-      "description": "Raised in wilderness"
+      "name": "Дикость",
+      "description": "Детсво проведено в дикой природе"
     },
     "magically_gifted": {
-      "name": "Magically Gifted",
-      "description": "Natural arcane talent"
+      "name": "Магическая Одаренность",
+      "description": "Природный магический талант"
     },
     "mana-starved": {
-      "name": "Mana-Starved",
-      "description": "Cannot channel magical energy"
+      "name": "Дефицит Маны",
+      "description": "Не может управлять магической энергией"
     },
     "spell-scarred": {
-      "name": "Spell-Scarred",
-      "description": "Marked by magical mishap"
+      "name": "Магический Шрам",
+      "description": "Заклинания оставили след на теле"
     },
     "witch-marked": {
-      "name": "Witch-Marked",
-      "description": "Bears supernatural curse mark"
+      "name": "Метка Ведьмы",
+      "description": "Метка мистического проклятия"
     },
     "possessed": {
-      "name": "Possessed",
-      "description": "Shares body with spirit"
+      "name": "Одержимость",
+      "description": "Делит тело со злым духом"
     },
     "lycanthrope": {
-      "name": "Lycanthrope",
-      "description": "Transforms under moon"
+      "name": "Ликантропия",
+      "description": "Обращается во время полнолуния"
     },
     "clairvoyant": {
-      "name": "Clairvoyant",
-      "description": "Sees beyond normal perception"
+      "name": "Ясновидение",
+      "description": "Видит за прошлое, настоящее и будущее"
     },
     "booming_voice": {
-      "name": "Booming Voice",
-      "description": "Naturally loud and commanding"
+      "name": "Зычный Голос",
+      "description": "Громкий и взывающий голос"
     },
     "soft-spoken": {
-      "name": "Soft-Spoken",
-      "description": "Quiet and gentle voice"
+      "name": "Мягкогласность",
+      "description": "Тихий и нежный голос"
     },
     "mute": {
-      "name": "Mute",
-      "description": "Cannot speak"
+      "name": "Немота",
+      "description": "Не может говорить"
     },
     "polyglot": {
-      "name": "Polyglot",
-      "description": "Speaks many languages"
+      "name": "Полиглотизм",
+      "description": "Владеет несколькими языками"
     },
     "prosopometamorphopsia": {
-      "name": "Prosopometamorphopsia",
-      "description": "See demon faces"
+      "name": "Прозопаметаморфопсия",
+      "description": "Видит демонические лица"
     }
   }
 }
